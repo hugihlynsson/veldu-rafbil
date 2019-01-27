@@ -9,7 +9,9 @@ const carBlacklist = [
 
 const Page = ({ cars }) => (
   <div className="root" key="index">
-    <h1>Rafbílar</h1>
+    <h1>
+      Notaðir Rafbílar <span>{cars.length}</span>
+    </h1>
 
     {cars.map(car => (
       <a key={car.link} href={car.link}>
@@ -56,6 +58,10 @@ const Page = ({ cars }) => (
       h1 {
         font-size: 40px;
         font-weight: 600;
+      }
+      h1 span {
+        font-weight: 300;
+        color: #CCC;
       }
       a {
         display: flex;
@@ -113,11 +119,39 @@ Page.getInitialProps = async ({ req }) => {
       "__VIEWSTATE=%2FwEPDwULLTEwMTg4OTM5MjlkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYPBSVjdGwwMCRMb2dpblZpZXcxJGxvZ2luRm9ybSRSZW1lbWJlck1lBSpjdGwwMCRjb250ZW50U2VhcmNoRW5naW5lJGN0bDAwJHNlYXJjaF94bWEFKmN0bDAwJGNvbnRlbnRTZWFyY2hFbmdpbmUkY3RsMDAkc2VhcmNoX3htbQUrY3RsMDAkY29udGVudFNlYXJjaEVuZ2luZSRjdGwwMCRzZWFyY2hfZnRfMAUrY3RsMDAkY29udGVudFNlYXJjaEVuZ2luZSRjdGwwMCRzZWFyY2hfZnRfMQUpY3RsMDAkY29udGVudFNlYXJjaEVuZ2luZSRjdGwwMCRzZWFyY2hfZmUFKWN0bDAwJGNvbnRlbnRTZWFyY2hFbmdpbmUkY3RsMDAkc2VhcmNoX2ZoBSxjdGwwMCRjb250ZW50U2VhcmNoRW5naW5lJGN0bDAwJHNlYXJjaF9jYXRfMAUsY3RsMDAkY29udGVudFNlYXJjaEVuZ2luZSRjdGwwMCRzZWFyY2hfY2F0XzEFLWN0bDAwJGNvbnRlbnRTZWFyY2hFbmdpbmUkY3RsMDAkc2VhcmNoX2NhdF8xNAUsY3RsMDAkY29udGVudFNlYXJjaEVuZ2luZSRjdGwwMCRzZWFyY2hfY2F0XzgFLWN0bDAwJGNvbnRlbnRTZWFyY2hFbmdpbmUkY3RsMDAkc2VhcmNoX2NhdF8yOAUsY3RsMDAkY29udGVudFNlYXJjaEVuZ2luZSRjdGwwMCRzZWFyY2hfY2F0XzIFLGN0bDAwJGNvbnRlbnRTZWFyY2hFbmdpbmUkY3RsMDAkc2VhcmNoX2NhdF8zBSxjdGwwMCRjb250ZW50U2VhcmNoRW5naW5lJGN0bDAwJHNlYXJjaF9jYXRfNKOZpV4%2BDwHqftYBSHd8irWHmjM0eVxLyBvG0Gx197tY&ctl00%24contentSearchEngine%24ctl00%24search_fe=on&ctl00%24contentSearchEngine%24ctl00%24btnSearch=Leita"
   });
 
+  const parsedPage = cheerio.load(await res.text());
+  const parsedPages = [parsedPage];
+
+  const getNextPage = async nextPageLink => {
+    console.log("Getting next page", nextPageLink);
+    const nextRes = await fetch(nextPageLink);
+
+    const parsedNextHtml = cheerio.load(await nextRes.text());
+    parsedPages.push(parsedNextHtml);
+
+    const nextestPageLink = parsedNextHtml(".pagingCell .fa-angle-right")
+      .parent()
+      .attr("href");
+
+    if (nextestPageLink) {
+      console.log("Found", nextestPageLink, "on", nextPageLink);
+      return getNextPage(`https://bilasolur.is/${nextestPageLink}`);
+    }
+  };
+
+  const nextPageLink = parsedPage(".pagingCell .fa-angle-right")
+    .parent()
+    .attr("href");
+
+  if (nextPageLink) {
+    await getNextPage(`https://bilasolur.is/${nextPageLink}`);
+  }
+
   const cars = [];
 
-  cheerio
-    .load(await res.text())(".sr-item")
-    .each((i, element) => {
+  parsedPages.map(page => {
+    const srItems = page(".sr-item");
+    srItems.each((i, element) => {
       const parsedElement = cheerio(element);
       const link = parsedElement.find(".sr-link").attr("href");
       if (!link) {
@@ -153,6 +187,7 @@ Page.getInitialProps = async ({ req }) => {
         price: parsedElement.find(".car-price span").text()
       });
     });
+  });
 
   return {
     cars: cars.filter(
