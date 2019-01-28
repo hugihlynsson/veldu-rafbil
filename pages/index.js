@@ -3,6 +3,7 @@ import fetch from "isomorphic-unfetch";
 import cheerio from "cheerio";
 import FormData from "form-data";
 import Car from "../components/CarItem";
+import Head from "next/head";
 
 const carBlacklist = [
   "hybrid", // Want BEV only
@@ -119,6 +120,14 @@ export default class Page extends React.Component {
 
     return (
       <div className="root" key="index">
+        <Head>
+          <title>Notaðir Rafbílar</title>
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
+        </Head>
+
         <h1>Notaðir Rafbílar</h1>
 
         <div className="filters">
@@ -159,7 +168,14 @@ export default class Page extends React.Component {
           ))}
 
         <style jsx global>{`
+          *,
+          *::before,
+          *::after {
+            box-sizing: border-box;
+          }
+
           body {
+            margin: 0;
             font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto,
               Helvetica, Arial, sans-serif;
             color: #111;
@@ -182,6 +198,7 @@ export default class Page extends React.Component {
           }
           .filters {
             display: flex;
+            flex-wrap: wrap;
           }
           .filter {
             font-size: 11px;
@@ -194,6 +211,7 @@ export default class Page extends React.Component {
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-bottom: 2px;
           }
           .filter:hover {
             background-color: #EEE;
