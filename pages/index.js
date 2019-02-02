@@ -203,46 +203,49 @@ export default class Page extends React.Component {
           ))}
         </div>
 
-        {cars
-          .filter(car => !filter || car.make === filter)
-          .slice() // Make sure the sorting doesn't try to mutate the original
-          .sort((a, b) => {
-            switch (this.state.sorting) {
-              case "price": {
-                return (
-                  Number(a.price.replace(".", "")) -
-                  Number(b.price.replace(".", ""))
-                );
+        <div className="cars">
+          {cars
+            .filter(car => !filter || car.make === filter)
+            .slice() // Make sure the sorting doesn't try to mutate the original
+            .sort((a, b) => {
+              switch (this.state.sorting) {
+                case "price": {
+                  return (
+                    Number(a.price.replace(".", "")) -
+                    Number(b.price.replace(".", ""))
+                  );
+                }
+                case "age": {
+                  return (
+                    Number((b.date.split("/")[1] || "").split(" ")[0]) -
+                    Number((a.date.split("/")[1] || "").split(" ")[0])
+                  );
+                }
+                case "milage": {
+                  return (
+                    (Number(a.milage.replace(" km.", "").replace(".", "")) ||
+                      0) -
+                    (Number(b.milage.replace(" km.", "").replace(".", "")) || 0)
+                  );
+                }
+                case "name": {
+                  return `${a.make} ${a.model}`.localeCompare(
+                    `${b.make} ${b.model}`
+                  );
+                }
+                default: {
+                  return 1;
+                }
               }
-              case "age": {
-                return (
-                  Number((b.date.split("/")[1] || "").split(" ")[0]) -
-                  Number((a.date.split("/")[1] || "").split(" ")[0])
-                );
-              }
-              case "milage": {
-                return (
-                  (Number(a.milage.replace(" km.", "").replace(".", "")) || 0) -
-                  (Number(b.milage.replace(" km.", "").replace(".", "")) || 0)
-                );
-              }
-              case "name": {
-                return `${a.make} ${a.model}`.localeCompare(
-                  `${b.make} ${b.model}`
-                );
-              }
-              default: {
-                return 1;
-              }
-            }
-          })
-          .map(car => {
-            console.log(car.milage);
-            return car;
-          })
-          .map(car => (
-            <Car car={car} key={car.link} />
-          ))}
+            })
+            .map(car => {
+              console.log(car.milage);
+              return car;
+            })
+            .map(car => (
+              <Car car={car} key={car.link} />
+            ))}
+        </div>
 
         <style jsx global>{`
           *,
@@ -324,6 +327,23 @@ export default class Page extends React.Component {
             font-weight: 400;
             margin-left: 2px;
             color: #888;
+          }
+
+          .cars {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+          }
+
+          @media screen and (min-width: 768px) {
+            .root {
+              margin 0 auto;
+              max-width: 1120px;
+            }
+            .cars {
+              flex-direction: row;
+              flex-wrap: wrap;
+            }
           }
         `}
         </style>
