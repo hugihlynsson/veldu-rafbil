@@ -1,0 +1,35 @@
+[
+  {
+    "make": "Audi",
+    "model": "e-tron",
+    "heroImage": "/static/e-tron.jpg",
+    "price": 9400000,
+    "sellerURL": "http://www.audi.is/is/web/is/models/tron/audi-e-tron.html",
+    "acceleration": 6.6,
+    "capacity": 95,
+    "range": 281,
+    "evDatabaseURL": "https://ev-database.org/car/1092/Audi-e-tron"
+  },
+  {
+    "make": "Nissan",
+    "model": "Leaf",
+    "heroImage": "/static/leaf.jpg",
+    "price": 4490000,
+    "sellerURL": "https://www.nissan.is/vehicles/new-vehicles/leaf.html",
+    "acceleration": 8.4,
+    "capacity": 40,
+    "range": 270,
+    "evDatabaseURL": "https://ev-database.org/car/1106/Nissan-Leaf"
+  },
+  {
+    "make": "Volkswagen",
+    "model": "e-Golf",
+    "heroImage": "/static/e-golf.jpg",
+    "price": 4490000,
+    "sellerURL": "https://www.volkswagen.is/is/volkswagen-bilar/e-golf-2016.html",
+    "acceleration": 9.6,
+    "capacity": 35.8,
+    "range": 231,
+    "evDatabaseURL": "https://ev-database.org/car/1087/Volkswagen-e-Golf"
+  }
+]

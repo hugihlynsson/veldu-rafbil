@@ -2,7 +2,7 @@ import React from "react";
 import fetch from "isomorphic-unfetch";
 import cheerio from "cheerio";
 import FormData from "form-data";
-import Car from "../components/CarItem";
+import Car from "../components/UsedCar";
 import Head from "next/head";
 
 const carBlacklist = [
@@ -10,7 +10,7 @@ const carBlacklist = [
   "tazzari" // This is not a general use vehicle
 ];
 
-export default class Page extends React.Component {
+export default class Used extends React.Component {
   static getInitialProps = async ({ req }) => {
     var form = new FormData();
     form.append("ctl00_contentSearchEngine_ctl00_search_fe", "1");
@@ -126,10 +126,11 @@ export default class Page extends React.Component {
     console.log("Render");
 
     return (
-      <div className="root" key="index">
+      <div className="root" key="used">
         <Head>
-          <title>Notaðir Rafbílar</title>
+          <title key="title">Notaðir Rafbílar</title>
           <meta
+            key="viewport"
             name="viewport"
             content="initial-scale=1.0, width=device-width"
           />

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default ({ car }) => (
   <a href={car.link}>
     <img src={car.image} />
