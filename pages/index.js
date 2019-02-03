@@ -42,7 +42,7 @@ export default class New extends React.Component {
         <header>
           <h1>Rafbílar á Íslandi</h1>
 
-          <div className="sorting-label">Röðun</div>
+          <div className="sorting-label">Raða eftir:</div>
           <div className="sorting">
             <div
               className="sorting-item"
@@ -51,7 +51,7 @@ export default class New extends React.Component {
               }
               onClick={() => this.handleSetSorting("name")}
             >
-              Nafn
+              Nafni
             </div>
             <div
               className="sorting-item"
@@ -60,7 +60,7 @@ export default class New extends React.Component {
               }
               onClick={() => this.handleSetSorting("price")}
             >
-              Verð
+              Verði
             </div>
             <div
               className="sorting-item"
@@ -93,11 +93,11 @@ export default class New extends React.Component {
 
         <footer>
           <p>
-            Smíðuð af <a href="http://hugihlynsson.com">Huga Hlynssyni</a>. Með
-            ábendingu eða fyrirspurn?{" "}
+            Rafbílar á Íslandi er smíðuð af{" "}
+            <a href="http://hugihlynsson.com">Huga Hlynssyni</a> er geymd á{" "}
+            <a href="https://github.com/hugihlynsson/evs">GitHub</a>. Ef þú ert
+            með ábendingu eða fyrirspurn geturu sent póst á{" "}
             <a href="mailto:hugihlynsson@gmail.com">hugihlynsson@gmail.com</a>.
-            Rafbílar á Íslandi er á{" "}
-            <a href="https://github.com/hugihlynsson/evs">GitHub</a>.
           </p>
         </footer>
 
@@ -113,6 +113,8 @@ export default class New extends React.Component {
             font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto,
               Helvetica, Arial, sans-serif;
             color: #111;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
           }
         `}</style>
 
@@ -145,9 +147,9 @@ export default class New extends React.Component {
             border-radius: 4px;
           }
           .sorting-item {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
-            padding: 4px 8px;
+            padding: 4px 12px;
             cursor: pointer;
             text-align: center;
             display: flex;
@@ -173,9 +175,12 @@ export default class New extends React.Component {
             color: #888;
             font-size: 14px;
             line-height: 1.5;
+            font-weight: 300;
           }
           footer a {
             color: #000;
+            font-weight: 500;
+            text-decoration: none;
           }
 
           @media screen and (min-width: 768px) {

@@ -45,7 +45,7 @@ export default ({ car }) => (
         }
 
         .content {
-          padding: 24px;
+          padding: 20px 24px 24px;
           margin 0 auto;
           max-width: 480px;
         }
@@ -60,20 +60,24 @@ export default ({ car }) => (
         }
 
         .price {
-          display: block;
+          display: inline-block;
           color: inherit;
           margin-top: 8px;
+          margin-bottom: 24px;
           font-size: 16px;
           font-weight: 600;
-          margin-bottom: 24px;
         }
 
         .info {
           display: flex;
           margin-bottom: 24px;
+          max-width: 320px;
+          justify-content: space-between;
         }
         .info-item {
           margin-right: 16px;
+          flex-basis: 33.33%;
+          flex-shrink: 0;
         }
         .info-item:last-child {
           margin-right: 0;
@@ -82,17 +86,18 @@ export default ({ car }) => (
           text-transform: uppercase;
           font-size: 10px;
           font-weight: 600;
-          letter-spacing: 0.03em;
+          letter-spacing: 0.05em;
           margin-bottom: 2px;
           color: #aaa;
         }
         .info-item-value {
           font-size: 24px;
-          font-weight: 300;
+          font-weight: 400;
+          flex-shrink: 0;
         }
 
         .more-info {
-          display: block;
+          display: inline-block;
           color: inherit;
           font-size: 14px;
         }
