@@ -36,7 +36,7 @@ export default ({ car }) => (
     <style jsx>
       {`
         article {
-          margin-bottom: 24px;
+          margin-bottom: 32px;
         }
 
         img {
@@ -45,7 +45,9 @@ export default ({ car }) => (
         }
 
         .content {
-          padding: 16px;
+          padding: 24px;
+          margin 0 auto;
+          max-width: 560px;
         }
 
         h1 {

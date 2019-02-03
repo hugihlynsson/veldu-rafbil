@@ -122,7 +122,7 @@ export default class New extends React.Component {
           }
 
           .sorting-label {
-            margin-bottom: 4px;
+            margin-bottom: 8px;
             font-size: 14px;
             font-weight: 600;
           }
