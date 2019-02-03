@@ -22,14 +22,14 @@ export default ({ car }) => (
           <div className="info-item-value">{car.capacity} kWh</div>
         </div>
 
-        <div className="info-item">
+        <div className="info-item" title="Samkvæmt WLTP prófunum">
           <div className="info-item-label">Drægni</div>
           <div className="info-item-value">{car.range} km</div>
         </div>
       </div>
 
       <a className="more-info" target="_blank" href={car.evDatabaseURL}>
-        Sjá fleiri upplýsingar á ev-database.org
+        Fleiri upplýsingar á ev-database.org
       </a>
     </div>
 
@@ -47,7 +47,7 @@ export default ({ car }) => (
         .content {
           padding: 24px;
           margin 0 auto;
-          max-width: 560px;
+          max-width: 480px;
         }
 
         h1 {
@@ -95,6 +95,10 @@ export default ({ car }) => (
           display: block;
           color: inherit;
           font-size: 14px;
+        }
+
+        @media screen and (min-width: 768px) {
+          
         }
       `}
     </style>

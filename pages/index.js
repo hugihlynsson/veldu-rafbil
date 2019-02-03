@@ -91,6 +91,16 @@ export default class New extends React.Component {
           ))}
         </div>
 
+        <footer>
+          <p>
+            Smíðuð af <a href="http://hugihlynsson.com">Huga Hlynssyni</a>. Með
+            ábendingu eða fyrirspurn?{" "}
+            <a href="mailto:hugihlynsson@gmail.com">hugihlynsson@gmail.com</a>.
+            Rafbílar á Íslandi er á{" "}
+            <a href="https://github.com/hugihlynsson/evs">GitHub</a>.
+          </p>
+        </footer>
+
         <style jsx global>{`
           *,
           *::before,
@@ -113,7 +123,7 @@ export default class New extends React.Component {
             flex-direction: column;
             align-items: stretch;
             margin 0 auto;
-            max-width: 560px;
+            max-width: 480px;
             padding: 24px;
           }
           h1 {
@@ -151,6 +161,21 @@ export default class New extends React.Component {
           }
           .sorting-item:hover {
             background-color: #F8F8F8;
+          }
+
+          footer {
+            background-color: #F8F8F8;
+          }
+          footer p {
+            padding: 56px 24px;
+            margin 0 auto;
+            max-width: 480px;
+            color: #888;
+            font-size: 14px;
+            line-height: 1.5;
+          }
+          footer a {
+            color: #000;
           }
 
           @media screen and (min-width: 768px) {
