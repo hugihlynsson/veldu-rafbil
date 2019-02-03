@@ -7,8 +7,41 @@
     "sellerURL": "http://www.audi.is/is/web/is/models/tron/audi-e-tron.html",
     "acceleration": 6.6,
     "capacity": 95,
-    "range": 281,
+    "range": 381,
     "evDatabaseURL": "https://ev-database.org/car/1092/Audi-e-tron"
+  },
+  {
+    "make": "BMW",
+    "model": "i3",
+    "heroImage": "/static/i3.jpg",
+    "price": 4890000,
+    "sellerURL": "https://www.bl.is/models/i3-linan",
+    "acceleration": 7.3,
+    "capacity": 33.2,
+    "range": 240,
+    "evDatabaseURL": "https://ev-database.org/car/1104/BMW-i3#similar"
+  },
+  {
+    "make": "Hyundai",
+    "model": "IONIQ Electric",
+    "heroImage": "/static/ioniq.jpg",
+    "price": 4190000,
+    "sellerURL": "https://www.hyundai.is/nyir/ioniq/yfirlit",
+    "acceleration": 9.9,
+    "capacity": 28,
+    "range": 204,
+    "evDatabaseURL": "https://ev-database.org/car/1057/Hyundai-IONIQ-Electric"
+  },
+  {
+    "make": "Hyundai",
+    "model": "Kona Electric",
+    "heroImage": "/static/kona.jpg",
+    "price": 5390000,
+    "sellerURL": "https://www.hyundai.is/nyir/kona-ev/yfirlit",
+    "acceleration": 7.6,
+    "capacity": 64,
+    "range": 450,
+    "evDatabaseURL": "https://ev-database.org/car/1126/Hyundai-Kona-Electric-64-kWh"
   },
   {
     "make": "Nissan",
