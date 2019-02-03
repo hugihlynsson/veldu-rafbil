@@ -44,6 +44,39 @@
     "evDatabaseURL": "https://ev-database.org/car/1126/Hyundai-Kona-Electric-64-kWh"
   },
   {
+    "make": "Jaguar",
+    "model": "I-PACE",
+    "heroImage": "/static/i-pace.jpg",
+    "price": 9790000,
+    "sellerURL": "https://www.jaguarisland.is/i-pace-overview",
+    "acceleration": 4.8,
+    "capacity": 90,
+    "range": 470,
+    "evDatabaseURL": "https://ev-database.org/car/1097/Jaguar-I-Pace"
+  },
+  {
+    "make": "Kia",
+    "model": "Soul EV",
+    "heroImage": "/static/soul.jpg",
+    "price": 4290777,
+    "sellerURL": "https://www.kia.com/is/nyir-bilar/soul-ev/upplifdu/",
+    "acceleration": 11.2,
+    "capacity": 30,
+    "range": 185,
+    "evDatabaseURL": "https://ev-database.org/car/1122/Kia-Soul-EV"
+  },
+  {
+    "make": "Nissan",
+    "model": "e-NV200",
+    "heroImage": "/static/e-nv200.jpg",
+    "price": 4850000,
+    "sellerURL": "https://www.nissan.is/vehicles/new-vehicles/e-nv200.html",
+    "acceleration": 14,
+    "capacity": 40,
+    "range": 200,
+    "evDatabaseURL": "https://ev-database.org/car/1117/Nissan-e-NV200-Evalia"
+  },
+  {
     "make": "Nissan",
     "model": "Leaf",
     "heroImage": "/static/leaf.jpg",
@@ -55,6 +88,28 @@
     "evDatabaseURL": "https://ev-database.org/car/1106/Nissan-Leaf"
   },
   {
+    "make": "Renault",
+    "model": "Zoe",
+    "heroImage": "/static/zoe.jpg",
+    "price": 3790000,
+    "sellerURL": "https://renault.is/cars/Zoe/zoe.html",
+    "acceleration": 13.2,
+    "capacity": 41,
+    "range": 317,
+    "evDatabaseURL": "https://ev-database.org/car/1150/Renault-Zoe-R90"
+  },
+  {
+    "make": "Renault",
+    "model": "MAXI II EV",
+    "heroImage": "/static/maxi.jpg",
+    "price": 4550000,
+    "sellerURL": "https://renault.is/cars/kangooExpress/kangoo-express.html",
+    "acceleration": 22.4,
+    "capacity": 33,
+    "range": 190,
+    "evDatabaseURL": "https://ev-database.org/car/1101/Renault-Kangoo-Maxi-ZE-33"
+  },
+  {
     "make": "Volkswagen",
     "model": "e-Golf",
     "heroImage": "/static/e-golf.jpg",
@@ -64,5 +119,16 @@
     "capacity": 35.8,
     "range": 231,
     "evDatabaseURL": "https://ev-database.org/car/1087/Volkswagen-e-Golf"
+  },
+  {
+    "make": "Volkswagen",
+    "model": "e-up!",
+    "heroImage": "/static/e-up.jpg",
+    "price": 3190000,
+    "sellerURL": "https://www.volkswagen.is/is/volkswagen-bilar/e-up-.html",
+    "acceleration": 12.4,
+    "capacity": 18.7,
+    "range": 133,
+    "evDatabaseURL": "https://ev-database.org/car/1081/Volkswagen-e-Up"
   }
 ]
