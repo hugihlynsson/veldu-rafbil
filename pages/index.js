@@ -33,11 +33,6 @@ export default class New extends React.Component {
         <div className="root" key="new">
           <Head>
             <title key="title">Rafbílar á Íslandi</title>
-            <meta
-              key="viewport"
-              name="viewport"
-              content="initial-scale=1.0, width=device-width"
-            />
           </Head>
 
           <header>
@@ -105,23 +100,6 @@ export default class New extends React.Component {
             <a href="mailto:hugihlynsson@gmail.com">hugihlynsson@gmail.com</a>.
           </p>
         </footer>
-
-        <style jsx global>{`
-          *,
-          *::before,
-          *::after {
-            box-sizing: border-box;
-          }
-
-          body {
-            margin: 0;
-            font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto,
-              Helvetica, Arial, sans-serif;
-            color: #111;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-          }
-        `}</style>
 
         <style jsx>
           {`
