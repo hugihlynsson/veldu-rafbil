@@ -43,7 +43,7 @@ export default class New extends React.Component {
           <header>
             <h1>Rafbílar á Íslandi</h1>
 
-            <div className="sorting-label">Raða eftir:</div>
+            <div className="sorting-title">Raða eftir:</div>
             <div className="sorting">
               <div
                 className="sorting-item"
@@ -143,7 +143,7 @@ export default class New extends React.Component {
             line-height: 1.1;
           }
 
-          .sorting-label {
+          .sorting-title {
             margin-bottom: 8px;
             font-size: 14px;
             font-weight: 600;
@@ -158,7 +158,7 @@ export default class New extends React.Component {
           .sorting-item {
             font-size: 12px;
             font-weight: 600;
-            padding: 4px 12px;
+            padding: 6px 16px;
             cursor: pointer;
             text-align: center;
             display: flex;
