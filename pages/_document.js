@@ -18,6 +18,8 @@ export default class Evs extends Document {
 
           <style>{`*, *::before, *::after { box-sizing: border-box; } body { margin: 0; font-family: BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif; color: #111; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }`}</style>
 
+          <link rel="icon" href="/static/icon.png" type="image/png" />
+
           <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=UA-20956924-5"
