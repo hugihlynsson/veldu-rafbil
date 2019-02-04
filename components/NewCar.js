@@ -17,8 +17,8 @@ export default ({ car }) => (
           <div className="info-item-value">{car.acceleration}s</div>
         </div>
 
-        <div className="info-item">
-          <div className="info-item-label">Rýmd</div>
+        <div className="info-item" style={{ flexShrink: 0 }}>
+          <div className="info-item-label">Rafhlaða</div>
           <div className="info-item-value">{car.capacity} kWh</div>
         </div>
 
@@ -41,7 +41,7 @@ export default ({ car }) => (
 
         img {
           width: 100%;
-          height: auto;
+          height: 66.66vw;
         }
 
         .content {
@@ -77,7 +77,6 @@ export default ({ car }) => (
         .info-item {
           margin-right: 16px;
           flex-basis: 33.33%;
-          flex-shrink: 0;
         }
         .info-item:last-child {
           margin-right: 0;
@@ -93,7 +92,6 @@ export default ({ car }) => (
         .info-item-value {
           font-size: 24px;
           font-weight: 400;
-          flex-shrink: 0;
         }
 
         .more-info {
@@ -103,7 +101,26 @@ export default ({ car }) => (
         }
 
         @media screen and (min-width: 768px) {
-          
+          article {
+            display: flex;
+            margin: 40px 0;
+            align-items: center;
+          }
+
+          img {
+            width: 50%;
+            height: auto;
+            align-self: center;
+            border-radius: 2px;
+            padding-left: 40px;
+          }
+
+          .content {
+            margin: 0 32px;
+            padding: 0;
+            max-width: 520px;
+            flex-grow: 1;
+          }
         }
       `}
     </style>

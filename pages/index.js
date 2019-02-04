@@ -29,74 +29,79 @@ export default class New extends React.Component {
     const { sorting } = this.state;
 
     return (
-      <div key="used">
-        <Head>
-          <title key="title">Rafbílar á Íslandi</title>
-          <meta
-            key="viewport"
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-          />
-        </Head>
+      <>
+        <div className="root" key="new">
+          <Head>
+            <title key="title">Rafbílar á Íslandi</title>
+            <meta
+              key="viewport"
+              name="viewport"
+              content="initial-scale=1.0, width=device-width"
+            />
+          </Head>
 
-        <header>
-          <h1>Rafbílar á Íslandi</h1>
+          <header>
+            <h1>Rafbílar á Íslandi</h1>
 
-          <div className="sorting-label">Raða eftir:</div>
-          <div className="sorting">
-            <div
-              className="sorting-item"
-              style={
-                sorting === "name" ? { backgroundColor: "#EEE" } : undefined
-              }
-              onClick={() => this.handleSetSorting("name")}
-            >
-              Nafni
+            <div className="sorting-label">Raða eftir:</div>
+            <div className="sorting">
+              <div
+                className="sorting-item"
+                style={
+                  sorting === "name" ? { backgroundColor: "#EEE" } : undefined
+                }
+                onClick={() => this.handleSetSorting("name")}
+              >
+                Nafni
+              </div>
+              <div
+                className="sorting-item"
+                style={
+                  sorting === "price" ? { backgroundColor: "#EEE" } : undefined
+                }
+                onClick={() => this.handleSetSorting("price")}
+              >
+                Verði
+              </div>
+              <div
+                className="sorting-item"
+                style={
+                  sorting === "range" ? { backgroundColor: "#EEE" } : undefined
+                }
+                onClick={() => this.handleSetSorting("range")}
+              >
+                Drægni
+              </div>
+              <div
+                className="sorting-item"
+                style={
+                  sorting === "acceleration"
+                    ? { backgroundColor: "#EEE" }
+                    : undefined
+                }
+                onClick={() => this.handleSetSorting("acceleration")}
+              >
+                Hröðun
+              </div>
             </div>
-            <div
-              className="sorting-item"
-              style={
-                sorting === "price" ? { backgroundColor: "#EEE" } : undefined
-              }
-              onClick={() => this.handleSetSorting("price")}
-            >
-              Verði
-            </div>
-            <div
-              className="sorting-item"
-              style={
-                sorting === "range" ? { backgroundColor: "#EEE" } : undefined
-              }
-              onClick={() => this.handleSetSorting("range")}
-            >
-              Drægni
-            </div>
-            <div
-              className="sorting-item"
-              style={
-                sorting === "acceleration"
-                  ? { backgroundColor: "#EEE" }
-                  : undefined
-              }
-              onClick={() => this.handleSetSorting("acceleration")}
-            >
-              Hröðun
-            </div>
+          </header>
+
+          <div className="cars">
+            {cars.sort(this.carSorter).map(car => (
+              <Car car={car} key={`${car.make} ${car.model}`} />
+            ))}
           </div>
-        </header>
-
-        <div className="cars">
-          {cars.sort(this.carSorter).map(car => (
-            <Car car={car} key={`${car.make} ${car.model}`} />
-          ))}
         </div>
 
         <footer>
           <p>
             Rafbílar á Íslandi er smíðuð af{" "}
             <a href="http://hugihlynsson.com">Huga Hlynssyni</a> er geymd á{" "}
-            <a href="https://github.com/hugihlynsson/evs">GitHub</a>. Ef þú ert
-            með ábendingu eða fyrirspurn geturu sent póst á{" "}
+            <a href="https://github.com/hugihlynsson/evs">GitHub</a>.{" "}
+          </p>
+
+          <p>
+            Ef þú ert með ábendingu eða fyrirspurn geturu sent póst á{" "}
             <a href="mailto:hugihlynsson@gmail.com">hugihlynsson@gmail.com</a>.
           </p>
         </footer>
@@ -120,6 +125,10 @@ export default class New extends React.Component {
 
         <style jsx>
           {`
+          .root {
+            max-width: 960px;
+            margin: 0 auto;
+          }
           header {
             display: flex;
             flex-direction: column;
@@ -131,6 +140,7 @@ export default class New extends React.Component {
           h1 {
             font-size: 40px;
             font-weight: 600;
+            line-height: 1.1;
           }
 
           .sorting-label {
@@ -143,7 +153,6 @@ export default class New extends React.Component {
             flex-wrap: wrap;
             border: 1px solid #EEE;
             align-self: flex-start;
-            margin-bottom: 8px;
             border-radius: 4px;
           }
           .sorting-item {
@@ -167,12 +176,11 @@ export default class New extends React.Component {
 
           footer {
             background-color: #F8F8F8;
+            padding: 56px 24px;
           }
           footer p {
-            padding: 56px 24px;
             margin 0 auto;
             max-width: 480px;
-            color: #888;
             font-size: 14px;
             line-height: 1.5;
             font-weight: 300;
@@ -182,16 +190,29 @@ export default class New extends React.Component {
             font-weight: 500;
             text-decoration: none;
           }
+          footer a:hover {
+            text-decoration: underline;
+          }
 
           @media screen and (min-width: 768px) {
-            .cars {
-              flex-direction: row;
-              flex-wrap: wrap;
+            header {
+              padding-left: 40px;
+              max-width: none;
+            }
+            h1 {
+              font-size: 64px;
+            }
+            footer {
+              padding: 56px 40px;
+            }
+            footer p {
+              max-width: calc(960px - 40px - 40px);
+              margin: 0 auto;
             }
           }
         `}
         </style>
-      </div>
+      </>
     );
   }
 }
