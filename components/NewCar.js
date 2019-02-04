@@ -64,8 +64,17 @@ export default ({ car }) => (
           color: inherit;
           margin-top: 8px;
           margin-bottom: 24px;
-          font-size: 16px;
+          font-size: 14px;
           font-weight: 600;
+          background-color: #EEE;
+          border-radius: 100px;
+          padding: 4px 12px;
+          text-decoration: none;
+          margin-left: -2px;
+          transition: background-color 0.1s;
+        }
+        .price:hover {
+          background-color: #8CF;
         }
 
         .info {
