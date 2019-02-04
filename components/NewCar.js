@@ -1,7 +1,7 @@
 export default ({ car }) => (
   <article>
     <img
-      alt={`${car.make} ${car.model}`}
+      alt=""
       sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
       srcSet={`
         /static/${car.heroImageName}-540w.jpg 540w, 
