@@ -112,22 +112,24 @@ export default ({ car }) => (
         @media screen and (min-width: 768px) {
           article {
             display: flex;
-            margin: 40px 0;
+            margin: 40px 32px 40px 40px;
             align-items: center;
           }
 
           img {
-            width: 50%;
+            width: 40%;
+            flex-grow: 1;
             height: auto;
             align-self: center;
             border-radius: 2px;
-            padding-left: 40px;
           }
 
           .content {
-            margin: 0 32px;
+            margin: 0 0 0 32px;
             padding: 0;
-            max-width: 520px;
+            width: 330px;
+            max-width: 380px;
+            flex-shrink: 0;
             flex-grow: 1;
           }
         }
