@@ -33,6 +33,10 @@ export default class New extends React.Component {
         <div className="root" key="new">
           <Head>
             <title key="title">Rafbílar á Íslandi</title>
+            <meta
+              key="description"
+              description="Listi yfir alla 12 rafbílana sem seldir eru á Íslandi með hlekk á seljanda og helstu upplýsingum til samanburðar"
+            />
           </Head>
 
           <header>
