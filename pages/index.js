@@ -203,7 +203,7 @@ export default class New extends React.Component {
               padding: 56px 40px;
             }
             footer p {
-              max-width: calc(960px - 40px - 40px);
+              max-width: calc(1024px - 40px - 40px);
               margin: 0 auto;
             }
           }
