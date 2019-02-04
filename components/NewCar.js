@@ -1,6 +1,7 @@
 export default ({ car }) => (
   <article>
     <img
+      alt={`${car.make} ${car.model}`}
       sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
       srcSet={`
         /static/${car.heroImageName}-540w.jpg 540w, 
@@ -16,7 +17,7 @@ export default ({ car }) => (
         <span className="model">{car.model}</span>
       </h1>
 
-      <a className="price" target="_blank" href={car.sellerURL}>
+      <a className="price" target="_blank" rel="noopener" href={car.sellerURL}>
         {car.price.toLocaleString("de")} kr.
       </a>
 
@@ -37,7 +38,12 @@ export default ({ car }) => (
         </div>
       </div>
 
-      <a className="more-info" target="_blank" href={car.evDatabaseURL}>
+      <a
+        className="more-info"
+        target="_blank"
+        href={car.evDatabaseURL}
+        rel="noopener"
+      >
         Fleiri upplýsingar á ev-database.org
       </a>
     </div>
@@ -105,7 +111,7 @@ export default ({ car }) => (
           font-weight: 600;
           letter-spacing: 0.05em;
           margin-bottom: 2px;
-          color: #aaa;
+          color: #555;
         }
         .info-item-value {
           font-size: 24px;
