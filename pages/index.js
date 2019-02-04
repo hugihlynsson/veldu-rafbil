@@ -126,7 +126,7 @@ export default class New extends React.Component {
         <style jsx>
           {`
           .root {
-            max-width: 960px;
+            max-width: 1024px;
             margin: 0 auto;
           }
           header {
