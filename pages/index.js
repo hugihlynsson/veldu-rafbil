@@ -35,7 +35,8 @@ export default class New extends React.Component {
             <title key="title">Rafbílar á Íslandi</title>
             <meta
               key="description"
-              description="Listi yfir alla 12 rafbílana sem seldir eru á Íslandi með hlekk á seljanda og helstu upplýsingum til samanburðar"
+              name="description"
+              content="Listi yfir alla 12 rafbílana sem seldir eru á Íslandi með hlekk á seljanda og helstu upplýsingum til samanburðar"
             />
           </Head>
 
