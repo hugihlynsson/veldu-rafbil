@@ -96,7 +96,7 @@ export default class New extends React.Component {
         <footer>
           <p>
             Rafbílar á Íslandi er smíðuð af{" "}
-            <a href="http://hugihlynsson.com">Huga Hlynssyni</a> er geymd á{" "}
+            <a href="http://hugihlynsson.com">Huga Hlynssyni</a> og er geymd á{" "}
             <a href="https://github.com/hugihlynsson/evs">GitHub</a>.{" "}
           </p>
 
