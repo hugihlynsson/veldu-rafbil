@@ -176,6 +176,7 @@ export default class New extends React.Component {
             header {
               padding-left: 40px;
               max-width: none;
+              padding-bottom: 40px; 
             }
             h1 {
               font-size: 64px;

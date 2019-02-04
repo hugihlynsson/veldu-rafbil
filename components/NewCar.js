@@ -112,7 +112,7 @@ export default ({ car }) => (
         @media screen and (min-width: 768px) {
           article {
             display: flex;
-            margin: 40px 32px 40px 40px;
+            margin: 0 32px 40px 40px;
             align-items: center;
           }
 
