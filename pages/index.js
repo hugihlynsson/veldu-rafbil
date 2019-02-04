@@ -113,7 +113,7 @@ export default class New extends React.Component {
             align-items: stretch;
             margin 0 auto;
             max-width: 480px;
-            padding: 24px;
+            padding: 16px;
           }
           h1 {
             font-size: 40px;
@@ -154,7 +154,7 @@ export default class New extends React.Component {
 
           footer {
             background-color: #F8F8F8;
-            padding: 56px 24px;
+            padding: 32px 16px;
           }
           footer p {
             margin 0 auto;
@@ -170,6 +170,19 @@ export default class New extends React.Component {
           }
           footer a:hover {
             text-decoration: underline;
+          }
+
+          @media screen and (min-width: 375px) {
+            header {
+              padding: 24px;
+            }
+            h1 {
+              font-size: 48px;
+            }
+
+            footer {
+              padding: 56px 24px;
+            }
           }
 
           @media screen and (min-width: 768px) {

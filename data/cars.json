@@ -2,7 +2,7 @@
   {
     "make": "Audi",
     "model": "e-tron",
-    "heroImage": "/static/e-tron.jpg",
+    "heroImageName": "e-tron",
     "price": 9400000,
     "sellerURL": "http://www.audi.is/is/web/is/models/tron/audi-e-tron.html",
     "acceleration": 6.6,
@@ -13,7 +13,7 @@
   {
     "make": "BMW",
     "model": "i3",
-    "heroImage": "/static/i3.jpg",
+    "heroImageName": "i3",
     "price": 4890000,
     "sellerURL": "https://www.bl.is/models/i3-linan",
     "acceleration": 7.3,
@@ -24,7 +24,7 @@
   {
     "make": "Hyundai",
     "model": "IONIQ Electric",
-    "heroImage": "/static/ioniq.jpg",
+    "heroImageName": "ioniq",
     "price": 4190000,
     "sellerURL": "https://www.hyundai.is/nyir/ioniq/yfirlit",
     "acceleration": 9.9,
@@ -35,7 +35,7 @@
   {
     "make": "Hyundai",
     "model": "Kona Electric",
-    "heroImage": "/static/kona.jpg",
+    "heroImageName": "kona",
     "price": 5390000,
     "sellerURL": "https://www.hyundai.is/nyir/kona-ev/yfirlit",
     "acceleration": 7.6,
@@ -46,7 +46,7 @@
   {
     "make": "Jaguar",
     "model": "I-PACE",
-    "heroImage": "/static/i-pace.jpg",
+    "heroImageName": "i-pace",
     "price": 9790000,
     "sellerURL": "https://www.jaguarisland.is/i-pace-overview",
     "acceleration": 4.8,
@@ -57,7 +57,7 @@
   {
     "make": "Kia",
     "model": "Soul EV",
-    "heroImage": "/static/soul.jpg",
+    "heroImageName": "soul",
     "price": 4290777,
     "sellerURL": "https://www.kia.com/is/nyir-bilar/soul-ev/upplifdu/",
     "acceleration": 11.2,
@@ -68,7 +68,7 @@
   {
     "make": "Nissan",
     "model": "e-NV200",
-    "heroImage": "/static/e-nv200.jpg",
+    "heroImageName": "e-nv200",
     "price": 4850000,
     "sellerURL": "https://www.nissan.is/vehicles/new-vehicles/e-nv200.html",
     "acceleration": 14,
@@ -79,7 +79,7 @@
   {
     "make": "Nissan",
     "model": "Leaf",
-    "heroImage": "/static/leaf.jpg",
+    "heroImageName": "leaf",
     "price": 4490000,
     "sellerURL": "https://www.nissan.is/vehicles/new-vehicles/leaf.html",
     "acceleration": 8.4,
@@ -90,7 +90,7 @@
   {
     "make": "Renault",
     "model": "Zoe",
-    "heroImage": "/static/zoe.jpg",
+    "heroImageName": "zoe",
     "price": 3790000,
     "sellerURL": "https://renault.is/cars/Zoe/zoe.html",
     "acceleration": 13.2,
@@ -101,7 +101,7 @@
   {
     "make": "Renault",
     "model": "MAXI II EV",
-    "heroImage": "/static/maxi.jpg",
+    "heroImageName": "maxi",
     "price": 4550000,
     "sellerURL": "https://renault.is/cars/kangooExpress/kangoo-express.html",
     "acceleration": 22.4,
@@ -112,7 +112,7 @@
   {
     "make": "Volkswagen",
     "model": "e-Golf",
-    "heroImage": "/static/e-golf.jpg",
+    "heroImageName": "e-golf",
     "price": 4490000,
     "sellerURL": "https://www.volkswagen.is/is/volkswagen-bilar/e-golf-2016.html",
     "acceleration": 9.6,
@@ -123,7 +123,7 @@
   {
     "make": "Volkswagen",
     "model": "e-up!",
-    "heroImage": "/static/e-up.jpg",
+    "heroImageName": "e-up",
     "price": 3190000,
     "sellerURL": "https://www.volkswagen.is/is/volkswagen-bilar/e-up-.html",
     "acceleration": 12.4,

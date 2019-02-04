@@ -1,6 +1,15 @@
 export default ({ car }) => (
   <article>
-    <img src={car.heroImage} />
+    <img
+      sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
+      srcSet={`
+        /static/${car.heroImageName}-540w.jpg 540w, 
+        /static/${car.heroImageName}-1080w.jpg 1080w, 
+        /static/${car.heroImageName}-1920w.jpg 1920w
+      `}
+      src={`/static/${car.heroImageName}-1080w.jpg`}
+    />
+
     <div className="content">
       <h1>
         <span className="make">{car.make}</span>{" "}
@@ -45,7 +54,7 @@ export default ({ car }) => (
         }
 
         .content {
-          padding: 20px 24px 24px;
+          padding: 10px 16px 16px;
           margin 0 auto;
           max-width: 480px;
         }
@@ -79,12 +88,12 @@ export default ({ car }) => (
 
         .info {
           display: flex;
-          margin-bottom: 24px;
+          margin-bottom: 16px;
           max-width: 320px;
           justify-content: space-between;
         }
         .info-item {
-          margin-right: 16px;
+          margin-right: 8px;
           flex-basis: 33.33%;
         }
         .info-item:last-child {
@@ -107,6 +116,16 @@ export default ({ car }) => (
           display: inline-block;
           color: inherit;
           font-size: 14px;
+        }
+
+        @media screen and (min-width: 375px) {
+          .content {
+            padding: 18px 24px 24px;
+          }
+
+          .info-item {
+            margin-right: 16px;
+          }
         }
 
         @media screen and (min-width: 768px) {
