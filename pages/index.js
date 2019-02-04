@@ -32,7 +32,7 @@ export default class New extends React.Component {
       <>
         <div className="root" key="new">
           <Head>
-            <title key="title">Rafbílar á Íslandi</title>
+            <title key="title">Veldu Rafbíl</title>
             <meta
               key="description"
               name="description"
@@ -41,7 +41,7 @@ export default class New extends React.Component {
           </Head>
 
           <header>
-            <h1>Rafbílar á Íslandi</h1>
+            <h1>Veldu Rafbíl</h1>
 
             <div className="sorting-title">Raða eftir:</div>
             <div className="sorting">
@@ -95,7 +95,7 @@ export default class New extends React.Component {
 
         <footer>
           <p>
-            Rafbílar á Íslandi er smíðuð af{" "}
+            Veldu Rafbíl er smíðuð af{" "}
             <a href="http://hugihlynsson.com">Huga Hlynssyni</a> og er geymd á{" "}
             <a href="https://github.com/hugihlynsson/evs">GitHub</a>.{" "}
           </p>
