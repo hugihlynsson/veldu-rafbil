@@ -38,12 +38,19 @@ export default class New extends React.Component {
             <meta
               key="description"
               name="description"
-              content="Listi yfir alla 12 rafbílana sem seldir eru á Íslandi með hlekk á seljanda og helstu upplýsingum til samanburðar"
+              content="Listi yfir alla 13 bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar"
             />
           </Head>
 
           <header>
             <h1>Veldu Rafbíl</h1>
+
+            <p className="description">
+              Listi yfir alla 13 bílana sem eru seldir á Íslandi og eru 100%
+              rafdrifnir. Upplýsingar um drægni eru samkvæmt{" "}
+              <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda
+              en raundrægni er háð aðstæðum og aksturslagi.
+            </p>
 
             <div className="sorting-title">Raða eftir:</div>
 
@@ -59,11 +66,9 @@ export default class New extends React.Component {
             />
           </header>
 
-          <div className="cars">
-            {cars.sort(this.carSorter).map(car => (
-              <Car car={car} key={`${car.make} ${car.model}`} />
-            ))}
-          </div>
+          {cars.sort(this.carSorter).map(car => (
+            <Car car={car} key={`${car.make} ${car.model}`} />
+          ))}
         </div>
 
         <Footer />
@@ -86,6 +91,21 @@ export default class New extends React.Component {
             font-size: 40px;
             font-weight: 600;
             line-height: 1.1;
+          }
+          .description {
+            line-height: 1.5;
+            font-size: 14px;
+            margin: 0 0 2.5em 0;
+            color: #555;
+            max-width: 33em;
+          }
+          .description a {
+            text-decoration: none;
+            font-weight: 500;
+            color: black;
+          }
+          .description a:hover {
+            text-decoration: underline;
           }
 
           .sorting-title {
@@ -111,6 +131,9 @@ export default class New extends React.Component {
             }
             h1 {
               font-size: 64px;
+            }
+            .description {
+              font-size: 16px;
             }
           }
         `}
