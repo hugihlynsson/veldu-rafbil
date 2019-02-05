@@ -59,7 +59,7 @@ export default class New extends React.Component {
             <Toggles
               currentValue={this.state.sorting}
               items={[
-                ["Nafi", "name"],
+                ["Nafni", "name"],
                 ["Verði", "price"],
                 ["Drægni", "range"],
                 ["Hröðun", "acceleration"]
