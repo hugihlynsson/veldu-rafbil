@@ -38,7 +38,9 @@ export default class New extends React.Component {
             <meta
               key="description"
               name="description"
-              content="Listi yfir alla 13 bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar"
+              content={`Listi yfir alla ${
+                cars.length
+              } bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar`}
             />
           </Head>
 
@@ -46,8 +48,8 @@ export default class New extends React.Component {
             <h1>Veldu Rafbíl</h1>
 
             <p className="description">
-              Listi yfir alla 13 bílana sem eru seldir á Íslandi og eru 100%
-              rafdrifnir. Upplýsingar um drægni eru samkvæmt{" "}
+              Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og
+              eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{" "}
               <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda
               en raundrægni er háð aðstæðum og aksturslagi.
             </p>
