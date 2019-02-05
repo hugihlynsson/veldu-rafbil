@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Car from "../components/NewCar";
 import Footer from "../components/Footer";
+import Toggles from "../components/Toggles";
 import cars from "../data/cars.json";
 
 export default class New extends React.Component {
@@ -45,46 +46,17 @@ export default class New extends React.Component {
             <h1>Veldu Rafbíl</h1>
 
             <div className="sorting-title">Raða eftir:</div>
-            <div className="sorting">
-              <div
-                className="sorting-item"
-                style={
-                  sorting === "name" ? { backgroundColor: "#EEE" } : undefined
-                }
-                onClick={() => this.handleSetSorting("name")}
-              >
-                Nafni
-              </div>
-              <div
-                className="sorting-item"
-                style={
-                  sorting === "price" ? { backgroundColor: "#EEE" } : undefined
-                }
-                onClick={() => this.handleSetSorting("price")}
-              >
-                Verði
-              </div>
-              <div
-                className="sorting-item"
-                style={
-                  sorting === "range" ? { backgroundColor: "#EEE" } : undefined
-                }
-                onClick={() => this.handleSetSorting("range")}
-              >
-                Drægni
-              </div>
-              <div
-                className="sorting-item"
-                style={
-                  sorting === "acceleration"
-                    ? { backgroundColor: "#EEE" }
-                    : undefined
-                }
-                onClick={() => this.handleSetSorting("acceleration")}
-              >
-                Hröðun
-              </div>
-            </div>
+
+            <Toggles
+              currentValue={this.state.sorting}
+              items={[
+                ["Nafi", "name"],
+                ["Verði", "price"],
+                ["Drægni", "range"],
+                ["Hröðun", "acceleration"]
+              ]}
+              onClick={this.handleSetSorting}
+            />
           </header>
 
           <div className="cars">
@@ -120,31 +92,6 @@ export default class New extends React.Component {
             margin-bottom: 8px;
             font-size: 14px;
             font-weight: 600;
-          }
-          .sorting {
-            display: flex;
-            flex-wrap: wrap;
-            border: 1px solid #EEE;
-            align-self: flex-start;
-            border-radius: 4px;
-          }
-          .sorting-item {
-            font-size: 12px;
-            font-weight: 600;
-            padding: 6px 16px;
-            cursor: pointer;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-right: 1px solid #EEE;
-
-          }
-          .sorting-item:last-child {
-            border-right-width: 0;
-          }
-          .sorting-item:hover {
-            background-color: #F8F8F8;
           }
 
           @media screen and (min-width: 375px) {
