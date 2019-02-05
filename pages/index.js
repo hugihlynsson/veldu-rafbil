@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Car from "../components/NewCar";
+import Footer from "../components/Footer";
 import cars from "../data/cars.json";
 
 export default class New extends React.Component {
@@ -93,18 +94,7 @@ export default class New extends React.Component {
           </div>
         </div>
 
-        <footer>
-          <p>
-            Veldu Rafbíl er smíðuð af{" "}
-            <a href="http://hugihlynsson.com">Huga Hlynssyni</a> og er geymd á{" "}
-            <a href="https://github.com/hugihlynsson/evs">GitHub</a>.{" "}
-          </p>
-
-          <p>
-            Ef þú ert með ábendingu eða fyrirspurn geturu sent póst á{" "}
-            <a href="mailto:hugihlynsson@gmail.com">hugihlynsson@gmail.com</a>.
-          </p>
-        </footer>
+        <Footer />
 
         <style jsx>
           {`
@@ -157,36 +147,12 @@ export default class New extends React.Component {
             background-color: #F8F8F8;
           }
 
-          footer {
-            background-color: #F8F8F8;
-            padding: 32px 16px;
-          }
-          footer p {
-            margin 0 auto;
-            max-width: 480px;
-            font-size: 14px;
-            line-height: 1.5;
-            font-weight: 300;
-          }
-          footer a {
-            color: #000;
-            font-weight: 500;
-            text-decoration: none;
-          }
-          footer a:hover {
-            text-decoration: underline;
-          }
-
           @media screen and (min-width: 375px) {
             header {
               padding: 24px;
             }
             h1 {
               font-size: 48px;
-            }
-
-            footer {
-              padding: 56px 24px;
             }
           }
 
@@ -198,13 +164,6 @@ export default class New extends React.Component {
             }
             h1 {
               font-size: 64px;
-            }
-            footer {
-              padding: 56px 40px;
-            }
-            footer p {
-              max-width: calc(1024px - 40px - 40px);
-              margin: 0 auto;
             }
           }
         `}
