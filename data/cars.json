@@ -5,9 +5,9 @@
     "heroImageName": "e-tron",
     "price": 9400000,
     "sellerURL": "http://www.audi.is/is/web/is/models/tron/audi-e-tron.html",
-    "acceleration": 6.6,
+    "acceleration": 5.7,
     "capacity": 95,
-    "range": 381,
+    "range": 400,
     "evDatabaseURL": "https://ev-database.org/car/1092/Audi-e-tron"
   },
   {
