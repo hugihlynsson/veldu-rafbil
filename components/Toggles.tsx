@@ -1,4 +1,13 @@
-export default ({ items, onClick, currentValue }) => (
+type Label = string
+type Value = string
+
+interface Props {
+  items: Array<[Label, Value]>
+  onClick: (value: Value) => void
+  currentValue: Value
+}
+
+export default ({ items, onClick, currentValue }: Props) => (
   <div className="toggles">
     {items.map(([label, value]) => (
       <div

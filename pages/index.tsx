@@ -4,17 +4,21 @@ import Car from '../components/NewCar'
 import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
 import cars from '../data/cars.json'
+import { NewCar } from '../types'
+
+type Sort = 'name' | 'price' | 'range' | 'acceleration'
 
 export default class New extends React.Component {
-  state = {
+  state: { sorting: Sort } = {
     sorting: 'name',
   }
 
-  handleSetSorting = (sorting) => {
+  handleSetSorting = (sorting: Sort) => {
     this.setState({ sorting })
+    return
   }
 
-  carSorter = (a, b) => {
+  carSorter = (a: NewCar, b: NewCar) => {
     switch (this.state.sorting) {
       case 'name':
         return `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`)
@@ -28,8 +32,6 @@ export default class New extends React.Component {
   }
 
   render() {
-    const { sorting } = this.state
-
     return (
       <>
         <div className="root" key="new">
@@ -64,7 +66,7 @@ export default class New extends React.Component {
                 ['Drægni', 'range'],
                 ['Hröðun', 'acceleration'],
               ]}
-              onClick={this.handleSetSorting}
+              onClick={(sort) => this.handleSetSorting(sort as Sort)}
             />
           </header>
 

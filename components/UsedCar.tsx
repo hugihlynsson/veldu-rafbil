@@ -1,4 +1,10 @@
-export default ({ car }) => (
+import { UsedCar } from '../types'
+
+interface Props {
+  car: UsedCar
+}
+
+export default ({ car }: Props) => (
   <a href={car.link}>
     <img src={car.image} />
 
