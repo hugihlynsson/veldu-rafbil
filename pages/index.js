@@ -1,34 +1,34 @@
-import React from "react";
-import Head from "next/head";
-import Car from "../components/NewCar";
-import Footer from "../components/Footer";
-import Toggles from "../components/Toggles";
-import cars from "../data/cars.json";
+import React from 'react'
+import Head from 'next/head'
+import Car from '../components/NewCar'
+import Footer from '../components/Footer'
+import Toggles from '../components/Toggles'
+import cars from '../data/cars.json'
 
 export default class New extends React.Component {
   state = {
-    sorting: "name"
-  };
+    sorting: 'name',
+  }
 
-  handleSetSorting = sorting => {
-    this.setState({ sorting });
-  };
+  handleSetSorting = (sorting) => {
+    this.setState({ sorting })
+  }
 
   carSorter = (a, b) => {
     switch (this.state.sorting) {
-      case "name":
-        return `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`);
-      case "price":
-        return a.price - b.price;
-      case "range":
-        return b.range - a.range;
-      case "acceleration":
-        return a.acceleration - b.acceleration;
+      case 'name':
+        return `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`)
+      case 'price':
+        return a.price - b.price
+      case 'range':
+        return b.range - a.range
+      case 'acceleration':
+        return a.acceleration - b.acceleration
     }
-  };
+  }
 
   render() {
-    const { sorting } = this.state;
+    const { sorting } = this.state
 
     return (
       <>
@@ -49,7 +49,7 @@ export default class New extends React.Component {
 
             <p className="description">
               Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og
-              eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{" "}
+              eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
               <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda
               en raundrægni er háð aðstæðum og aksturslagi.
             </p>
@@ -59,16 +59,16 @@ export default class New extends React.Component {
             <Toggles
               currentValue={this.state.sorting}
               items={[
-                ["Nafni", "name"],
-                ["Verði", "price"],
-                ["Drægni", "range"],
-                ["Hröðun", "acceleration"]
+                ['Nafni', 'name'],
+                ['Verði', 'price'],
+                ['Drægni', 'range'],
+                ['Hröðun', 'acceleration'],
               ]}
               onClick={this.handleSetSorting}
             />
           </header>
 
-          {cars.sort(this.carSorter).map(car => (
+          {cars.sort(this.carSorter).map((car) => (
             <Car car={car} key={`${car.make} ${car.model}`} />
           ))}
         </div>
@@ -141,6 +141,6 @@ export default class New extends React.Component {
         `}
         </style>
       </>
-    );
+    )
   }
 }

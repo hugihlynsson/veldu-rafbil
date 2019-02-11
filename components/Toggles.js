@@ -4,7 +4,7 @@ export default ({ items, onClick, currentValue }) => (
       <div
         key={value}
         className="toggle"
-        style={value === currentValue ? { backgroundColor: "#EEE" } : undefined}
+        style={value === currentValue ? { backgroundColor: '#EEE' } : undefined}
         onClick={() => onClick(value)}
       >
         {label}
@@ -40,4 +40,4 @@ export default ({ items, onClick, currentValue }) => (
       `}
     </style>
   </div>
-);
+)

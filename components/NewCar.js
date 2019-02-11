@@ -13,12 +13,12 @@ export default ({ car }) => (
 
     <div className="content">
       <h1>
-        <span className="make">{car.make}</span>{" "}
+        <span className="make">{car.make}</span>{' '}
         <span className="model">{car.model}</span>
       </h1>
 
       <a className="price" target="_blank" rel="noopener" href={car.sellerURL}>
-        {car.price.toLocaleString("de")} kr.
+        {car.price.toLocaleString('de')} kr.
       </a>
 
       <div className="info">
@@ -161,4 +161,4 @@ export default ({ car }) => (
       `}
     </style>
   </article>
-);
+)

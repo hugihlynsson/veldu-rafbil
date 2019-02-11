@@ -16,5 +16,8 @@
     "build": "next build",
     "start": "next start",
     "now-build": "next build"
+  },
+  "devDependencies": {
+    "prettier": "^1.16.4"
   }
 }
