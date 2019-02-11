@@ -1,35 +1,37 @@
-import React from "react";
-import Head from "next/head";
-import Car from "../components/NewCar";
-import Footer from "../components/Footer";
-import Toggles from "../components/Toggles";
-import cars from "../data/cars.json";
+import React from 'react'
+import Head from 'next/head'
+import Car from '../components/NewCar'
+import Footer from '../components/Footer'
+import Toggles from '../components/Toggles'
+import cars from '../data/cars.json'
+import { NewCar } from '../types'
+
+type Sort = 'name' | 'price' | 'range' | 'acceleration'
 
 export default class New extends React.Component {
-  state = {
-    sorting: "name"
-  };
+  state: { sorting: Sort } = {
+    sorting: 'name',
+  }
 
-  handleSetSorting = sorting => {
-    this.setState({ sorting });
-  };
+  handleSetSorting = (sorting: Sort) => {
+    this.setState({ sorting })
+    return
+  }
 
-  carSorter = (a, b) => {
+  carSorter = (a: NewCar, b: NewCar) => {
     switch (this.state.sorting) {
-      case "name":
-        return `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`);
-      case "price":
-        return a.price - b.price;
-      case "range":
-        return b.range - a.range;
-      case "acceleration":
-        return a.acceleration - b.acceleration;
+      case 'name':
+        return `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`)
+      case 'price':
+        return a.price - b.price
+      case 'range':
+        return b.range - a.range
+      case 'acceleration':
+        return a.acceleration - b.acceleration
     }
-  };
+  }
 
   render() {
-    const { sorting } = this.state;
-
     return (
       <>
         <div className="root" key="new">
@@ -49,7 +51,7 @@ export default class New extends React.Component {
 
             <p className="description">
               Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og
-              eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{" "}
+              eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
               <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda
               en raundrægni er háð aðstæðum og aksturslagi.
             </p>
@@ -59,16 +61,16 @@ export default class New extends React.Component {
             <Toggles
               currentValue={this.state.sorting}
               items={[
-                ["Nafni", "name"],
-                ["Verði", "price"],
-                ["Drægni", "range"],
-                ["Hröðun", "acceleration"]
+                ['Nafni', 'name'],
+                ['Verði', 'price'],
+                ['Drægni', 'range'],
+                ['Hröðun', 'acceleration'],
               ]}
-              onClick={this.handleSetSorting}
+              onClick={(sort) => this.handleSetSorting(sort as Sort)}
             />
           </header>
 
-          {cars.sort(this.carSorter).map(car => (
+          {cars.sort(this.carSorter).map((car) => (
             <Car car={car} key={`${car.make} ${car.model}`} />
           ))}
         </div>
@@ -141,6 +143,6 @@ export default class New extends React.Component {
         `}
         </style>
       </>
-    );
+    )
   }
 }

@@ -1,10 +1,16 @@
-export default ({ car }) => (
+import { UsedCar } from '../types'
+
+interface Props {
+  car: UsedCar
+}
+
+export default ({ car }: Props) => (
   <a href={car.link}>
     <img src={car.image} />
 
     <div>
       <p className="title">
-        <span className="make">{car.make.toLowerCase()}</span>{" "}
+        <span className="make">{car.make.toLowerCase()}</span>{' '}
         {car.model.toLowerCase()}
       </p>
 
@@ -15,7 +21,7 @@ export default ({ car }) => (
       <p className="extra">
         <span className="price">{car.price} kr. </span>
 
-        {car.date.split("/")[1]}
+        {car.date.split('/')[1]}
 
         {car.milage && ` • ${car.milage}`}
       </p>
@@ -69,4 +75,4 @@ export default ({ car }) => (
       }
     `}</style>
   </a>
-);
+)

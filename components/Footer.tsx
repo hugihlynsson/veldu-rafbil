@@ -1,13 +1,13 @@
 export default () => (
   <footer>
     <p>
-      Veldu Rafbíl er smíðuð af{" "}
-      <a href="http://hugihlynsson.com">Huga Hlynssyni</a> og er geymd á{" "}
-      <a href="https://github.com/hugihlynsson/evs">GitHub</a>.{" "}
+      Veldu Rafbíl er smíðuð af{' '}
+      <a href="http://hugihlynsson.com">Huga Hlynssyni</a> og er geymd á{' '}
+      <a href="https://github.com/hugihlynsson/evs">GitHub</a>.{' '}
     </p>
 
     <p>
-      Ef þú ert með ábendingu eða fyrirspurn geturu sent póst á{" "}
+      Ef þú ert með ábendingu eða fyrirspurn geturu sent póst á{' '}
       <a href="mailto:hugihlynsson@gmail.com">hugihlynsson@gmail.com</a>.
     </p>
 
@@ -51,4 +51,4 @@ export default () => (
       `}
     </style>
   </footer>
-);
+)

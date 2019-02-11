@@ -1,9 +1,9 @@
-import Document, { Head, Main, NextScript } from "next/document";
+import Document, { Head, Main, NextScript } from 'next/document'
 
 export default class Evs extends Document {
-  static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+  static async getInitialProps(ctx: any) {
+    const initialProps = await Document.getInitialProps(ctx)
+    return { ...initialProps }
   }
 
   render() {
@@ -31,7 +31,7 @@ export default class Evs extends Document {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'UA-20956924-5');
-          `
+          `,
             }}
           />
         </Head>
@@ -42,6 +42,6 @@ export default class Evs extends Document {
           <NextScript />
         </body>
       </html>
-    );
+    )
   }
 }

@@ -1,10 +1,19 @@
-export default ({ items, onClick, currentValue }) => (
+type Label = string
+type Value = string
+
+interface Props {
+  items: Array<[Label, Value]>
+  onClick: (value: Value) => void
+  currentValue: Value
+}
+
+export default ({ items, onClick, currentValue }: Props) => (
   <div className="toggles">
     {items.map(([label, value]) => (
       <div
         key={value}
         className="toggle"
-        style={value === currentValue ? { backgroundColor: "#EEE" } : undefined}
+        style={value === currentValue ? { backgroundColor: '#EEE' } : undefined}
         onClick={() => onClick(value)}
       >
         {label}
@@ -40,4 +49,4 @@ export default ({ items, onClick, currentValue }) => (
       `}
     </style>
   </div>
-);
+)
