@@ -2,7 +2,7 @@
   "alias": ["veldurafbil.com"],
   "version": 2,
   "builds": [
-    { "src": "next.config.js", "use": "@now/next" },
+    { "src": "ui/next.config.js", "use": "@now/next" },
     { "src": "api/*.js", "use": "@now/node" }
   ],
   "routes": [
