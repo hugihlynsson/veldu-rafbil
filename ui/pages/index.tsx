@@ -58,7 +58,7 @@ export default class New extends React.Component {
 
             <div className="sorting-title">Raða eftir:</div>
 
-            <Toggles
+            <Toggles<Sort>
               currentValue={this.state.sorting}
               items={[
                 ['Nafni', 'name'],
@@ -66,7 +66,7 @@ export default class New extends React.Component {
                 ['Drægni', 'range'],
                 ['Hröðun', 'acceleration'],
               ]}
-              onClick={(sort) => this.handleSetSorting(sort as Sort)}
+              onClick={(sort) => this.handleSetSorting(sort)}
             />
           </header>
 

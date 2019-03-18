@@ -60,12 +60,12 @@ const Used: NextStatelessComponent<Props> = ({ cars }) => {
         <Toggles
           currentValue={sorting}
           items={[
-            ['Nafni', 'name'],
             ['Verði', 'price'],
+            ['Nafni', 'name'],
             ['Aldri', 'age'],
             ['Keyrslu', 'milage'],
           ]}
-          onClick={(sort) => setSorting(sort as Sorting)}
+          onClick={setSorting}
         />
 
         <div className="filters">
