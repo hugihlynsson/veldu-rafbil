@@ -34,12 +34,12 @@ export default class Evs extends Document {
           />
         </Head>
 
-        <body className="custom_class">
+        <body>
           <Main />
           <NextScript />
         </body>
 
-        <style jsx>{`
+        <style jsx global>{`
           *,
           *::before,
           *::after {
