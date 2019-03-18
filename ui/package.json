@@ -4,14 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@types/next": "^8.0.1",
-    "@types/react": "^16.8.8",
-    "@types/react-dom": "^16.8.2",
-    "@types/styled-jsx": "^2.2.8",
     "@zeit/next-typescript": "^1.1.1",
-    "cheerio": "^1.0.0-rc.2",
     "fork-ts-checker-webpack-plugin": "^1.0.0",
-    "form-data": "^2.3.3",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^8.0.3",
     "react": "^16.8.4",
@@ -25,6 +19,10 @@
     "now-build": "next build"
   },
   "devDependencies": {
+    "@types/next": "^8.0.1",
+    "@types/react": "^16.8.8",
+    "@types/react-dom": "^16.8.2",
+    "@types/styled-jsx": "^2.2.8",
     "prettier": "^1.16.4"
   }
 }

@@ -1,4 +1,4 @@
-import { UsedCar } from '../types'
+import { UsedCar } from '../../types'
 
 interface Props {
   car: UsedCar

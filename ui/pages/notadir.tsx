@@ -1,33 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { NextStatelessComponent } from 'next'
 import fetch from 'isomorphic-unfetch'
-import Car from '../components/UsedCar'
 import Head from 'next/head'
+import Toggles from '../components/Toggles'
+import Footer from '../components/Footer'
 
-export default class Used extends React.Component {
-  static getInitialProps = async ({ req }) => {
-    return await fetch('/api/used.ts')
-  }
+import { UsedCar } from '../../types'
+import Car from '../components/UsedCar'
 
-  state = {
-    filter: undefined,
-    sorting: 'price',
-  }
+type Sorting = 'price' | 'age' | 'milage' | 'name'
 
-  handleSetFilter = (filter) => {
-    this.setState({ filter })
-  }
+interface Props {
+  cars: Array<UsedCar>
+}
 
-  handleSetSorting = (sorting) => {
-    this.setState({ sorting })
-  }
+const Used: NextStatelessComponent<Props> = ({ cars }) => {
+  const [filter, setFilter] = useState<string | undefined>(undefined)
+  const [sorting, setSorting] = useState<Sorting>('price')
 
-  render() {
-    const { cars } = this.props
-    const { filter, sorting } = this.state
-
-    console.log('Render')
-
-    return (
+  return (
+    <>
       <div className="root" key="used">
         <Head>
           <title key="title">Notaðir Rafbílar</title>
@@ -40,46 +32,23 @@ export default class Used extends React.Component {
 
         <h1>Notaðir Rafbílar</h1>
 
-        <div className="sorting">
-          <div
-            className="sorting-item"
-            style={
-              sorting === 'price' ? { backgroundColor: '#EEE' } : undefined
-            }
-            onClick={() => this.handleSetSorting('price')}
-          >
-            Verð
-          </div>
-          <div
-            className="sorting-item"
-            style={sorting === 'age' ? { backgroundColor: '#EEE' } : undefined}
-            onClick={() => this.handleSetSorting('age')}
-          >
-            Aldur
-          </div>
-          <div
-            className="sorting-item"
-            style={
-              sorting === 'milage' ? { backgroundColor: '#EEE' } : undefined
-            }
-            onClick={() => this.handleSetSorting('milage')}
-          >
-            Keyrsla
-          </div>
-          <div
-            className="sorting-item"
-            style={sorting === 'name' ? { backgroundColor: '#EEE' } : undefined}
-            onClick={() => this.handleSetSorting('name')}
-          >
-            Nafn
-          </div>
-        </div>
+        <div className="sorting-title">Raða eftir:</div>
+        <Toggles
+          currentValue={sorting}
+          items={[
+            ['Nafni', 'name'],
+            ['Verði', 'price'],
+            ['Aldri', 'age'],
+            ['Keyrslu', 'milage'],
+          ]}
+          onClick={(sort) => setSorting(sort as Sorting)}
+        />
 
         <div className="filters">
           <div
             className="filter"
             style={!filter ? { backgroundColor: '#EEE' } : undefined}
-            onClick={() => this.handleSetFilter()}
+            onClick={() => setFilter(undefined)}
           >
             ALLIR <span className="count">{cars.length}</span>
           </div>
@@ -87,7 +56,7 @@ export default class Used extends React.Component {
           {Object.entries(
             cars
               .map((car) => car.make)
-              .reduce(
+              .reduce<{ [key: string]: number }>(
                 (makes, make) =>
                   makes[make]
                     ? { ...makes, [make]: makes[make] + 1 } // Add one count
@@ -99,7 +68,7 @@ export default class Used extends React.Component {
               key={make}
               className="filter"
               style={filter === make ? { backgroundColor: '#EEE' } : undefined}
-              onClick={() => this.handleSetFilter(make)}
+              onClick={() => setFilter(make)}
             >
               {make} <span className="count">{count}</span>
             </div>
@@ -111,11 +80,11 @@ export default class Used extends React.Component {
             .filter((car) => !filter || car.make === filter)
             .slice() // Make sure the sorting doesn't try to mutate the original
             .sort((a, b) => {
-              switch (this.state.sorting) {
+              switch (sorting) {
                 case 'price': {
                   return (
-                    Number(a.price.replace('.', '')) -
-                    Number(b.price.replace('.', ''))
+                    (a.price || Number.MAX_SAFE_INTEGER) -
+                    (b.price || Number.MAX_SAFE_INTEGER)
                   )
                 }
                 case 'age': {
@@ -141,32 +110,15 @@ export default class Used extends React.Component {
                 }
               }
             })
-            .map((car) => {
-              console.log(car.milage)
-              return car
-            })
             .map((car) => (
               <Car car={car} key={car.link} />
             ))}
         </div>
+      </div>
 
-        <style jsx global>{`
-          *,
-          *::before,
-          *::after {
-            box-sizing: border-box;
-          }
+      <Footer />
 
-          body {
-            margin: 0;
-            font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto,
-              Helvetica, Arial, sans-serif;
-            color: #111;
-          }
-        `}</style>
-
-        <style jsx>
-          {`
+      <style jsx>{`
           .root {
             display: flex;
             flex-direction: column;
@@ -179,36 +131,16 @@ export default class Used extends React.Component {
             font-size: 40px;
             font-weight: 600;
           }
-          .sorting {
-            display: flex;
-            flex-wrap: wrap;
-            border: 1px solid #EEE;
-            align-self: flex-start;
+          .sorting-title {
             margin-bottom: 8px;
-            border-radius: 4px;
-          }
-          .sorting-item {
-            font-size: 11px;
+            font-size: 14px;
             font-weight: 600;
-            padding: 4px 8px;
-            cursor: pointer;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-right: 1px solid #EEE;
-
-          }
-          .sorting-item:last-child {
-            border-right-width: 0;
-          }
-          .sorting-item:hover {
-            background-color: #F8F8F8;
           }
 
           .filters {
             display: flex;
             flex-wrap: wrap;
+            margin-top: 16px;
           }
           .filter {
             font-size: 11px;
@@ -243,14 +175,29 @@ export default class Used extends React.Component {
               margin 0 auto;
               max-width: 1120px;
             }
+
             .cars {
               flex-direction: row;
               flex-wrap: wrap;
             }
           }
-        `}
-        </style>
-      </div>
-    )
+        `}</style>
+    </>
+  )
+}
+
+Used.getInitialProps = async (): Promise<Props> => {
+  try {
+    const response = await fetch(`${process.env.API_HOST}/api/used.ts`)
+    const json = await response.json()
+    if (json.error) {
+      throw json.error
+    }
+    return { cars: json.cars as Array<UsedCar> }
+  } catch (error) {
+    console.log('Failed to fetch cars', error)
+    return { cars: [] }
   }
 }
+
+export default Used

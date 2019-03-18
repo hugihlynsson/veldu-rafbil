@@ -16,8 +16,6 @@ export default class Evs extends Document {
             content="initial-scale=1.0, width=device-width"
           />
 
-          <style>{`*, *::before, *::after { box-sizing: border-box; } body { margin: 0; font-family: BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif; color: #111; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }`}</style>
-
           <link rel="icon" href="/static/icon.png" type="image/png" />
 
           <script
@@ -38,9 +36,24 @@ export default class Evs extends Document {
 
         <body className="custom_class">
           <Main />
-
           <NextScript />
         </body>
+
+        <style jsx>{`
+          *,
+          *::before,
+          *::after {
+            box-sizing: border-box;
+          }
+          body {
+            margin: 0;
+            font-family: BlinkMacSystemFont, -apple-system, Roboto, Helvetica,
+              Arial, sans-serif;
+            color: #111;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+          }
+        `}</style>
       </html>
     )
   }
