@@ -81,7 +81,7 @@ const handler = async (_: IncomingMessage, res: ServerResponse) => {
           milage: cheerio(details[1])
             .text()
             .split(' · ')[0],
-          price: priceText ? Number(priceText.replace('.', '')) : undefined,
+          price: priceText ? Number(priceText.split('.').join('')) : undefined,
         })
       })
     })

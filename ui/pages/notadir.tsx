@@ -34,8 +34,18 @@ const Used: NextStatelessComponent<Props> = ({ cars }) => {
       }
       case 'milage': {
         return (
-          (Number(a.milage.replace(' km.', '').replace('.', '')) || 0) -
-          (Number(b.milage.replace(' km.', '').replace('.', '')) || 0)
+          (Number(
+            a.milage
+              .replace(' km.', '')
+              .split('.')
+              .join(''),
+          ) || 0) -
+          (Number(
+            b.milage
+              .replace(' km.', '')
+              .split('.')
+              .join(''),
+          ) || 0)
         )
       }
       case 'name': {
