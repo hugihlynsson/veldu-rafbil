@@ -1,4 +1,4 @@
-import { UsedCar } from '../types'
+import { UsedCar } from '../../types'
 
 interface Props {
   car: UsedCar
@@ -15,11 +15,13 @@ export default ({ car }: Props) => (
       </p>
 
       {car.modelExtra && (
-        <p className="extra">{car.modelExtra.toLowerCase()}</p>
+        <p className="extra extra--model">{car.modelExtra.toLowerCase()}</p>
       )}
 
       <p className="extra">
-        <span className="price">{car.price} kr. </span>
+        {car.price && (
+          <span className="price">{car.price.toLocaleString('de')} kr. </span>
+        )}
 
         {car.date.split('/')[1]}
 
@@ -58,9 +60,11 @@ export default ({ car }: Props) => (
       .extra {
         margin: 0 0 6px;
         color: #aaa;
-        text-transform: capitalize;
         font-weight: 300;
         font-size: 14px;
+      }
+      .extra--model {
+        text-transform: capitalize;
       }
       .price {
         color: #111;

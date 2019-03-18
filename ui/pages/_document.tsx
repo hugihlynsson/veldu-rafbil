@@ -1,11 +1,6 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 
 export default class Evs extends Document {
-  static async getInitialProps(ctx: any) {
-    const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
-  }
-
   render() {
     return (
       <html lang="is">
@@ -16,9 +11,23 @@ export default class Evs extends Document {
             content="initial-scale=1.0, width=device-width"
           />
 
-          <style>{`*, *::before, *::after { box-sizing: border-box; } body { margin: 0; font-family: BlinkMacSystemFont, -apple-system, Roboto, Helvetica, Arial, sans-serif; color: #111; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }`}</style>
-
           <link rel="icon" href="/static/icon.png" type="image/png" />
+
+          <style>{`
+              *,
+              *::before,
+              *::after {
+                box-sizing: border-box;
+              }
+              body {
+                margin: 0;
+                font-family: BlinkMacSystemFont, -apple-system, Roboto, Helvetica,
+                  Arial, sans-serif;
+                color: #111;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+              }
+          `}</style>
 
           <script
             async
@@ -36,9 +45,8 @@ export default class Evs extends Document {
           />
         </Head>
 
-        <body className="custom_class">
+        <body>
           <Main />
-
           <NextScript />
         </body>
       </html>
