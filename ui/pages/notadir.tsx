@@ -18,16 +18,40 @@ const Used: NextStatelessComponent<Props> = ({ cars }) => {
   const [filter, setFilter] = useState<string | undefined>(undefined)
   const [sorting, setSorting] = useState<Sorting>('price')
 
+  const carSorter = (a: UsedCar, b: UsedCar) => {
+    switch (sorting) {
+      case 'price': {
+        return (
+          (a.price || Number.MAX_SAFE_INTEGER) -
+          (b.price || Number.MAX_SAFE_INTEGER)
+        )
+      }
+      case 'age': {
+        return (
+          Number((b.date.split('/')[1] || '').split(' ')[0]) -
+          Number((a.date.split('/')[1] || '').split(' ')[0])
+        )
+      }
+      case 'milage': {
+        return (
+          (Number(a.milage.replace(' km.', '').replace('.', '')) || 0) -
+          (Number(b.milage.replace(' km.', '').replace('.', '')) || 0)
+        )
+      }
+      case 'name': {
+        return `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`)
+      }
+      default: {
+        return 1
+      }
+    }
+  }
+
   return (
     <>
       <div className="root" key="used">
         <Head>
           <title key="title">Notaðir Rafbílar</title>
-          <meta
-            key="viewport"
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-          />
         </Head>
 
         <h1>Notaðir Rafbílar</h1>
@@ -79,37 +103,7 @@ const Used: NextStatelessComponent<Props> = ({ cars }) => {
           {cars
             .filter((car) => !filter || car.make === filter)
             .slice() // Make sure the sorting doesn't try to mutate the original
-            .sort((a, b) => {
-              switch (sorting) {
-                case 'price': {
-                  return (
-                    (a.price || Number.MAX_SAFE_INTEGER) -
-                    (b.price || Number.MAX_SAFE_INTEGER)
-                  )
-                }
-                case 'age': {
-                  return (
-                    Number((b.date.split('/')[1] || '').split(' ')[0]) -
-                    Number((a.date.split('/')[1] || '').split(' ')[0])
-                  )
-                }
-                case 'milage': {
-                  return (
-                    (Number(a.milage.replace(' km.', '').replace('.', '')) ||
-                      0) -
-                    (Number(b.milage.replace(' km.', '').replace('.', '')) || 0)
-                  )
-                }
-                case 'name': {
-                  return `${a.make} ${a.model}`.localeCompare(
-                    `${b.make} ${b.model}`,
-                  )
-                }
-                default: {
-                  return 1
-                }
-              }
-            })
+            .sort(carSorter)
             .map((car) => (
               <Car car={car} key={car.link} />
             ))}
@@ -186,9 +180,11 @@ const Used: NextStatelessComponent<Props> = ({ cars }) => {
   )
 }
 
-Used.getInitialProps = async (): Promise<Props> => {
+Used.getInitialProps = async ({ req }): Promise<Props> => {
   try {
-    const response = await fetch(`${process.env.API_HOST}/api/used.ts`)
+    const baseUrl =
+      process.env.LOCAL_BASE_URL || (req ? `https://${req.headers.host}` : '')
+    const response = await fetch(`${baseUrl}/api/used.ts`)
     const json = await response.json()
     if (json.error) {
       throw json.error

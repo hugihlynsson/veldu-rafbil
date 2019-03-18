@@ -4,7 +4,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 module.exports = () => ({
   target: 'serverless',
   env: {
-    API_HOST: process.env.IS_NOW ? '' : 'http://localhost:4000',
+    LOCAL_BASE_URL: process.env.IS_NOW ? '' : 'http://localhost:4000',
   },
   ...withTypescript({
     webpack(config, options) {
