@@ -91,10 +91,7 @@ const Used: NextStatelessComponent<Props> = ({ cars }) => {
             cars
               .map((car) => car.make)
               .reduce<{ [key: string]: number }>(
-                (makes, make) =>
-                  makes[make]
-                    ? { ...makes, [make]: makes[make] + 1 } // Add one count
-                    : { ...makes, [make]: 1 }, // Create a new make and set to 1
+                (makes, make) => ({ ...makes, [make]: (makes[make] || 0) + 1 }),
                 {},
               ),
           ).map(([make, count]) => (
