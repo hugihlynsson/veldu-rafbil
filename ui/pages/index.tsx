@@ -1,25 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Head from 'next/head'
+import { NextStatelessComponent } from 'next'
 import Car from '../components/NewCar'
 import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
 import cars from '../data/cars.json'
 import { NewCar } from '../types'
 
-type Sort = 'name' | 'price' | 'range' | 'acceleration'
+type Sorting = 'name' | 'price' | 'range' | 'acceleration'
 
-export default class New extends React.Component {
-  state: { sorting: Sort } = {
-    sorting: 'name',
-  }
+const Used: NextStatelessComponent = () => {
+  const [sorting, setSorting] = useState<Sorting>('name')
 
-  handleSetSorting = (sorting: Sort) => {
-    this.setState({ sorting })
-    return
-  }
-
-  carSorter = (a: NewCar, b: NewCar) => {
-    switch (this.state.sorting) {
+  const carSorter = (a: NewCar, b: NewCar) => {
+    switch (sorting) {
       case 'name':
         return `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`)
       case 'price':
@@ -31,54 +25,53 @@ export default class New extends React.Component {
     }
   }
 
-  render() {
-    return (
-      <>
-        <div className="root" key="new">
-          <Head>
-            <title key="title">Veldu Rafbíl</title>
-            <meta
-              key="description"
-              name="description"
-              content={`Listi yfir alla ${
-                cars.length
-              } bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar`}
-            />
-          </Head>
+  return (
+    <>
+      <div className="root" key="new">
+        <Head>
+          <title key="title">Veldu Rafbíl</title>
+          <meta
+            key="description"
+            name="description"
+            content={`Listi yfir alla ${
+              cars.length
+            } bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar`}
+          />
+        </Head>
 
-          <header>
-            <h1>Veldu Rafbíl</h1>
+        <header>
+          <h1>Veldu Rafbíl</h1>
 
-            <p className="description">
-              Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og
-              eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
-              <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda
-              en raundrægni er háð aðstæðum og aksturslagi.
-            </p>
+          <p className="description">
+            Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og eru
+            100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
+            <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda en
+            raundrægni er háð aðstæðum og aksturslagi.
+          </p>
 
-            <div className="sorting-title">Raða eftir:</div>
+          <div className="sorting-title">Raða eftir:</div>
 
-            <Toggles<Sort>
-              currentValue={this.state.sorting}
-              items={[
-                ['Nafni', 'name'],
-                ['Verði', 'price'],
-                ['Drægni', 'range'],
-                ['Hröðun', 'acceleration'],
-              ]}
-              onClick={(sort) => this.handleSetSorting(sort)}
-            />
-          </header>
+          <Toggles<Sorting>
+            currentValue={sorting}
+            items={[
+              ['Nafni', 'name'],
+              ['Verði', 'price'],
+              ['Drægni', 'range'],
+              ['Hröðun', 'acceleration'],
+            ]}
+            onClick={setSorting}
+          />
+        </header>
 
-          {cars.sort(this.carSorter).map((car) => (
-            <Car car={car} key={`${car.make} ${car.model}`} />
-          ))}
-        </div>
+        {cars.sort(carSorter).map((car) => (
+          <Car car={car} key={`${car.make} ${car.model}`} />
+        ))}
+      </div>
 
-        <Footer />
+      <Footer />
 
-        <style jsx>
-          {`
+      <style jsx>
+        {`
           .root {
             max-width: 1024px;
             margin: 0 auto;
@@ -141,8 +134,9 @@ export default class New extends React.Component {
             }
           }
         `}
-        </style>
-      </>
-    )
-  }
+      </style>
+    </>
+  )
 }
+
+export default Used
