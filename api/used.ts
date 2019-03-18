@@ -60,7 +60,8 @@ const handler = async (_: IncomingMessage, res: ServerResponse) => {
         const model = parsedElement
           .find('.car-make-and-model')
           .text()
-          .replace(parsedElement.find('.car-make').text(), '')
+          .split(parsedElement.find('.car-make').text())
+          .join('')
           .trim()
 
         const details = parsedElement.find('.tech-details div')
