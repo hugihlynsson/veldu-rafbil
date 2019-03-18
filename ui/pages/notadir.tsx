@@ -4,6 +4,7 @@ import fetch from 'isomorphic-unfetch'
 import Head from 'next/head'
 import Toggles from '../components/Toggles'
 import Footer from '../components/Footer'
+import stableSort from '../components/stableSort'
 
 import { UsedCar } from '../../types'
 import Car from '../components/UsedCar'
@@ -107,10 +108,8 @@ const Used: NextStatelessComponent<Props> = ({ cars }) => {
         </div>
 
         <div className="cars">
-          {cars
+          {stableSort(cars, carSorter)
             .filter((car) => !filter || car.make === filter)
-            .slice() // Make sure the sorting doesn't try to mutate the original
-            .sort(carSorter)
             .map((car) => (
               <Car car={car} key={car.link} />
             ))}
