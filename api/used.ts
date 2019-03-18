@@ -99,6 +99,7 @@ const handler = async (_: IncomingMessage, res: ServerResponse) => {
     ),
   )
 
+  res.setHeader('Cache-Control', 's-maxage=3600') // Cache requests for 1 hour
   res.end(JSON.stringify({ cars: filteredCars }))
 }
 
