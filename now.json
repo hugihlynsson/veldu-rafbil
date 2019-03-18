@@ -8,5 +8,13 @@
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/(.*)", "dest": "/ui/$1" }
-  ]
+  ],
+  "build": {
+    "env": {
+      "IS_NOW": "true"
+    }
+  },
+  "env": {
+    "IS_NOW": "true"
+  }
 }

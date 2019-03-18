@@ -1,0 +1,18 @@
+{
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon --exec \"ts-node $1\""
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "node-fetch": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.11",
+    "@types/node": "^11.11.3",
+    "@types/node-fetch": "^2.1.6",
+    "nodemon": "^1.18.10",
+    "ts-node": "^8.0.3",
+    "typescript": "^3.3.3333"
+  }
+}
