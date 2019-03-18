@@ -9,8 +9,6 @@ const carBlacklist = [
 ]
 
 const handler = async (_: IncomingMessage, res: ServerResponse) => {
-  res.writeHead(200, { 'Content-Type': 'application/json' })
-
   const cars: Array<UsedCar> = []
   try {
     const fetchRes = await fetch('https://bilasolur.is/Section.aspx?s=1', {
@@ -87,6 +85,7 @@ const handler = async (_: IncomingMessage, res: ServerResponse) => {
       })
     })
   } catch (error) {
+    res.writeHead(200, { 'Content-Type': 'application/json' })
     res.end(JSON.stringify({ error: 'Failed to fetch cars' }))
   }
 
@@ -100,6 +99,7 @@ const handler = async (_: IncomingMessage, res: ServerResponse) => {
   )
 
   res.setHeader('Cache-Control', 's-maxage=3600') // Cache requests for 1 hour
+  res.writeHead(200, { 'Content-Type': 'application/json' })
   res.end(JSON.stringify({ cars: filteredCars }))
 }
 
