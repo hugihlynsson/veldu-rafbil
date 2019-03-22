@@ -14,12 +14,12 @@
     "make": "BMW",
     "model": "i3",
     "heroImageName": "i3",
-    "price": 4890000,
+    "price": 4790000,
     "sellerURL": "https://www.bl.is/models/i3-linan",
     "acceleration": 7.3,
-    "capacity": 33.2,
-    "range": 240,
-    "evDatabaseURL": "https://ev-database.org/car/1104/BMW-i3#similar"
+    "capacity": 42.2,
+    "range": 359,
+    "evDatabaseURL": "https://ev-database.org/car/1145/BMW-i3-120-Ah"
   },
   {
     "make": "Hyundai",
