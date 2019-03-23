@@ -4,7 +4,11 @@
   "version": 2,
   "builds": [
     { "src": "ui/next.config.js", "use": "@now/next" },
-    { "src": "api/endpoints/*.ts", "use": "@now/node" }
+    {
+      "src": "api/endpoints/*.ts",
+      "use": "@now/node",
+      "config": { "maxLambdaSize": "6mb" }
+    }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/endpoints/$1" },
