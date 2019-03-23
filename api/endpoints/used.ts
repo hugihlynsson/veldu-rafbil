@@ -22,19 +22,19 @@ firebaseAdmin.initializeApp({
 })
 
 const handler = async (_: IncomingMessage, res: ServerResponse) => {
+  const database = firebaseAdmin.database()
   try {
-    const snapshot = await fetchLastSnapshot()
+    const snapshot = await fetchLastSnapshot(database)
     if (snapshot) {
-      const snapshotEpoch = snapshot.timestamp.toDate().getTime()
       const isFromLastHour =
-        new Date().getTime() - snapshotEpoch < 60 * 60 * 1000
+        new Date().getTime() - snapshot.timestamp < 60 * 60 * 1000
       if (isFromLastHour) {
-        console.log('Returning snapshot from', snapshot.timestamp.toDate())
+        console.log('Returning snapshot from', snapshot.date)
         res.writeHead(200, { 'Content-Type': 'application/json' })
         res.end(JSON.stringify({ cars: snapshot.cars }))
         return
       }
-      console.log('Snapshot too old, from:', snapshot.timestamp.toDate())
+      console.log('Snapshot too old, from:', snapshot.date)
     } else {
       console.log('Found no snapshot')
     }
@@ -54,15 +54,17 @@ const handler = async (_: IncomingMessage, res: ServerResponse) => {
 
   const filteredCars = filterUsedCars(cars)
   console.log('Storing scrape', new Date())
-  firebaseAdmin
-    .firestore()
-    .collection('snapshots')
-    .add({
-      timestamp: firebaseAdmin.firestore.Timestamp.fromDate(new Date()),
+
+  const now = new Date()
+  database
+    .ref(`snapshots/${now.getTime()}`)
+    .set({
+      timestamp: now.getTime(),
       cars: JSON.parse(JSON.stringify(filteredCars)), // Trim undefined values
+      date: now.toISOString(),
     })
     .catch((error) =>
-      console.log('Failed to add new snapshot to Firestore', error),
+      console.log('Failed to add new snapshot to Firebase', error),
     )
 
   res.writeHead(200, { 'Content-Type': 'application/json' })
