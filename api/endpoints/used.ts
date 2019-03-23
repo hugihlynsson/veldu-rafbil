@@ -52,11 +52,9 @@ const handler = async (_: IncomingMessage, res: ServerResponse) => {
   }
 
   const filteredCars = filterUsedCars(cars)
-  res.writeHead(200, { 'Content-Type': 'application/json' })
-  res.end(JSON.stringify({ cars: filteredCars }))
 
   console.log('Storing scrape', new Date())
-  await firestore
+  firestore
     .collection('snapshots')
     .add({
       timestamp: Timestamp.fromDate(new Date()),
@@ -65,6 +63,9 @@ const handler = async (_: IncomingMessage, res: ServerResponse) => {
     .catch((error) =>
       console.log('Failed to add new snapshot to Firestore', error),
     )
+
+  res.writeHead(200, { 'Content-Type': 'application/json' })
+  res.end(JSON.stringify({ cars: filteredCars }))
 }
 
 // process.env.IS_NOW is undefined locally,
