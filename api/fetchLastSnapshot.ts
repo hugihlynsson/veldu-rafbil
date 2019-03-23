@@ -1,15 +1,16 @@
-import firebaseAdmin from 'firebase-admin'
+import { Firestore, Timestamp } from '@google-cloud/firestore'
 
 import { UsedCar } from '../types'
 
 interface UsedCarsSnapshot {
   cars: Array<UsedCar>
-  timestamp: firebaseAdmin.firestore.Timestamp
+  timestamp: Timestamp
 }
-// Assume that firebase app has already been initialised
-export default async (): Promise<UsedCarsSnapshot | undefined> => {
-  const query = await firebaseAdmin
-    .firestore()
+
+export default async (
+  firestore: Firestore,
+): Promise<UsedCarsSnapshot | undefined> => {
+  const query = await firestore
     .collection('snapshots')
     .orderBy('timestamp', 'desc')
     .limit(1)

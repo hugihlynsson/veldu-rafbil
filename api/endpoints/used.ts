@@ -1,7 +1,7 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http'
-import firebaseAdmin from 'firebase-admin'
 import dotenv from 'dotenv'
 import atob from 'atob'
+import { Firestore, Timestamp } from '@google-cloud/firestore'
 
 import { UsedCar } from '../../types'
 import scrapeUsedCars from '../scrapeUsedCars'
@@ -12,18 +12,17 @@ if (!process.env.IS_NOW) {
   dotenv.config()
 }
 
-firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert({
-    projectId: process.env.FIREBASE_PROJECT_ID,
-    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-    privateKey: atob(process.env.FIREBASE_PRIVATE_KEY!).replace(/\\n/g, '\n'),
-  }),
-  databaseURL: 'https://choose-ev.firebaseio.com',
+const firestore = new Firestore({
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  credentials: {
+    client_email: process.env.FIREBASE_CLIENT_EMAIL,
+    private_key: atob(process.env.FIREBASE_PRIVATE_KEY!).replace(/\\n/g, '\n'),
+  },
 })
 
 const handler = async (_: IncomingMessage, res: ServerResponse) => {
   try {
-    const snapshot = await fetchLastSnapshot()
+    const snapshot = await fetchLastSnapshot(firestore)
     if (snapshot) {
       const snapshotEpoch = snapshot.timestamp.toDate().getTime()
       const isFromLastHour =
@@ -57,11 +56,10 @@ const handler = async (_: IncomingMessage, res: ServerResponse) => {
   res.end(JSON.stringify({ cars: filteredCars }))
 
   console.log('Storing scrape', new Date())
-  await firebaseAdmin
-    .firestore()
+  await firestore
     .collection('snapshots')
     .add({
-      timestamp: firebaseAdmin.firestore.Timestamp.fromDate(new Date()),
+      timestamp: Timestamp.fromDate(new Date()),
       cars: JSON.parse(JSON.stringify(filteredCars)), // Trim undefined values
     })
     .catch((error) =>

@@ -4,10 +4,10 @@
     "dev": "nodemon --exec \"ts-node $1\""
   },
   "dependencies": {
+    "@google-cloud/firestore": "^1.2.0",
     "atob": "^2.1.2",
     "cheerio": "^1.0.0-rc.2",
     "dotenv": "^7.0.0",
-    "firebase-admin": "^7.1.0",
     "node-fetch": "^2.3.0"
   },
   "devDependencies": {
