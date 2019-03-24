@@ -4,11 +4,16 @@
     "dev": "nodemon --exec \"ts-node $1\""
   },
   "dependencies": {
+    "atob": "^2.1.2",
     "cheerio": "^1.0.0-rc.2",
+    "dotenv": "^7.0.0",
+    "firebase-admin": "^7.1.0",
     "node-fetch": "^2.3.0"
   },
   "devDependencies": {
+    "@types/atob": "^2.1.2",
     "@types/cheerio": "^0.22.11",
+    "@types/dotenv": "^6.1.0",
     "@types/node": "^11.11.3",
     "@types/node-fetch": "^2.1.6",
     "nodemon": "^1.18.10",

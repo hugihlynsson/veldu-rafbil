@@ -1,12 +1,17 @@
 {
   "alias": ["veldurafbil.com"],
+  "scope": "hugihlynsson",
   "version": 2,
   "builds": [
     { "src": "ui/next.config.js", "use": "@now/next" },
-    { "src": "api/*.ts", "use": "@now/node" }
+    {
+      "src": "api/endpoints/*.ts",
+      "use": "@now/node",
+      "config": { "maxLambdaSize": "7mb" }
+    }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/api/(.*)", "dest": "/api/endpoints/$1" },
     { "src": "/(.*)", "dest": "/ui/$1" }
   ],
   "build": {
@@ -15,6 +20,9 @@
     }
   },
   "env": {
-    "IS_NOW": "true"
+    "IS_NOW": "true",
+    "FIREBASE_PROJECT_ID": "@firebase-project-id",
+    "FIREBASE_CLIENT_EMAIL": "@firebase-client-email",
+    "FIREBASE_PRIVATE_KEY": "@firebase-private-key"
   }
 }
