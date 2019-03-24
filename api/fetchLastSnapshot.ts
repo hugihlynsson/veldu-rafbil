@@ -14,15 +14,20 @@ export default async (
   const dataSnapshot = await database
     .ref('snapshots')
     .orderByKey()
-    .limitToFirst(1)
+    .limitToLast(1)
     .once('value')
 
-  const snapshots: Array<UsedCarsSnapshot> = dataSnapshot.val()
-  if (!snapshots || !snapshots.length) {
-    console.log('Snapshots empty')
+  const snapshots: { [key: string]: UsedCarsSnapshot } = dataSnapshot.val()
+  if (!snapshots) {
+    console.log('Fetched snapshots are empty')
     return
   }
 
-  console.log('Found snapshot, timestamp:', snapshots[0].date)
-  return snapshots[0]
+  const snapshot = snapshots[Object.keys(snapshots)[0]]
+  if (!snapshot) {
+    console.log('Found no snapshot when fetching')
+  }
+
+  console.log('Fetched snapshot from', snapshot.date)
+  return snapshot
 }
