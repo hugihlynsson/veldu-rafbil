@@ -19,6 +19,7 @@
       "IS_NOW": "true"
     }
   },
+  "regions": ["lhr"],
   "env": {
     "IS_NOW": "true",
     "FIREBASE_PROJECT_ID": "@firebase-project-id",
