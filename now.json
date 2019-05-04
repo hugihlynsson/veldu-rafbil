@@ -7,7 +7,7 @@
     {
       "src": "api/endpoints/*.ts",
       "use": "@now/node",
-      "config": { "maxLambdaSize": "7mb" }
+      "config": { "maxLambdaSize": "10mb" }
     }
   ],
   "routes": [
