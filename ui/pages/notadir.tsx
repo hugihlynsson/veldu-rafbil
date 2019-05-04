@@ -68,7 +68,7 @@ const Used: NextStatelessComponent<Props> = ({ cars }) => {
         <h1>Notaðir Rafbílar</h1>
 
         <div className="sorting-title">Raða eftir:</div>
-        <Toggles
+        <Toggles<Sorting>
           currentValue={sorting}
           items={[
             ['Verði', 'price'],
