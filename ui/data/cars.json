@@ -77,6 +77,17 @@
     "evDatabaseURL": "https://ev-database.org/car/1122/Kia-Soul-EV"
   },
   {
+    "make": "Mercedes-Benz",
+    "model": "EQC",
+    "heroImageName": "eqc",
+    "price": 9390000,
+    "sellerURL": "https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqc/pad/highlights.module.html",
+    "acceleration": 5.1,
+    "capacity": 80,
+    "range": 417,
+    "evDatabaseURL": "https://ev-database.org/car/1135/Mercedes-EQC-400-4MATIC"
+  },
+  {
     "make": "Nissan",
     "model": "e-NV200",
     "heroImageName": "e-nv200",
