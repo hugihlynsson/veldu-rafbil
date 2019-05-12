@@ -22,11 +22,9 @@ export default ({ car }: Props) => (
         <span className="make">{car.make}</span>{' '}
         <span className="model">{car.model}</span>
       </h1>
-
       <a className="price" target="_blank" rel="noopener" href={car.sellerURL}>
         {car.price.toLocaleString('de')} kr.
       </a>
-
       <div className="info">
         <div className="info-item">
           <div className="info-item-label">0-100 km/klst</div>
@@ -43,14 +41,13 @@ export default ({ car }: Props) => (
           <div className="info-item-value">{car.range} km</div>
         </div>
       </div>
-
       <a
         className="more-info"
         target="_blank"
         href={car.evDatabaseURL}
         rel="noopener"
       >
-        Fleiri upplýsingar á ev-database.org
+        Nánar á ev-database.org
       </a>
     </div>
 
