@@ -12,6 +12,10 @@
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/endpoints/$1" },
+    { 
+      "src": "/_next/static/(?:[^/]+/pages|chunks|runtime)/.+", 
+      "headers": { "cache-control": "immutable,max-age=31536000" } 
+    },
     { "src": "/(.*)", "dest": "/ui/$1" }
   ],
   "build": {
