@@ -31,19 +31,15 @@ interface Props {
 }
 
 const Used: NextFunctionComponent<Props> = ({ initialSorting }) => {
-  const { pathname, query } = useRouter<{ radaeftir: SortingQuery }>()
+  const { pathname } = useRouter<{ radaeftir: SortingQuery }>()
   const [sorting, setSorting] = useState<Sorting>(
-    queryToSorting[(query && query.radaeftir) || initialSorting || 'nafni'],
+    queryToSorting[initialSorting || 'nafni'],
   )
-
-  useEffect(() => {
-    setSorting(queryToSorting[(query && query.radaeftir) || 'nafni'])
-  }, [query])
 
   useEffect(() => {
     const query =
       sorting === 'name' ? {} : { radaeftir: sortingToQuery[sorting] }
-    Router.push({ pathname, query })
+    Router.replace({ pathname, query })
   }, [sorting])
 
   const carSorter = (a: NewCar, b: NewCar) => {
