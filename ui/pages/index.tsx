@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
-import { NextStatelessComponent } from 'next'
+import { NextFunctionComponent } from 'next'
+import Router, { useRouter } from 'next/router'
+
 import Car from '../components/NewCar'
 import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
@@ -8,9 +10,41 @@ import cars from '../data/cars.json'
 import { NewCar } from '../types'
 
 type Sorting = 'name' | 'price' | 'range' | 'acceleration'
+type SortingQuery = 'nafni' | 'verdi' | 'draegni' | 'hrodun'
 
-const Used: NextStatelessComponent = () => {
-  const [sorting, setSorting] = useState<Sorting>('name')
+const sortingToQuery: { [key in Sorting]: SortingQuery } = {
+  name: 'nafni',
+  price: 'verdi',
+  range: 'draegni',
+  acceleration: 'hrodun',
+}
+
+const queryToSorting: { [key in SortingQuery]: Sorting } = {
+  nafni: 'name',
+  verdi: 'price',
+  draegni: 'range',
+  hrodun: 'acceleration',
+}
+
+interface Props {
+  initialSorting: SortingQuery | undefined
+}
+
+const Used: NextFunctionComponent<Props> = ({ initialSorting }) => {
+  const { pathname, query } = useRouter<{ radaeftir: SortingQuery }>()
+  const [sorting, setSorting] = useState<Sorting>(
+    queryToSorting[(query && query.radaeftir) || initialSorting || 'nafni'],
+  )
+
+  useEffect(() => {
+    setSorting(queryToSorting[(query && query.radaeftir) || 'nafni'])
+  }, [query])
+
+  useEffect(() => {
+    const query =
+      sorting === 'name' ? {} : { radaeftir: sortingToQuery[sorting] }
+    Router.push({ pathname, query })
+  }, [sorting])
 
   const carSorter = (a: NewCar, b: NewCar) => {
     switch (sorting) {
@@ -137,6 +171,10 @@ const Used: NextStatelessComponent = () => {
       </style>
     </>
   )
+}
+
+Used.getInitialProps = ({ query }) => {
+  return { initialSorting: query.radaeftir as SortingQuery | undefined }
 }
 
 export default Used
