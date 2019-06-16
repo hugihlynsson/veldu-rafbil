@@ -116,7 +116,7 @@
     "price": 5590000,
     "sellerURL": "https://www.opel.is/bilar/ampera-e",
     "acceleration": 7.3,
-    "capacity": 50,
+    "capacity": 60,
     "range": 380,
     "evDatabaseURL": "https://ev-database.org/car/1051/Opel-Ampera-e"
   },
