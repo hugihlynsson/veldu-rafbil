@@ -7,21 +7,15 @@
     {
       "src": "api/endpoints/*.ts",
       "use": "@now/node",
-      "config": { "maxLambdaSize": "10mb" }
+      "config": { "maxLambdaSize": "12mb" }
     }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/endpoints/$1" },
     { "src": "/(.*)", "dest": "/ui/$1" }
   ],
-  "build": {
-    "env": {
-      "IS_NOW": "true"
-    }
-  },
   "regions": ["lhr"],
   "env": {
-    "IS_NOW": "true",
     "FIREBASE_PROJECT_ID": "@firebase-project-id",
     "FIREBASE_CLIENT_EMAIL": "@firebase-client-email",
     "FIREBASE_PRIVATE_KEY": "@firebase-private-key"

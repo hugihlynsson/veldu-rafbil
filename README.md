@@ -1,19 +1,16 @@
-# Choose EV
+# Veldu Rafbíl (Choose EV)
 
-This is a monorepo and is deployed using [Now](http://now.sh).
-
-The repo contains two projecs. `ui/` is a [Next](https://nextjs.org) project while `api/` contains the server endpoints. They are both written in Typescript. Files in `api/endpoints/` are deployed as lamdas and routed to as `/api/`. The UI is served from `/`.
+This monorepo contains two projecs. `ui/` is a [Next](https://nextjs.org) project while `api/` contains server endpoints. They are both written in Typescript. The project is deployed using [Now](http://now.sh). The UI is served from `/`. Files in `api/endpoints/<filename>` are deployed as lamdas and routed to as `/api/<filename>`. 
 
 Requirements:
 
-- Node 8 or later
+- Node 8.10 or later
 - [Yarn](https://yarnpkg.com)
+- [Now CLI](https://zeit.co/download) - `yarn add global now`
 
-To start working on the UI, run `cd ui`, `yarn install` and finally `yarn dev`. This will start a development server at `localhost:3000`. It will try to connect to endpoints at `localhost:4000`.
+Run `now dev` to spin up the project. It uses the config from `now.json`, installs the specified builders and starts serving the routes. It will defer building a route until it is requested – the first load might take some time.
 
-To get the endpoints going, run `cd api` and `yarn install`. While the now-cli is [working on supporting `now dev`](https://github.com/zeit/now-cli/pull/1883) the development setup is quite simplistic and currently only supports running one endpoint at a time. From `api/`, run `yarn dev <path-to-the-endpoint>`, for example `yarn dev endpoints/used.ts`. This will start a server at `localhost:4000` where any route will resolve to the chosen path.
-
-To run the server, you'll need to have access to a Firebase project and have the following keys in a `api/.env` file:
+To access the `api/used.ts` endpoint, you'll need to have access to a Firebase project (you can follow [this guide](https://firebase.google.com/docs/web/setup)) and have the following keys in your environment (a `.env` file will be picked up by `now dev`):
 
 - `FIREBASE_PROJECT_ID`
 - `FIREBASE_CLIENT_EMAIL`
