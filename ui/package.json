@@ -13,9 +13,6 @@
     "typescript": "^3.5.2"
   },
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
     "now-build": "next build"
   },
   "devDependencies": {

@@ -1,16 +1,11 @@
-import { createServer, IncomingMessage, ServerResponse } from 'http'
+import { IncomingMessage, ServerResponse } from 'http'
 import firebaseAdmin from 'firebase-admin'
-import dotenv from 'dotenv'
 import atob from 'atob'
 
 import { UsedCar } from '../../types'
 import scrapeUsedCars from '../scrapeUsedCars'
 import filterUsedCars from '../filterUsedCars'
 import fetchLastSnapshot from '../fetchLastSnapshot'
-
-if (!process.env.IS_NOW) {
-  dotenv.config()
-}
 
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert({
@@ -21,7 +16,7 @@ firebaseAdmin.initializeApp({
   databaseURL: 'https://choose-ev.firebaseio.com',
 })
 
-const handler = async (_: IncomingMessage, res: ServerResponse) => {
+export default async (_: IncomingMessage, res: ServerResponse) => {
   const database = firebaseAdmin.database()
   try {
     const snapshot = await fetchLastSnapshot(database)
@@ -70,14 +65,3 @@ const handler = async (_: IncomingMessage, res: ServerResponse) => {
   res.writeHead(200, { 'Content-Type': 'application/json' })
   res.end(JSON.stringify({ cars: filteredCars }))
 }
-
-// process.env.IS_NOW is undefined locally,
-if (!process.env.IS_NOW) {
-  // so we have a server with the handler!
-  createServer(handler).listen(4000)
-  console.log('Stated used.ts on port 4000')
-}
-
-// Either way, this is exported
-// On Now, this is what gets invoked/called/executed.
-export default handler
