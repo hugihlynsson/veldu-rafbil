@@ -9,7 +9,7 @@ export default function Toggles<P>({ items, onClick, currentValue }: Props<P>) {
     <div className="toggles">
       {items.map(([label, value]) => (
         <div
-          key={value.toString()}
+          key={label}
           className="toggle"
           style={
             value === currentValue ? { backgroundColor: '#EEE' } : undefined
