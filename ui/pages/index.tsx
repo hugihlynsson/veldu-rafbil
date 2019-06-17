@@ -8,6 +8,7 @@ import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
 import cars from '../data/cars.json'
 import { NewCar } from '../types'
+import stableSort from '../components/stableSort'
 
 type Sorting = 'name' | 'price' | 'range' | 'acceleration'
 type SortingQuery = 'nafni' | 'verdi' | 'draegni' | 'hrodun'
@@ -63,9 +64,7 @@ const Used: NextFunctionComponent<Props> = ({ initialSorting }) => {
           <meta
             key="description"
             name="description"
-            content={`Listi yfir alla ${
-              cars.length
-            } bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar`}
+            content={`Listi yfir alla ${cars.length} bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar`}
           />
         </Head>
 
@@ -93,7 +92,7 @@ const Used: NextFunctionComponent<Props> = ({ initialSorting }) => {
           />
         </header>
 
-        {cars.sort(carSorter).map((car) => (
+        {stableSort(cars, carSorter).map((car) => (
           <Car car={car} key={`${car.make} ${car.model}`} />
         ))}
       </div>
