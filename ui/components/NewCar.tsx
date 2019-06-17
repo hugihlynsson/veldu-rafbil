@@ -1,5 +1,18 @@
 import { NewCar } from '../types'
 
+// number.toLocaleString() can be inconsistent between node and client, breaking SSR
+const addDecimalSeprators = (value: number): string =>
+  value
+    .toString()
+    .split('')
+    .reverse()
+    .join('')
+    .match(/.{1,3}/g)!
+    .join('.')
+    .split('')
+    .reverse()
+    .join('')
+
 interface Props {
   car: NewCar
 }
@@ -23,7 +36,7 @@ export default ({ car }: Props) => (
         <span className="model">{car.model}</span>
       </h1>
       <a className="price" target="_blank" rel="noopener" href={car.sellerURL}>
-        {car.price.toLocaleString('de')} kr.
+        {addDecimalSeprators(car.price)} kr.
       </a>
       <div className="info">
         <div className="info-item">
