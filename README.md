@@ -4,7 +4,7 @@ This monorepo contains two projecs. `ui/` is a [Next](https://nextjs.org) projec
 
 Requirements:
 
-- Node 8.10 or later
+- Node 10.15 or later
 - [Yarn](https://yarnpkg.com)
 - [Now CLI](https://zeit.co/download) - `yarn add global now`
 
