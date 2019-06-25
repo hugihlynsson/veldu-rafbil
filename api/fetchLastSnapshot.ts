@@ -1,33 +1,29 @@
-import firebaseAdmin from 'firebase-admin'
+import { database } from 'firebase-admin'
 
 import { UsedCar } from '../types'
 
-interface UsedCarsSnapshot {
+interface Snapshot {
   cars: Array<UsedCar>
   timestamp: number
   date: string // ISO date string (Date.toISOString())
 }
 
-export default async (
-  database: firebaseAdmin.database.Database,
-): Promise<UsedCarsSnapshot | undefined> => {
+export default async (database: database.Database): Promise<Snapshot> => {
   const dataSnapshot = await database
     .ref('snapshots')
     .orderByKey()
     .limitToLast(1)
     .once('value')
 
-  const snapshots: { [key: string]: UsedCarsSnapshot } = dataSnapshot.val()
+  const snapshots: { [key: string]: Snapshot } = dataSnapshot.val()
   if (!snapshots) {
-    console.log('Fetched snapshots are empty')
-    return
+    throw new Error('Fetched snapshots are undefined')
   }
 
   const snapshot = snapshots[Object.keys(snapshots)[0]]
   if (!snapshot) {
-    console.log('Found no snapshot when fetching')
+    throw new Error('Fetched snapshots contain no items')
   }
 
-  console.log('Fetched snapshot from', snapshot.date)
   return snapshot
 }

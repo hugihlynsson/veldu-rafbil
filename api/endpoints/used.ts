@@ -20,19 +20,15 @@ export default async (_: IncomingMessage, res: ServerResponse) => {
   const database = firebaseAdmin.database()
   try {
     const snapshot = await fetchLastSnapshot(database)
-    if (snapshot) {
-      const isFromLastHour =
-        new Date().getTime() - snapshot.timestamp < 60 * 60 * 1000
-      if (isFromLastHour) {
-        console.log('Returning snapshot from', snapshot.date)
-        res.writeHead(200, { 'Content-Type': 'application/json' })
-        res.end(JSON.stringify({ cars: snapshot.cars }))
-        return
-      }
-      console.log('Snapshot too old, from:', snapshot.date)
-    } else {
-      console.log('Found no snapshot')
+    const isFromLastHour =
+      new Date().getTime() - snapshot.timestamp < 60 * 60 * 1000
+    if (isFromLastHour) {
+      console.log('Returning snapshot from', snapshot.date)
+      res.writeHead(200, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ cars: snapshot.cars }))
+      return
     }
+    console.log('Snapshot too old, from:', snapshot.date)
   } catch (error) {
     console.log('Failed to fetch snapshot', error)
   }
@@ -42,6 +38,7 @@ export default async (_: IncomingMessage, res: ServerResponse) => {
   try {
     cars = await scrapeUsedCars()
   } catch (error) {
+    console.log('Failed to scrape cars', error)
     res.writeHead(200, { 'Content-Type': 'application/json' })
     res.end(JSON.stringify({ error: 'Failed to fetch cars' }))
     return
