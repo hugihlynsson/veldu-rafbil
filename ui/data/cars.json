@@ -99,6 +99,17 @@
     "evDatabaseURL": "https://ev-database.org/car/1106/Nissan-Leaf"
   },
   {
+    "make": "Nissan",
+    "model": "Leaf e+",
+    "heroImageName": "leaf",
+    "price": 5590000,
+    "sellerURL": "https://www.nissan.is/vehicles/new-vehicles/leaf.html",
+    "acceleration": 7.3,
+    "capacity": 62,
+    "range": 385,
+    "evDatabaseURL": "https://ev-database.org/car/1144/Nissan-Leaf-eplus"
+  },
+  {
     "make": "Opel",
     "model": "Ampera-e",
     "heroImageName": "ampera-e",
