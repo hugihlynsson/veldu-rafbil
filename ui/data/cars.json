@@ -93,7 +93,7 @@
     "heroImageName": "leaf",
     "price": 4390000,
     "sellerURL": "https://www.nissan.is/vehicles/new-vehicles/leaf.html",
-    "acceleration": 8.4,
+    "acceleration": 7.9,
     "capacity": 40,
     "range": 270,
     "evDatabaseURL": "https://ev-database.org/car/1106/Nissan-Leaf"
