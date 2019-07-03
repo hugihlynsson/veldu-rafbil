@@ -12,6 +12,7 @@ export default class Evs extends Document {
           />
 
           <link rel="icon" href="/static/icon.png" type="image/png" />
+          <link rel="preconnect" href="https://www.google-analytics.com" />
 
           <style>{`
               *,
