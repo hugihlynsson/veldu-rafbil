@@ -66,6 +66,17 @@
     "evDatabaseURL": "https://ev-database.org/car/1125/Kia-e-Niro-64-kWh"
   },
   {
+    "make": "Kia",
+    "model": "e-Soul",
+    "heroImageName": "e-soul",
+    "price": 5690777,
+    "sellerURL": "https://www.kia.com/is/nyir-bilar/e-soul/upplifdu/",
+    "acceleration": 7.9,
+    "capacity": 64,
+    "range": 452,
+    "evDatabaseURL": "https://ev-database.org/car/1154/Kia-e-Soul-64-kWh"
+  },
+  {
     "make": "Mercedes-Benz",
     "model": "EQC",
     "heroImageName": "eqc",
