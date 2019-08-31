@@ -41,7 +41,7 @@ export default ({ car }: Props) => (
       <div className="info">
         <div className="info-item">
           <div className="info-item-label">0-100 km/klst</div>
-          <div className="info-item-value">{car.acceleration}s</div>
+          <div className="info-item-value">{car.acceleration.toFixed(1)}s</div>
         </div>
 
         <div className="info-item" style={{ flexShrink: 0 }}>
