@@ -123,7 +123,7 @@
   {
     "make": "Nissan",
     "model": "Leaf e+",
-    "heroImageName": "leaf",
+    "heroImageName": "leaf-eplus",
     "price": 5590000,
     "sellerURL": "https://www.nissan.is/vehicles/new-vehicles/leaf.html",
     "acceleration": 7.3,
