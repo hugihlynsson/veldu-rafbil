@@ -1,7 +1,7 @@
 [
   {
     "make": "Audi",
-    "model": "e-tron",
+    "model": "e-tron 55",
     "heroImageName": "e-tron",
     "price": 9790000,
     "sellerURL": "http://www.audi.is/is/web/is/models/tron/audi-e-tron.html",
@@ -9,6 +9,17 @@
     "capacity": 95,
     "range": 417,
     "evDatabaseURL": "https://ev-database.org/car/1092/Audi-e-tron"
+  },
+  {
+    "make": "Audi",
+    "model": "e-tron 50",
+    "heroImageName": "e-tron-50",
+    "price": 7990000,
+    "sellerURL": "https://www.hekla.is/is/vefverslun/forsala/audi/audi-e-tron-50",
+    "acceleration": 7,
+    "capacity": 71,
+    "range": 328,
+    "evDatabaseURL": "https://ev-database.org/car/1209/Audi-e-tron-50-quattro"
   },
   {
     "make": "BMW",
