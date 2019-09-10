@@ -165,6 +165,83 @@
     "evDatabaseURL": "https://ev-database.org/car/1101/Renault-Kangoo-Maxi-ZE-33"
   },
   {
+    "make": "Tesla",
+    "model": "Model 3 Standard Range Plus",
+    "heroImageName": "tesla-model-3-srplus",
+    "price": 5122735,
+    "sellerURL": "https://www.tesla.com/is_IS/model3/design",
+    "acceleration": 5.6,
+    "capacity": 55,
+    "range": 409,
+    "evDatabaseURL": "https://ev-database.org/car/1177/Tesla-Model-3-Standard-Range-Plus"
+  },
+  {
+    "make": "Tesla",
+    "model": "Model 3 Long Range",
+    "heroImageName": "tesla-model-3-lr",
+    "price": 6152191,
+    "sellerURL": "https://www.tesla.com/is_IS/model3/design",
+    "acceleration": 4.6,
+    "capacity": 75,
+    "range": 560,
+    "evDatabaseURL": "https://ev-database.org/car/1138/Tesla-Model-3-Long-Range-Dual-Motor"
+  },
+  {
+    "make": "Tesla",
+    "model": "Model 3 Performance",
+    "heroImageName": "tesla-model-3-performance",
+    "price": 7144191,
+    "sellerURL": "https://www.tesla.com/is_IS/model3/design",
+    "acceleration": 3.4,
+    "capacity": 75,
+    "range": 530,
+    "evDatabaseURL": "https://ev-database.org/car/1139/Tesla-Model-3-Long-Range-Performance"
+  },
+  {
+    "make": "Tesla",
+    "model": "Model S Long Range",
+    "heroImageName": "tesla-model-s-lr",
+    "price": 10988191,
+    "sellerURL": "https://www.tesla.com/is_IS/models/design",
+    "acceleration": 3.8,
+    "capacity": 100,
+    "range": 610,
+    "evDatabaseURL": "https://ev-database.org/car/1194/Tesla-Model-S-Long-Range"
+  },
+  {
+    "make": "Tesla",
+    "model": "Model S Performance",
+    "heroImageName": "tesla-model-s-performance",
+    "price": 13468191,
+    "sellerURL": "https://www.tesla.com/is_IS/models/design",
+    "acceleration": 2.6,
+    "capacity": 100,
+    "range": 590,
+    "evDatabaseURL": "https://ev-database.org/car/1207/Tesla-Model-S-Performance"
+  },
+  {
+    "make": "Tesla",
+    "model": "Model X Long Range",
+    "heroImageName": "tesla-model-x-lr",
+    "price": 12228191,
+    "sellerURL": "https://www.tesla.com/is_IS/modelx/design",
+    "acceleration": 4.6,
+    "capacity": 100,
+    "range": 505,
+    "evDatabaseURL": "https://ev-database.org/car/1198/Tesla-Model-X-Long-Range"
+  },
+  {
+    "make": "Tesla",
+    "model": "Model X Performance",
+    "heroImageName": "tesla-model-x-performance",
+    "price": 14708191,
+    "sellerURL": "https://www.tesla.com/is_IS/modelx/design",
+    "acceleration": 2.9,
+    "capacity": 100,
+    "range": 485,
+    "evDatabaseURL": "https://ev-database.org/car/1208/Tesla-Model-X-Performance"
+  },
+  {
     "make": "Volkswagen",
     "model": "e-Golf",
     "heroImageName": "e-golf",
