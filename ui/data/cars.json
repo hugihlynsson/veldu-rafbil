@@ -258,9 +258,9 @@
     "heroImageName": "e-up",
     "price": 2990000,
     "sellerURL": "https://www.volkswagen.is/is/volkswagen-bilar/e-up-.html",
-    "acceleration": 12.4,
-    "capacity": 18.7,
-    "range": 133,
-    "evDatabaseURL": "https://ev-database.org/car/1081/Volkswagen-e-Up"
+    "acceleration": 11.9,
+    "capacity": 36.8,
+    "range": 260,
+    "evDatabaseURL": "https://ev-database.org/car/1189/Volkswagen-e-Up"
   }
 ]
