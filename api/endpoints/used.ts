@@ -39,7 +39,7 @@ export default async (_: IncomingMessage, res: ServerResponse) => {
     cars = await scrapeUsedCars()
   } catch (error) {
     console.log('Failed to scrape cars', error)
-    res.writeHead(200, { 'Content-Type': 'application/json' })
+    res.writeHead(500, { 'Content-Type': 'application/json' })
     res.end(JSON.stringify({ error: 'Failed to fetch cars' }))
     return
   }
