@@ -1,5 +1,6 @@
 import cheerio from 'cheerio'
 import fetch from 'node-fetch'
+import url from 'url'
 
 import { UsedCar } from '../types'
 
@@ -48,6 +49,8 @@ export default async (): Promise<Array<UsedCar>> => {
         return
       }
 
+      const serialNumber = url.parse(link, true).query.cid
+
       const imageSrc = parsedElement.find('img.swiper-slide').attr('src')
 
       const model = parsedElement
@@ -61,6 +64,7 @@ export default async (): Promise<Array<UsedCar>> => {
       const priceText = parsedElement.find('.car-price span').text()
 
       cars.push({
+        serialNumber: Number(serialNumber),
         image: imageSrc && `https://bilasolur.is/${imageSrc}`,
         link: `https://bilasolur.is/${link}`,
         make: parsedElement.find('.car-make').text(),
