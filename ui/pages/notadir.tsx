@@ -188,11 +188,12 @@ const Used: NextFunctionComponent<Props> = ({ cars }) => {
 
 Used.getInitialProps = async ({ req }): Promise<Props> => {
   try {
-    const baseUrl = req
-      ? `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers[
-          'x-forwarded-host'
-        ] || req.headers.host}`
-      : ''
+    const baseUrl =
+      req && req.headers
+        ? `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers[
+            'x-forwarded-host'
+          ] || req.headers.host}`
+        : ''
     const response = await fetch(`${baseUrl}/api/used.ts`)
     const json = await response.json()
     if (json.error) {
