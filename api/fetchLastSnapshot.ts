@@ -1,14 +1,10 @@
 import { database } from 'firebase-admin'
 
-import { UsedCar } from '../types'
+import { Snapshot } from '../types'
 
-interface Snapshot {
-  cars: Array<UsedCar>
-  timestamp: number
-  date: string // ISO date string (Date.toISOString())
-}
-
-export default async (database: database.Database): Promise<Snapshot> => {
+export default async (
+  database: database.Database,
+): Promise<Snapshot | undefined> => {
   const dataSnapshot = await database
     .ref('snapshots')
     .orderByKey()
@@ -17,12 +13,14 @@ export default async (database: database.Database): Promise<Snapshot> => {
 
   const snapshots: { [key: string]: Snapshot } = dataSnapshot.val()
   if (!snapshots) {
-    throw new Error('Fetched snapshots are undefined')
+    console.log('Fetched snapshots are undefined')
+    return
   }
 
   const snapshot = snapshots[Object.keys(snapshots)[0]]
   if (!snapshot) {
-    throw new Error('Fetched snapshots contain no items')
+    console.log('Fetched snapshots contain no items')
+    return
   }
 
   return snapshot
