@@ -1,0 +1,241 @@
+type URL = string
+type KM = number
+type ISK = number
+
+interface KnownCars {
+  id: string
+  make: string
+  model: string
+  acceleration: number // 0-100 km/hour
+  capacity: number // kWh
+  range?: KM // WLTP
+  rangeNEDC?: KM
+  price?: ISK
+  sellerURL?: URL
+  evDatabaseURL?: URL
+}
+
+const knownCars: Array<KnownCars> = [
+  {
+    id: 'mitsubishi-imiev',
+    make: 'Mitsubishi',
+    model: 'i-MiEV',
+    acceleration: 15.9,
+    capacity: 16,
+    rangeNEDC: 160,
+    evDatabaseURL: 'https://ev-database.org/car/1096/Mitsubishi-iMiEV',
+  },
+  {
+    id: 'renault-kangoo-ze',
+    make: 'Renault',
+    model: 'Kangoo Z.E.',
+    acceleration: 22.4,
+    capacity: 22.0,
+    rangeNEDC: 170,
+  },
+  {
+    id: 'nissan-leaf-24',
+    make: 'Nissan',
+    model: 'Leaf',
+    acceleration: 11.5,
+    capacity: 24.0,
+    rangeNEDC: 199,
+    evDatabaseURL: 'https://ev-database.org/car/1019/Nissan-Leaf-24-kWh',
+  },
+  {
+    id: 'nissan-leaf-30',
+    make: 'Nissan',
+    model: 'Leaf',
+    acceleration: 11.5,
+    capacity: 30.0,
+    rangeNEDC: 250,
+    evDatabaseURL: 'https://ev-database.org/car/1020/Nissan-Leaf-30-kWh',
+  },
+  {
+    id: 'nissan-leaf-40',
+    make: 'Nissan',
+    model: 'Leaf',
+    acceleration: 7.9,
+    capacity: 40.0,
+    range: 270,
+    evDatabaseURL: 'https://ev-database.org/car/1106/Nissan-Leaf',
+    price: 4390000,
+    sellerURL: 'https://www.nissan.is/vehicles/new-vehicles/leaf.html',
+  },
+  {
+    id: 'vw-eup-18',
+    make: 'Volkswagen',
+    model: 'e-Up!',
+    acceleration: 12.4,
+    capacity: 18.7,
+    range: 133,
+    rangeNEDC: 160,
+    evDatabaseURL: 'https://ev-database.org/car/1081/Volkswagen-e-Up',
+  },
+  {
+    id: 'volkswagen-egolf-24',
+    make: 'Volkswagen',
+    model: 'e-Golf',
+    acceleration: 10.4,
+    capacity: 24.2,
+    range: 190,
+    evDatabaseURL: 'https://ev-database.org/car/1040/Volkswagen-e-Golf',
+  },
+  {
+    id: 'volkswagen-egolf-35',
+    make: 'Volkswagen',
+    model: 'e-Golf',
+    acceleration: 9.6,
+    capacity: 35.8,
+    range: 230,
+    evDatabaseURL: 'https://ev-database.org/car/1087/Volkswagen-e-Golf',
+  },
+  {
+    id: 'kia-soul-ev-2014',
+    make: 'Kia',
+    model: 'Soul EV',
+    acceleration: 11.2,
+    capacity: 30.5,
+    rangeNEDC: 212,
+    evDatabaseURL: 'https://ev-database.org/car/1012/Kia-Soul-EV',
+  },
+  {
+    id: 'kia-soul-ev-2017',
+    make: 'Kia',
+    model: 'Soul EV',
+    acceleration: 11.2,
+    capacity: 33,
+    rangeNEDC: 250,
+    evDatabaseURL: 'https://ev-database.org/car/1122/Kia-Soul-EV',
+  },
+  {
+    id: 'renault-zoe-ze20',
+    make: 'Renault',
+    model: 'Zoe',
+    acceleration: 13.5,
+    capacity: 25,
+    rangeNEDC: 210,
+    evDatabaseURL: 'https://ev-database.org/car/1026/Renault-Zoe-Q210',
+  },
+  {
+    id: 'renault-zoe-ze40',
+    make: 'Renault',
+    model: 'Zoe',
+    acceleration: 11.4,
+    capacity: 44.1,
+    range: 300,
+    evDatabaseURL: 'https://ev-database.org/car/1128/Renault-Zoe-R110',
+  },
+  {
+    id: 'renault-kangoo-maxi-ze-33',
+    make: 'Renault',
+    model: 'Kangoo Maxi Z.E.',
+    acceleration: 22.4,
+    capacity: 33,
+    rangeNEDC: 270,
+    evDatabaseURL: 'https://ev-database.org/car/1101/Renault-Kangoo-Maxi-ZE-33',
+  },
+  {
+    id: 'bmw-i3-60',
+    make: 'BMW',
+    model: 'i3',
+    acceleration: 7.2,
+    capacity: 21.6,
+    rangeNEDC: 190,
+    evDatabaseURL: 'https://ev-database.org/car/1004/BMW-i3-60-Ah',
+  },
+  {
+    id: 'bmw-i3-94',
+    make: 'BMW',
+    model: 'i3',
+    acceleration: 7.3,
+    capacity: 33.2,
+    rangeNEDC: 312,
+    evDatabaseURL: 'https://ev-database.org/car/1068/BMW-i3-94-Ah',
+  },
+  {
+    id: 'bmw-i3-120',
+    make: 'BMW',
+    model: 'i3',
+    acceleration: 7.3,
+    capacity: 42.8,
+    range: 310,
+    evDatabaseURL: 'https://ev-database.org/car/1068/BMW-i3-94-Ah',
+  },
+  {
+    id: 'hyundai-ioniq',
+    make: 'Hyundai',
+    model: 'IONIQ Electric',
+    acceleration: 9.9,
+    capacity: 30.5,
+    rangeNEDC: 280,
+    evDatabaseURL: 'https://ev-database.org/car/1057/Hyundai-IONIQ-Electric',
+  },
+  {
+    id: 'hyundai-kona-39',
+    make: 'Hyundai',
+    model: 'Kona Electric',
+    acceleration: 9.7,
+    capacity: 42.0,
+    range: 280,
+    evDatabaseURL:
+      'https://ev-database.org/car/1129/Hyundai-Kona-Electric-39-kWh',
+  },
+  {
+    id: 'hyundai-kona-64',
+    make: 'Hyundai',
+    model: 'Kona Electric',
+    acceleration: 7.6,
+    capacity: 67.1,
+    range: 449,
+    evDatabaseURL:
+      'https://ev-database.org/car/1126/Hyundai-Kona-Electric-64-kWh',
+  },
+  {
+    id: 'tesla-model-s-85',
+    make: 'Tesla',
+    model: 'Model S 85',
+    acceleration: 5.6,
+    capacity: 85,
+    rangeNEDC: 502,
+    evDatabaseURL: 'https://ev-database.org/car/1031/Tesla-Model-S-85',
+  },
+  {
+    id: 'tesla-model-s-p85d',
+    make: 'Tesla',
+    model: 'Model S P85D',
+    acceleration: 3.3,
+    capacity: 85,
+    rangeNEDC: 491,
+    evDatabaseURL: 'https://ev-database.org/car/1036/Tesla-Model-S-P85D',
+  },
+  {
+    id: 'tesla-model-s-90d',
+    make: 'Tesla',
+    model: 'Model S 90D',
+    acceleration: 4.4,
+    capacity: 90,
+    rangeNEDC: 557,
+    evDatabaseURL: 'https://ev-database.org/car/1063/Tesla-Model-S-90D',
+  },
+  {
+    id: 'tesla-model-x-90d',
+    make: 'Tesla',
+    model: 'Model X 90D',
+    acceleration: 5,
+    capacity: 90,
+    rangeNEDC: 489,
+    evDatabaseURL: 'https://ev-database.org/car/1053/Tesla-Model-X-90D',
+  },
+  {
+    id: 'tesla-model-x-p90d',
+    make: 'Tesla',
+    model: 'Model X P90D',
+    acceleration: 4,
+    capacity: 90,
+    rangeNEDC: 467,
+    evDatabaseURL: 'https://ev-database.org/car/1054/Tesla-Model-X-P90D',
+  },
+]
+
+export default knownCars
