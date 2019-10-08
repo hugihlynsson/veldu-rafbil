@@ -1,4 +1,5 @@
-import { NewCar } from '../types'
+import { FunctionComponent } from 'react'
+import { NewCar as NewCarType } from '../types'
 
 // number.toLocaleString() can be inconsistent between node and client, breaking SSR
 const addDecimalSeprators = (value: number): string =>
@@ -14,10 +15,10 @@ const addDecimalSeprators = (value: number): string =>
     .join('')
 
 interface Props {
-  car: NewCar
+  car: NewCarType
 }
 
-export default ({ car }: Props) => (
+const NewCar: FunctionComponent<Props> = ({ car }) => (
   <article>
     <img
       alt=""
@@ -178,3 +179,5 @@ export default ({ car }: Props) => (
     </style>
   </article>
 )
+
+export default NewCar

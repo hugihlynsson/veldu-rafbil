@@ -2,18 +2,6 @@
   "alias": ["veldurafbil.is"],
   "scope": "hugihlynsson",
   "version": 2,
-  "builds": [
-    { "src": "ui/package.json", "use": "@now/next" },
-    {
-      "src": "api/endpoints/*.ts",
-      "use": "@now/node",
-      "config": { "maxLambdaSize": "12mb" }
-    }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/endpoints/$1" },
-    { "src": "/(.*)", "dest": "/ui/$1" }
-  ],
   "regions": ["lhr"],
   "env": {
     "FIREBASE_PROJECT_ID": "@firebase-project-id",

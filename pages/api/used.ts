@@ -1,23 +1,40 @@
-import { IncomingMessage, ServerResponse } from 'http'
+import { NextApiRequest, NextApiResponse } from 'next'
 import firebaseAdmin from 'firebase-admin'
 import atob from 'atob'
 
 import { UsedCar, Snapshot } from '../../types'
-import scrapeUsedCars from '../scrapeUsedCars'
-import filterUsedCars from '../filterUsedCars'
-import fetchLastSnapshot from '../fetchLastSnapshot'
-import transferKnownData from '../transferKnownData'
+import scrapeUsedCars from '../../apiHelpers/scrapeUsedCars'
+import filterUsedCars from '../../apiHelpers/filterUsedCars'
+import fetchLastSnapshot from '../../apiHelpers/fetchLastSnapshot'
+import transferKnownData from '../../apiHelpers/transferKnownData'
 
-firebaseAdmin.initializeApp({
-  credential: firebaseAdmin.credential.cert({
-    projectId: process.env.FIREBASE_PROJECT_ID,
-    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-    privateKey: atob(process.env.FIREBASE_PRIVATE_KEY!).replace(/\\n/g, '\n'),
-  }),
-  databaseURL: 'https://choose-ev.firebaseio.com',
-})
+const {
+  FIREBASE_PROJECT_ID,
+  FIREBASE_CLIENT_EMAIL,
+  FIREBASE_PRIVATE_KEY,
+} = process.env
 
-export default async (_: IncomingMessage, res: ServerResponse) => {
+if (
+  FIREBASE_PROJECT_ID &&
+  FIREBASE_CLIENT_EMAIL &&
+  FIREBASE_PRIVATE_KEY &&
+  !firebaseAdmin.apps.length
+) {
+  firebaseAdmin.initializeApp({
+    credential: firebaseAdmin.credential.cert({
+      projectId: FIREBASE_PROJECT_ID,
+      clientEmail: FIREBASE_CLIENT_EMAIL,
+      privateKey: atob(FIREBASE_PRIVATE_KEY).replace(/\\n/g, '\n'),
+    }),
+    databaseURL: 'https://choose-ev.firebaseio.com',
+  })
+} else {
+  console.error(
+    'Missing firebase config. Are you trying to run `next`? Try `now dev`. See README.md for more info',
+  )
+}
+
+export default async (_: NextApiRequest, res: NextApiResponse) => {
   const database = firebaseAdmin.database()
   let lastSnapshot: Snapshot | undefined
   try {
@@ -27,20 +44,16 @@ export default async (_: IncomingMessage, res: ServerResponse) => {
         new Date().getTime() - lastSnapshot.timestamp < 60 * 60 * 1000
       if (isFromLastHour) {
         console.log('Returning snapshot from', lastSnapshot.date)
-        res.writeHead(200, { 'Content-Type': 'application/json' })
-        res.end(JSON.stringify({ cars: lastSnapshot.cars }))
+        res.json({ cars: lastSnapshot.cars })
         return
       }
       console.log('Snapshot too old, from:', lastSnapshot.date)
     }
   } catch (error) {
     console.log('Failed to fetch snapshot', error)
-    res.writeHead(500, { 'Content-Type': 'application/json' })
-    res.end(
-      JSON.stringify({
-        error: 'Failed to fetch cars, could not connect to database',
-      }),
-    )
+    res
+      .status(500)
+      .json({ error: 'Failed to fetch cars, could not connect to database' })
     return
   }
 
@@ -50,8 +63,7 @@ export default async (_: IncomingMessage, res: ServerResponse) => {
     cars = await scrapeUsedCars()
   } catch (error) {
     console.log('Failed to scrape cars', error)
-    res.writeHead(500, { 'Content-Type': 'application/json' })
-    res.end(JSON.stringify({ error: 'Failed to fetch cars' }))
+    res.status(500).json({ error: 'Failed to fetch cars' })
     return
   }
 
@@ -76,6 +88,5 @@ export default async (_: IncomingMessage, res: ServerResponse) => {
       console.log('Failed to add new snapshot to Firebase', error),
     )
 
-  res.writeHead(200, { 'Content-Type': 'application/json' })
-  res.end(JSON.stringify({ cars: processedCars }))
+  res.json({ cars: processedCars })
 }

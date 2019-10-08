@@ -10,15 +10,22 @@
     "next": "^9.1.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "atob": "^2.1.2",
+    "cheerio": "^1.0.0-rc.3",
+    "firebase-admin": "^7.1.0",
+    "node-fetch": "^2.6.0"
   },
   "scripts": {
-    "now-build": "next build"
+    "build": "next build"
   },
   "devDependencies": {
     "@types/node": "10",
     "@types/react": "^16.9.5",
     "@types/react-dom": "^16.9.1",
+    "@types/atob": "^2.1.2",
+    "@types/cheerio": "^0.22.11",
+    "@types/node-fetch": "^2.3.7",
     "prettier": "^1.18.2"
   },
   "engines": {
