@@ -1,4 +1,6 @@
-export default () => (
+import { FunctionComponent } from 'react'
+
+const Footer: FunctionComponent<{}> = () => (
   <footer>
     <p>
       Veldu Rafbíl er smíðuð af{' '}
@@ -52,3 +54,5 @@ export default () => (
     </style>
   </footer>
 )
+
+export default Footer

@@ -41,7 +41,7 @@ export default async (): Promise<Array<UsedCar>> => {
 
   parsedPages.map((page) => {
     const srItems = page('.sr-item')
-    srItems.each((i, element) => {
+    srItems.each((_, element) => {
       const parsedElement = cheerio(element)
       const link = parsedElement.find('.sr-link').attr('href')
       if (!link) {

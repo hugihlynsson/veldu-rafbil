@@ -1,10 +1,11 @@
-import { UsedCar } from '../../types'
+import { FunctionComponent } from 'react'
+import { UsedCar as UsedCarType } from '../types'
 
 interface Props {
-  car: UsedCar
+  car: UsedCarType
 }
 
-export default ({ car }: Props) => (
+const UsedCar: FunctionComponent<Props> = ({ car }) => (
   <a href={car.link}>
     <img src={car.image} />
 
@@ -80,3 +81,5 @@ export default ({ car }: Props) => (
     `}</style>
   </a>
 )
+
+export default UsedCar

@@ -6,20 +6,20 @@ import Toggles from '../components/Toggles'
 import Footer from '../components/Footer'
 import stableSort from '../components/stableSort'
 
-import { UsedCar } from '../../types'
+import { UsedCar as UsedCarType } from '../types'
 import Car from '../components/UsedCar'
 
 type Sorting = 'price' | 'age' | 'milage' | 'name'
 
 interface Props {
-  cars: Array<UsedCar>
+  cars: Array<UsedCarType>
 }
 
 const Used: NextPage<Props> = ({ cars }) => {
   const [filter, setFilter] = useState<string | undefined>(undefined)
   const [sorting, setSorting] = useState<Sorting>('price')
 
-  const carSorter = (a: UsedCar, b: UsedCar) => {
+  const carSorter = (a: UsedCarType, b: UsedCarType) => {
     switch (sorting) {
       case 'price': {
         return (
@@ -194,12 +194,12 @@ Used.getInitialProps = async ({ req }): Promise<Props> => {
             'x-forwarded-host'
           ] || req.headers.host}`
         : ''
-    const response = await fetch(`${baseUrl}/api/used.ts`)
+    const response = await fetch(`${baseUrl}/api/used`)
     const json = await response.json()
     if (json.error) {
       throw json.error
     }
-    return { cars: json.cars as Array<UsedCar> }
+    return { cars: json.cars as Array<UsedCarType> }
   } catch (error) {
     console.log('Failed to fetch cars', error)
     return { cars: [] }
