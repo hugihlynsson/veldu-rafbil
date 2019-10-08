@@ -23,11 +23,11 @@ export default ({ car }: Props) => (
       alt=""
       sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
       srcSet={`
-        /static/${car.heroImageName}-540w.jpg 540w, 
-        /static/${car.heroImageName}-1080w.jpg 1080w, 
-        /static/${car.heroImageName}-1920w.jpg 1920w
+        /images/${car.heroImageName}-540w.jpg 540w, 
+        /images/${car.heroImageName}-1080w.jpg 1080w, 
+        /images/${car.heroImageName}-1920w.jpg 1920w
       `}
-      src={`/static/${car.heroImageName}-1080w.jpg`}
+      src={`/images/${car.heroImageName}-1080w.jpg`}
     />
 
     <div className="content">

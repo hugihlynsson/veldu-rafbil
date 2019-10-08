@@ -3,7 +3,7 @@
   "scope": "hugihlynsson",
   "version": 2,
   "builds": [
-    { "src": "ui/next.config.js", "use": "@now/next" },
+    { "src": "ui/package.json", "use": "@now/next" },
     {
       "src": "api/endpoints/*.ts",
       "use": "@now/node",
