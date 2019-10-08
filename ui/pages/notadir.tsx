@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NextFunctionComponent } from 'next'
+import { NextPage } from 'next'
 import fetch from 'isomorphic-unfetch'
 import Head from 'next/head'
 import Toggles from '../components/Toggles'
@@ -15,7 +15,7 @@ interface Props {
   cars: Array<UsedCar>
 }
 
-const Used: NextFunctionComponent<Props> = ({ cars }) => {
+const Used: NextPage<Props> = ({ cars }) => {
   const [filter, setFilter] = useState<string | undefined>(undefined)
   const [sorting, setSorting] = useState<Sorting>('price')
 

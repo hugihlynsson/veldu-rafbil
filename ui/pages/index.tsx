@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
-import { NextFunctionComponent } from 'next'
+import { NextPage } from 'next'
 import Router, { useRouter } from 'next/router'
 
 import Car from '../components/NewCar'
@@ -31,8 +31,8 @@ interface Props {
   initialSorting: SortingQuery | undefined
 }
 
-const Used: NextFunctionComponent<Props> = ({ initialSorting }) => {
-  const { pathname } = useRouter<{ radaeftir: SortingQuery }>()
+const Used: NextPage<Props> = ({ initialSorting }) => {
+  const { pathname } = useRouter()
   const [sorting, setSorting] = useState<Sorting>(
     queryToSorting[initialSorting || 'nafni'],
   )
@@ -168,8 +168,9 @@ const Used: NextFunctionComponent<Props> = ({ initialSorting }) => {
   )
 }
 
-Used.getInitialProps = ({ query }) => {
-  return { initialSorting: query.radaeftir as SortingQuery | undefined }
-}
+Used.getInitialProps = ({ query }) =>
+  Promise.resolve({
+    initialSorting: query.radaeftir as SortingQuery | undefined,
+  })
 
 export default Used
