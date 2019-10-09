@@ -1,4 +1,6 @@
 import { FunctionComponent } from 'react'
+import LazyLoad from 'react-lazy-load'
+
 import { NewCar as NewCarType } from '../types'
 
 // number.toLocaleString() can be inconsistent between node and client, breaking SSR
@@ -14,23 +16,34 @@ const addDecimalSeprators = (value: number): string =>
     .reverse()
     .join('')
 
+const getSrcSet = (name: string) =>
+  `/images/${name}-540w.jpg 540w, /images/${name}-1080w.jpg 1080w, /images/${name}-1920w.jpg 1920w`
+
 interface Props {
   car: NewCarType
+  lazyLoad: boolean
 }
 
-const NewCar: FunctionComponent<Props> = ({ car }) => (
+const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
   <article>
     <picture>
-      <img
-        alt=""
-        sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
-        srcSet={`
-          /images/${car.heroImageName}-540w.jpg 540w,
-          /images/${car.heroImageName}-1080w.jpg 1080w,
-          /images/${car.heroImageName}-1920w.jpg 1920w
-        `}
-        src={`/images/${car.heroImageName}-1080w.jpg`}
-      />
+      {lazyLoad ? (
+        <LazyLoad offset={500} debounce={false}>
+          <img
+            alt=""
+            sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
+            srcSet={getSrcSet(car.heroImageName)}
+            src={`/images/${car.heroImageName}-1080w.jpg`}
+          />
+        </LazyLoad>
+      ) : (
+        <img
+          alt=""
+          sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
+          srcSet={getSrcSet(car.heroImageName)}
+          src={`/images/${car.heroImageName}-1080w.jpg`}
+        />
+      )}
     </picture>
 
     <div className="content">
@@ -74,6 +87,7 @@ const NewCar: FunctionComponent<Props> = ({ car }) => (
         }
 
         picture {
+          display: block;
           position: relative;
           padding-bottom: 66.667%;
         }
