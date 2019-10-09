@@ -20,16 +20,18 @@ interface Props {
 
 const NewCar: FunctionComponent<Props> = ({ car }) => (
   <article>
-    <img
-      alt=""
-      sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
-      srcSet={`
-        /images/${car.heroImageName}-540w.jpg 540w, 
-        /images/${car.heroImageName}-1080w.jpg 1080w, 
-        /images/${car.heroImageName}-1920w.jpg 1920w
-      `}
-      src={`/images/${car.heroImageName}-1080w.jpg`}
-    />
+    <picture>
+      <img
+        alt=""
+        sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
+        srcSet={`
+          /images/${car.heroImageName}-540w.jpg 540w,
+          /images/${car.heroImageName}-1080w.jpg 1080w,
+          /images/${car.heroImageName}-1920w.jpg 1920w
+        `}
+        src={`/images/${car.heroImageName}-1080w.jpg`}
+      />
+    </picture>
 
     <div className="content">
       <h1>
@@ -71,9 +73,15 @@ const NewCar: FunctionComponent<Props> = ({ car }) => (
           margin-bottom: 32px;
         }
 
+        picture {
+          position: relative;
+          padding-bottom: 66.667%;
+        }
+
         img {
+          position: absolute;
           width: 100%;
-          height: 66.66vw;
+          height: auto;
         }
 
         .content {
@@ -158,11 +166,14 @@ const NewCar: FunctionComponent<Props> = ({ car }) => (
             align-items: center;
           }
 
-          img {
+          picture {
             width: 40%;
+            padding-bottom: calc(40vw * 0.66667);
             flex-grow: 1;
-            height: auto;
             align-self: center;
+          }
+
+          img {
             border-radius: 2px;
           }
 
