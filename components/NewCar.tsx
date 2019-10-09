@@ -28,7 +28,7 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
   <article>
     <picture>
       {lazyLoad ? (
-        <LazyLoad offset={500} debounce={false}>
+        <LazyLoad offset={1000} debounce={false}>
           <img
             alt=""
             sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
