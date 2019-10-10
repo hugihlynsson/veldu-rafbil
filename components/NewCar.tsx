@@ -26,7 +26,8 @@ interface Props {
 
 const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
   <article>
-    <picture>
+    <div className="imageBox">
+      <div className="imageSizer" />
       {lazyLoad ? (
         <LazyLoad offset={1000} debounce={false}>
           <img
@@ -44,7 +45,7 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
           src={`/images/${car.heroImageName}-1080w.jpg`}
         />
       )}
-    </picture>
+    </div>
 
     <div className="content">
       <h1>
@@ -86,14 +87,17 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
           margin-bottom: 32px;
         }
 
-        picture {
+        .imageBox {
           display: block;
           position: relative;
+        }
+        .imageSizer {
+          width: 100%;
           padding-bottom: 66.667%;
         }
-
         img {
           position: absolute;
+          top: 0;
           width: 100%;
           height: auto;
         }
@@ -180,9 +184,8 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
             align-items: center;
           }
 
-          picture {
+          .imageBox {
             width: 40%;
-            padding-bottom: calc(40vw * 0.66667);
             flex-grow: 1;
             align-self: center;
           }
