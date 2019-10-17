@@ -63,6 +63,15 @@ const knownCars: Array<KnownCars> = [
     sellerURL: 'https://www.nissan.is/vehicles/new-vehicles/leaf.html',
   },
   {
+    id: 'nissan-e-nv200-24',
+    make: 'Nissan',
+    model: 'e-NV200 Evalia',
+    acceleration: 14,
+    capacity: 24.0,
+    rangeNEDC: 170,
+    evDatabaseURL: 'https://ev-database.org/car/1021/Nissan-e-NV200-Evalia',
+  },
+  {
     id: 'vw-eup-18',
     make: 'Volkswagen',
     model: 'e-Up!',
