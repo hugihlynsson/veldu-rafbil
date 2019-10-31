@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { NextPage } from 'next'
+import { IncomingHttpHeaders } from 'http'
 import fetch from 'isomorphic-unfetch'
 import Head from 'next/head'
 import Toggles from '../components/Toggles'
@@ -186,14 +187,18 @@ const Used: NextPage<Props> = ({ cars }) => {
   )
 }
 
-Used.getInitialProps = async ({ req }): Promise<Props> => {
+const getBaseUrlFromHeaders = (headers: IncomingHttpHeaders): string =>
+  `${headers['x-forwarded-proto'] || 'https'}://${headers['x-forwarded-host'] ||
+    headers.host}`
+
+Used.getInitialProps = async ({ res, req }): Promise<Props> => {
+  if (res) {
+    res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate')
+  }
+
   try {
-    const baseUrl =
-      req && req.headers
-        ? `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers[
-            'x-forwarded-host'
-          ] || req.headers.host}`
-        : ''
+    const baseUrl = req && req.headers ? getBaseUrlFromHeaders(req.headers) : ''
+
     const response = await fetch(`${baseUrl}/api/used`)
     const json = await response.json()
     if (json.error) {

@@ -168,9 +168,14 @@ const Used: NextPage<Props> = ({ initialSorting }) => {
   )
 }
 
-Used.getInitialProps = ({ query }) =>
-  Promise.resolve({
+Used.getInitialProps = ({ res, query }) => {
+  if (res) {
+    res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate')
+  }
+
+  return Promise.resolve({
     initialSorting: query.radaeftir as SortingQuery | undefined,
   })
+}
 
 export default Used
