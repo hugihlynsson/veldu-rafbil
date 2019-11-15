@@ -144,14 +144,25 @@
   },
   {
     "make": "Renault",
-    "model": "Zoe",
-    "heroImageName": "zoe",
-    "price": 3850000,
-    "sellerURL": "https://renault.is/cars/Zoe/yfirlit.html",
-    "acceleration": 13.2,
-    "capacity": 41,
-    "range": 317,
-    "evDatabaseURL": "https://ev-database.org/car/1150/Renault-Zoe-R90"
+    "model": "Zoe R110",
+    "heroImageName": "zoe-r110",
+    "price": 3990000,
+    "sellerURL": "https://www.renault.is/cars/zoe/yfirlit.html",
+    "acceleration": 11.4,
+    "capacity": 52,
+    "range": 395,
+    "evDatabaseURL": "https://ev-database.org/car/1164/Renault-Zoe-ZE50-R110"
+  },
+  {
+    "make": "Renault",
+    "model": "Zoe R135",
+    "heroImageName": "zoe-r135",
+    "price": 4390000,
+    "sellerURL": "https://www.renault.is/cars/zoe/yfirlit.html",
+    "acceleration": 9.5,
+    "capacity": 52,
+    "range": 385,
+    "evDatabaseURL": "https://ev-database.org/car/1205/Renault-Zoe-ZE50-R135"
   },
   {
     "make": "Renault",
