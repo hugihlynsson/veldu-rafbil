@@ -93,7 +93,7 @@ const Used: NextPage<Props> = ({ initialSorting }) => {
         </header>
 
         {stableSort(cars, carSorter).map((car, i) => (
-          <Car car={car} key={`${car.make} ${car.model}`} lazyLoad={i >= 2} />
+          <Car car={car} key={`${car.make} ${car.model} ${car.capacity}`} lazyLoad={i >= 2} />
         ))}
       </div>
 
