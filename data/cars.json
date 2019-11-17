@@ -46,8 +46,19 @@
   {
     "make": "Hyundai",
     "model": "Kona Electric",
+    "heroImageName": "kona-39",
+    "price": 4590000,
+    "sellerURL": "https://www.hyundai.is/nyir/kona-ev/yfirlit",
+    "acceleration": 9.9,
+    "capacity": 39,
+    "range": 289,
+    "evDatabaseURL": "https://ev-database.org/car/1239/Hyundai-Kona-Electric-39-kWh"
+  },
+  {
+    "make": "Hyundai",
+    "model": "Kona Electric",
     "heroImageName": "kona",
-    "price": 5490000,
+    "price": 5890000,
     "sellerURL": "https://www.hyundai.is/nyir/kona-ev/yfirlit",
     "acceleration": 7.6,
     "capacity": 64,
