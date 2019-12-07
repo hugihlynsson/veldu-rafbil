@@ -8,7 +8,7 @@ export default class Evs extends Document {
           <meta
             key="viewport"
             name="viewport"
-            content="initial-scale=1.0, width=device-width"
+            content="initial-scale=1.0, width=device-width, viewport-fit=cover"
           />
 
           <link rel="icon" href="/images/icon.png" type="image/png" />
