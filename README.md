@@ -11,7 +11,7 @@ Requirements:
 
 - [Node](https://nodejs.org/) 10.15 or later
 - [Yarn](https://yarnpkg.com)
-- [Now CLI](https://zeit.co/download) - `yarn add global now`
+- [Now CLI](https://zeit.co/download) - `yarn global add now`
 
 Run `now dev` to spin up the project. It uses the config from `now.json`, installs the required builders and starts serving the routes. It will defer building a route until it is requested — the first load might take some time.
 
