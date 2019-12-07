@@ -154,6 +154,17 @@
     "evDatabaseURL": "https://ev-database.org/car/1051/Opel-Ampera-e"
   },
   {
+    "make": "Peugeot",
+    "model": "e-208",
+    "heroImageName": "e-208",
+    "price": 3790000,
+    "sellerURL": "https://www.peugeotisland.is/nyir-bilar/velja-bil/glaenyr-peugeot-e-208/",
+    "acceleration": 8.1,
+    "capacity": 50,
+    "range": 340,
+    "evDatabaseURL": "https://ev-database.org/car/1168/Peugeot-e-208"
+  },
+  {
     "make": "Renault",
     "model": "Zoe R110",
     "heroImageName": "zoe-r110",
