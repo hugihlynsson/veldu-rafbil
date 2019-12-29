@@ -165,6 +165,17 @@
     "evDatabaseURL": "https://ev-database.org/car/1168/Peugeot-e-208"
   },
   {
+    "make": "Peugeot",
+    "model": "e-2008",
+    "heroImageName": "e-2008",
+    "price": 4350000,
+    "sellerURL": "https://www.peugeotisland.is/nyir-bilar/velja-bil/glaenyr-peugeot-e-2008/",
+    "acceleration": 8.5,
+    "capacity": 50,
+    "range": 310,
+    "evDatabaseURL": "https://ev-database.org/car/1206/Peugeot-e-2008-SUV"
+  },
+  {
     "make": "Renault",
     "model": "Zoe R110",
     "heroImageName": "zoe-r110",
