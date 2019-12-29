@@ -176,6 +176,17 @@
     "evDatabaseURL": "https://ev-database.org/car/1206/Peugeot-e-2008-SUV"
   },
   {
+    "make": "Porsche",
+    "model": "Taycan 4s",
+    "heroImageName": "taycan-4s",
+    "price": 13900000,
+    "sellerURL": "https://benni.is/Nyir_Bilar/Porsche/Taycan/",
+    "acceleration": 4.0,
+    "capacity": 79.2,
+    "range": 407,
+    "evDatabaseURL": "https://ev-database.org/car/1237/Porsche-Taycan-4S"
+  },
+  {
     "make": "Renault",
     "model": "Zoe R110",
     "heroImageName": "zoe-r110",
