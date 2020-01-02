@@ -121,6 +121,17 @@
     "evDatabaseURL": "https://ev-database.org/car/1135/Mercedes-EQC-400-4MATIC"
   },
   {
+    "make": "Mini Cooper",
+    "model": "SE",
+    "heroImageName": "mini",
+    "price": 3980000,
+    "sellerURL": "https://www.mini.is/is_IS/home/range/electric.html",
+    "acceleration": 7.3,
+    "capacity": 28.9,
+    "range": 232,
+    "evDatabaseURL": "https://ev-database.org/car/1163/Mini-Cooper-SE"
+  },
+  {
     "make": "Nissan",
     "model": "e-NV200",
     "heroImageName": "e-nv200",
