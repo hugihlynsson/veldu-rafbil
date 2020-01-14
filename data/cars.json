@@ -112,6 +112,17 @@
   {
     "make": "Kia",
     "model": "e-Soul",
+    "heroImageName": "e-soul-alt",
+    "price": 4990777,
+    "sellerURL": "https://issuu.com/askja/docs/kia_verdlisti_19012018/20?e=6076164/57534189",
+    "acceleration": 9.6,
+    "capacity": 39,
+    "range": 277,
+    "evDatabaseURL": "https://ev-database.org/car/1169/Kia-e-Soul-39-kWh"
+  },
+  {
+    "make": "Kia",
+    "model": "e-Soul",
     "heroImageName": "e-soul",
     "price": 5690777,
     "sellerURL": "https://www.kia.com/is/nyir-bilar/e-soul/upplifdu/",
