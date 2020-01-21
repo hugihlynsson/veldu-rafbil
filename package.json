@@ -21,13 +21,10 @@
   "devDependencies": {
     "@types/atob": "^2.1.2",
     "@types/cheerio": "^0.22.15",
-    "@types/node": "10.17.6",
+    "@types/node": "^13.1.8",
     "@types/node-fetch": "^2.5.4",
     "@types/react": "^16.9.15",
     "@types/react-dom": "^16.9.4",
     "prettier": "^1.19.1"
-  },
-  "engines": {
-    "node": "10.x"
   }
 }
