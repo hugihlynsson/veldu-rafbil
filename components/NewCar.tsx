@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react'
 import LazyLoad from 'react-lazy-load'
 
+declare let gtag: Function
+
 import { NewCar as NewCarType } from '../types'
 
 // number.toLocaleString() can be inconsistent between node and client, breaking SSR
@@ -52,7 +54,18 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
         <span className="make">{car.make}</span>{' '}
         <span className="model">{car.model}</span>
       </h1>
-      <a className="price" target="_blank" rel="noopener" href={car.sellerURL}>
+      <a
+        className="price"
+        target="_blank"
+        rel="noopener"
+        href={car.sellerURL}
+        onClick={() =>
+          gtag('event', 'click', {
+            event_category: 'seller',
+            event_label: `${car.make} ${car.model}`,
+          })
+        }
+      >
         {addDecimalSeprators(car.price)} kr.
       </a>
       <div className="info">
@@ -76,6 +89,12 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
         target="_blank"
         href={car.evDatabaseURL}
         rel="noopener"
+        onClick={() =>
+          gtag('event', 'click', {
+            event_category: 'EV Database',
+            event_label: `${car.make} ${car.model}`,
+          })
+        }
       >
         Nánar á ev-database.org
       </a>
