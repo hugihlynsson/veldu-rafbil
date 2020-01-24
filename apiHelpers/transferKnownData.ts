@@ -6,10 +6,7 @@ const transferKnownData = (
 ): Array<ProcessedUsedCar> => {
   if (!snapshot) {
     // For some reason, the snapshot is missing
-    return newCars.map((newCar) => ({
-      ...newCar,
-      metadata: { verified: false },
-    }))
+    return newCars
   }
 
   return newCars.map((newCar) => {
@@ -18,12 +15,13 @@ const transferKnownData = (
     )
 
     if (!carToTransfer) {
-      return { ...newCar, metadata: { verified: false } }
+      return newCar
     }
 
     return {
       ...newCar,
-      metadata: carToTransfer.metadata || { verified: false },
+      metadata: carToTransfer.metadata,
+      filtered: carToTransfer.filtered,
     }
   })
 }

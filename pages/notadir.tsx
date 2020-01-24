@@ -6,20 +6,20 @@ import Toggles from '../components/Toggles'
 import Footer from '../components/Footer'
 import stableSort from '../components/stableSort'
 
-import { UsedCar as UsedCarType } from '../types'
+import { ProcessedUsedCar } from '../types'
 import Car from '../components/UsedCar'
 
 type Sorting = 'price' | 'age' | 'milage' | 'name'
 
 interface Props {
-  cars: Array<UsedCarType>
+  cars: Array<ProcessedUsedCar>
 }
 
 const Used: NextPage<Props> = ({ cars }) => {
   const [filter, setFilter] = useState<string | undefined>(undefined)
   const [sorting, setSorting] = useState<Sorting>('price')
 
-  const carSorter = (a: UsedCarType, b: UsedCarType) => {
+  const carSorter = (a: ProcessedUsedCar, b: ProcessedUsedCar): number => {
     switch (sorting) {
       case 'price': {
         return (
@@ -85,14 +85,21 @@ const Used: NextPage<Props> = ({ cars }) => {
             style={!filter ? { backgroundColor: '#EEE' } : undefined}
             onClick={() => setFilter(undefined)}
           >
-            ALLIR <span className="count">{cars.length}</span>
+            ALLIR{' '}
+            <span className="count">
+              {cars.filter((car) => !car.filtered).length}
+            </span>
           </div>
 
           {Object.entries(
             cars
-              .map((car) => car.make)
+              .filter((car) => !car.filtered)
+              .map((car) => car.metadata?.make ?? car.make)
               .reduce<{ [key: string]: number }>(
-                (makes, make) => ({ ...makes, [make]: (makes[make] || 0) + 1 }),
+                (makes, make) => ({
+                  ...makes,
+                  [make.toUpperCase()]: (makes[make.toUpperCase()] || 0) + 1,
+                }),
                 {},
               ),
           ).map(([make, count]) => (
@@ -109,7 +116,13 @@ const Used: NextPage<Props> = ({ cars }) => {
 
         <div className="cars">
           {stableSort(cars, carSorter)
-            .filter((car) => !filter || car.make === filter)
+            .filter(
+              (car) =>
+                (!filter ||
+                  car.make === filter ||
+                  car.metadata?.make?.toUpperCase() === filter) &&
+                !car.filtered,
+            )
             .map((car) => (
               <Car car={car} key={car.link} />
             ))}
@@ -199,7 +212,7 @@ Used.getInitialProps = async ({ req }): Promise<Props> => {
     if (json.error) {
       throw json.error
     }
-    return { cars: json.cars as Array<UsedCarType> }
+    return { cars: json.cars as Array<ProcessedUsedCar> }
   } catch (error) {
     console.log('Failed to fetch cars', error)
     return { cars: [] }
