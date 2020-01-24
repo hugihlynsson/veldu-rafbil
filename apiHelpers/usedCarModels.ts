@@ -243,7 +243,7 @@ const usedCarModels: Array<UsedCarModel> = [
   {
     id: 'mercedes-b-250e',
     make: 'Mercedes',
-    model: 'B 250 e',
+    model: 'B 250e',
     acceleration: 7.9,
     capacity: 28,
     rangeNEDC: 200,

@@ -95,6 +95,7 @@ const Used: NextPage<Props> = ({ cars }) => {
             cars
               .filter((car) => !car.filtered)
               .map((car) => car.metadata?.make ?? car.make)
+              .map((make) => (make === 'VW' ? 'Volkswagen' : make))
               .reduce<{ [key: string]: number }>(
                 (makes, make) => ({
                   ...makes,
@@ -120,7 +121,8 @@ const Used: NextPage<Props> = ({ cars }) => {
               (car) =>
                 (!filter ||
                   car.make === filter ||
-                  car.metadata?.make?.toUpperCase() === filter) &&
+                  car.metadata?.make?.toUpperCase() === filter ||
+                  (filter === 'VOLKSWAGEN' && car.make === 'VW')) &&
                 !car.filtered,
             )
             .map((car) => (
