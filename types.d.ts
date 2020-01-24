@@ -16,12 +16,22 @@ export interface UsedCar {
   serialNumber: number
 }
 
+export interface UsedCarModel {
+  id: string
+  make: string
+  model: string
+  acceleration: number // 0-100 km/hour
+  capacity: number // kWh
+  range?: number // WLTP, KM
+  rangeNEDC?: number // KM
+  price?: number // ISK
+  sellerURL?: string
+  evDatabaseURL?: string
+}
+
 export interface ProcessedUsedCar extends UsedCar {
-  metadata?: {
-    verified: boolean
-    hidden?: boolean
-    knownCarId?: string
-  }
+  metadata?: UsedCarModel
+  filtered?: boolean
 }
 
 export interface NewCar {

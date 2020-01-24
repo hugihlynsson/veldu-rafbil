@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react'
-import { UsedCar as UsedCarType } from '../types'
+import { ProcessedUsedCar } from '../types'
 
 interface Props {
-  car: UsedCarType
+  car: ProcessedUsedCar
 }
 
 const UsedCar: FunctionComponent<Props> = ({ car }) => (
@@ -11,8 +11,10 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
 
     <div>
       <p className="title">
-        <span className="make">{car.make.toLowerCase()}</span>{' '}
-        {car.model.toLowerCase()}
+        <span className="make">
+          {car.metadata?.make ?? car.make.toLowerCase()}
+        </span>{' '}
+        {car.metadata?.model ?? car.model.toLowerCase()}
       </p>
 
       {car.modelExtra && (

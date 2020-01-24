@@ -1,21 +1,6 @@
-type URL = string
-type KM = number
-type ISK = number
+import { UsedCarModel } from '../types'
 
-interface KnownCars {
-  id: string
-  make: string
-  model: string
-  acceleration: number // 0-100 km/hour
-  capacity: number // kWh
-  range?: KM // WLTP
-  rangeNEDC?: KM
-  price?: ISK
-  sellerURL?: URL
-  evDatabaseURL?: URL
-}
-
-const knownCars: Array<KnownCars> = [
+const usedCarModels: Array<UsedCarModel> = [
   {
     id: 'mitsubishi-imiev',
     make: 'Mitsubishi',
@@ -70,6 +55,16 @@ const knownCars: Array<KnownCars> = [
     capacity: 24.0,
     rangeNEDC: 170,
     evDatabaseURL: 'https://ev-database.org/car/1021/Nissan-e-NV200-Evalia',
+  },
+  {
+    id: 'nissan-e-nv200-40',
+    make: 'Nissan',
+    model: 'e-NV200 Evalia',
+    acceleration: 14,
+    capacity: 40.0,
+    rangeNEDC: 280,
+    range: 200,
+    evDatabaseURL: 'https://ev-database.org/car/1117/Nissan-e-NV200-Evalia',
   },
   {
     id: 'vw-eup-18',
@@ -245,6 +240,33 @@ const knownCars: Array<KnownCars> = [
     rangeNEDC: 467,
     evDatabaseURL: 'https://ev-database.org/car/1054/Tesla-Model-X-P90D',
   },
+  {
+    id: 'mercedes-b-250e',
+    make: 'Mercedes',
+    model: 'B 250 e',
+    acceleration: 7.9,
+    capacity: 28,
+    rangeNEDC: 200,
+    evDatabaseURL: 'https://ev-database.org/car/1013/Mercedes-B-250e',
+  },
+  {
+    id: 'ford-focus-electric-23',
+    make: 'Ford',
+    model: 'Focus Electric',
+    acceleration: 11.4,
+    capacity: 23,
+    rangeNEDC: 162,
+    evDatabaseURL: 'https://ev-database.org/car/1010/Ford-Focus-Electric',
+  },
+  {
+    id: 'ford-focus-electric-2017',
+    make: 'Ford',
+    model: 'Focus Electric',
+    acceleration: 11.4,
+    capacity: 33.5,
+    rangeNEDC: 225,
+    evDatabaseURL: 'https://ev-database.org/car/1010/Ford-Focus-Electric',
+  },
 ]
 
-export default knownCars
+export default usedCarModels
