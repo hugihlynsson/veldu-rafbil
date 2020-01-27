@@ -22,6 +22,7 @@ const transferKnownData = (
       ...newCar,
       metadata: carToTransfer.metadata,
       filtered: carToTransfer.filtered,
+      firstSeen: carToTransfer.firstSeen ?? newCar.firstSeen,
     }
   })
 }

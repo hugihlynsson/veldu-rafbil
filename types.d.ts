@@ -14,6 +14,7 @@ export interface UsedCar {
   milage: string
   price?: number
   serialNumber: number
+  firstSeen: string // ISO date string (Date.toISOString())
 }
 
 export interface UsedCarModel {

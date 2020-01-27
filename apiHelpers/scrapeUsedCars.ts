@@ -64,6 +64,7 @@ export default async (): Promise<Array<UsedCar>> => {
       const priceText = parsedElement.find('.car-price span').text()
 
       cars.push({
+        firstSeen: new Date().toISOString(),
         serialNumber: Number(serialNumber),
         image: imageSrc && `https://bilasolur.is/${imageSrc}`,
         link: `https://bilasolur.is/${link}`,
