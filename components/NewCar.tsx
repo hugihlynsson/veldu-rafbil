@@ -4,19 +4,7 @@ import LazyLoad from 'react-lazy-load'
 declare let gtag: Function
 
 import { NewCar as NewCarType } from '../types'
-
-// number.toLocaleString() can be inconsistent between node and client, breaking SSR
-const addDecimalSeprators = (value: number): string =>
-  value
-    .toString()
-    .split('')
-    .reverse()
-    .join('')
-    .match(/.{1,3}/g)!
-    .join('.')
-    .split('')
-    .reverse()
-    .join('')
+import addDecimalSeprators from '../modules/addDecimalSeparators'
 
 const getSrcSet = (name: string) =>
   `/images/${name}-540w.jpg 540w, /images/${name}-1080w.jpg 1080w, /images/${name}-1920w.jpg 1920w`

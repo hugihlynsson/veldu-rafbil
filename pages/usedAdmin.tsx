@@ -15,18 +15,16 @@ interface Props {
 const Used: NextPage<Props> = ({ cars }) => {
   const [usedCars, setUsedCars] = useState<Array<ProcessedUsedCar>>(cars)
 
-  useEffect(() => {
-    setUsedCars(cars)
-  }, [cars])
+  useEffect(() => setUsedCars(cars), [cars])
 
   return (
     <>
-      <div className="root" key="used">
+      <div className="root">
         <Head>
-          <title key="title">Notaðir Rafbílar</title>
+          <title key="title">Stjórnborð notaðra rafbíla</title>
         </Head>
 
-        <h1>Notaðir Rafbílar</h1>
+        <h1>Stjórnborð notaðra rafbíla</h1>
 
         <div className="cars">
           {usedCars.map((car, index) => {
@@ -103,26 +101,29 @@ const Used: NextPage<Props> = ({ cars }) => {
             return (
               <div key={car.link}>
                 <Car car={car} />
-                <select
-                  value={car.metadata?.id}
-                  onChange={handleMetadataChange}
-                >
-                  <option value={undefined}>Ekki valið</option>
 
-                  {usedCarModels.map((carOption) => (
-                    <option value={carOption.id} key={carOption.id}>
-                      {carOption.make} {carOption.model}: {carOption.id}
-                    </option>
-                  ))}
-                </select>
+                <div className="car-settings">
+                  <select
+                    value={car.metadata?.id}
+                    onChange={handleMetadataChange}
+                  >
+                    <option value={undefined}>Ekki valið</option>
 
-                <input
-                  id={`filtered-${car.link}`}
-                  type="checkbox"
-                  checked={car.filtered}
-                  onChange={handleFilteredChange}
-                />
-                <label htmlFor={`filtered-${car.link}`}>Filtered</label>
+                    {usedCarModels.map((carOption) => (
+                      <option value={carOption.id} key={carOption.id}>
+                        {carOption.make} {carOption.model}: {carOption.id}
+                      </option>
+                    ))}
+                  </select>
+
+                  <input
+                    id={`filtered-${car.link}`}
+                    type="checkbox"
+                    checked={car.filtered}
+                    onChange={handleFilteredChange}
+                  />
+                  <label htmlFor={`filtered-${car.link}`}>Filtered</label>
+                </div>
               </div>
             )
           })}
@@ -140,15 +141,21 @@ const Used: NextPage<Props> = ({ cars }) => {
             max-width: 560px;
             padding: 24px;
           }
+
           h1 {
             font-size: 40px;
             font-weight: 600;
           }
 
           .cars {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
+            display: grid;
+            grid-gap: 32px;
+            grid-template-columns: 100%;
+            margin-top: 32px;
+          }
+
+          .car-settings {
+            margin-top: 8px;
           }
 
           @media screen and (min-width: 768px) {
@@ -158,8 +165,7 @@ const Used: NextPage<Props> = ({ cars }) => {
             }
 
             .cars {
-              flex-direction: row;
-              flex-wrap: wrap;
+              grid-template-columns: 50% 50%;
             }
           }
         `}</style>
