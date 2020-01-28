@@ -2,14 +2,16 @@ import React, { useState } from 'react'
 import { NextPage } from 'next'
 import fetch from 'isomorphic-unfetch'
 import Head from 'next/head'
+
 import Toggles from '../components/Toggles'
 import Footer from '../components/Footer'
 import stableSort from '../components/stableSort'
+import estimateWLTP from '../modules/estimateWLTP'
 
 import { ProcessedUsedCar } from '../types'
 import Car from '../components/UsedCar'
 
-type Sorting = 'price' | 'age' | 'milage' | 'name'
+type Sorting = 'price' | 'age' | 'milage' | 'name' | 'range' | 'acceleration'
 
 interface Props {
   cars: Array<ProcessedUsedCar>
@@ -50,7 +52,30 @@ const Used: NextPage<Props> = ({ cars }) => {
         )
       }
       case 'name': {
-        return `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`)
+        const getName = (car: ProcessedUsedCar): string =>
+          car.metadata?.model
+            ? `${car.metadata.make} ${car.metadata.model}`
+            : `${car.make} ${car.model}`
+        return getName(a).localeCompare(getName(b))
+      }
+      case 'range': {
+        const getRange = (car: ProcessedUsedCar): number => {
+          if (car.metadata?.range) {
+            return car.metadata.range
+          }
+          if (car.metadata?.rangeNEDC) {
+            return Number(estimateWLTP(car.metadata.rangeNEDC))
+          }
+          return 0
+        }
+
+        return getRange(b) - getRange(a)
+      }
+      case 'acceleration': {
+        return (
+          (a.metadata?.acceleration ?? Number.MAX_SAFE_INTEGER) -
+          (b.metadata?.acceleration ?? Number.MAX_SAFE_INTEGER)
+        )
       }
       default: {
         return 1
@@ -75,6 +100,8 @@ const Used: NextPage<Props> = ({ cars }) => {
             ['Nafni', 'name'],
             ['Aldri', 'age'],
             ['Keyrslu', 'milage'],
+            ['Drægni', 'range'],
+            ['Hröðun', 'acceleration'],
           ]}
           onClick={setSorting}
         />
@@ -180,9 +207,10 @@ const Used: NextPage<Props> = ({ cars }) => {
           }
 
           .cars {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
+            display: grid;
+            grid-gap: 32px;
+            grid-template-columns: 100%;
+            margin-top: 32px;
           }
 
           @media screen and (min-width: 768px) {
@@ -192,8 +220,7 @@ const Used: NextPage<Props> = ({ cars }) => {
             }
 
             .cars {
-              flex-direction: row;
-              flex-wrap: wrap;
+              grid-template-columns: 50% 50%;
             }
           }
         `}</style>
