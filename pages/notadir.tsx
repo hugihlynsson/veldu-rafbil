@@ -97,7 +97,7 @@ const Used: NextPage<Props> = ({ cars }) => {
             Listi yfir alla {cars.filter((car) => !car.filtered).length} notuðu
             bílana sem eru til sölu á Íslandi og eru 100% rafdrifnir.
             Upplýsingar um drægni eru samkvæmt{' '}
-            <a href="http://wltpfacts.eu/">WLTP</a> mælingum þegar bíllinn nýr
+            <a href="http://wltpfacts.eu/">WLTP</a> mælingum þegar bíllinn er nýr
             en ekki er tekið tillit til rýrnunar með aldri eða notkun
             rafhlöðunnar. <strong>*</strong>Stjörnumerkt drægni er áætluð úr
             NEDC þar sem nýrri mælingar eru ekki til.
