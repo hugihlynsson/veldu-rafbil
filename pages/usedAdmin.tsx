@@ -158,14 +158,21 @@ const Used: NextPage<Props> = ({ cars }) => {
             margin-top: 8px;
           }
 
-          @media screen and (min-width: 768px) {
+          @media screen and (min-width: 767px) {
             .root {
               margin 0 auto;
-              max-width: 1120px;
+              max-width: 1180px;
             }
 
             .cars {
-              grid-template-columns: 50% 50%;
+              grid-template-columns: 1fr 1fr;
+              margin: 24px;
+            }
+          }
+
+          @media screen and (min-width: 1200px) {
+            .cars {
+              grid-template-columns: 1fr 1fr 1fr;
             }
           }
         `}</style>

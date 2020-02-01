@@ -10,21 +10,15 @@ interface Props {
 
 const UsedCar: FunctionComponent<Props> = ({ car }) => (
   <article>
-    <img src={car.image} />
+    <div className="imageBox">
+      <div className="imageSizer" />
+      <img alt="" src={car.image} />
+    </div>
 
-    <div className="data">
-      <h1 className="title">
-        {car.metadata?.make ? (
-          <>
-            <span className="title-make">{car.metadata.make}</span>{' '}
-            {car.metadata.model}
-          </>
-        ) : (
-          <span className="title--capitalize">
-            <span className="title-make">{car.make.toLowerCase()}</span>{' '}
-            {car.model.toLowerCase()}
-          </span>
-        )}
+    <div className="content">
+      <h1>
+        <span className="make">{car.make}</span>{' '}
+        <span className="model">{car.model}</span>
       </h1>
 
       <a className="price" target="_blank" rel="noopener" href={car.link}>
@@ -50,7 +44,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
 
         <div className="info-item" title="Samkvæmt WLTP prófunum">
           <div className="info-item-label">
-            Drægni{car.metadata?.rangeNEDC && '*'}
+            Drægni{car.metadata?.rangeNEDC && <strong>*</strong>}
           </div>
           <div className="info-item-value">
             {car.metadata
@@ -74,113 +68,134 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
         <a
           className="more-info"
           target="_blank"
-          href={car.metadata.evDatabaseURL}
+          href={car.metadata?.evDatabaseURL}
           rel="noopener"
         >
-          Nánar um gerð á ev-database.org
+          Nánar á ev-database.org
         </a>
       )}
     </div>
 
-    <style jsx>{`
-      article {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        text-decoration: none;
-        color: inherit;
-      }
+    <style jsx>
+      {`
+        article {
+        }
 
-      img {
-        width: 200px;
-        border-radius: 2px;
-        object-fit: cover;
-        margin-right: 24px;
-        background-color: #f8f8f8;
-        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
-        flex-shrink: 0;
-      }
+        .imageBox {
+          display: block;
+          position: relative;
+          overflow: hidden;
+          box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+          max-width: 480px;
+          margin: 0 auto;
+        }
+        .imageSizer {
+          width: 100%;
+          padding-bottom: 66.667%;
+        }
+        img {
+          position: absolute;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
 
-      .data {
-        flex-grow: 1;
-      }
+        .content {
+          padding: 10px 16px 16px;
+          margin 0 auto;
+          max-width: 480px;
+        }
 
-      .title {
-        font-size: 24px;
-        color: #111;
-        margin: 0;
-        margin-bottom: 4px;
-        font-weight: 400;
-      }
-      .title--capitalize {
-        text-transform: capitalize;
-      }
-      .title-make {
-        font-weight: 600;
-      }
+        h1 {
+          margin: 0;
+          font-weight: 600;
+          font-size: 32px;
+        }
+        .model {
+          font-weight: 400;
+        }
 
-      .price {
-        display: inline-block;
-        color: inherit;
-        margin-top: 8px;
-        margin-bottom: 16px;
-        font-size: 14px;
-        font-weight: 600;
-        background-color: #eee;
-        border-radius: 100px;
-        padding: 4px 12px;
-        text-decoration: none;
-        margin-left: -2px;
-        transition: background-color 0.1s;
-      }
-      .price:hover {
-        background-color: #8cf;
-      }
+        .price {
+          display: inline-block;
+          color: inherit;
+          margin-top: 8px;
+          margin-bottom: 24px;
+          font-size: 14px;
+          font-weight: 600;
+          background-color: #EEE;
+          border-radius: 100px;
+          padding: 4px 12px;
+          text-decoration: none;
+          margin-left: -2px;
+          transition: background-color 0.1s;
+        }
+        .price:hover {
+          background-color: #8CF;
+        }
 
-      .info {
-        display: flex;
-        margin-bottom: 16px;
-        max-width: 320px;
-        justify-content: space-between;
-      }
-      .info-item {
-        margin-right: 8px;
-        flex-basis: 33.33%;
-      }
-      .info-item:last-child {
-        margin-right: 0;
-      }
-      .info-item-label {
-        text-transform: uppercase;
-        font-size: 10px;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        margin-bottom: 2px;
-        color: #888;
-      }
-      .info-item-value {
-        font-size: 20px;
-        font-weight: 400;
-      }
+        .info {
+          display: flex;
+          margin-bottom: 16px;
+          max-width: 320px;
+          justify-content: space-between;
+        }
+        .info-item {
+          margin-right: 8px;
+          flex-basis: 33.33%;
+        }
+        .info-item:last-child {
+          margin-right: 0;
+        }
+        .info-item-label {
+          text-transform: uppercase;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.05em;
+          margin-bottom: 2px;
+          color: #555;
+        }
+        .info-item-label strong {
+          color: #000;
+        }
+        .info-item-value {
+          font-size: 24px;
+          font-weight: 400;
+        }
 
-      .extra {
-        color: #aaa;
-        font-weight: 300;
-        font-size: 14px;
-        margin-bottom: 0;
-      }
-      .extra--model {
-        text-transform: capitalize;
-      }
+        .extra {
+          color: #aaa;
+          font-weight: 300;
+          font-size: 14px;
+          margin-bottom: 0;
+        }
 
-      .more-info {
-        display: inline-block;
-        color: inherit;
-        font-size: 14px;
-        font-weight: 300;
-        color: #aaa;
-      }
-    `}</style>
+        .more-info {
+          display: inline-block;
+          color: inherit;
+          font-size: 14px;
+          color: #aaa;
+        }
+
+        @media screen and (min-width: 375px) {
+          .content {
+            padding: 20px 24px 24px;
+          }
+        }
+
+        @media screen and (min-width: 480px) {
+          img {
+            border-radius: 2px;
+          }
+        }
+
+        @media screen and (min-width: 820px) {
+          .info-item {
+            margin-right: 16px;
+          }
+        }
+      `}
+    </style>
   </article>
 )
 
