@@ -90,57 +90,71 @@ const Used: NextPage<Props> = ({ cars }) => {
           <title key="title">Notaðir Rafbílar</title>
         </Head>
 
-        <h1>Notaðir Rafbílar</h1>
+        <header>
+          <h1>Notaðir Rafbílar</h1>
 
-        <div className="sorting-title">Raða eftir:</div>
-        <Toggles<Sorting>
-          currentValue={sorting}
-          items={[
-            ['Verði', 'price'],
-            ['Nafni', 'name'],
-            ['Aldri', 'age'],
-            ['Keyrslu', 'milage'],
-            ['Drægni', 'range'],
-            ['Hröðun', 'acceleration'],
-          ]}
-          onClick={setSorting}
-        />
+          <p className="description">
+            Listi yfir alla {cars.filter((car) => !car.filtered).length} notuðu
+            bílana sem eru til sölu á Íslandi og eru 100% rafdrifnir.
+            Upplýsingar um drægni eru samkvæmt{' '}
+            <a href="http://wltpfacts.eu/">WLTP</a> mælingum þegar bíllinn nýr
+            en ekki er tekið tillit til rýrnunar með aldri eða notkun
+            rafhlöðunnar. <strong>*</strong>Stjörnumerkt drægni er áætluð úr
+            NEDC þar sem nýrri mælingar eru ekki til.
+          </p>
 
-        <div className="filters">
-          <div
-            className="filter"
-            style={!filter ? { backgroundColor: '#EEE' } : undefined}
-            onClick={() => setFilter(undefined)}
-          >
-            ALLIR{' '}
-            <span className="count">
-              {cars.filter((car) => !car.filtered).length}
-            </span>
-          </div>
+          <div className="sorting-title">Raða eftir:</div>
+          <Toggles<Sorting>
+            currentValue={sorting}
+            items={[
+              ['Verði', 'price'],
+              ['Nafni', 'name'],
+              ['Aldri', 'age'],
+              ['Keyrslu', 'milage'],
+              ['Drægni', 'range'],
+              ['Hröðun', 'acceleration'],
+            ]}
+            onClick={setSorting}
+          />
 
-          {Object.entries(
-            cars
-              .filter((car) => !car.filtered)
-              .map((car) => car.metadata?.make ?? car.make)
-              .map((make) => (make === 'VW' ? 'Volkswagen' : make))
-              .reduce<{ [key: string]: number }>(
-                (makes, make) => ({
-                  ...makes,
-                  [make.toUpperCase()]: (makes[make.toUpperCase()] || 0) + 1,
-                }),
-                {},
-              ),
-          ).map(([make, count]) => (
+          <div className="filters">
             <div
-              key={make}
               className="filter"
-              style={filter === make ? { backgroundColor: '#EEE' } : undefined}
-              onClick={() => setFilter(make)}
+              style={!filter ? { backgroundColor: '#EEE' } : undefined}
+              onClick={() => setFilter(undefined)}
             >
-              {make} <span className="count">{count}</span>
+              ALLIR{' '}
+              <span className="count">
+                {cars.filter((car) => !car.filtered).length}
+              </span>
             </div>
-          ))}
-        </div>
+
+            {Object.entries(
+              cars
+                .filter((car) => !car.filtered)
+                .map((car) => car.metadata?.make ?? car.make)
+                .map((make) => (make === 'VW' ? 'Volkswagen' : make))
+                .reduce<{ [key: string]: number }>(
+                  (makes, make) => ({
+                    ...makes,
+                    [make.toUpperCase()]: (makes[make.toUpperCase()] || 0) + 1,
+                  }),
+                  {},
+                ),
+            ).map(([make, count]) => (
+              <div
+                key={make}
+                className="filter"
+                style={
+                  filter === make ? { backgroundColor: '#EEE' } : undefined
+                }
+                onClick={() => setFilter(make)}
+              >
+                {make} <span className="count">{count}</span>
+              </div>
+            ))}
+          </div>
+        </header>
 
         <div className="cars">
           {stableSort(cars, carSorter)
@@ -162,17 +176,40 @@ const Used: NextPage<Props> = ({ cars }) => {
 
       <style jsx>{`
           .root {
+            margin 0 auto;
+            padding: 24px 0;
+          }
+
+          header {
+            padding: 0 16px;
             display: flex;
             flex-direction: column;
             align-items: stretch;
-            margin 0 auto;
-            max-width: 560px;
-            padding: 24px;
           }
+
           h1 {
             font-size: 40px;
             font-weight: 600;
+            line-height: 1.1;
           }
+
+          .description {
+            line-height: 1.5;
+            font-size: 14px;
+            margin: 0 0 2.5em 0;
+            color: #555;
+            max-width: 33em;
+          }
+          .description a,
+          .description strong {
+            text-decoration: none;
+            font-weight: 500;
+            color: black;
+          }
+          .description a:hover {
+            text-decoration: underline;
+          }
+
           .sorting-title {
             margin-bottom: 8px;
             font-size: 14px;
@@ -209,18 +246,46 @@ const Used: NextPage<Props> = ({ cars }) => {
           .cars {
             display: grid;
             grid-gap: 32px;
-            grid-template-columns: 100%;
+            grid-template-columns: 1fr;
             margin-top: 32px;
+          }
+
+          @media screen and (min-width: 375px) {
+            header {
+              padding: 24px;
+            }
+            h1 {
+              font-size: 48px;
+            }
           }
 
           @media screen and (min-width: 768px) {
             .root {
               margin 0 auto;
-              max-width: 1120px;
+              max-width: 1180px;
+            }
+
+            header {
+              padding-left: 40px;
+              max-width: none;
+              padding-bottom: 40px; 
+            }
+            h1 {
+              font-size: 64px;
+            }
+            .description {
+              font-size: 16px;
             }
 
             .cars {
-              grid-template-columns: 50% 50%;
+              grid-template-columns: 1fr 1fr;
+              margin: 24px;
+            }
+          }
+
+          @media screen and (min-width: 1200px) {
+            .cars {
+              grid-template-columns: 1fr 1fr 1fr;
             }
           }
         `}</style>
