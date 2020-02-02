@@ -11,7 +11,24 @@ import estimateWLTP from '../modules/estimateWLTP'
 import { ProcessedUsedCar } from '../types'
 import Car from '../components/UsedCar'
 
-type Sorting = 'price' | 'age' | 'milage' | 'name' | 'range' | 'acceleration'
+type Sorting =
+  | 'price'
+  | 'age'
+  | 'milage'
+  | 'name'
+  | 'range'
+  | 'acceleration'
+  | 'value'
+
+const getRange = (car: ProcessedUsedCar): number => {
+  if (car.metadata?.range) {
+    return car.metadata.range
+  }
+  if (car.metadata?.rangeNEDC) {
+    return Number(estimateWLTP(car.metadata.rangeNEDC))
+  }
+  return 0
+}
 
 interface Props {
   cars: Array<ProcessedUsedCar>
@@ -58,17 +75,13 @@ const Used: NextPage<Props> = ({ cars }) => {
             : `${car.make} ${car.model}`
         return getName(a).localeCompare(getName(b))
       }
+      case 'value': {
+        return (
+          (a.price || Number.MAX_SAFE_INTEGER) / getRange(a) -
+          (b.price || Number.MAX_SAFE_INTEGER) / getRange(b)
+        )
+      }
       case 'range': {
-        const getRange = (car: ProcessedUsedCar): number => {
-          if (car.metadata?.range) {
-            return car.metadata.range
-          }
-          if (car.metadata?.rangeNEDC) {
-            return Number(estimateWLTP(car.metadata.rangeNEDC))
-          }
-          return 0
-        }
-
         return getRange(b) - getRange(a)
       }
       case 'acceleration': {
@@ -97,8 +110,8 @@ const Used: NextPage<Props> = ({ cars }) => {
             Listi yfir alla {cars.filter((car) => !car.filtered).length} notuðu
             bílana sem eru til sölu á Íslandi og eru 100% rafdrifnir.
             Upplýsingar um drægni eru samkvæmt{' '}
-            <a href="http://wltpfacts.eu/">WLTP</a> mælingum þegar bíllinn er nýr
-            en ekki er tekið tillit til rýrnunar með aldri eða notkun
+            <a href="http://wltpfacts.eu/">WLTP</a> mælingum þegar bíllinn er
+            nýr en ekki er tekið tillit til rýrnunar með aldri eða notkun
             rafhlöðunnar. <strong>*</strong>Stjörnumerkt drægni er áætluð úr
             NEDC þar sem nýrri mælingar eru ekki til.
           </p>
@@ -109,6 +122,7 @@ const Used: NextPage<Props> = ({ cars }) => {
             items={[
               ['Verði', 'price'],
               ['Nafni', 'name'],
+              ['Verð á Km', 'value'],
               ['Aldri', 'age'],
               ['Keyrslu', 'milage'],
               ['Drægni', 'range'],
