@@ -113,7 +113,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
         }
 
         .content {
-          padding: 10px 16px 16px;
+          padding: 12px 16px 8px;
           margin 0 auto;
           max-width: 480px;
         }
@@ -191,15 +191,13 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
           color: #aaa;
         }
 
-        @media screen and (min-width: 375px) {
-          .content {
-            padding: 20px 24px 24px;
-          }
-        }
-
         @media screen and (min-width: 480px) {
           img {
             border-radius: 2px;
+          }
+          .content {
+            padding-top: 20px;
+            padding-bottom: 24px;
           }
         }
 

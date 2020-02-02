@@ -122,7 +122,7 @@ const Used: NextPage<Props> = ({ cars }) => {
             items={[
               ['Verði', 'price'],
               ['Nafni', 'name'],
-              ['Verð á Km', 'value'],
+              ['Verði á km', 'value'],
               ['Aldri', 'age'],
               ['Keyrslu', 'milage'],
               ['Drægni', 'range'],
@@ -274,16 +274,6 @@ const Used: NextPage<Props> = ({ cars }) => {
           }
 
           @media screen and (min-width: 768px) {
-            .root {
-              margin 0 auto;
-              max-width: 1180px;
-            }
-
-            header {
-              padding-left: 40px;
-              max-width: none;
-              padding-bottom: 40px; 
-            }
             h1 {
               font-size: 64px;
             }
@@ -297,7 +287,17 @@ const Used: NextPage<Props> = ({ cars }) => {
             }
           }
 
-          @media screen and (min-width: 1200px) {
+          @media screen and (min-width: 1280px) {
+            header {
+              max-width: none;
+              padding-bottom: 40px; 
+            }
+            
+            .root {
+              margin 0 auto;
+              max-width: 1280px;
+            }
+
             .cars {
               grid-template-columns: 1fr 1fr 1fr;
             }
