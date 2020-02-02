@@ -16,10 +16,21 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
     </div>
 
     <div className="content">
-      <h1>
-        <span className="make">{car.make}</span>{' '}
-        <span className="model">{car.model}</span>
-      </h1>
+      {car.metadata?.make ? (
+        <h1>
+          <span className="make">{car.metadata.make}</span>{' '}
+          <span className="model">{car.metadata.model}</span>
+        </h1>
+      ) : (
+        <h1>
+          <span className="make title--capitalize">
+            {car.make.toLowerCase()}
+          </span>{' '}
+          <span className="model title--capitalize">
+            {car.model.toLowerCase()}
+          </span>
+        </h1>
+      )}
 
       <a className="price" target="_blank" rel="noopener" href={car.link}>
         {car.price
@@ -114,6 +125,9 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
         }
         .model {
           font-weight: 400;
+        }
+        .title--capitalize {
+          text-transform: capitalize;
         }
 
         .price {
