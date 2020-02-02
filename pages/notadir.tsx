@@ -287,7 +287,7 @@ const Used: NextPage<Props> = ({ cars }) => {
             }
           }
 
-          @media screen and (min-width: 1280px) {
+          @media screen and (min-width: 1194px) {
             header {
               max-width: none;
               padding-bottom: 40px; 
