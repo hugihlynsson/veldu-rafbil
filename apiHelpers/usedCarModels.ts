@@ -82,7 +82,7 @@ const usedCarModels: Array<UsedCarModel> = [
     model: 'e-Golf',
     acceleration: 10.4,
     capacity: 24.2,
-    range: 190,
+    rangeNEDC: 190,
     evDatabaseURL: 'https://ev-database.org/car/1040/Volkswagen-e-Golf',
   },
   {
