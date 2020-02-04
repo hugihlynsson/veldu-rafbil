@@ -2,6 +2,15 @@ import { UsedCarModel } from '../types'
 
 const usedCarModels: Array<UsedCarModel> = [
   {
+    id: 'audi-etron-55',
+    make: 'Audi',
+    model: 'e-tron 55',
+    acceleration: 5.7,
+    capacity: 95,
+    range: 417,
+    evDatabaseURL: 'https://ev-database.org/car/1092/Audi-e-tron',
+  },
+  {
     id: 'mitsubishi-imiev',
     make: 'Mitsubishi',
     model: 'i-MiEV',
