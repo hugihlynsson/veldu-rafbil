@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import Head from 'next/head'
 import { NextPage } from 'next'
 import Router, { useRouter } from 'next/router'
+import Link from 'next/link'
+import smoothscroll from 'smoothscroll-polyfill'
 
 import Car from '../components/NewCar'
 import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
+import LinkPill from '../components/LinkPill'
 import cars from '../data/cars.json'
 import { NewCar } from '../types'
 import stableSort from '../components/stableSort'
@@ -38,6 +41,10 @@ const Used: NextPage<Props> = ({ initialSorting }) => {
   )
 
   useEffect(() => {
+    smoothscroll.polyfill()
+  }, [])
+
+  useEffect(() => {
     const query =
       sorting === 'name' ? {} : { radaeftir: sortingToQuery[sorting] }
     Router.replace({ pathname, query })
@@ -56,6 +63,16 @@ const Used: NextPage<Props> = ({ initialSorting }) => {
     }
   }
 
+  const sortingTitleRef = useRef<HTMLParagraphElement>(null)
+
+  const handleNewPress = useCallback(
+    (event) => {
+      event.preventDefault()
+      sortingTitleRef.current?.scrollIntoView({ behavior: 'smooth' })
+    },
+    [sortingTitleRef],
+  )
+
   return (
     <>
       <div className="root" key="new">
@@ -71,7 +88,17 @@ const Used: NextPage<Props> = ({ initialSorting }) => {
         <header>
           <h1>Veldu Rafbíl</h1>
 
-          <p className="description">
+          <div className="headerLinks">
+            <LinkPill current onClick={handleNewPress} href="#nyjir">
+              Nýjir ↓
+            </LinkPill>
+
+            <Link href="/notadir">
+              <LinkPill>Notaðir →</LinkPill>
+            </Link>
+          </div>
+
+          <p className="description" id="nyjir" ref={sortingTitleRef}>
             Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og eru
             100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
             <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda en
@@ -121,11 +148,19 @@ const Used: NextPage<Props> = ({ initialSorting }) => {
             font-size: 40px;
             font-weight: 600;
             line-height: 1.1;
+            margin-bottom: 0.4em;
           }
+
+          .headerLinks {
+            display: flex;
+            margin-bottom: 10px;
+          }
+
           .description {
             line-height: 1.5;
             font-size: 14px;
-            margin: 0 0 2.5em 0;
+            padding-top: 2em;
+            margin: 0 0 2em 0;
             color: #555;
             max-width: 33em;
           }

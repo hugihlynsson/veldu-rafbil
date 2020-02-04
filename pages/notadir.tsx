@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { NextPage } from 'next'
-import fetch from 'isomorphic-unfetch'
+import Link from 'next/link'
 import Head from 'next/head'
+import fetch from 'isomorphic-unfetch'
 
+import { ProcessedUsedCar } from '../types'
 import Toggles from '../components/Toggles'
 import Footer from '../components/Footer'
 import stableSort from '../components/stableSort'
-import estimateWLTP from '../modules/estimateWLTP'
-
-import { ProcessedUsedCar } from '../types'
+import LinkPill from '../components/LinkPill'
 import Car from '../components/UsedCar'
+import estimateWLTP from '../modules/estimateWLTP'
 
 type Sorting =
   | 'price'
@@ -104,6 +105,10 @@ const Used: NextPage<Props> = ({ cars }) => {
         </Head>
 
         <header>
+          <Link href="/">
+            <LinkPill>← Nýjir rafbílar</LinkPill>
+          </Link>
+
           <h1>Notaðir Rafbílar</h1>
 
           <p className="description">
@@ -202,6 +207,7 @@ const Used: NextPage<Props> = ({ cars }) => {
           }
 
           h1 {
+            margin-top: 0.6em;
             font-size: 40px;
             font-weight: 600;
             line-height: 1.1;

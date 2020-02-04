@@ -54,7 +54,7 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
           })
         }
       >
-        {addDecimalSeprators(car.price)} kr.
+        {addDecimalSeprators(car.price)} kr. ↗
       </a>
       <div className="info">
         <div className="info-item">
@@ -84,7 +84,7 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
           })
         }
       >
-        Nánar á ev-database.org
+        Nánar á ev-database.org ↗
       </a>
     </div>
 
