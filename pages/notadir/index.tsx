@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react'
 import { NextPage } from 'next'
-import fetch from 'isomorphic-unfetch'
+import Link from 'next/link'
 import Head from 'next/head'
+import fetch from 'isomorphic-unfetch'
 
 import { ProcessedUsedCar, UsedCarModel } from '../../types'
 import Toggles from '../../components/Toggles'
@@ -9,6 +10,7 @@ import Footer from '../../components/Footer'
 import ModelCard from '../../components/UsedCarModelCard'
 import estimateWLTP from '../../modules/estimateWLTP'
 import usedCarModels from '../../apiHelpers/usedCarModels'
+import LinkPill from '../../components/LinkPill'
 
 type Sorting = 'price' | 'name' | 'range' | 'acceleration' | 'value' | 'age'
 
@@ -102,6 +104,10 @@ const Used: NextPage<Props> = ({ cars }) => {
         </Head>
 
         <header>
+          <Link href="/">
+            <LinkPill>← Nýjir rafbílar</LinkPill>
+          </Link>
+
           <h1>Notaðir Rafbílar</h1>
 
           <p className="description">
@@ -183,6 +189,7 @@ const Used: NextPage<Props> = ({ cars }) => {
           }
 
           h1 {
+            margin-top: 0.6em;
             font-size: 40px;
             font-weight: 600;
             line-height: 1.1;
