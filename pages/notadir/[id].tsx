@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { NextPage } from 'next'
+import Link from 'next/link'
 import Head from 'next/head'
 import Error from 'next/error'
 import fetch from 'isomorphic-unfetch'
@@ -73,9 +74,9 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
         </Head>
 
         <header>
-          <a className="more-info" href="/notadir">
-            ← Allir notaðir
-          </a>
+          <Link href="/notadir">
+            <a className="more-info">← Allir notaðir</a>
+          </Link>
 
           <h1>
             <strong>{model.make}</strong> {model.model}

@@ -1,84 +1,82 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { NextPage } from 'next'
 import fetch from 'isomorphic-unfetch'
 import Head from 'next/head'
 
-import Toggles from '../components/Toggles'
-import Footer from '../components/Footer'
-import stableSort from '../components/stableSort'
-import estimateWLTP from '../modules/estimateWLTP'
+import { ProcessedUsedCar, UsedCarModel } from '../../types'
+import Toggles from '../../components/Toggles'
+import Footer from '../../components/Footer'
+import ModelCard from '../../components/UsedCarModelCard'
+import estimateWLTP from '../../modules/estimateWLTP'
+import usedCarModels from '../../apiHelpers/usedCarModels'
 
-import { ProcessedUsedCar } from '../types'
-import Car from '../components/UsedCar'
+type Sorting = 'price' | 'name' | 'range' | 'acceleration' | 'value' | 'age'
 
-type Sorting =
-  | 'price'
-  | 'age'
-  | 'milage'
-  | 'name'
-  | 'range'
-  | 'acceleration'
-  | 'value'
+interface Model {
+  count: number
+  images: Array<string>
+  lowestPrice?: number
+  model: UsedCarModel
+  oldest?: number
+}
 
-const getRange = (car: ProcessedUsedCar): number => {
-  if (car.metadata?.range) {
-    return car.metadata.range
+const getRange = (modelItem: Model): number => {
+  if (modelItem.model.range) {
+    return modelItem.model.range
   }
-  if (car.metadata?.rangeNEDC) {
-    return Number(estimateWLTP(car.metadata.rangeNEDC))
+
+  if (modelItem.model.rangeNEDC) {
+    return Number(estimateWLTP(modelItem.model.rangeNEDC))
   }
+
   return 0
 }
+
+type Models = { [id: string]: Array<ProcessedUsedCar> }
+
+const carsToModels = (models: Models, car: ProcessedUsedCar): Models => ({
+  ...models,
+  [car.metadata!.id]: models[car.metadata!.id]
+    ? [...models[car.metadata!.id], car]
+    : [car],
+})
 
 interface Props {
   cars: Array<ProcessedUsedCar>
 }
 
 const Used: NextPage<Props> = ({ cars }) => {
-  const [filter, setFilter] = useState<string | undefined>(undefined)
-  const [sorting, setSorting] = useState<Sorting>('price')
+  const [sorting, setSorting] = useState<Sorting>('name')
 
-  const carSorter = (a: ProcessedUsedCar, b: ProcessedUsedCar): number => {
+  const models = useMemo(
+    () =>
+      cars
+        .filter(({ filtered }) => !filtered)
+        .filter(({ metadata }) => Boolean(metadata?.id))
+        .reduce(carsToModels, {}),
+    [cars],
+  )
+
+  const modelSorter = (a: Model, b: Model): number => {
     switch (sorting) {
       case 'price': {
         return (
-          (a.price || Number.MAX_SAFE_INTEGER) -
-          (b.price || Number.MAX_SAFE_INTEGER)
+          (a.lowestPrice || Number.MAX_SAFE_INTEGER) -
+          (b.lowestPrice || Number.MAX_SAFE_INTEGER)
         )
       }
       case 'age': {
-        return (
-          Number((b.date.split('/')[1] || '').split(' ')[0]) -
-          Number((a.date.split('/')[1] || '').split(' ')[0])
-        )
-      }
-      case 'milage': {
-        return (
-          (Number(
-            a.milage
-              .replace(' km.', '')
-              .split('.')
-              .join(''),
-          ) || 0) -
-          (Number(
-            b.milage
-              .replace(' km.', '')
-              .split('.')
-              .join(''),
-          ) || 0)
-        )
+        return (b.oldest || 0) - (a.oldest || 0)
       }
       case 'name': {
-        const getName = (car: ProcessedUsedCar): string =>
-          car.metadata?.model
-            ? `${car.metadata.make} ${car.metadata.model}`
-            : `${car.make} ${car.model}`
+        const getName = (modelItem: Model): string =>
+          `${modelItem.model.make} ${modelItem.model.model}`
         return getName(a).localeCompare(getName(b))
       }
       case 'value': {
         return (
-          (a.price || Number.MAX_SAFE_INTEGER) / getRange(a) -
-          (b.price || Number.MAX_SAFE_INTEGER) / getRange(b)
+          (a.lowestPrice || Number.MAX_SAFE_INTEGER) / getRange(a) -
+          (b.lowestPrice || Number.MAX_SAFE_INTEGER) / getRange(b)
         )
       }
       case 'range': {
@@ -86,8 +84,8 @@ const Used: NextPage<Props> = ({ cars }) => {
       }
       case 'acceleration': {
         return (
-          (a.metadata?.acceleration ?? Number.MAX_SAFE_INTEGER) -
-          (b.metadata?.acceleration ?? Number.MAX_SAFE_INTEGER)
+          (a.model.acceleration ?? Number.MAX_SAFE_INTEGER) -
+          (b.model.acceleration ?? Number.MAX_SAFE_INTEGER)
         )
       }
       default: {
@@ -120,68 +118,51 @@ const Used: NextPage<Props> = ({ cars }) => {
           <Toggles<Sorting>
             currentValue={sorting}
             items={[
-              ['Verði', 'price'],
               ['Nafni', 'name'],
+              ['Verði', 'price'],
               ['Verði á km', 'value'],
               ['Aldri', 'age'],
-              ['Keyrslu', 'milage'],
               ['Drægni', 'range'],
               ['Hröðun', 'acceleration'],
             ]}
             onClick={setSorting}
           />
-
-          <div className="filters">
-            <div
-              className="filter"
-              style={!filter ? { backgroundColor: '#EEE' } : undefined}
-              onClick={() => setFilter(undefined)}
-            >
-              ALLIR{' '}
-              <span className="count">
-                {cars.filter((car) => !car.filtered).length}
-              </span>
-            </div>
-
-            {Object.entries(
-              cars
-                .filter((car) => !car.filtered)
-                .map((car) => car.metadata?.make ?? car.make)
-                .map((make) => (make === 'VW' ? 'Volkswagen' : make))
-                .reduce<{ [key: string]: number }>(
-                  (makes, make) => ({
-                    ...makes,
-                    [make.toUpperCase()]: (makes[make.toUpperCase()] || 0) + 1,
-                  }),
-                  {},
-                ),
-            ).map(([make, count]) => (
-              <div
-                key={make}
-                className="filter"
-                style={
-                  filter === make ? { backgroundColor: '#EEE' } : undefined
-                }
-                onClick={() => setFilter(make)}
-              >
-                {make} <span className="count">{count}</span>
-              </div>
-            ))}
-          </div>
         </header>
 
         <div className="cars">
-          {stableSort(cars, carSorter)
-            .filter(
-              (car) =>
-                (!filter ||
-                  car.make === filter ||
-                  car.metadata?.make?.toUpperCase() === filter ||
-                  (filter === 'VOLKSWAGEN' && car.make === 'VW')) &&
-                !car.filtered,
+          {Object.entries(models)
+            .map(
+              ([id, cars]): Model => ({
+                model: usedCarModels.find((model) => model.id === id)!,
+                images: cars.map((car) => car.image).filter(Boolean) as Array<
+                  string
+                >,
+                count: cars.length,
+                lowestPrice: cars.reduce(
+                  (lowest: number | undefined, { price }) =>
+                    lowest ? (price ? Math.min(price, lowest) : lowest) : price,
+                  undefined,
+                ),
+                oldest: cars.reduce((oldest: number | undefined, { date }) => {
+                  const maybeYear = Number(
+                    (date.split('/')[1] || '').split(' ')[0],
+                  )
+                  if (isNaN(maybeYear)) {
+                    return oldest
+                  }
+                  return oldest ? Math.min(maybeYear, oldest) : maybeYear
+                }, undefined),
+              }),
             )
-            .map((car) => (
-              <Car car={car} key={car.link} />
+            .sort(modelSorter)
+            .map(({ model, images, count, lowestPrice }) => (
+              <ModelCard
+                key={model.id}
+                model={model}
+                count={count}
+                images={images}
+                lowestPrice={lowestPrice}
+              />
             ))}
         </div>
       </div>
@@ -228,33 +209,6 @@ const Used: NextPage<Props> = ({ cars }) => {
             margin-bottom: 8px;
             font-size: 14px;
             font-weight: 600;
-          }
-
-          .filters {
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: 16px;
-          }
-          .filter {
-            font-size: 11px;
-            font-weight: 600;
-            margin-right: 2px;
-            padding: 4px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 2px;
-          }
-          .filter:hover {
-            background-color: #F8F8F8;
-          }
-          .count {
-            font-weight: 400;
-            margin-left: 2px;
-            color: #888;
           }
 
           .cars {

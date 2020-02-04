@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react'
 
 import { ProcessedUsedCar } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
+import selectCarImageSize from '../modules/selectCarImageSize'
 
 interface Props {
   car: ProcessedUsedCar
@@ -11,7 +12,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
   <article>
     <div className="imageBox">
       <div className="imageSizer" />
-      <img alt="" src={car.image} />
+      {car.image && <img alt="" src={selectCarImageSize(car.image, 'medium')} />}
     </div>
 
     <div className="content">
