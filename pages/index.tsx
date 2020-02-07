@@ -34,7 +34,7 @@ interface Props {
   initialSorting: SortingQuery | undefined
 }
 
-const Used: NextPage<Props> = ({ initialSorting }) => {
+const New: NextPage<Props> = ({ initialSorting }) => {
   const { pathname } = useRouter()
   const [sorting, setSorting] = useState<Sorting>(
     queryToSorting[initialSorting || 'nafni'],
@@ -63,14 +63,14 @@ const Used: NextPage<Props> = ({ initialSorting }) => {
     }
   }
 
-  const sortingTitleRef = useRef<HTMLParagraphElement>(null)
+  const descriptionRef = useRef<HTMLParagraphElement>(null)
 
   const handleNewPress = useCallback(
     (event) => {
       event.preventDefault()
-      sortingTitleRef.current?.scrollIntoView({ behavior: 'smooth' })
+      descriptionRef.current?.scrollIntoView({ behavior: 'smooth' })
     },
-    [sortingTitleRef],
+    [descriptionRef],
   )
 
   return (
@@ -93,12 +93,12 @@ const Used: NextPage<Props> = ({ initialSorting }) => {
               Nýjir ↓
             </LinkPill>
 
-            <Link href="/notadir">
+            <Link href="/notadir" passHref>
               <LinkPill>Notaðir →</LinkPill>
             </Link>
           </div>
 
-          <p className="description" id="nyjir" ref={sortingTitleRef}>
+          <p className="description" id="nyjir" ref={descriptionRef}>
             Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og eru
             100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
             <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda en
@@ -207,9 +207,9 @@ const Used: NextPage<Props> = ({ initialSorting }) => {
   )
 }
 
-Used.getInitialProps = ({ query }) =>
+New.getInitialProps = ({ query }) =>
   Promise.resolve({
     initialSorting: query.radaeftir as SortingQuery | undefined,
   })
 
-export default Used
+export default New

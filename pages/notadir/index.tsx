@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useRef, useCallback } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import Head from 'next/head'
@@ -96,21 +96,37 @@ const Used: NextPage<Props> = ({ cars }) => {
     }
   }
 
+  const descriptionRef = useRef<HTMLParagraphElement>(null)
+
+  const handleNewPress = useCallback(
+    (event) => {
+      event.preventDefault()
+      descriptionRef.current?.scrollIntoView({ behavior: 'smooth' })
+    },
+    [descriptionRef],
+  )
+
   return (
     <>
       <div className="root" key="used">
         <Head>
-          <title key="title">Notaðir Rafbílar</title>
+          <title key="title">Veldu Rafbíl → Notaðir</title>
         </Head>
 
         <header>
-          <Link href="/">
-            <LinkPill>← Nýjir rafbílar</LinkPill>
-          </Link>
+          <h1>Veldu Rafbíl</h1>
 
-          <h1>Notaðir Rafbílar</h1>
+          <div className="headerLinks">
+            <Link href="/" passHref>
+              <LinkPill>Nýjir ←</LinkPill>
+            </Link>
 
-          <p className="description">
+            <LinkPill href="#notadir" current onClick={handleNewPress}>
+              Notaðir ↓
+            </LinkPill>
+          </div>
+
+          <p className="description" ref={descriptionRef}>
             Listi yfir alla {cars.filter((car) => !car.filtered).length} notuðu
             bílana sem eru til sölu á Íslandi og eru 100% rafdrifnir.
             Upplýsingar um drægni eru samkvæmt{' '}
@@ -178,27 +194,34 @@ const Used: NextPage<Props> = ({ cars }) => {
       <style jsx>{`
           .root {
             margin 0 auto;
-            padding: 24px 0;
           }
 
           header {
-            padding: 0 16px;
             display: flex;
             flex-direction: column;
             align-items: stretch;
+            margin 0 auto;
+            max-width: 480px;
+            padding: 16px;
           }
 
           h1 {
-            margin-top: 0.6em;
             font-size: 40px;
             font-weight: 600;
             line-height: 1.1;
+            margin-bottom: 0.4em;
+          }
+
+          .headerLinks {
+            display: flex;
+            margin-bottom: 10px;
           }
 
           .description {
             line-height: 1.5;
             font-size: 14px;
-            margin: 0 0 2.5em 0;
+            padding-top: 2em;
+            margin: 0 0 2em 0;
             color: #555;
             max-width: 33em;
           }
@@ -235,6 +258,11 @@ const Used: NextPage<Props> = ({ cars }) => {
           }
 
           @media screen and (min-width: 768px) {
+            header {
+              padding-left: 40px;
+              max-width: 1024px;
+              padding-bottom: 40px; 
+            }
             h1 {
               font-size: 64px;
             }
@@ -250,7 +278,6 @@ const Used: NextPage<Props> = ({ cars }) => {
 
           @media screen and (min-width: 1194px) {
             header {
-              max-width: none;
               padding-bottom: 40px; 
             }
             
