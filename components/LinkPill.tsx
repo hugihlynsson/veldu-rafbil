@@ -30,9 +30,10 @@ const LinkPill: FunctionComponent<Props> = ({
         margin-left: -2px;
         transition: background-color 0.1s;
         margin-right: 10px;
+        transition: background-color: 0.2s;
       }
       a:hover {
-        background-color: #8cf;
+        background-color: #dadcec;
       }
       .current,
       .current:hover {

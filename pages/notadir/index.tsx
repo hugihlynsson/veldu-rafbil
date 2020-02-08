@@ -20,6 +20,7 @@ interface Model {
   lowestPrice?: number
   model: UsedCarModel
   oldest?: number
+  years: Array<number>
 }
 
 const getRange = (modelItem: Model): number => {
@@ -174,16 +175,20 @@ const Used: NextPage<Props> = ({ cars }) => {
                   }
                   return oldest ? Math.min(maybeYear, oldest) : maybeYear
                 }, undefined),
+                years: cars.map(({ date }) =>
+                  Number(date.split('/')[1] || ''.split(' ')[0]),
+                ),
               }),
             )
             .sort(modelSorter)
-            .map(({ model, images, count, lowestPrice }) => (
+            .map(({ model, images, count, lowestPrice, years }) => (
               <ModelCard
                 key={model.id}
                 model={model}
                 count={count}
                 images={images}
                 lowestPrice={lowestPrice}
+                years={years}
               />
             ))}
         </div>
