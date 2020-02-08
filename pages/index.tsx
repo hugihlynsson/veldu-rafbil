@@ -90,7 +90,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
 
           <div className="headerLinks">
             <LinkPill current onClick={handleNewPress} href="#nyjir">
-              Nýjir ↓
+              Nýir ↓
             </LinkPill>
 
             <Link href="/notadir" passHref>

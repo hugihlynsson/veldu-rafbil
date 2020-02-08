@@ -169,12 +169,13 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
         color: inherit;
         text-decoration: none;
         border-radius: 16px;
-        box-shadow: 0 2px 32px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 2px 32px rgba(0, 0, 0, 0.12);
         overflow: hidden;
-        transition: box-shadow 0.2s;
+        transition: all 0.2s;
       }
       a:hover {
         box-shadow: 0 2px 48px rgba(0, 0, 0, 0.16);
+        transform: translateY(-8px);
       }
 
       .images {
@@ -219,11 +220,11 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
       }
 
       .content {
-        padding: 24px;
+        padding: 16px;
       }
 
       .title {
-        margin: 0 0 2px;
+        margin: 0 0;
         font-weight: 600;
         font-size: 32px;
       }
@@ -233,7 +234,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
 
       .years {
         font-size: 14px;
-        color: #bbb;
+        color: #888;
         font-weight: 500;
         margin: 0 0 20px;
       }
@@ -257,7 +258,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
         font-weight: 600;
         letter-spacing: 0.05em;
         margin-bottom: 2px;
-        color: #555;
+        color: #888;
       }
       .info-item-value {
         font-size: 24px;
@@ -270,6 +271,15 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
       }
       p strong {
         font-weight: 600;
+      }
+
+      @media screen and (min-width: 480px) {
+        a {
+          box-shadow: 0 2px 32px rgba(0, 0, 0, 0.08);
+        }
+        .content {
+          padding: 24px;
+        }
       }
     `}</style>
   </article>

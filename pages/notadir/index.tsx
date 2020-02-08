@@ -119,7 +119,7 @@ const Used: NextPage<Props> = ({ cars }) => {
 
           <div className="headerLinks">
             <Link href="/" passHref>
-              <LinkPill>Nýjir ←</LinkPill>
+              <LinkPill>Nýir ←</LinkPill>
             </Link>
 
             <LinkPill href="#notadir" current onClick={handleNewPress}>
@@ -143,8 +143,8 @@ const Used: NextPage<Props> = ({ cars }) => {
             items={[
               ['Nafni', 'name'],
               ['Verði', 'price'],
-              ['Verði á km', 'value'],
-              ['Aldri', 'age'],
+              // ['Verði á km', 'value'],
+              // ['Aldri', 'age'],
               ['Drægni', 'range'],
               ['Hröðun', 'acceleration'],
             ]}
@@ -250,7 +250,9 @@ const Used: NextPage<Props> = ({ cars }) => {
             display: grid;
             grid-gap: 32px;
             grid-template-columns: 1fr;
-            margin-top: 32px;
+            margin-top: 0px;
+            margin-left: 16px;
+            margin-right: 16px;
           }
 
           @media screen and (min-width: 375px) {
@@ -277,7 +279,7 @@ const Used: NextPage<Props> = ({ cars }) => {
 
             .cars {
               grid-template-columns: 1fr 1fr;
-              margin: 24px;
+              margin: 0px 40px 40px;
             }
           }
 
