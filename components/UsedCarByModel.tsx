@@ -19,17 +19,24 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
     </div>
 
     <div className="content">
-      <LinkPill href={car.link} external>
-        {car.price
-          ? `${addDecimalSeprators(car.price)} kr.`
-          : 'Ekkert skráð verð'}{' '}
-        ↗
-      </LinkPill>
+      <div className="contentTop">
+        <div className="contentTopInfo">
+          <div className="info-item-label">Lýsing</div>
+          <div className="info-item-value">{car.modelExtra || '—'}</div>
+        </div>
+
+        <LinkPill href={car.link} external>
+          {car.price
+            ? `${addDecimalSeprators(car.price)} kr.`
+            : 'Ekkert skráð verð'}{' '}
+          ↗
+        </LinkPill>
+      </div>
 
       <div className="info">
         <div className="info-item">
-          <div className="info-item-label">Árgerð</div>
-          <div className="info-item-value">{car.date.split('/')[1] ?? '—'}</div>
+          <div className="info-item-label">Skráning</div>
+          <div className="info-item-value">{car.date}</div>
         </div>
 
         <div className="info-item">
@@ -68,6 +75,18 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
           padding: 12px 16px 8px;
           margin 0 auto;
           max-width: 480px;
+        }
+
+        .contentTop {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 8px;
+          margin-bottom: 24px;
+        }
+        .contentTopInfo {
+          margin-right: 8px;
+          flex-shrink: 1;
+          margin-top: -8px;
         }
 
         .info {

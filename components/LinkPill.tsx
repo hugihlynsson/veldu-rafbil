@@ -25,6 +25,7 @@ const LinkPill: FunctionComponent<Props> = React.forwardRef<
       a {
         display: inline-block;
         align-self: flex-start;
+        flex-shrink: 0;
         margin-top: 8px;
         color: inherit;
         font-size: 14px;
