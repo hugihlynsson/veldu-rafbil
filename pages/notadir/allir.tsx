@@ -1,17 +1,14 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { NextPage } from 'next'
 import Router, { useRouter } from 'next/router'
-import Link from 'next/link'
-import smoothscroll from 'smoothscroll-polyfill'
 
-import Car from '../components/NewCar'
-import Footer from '../components/Footer'
-import Toggles from '../components/Toggles'
-import LinkPill from '../components/LinkPill'
-import cars from '../data/cars.json'
-import { NewCar } from '../types'
-import stableSort from '../components/stableSort'
+import Car from '../../components/NewCar'
+import Footer from '../../components/Footer'
+import Toggles from '../../components/Toggles'
+import cars from '../../data/cars.json'
+import { NewCar } from '../../types'
+import stableSort from '../../components/stableSort'
 
 type Sorting = 'name' | 'price' | 'range' | 'acceleration'
 type SortingQuery = 'nafni' | 'verdi' | 'draegni' | 'hrodun'
@@ -34,13 +31,11 @@ interface Props {
   initialSorting: SortingQuery | undefined
 }
 
-const New: NextPage<Props> = ({ initialSorting }) => {
+const Used: NextPage<Props> = ({ initialSorting }) => {
   const { pathname } = useRouter()
   const [sorting, setSorting] = useState<Sorting>(
     queryToSorting[initialSorting || 'nafni'],
   )
-
-  useEffect(() => smoothscroll.polyfill(), [])
 
   useEffect(() => {
     const query =
@@ -61,16 +56,6 @@ const New: NextPage<Props> = ({ initialSorting }) => {
     }
   }
 
-  const descriptionRef = useRef<HTMLParagraphElement>(null)
-
-  const handleNewPress = useCallback(
-    (event) => {
-      event.preventDefault()
-      descriptionRef.current?.scrollIntoView({ behavior: 'smooth' })
-    },
-    [descriptionRef],
-  )
-
   return (
     <>
       <div className="root" key="new">
@@ -86,17 +71,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
         <header>
           <h1>Veldu Rafbíl</h1>
 
-          <div className="headerLinks">
-            <LinkPill current onClick={handleNewPress} href="#nyjir">
-              Nýir ↓
-            </LinkPill>
-
-            <Link href="/notadir" passHref>
-              <LinkPill extra="beta">Notaðir →</LinkPill>
-            </Link>
-          </div>
-
-          <p className="description" id="nyjir" ref={descriptionRef}>
+          <p className="description">
             Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og eru
             100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
             <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda en
@@ -146,19 +121,11 @@ const New: NextPage<Props> = ({ initialSorting }) => {
             font-size: 40px;
             font-weight: 600;
             line-height: 1.1;
-            margin-bottom: 0.4em;
           }
-
-          .headerLinks {
-            display: flex;
-            margin-bottom: 10px;
-          }
-
           .description {
             line-height: 1.5;
             font-size: 14px;
-            padding-top: 2em;
-            margin: 0 0 2em 0;
+            margin: 0 0 2.5em 0;
             color: #555;
             max-width: 33em;
           }
@@ -205,9 +172,9 @@ const New: NextPage<Props> = ({ initialSorting }) => {
   )
 }
 
-New.getInitialProps = ({ query }) =>
+Used.getInitialProps = ({ query }) =>
   Promise.resolve({
     initialSorting: query.radaeftir as SortingQuery | undefined,
   })
 
-export default New
+export default Used

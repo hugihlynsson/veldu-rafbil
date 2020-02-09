@@ -1,0 +1,19 @@
+type Size = 'small' | 'medium' | 'large'
+
+const pixelsToSize = {
+  small: 400,
+  medium: 784,
+  large: 1280,
+}
+
+export default (imageUrl: string, size: Size) => {
+  if (!imageUrl.includes('?')) {
+    return `${imageUrl}?w=${pixelsToSize[size]}`
+  }
+
+  if (!imageUrl.includes('&w=')) {
+    return `${imageUrl}?w=${pixelsToSize[size]}`
+  }
+
+  return imageUrl.replace(/&w=[0-9]*/g, `&w=${pixelsToSize[size]}`)
+}
