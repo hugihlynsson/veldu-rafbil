@@ -242,6 +242,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
         margin: 0 0;
         font-weight: 600;
         font-size: 32px;
+        line-height: 1.1;
       }
       .title--model {
         font-weight: 400;
@@ -251,7 +252,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
         font-size: 14px;
         color: #888;
         font-weight: 500;
-        margin: 0 0 20px;
+        margin: 3px 0 20px;
       }
 
       .info {
@@ -281,7 +282,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
       }
 
       p {
-        margin-bottom: 0;
+        margin-bottom: 2px;
         margin-top: 1.5em;
       }
       p strong {
@@ -293,7 +294,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
           box-shadow: 0 2px 32px rgba(0, 0, 0, 0.08);
         }
         .content {
-          padding: 24px;
+          padding: 20px 24px;
         }
       }
     `}</style>

@@ -334,6 +334,8 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
 
             .cars {
               grid-template-columns: 1fr 1fr 1fr;
+              margin-left: 24px;
+              margin-right: 24px;
             }
           }
         `}</style>
