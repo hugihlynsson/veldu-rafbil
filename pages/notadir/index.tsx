@@ -1,8 +1,9 @@
-import React, { useState, useMemo, useRef, useCallback } from 'react'
+import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import Head from 'next/head'
 import fetch from 'isomorphic-unfetch'
+import smoothscroll from 'smoothscroll-polyfill'
 
 import { ProcessedUsedCar, UsedCarModel } from '../../types'
 import Toggles from '../../components/Toggles'
@@ -59,6 +60,8 @@ const Used: NextPage<Props> = ({ cars }) => {
         .reduce(carsToModels, {}),
     [cars],
   )
+
+  useEffect(() => smoothscroll.polyfill(), [])
 
   const modelSorter = (a: Model, b: Model): number => {
     switch (sorting) {

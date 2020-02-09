@@ -2,17 +2,23 @@ import React, { FunctionComponent } from 'react'
 
 interface Props {
   current?: boolean
+  external?: boolean
   href?: string
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
 }
 
-const LinkPill: FunctionComponent<Props> = ({
-  children,
-  current,
-  href,
-  onClick,
-}) => (
-  <a className={current ? 'current' : ''} onClick={onClick} href={href}>
+const LinkPill: FunctionComponent<Props> = React.forwardRef<
+  HTMLAnchorElement,
+  Props
+>(({ children, current, external, href, onClick }, ref) => (
+  <a
+    ref={ref}
+    className={current ? 'current' : ''}
+    onClick={onClick}
+    href={href}
+    target={external ? '_blank' : undefined}
+    rel={external ? 'noopener' : undefined}
+  >
     {children}
 
     <style jsx>{`
@@ -42,6 +48,6 @@ const LinkPill: FunctionComponent<Props> = ({
       }
     `}</style>
   </a>
-)
+))
 
 export default LinkPill

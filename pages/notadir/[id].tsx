@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import Head from 'next/head'
 import Error from 'next/error'
 import fetch from 'isomorphic-unfetch'
+import smoothscroll from 'smoothscroll-polyfill'
 
 import Toggles from '../../components/Toggles'
 import Footer from '../../components/Footer'
@@ -13,6 +14,7 @@ import usedCarModels from '../../apiHelpers/usedCarModels'
 import { ProcessedUsedCar, UsedCarModel } from '../../types'
 import Car from '../../components/UsedCarByModel'
 import estimateWLTP from '../../modules/estimateWLTP'
+import LinkPill from '../../components/LinkPill'
 
 type Sorting = 'price' | 'age' | 'milage'
 
@@ -32,6 +34,20 @@ const getCarMilage = (car: ProcessedUsedCar) =>
 
 const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
   const [sorting, setSorting] = useState<Sorting>('price')
+
+  useEffect(() => {
+    smoothscroll.polyfill()
+  }, [])
+
+  const descriptionRef = useRef<HTMLParagraphElement>(null)
+
+  const handleNewPress = useCallback(
+    (event) => {
+      event.preventDefault()
+      descriptionRef.current?.scrollIntoView({ behavior: 'smooth' })
+    },
+    [descriptionRef],
+  )
 
   if (error || !cars || !model) {
     return <Error statusCode={error ?? 500} />
@@ -69,20 +85,24 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
       <div className="root" key="used">
         <Head>
           <title key="title">
-            {model.make} {model.model} — Veldu Rafbíl
+            Veldu Rafbíl → {model.make} {model.model}
           </title>
         </Head>
 
         <header>
-          <Link href="/notadir">
-            <a className="more-info">← Allir notaðir</a>
-          </Link>
+          <h1>Veldu Rafbíl</h1>
 
-          <h1>
-            <strong>{model.make}</strong> {model.model}
-          </h1>
+          <div className="headerLinks">
+            <Link href="/notadir" passHref>
+              <LinkPill>Notaðir ←</LinkPill>
+            </Link>
 
-          <div className="info">
+            <LinkPill href="#info" current onClick={handleNewPress}>
+              {model.make} {model.model} ↓
+            </LinkPill>
+          </div>
+
+          <div id="info" className="info" ref={descriptionRef}>
             <div className="info-item">
               <div className="info-item-label">0-100 km/klst</div>
               <div className="info-item-value">{model.acceleration}s</div>
@@ -106,14 +126,9 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
           </div>
 
           {model.evDatabaseURL && (
-            <a
-              className="more-info"
-              target="_blank"
-              href={model.evDatabaseURL}
-              rel="noopener"
-            >
+            <LinkPill href={model.evDatabaseURL} external>
               Nánar á ev-database.org ↗
-            </a>
+            </LinkPill>
           )}
 
           <p className="description">
@@ -144,23 +159,28 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
       <style jsx>{`
           .root {
             margin 0 auto;
-            padding: 24px 0;
+            padding: 0;
           }
 
           header {
-            padding: 0 16px;
             display: flex;
             flex-direction: column;
             align-items: stretch;
+            margin 0 auto;
+            max-width: 480px;
+            padding: 16px;
           }
 
           h1 {
             font-size: 40px;
-            font-weight: 400;
-            line-height: 1.1;
-          }
-          h1 strong {
             font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 0.4em;
+          }
+
+          .headerLinks {
+            display: flex;
+            margin-bottom: 10px;
           }
 
           .description {
@@ -188,6 +208,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
           .info {
             display: flex;
+            padding-top: 32px;
             margin-bottom: 16px;
             max-width: 320px;
             justify-content: space-between;
@@ -214,24 +235,6 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             font-size: 24px;
             font-weight: 400;
           }
-          .more-info {
-            display: inline-block;
-            align-self: flex-start;
-            color: inherit;
-            margin-top: 8px;
-            margin-bottom: 24px;
-            font-size: 14px;
-            font-weight: 600;
-            background-color: #EEE;
-            border-radius: 100px;
-            padding: 4px 12px;
-            text-decoration: none;
-            margin-left: -2px;
-            transition: background-color 0.1s;
-          }
-          .more-info:hover {
-            background-color: #8CF;
-          }
 
           .cars {
             display: grid;
@@ -254,6 +257,11 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
           }
 
           @media screen and (min-width: 768px) {
+            header {
+              padding-left: 40px;
+              max-width: 1024px;
+              padding-bottom: 40px; 
+            }
             h1 {
               font-size: 64px;
             }
@@ -266,7 +274,6 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
           @media screen and (min-width: 1194px) {
             header {
-              max-width: none;
               padding-bottom: 40px; 
             }
             

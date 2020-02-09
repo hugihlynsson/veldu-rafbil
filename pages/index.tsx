@@ -40,9 +40,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
     queryToSorting[initialSorting || 'nafni'],
   )
 
-  useEffect(() => {
-    smoothscroll.polyfill()
-  }, [])
+  useEffect(() => smoothscroll.polyfill(), [])
 
   useEffect(() => {
     const query =
