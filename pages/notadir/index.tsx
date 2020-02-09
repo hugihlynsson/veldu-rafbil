@@ -2,6 +2,7 @@ import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import Head from 'next/head'
+import Router, { useRouter } from 'next/router'
 import fetch from 'isomorphic-unfetch'
 import smoothscroll from 'smoothscroll-polyfill'
 
@@ -45,12 +46,42 @@ const carsToModels = (models: Models, car: ProcessedUsedCar): Models => ({
     : [car],
 })
 
-interface Props {
-  cars: Array<ProcessedUsedCar>
+type SortingQuery = 'nafni' | 'verdi' | 'draegni' | 'hrodun' | 'virdi' | 'aldri'
+
+const sortingToQuery: { [key in Sorting]: SortingQuery } = {
+  name: 'nafni',
+  price: 'verdi',
+  range: 'draegni',
+  acceleration: 'hrodun',
+  value: 'virdi',
+  age: 'aldri',
 }
 
-const Used: NextPage<Props> = ({ cars }) => {
-  const [sorting, setSorting] = useState<Sorting>('name')
+const queryToSorting: { [key in SortingQuery]: Sorting } = {
+  nafni: 'name',
+  verdi: 'price',
+  draegni: 'range',
+  hrodun: 'acceleration',
+  virdi: 'value',
+  aldri: 'age',
+}
+
+interface Props {
+  cars: Array<ProcessedUsedCar>
+  initialSorting: SortingQuery | undefined
+}
+
+const Used: NextPage<Props> = ({ cars, initialSorting }) => {
+  const { pathname } = useRouter()
+  const [sorting, setSorting] = useState<Sorting>(
+    queryToSorting[initialSorting || 'nafni'],
+  )
+
+  useEffect(() => {
+    const query =
+      sorting === 'name' ? {} : { radaeftir: sortingToQuery[sorting] }
+    Router.replace({ pathname, query })
+  }, [sorting])
 
   const models = useMemo(
     () =>
@@ -310,7 +341,7 @@ const Used: NextPage<Props> = ({ cars }) => {
   )
 }
 
-Used.getInitialProps = async ({ req }): Promise<Props> => {
+Used.getInitialProps = async ({ req, query }): Promise<Props> => {
   try {
     const baseUrl =
       req && req.headers
@@ -323,10 +354,16 @@ Used.getInitialProps = async ({ req }): Promise<Props> => {
     if (json.error) {
       throw json.error
     }
-    return { cars: json.cars as Array<ProcessedUsedCar> }
+    return {
+      cars: json.cars as Array<ProcessedUsedCar>,
+      initialSorting: query.radaeftir as SortingQuery | undefined,
+    }
   } catch (error) {
     console.log('Failed to fetch cars', error)
-    return { cars: [] }
+    return {
+      cars: [],
+      initialSorting: query.radaeftir as SortingQuery | undefined,
+    }
   }
 }
 
