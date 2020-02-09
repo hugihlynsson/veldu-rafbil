@@ -102,7 +102,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
                   <img
                     src={selectCarImageSize(
                       src,
-                      images.length === 1 ? 'medium' : 'small',
+                      getImagesToShow(images.length) === 1 ? 'medium' : 'small',
                     )}
                     alt=""
                   />

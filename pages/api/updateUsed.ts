@@ -2,8 +2,11 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import firebaseAdmin from 'firebase-admin'
 import atob from 'atob'
 
-import { Snapshot, ProcessedUsedCar } from '../../types'
+import { UsedCar, Snapshot } from '../../types'
+import scrapeUsedCars from '../../apiHelpers/scrapeUsedCars'
+import filterUsedCars from '../../apiHelpers/filterUsedCars'
 import fetchLastSnapshot from '../../apiHelpers/fetchLastSnapshot'
+import transferKnownData from '../../apiHelpers/transferKnownData'
 
 const {
   FIREBASE_PROJECT_ID,
@@ -31,28 +34,16 @@ if (!firebaseAdmin.apps.length) {
   console.warn('Firebase admin app already initialized, skipping…')
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (_: NextApiRequest, res: NextApiResponse) => {
   const database = firebaseAdmin.database()
-  const baseUrl = `${req.headers['x-forwarded-proto'] || 'https'}://${req
-    .headers['x-forwarded-host'] || req.headers.host}`
-
+  let lastSnapshot: Snapshot | undefined
   try {
-    const lastSnapshot: Snapshot | undefined = await fetchLastSnapshot(database)
+    lastSnapshot = await fetchLastSnapshot(database)
     if (lastSnapshot) {
-      const isFromLast24Hours =
-        new Date().getTime() - lastSnapshot.timestamp < 60 * 60 * 1000 * 24
-      if (isFromLast24Hours) {
-        const isFromLastHour =
-          new Date().getTime() - lastSnapshot.timestamp < 60 * 60 * 1000
-        if (!isFromLastHour) {
-          // Update but immediately return the slightly older data
-          console.log(
-            'Data older than an your but younger than 24. Returning stale but updating',
-          )
-          fetch(`${baseUrl}/api/updateUsed`)
-        }
+      const isFromLastHour =
+        new Date().getTime() - lastSnapshot.timestamp < 60 * 60 * 1000
+      if (isFromLastHour) {
         console.log('Returning snapshot from', lastSnapshot.date)
-        res.setHeader('Cache-Control', 's-maxage=3600')
         res.json({ cars: lastSnapshot.cars })
         return
       }
@@ -66,19 +57,36 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
+  console.log('Starting new scrape')
+  let cars: Array<UsedCar> = []
   try {
-    console.log('Requesting updated cars')
-    const response = await fetch(`${baseUrl}/api/updateUsed`)
-    if (response.status !== 200) {
-      throw new Error(await response.json())
-    }
-    const usedJson: { cars: Array<ProcessedUsedCar> } = await response.json()
-    console.log('Update successful. Returning cars')
-    res.setHeader('Cache-Control', 's-maxage=3600')
-    res.json(usedJson)
+    cars = await scrapeUsedCars()
   } catch (error) {
-    console.log('Failed to update cars', error)
-    res.status(500).json({ error: 'Failed to update cars' })
+    console.log('Failed to scrape cars', error)
+    res.status(500).json({ error: 'Failed to fetch cars' })
     return
   }
+
+  console.log('Scrape successful. Transferring known data from last snapshot…')
+  const filteredCars = filterUsedCars(cars)
+  const processedCars = transferKnownData(lastSnapshot, filteredCars)
+
+  console.log(
+    'Storing scrape',
+    new Date(),
+    JSON.parse(JSON.stringify(processedCars))[0],
+  )
+  const now = new Date()
+  database
+    .ref(`snapshots/${now.getTime()}`)
+    .set({
+      timestamp: now.getTime(),
+      cars: JSON.parse(JSON.stringify(processedCars)), // Trim undefined values
+      date: now.toISOString(),
+    })
+    .catch((error) =>
+      console.log('Failed to add new snapshot to Firebase', error),
+    )
+
+  res.json({ cars: processedCars })
 }
