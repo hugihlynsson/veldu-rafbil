@@ -7,23 +7,42 @@ import addDecimalSeprators from '../modules/addDecimalSeparators'
 import selectCarImageSize from '../modules/selectCarImageSize'
 import { isNumber } from 'util'
 
-const getImageSize = (total: number): CSSProperties => {
+type ImageDisplay = 0 | 1 | 4 | 6 | 8 | 9
+
+const getImagesToShow = (total: number): ImageDisplay => {
   switch (total) {
+    case 0:
+      return 0
+    case 1:
+    case 2:
+    case 3:
+      return 1
+    case 4:
+    case 5:
+      return 4
+    case 6:
+    case 7:
+      return 6
+    case 8:
+      return 8
+    default:
+      return 9
+  }
+}
+
+const getImageSize = (total: number): CSSProperties => {
+  switch (getImagesToShow(total)) {
     case 0:
       return {}
     case 1:
-    case 3:
-    case 2:
       return { width: '100%', height: '100%' }
     case 4:
-    case 5:
       return { width: '50%', height: '50%' }
     case 6:
-    case 7:
       return { width: '33.33333%', height: '50%' }
     case 8:
       return { width: '25%', height: '50%' }
-    default:
+    case 9:
       return { width: '33.3333%', height: '33.3333%' }
   }
 }
@@ -49,26 +68,8 @@ const getRange = (years: Array<number>): string => {
   return `${lowest} - ${highest}`
 }
 
-const getExtraCount = (n: number): number => {
-  if (n > 9) {
-    return n - 8
-  }
-
-  switch (n) {
-    case 2:
-      return 2
-    case 3:
-      return 3
-    case 5:
-      return 2
-    case 6:
-      return 0
-    case 7:
-      return 2
-    default:
-      return 0
-  }
-}
+const getExtraCount = (total: number, images: number): number =>
+  total - getImagesToShow(images)
 
 export interface Props {
   count: number
@@ -91,7 +92,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
         <div className="images">
           <div className="imagesContainer">
             {images
-              .filter((_, n) => n < 9)
+              .filter((_, n) => n < getImagesToShow(images.length))
               .map((src) => (
                 <div
                   key={src}
@@ -107,10 +108,23 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
                   />
                 </div>
               ))}
-            {getExtraCount(images.length) + count - images.length > 0 && (
-              <div className="imagesMore" style={getImageSize(images.length)}>
+            {getExtraCount(count, images.length) > 0 && (
+              <div
+                className="imagesMore"
+                style={
+                  getImagesToShow(images.length) === 1
+                    ? {
+                        bottom: '16px',
+                        right: '20px',
+                        borderRadius: '32px',
+                        padding: '7px 16px 8px 14px',
+                      }
+                    : getImageSize(images.length)
+                }
+              >
                 <span>
-                  +{getExtraCount(images.length) + count - images.length}
+                  +{getExtraCount(count, images.length)}{' '}
+                  {getExtraCount(count, images.length) === 1 ? 'bíll' : 'bílar'}
                 </span>
               </div>
             )}
@@ -208,13 +222,14 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
         position: absolute;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
+        background: black;
         display: flex;
         align-items: center;
         justify-content: center;
+        opacity: 0.6;
       }
       .imagesMore span {
-        color: rgba(255, 255, 255, 0.8);
+        color: white;
         font-weight: 600;
         font-size: 20px;
       }
