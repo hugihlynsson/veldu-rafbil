@@ -94,7 +94,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
           <div className="headerLinks">
             <Link href="/notadir" passHref>
-              <LinkPill>Notaðir ←</LinkPill>
+              <LinkPill extra="beta">Notaðir ←</LinkPill>
             </Link>
 
             <LinkPill href="#info" current onClick={handleNewPress}>
@@ -132,7 +132,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
           )}
 
           <p className="description">
-            <strong>{filtered.length}</strong> notaðir til sölu
+            <strong>{filtered.length}</strong> notaðir til sölu:
           </p>
 
           <div className="sorting-title">Raða eftir:</div>

@@ -114,7 +114,7 @@ const Used: NextPage<Props> = ({ cars }) => {
     <>
       <div className="root" key="used">
         <Head>
-          <title key="title">Veldu Rafbíl → Notaðir</title>
+          <title key="title">Veldu Rafbíl → Notaðir (beta)</title>
         </Head>
 
         <header>
@@ -125,7 +125,12 @@ const Used: NextPage<Props> = ({ cars }) => {
               <LinkPill>Nýir ←</LinkPill>
             </Link>
 
-            <LinkPill href="#notadir" current onClick={handleNewPress}>
+            <LinkPill
+              href="#notadir"
+              extra="beta"
+              current
+              onClick={handleNewPress}
+            >
               Notaðir ↓
             </LinkPill>
           </div>

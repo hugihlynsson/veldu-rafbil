@@ -3,6 +3,7 @@ import React, { FunctionComponent } from 'react'
 interface Props {
   current?: boolean
   external?: boolean
+  extra?: string
   href?: string
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
 }
@@ -10,7 +11,7 @@ interface Props {
 const LinkPill: FunctionComponent<Props> = React.forwardRef<
   HTMLAnchorElement,
   Props
->(({ children, current, external, href, onClick }, ref) => (
+>(({ children, current, external, extra, href, onClick }, ref) => (
   <a
     ref={ref}
     className={current ? 'current' : ''}
@@ -19,8 +20,7 @@ const LinkPill: FunctionComponent<Props> = React.forwardRef<
     target={external ? '_blank' : undefined}
     rel={external ? 'noopener' : undefined}
   >
-    {children}
-
+    {children} {extra && <span className="extra">{extra}</span>}
     <style jsx>{`
       a {
         display: inline-block;
@@ -34,9 +34,8 @@ const LinkPill: FunctionComponent<Props> = React.forwardRef<
         padding: 4px 12px;
         text-decoration: none;
         margin-left: -2px;
-        transition: background-color 0.1s;
         margin-right: 10px;
-        transition: background-color: 0.2s;
+        transition: background-color 0.1s;
       }
       a:hover {
         background-color: #dadcec;
@@ -45,6 +44,27 @@ const LinkPill: FunctionComponent<Props> = React.forwardRef<
       .current:hover {
         background-color: #48f;
         color: #fff;
+      }
+      .extra {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 10px;
+        background: white;
+        color: #444;
+        border-radius: 16px;
+        padding: 1px 6px 2px;
+        margin: 1px -6px -4px 1px;
+        vertical-align: top;
+        display: inline-block;
+        transition: background-color 0.1s;
+      }
+      a:hover .extra {
+        background: rgba(255, 255, 255, 0.8);
+      }
+      .current:hover .extra,
+      .current .extra {
+        color: #27f;
+        background: rgba(255, 255, 255, 0.9);
       }
     `}</style>
   </a>

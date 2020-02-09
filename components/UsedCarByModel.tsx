@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react'
 
+import LinkPill from './LinkPill'
 import { ProcessedUsedCar } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import selectCarImageSize from '../modules/selectCarImageSize'
@@ -12,16 +13,18 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
   <article>
     <div className="imageBox">
       <div className="imageSizer" />
-      {car.image && <img alt="" src={selectCarImageSize(car.image, 'medium')} />}
+      {car.image && (
+        <img alt="" src={selectCarImageSize(car.image, 'medium')} />
+      )}
     </div>
 
     <div className="content">
-      <a className="price" target="_blank" rel="noopener" href={car.link}>
+      <LinkPill href={car.link} external>
         {car.price
           ? `${addDecimalSeprators(car.price)} kr.`
           : 'Ekkert skráð verð'}{' '}
         ↗
-      </a>
+      </LinkPill>
 
       <div className="info">
         <div className="info-item">
@@ -67,27 +70,10 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
           max-width: 480px;
         }
 
-        .price {
-          display: inline-block;
-          color: inherit;
-          margin-top: 8px;
-          margin-bottom: 24px;
-          font-size: 14px;
-          font-weight: 600;
-          background-color: #EEE;
-          border-radius: 100px;
-          padding: 4px 12px;
-          text-decoration: none;
-          margin-left: -2px;
-          transition: background-color 0.1s;
-        }
-        .price:hover {
-          background-color: #8CF;
-        }
-
         .info {
           display: flex;
           margin-bottom: 16px;
+          margin-top: 16px;
           max-width: 320px;
           justify-content: space-between;
         }
