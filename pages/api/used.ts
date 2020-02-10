@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import firebaseAdmin from 'firebase-admin'
 import atob from 'atob'
+import fetch from 'node-fetch'
 
 import { Snapshot, ProcessedUsedCar } from '../../types'
 import fetchLastSnapshot from '../../apiHelpers/fetchLastSnapshot'
