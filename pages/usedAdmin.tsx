@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react'
+import React, { useState, useCallback } from 'react'
 import { NextPage } from 'next'
 import fetch from 'isomorphic-unfetch'
 import Head from 'next/head'
@@ -6,7 +6,7 @@ import Head from 'next/head'
 import usedCarModels from '../apiHelpers/usedCarModels'
 import Footer from '../components/Footer'
 import { ProcessedUsedCar } from '../types'
-import Car from '../components/UsedCar'
+import UsedAdminCar from '../components/UsedAdminCar'
 
 interface Props {
   cars: Array<ProcessedUsedCar>
@@ -15,7 +15,72 @@ interface Props {
 const Used: NextPage<Props> = ({ cars }) => {
   const [usedCars, setUsedCars] = useState<Array<ProcessedUsedCar>>(cars)
 
-  useEffect(() => setUsedCars(cars), [cars])
+  const setCar = useCallback(
+    (index: number, updatedCar: ProcessedUsedCar): void =>
+      setUsedCars(
+        usedCars.map((usedCar, usedCarIndex) =>
+          index === usedCarIndex ? updatedCar : usedCar,
+        ),
+      ),
+    [setUsedCars],
+  )
+
+  const handleMetadataChange = async (
+    carListIndex: number,
+    car: ProcessedUsedCar,
+    usedModelId: string,
+  ) => {
+    const selectedMetadata = usedCarModels.find(
+      (model) => model.id === usedModelId,
+    )
+
+    const originalMetadata = car.metadata
+
+    // Optimistic update
+    setCar(carListIndex, { ...car, metadata: selectedMetadata })
+
+    try {
+      await fetch('/api/updateUsedMetadata', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          carIndex: carListIndex,
+          metadata: selectedMetadata,
+        }),
+      })
+    } catch (error) {
+      // Revert to old metadata
+      setCar(carListIndex, { ...car, metadata: originalMetadata })
+      console.log('Failed to update metadata', error)
+      alert('Failed to update car metadata')
+    }
+  }
+
+  const handleFilteredChange = async (
+    selectedCarIndex: number,
+    car: ProcessedUsedCar,
+    filtered: boolean,
+  ) => {
+    // Optimistic update
+    setCar(selectedCarIndex, { ...car, filtered })
+
+    try {
+      await fetch('/api/updateUsedFiltered', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ carIndex: selectedCarIndex, filtered }),
+      })
+    } catch (error) {
+      // Revert to old filtered
+      setCar(selectedCarIndex, { ...car, filtered: !filtered })
+      console.log('Failed to update filter status', error)
+      alert('Failed to update car filter status')
+    }
+  }
+
+  const unTagged = usedCars
+    .map((car, index) => ({ car, index }))
+    .filter(({ car }) => !car.metadata)
 
   return (
     <>
@@ -26,107 +91,42 @@ const Used: NextPage<Props> = ({ cars }) => {
 
         <h1>Stjórnborð notaðra rafbíla</h1>
 
+        <h2>
+          Ómerktir <span>{unTagged.length}</span>
+        </h2>
+
         <div className="cars">
-          {usedCars.map((car, index) => {
-            const handleMetadataChange = async (
-              event: ChangeEvent<HTMLSelectElement>,
-            ) => {
-              const metadata = usedCarModels.find(
-                (model) => model.id === event.target.value,
-              )
-              console.log('Selected', event.target.value, metadata)
-
-              const originalMetadata = car.metadata
-
-              // Optimistic update
-              setUsedCars(
-                usedCars.map((usedCar, usedCarIndex) =>
-                  index === usedCarIndex ? { ...usedCar, metadata } : usedCar,
-                ),
-              )
-
-              try {
-                await fetch('/api/updateUsedMetadata', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ carIndex: index, metadata: metadata }),
-                })
-              } catch (error) {
-                // Revert to old metadata
-                setUsedCars(
-                  usedCars.map((usedCar, usedCarIndex) =>
-                    index === usedCarIndex
-                      ? { ...usedCar, originalMetadata }
-                      : usedCar,
-                  ),
-                )
-                console.log('Failed to update metadata', error)
-                alert('Failed to update car metadata')
+          {unTagged.map(({ car, index }) => (
+            <UsedAdminCar
+              key={car.link}
+              car={car}
+              onFilteredChange={(filtered: boolean) =>
+                handleFilteredChange(index, car, filtered)
               }
-            }
-
-            const handleFilteredChange = async (
-              event: ChangeEvent<HTMLInputElement>,
-            ) => {
-              const filtered = event.target.checked
-              console.log('filtered', filtered)
-
-              // Optimistic update
-              setUsedCars(
-                usedCars.map((usedCar, usedCarIndex) =>
-                  index === usedCarIndex ? { ...usedCar, filtered } : usedCar,
-                ),
-              )
-
-              try {
-                await fetch('/api/updateUsedFiltered', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ carIndex: index, filtered }),
-                })
-              } catch (error) {
-                // Revert to old filtered
-                setUsedCars(
-                  usedCars.map((usedCar, usedCarIndex) =>
-                    index === usedCarIndex
-                      ? { ...usedCar, filtered: !filtered }
-                      : usedCar,
-                  ),
-                )
-                console.log('Failed to update filter status', error)
-                alert('Failed to update car filter status')
+              onMetadataChange={(usedCarId) =>
+                handleMetadataChange(index, car, usedCarId)
               }
-            }
+            />
+          ))}
+        </div>
 
-            return (
-              <div key={car.link}>
-                <Car car={car} />
+        <h2>
+          Allir <span>{usedCars.length}</span>
+        </h2>
 
-                <div className="car-settings">
-                  <select
-                    value={car.metadata?.id}
-                    onChange={handleMetadataChange}
-                  >
-                    <option value={undefined}>Ekki valið</option>
-
-                    {usedCarModels.map((carOption) => (
-                      <option value={carOption.id} key={carOption.id}>
-                        {carOption.make} {carOption.model}: {carOption.id}
-                      </option>
-                    ))}
-                  </select>
-
-                  <input
-                    id={`filtered-${car.link}`}
-                    type="checkbox"
-                    checked={car.filtered}
-                    onChange={handleFilteredChange}
-                  />
-                  <label htmlFor={`filtered-${car.link}`}>Filtered</label>
-                </div>
-              </div>
-            )
-          })}
+        <div className="cars">
+          {usedCars.map((car, index) => (
+            <UsedAdminCar
+              key={car.link}
+              car={car}
+              onFilteredChange={(filtered: boolean) =>
+                handleFilteredChange(index, car, filtered)
+              }
+              onMetadataChange={(usedCarId) =>
+                handleMetadataChange(index, car, usedCarId)
+              }
+            />
+          ))}
         </div>
       </div>
 
@@ -147,15 +147,20 @@ const Used: NextPage<Props> = ({ cars }) => {
             font-weight: 600;
           }
 
+          h2 {
+            font-size: 32px;
+            font-weight: 600;
+          }
+
+          h2 span {
+            font-weight: 400;
+          }
+
           .cars {
             display: grid;
             grid-gap: 32px;
             grid-template-columns: 100%;
             margin-top: 32px;
-          }
-
-          .car-settings {
-            margin-top: 8px;
           }
 
           @media screen and (min-width: 767px) {
