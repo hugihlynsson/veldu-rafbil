@@ -367,6 +367,24 @@ const usedCarModels: Array<UsedCarModel> = [
     rangeNEDC: 225,
     evDatabaseURL: 'https://ev-database.org/car/1010/Ford-Focus-Electric',
   },
+  {
+    id: 'jaguar-i-pace',
+    make: 'Jaguar',
+    model: 'I-PACE',
+    acceleration: 4.8,
+    capacity: 90,
+    range: 470,
+    evDatabaseURL: 'https://ev-database.org/car/1097/Jaguar-I-Pace',
+  },
+  {
+    id: 'mercedes-eqc',
+    make: 'Mercedes-Benz',
+    model: 'EQC',
+    acceleration: 5.1,
+    capacity: 80,
+    range: 417,
+    evDatabaseURL: 'https://ev-database.org/car/1135/Mercedes-EQC-400-4MATIC',
+  },
 ]
 
 export default usedCarModels
