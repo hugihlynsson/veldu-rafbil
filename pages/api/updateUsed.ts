@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import firebaseAdmin from 'firebase-admin'
 import atob from 'atob'
+import fetch from 'isomorphic-unfetch'
 
 import { UsedCar, Snapshot } from '../../types'
 import scrapeUsedCars from '../../apiHelpers/scrapeUsedCars'
@@ -89,4 +90,35 @@ export default async (_: NextApiRequest, res: NextApiResponse) => {
     )
 
   res.json({ cars: processedCars })
+
+  try {
+    const tokenSnapshot = await database.ref('adminPushToken').once('value')
+
+    if (tokenSnapshot.val && Boolean(lastSnapshot)) {
+      const justAddedCars = filteredCars.filter(
+        (car) =>
+          !lastSnapshot!.cars.find(
+            (storedCar) => car.serialNumber === storedCar.serialNumber,
+          ),
+      )
+
+      if (justAddedCars.length) {
+        const notifications = justAddedCars.map((car) => ({
+          to: tokenSnapshot.val,
+          title: 'New used car found',
+          body: `${car.make} ${car.model} — ${car.modelExtra ?? ''}`,
+        }))
+
+        await fetch('https://exp.host/--/api/v2/push/send', {
+          method: 'POST',
+          body: JSON.stringify(notifications),
+          headers: { 'Content-Type': 'application/json' },
+        })
+
+        console.log('Sent notifications', notifications)
+      }
+    }
+  } catch (error) {
+    console.log('Failed to send notification for new cars', error)
+  }
 }
