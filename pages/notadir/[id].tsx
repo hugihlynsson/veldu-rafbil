@@ -85,7 +85,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
       <div className="root" key="used">
         <Head>
           <title key="title">
-            Veldu Rafbíl → {model.make} {model.model}
+            Veldu Rafbíl → Notaðir → {model.make} {model.model}
           </title>
         </Head>
 
@@ -197,6 +197,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             font-size: 24px;
             margin: 1.8em 0 0.5em 0;
             color: #000;
+            font-weight: 500;
             max-width: 33em;
           }
 
@@ -253,16 +254,23 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             .info-item {
               margin-right: 16px;
             }
+
+            .cars {
+              margin: 24px;
+            }
           }
 
           @media screen and (min-width: 768px) {
             header {
               padding-left: 40px;
               max-width: 1024px;
-              padding-bottom: 16px; 
             }
             h1 {
               font-size: 64px;
+            }
+
+            h1 {
+              font-size: 40px;
             }
 
             .cars {
@@ -273,10 +281,6 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
           }
 
           @media screen and (min-width: 1194px) {
-            header {
-              padding-bottom: 24px; 
-            }
-            
             .root {
               margin 0 auto;
               max-width: 1280px;

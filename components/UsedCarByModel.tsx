@@ -22,13 +22,11 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
       <div className="price">
         {car.price
           ? `${addDecimalSeprators(car.price)} kr.`
-          : 'Ekkert skráð verð'}{' '}
+          : 'Ekkert skráð verð'}
       </div>
 
       <div className="description">{car.modelExtra || '—'}</div>
     </div>
-
-    <div className="exitArrow">↗</div>
 
     <style jsx>{`
       a {
@@ -75,7 +73,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
         color: #fff;
         font-size: 14px;
         font-weight: 600;
-        opacity: 0.7;
+        opacity: 0.8;
       }
 
       .price {
@@ -83,25 +81,14 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
         font-size: 24px;
         margin-top: 2px;
         margin-bottom: 2px;
-        opacity: 0.9;
         font-weight: 500;
       }
 
       .description {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
         color: #fff;
-        opacity: 0.7;
-      }
-
-      .exitArrow {
-        position: absolute;
-        top: 16px;
-        right: 24px;
-        color: #fff;
-        font-size: 40px;
-        font-weight: 300;
-        opacity: 0.9;
+        opacity: 0.8;
       }
     `}</style>
   </a>
