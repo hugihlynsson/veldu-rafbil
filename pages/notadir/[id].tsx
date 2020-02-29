@@ -102,6 +102,10 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             </LinkPill>
           </div>
 
+          <h2>
+            {model.make} {model.model}
+          </h2>
+
           <div id="info" className="info" ref={descriptionRef}>
             <div className="info-item">
               <div className="info-item-label">0-100 km/klst</div>
@@ -131,9 +135,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             </LinkPill>
           )}
 
-          <p className="description">
-            <strong>{filtered.length}</strong> notaðir til sölu:
-          </p>
+          <p className="description">{filtered.length} notaðir til sölu</p>
 
           <div className="sorting-title">Raða eftir:</div>
           <Toggles<Sorting>
@@ -168,7 +170,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             align-items: stretch;
             margin 0 auto;
             max-width: 480px;
-            padding: 16px;
+            padding: 16px 16px 0;
           }
 
           h1 {
@@ -180,24 +182,22 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
           .headerLinks {
             display: flex;
-            margin-bottom: 10px;
+            margin-bottom: 24px;
+          }
+
+          h2 {
+            font-size: 36px;
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: 24px;
           }
 
           .description {
             line-height: 1.5;
             font-size: 24px;
-            margin: 1em 0 1em 0;
-            color: #555;
+            margin: 1.8em 0 0.5em 0;
+            color: #000;
             max-width: 33em;
-          }
-          .description a,
-          .description strong {
-            text-decoration: none;
-            font-weight: 500;
-            color: black;
-          }
-          .description a:hover {
-            text-decoration: underline;
           }
 
           .sorting-title {
@@ -208,7 +208,6 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
           .info {
             display: flex;
-            padding-top: 32px;
             margin-bottom: 16px;
             max-width: 320px;
             justify-content: space-between;
@@ -245,7 +244,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
           @media screen and (min-width: 375px) {
             header {
-              padding: 24px;
+              padding: 24px 24px 0;
             }
             h1 {
               font-size: 48px;
@@ -260,7 +259,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             header {
               padding-left: 40px;
               max-width: 1024px;
-              padding-bottom: 40px; 
+              padding-bottom: 16px; 
             }
             h1 {
               font-size: 64px;
@@ -274,7 +273,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
           @media screen and (min-width: 1194px) {
             header {
-              padding-bottom: 40px; 
+              padding-bottom: 24px; 
             }
             
             .root {
