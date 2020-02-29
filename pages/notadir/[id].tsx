@@ -237,9 +237,9 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
           .cars {
             display: grid;
-            grid-gap: 32px;
+            grid-gap: 24px;
             grid-template-columns: 1fr;
-            margin-top: 32px;
+            margin: 16px;
           }
 
           @media screen and (min-width: 375px) {
@@ -267,7 +267,8 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
             .cars {
               grid-template-columns: 1fr 1fr;
-              margin: 24px;
+              grid-gap: 32px;
+              margin: 32px;
             }
           }
 

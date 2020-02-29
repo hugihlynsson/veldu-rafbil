@@ -41,11 +41,12 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
         margin: 0 auto;
         border-radius: 16px;
         color: inherit;
-        transition: transform 0.2s;
+        transition: transform 0.2s, box-shadow 0.2s;
       }
 
       a:hover {
-        transform: scale(1.04);
+        transform: scale(1.03);
+        box-shadow: 0 8px 48px rgba(0, 0, 0, 0.2);
       }
 
       .sizer {
