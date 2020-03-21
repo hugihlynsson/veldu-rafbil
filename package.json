@@ -8,12 +8,12 @@
     "atob": "^2.1.2",
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
-    "firebase-admin": "^8.9.2",
+    "firebase-admin": "^8.10.0",
     "isomorphic-unfetch": "^3.0.0",
-    "next": "^9.3.0",
+    "next": "^9.3.1",
     "node-fetch": "^2.6.0",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-lazy-load": "^3.0.13",
     "smoothscroll-polyfill": "^0.4.4",
     "typescript": "^3.8.3"
@@ -23,10 +23,10 @@
   },
   "devDependencies": {
     "@types/atob": "^2.1.2",
-    "@types/cheerio": "^0.22.16",
-    "@types/node": "^13.9.0",
+    "@types/cheerio": "^0.22.17",
+    "@types/node": "^13.9.2",
     "@types/node-fetch": "^2.5.5",
-    "@types/react": "^16.9.23",
+    "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.4",
     "prettier": "^1.19.1"
   }
