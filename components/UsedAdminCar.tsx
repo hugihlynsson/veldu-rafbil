@@ -34,23 +34,23 @@ const UsedAdminCar: FunctionComponent<Props> = ({
       >
         <option value={undefined}>Ekki valið</option>
 
-        {Object.entries(usedCarModels.reduce(groupBy('make'), {})).map(
-          ([make, models]) => (
-            <optgroup label={make}>
+        {Object.entries(usedCarModels.reduce(groupBy('make'), {}))
+          .sort() // Fix server-client mismatch
+          .map(([make, models]) => (
+            <optgroup label={make} key={make}>
               {(models as Array<UsedCarModel>).map((carOption) => (
                 <option value={carOption.id} key={carOption.id}>
                   {carOption.model}: {carOption.id}
                 </option>
               ))}
             </optgroup>
-          ),
-        )}
+          ))}
       </select>
 
       <input
         id={`filtered-${car.link}`}
         type="checkbox"
-        checked={car.filtered}
+        checked={Boolean(car.filtered)}
         onChange={({ target }) => onFilteredChange(target.checked)}
       />
       <label htmlFor={`filtered-${car.link}`}>Filtered</label>
@@ -59,6 +59,9 @@ const UsedAdminCar: FunctionComponent<Props> = ({
     <style jsx>{`
       .car-settings {
         margin-top: 8px;
+      }
+      select {
+        display: block;
       }
     `}</style>
   </div>

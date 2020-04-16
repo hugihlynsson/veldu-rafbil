@@ -2,6 +2,15 @@ import { UsedCarModel } from '../types'
 
 const usedCarModels: Array<UsedCarModel> = [
   {
+    id: 'audi-etron-50',
+    make: 'Audi',
+    model: 'e-tron 50',
+    acceleration: 7,
+    capacity: 71,
+    range: 328,
+    evDatabaseURL: 'https://ev-database.org/car/1209/Audi-e-tron-50-quattro',
+  },
+  {
     id: 'audi-etron-55',
     make: 'Audi',
     model: 'e-tron 55',
@@ -120,6 +129,24 @@ const usedCarModels: Array<UsedCarModel> = [
     capacity: 33,
     rangeNEDC: 250,
     evDatabaseURL: 'https://ev-database.org/car/1122/Kia-Soul-EV',
+  },
+  {
+    id: 'kia-e-niro-39',
+    make: 'Kia',
+    model: 'e-Niro',
+    acceleration: 9.8,
+    capacity: 39,
+    range: 289,
+    evDatabaseURL: 'https://ev-database.org/car/1137/Kia-e-Niro-39-kWh',
+  },
+  {
+    id: 'kia-e-niro-64',
+    make: 'Kia',
+    model: 'e-Niro',
+    acceleration: 7.8,
+    capacity: 64,
+    range: 455,
+    evDatabaseURL: 'https://ev-database.org/car/1125/Kia-e-Niro-64-kWh',
   },
   {
     id: 'renault-zoe-ze20',

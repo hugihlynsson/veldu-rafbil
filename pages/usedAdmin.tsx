@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import { NextPage } from 'next'
 import fetch from 'isomorphic-unfetch'
 import Head from 'next/head'
@@ -15,15 +15,12 @@ interface Props {
 const Used: NextPage<Props> = ({ cars }) => {
   const [usedCars, setUsedCars] = useState<Array<ProcessedUsedCar>>(cars)
 
-  const setCar = useCallback(
-    (index: number, updatedCar: ProcessedUsedCar): void =>
-      setUsedCars(
-        usedCars.map((usedCar, usedCarIndex) =>
-          index === usedCarIndex ? updatedCar : usedCar,
-        ),
+  const setCar = (index: number, updatedCar: ProcessedUsedCar): void =>
+    setUsedCars(
+      usedCars.map((usedCar, usedCarIndex) =>
+        index === usedCarIndex ? updatedCar : usedCar,
       ),
-    [setUsedCars],
-  )
+    )
 
   const handleMetadataChange = async (
     carListIndex: number,
