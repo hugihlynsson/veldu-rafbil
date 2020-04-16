@@ -62,6 +62,12 @@ const UsedAdminCar: FunctionComponent<Props> = ({
       }
       select {
         display: block;
+        max-width: 100%;
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+      input {
+        margin-right: 8px;
       }
     `}</style>
   </div>
