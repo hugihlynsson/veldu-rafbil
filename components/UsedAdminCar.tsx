@@ -1,8 +1,17 @@
 import React, { FunctionComponent } from 'react'
 
 import Car from './UsedCar'
-import { ProcessedUsedCar } from '../types'
+import { ProcessedUsedCar, UsedCarModel } from '../types'
 import usedCarModels from '../apiHelpers/usedCarModels'
+
+const groupBy = (key: string) => (grouped: any, groupable: any) => {
+  const value = groupable[key]
+  const group = grouped[value]
+  return {
+    ...grouped,
+    [value]: group ? [...group, groupable] : [groupable],
+  }
+}
 
 interface Props {
   car: ProcessedUsedCar
@@ -25,11 +34,17 @@ const UsedAdminCar: FunctionComponent<Props> = ({
       >
         <option value={undefined}>Ekki valið</option>
 
-        {usedCarModels.map((carOption) => (
-          <option value={carOption.id} key={carOption.id}>
-            {carOption.make} {carOption.model}: {carOption.id}
-          </option>
-        ))}
+        {Object.entries(usedCarModels.reduce(groupBy('make'), {})).map(
+          ([make, models]) => (
+            <optgroup label={make}>
+              {(models as Array<UsedCarModel>).map((carOption) => (
+                <option value={carOption.id} key={carOption.id}>
+                  {carOption.model}: {carOption.id}
+                </option>
+              ))}
+            </optgroup>
+          ),
+        )}
       </select>
 
       <input
