@@ -104,7 +104,7 @@ export default async (_: NextApiRequest, res: NextApiResponse) => {
 
       if (justAddedCars.length) {
         const notifications = justAddedCars.map((car) => ({
-          to: tokenSnapshot.val,
+          to: tokenSnapshot.val(),
           title: 'New used car found',
           body: `${car.make} ${car.model} — ${car.modelExtra ?? ''}`,
         }))
