@@ -158,7 +158,6 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
 
             <LinkPill
               href="#notadir"
-              extra="beta"
               current
               onClick={handleNewPress}
             >

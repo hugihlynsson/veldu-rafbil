@@ -92,7 +92,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
             </LinkPill>
 
             <Link href="/notadir" passHref>
-              <LinkPill extra="beta">Notaðir →</LinkPill>
+              <LinkPill>Notaðir →</LinkPill>
             </Link>
           </div>
 

@@ -94,7 +94,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
           <div className="headerLinks">
             <Link href="/notadir" passHref>
-              <LinkPill extra="beta">Notaðir ←</LinkPill>
+              <LinkPill>Notaðir ←</LinkPill>
             </Link>
 
             <LinkPill href="#info" current onClick={handleNewPress}>
