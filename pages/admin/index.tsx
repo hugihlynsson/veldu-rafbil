@@ -3,10 +3,10 @@ import { NextPage } from 'next'
 import fetch from 'isomorphic-unfetch'
 import Head from 'next/head'
 
-import usedCarModels from '../apiHelpers/usedCarModels'
-import Footer from '../components/Footer'
-import { ProcessedUsedCar } from '../types'
-import UsedAdminCar from '../components/UsedAdminCar'
+import usedCarModels from '../../apiHelpers/usedCarModels'
+import Footer from '../../components/Footer'
+import { ProcessedUsedCar } from '../../types'
+import UsedAdminCar from '../../components/UsedAdminCar'
 
 interface Props {
   cars: Array<ProcessedUsedCar>
