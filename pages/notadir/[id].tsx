@@ -85,14 +85,14 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
       <div className="root" key="used">
         <Head>
           <title key="title">
-            Veldu Rafbíl → Notaðir → {model.make} {model.model}
+            Veldu Rafbíl – Notaðir – {model.make} {model.model}
           </title>
         </Head>
 
         <header>
           <h1>Veldu Rafbíl</h1>
 
-          <div className="headerLinks">
+          <nav className="headerLinks">
             <Link href="/notadir" passHref>
               <LinkPill>Notaðir ←</LinkPill>
             </Link>
@@ -100,7 +100,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             <LinkPill href="#info" current onClick={handleNewPress}>
               {model.make} {model.model} ↓
             </LinkPill>
-          </div>
+          </nav>
 
           <h2>
             {model.make} {model.model}

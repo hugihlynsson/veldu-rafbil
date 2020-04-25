@@ -145,13 +145,13 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
     <>
       <div className="root" key="used">
         <Head>
-          <title key="title">Veldu Rafbíl → Notaðir (beta)</title>
+          <title key="title">Veldu Rafbíl – Notaðir</title>
         </Head>
 
         <header>
           <h1>Veldu Rafbíl</h1>
 
-          <div className="headerLinks">
+          <nav className="">
             <Link href="/" passHref>
               <LinkPill>Nýir ←</LinkPill>
             </Link>
@@ -163,7 +163,7 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
             >
               Notaðir ↓
             </LinkPill>
-          </div>
+          </nav>
 
           <p className="description" ref={descriptionRef}>
             Listi yfir alla {cars.filter((car) => !car.filtered).length} notuðu

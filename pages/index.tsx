@@ -86,7 +86,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
         <header>
           <h1>Veldu Rafbíl</h1>
 
-          <div className="headerLinks">
+          <nav className="headerLinks">
             <LinkPill current onClick={handleNewPress} href="#nyjir">
               Nýir ↓
             </LinkPill>
@@ -94,7 +94,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
             <Link href="/notadir" passHref>
               <LinkPill>Notaðir →</LinkPill>
             </Link>
-          </div>
+          </nav>
 
           <p className="description" id="nyjir" ref={descriptionRef}>
             Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og eru
