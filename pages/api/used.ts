@@ -45,15 +45,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       if (isFromLast24Hours) {
         const isFromLastHour =
           new Date().getTime() - lastSnapshot.timestamp < 60 * 60 * 1000
-        if (!isFromLastHour) {
+        if (isFromLastHour) {
+          res.setHeader('Cache-Control', 's-maxage=3600')
+        } else {
           // Update but immediately return the slightly older data
           console.log(
-            'Data older than an your but younger than 24. Returning stale but updating',
+            'Data older than an hour but younger than 24. Returning stale but updating',
           )
           fetch(`${baseUrl}/api/updateUsed`)
         }
         console.log('Returning snapshot from', lastSnapshot.date)
-        res.setHeader('Cache-Control', 's-maxage=3600')
+
         res.json({ cars: lastSnapshot.cars })
         return
       }
