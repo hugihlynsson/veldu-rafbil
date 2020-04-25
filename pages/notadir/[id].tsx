@@ -269,10 +269,6 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
               font-size: 64px;
             }
 
-            h1 {
-              font-size: 40px;
-            }
-
             .cars {
               grid-template-columns: 1fr 1fr;
               grid-gap: 32px;
