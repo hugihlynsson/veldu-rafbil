@@ -5,6 +5,7 @@ import { UsedCarModel } from '../types'
 import estimateWLTP from '../modules/estimateWLTP'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import selectCarImageSize from '../modules/selectCarImageSize'
+import isSingular from '../modules/isSingular'
 import { isNumber } from 'util'
 
 type ImageDisplay = 0 | 1 | 4 | 6 | 8 | 9
@@ -124,7 +125,9 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
               >
                 <span>
                   +{getExtraCount(count, images.length)}{' '}
-                  {getExtraCount(count, images.length) === 1 ? 'bíll' : 'bílar'}
+                  {isSingular(getExtraCount(count, images.length))
+                    ? 'bíll'
+                    : 'bílar'}
                 </span>
               </div>
             )}

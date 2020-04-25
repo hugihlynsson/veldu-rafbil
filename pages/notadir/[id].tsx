@@ -14,6 +14,7 @@ import usedCarModels from '../../apiHelpers/usedCarModels'
 import { ProcessedUsedCar, UsedCarModel } from '../../types'
 import Car from '../../components/UsedCarByModel'
 import estimateWLTP from '../../modules/estimateWLTP'
+import isSingular from '../../modules/isSingular'
 import LinkPill from '../../components/LinkPill'
 
 type Sorting = 'price' | 'age' | 'milage'
@@ -135,7 +136,10 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             </LinkPill>
           )}
 
-          <p className="description">{filtered.length} notaðir til sölu</p>
+          <p className="description">
+            {filtered.length}{' '}
+            {isSingular(filtered.length) ? 'notaður' : 'notaðir'} til sölu
+          </p>
 
           <div className="sorting-title">Raða eftir:</div>
           <Toggles<Sorting>
