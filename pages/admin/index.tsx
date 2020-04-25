@@ -37,7 +37,7 @@ const Used: NextPage<Props> = ({ cars }) => {
     setCar(carListIndex, { ...car, metadata: selectedMetadata })
 
     try {
-      await fetch('/api/updateUsedMetadata', {
+      const response = await fetch('/api/updateUsedMetadata', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -45,6 +45,9 @@ const Used: NextPage<Props> = ({ cars }) => {
           metadata: selectedMetadata,
         }),
       })
+      if (response.status !== 200) {
+        throw new Error(`Failed to update ${response.statusText}`)
+      }
     } catch (error) {
       // Revert to old metadata
       setCar(carListIndex, { ...car, metadata: originalMetadata })
@@ -62,11 +65,14 @@ const Used: NextPage<Props> = ({ cars }) => {
     setCar(selectedCarIndex, { ...car, filtered })
 
     try {
-      await fetch('/api/updateUsedFiltered', {
+      const response = await fetch('/api/updateUsedFiltered', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ carIndex: selectedCarIndex, filtered }),
       })
+      if (response.status !== 200) {
+        throw new Error(`Failed to update ${response.statusText}`)
+      }
     } catch (error) {
       // Revert to old filtered
       setCar(selectedCarIndex, { ...car, filtered: !filtered })
@@ -116,7 +122,7 @@ const Used: NextPage<Props> = ({ cars }) => {
             <UsedAdminCar
               key={car.link}
               car={car}
-              onFilteredChange={(filtered: boolean) =>
+              onFilteredChange={(filtered) =>
                 handleFilteredChange(index, car, filtered)
               }
               onMetadataChange={(usedCarId) =>
