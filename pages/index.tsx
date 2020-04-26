@@ -9,7 +9,7 @@ import Car from '../components/NewCar'
 import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
 import LinkPill from '../components/LinkPill'
-import newCars from '../modules/newCars'
+import newCars, { expectedCars } from '../modules/newCars'
 import { NewCar } from '../types'
 import stableSort from '../components/stableSort'
 
@@ -30,6 +30,19 @@ const queryToSorting: { [key in SortingQuery]: Sorting } = {
   hrodun: 'acceleration',
 }
 
+const carSorter = (sorting: Sorting) => (a: NewCar, b: NewCar) => {
+  switch (sorting) {
+    case 'name':
+      return `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`)
+    case 'price':
+      return a.price - b.price
+    case 'range':
+      return b.range - a.range
+    case 'acceleration':
+      return a.acceleration - b.acceleration
+  }
+}
+
 interface Props {
   initialSorting: SortingQuery | undefined
 }
@@ -48,19 +61,6 @@ const New: NextPage<Props> = ({ initialSorting }) => {
     Router.replace({ pathname, query })
   }, [sorting])
 
-  const carSorter = (a: NewCar, b: NewCar) => {
-    switch (sorting) {
-      case 'name':
-        return `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`)
-      case 'price':
-        return a.price - b.price
-      case 'range':
-        return b.range - a.range
-      case 'acceleration':
-        return a.acceleration - b.acceleration
-    }
-  }
-
   const descriptionRef = useRef<HTMLParagraphElement>(null)
 
   const handleNewPress = useCallback(
@@ -73,7 +73,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
 
   return (
     <>
-      <div className="root" key="new">
+      <div className="content">
         <Head>
           <title key="title">Veldu Rafbíl</title>
           <meta
@@ -117,7 +117,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
           />
         </header>
 
-        {stableSort(newCars, carSorter).map((car, i) => (
+        {stableSort(newCars, carSorter(sorting)).map((car, i) => (
           <Car
             car={car}
             key={`${car.make} ${car.model} ${car.capacity}`}
@@ -126,11 +126,27 @@ const New: NextPage<Props> = ({ initialSorting }) => {
         ))}
       </div>
 
+      <section className="expected">
+        <div className="content">
+          <header>
+            <h2 className="expectedHeader">Væntanlegir rafbílar</h2>
+          </header>
+
+          {stableSort(expectedCars, carSorter('name')).map((car) => (
+            <Car
+              car={car}
+              key={`${car.make} ${car.model} ${car.capacity}`}
+              lazyLoad
+            />
+          ))}
+        </div>
+      </section>
+
       <Footer />
 
       <style jsx>
         {`
-          .root {
+          .content {
             max-width: 1024px;
             margin: 0 auto;
           }
@@ -177,12 +193,28 @@ const New: NextPage<Props> = ({ initialSorting }) => {
             font-weight: 600;
           }
 
+          .expected {
+            background-color: #F8F8F8;
+            padding-bottom: 1px;
+            margin-bottom: 2px;
+          }
+
+          h2 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: 0.4em;
+          }
+
           @media screen and (min-width: 375px) {
             header {
               padding: 24px;
             }
             h1 {
               font-size: 48px;
+            }
+            h2 {
+              font-size: 40px;
             }
           }
 
@@ -194,6 +226,9 @@ const New: NextPage<Props> = ({ initialSorting }) => {
             }
             h1 {
               font-size: 64px;
+            }
+            h2 {
+              font-size: 48px;
             }
             .description {
               font-size: 16px;
