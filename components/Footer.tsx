@@ -13,45 +13,47 @@ const Footer: FunctionComponent<{}> = () => (
       <a href="mailto:hugihlynsson@gmail.com">hugihlynsson@gmail.com</a>.
     </p>
 
-    <style jsx>
-      {`
+    <style jsx>{`
+      footer {
+        background-color: #f8f8f8;
+        padding: 32px 0;
+      }
+      p {
+        margin: 0 auto;
+        max-width: 480px;
+        font-size: 14px;
+        line-height: 1.5;
+        font-weight: 300;
+        padding: 0 16px;
+      }
+      a {
+        color: #000;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      @media screen and (min-width: 375px) {
         footer {
-          background-color: #F8F8F8;
-          padding: 32px 16px;
+          padding: 56px 0;
         }
-        footer p {
-          margin 0 auto;
-          max-width: 480px;
-          font-size: 14px;
-          line-height: 1.5;
-          font-weight: 300;
+        p {
+          padding: 0 24px;
         }
-        footer a {
-          color: #000;
-          font-weight: 500;
-          text-decoration: none;
-        }
-        footer a:hover {
-          text-decoration: underline;
-        }
+      }
 
-        @media screen and (min-width: 375px) {
-          footer {
-            padding: 56px 24px;
-          }
+      @media screen and (min-width: 768px) {
+        footer {
+          padding: 56px 0;
         }
-
-        @media screen and (min-width: 768px) {
-          footer {
-            padding: 56px 40px;
-          }
-          footer p {
-            max-width: calc(1024px - 40px - 40px);
-            margin: 0 auto;
-          }
+        p {
+          max-width: 1024px;
+          padding: 0 40px;
         }
-      `}
-    </style>
+      }
+    `}</style>
   </footer>
 )
 
