@@ -9,7 +9,7 @@ import Car from '../components/NewCar'
 import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
 import LinkPill from '../components/LinkPill'
-import cars from '../data/cars.json'
+import newCars from '../modules/newCars'
 import { NewCar } from '../types'
 import stableSort from '../components/stableSort'
 
@@ -79,7 +79,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
           <meta
             key="description"
             name="description"
-            content={`Listi yfir alla ${cars.length} bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar`}
+            content={`Listi yfir alla ${newCars.length} bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar`}
           />
         </Head>
 
@@ -97,8 +97,8 @@ const New: NextPage<Props> = ({ initialSorting }) => {
           </nav>
 
           <p className="description" id="nyjir" ref={descriptionRef}>
-            Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og eru
-            100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
+            Listi yfir alla {newCars.length} bílana sem eru seldir á Íslandi og
+            eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
             <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda en
             raundrægni er háð aðstæðum og aksturslagi.
           </p>
@@ -117,7 +117,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
           />
         </header>
 
-        {stableSort(cars, carSorter).map((car, i) => (
+        {stableSort(newCars, carSorter).map((car, i) => (
           <Car
             car={car}
             key={`${car.make} ${car.model} ${car.capacity}`}
