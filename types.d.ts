@@ -46,3 +46,7 @@ export interface NewCar {
   range: number
   evDatabaseURL: string
 }
+
+export interface ExpectedCar extends NewCar {
+  expectedDelivery: string // In Icelandic, for exmaple: "Sumar 2020"
+}

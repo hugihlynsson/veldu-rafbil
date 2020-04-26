@@ -3,14 +3,15 @@ import LazyLoad from 'react-lazy-load'
 
 declare let gtag: Function
 
-import { NewCar as NewCarType } from '../types'
+import { NewCar as NewCarType, ExpectedCar } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
+import LinkPill from './LinkPill'
 
 const getSrcSet = (name: string) =>
   `/images/${name}-540w.jpg 540w, /images/${name}-1080w.jpg 1080w, /images/${name}-1920w.jpg 1920w`
 
 interface Props {
-  car: NewCarType
+  car: NewCarType | ExpectedCar
   lazyLoad: boolean
 }
 
@@ -38,15 +39,21 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
     </div>
 
     <div className="content">
+      {(car as ExpectedCar).expectedDelivery && (
+        <div className="expectedDelivery">
+          {(car as ExpectedCar).expectedDelivery}
+        </div>
+      )}
+
       <h1>
         <span className="make">{car.make}</span>{' '}
         <span className="model">{car.model}</span>
       </h1>
-      <a
-        className="price"
-        target="_blank"
-        rel="noopener"
+
+      <LinkPill
         href={car.sellerURL}
+        external
+        extra={(car as ExpectedCar).expectedDelivery && 'áætlað verð ↗'}
         onClick={() =>
           gtag('event', 'click', {
             event_category: 'seller',
@@ -54,8 +61,10 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
           })
         }
       >
-        {addDecimalSeprators(car.price)} kr. ↗
-      </a>
+        {addDecimalSeprators(car.price)} kr.
+        {!(car as ExpectedCar).expectedDelivery && ' ↗'}
+      </LinkPill>
+
       <div className="info">
         <div className="info-item">
           <div className="info-item-label">0-100 km/klst</div>
@@ -123,28 +132,18 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
         .model {
           font-weight: 400;
         }
-
-        .price {
-          display: inline-block;
-          color: inherit;
-          margin-top: 8px;
-          margin-bottom: 24px;
-          font-size: 14px;
-          font-weight: 600;
-          background-color: #EEE;
-          border-radius: 100px;
-          padding: 4px 12px;
-          text-decoration: none;
-          margin-left: -2px;
-          transition: background-color 0.1s;
-        }
-        .price:hover {
-          background-color: #8CF;
+        
+        .expectedDelivery {
+          margin-bottom: 2px;
+          font-size: 16px;
+          font-weight: 500;
+          color: #888;
         }
 
         .info {
           display: flex;
           margin-bottom: 16px;
+          margin-top: 24px;
           max-width: 320px;
           justify-content: space-between;
         }

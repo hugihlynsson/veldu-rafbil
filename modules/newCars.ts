@@ -1,4 +1,4 @@
-import { NewCar } from '../types'
+import { NewCar, ExpectedCar } from '../types'
 
 const newCars: Array<NewCar> = [
   {
@@ -33,17 +33,6 @@ const newCars: Array<NewCar> = [
     capacity: 42.2,
     range: 310,
     evDatabaseURL: 'https://ev-database.org/car/1145/BMW-i3-120-Ah',
-  },
-  {
-    make: 'Honda',
-    model: 'e',
-    heroImageName: 'honda-e',
-    price: 4290000,
-    sellerURL: 'http://www.honda.is/voruflokkar/bilar/honda-e/',
-    acceleration: 9.5,
-    capacity: 32.0,
-    range: 220,
-    evDatabaseURL: 'https://ev-database.org/car/1171/Honda-e',
   },
   {
     make: 'Hyundai',
@@ -377,3 +366,30 @@ const newCars: Array<NewCar> = [
 ]
 
 export default newCars
+
+export const expectedCars: Array<ExpectedCar> = [
+  {
+    make: 'Honda',
+    model: 'e',
+    heroImageName: 'honda-e',
+    price: 4290000,
+    sellerURL: 'http://www.honda.is/voruflokkar/bilar/honda-e/',
+    acceleration: 9.5,
+    capacity: 32.0,
+    range: 220,
+    evDatabaseURL: 'https://ev-database.org/car/1171/Honda-e',
+    expectedDelivery: 'Sumar 2020',
+  },
+  {
+    make: 'Volkswagen',
+    model: 'ID.3 First Edition',
+    heroImageName: 'vw-id-3',
+    price: 4500000,
+    sellerURL: 'https://www.volkswagen.is/is/bilar/id3.html',
+    acceleration: 9.0,
+    capacity: 58,
+    range: 420,
+    evDatabaseURL: 'https://ev-database.org/car/1202/Volkswagen-ID3-Pro',
+    expectedDelivery: 'Sumar 2020',
+  },
+]
