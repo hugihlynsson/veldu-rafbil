@@ -39,7 +39,7 @@ const LinkPill: FunctionComponent<Props> = React.forwardRef<
         transition: background-color 0.1s;
       }
       a:hover {
-        background-color: #dadcec;
+        background-color: #ddd;
       }
       .current,
       .current:hover {
