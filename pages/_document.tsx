@@ -13,6 +13,7 @@ export default class Evs extends Document {
 
           <link rel="icon" href="/images/icon.png" type="image/png" />
           <link rel="preconnect" href="https://www.google-analytics.com" />
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
           <style>{`
               *,
@@ -22,7 +23,7 @@ export default class Evs extends Document {
               }
               body {
                 margin: 0;
-                font-family: BlinkMacSystemFont, -apple-system, Roboto, Helvetica,
+                font-family: Inter, BlinkMacSystemFont, -apple-system, Roboto, Helvetica,
                   Arial, sans-serif;
                 color: #111;
                 -webkit-font-smoothing: antialiased;
