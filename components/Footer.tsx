@@ -22,9 +22,10 @@ const Footer: FunctionComponent<{}> = () => (
         margin: 0 auto;
         max-width: 480px;
         font-size: 14px;
+        letter-spacing: -0.006em;
         line-height: 1.5;
-        font-weight: 300;
         padding: 0 16px;
+        color: #555;
       }
       a {
         color: #000;

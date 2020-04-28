@@ -122,6 +122,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
           margin: 0;
           font-weight: 600;
           font-size: 32px;
+          letter-spacing: -0.021em;
         }
         .model {
           font-weight: 400;
@@ -136,6 +137,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
           margin-top: 8px;
           margin-bottom: 24px;
           font-size: 14px;
+          letter-spacing: -0.006em;
           font-weight: 600;
           background-color: #EEE;
           border-radius: 100px;
@@ -165,7 +167,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
           text-transform: uppercase;
           font-size: 10px;
           font-weight: 600;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.08em;
           margin-bottom: 2px;
           color: #555;
         }
@@ -174,6 +176,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
         }
         .info-item-value {
           font-size: 24px;
+          letter-spacing: -0.019em;
           font-weight: 400;
         }
 
@@ -181,6 +184,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
           color: #aaa;
           font-weight: 300;
           font-size: 14px;
+          letter-spacing: -0.006em;
           margin-bottom: 0;
         }
 
@@ -188,6 +192,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
           display: inline-block;
           color: inherit;
           font-size: 14px;
+          letter-spacing: -0.006em;
           color: #aaa;
         }
 

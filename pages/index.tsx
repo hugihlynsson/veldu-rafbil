@@ -160,6 +160,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
           }
           h1 {
             font-size: 40px;
+            letter-spacing: -0.022em;
             font-weight: 600;
             line-height: 1.1;
             margin-bottom: 0.4em;
@@ -173,6 +174,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
           .description {
             line-height: 1.5;
             font-size: 14px;
+            letter-spacing: -0.006em;
             padding-top: 2em;
             margin: 0 0 2em 0;
             color: #555;
@@ -201,6 +203,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
 
           h2 {
             font-size: 32px;
+            letter-spacing: -0.021em;
             font-weight: 500;
             line-height: 1.1;
             margin-bottom: 0.4em;
@@ -212,9 +215,11 @@ const New: NextPage<Props> = ({ initialSorting }) => {
             }
             h1 {
               font-size: 48px;
+              letter-spacing: -0.022em;
             }
             h2 {
               font-size: 40px;
+              letter-spacing: -0.022em;
             }
           }
 
@@ -226,12 +231,15 @@ const New: NextPage<Props> = ({ initialSorting }) => {
             }
             h1 {
               font-size: 64px;
+              letter-spacing: -0.022em;
             }
             h2 {
               font-size: 48px;
+              letter-spacing: -0.022em;
             }
             .description {
               font-size: 16px;
+              letter-spacing: -0.011em;
             }
           }
         `}

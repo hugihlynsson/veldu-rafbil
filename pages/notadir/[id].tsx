@@ -179,6 +179,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
           h1 {
             font-size: 40px;
+            letter-spacing: -0.022em;
             font-weight: 600;
             line-height: 1.1;
             margin-bottom: 0.4em;
@@ -191,6 +192,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
           h2 {
             font-size: 36px;
+            letter-spacing: -0.021em;
             font-weight: 500;
             line-height: 1.1;
             margin-bottom: 24px;
@@ -199,6 +201,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
           .description {
             line-height: 1.5;
             font-size: 24px;
+            letter-spacing: -0.021em;
             margin: 1.8em 0 0.5em 0;
             color: #000;
             font-weight: 500;
@@ -208,6 +211,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
           .sorting-title {
             margin-bottom: 8px;
             font-size: 14px;
+            letter-spacing: -0.006em;
             font-weight: 600;
           }
 
@@ -228,7 +232,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             text-transform: uppercase;
             font-size: 10px;
             font-weight: 600;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
             margin-bottom: 2px;
             color: #555;
           }
@@ -237,6 +241,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
           }
           .info-item-value {
             font-size: 24px;
+            letter-spacing: -0.021em;
             font-weight: 400;
           }
 
@@ -253,6 +258,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             }
             h1 {
               font-size: 48px;
+              letter-spacing: -0.022em;
             }
 
             .info-item {
@@ -271,6 +277,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             }
             h1 {
               font-size: 64px;
+              letter-spacing: -0.022em;
             }
 
             .cars {

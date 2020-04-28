@@ -147,11 +147,13 @@ const Used: NextPage<Props> = ({ cars }) => {
 
           h1 {
             font-size: 40px;
+            letter-spacing: -0.022em;
             font-weight: 600;
           }
 
           h2 {
             font-size: 32px;
+            letter-spacing: -0.021em;
             font-weight: 600;
           }
 

@@ -128,6 +128,7 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
           margin: 0;
           font-weight: 600;
           font-size: 32px;
+          letter-spacing: -0.021em;
         }
         .model {
           font-weight: 400;
@@ -136,6 +137,7 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
         .expectedDelivery {
           margin-bottom: 2px;
           font-size: 16px;
+          letter-spacing: -0.011em;
           font-weight: 500;
           color: #888;
         }
@@ -158,12 +160,13 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
           text-transform: uppercase;
           font-size: 10px;
           font-weight: 600;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.08em;
           margin-bottom: 2px;
           color: #555;
         }
         .info-item-value {
           font-size: 24px;
+          letter-spacing: -0.019em;
           font-weight: 400;
         }
 
@@ -171,6 +174,7 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
           display: inline-block;
           color: inherit;
           font-size: 14px;
+          letter-spacing: -0.006em;
         }
 
         @media screen and (min-width: 375px) {

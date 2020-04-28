@@ -36,7 +36,7 @@ const LinkPill: FunctionComponent<Props> = React.forwardRef<
         text-decoration: none;
         margin-left: -2px;
         margin-right: 10px;
-        transition: background-color 0.1s;
+        transition: background-color 0.2s;
       }
       a:hover {
         background-color: #ddd;
@@ -50,10 +50,11 @@ const LinkPill: FunctionComponent<Props> = React.forwardRef<
         text-transform: uppercase;
         font-weight: 700;
         font-size: 10px;
+        letter-spacing: 0.04em;
         background: white;
-        color: #444;
+        color: #555;
         border-radius: 16px;
-        padding: 1px 6px 2px;
+        padding: 2px 6px 2px;
         margin: 1px -6px -4px 1px;
         vertical-align: top;
         display: inline-block;

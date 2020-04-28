@@ -235,6 +235,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
         color: white;
         font-weight: 600;
         font-size: 20px;
+        letter-spacing: -0.017em;
       }
 
       .content {
@@ -245,6 +246,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
         margin: 0 0;
         font-weight: 600;
         font-size: 32px;
+        letter-spacing: -0.021em;
         line-height: 1.1;
       }
       .title--model {
@@ -253,6 +255,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
 
       .years {
         font-size: 14px;
+        letter-spacing: -0.006em;
         color: #888;
         font-weight: 500;
         margin: 3px 0 20px;
@@ -275,12 +278,13 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
         text-transform: uppercase;
         font-size: 10px;
         font-weight: 600;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.08em;
         margin-bottom: 2px;
         color: #888;
       }
       .info-item-value {
         font-size: 24px;
+        letter-spacing: -0.021em;
         font-weight: 400;
       }
 

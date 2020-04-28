@@ -72,6 +72,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
       .info {
         color: #fff;
         font-size: 14px;
+        letter-spacing: -0.006em;
         font-weight: 600;
         opacity: 0.8;
       }
@@ -79,6 +80,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
       .price {
         color: #fff;
         font-size: 24px;
+        letter-spacing: -0.021em;
         margin-top: 2px;
         margin-bottom: 2px;
         font-weight: 500;
@@ -86,6 +88,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
 
       .description {
         font-size: 13px;
+        letter-spacing: -0.0025em;
         font-weight: 600;
         color: #fff;
         opacity: 0.8;

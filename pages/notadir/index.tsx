@@ -250,6 +250,7 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
 
           h1 {
             font-size: 40px;
+            letter-spacing: -0.022em;
             font-weight: 600;
             line-height: 1.1;
             margin-bottom: 0.4em;
@@ -263,6 +264,7 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
           .description {
             line-height: 1.5;
             font-size: 14px;
+            letter-spacing: -0.006em;
             padding-top: 2em;
             margin: 0 0 2em 0;
             color: #555;
@@ -281,6 +283,7 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
           .sorting-title {
             margin-bottom: 8px;
             font-size: 14px;
+            letter-spacing: -0.006em;
             font-weight: 600;
           }
 
@@ -299,6 +302,7 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
             }
             h1 {
               font-size: 48px;
+            letter-spacing: -0.022em;
             }
           }
 
@@ -310,9 +314,11 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
             }
             h1 {
               font-size: 64px;
+              letter-spacing: -0.022em;
             }
             .description {
               font-size: 16px;
+              letter-spacing: -0.011em;
             }
 
             .cars {

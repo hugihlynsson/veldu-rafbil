@@ -31,6 +31,7 @@ export default function Toggles<P>({ items, onClick, currentValue }: Props<P>) {
           }
           .toggle {
             font-size: 12px;
+            letter-spacing: 0.005em;
             font-weight: 600;
             padding: 6px 16px;
             cursor: pointer;
