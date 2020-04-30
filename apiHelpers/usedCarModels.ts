@@ -209,7 +209,7 @@ const usedCarModels: Array<UsedCarModel> = [
     acceleration: 7.3,
     capacity: 42.8,
     range: 310,
-    evDatabaseURL: 'https://ev-database.org/car/1068/BMW-i3-94-Ah',
+    evDatabaseURL: 'https://ev-database.org/car/1145/BMW-i3-120-Ah',
   },
   {
     id: 'hyundai-ioniq',
