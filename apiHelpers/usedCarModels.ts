@@ -66,6 +66,17 @@ const usedCarModels: Array<UsedCarModel> = [
     sellerURL: 'https://www.nissan.is/vehicles/new-vehicles/leaf.html',
   },
   {
+    id: 'nissan-leaf-e+',
+    make: 'Nissan',
+    model: 'Leaf e+',
+    acceleration: 7.3,
+    capacity: 62.0,
+    range: 385,
+    evDatabaseURL: 'https://ev-database.org/car/1144/Nissan-Leaf-eplus',
+    price: 4390000,
+    sellerURL: 'https://www.nissan.is/vehicles/new-vehicles/leaf.html',
+  },
+  {
     id: 'nissan-e-nv200-24',
     make: 'Nissan',
     model: 'e-NV200 Evalia',
