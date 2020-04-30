@@ -19,10 +19,30 @@ import LinkPill from '../../components/LinkPill'
 
 type Sorting = 'price' | 'age' | 'milage'
 
-interface Props {
-  error?: number
-  cars?: Array<ProcessedUsedCar>
-  model?: UsedCarModel
+const carSorter = (sorting: Sorting) => (
+  a: ProcessedUsedCar,
+  b: ProcessedUsedCar,
+): number => {
+  switch (sorting) {
+    case 'price': {
+      return (
+        (a.price || Number.MAX_SAFE_INTEGER) -
+        (b.price || Number.MAX_SAFE_INTEGER)
+      )
+    }
+    case 'milage': {
+      return getCarMilage(a) - getCarMilage(b)
+    }
+    case 'age': {
+      return (
+        Number((b.date.split('/')[1] || '').split(' ')[0]) -
+        Number((a.date.split('/')[1] || '').split(' ')[0])
+      )
+    }
+    default: {
+      return 1
+    }
+  }
 }
 
 const getCarMilage = (car: ProcessedUsedCar) =>
@@ -31,7 +51,13 @@ const getCarMilage = (car: ProcessedUsedCar) =>
       .replace(' km.', '')
       .split('.')
       .join(''),
-  ) || 0
+  ) ?? 0
+
+interface Props {
+  error?: number
+  cars?: Array<ProcessedUsedCar>
+  model?: UsedCarModel
+}
 
 const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
   const [sorting, setSorting] = useState<Sorting>('price')
@@ -58,29 +84,6 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
     (car) => !car.filtered && car.metadata && car.metadata.id === model.id,
   )
 
-  const carSorter = (a: ProcessedUsedCar, b: ProcessedUsedCar): number => {
-    switch (sorting) {
-      case 'price': {
-        return (
-          (a.price || Number.MAX_SAFE_INTEGER) -
-          (b.price || Number.MAX_SAFE_INTEGER)
-        )
-      }
-      case 'milage': {
-        return getCarMilage(a) - getCarMilage(b)
-      }
-      case 'age': {
-        return (
-          Number((b.date.split('/')[1] || '').split(' ')[0]) -
-          Number((a.date.split('/')[1] || '').split(' ')[0])
-        )
-      }
-      default: {
-        return 1
-      }
-    }
-  }
-
   return (
     <>
       <div className="root" key="used">
@@ -103,38 +106,40 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             </LinkPill>
           </nav>
 
-          <h2>
-            {model.make} {model.model}
-          </h2>
+          <section className="info-card">
+            <h2>
+              {model.make} {model.model}
+            </h2>
 
-          <div id="info" className="info" ref={descriptionRef}>
-            <div className="info-item">
-              <div className="info-item-label">0-100 km/klst</div>
-              <div className="info-item-value">{model.acceleration}s</div>
-            </div>
-
-            <div className="info-item" style={{ flexShrink: 0 }}>
-              <div className="info-item-label">Rafhlaða</div>
-              <div className="info-item-value">{model.capacity} kWh</div>
-            </div>
-
-            <div className="info-item" title="Samkvæmt WLTP prófunum">
-              <div className="info-item-label">
-                Drægni{model.rangeNEDC && <strong>*</strong>}
+            <div id="info" className="info" ref={descriptionRef}>
+              <div className="info-item">
+                <div className="info-item-label">0-100 km/klst</div>
+                <div className="info-item-value">{model.acceleration}s</div>
               </div>
-              <div className="info-item-value">
-                {model.range ??
-                  (model.rangeNEDC && estimateWLTP(model.rangeNEDC))}
-                km
+
+              <div className="info-item" style={{ flexShrink: 0 }}>
+                <div className="info-item-label">Rafhlaða</div>
+                <div className="info-item-value">{model.capacity} kWh</div>
+              </div>
+
+              <div className="info-item" title="Samkvæmt WLTP prófunum">
+                <div className="info-item-label">
+                  Drægni{model.rangeNEDC && <strong>*</strong>}
+                </div>
+                <div className="info-item-value">
+                  {model.range ??
+                    (model.rangeNEDC && estimateWLTP(model.rangeNEDC))}
+                  km
+                </div>
               </div>
             </div>
-          </div>
 
-          {model.evDatabaseURL && (
-            <LinkPill href={model.evDatabaseURL} external>
-              Nánar á ev-database.org ↗
-            </LinkPill>
-          )}
+            {model.evDatabaseURL && (
+              <LinkPill href={model.evDatabaseURL} external onGray>
+                Nánar á ev-database.org ↗
+              </LinkPill>
+            )}
+          </section>
 
           <p className="description">
             {filtered.length}{' '}
@@ -154,7 +159,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
         </header>
 
         <div className="cars">
-          {stableSort(filtered, carSorter).map((car) => (
+          {stableSort(filtered, carSorter(sorting)).map((car) => (
             <Car car={car} key={car.link} />
           ))}
         </div>
@@ -186,7 +191,16 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
           .headerLinks {
             display: flex;
-            margin-bottom: 24px;
+            margin-bottom: 32px;
+          }
+
+          .info-card {
+            padding: 16px;
+            background: #F8F8F8;
+            border-radius: 16px;
+            margin-left: -8px;
+            margin-right: -8px;
+            max-width: 360px;
           }
 
           h2 {
@@ -194,21 +208,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             font-weight: 500;
             line-height: 1.1;
             margin-bottom: 24px;
-          }
-
-          .description {
-            line-height: 1.5;
-            font-size: 24px;
-            margin: 1.8em 0 0.5em 0;
-            color: #000;
-            font-weight: 500;
-            max-width: 33em;
-          }
-
-          .sorting-title {
-            margin-bottom: 8px;
-            font-size: 14px;
-            font-weight: 600;
+            margin-top: 0;
           }
 
           .info {
@@ -238,6 +238,21 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
           .info-item-value {
             font-size: 24px;
             font-weight: 400;
+          }
+
+          .description {
+            line-height: 1.5;
+            font-size: 24px;
+            margin: 1.2em 0 0.5em 0;
+            color: #000;
+            font-weight: 500;
+            max-width: 33em;
+          }
+
+          .sorting-title {
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
           }
 
           .cars {

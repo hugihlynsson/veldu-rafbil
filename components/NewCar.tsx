@@ -13,9 +13,10 @@ const getSrcSet = (name: string) =>
 interface Props {
   car: NewCarType | ExpectedCar
   lazyLoad: boolean
+  onGray?: boolean
 }
 
-const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
+const NewCar: FunctionComponent<Props> = ({ car, lazyLoad, onGray }) => (
   <article>
     <div className="imageBox">
       <div className="imageSizer" />
@@ -51,6 +52,7 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad }) => (
       </h1>
 
       <LinkPill
+        onGray={Boolean(onGray)}
         href={car.sellerURL}
         external
         extra={(car as ExpectedCar).expectedDelivery && 'áætlað verð ↗'}

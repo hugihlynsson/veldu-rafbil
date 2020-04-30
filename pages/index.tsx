@@ -134,9 +134,10 @@ const New: NextPage<Props> = ({ initialSorting }) => {
 
           {stableSort(expectedCars, carSorter('name')).map((car) => (
             <Car
+              lazyLoad
               car={car}
               key={`${car.make} ${car.model} ${car.capacity}`}
-              lazyLoad
+              onGray
             />
           ))}
         </div>

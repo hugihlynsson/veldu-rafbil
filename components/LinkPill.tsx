@@ -6,15 +6,16 @@ interface Props {
   extra?: string
   href?: string
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
+  onGray?: boolean
 }
 
 const LinkPill: FunctionComponent<Props> = React.forwardRef<
   HTMLAnchorElement,
   Props
->(({ children, current, external, extra, href, onClick }, ref) => (
+>(({ children, current, external, extra, href, onClick, onGray }, ref) => (
   <a
     ref={ref}
-    className={current ? 'current' : ''}
+    className={current ? 'current' : onGray ? 'on-gray' : ''}
     onClick={onClick}
     href={href}
     target={external ? '_blank' : undefined}
@@ -45,6 +46,12 @@ const LinkPill: FunctionComponent<Props> = React.forwardRef<
       .current:hover {
         background-color: #48f;
         color: #fff;
+      }
+      .on-gray {
+        background-color: #e4e4e4;
+      }
+      .on-gray:hover {
+        background-color: #d8d8d8;
       }
       .extra {
         text-transform: uppercase;

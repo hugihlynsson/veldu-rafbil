@@ -3,3 +3,4 @@ node_modules/
 .next/
 .now
 scripts/choose-ev-snapshots-export.json
+.vscode
