@@ -96,7 +96,8 @@ const Used: NextPage<Props> = ({ cars }) => {
     .map((car, index) => [car, index] as const)
     .filter(
       ([car]) =>
-        (!car.filtered || showFiltered) && (!car.metadata || showTagged),
+        (!car.filtered || showFiltered) &&
+        (!Boolean(car.metadata?.id) || showTagged),
     )
 
   return (
