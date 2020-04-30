@@ -232,6 +232,17 @@ const usedCarModels: Array<UsedCarModel> = [
     evDatabaseURL: 'https://ev-database.org/car/1057/Hyundai-IONIQ-Electric',
   },
   {
+    id: 'hyundai-ioniq-2020',
+    make: 'Hyundai',
+    model: 'IONIQ Electric',
+    price: 4790000,
+    sellerURL: 'https://www.hyundai.is/nyir/ioniq/yfirlit',
+    acceleration: 9.7,
+    capacity: 38.3,
+    range: 311,
+    evDatabaseURL: 'https://ev-database.org/car/1165/Hyundai-IONIQ-Electric',
+  },
+  {
     id: 'hyundai-kona-39',
     make: 'Hyundai',
     model: 'Kona Electric',
