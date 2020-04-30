@@ -1,7 +1,7 @@
 interface Props<P> {
   items: Array<[string, P]>
   onClick: (value: P) => void
-  currentValue: P
+  currentValue: P | undefined
 }
 
 export default function Toggles<P>({ items, onClick, currentValue }: Props<P>) {

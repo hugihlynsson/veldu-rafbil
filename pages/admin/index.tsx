@@ -7,6 +7,7 @@ import usedCarModels from '../../apiHelpers/usedCarModels'
 import Footer from '../../components/Footer'
 import { ProcessedUsedCar, UsedCarModel } from '../../types'
 import UsedAdminCar from '../../components/UsedAdminCar'
+import Toggles from '../../components/Toggles'
 
 const updateUsedMetadata = async (carIndex: number, metadata: UsedCarModel) => {
   const response = await fetch('/api/updateUsedMetadata', {
@@ -36,10 +37,12 @@ interface Props {
 
 const Used: NextPage<Props> = ({ cars }) => {
   const [usedCars, setUsedCars] = useState<Array<ProcessedUsedCar>>(cars)
+  const [showTagged, setShowTagged] = useState<boolean>(false)
+  const [showFiltered, setShowFiltered] = useState<boolean>(false)
 
   const setCar = (index: number, updatedCar: ProcessedUsedCar): void =>
-    setUsedCars(
-      usedCars.map((usedCar, usedCarIndex) =>
+    setUsedCars((cars) =>
+      cars.map((usedCar, usedCarIndex) =>
         index === usedCarIndex ? updatedCar : usedCar,
       ),
     )
@@ -81,9 +84,20 @@ const Used: NextPage<Props> = ({ cars }) => {
     })
   }
 
-  const unTagged = usedCars
+  const taggedCount = usedCars
     .map((car, index) => ({ car, index }))
-    .filter(({ car }) => !car.metadata)
+    .filter(({ car }) => car.metadata).length
+
+  const filteredCount = usedCars
+    .map((car, index) => ({ car, index }))
+    .filter(({ car }) => car.filtered).length
+
+  const carsToShow = usedCars
+    .map((car, index) => [car, index] as const)
+    .filter(
+      ([car]) =>
+        (!car.filtered || showFiltered) && (!car.metadata || showTagged),
+    )
 
   return (
     <>
@@ -92,44 +106,43 @@ const Used: NextPage<Props> = ({ cars }) => {
           <title key="title">Stjórnborð notaðra rafbíla</title>
         </Head>
 
-        <h1>Stjórnborð notaðra rafbíla</h1>
+        <h1>
+          Stjórnborð notaðra rafbíla <span>{cars.length}</span>
+        </h1>
 
-        <h2>
-          Ómerktir <span>{unTagged.length}</span>
-        </h2>
+        <div className="toggles">
+          <Toggles<boolean>
+            currentValue={showTagged}
+            items={[[`Sýna merkta (${taggedCount})`, true]]}
+            onClick={() => setShowTagged(!showTagged)}
+          />
 
-        <div className="cars">
-          {unTagged.map(({ car, index }) => (
-            <UsedAdminCar
-              key={car.link}
-              car={car}
-              onFilteredChange={(filtered: boolean) =>
-                handleFilteredChange(index, car, filtered)
-              }
-              onMetadataChange={(usedCarId) =>
-                handleMetadataChange(index, car, usedCarId)
-              }
-            />
-          ))}
+          <div style={{ width: '8px' }} />
+
+          <Toggles<boolean>
+            currentValue={showFiltered}
+            items={[[`Sýna falda (${filteredCount})`, true]]}
+            onClick={() => setShowFiltered(!showFiltered)}
+          />
         </div>
 
-        <h2>
-          Allir <span>{usedCars.length}</span>
-        </h2>
-
         <div className="cars">
-          {usedCars.map((car, index) => (
-            <UsedAdminCar
-              key={car.link}
-              car={car}
-              onFilteredChange={(filtered) =>
-                handleFilteredChange(index, car, filtered)
-              }
-              onMetadataChange={(usedCarId) =>
-                handleMetadataChange(index, car, usedCarId)
-              }
-            />
-          ))}
+          {carsToShow.length > 0 ? (
+            carsToShow.map(([car, index]) => (
+              <UsedAdminCar
+                key={car.link}
+                car={car}
+                onFilteredChange={(filtered) =>
+                  handleFilteredChange(index, car, filtered)
+                }
+                onMetadataChange={(usedCarId) =>
+                  handleMetadataChange(index, car, usedCarId)
+                }
+              />
+            ))
+          ) : (
+            <div className="emptyResults">Engir bílar til að sýna</div>
+          )}
         </div>
       </div>
 
@@ -150,13 +163,12 @@ const Used: NextPage<Props> = ({ cars }) => {
             font-weight: 600;
           }
 
-          h2 {
-            font-size: 32px;
-            font-weight: 600;
+          h1 span {
+            font-weight: 400;
           }
 
-          h2 span {
-            font-weight: 400;
+          .toggles {
+            display: flex;
           }
 
           .cars {
@@ -164,6 +176,11 @@ const Used: NextPage<Props> = ({ cars }) => {
             grid-gap: 32px;
             grid-template-columns: 100%;
             margin-top: 32px;
+          }
+
+          .emptyResults {
+            font-weight: 500;
+            color: #888;
           }
 
           @media screen and (min-width: 767px) {
