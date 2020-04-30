@@ -5,8 +5,30 @@ import Head from 'next/head'
 
 import usedCarModels from '../../apiHelpers/usedCarModels'
 import Footer from '../../components/Footer'
-import { ProcessedUsedCar } from '../../types'
+import { ProcessedUsedCar, UsedCarModel } from '../../types'
 import UsedAdminCar from '../../components/UsedAdminCar'
+
+const updateUsedMetadata = async (carIndex: number, metadata: UsedCarModel) => {
+  const response = await fetch('/api/updateUsedMetadata', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ carIndex, metadata }),
+  })
+  if (response.status !== 200) {
+    throw new Error(`Failed to update: ${response.statusText}`)
+  }
+}
+
+const updateUsedFiltered = async (carIndex: number, filtered: boolean) => {
+  const response = await fetch('/api/updateUsedFiltered', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ carIndex: carIndex, filtered }),
+  })
+  if (response.status !== 200) {
+    throw new Error(`Failed to update ${response.statusText}`)
+  }
+}
 
 interface Props {
   cars: Array<ProcessedUsedCar>
@@ -36,24 +58,12 @@ const Used: NextPage<Props> = ({ cars }) => {
     // Optimistic update
     setCar(carListIndex, { ...car, metadata: selectedMetadata })
 
-    try {
-      const response = await fetch('/api/updateUsedMetadata', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          carIndex: carListIndex,
-          metadata: selectedMetadata,
-        }),
-      })
-      if (response.status !== 200) {
-        throw new Error(`Failed to update ${response.statusText}`)
-      }
-    } catch (error) {
+    updateUsedMetadata(carListIndex, selectedMetadata!).catch((error) => {
       // Revert to old metadata
       setCar(carListIndex, { ...car, metadata: originalMetadata })
       console.log('Failed to update metadata', error)
       alert('Failed to update car metadata')
-    }
+    })
   }
 
   const handleFilteredChange = async (
@@ -63,22 +73,12 @@ const Used: NextPage<Props> = ({ cars }) => {
   ) => {
     // Optimistic update
     setCar(selectedCarIndex, { ...car, filtered })
-
-    try {
-      const response = await fetch('/api/updateUsedFiltered', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ carIndex: selectedCarIndex, filtered }),
-      })
-      if (response.status !== 200) {
-        throw new Error(`Failed to update ${response.statusText}`)
-      }
-    } catch (error) {
+    updateUsedFiltered(selectedCarIndex, filtered).catch((error) => {
       // Revert to old filtered
       setCar(selectedCarIndex, { ...car, filtered: !filtered })
       console.log('Failed to update filter status', error)
       alert('Failed to update car filter status')
-    }
+    })
   }
 
   const unTagged = usedCars
