@@ -46,12 +46,7 @@ const carSorter = (sorting: Sorting) => (
 }
 
 const getCarMilage = (car: ProcessedUsedCar) =>
-  Number(
-    car.milage
-      .replace(' km.', '')
-      .split('.')
-      .join(''),
-  ) ?? 0
+  Number(car.milage.replace(' km.', '').split('.').join('')) ?? 0
 
 interface Props {
   error?: number
@@ -318,9 +313,9 @@ UsedModel.getInitialProps = async ({ req, query }): Promise<Props> => {
 
     const baseUrl =
       req && req.headers
-        ? `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers[
-            'x-forwarded-host'
-          ] || req.headers.host}`
+        ? `${req.headers['x-forwarded-proto'] || 'https'}://${
+            req.headers['x-forwarded-host'] || req.headers.host
+          }`
         : ''
 
     const model = usedCarModels.find((model) => model.id === query.id)

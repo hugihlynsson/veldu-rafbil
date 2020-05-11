@@ -34,8 +34,9 @@ if (!firebaseAdmin.apps.length) {
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const database = firebaseAdmin.database()
-  const baseUrl = `${req.headers['x-forwarded-proto'] || 'https'}://${req
-    .headers['x-forwarded-host'] || req.headers.host}`
+  const baseUrl = `${req.headers['x-forwarded-proto'] || 'https'}://${
+    req.headers['x-forwarded-host'] || req.headers.host
+  }`
 
   try {
     const lastSnapshot: Snapshot | undefined = await fetchLastSnapshot(database)

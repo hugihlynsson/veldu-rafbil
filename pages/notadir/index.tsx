@@ -156,11 +156,7 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
               <LinkPill>Nýir ←</LinkPill>
             </Link>
 
-            <LinkPill
-              href="#notadir"
-              current
-              onClick={handleNewPress}
-            >
+            <LinkPill href="#notadir" current onClick={handleNewPress}>
               Notaðir ↓
             </LinkPill>
           </nav>
@@ -346,9 +342,9 @@ Used.getInitialProps = async ({ req, query }): Promise<Props> => {
   try {
     const baseUrl =
       req && req.headers
-        ? `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers[
-            'x-forwarded-host'
-          ] || req.headers.host}`
+        ? `${req.headers['x-forwarded-proto'] || 'https'}://${
+            req.headers['x-forwarded-host'] || req.headers.host
+          }`
         : ''
     const response = await fetch(`${baseUrl}/api/used`)
     const json = await response.json()

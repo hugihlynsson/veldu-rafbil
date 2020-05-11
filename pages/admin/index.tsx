@@ -210,9 +210,9 @@ Used.getInitialProps = async ({ req }): Promise<Props> => {
   try {
     const baseUrl =
       req && req.headers
-        ? `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers[
-            'x-forwarded-host'
-          ] || req.headers.host}`
+        ? `${req.headers['x-forwarded-proto'] || 'https'}://${
+            req.headers['x-forwarded-host'] || req.headers.host
+          }`
         : ''
     const response = await fetch(`${baseUrl}/api/used`)
     const json = await response.json()
