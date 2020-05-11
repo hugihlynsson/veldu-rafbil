@@ -6454,6 +6454,11 @@ vendors@^1.0.0:
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.4.tgz#e2b800a53e7a29b93506c3cf41100d16c4c4ad8e"
   integrity sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w==
 
+vercel@^19.0.1:
+  version "19.0.1"
+  resolved "https://registry.yarnpkg.com/vercel/-/vercel-19.0.1.tgz#a0c3ca40f19cb12f0dd07e3249e175c3c513f461"
+  integrity sha512-T8Qm9+3h/R89i6gUY1swGdfTMEV1I6KREEti3753i1x3ITYTh8NRpOP04ixP3/klELH1LXnfm44D/0sd9z/WXg==
+
 vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"

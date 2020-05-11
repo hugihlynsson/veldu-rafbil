@@ -11,9 +11,8 @@ Requirements:
 
 - [Node](https://nodejs.org/) 10.15 or later
 - [Yarn](https://yarnpkg.com)
-- [Vercel CLI](https://vercel.com/download) - `yarn global add vercel`
 
-Run `vercel dev` to spin up the project. It uses the config from `now.json`, installs the required builders and starts serving the routes. It will defer building a route until it is requested — the first load might take some time.
+Run `yarn vercel-dev` to spin up the project. It uses the config from `now.json`, installs the required builders and starts serving the routes. It will defer building a route until it is requested — the first load might take some time.
 
 To access `/api/used` you need to have access to a Firebase project (you can follow [this guide](https://firebase.google.com/docs/web/setup) to set one up) and have the following keys in your environment (a `.env` file will be picked up by `vercel dev`):
 

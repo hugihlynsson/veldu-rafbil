@@ -18,7 +18,8 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "build": "next build"
+    "build": "next build",
+    "vercel-dev": "vercel dev"
   },
   "devDependencies": {
     "@types/atob": "^2.1.2",
@@ -26,6 +27,7 @@
     "@types/node": "^13.13.5",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "vercel": "^19.0.1"
   }
 }
