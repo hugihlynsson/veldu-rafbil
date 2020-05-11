@@ -1,5 +1,4 @@
 import cheerio from 'cheerio'
-import fetch from 'node-fetch'
 import url from 'url'
 
 import { UsedCar } from '../types'
@@ -70,16 +69,9 @@ export default async (): Promise<Array<UsedCar>> => {
         link: `https://bilasolur.is/${link}`,
         make: parsedElement.find('.car-make').text(),
         model: model.split(' ')[0],
-        modelExtra: model
-          .split(' ')
-          .slice(1)
-          .join(' '),
-        date: cheerio(details[0])
-          .text()
-          .split(' · ')[0],
-        milage: cheerio(details[1])
-          .text()
-          .split(' · ')[0],
+        modelExtra: model.split(' ').slice(1).join(' '),
+        date: cheerio(details[0]).text().split(' · ')[0],
+        milage: cheerio(details[1]).text().split(' · ')[0],
         price: priceText ? Number(priceText.split('.').join('')) : undefined,
       })
     })
