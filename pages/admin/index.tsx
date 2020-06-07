@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { NextPage } from 'next'
-import fetch from 'isomorphic-unfetch'
 import Head from 'next/head'
 
 import usedCarModels from '../../apiHelpers/usedCarModels'

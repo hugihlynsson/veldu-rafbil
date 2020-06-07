@@ -3,7 +3,6 @@ import { NextPage } from 'next'
 import Link from 'next/link'
 import Head from 'next/head'
 import Router, { useRouter } from 'next/router'
-import fetch from 'isomorphic-unfetch'
 import smoothscroll from 'smoothscroll-polyfill'
 
 import { ProcessedUsedCar, UsedCarModel } from '../../types'
