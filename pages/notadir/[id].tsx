@@ -3,7 +3,6 @@ import { NextPage } from 'next'
 import Link from 'next/link'
 import Head from 'next/head'
 import Error from 'next/error'
-import fetch from 'isomorphic-unfetch'
 import smoothscroll from 'smoothscroll-polyfill'
 
 import Toggles from '../../components/Toggles'

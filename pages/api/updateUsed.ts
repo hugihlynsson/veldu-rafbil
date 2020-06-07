@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import firebaseAdmin from 'firebase-admin'
 import atob from 'atob'
-import fetch from 'isomorphic-unfetch'
 
 import { UsedCar, Snapshot } from '../../types'
 import scrapeUsedCars from '../../apiHelpers/scrapeUsedCars'
