@@ -139,6 +139,17 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1135/Mercedes-EQC-400-4MATIC',
   },
   {
+    make: 'MG',
+    model: 'ZS EV',
+    heroImageName: 'mg-zs-ev',
+    price: 3990000,
+    sellerURL: 'https://www.bl.is/nyir/mg/zsev/',
+    acceleration: 8.2,
+    capacity: 44.5,
+    range: 263,
+    evDatabaseURL: 'https://ev-database.org/car/1201/MG-ZS-EV',
+  },
+  {
     make: 'Mini Cooper',
     model: 'SE',
     heroImageName: 'mini',
