@@ -127,6 +127,17 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1154/Kia-e-Soul-64-kWh',
   },
   {
+    make: 'Mazda',
+    model: 'MX-30',
+    heroImageName: 'mazda-mx-30',
+    price: 4590000,
+    sellerURL: 'https://www.mazda.is/is/nyir-bilar/mazda-mx-30',
+    acceleration: 9.0,
+    capacity: 35.5,
+    range: 200,
+    evDatabaseURL: 'https://ev-database.org/car/1241/Mazda-MX-30',
+  },
+  {
     make: 'Mercedes-Benz',
     model: 'EQC',
     heroImageName: 'eqc',
