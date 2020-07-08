@@ -216,6 +216,17 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1051/Opel-Ampera-e',
   },
   {
+    make: 'Opel',
+    model: 'Corsa-e',
+    heroImageName: 'opel-corsa-e',
+    price: 3990000,
+    sellerURL: 'https://nyir.opel.is/corsa-e/',
+    acceleration: 8.1,
+    capacity: 50,
+    range: 330,
+    evDatabaseURL: 'https://ev-database.org/car/1192/Opel-Corsa-e',
+  },
+  {
     make: 'Peugeot',
     model: 'e-208',
     heroImageName: 'e-208',
