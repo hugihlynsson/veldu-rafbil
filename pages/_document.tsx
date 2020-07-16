@@ -31,18 +31,9 @@ export default class Evs extends Document {
           `}</style>
 
           <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=UA-20956924-5"
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'UA-20956924-5');
-          `,
-            }}
+            src="https://cdn.usefathom.com/script.js"
+            {...({ site: 'DDOQKVOW' } as any)}
+            defer
           />
         </Head>
 
