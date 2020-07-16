@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react'
 import LazyLoad from 'react-lazy-load'
+import { trackGoal } from 'fathom-client'
 
 import { NewCar as NewCarType, ExpectedCar } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
@@ -54,6 +55,7 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad, onGray }) => (
         href={car.sellerURL}
         external
         extra={(car as ExpectedCar).expectedDelivery && 'áætlað verð ↗'}
+        onClick={() => trackGoal('OBBPADY0', 0)}
       >
         {addDecimalSeprators(car.price)} kr.
         {!(car as ExpectedCar).expectedDelivery && ' ↗'}
@@ -80,6 +82,7 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad, onGray }) => (
         target="_blank"
         href={car.evDatabaseURL}
         rel="noopener"
+        onClick={() => trackGoal('DGRMWSOJ', 0)}
       >
         Nánar á ev-database.org ↗
       </a>
