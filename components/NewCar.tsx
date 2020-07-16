@@ -1,8 +1,6 @@
 import { FunctionComponent } from 'react'
 import LazyLoad from 'react-lazy-load'
 
-declare let gtag: Function
-
 import { NewCar as NewCarType, ExpectedCar } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import LinkPill from './LinkPill'
@@ -56,12 +54,6 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad, onGray }) => (
         href={car.sellerURL}
         external
         extra={(car as ExpectedCar).expectedDelivery && 'áætlað verð ↗'}
-        onClick={() =>
-          gtag('event', 'click', {
-            event_category: 'seller',
-            event_label: `${car.make} ${car.model}`,
-          })
-        }
       >
         {addDecimalSeprators(car.price)} kr.
         {!(car as ExpectedCar).expectedDelivery && ' ↗'}
@@ -88,12 +80,6 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad, onGray }) => (
         target="_blank"
         href={car.evDatabaseURL}
         rel="noopener"
-        onClick={() =>
-          gtag('event', 'click', {
-            event_category: 'EV Database',
-            event_label: `${car.make} ${car.model}`,
-          })
-        }
       >
         Nánar á ev-database.org ↗
       </a>
