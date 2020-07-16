@@ -30,6 +30,7 @@ export default class Evs extends Document {
               }
           `}</style>
 
+          // @ts-ignore 
           <script src="https://cdn.usefathom.com/script.js" site="DDOQKVOW" defer />
         </Head>
 
