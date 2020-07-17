@@ -10,7 +10,7 @@ const Footer: FunctionComponent<{}> = () => (
 
     <p>
       Ef þú ert með ábendingu eða fyrirspurn geturu sent póst á{' '}
-      <a href="mailto:hugihlynsson@gmail.com">hugihlynsson@gmail.com</a>.
+      <a href="mailto:hugi@hey.com">hugi@hey.com</a>.
     </p>
 
     <style jsx>{`
