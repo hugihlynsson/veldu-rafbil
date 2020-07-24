@@ -230,7 +230,7 @@ const newCars: Array<NewCar> = [
     make: 'Peugeot',
     model: 'e-208',
     heroImageName: 'e-208',
-    price: 4270000,
+    price: 4190000,
     sellerURL:
       'https://www.peugeotisland.is/nyir-bilar/velja-bil/glaenyr-peugeot-e-208/',
     acceleration: 8.1,
@@ -247,7 +247,7 @@ const newCars: Array<NewCar> = [
       'https://www.peugeotisland.is/nyir-bilar/velja-bil/glaenyr-peugeot-e-2008/',
     acceleration: 8.5,
     capacity: 50,
-    range: 310,
+    range: 320,
     evDatabaseURL: 'https://ev-database.org/car/1206/Peugeot-e-2008-SUV',
   },
   {
