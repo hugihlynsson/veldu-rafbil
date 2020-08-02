@@ -38,6 +38,7 @@ const Used: NextPage<Props> = ({ cars }) => {
   const [usedCars, setUsedCars] = useState<Array<ProcessedUsedCar>>(cars)
   const [showTagged, setShowTagged] = useState<boolean>(false)
   const [showFiltered, setShowFiltered] = useState<boolean>(false)
+  const [showWithNoImage, setShowWithNoImage] = useState<boolean>(false)
 
   const setCar = (index: number, updatedCar: ProcessedUsedCar): void =>
     setUsedCars((cars) =>
@@ -83,20 +84,17 @@ const Used: NextPage<Props> = ({ cars }) => {
     })
   }
 
-  const taggedCount = usedCars
-    .map((car, index) => ({ car, index }))
-    .filter(({ car }) => car.metadata).length
-
-  const filteredCount = usedCars
-    .map((car, index) => ({ car, index }))
-    .filter(({ car }) => car.filtered).length
+  const taggedCount = usedCars.filter((car) => car.metadata).length
+  const filteredCount = usedCars.filter((car) => car.filtered).length
+  const withNoImageCount = usedCars.filter((car) => !car.image).length
 
   const carsToShow = usedCars
     .map((car, index) => [car, index] as const)
     .filter(
       ([car]) =>
         (!car.filtered || showFiltered) &&
-        (!Boolean(car.metadata?.id) || showTagged),
+        (!Boolean(car.metadata?.id) || showTagged) &&
+        (Boolean(car.image) || showWithNoImage),
     )
 
   return (
@@ -123,6 +121,14 @@ const Used: NextPage<Props> = ({ cars }) => {
             currentValue={showFiltered}
             items={[[`Sýna falda (${filteredCount})`, true]]}
             onClick={() => setShowFiltered(!showFiltered)}
+          />
+
+          <div style={{ width: '8px' }} />
+
+          <Toggles<boolean>
+            currentValue={showWithNoImage}
+            items={[[`Sýna án myndar (${withNoImageCount})`, true]]}
+            onClick={() => setShowWithNoImage(!showWithNoImage)}
           />
         </div>
 
