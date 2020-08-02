@@ -175,7 +175,7 @@ const newCars: Array<NewCar> = [
     make: 'Mini Cooper',
     model: 'SE',
     heroImageName: 'mini',
-    price: 4490000,
+    price: 4750000,
     sellerURL: 'https://www.mini.is/is_IS/home/range/electric.html',
     acceleration: 7.3,
     capacity: 28.9,
