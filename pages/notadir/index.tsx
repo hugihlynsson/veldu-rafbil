@@ -73,12 +73,12 @@ interface Props {
 const Used: NextPage<Props> = ({ cars, initialSorting }) => {
   const { pathname } = useRouter()
   const [sorting, setSorting] = useState<Sorting>(
-    queryToSorting[initialSorting || 'nafni'],
+    queryToSorting[initialSorting || 'verdi'],
   )
 
   useEffect(() => {
     const query =
-      sorting === 'name' ? {} : { radaeftir: sortingToQuery[sorting] }
+      sorting === 'price' ? {} : { radaeftir: sortingToQuery[sorting] }
     Router.replace({ pathname, query })
   }, [sorting])
 
@@ -174,12 +174,12 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
           <Toggles<Sorting>
             currentValue={sorting}
             items={[
-              ['Nafni', 'name'],
               ['Verði', 'price'],
               // ['Verði á km', 'value'],
               // ['Aldri', 'age'],
               ['Drægni', 'range'],
               ['Hröðun', 'acceleration'],
+              ['Nafni', 'name'],
             ]}
             onClick={setSorting}
           />
