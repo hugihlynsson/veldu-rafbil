@@ -387,7 +387,7 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Volkswagen',
-    model: 'e-up!',
+    model: 'e-Up!',
     heroImageName: 'e-up',
     price: 3390000,
     sellerURL: 'https://www.volkswagen.is/is/bilar/e-up.html',
