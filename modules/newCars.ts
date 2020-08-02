@@ -219,7 +219,7 @@ const newCars: Array<NewCar> = [
     make: 'Opel',
     model: 'Ampera-e',
     heroImageName: 'ampera-e',
-    price: 4990000,
+    price: 5290000,
     sellerURL: 'https://ampera-e.opel.is/',
     acceleration: 7.3,
     capacity: 60,
