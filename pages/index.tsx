@@ -126,22 +126,24 @@ const New: NextPage<Props> = ({ initialSorting }) => {
         ))}
       </div>
 
-      <section className="expected">
-        <div className="content">
-          <header>
-            <h2 className="expectedHeader">Væntanlegir rafbílar</h2>
-          </header>
+      {expectedCars.length > 0 && (
+        <section className="expected">
+          <div className="content">
+            <header>
+              <h2 className="expectedHeader">Væntanlegir rafbílar</h2>
+            </header>
 
-          {stableSort(expectedCars, carSorter('name')).map((car) => (
-            <Car
-              lazyLoad
-              car={car}
-              key={`${car.make} ${car.model} ${car.capacity}`}
-              onGray
-            />
-          ))}
-        </div>
-      </section>
+            {stableSort(expectedCars, carSorter('name')).map((car) => (
+              <Car
+                lazyLoad
+                car={car}
+                key={`${car.make} ${car.model} ${car.capacity}`}
+                onGray
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
       <Footer />
 

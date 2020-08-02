@@ -35,6 +35,17 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1145/BMW-i3-120-Ah',
   },
   {
+    make: 'Honda',
+    model: 'e',
+    heroImageName: 'honda-e',
+    price: 4090000,
+    sellerURL: 'http://www.honda.is/voruflokkar/bilar/honda-e/',
+    acceleration: 9.5,
+    capacity: 32.0,
+    range: 220,
+    evDatabaseURL: 'https://ev-database.org/car/1171/Honda-e',
+  },
+  {
     make: 'Hyundai',
     model: 'IONIQ Electric',
     heroImageName: 'ioniq',
@@ -396,23 +407,6 @@ const newCars: Array<NewCar> = [
     range: 260,
     evDatabaseURL: 'https://ev-database.org/car/1189/Volkswagen-e-Up',
   },
-]
-
-export default newCars
-
-export const expectedCars: Array<ExpectedCar> = [
-  {
-    make: 'Honda',
-    model: 'e',
-    heroImageName: 'honda-e',
-    price: 4290000,
-    sellerURL: 'http://www.honda.is/voruflokkar/bilar/honda-e/',
-    acceleration: 9.5,
-    capacity: 32.0,
-    range: 220,
-    evDatabaseURL: 'https://ev-database.org/car/1171/Honda-e',
-    expectedDelivery: 'Sumar 2020',
-  },
   {
     make: 'Volkswagen',
     model: 'ID.3 Pro Performance',
@@ -424,7 +418,6 @@ export const expectedCars: Array<ExpectedCar> = [
     range: 420,
     evDatabaseURL:
       'https://ev-database.org/car/1306/Volkswagen-ID3-Pro-Performance',
-    expectedDelivery: 'Haust 2020',
   },
   {
     make: 'Volkswagen',
@@ -436,6 +429,9 @@ export const expectedCars: Array<ExpectedCar> = [
     capacity: 77,
     range: 550,
     evDatabaseURL: 'https://ev-database.org/car/1203/Volkswagen-ID3-Pro-S',
-    expectedDelivery: 'Haust 2020',
   },
 ]
+
+export default newCars
+
+export const expectedCars: Array<ExpectedCar> = []
