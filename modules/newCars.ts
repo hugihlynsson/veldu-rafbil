@@ -154,7 +154,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'eqc',
     price: 9790000,
     sellerURL:
-      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqc/pad/highlights.module.html',
+      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqc/',
     acceleration: 5.1,
     capacity: 80,
     range: 417,
