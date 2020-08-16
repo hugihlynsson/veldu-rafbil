@@ -101,6 +101,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
             eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
             <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda en
             raundrægni er háð aðstæðum og aksturslagi.
+            <em>Verð eru birt án ábyrgðar og geta verið úrelt.</em>
           </p>
 
           <div className="sorting-title">Raða eftir:</div>
@@ -188,6 +189,11 @@ const New: NextPage<Props> = ({ initialSorting }) => {
           }
           .description a:hover {
             text-decoration: underline;
+          }
+          .description em {
+            display: inline-block;
+            font-size: 12px;
+            color: #888;
           }
 
           .sorting-title {
