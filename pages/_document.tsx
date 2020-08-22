@@ -5,12 +5,6 @@ export default class Evs extends Document {
     return (
       <html lang="is">
         <Head>
-          <meta
-            key="viewport"
-            name="viewport"
-            content="initial-scale=1.0, width=device-width"
-          />
-
           <link rel="icon" href="/images/icon.png" type="image/png" />
           <link rel="preconnect" href="https://www.google-analytics.com" />
 
