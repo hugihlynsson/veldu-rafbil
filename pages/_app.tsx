@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { AppProps } from 'next/app'
+import Head from 'next/head'
 import * as Fathom from 'fathom-client'
 
 function App({ Component, pageProps }: AppProps) {
@@ -16,7 +17,14 @@ function App({ Component, pageProps }: AppProps) {
     return () => router.events.off('routeChangeComplete', onRouteChangeComplete)
   }, [])
 
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <Component {...pageProps} />
+    </>
+  )
 }
 
 export default App

@@ -6,7 +6,7 @@ const pixelsToSize = {
   large: 1280,
 }
 
-export default (imageUrl: string, size: Size) => {
+const selectCarImageSize = (imageUrl: string, size: Size) => {
   if (!imageUrl.includes('?')) {
     return `${imageUrl}?w=${pixelsToSize[size]}`
   }
@@ -17,3 +17,5 @@ export default (imageUrl: string, size: Size) => {
 
   return imageUrl.replace(/&w=[0-9]*/g, `&w=${pixelsToSize[size]}`)
 }
+
+export default selectCarImageSize

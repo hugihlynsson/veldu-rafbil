@@ -1,5 +1,5 @@
 // number.toLocaleString() can be inconsistent between node and client, breaking SSR
-export default (value: number): string =>
+const addDecimalSeparators = (value: number): string =>
   value
     .toString()
     .split('')
@@ -10,3 +10,5 @@ export default (value: number): string =>
     .split('')
     .reverse()
     .join('')
+
+export default addDecimalSeparators
