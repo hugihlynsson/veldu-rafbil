@@ -422,7 +422,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Volkswagen',
     model: 'ID.3 Pro S',
-    heroImageName: 'vw-id-3',
+    heroImageName: 'vw-id-3-alt',
     price: 6250000,
     sellerURL: 'https://www.volkswagen.is/is/bilar/id3.html',
     acceleration: 8.5,
