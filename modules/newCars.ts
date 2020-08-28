@@ -430,6 +430,19 @@ const newCars: Array<NewCar> = [
     range: 550,
     evDatabaseURL: 'https://ev-database.org/car/1203/Volkswagen-ID3-Pro-S',
   },
+  {
+    make: 'Volvo',
+    model: 'XC40 P8 AWD Recharge',
+    heroImageName: 'volvo-xc-40',
+    price: 7990000,
+    sellerURL:
+      'https://www.volvocars.com/is#!/id:5f4900c3f02c4752360e8829/fjrhjladrifinn-rafma/',
+    acceleration: 4.9,
+    capacity: 78,
+    range: 400,
+    evDatabaseURL:
+      'https://ev-database.org/car/1188/Volvo-XC40-P8-AWD-Recharge',
+  },
 ]
 
 export default newCars
