@@ -390,7 +390,8 @@ const newCars: Array<NewCar> = [
     model: 'e-Golf',
     heroImageName: 'e-golf',
     price: 4390000,
-    sellerURL: 'https://www.volkswagen.is/is/volkswagen-bilar/e-golf-2016.html',
+    sellerURL:
+      'https://www.hekla.is/static/files/efni/verdlistar/vw/e-golf.pdf',
     acceleration: 9.6,
     capacity: 35.8,
     range: 231,
