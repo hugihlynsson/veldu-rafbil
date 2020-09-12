@@ -9,7 +9,7 @@
     "dotenv": "^8.2.0",
     "fathom-client": "^3.0.0",
     "firebase-admin": "^9.1.1",
-    "next": "^9.4.4",
+    "next": "^9.5.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-lazy-load": "^3.0.13",
@@ -24,10 +24,10 @@
     "@types/atob": "^2.1.2",
     "@types/cheerio": "^0.22.18",
     "@types/node": "12",
-    "@types/react": "^16.9.35",
+    "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "@types/smoothscroll-polyfill": "^0.3.1",
-    "prettier": "^2.0.5",
-    "vercel": "^19.0.1"
+    "prettier": "^2.1.1",
+    "vercel": "^20.1.0"
   }
 }

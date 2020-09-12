@@ -4,3 +4,4 @@ node_modules/
 .now
 scripts/choose-ev-snapshots-export.json
 .vscode
+.vercel
