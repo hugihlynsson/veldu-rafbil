@@ -161,6 +161,18 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1135/Mercedes-EQC-400-4MATIC',
   },
   {
+    make: 'Mercedes-Benz',
+    model: 'EQV',
+    heroImageName: 'eqv',
+    price: 11950000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/v-class/v-class-447/eqv/labeling.module.html',
+    acceleration: 10.0,
+    capacity: 90,
+    range: 363,
+    evDatabaseURL: 'https://ev-database.org/car/1240/Mercedes-EQV-300-Long',
+  },
+  {
     make: 'MG',
     model: 'ZS EV',
     heroImageName: 'mg-zs-ev',
