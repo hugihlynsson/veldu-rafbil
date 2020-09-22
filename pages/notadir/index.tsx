@@ -140,6 +140,11 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
     [descriptionRef],
   )
 
+  const totalUsedCount = Object.values(models).reduce(
+    (sum, model) => sum + model.length,
+    0,
+  )
+
   return (
     <>
       <div className="root" key="used">
@@ -161,9 +166,8 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
           </nav>
 
           <p className="description" ref={descriptionRef}>
-            Listi yfir alla {cars.filter((car) => !car.filtered).length} notuðu
-            bílana sem eru til sölu á Íslandi og eru 100% rafdrifnir.
-            Upplýsingar um drægni eru samkvæmt{' '}
+            Listi yfir alla {totalUsedCount} notuðu bílana sem eru til sölu á
+            Íslandi og eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
             <a href="http://wltpfacts.eu/">WLTP</a> mælingum þegar bíllinn er
             nýr en ekki er tekið tillit til rýrnunar með aldri eða notkun
             rafhlöðunnar. <strong>*</strong>Stjörnumerkt drægni er áætluð úr
