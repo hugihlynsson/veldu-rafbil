@@ -471,4 +471,17 @@ const newCars: Array<NewCar> = [
 
 export default newCars
 
-export const expectedCars: Array<ExpectedCar> = []
+export const expectedCars: Array<ExpectedCar> = [
+  {
+    make: 'Tesla',
+    model: 'Model S Plaid',
+    heroImageName: 'tesla-model-s-performance',
+    price: 19672191,
+    sellerURL: 'https://www.tesla.com/is_IS/models/design',
+    acceleration: 2.1,
+    capacity: 130,
+    range: 840,
+    evDatabaseURL: 'https://ev-database.org/car/1207/Tesla-Model-S-Performance',
+    expectedDelivery: 'Lok 2021',
+  },
+]
