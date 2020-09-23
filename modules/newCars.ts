@@ -444,6 +444,17 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1203/Volkswagen-ID3-Pro-S',
   },
   {
+    make: 'Volkswagen',
+    model: 'ID.4 Pro Performance 2WD',
+    heroImageName: 'vw-id-4',
+    price: 6490000,
+    sellerURL: 'https://www.volkswagen.is/is/rafbilar/id-fjolskyldan/id4.html',
+    acceleration: 8.5,
+    capacity: 77,
+    range: 500,
+    evDatabaseURL: 'https://ev-database.org/car/1273/Volkswagen-ID4',
+  },
+  {
     make: 'Volvo',
     model: 'XC40 P8 AWD Recharge',
     heroImageName: 'volvo-xc-40',
