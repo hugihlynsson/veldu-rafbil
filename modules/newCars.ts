@@ -240,6 +240,17 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Opel',
+    model: 'Mokka-e',
+    heroImageName: 'opel-mokka-e',
+    price: 4590000,
+    sellerURL: 'https://www.opel.is/bilar/nyr-mokka',
+    acceleration: 8.5,
+    capacity: 50,
+    range: 322,
+    evDatabaseURL: 'https://ev-database.org/car/1278/Opel-Mokka-e',
+  },
+  {
+    make: 'Opel',
     model: 'Corsa-e',
     heroImageName: 'opel-corsa-e',
     price: 3990000,
