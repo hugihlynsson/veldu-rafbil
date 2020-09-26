@@ -410,18 +410,6 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Volkswagen',
-    model: 'e-Golf',
-    heroImageName: 'e-golf',
-    price: 4390000,
-    sellerURL:
-      'https://www.hekla.is/static/files/efni/verdlistar/vw/e-golf.pdf',
-    acceleration: 9.6,
-    capacity: 35.8,
-    range: 231,
-    evDatabaseURL: 'https://ev-database.org/car/1087/Volkswagen-e-Golf',
-  },
-  {
-    make: 'Volkswagen',
     model: 'e-Up!',
     heroImageName: 'e-up',
     price: 3390000,
