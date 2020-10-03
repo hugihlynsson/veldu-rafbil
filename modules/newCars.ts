@@ -176,7 +176,7 @@ const newCars: Array<NewCar> = [
     make: 'MG',
     model: 'ZS EV',
     heroImageName: 'mg-zs-ev',
-    price: 3990000,
+    price: 4190000,
     sellerURL: 'https://www.bl.is/nyir/mg/zsev/',
     acceleration: 8.2,
     capacity: 44.5,
