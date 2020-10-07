@@ -425,15 +425,6 @@ const usedCarModels: Array<UsedCarModel> = [
       'https://ev-database.org/car/1139/Tesla-Model-3-Long-Range-Performance',
   },
   {
-    id: 'mercedes-b-250e',
-    make: 'Mercedes',
-    model: 'B 250e',
-    acceleration: 7.9,
-    capacity: 28,
-    rangeNEDC: 200,
-    evDatabaseURL: 'https://ev-database.org/car/1013/Mercedes-B-250e',
-  },
-  {
     id: 'ford-focus-electric-23',
     make: 'Ford',
     model: 'Focus Electric',
@@ -461,6 +452,15 @@ const usedCarModels: Array<UsedCarModel> = [
     evDatabaseURL: 'https://ev-database.org/car/1097/Jaguar-I-Pace',
   },
   {
+    id: 'mercedes-b-250e',
+    make: 'Mercedes-Benz',
+    model: 'B 250e',
+    acceleration: 7.9,
+    capacity: 28,
+    rangeNEDC: 200,
+    evDatabaseURL: 'https://ev-database.org/car/1013/Mercedes-B-250e',
+  },
+  {
     id: 'mercedes-eqc',
     make: 'Mercedes-Benz',
     model: 'EQC',
@@ -468,6 +468,14 @@ const usedCarModels: Array<UsedCarModel> = [
     capacity: 80,
     range: 417,
     evDatabaseURL: 'https://ev-database.org/car/1135/Mercedes-EQC-400-4MATIC',
+  },
+  {
+    id: 'mercedes-e-vito-tourer',
+    make: 'Mercedes-Benz',
+    model: 'eVito Tourer',
+    acceleration: 12.1,
+    capacity: 41,
+    range: 150,
   },
   {
     id: 'open-ampera-e',
