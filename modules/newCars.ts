@@ -57,6 +57,17 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1171/Honda-e',
   },
   {
+    make: 'Honda',
+    model: 'e Advance',
+    heroImageName: 'honda-e',
+    price: 4690000,
+    sellerURL: 'https://www.honda.is/voruflokkar/bilar/honda-e/',
+    acceleration: 8.3,
+    capacity: 32.0,
+    range: 220,
+    evDatabaseURL: 'https://ev-database.org/car/1233/Honda-e-Advance',
+  },
+  {
     make: 'Hyundai',
     model: 'IONIQ Electric',
     heroImageName: 'ioniq',
