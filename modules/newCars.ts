@@ -28,7 +28,8 @@ const newCars: Array<NewCar> = [
     model: 'e-tron S',
     heroImageName: 'e-tron',
     price: 15990000,
-    sellerURL: 'https://www.hekla.is/static/files/efni/verdlistar/audi/etron-s.pdf',
+    sellerURL:
+      'https://www.hekla.is/static/files/efni/verdlistar/audi/etron-s.pdf',
     acceleration: 4.5,
     capacity: 95,
     range: 364,
@@ -286,7 +287,7 @@ const newCars: Array<NewCar> = [
     make: 'Peugeot',
     model: 'e-208',
     heroImageName: 'e-208',
-    price: 4190000,
+    price: 4390000,
     sellerURL:
       'https://www.peugeotisland.is/nyir-bilar/velja-bil/glaenyr-peugeot-e-208/',
     acceleration: 8.1,
@@ -298,7 +299,7 @@ const newCars: Array<NewCar> = [
     make: 'Peugeot',
     model: 'e-2008',
     heroImageName: 'e-2008',
-    price: 4650000,
+    price: 4790000,
     sellerURL:
       'https://www.peugeotisland.is/nyir-bilar/velja-bil/glaenyr-peugeot-e-2008/',
     acceleration: 8.5,
