@@ -521,6 +521,19 @@ export default newCars
 
 export const expectedCars: Array<ExpectedCar> = [
   {
+    make: 'Mercedes-Benz',
+    model: 'EQA',
+    heroImageName: 'mercedes-eqa',
+    price: 7500000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/the-brand/innovation/concept-eqa/details.html',
+    acceleration: 5.0,
+    capacity: 60,
+    range: 400,
+    evDatabaseURL: 'https://ev-database.org/car/1147/Mercedes-EQA',
+    expectedDelivery: 'Snemma 2021',
+  },
+  {
     make: 'Tesla',
     model: 'Model S Plaid',
     heroImageName: 'tesla-model-s-performance',
