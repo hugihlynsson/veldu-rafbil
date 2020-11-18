@@ -6,7 +6,7 @@ const newCars: Array<NewCar> = [
     model: 'e-tron 50',
     heroImageName: 'e-tron-50',
     price: 8890000,
-    sellerURL: 'https://www.audi.is/is/web/is/models/tron/audi-etron-50.html',
+    sellerURL: 'http://www.audi.is/is/web/is/models/tron/audi-etron-50.html',
     acceleration: 6.8,
     capacity: 71,
     range: 339,
