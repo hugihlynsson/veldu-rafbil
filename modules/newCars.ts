@@ -25,8 +25,21 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Audi',
+    model: 'e-tron 55 Sportback',
+    heroImageName: 'e-tron-55-sportback',
+    price: 12890000,
+    sellerURL:
+      'https://www.hekla.is/static/files/efni/verdlistar/audi/etron-sportback.pdf',
+    acceleration: 5.7,
+    capacity: 95,
+    range: 446,
+    evDatabaseURL:
+      'https://ev-database.org/car/1107/Audi-e-tron-Sportback-55-quattro',
+  },
+  {
+    make: 'Audi',
     model: 'e-tron S',
-    heroImageName: 'e-tron',
+    heroImageName: 'e-tron-s',
     price: 15990000,
     sellerURL:
       'https://www.hekla.is/static/files/efni/verdlistar/audi/etron-s.pdf',
@@ -34,6 +47,19 @@ const newCars: Array<NewCar> = [
     capacity: 95,
     range: 364,
     evDatabaseURL: 'https://ev-database.org/car/1271/Audi-e-tron-S-55-quattro',
+  },
+  {
+    make: 'Audi',
+    model: 'e-tron S Sportback',
+    heroImageName: 'e-tron-s-sportback',
+    price: 16390000,
+    sellerURL:
+      'https://www.hekla.is/static/files/efni/verdlistar/audi/etron-s.pdf',
+    acceleration: 4.5,
+    capacity: 95,
+    range: 370,
+    evDatabaseURL:
+      'https://ev-database.org/car/1272/Audi-e-tron-S-Sportback-55-quattro',
   },
   {
     make: 'BMW',
