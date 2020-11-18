@@ -86,7 +86,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Honda',
     model: 'e Advance',
-    heroImageName: 'honda-e',
+    heroImageName: 'honda-e-advance',
     price: 4690000,
     sellerURL: 'https://www.honda.is/voruflokkar/bilar/honda-e/',
     acceleration: 8.3,
