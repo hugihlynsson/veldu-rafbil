@@ -522,14 +522,27 @@ export default newCars
 export const expectedCars: Array<ExpectedCar> = [
   {
     make: 'Mercedes-Benz',
-    model: 'EQA',
+    model: 'EQA 250',
     heroImageName: 'mercedes-eqa',
-    price: 7500000,
+    price: 6790000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/the-brand/innovation/concept-eqa/details.html',
-    acceleration: 5.0,
-    capacity: 60,
-    range: 400,
+    acceleration: 8.0,
+    capacity: 66,
+    range: 417,
+    evDatabaseURL: 'https://ev-database.org/car/1147/Mercedes-EQA',
+    expectedDelivery: 'Snemma 2021',
+  },
+  {
+    make: 'Mercedes-Benz',
+    model: 'EQA 300 4M',
+    heroImageName: 'mercedes-eqa',
+    price: 7390000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/the-brand/innovation/concept-eqa/details.html',
+    acceleration: 6.9,
+    capacity: 66,
+    range: 428,
     evDatabaseURL: 'https://ev-database.org/car/1147/Mercedes-EQA',
     expectedDelivery: 'Snemma 2021',
   },
