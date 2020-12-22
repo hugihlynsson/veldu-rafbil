@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "atob": "^2.1.2",
-    "cheerio": "^1.0.0-rc.3",
+    "cheerio": "^1.0.0-rc.5",
     "dotenv": "^8.2.0",
     "fathom-client": "^3.0.0",
     "firebase-admin": "^9.4.2",
