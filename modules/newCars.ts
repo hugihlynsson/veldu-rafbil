@@ -72,6 +72,17 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1145/BMW-i3-120-Ah',
   },
   {
+    make: 'Citroën',
+    model: 'ë-C4',
+    heroImageName: 'citroen-ec4',
+    price: 4090000,
+    sellerURL: 'https://www.citroen.is/bill/e-c4-rafbill/',
+    acceleration: 9.7,
+    capacity: 50,
+    range: 350,
+    evDatabaseURL: 'https://ev-database.org/car/1286/Citroen-e-C4',
+  },
+  {
     make: 'Honda',
     model: 'e',
     heroImageName: 'honda-e',
