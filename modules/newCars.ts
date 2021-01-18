@@ -510,18 +510,6 @@ const newCars: Array<NewCar> = [
     range: 500,
     evDatabaseURL: 'https://ev-database.org/car/1273/Volkswagen-ID4',
   },
-  {
-    make: 'Volvo',
-    model: 'XC40 P8 AWD Recharge',
-    heroImageName: 'volvo-xc-40',
-    price: 7990000,
-    sellerURL: 'https://www.volvocars.com/is/bilar/volvo/xc40',
-    acceleration: 4.9,
-    capacity: 78,
-    range: 418,
-    evDatabaseURL:
-      'https://ev-database.org/car/1188/Volvo-XC40-P8-AWD-Recharge',
-  },
 ]
 
 export default newCars
@@ -588,5 +576,18 @@ export const expectedCars: Array<ExpectedCar> = [
     range: 840,
     evDatabaseURL: 'https://ev-database.org/car/1207/Tesla-Model-S-Performance',
     expectedDelivery: 'Lok 2021',
+  },
+  {
+    make: 'Volvo',
+    model: 'XC40 P8 AWD Recharge',
+    heroImageName: 'volvo-xc-40',
+    price: 7990000,
+    sellerURL: 'https://www.volvocars.com/is/bilar/volvo/xc40',
+    acceleration: 4.9,
+    capacity: 78,
+    range: 418,
+    evDatabaseURL:
+      'https://ev-database.org/car/1188/Volvo-XC40-P8-AWD-Recharge',
+    expectedDelivery: 'Sumar 2021',
   },
 ]
