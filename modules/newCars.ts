@@ -195,6 +195,17 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1154/Kia-e-Soul-64-kWh',
   },
   {
+    make: 'Lexus',
+    model: 'UX 300e',
+    heroImageName: 'lexus-ux-300e',
+    price: 8490000,
+    sellerURL: 'https://www.lexus.is/car-models/ux-300e/',
+    acceleration: 7.5,
+    capacity: 50,
+    range: 315,
+    evDatabaseURL: 'https://ev-database.org/car/1251/Lexus-UX-300e',
+  },
+  {
     make: 'Mazda',
     model: 'MX-30',
     heroImageName: 'mazda-mx-30',
