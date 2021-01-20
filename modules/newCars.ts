@@ -241,6 +241,18 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1240/Mercedes-EQV-300-Long',
   },
   {
+    make: 'Mercedes-Benz',
+    model: 'EQA 250',
+    heroImageName: 'mercedes-eqa',
+    price: 6790000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/the-brand/innovation/concept-eqa/details.html',
+    acceleration: 8.9,
+    capacity: 66,
+    range: 426,
+    evDatabaseURL: 'https://ev-database.org/car/1147/Mercedes-EQA-250',
+  },
+  {
     make: 'MG',
     model: 'ZS EV',
     heroImageName: 'mg-zs-ev',
@@ -526,19 +538,6 @@ const newCars: Array<NewCar> = [
 export default newCars
 
 export const expectedCars: Array<ExpectedCar> = [
-  {
-    make: 'Mercedes-Benz',
-    model: 'EQA 250',
-    heroImageName: 'mercedes-eqa',
-    price: 6790000,
-    sellerURL:
-      'https://www.mercedes-benz.is/passengercars/the-brand/innovation/concept-eqa/details.html',
-    acceleration: 8.0,
-    capacity: 66,
-    range: 417,
-    evDatabaseURL: 'https://ev-database.org/car/1147/Mercedes-EQA',
-    expectedDelivery: 'Snemma 2021',
-  },
   {
     make: 'Mercedes-Benz',
     model: 'EQA 300 4M',
