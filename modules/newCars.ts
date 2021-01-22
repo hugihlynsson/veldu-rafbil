@@ -230,18 +230,6 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Mercedes-Benz',
-    model: 'EQV',
-    heroImageName: 'eqv',
-    price: 11950000,
-    sellerURL:
-      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/v-class/v-class-447/eqv/labeling.module.html',
-    acceleration: 10.0,
-    capacity: 90,
-    range: 363,
-    evDatabaseURL: 'https://ev-database.org/car/1240/Mercedes-EQV-300-Long',
-  },
-  {
-    make: 'Mercedes-Benz',
     model: 'EQA 250',
     heroImageName: 'mercedes-eqa',
     price: 6790000,
@@ -251,6 +239,42 @@ const newCars: Array<NewCar> = [
     capacity: 66,
     range: 426,
     evDatabaseURL: 'https://ev-database.org/car/1147/Mercedes-EQA-250',
+  },
+  {
+    make: 'Mercedes-Benz',
+    model: 'EQA 300 4MATIC',
+    heroImageName: 'mercedes-eqa-alt',
+    price: 7590000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/the-brand/innovation/concept-eqa/details.html',
+    acceleration: 6.9,
+    capacity: 66,
+    range: 423,
+    evDatabaseURL: 'https://ev-database.org/car/1147/Mercedes-EQA',
+  },
+  {
+    make: 'Mercedes-Benz',
+    model: 'EQA 350 4MATIC',
+    heroImageName: 'mercedes-eqa-alt2',
+    price: 8090000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/the-brand/innovation/concept-eqa/details.html',
+    acceleration: 5.8,
+    capacity: 66,
+    range: 423,
+    evDatabaseURL: 'https://ev-database.org/car/1147/Mercedes-EQA',
+  },
+  {
+    make: 'Mercedes-Benz',
+    model: 'EQV',
+    heroImageName: 'eqv',
+    price: 11950000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/v-class/v-class-447/eqv/labeling.module.html',
+    acceleration: 10.0,
+    capacity: 90,
+    range: 363,
+    evDatabaseURL: 'https://ev-database.org/car/1240/Mercedes-EQV-300-Long',
   },
   {
     make: 'MG',
@@ -538,19 +562,6 @@ const newCars: Array<NewCar> = [
 export default newCars
 
 export const expectedCars: Array<ExpectedCar> = [
-  {
-    make: 'Mercedes-Benz',
-    model: 'EQA 300 4M',
-    heroImageName: 'mercedes-eqa',
-    price: 7390000,
-    sellerURL:
-      'https://www.mercedes-benz.is/passengercars/the-brand/innovation/concept-eqa/details.html',
-    acceleration: 6.9,
-    capacity: 66,
-    range: 428,
-    evDatabaseURL: 'https://ev-database.org/car/1147/Mercedes-EQA',
-    expectedDelivery: 'Snemma 2021',
-  },
   {
     make: 'Skoda',
     model: 'Enyaq iV 60',
