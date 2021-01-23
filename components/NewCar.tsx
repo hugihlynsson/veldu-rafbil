@@ -48,6 +48,7 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad, onGray }) => (
       <h1>
         <span className="make">{car.make}</span>{' '}
         <span className="model">{car.model}</span>
+        <span className="subModel">{car.subModel}</span>
       </h1>
 
       <LinkPill
@@ -122,6 +123,14 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad, onGray }) => (
         }
         .model {
           font-weight: 400;
+        }
+        .subModel {
+          display: block;
+          font-weight: 500;
+          font-size: 16px;
+          color: #AAA;
+          margin-top: -1px;
+          margin-bottom: 8px;
         }
         
         .expectedDelivery {

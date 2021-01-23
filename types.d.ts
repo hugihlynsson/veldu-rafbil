@@ -38,6 +38,7 @@ export interface ProcessedUsedCar extends UsedCar {
 export interface NewCar {
   make: string
   model: string
+  subModel?: string
   heroImageName: string
   price: number
   sellerURL: string

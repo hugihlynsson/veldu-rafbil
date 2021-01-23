@@ -3,7 +3,8 @@ import { NewCar, ExpectedCar } from '../types'
 const newCars: Array<NewCar> = [
   {
     make: 'Audi',
-    model: 'e-tron 50',
+    model: 'e-tron',
+    subModel: '50 Quattro',
     heroImageName: 'e-tron-50',
     price: 8890000,
     sellerURL: 'http://www.audi.is/is/web/is/models/tron/audi-e-tron-2021.html',
@@ -14,7 +15,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Audi',
-    model: 'e-tron 55',
+    model: 'e-tron',
+    subModel: '55 Quattro',
     heroImageName: 'e-tron',
     price: 11990000,
     sellerURL: 'http://www.audi.is/is/web/is/models/tron/audi-e-tron-2021.html',
@@ -25,7 +27,20 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Audi',
-    model: 'e-tron 55 Sportback',
+    model: 'e-tron',
+    subModel: 'S',
+    heroImageName: 'e-tron-s',
+    price: 15990000,
+    sellerURL: 'http://www.audi.is/is/web/is/models/tron/audi-e-tron-2021.html',
+    acceleration: 4.5,
+    capacity: 95,
+    range: 364,
+    evDatabaseURL: 'https://ev-database.org/car/1271/Audi-e-tron-S-55-quattro',
+  },
+  {
+    make: 'Audi',
+    model: 'e-tron Sportback',
+    subModel: '55 Quattro',
     heroImageName: 'e-tron-55-sportback',
     price: 12890000,
     sellerURL:
@@ -38,18 +53,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Audi',
-    model: 'e-tron S',
-    heroImageName: 'e-tron-s',
-    price: 15990000,
-    sellerURL: 'http://www.audi.is/is/web/is/models/tron/audi-e-tron-2021.html',
-    acceleration: 4.5,
-    capacity: 95,
-    range: 364,
-    evDatabaseURL: 'https://ev-database.org/car/1271/Audi-e-tron-S-55-quattro',
-  },
-  {
-    make: 'Audi',
-    model: 'e-tron S Sportback',
+    model: 'e-tron Sportback',
+    subModel: 'S',
     heroImageName: 'e-tron-s-sportback',
     price: 16390000,
     sellerURL:
@@ -95,7 +100,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Honda',
-    model: 'e Advance',
+    model: 'e',
+    subModel: 'Advance',
     heroImageName: 'honda-e-advance',
     price: 4690000,
     sellerURL: 'https://www.honda.is/voruflokkar/bilar/honda-e/',
@@ -118,6 +124,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Hyundai',
     model: 'Kona Electric',
+    subModel: '39 kWh',
     heroImageName: 'kona-39',
     price: 5290000,
     sellerURL: 'https://www.hyundai.is/nyir/kona-ev/yfirlit',
@@ -130,6 +137,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Hyundai',
     model: 'Kona Electric',
+    subModel: '64 kWh',
     heroImageName: 'kona',
     price: 5990000,
     sellerURL: 'https://www.hyundai.is/nyir/kona-ev/yfirlit',
@@ -153,6 +161,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Kia',
     model: 'e-Niro',
+    subModel: '39 kWh',
     heroImageName: 'e-niro-alt',
     price: 4990777,
     sellerURL: 'https://www.kia.com/is/nyir-bilar/e-niro/upplifdu/',
@@ -164,6 +173,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Kia',
     model: 'e-Niro',
+    subModel: '64 kWh',
     heroImageName: 'e-niro',
     price: 5790777,
     sellerURL: 'https://www.kia.com/is/nyir-bilar/e-niro/upplifdu/',
@@ -175,6 +185,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Kia',
     model: 'e-Soul',
+    subModel: '39 kWh',
     heroImageName: 'e-soul-alt',
     price: 4990777,
     sellerURL: 'https://www.kia.com/is/nyir-bilar/e-soul/upplifdu/',
@@ -186,6 +197,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Kia',
     model: 'e-Soul',
+    subModel: '64 kWh',
     heroImageName: 'e-soul',
     price: 5990777,
     sellerURL: 'https://www.kia.com/is/nyir-bilar/e-soul/upplifdu/',
@@ -196,7 +208,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Lexus',
-    model: 'UX 300e',
+    model: 'UX',
+    subModel: '300e',
     heroImageName: 'lexus-ux-300e',
     price: 8490000,
     sellerURL: 'https://www.lexus.is/car-models/ux-300e/',
@@ -219,6 +232,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Mercedes-Benz',
     model: 'EQC',
+    subModel: '400 4MATIC',
     heroImageName: 'eqc',
     price: 9590000,
     sellerURL:
@@ -230,7 +244,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Mercedes-Benz',
-    model: 'EQA 250',
+    model: 'EQA',
+    subModel: '250',
     heroImageName: 'mercedes-eqa',
     price: 6790000,
     sellerURL:
@@ -242,7 +257,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Mercedes-Benz',
-    model: 'EQA 300 4MATIC',
+    model: 'EQA',
+    subModel: '300 4MATIC',
     heroImageName: 'mercedes-eqa-alt',
     price: 7590000,
     sellerURL:
@@ -254,7 +270,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Mercedes-Benz',
-    model: 'EQA 350 4MATIC',
+    model: 'EQA',
+    subModel: '350 4MATIC',
     heroImageName: 'mercedes-eqa-alt2',
     price: 8090000,
     sellerURL:
@@ -267,6 +284,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Mercedes-Benz',
     model: 'EQV',
+    subModel: '300',
     heroImageName: 'eqv',
     price: 11950000,
     sellerURL:
@@ -322,7 +340,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Nissan',
-    model: 'Leaf e+',
+    model: 'Leaf',
+    subModel: 'e+',
     heroImageName: 'leaf-eplus',
     price: 5890000,
     sellerURL: 'https://www.nissan.is/vehicles/new-vehicles/leaf.html',
@@ -390,7 +409,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Porsche',
-    model: 'Taycan 4s',
+    model: 'Taycan',
+    subModel: '4s',
     heroImageName: 'taycan-4s',
     price: 13900000,
     sellerURL: 'https://benni.is/Nyir_Bilar/Porsche/Taycan/',
@@ -401,7 +421,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Renault',
-    model: 'Zoe R110',
+    model: 'Zoe',
+    subModel: 'R110',
     heroImageName: 'zoe-r110',
     price: 4450000,
     sellerURL: 'https://www.renault.is/cars/zoe/yfirlit.html',
@@ -412,7 +433,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Renault',
-    model: 'Zoe R135',
+    model: 'Zoe',
+    subModel: 'R135',
     heroImageName: 'zoe-r135',
     price: 4950000,
     sellerURL: 'https://www.renault.is/cars/zoe/yfirlit.html',
@@ -423,9 +445,10 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Renault',
-    model: 'MAXI II EV',
+    model: 'Kangoo',
+    subModel: 'MAXI II EV',
     heroImageName: 'maxi',
-    price: 5150000,
+    price: 4950000,
     sellerURL: 'https://renault.is/cars/kangoo/yfirlit.html',
     acceleration: 22.4,
     capacity: 33,
@@ -434,7 +457,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Tesla',
-    model: 'Model 3 Standard Range Plus',
+    model: 'Model 3',
+    subModel: 'Standard Range Plus',
     heroImageName: 'tesla-model-3-srplus',
     price: 5683335,
     sellerURL: 'https://www.tesla.com/is_IS/model3/design',
@@ -446,7 +470,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Tesla',
-    model: 'Model 3 Long Range',
+    model: 'Model 3',
+    subModel: 'Long Range',
     heroImageName: 'tesla-model-3-lr',
     price: 6427551,
     sellerURL: 'https://www.tesla.com/is_IS/model3/design',
@@ -458,7 +483,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Tesla',
-    model: 'Model 3 Performance',
+    model: 'Model 3',
+    subModel: 'Performance',
     heroImageName: 'tesla-model-3-performance',
     price: 7489211,
     sellerURL: 'https://www.tesla.com/is_IS/model3/design',
@@ -470,7 +496,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Tesla',
-    model: 'Model S Long Range',
+    model: 'Model S',
+    subModel: 'Long Range',
     heroImageName: 'tesla-model-s-lr',
     price: 11674191,
     sellerURL: 'https://www.tesla.com/is_IS/models/design',
@@ -481,7 +508,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Tesla',
-    model: 'Model S Performance',
+    model: 'Model S',
+    subModel: 'Performance',
     heroImageName: 'tesla-model-s-performance',
     price: 14154191,
     sellerURL: 'https://www.tesla.com/is_IS/models/design',
@@ -492,7 +520,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Tesla',
-    model: 'Model X Long Range',
+    model: 'Model X',
+    subModel: 'Long Range',
     heroImageName: 'tesla-model-x-lr',
     price: 12914191,
     sellerURL: 'https://www.tesla.com/is_IS/modelx/design',
@@ -503,7 +532,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Tesla',
-    model: 'Model X Performance',
+    model: 'Model X',
+    subModel: 'Performance',
     heroImageName: 'tesla-model-x-performance',
     price: 15394191,
     sellerURL: 'https://www.tesla.com/is_IS/modelx/design',
@@ -525,7 +555,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Volkswagen',
-    model: 'ID.3 Pro Performance',
+    model: 'ID.3',
+    subModel: 'Pro Performance',
     heroImageName: 'vw-id-3',
     price: 5190000,
     sellerURL: 'https://www.volkswagen.is/is/bilar/id3.html',
@@ -537,7 +568,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Volkswagen',
-    model: 'ID.3 Pro S',
+    model: 'ID.3',
+    subModel: 'Pro S',
     heroImageName: 'vw-id-3-alt',
     price: 6490000,
     sellerURL: 'https://www.volkswagen.is/is/bilar/id3.html',
@@ -548,7 +580,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Volkswagen',
-    model: 'ID.4 Pro Performance 2WD',
+    model: 'ID.4',
+    subModel: 'Pro Performance 2WD',
     heroImageName: 'vw-id-4',
     price: 6490000,
     sellerURL: 'https://www.volkswagen.is/is/rafbilar/id-fjolskyldan/id4.html',
@@ -564,7 +597,8 @@ export default newCars
 export const expectedCars: Array<ExpectedCar> = [
   {
     make: 'Skoda',
-    model: 'Enyaq iV 60',
+    model: 'Enyaq',
+    subModel: 'iV 60',
     heroImageName: 'skoda-enyaq',
     price: 5600000,
     sellerURL: 'https://www.skoda.is/models/enyaq/enyaq',
@@ -576,7 +610,8 @@ export const expectedCars: Array<ExpectedCar> = [
   },
   {
     make: 'Skoda',
-    model: 'Enyaq iV 80',
+    model: 'Enyaq',
+    subModel: 'iV 80',
     heroImageName: 'skoda-enyaq-alt',
     price: 6600000,
     sellerURL: 'https://www.skoda.is/models/enyaq/enyaq',
@@ -588,7 +623,8 @@ export const expectedCars: Array<ExpectedCar> = [
   },
   {
     make: 'Tesla',
-    model: 'Model S Plaid',
+    model: 'Model S',
+    subModel: 'Plaid',
     heroImageName: 'tesla-model-s-performance',
     price: 19672191,
     sellerURL: 'https://www.tesla.com/is_IS/models/design',
@@ -600,7 +636,8 @@ export const expectedCars: Array<ExpectedCar> = [
   },
   {
     make: 'Volvo',
-    model: 'XC40 P8 AWD Recharge',
+    model: 'XC40',
+    subModel: 'P8 AWD Recharge',
     heroImageName: 'volvo-xc-40',
     price: 7990000,
     sellerURL: 'https://www.volvocars.com/is/bilar/volvo/xc40',

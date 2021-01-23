@@ -31,9 +31,12 @@ const queryToSorting: { [key in SortingQuery]: Sorting } = {
 }
 
 const carSorter = (sorting: Sorting) => (a: NewCar, b: NewCar) => {
+  let padPrice = (car: NewCar): string => car.price.toString().padStart(9, '0')
   switch (sorting) {
     case 'name':
-      return `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`)
+      return `${a.make} ${a.model} ${padPrice(a)}`.localeCompare(
+        `${b.make} ${b.model} ${padPrice(b)}`,
+      )
     case 'price':
       return a.price - b.price
     case 'range':
@@ -121,7 +124,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
         {stableSort(newCars, carSorter(sorting)).map((car, i) => (
           <Car
             car={car}
-            key={`${car.make} ${car.model} ${car.capacity}`}
+            key={`${car.make} ${car.model} ${car.subModel}`}
             lazyLoad={i >= 2}
           />
         ))}
@@ -138,7 +141,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
               <Car
                 lazyLoad
                 car={car}
-                key={`${car.make} ${car.model} ${car.capacity}`}
+                key={`${car.make} ${car.model} ${car.subModel}`}
                 onGray
               />
             ))}
