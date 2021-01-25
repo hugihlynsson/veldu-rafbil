@@ -356,7 +356,7 @@ const newCars: Array<NewCar> = [
     model: 'Leaf',
     subModel: 'e+',
     heroImageName: 'leaf-eplus',
-    price: 5890000,
+    price: 5490000,
     sellerURL: 'https://www.nissan.is/vehicles/new-vehicles/leaf.html',
     acceleration: 7.3,
     capacity: 62,
