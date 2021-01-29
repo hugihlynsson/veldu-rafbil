@@ -489,7 +489,7 @@ const newCars: Array<NewCar> = [
     capacity: 55,
     range: 430,
     evDatabaseURL:
-      'https://ev-database.org/car/1177/Tesla-Model-3-Standard-Range-Plus',
+      'https://ev-database.org/car/1320/Tesla-Model-3-Standard-Range-Plus',
   },
   {
     make: 'Tesla',
@@ -499,10 +499,10 @@ const newCars: Array<NewCar> = [
     price: 6427551,
     sellerURL: 'https://www.tesla.com/is_IS/model3/design',
     acceleration: 4.4,
-    capacity: 75,
+    capacity: 74,
     range: 580,
     evDatabaseURL:
-      'https://ev-database.org/car/1138/Tesla-Model-3-Long-Range-Dual-Motor',
+      'https://ev-database.org/car/1321/Tesla-Model-3-Long-Range-Dual-Motor',
   },
   {
     make: 'Tesla',
@@ -512,10 +512,10 @@ const newCars: Array<NewCar> = [
     price: 7489211,
     sellerURL: 'https://www.tesla.com/is_IS/model3/design',
     acceleration: 3.3,
-    capacity: 75,
+    capacity: 82,
     range: 567,
     evDatabaseURL:
-      'https://ev-database.org/car/1139/Tesla-Model-3-Long-Range-Performance',
+      'https://ev-database.org/car/1322/Tesla-Model-3-Long-Range-Performance',
   },
   {
     make: 'Tesla',
@@ -527,7 +527,7 @@ const newCars: Array<NewCar> = [
     acceleration: 3.2,
     capacity: 100,
     range: 663,
-    evDatabaseURL: 'https://ev-database.org/car/1194/Tesla-Model-S-Long-Range',
+    evDatabaseURL: 'https://ev-database.org/car/1404/Tesla-Model-S-Long-Range',
   },
   {
     make: 'Tesla',
@@ -539,7 +539,7 @@ const newCars: Array<NewCar> = [
     acceleration: 2.1,
     capacity: 100,
     range: 628,
-    evDatabaseURL: 'https://ev-database.org/car/1207/Tesla-Model-S-Performance',
+    evDatabaseURL: 'https://ev-database.org/car/1405/Tesla-Model-S-Plaid',
   },
   {
     make: 'Tesla',
@@ -551,7 +551,7 @@ const newCars: Array<NewCar> = [
     acceleration: 3.9,
     capacity: 100,
     range: 580,
-    evDatabaseURL: 'https://ev-database.org/car/1198/Tesla-Model-X-Long-Range',
+    evDatabaseURL: 'https://ev-database.org/car/1407/Tesla-Model-X-Long-Range',
   },
   {
     make: 'Tesla',
@@ -563,7 +563,7 @@ const newCars: Array<NewCar> = [
     acceleration: 2.6,
     capacity: 100,
     range: 547,
-    evDatabaseURL: 'https://ev-database.org/car/1326/Tesla-Model-X-Performance',
+    evDatabaseURL: 'https://ev-database.org/car/1408/Tesla-Model-X-Plaid',
   },
   {
     make: 'Volkswagen',
@@ -654,7 +654,7 @@ export const expectedCars: Array<ExpectedCar> = [
     acceleration: 2.0,
     capacity: 130,
     range: 840,
-    evDatabaseURL: 'https://ev-database.org/car/1207/Tesla-Model-S-Performance',
+    evDatabaseURL: 'https://ev-database.org/car/1406/Tesla-Model-S-Plaidplus',
     expectedDelivery: 'Lok 2021',
   },
   {
