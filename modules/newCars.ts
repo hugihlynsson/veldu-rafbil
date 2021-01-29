@@ -243,6 +243,16 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1241/Mazda-MX-30',
   },
   {
+    make: 'Maxus',
+    model: 'EUNIQ 5',
+    heroImageName: 'maxus-euniq-5',
+    price: 6690000,
+    sellerURL: 'https://vatt.is/euniq/',
+    acceleration: 9.5,
+    capacity: 52.5,
+    range: 260,
+  },
+  {
     make: 'Mercedes-Benz',
     model: 'EQC',
     subModel: '400 4MATIC',

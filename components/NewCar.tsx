@@ -78,15 +78,17 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad, onGray }) => (
           <div className="info-item-value">{car.range} km</div>
         </div>
       </div>
-      <a
-        className="more-info"
-        target="_blank"
-        href={car.evDatabaseURL}
-        rel="noopener"
-        onClick={() => trackGoal('DGRMWSOJ', 0)}
-      >
-        Nánar á ev-database.org ↗
-      </a>
+      {car.evDatabaseURL && (
+        <a
+          className="more-info"
+          target="_blank"
+          href={car.evDatabaseURL}
+          rel="noopener"
+          onClick={() => trackGoal('DGRMWSOJ', 0)}
+        >
+          Nánar á ev-database.org ↗
+        </a>
+      )}
     </div>
 
     <style jsx>

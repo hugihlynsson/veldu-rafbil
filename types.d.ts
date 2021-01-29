@@ -45,7 +45,7 @@ export interface NewCar {
   acceleration: number
   capacity: number
   range: number
-  evDatabaseURL: string
+  evDatabaseURL?: string
 }
 
 export interface ExpectedCar extends NewCar {
