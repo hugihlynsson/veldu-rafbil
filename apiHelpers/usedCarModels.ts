@@ -106,6 +106,15 @@ const usedCarModels: Array<UsedCarModel> = [
     evDatabaseURL: 'https://ev-database.org/car/1081/Volkswagen-e-Up',
   },
   {
+    id: 'vw-eup-37',
+    make: 'Volkswagen',
+    model: 'e-Up!',
+    acceleration: 11.9,
+    capacity: 36.8,
+    range: 260,
+    evDatabaseURL: 'https://ev-database.org/car/1189/Volkswagen-e-Up',
+  },
+  {
     id: 'volkswagen-egolf-24',
     make: 'Volkswagen',
     model: 'e-Golf',
@@ -469,6 +478,15 @@ const usedCarModels: Array<UsedCarModel> = [
     capacity: 90,
     range: 470,
     evDatabaseURL: 'https://ev-database.org/car/1097/Jaguar-I-Pace',
+  },
+  {
+    id: 'jaguar-i-pace-ev-320',
+    make: 'Jaguar',
+    model: 'I-PACE',
+    acceleration: 6.4,
+    capacity: 90,
+    range: 470,
+    evDatabaseURL: 'https://ev-database.org/car/1307/Jaguar-I-Pace-EV320',
   },
   {
     id: 'mercedes-b-250e',
