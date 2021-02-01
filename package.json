@@ -9,7 +9,7 @@
     "dotenv": "^8.2.0",
     "fathom-client": "^3.0.0",
     "firebase-admin": "^9.4.2",
-    "next": "^10.0.5",
+    "next": "^10.0.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-lazy-load": "^3.0.13",
