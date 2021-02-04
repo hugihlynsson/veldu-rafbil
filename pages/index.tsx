@@ -13,14 +13,15 @@ import newCars, { expectedCars } from '../modules/newCars'
 import { NewCar } from '../types'
 import stableSort from '../components/stableSort'
 
-type Sorting = 'name' | 'price' | 'range' | 'acceleration'
-type SortingQuery = 'nafni' | 'verdi' | 'draegni' | 'hrodun'
+type Sorting = 'name' | 'price' | 'range' | 'acceleration' | 'value'
+type SortingQuery = 'nafni' | 'verdi' | 'draegni' | 'hrodun' | 'virdi'
 
 const sortingToQuery: { [key in Sorting]: SortingQuery } = {
   name: 'nafni',
   price: 'verdi',
   range: 'draegni',
   acceleration: 'hrodun',
+  value: 'virdi',
 }
 
 const queryToSorting: { [key in SortingQuery]: Sorting } = {
@@ -28,6 +29,7 @@ const queryToSorting: { [key in SortingQuery]: Sorting } = {
   verdi: 'price',
   draegni: 'range',
   hrodun: 'acceleration',
+  virdi: 'value',
 }
 
 const carSorter = (sorting: Sorting) => (a: NewCar, b: NewCar) => {
@@ -43,6 +45,8 @@ const carSorter = (sorting: Sorting) => (a: NewCar, b: NewCar) => {
       return b.range - a.range
     case 'acceleration':
       return a.acceleration - b.acceleration
+    case 'value':
+      return a.price / a.range - b.price / b.range
   }
 }
 
