@@ -130,7 +130,7 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad, onGray }) => (
           display: block;
           font-weight: 500;
           font-size: 16px;
-          color: #AAA;
+          color: #888;
           margin-top: -1px;
           margin-bottom: 8px;
         }
