@@ -30,7 +30,7 @@ const getRange = (modelItem: Model): number => {
   }
 
   if (modelItem.model.rangeNEDC) {
-    return Number(estimateWLTP(modelItem.model.rangeNEDC))
+    return estimateWLTP(modelItem.model.rangeNEDC)
   }
 
   return 0
@@ -179,11 +179,11 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
             currentValue={sorting}
             items={[
               ['Verði', 'price'],
-              // ['Verði á km', 'value'],
               // ['Aldri', 'age'],
               ['Drægni', 'range'],
               ['Hröðun', 'acceleration'],
               ['Nafni', 'name'],
+              ['Verði á km', 'value'],
             ]}
             onClick={setSorting}
           />
@@ -194,9 +194,9 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
             .map(
               ([id, cars]): Model => ({
                 model: usedCarModels.find((model) => model.id === id)!,
-                images: cars.map((car) => car.image).filter(Boolean) as Array<
-                  string
-                >,
+                images: cars
+                  .map((car) => car.image)
+                  .filter(Boolean) as Array<string>,
                 count: cars.length,
                 lowestPrice: cars.reduce(
                   (lowest: number | undefined, { price }) =>
@@ -226,6 +226,7 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
                 images={images}
                 lowestPrice={lowestPrice}
                 years={years}
+                showValue={sorting === 'value'}
               />
             ))}
         </div>

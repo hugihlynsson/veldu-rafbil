@@ -61,7 +61,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
             {car.metadata
               ? car.metadata.range ??
                 (car.metadata.rangeNEDC &&
-                  estimateWLTP(car.metadata.rangeNEDC)) ??
+                  estimateWLTP(car.metadata.rangeNEDC).toFixed(0)) ??
                 '—'
               : '—'}{' '}
             km

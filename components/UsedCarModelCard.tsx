@@ -6,7 +6,6 @@ import estimateWLTP from '../modules/estimateWLTP'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import selectCarImageSize from '../modules/selectCarImageSize'
 import isSingular from '../modules/isSingular'
-import { isNumber } from 'util'
 
 type ImageDisplay = 0 | 1 | 4 | 6 | 8 | 9
 
@@ -62,7 +61,7 @@ const getRange = (years: Array<number>): string => {
     current < lowest ? current : lowest,
   )
 
-  if (isNumber(lowest) && lowest === highest) {
+  if (typeof lowest === 'number' && lowest === highest) {
     return highest.toString()
   }
 
@@ -78,6 +77,7 @@ export interface Props {
   lowestPrice?: number
   model: UsedCarModel
   years: Array<number>
+  showValue?: boolean
 }
 
 const UsedCarModelCars: FunctionComponent<Props> = ({
@@ -86,6 +86,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
   lowestPrice,
   model,
   years,
+  showValue,
 }) => (
   <article>
     <Link href="/notadir/[id]" as={`/notadir/${model.id}`}>
@@ -160,7 +161,8 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
               </div>
               <div className="info-item-value">
                 {model.range ??
-                  (model.rangeNEDC && estimateWLTP(model.rangeNEDC)) ??
+                  (model.rangeNEDC &&
+                    estimateWLTP(model.rangeNEDC).toFixed(0)) ??
                   '—'}{' '}
                 km
               </div>
@@ -174,6 +176,18 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
             til sölu
             {lowestPrice && (
               <strong> frá {addDecimalSeprators(lowestPrice)} kr.</strong>
+            )}
+            {showValue && lowestPrice && (
+              <span className="value">
+                {addDecimalSeprators(
+                  Math.round(
+                    lowestPrice /
+                      (model.range ??
+                        (model.rangeNEDC ? estimateWLTP(model.rangeNEDC) : 1)),
+                  ),
+                )}{' '}
+                kr. á km
+              </span>
             )}
           </p>
         </div>
@@ -290,6 +304,20 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
       }
       p strong {
         font-weight: 600;
+      }
+
+      .value {
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 4px;
+        margin-top: 3px;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 10px;
+        background-color: #eee;
+        color: #444;
+        border-radius: 16px;
+        padding: 1px 6px 2px;
       }
 
       @media screen and (min-width: 480px) {
