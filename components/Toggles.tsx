@@ -24,7 +24,7 @@ export default function Toggles<P>({ items, onClick, currentValue }: Props<P>) {
         {`
           .toggles {
             display: flex;
-            flex-wrap: wrap;
+            max-width: 100%;
             border: 1px solid #eee;
             align-self: flex-start;
             border-radius: 4px;
@@ -39,6 +39,8 @@ export default function Toggles<P>({ items, onClick, currentValue }: Props<P>) {
             justify-content: center;
             align-items: center;
             border-right: 1px solid #eee;
+            white-space: nowrap;
+            min-width: 0;
           }
           .toggle:last-child {
             border-right-width: 0;
