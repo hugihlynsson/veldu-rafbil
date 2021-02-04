@@ -13,9 +13,15 @@ interface Props {
   car: NewCarType | ExpectedCar
   lazyLoad: boolean
   onGray?: boolean
+  showValue?: boolean
 }
 
-const NewCar: FunctionComponent<Props> = ({ car, lazyLoad, onGray }) => (
+const NewCar: FunctionComponent<Props> = ({
+  car,
+  lazyLoad,
+  onGray,
+  showValue,
+}) => (
   <article>
     <div className="imageBox">
       <div className="imageSizer" />
@@ -55,7 +61,14 @@ const NewCar: FunctionComponent<Props> = ({ car, lazyLoad, onGray }) => (
         onGray={Boolean(onGray)}
         href={car.sellerURL}
         external
-        extra={(car as ExpectedCar).expectedDelivery && 'áætlað verð ↗'}
+        extra={
+          ((car as ExpectedCar).expectedDelivery && 'áætlað verð ↗') ||
+          (showValue
+            ? `${addDecimalSeprators(
+                Math.round(car.price / car.range),
+              )} kr. á km.`
+            : undefined)
+        }
         onClick={() => trackGoal('OBBPADY0', 0)}
       >
         {addDecimalSeprators(car.price)} kr.

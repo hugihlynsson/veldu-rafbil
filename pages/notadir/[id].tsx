@@ -122,7 +122,8 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
                 </div>
                 <div className="info-item-value">
                   {model.range ??
-                    (model.rangeNEDC && estimateWLTP(model.rangeNEDC))}
+                    (model.rangeNEDC &&
+                      estimateWLTP(model.rangeNEDC).toFixed(0))}
                   km
                 </div>
               </div>

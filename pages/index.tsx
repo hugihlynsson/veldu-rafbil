@@ -120,6 +120,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
               ['Verði', 'price'],
               ['Drægni', 'range'],
               ['Hröðun', 'acceleration'],
+              ['Verði á km', 'value'],
             ]}
             onClick={setSorting}
           />
@@ -130,6 +131,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
             car={car}
             key={`${car.make} ${car.model} ${car.subModel}`}
             lazyLoad={i >= 2}
+            showValue={sorting === 'value'}
           />
         ))}
       </div>
