@@ -272,7 +272,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'mercedes-eqa',
     price: 6790000,
     sellerURL:
-      'https://www.mercedes-benz.is/passengercars/the-brand/innovation/concept-eqa/details.html',
+      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/brochures-pricelists/teaser/_jcr_content/par/productinfotextimage/interactions.attachments.5.EQA_verdlisti.pdf',
     acceleration: 8.9,
     capacity: 66,
     range: 426,
@@ -285,7 +285,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'mercedes-eqa-alt',
     price: 7590000,
     sellerURL:
-      'https://www.mercedes-benz.is/passengercars/the-brand/innovation/concept-eqa/details.html',
+      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/brochures-pricelists/teaser/_jcr_content/par/productinfotextimage/interactions.attachments.5.EQA_verdlisti.pdf',
     acceleration: 6.9,
     capacity: 66,
     range: 423,
@@ -298,7 +298,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'mercedes-eqa-alt2',
     price: 8090000,
     sellerURL:
-      'https://www.mercedes-benz.is/passengercars/the-brand/innovation/concept-eqa/details.html',
+      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/brochures-pricelists/teaser/_jcr_content/par/productinfotextimage/interactions.attachments.5.EQA_verdlisti.pdf',
     acceleration: 5.8,
     capacity: 66,
     range: 423,
