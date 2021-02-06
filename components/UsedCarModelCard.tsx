@@ -176,7 +176,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
             til sölu
             {lowestPrice && (
               <strong> frá {addDecimalSeprators(lowestPrice)} kr.</strong>
-            )}
+            )}{' '}
             {showValue && lowestPrice && (
               <span className="value">
                 {addDecimalSeprators(
@@ -301,6 +301,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
       p {
         margin-bottom: 2px;
         margin-top: 1.5em;
+        line-height: 1.5;
       }
       p strong {
         font-weight: 600;
@@ -309,15 +310,14 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
       .value {
         display: inline-block;
         vertical-align: top;
-        margin-left: 4px;
-        margin-top: 3px;
+        margin-top: 2px;
         text-transform: uppercase;
         font-weight: 700;
         font-size: 10px;
         background-color: #eee;
         color: #444;
         border-radius: 16px;
-        padding: 1px 6px 2px;
+        padding: 2px 8px 2px;
       }
 
       @media screen and (min-width: 480px) {
