@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@types/atob": "^2.1.2",
-    "@types/cheerio": "^0.22.23",
+    "@types/cheerio": "^0.22.24",
     "@types/react": "^17.0.1",
     "@types/node": "14.14.25",
     "@types/react-dom": "^17.0.0",
