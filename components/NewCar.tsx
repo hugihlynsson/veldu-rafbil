@@ -1,13 +1,10 @@
 import { FunctionComponent } from 'react'
-import LazyLoad from 'react-lazy-load'
 import { trackGoal } from 'fathom-client'
+import Image from 'next/image';
 
 import { NewCar as NewCarType, ExpectedCar } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import LinkPill from './LinkPill'
-
-const getSrcSet = (name: string) =>
-  `/images/${name}-540w.jpg 540w, /images/${name}-1080w.jpg 1080w, /images/${name}-1920w.jpg 1920w`
 
 interface Props {
   car: NewCarType | ExpectedCar
@@ -24,24 +21,16 @@ const NewCar: FunctionComponent<Props> = ({
 }) => (
   <article>
     <div className="imageBox">
-      <div className="imageSizer" />
-      {lazyLoad ? (
-        <LazyLoad offset={1000} debounce={false}>
-          <img
-            alt=""
-            sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
-            srcSet={getSrcSet(car.heroImageName)}
-            src={`/images/${car.heroImageName}-1080w.jpg`}
-          />
-        </LazyLoad>
-      ) : (
-        <img
-          alt=""
-          sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
-          srcSet={getSrcSet(car.heroImageName)}
-          src={`/images/${car.heroImageName}-1080w.jpg`}
-        />
-      )}
+      <Image
+        priority={!lazyLoad}
+        alt=""
+        sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
+        src={`/images/${car.heroImageName}.jpg`}
+        width={1920}
+        height={1280}
+        layout="responsive"
+        className="image"
+      />
     </div>
 
     <div className="content">
@@ -65,8 +54,8 @@ const NewCar: FunctionComponent<Props> = ({
           ((car as ExpectedCar).expectedDelivery && 'áætlað verð ↗') ||
           (showValue
             ? `${addDecimalSeprators(
-                Math.round(car.price / car.range),
-              )} kr. á km.`
+              Math.round(car.price / car.range),
+            )} kr. á km.`
             : undefined)
         }
         onClick={() => trackGoal('OBBPADY0', 0)}
@@ -108,21 +97,6 @@ const NewCar: FunctionComponent<Props> = ({
       {`
         article {
           margin-bottom: 32px;
-        }
-
-        .imageBox {
-          display: block;
-          position: relative;
-        }
-        .imageSizer {
-          width: 100%;
-          padding-bottom: 66.667%;
-        }
-        img {
-          position: absolute;
-          top: 0;
-          width: 100%;
-          height: auto;
         }
 
         .content {
@@ -206,12 +180,14 @@ const NewCar: FunctionComponent<Props> = ({
           }
 
           .imageBox {
+            display: block;
+            position: relative;
             width: 40%;
             flex-grow: 1;
             align-self: center;
           }
 
-          img {
+          .image {
             border-radius: 2px;
           }
 
