@@ -1,7 +1,4 @@
 {
-  "scope": "hugihlynsson",
-  "version": 2,
-  "regions": ["lhr"],
   "env": {
     "FIREBASE_PROJECT_ID": "@firebase-project-id",
     "FIREBASE_CLIENT_EMAIL": "@firebase-client-email",
