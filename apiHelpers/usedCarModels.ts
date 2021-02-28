@@ -569,6 +569,17 @@ const usedCarModels: Array<UsedCarModel> = [
     range: 220,
     evDatabaseURL: 'https://ev-database.org/car/1233/Honda-e-Advance',
   },
+  {
+    make: 'Mini Cooper',
+    model: 'SE',
+    id: 'mini-cooper-se',
+    price: 4790000,
+    sellerURL: 'https://www.mini.is/is_IS/home/range/electric.html',
+    acceleration: 7.3,
+    capacity: 28.9,
+    range: 232,
+    evDatabaseURL: 'https://ev-database.org/car/1163/Mini-Cooper-SE',
+  },
 ]
 
 export default usedCarModels
