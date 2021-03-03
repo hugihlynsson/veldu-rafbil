@@ -734,6 +734,20 @@ export const expectedCars: Array<ExpectedCar> = [
   },
   {
     make: 'Volvo',
+    model: 'C40',
+    subModel: 'Recharge',
+    heroImageName: 'volvo-c40',
+    price: 7990000,
+    sellerURL: 'https://www.volvocars.com/is/why-volvo/human-innovation/future-of-driving/the-ultimate-safety-test',
+    acceleration: 4.9,
+    capacity: 78,
+    range: 420,
+    evDatabaseURL:
+      'https://ev-database.org/car/1421/Volvo-C40-Recharge',
+    expectedDelivery: 'Haust 2021',
+  },
+  {
+    make: 'Volvo',
     model: 'XC40',
     subModel: 'P8 AWD Recharge',
     heroImageName: 'volvo-xc-40',
