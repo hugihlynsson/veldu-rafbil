@@ -8,21 +8,18 @@ import LinkPill from './LinkPill'
 
 interface Props {
   car: NewCarType | ExpectedCar
-  lazyLoad: boolean
   onGray?: boolean
   showValue?: boolean
 }
 
 const NewCar: FunctionComponent<Props> = ({
   car,
-  lazyLoad,
   onGray,
   showValue,
 }) => (
   <article>
     <div className="imageBox">
       <Image
-        priority={!lazyLoad}
         alt=""
         sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
         src={`/images/${car.heroImageName}.jpg`}
