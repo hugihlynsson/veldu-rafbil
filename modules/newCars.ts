@@ -70,7 +70,7 @@ const newCars: Array<NewCar> = [
     model: 'ë-C4',
     heroImageName: 'citroen-ec4',
     price: 4090000,
-    sellerURL: 'https://www.citroen.is/bill/e-c4-rafbill/',
+    sellerURL: 'https://www.citroen.is/bill/citroen-e-c4-rafbill/',
     acceleration: 9.7,
     capacity: 50,
     range: 350,
