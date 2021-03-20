@@ -730,6 +730,32 @@ export default newCars
 
 export const expectedCars: Array<ExpectedCar> = [
   {
+    make: 'BMW',
+    model: 'iX',
+    subModel: 'xDrive 40',
+    heroImageName: 'bmw-ix',
+    price: 12000000,
+    sellerURL: 'https://www.bmw.is/is/all-models/bmw-i/bmw-ix/2020/bmw-ix.html',
+    acceleration: 6.1,
+    capacity: 75,
+    range: 400,
+    evDatabaseURL: 'https://ev-database.org/car/1472/BMW-iX-xDrive-40',
+    expectedDelivery: 'Haust 2021',
+  },
+  {
+    make: 'BMW',
+    model: 'iX',
+    subModel: 'xDrive 50',
+    heroImageName: 'bmw-ix-alt',
+    price: 15500000,
+    sellerURL: 'https://www.bmw.is/is/all-models/bmw-i/bmw-ix/2020/bmw-ix.html',
+    acceleration: 4.8,
+    capacity: 110,
+    range: 600,
+    evDatabaseURL: 'https://ev-database.org/car/1473/BMW-iX-xDrive-50',
+    expectedDelivery: 'Haust 2021',
+  },
+  {
     make: 'MG',
     model: ' Marvel R',
     heroImageName: 'mg-marvel-r',
