@@ -730,6 +730,18 @@ export default newCars
 
 export const expectedCars: Array<ExpectedCar> = [
   {
+    make: 'MG',
+    model: ' Marvel R',
+    heroImageName: 'mg-marvel-r',
+    price: 5500000,
+    sellerURL: 'https://mgmotor.eu/is-IS/model/marvel-r',
+    acceleration: 4.9,
+    capacity: 70,
+    range: 400,
+    evDatabaseURL: 'https://ev-database.org/car/1475/MG-Marvel-R',
+    expectedDelivery: 'Maí 2021',
+  },
+  {
     make: 'Tesla',
     model: 'Model S',
     subModel: 'Plaid+',
