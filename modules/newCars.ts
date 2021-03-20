@@ -742,6 +742,18 @@ export const expectedCars: Array<ExpectedCar> = [
     expectedDelivery: 'Maí 2021',
   },
   {
+    make: 'MG',
+    model: 'MG5 EV',
+    heroImageName: 'mg-mg5-ev',
+    price: 3990000,
+    sellerURL: 'https://mgmotor.eu/is-IS/model/mg5',
+    acceleration: 7.7,
+    capacity: 52,
+    range: 344,
+    evDatabaseURL: 'https://ev-database.org/car/1313/MG-MG5-EV',
+    expectedDelivery: 'Október 2021',
+  },
+  {
     make: 'Tesla',
     model: 'Model S',
     subModel: 'Plaid+',
