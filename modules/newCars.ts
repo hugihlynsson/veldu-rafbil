@@ -86,7 +86,8 @@ const newCars: Array<NewCar> = [
     acceleration: 6.1,
     capacity: 75,
     range: 440,
-    evDatabaseURL: 'https://ev-database.org/car/1242/Ford-Mustang-Mach-E-SR-RWD',
+    evDatabaseURL:
+      'https://ev-database.org/car/1242/Ford-Mustang-Mach-E-SR-RWD',
   },
   {
     make: 'Ford',
@@ -98,7 +99,8 @@ const newCars: Array<NewCar> = [
     acceleration: 6.2,
     capacity: 98,
     range: 610,
-    evDatabaseURL: 'https://ev-database.org/car/1243/Ford-Mustang-Mach-E-ER-RWD',
+    evDatabaseURL:
+      'https://ev-database.org/car/1243/Ford-Mustang-Mach-E-ER-RWD',
   },
   {
     make: 'Ford',
@@ -110,7 +112,8 @@ const newCars: Array<NewCar> = [
     acceleration: 5.6,
     capacity: 75,
     range: 400,
-    evDatabaseURL: 'https://ev-database.org/car/1244/Ford-Mustang-Mach-E-SR-AWD',
+    evDatabaseURL:
+      'https://ev-database.org/car/1244/Ford-Mustang-Mach-E-SR-AWD',
   },
   {
     make: 'Ford',
@@ -122,7 +125,8 @@ const newCars: Array<NewCar> = [
     acceleration: 5.1,
     capacity: 98,
     range: 540,
-    evDatabaseURL: 'https://ev-database.org/car/1245/Ford-Mustang-Mach-E-ER-AWD',
+    evDatabaseURL:
+      'https://ev-database.org/car/1245/Ford-Mustang-Mach-E-ER-AWD',
   },
   {
     make: 'Honda',
@@ -501,7 +505,8 @@ const newCars: Array<NewCar> = [
     acceleration: 5.1,
     capacity: 93.4,
     range: 456,
-    evDatabaseURL: 'https://ev-database.org/car/1186/Porsche-Taycan-4-Cross-Turismo',
+    evDatabaseURL:
+      'https://ev-database.org/car/1186/Porsche-Taycan-4-Cross-Turismo',
   },
   {
     make: 'Renault',
@@ -671,7 +676,8 @@ const newCars: Array<NewCar> = [
     acceleration: 8.9,
     capacity: 45,
     range: 350,
-    evDatabaseURL: 'https://ev-database.org/car/1127/Volkswagen-ID3-Pure-Performance',
+    evDatabaseURL:
+      'https://ev-database.org/car/1127/Volkswagen-ID3-Pure-Performance',
   },
   {
     make: 'Volkswagen',
@@ -789,7 +795,8 @@ export const expectedCars: Array<ExpectedCar> = [
     acceleration: 5.2,
     capacity: 73,
     range: 460,
-    evDatabaseURL: 'https://ev-database.org/car/1479/Hyundai-IONIQ-5-Long-Range-AWD',
+    evDatabaseURL:
+      'https://ev-database.org/car/1479/Hyundai-IONIQ-5-Long-Range-AWD',
     expectedDelivery: 'Haust 2021',
   },
   {
@@ -817,6 +824,32 @@ export const expectedCars: Array<ExpectedCar> = [
     expectedDelivery: 'Október 2021',
   },
   {
+    make: 'Nissan',
+    model: 'Ariya',
+    heroImageName: 'nissan-ariya',
+    price: 7200000,
+    sellerURL: 'https://www.nissan.is/vehicles/new-vehicles/ariya.html',
+    acceleration: 7.9,
+    capacity: 63,
+    range: 360,
+    evDatabaseURL: 'https://ev-database.org/car/1301/Nissan-Ariya-63kWh',
+    expectedDelivery: 'Lok 2021',
+  },
+  {
+    make: 'Nissan',
+    model: 'Ariya',
+    subModel: 'e-4ORCE',
+    heroImageName: 'nissan-ariya-alt',
+    price: 8600000,
+    sellerURL: 'https://www.nissan.is/vehicles/new-vehicles/ariya.html',
+    acceleration: 5.7,
+    capacity: 87,
+    range: 460,
+    evDatabaseURL:
+      'https://ev-database.org/car/1304/Nissan-Ariya-e-4ORCE-87kWh',
+    expectedDelivery: 'Lok 2021',
+  },
+  {
     make: 'Tesla',
     model: 'Model S',
     subModel: 'Plaid+',
@@ -835,12 +868,12 @@ export const expectedCars: Array<ExpectedCar> = [
     subModel: 'Recharge',
     heroImageName: 'volvo-c40',
     price: 7990000,
-    sellerURL: 'https://www.volvocars.com/is/why-volvo/human-innovation/future-of-driving/the-ultimate-safety-test',
+    sellerURL:
+      'https://www.volvocars.com/is/why-volvo/human-innovation/future-of-driving/the-ultimate-safety-test',
     acceleration: 4.9,
     capacity: 78,
     range: 420,
-    evDatabaseURL:
-      'https://ev-database.org/car/1421/Volvo-C40-Recharge',
+    evDatabaseURL: 'https://ev-database.org/car/1421/Volvo-C40-Recharge',
     expectedDelivery: 'Haust 2021',
   },
   {
