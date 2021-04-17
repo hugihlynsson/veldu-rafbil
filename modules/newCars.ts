@@ -349,10 +349,22 @@ const newCars: Array<NewCar> = [
     price: 11950000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/v-class/v-class-447/eqv/labeling.module.html',
-    acceleration: 10.0,
+    acceleration: 12.1,
     capacity: 90,
     range: 363,
     evDatabaseURL: 'https://ev-database.org/car/1240/Mercedes-EQV-300-Long',
+  },
+  {
+    make: 'Mercedes-Benz',
+    model: 'eVito',
+    subModel: 'Tourer',
+    heroImageName: 'mercedes-evito-tourer',
+    price: 9950000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/brochures-pricelists/teaser/_jcr_content/par/productinfotextimage/interactions.attachments.15.eVito_verdlisti.pdf',
+    acceleration: 12.1,
+    capacity: 90,
+    range: 361,
   },
   {
     make: 'MG',
