@@ -613,7 +613,7 @@ const newCars: Array<NewCar> = [
     sellerURL: 'https://www.tesla.com/is_IS/model3/design',
     acceleration: 5.6,
     capacity: 55,
-    range: 430,
+    range: 448,
     evDatabaseURL:
       'https://ev-database.org/car/1320/Tesla-Model-3-Standard-Range-Plus',
   },
@@ -625,8 +625,8 @@ const newCars: Array<NewCar> = [
     price: 6601123,
     sellerURL: 'https://www.tesla.com/is_IS/model3/design',
     acceleration: 4.4,
-    capacity: 74,
-    range: 580,
+    capacity: 77,
+    range: 614,
     evDatabaseURL:
       'https://ev-database.org/car/1321/Tesla-Model-3-Long-Range-Dual-Motor',
   },
