@@ -836,7 +836,7 @@ export const expectedCars: Array<ExpectedCar> = [
     make: 'Audi',
     model: 'Q4 Sportback e-tron',
     subModel: '50 quattro',
-    heroImageName: 'audi-q4-sportback-alt-2',
+    heroImageName: 'audi-q4-sportback-alt2',
     price: 8090000,
     sellerURL: 'http://www.audi.is/is/web/is/models/q4-e-tron/q4-e-tron.html',
     acceleration: 6.2,
