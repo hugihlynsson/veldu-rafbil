@@ -366,7 +366,7 @@ const newCars: Array<NewCar> = [
     acceleration: 6.9,
     capacity: 66.5,
     range: 423,
-    evDatabaseURL: 'https://ev-database.org/car/1147/Mercedes-EQA',
+    evDatabaseURL: 'https://ev-database.org/car/1495/Mercedes-EQA-300-4MATIC',
   },
   {
     make: 'Mercedes-Benz',
@@ -379,7 +379,7 @@ const newCars: Array<NewCar> = [
     acceleration: 5.8,
     capacity: 66.5,
     range: 423,
-    evDatabaseURL: 'https://ev-database.org/car/1147/Mercedes-EQA',
+    evDatabaseURL: 'https://ev-database.org/car/1496/Mercedes-EQA-350-4MATIC',
   },
   {
     make: 'Mercedes-Benz',
@@ -799,6 +799,7 @@ const newCars: Array<NewCar> = [
     sellerURL: 'https://www.volkswagen.is/is/bilar/id4-gtx.html',
     acceleration: 6.2,
     capacity: 77,
+    evDatabaseURL: 'https://ev-database.org/car/1494/Volkswagen-ID4-GTX',
     range: 480,
   },
 ]
@@ -988,6 +989,7 @@ export const expectedCars: Array<ExpectedCar> = [
     acceleration: 5.1,
     capacity: 66.5,
     range: 419,
+    evDatabaseURL: 'https://ev-database.org/car/1493/Mercedes-EQB-350-4MATIC',
     expectedDelivery: 'Lok 2021',
   },
   {
