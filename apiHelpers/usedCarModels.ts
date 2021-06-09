@@ -468,7 +468,6 @@ const usedCarModels: Array<UsedCarModel> = [
     acceleration: 11.4,
     capacity: 33.5,
     rangeNEDC: 225,
-    evDatabaseURL: 'https://ev-database.org/car/1010/Ford-Focus-Electric',
   },
   {
     id: 'jaguar-i-pace',
