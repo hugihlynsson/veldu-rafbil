@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { trackGoal } from 'fathom-client'
 import Image from 'next/image'
 
-import { NewCar as NewCarType, ExpectedCar } from '../types'
+import { NewCar as NewCarType, ExpectedCar, Drive } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import LinkPill from './LinkPill'
 
@@ -10,6 +10,20 @@ interface Props {
   car: NewCarType | ExpectedCar
   onGray?: boolean
   showValue?: boolean
+}
+
+let getKmPerMinutesCharged = (timeToCharge10T080: number, range: number) =>
+  ((range * 0.7) / timeToCharge10T080).toPrecision(3)
+
+let getDriveLabel = (drive: Drive) => {
+  switch (drive) {
+    case 'AWD':
+      return 'Fjórhjóladrif'
+    case 'RWD':
+      return 'Afturhjóladrif'
+    case 'FWD':
+      return 'Framhjóladrif'
+  }
 }
 
 const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
@@ -62,16 +76,37 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
         <div className="info-item">
           <div className="info-item-label">0-100 km/klst</div>
           <div className="info-item-value">{car.acceleration.toFixed(1)}s</div>
+          {car.power && (
+            <div
+              className="info-item-extra"
+              title={`Afl (${Math.round(car.power * 1.34102) + ' hö'})`}
+            >
+              {car.power} kw
+            </div>
+          )}
         </div>
 
         <div className="info-item" style={{ flexShrink: 0 }}>
           <div className="info-item-label">Rafhlaða</div>
           <div className="info-item-value">{car.capacity} kWh</div>
+          {car.timeToCharge10T080 && (
+            <div
+              className="info-item-extra"
+              title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10T080} min)`}
+            >
+              {getKmPerMinutesCharged(car.timeToCharge10T080, car.range)} km/min
+            </div>
+          )}
         </div>
 
         <div className="info-item" title="Samkvæmt WLTP prófunum">
           <div className="info-item-label">Drægni</div>
           <div className="info-item-value">{car.range} km</div>
+          {car.drive && (
+            <div className="info-item-extra" title={getDriveLabel(car.drive)}>
+              {car.drive}
+            </div>
+          )}
         </div>
       </div>
       {car.evDatabaseURL && (
@@ -142,18 +177,31 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
           font-size: 10px;
           font-weight: 600;
           letter-spacing: 0.05em;
-          margin-bottom: 2px;
+          margin-bottom: 3px;
           color: #555;
         }
         .info-item-value {
           font-size: 24px;
           font-weight: 400;
         }
+        .info-item-extra {
+          margin-top: 2px;
+          font-size: 12px;
+          color: #666;
+          font-weight: 500;
+        }
 
         .more-info {
           display: inline-block;
-          color: inherit;
           font-size: 14px;
+          color: #888;
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.1s;
+        }
+        .more-info:hover {
+          text-decoration: underline;
+          color: #555;
         }
 
         @media screen and (min-width: 375px) {

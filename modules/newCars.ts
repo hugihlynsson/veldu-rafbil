@@ -12,6 +12,9 @@ const newCars: Array<NewCar> = [
     capacity: 71,
     range: 339,
     evDatabaseURL: 'https://ev-database.org/car/1209/Audi-e-tron-50-quattro',
+    drive: 'AWD',
+    timeToCharge10T080: 25,
+    power: 230,
   },
   {
     make: 'Audi',
@@ -24,6 +27,9 @@ const newCars: Array<NewCar> = [
     capacity: 95,
     range: 436,
     evDatabaseURL: 'https://ev-database.org/car/1253/Audi-e-tron-55-quattro',
+    drive: 'AWD',
+    timeToCharge10T080: 26,
+    power: 300,
   },
   {
     make: 'Audi',
@@ -36,6 +42,9 @@ const newCars: Array<NewCar> = [
     capacity: 95,
     range: 364,
     evDatabaseURL: 'https://ev-database.org/car/1271/Audi-e-tron-S-55-quattro',
+    drive: 'AWD',
+    timeToCharge10T080: 26,
+    power: 370,
   },
   {
     make: 'Audi',
@@ -50,6 +59,9 @@ const newCars: Array<NewCar> = [
     range: 446,
     evDatabaseURL:
       'https://ev-database.org/car/1107/Audi-e-tron-Sportback-55-quattro',
+    drive: 'AWD',
+    timeToCharge10T080: 26,
+    power: 300,
   },
   {
     make: 'Audi',
@@ -64,6 +76,9 @@ const newCars: Array<NewCar> = [
     range: 370,
     evDatabaseURL:
       'https://ev-database.org/car/1272/Audi-e-tron-S-Sportback-55-quattro',
+    drive: 'AWD',
+    timeToCharge10T080: 26,
+    power: 370,
   },
   {
     make: 'Audi',
@@ -76,6 +91,9 @@ const newCars: Array<NewCar> = [
     capacity: 55,
     range: 341,
     evDatabaseURL: 'https://ev-database.org/car/1179/Audi-Q4-e-tron-35',
+    drive: 'RWD',
+    timeToCharge10T080: 31,
+    power: 125,
   },
   {
     make: 'Audi',
@@ -88,6 +106,9 @@ const newCars: Array<NewCar> = [
     capacity: 82,
     range: 522,
     evDatabaseURL: 'https://ev-database.org/car/1490/Audi-Q4-e-tron-40',
+    drive: 'RWD',
+    timeToCharge10T080: 34,
+    power: 150,
   },
   {
     make: 'Audi',
@@ -100,6 +121,9 @@ const newCars: Array<NewCar> = [
     capacity: 82,
     range: 488,
     evDatabaseURL: 'https://ev-database.org/car/1491/Audi-Q4-e-tron-50-quattro',
+    drive: 'AWD',
+    timeToCharge10T080: 34,
+    power: 220,
   },
   {
     make: 'Citroën',
@@ -111,6 +135,9 @@ const newCars: Array<NewCar> = [
     capacity: 50,
     range: 350,
     evDatabaseURL: 'https://ev-database.org/car/1286/Citroen-e-C4',
+    drive: 'AWD',
+    timeToCharge10T080: 31,
+    power: 100,
   },
   {
     make: 'Ford',
@@ -124,6 +151,9 @@ const newCars: Array<NewCar> = [
     range: 440,
     evDatabaseURL:
       'https://ev-database.org/car/1242/Ford-Mustang-Mach-E-SR-RWD',
+    drive: 'RWD',
+    timeToCharge10T080: 38,
+    power: 198,
   },
   {
     make: 'Ford',
@@ -137,6 +167,9 @@ const newCars: Array<NewCar> = [
     range: 610,
     evDatabaseURL:
       'https://ev-database.org/car/1243/Ford-Mustang-Mach-E-ER-RWD',
+    drive: 'RWD',
+    power: 216,
+    timeToCharge10T080: 43,
   },
   {
     make: 'Ford',
@@ -150,6 +183,9 @@ const newCars: Array<NewCar> = [
     range: 400,
     evDatabaseURL:
       'https://ev-database.org/car/1244/Ford-Mustang-Mach-E-SR-AWD',
+    drive: 'AWD',
+    timeToCharge10T080: 38,
+    power: 198,
   },
   {
     make: 'Ford',
@@ -163,6 +199,9 @@ const newCars: Array<NewCar> = [
     range: 540,
     evDatabaseURL:
       'https://ev-database.org/car/1245/Ford-Mustang-Mach-E-ER-AWD',
+    drive: 'AWD',
+    power: 258,
+    timeToCharge10T080: 43,
   },
   {
     make: 'Honda',
@@ -174,6 +213,9 @@ const newCars: Array<NewCar> = [
     capacity: 32.0,
     range: 220,
     evDatabaseURL: 'https://ev-database.org/car/1171/Honda-e',
+    drive: 'RWD',
+    power: 100,
+    timeToCharge10T080: 36,
   },
   {
     make: 'Honda',
@@ -186,6 +228,9 @@ const newCars: Array<NewCar> = [
     capacity: 32.0,
     range: 220,
     evDatabaseURL: 'https://ev-database.org/car/1233/Honda-e-Advance',
+    drive: 'RWD',
+    power: 113,
+    timeToCharge10T080: 36,
   },
   {
     make: 'Hyundai',
@@ -197,6 +242,9 @@ const newCars: Array<NewCar> = [
     capacity: 38.3,
     range: 311,
     evDatabaseURL: 'https://ev-database.org/car/1165/Hyundai-IONIQ-Electric',
+    drive: 'FWD',
+    power: 100,
+    timeToCharge10T080: 47,
   },
   {
     make: 'Hyundai',
@@ -210,6 +258,9 @@ const newCars: Array<NewCar> = [
     range: 289,
     evDatabaseURL:
       'https://ev-database.org/car/1422/Hyundai-Kona-Electric-39-kWh',
+    drive: 'FWD',
+    power: 100,
+    timeToCharge10T080: 50,
   },
   {
     make: 'Hyundai',
@@ -223,6 +274,9 @@ const newCars: Array<NewCar> = [
     range: 450,
     evDatabaseURL:
       'https://ev-database.org/car/1423/Hyundai-Kona-Electric-64-kWh',
+    drive: 'FWD',
+    power: 150,
+    timeToCharge10T080: 44,
   },
   {
     make: 'Jaguar',
@@ -235,6 +289,9 @@ const newCars: Array<NewCar> = [
     capacity: 90,
     range: 470,
     evDatabaseURL: 'https://ev-database.org/car/1307/Jaguar-I-Pace-EV320',
+    drive: 'AWD',
+    power: 235,
+    timeToCharge10T080: 44,
   },
   {
     make: 'Jaguar',
@@ -247,6 +304,9 @@ const newCars: Array<NewCar> = [
     capacity: 90,
     range: 470,
     evDatabaseURL: 'https://ev-database.org/car/1287/Jaguar-I-Pace-EV400',
+    drive: 'AWD',
+    power: 294,
+    timeToCharge10T080: 44,
   },
   {
     make: 'Kia',
@@ -258,7 +318,10 @@ const newCars: Array<NewCar> = [
     acceleration: 9.8,
     capacity: 39,
     range: 289,
-    evDatabaseURL: 'https://ev-database.org/car/1137/Kia-e-Niro-39-kWh',
+    evDatabaseURL: 'https://ev-database.org/car/1339/Kia-e-Niro-39-kWh',
+    drive: 'FWD',
+    power: 100,
+    timeToCharge10T080: 43,
   },
   {
     make: 'Kia',
@@ -270,7 +333,10 @@ const newCars: Array<NewCar> = [
     acceleration: 7.8,
     capacity: 64,
     range: 455,
-    evDatabaseURL: 'https://ev-database.org/car/1125/Kia-e-Niro-64-kWh',
+    evDatabaseURL: 'https://ev-database.org/car/1338/Kia-e-Niro-64-kWh',
+    drive: 'FWD',
+    power: 150,
+    timeToCharge10T080: 44,
   },
   {
     make: 'Kia',
@@ -282,7 +348,10 @@ const newCars: Array<NewCar> = [
     acceleration: 9.6,
     capacity: 39,
     range: 277,
-    evDatabaseURL: 'https://ev-database.org/car/1169/Kia-e-Soul-39-kWh',
+    evDatabaseURL: 'https://ev-database.org/car/1289/Kia-e-Soul-39-kWh',
+    drive: 'FWD',
+    power: 100,
+    timeToCharge10T080: 43,
   },
   {
     make: 'Kia',
@@ -294,7 +363,10 @@ const newCars: Array<NewCar> = [
     acceleration: 7.9,
     capacity: 64,
     range: 452,
-    evDatabaseURL: 'https://ev-database.org/car/1154/Kia-e-Soul-64-kWh',
+    evDatabaseURL: 'https://ev-database.org/car/1288/Kia-e-Soul-64-kWh',
+    drive: 'FWD',
+    power: 150,
+    timeToCharge10T080: 44,
   },
   {
     make: 'Lexus',
@@ -307,17 +379,9 @@ const newCars: Array<NewCar> = [
     capacity: 50,
     range: 315,
     evDatabaseURL: 'https://ev-database.org/car/1251/Lexus-UX-300e',
-  },
-  {
-    make: 'Mazda',
-    model: 'MX-30',
-    heroImageName: 'mazda-mx-30',
-    price: 3990000,
-    sellerURL: 'https://www.mazda.is/is/nyir-bilar/mazda-mx-30',
-    acceleration: 9.0,
-    capacity: 35.5,
-    range: 200,
-    evDatabaseURL: 'https://ev-database.org/car/1241/Mazda-MX-30',
+    drive: 'FWD',
+    power: 150,
+    timeToCharge10T080: 69,
   },
   {
     make: 'Maxus',
@@ -330,17 +394,18 @@ const newCars: Array<NewCar> = [
     range: 356,
   },
   {
-    make: 'Mercedes-Benz',
-    model: 'EQC',
-    subModel: '400 4MATIC',
-    heroImageName: 'eqc',
-    price: 9590000,
-    sellerURL:
-      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqc/',
-    acceleration: 5.1,
-    capacity: 80,
-    range: 417,
-    evDatabaseURL: 'https://ev-database.org/car/1135/Mercedes-EQC-400-4MATIC',
+    make: 'Mazda',
+    model: 'MX-30',
+    heroImageName: 'mazda-mx-30',
+    price: 3990000,
+    sellerURL: 'https://www.mazda.is/is/nyir-bilar/mazda-mx-30',
+    acceleration: 9.0,
+    capacity: 35.5,
+    range: 200,
+    evDatabaseURL: 'https://ev-database.org/car/1241/Mazda-MX-30',
+    drive: 'FWD',
+    power: 105,
+    timeToCharge10T080: 39,
   },
   {
     make: 'Mercedes-Benz',
@@ -354,6 +419,9 @@ const newCars: Array<NewCar> = [
     capacity: 66.5,
     range: 426,
     evDatabaseURL: 'https://ev-database.org/car/1147/Mercedes-EQA-250',
+    drive: 'FWD',
+    power: 140,
+    timeToCharge10T080: 35,
   },
   {
     make: 'Mercedes-Benz',
@@ -367,6 +435,9 @@ const newCars: Array<NewCar> = [
     capacity: 66.5,
     range: 423,
     evDatabaseURL: 'https://ev-database.org/car/1495/Mercedes-EQA-300-4MATIC',
+    drive: 'AWD',
+    power: 168,
+    timeToCharge10T080: 35,
   },
   {
     make: 'Mercedes-Benz',
@@ -380,6 +451,25 @@ const newCars: Array<NewCar> = [
     capacity: 66.5,
     range: 423,
     evDatabaseURL: 'https://ev-database.org/car/1496/Mercedes-EQA-350-4MATIC',
+    drive: 'AWD',
+    power: 215,
+    timeToCharge10T080: 35,
+  },
+  {
+    make: 'Mercedes-Benz',
+    model: 'EQC',
+    subModel: '400 4MATIC',
+    heroImageName: 'eqc',
+    price: 9590000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqc/',
+    acceleration: 5.1,
+    capacity: 80,
+    range: 417,
+    evDatabaseURL: 'https://ev-database.org/car/1135/Mercedes-EQC-400-4MATIC',
+    drive: 'AWD',
+    power: 300,
+    timeToCharge10T080: 35,
   },
   {
     make: 'Mercedes-Benz',
@@ -393,6 +483,9 @@ const newCars: Array<NewCar> = [
     capacity: 90,
     range: 363,
     evDatabaseURL: 'https://ev-database.org/car/1240/Mercedes-EQV-300-Long',
+    drive: 'FWD',
+    power: 150,
+    timeToCharge10T080: 47,
   },
   {
     make: 'Mercedes-Benz',
@@ -401,10 +494,12 @@ const newCars: Array<NewCar> = [
     heroImageName: 'mercedes-evito-tourer',
     price: 9950000,
     sellerURL:
-      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/brochures-pricelists/teaser/_jcr_content/par/productinfotextimage/interactions.attachments.15.eVito_verdlisti.pdf',
+      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/brochures-pricelists/teaser/_jcr_content/par/productinfotextimage/interactions.attachments.16.eVito_verdlisti.pdf',
     acceleration: 12.1,
     capacity: 90,
     range: 361,
+    drive: 'FWD',
+    power: 150,
   },
   {
     make: 'MG',
@@ -416,6 +511,9 @@ const newCars: Array<NewCar> = [
     capacity: 44.5,
     range: 263,
     evDatabaseURL: 'https://ev-database.org/car/1201/MG-ZS-EV',
+    drive: 'FWD',
+    power: 105,
+    timeToCharge10T080: 35,
   },
   {
     make: 'Mini Cooper',
@@ -426,7 +524,10 @@ const newCars: Array<NewCar> = [
     acceleration: 7.3,
     capacity: 28.9,
     range: 232,
-    evDatabaseURL: 'https://ev-database.org/car/1163/Mini-Cooper-SE',
+    evDatabaseURL: 'https://ev-database.org/car/1409/Mini-Cooper-SE',
+    drive: 'FWD',
+    power: 135,
+    timeToCharge10T080: 29,
   },
   {
     make: 'Nissan',
@@ -438,6 +539,9 @@ const newCars: Array<NewCar> = [
     capacity: 40,
     range: 200,
     evDatabaseURL: 'https://ev-database.org/car/1117/Nissan-e-NV200-Evalia',
+    drive: 'FWD',
+    power: 80,
+    timeToCharge10T080: 42,
   },
   {
     make: 'Nissan',
@@ -449,6 +553,9 @@ const newCars: Array<NewCar> = [
     capacity: 40,
     range: 270,
     evDatabaseURL: 'https://ev-database.org/car/1106/Nissan-Leaf',
+    drive: 'FWD',
+    power: 110,
+    timeToCharge10T080: 40,
   },
   {
     make: 'Nissan',
@@ -461,6 +568,9 @@ const newCars: Array<NewCar> = [
     capacity: 62,
     range: 385,
     evDatabaseURL: 'https://ev-database.org/car/1144/Nissan-Leaf-eplus',
+    drive: 'FWD',
+    power: 160,
+    timeToCharge10T080: 35,
   },
   {
     make: 'Opel',
@@ -472,6 +582,9 @@ const newCars: Array<NewCar> = [
     capacity: 50,
     range: 330,
     evDatabaseURL: 'https://ev-database.org/car/1192/Opel-Corsa-e',
+    drive: 'FWD',
+    power: 100,
+    timeToCharge10T080: 31,
   },
   {
     make: 'Opel',
@@ -483,18 +596,9 @@ const newCars: Array<NewCar> = [
     capacity: 50,
     range: 322,
     evDatabaseURL: 'https://ev-database.org/car/1278/Opel-Mokka-e',
-  },
-  {
-    make: 'Peugeot',
-    model: 'e-208',
-    heroImageName: 'e-208',
-    price: 4090000,
-    sellerURL:
-      'https://www.peugeotisland.is/nyir-bilar/velja-bil/glaenyr-peugeot-e-208/',
-    acceleration: 8.1,
-    capacity: 50,
-    range: 340,
-    evDatabaseURL: 'https://ev-database.org/car/1168/Peugeot-e-208',
+    drive: 'FWD',
+    power: 100,
+    timeToCharge10T080: 31,
   },
   {
     make: 'Peugeot',
@@ -507,6 +611,24 @@ const newCars: Array<NewCar> = [
     capacity: 50,
     range: 320,
     evDatabaseURL: 'https://ev-database.org/car/1206/Peugeot-e-2008-SUV',
+    drive: 'FWD',
+    power: 100,
+    timeToCharge10T080: 31,
+  },
+  {
+    make: 'Peugeot',
+    model: 'e-208',
+    heroImageName: 'e-208',
+    price: 4090000,
+    sellerURL:
+      'https://www.peugeotisland.is/nyir-bilar/velja-bil/glaenyr-peugeot-e-208/',
+    acceleration: 8.1,
+    capacity: 50,
+    range: 340,
+    evDatabaseURL: 'https://ev-database.org/car/1168/Peugeot-e-208',
+    drive: 'FWD',
+    power: 100,
+    timeToCharge10T080: 31,
   },
   {
     make: 'Porsche',
@@ -518,6 +640,9 @@ const newCars: Array<NewCar> = [
     capacity: 79.2,
     range: 407,
     evDatabaseURL: 'https://ev-database.org/car/1393/Porsche-Taycan',
+    drive: 'RWD',
+    power: 300,
+    timeToCharge10T080: 21,
   },
   {
     make: 'Porsche',
@@ -530,6 +655,9 @@ const newCars: Array<NewCar> = [
     capacity: 79.2,
     range: 407,
     evDatabaseURL: 'https://ev-database.org/car/1237/Porsche-Taycan-4S',
+    drive: 'AWD',
+    power: 390,
+    timeToCharge10T080: 21,
   },
   {
     make: 'Porsche',
@@ -543,30 +671,9 @@ const newCars: Array<NewCar> = [
     range: 456,
     evDatabaseURL:
       'https://ev-database.org/car/1186/Porsche-Taycan-4-Cross-Turismo',
-  },
-  {
-    make: 'Renault',
-    model: 'Zoe',
-    subModel: 'R110',
-    heroImageName: 'zoe-r110',
-    price: 4450000,
-    sellerURL: 'https://www.renault.is/cars/zoe/yfirlit.html',
-    acceleration: 11.4,
-    capacity: 52,
-    range: 395,
-    evDatabaseURL: 'https://ev-database.org/car/1164/Renault-Zoe-ZE50-R110',
-  },
-  {
-    make: 'Renault',
-    model: 'Zoe',
-    subModel: 'R135',
-    heroImageName: 'zoe-r135',
-    price: 4950000,
-    sellerURL: 'https://www.renault.is/cars/zoe/yfirlit.html',
-    acceleration: 9.5,
-    capacity: 52,
-    range: 385,
-    evDatabaseURL: 'https://ev-database.org/car/1205/Renault-Zoe-ZE50-R135',
+    drive: 'AWD',
+    power: 350,
+    timeToCharge10T080: 19,
   },
   {
     make: 'Renault',
@@ -579,6 +686,39 @@ const newCars: Array<NewCar> = [
     capacity: 33,
     range: 190,
     evDatabaseURL: 'https://ev-database.org/car/1101/Renault-Kangoo-Maxi-ZE-33',
+    drive: 'FWD',
+    power: 44,
+    timeToCharge10T080: 300,
+  },
+  {
+    make: 'Renault',
+    model: 'Zoe',
+    subModel: 'R110',
+    heroImageName: 'zoe-r110',
+    price: 4450000,
+    sellerURL: 'https://www.renault.is/cars/zoe/yfirlit.html',
+    acceleration: 11.4,
+    capacity: 52,
+    range: 395,
+    evDatabaseURL: 'https://ev-database.org/car/1164/Renault-Zoe-ZE50-R110',
+    drive: 'FWD',
+    power: 80,
+    timeToCharge10T080: 56,
+  },
+  {
+    make: 'Renault',
+    model: 'Zoe',
+    subModel: 'R135',
+    heroImageName: 'zoe-r135',
+    price: 4950000,
+    sellerURL: 'https://www.renault.is/cars/zoe/yfirlit.html',
+    acceleration: 9.5,
+    capacity: 52,
+    range: 385,
+    evDatabaseURL: 'https://ev-database.org/car/1205/Renault-Zoe-ZE50-R135',
+    drive: 'FWD',
+    power: 100,
+    timeToCharge10T080: 56,
   },
   {
     make: 'Skoda',
@@ -591,6 +731,9 @@ const newCars: Array<NewCar> = [
     capacity: 58,
     range: 390,
     evDatabaseURL: 'https://ev-database.org/car/1279/Skoda-Enyaq-iV-60',
+    drive: 'FWD',
+    power: 132,
+    timeToCharge10T080: 33,
   },
   {
     make: 'Skoda',
@@ -603,6 +746,9 @@ const newCars: Array<NewCar> = [
     capacity: 77,
     range: 536,
     evDatabaseURL: 'https://ev-database.org/car/1280/Skoda-Enyaq-iV-80',
+    drive: 'FWD',
+    power: 132,
+    timeToCharge10T080: 33,
   },
   {
     make: 'Tesla',
@@ -616,6 +762,9 @@ const newCars: Array<NewCar> = [
     range: 448,
     evDatabaseURL:
       'https://ev-database.org/car/1320/Tesla-Model-3-Standard-Range-Plus',
+    drive: 'RWD',
+    power: 239,
+    timeToCharge10T080: 29,
   },
   {
     make: 'Tesla',
@@ -628,7 +777,10 @@ const newCars: Array<NewCar> = [
     capacity: 77,
     range: 614,
     evDatabaseURL:
-      'https://ev-database.org/car/1321/Tesla-Model-3-Long-Range-Dual-Motor',
+      'https://ev-database.org/car/1321/Tesla-Model-3-Long-Range-Dual-Motor-LG',
+    drive: 'AWD',
+    power: 324,
+    timeToCharge10T080: 34,
   },
   {
     make: 'Tesla',
@@ -642,6 +794,9 @@ const newCars: Array<NewCar> = [
     range: 567,
     evDatabaseURL:
       'https://ev-database.org/car/1322/Tesla-Model-3-Long-Range-Performance',
+    drive: 'AWD',
+    power: 377,
+    timeToCharge10T080: 21,
   },
   {
     make: 'Tesla',
@@ -654,6 +809,9 @@ const newCars: Array<NewCar> = [
     capacity: 100,
     range: 663,
     evDatabaseURL: 'https://ev-database.org/car/1404/Tesla-Model-S-Long-Range',
+    drive: 'AWD',
+    power: 500,
+    timeToCharge10T080: 23,
   },
   {
     make: 'Tesla',
@@ -666,6 +824,9 @@ const newCars: Array<NewCar> = [
     capacity: 100,
     range: 628,
     evDatabaseURL: 'https://ev-database.org/car/1405/Tesla-Model-S-Plaid',
+    drive: 'AWD',
+    power: 760,
+    timeToCharge10T080: 23,
   },
   {
     make: 'Tesla',
@@ -678,6 +839,9 @@ const newCars: Array<NewCar> = [
     capacity: 100,
     range: 580,
     evDatabaseURL: 'https://ev-database.org/car/1407/Tesla-Model-X-Long-Range',
+    drive: 'AWD',
+    power: 500,
+    timeToCharge10T080: 23,
   },
   {
     make: 'Tesla',
@@ -690,6 +854,9 @@ const newCars: Array<NewCar> = [
     capacity: 100,
     range: 547,
     evDatabaseURL: 'https://ev-database.org/car/1408/Tesla-Model-X-Plaid',
+    drive: 'AWD',
+    power: 760,
+    timeToCharge10T080: 23,
   },
   {
     make: 'Volkswagen',
@@ -701,6 +868,9 @@ const newCars: Array<NewCar> = [
     capacity: 36.8,
     range: 260,
     evDatabaseURL: 'https://ev-database.org/car/1189/Volkswagen-e-Up',
+    drive: 'FWD',
+    power: 61,
+    timeToCharge10T080: 48,
   },
   {
     make: 'Volkswagen',
@@ -714,6 +884,9 @@ const newCars: Array<NewCar> = [
     range: 350,
     evDatabaseURL:
       'https://ev-database.org/car/1127/Volkswagen-ID3-Pure-Performance',
+      drive: 'RWD',
+      power: 110,
+      timeToCharge10T080: 44,
   },
   {
     make: 'Volkswagen',
@@ -726,6 +899,9 @@ const newCars: Array<NewCar> = [
     capacity: 58,
     range: 426,
     evDatabaseURL: 'https://ev-database.org/car/1202/Volkswagen-ID3-Pro',
+    drive: 'RWD',
+    power: 107,
+    timeToCharge10T080: 33,
   },
   {
     make: 'Volkswagen',
@@ -739,6 +915,9 @@ const newCars: Array<NewCar> = [
     range: 426,
     evDatabaseURL:
       'https://ev-database.org/car/1306/Volkswagen-ID3-Pro-Performance',
+      drive: 'RWD',
+      power: 150,
+      timeToCharge10T080: 33,
   },
   {
     make: 'Volkswagen',
@@ -751,6 +930,9 @@ const newCars: Array<NewCar> = [
     capacity: 77,
     range: 550,
     evDatabaseURL: 'https://ev-database.org/car/1203/Volkswagen-ID3-Pro-S',
+    drive: 'RWD',
+    power: 150,
+    timeToCharge10T080: 34,
   },
   {
     make: 'Volkswagen',
@@ -763,6 +945,9 @@ const newCars: Array<NewCar> = [
     capacity: 52,
     range: 346,
     evDatabaseURL: 'https://ev-database.org/car/1273/Volkswagen-ID4',
+    drive: 'RWD',
+    power: 150,
+    timeToCharge10T080: 34,
   },
   {
     make: 'Volkswagen',
@@ -776,6 +961,9 @@ const newCars: Array<NewCar> = [
     range: 346,
     evDatabaseURL:
       'https://ev-database.org/car/1411/Volkswagen-ID4-Pure-Performance',
+      drive: 'RWD',
+      power: 125,
+      timeToCharge10T080: 29,
   },
   {
     make: 'Volkswagen',
@@ -789,6 +977,9 @@ const newCars: Array<NewCar> = [
     range: 522,
     evDatabaseURL:
       'https://ev-database.org/car/1314/Volkswagen-ID4-Pro-Performance',
+      drive: 'RWD',
+      power: 150,
+      timeToCharge10T080: 34,
   },
   {
     make: 'Volkswagen',
@@ -801,6 +992,9 @@ const newCars: Array<NewCar> = [
     capacity: 77,
     evDatabaseURL: 'https://ev-database.org/car/1494/Volkswagen-ID4-GTX',
     range: 480,
+    drive: 'AWD',
+    power: 220,
+    timeToCharge10T080: 34,
   },
   {
     make: 'Volvo',
@@ -814,6 +1008,9 @@ const newCars: Array<NewCar> = [
     range: 418,
     evDatabaseURL:
       'https://ev-database.org/car/1188/Volvo-XC40-P8-AWD-Recharge',
+      drive: 'AWD',
+      power: 300,
+      timeToCharge10T080: 33,
   },
 ]
 
@@ -1113,8 +1310,7 @@ export const expectedCars: Array<ExpectedCar> = [
     subModel: 'Recharge',
     heroImageName: 'volvo-c40',
     price: 7990000,
-    sellerURL:
-      'https://www.volvocars.com/is/v/cars/c40-electric',
+    sellerURL: 'https://www.volvocars.com/is/v/cars/c40-electric',
     acceleration: 4.7,
     capacity: 78,
     range: 420,
