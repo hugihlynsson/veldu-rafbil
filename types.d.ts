@@ -35,17 +35,22 @@ export interface ProcessedUsedCar extends UsedCar {
   filtered?: boolean
 }
 
+export type Drive = 'AWD' | 'FWD' | 'RWD'
+
 export interface NewCar {
   make: string
   model: string
   subModel?: string
   heroImageName: string
-  price: number
+  price: number // ISK
   sellerURL: string
-  acceleration: number
-  capacity: number
-  range: number
+  acceleration: number // 0-100 km/h
+  capacity: number // kWh
+  range: number // WLTP
   evDatabaseURL?: string
+  drive?: Drive
+  timeToCharge10T080?: number // minutes
+  power?: number // kW
 }
 
 export interface ExpectedCar extends NewCar {
