@@ -216,7 +216,7 @@ const newCars: Array<NewCar> = [
     model: 'Kona Electric',
     subModel: '64 kWh',
     heroImageName: 'kona',
-    price: 6000000,
+    price: 5990000,
     sellerURL: 'https://www.hyundai.is/nyir/kona-ev/yfirlit',
     acceleration: 7.6,
     capacity: 64,
