@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { trackGoal } from 'fathom-client'
-import Image from 'next/image';
+import Image from 'next/image'
 
 import { NewCar as NewCarType, ExpectedCar } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
@@ -12,11 +12,7 @@ interface Props {
   showValue?: boolean
 }
 
-const NewCar: FunctionComponent<Props> = ({
-  car,
-  onGray,
-  showValue,
-}) => (
+const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
   <article>
     <div className="imageBox">
       <Image
@@ -27,6 +23,7 @@ const NewCar: FunctionComponent<Props> = ({
         height={1280}
         layout="responsive"
         className="image"
+        unoptimized={process.env.NODE_ENV === 'development'}
       />
     </div>
 
@@ -51,8 +48,8 @@ const NewCar: FunctionComponent<Props> = ({
           ((car as ExpectedCar).expectedDelivery && 'áætlað verð ↗') ||
           (showValue
             ? `${addDecimalSeprators(
-              Math.round(car.price / car.range),
-            )} kr. á km.`
+                Math.round(car.price / car.range),
+              )} kr. á km.`
             : undefined)
         }
         onClick={() => trackGoal('OBBPADY0', 0)}
