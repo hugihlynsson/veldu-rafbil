@@ -802,6 +802,19 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1494/Volkswagen-ID4-GTX',
     range: 480,
   },
+  {
+    make: 'Volvo',
+    model: 'XC40',
+    subModel: 'P8 AWD Recharge',
+    heroImageName: 'volvo-xc-40',
+    price: 7640000,
+    sellerURL: 'https://www.volvocars.com/is/v/cars/xc40-electric',
+    acceleration: 4.9,
+    capacity: 78,
+    range: 418,
+    evDatabaseURL:
+      'https://ev-database.org/car/1188/Volvo-XC40-P8-AWD-Recharge',
+  },
 ]
 
 export default newCars
@@ -1107,19 +1120,5 @@ export const expectedCars: Array<ExpectedCar> = [
     range: 420,
     evDatabaseURL: 'https://ev-database.org/car/1421/Volvo-C40-Recharge',
     expectedDelivery: 'Haust 2021',
-  },
-  {
-    make: 'Volvo',
-    model: 'XC40',
-    subModel: 'P8 AWD Recharge',
-    heroImageName: 'volvo-xc-40',
-    price: 7990000,
-    sellerURL: 'https://www.volvocars.com/is/v/cars/xc40-electric',
-    acceleration: 4.9,
-    capacity: 78,
-    range: 418,
-    evDatabaseURL:
-      'https://ev-database.org/car/1188/Volvo-XC40-P8-AWD-Recharge',
-    expectedDelivery: 'Sumar 2021',
   },
 ]
