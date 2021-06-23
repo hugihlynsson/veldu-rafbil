@@ -65,7 +65,7 @@ const New: NextPage<Props> = ({ initialSorting }) => {
   useEffect(() => {
     const query =
       sorting === 'name' ? {} : { radaeftir: sortingToQuery[sorting] }
-    Router.replace({ pathname, query })
+    Router.replace({ pathname, query }, undefined, { scroll: false })
   }, [sorting])
 
   const descriptionRef = useRef<HTMLParagraphElement>(null)

@@ -79,7 +79,7 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
   useEffect(() => {
     const query =
       sorting === 'price' ? {} : { radaeftir: sortingToQuery[sorting] }
-    Router.replace({ pathname, query })
+    Router.replace({ pathname, query }, undefined, { scroll: false })
   }, [sorting])
 
   const models = useMemo(
