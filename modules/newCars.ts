@@ -392,6 +392,9 @@ const newCars: Array<NewCar> = [
     acceleration: 9.5,
     capacity: 52.5,
     range: 356,
+    drive: 'FWD',
+    power: 130,
+    timeToCharge10T080: 38,
   },
   {
     make: 'Mazda',
@@ -500,6 +503,7 @@ const newCars: Array<NewCar> = [
     range: 361,
     drive: 'FWD',
     power: 150,
+    timeToCharge10T080: 47,
   },
   {
     make: 'MG',
@@ -688,7 +692,7 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1101/Renault-Kangoo-Maxi-ZE-33',
     drive: 'FWD',
     power: 44,
-    timeToCharge10T080: 300,
+    timeToCharge10T080: 210,
   },
   {
     make: 'Renault',
@@ -731,7 +735,7 @@ const newCars: Array<NewCar> = [
     capacity: 58,
     range: 390,
     evDatabaseURL: 'https://ev-database.org/car/1279/Skoda-Enyaq-iV-60',
-    drive: 'FWD',
+    drive: 'RWD',
     power: 132,
     timeToCharge10T080: 33,
   },
@@ -746,8 +750,8 @@ const newCars: Array<NewCar> = [
     capacity: 77,
     range: 536,
     evDatabaseURL: 'https://ev-database.org/car/1280/Skoda-Enyaq-iV-80',
-    drive: 'FWD',
-    power: 132,
+    drive: 'RWD',
+    power: 150,
     timeToCharge10T080: 33,
   },
   {
@@ -884,9 +888,9 @@ const newCars: Array<NewCar> = [
     range: 350,
     evDatabaseURL:
       'https://ev-database.org/car/1127/Volkswagen-ID3-Pure-Performance',
-      drive: 'RWD',
-      power: 110,
-      timeToCharge10T080: 44,
+    drive: 'RWD',
+    power: 110,
+    timeToCharge10T080: 44,
   },
   {
     make: 'Volkswagen',
@@ -915,9 +919,9 @@ const newCars: Array<NewCar> = [
     range: 426,
     evDatabaseURL:
       'https://ev-database.org/car/1306/Volkswagen-ID3-Pro-Performance',
-      drive: 'RWD',
-      power: 150,
-      timeToCharge10T080: 33,
+    drive: 'RWD',
+    power: 150,
+    timeToCharge10T080: 33,
   },
   {
     make: 'Volkswagen',
@@ -944,9 +948,9 @@ const newCars: Array<NewCar> = [
     acceleration: 10.9,
     capacity: 52,
     range: 346,
-    evDatabaseURL: 'https://ev-database.org/car/1273/Volkswagen-ID4',
+    evDatabaseURL: 'https://ev-database.org/car/1489/Volkswagen-ID4-Pure',
     drive: 'RWD',
-    power: 150,
+    power: 109,
     timeToCharge10T080: 34,
   },
   {
@@ -961,9 +965,9 @@ const newCars: Array<NewCar> = [
     range: 346,
     evDatabaseURL:
       'https://ev-database.org/car/1411/Volkswagen-ID4-Pure-Performance',
-      drive: 'RWD',
-      power: 125,
-      timeToCharge10T080: 29,
+    drive: 'RWD',
+    power: 125,
+    timeToCharge10T080: 29,
   },
   {
     make: 'Volkswagen',
@@ -977,9 +981,9 @@ const newCars: Array<NewCar> = [
     range: 522,
     evDatabaseURL:
       'https://ev-database.org/car/1314/Volkswagen-ID4-Pro-Performance',
-      drive: 'RWD',
-      power: 150,
-      timeToCharge10T080: 34,
+    drive: 'RWD',
+    power: 150,
+    timeToCharge10T080: 34,
   },
   {
     make: 'Volkswagen',
@@ -1008,9 +1012,9 @@ const newCars: Array<NewCar> = [
     range: 418,
     evDatabaseURL:
       'https://ev-database.org/car/1188/Volvo-XC40-P8-AWD-Recharge',
-      drive: 'AWD',
-      power: 300,
-      timeToCharge10T080: 33,
+    drive: 'AWD',
+    power: 300,
+    timeToCharge10T080: 33,
   },
 ]
 
@@ -1030,6 +1034,9 @@ export const expectedCars: Array<ExpectedCar> = [
     evDatabaseURL:
       'https://ev-database.org/car/1290/Audi-Q4-Sportback-e-tron-35',
     expectedDelivery: 'Júní 2021',
+    drive: 'RWD',
+    power: 125,
+    timeToCharge10T080: 31,
   },
   {
     make: 'Audi',
@@ -1042,6 +1049,9 @@ export const expectedCars: Array<ExpectedCar> = [
     capacity: 82,
     range: 540,
     expectedDelivery: 'Júní 2021',
+    drive: 'RWD',
+    power: 150,
+    timeToCharge10T080: 34,
   },
   {
     make: 'Audi',
@@ -1056,6 +1066,9 @@ export const expectedCars: Array<ExpectedCar> = [
     evDatabaseURL:
       'https://ev-database.org/car/1492/Audi-Q4-Sportback-e-tron-50-quattro',
     expectedDelivery: 'Júní 2021',
+    drive: 'AWD',
+    power: 220,
+    timeToCharge10T080: 34,
   },
   {
     make: 'BMW',
@@ -1069,6 +1082,9 @@ export const expectedCars: Array<ExpectedCar> = [
     range: 400,
     evDatabaseURL: 'https://ev-database.org/car/1472/BMW-iX-xDrive-40',
     expectedDelivery: 'Haust 2021',
+    drive: 'AWD',
+    power: 240,
+    timeToCharge10T080: 31,
   },
   {
     make: 'BMW',
@@ -1082,6 +1098,9 @@ export const expectedCars: Array<ExpectedCar> = [
     range: 600,
     evDatabaseURL: 'https://ev-database.org/car/1473/BMW-iX-xDrive-50',
     expectedDelivery: 'Haust 2021',
+    drive: 'AWD',
+    power: 385,
+    timeToCharge10T080: 34,
   },
   {
     make: 'Hyundai',
@@ -1096,6 +1115,9 @@ export const expectedCars: Array<ExpectedCar> = [
     evDatabaseURL:
       'https://ev-database.org/car/1476/Hyundai-IONIQ-5-Standard-Range-2WD',
     expectedDelivery: 'Haust 2021',
+    drive: 'RWD',
+    power: 125,
+    timeToCharge10T080: 18,
   },
   {
     make: 'Hyundai',
@@ -1110,6 +1132,9 @@ export const expectedCars: Array<ExpectedCar> = [
     evDatabaseURL:
       'https://ev-database.org/car/1478/Hyundai-IONIQ-5-Long-Range-2WD',
     expectedDelivery: 'Haust 2021',
+    drive: 'RWD',
+    power: 160,
+    timeToCharge10T080: 18,
   },
   {
     make: 'Hyundai',
@@ -1124,6 +1149,9 @@ export const expectedCars: Array<ExpectedCar> = [
     evDatabaseURL:
       'https://ev-database.org/car/1479/Hyundai-IONIQ-5-Long-Range-AWD',
     expectedDelivery: 'Haust 2021',
+    drive: 'AWD',
+    power: 225,
+    timeToCharge10T080: 18,
   },
   {
     make: 'Kia',
@@ -1138,6 +1166,9 @@ export const expectedCars: Array<ExpectedCar> = [
     evDatabaseURL:
       'https://ev-database.org/car/1480/Kia-EV6-Standard-Range-2WD',
     expectedDelivery: 'Lok 2021',
+    drive: 'RWD',
+    power: 125,
+    timeToCharge10T080: 18,
   },
   {
     make: 'Kia',
@@ -1150,6 +1181,9 @@ export const expectedCars: Array<ExpectedCar> = [
     capacity: 58,
     range: 380,
     expectedDelivery: 'Lok 2021',
+    drive: 'AWD',
+    power: 175,
+    timeToCharge10T080: 18,
   },
   {
     make: 'Kia',
@@ -1163,11 +1197,14 @@ export const expectedCars: Array<ExpectedCar> = [
     range: 510,
     evDatabaseURL: 'https://ev-database.org/car/1481/Kia-EV6-Long-Range-2WD',
     expectedDelivery: 'Lok 2021',
+    drive: 'RWD',
+    power: 168,
+    timeToCharge10T080: 18,
   },
   {
     make: 'Kia',
     model: 'EV6',
-    subModel: 'Long Range AWS',
+    subModel: 'Long Range AWD',
     heroImageName: 'kia-ev6-alt3',
     price: 7150777,
     sellerURL: 'https://forpontun.kia.is',
@@ -1176,6 +1213,9 @@ export const expectedCars: Array<ExpectedCar> = [
     range: 490,
     evDatabaseURL: 'https://ev-database.org/car/1482/Kia-EV6-Long-Range-AWD',
     expectedDelivery: 'Lok 2021',
+    drive: 'AWD',
+    power: 239,
+    timeToCharge10T080: 18,
   },
   {
     make: 'Mercedes-Benz',
@@ -1188,6 +1228,9 @@ export const expectedCars: Array<ExpectedCar> = [
     capacity: 66.5,
     range: 422,
     expectedDelivery: 'Lok 2021',
+    drive: 'FWD',
+    power: 140,
+    timeToCharge10T080: 35,
   },
   {
     make: 'Mercedes-Benz',
@@ -1201,6 +1244,9 @@ export const expectedCars: Array<ExpectedCar> = [
     range: 419,
     evDatabaseURL: 'https://ev-database.org/car/1493/Mercedes-EQB-350-4MATIC',
     expectedDelivery: 'Lok 2021',
+    drive: 'AWD',
+    power: 215,
+    timeToCharge10T080: 35,
   },
   {
     make: 'Mercedes-Benz',
@@ -1213,6 +1259,7 @@ export const expectedCars: Array<ExpectedCar> = [
     capacity: 90,
     range: 630,
     expectedDelivery: 'Haust 2021',
+    drive: 'RWD',
   },
   {
     make: 'Mercedes-Benz',
@@ -1226,6 +1273,9 @@ export const expectedCars: Array<ExpectedCar> = [
     range: 770,
     evDatabaseURL: 'https://ev-database.org/car/1483/Mercedes-EQS-450plus',
     expectedDelivery: 'Haust 2021',
+    drive: 'RWD',
+    power: 245,
+    timeToCharge10T080: 32,
   },
   {
     make: 'Mercedes-Benz',
@@ -1239,11 +1289,13 @@ export const expectedCars: Array<ExpectedCar> = [
     range: 702,
     evDatabaseURL: 'https://ev-database.org/car/1483/Mercedes-EQS-450plus',
     expectedDelivery: 'Haust 2021',
+    drive: 'AWD',
+    power: 385,
+    timeToCharge10T080: 32,
   },
   {
     make: 'MG',
     model: ' Marvel R',
-    subModel: 'RWD',
     heroImageName: 'mg-marvel-r',
     price: 5800000,
     sellerURL: 'https://mgmotor.eu/is-IS/model/marvel-r',
@@ -1252,31 +1304,40 @@ export const expectedCars: Array<ExpectedCar> = [
     range: 402,
     evDatabaseURL: 'https://ev-database.org/car/1475/MG-Marvel-R',
     expectedDelivery: 'Haust 2021',
+    drive: 'RWD',
+    power: 132,
+    timeToCharge10T080: 36,
   },
   {
     make: 'MG',
     model: ' Marvel R',
-    subModel: 'AWD',
+    subModel: 'Performance',
     heroImageName: 'mg-marvel-r-alt',
     price: 6800000,
     sellerURL: 'https://mgmotor.eu/is-IS/model/marvel-r',
     acceleration: 4.9,
     capacity: 70,
     range: 370,
-    evDatabaseURL: 'https://ev-database.org/car/1475/MG-Marvel-R',
+    evDatabaseURL: 'https://ev-database.org/car/1475/MG-Marvel-R-Performance',
     expectedDelivery: 'Haust 2021',
+    drive: 'AWD',
+    power: 212,
+    timeToCharge10T080: 36,
   },
   {
     make: 'MG',
     model: 'MG5 EV',
     heroImageName: 'mg-mg5-ev',
-    price: 3990000,
+    price: 4990000,
     sellerURL: 'https://mgmotor.eu/is-IS/model/mg5',
-    acceleration: 7.7,
-    capacity: 52,
-    range: 344,
-    evDatabaseURL: 'https://ev-database.org/car/1313/MG-MG5-EV',
+    acceleration: 8.3,
+    capacity: 60,
+    range: 400,
+    evDatabaseURL: 'https://ev-database.org/car/1474/MG-MG5-Electric',
     expectedDelivery: 'Október 2021',
+    drive: 'FWD',
+    power: 135,
+    timeToCharge10T080: 31,
   },
   {
     make: 'Nissan',
@@ -1289,6 +1350,9 @@ export const expectedCars: Array<ExpectedCar> = [
     range: 360,
     evDatabaseURL: 'https://ev-database.org/car/1301/Nissan-Ariya-63kWh',
     expectedDelivery: 'Lok 2021',
+    drive: 'FWD',
+    power: 160,
+    timeToCharge10T080: 31,
   },
   {
     make: 'Nissan',
@@ -1303,6 +1367,9 @@ export const expectedCars: Array<ExpectedCar> = [
     evDatabaseURL:
       'https://ev-database.org/car/1304/Nissan-Ariya-e-4ORCE-87kWh',
     expectedDelivery: 'Lok 2021',
+    drive: 'AWD',
+    power: 225,
+    timeToCharge10T080: 35,
   },
   {
     make: 'Volvo',
@@ -1316,5 +1383,8 @@ export const expectedCars: Array<ExpectedCar> = [
     range: 420,
     evDatabaseURL: 'https://ev-database.org/car/1421/Volvo-C40-Recharge',
     expectedDelivery: 'Haust 2021',
+    drive: 'AWD',
+    power: 300,
+    timeToCharge10T080: 33,
   },
 ]
