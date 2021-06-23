@@ -10,11 +10,24 @@ import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
 import LinkPill from '../components/LinkPill'
 import newCars, { expectedCars } from '../modules/newCars'
+import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
 import { NewCar } from '../types'
 import stableSort from '../components/stableSort'
 
-type Sorting = 'name' | 'price' | 'range' | 'acceleration' | 'value'
-type SortingQuery = 'nafni' | 'verdi' | 'draegni' | 'hrodun' | 'virdi'
+type Sorting =
+  | 'name'
+  | 'price'
+  | 'range'
+  | 'acceleration'
+  | 'value'
+  | 'fastcharge'
+type SortingQuery =
+  | 'nafni'
+  | 'verdi'
+  | 'draegni'
+  | 'hrodun'
+  | 'virdi'
+  | 'hradhledslu'
 
 const sortingToQuery: { [key in Sorting]: SortingQuery } = {
   name: 'nafni',
@@ -22,6 +35,7 @@ const sortingToQuery: { [key in Sorting]: SortingQuery } = {
   range: 'draegni',
   acceleration: 'hrodun',
   value: 'virdi',
+  fastcharge: 'hradhledslu',
 }
 
 const queryToSorting: { [key in SortingQuery]: Sorting } = {
@@ -30,6 +44,7 @@ const queryToSorting: { [key in SortingQuery]: Sorting } = {
   draegni: 'range',
   hrodun: 'acceleration',
   virdi: 'value',
+  hradhledslu: 'fastcharge',
 }
 
 const carSorter = (sorting: Sorting) => (a: NewCar, b: NewCar) => {
@@ -47,6 +62,11 @@ const carSorter = (sorting: Sorting) => (a: NewCar, b: NewCar) => {
       return a.acceleration - b.acceleration
     case 'value':
       return a.price / a.range - b.price / b.range
+    case 'fastcharge':
+      return (
+        Number(getKmPerMinutesCharged(b.timeToCharge10T080, b.range)) -
+        Number(getKmPerMinutesCharged(a.timeToCharge10T080, a.range))
+      )
   }
 }
 

@@ -4,6 +4,7 @@ import Image from 'next/image'
 
 import { NewCar as NewCarType, ExpectedCar, Drive } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
+import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
 import LinkPill from './LinkPill'
 
 interface Props {
@@ -11,9 +12,6 @@ interface Props {
   onGray?: boolean
   showValue?: boolean
 }
-
-let getKmPerMinutesCharged = (timeToCharge10T080: number, range: number) =>
-  ((range * 0.7) / timeToCharge10T080).toPrecision(3)
 
 let getDriveLabel = (drive: Drive) => {
   switch (drive) {
