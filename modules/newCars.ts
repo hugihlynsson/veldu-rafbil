@@ -135,7 +135,7 @@ const newCars: Array<NewCar> = [
     capacity: 50,
     range: 350,
     evDatabaseURL: 'https://ev-database.org/car/1286/Citroen-e-C4',
-    drive: 'AWD',
+    drive: 'FWD',
     timeToCharge10T080: 31,
     power: 100,
   },
