@@ -1260,6 +1260,8 @@ export const expectedCars: Array<ExpectedCar> = [
     range: 630,
     expectedDelivery: 'Haust 2021',
     drive: 'RWD',
+    power: 212,
+    timeToCharge10T080: 28,
   },
   {
     make: 'Mercedes-Benz',

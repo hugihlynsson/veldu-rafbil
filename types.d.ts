@@ -48,9 +48,9 @@ export interface NewCar {
   capacity: number // kWh
   range: number // WLTP
   evDatabaseURL?: string
-  drive?: Drive
-  timeToCharge10T080?: number // minutes
-  power?: number // kW
+  drive: Drive
+  timeToCharge10T080: number // minutes
+  power: number // kW
 }
 
 export interface ExpectedCar extends NewCar {

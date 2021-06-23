@@ -76,37 +76,31 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
         <div className="info-item">
           <div className="info-item-label">0-100 km/klst</div>
           <div className="info-item-value">{car.acceleration.toFixed(1)}s</div>
-          {car.power && (
-            <div
-              className="info-item-extra"
-              title={`Afl (${Math.round(car.power * 1.34102) + ' hö'})`}
-            >
-              {car.power} kw
-            </div>
-          )}
+          <div
+            className="info-item-extra"
+            title={`Afl (${Math.round(car.power * 1.34102) + ' hö'})`}
+          >
+            {car.power} kw
+          </div>
         </div>
 
         <div className="info-item" style={{ flexShrink: 0 }}>
           <div className="info-item-label">Rafhlaða</div>
           <div className="info-item-value">{car.capacity} kWh</div>
-          {car.timeToCharge10T080 && (
-            <div
-              className="info-item-extra"
-              title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10T080} min)`}
-            >
-              {getKmPerMinutesCharged(car.timeToCharge10T080, car.range)} km/min
-            </div>
-          )}
+          <div
+            className="info-item-extra"
+            title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10T080} min)`}
+          >
+            {getKmPerMinutesCharged(car.timeToCharge10T080, car.range)} km/min
+          </div>
         </div>
 
         <div className="info-item" title="Samkvæmt WLTP prófunum">
           <div className="info-item-label">Drægni</div>
           <div className="info-item-value">{car.range} km</div>
-          {car.drive && (
-            <div className="info-item-extra" title={getDriveLabel(car.drive)}>
-              {car.drive}
-            </div>
-          )}
+          <div className="info-item-extra" title={getDriveLabel(car.drive)}>
+            {car.drive}
+          </div>
         </div>
       </div>
       {car.evDatabaseURL && (
