@@ -4,6 +4,7 @@ import { NextPage } from 'next'
 import Router, { useRouter } from 'next/router'
 import Link from 'next/link'
 import smoothscroll from 'smoothscroll-polyfill'
+import { ParsedUrlQuery } from 'querystring'
 
 import Car from '../components/NewCar'
 import Footer from '../components/Footer'
@@ -11,7 +12,7 @@ import Toggles from '../components/Toggles'
 import LinkPill from '../components/LinkPill'
 import newCars, { expectedCars } from '../modules/newCars'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
-import { NewCar } from '../types'
+import { NewCar, Drive } from '../types'
 import stableSort from '../components/stableSort'
 
 type Sorting =
@@ -21,6 +22,7 @@ type Sorting =
   | 'acceleration'
   | 'value'
   | 'fastcharge'
+
 type SortingQuery =
   | 'nafni'
   | 'verdi'
@@ -47,44 +49,140 @@ const queryToSorting: { [key in SortingQuery]: Sorting } = {
   hradhledslu: 'fastcharge',
 }
 
-const carSorter = (sorting: Sorting) => (a: NewCar, b: NewCar) => {
-  let padPrice = (car: NewCar): string => car.price.toString().padStart(9, '0')
-  switch (sorting) {
-    case 'name':
-      return `${a.make} ${a.model} ${padPrice(a)}`.localeCompare(
-        `${b.make} ${b.model} ${padPrice(b)}`,
-      )
-    case 'price':
-      return a.price - b.price
-    case 'range':
-      return b.range - a.range
-    case 'acceleration':
-      return a.acceleration - b.acceleration
-    case 'value':
-      return a.price / a.range - b.price / b.range
-    case 'fastcharge':
-      return (
-        Number(getKmPerMinutesCharged(b.timeToCharge10T080, b.range)) -
-        Number(getKmPerMinutesCharged(a.timeToCharge10T080, a.range))
-      )
+const getFiltersFromQuery = (query: ParsedUrlQuery): Filters => {
+  let filters: Filters = {}
+
+  if (query.hrodun) {
+    filters.acceleration = Number(query.hrodun)
   }
+  if (query.drif) {
+    filters.drive = (query.drif as string).split(',') as Drive[]
+  }
+  if (query.hradhledsla) {
+    filters.fastcharge = Number(query.hradhledsla)
+  }
+  if (query.nafn) {
+    filters.name = query.nafn as string
+  }
+  if (query.verd) {
+    filters.price = Number(query.verd)
+  }
+  if (query.draegni) {
+    filters.range = Number(query.draegni)
+  }
+  if (query.virdi) {
+    filters.value = Number(query.virdi)
+  }
+  return filters
 }
+
+const carSorter =
+  (sorting: Sorting) =>
+  (a: NewCar, b: NewCar): number => {
+    let padPrice = (car: NewCar): string =>
+      car.price.toString().padStart(9, '0')
+    switch (sorting) {
+      case 'name':
+        return `${a.make} ${a.model} ${padPrice(a)}`.localeCompare(
+          `${b.make} ${b.model} ${padPrice(b)}`,
+        )
+      case 'price':
+        return a.price - b.price
+      case 'range':
+        return b.range - a.range
+      case 'acceleration':
+        return a.acceleration - b.acceleration
+      case 'value':
+        return a.price / a.range - b.price / b.range
+      case 'fastcharge':
+        return (
+          Number(getKmPerMinutesCharged(b.timeToCharge10T080, b.range)) -
+          Number(getKmPerMinutesCharged(a.timeToCharge10T080, a.range))
+        )
+    }
+  }
+
+type Filters = {
+  acceleration?: number
+  drive?: Drive[]
+  fastcharge?: number
+  name?: string
+  price?: number
+  range?: number
+  value?: number
+}
+
+const carFilter =
+  (filters: Filters) =>
+  (car: NewCar): boolean =>
+    Object.keys(filters).length === 0
+      ? true
+      : Object.keys(filters).every((name): boolean => {
+          switch (name as keyof Filters) {
+            case 'acceleration':
+              return (
+                car.acceleration <=
+                (filters.acceleration ?? Number.MAX_SAFE_INTEGER)
+              )
+            case 'drive':
+              return filters.drive?.includes(car.drive) || false
+            case 'fastcharge':
+              Number(
+                getKmPerMinutesCharged(car.timeToCharge10T080, car.range),
+              ) >= (filters.fastcharge ?? 0)
+            case 'name':
+              return `${car.make} ${car.model}`
+                .toLowerCase()
+                .includes(filters.name?.toLowerCase() ?? '')
+            case 'price':
+              return car.price <= (filters.price ?? Number.MAX_SAFE_INTEGER)
+            case 'range':
+              return car.range >= (filters.range ?? 0)
+            case 'value':
+              return (
+                car.price / car.range <=
+                (filters.value ?? Number.MAX_SAFE_INTEGER)
+              )
+          }
+        })
 
 interface Props {
-  initialSorting: SortingQuery | undefined
+  sorting: Sorting
+  filters: Filters
 }
 
-const New: NextPage<Props> = ({ initialSorting }) => {
+const New: NextPage<Props> = ({ sorting: initialSorting, filters }) => {
   const { pathname } = useRouter()
-  const [sorting, setSorting] = useState<Sorting>(
-    queryToSorting[initialSorting || 'nafni'],
-  )
+  const [sorting, setSorting] = useState<Sorting>(initialSorting)
 
   useEffect(() => smoothscroll.polyfill(), [])
 
   useEffect(() => {
-    const query =
-      sorting === 'name' ? {} : { radaeftir: sortingToQuery[sorting] }
+    const query = {} as any
+    if (sorting !== 'name') {
+      query.radaeftir = sortingToQuery[sorting]
+    }
+    if (filters.acceleration) {
+      query.hrodun = filters.acceleration
+    }
+    if (filters.drive) {
+      query.drif = filters.drive
+    }
+    if (filters.fastcharge) {
+      query.hradhledsla = Number(filters.fastcharge)
+    }
+    if (filters.name) {
+      query.nafn = filters.name as string
+    }
+    if (filters.price) {
+      query.verd = Number(filters.price)
+    }
+    if (filters.range) {
+      query.draegni = Number(filters.range)
+    }
+    if (filters.value) {
+      query.virdi = Number(filters.value)
+    }
     Router.replace({ pathname, query }, undefined, { scroll: false })
   }, [sorting])
 
@@ -146,13 +244,15 @@ const New: NextPage<Props> = ({ initialSorting }) => {
           />
         </header>
 
-        {stableSort(newCars, carSorter(sorting)).map((car) => (
-          <Car
-            car={car}
-            key={`${car.make} ${car.model} ${car.subModel}`}
-            showValue={sorting === 'value'}
-          />
-        ))}
+        {stableSort(newCars.filter(carFilter(filters)), carSorter(sorting)).map(
+          (car) => (
+            <Car
+              car={car}
+              key={`${car.make} ${car.model} ${car.subModel}`}
+              showValue={sorting === 'value'}
+            />
+          ),
+        )}
       </div>
 
       {expectedCars.length > 0 && (
@@ -276,9 +376,9 @@ const New: NextPage<Props> = ({ initialSorting }) => {
   )
 }
 
-New.getInitialProps = ({ query }) =>
-  Promise.resolve({
-    initialSorting: query.radaeftir as SortingQuery | undefined,
-  })
+New.getInitialProps = ({ query }): Props => ({
+  sorting: queryToSorting[(query.radaeftir as SortingQuery) ?? 'nafni'],
+  filters: getFiltersFromQuery(query),
+})
 
 export default New
