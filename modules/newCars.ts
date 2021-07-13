@@ -255,7 +255,7 @@ const newCars: Array<NewCar> = [
     sellerURL: 'https://www.hyundai.is/nyir/kona-ev/yfirlit',
     acceleration: 9.9,
     capacity: 39,
-    range: 289,
+    range: 305,
     evDatabaseURL:
       'https://ev-database.org/car/1422/Hyundai-Kona-Electric-39-kWh',
     drive: 'FWD',
@@ -271,7 +271,7 @@ const newCars: Array<NewCar> = [
     sellerURL: 'https://www.hyundai.is/nyir/kona-ev/yfirlit',
     acceleration: 7.6,
     capacity: 64,
-    range: 450,
+    range: 484,
     evDatabaseURL:
       'https://ev-database.org/car/1423/Hyundai-Kona-Electric-64-kWh',
     drive: 'FWD',
