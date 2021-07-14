@@ -48,8 +48,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Audi',
-    model: 'e-tron Sportback',
-    subModel: '55 Quattro',
+    model: 'e-tron',
+    subModel: 'Sportback 55 Quattro',
     heroImageName: 'e-tron-55-sportback',
     price: 10590000,
     sellerURL:
@@ -65,8 +65,8 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Audi',
-    model: 'e-tron Sportback',
-    subModel: 'S',
+    model: 'e-tron',
+    subModel: 'Sportback S',
     heroImageName: 'e-tron-s-sportback',
     price: 16390000,
     sellerURL:
@@ -79,6 +79,22 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     timeToCharge10T080: 26,
     power: 370,
+  },
+  {
+    make: 'Audi',
+    model: 'e-tron GT',
+    subModel: 'quattro',
+    heroImageName: 'audi-etron-gt',
+    price: 13990000,
+    sellerURL: 'http://www.audi.is/is/web/is/models/q4-e-tron/q4-e-tron.html',
+    acceleration: 4.1,
+    capacity: 93.4,
+    range: 475,
+    evDatabaseURL:
+      'https://ev-database.org/car/1420/Audi-e-tron-GT-quattro',
+    drive: 'AWD',
+    power: 450,
+    timeToCharge10T080: 21,
   },
   {
     make: 'Audi',
