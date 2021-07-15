@@ -797,7 +797,7 @@ const newCars: Array<NewCar> = [
     capacity: 77,
     range: 614,
     evDatabaseURL:
-      'https://ev-database.org/car/1321/Tesla-Model-3-Long-Range-Dual-Motor-LG',
+      'https://ev-database.org/car/1321/Tesla-Model-3-Long-Range-Dual-Motor',
     drive: 'AWD',
     power: 324,
     timeToCharge10T080: 34,
