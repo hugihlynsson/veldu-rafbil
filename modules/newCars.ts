@@ -595,7 +595,7 @@ const newCars: Array<NewCar> = [
     make: 'Opel',
     model: 'Corsa-e',
     heroImageName: 'opel-corsa-e',
-    price: 3690000,
+    price: 3990000,
     sellerURL: 'https://www.opel.is/cars/corsa-models/corsa-e/overview.html',
     acceleration: 8.1,
     capacity: 50,
