@@ -579,6 +579,17 @@ const usedCarModels: Array<UsedCarModel> = [
     range: 232,
     evDatabaseURL: 'https://ev-database.org/car/1163/Mini-Cooper-SE',
   },
+  {
+    make: 'Peugeot',
+    model: 'e-208',
+    id: 'peugeot-e-208',
+    price: 4090000,
+    sellerURL: 'https://www.peugeotisland.is/nyir-bilar/velja-bil/glaenyr-peugeot-e-208/',
+    acceleration: 8.1,
+    capacity: 50,
+    range: 340,
+    evDatabaseURL: 'https://ev-database.org/car/1168/Peugeot-e-208',
+  },
 ]
 
 export default usedCarModels
