@@ -86,7 +86,7 @@ const newCars: Array<NewCar> = [
     subModel: 'quattro',
     heroImageName: 'audi-etron-gt',
     price: 13990000,
-    sellerURL: 'http://www.audi.is/is/web/is/models/q4-e-tron/q4-e-tron.html',
+    sellerURL: 'https://www.audi.is/is/web/is/models/e-tron-gt/e-tron-gt.html',
     acceleration: 4.1,
     capacity: 93.4,
     range: 475,
