@@ -35,7 +35,6 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
         height={1280}
         layout="responsive"
         className="image"
-        unoptimized={process.env.NODE_ENV === 'development'}
       />
     </div>
 
