@@ -437,7 +437,7 @@ const usedCarModels: Array<UsedCarModel> = [
     make: 'Tesla',
     model: 'Model 3 Long Range',
     acceleration: 4.6,
-    capacity: 100,
+    capacity: 79,
     range: 560,
     evDatabaseURL:
       'https://ev-database.org/car/1138/Tesla-Model-3-Long-Range-Dual-Motor',
