@@ -584,11 +584,23 @@ const usedCarModels: Array<UsedCarModel> = [
     model: 'e-208',
     id: 'peugeot-e-208',
     price: 4090000,
-    sellerURL: 'https://www.peugeotisland.is/nyir-bilar/velja-bil/glaenyr-peugeot-e-208/',
+    sellerURL:
+      'https://www.peugeotisland.is/nyir-bilar/velja-bil/glaenyr-peugeot-e-208/',
     acceleration: 8.1,
     capacity: 50,
     range: 340,
     evDatabaseURL: 'https://ev-database.org/car/1168/Peugeot-e-208',
+  },
+  {
+    make: 'Lexus',
+    model: 'UX 300e',
+    id: 'lexus-ux-300e',
+    price: 8490000,
+    sellerURL: 'https://www.lexus.is/car-models/ux-300e/',
+    acceleration: 7.5,
+    capacity: 50,
+    range: 315,
+    evDatabaseURL: 'https://ev-database.org/car/1251/Lexus-UX-300e',
   },
 ]
 
