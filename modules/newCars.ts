@@ -712,6 +712,21 @@ const newCars: Array<NewCar> = [
     timeToCharge10T080: 31,
   },
   {
+    make: 'Peugeot',
+    model: 'e-Traveller',
+    heroImageName: 'peugeot-e-traveller',
+    price: 7490000,
+    sellerURL:
+      'https://www.peugeotisland.is/nyir-bilar/sko/e-traveller/',
+    acceleration: 13.3,
+    capacity: 75,
+    range: 330,
+    evDatabaseURL: 'https://ev-database.org/car/1353/Peugeot-e-Traveller-Standard-75-kWh',
+    drive: 'FWD',
+    power: 100,
+    timeToCharge10T080: 38,
+  },
+  {
     make: 'Porsche',
     model: 'Taycan',
     heroImageName: 'porsche-taycan',
