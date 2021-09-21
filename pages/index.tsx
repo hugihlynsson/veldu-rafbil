@@ -11,6 +11,7 @@ import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
 import LinkPill from '../components/LinkPill'
 import newCars, { expectedCars } from '../modules/newCars'
+import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
 import { NewCar, Drive } from '../types'
 import stableSort from '../components/stableSort'
@@ -56,7 +57,7 @@ const getFiltersFromQuery = (query: ParsedUrlQuery): Filters => {
     filters.acceleration = Number(query.hrodun)
   }
   if (query.drif) {
-    filters.drive = (query.drif as string).split(',') as Drive[]
+    filters.drive = typeof query.drif === "string" ? [query.drif as Drive] : query.drif as Drive[]
   }
   if (query.hradhledsla) {
     filters.fastcharge = Number(query.hradhledsla)
@@ -151,40 +152,44 @@ interface Props {
   filters: Filters
 }
 
-const New: NextPage<Props> = ({ sorting: initialSorting, filters }) => {
+const New: NextPage<Props> = ({
+  sorting: initialSorting,
+  filters: initialFilters,
+}) => {
   const { pathname } = useRouter()
   const [sorting, setSorting] = useState<Sorting>(initialSorting)
+  const [filters, setFilters] = useState<Filters>(initialFilters)
 
   useEffect(() => smoothscroll.polyfill(), [])
 
   useEffect(() => {
-    const query = {} as any
+    const query = {} as ParsedUrlQuery
     if (sorting !== 'name') {
       query.radaeftir = sortingToQuery[sorting]
     }
     if (filters.acceleration) {
-      query.hrodun = filters.acceleration
+      query.hrodun = filters.acceleration.toString()
     }
     if (filters.drive) {
       query.drif = filters.drive
     }
     if (filters.fastcharge) {
-      query.hradhledsla = Number(filters.fastcharge)
+      query.hradhledsla = filters.fastcharge.toString()
     }
     if (filters.name) {
-      query.nafn = filters.name as string
+      query.nafn = filters.name
     }
     if (filters.price) {
-      query.verd = Number(filters.price)
+      query.verd = filters.price.toString()
     }
     if (filters.range) {
-      query.draegni = Number(filters.range)
+      query.draegni = filters.range.toString()
     }
     if (filters.value) {
-      query.virdi = Number(filters.value)
+      query.virdi = filters.value.toString()
     }
     Router.replace({ pathname, query }, undefined, { scroll: false })
-  }, [sorting])
+  }, [sorting, filters])
 
   const descriptionRef = useRef<HTMLParagraphElement>(null)
 
@@ -195,6 +200,14 @@ const New: NextPage<Props> = ({ sorting: initialSorting, filters }) => {
     },
     [descriptionRef],
   )
+
+  const handleRemoveFilter = (name: keyof Filters) => () => {
+    setFilters((filters) => {
+      let newFilters = Object.assign({}, filters)
+      delete newFilters[name]
+      return newFilters
+    })
+  }
 
   return (
     <>
@@ -242,6 +255,75 @@ const New: NextPage<Props> = ({ sorting: initialSorting, filters }) => {
             ]}
             onClick={setSorting}
           />
+
+          {Object.values(filters).length > 0 && (
+            <div className="filters-box">
+              <div className="filters-title">Filterar:</div>
+              <div className="filters">
+                {filters.acceleration && (
+                  <button
+                    className="filter"
+                    onClick={handleRemoveFilter('acceleration')}
+                  >
+                    Hröðun {filters.acceleration.toFixed(1)}s
+                  </button>
+                )}
+                {filters.drive && (
+                  <button
+                    className="filter"
+                    onClick={handleRemoveFilter('drive')}
+                  >
+                    Drif: {filters.drive.join(', ')}
+                  </button>
+                )}
+
+                {filters.fastcharge && (
+                  <button
+                    className="filter"
+                    onClick={handleRemoveFilter('fastcharge')}
+                  >
+                    Hraðhleðsla: {filters.fastcharge} km/min
+                  </button>
+                )}
+
+                {filters.name && (
+                  <button
+                    className="filter"
+                    onClick={handleRemoveFilter('name')}
+                  >
+                    Nafn: {filters.name}
+                  </button>
+                )}
+
+                {filters.price && (
+                  <button
+                    className="filter"
+                    onClick={handleRemoveFilter('price')}
+                  >
+                    Verð: {addDecimalSeprators(filters.price)} kr.
+                  </button>
+                )}
+
+                {filters.range && (
+                  <button
+                    className="filter"
+                    onClick={handleRemoveFilter('range')}
+                  >
+                    Drægni: {filters.range} km.
+                  </button>
+                )}
+
+                {filters.value && (
+                  <button
+                    className="filter"
+                    onClick={handleRemoveFilter('value')}
+                  >
+                    Verði á km: `${addDecimalSeprators(filters.value)} kr.
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
         </header>
 
         {stableSort(newCars.filter(carFilter(filters)), carSorter(sorting)).map(
@@ -323,10 +405,58 @@ const New: NextPage<Props> = ({ sorting: initialSorting, filters }) => {
             color: #888;
           }
 
-          .sorting-title {
+          .sorting-title,
+          .filters-title {
             margin-bottom: 8px;
             font-size: 14px;
             font-weight: 600;
+          }
+
+          .filters-box {
+            margin-top: 20px;
+          }
+          .filters {
+            display: flex;
+            max-width: 100%;
+            align-self: flex-start;
+            margin-left: -2px;
+          }
+          .filter {
+            position: relative;
+            border: 0;
+            margin: 0 8px 0 0;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 8px 5px 12px;
+            border-radius: 100px;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #EEE;
+            transition: all 0.2s;
+          }
+          .filter::after {
+            content: '+';
+            transform: rotate(45deg);
+            margin-left: 6px;
+            font-size: 18px;
+            line-height: 10px;
+            margin-top: -2px;
+            color: #666;
+          }
+          .filter:last-child {
+            border-right-width: 0;
+          }
+          .filter:active {
+            color: #000;
+          }
+          .filter:hover {
+            background-color: #f8f8f8;
+          }
+          .filter:hover::after {
+            color: #222;
           }
 
           .expected {
