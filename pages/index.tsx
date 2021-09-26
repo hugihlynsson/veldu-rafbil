@@ -57,7 +57,10 @@ const getFiltersFromQuery = (query: ParsedUrlQuery): Filters => {
     filters.acceleration = Number(query.hrodun)
   }
   if (query.drif) {
-    filters.drive = typeof query.drif === "string" ? [query.drif as Drive] : query.drif as Drive[]
+    filters.drive =
+      typeof query.drif === 'string'
+        ? [query.drif as Drive]
+        : (query.drif as Drive[])
   }
   if (query.hradhledsla) {
     filters.fastcharge = Number(query.hradhledsla)
@@ -209,6 +212,8 @@ const New: NextPage<Props> = ({
     })
   }
 
+  const filteredCars = newCars.filter(carFilter(filters))
+
   return (
     <>
       <div className="content">
@@ -258,7 +263,13 @@ const New: NextPage<Props> = ({
 
           {Object.values(filters).length > 0 && (
             <div className="filters-box">
-              <div className="filters-title">Filterar:</div>
+              <div className="filters-title">
+                {filteredCars.length}{' '}
+                {filteredCars.length.toString().match(/.*1$/m)
+                  ? 'bíll passar'
+                  : 'bílar passa'}{' '}
+                við:
+              </div>
               <div className="filters">
                 {filters.acceleration && (
                   <button
@@ -326,15 +337,13 @@ const New: NextPage<Props> = ({
           )}
         </header>
 
-        {stableSort(newCars.filter(carFilter(filters)), carSorter(sorting)).map(
-          (car) => (
-            <Car
-              car={car}
-              key={`${car.make} ${car.model} ${car.subModel}`}
-              showValue={sorting === 'value'}
-            />
-          ),
-        )}
+        {stableSort(filteredCars, carSorter(sorting)).map((car) => (
+          <Car
+            car={car}
+            key={`${car.make} ${car.model} ${car.subModel}`}
+            showValue={sorting === 'value'}
+          />
+        ))}
       </div>
 
       {expectedCars.length > 0 && (
