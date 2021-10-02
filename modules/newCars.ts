@@ -1227,7 +1227,7 @@ export const expectedCars: Array<ExpectedCar> = [
     model: 'i4',
     subModel: 'eDrive 40',
     heroImageName: 'bmw-i4',
-    price: 8490000,
+    price: 7990000,
     sellerURL:
       'https://www.bmw.is/is/all-models/bmw-i/i4/2021/bmw-i4-forskooun.html',
     acceleration: 5.7,
@@ -1244,7 +1244,7 @@ export const expectedCars: Array<ExpectedCar> = [
     model: 'i4',
     subModel: 'M50',
     heroImageName: 'bmw-i4-m50',
-    price: 9900000,
+    price: 12390000,
     sellerURL:
       'https://www.bmw.is/is/all-models/bmw-i/i4/2021/bmw-i4-forskooun.html',
     acceleration: 3.9,
