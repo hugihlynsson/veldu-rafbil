@@ -121,7 +121,7 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
 
         .content {
           padding: 10px 16px 16px;
-          margin 0 auto;
+          margin: 0 auto;
           max-width: 480px;
         }
 

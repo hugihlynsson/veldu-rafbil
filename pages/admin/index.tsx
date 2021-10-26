@@ -159,7 +159,7 @@ const Used: NextPage<Props> = ({ cars }) => {
             display: flex;
             flex-direction: column;
             align-items: stretch;
-            margin 0 auto;
+            margin: 0 auto;
             max-width: 560px;
             padding: 24px;
           }
@@ -191,7 +191,7 @@ const Used: NextPage<Props> = ({ cars }) => {
 
           @media screen and (min-width: 767px) {
             .root {
-              margin 0 auto;
+              margin: 0 auto;
               max-width: 1180px;
             }
 

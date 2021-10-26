@@ -114,7 +114,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
 
         .content {
           padding: 12px 16px 8px;
-          margin 0 auto;
+          margin: 0 auto;
           max-width: 480px;
         }
 

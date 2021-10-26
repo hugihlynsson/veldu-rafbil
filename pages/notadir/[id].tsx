@@ -164,7 +164,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
       <style jsx>{`
           .root {
-            margin 0 auto;
+            margin: 0 auto;
             padding: 0;
           }
 
@@ -172,7 +172,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
             display: flex;
             flex-direction: column;
             align-items: stretch;
-            margin 0 auto;
+            margin: 0 auto;
             max-width: 480px;
             padding: 16px 16px 0;
           }
@@ -292,7 +292,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
 
           @media screen and (min-width: 1194px) {
             .root {
-              margin 0 auto;
+              margin: 0 auto;
               max-width: 1280px;
             }
 

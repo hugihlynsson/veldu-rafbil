@@ -236,14 +236,14 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
 
       <style jsx>{`
           .root {
-            margin 0 auto;
+            margin: 0 auto;
           }
 
           header {
             display: flex;
             flex-direction: column;
             align-items: stretch;
-            margin 0 auto;
+            margin: 0 auto;
             max-width: 480px;
             padding: 16px;
           }
@@ -327,7 +327,7 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
             }
             
             .root {
-              margin 0 auto;
+              margin: 0 auto;
               max-width: 1280px;
             }
 

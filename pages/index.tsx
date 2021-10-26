@@ -376,7 +376,7 @@ const New: NextPage<Props> = ({
             display: flex;
             flex-direction: column;
             align-items: stretch;
-            margin 0 auto;
+            margin: 0 auto;
             max-width: 480px;
             padding: 16px;
           }
