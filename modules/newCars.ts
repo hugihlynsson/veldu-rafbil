@@ -1250,6 +1250,20 @@ export default newCars
 
 export const expectedCars: Array<ExpectedCar> = [
   {
+    make: 'Aiways',
+    model: 'U5',
+    heroImageName: 'aiways-u5',
+    price: 5190000,
+    sellerURL: 'https://aiwaysaislandi.is',
+    acceleration: 7.5,
+    capacity: 63,
+    range: 410,
+    expectedDelivery: 'Byrjun 2022',
+    drive: 'FWD',
+    timeToCharge10T080: 35,
+    power: 150,
+  },
+  {
     make: 'Audi',
     model: 'Q4 Sportback e-tron',
     subModel: '35',
@@ -1320,7 +1334,7 @@ export const expectedCars: Array<ExpectedCar> = [
     model: 'i4',
     subModel: 'M50',
     heroImageName: 'bmw-i4-m50',
-    price: 12390000,
+    price: 10390000,
     sellerURL:
       'https://www.bmw.is/is/all-models/bmw-i/i4/2021/bmw-i4-forskooun.html',
     acceleration: 3.9,
@@ -1645,7 +1659,7 @@ export const expectedCars: Array<ExpectedCar> = [
     acceleration: 7.4,
     capacity: 70,
     range: 400,
-    evDatabaseURL: 'https://ev-database.org/car/1539/-Recharge-Pure-Electric',
+    evDatabaseURL: 'https://ev-database.org/car/1539/Volvo-XC40-Recharge-Pure-Electric',
     expectedDelivery: 'Fyrri hluta 2022',
     drive: 'FWD',
     power: 170,
