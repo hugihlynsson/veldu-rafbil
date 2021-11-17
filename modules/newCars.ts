@@ -947,7 +947,7 @@ const newCars: Array<NewCar> = [
     sellerURL: 'https://www.skoda.is/models/enyaq/enyaq',
     acceleration: 6.9,
     capacity: 77,
-    range: 460,
+    range: 496,
     evDatabaseURL: 'https://ev-database.org/car/1281/Skoda-Enyaq-iV-80X',
     drive: 'AWD',
     power: 195,
