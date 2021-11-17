@@ -1,5 +1,6 @@
-// Export Firebase Database and store it at the root of this project
-// Run node scripts/TM3LRperDay.mjs to get some results ✨
+// Export Firebase Database and store it in this folder.
+// It should be named "choose-ev-export.json"
+// Then run `node scripts/TM3LRperDay.mjs` to get some results ✨
 
 import { readFile } from 'fs/promises'
 
