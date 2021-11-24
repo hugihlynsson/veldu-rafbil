@@ -1023,7 +1023,7 @@ const newCars: Array<NewCar> = [
     sellerURL: 'https://www.tesla.com/is_IS/model3/design',
     acceleration: 6.1,
     capacity: 55,
-    range: 491,
+    range: 510,
     evDatabaseURL:
       'https://ev-database.org/car/1320/Tesla-Model-3-Standard-Range-Plus',
     drive: 'RWD',
@@ -1039,7 +1039,7 @@ const newCars: Array<NewCar> = [
     sellerURL: 'https://www.tesla.com/is_IS/model3/design',
     acceleration: 4.4,
     capacity: 77,
-    range: 614,
+    range: 638,
     evDatabaseURL:
       'https://ev-database.org/car/1321/Tesla-Model-3-Long-Range-Dual-Motor',
     drive: 'AWD',
@@ -1131,7 +1131,7 @@ const newCars: Array<NewCar> = [
     sellerURL: 'https://www.tesla.com/is_is/modely/design',
     acceleration: 5.0,
     capacity: 75,
-    range: 507,
+    range: 537,
     evDatabaseURL:
       'https://ev-database.org/car/1182/Tesla-Model-Y-Long-Range-Dual-Motor',
     drive: 'AWD',
