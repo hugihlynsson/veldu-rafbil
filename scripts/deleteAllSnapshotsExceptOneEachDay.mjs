@@ -29,7 +29,9 @@ const snapshotsDataSnapshot = await snapshotRef
 snapshotsDataSnapshot.forEach((childSnapshot) => {
   let key = childSnapshot.key
   const date = new Date(Number(key))
-  const dateString = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+  const dateString = `${date.getFullYear()}-${
+    date.getMonth() + 1
+  }-${date.getDate()}`
 
   if (datesSeen.has(dateString)) {
     console.log(

@@ -141,7 +141,7 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
           margin-top: -1px;
           margin-bottom: 8px;
         }
-        
+
         .expectedDelivery {
           margin-bottom: 2px;
           font-size: 16px;

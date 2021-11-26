@@ -8,10 +8,10 @@ const Orflaedi: FunctionComponent<{}> = () => (
 
         <p>
           <a href="https://www.orflaedi.is">Örflæði.is</a> er einfalt yfirlit
-          yfir öll rafhjól og örflæðistæki sem eru í boði á Íslandi. Þar hefur Jökull
-          Sólberg, áhugamaður um samgöngur, flokkað öll tækin eftir því hvar þau eru í
-          umferðarlögunum, klippt til myndir og tekið saman helstu
-          tækniupplýsingarnar.
+          yfir öll rafhjól og örflæðistæki sem eru í boði á Íslandi. Þar hefur
+          Jökull Sólberg, áhugamaður um samgöngur, flokkað öll tækin eftir því
+          hvar þau eru í umferðarlögunum, klippt til myndir og tekið saman
+          helstu tækniupplýsingarnar.
         </p>
       </div>
 

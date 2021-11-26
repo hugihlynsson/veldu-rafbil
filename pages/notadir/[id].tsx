@@ -18,31 +18,30 @@ import LinkPill from '../../components/LinkPill'
 
 type Sorting = 'price' | 'age' | 'milage'
 
-const carSorter = (sorting: Sorting) => (
-  a: ProcessedUsedCar,
-  b: ProcessedUsedCar,
-): number => {
-  switch (sorting) {
-    case 'price': {
-      return (
-        (a.price || Number.MAX_SAFE_INTEGER) -
-        (b.price || Number.MAX_SAFE_INTEGER)
-      )
-    }
-    case 'milage': {
-      return getCarMilage(a) - getCarMilage(b)
-    }
-    case 'age': {
-      return (
-        Number((b.date.split('/')[1] || '').split(' ')[0]) -
-        Number((a.date.split('/')[1] || '').split(' ')[0])
-      )
-    }
-    default: {
-      return 1
+const carSorter =
+  (sorting: Sorting) =>
+  (a: ProcessedUsedCar, b: ProcessedUsedCar): number => {
+    switch (sorting) {
+      case 'price': {
+        return (
+          (a.price || Number.MAX_SAFE_INTEGER) -
+          (b.price || Number.MAX_SAFE_INTEGER)
+        )
+      }
+      case 'milage': {
+        return getCarMilage(a) - getCarMilage(b)
+      }
+      case 'age': {
+        return (
+          Number((b.date.split('/')[1] || '').split(' ')[0]) -
+          Number((a.date.split('/')[1] || '').split(' ')[0])
+        )
+      }
+      default: {
+        return 1
+      }
     }
   }
-}
 
 const getCarMilage = (car: ProcessedUsedCar) =>
   Number(car.milage.replace(' km.', '').split('.').join('')) ?? 0
@@ -163,144 +162,144 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
       <Footer />
 
       <style jsx>{`
-          .root {
-            margin: 0 auto;
-            padding: 0;
-          }
+        .root {
+          margin: 0 auto;
+          padding: 0;
+        }
 
+        header {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          margin: 0 auto;
+          max-width: 480px;
+          padding: 16px 16px 0;
+        }
+
+        h1 {
+          font-size: 40px;
+          font-weight: 600;
+          line-height: 1.1;
+          margin-bottom: 0.4em;
+        }
+
+        .headerLinks {
+          display: flex;
+          margin-bottom: 32px;
+        }
+
+        .info-card {
+          padding: 16px;
+          background: #f8f8f8;
+          border-radius: 16px;
+          margin-left: -8px;
+          margin-right: -8px;
+          max-width: 360px;
+        }
+
+        h2 {
+          font-size: 36px;
+          font-weight: 500;
+          line-height: 1.1;
+          margin-bottom: 24px;
+          margin-top: 0;
+        }
+
+        .info {
+          display: flex;
+          margin-bottom: 16px;
+          max-width: 320px;
+          justify-content: space-between;
+        }
+        .info-item {
+          margin-right: 8px;
+          flex-basis: 33.33%;
+        }
+        .info-item:last-child {
+          margin-right: 0;
+        }
+        .info-item-label {
+          text-transform: uppercase;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.05em;
+          margin-bottom: 2px;
+          color: #555;
+        }
+        .info-item-label strong {
+          color: #000;
+        }
+        .info-item-value {
+          font-size: 24px;
+          font-weight: 400;
+        }
+
+        .description {
+          line-height: 1.5;
+          font-size: 24px;
+          margin: 1.2em 0 0.5em 0;
+          color: #000;
+          font-weight: 500;
+          max-width: 33em;
+        }
+
+        .sorting-title {
+          margin-bottom: 8px;
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        .cars {
+          display: grid;
+          grid-gap: 24px;
+          grid-template-columns: 1fr;
+          margin: 16px;
+        }
+
+        @media screen and (min-width: 375px) {
           header {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            margin: 0 auto;
-            max-width: 480px;
-            padding: 16px 16px 0;
+            padding: 24px 24px 0;
           }
-
           h1 {
-            font-size: 40px;
-            font-weight: 600;
-            line-height: 1.1;
-            margin-bottom: 0.4em;
+            font-size: 48px;
           }
 
-          .headerLinks {
-            display: flex;
-            margin-bottom: 32px;
-          }
-
-          .info-card {
-            padding: 16px;
-            background: #F8F8F8;
-            border-radius: 16px;
-            margin-left: -8px;
-            margin-right: -8px;
-            max-width: 360px;
-          }
-
-          h2 {
-            font-size: 36px;
-            font-weight: 500;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            margin-top: 0;
-          }
-
-          .info {
-            display: flex;
-            margin-bottom: 16px;
-            max-width: 320px;
-            justify-content: space-between;
-          }
           .info-item {
-            margin-right: 8px;
-            flex-basis: 33.33%;
-          }
-          .info-item:last-child {
-            margin-right: 0;
-          }
-          .info-item-label {
-            text-transform: uppercase;
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            margin-bottom: 2px;
-            color: #555;
-          }
-          .info-item-label strong {
-            color: #000;
-          }
-          .info-item-value {
-            font-size: 24px;
-            font-weight: 400;
-          }
-
-          .description {
-            line-height: 1.5;
-            font-size: 24px;
-            margin: 1.2em 0 0.5em 0;
-            color: #000;
-            font-weight: 500;
-            max-width: 33em;
-          }
-
-          .sorting-title {
-            margin-bottom: 8px;
-            font-size: 14px;
-            font-weight: 600;
+            margin-right: 16px;
           }
 
           .cars {
-            display: grid;
-            grid-gap: 24px;
-            grid-template-columns: 1fr;
-            margin: 16px;
+            margin: 24px;
+          }
+        }
+
+        @media screen and (min-width: 768px) {
+          header {
+            padding-left: 40px;
+            max-width: 1024px;
+          }
+          h1 {
+            font-size: 64px;
           }
 
-          @media screen and (min-width: 375px) {
-            header {
-              padding: 24px 24px 0;
-            }
-            h1 {
-              font-size: 48px;
-            }
+          .cars {
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 32px;
+            margin: 32px;
+          }
+        }
 
-            .info-item {
-              margin-right: 16px;
-            }
-
-            .cars {
-              margin: 24px;
-            }
+        @media screen and (min-width: 1194px) {
+          .root {
+            margin: 0 auto;
+            max-width: 1280px;
           }
 
-          @media screen and (min-width: 768px) {
-            header {
-              padding-left: 40px;
-              max-width: 1024px;
-            }
-            h1 {
-              font-size: 64px;
-            }
-
-            .cars {
-              grid-template-columns: 1fr 1fr;
-              grid-gap: 32px;
-              margin: 32px;
-            }
+          .cars {
+            grid-template-columns: 1fr 1fr 1fr;
           }
-
-          @media screen and (min-width: 1194px) {
-            .root {
-              margin: 0 auto;
-              max-width: 1280px;
-            }
-
-            .cars {
-              grid-template-columns: 1fr 1fr 1fr;
-            }
-          }
-        `}</style>
+        }
+      `}</style>
     </>
   )
 }

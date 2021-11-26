@@ -443,7 +443,7 @@ const New: NextPage<Props> = ({
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #EEE;
+            background-color: #eee;
             transition: all 0.2s;
           }
           .filter::after {
@@ -469,7 +469,7 @@ const New: NextPage<Props> = ({
           }
 
           .expected {
-            background-color: #F8F8F8;
+            background-color: #f8f8f8;
             padding-bottom: 1px;
             margin-bottom: 2px;
           }
@@ -497,7 +497,7 @@ const New: NextPage<Props> = ({
             header {
               padding-left: 40px;
               max-width: none;
-              padding-bottom: 40px; 
+              padding-bottom: 40px;
             }
             h1 {
               font-size: 64px;

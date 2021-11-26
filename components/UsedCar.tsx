@@ -137,7 +137,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
           margin-bottom: 24px;
           font-size: 14px;
           font-weight: 600;
-          background-color: #EEE;
+          background-color: #eee;
           border-radius: 100px;
           padding: 4px 12px;
           text-decoration: none;
@@ -145,7 +145,7 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
           transition: background-color 0.1s;
         }
         .price:hover {
-          background-color: #8CF;
+          background-color: #8cf;
         }
 
         .info {

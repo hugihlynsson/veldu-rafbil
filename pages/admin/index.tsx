@@ -155,58 +155,58 @@ const Used: NextPage<Props> = ({ cars }) => {
       <Footer />
 
       <style jsx>{`
+        .root {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          margin: 0 auto;
+          max-width: 560px;
+          padding: 24px;
+        }
+
+        h1 {
+          font-size: 40px;
+          font-weight: 600;
+        }
+
+        h1 span {
+          font-weight: 400;
+        }
+
+        .toggles {
+          display: flex;
+        }
+
+        .cars {
+          display: grid;
+          grid-gap: 32px;
+          grid-template-columns: 100%;
+          margin-top: 32px;
+        }
+
+        .emptyResults {
+          font-weight: 500;
+          color: #888;
+        }
+
+        @media screen and (min-width: 767px) {
           .root {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
             margin: 0 auto;
-            max-width: 560px;
-            padding: 24px;
-          }
-
-          h1 {
-            font-size: 40px;
-            font-weight: 600;
-          }
-
-          h1 span {
-            font-weight: 400;
-          }
-
-          .toggles {
-            display: flex;
+            max-width: 1180px;
           }
 
           .cars {
-            display: grid;
-            grid-gap: 32px;
-            grid-template-columns: 100%;
-            margin-top: 32px;
+            grid-template-columns: 1fr 1fr;
+            margin: 24px;
           }
+        }
 
-          .emptyResults {
-            font-weight: 500;
-            color: #888;
+        @media screen and (min-width: 1200px) {
+          .cars {
+            grid-template-columns: 1fr 1fr 1fr;
           }
-
-          @media screen and (min-width: 767px) {
-            .root {
-              margin: 0 auto;
-              max-width: 1180px;
-            }
-
-            .cars {
-              grid-template-columns: 1fr 1fr;
-              margin: 24px;
-            }
-          }
-
-          @media screen and (min-width: 1200px) {
-            .cars {
-              grid-template-columns: 1fr 1fr 1fr;
-            }
-          }
-        `}</style>
+        }
+      `}</style>
     </>
   )
 }

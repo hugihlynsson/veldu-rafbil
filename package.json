@@ -17,6 +17,7 @@
   },
   "scripts": {
     "build": "next build",
+    "prettify": "prettier --write . '!scripts/choose-ev-export.json'",
     "vercel-dev": "vercel dev"
   },
   "devDependencies": {

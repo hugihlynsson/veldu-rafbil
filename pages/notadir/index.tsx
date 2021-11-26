@@ -235,109 +235,109 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
       <Footer />
 
       <style jsx>{`
-          .root {
-            margin: 0 auto;
-          }
+        .root {
+          margin: 0 auto;
+        }
 
+        header {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          margin: 0 auto;
+          max-width: 480px;
+          padding: 16px;
+        }
+
+        h1 {
+          font-size: 40px;
+          font-weight: 600;
+          line-height: 1.1;
+          margin-bottom: 0.4em;
+        }
+
+        .headerLinks {
+          display: flex;
+          margin-bottom: 10px;
+        }
+
+        .description {
+          line-height: 1.5;
+          font-size: 14px;
+          padding-top: 2em;
+          margin: 0 0 2em 0;
+          color: #555;
+          max-width: 33em;
+        }
+        .description a,
+        .description strong {
+          text-decoration: none;
+          font-weight: 500;
+          color: black;
+        }
+        .description a:hover {
+          text-decoration: underline;
+        }
+
+        .sorting-title {
+          margin-bottom: 8px;
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        .cars {
+          display: grid;
+          grid-gap: 32px;
+          grid-template-columns: 1fr;
+          margin-top: 0px;
+          margin-left: 16px;
+          margin-right: 16px;
+        }
+
+        @media screen and (min-width: 375px) {
           header {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            margin: 0 auto;
-            max-width: 480px;
-            padding: 16px;
+            padding: 24px;
           }
-
           h1 {
-            font-size: 40px;
-            font-weight: 600;
-            line-height: 1.1;
-            margin-bottom: 0.4em;
+            font-size: 48px;
           }
+        }
 
-          .headerLinks {
-            display: flex;
-            margin-bottom: 10px;
+        @media screen and (min-width: 768px) {
+          header {
+            padding-left: 40px;
+            max-width: 1024px;
+            padding-bottom: 40px;
           }
-
+          h1 {
+            font-size: 64px;
+          }
           .description {
-            line-height: 1.5;
-            font-size: 14px;
-            padding-top: 2em;
-            margin: 0 0 2em 0;
-            color: #555;
-            max-width: 33em;
-          }
-          .description a,
-          .description strong {
-            text-decoration: none;
-            font-weight: 500;
-            color: black;
-          }
-          .description a:hover {
-            text-decoration: underline;
-          }
-
-          .sorting-title {
-            margin-bottom: 8px;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 16px;
           }
 
           .cars {
-            display: grid;
-            grid-gap: 32px;
-            grid-template-columns: 1fr;
-            margin-top: 0px;
-            margin-left: 16px;
-            margin-right: 16px;
+            grid-template-columns: 1fr 1fr;
+            margin: 0px 40px 40px;
+          }
+        }
+
+        @media screen and (min-width: 1194px) {
+          header {
+            padding-bottom: 40px;
           }
 
-          @media screen and (min-width: 375px) {
-            header {
-              padding: 24px;
-            }
-            h1 {
-              font-size: 48px;
-            }
+          .root {
+            margin: 0 auto;
+            max-width: 1280px;
           }
 
-          @media screen and (min-width: 768px) {
-            header {
-              padding-left: 40px;
-              max-width: 1024px;
-              padding-bottom: 40px; 
-            }
-            h1 {
-              font-size: 64px;
-            }
-            .description {
-              font-size: 16px;
-            }
-
-            .cars {
-              grid-template-columns: 1fr 1fr;
-              margin: 0px 40px 40px;
-            }
+          .cars {
+            grid-template-columns: 1fr 1fr 1fr;
+            margin-left: 24px;
+            margin-right: 24px;
           }
-
-          @media screen and (min-width: 1194px) {
-            header {
-              padding-bottom: 40px; 
-            }
-            
-            .root {
-              margin: 0 auto;
-              max-width: 1280px;
-            }
-
-            .cars {
-              grid-template-columns: 1fr 1fr 1fr;
-              margin-left: 24px;
-              margin-right: 24px;
-            }
-          }
-        `}</style>
+        }
+      `}</style>
     </>
   )
 }
