@@ -111,25 +111,11 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
                 </div>
               ))}
             {getExtraCount(count, images.length) > 0 && (
-              <div
-                className="imagesMore"
-                style={
-                  getImagesToShow(images.length) === 1
-                    ? {
-                        bottom: '16px',
-                        right: '20px',
-                        borderRadius: '32px',
-                        padding: '7px 16px 8px 14px',
-                      }
-                    : getImageSize(images.length)
-                }
-              >
-                <span>
-                  +{getExtraCount(count, images.length)}{' '}
-                  {isSingular(getExtraCount(count, images.length))
-                    ? 'bíll'
-                    : 'bílar'}
-                </span>
+              <div className="imagesMore">
+                +{getExtraCount(count, images.length)}{' '}
+                {isSingular(getExtraCount(count, images.length))
+                  ? 'bíll'
+                  : 'bílar'}
               </div>
             )}
           </div>
@@ -237,15 +223,15 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
 
       .imagesMore {
         position: absolute;
-        right: 0;
-        bottom: 0;
         background: black;
         display: flex;
         align-items: center;
         justify-content: center;
+        right: 20px;
+        bottom: 16px;
+        padding: 7px 16px 8px 14px;
         opacity: 0.6;
-      }
-      .imagesMore span {
+        border-radius: 32px;
         color: white;
         font-weight: 600;
         font-size: 20px;
