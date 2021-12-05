@@ -69,7 +69,10 @@ export const getFiltersFromQuery = (query: ParsedUrlQuery): Filters => {
     filters.fastcharge = Number(query.hradhledsla)
   }
   if (query.nafn) {
-    filters.name = query.nafn as string
+    filters.name =
+      typeof query.nafn === 'string'
+        ? [query.nafn as string]
+        : (query.nafn as string[])
   }
   if (query.verd) {
     filters.price = Number(query.verd)
@@ -130,9 +133,13 @@ const carFilter =
                 ) >= (filters.fastcharge ?? 0)
               )
             case 'name':
-              return `${car.make} ${car.model}`
-                .toLowerCase()
-                .includes(filters.name?.toLowerCase() ?? '')
+              return (
+                filters.name?.some((nameFilter) =>
+                  `${car.make} ${car.model}`
+                    .toLowerCase()
+                    .includes(nameFilter.toLowerCase()),
+                ) || false
+              )
             case 'price':
               return car.price <= (filters.price ?? Number.MAX_SAFE_INTEGER)
             case 'range':
@@ -180,6 +187,8 @@ const New: NextPage<Props> = ({
   const { pathname } = useRouter()
   const [sorting, setSorting] = useState<Sorting>(initialSorting)
   const [filters, setFilters] = useState<Filters>(initialFilters)
+
+  console.log("filters", filters)
 
   useEffect(() => smoothscroll.polyfill(), [])
 
@@ -294,7 +303,7 @@ const New: NextPage<Props> = ({
             <div className="filters">
               {filters.name && (
                 <button className="filter" onClick={handleRemoveFilter('name')}>
-                  Nafn: <span>{filters.name}</span>
+                  Nafn: <span>{filters.name.join(', ')}</span>
                 </button>
               )}
 
