@@ -63,7 +63,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             updatedFilters.fastcharge = Number(value)
             break
           case 'name':
-            updatedFilters.name = value
+            updatedFilters.name = value.split(',').map((name) => name.trim())
             break
           case 'price':
             updatedFilters.price = Number(value)
@@ -125,7 +125,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             placeholder="Tesla, Kia"
             onChange={handleFilterChange('name')}
             onKeyDown={handleKeyPress}
-            value={filters.name ?? ''}
+            value={filters.name?.join(', ') ?? ''}
           />
           <div className="filter-header">
             <label htmlFor="filter-price">Verð</label>

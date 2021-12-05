@@ -61,7 +61,7 @@ export type Filters = {
   acceleration?: number
   drive?: Drive[]
   fastcharge?: number
-  name?: string
+  name?: string[]
   price?: number
   range?: number
   value?: number
