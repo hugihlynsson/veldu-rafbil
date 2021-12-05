@@ -56,3 +56,13 @@ export interface NewCar {
 export interface ExpectedCar extends NewCar {
   expectedDelivery: string // In Icelandic, for exmaple: "Sumar 2020"
 }
+
+export type Filters = {
+  acceleration?: number
+  drive?: Drive[]
+  fastcharge?: number
+  name?: string
+  price?: number
+  range?: number
+  value?: number
+}

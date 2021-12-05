@@ -20,7 +20,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1" />
       </Head>
       <Component {...pageProps} />
     </>
