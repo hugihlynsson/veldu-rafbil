@@ -10,10 +10,13 @@ import Car from '../components/NewCar'
 import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
 import LinkPill from '../components/LinkPill'
+import FilterModal from '../components/FilterModal'
 import newCars, { expectedCars } from '../modules/newCars'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
-import { NewCar, Drive } from '../types'
+import { colors } from '../modules/globals'
+import { NewCar, Filters, Drive } from '../types'
+
 import stableSort from '../components/stableSort'
 
 type Sorting =
@@ -50,7 +53,7 @@ const queryToSorting: { [key in SortingQuery]: Sorting } = {
   hradhledslu: 'fastcharge',
 }
 
-const getFiltersFromQuery = (query: ParsedUrlQuery): Filters => {
+export const getFiltersFromQuery = (query: ParsedUrlQuery): Filters => {
   let filters: Filters = {}
 
   if (query.hrodun) {
@@ -106,16 +109,6 @@ const carSorter =
     }
   }
 
-type Filters = {
-  acceleration?: number
-  drive?: Drive[]
-  fastcharge?: number
-  name?: string
-  price?: number
-  range?: number
-  value?: number
-}
-
 const carFilter =
   (filters: Filters) =>
   (car: NewCar): boolean =>
@@ -131,9 +124,11 @@ const carFilter =
             case 'drive':
               return filters.drive?.includes(car.drive) || false
             case 'fastcharge':
-              Number(
-                getKmPerMinutesCharged(car.timeToCharge10T080, car.range),
-              ) >= (filters.fastcharge ?? 0)
+              return (
+                Number(
+                  getKmPerMinutesCharged(car.timeToCharge10T080, car.range),
+                ) >= (filters.fastcharge ?? 0)
+              )
             case 'name':
               return `${car.make} ${car.model}`
                 .toLowerCase()
@@ -155,6 +150,29 @@ interface Props {
   filters: Filters
 }
 
+const useBodyScrollLock = (lock: boolean): void => {
+  const [scrollY, setScrollY] = useState<number>(0)
+
+  useEffect(() => {
+    setScrollY(window.scrollY)
+    const handleScroll = () => setScrollY(window.scrollY)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    if (lock) {
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY}px`
+    } else {
+      const scrollY = document.body.style.top
+      document.body.style.position = ''
+      document.body.style.top = ''
+      window.scrollTo(0, parseInt(scrollY) * -1)
+    }
+  }, [lock])
+}
+
 const New: NextPage<Props> = ({
   sorting: initialSorting,
   filters: initialFilters,
@@ -164,6 +182,10 @@ const New: NextPage<Props> = ({
   const [filters, setFilters] = useState<Filters>(initialFilters)
 
   useEffect(() => smoothscroll.polyfill(), [])
+
+  let [editingFilters, setEditingFilters] = useState<boolean>(false)
+
+  useBodyScrollLock(editingFilters)
 
   useEffect(() => {
     const query = {} as ParsedUrlQuery
@@ -204,15 +226,16 @@ const New: NextPage<Props> = ({
     [descriptionRef],
   )
 
-  const handleRemoveFilter = (name: keyof Filters) => () => {
+  const handleRemoveFilter = (name: keyof Filters) => () =>
     setFilters((filters) => {
       let newFilters = Object.assign({}, filters)
       delete newFilters[name]
       return newFilters
     })
-  }
 
   const filteredCars = newCars.filter(carFilter(filters))
+
+  const hasFilter = Object.values(filters).length > 0
 
   return (
     <>
@@ -222,7 +245,7 @@ const New: NextPage<Props> = ({
           <meta
             key="description"
             name="description"
-            content={`Listi yfir alla ${newCars.length} bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar`}
+            content="Listi yfir alla bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar"
           />
         </Head>
 
@@ -261,80 +284,82 @@ const New: NextPage<Props> = ({
             onClick={setSorting}
           />
 
-          {Object.values(filters).length > 0 && (
-            <div className="filters-box">
-              <div className="filters-title">
-                {filteredCars.length}{' '}
-                {filteredCars.length.toString().match(/.*1$/m)
-                  ? 'bíll passar'
-                  : 'bílar passa'}{' '}
-                við:
-              </div>
-              <div className="filters">
-                {filters.acceleration && (
-                  <button
-                    className="filter"
-                    onClick={handleRemoveFilter('acceleration')}
-                  >
-                    Hröðun {filters.acceleration.toFixed(1)}s
-                  </button>
-                )}
-                {filters.drive && (
-                  <button
-                    className="filter"
-                    onClick={handleRemoveFilter('drive')}
-                  >
-                    Drif: {filters.drive.join(', ')}
-                  </button>
-                )}
-
-                {filters.fastcharge && (
-                  <button
-                    className="filter"
-                    onClick={handleRemoveFilter('fastcharge')}
-                  >
-                    Hraðhleðsla: {filters.fastcharge} km/min
-                  </button>
-                )}
-
-                {filters.name && (
-                  <button
-                    className="filter"
-                    onClick={handleRemoveFilter('name')}
-                  >
-                    Nafn: {filters.name}
-                  </button>
-                )}
-
-                {filters.price && (
-                  <button
-                    className="filter"
-                    onClick={handleRemoveFilter('price')}
-                  >
-                    Verð: {addDecimalSeprators(filters.price)} kr.
-                  </button>
-                )}
-
-                {filters.range && (
-                  <button
-                    className="filter"
-                    onClick={handleRemoveFilter('range')}
-                  >
-                    Drægni: {filters.range} km.
-                  </button>
-                )}
-
-                {filters.value && (
-                  <button
-                    className="filter"
-                    onClick={handleRemoveFilter('value')}
-                  >
-                    Verði á km: `${addDecimalSeprators(filters.value)} kr.
-                  </button>
-                )}
-              </div>
+          <div className="filters-box">
+            <div className="filters-title">
+              {filteredCars.length}{' '}
+              {filteredCars.length.toString().match(/.*1$/m)
+                ? `bíll${hasFilter ? ' passar við:' : ':'}`
+                : `bílar${hasFilter ? ' passa við:' : ':'}`}
             </div>
-          )}
+            <div className="filters">
+              {filters.name && (
+                <button className="filter" onClick={handleRemoveFilter('name')}>
+                  Nafn: <span>{filters.name}</span>
+                </button>
+              )}
+
+              {filters.price && (
+                <button
+                  className="filter"
+                  onClick={handleRemoveFilter('price')}
+                >
+                  Verð: <span>↑{addDecimalSeprators(filters.price)} kr.</span>
+                </button>
+              )}
+
+              {filters.range && (
+                <button
+                  className="filter"
+                  onClick={handleRemoveFilter('range')}
+                >
+                  Drægni: <span>↓{filters.range} km.</span>
+                </button>
+              )}
+
+              {filters.drive && (
+                <button
+                  className="filter"
+                  onClick={handleRemoveFilter('drive')}
+                >
+                  Drif: <span>{filters.drive.join(', ')}</span>
+                </button>
+              )}
+
+              {filters.acceleration && (
+                <button
+                  className="filter"
+                  onClick={handleRemoveFilter('acceleration')}
+                >
+                  Hröðun <span>↓{filters.acceleration.toFixed(1)}s</span>
+                </button>
+              )}
+
+              {filters.value && (
+                <button
+                  className="filter"
+                  onClick={handleRemoveFilter('value')}
+                >
+                  Verði á km:{' '}
+                  <span>↑{addDecimalSeprators(filters.value)} kr.</span>
+                </button>
+              )}
+
+              {filters.fastcharge && (
+                <button
+                  className="filter"
+                  onClick={handleRemoveFilter('fastcharge')}
+                >
+                  Hraðhleðsla: <span>↓{filters.fastcharge} km/min</span>
+                </button>
+              )}
+              <button
+                className="add-filter"
+                onClick={() => setEditingFilters(() => true)}
+              >
+                + Bæta við síu
+              </button>
+            </div>
+          </div>
         </header>
 
         {stableSort(filteredCars, carSorter(sorting)).map((car) => (
@@ -365,6 +390,17 @@ const New: NextPage<Props> = ({
       )}
 
       <Footer />
+
+      {editingFilters && (
+        <FilterModal
+          initialFilters={filters}
+          onSubmit={(filters: Filters) => setFilters(() => filters)}
+          onDone={() => setEditingFilters(() => false)}
+          getCountPreview={(filters: Filters) =>
+            newCars.filter(carFilter(filters)).length
+          }
+        />
+      )}
 
       <style jsx>
         {`
@@ -429,31 +465,44 @@ const New: NextPage<Props> = ({
             max-width: 100%;
             align-self: flex-start;
             margin-left: -2px;
+            flex-wrap: wrap;
           }
           .filter {
+            flex-shrink: 0;
             position: relative;
-            border: 0;
             margin: 0 8px 0 0;
             font-size: 12px;
             font-weight: 600;
-            padding: 5px 8px 5px 12px;
+            padding: 4px 6px 5px 8px;
+            border: 1px solid ${colors.smoke};
             border-radius: 100px;
             cursor: pointer;
             text-align: center;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #eee;
+            background-color: ${colors.lab};
             transition: all 0.2s;
+            color: ${colors.clay};
+            margin-bottom: 8px;
+          }
+          .filter span {
+            color: ${colors.tint};
+            transition: color 0.2s;
+            margin-left: 3px;
+          }
+          .filter:hover span {
+            color: ${colors.stone};
           }
           .filter::after {
             content: '+';
             transform: rotate(45deg);
             margin-left: 6px;
-            font-size: 18px;
+            font-size: 16px;
             line-height: 10px;
-            margin-top: -2px;
-            color: #666;
+            margin-top: -1px;
+            color: ${colors.clay};
+            transition: color 0.2s;
           }
           .filter:last-child {
             border-right-width: 0;
@@ -466,6 +515,28 @@ const New: NextPage<Props> = ({
           }
           .filter:hover::after {
             color: #222;
+          }
+
+          .add-filter {
+            border: 0;
+            flex-shrink: 0;
+            margin: 0 8px 0 0;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 12px 5px 12px;
+            border-radius: 100px;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #eee;
+            transition: all 0.2s;
+            color: ${colors.tint};
+            margin-bottom: 8px;
+          }
+          .add-filter:hover {
+            background-color: #f8f8f8;
           }
 
           .expected {

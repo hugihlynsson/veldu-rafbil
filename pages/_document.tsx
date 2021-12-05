@@ -14,11 +14,16 @@ export default class Evs extends Document {
               *::after {
                 box-sizing: border-box;
               }
+              html {
+                min-height: 100vh;
+              }
               body {
                 margin: 0;
                 font-family: BlinkMacSystemFont, -apple-system, Roboto, Helvetica,
                   Arial, sans-serif;
                 color: #111;
+                width: 100%;
+                min-height: 100vh;
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
               }
