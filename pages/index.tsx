@@ -11,14 +11,13 @@ import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
 import LinkPill from '../components/LinkPill'
 import FilterModal from '../components/FilterModal'
-import newCars, { expectedCars } from '../modules/newCars'
+import newCars from '../modules/newCars'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
 import { colors } from '../modules/globals'
 import { NewCar, Filters, Drive } from '../types'
 
 import stableSort from '../components/stableSort'
-import { filter } from 'cheerio/lib/api/traversing'
 
 type Sorting =
   | 'name'
@@ -245,6 +244,8 @@ const New: NextPage<Props> = ({
 
   const hasFilter = Object.values(filters).length > 0
 
+  const filteredCarCount = newCars.length - filteredCars.length
+
   return (
     <>
       <div className="content">
@@ -253,7 +254,7 @@ const New: NextPage<Props> = ({
           <meta
             key="description"
             name="description"
-            content="Listi yfir alla bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar"
+            content={`Listi yfir alla ${newCars.length} bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar`}
           />
         </Head>
 
@@ -297,12 +298,14 @@ const New: NextPage<Props> = ({
           />
 
           <div className="filters-box">
-            <div className="filters-title">
-              {filteredCars.length}{' '}
-              {filteredCars.length.toString().match(/.*1$/m)
-                ? `bíll${hasFilter ? ' passar við:' : ':'}`
-                : `bílar${hasFilter ? ' passa við:' : ':'}`}
-            </div>
+            {hasFilter && (
+              <div className="filters-title">
+                {filteredCars.length}{' '}
+                {filteredCars.length.toString().match(/.*1$/m)
+                  ? 'bíll passar við:'
+                  : 'bílar passa við:'}
+              </div>
+            )}
             <div className="filters">
               {filters.name && (
                 <button className="filter" onClick={handleRemoveFilter('name')}>
@@ -381,6 +384,25 @@ const New: NextPage<Props> = ({
             showValue={sorting === 'value' || Boolean(filters.value)}
           />
         ))}
+
+        {hasFilter && filteredCarCount > 0 && (
+          <div className="filters-reset-box">
+            {filteredCarCount}
+            {filteredCarCount.toString().match(/.*1$/m)
+              ? ' bíll passaði '
+              : ' bílar pössuðu '}
+            ekki við síurnar{' '}
+            <button
+              className="filters-reset-button"
+              onClick={(event) => {
+                setFilters(() => ({}))
+                handleNewPress(event)
+              }}
+            >
+              Sýna alla
+            </button>
+          </div>
+        )}
       </div>
 
       <Footer />
@@ -533,12 +555,48 @@ const New: NextPage<Props> = ({
             background-color: #f8f8f8;
           }
 
+          .filters-reset-box {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            margin: 0 auto;
+            max-width: 480px;
+            grid-gap: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 40px;
+          }
+
+          .filters-reset-button {
+            border: 0;
+            flex-shrink: 0;
+            margin: 0 8px 0 0;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 12px 5px 12px;
+            border-radius: 100px;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #eee;
+            transition: all 0.2s;
+            color: ${colors.tint};
+          }
+          .filters-reset-button:hover {
+            background-color: #f8f8f8;
+          }
+
           @media screen and (min-width: 375px) {
             header {
               padding: 24px;
             }
             h1 {
               font-size: 48px;
+            }
+            .filters-reset-box {
+              padding: 24px;
             }
           }
 
@@ -553,6 +611,10 @@ const New: NextPage<Props> = ({
             }
             .description {
               font-size: 16px;
+            }
+            .filters-reset-box {
+              padding-left: 40px;
+              max-width: none;
             }
           }
         `}
