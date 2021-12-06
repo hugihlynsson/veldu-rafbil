@@ -160,6 +160,10 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
               <LinkPill>Nýir ←</LinkPill>
             </Link>
 
+            <Link href="/vaentanlegir" passHref>
+              <LinkPill>Væntanlegir ←</LinkPill>
+            </Link>
+
             <LinkPill href="#notadir" current onClick={handleNewPress}>
               Notaðir ↓
             </LinkPill>

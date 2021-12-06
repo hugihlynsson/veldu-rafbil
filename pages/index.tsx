@@ -18,6 +18,7 @@ import { colors } from '../modules/globals'
 import { NewCar, Filters, Drive } from '../types'
 
 import stableSort from '../components/stableSort'
+import { filter } from 'cheerio/lib/api/traversing'
 
 type Sorting =
   | 'name'
@@ -135,7 +136,7 @@ const carFilter =
             case 'name':
               return (
                 filters.name?.some((nameFilter) =>
-                  `${car.make} ${car.model}`
+                  `${car.make} ${car.model} ${car.subModel}`
                     .toLowerCase()
                     .includes(nameFilter.toLowerCase()),
                 ) || false
@@ -187,8 +188,6 @@ const New: NextPage<Props> = ({
   const { pathname } = useRouter()
   const [sorting, setSorting] = useState<Sorting>(initialSorting)
   const [filters, setFilters] = useState<Filters>(initialFilters)
-
-  console.log("filters", filters)
 
   useEffect(() => smoothscroll.polyfill(), [])
 
@@ -265,6 +264,10 @@ const New: NextPage<Props> = ({
             <LinkPill current onClick={handleNewPress} href="#nyjir">
               Nýir ↓
             </LinkPill>
+
+            <Link href="/vaentanlegir" passHref>
+              <LinkPill>Væntanlegir →</LinkPill>
+            </Link>
 
             <Link href="/notadir" passHref>
               <LinkPill>Notaðir →</LinkPill>
@@ -375,28 +378,10 @@ const New: NextPage<Props> = ({
           <Car
             car={car}
             key={`${car.make} ${car.model} ${car.subModel}`}
-            showValue={sorting === 'value'}
+            showValue={sorting === 'value' || Boolean(filters.value)}
           />
         ))}
       </div>
-
-      {expectedCars.length > 0 && (
-        <section className="expected">
-          <div className="content">
-            <header>
-              <h2 className="expectedHeader">Væntanlegir rafbílar</h2>
-            </header>
-
-            {stableSort(expectedCars, carSorter('name')).map((car) => (
-              <Car
-                car={car}
-                key={`${car.make} ${car.model} ${car.subModel}`}
-                onGray
-              />
-            ))}
-          </div>
-        </section>
-      )}
 
       <Footer />
 
@@ -548,28 +533,12 @@ const New: NextPage<Props> = ({
             background-color: #f8f8f8;
           }
 
-          .expected {
-            background-color: #f8f8f8;
-            padding-bottom: 1px;
-            margin-bottom: 2px;
-          }
-
-          h2 {
-            font-size: 32px;
-            font-weight: 500;
-            line-height: 1.1;
-            margin-bottom: 0.4em;
-          }
-
           @media screen and (min-width: 375px) {
             header {
               padding: 24px;
             }
             h1 {
               font-size: 48px;
-            }
-            h2 {
-              font-size: 40px;
             }
           }
 
@@ -581,9 +550,6 @@ const New: NextPage<Props> = ({
             }
             h1 {
               font-size: 64px;
-            }
-            h2 {
-              font-size: 48px;
             }
             .description {
               font-size: 16px;
