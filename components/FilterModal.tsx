@@ -24,6 +24,9 @@ const FiltersModal: React.FunctionComponent<Props> = ({
 }) => {
   const [state, setState] = useState<State>(State.Initializing)
   const [filters, setFilters] = useState<Filters>(initialFilters)
+  const [nameInput, setNameInput] = useState<string>(
+    filters.name?.join(', ') ?? '',
+  )
 
   useEffect(() => {
     setTimeout(() => setState(() => State.Visible), 1)
@@ -48,6 +51,10 @@ const FiltersModal: React.FunctionComponent<Props> = ({
       setFilters((filters) => {
         let updatedFilters = Object.assign({}, filters)
 
+        if (name == 'name') {
+          setNameInput(() => value)
+        }
+
         if (value == '') {
           delete updatedFilters[name]
           return updatedFilters
@@ -68,7 +75,9 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             updatedFilters.fastcharge = Number(value)
             break
           case 'name':
-            updatedFilters.name = value.split(',').map((name) => name.trimStart())
+            updatedFilters.name = value
+              .split(',')
+              .map((name) => name.trim()).filter(name => name)
             break
           case 'price':
             updatedFilters.price = Number(value)
@@ -84,6 +93,8 @@ const FiltersModal: React.FunctionComponent<Props> = ({
         return updatedFilters
       })
     }
+
+  console.log(filters)
 
   const handleKeyPress = (
     event: React.KeyboardEvent<HTMLInputElement | HTMLSelectElement>,
@@ -130,7 +141,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             placeholder="Tesla, Kia"
             onChange={handleFilterChange('name')}
             onKeyDown={handleKeyPress}
-            value={filters.name?.join(', ') ?? ''}
+            value={nameInput}
           />
           <div className="filter-header">
             <label htmlFor="filter-price">Verð</label>
