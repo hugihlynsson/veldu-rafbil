@@ -7,7 +7,7 @@ import smoothscroll from 'smoothscroll-polyfill'
 import Car from '../components/NewCar'
 import Footer from '../components/Footer'
 import LinkPill from '../components/LinkPill'
-import newCars, { expectedCars } from '../modules/newCars'
+import { expectedCars } from '../modules/newCars'
 
 interface Props {}
 
@@ -32,7 +32,7 @@ const New: NextPage<Props> = ({}) => {
           <meta
             key="description"
             name="description"
-            content="Listi yfir alla 100% rafbíla sem eru væntanlegir í sölu á Íslandi."
+            content={`Listi yfir ${expectedCars.length} rafbíla sem eru 100% rafdrifnir og eru væntanlegir í sölu á Íslandi.`}
           />
         </Head>
 
@@ -54,10 +54,10 @@ const New: NextPage<Props> = ({}) => {
           </nav>
 
           <p className="description" id="nyjir" ref={descriptionRef}>
-            Listi yfir alla 100% rafbíla sem eru væntanlegir í sölu á Íslandi. 
-            Upplýsingar um drægni eru samkvæmt{' '}
-            <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda en
-            raundrægni og eru áætlaðar liggi þær ekki fyrir.
+            Listi yfir {expectedCars.length} rafbíla sem eru 100% rafdrifnir og
+            eru væntanlegir í sölu á Íslandi. Upplýsingar um drægni eru samkvæmt{' '}
+            <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda og
+            eru áætlaðar liggi þær ekki fyrir.
             <em>Verð eru birt án ábyrgðar og geta verið úrelt.</em>
           </p>
         </header>
