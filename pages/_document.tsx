@@ -27,6 +27,10 @@ export default class Evs extends Document {
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
               }
+              button, input {
+                font-family: BlinkMacSystemFont, -apple-system, Roboto, Helvetica,
+                  Arial, sans-serif;
+              }
           `}</style>
 
           <script
