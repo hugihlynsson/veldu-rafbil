@@ -48,6 +48,11 @@ const FiltersModal: React.FunctionComponent<Props> = ({
       setFilters((filters) => {
         let updatedFilters = Object.assign({}, filters)
 
+        if (value == '') {
+          delete updatedFilters[name]
+          return updatedFilters
+        }
+
         switch (name) {
           case 'acceleration':
             updatedFilters.acceleration = Number(value)
@@ -63,7 +68,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             updatedFilters.fastcharge = Number(value)
             break
           case 'name':
-            updatedFilters.name = value.split(',').map((name) => name.trim())
+            updatedFilters.name = value.split(',').map((name) => name.trimStart())
             break
           case 'price':
             updatedFilters.price = Number(value)
