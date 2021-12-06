@@ -6,7 +6,6 @@ export default class Evs extends Document {
       <Html lang="is">
         <Head>
           <link rel="icon" href="/images/icon.png" type="image/png" />
-          <link rel="preconnect" href="https://www.google-analytics.com" />
 
           <style>{`
               *,
