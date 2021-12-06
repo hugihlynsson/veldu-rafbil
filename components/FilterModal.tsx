@@ -94,8 +94,6 @@ const FiltersModal: React.FunctionComponent<Props> = ({
       })
     }
 
-  console.log(filters)
-
   const handleKeyPress = (
     event: React.KeyboardEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
@@ -271,12 +269,10 @@ const FiltersModal: React.FunctionComponent<Props> = ({
           box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
           transform: translateY(40px);
           opacity: 0;
-          transition-delay: 0s;
           transition: all 0.3s cubic-bezier(0.32, 0, 0.67, 0); /* Ease in quad */
         }
         section.visible {
           opacity: 1;
-          transition-delay: 0.1s;
           transition-timing-function: cubic-bezier(
             0.33,
             1,
