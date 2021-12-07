@@ -636,7 +636,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'mercedes-eqs',
     price: 14290000,
     sellerURL:
-      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/brochures-pricelists/teaser/_jcr_content/par/productinfotextimage/interactions.attachments.6.EQS_verdlistinn.pdf',
+      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs',
     acceleration: 6.9,
     capacity: 90,
     range: 630,
@@ -651,7 +651,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'mercedes-eqs-alt',
     price: 15990000,
     sellerURL:
-      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/brochures-pricelists/teaser/_jcr_content/par/productinfotextimage/interactions.attachments.6.EQS_verdlistinn.pdf',
+      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs',
     acceleration: 6.2,
     capacity: 108,
     range: 739,
@@ -667,7 +667,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'mercedes-eqs',
     price: 22590000,
     sellerURL:
-      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/brochures-pricelists/teaser/_jcr_content/par/productinfotextimage/interactions.attachments.6.EQS_verdlistinn.pdf',
+      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs',
     acceleration: 4.3,
     capacity: 108,
     range: 669,
