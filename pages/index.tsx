@@ -318,7 +318,7 @@ const New: NextPage<Props> = ({
                   className="filter"
                   onClick={handleRemoveFilter('price')}
                 >
-                  Verð: <span>↑{addDecimalSeprators(filters.price)} kr.</span>
+                  Verð: <span>↓{addDecimalSeprators(filters.price)} kr.</span>
                 </button>
               )}
 
@@ -327,7 +327,7 @@ const New: NextPage<Props> = ({
                   className="filter"
                   onClick={handleRemoveFilter('range')}
                 >
-                  Drægni: <span>↓{filters.range} km.</span>
+                  Drægni: <span>↑{filters.range} km.</span>
                 </button>
               )}
 
@@ -355,7 +355,7 @@ const New: NextPage<Props> = ({
                   onClick={handleRemoveFilter('value')}
                 >
                   Verði á km:{' '}
-                  <span>↑{addDecimalSeprators(filters.value)} kr.</span>
+                  <span>↓{addDecimalSeprators(filters.value)} kr.</span>
                 </button>
               )}
 
@@ -364,7 +364,7 @@ const New: NextPage<Props> = ({
                   className="filter"
                   onClick={handleRemoveFilter('fastcharge')}
                 >
-                  Hraðhleðsla: <span>↓{filters.fastcharge} km/min</span>
+                  Hraðhleðsla: <span>↑{filters.fastcharge} km/min</span>
                 </button>
               )}
               <button
