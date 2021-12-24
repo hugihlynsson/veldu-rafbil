@@ -1115,7 +1115,7 @@ const newCars: Array<NewCar> = [
     price: 6787123,
     sellerURL: 'https://www.tesla.com/is_IS/model3/design',
     acceleration: 4.4,
-    capacity: 77,
+    capacity: 82,
     range: 638,
     evDatabaseURL:
       'https://ev-database.org/car/1321/Tesla-Model-3-Long-Range-Dual-Motor',
