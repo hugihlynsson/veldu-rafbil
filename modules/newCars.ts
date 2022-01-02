@@ -207,7 +207,7 @@ const newCars: Array<NewCar> = [
     model: 'iX',
     subModel: 'xDrive 50',
     heroImageName: 'bmw-ix-alt',
-    price: 13590000,
+    price: 13990000,
     sellerURL: 'https://www.bmw.is/is/all-models/bmw-i/bmw-ix/2020/bmw-ix.html',
     acceleration: 4.6,
     capacity: 110,
