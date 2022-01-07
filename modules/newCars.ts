@@ -1567,6 +1567,22 @@ export const expectedCars: Array<ExpectedCar> = [
     timeToCharge10T080: 32,
   },
   {
+    make: 'Subaru',
+    model: 'Solterra',
+    heroImageName: 'subaru-solterra',
+    price: 6990000,
+    sellerURL: 'https://www.subaru.is/solterra.html',
+    acceleration: 7.7,
+    capacity: 71.4,
+    range: 415,
+    evDatabaseURL:
+      'https://ev-database.org/car/1567/Subaru-Solterra-AWD',
+    expectedDelivery: 'Sumar 2022',
+    drive: 'AWD',
+    power: 160,
+    timeToCharge10T080: 32,
+  },
+  {
     make: 'Tesla',
     model: 'Model S',
     subModel: 'Long Range',
