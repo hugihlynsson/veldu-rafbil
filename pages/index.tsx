@@ -11,7 +11,7 @@ import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
 import LinkPill from '../components/LinkPill'
 import FilterModal from '../components/FilterModal'
-import newCars from '../modules/newCars'
+import newCars, { expectedCars } from '../modules/newCars'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
 import { colors } from '../modules/globals'
@@ -240,7 +240,7 @@ const New: NextPage<Props> = ({
       return newFilters
     })
 
-  const filteredCars = newCars.filter(carFilter(filters))
+  const filteredCars = newCars.concat(expectedCars).filter(carFilter(filters))
 
   const hasFilter = Object.values(filters).length > 0
 

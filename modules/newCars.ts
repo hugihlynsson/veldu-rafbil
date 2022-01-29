@@ -1,4 +1,4 @@
-import { NewCar, ExpectedCar } from '../types'
+import { NewCar } from '../types'
 
 const newCars: Array<NewCar> = [
   {
@@ -1530,7 +1530,7 @@ const newCars: Array<NewCar> = [
 
 export default newCars
 
-export const expectedCars: Array<ExpectedCar> = [
+export const expectedCars: Array<NewCar> = [
   {
     make: 'Aiways',
     model: 'U5',
