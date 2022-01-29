@@ -51,10 +51,7 @@ export interface NewCar {
   drive: Drive
   timeToCharge10T080: number // minutes
   power: number // kW
-}
-
-export interface ExpectedCar extends NewCar {
-  expectedDelivery: string // In Icelandic, for exmaple: "Sumar 2020"
+  expectedDelivery?: string // In Icelandic, for exmaple: "Sumar 2020"
 }
 
 export type Filters = {

@@ -2,13 +2,14 @@ import { FunctionComponent } from 'react'
 import { trackGoal } from 'fathom-client'
 import Image from 'next/image'
 
-import { NewCar as NewCarType, ExpectedCar, Drive } from '../types'
+import { NewCar as NewCarType, Drive } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
+import {colors} from '../modules/globals'
 import LinkPill from './LinkPill'
 
 interface Props {
-  car: NewCarType | ExpectedCar
+  car: NewCarType
   onGray?: boolean
   showValue?: boolean
 }
@@ -39,9 +40,9 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
     </div>
 
     <div className="content">
-      {(car as ExpectedCar).expectedDelivery && (
+      {car.expectedDelivery && (
         <div className="expectedDelivery">
-          {(car as ExpectedCar).expectedDelivery}
+          Væntanlegur {car.expectedDelivery.toLowerCase()}
         </div>
       )}
 
@@ -56,7 +57,7 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
         href={car.sellerURL}
         external
         extra={
-          ((car as ExpectedCar).expectedDelivery && 'áætlað verð ↗') ||
+          (car.expectedDelivery && 'áætlað verð ↗') ||
           (showValue
             ? `${addDecimalSeprators(
                 Math.round(car.price / car.range),
@@ -66,7 +67,7 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
         onClick={() => trackGoal('OBBPADY0', 0)}
       >
         {addDecimalSeprators(car.price)} kr.
-        {!(car as ExpectedCar).expectedDelivery && ' ↗'}
+        {!car.expectedDelivery && ' ↗'}
       </LinkPill>
 
       <div className="info">
@@ -137,7 +138,7 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
           display: block;
           font-weight: 500;
           font-size: 16px;
-          color: #888;
+          color: ${colors.clay};
           margin-top: -1px;
           margin-bottom: 8px;
         }
@@ -146,7 +147,7 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
           margin-bottom: 2px;
           font-size: 16px;
           font-weight: 500;
-          color: #888;
+          color: ${colors.clay};
         }
 
         .info {
@@ -169,7 +170,7 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
           font-weight: 600;
           letter-spacing: 0.05em;
           margin-bottom: 3px;
-          color: #555;
+          color: ${colors.stone};
         }
         .info-item-value {
           font-size: 24px;
@@ -185,14 +186,14 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
         .more-info {
           display: inline-block;
           font-size: 14px;
-          color: #888;
+          color: ${colors.clay};
           text-decoration: none;
           font-weight: 500;
           transition: color 0.1s;
         }
         .more-info:hover {
           text-decoration: underline;
-          color: #555;
+          color: ${colors.stone};
         }
 
         @media screen and (min-width: 375px) {

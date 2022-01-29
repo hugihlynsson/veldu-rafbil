@@ -1,3 +1,5 @@
+import { colors } from '../modules/globals'
+
 interface Props<P> {
   items: Array<[string, P]>
   onClick: (value: P) => void
@@ -12,7 +14,9 @@ export default function Toggles<P>({ items, onClick, currentValue }: Props<P>) {
           key={label}
           className="toggle"
           style={
-            value === currentValue ? { backgroundColor: '#EEE' } : undefined
+            value === currentValue
+              ? { backgroundColor: colors.cloud, color: '#000' }
+              : undefined
           }
           onClick={() => onClick(value)}
         >
@@ -25,7 +29,7 @@ export default function Toggles<P>({ items, onClick, currentValue }: Props<P>) {
           .toggles {
             display: flex;
             max-width: 100%;
-            border: 1px solid #eee;
+            border: 1px solid ${colors.cloud};
             align-self: flex-start;
             border-radius: 4px;
           }
@@ -41,6 +45,7 @@ export default function Toggles<P>({ items, onClick, currentValue }: Props<P>) {
             border-right: 1px solid #eee;
             white-space: nowrap;
             min-width: 0;
+            color: ${colors.tint};
           }
           .toggle:last-child {
             border-right-width: 0;
