@@ -647,6 +647,17 @@ const usedCarModels: Array<UsedCarModel> = [
     range: 496,
     evDatabaseURL: 'https://ev-database.org/car/1281/Skoda-Enyaq-iV-80X',
   },
+  {
+    make: 'Opel',
+    model: 'Corsa-e',
+    id: 'opel-corsa-e',
+    price: 3990000,
+    sellerURL: 'https://www.opel.is/cars/corsa-models/corsa-e/overview.html',
+    acceleration: 8.1,
+    capacity: 50,
+    range: 330,
+    evDatabaseURL: 'https://ev-database.org/car/1192/Opel-Corsa-e',
+  },
 ]
 
 export default usedCarModels
