@@ -616,7 +616,7 @@ const newCars: Array<NewCar> = [
     model: 'EQA',
     subModel: '250',
     heroImageName: 'mercedes-eqa',
-    price: 6790000,
+    price: 6990000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqa/',
     acceleration: 8.9,
@@ -632,7 +632,7 @@ const newCars: Array<NewCar> = [
     model: 'EQA',
     subModel: '300 4MATIC',
     heroImageName: 'mercedes-eqa-alt',
-    price: 7590000,
+    price: 7790000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqa/',
     acceleration: 6.9,
@@ -648,7 +648,7 @@ const newCars: Array<NewCar> = [
     model: 'EQA',
     subModel: '350 4MATIC',
     heroImageName: 'mercedes-eqa-alt2',
-    price: 8090000,
+    price: 8490000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqa/',
     acceleration: 5.8,
@@ -664,7 +664,7 @@ const newCars: Array<NewCar> = [
     model: 'EQC',
     subModel: '400 4MATIC',
     heroImageName: 'eqc',
-    price: 9590000,
+    price: 9990000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqc/',
     acceleration: 5.1,
@@ -680,7 +680,7 @@ const newCars: Array<NewCar> = [
     model: 'EQS',
     subModel: '350',
     heroImageName: 'mercedes-eqs',
-    price: 14290000,
+    price: 14690000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs',
     acceleration: 6.9,
@@ -695,7 +695,7 @@ const newCars: Array<NewCar> = [
     model: 'EQS',
     subModel: '450+',
     heroImageName: 'mercedes-eqs-alt',
-    price: 15990000,
+    price: 16290000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs',
     acceleration: 6.2,
@@ -711,7 +711,7 @@ const newCars: Array<NewCar> = [
     model: 'EQS',
     subModel: '580 4MATIC',
     heroImageName: 'mercedes-eqs',
-    price: 22590000,
+    price: 22490000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs',
     acceleration: 4.3,
@@ -727,7 +727,7 @@ const newCars: Array<NewCar> = [
     model: 'EQV',
     subModel: '300',
     heroImageName: 'eqv',
-    price: 11890000,
+    price: 11990000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/v-class/v-class-447/eqv/labeling.module.html',
     acceleration: 12.1,
@@ -1427,7 +1427,7 @@ export const expectedCars: Array<ExpectedCar> = [
     model: 'EQB',
     subModel: '300 4MATIC',
     heroImageName: 'mercedes-eqb-alt',
-    price: 8390000,
+    price: 7990000,
     sellerURL: 'https://www.mercedes-benz.com/en/vehicles/passenger-cars/eqb/',
     acceleration: 7.0,
     capacity: 66.5,
@@ -1442,7 +1442,7 @@ export const expectedCars: Array<ExpectedCar> = [
     model: 'EQB',
     subModel: '350 4MATIC',
     heroImageName: 'mercedes-eqb',
-    price: 8890000,
+    price: 8790000,
     sellerURL: 'https://www.mercedes-benz.com/en/vehicles/passenger-cars/eqb/',
     acceleration: 6.0,
     capacity: 66.5,
