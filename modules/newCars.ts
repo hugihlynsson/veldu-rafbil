@@ -901,7 +901,7 @@ const newCars: Array<NewCar> = [
     make: 'Peugeot',
     model: 'e-2008',
     heroImageName: 'e-2008',
-    price: 4490000,
+    price: 4470000,
     sellerURL:
       'https://www.peugeotisland.is/nyir-bilar/velja-bil/glaenyr-peugeot-e-2008/',
     acceleration: 8.5,
@@ -916,7 +916,7 @@ const newCars: Array<NewCar> = [
     make: 'Peugeot',
     model: 'e-208',
     heroImageName: 'e-208',
-    price: 4090000,
+    price: 4150000,
     sellerURL:
       'https://www.peugeotisland.is/nyir-bilar/velja-bil/glaenyr-peugeot-e-208/',
     acceleration: 8.1,
@@ -931,7 +931,7 @@ const newCars: Array<NewCar> = [
     make: 'Peugeot',
     model: 'e-Traveller',
     heroImageName: 'peugeot-e-traveller',
-    price: 7490000,
+    price: 7790000,
     sellerURL: 'https://www.peugeotisland.is/nyir-bilar/sko/e-traveller/',
     acceleration: 13.3,
     capacity: 75,
