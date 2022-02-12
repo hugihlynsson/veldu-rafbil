@@ -1099,13 +1099,13 @@ const newCars: Array<NewCar> = [
     price: 5837335,
     sellerURL: 'https://www.tesla.com/is_IS/model3/design',
     acceleration: 6.1,
-    capacity: 55,
+    capacity: 57.5,
     range: 510,
     evDatabaseURL:
-      'https://ev-database.org/car/1320/Tesla-Model-3-Standard-Range-Plus',
+      'https://ev-database.org/car/1555/Tesla-Model-3',
     drive: 'RWD',
     power: 239,
-    timeToCharge10T080: 29,
+    timeToCharge10T080: 27,
   },
   {
     make: 'Tesla',
@@ -1118,10 +1118,10 @@ const newCars: Array<NewCar> = [
     capacity: 82,
     range: 626,
     evDatabaseURL:
-      'https://ev-database.org/car/1321/Tesla-Model-3-Long-Range-Dual-Motor',
+      'https://ev-database.org/car/1591/Tesla-Model-3-Long-Range-Dual-Motor',
     drive: 'AWD',
     power: 324,
-    timeToCharge10T080: 34,
+    timeToCharge10T080: 30,
   },
   {
     make: 'Tesla',
@@ -1134,10 +1134,10 @@ const newCars: Array<NewCar> = [
     capacity: 82,
     range: 547,
     evDatabaseURL:
-      'https://ev-database.org/car/1322/Tesla-Model-3-Long-Range-Performance',
+      'https://ev-database.org/car/1620/Tesla-Model-3-Performance',
     drive: 'AWD',
-    power: 377,
-    timeToCharge10T080: 21,
+    power: 413,
+    timeToCharge10T080: 30,
   },
   {
     make: 'Tesla',
@@ -1150,10 +1150,10 @@ const newCars: Array<NewCar> = [
     capacity: 75,
     range: 567,
     evDatabaseURL:
-      'https://ev-database.org/car/1182/Tesla-Model-Y-Long-Range-Dual-Motor',
+      'https://ev-database.org/car/1619/Tesla-Model-Y-Long-Range-Dual-Motor',
     drive: 'AWD',
     power: 324,
-    timeToCharge10T080: 33,
+    timeToCharge10T080: 30,
   },
   {
     make: 'Tesla',
@@ -1167,8 +1167,8 @@ const newCars: Array<NewCar> = [
     range: 514,
     evDatabaseURL: 'https://ev-database.org/car/1183/Tesla-Model-Y-Performance',
     drive: 'AWD',
-    power: 420,
-    timeToCharge10T080: 25,
+    power: 413,
+    timeToCharge10T080: 30,
   },
   {
     make: 'Volkswagen',
