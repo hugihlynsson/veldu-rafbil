@@ -1188,6 +1188,22 @@ const newCars: Array<NewCar> = [
     timeToCharge10T080: 30,
   },
   {
+    make: 'Toyota',
+    model: 'Proace',
+    subModel: 'Verso',
+    heroImageName: 'toyota-proace-verso',
+    price: 8790000,
+    sellerURL: 'https://www.toyota.is/new-cars/proace-verso-ev',
+    acceleration: 13.1,
+    capacity: 75,
+    range: 330,
+    evDatabaseURL:
+      'https://ev-database.org/car/1514/Toyota-PROACE-Verso-M-75-kWh',
+    drive: 'FWD',
+    power: 100,
+    timeToCharge10T080: 36,
+  },
+  {
     make: 'Volkswagen',
     model: 'e-Up!',
     heroImageName: 'e-up',
