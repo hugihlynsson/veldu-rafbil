@@ -234,6 +234,21 @@ const newCars: Array<NewCar> = [
   {
     make: 'Fiat',
     model: '500e',
+    heroImageName: 'fiat-500e-alt',
+    price: 3999000,
+    sellerURL: 'https://www.fiat.is/model/500e-la-prima/',
+    acceleration: 9.5,
+    capacity: 23.8,
+    range: 190,
+    evDatabaseURL:
+      'https://ev-database.org/car/1327/Fiat-500e-Hatchback-24-kWh',
+    drive: 'FWD',
+    timeToCharge10T080: 24,
+    power: 70,
+  },
+  {
+    make: 'Fiat',
+    model: '500e',
     heroImageName: 'fiat-500e',
     price: 5199000,
     sellerURL: 'https://www.fiat.is/model/500e-la-prima/',
