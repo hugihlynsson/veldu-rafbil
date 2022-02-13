@@ -1375,7 +1375,7 @@ const newCars: Array<NewCar> = [
     make: 'Volvo',
     model: 'XC40',
     subModel: 'Recharge',
-    heroImageName: 'volvo-xc-40',
+    heroImageName: 'volvo-xc-40-alt',
     price: 6611920,
     sellerURL: 'https://www.volvocars.com/is/v/cars/xc40-electric',
     acceleration: 7.4,
