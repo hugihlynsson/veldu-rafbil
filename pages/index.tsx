@@ -380,7 +380,7 @@ const New: NextPage<Props> = ({
         {stableSort(filteredCars, carSorter(sorting)).map((car) => (
           <Car
             car={car}
-            key={`${car.make} ${car.model} ${car.subModel}`}
+            key={`${car.make} ${car.model} ${car.subModel} ${car.price}`}
             showValue={sorting === 'value' || Boolean(filters.value)}
           />
         ))}
