@@ -859,7 +859,7 @@ const newCars: Array<NewCar> = [
     make: 'Nissan',
     model: 'Leaf',
     heroImageName: 'leaf',
-    price: 4290000,
+    price: 3990000,
     sellerURL: 'https://www.nissan.is/vehicles/new-vehicles/leaf.html',
     acceleration: 7.9,
     capacity: 40,
