@@ -1650,14 +1650,14 @@ export const expectedCars: Array<ExpectedCar> = [
     price: 5850000,
     sellerURL: 'https://www.polestar.com/en-is/polestar-2/',
     acceleration: 7.4,
-    capacity: 64,
+    capacity: 69,
     range: 440,
     evDatabaseURL:
-      'https://ev-database.org/car/1486/Polestar-2-Standard-Range-Single-Motor',
+      'https://ev-database.org/car/1654/Polestar-2-Standard-Range-Single-Motor',
     expectedDelivery: 'Seinni part 2022',
     drive: 'FWD',
-    power: 165,
-    timeToCharge10T080: 34,
+    power: 170,
+    timeToCharge10T080: 33,
   },
   {
     make: 'Renault',
