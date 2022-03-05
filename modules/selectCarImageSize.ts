@@ -7,6 +7,9 @@ const pixelsToSize = {
 }
 
 const selectCarImageSize = (imageUrl: string, size: Size) => {
+  if (!imageUrl.includes("bilasolur.is")) {
+    return imageUrl // The image sizer only works for images from bilasolur.is
+  }
   if (!imageUrl.includes('?')) {
     return `${imageUrl}?w=${pixelsToSize[size]}`
   }
