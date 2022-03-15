@@ -1243,10 +1243,10 @@ const newCars: Array<NewCar> = [
     capacity: 45,
     range: 350,
     evDatabaseURL:
-      'https://ev-database.org/car/1127/Volkswagen-ID3-Pure-Performance',
+      'https://ev-database.org/car/1530/Volkswagen-ID3-Pure-Performance',
     drive: 'RWD',
     power: 110,
-    timeToCharge10T080: 44,
+    timeToCharge10T080: 28,
   },
   {
     make: 'Volkswagen',
@@ -1258,27 +1258,27 @@ const newCars: Array<NewCar> = [
     acceleration: 9.6,
     capacity: 58,
     range: 426,
-    evDatabaseURL: 'https://ev-database.org/car/1202/Volkswagen-ID3-Pro',
+    evDatabaseURL: 'https://ev-database.org/car/1531/Volkswagen-ID3-Pro',
     drive: 'RWD',
     power: 107,
-    timeToCharge10T080: 33,
+    timeToCharge10T080: 30,
   },
-  /* {
+  {
     make: 'Volkswagen',
     model: 'ID.3',
     subModel: 'Pro Performance',
     heroImageName: 'vw-id-3',
-    price: 4990000,
+    price: 5540000,
     sellerURL: 'https://www.volkswagen.is/is/bilar/id3.html',
     acceleration: 7.3,
     capacity: 58,
-    range: 426,
+    range: 420,
     evDatabaseURL:
-      'https://ev-database.org/car/1306/Volkswagen-ID3-Pro-Performance',
+      'https://ev-database.org/car/1532/Volkswagen-ID3-Pro-Performance',
     drive: 'RWD',
     power: 150,
-    timeToCharge10T080: 33,
-  }, */
+    timeToCharge10T080: 30,
+  },
   {
     make: 'Volkswagen',
     model: 'ID.3',
