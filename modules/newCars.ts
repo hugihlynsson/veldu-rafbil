@@ -978,7 +978,7 @@ const newCars: Array<NewCar> = [
     make: 'Opel',
     model: 'Mokka-e',
     heroImageName: 'opel-mokka-e',
-    price: 4590000,
+    price: 4495000,
     sellerURL: 'https://www.opel.is/cars/mokka-models/mokka-e/overview.html',
     acceleration: 8.5,
     capacity: 50,
