@@ -717,6 +717,7 @@ const newCars: Array<NewCar> = [
     acceleration: 9.2,
     capacity: 66.5,
     range: 474,
+    evDatabaseURL: 'https://ev-database.org/car/1664/Mercedes-EQB-250',
     drive: 'FWD',
     power: 140,
     timeToCharge10T080: 29,
