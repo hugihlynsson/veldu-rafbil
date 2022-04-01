@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { NewCar as NewCarType, Drive } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
-import {colors} from '../modules/globals'
+import { colors } from '../modules/globals'
 import LinkPill from './LinkPill'
 
 interface Props {

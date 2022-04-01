@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { Drive, Filters } from '../types'
+import { Availability, Drive, Filters } from '../types'
 import { colors } from '../modules/globals'
 
 interface Props {
@@ -51,10 +51,12 @@ const FiltersModal: React.FunctionComponent<Props> = ({
       setFilters((filters) => {
         let updatedFilters = Object.assign({}, filters)
 
+        // Name is a special filter
         if (name == 'name') {
           setNameInput(() => value)
         }
 
+        // Need to handle deletion separately
         if (value == '') {
           delete updatedFilters[name]
           return updatedFilters
@@ -63,6 +65,13 @@ const FiltersModal: React.FunctionComponent<Props> = ({
         switch (name) {
           case 'acceleration':
             updatedFilters.acceleration = Number(value)
+            break
+          case 'availability':
+            if (value === 'all') {
+              delete updatedFilters.availability
+            } else {
+              updatedFilters.availability = value as Availability
+            }
             break
           case 'drive':
             if (value === 'all') {
@@ -179,6 +188,19 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             <option value="AWD">AWD</option>
             <option value="FWD">FWD</option>
             <option value="RWD">RWD</option>
+          </select>
+          <div className="filter-header">
+            <label htmlFor="filter-drive">Framboð</label>
+          </div>
+          <select
+            id="filter-availability"
+            onChange={handleFilterChange('availability')}
+            onKeyDown={handleKeyPress}
+            value={filters.availability ?? 'all'}
+          >
+            <option value="all">Allir</option>
+            <option value="availability">Fáanlegir</option>
+            <option value="expected">Væntanlegir</option>
           </select>
           <div className="filter-header">
             <label htmlFor="filter-acceleration">Hröðun</label>
