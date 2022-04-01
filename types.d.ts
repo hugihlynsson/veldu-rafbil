@@ -51,8 +51,10 @@ export interface NewCar {
   drive: Drive
   timeToCharge10T080: number // minutes
   power: number // kW
-  expectedDelivery?: string // In Icelandic, for exmaple: "Sumar 2020"
+  expectedDelivery?: string // In Icelandic, for example: "sumar 2020"
 }
+
+export type Availability = 'available' | 'expected'
 
 export type Filters = {
   acceleration?: number
@@ -62,4 +64,5 @@ export type Filters = {
   price?: number
   range?: number
   value?: number
+  availability?: availability
 }

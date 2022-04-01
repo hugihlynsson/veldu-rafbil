@@ -83,6 +83,10 @@ export const getFiltersFromQuery = (query: ParsedUrlQuery): Filters => {
   if (query.virdi) {
     filters.value = Number(query.virdi)
   }
+  if (query.frambod) {
+    filters.availability =
+      query.frambod === 'faanlegir' ? 'availible' : 'expected'
+  }
   return filters
 }
 
@@ -124,6 +128,11 @@ const carFilter =
                 car.acceleration <=
                 (filters.acceleration ?? Number.MAX_SAFE_INTEGER)
               )
+            case 'availability':
+              return (
+                Boolean(car.expectedDelivery) ===
+                (filters.availability === 'expected')
+              )
             case 'drive':
               return filters.drive?.includes(car.drive) || false
             case 'fastcharge':
@@ -151,6 +160,8 @@ const carFilter =
               )
           }
         })
+
+let allCars = newCars.concat(expectedCars)
 
 interface Props {
   sorting: Sorting
@@ -202,6 +213,10 @@ const New: NextPage<Props> = ({
     if (filters.acceleration) {
       query.hrodun = filters.acceleration.toString()
     }
+    if (filters.availability) {
+      query.frambod =
+        filters.availability === 'availible' ? 'faanlegir' : 'vaentanlegir'
+    }
     if (filters.drive) {
       query.drif = filters.drive
     }
@@ -240,7 +255,7 @@ const New: NextPage<Props> = ({
       return newFilters
     })
 
-  const filteredCars = newCars.concat(expectedCars).filter(carFilter(filters))
+  const filteredCars = allCars.filter(carFilter(filters))
 
   const hasFilter = Object.values(filters).length > 0
 
@@ -265,10 +280,6 @@ const New: NextPage<Props> = ({
             <LinkPill current onClick={handleNewPress} href="#nyjir">
               Nýir ↓
             </LinkPill>
-
-            <Link href="/vaentanlegir" passHref>
-              <LinkPill>Væntanlegir →</LinkPill>
-            </Link>
 
             <Link href="/notadir" passHref>
               <LinkPill>Notaðir →</LinkPill>
@@ -367,6 +378,20 @@ const New: NextPage<Props> = ({
                   Hraðhleðsla: <span>↑{filters.fastcharge} km/min</span>
                 </button>
               )}
+
+              {filters.availability && (
+                <button
+                  className="filter"
+                  onClick={handleRemoveFilter('availability')}
+                >
+                  Framboð:{' '}
+                  <span>
+                    {filters.availability === 'availible'
+                      ? 'Fáanlegir'
+                      : 'Væntanlegir'}
+                  </span>
+                </button>
+              )}
               <button
                 className="add-filter"
                 onClick={() => setEditingFilters(() => true)}
@@ -413,7 +438,7 @@ const New: NextPage<Props> = ({
           onSubmit={(filters: Filters) => setFilters(() => filters)}
           onDone={() => setEditingFilters(() => false)}
           getCountPreview={(filters: Filters) =>
-            newCars.filter(carFilter(filters)).length
+            allCars.filter(carFilter(filters)).length
           }
         />
       )}

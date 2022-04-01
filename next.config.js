@@ -18,4 +18,13 @@ module.exports = {
       1284, // iPhone 12 Pro Max @3x
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/vaentanlegir',
+        destination: '/?frambod=vaentanlegir',
+        permanent: true,
+      },
+    ]
+  },
 }
