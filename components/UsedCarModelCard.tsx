@@ -89,7 +89,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
   showValue,
 }) => (
   <article>
-    <Link href="/notadir/[id]" as={`/notadir/${model.id}`}>
+    <Link href="/notadir/[id]" as={`/notadir/${encodeURIComponent(model.id)}`}>
       <a>
         <div className="images">
           <div className="imagesContainer">
