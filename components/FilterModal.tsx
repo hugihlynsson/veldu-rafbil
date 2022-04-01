@@ -77,7 +77,8 @@ const FiltersModal: React.FunctionComponent<Props> = ({
           case 'name':
             updatedFilters.name = value
               .split(',')
-              .map((name) => name.trim()).filter(name => name)
+              .map((name) => name.trim())
+              .filter((name) => name)
             break
           case 'price':
             updatedFilters.price = Number(value)

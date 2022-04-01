@@ -20,13 +20,13 @@ console.log(`Deleting snapshot with key: ${snapshotKey}`)
 
 let snapshotRef = firebaseAdmin.database().ref('snapshots')
 
-snapshotRef.once("value", (dataSnapshot) => {
+snapshotRef.once('value', (dataSnapshot) => {
   if (dataSnapshot.hasChild(snapshotKey)) {
     snapshotRef.child(snapshotKey).remove()
-    console.log("Successfully deleted!")
+    console.log('Successfully deleted!')
     setTimeout(() => app.delete(), 1000)
   } else {
     console.log("Snapshot doesn't exist, aborting")
     app.delete()
-  } 
+  }
 })

@@ -1647,12 +1647,12 @@ export const expectedCars: Array<ExpectedCar> = [
     subModel: '350+',
     heroImageName: 'mercedes-eqe',
     price: 11000000,
-    sellerURL: 'https://mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqe',
+    sellerURL:
+      'https://mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqe',
     acceleration: 6.0,
     capacity: 90.6,
     range: 660,
-    evDatabaseURL:
-      'https://ev-database.org/car/1538/Mercedes-EQE-350plus',
+    evDatabaseURL: 'https://ev-database.org/car/1538/Mercedes-EQE-350plus',
     expectedDelivery: 'Sumar 2022',
     drive: 'RWD',
     power: 215,
@@ -1664,7 +1664,8 @@ export const expectedCars: Array<ExpectedCar> = [
     subModel: 'AMG 43 4MATIC',
     heroImageName: 'mercedes-eqe-amg',
     price: 14500000,
-    sellerURL: 'https://mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqe',
+    sellerURL:
+      'https://mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqe',
     acceleration: 4.2,
     capacity: 90.6,
     range: 533,
@@ -1681,7 +1682,8 @@ export const expectedCars: Array<ExpectedCar> = [
     subModel: 'AMG 53 4MATIC+',
     heroImageName: 'mercedes-eqe-alt',
     price: 17500000,
-    sellerURL: 'https://mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqe',
+    sellerURL:
+      'https://mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqe',
     acceleration: 3.3,
     capacity: 90.6,
     range: 518,
