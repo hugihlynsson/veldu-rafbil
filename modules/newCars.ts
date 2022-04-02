@@ -1540,6 +1540,7 @@ export const expectedCars: Array<NewCar> = [
     acceleration: 7.5,
     capacity: 63,
     range: 410,
+    evDatabaseURL: 'https://ev-database.org/car/1261/Aiways-U5',
     expectedDelivery: 'Byrjun 2022',
     drive: 'FWD',
     timeToCharge10T080: 35,
