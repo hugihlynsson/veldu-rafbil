@@ -449,7 +449,6 @@ const New: NextPage<Props> = ({
         {`
           .content {
             margin: 0 auto;
-            padding: 8px;
           }
           header {
             display: flex;
@@ -627,7 +626,10 @@ const New: NextPage<Props> = ({
             }
           }
 
-          @media screen and (min-width: 768px) {
+          @media screen and (min-width: 750px) {
+            .content {
+              padding: 8px;
+            }
             header {
               padding-left: 120px;
               max-width: none;
@@ -645,13 +647,7 @@ const New: NextPage<Props> = ({
             }
             .cars {
               display: grid;
-              grid-template-columns: auto auto;
-            }
-          }
-
-          @media screen and (min-width: 1200px) {
-            .cars {
-              grid-template-columns: auto auto auto;
+              grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
               grid-gap: 8px;
             }
           }
