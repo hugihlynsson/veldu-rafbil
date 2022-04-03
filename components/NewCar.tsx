@@ -204,9 +204,9 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
           .info-item {
             margin-right: 16px;
           }
-        }
+        } 
 
-        @media screen and (min-width: 768px) {
+        {/* @media screen and (min-width: 768px) {
           article {
             display: flex;
             margin: 0 32px 40px 40px;
@@ -233,7 +233,7 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
             flex-shrink: 0;
             flex-grow: 1;
           }
-        }
+        } */}
       `}
     </style>
   </article>
