@@ -1700,11 +1700,11 @@ export const expectedCars: Array<NewCar> = [
     model: 'Niro EV',
     heroImageName: 'kia-niro-2023',
     price: 5500000,
-    sellerURL:
-      'https://www.kia.com/is/',
+    sellerURL: 'https://www.kia.com/is/',
     acceleration: 7.8,
     capacity: 64.8,
     range: 463,
+    evDatabaseURL: 'https://ev-database.org/car/1666/Kia-Niro-EV',
     expectedDelivery: 'Seinni part 2022',
     drive: 'FWD',
     power: 150,
