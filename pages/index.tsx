@@ -241,7 +241,7 @@ const New: NextPage<Props> = ({
   const descriptionRef = useRef<HTMLParagraphElement>(null)
 
   const handleNewPress = useCallback(
-    (event) => {
+    (event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>) => {
       event.preventDefault()
       descriptionRef.current?.scrollIntoView({ behavior: 'smooth' })
     },

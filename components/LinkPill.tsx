@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { ReactNode, FunctionComponent } from 'react'
 
 interface Props {
   current?: boolean
@@ -7,6 +7,7 @@ interface Props {
   href?: string
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
   onGray?: boolean
+  children?: ReactNode | undefined
 }
 
 const LinkPill: FunctionComponent<Props> = React.forwardRef<

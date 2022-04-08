@@ -62,7 +62,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
   const descriptionRef = useRef<HTMLParagraphElement>(null)
 
   const handleNewPress = useCallback(
-    (event) => {
+    (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       event.preventDefault()
       descriptionRef.current?.scrollIntoView({ behavior: 'smooth' })
     },
