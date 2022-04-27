@@ -2,6 +2,20 @@ import { NewCar } from '../types'
 
 const newCars: Array<NewCar> = [
   {
+    make: 'Aiways',
+    model: 'U5',
+    heroImageName: 'aiways-u5',
+    price: 5190000,
+    sellerURL: 'https://aiwaysaislandi.is',
+    acceleration: 7.5,
+    capacity: 63,
+    range: 410,
+    evDatabaseURL: 'https://ev-database.org/car/1261/Aiways-U5',
+    drive: 'FWD',
+    timeToCharge10T080: 35,
+    power: 150,
+  },
+  {
     make: 'Audi',
     model: 'e-tron',
     subModel: '50 Quattro',
@@ -1531,21 +1545,6 @@ const newCars: Array<NewCar> = [
 export default newCars
 
 export const expectedCars: Array<NewCar> = [
-  {
-    make: 'Aiways',
-    model: 'U5',
-    heroImageName: 'aiways-u5',
-    price: 5190000,
-    sellerURL: 'https://aiwaysaislandi.is',
-    acceleration: 7.5,
-    capacity: 63,
-    range: 410,
-    evDatabaseURL: 'https://ev-database.org/car/1261/Aiways-U5',
-    expectedDelivery: 'Byrjun 2022',
-    drive: 'FWD',
-    timeToCharge10T080: 35,
-    power: 150,
-  },
   {
     make: 'Audi',
     model: 'Q4 Sportback e-tron',
