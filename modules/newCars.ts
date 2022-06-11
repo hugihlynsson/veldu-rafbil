@@ -1102,6 +1102,21 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Peugeot',
+    model: 'e-Rifter',
+    heroImageName: 'peugeot-e-rifter',
+    price: 5548000,
+    sellerURL: 'https://www.peugeotisland.is/nyir-bilar/tegundir/e-rifter/',
+    acceleration: 11.7,
+    capacity: 50,
+    range: 269,
+    evDatabaseURL:
+      'https://ev-database.org/car/1522/Peugeot-e-Rifter-Standard-50-kWh',
+    drive: 'FWD',
+    power: 100,
+    timeToCharge10T080: 26,
+  },
+  {
+    make: 'Peugeot',
     model: 'e-Traveller',
     heroImageName: 'peugeot-e-traveller',
     price: 7790000,
