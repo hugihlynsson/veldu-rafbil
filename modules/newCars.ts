@@ -800,7 +800,7 @@ const newCars: Array<NewCar> = [
     timeToCharge10T080: 35,
   },
   {
-    make: 'Mercedes Benz',
+    make: 'Mercedes-Benz',
     model: 'EQE',
     subModel: '350+',
     heroImageName: 'mercedes-eqe',
@@ -816,7 +816,7 @@ const newCars: Array<NewCar> = [
     timeToCharge10T080: 33,
   },
   {
-    make: 'Mercedes Benz',
+    make: 'Mercedes-Benz',
     model: 'EQE',
     subModel: 'AMG 43 4MATIC',
     heroImageName: 'mercedes-eqe-amg',
@@ -1740,7 +1740,7 @@ export const expectedCars: Array<NewCar> = [
     timeToCharge10T080: 35,
   },
   {
-    make: 'Mercedes Benz',
+    make: 'Mercedes-Benz',
     model: 'EQE',
     subModel: 'AMG 53 4MATIC+',
     heroImageName: 'mercedes-eqe-alt',
