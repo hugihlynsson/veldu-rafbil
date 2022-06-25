@@ -11,7 +11,7 @@ import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
 import LinkPill from '../components/LinkPill'
 import FilterModal from '../components/FilterModal'
-import newCars, { expectedCars } from '../modules/newCars'
+import newCars from '../modules/newCars'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
 import { colors } from '../modules/globals'
@@ -161,8 +161,6 @@ const carFilter =
           }
         })
 
-let allCars = newCars.concat(expectedCars)
-
 interface Props {
   sorting: Sorting
   filters: Filters
@@ -241,7 +239,12 @@ const New: NextPage<Props> = ({
   const descriptionRef = useRef<HTMLParagraphElement>(null)
 
   const handleNewPress = useCallback(
-    (event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>) => {
+    (
+      event: React.MouseEvent<
+        HTMLAnchorElement | HTMLButtonElement,
+        MouseEvent
+      >,
+    ) => {
       event.preventDefault()
       descriptionRef.current?.scrollIntoView({ behavior: 'smooth' })
     },
@@ -255,7 +258,7 @@ const New: NextPage<Props> = ({
       return newFilters
     })
 
-  const filteredCars = allCars.filter(carFilter(filters))
+  const filteredCars = newCars.filter(carFilter(filters))
 
   const hasFilter = Object.values(filters).length > 0
 
@@ -438,7 +441,7 @@ const New: NextPage<Props> = ({
           onSubmit={(filters: Filters) => setFilters(() => filters)}
           onDone={() => setEditingFilters(() => false)}
           getCountPreview={(filters: Filters) =>
-            allCars.filter(carFilter(filters)).length
+            newCars.filter(carFilter(filters)).length
           }
         />
       )}
