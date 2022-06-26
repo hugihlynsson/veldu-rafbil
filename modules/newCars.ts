@@ -1480,6 +1480,21 @@ const newCars: Array<NewCar> = [
     timeToCharge10T080: 56,
   },
   {
+    make: 'Smart',
+    model: '#1',
+    heroImageName: 'smart-one',
+    price: 5600000,
+    sellerURL: 'https://smart.askja.is/',
+    acceleration: 6.0,
+    capacity: 66,
+    range: 440,
+    evDatabaseURL: 'https://ev-database.org/car/1667/Smart-1',
+    drive: 'RWD',
+    power: 200,
+    timeToCharge10T080: 29,
+    expectedDelivery: "2023"
+  },
+  {
     make: 'Skoda',
     model: 'Enyaq',
     subModel: 'iV 60',
