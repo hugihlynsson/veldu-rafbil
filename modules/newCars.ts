@@ -174,7 +174,7 @@ const newCars: Array<NewCar> = [
     model: 'Q4 Sportback e-tron',
     subModel: '35',
     heroImageName: 'audi-q4-sportback',
-    price: 6190000,
+    price: 7500000,
     sellerURL: 'http://www.audi.is/is/web/is/models/q4-e-tron/q4-e-tron.html',
     acceleration: 9.0,
     capacity: 55,
