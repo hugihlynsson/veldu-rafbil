@@ -1599,7 +1599,6 @@ const newCars: Array<NewCar> = [
     capacity: 71.4,
     range: 415,
     evDatabaseURL: 'https://ev-database.org/car/1567/Subaru-Solterra-AWD',
-    expectedDelivery: 'Sumar 2022',
     drive: 'AWD',
     power: 160,
     timeToCharge10T080: 32,
