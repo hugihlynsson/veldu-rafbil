@@ -241,7 +241,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'bmw-i4-m50',
     price: 10390000,
     sellerURL:
-      'https://www.bmw.is/is/all-models/bmw-i/i4/2021/bmw-i4-forskooun.html',
+      'https://www.bmw.is/is/all-models/m-series/i4-m50/2021/bmw-i4-m50-highlights.html',
     acceleration: 3.9,
     capacity: 83.9,
     range: 510,
@@ -249,6 +249,22 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 400,
     timeToCharge10T080: 30,
+  },
+  {
+    make: 'BMW',
+    model: 'i7',
+    heroImageName: 'bmw-i7',
+    price: 18000000,
+    sellerURL:
+      'https://www.bmw.is/is/all-models/bmw-i/i7/2022/bmw-i7-sedan-highlights.html',
+    acceleration: 4.7,
+    capacity: 105,
+    range: 625,
+    evDatabaseURL: 'https://ev-database.org/car/1676/BMW-i7-xDrive60',
+    expectedDelivery: '2023',
+    drive: 'AWD',
+    power: 400,
+    timeToCharge10T080: 35,
   },
   {
     make: 'BMW',
@@ -282,10 +298,26 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'BMW',
+    model: 'iX1',
+    heroImageName: 'bmw-ix1',
+    price: 7500000,
+    sellerURL: 'https://www.bmw.is/is/all-models/bmw-i/iX1/2022/bmw-ix1.html',
+    acceleration: 5.7,
+    capacity: 68,
+    range: 438,
+    evDatabaseURL: 'https://ev-database.org/car/1701/BMW-iX1-xDrive30',
+    expectedDelivery: '2023',
+    drive: 'AWD',
+    power: 230,
+    timeToCharge10T080: 29,
+  },
+  {
+    make: 'BMW',
     model: 'iX3',
     heroImageName: 'bmw-ix3',
     price: 8990000,
-    sellerURL: 'https://www.bl.is/nyir/bmw/ix3/',
+    sellerURL:
+      'https://www.bmw.is/is/all-models/x-series/iX3/2021/bmw-ix3-highlights.html',
     acceleration: 6.8,
     capacity: 80,
     range: 461,
@@ -1002,7 +1034,8 @@ const newCars: Array<NewCar> = [
     acceleration: 3.4,
     capacity: 108,
     range: 577,
-    evDatabaseURL: 'https://ev-database.org/car/1537/Mercedes-EQS-AMG-53-4MATICplus',
+    evDatabaseURL:
+      'https://ev-database.org/car/1537/Mercedes-EQS-AMG-53-4MATICplus',
     drive: 'AWD',
     power: 560,
     timeToCharge10T080: 32,
@@ -1492,7 +1525,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 200,
     timeToCharge10T080: 29,
-    expectedDelivery: "2023"
+    expectedDelivery: '2023',
   },
   {
     make: 'Skoda',
