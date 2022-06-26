@@ -1042,6 +1042,24 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Mercedes-Benz',
+    model: 'EQS SUV',
+    subModel: '450 4MATIC',
+    heroImageName: 'mercedes-eqs-suv',
+    price: 18500000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs/suv-x296/pad.html',
+    acceleration: 7.0,
+    capacity: 108,
+    range: 613,
+    evDatabaseURL:
+      'https://ev-database.org/car/1674/Mercedes-EQS-SUV-450-4MATIC',
+    expectedDelivery: "2023",
+    drive: 'AWD',
+    power: 265,
+    timeToCharge10T080: 32,
+  },
+  {
+    make: 'Mercedes-Benz',
     model: 'EQV',
     subModel: '300',
     heroImageName: 'eqv',
