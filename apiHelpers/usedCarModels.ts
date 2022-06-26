@@ -305,6 +305,26 @@ const usedCarModels: Array<UsedCarModel> = [
       'https://ev-database.org/car/1126/Hyundai-Kona-Electric-64-kWh',
   },
   {
+    id: 'hyundai-kona-39-2022',
+    make: 'Hyundai',
+    model: 'Kona Electric',
+    acceleration: 9.9,
+    capacity: 39,
+    range: 305,
+    evDatabaseURL:
+      'https://ev-database.org/car/1422/Hyundai-Kona-Electric-39-kWh',
+  },
+  {
+    id: 'hyundai-kona-64-2022',
+    make: 'Hyundai',
+    model: 'Kona Electric',
+    acceleration: 7.6,
+    capacity: 64,
+    range: 484,
+    evDatabaseURL:
+      'https://ev-database.org/car/1423/Hyundai-Kona-Electric-64-kW',
+  },
+  {
     id: 'tesla-model-s-60',
     make: 'Tesla',
     model: 'Model S 60',
