@@ -557,6 +557,14 @@ const usedCarModels: Array<UsedCarModel> = [
     range: 150,
   },
   {
+    id: 'mercedes-eqv',
+    make: 'Mercedes-Benz',
+    model: 'EQV',
+    acceleration: 12.1,
+    capacity: 90,
+    range: 363,
+  },
+  {
     id: 'open-ampera-e',
     make: 'Opel',
     model: 'Ampera-e',
