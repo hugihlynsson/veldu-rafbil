@@ -1451,6 +1451,22 @@ const newCars: Array<NewCar> = [
     timeToCharge10T080: 19,
   },
   {
+    make: 'Porsche',
+    model: 'Taycan',
+    subModel: '4S Cross Turismo',
+    heroImageName: 'porsche-taycan-cross-turismo',
+    price: 16900000,
+    sellerURL: 'https://crossturismo.porsche.is',
+    acceleration: 4.1,
+    capacity: 93.4,
+    range: 452,
+    evDatabaseURL:
+      'https://ev-database.org/car/1437/Porsche-Taycan-4S-Cross-Turismo',
+    drive: 'AWD',
+    power: 420,
+    timeToCharge10T080: 19,
+  },
+  {
     make: 'Renault',
     model: 'Kangoo',
     subModel: 'MAXI II EV',
