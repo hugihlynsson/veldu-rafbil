@@ -5,7 +5,7 @@ const newCars: Array<NewCar> = [
     make: 'Aiways',
     model: 'U5',
     heroImageName: 'aiways-u5',
-    price: 5190000,
+    price: 5490000,
     sellerURL: 'https://aiwaysaislandi.is',
     acceleration: 7.5,
     capacity: 63,
