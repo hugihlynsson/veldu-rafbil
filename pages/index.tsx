@@ -405,13 +405,15 @@ const New: NextPage<Props> = ({
           </div>
         </header>
 
-        {stableSort(filteredCars, carSorter(sorting)).map((car) => (
-          <Car
-            car={car}
-            key={`${car.make} ${car.model} ${car.subModel} ${car.price}`}
-            showValue={sorting === 'value' || Boolean(filters.value)}
-          />
-        ))}
+        <div className="cars">
+          {stableSort(filteredCars, carSorter(sorting)).map((car) => (
+            <Car
+              car={car}
+              key={`${car.make} ${car.model} ${car.subModel} ${car.price}`}
+              showValue={sorting === 'value' || Boolean(filters.value)}
+            />
+          ))}
+        </div>
 
         {hasFilter && filteredCarCount > 0 && (
           <div className="filters-reset-box">
@@ -449,7 +451,6 @@ const New: NextPage<Props> = ({
       <style jsx>
         {`
           .content {
-            max-width: 1024px;
             margin: 0 auto;
           }
           header {
@@ -628,9 +629,12 @@ const New: NextPage<Props> = ({
             }
           }
 
-          @media screen and (min-width: 768px) {
+          @media screen and (min-width: 750px) {
+            .content {
+              padding: 8px;
+            }
             header {
-              padding-left: 40px;
+              padding-left: 120px;
               max-width: none;
               padding-bottom: 40px;
             }
@@ -643,6 +647,11 @@ const New: NextPage<Props> = ({
             .filters-reset-box {
               padding-left: 40px;
               max-width: none;
+            }
+            .cars {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+              grid-gap: 8px;
             }
           }
         `}

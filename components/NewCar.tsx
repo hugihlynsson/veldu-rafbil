@@ -204,36 +204,13 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
           .info-item {
             margin-right: 16px;
           }
-        }
+        } 
 
-        @media screen and (min-width: 768px) {
-          article {
-            display: flex;
-            margin: 0 32px 40px 40px;
-            align-items: center;
-          }
-
-          .imageBox {
-            display: block;
-            position: relative;
-            width: 40%;
-            flex-grow: 1;
-            align-self: center;
-          }
-
-          .image {
-            border-radius: 2px;
-          }
-
+       @media screen and (min-width: 750px) {
           .content {
-            margin: 0 0 0 32px;
-            padding: 0;
-            width: 330px;
-            max-width: 380px;
-            flex-shrink: 0;
-            flex-grow: 1;
+            padding-left: 0;
           }
-        }
+        } 
       `}
     </style>
   </article>
