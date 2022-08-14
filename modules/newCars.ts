@@ -725,6 +725,22 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Lexus',
+    model: 'RZ',
+    subModel: '450e',
+    heroImageName: 'lexus-rz',
+    price: 11000000,
+    sellerURL: 'https://www.lexus.is/new-cars/rz-world-premiere',
+    acceleration: 5.6,
+    capacity: 75,
+    range: 420,
+    evDatabaseURL: 'https://ev-database.org/car/1677/Lexus-RZ-450e',
+    drive: 'AWD',
+    power: 230,
+    timeToCharge10T080: 32,
+    expectedDelivery: '2023',
+  },
+  {
+    make: 'Lexus',
     model: 'UX',
     subModel: '300e',
     heroImageName: 'lexus-ux-300e',
@@ -1127,11 +1143,12 @@ const newCars: Array<NewCar> = [
     acceleration: 8.0,
     capacity: 51,
     range: 350,
-    evDatabaseURL: 'https://ev-database.org/car/1707/MG-MG4-Electric-Standard-Range',
+    evDatabaseURL:
+      'https://ev-database.org/car/1707/MG-MG4-Electric-Standard-Range',
     drive: 'RWD',
     power: 125,
     timeToCharge10T080: 37,
-    expectedDelivery: "2023"
+    expectedDelivery: '2023',
   },
   {
     make: 'MG',
@@ -1143,11 +1160,12 @@ const newCars: Array<NewCar> = [
     acceleration: 7.9,
     capacity: 64,
     range: 435,
-    evDatabaseURL: 'https://ev-database.org/car/1708/MG-MG4-Electric-Long-Range',
+    evDatabaseURL:
+      'https://ev-database.org/car/1708/MG-MG4-Electric-Long-Range',
     drive: 'RWD',
     power: 150,
     timeToCharge10T080: 35,
-    expectedDelivery: "Október 2022"
+    expectedDelivery: 'Október 2022',
   },
   {
     make: 'MG',
@@ -1289,7 +1307,8 @@ const newCars: Array<NewCar> = [
     model: 'Corsa-e',
     heroImageName: 'opel-corsa-e',
     price: 4290000,
-    sellerURL: 'https://www.opelisland.is/cars/corsa-models/corsa-e/yfirsyn.html',
+    sellerURL:
+      'https://www.opelisland.is/cars/corsa-models/corsa-e/yfirsyn.html',
     acceleration: 8.1,
     capacity: 50,
     range: 330,
@@ -1303,7 +1322,8 @@ const newCars: Array<NewCar> = [
     model: 'Mokka-e',
     heroImageName: 'opel-mokka-e',
     price: 4650000,
-    sellerURL: 'https://www.opelisland.is/cars/mokka-models/mokka-e/Yfirsyn.html',
+    sellerURL:
+      'https://www.opelisland.is/cars/mokka-models/mokka-e/Yfirsyn.html',
     acceleration: 8.5,
     capacity: 50,
     range: 322,
