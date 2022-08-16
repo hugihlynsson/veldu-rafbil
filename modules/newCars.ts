@@ -882,7 +882,7 @@ const newCars: Array<NewCar> = [
     model: 'EQC',
     subModel: '400 4MATIC',
     heroImageName: 'eqc',
-    price: 9990000,
+    price: 9590000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqc/',
     acceleration: 5.1,
@@ -1044,17 +1044,35 @@ const newCars: Array<NewCar> = [
     model: 'EQS SUV',
     subModel: '450 4MATIC',
     heroImageName: 'mercedes-eqs-suv',
-    price: 18500000,
+    price: 18790000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs/suv-x296/pad.html',
-    acceleration: 7.0,
+    acceleration: 5.8,
     capacity: 108,
-    range: 613,
+    range: 610,
     evDatabaseURL:
       'https://ev-database.org/car/1674/Mercedes-EQS-SUV-450-4MATIC',
     expectedDelivery: '2023',
     drive: 'AWD',
     power: 265,
+    timeToCharge10T080: 32,
+  },
+  {
+    make: 'Mercedes-Benz',
+    model: 'EQS SUV',
+    subModel: '580 4MATIC',
+    heroImageName: 'mercedes-eqs-suv',
+    price: 24690000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs/suv-x296/pad.html',
+    acceleration: 4.7,
+    capacity: 108,
+    range: 609,
+    evDatabaseURL:
+      'https://ev-database.org/car/1675/Mercedes-EQS-SUV-580-4MATIC',
+    expectedDelivery: '2023',
+    drive: 'AWD',
+    power: 400,
     timeToCharge10T080: 32,
   },
   {
