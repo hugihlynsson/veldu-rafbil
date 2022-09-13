@@ -2659,10 +2659,10 @@ uuid@^8.0.0, uuid@^8.3.2:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
-vercel@^28.2.4:
-  version "28.2.4"
-  resolved "https://registry.yarnpkg.com/vercel/-/vercel-28.2.4.tgz#3ee1247fa294914aa4b1cbc77a2e87859dce7bd5"
-  integrity sha512-LC9tcGVqDCJyopKqsgwdW2IUVFJvP1Fc0I/2A1wMmRXtEeHwNHctPP8VlBXpO+i8DaRdQYipsFcKqdDJHZrwBw==
+vercel@^28.2.5:
+  version "28.2.5"
+  resolved "https://registry.yarnpkg.com/vercel/-/vercel-28.2.5.tgz#54d03217e4fcf57b58dded686d248b652ab8ad6b"
+  integrity sha512-EFXHq/zYeBXNvsQ8FPtJ1Qw86qvQQvA7Rwb3/jljS3Ub55QQ8Tn8o5hqzee4V/Y3/aGJIU5n4hL37oooyIuZaw==
   dependencies:
     "@vercel/build-utils" "5.4.2"
     "@vercel/go" "2.2.5"
