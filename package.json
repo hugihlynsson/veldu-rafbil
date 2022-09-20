@@ -9,7 +9,7 @@
     "dotenv": "^16.0.2",
     "fathom-client": "^3.5.0",
     "firebase-admin": "^11.0.1",
-    "next": "^12.3.0",
+    "next": "^12.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "smoothscroll-polyfill": "^0.4.4"
