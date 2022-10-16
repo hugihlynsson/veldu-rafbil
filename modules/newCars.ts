@@ -1506,7 +1506,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'polestar-3-alt',
     price: 14000000,
     sellerURL: 'https://www.polestar.com/en-is/polestar-3/',
-    acceleration: 4.7 ,
+    acceleration: 4.7,
     capacity: 111,
     range: 560,
     evDatabaseURL:
@@ -1833,6 +1833,7 @@ const newCars: Array<NewCar> = [
     acceleration: 6.9,
     capacity: 60,
     range: 455,
+    evDatabaseURL: 'https://ev-database.org/car/1743/Tesla-Model-Y',
     drive: 'RWD',
     power: 239,
     timeToCharge10T080: 30,
