@@ -708,6 +708,41 @@ const usedCarModels: Array<UsedCarModel> = [
     capacity: 50,
     range: 330,
     evDatabaseURL: 'https://ev-database.org/car/1192/Opel-Corsa-e',
+  },{
+    id: 'polestar-2srsm',
+    make: 'Polestar',
+    model: '2',
+    price: 6840000,
+    sellerURL: 'https://www.polestar.com/en-is/polestar-2/',
+    acceleration: 7.4,
+    capacity: 69,
+    range: 440,
+    evDatabaseURL:
+      'https://ev-database.org/car/1654/Polestar-2-Standard-Range-Single-Motor',
+  },
+  {
+    id: 'polestar-2-lrsm',
+    make: 'Polestar',
+    model: '2',
+    price: 7340000,
+    sellerURL: 'https://www.polestar.com/en-is/polestar-2/',
+    acceleration: 7.4,
+    capacity: 78,
+    range: 542,
+    evDatabaseURL:
+      'https://ev-database.org/car/1487/Polestar-2-Long-Range-Single-Motor',
+  },
+  {
+    id: 'polestar-2-lrdm',
+    make: 'Polestar',
+    model: '2',
+    price: 7940000,
+    sellerURL: 'https://www.polestar.com/en-is/polestar-2/',
+    acceleration: 4.7,
+    capacity: 78,
+    range: 482,
+    evDatabaseURL:
+      'https://ev-database.org/car/1488/Polestar-2-Long-Range-Dual-Motor',
   },
 ]
 
