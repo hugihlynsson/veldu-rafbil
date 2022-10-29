@@ -34,7 +34,6 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
         src={`/images/${car.heroImageName}.jpg`}
         width={1920}
         height={1280}
-        layout="responsive"
         className="image"
       />
     </div>
@@ -221,8 +220,10 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
             align-self: center;
           }
 
-          .image {
+          .imageBox :global(.image) {
             border-radius: 2px;
+            width: 100%;
+            height: auto;
           }
 
           .content {

@@ -90,9 +90,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
           <h1>Veldu Rafbíl</h1>
 
           <nav className="headerLinks">
-            <Link href="/notadir" passHref>
-              <LinkPill>Notaðir ←</LinkPill>
-            </Link>
+            <LinkPill href="/notadir">Notaðir ←</LinkPill>
 
             <LinkPill href="#info" current onClick={handleNewPress}>
               {model.make} {model.model} ↓

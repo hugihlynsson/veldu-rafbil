@@ -1,30 +1,35 @@
 import React, { ReactNode, FunctionComponent } from 'react'
+import Link from 'next/link'
 
 interface Props {
   current?: boolean
   external?: boolean
   extra?: string
-  href?: string
+  href?: any
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
   onGray?: boolean
   children?: ReactNode | undefined
 }
 
-const LinkPill: FunctionComponent<Props> = React.forwardRef<
-  HTMLAnchorElement,
-  Props
->(({ children, current, external, extra, href, onClick, onGray }, ref) => (
-  <a
-    ref={ref}
-    className={current ? 'current' : onGray ? 'on-gray' : ''}
+const LinkPill: FunctionComponent<Props> = ({
+  children,
+  current,
+  external,
+  extra,
+  href,
+  onClick,
+  onGray,
+}) => (
+  <Link
+    className={'link-pill ' + (current ? 'current' : onGray ? 'on-gray' : '')}
     onClick={onClick}
     href={href}
     target={external ? '_blank' : undefined}
     rel={external ? 'noopener' : undefined}
   >
     {children} {extra && <span className="extra">{extra}</span>}
-    <style jsx>{`
-      a {
+    <style jsx global>{`
+      .link-pill {
         display: inline-block;
         align-self: flex-start;
         flex-shrink: 0;
@@ -40,21 +45,21 @@ const LinkPill: FunctionComponent<Props> = React.forwardRef<
         margin-right: 10px;
         transition: background-color 0.1s;
       }
-      a:hover {
+      .link-pill:hover {
         background-color: #ddd;
       }
-      .current,
-      .current:hover {
+      .link-pill.current,
+      .link-pill.current:hover {
         background-color: #48f;
         color: #fff;
       }
-      .on-gray {
+      .link-pill.on-gray {
         background-color: #e4e4e4;
       }
-      .on-gray:hover {
+      .link-pill.on-gray:hover {
         background-color: #d8d8d8;
       }
-      .extra {
+      .link-pill .extra {
         text-transform: uppercase;
         font-weight: 700;
         font-size: 10px;
@@ -67,16 +72,16 @@ const LinkPill: FunctionComponent<Props> = React.forwardRef<
         display: inline-block;
         transition: background-color 0.1s;
       }
-      a:hover .extra {
+      .link-pill.link-pill:hover .extra {
         background: rgba(255, 255, 255, 0.8);
       }
-      .current:hover .extra,
-      .current .extra {
+      .link-pill.current:hover .extra,
+      .link-pill.current .extra {
         color: #27f;
         background: rgba(255, 255, 255, 0.9);
       }
     `}</style>
-  </a>
-))
+  </Link>
+)
 
 export default LinkPill
