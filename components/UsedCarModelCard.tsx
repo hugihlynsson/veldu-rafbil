@@ -80,7 +80,7 @@ export interface Props {
   showValue?: boolean
 }
 
-const UsedCarModelCars: FunctionComponent<Props> = ({
+const UsedCarModelCard: FunctionComponent<Props> = ({
   count,
   images,
   lowestPrice,
@@ -88,100 +88,97 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
   years,
   showValue,
 }) => (
-  <article>
-    <Link href="/notadir/[id]" as={`/notadir/${encodeURIComponent(model.id)}`}>
-      <a>
-        <div className="images">
-          <div className="imagesContainer">
-            {images
-              .filter((_, n) => n < getImagesToShow(images.length))
-              .map((src) => (
-                <div
-                  key={src}
-                  className="imageGridItem"
-                  style={getImageSize(images.length)}
-                >
-                  <img
-                    src={selectCarImageSize(
-                      src,
-                      getImagesToShow(images.length) === 1 ? 'medium' : 'small',
-                    )}
-                    alt=""
-                  />
-                </div>
-              ))}
-            {getExtraCount(count, images.length) > 0 && (
-              <div className="imagesMore">
-                +{getExtraCount(count, images.length)}{' '}
-                {isSingular(getExtraCount(count, images.length))
-                  ? 'bíll'
-                  : 'bílar'}
-              </div>
-            )}
+  <Link
+    className="UsedCarModelCard"
+    href="/notadir/[id]"
+    as={`/notadir/${encodeURIComponent(model.id)}`}
+  >
+    <div className="images">
+      <div className="imagesContainer">
+        {images
+          .filter((_, n) => n < getImagesToShow(images.length))
+          .map((src) => (
+            <div
+              key={src}
+              className="imageGridItem"
+              style={getImageSize(images.length)}
+            >
+              <img
+                src={selectCarImageSize(
+                  src,
+                  getImagesToShow(images.length) === 1 ? 'medium' : 'small',
+                )}
+                alt=""
+              />
+            </div>
+          ))}
+        {getExtraCount(count, images.length) > 0 && (
+          <div className="imagesMore">
+            +{getExtraCount(count, images.length)}{' '}
+            {isSingular(getExtraCount(count, images.length)) ? 'bíll' : 'bílar'}
+          </div>
+        )}
+      </div>
+    </div>
+
+    <div className="content">
+      <h1 className="title">
+        {model.make} <span className="title--model">{model.model}</span>
+      </h1>
+
+      <p className="years">{getRange(years)}</p>
+
+      <div className="info">
+        <div className="info-item">
+          <div className="info-item-label">0-100 km/klst</div>
+          <div className="info-item-value">
+            {model.acceleration?.toFixed(1) ?? '— '}s
           </div>
         </div>
 
-        <div className="content">
-          <h1 className="title">
-            {model.make} <span className="title--model">{model.model}</span>
-          </h1>
+        <div className="info-item" style={{ flexShrink: 0 }}>
+          <div className="info-item-label">Rafhlaða</div>
+          <div className="info-item-value">{model.capacity ?? '—'} kWh</div>
+        </div>
 
-          <p className="years">{getRange(years)}</p>
-
-          <div className="info">
-            <div className="info-item">
-              <div className="info-item-label">0-100 km/klst</div>
-              <div className="info-item-value">
-                {model.acceleration?.toFixed(1) ?? '— '}s
-              </div>
-            </div>
-
-            <div className="info-item" style={{ flexShrink: 0 }}>
-              <div className="info-item-label">Rafhlaða</div>
-              <div className="info-item-value">{model.capacity ?? '—'} kWh</div>
-            </div>
-
-            <div className="info-item" title="Samkvæmt WLTP prófunum">
-              <div className="info-item-label">
-                Drægni{model.rangeNEDC && <strong>*</strong>}
-              </div>
-              <div className="info-item-value">
-                {model.range ??
-                  (model.rangeNEDC &&
-                    estimateWLTP(model.rangeNEDC).toFixed(0)) ??
-                  '—'}{' '}
-                km
-              </div>
-            </div>
+        <div className="info-item" title="Samkvæmt WLTP prófunum">
+          <div className="info-item-label">
+            Drægni{model.rangeNEDC && <strong>*</strong>}
           </div>
+          <div className="info-item-value">
+            {model.range ??
+              (model.rangeNEDC && estimateWLTP(model.rangeNEDC).toFixed(0)) ??
+              '—'}{' '}
+            km
+          </div>
+        </div>
+      </div>
 
-          <p>
-            <strong>
-              {count} {count === 1 ? 'bíll' : 'bílar'}
-            </strong>{' '}
-            til sölu
-            {lowestPrice && (
-              <strong> frá {addDecimalSeprators(lowestPrice)} kr.</strong>
+      <p>
+        <strong>
+          {count} {count === 1 ? 'bíll' : 'bílar'}
+        </strong>{' '}
+        til sölu
+        {lowestPrice && (
+          <strong> frá {addDecimalSeprators(lowestPrice)} kr.</strong>
+        )}{' '}
+        {showValue && lowestPrice && (
+          <span className="value">
+            {addDecimalSeprators(
+              Math.round(
+                lowestPrice /
+                  (model.range ??
+                    (model.rangeNEDC ? estimateWLTP(model.rangeNEDC) : 1)),
+              ),
             )}{' '}
-            {showValue && lowestPrice && (
-              <span className="value">
-                {addDecimalSeprators(
-                  Math.round(
-                    lowestPrice /
-                      (model.range ??
-                        (model.rangeNEDC ? estimateWLTP(model.rangeNEDC) : 1)),
-                  ),
-                )}{' '}
-                kr. á km
-              </span>
-            )}
-          </p>
-        </div>
-      </a>
-    </Link>
+            kr. á km
+          </span>
+        )}
+      </p>
+    </div>
 
     <style jsx>{`
-      a {
+      :global(.UsedCarModelCard) {
         display: block;
         color: inherit;
         text-decoration: none;
@@ -190,7 +187,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
         overflow: hidden;
         transition: all 0.2s;
       }
-      a:hover {
+      :global(.UsedCarModelCard):hover {
         box-shadow: 0 2px 48px rgba(0, 0, 0, 0.16);
         transform: translateY(-8px);
       }
@@ -307,7 +304,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
       }
 
       @media screen and (min-width: 480px) {
-        a {
+        :global(.UsedCarModelCard) {
           box-shadow: 0 2px 32px rgba(0, 0, 0, 0.08);
         }
         .content {
@@ -315,7 +312,7 @@ const UsedCarModelCars: FunctionComponent<Props> = ({
         }
       }
     `}</style>
-  </article>
+  </Link>
 )
 
-export default UsedCarModelCars
+export default UsedCarModelCard

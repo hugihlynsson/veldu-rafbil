@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import Head from 'next/head'
 import { NextPage } from 'next'
 import Router, { useRouter } from 'next/router'
-import Link from 'next/link'
 import smoothscroll from 'smoothscroll-polyfill'
 import { ParsedUrlQuery } from 'querystring'
 
@@ -284,9 +283,7 @@ const New: NextPage<Props> = ({
               Nýir ↓
             </LinkPill>
 
-            <Link href="/notadir" passHref>
-              <LinkPill>Notaðir →</LinkPill>
-            </Link>
+              <LinkPill href="/notadir">Notaðir →</LinkPill>
           </nav>
 
           <p className="description" id="nyjir" ref={descriptionRef}>

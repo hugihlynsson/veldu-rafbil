@@ -133,7 +133,12 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
   const descriptionRef = useRef<HTMLParagraphElement>(null)
 
   const handleNewPress = useCallback(
-    (event: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>) => {
+    (
+      event: React.MouseEvent<
+        HTMLAnchorElement | HTMLButtonElement,
+        MouseEvent
+      >,
+    ) => {
       event.preventDefault()
       descriptionRef.current?.scrollIntoView({ behavior: 'smooth' })
     },
@@ -156,9 +161,7 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
           <h1>Veldu Rafbíl</h1>
 
           <nav className="">
-            <Link href="/" passHref>
-              <LinkPill>Nýir ←</LinkPill>
-            </Link>
+            <LinkPill href="/">Nýir ←</LinkPill>
 
             <LinkPill href="#notadir" current onClick={handleNewPress}>
               Notaðir ↓
