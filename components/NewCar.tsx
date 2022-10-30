@@ -195,6 +195,11 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
           color: ${colors.stone};
         }
 
+        .imageBox :global(.image) {
+          width: 100%;
+          height: auto;
+        }
+
         @media screen and (min-width: 375px) {
           .content {
             padding: 18px 24px 24px;
@@ -222,8 +227,6 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
 
           .imageBox :global(.image) {
             border-radius: 2px;
-            width: 100%;
-            height: auto;
           }
 
           .content {
