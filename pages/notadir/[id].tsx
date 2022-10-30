@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { NextPage } from 'next'
-import Link from 'next/link'
 import Head from 'next/head'
 import Error from 'next/error'
 import smoothscroll from 'smoothscroll-polyfill'
