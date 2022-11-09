@@ -1011,12 +1011,11 @@ const newCars: Array<NewCar> = [
     acceleration: 7.0,
     capacity: 90.6,
     range: 590,
-    evDatabaseURL:
-      'https://ev-database.org/car/1760/Mercedes-EQE-SUV-350plus',
+    evDatabaseURL: 'https://ev-database.org/car/1760/Mercedes-EQE-SUV-350plus',
     drive: 'RWD',
     power: 215,
     timeToCharge10T080: 28,
-    expectedDelivery: "2023"
+    expectedDelivery: '2023',
   },
   {
     make: 'Mercedes-Benz',
@@ -1034,7 +1033,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 215,
     timeToCharge10T080: 28,
-    expectedDelivery: "2023"
+    expectedDelivery: '2023',
   },
   {
     make: 'Mercedes-Benz',
@@ -1052,7 +1051,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 300,
     timeToCharge10T080: 28,
-    expectedDelivery: "2023"
+    expectedDelivery: '2023',
   },
   {
     make: 'Mercedes-Benz',
@@ -1070,7 +1069,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 350,
     timeToCharge10T080: 28,
-    expectedDelivery: "2023"
+    expectedDelivery: '2023',
   },
   {
     make: 'Mercedes-Benz',
@@ -1088,7 +1087,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 460,
     timeToCharge10T080: 28,
-    expectedDelivery: "2023"
+    expectedDelivery: '2023',
   },
   {
     make: 'Mercedes-Benz',
@@ -2264,6 +2263,39 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 300,
     timeToCharge10T080: 33,
+  },
+  {
+    make: 'Volvo',
+    model: 'EX90',
+    subModel: 'Twin Motor',
+    heroImageName: 'volvo-ex90',
+    price: 15000000,
+    sellerURL: 'https://www.volvocars.com/intl/cars/ex90-electric/',
+    acceleration: 5.9,
+    capacity: 111,
+    range: 585,
+    evDatabaseURL: 'https://ev-database.org/car/1775/Volvo-EX90-Twin-Motor',
+    drive: 'AWD',
+    power: 300,
+    timeToCharge10T080: 32,
+    expectedDelivery: '2023',
+  },
+  {
+    make: 'Volvo',
+    model: 'EX90',
+    subModel: 'Twin Motor Performance',
+    heroImageName: 'volvo-ex90-alt',
+    price: 16000000,
+    sellerURL: 'https://www.volvocars.com/intl/cars/ex90-electric/',
+    acceleration: 4.9,
+    capacity: 111,
+    range: 580,
+    evDatabaseURL:
+      'https://ev-database.org/car/1776/Volvo-EX90-Twin-Motor-Performance',
+    drive: 'AWD',
+    power: 380,
+    timeToCharge10T080: 32,
+    expectedDelivery: '2023',
   },
 ]
 
