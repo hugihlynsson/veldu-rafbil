@@ -1002,6 +1002,96 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Mercedes-Benz',
+    model: 'EQE SUV',
+    subModel: '350+',
+    heroImageName: 'mercedes-eqe-suv',
+    price: 12000000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
+    acceleration: 7.0,
+    capacity: 90.6,
+    range: 590,
+    evDatabaseURL:
+      'https://ev-database.org/car/1760/Mercedes-EQE-SUV-350plus',
+    drive: 'RWD',
+    power: 215,
+    timeToCharge10T080: 28,
+    expectedDelivery: "2023"
+  },
+  {
+    make: 'Mercedes-Benz',
+    model: 'EQE SUV',
+    subModel: '350 4MATIC',
+    heroImageName: 'mercedes-eqe-suv-alt',
+    price: 14000000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
+    acceleration: 6.5,
+    capacity: 90.6,
+    range: 558,
+    evDatabaseURL:
+      'https://ev-database.org/car/1760/Mercedes-EQE-SUV-350plus',
+    drive: 'AWD',
+    power: 215,
+    timeToCharge10T080: 28,
+    expectedDelivery: "2023"
+  },
+  {
+    make: 'Mercedes-Benz',
+    model: 'EQE SUV',
+    subModel: '500 4MATIC',
+    heroImageName: 'mercedes-eqe-suv-alt2',
+    price: 17000000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
+    acceleration: 5.0,
+    capacity: 90.6,
+    range: 547,
+    evDatabaseURL:
+      'https://ev-database.org/car/1760/Mercedes-EQE-SUV-350plus',
+    drive: 'AWD',
+    power: 300,
+    timeToCharge10T080: 28,
+    expectedDelivery: "2023"
+  },
+  {
+    make: 'Mercedes-Benz',
+    model: 'EQE SUV',
+    subModel: 'AMG 43 4MATIC',
+    heroImageName: 'mercedes-eqe-suv-amg',
+    price: 19000000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
+    acceleration: 4.3,
+    capacity: 90.6,
+    range: 488,
+    evDatabaseURL:
+      'https://ev-database.org/car/1760/Mercedes-EQE-SUV-350plus',
+    drive: 'AWD',
+    power: 350,
+    timeToCharge10T080: 28,
+    expectedDelivery: "2023"
+  },
+  {
+    make: 'Mercedes-Benz',
+    model: 'EQE SUV',
+    subModel: 'AMG 53 4MATIC',
+    heroImageName: 'mercedes-eqe-suv-amg-alt',
+    price: 23000000,
+    sellerURL:
+      'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
+    acceleration: 3.5,
+    capacity: 90.6,
+    range: 470,
+    evDatabaseURL:
+      'https://ev-database.org/car/1760/Mercedes-EQE-SUV-350plus',
+    drive: 'AWD',
+    power: 460,
+    timeToCharge10T080: 28,
+    expectedDelivery: "2023"
+  },
+  {
+    make: 'Mercedes-Benz',
     model: 'EQS',
     subModel: '450+',
     heroImageName: 'mercedes-eqs',
