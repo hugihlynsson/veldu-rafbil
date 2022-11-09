@@ -1030,7 +1030,7 @@ const newCars: Array<NewCar> = [
     capacity: 90.6,
     range: 558,
     evDatabaseURL:
-      'https://ev-database.org/car/1760/Mercedes-EQE-SUV-350plus',
+      'https://ev-database.org/car/1761/Mercedes-EQE-SUV-350-4MATIC',
     drive: 'AWD',
     power: 215,
     timeToCharge10T080: 28,
@@ -1048,7 +1048,7 @@ const newCars: Array<NewCar> = [
     capacity: 90.6,
     range: 547,
     evDatabaseURL:
-      'https://ev-database.org/car/1760/Mercedes-EQE-SUV-350plus',
+      'https://ev-database.org/car/1762/Mercedes-EQE-SUV-500-4MATIC',
     drive: 'AWD',
     power: 300,
     timeToCharge10T080: 28,
@@ -1066,7 +1066,7 @@ const newCars: Array<NewCar> = [
     capacity: 90.6,
     range: 488,
     evDatabaseURL:
-      'https://ev-database.org/car/1760/Mercedes-EQE-SUV-350plus',
+      'https://ev-database.org/car/1763/Mercedes-EQE-SUV-AMG-43-4MATIC',
     drive: 'AWD',
     power: 350,
     timeToCharge10T080: 28,
@@ -1084,7 +1084,7 @@ const newCars: Array<NewCar> = [
     capacity: 90.6,
     range: 470,
     evDatabaseURL:
-      'https://ev-database.org/car/1760/Mercedes-EQE-SUV-350plus',
+      'https://ev-database.org/car/1764/Mercedes-EQE-SUV-AMG-53-4MATICplus',
     drive: 'AWD',
     power: 460,
     timeToCharge10T080: 28,
@@ -1832,7 +1832,7 @@ const newCars: Array<NewCar> = [
     acceleration: 8.5,
     capacity: 77,
     range: 536,
-    evDatabaseURL: 'https://ev-database.org/car/1280/Skoda-Enyaq-iV-80',
+    evDatabaseURL: 'https://ev-database.org/car/1629/Skoda-Enyaq-Coupe-iV-80',
     drive: 'RWD',
     power: 150,
     timeToCharge10T080: 33,
@@ -1847,7 +1847,7 @@ const newCars: Array<NewCar> = [
     acceleration: 6.9,
     capacity: 77,
     range: 496,
-    evDatabaseURL: 'https://ev-database.org/car/1281/Skoda-Enyaq-iV-80X',
+    evDatabaseURL: 'https://ev-database.org/car/1630/Skoda-Enyaq-Coupe-iV-80x',
     drive: 'AWD',
     power: 195,
     timeToCharge10T080: 34,
