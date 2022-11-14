@@ -569,7 +569,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Hongqi',
     model: 'E-HS9',
-    heroImageName: 'Hongqi-ehs9',
+    heroImageName: 'hongqi-ehs9',
     price: 10690000,
     sellerURL: 'https://www.hongqi.is/ehs9.html',
     acceleration: 6.5,
@@ -584,7 +584,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Hongqi',
     model: 'E-HS9',
-    heroImageName: 'Hongqi-ehs9-alt',
+    heroImageName: 'hongqi-ehs9-alt',
     price: 12290000,
     sellerURL: 'https://www.hongqi.is/ehs9.html',
     acceleration: 4.9,
