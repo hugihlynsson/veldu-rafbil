@@ -2202,7 +2202,7 @@ const newCars: Array<NewCar> = [
     make: 'Volkswagen',
     model: 'ID. Buzz',
     heroImageName: 'vw-id-buzz',
-    price: 9500000,
+    price: 8490000,
     sellerURL: 'https://www.volkswagen.is/is/bilar/id-buzz.html',
     acceleration: 10.2,
     capacity: 77,
