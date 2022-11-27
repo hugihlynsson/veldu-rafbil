@@ -308,11 +308,28 @@ const newCars: Array<NewCar> = [
   {
     make: 'BMW',
     model: 'i4',
+    subModel: 'eDrive 35',
+    heroImageName: 'bmw-i4-alt',
+    price: 8500000,
+    sellerURL:
+      'https://www.bmw.is/is/all-models/bmw-i/i4/2021/bmw-i4-highlights.html',
+    acceleration: 6.0,
+    capacity: 70.2,
+    range: 483,
+    evDatabaseURL: 'https://ev-database.org/car/1785/BMW-i4-eDrive35',
+    drive: 'RWD',
+    power: 210,
+    timeToCharge10T080: 31,
+    expectedDelivery: '2023'
+  },
+  {
+    make: 'BMW',
+    model: 'i4',
     subModel: 'eDrive 40',
     heroImageName: 'bmw-i4',
     price: 8990000,
     sellerURL:
-      'https://www.bmw.is/is/all-models/bmw-i/i4/2021/bmw-i4-forskooun.html',
+      'https://www.bmw.is/is/all-models/bmw-i/i4/2021/bmw-i4-highlights.html',
     acceleration: 5.7,
     capacity: 83.9,
     range: 590,
