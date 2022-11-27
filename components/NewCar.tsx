@@ -77,7 +77,7 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
             className="info-item-extra"
             title={`Afl (${Math.round(car.power * 1.34102) + ' hö'})`}
           >
-            {car.power} kw
+            {car.power} kW
           </div>
         </div>
 
