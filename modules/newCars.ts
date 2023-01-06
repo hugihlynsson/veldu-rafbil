@@ -1968,7 +1968,6 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1567/Subaru-Solterra-AWD',
     drive: 'AWD',
     power: 160,
-    expectedDelivery: 'Lok 2022',
     timeToCharge10T080: 32,
   },
   {
