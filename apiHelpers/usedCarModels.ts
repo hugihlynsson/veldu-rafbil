@@ -708,7 +708,8 @@ const usedCarModels: Array<UsedCarModel> = [
     capacity: 50,
     range: 330,
     evDatabaseURL: 'https://ev-database.org/car/1192/Opel-Corsa-e',
-  },{
+  },
+  {
     id: 'polestar-2srsm',
     make: 'Polestar',
     model: '2',
@@ -743,6 +744,18 @@ const usedCarModels: Array<UsedCarModel> = [
     range: 482,
     evDatabaseURL:
       'https://ev-database.org/car/1488/Polestar-2-Long-Range-Dual-Motor',
+  },
+  {
+    id: 'volvo-xc40-recharge-twin',
+    make: 'Volvo',
+    model: 'XC40',
+    price: 8397200,
+    sellerURL: 'https://www.volvocars.com/is/v/cars/xc40-electric',
+    acceleration: 4.9,
+    capacity: 78,
+    range: 437,
+    evDatabaseURL:
+      'https://ev-database.org/car/1593/Volvo-XC40-Recharge-Twin-Pure-Electric',
   },
 ]
 
