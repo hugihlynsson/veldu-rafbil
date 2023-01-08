@@ -20,6 +20,32 @@ const usedCarModels: Array<UsedCarModel> = [
     evDatabaseURL: 'https://ev-database.org/car/1092/Audi-e-tron',
   },
   {
+    make: 'Audi',
+    model: 'e-tron Sportback 50',
+    id: 'e-tron-50-sportback',
+    price: 11590000,
+    sellerURL:
+      'http://www.audi.is/is/web/is/models/tron/audi-e-tron-sportback-2021.html',
+    acceleration: 6.8,
+    capacity: 71,
+    range: 350,
+    evDatabaseURL:
+      'https://ev-database.org/car/1661/Audi-e-tron-Sportback-50-quattro',
+  },
+  {
+    make: 'Audi',
+    model: 'e-tron Sportback 55',
+    id: 'e-tron-55-sportback',
+    price: 11590000,
+    sellerURL:
+      'http://www.audi.is/is/web/is/models/tron/audi-e-tron-sportback-2021.html',
+    acceleration: 5.7,
+    capacity: 95,
+    range: 446,
+    evDatabaseURL:
+      'https://ev-database.org/car/1107/Audi-e-tron-Sportback-55-quattro',
+  },
+  {
     id: 'mitsubishi-imiev',
     make: 'Mitsubishi',
     model: 'i-MiEV',
