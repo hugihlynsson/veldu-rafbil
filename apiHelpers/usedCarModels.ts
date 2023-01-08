@@ -23,7 +23,6 @@ const usedCarModels: Array<UsedCarModel> = [
     make: 'Audi',
     model: 'e-tron Sportback 50',
     id: 'e-tron-50-sportback',
-    price: 11590000,
     sellerURL:
       'http://www.audi.is/is/web/is/models/tron/audi-e-tron-sportback-2021.html',
     acceleration: 6.8,
@@ -289,6 +288,17 @@ const usedCarModels: Array<UsedCarModel> = [
     capacity: 42.8,
     range: 310,
     evDatabaseURL: 'https://ev-database.org/car/1145/BMW-i3-120-Ah',
+  },
+  {
+    make: 'BMW',
+    model: 'iX xDrive 40',
+    id: 'bmw-ix-40',
+    price: 13990000,
+    sellerURL: 'https://www.bmw.is/is/all-models/bmw-i/bmw-ix/2021/bmw-ix.html',
+    acceleration: 6.1,
+    capacity: 75,
+    range: 425,
+    evDatabaseURL: 'https://ev-database.org/car/1472/BMW-iX-xDrive-40',
   },
   {
     id: 'hyundai-ioniq',
