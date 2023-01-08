@@ -561,6 +561,30 @@ const usedCarModels: Array<UsedCarModel> = [
     rangeNEDC: 225,
   },
   {
+    make: 'Ford',
+    model: 'Mustang Mach-E SR AWD',
+    id: 'ford-mach-e-sr-awd',
+    price: 9590000,
+    sellerURL: 'https://www.ford.is/is/nyir-bilar/Mustang-Mach-E',
+    acceleration: 5.6,
+    capacity: 75,
+    range: 400,
+    evDatabaseURL:
+      'https://ev-database.org/car/1244/Ford-Mustang-Mach-E-SR-AWD',
+  },
+  {
+    make: 'Ford',
+    model: 'Mustang Mach-E LR AWD',
+    id: 'ford-mach-e-lr-awd',
+    price: 10590000,
+    sellerURL: 'https://www.ford.is/is/nyir-bilar/Mustang-Mach-E',
+    acceleration: 5.1,
+    capacity: 98,
+    range: 550,
+    evDatabaseURL:
+      'https://ev-database.org/car/1245/Ford-Mustang-Mach-E-ER-AWD',
+  },
+  {
     id: 'jaguar-i-pace',
     make: 'Jaguar',
     model: 'I-PACE',
