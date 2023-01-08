@@ -496,6 +496,18 @@ const usedCarModels: Array<UsedCarModel> = [
     evDatabaseURL: 'https://ev-database.org/car/1183/Tesla-Model-Y-Performance',
   },
   {
+    make: 'Fiat',
+    model: '500e',
+    id: 'fiat-500e',
+    price: 5650000,
+    sellerURL: 'https://www.fiat.is/model/500e-la-prima/',
+    acceleration: 9.0,
+    capacity: 42,
+    range: 320,
+    evDatabaseURL:
+      'https://ev-database.org/car/1285/Fiat-500e-Hatchback-42-kWh',
+  },
+  {
     id: 'ford-focus-electric-23',
     make: 'Ford',
     model: 'Focus Electric',
