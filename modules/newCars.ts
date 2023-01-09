@@ -1924,7 +1924,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 200,
     timeToCharge10T080: 29,
-    expectedDelivery: '2023',
+    expectedDelivery: 'Seinni part 2023',
   },
   {
     make: 'Subaru',
