@@ -901,7 +901,7 @@ const newCars: Array<NewCar> = [
     model: 'EQA SUV',
     subModel: '250',
     heroImageName: 'mercedes-eqa',
-    price: 7990000,
+    price: 8390000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqa/',
     acceleration: 8.9,
@@ -917,7 +917,7 @@ const newCars: Array<NewCar> = [
     model: 'EQA SUV',
     subModel: '300 4MATIC',
     heroImageName: 'mercedes-eqa-alt',
-    price: 8490000,
+    price: 8890000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqa/',
     acceleration: 6.9,
@@ -933,7 +933,7 @@ const newCars: Array<NewCar> = [
     model: 'EQA SUV',
     subModel: '350 4MATIC',
     heroImageName: 'mercedes-eqa-alt2',
-    price: 9190000,
+    price: 9590000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqa/',
     acceleration: 5.8,
@@ -949,7 +949,7 @@ const newCars: Array<NewCar> = [
     model: 'EQB SUV',
     subModel: '250',
     heroImageName: 'mercedes-eqb',
-    price: 8490000,
+    price: 8890000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqb/',
     acceleration: 9.2,
@@ -965,7 +965,7 @@ const newCars: Array<NewCar> = [
     model: 'EQB SUV',
     subModel: '300 4MATIC',
     heroImageName: 'mercedes-eqb-alt',
-    price: 8990000,
+    price: 9390000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqb/',
     acceleration: 8.0,
@@ -981,7 +981,7 @@ const newCars: Array<NewCar> = [
     model: 'EQB SUV',
     subModel: '350 4MATIC',
     heroImageName: 'mercedes-eqb',
-    price: 9690000,
+    price: 10090000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqb/',
     acceleration: 6.2,
@@ -1013,7 +1013,7 @@ const newCars: Array<NewCar> = [
     model: 'EQE',
     subModel: '300',
     heroImageName: 'mercedes-eqe',
-    price: 10890000,
+    price: 11290000,
     sellerURL:
       'https://mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqe',
     acceleration: 7.2,
@@ -1029,7 +1029,7 @@ const newCars: Array<NewCar> = [
     model: 'EQE',
     subModel: '350 4MATIC',
     heroImageName: 'mercedes-eqe-alt',
-    price: 11990000,
+    price: 12390000,
     sellerURL:
       'https://mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqe',
     acceleration: 6.3,
@@ -1045,7 +1045,7 @@ const newCars: Array<NewCar> = [
     model: 'EQE',
     subModel: 'AMG 43 4MATIC',
     heroImageName: 'mercedes-eqe-amg',
-    price: 17990000,
+    price: 18590000,
     sellerURL:
       'https://mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqe',
     acceleration: 4.2,
@@ -1062,7 +1062,7 @@ const newCars: Array<NewCar> = [
     model: 'EQE',
     subModel: 'AMG 53 4MATIC+',
     heroImageName: 'mercedes-eqe-alt',
-    price: 20350000,
+    price: 20950000,
     sellerURL:
       'https://mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqe',
     acceleration: 3.3,
@@ -1079,7 +1079,7 @@ const newCars: Array<NewCar> = [
     model: 'EQE SUV',
     subModel: '350+',
     heroImageName: 'mercedes-eqe-suv',
-    price: 12000000,
+    price: 13000000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
     acceleration: 7.0,
@@ -1096,7 +1096,7 @@ const newCars: Array<NewCar> = [
     model: 'EQE SUV',
     subModel: '350 4MATIC',
     heroImageName: 'mercedes-eqe-suv-alt',
-    price: 14000000,
+    price: 15000000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
     acceleration: 6.5,
@@ -1114,7 +1114,7 @@ const newCars: Array<NewCar> = [
     model: 'EQE SUV',
     subModel: '500 4MATIC',
     heroImageName: 'mercedes-eqe-suv-alt2',
-    price: 17000000,
+    price: 18000000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
     acceleration: 5.0,
@@ -1132,7 +1132,7 @@ const newCars: Array<NewCar> = [
     model: 'EQE SUV',
     subModel: 'AMG 43 4MATIC',
     heroImageName: 'mercedes-eqe-suv-amg',
-    price: 19000000,
+    price: 20000000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
     acceleration: 4.3,
@@ -1150,7 +1150,7 @@ const newCars: Array<NewCar> = [
     model: 'EQE SUV',
     subModel: 'AMG 53 4MATIC',
     heroImageName: 'mercedes-eqe-suv-amg-alt',
-    price: 23000000,
+    price: 24000000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
     acceleration: 3.5,
@@ -1233,7 +1233,7 @@ const newCars: Array<NewCar> = [
     model: 'EQS SUV',
     subModel: '450 4MATIC',
     heroImageName: 'mercedes-eqs-suv',
-    price: 19690000,
+    price: 20590000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs/suv-x296/pad.html',
     acceleration: 5.8,
@@ -1251,7 +1251,7 @@ const newCars: Array<NewCar> = [
     model: 'EQS SUV',
     subModel: '580 4MATIC',
     heroImageName: 'mercedes-eqs-suv',
-    price: 25590000,
+    price: 26490000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs/suv-x296/pad.html',
     acceleration: 4.7,
@@ -1269,7 +1269,7 @@ const newCars: Array<NewCar> = [
     model: 'EQV',
     subModel: '300',
     heroImageName: 'eqv',
-    price: 11990000,
+    price: 12990000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/v-class/v-class-447/eqv/labeling.module.html',
     acceleration: 12.1,
@@ -1285,7 +1285,7 @@ const newCars: Array<NewCar> = [
     model: 'eVito',
     subModel: 'Tourer',
     heroImageName: 'mercedes-evito-tourer',
-    price: 9990000,
+    price: 10990000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/brochures-pricelists/teaser/_jcr_content/par/productinfotextimage/interactions.attachments.16.eVito_verdlisti.pdf',
     acceleration: 12.1,
@@ -1297,7 +1297,7 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'MG',
-    model: ' Marvel R',
+    model: 'Marvel R',
     heroImageName: 'mg-marvel-r',
     price: 6499000,
     sellerURL: 'https://mgmotor.eu/is-IS/model/marvel-r',
@@ -1311,7 +1311,7 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'MG',
-    model: ' Marvel R',
+    model: 'Marvel R',
     subModel: 'Performance',
     heroImageName: 'mg-marvel-r-alt',
     price: 7199000,
