@@ -1901,7 +1901,7 @@ const newCars: Array<NewCar> = [
     model: 'Enyaq',
     subModel: 'Coupé RS',
     heroImageName: 'skoda-enyaq-coupe-rs',
-    price: 8190000,
+    price: 9290000,
     sellerURL: 'https://www.skoda.is/models/enyaq/enyaq',
     acceleration: 6.5,
     capacity: 77,
