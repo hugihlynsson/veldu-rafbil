@@ -732,7 +732,7 @@ const newCars: Array<NewCar> = [
     acceleration: 4.8,
     capacity: 90,
     range: 470,
-    evDatabaseURL: 'https://ev-database.org/car/1287/Jaguar-I-Pace-EV400',
+    evDatabaseURL: 'https://ev-database.org/car/1812/Jaguar-I-Pace-EV400',
     drive: 'AWD',
     power: 294,
     timeToCharge10T080: 44,
