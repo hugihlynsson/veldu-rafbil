@@ -1693,7 +1693,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 200,
     timeToCharge10T080: 26,
-    expectedDelivery: "Seinni part 2023"
+    expectedDelivery: 'Seinni part 2023',
   },
   {
     make: 'Polestar',
@@ -1710,7 +1710,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 220,
     timeToCharge10T080: 27,
-    expectedDelivery: "Seinni part 2023"
+    expectedDelivery: 'Seinni part 2023',
   },
   {
     make: 'Polestar',
@@ -1727,7 +1727,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 310,
     timeToCharge10T080: 27,
-    expectedDelivery: "Seinni part 2023"
+    expectedDelivery: 'Seinni part 2023',
   },
   {
     make: 'Polestar',
@@ -1744,7 +1744,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 350,
     timeToCharge10T080: 27,
-    expectedDelivery: "Seinni part 2023"
+    expectedDelivery: 'Seinni part 2023',
   },
   {
     make: 'Polestar',
@@ -1925,7 +1925,7 @@ const newCars: Array<NewCar> = [
     model: 'Enyaq',
     subModel: 'iV 60',
     heroImageName: 'skoda-enyaq',
-    price: 6990000,
+    price: 7290000,
     sellerURL: 'https://www.skoda.is/models/enyaq/enyaq',
     acceleration: 8.7,
     capacity: 58,
@@ -1940,7 +1940,7 @@ const newCars: Array<NewCar> = [
     model: 'Enyaq',
     subModel: 'iV 80',
     heroImageName: 'skoda-enyaq-alt',
-    price: 7990000,
+    price: 8090000,
     sellerURL: 'https://www.skoda.is/models/enyaq/enyaq',
     acceleration: 8.5,
     capacity: 77,
@@ -1953,9 +1953,24 @@ const newCars: Array<NewCar> = [
   {
     make: 'Skoda',
     model: 'Enyaq',
+    subModel: 'iV 80 Coupé',
+    heroImageName: 'skoda-enyaq-coupe',
+    price: 8690000,
+    sellerURL: 'https://www.skoda.is/models/enyaq/enyaq',
+    acceleration: 8.5,
+    capacity: 77,
+    range: 536,
+    evDatabaseURL: 'https://ev-database.org/car/1629/Skoda-Enyaq-Coupe-iV-80',
+    drive: 'RWD',
+    power: 150,
+    timeToCharge10T080: 33,
+  },
+  {
+    make: 'Skoda',
+    model: 'Enyaq',
     subModel: 'iV 80X',
     heroImageName: 'skoda-enyaq-alt3',
-    price: 8290000,
+    price: 8390000,
     sellerURL: 'https://www.skoda.is/models/enyaq/enyaq',
     acceleration: 6.9,
     capacity: 77,
@@ -1970,7 +1985,7 @@ const newCars: Array<NewCar> = [
     model: 'Enyaq',
     subModel: 'iV 80X Coupé',
     heroImageName: 'skoda-enyaq-coupe-alt',
-    price: 8690000,
+    price: 9090000,
     sellerURL: 'https://www.skoda.is/models/enyaq/enyaq',
     acceleration: 6.9,
     capacity: 77,
@@ -1985,7 +2000,7 @@ const newCars: Array<NewCar> = [
     model: 'Enyaq',
     subModel: 'Coupé RS',
     heroImageName: 'skoda-enyaq-coupe-rs',
-    price: 9290000,
+    price: 9590000,
     sellerURL: 'https://www.skoda.is/models/enyaq/enyaq',
     acceleration: 6.5,
     capacity: 77,
