@@ -68,6 +68,12 @@ export default async (_: NextApiRequest, res: NextApiResponse) => {
   const filteredCars = filterUsedCars(cars)
   const processedCars = transferKnownData(lastSnapshot, filteredCars)
 
+  if (processedCars.length === 0) {
+    console.error('Failed to store scrape, no cars found')
+    res.status(500).json({ error: 'Failed to fetch cars, no cars found' })
+    return
+  }
+
   console.log(
     'Storing scrape',
     new Date(),
