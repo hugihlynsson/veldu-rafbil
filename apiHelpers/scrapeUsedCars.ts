@@ -14,27 +14,60 @@ export default async (): Promise<Array<UsedCar>> => {
   const parsedPage = cheerio.load(await fetchRes.text())
   const parsedPages = [parsedPage]
 
-  const getNextPage = async (nextPageLink: string): Promise<void> => {
-    const nextRes = await fetch(nextPageLink)
+  let lastPageFound = false
 
-    const parsedNextHtml = cheerio.load(await nextRes.text())
-    parsedPages.push(parsedNextHtml)
+  const getNextPageLink = (parsedPage: cheerio.Root) =>
+    parsedPage('.pagingCell .fa-angle-right').parent().attr('href')
 
-    const nextestPageLink = parsedNextHtml('.pagingCell .fa-angle-right')
-      .parent()
-      .attr('href')
+  const setPage = (pageLink: string, page: number) =>
+    // We're expecting a string that looks like this:
+    // "SearchResults.aspx?page=4454&id=ae3be579-e967-4fe2-acee-a3ebce261a7c"
+    pageLink.replace(/page=\d+/, `page=${page}`)
 
-    if (nextestPageLink) {
-      return getNextPage(`https://bilasolur.is/${nextestPageLink}`)
+  const getPage = async (pageLink: string): Promise<void> => {
+    const response = await fetch(pageLink)
+    const parsedPage = cheerio.load(await response.text())
+
+    const nextPageLink = getNextPageLink(parsedPage)
+
+    if (lastPageFound && !nextPageLink) {
+      // On this server, any page that is beyond the last page will include the same content
+      // as the last one. That is, if page n is the last page, then page n+1 will have the exact same content, as oposite of being just empty or a 404.
+      // So if we've already found a "last page" and this is also a "last page" we don't
+      // want to include duplicate the content
+      return
+    }
+
+    // If we've found the last page, make sure that we stop the chain
+    if (!nextPageLink) {
+      lastPageFound = true
+    }
+
+    // Finally add the content to the list of collected pages
+    parsedPages.push(parsedPage)
+  }
+
+  const batchSize = 5
+  const getPageBatch = async (baseLink: string, firstPageIndex: number) => {
+    // Create an array of length batchSize, starting at firstPageIndex
+    // Map each index, fetching the correct page for each one
+    console.log('Fetching batch from:', firstPageIndex)
+    await Promise.all(
+      Array.from({ length: batchSize }, (_x, i) =>
+        getPage(setPage(baseLink, i + firstPageIndex)),
+      ),
+    )
+
+    console.log('Done fetching batches! Last page found:', lastPageFound)
+    if (!lastPageFound) {
+      await getPageBatch(baseLink, firstPageIndex + batchSize)
     }
   }
 
-  const nextPageLink = parsedPage('.pagingCell .fa-angle-right')
-    .parent()
-    .attr('href')
+  const nextPageLink = getNextPageLink(parsedPage)
 
   if (nextPageLink) {
-    await getNextPage(`https://bilasolur.is/${nextPageLink}`)
+    await getPageBatch(`https://bilasolur.is/${nextPageLink}`, 2)
   }
 
   parsedPages.map((page) => {
