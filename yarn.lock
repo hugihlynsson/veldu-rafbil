@@ -1587,10 +1587,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
-"@remix-run/dev@1.12.0":
-  version "1.12.0"
-  resolved "https://registry.yarnpkg.com/@remix-run/dev/-/dev-1.12.0.tgz#b2e5791d5a526849c74c5e15ddf1eb8737a70de7"
-  integrity sha512-lBiA2FlDi+DjpOAE/vn93zFTSxudKag/FGpmbV6O+LQItDCpFARfbBMhTck/uKcc95nyhRd1GGhQ4ZDgQnyjaQ==
+"@remix-run/dev@1.13.0":
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/@remix-run/dev/-/dev-1.13.0.tgz#6fa065c4ebadfdffe077b0229740bcedf71255c4"
+  integrity sha512-hPqUjM9RRcz3inBOWqP3GKhggVz0a0ikWaRZpdKrhpQNCNiF6Hunbx876mJERj2YrmIzJ05eoeQmmdF6xcr4qg==
   dependencies:
     "@babel/core" "^7.18.6"
     "@babel/generator" "^7.18.6"
@@ -1603,7 +1603,7 @@
     "@babel/types" "^7.20.2"
     "@esbuild-plugins/node-modules-polyfill" "^0.1.4"
     "@npmcli/package-json" "^2.0.0"
-    "@remix-run/server-runtime" "1.12.0"
+    "@remix-run/server-runtime" "1.13.0"
     "@vanilla-extract/integration" "^6.0.2"
     arg "^5.0.1"
     cacache "^15.0.5"
@@ -1629,6 +1629,7 @@
     ora "^5.4.1"
     postcss "^8.4.19"
     postcss-discard-duplicates "^5.1.0"
+    postcss-load-config "^4.0.1"
     postcss-modules "^6.0.0"
     prettier "2.7.1"
     pretty-ms "^7.0.1"
@@ -1643,17 +1644,17 @@
     ws "^7.4.5"
     xdm "^2.0.0"
 
-"@remix-run/router@1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.3.1.tgz#3bb0b6ddc0a276e8dc1138d08f63035e4e23e8bf"
-  integrity sha512-+eun1Wtf72RNRSqgU7qM2AMX/oHp+dnx7BHk1qhK5ZHzdHTUU4LA1mGG1vT+jMc8sbhG3orvsfOmryjzx2PzQw==
+"@remix-run/router@1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.3.2.tgz#58cd2bd25df2acc16c628e1b6f6150ea6c7455bc"
+  integrity sha512-t54ONhl/h75X94SWsHGQ4G/ZrCEguKSRQr7DrjTciJXW0YU1QhlwYeycvK5JgkzlxmvrK7wq1NB/PLtHxoiDcA==
 
-"@remix-run/server-runtime@1.12.0":
-  version "1.12.0"
-  resolved "https://registry.yarnpkg.com/@remix-run/server-runtime/-/server-runtime-1.12.0.tgz#a2072c2e88b948b2a657993574cad01d42cf8cd4"
-  integrity sha512-7I0165Ns/ffPfCEfuiqD58lMderTn2s/sew1xJ34ONa21mG/7+5T7diHIgxKST8rS3816JPmlwSqUaHgwbmO6Q==
+"@remix-run/server-runtime@1.13.0":
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/@remix-run/server-runtime/-/server-runtime-1.13.0.tgz#7e04955b401c3f9f114ebaf4e14adf48c0fd822f"
+  integrity sha512-gjIW3XCeIlOt3rrOZMD6HixQydRgs1SwYjP99ZAVruG2+gNq/tL2OusMFYTLvtWrybt215tPROyF/6iTLsaO3g==
   dependencies:
-    "@remix-run/router" "1.3.1"
+    "@remix-run/router" "1.3.2"
     "@types/cookie" "^0.4.0"
     "@types/react" "^18.0.15"
     "@web3-storage/multipart-parser" "^1.0.0"
@@ -2117,12 +2118,12 @@
     "@vercel/routing-utils" "2.1.9"
     semver "6.1.1"
 
-"@vercel/remix@1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@vercel/remix/-/remix-1.4.0.tgz#aa7208fa95a0e6d4909187e94cac94c2e38f9737"
-  integrity sha512-XGbLIDsI8M34EaiRa3Bfwg5FcmjIeGBUkf0KGM7m5WnRfdukV3zUy8sAdKkCMejPaL6ga5xjMNuW8u15elW6ZQ==
+"@vercel/remix@1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@vercel/remix/-/remix-1.4.1.tgz#6da867769d3620c326dfe4f27650de35a75b598b"
+  integrity sha512-Tmq8zDZIW3feYMzVcMVTDF1hKiHdZXXvwQpNXy5oPJOK6j1mNXcr51z0LZMPIcxLUns8ZC1h18xvDl0x04j63A==
   dependencies:
-    "@remix-run/dev" "1.12.0"
+    "@remix-run/dev" "1.13.0"
     "@vercel/nft" "0.22.5"
     "@vercel/static-config" "2.0.13"
     path-to-regexp "6.2.1"
@@ -4595,6 +4596,11 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+lilconfig@^2.0.5:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-2.0.6.tgz#32a384558bd58af3d4c6e077dd1ad1d397bc69d4"
+  integrity sha512-9JROoBW7pobfsx+Sq2JsASvCo6Pfo6WWoUW79HuB1BCoBXD4PLWJPqDF6fNj67pqBYTbAHkE57M1kS/+L1neOg==
+
 limiter@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/limiter/-/limiter-1.1.5.tgz#8f92a25b3b16c6131293a0cc834b4a838a2aa7c2"
@@ -5747,6 +5753,14 @@ postcss-discard-duplicates@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/postcss-discard-duplicates/-/postcss-discard-duplicates-5.1.0.tgz#9eb4fe8456706a4eebd6d3b7b777d07bad03e848"
   integrity sha512-zmX3IoSI2aoenxHV6C7plngHWWhUOV3sP1T8y2ifzxzbtnuhk1EdPwm0S1bIUNaJ2eNbWeGLEwzw8huPD67aQw==
+
+postcss-load-config@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/postcss-load-config/-/postcss-load-config-4.0.1.tgz#152383f481c2758274404e4962743191d73875bd"
+  integrity sha512-vEJIc8RdiBRu3oRAI0ymerOn+7rPuMvRXslTvZUKZonDHFIczxztIyJ1urxM1x9JXEikvpWWTUUqal5j/8QgvA==
+  dependencies:
+    lilconfig "^2.0.5"
+    yaml "^2.1.1"
 
 postcss-modules-extract-imports@^3.0.0:
   version "3.0.0"
@@ -7005,10 +7019,10 @@ vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
 
-vercel@^28.16.5:
-  version "28.16.5"
-  resolved "https://registry.yarnpkg.com/vercel/-/vercel-28.16.5.tgz#a87e2cb3bdb3037c761e34c91f2d04440013d821"
-  integrity sha512-jtdHJ0aVoMLN0X5CPihZOMibz2wEzBa76gSN/qrR2y4LPrDgsS4IMHKN9tieF4i2UIDF4J8Eh8N7RX1H/TLJCg==
+vercel@^28.16.6:
+  version "28.16.6"
+  resolved "https://registry.yarnpkg.com/vercel/-/vercel-28.16.6.tgz#f1dce2d533990c9c71b36015cb1533fd3cadf35d"
+  integrity sha512-8tED+h6kikojngZlDZK7YbqzZVjK45p/HmmAtkjPcGL62pQVJxd0UtFrve8S3YFYy2R/bjPq/J3fQpaEa3x2rw==
   dependencies:
     "@vercel/build-utils" "6.3.1"
     "@vercel/go" "2.3.8"
@@ -7017,7 +7031,7 @@ vercel@^28.16.5:
     "@vercel/node" "2.9.7"
     "@vercel/python" "3.1.50"
     "@vercel/redwood" "1.1.6"
-    "@vercel/remix" "1.4.0"
+    "@vercel/remix" "1.4.1"
     "@vercel/ruby" "1.3.67"
     "@vercel/static-build" "1.3.11"
 
@@ -7195,6 +7209,11 @@ yallist@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
+
+yaml@^2.1.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.2.1.tgz#3014bf0482dcd15147aa8e56109ce8632cd60ce4"
+  integrity sha512-e0WHiYql7+9wr4cWMx3TVQrNwejKaEe7/rHNmQmqRjazfOP5W8PB6Jpebb5o6fIapbz9o9+2ipcaTM2ZwDI6lw==
 
 yargs-parser@^20.2.2:
   version "20.2.9"
