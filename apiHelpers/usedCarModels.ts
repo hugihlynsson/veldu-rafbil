@@ -991,6 +991,28 @@ const usedCarModels: Array<UsedCarModel> = [
     range: 322,
     evDatabaseURL: 'https://ev-database.org/car/1278/Opel-Mokka-e',
   },
+  {
+    id: 'mg-marvel-r',
+    make: 'MG',
+    model: 'Marvel R',
+    price: 7299000,
+    sellerURL: 'https://mgmotor.eu/is-IS/model/marvel-r',
+    acceleration: 7.9,
+    capacity: 70,
+    range: 402,
+    evDatabaseURL: 'https://ev-database.org/car/1524/MG-Marvel-R',
+  },
+  {
+    id: 'mg-marvel-r-performance',
+    make: 'MG',
+    model: 'Marvel R Performance',
+    price: 7999000,
+    sellerURL: 'https://mgmotor.eu/is-IS/model/marvel-r',
+    acceleration: 4.9,
+    capacity: 70,
+    range: 370,
+    evDatabaseURL: 'https://ev-database.org/car/1475/MG-Marvel-R-Performance',
+  },
 ]
 
 export default usedCarModels
