@@ -979,6 +979,18 @@ const usedCarModels: Array<UsedCarModel> = [
     range: 350,
     evDatabaseURL: 'https://ev-database.org/car/1286/Citroen-e-C4',
   },
+  {
+    id: 'opel-mokka-e',
+    make: 'Opel',
+    model: 'Mokka-e',
+    price: 5420000,
+    sellerURL:
+      'https://www.opelisland.is/cars/mokka-models/mokka-e/Yfirsyn.html',
+    acceleration: 8.5,
+    capacity: 50,
+    range: 322,
+    evDatabaseURL: 'https://ev-database.org/car/1278/Opel-Mokka-e',
+  },
 ]
 
 export default usedCarModels
