@@ -968,6 +968,17 @@ const usedCarModels: Array<UsedCarModel> = [
     evDatabaseURL:
       'https://ev-database.org/car/1593/Volvo-XC40-Recharge-Twin-Pure-Electric',
   },
+  {
+    id: 'citroen-ec4',
+    make: 'Citroën',
+    model: 'ë-C4',
+    price: 5590000,
+    sellerURL: 'https://www.citroen.is/bill/citroen-e-c4-rafbill/',
+    acceleration: 9.7,
+    capacity: 50,
+    range: 350,
+    evDatabaseURL: 'https://ev-database.org/car/1286/Citroen-e-C4',
+  },
 ]
 
 export default usedCarModels
