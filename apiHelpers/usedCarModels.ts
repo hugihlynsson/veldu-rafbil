@@ -1013,6 +1013,42 @@ const usedCarModels: Array<UsedCarModel> = [
     range: 370,
     evDatabaseURL: 'https://ev-database.org/car/1475/MG-Marvel-R-Performance',
   },
+  {
+    make: 'Hyundai',
+    model: 'IONIQ 5 Standard Range 2WD',
+    id: 'hyundai-ioniq-5-sr-2wd',
+    price: 7490000,
+    sellerURL: 'https://www.hyundai.is/nyir/nyr-ioniq-5/yfirlit',
+    acceleration: 8.5,
+    capacity: 58,
+    range: 384,
+    evDatabaseURL:
+      'https://ev-database.org/car/1476/Hyundai-IONIQ-5-Standard-Range-2WD',
+  },
+  {
+    id: 'hyundai-ioniq-5-lr-2wd',
+    make: 'Hyundai',
+    model: 'IONIQ 5 Long Range 2WD',
+    price: 8290000,
+    sellerURL: 'https://www.hyundai.is/nyir/nyr-ioniq-5/yfirlit',
+    acceleration: 7.4,
+    capacity: 77.4,
+    range: 507,
+    evDatabaseURL:
+      'https://ev-database.org/car/1662/Hyundai-IONIQ-5-Long-Range-2WD',
+  },
+  {
+    id: 'hyundai-ioniq-5-lr-awd',
+    make: 'Hyundai',
+    model: 'IONIQ 5 Long Range AWD',
+    price: 8790000,
+    sellerURL: 'https://www.hyundai.is/nyir/nyr-ioniq-5/yfirlit',
+    acceleration: 5.2,
+    capacity: 77.4,
+    range: 481,
+    evDatabaseURL:
+      'https://ev-database.org/car/1663/Hyundai-IONIQ-5-Long-Range-AWD',
+  },
 ]
 
 export default usedCarModels
