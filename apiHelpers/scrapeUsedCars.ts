@@ -47,7 +47,7 @@ export default async (): Promise<Array<UsedCar>> => {
     parsedPages.push(parsedPage)
   }
 
-  const batchSize = 5
+  const batchSize = 6
   const getPageBatch = async (baseLink: string, firstPageIndex: number) => {
     // Create an array of length batchSize, starting at firstPageIndex
     // Map each index, fetching the correct page for each one
