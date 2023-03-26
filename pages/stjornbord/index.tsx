@@ -141,6 +141,7 @@ const AdminCars = ({ viewer }: AdminCarsProps) => {
       <div className="root">
         <Head>
           <title key="title">Stjórnborð notaðra rafbíla</title>
+          <meta name="robots" content="noindex"></meta>
         </Head>
 
         <header className="pageHeader">
@@ -178,8 +179,11 @@ const AdminCars = ({ viewer }: AdminCarsProps) => {
             items={[[`Sýna án myndar (${withNoImageCount})`, true]]}
             onClick={() => setShowWithNoImage(!showWithNoImage)}
           />
-          <p className="dataDate">{carsSnapshot && getDataDate(new Date(carsSnapshot.date))}</p>
-          {carsSnapshot && <UpdateButton />}
+          {carsSnapshot && (
+            <p className="dataDate">
+              {getDataDate(new Date(carsSnapshot.date))} <UpdateButton />
+            </p>
+          )}
         </div>
 
         <div className="cars">
@@ -235,6 +239,7 @@ const AdminCars = ({ viewer }: AdminCarsProps) => {
 
         .toggles {
           display: flex;
+          flex-wrap: wrap;
           gap: 8px;
           align-items: center;
         }
