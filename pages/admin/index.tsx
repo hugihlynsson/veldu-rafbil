@@ -34,7 +34,7 @@ interface Props {
   cars: Array<ProcessedUsedCar>
 }
 
-const Used: NextPage<Props> = ({ cars }) => {
+const Admin: NextPage<Props> = ({ cars }) => {
   const [usedCars, setUsedCars] = useState<Array<ProcessedUsedCar>>(cars)
   const [showTagged, setShowTagged] = useState<boolean>(false)
   const [showFiltered, setShowFiltered] = useState<boolean>(false)
@@ -211,13 +211,12 @@ const Used: NextPage<Props> = ({ cars }) => {
   )
 }
 
-Used.getInitialProps = async ({ req }): Promise<Props> => {
+Admin.getInitialProps = async ({ req }): Promise<Props> => {
   try {
     const baseUrl =
       req && req.headers
-        ? `${req.headers['x-forwarded-proto'] || 'https'}://${
-            req.headers['x-forwarded-host'] || req.headers.host
-          }`
+        ? `${req.headers['x-forwarded-proto'] || 'https'}://${req.headers['x-forwarded-host'] || req.headers.host
+        }`
         : ''
     const response = await fetch(`${baseUrl}/api/used`)
     const json = await response.json()
@@ -231,4 +230,4 @@ Used.getInitialProps = async ({ req }): Promise<Props> => {
   }
 }
 
-export default Used
+export default Admin
