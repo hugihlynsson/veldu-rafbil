@@ -28,6 +28,15 @@ const UsedAdminCar: FunctionComponent<Props> = ({
     <Car car={car} />
 
     <div className="car-settings">
+      <p className="first-seen">
+        {new Date().setHours(0, 0, 0, 0) ==
+        new Date(car.firstSeen).setHours(0, 0, 0, 0)
+          ? `Fyrst séður í dag kl. ${new Date(car.firstSeen).toLocaleTimeString(
+              'DE',
+            )}`
+          : `Fyrst séður ${new Date(car.firstSeen).toLocaleString('DE')}`}
+      </p>
+
       <select
         value={car.metadata?.id}
         onChange={({ target }) => onMetadataChange(target.value)}
@@ -58,11 +67,21 @@ const UsedAdminCar: FunctionComponent<Props> = ({
 
     <style jsx>{`
       .car-settings {
-        margin-top: 8px;
+        margin-right: 12px;
+        margin-left: 12px;
+        margin-top: -12px;
+      }
+      .first-seen {
+        margin: 0;
+        margin-bottom: 12px;
+        margin-left: 4px;
+        font-size: 13px;
+        color: #999;
+        font-weight: 300;
       }
       select {
         display: block;
-        max-width: 100%;
+        width: 100%;
         margin: 0 0 8px;
       }
       input {
