@@ -63,7 +63,11 @@ const LogIn: FunctionComponent<{}> = () => {
   )
 }
 
-const AdminCars: FunctionComponent<{}> = () => {
+interface AdminCarsProps {
+  viewer: Auth.User
+}
+
+const AdminCars: FunctionComponent<AdminCarsProps> = ({ viewer }) => {
   let [carsSnapshots, setCarsSnapshot] = useState<CarsSnapshot | null>(null)
   const [showTagged, setShowTagged] = useState<boolean>(false)
   const [showFiltered, setShowFiltered] = useState<boolean>(false)
@@ -105,9 +109,22 @@ const AdminCars: FunctionComponent<{}> = () => {
           <title key="title">Stjórnborð notaðra rafbíla</title>
         </Head>
 
-        <h1>
-          Stjórnborð notaðra rafbíla <span>{usedCars.length}</span>
-        </h1>
+        <header className="pageHeader">
+          <h1>
+            Stjórnborð notaðra rafbíla <span>{usedCars.length}</span>
+          </h1>
+          <div className="user">
+            {viewer.email}{' '}
+            <button
+              onClick={() =>
+                confirm('Are you sure you want to log out?') &&
+                Auth.signOut(auth)
+              }
+            >
+              Log out
+            </button>
+          </div>
+        </header>
 
         <div className="toggles">
           <Toggles<boolean>
@@ -181,9 +198,17 @@ const AdminCars: FunctionComponent<{}> = () => {
           padding: 24px;
         }
 
+        .pageHeader {
+          margin-bottom: 40px;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+
         h1 {
           font-size: 40px;
           font-weight: 600;
+          margin: 0px;
         }
 
         h1 span {
@@ -212,6 +237,12 @@ const AdminCars: FunctionComponent<{}> = () => {
             max-width: 1180px;
           }
 
+          .pageHeader {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+          }
+
           .cars {
             grid-template-columns: 1fr 1fr;
             margin: 24px;
@@ -229,18 +260,13 @@ const AdminCars: FunctionComponent<{}> = () => {
 }
 
 const Admin: NextPage<{}> = () => {
-  let [user, setUser] = useState<Auth.User | null>(null)
+  let [viewer, setViewer] = useState<Auth.User | null>(null)
 
   useEffect(() => {
-    Auth.onAuthStateChanged(auth, (authUser) => setUser(() => authUser))
+    Auth.onAuthStateChanged(auth, (authUser) => setViewer(() => authUser))
   }, [])
 
-  return (
-    <div>
-      Hello {user?.email}
-      {user ? <AdminCars /> : <LogIn />}
-    </div>
-  )
+  return viewer ? <AdminCars viewer={viewer} /> : <LogIn />
 }
 
 export default Admin
