@@ -109,15 +109,6 @@ const AdminCars = ({ viewer }: AdminCarsProps) => {
   const filteredCount = usedCars.filter((car) => car.filtered).length
   const withNoImageCount = usedCars.filter((car) => !car.image).length
 
-  usedCars.sort((a, b) => {
-    if (a.firstSeen > b.firstSeen) {
-      return -1
-    } else if (a.firstSeen == b.firstSeen) {
-      return 0
-    } else {
-      return 1
-    }
-  })
 
   const carsToShow = usedCars
     .map((car, index) => [car, index] as const)
@@ -127,6 +118,17 @@ const AdminCars = ({ viewer }: AdminCarsProps) => {
         (!Boolean(car.metadata?.id) || showTagged) &&
         (Boolean(car.image) || showWithNoImage),
     )
+
+    // Sort cars in decending order by firstSeen
+    carsToShow.sort(([carA, _indexA], [carB, _indexB]) => {
+    if (carA.firstSeen > carB.firstSeen) {
+      return -1
+    } else if (carA.firstSeen == carB.firstSeen) {
+      return 0
+    } else {
+      return 1
+    }
+  })
 
   const updateCar = (index: number, data: object) =>
     Database.update(

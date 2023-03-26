@@ -69,14 +69,14 @@ const UsedAdminCar: FunctionComponent<Props> = ({
       .car-settings {
         margin-right: 12px;
         margin-left: 12px;
-        margin-top: -12px;
+        margin-top: -8px;
       }
       .first-seen {
         margin: 0;
         margin-bottom: 12px;
         margin-left: 4px;
-        font-size: 13px;
-        color: #999;
+        font-size: 14px;
+        color: #AAA;
         font-weight: 300;
       }
       select {
