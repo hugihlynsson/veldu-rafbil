@@ -80,13 +80,14 @@ export default async (_: NextApiRequest, res: NextApiResponse) => {
     JSON.parse(JSON.stringify(processedCars))[0],
   )
   const now = new Date()
-  database
+  await database
     .ref(`snapshots/${now.getTime()}`)
     .set({
       timestamp: now.getTime(),
       cars: JSON.parse(JSON.stringify(processedCars)), // Trim undefined values
       date: now.toISOString(),
     })
+    .then(() => console.log('Successfully stored scrape'))
     .catch((error) =>
       console.log('Failed to add new snapshot to Firebase', error),
     )
