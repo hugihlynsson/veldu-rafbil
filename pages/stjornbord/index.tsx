@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FunctionComponent } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import * as FirebaseApp from 'firebase/app'
@@ -29,7 +29,7 @@ const app =
 const auth = Auth.getAuth(app)
 const database = Database.getDatabase()
 
-const LogIn: FunctionComponent<{}> = () => {
+const LogIn = () => {
   let [email, setEmail] = useState('')
   let [password, setPassword] = useState('')
 
@@ -63,17 +63,33 @@ const LogIn: FunctionComponent<{}> = () => {
   )
 }
 
-interface AdminCarsProps {
+const UpdateButton = () => {
+  const [loading, setLoading] = useState(false)
+
+  return (
+    <button
+      disabled={loading}
+      onClick={() => {
+        setLoading(true)
+        fetch(`/api/updateUsed`).finally(() => setLoading(false))
+      }}
+    >
+      {loading ? 'Uppfæri...' : 'Uppfæra'}
+    </button>
+  )
+}
+
+type AdminCarsProps = {
   viewer: Auth.User
 }
 
-const AdminCars: FunctionComponent<AdminCarsProps> = ({ viewer }) => {
-  let [carsSnapshots, setCarsSnapshot] = useState<CarsSnapshot | null>(null)
+const AdminCars = ({ viewer }: AdminCarsProps) => {
+  let [carsSnapshot, setCarsSnapshot] = useState<CarsSnapshot | null>(null)
   const [showTagged, setShowTagged] = useState<boolean>(false)
   const [showFiltered, setShowFiltered] = useState<boolean>(false)
   const [showWithNoImage, setShowWithNoImage] = useState<boolean>(false)
 
-  const usedCars = carsSnapshots?.cars ?? []
+  const usedCars = carsSnapshot?.cars ?? []
 
   useEffect(() => {
     let lastScrapeRef = Database.query(
@@ -102,6 +118,24 @@ const AdminCars: FunctionComponent<AdminCarsProps> = ({ viewer }) => {
         (Boolean(car.image) || showWithNoImage),
     )
 
+  const updateCar = (index: number, data: object) =>
+    Database.update(
+      Database.ref(
+        database,
+        `snapshots/${carsSnapshot?.timestamp}/cars/${index}`,
+      ),
+      data,
+    )
+
+  const getDataDate = (date: Date) => {
+    const isToday =
+      new Date().setHours(0, 0, 0, 0) == new Date(date).setHours(0, 0, 0, 0)
+
+    return isToday
+      ? `Gögn frá því í dag kl. ${date.toLocaleTimeString('DE')}`
+      : `Gögn frá ${date.toLocaleString('DE')}`
+  }
+
   return (
     <>
       <div className="root">
@@ -117,11 +151,11 @@ const AdminCars: FunctionComponent<AdminCarsProps> = ({ viewer }) => {
             {viewer.email}{' '}
             <button
               onClick={() =>
-                confirm('Are you sure you want to log out?') &&
+                confirm('Ertu viss um að þú viljir skrá þig út?') &&
                 Auth.signOut(auth)
               }
             >
-              Log out
+              Útskrá
             </button>
           </div>
         </header>
@@ -133,21 +167,19 @@ const AdminCars: FunctionComponent<AdminCarsProps> = ({ viewer }) => {
             onClick={() => setShowTagged(!showTagged)}
           />
 
-          <div style={{ width: '8px' }} />
-
           <Toggles<boolean>
             currentValue={showFiltered}
             items={[[`Sýna falda (${filteredCount})`, true]]}
             onClick={() => setShowFiltered(!showFiltered)}
           />
 
-          <div style={{ width: '8px' }} />
-
           <Toggles<boolean>
             currentValue={showWithNoImage}
             items={[[`Sýna án myndar (${withNoImageCount})`, true]]}
             onClick={() => setShowWithNoImage(!showWithNoImage)}
           />
+          <p className="dataDate">{carsSnapshot && getDataDate(new Date(carsSnapshot.date))}</p>
+          {carsSnapshot && <UpdateButton />}
         </div>
 
         <div className="cars">
@@ -156,27 +188,13 @@ const AdminCars: FunctionComponent<AdminCarsProps> = ({ viewer }) => {
               <UsedAdminCar
                 key={car.link}
                 car={car}
-                onFilteredChange={(filtered) =>
-                  Database.update(
-                    Database.ref(
-                      database,
-                      `snapshots/${carsSnapshots?.timestamp}/cars/${index}`,
-                    ),
-                    { filtered },
-                  )
-                }
+                onFilteredChange={(filtered) => updateCar(index, { filtered })}
                 onMetadataChange={(usedModelId) =>
-                  Database.update(
-                    Database.ref(
-                      database,
-                      `snapshots/${carsSnapshots?.timestamp}/cars/${index}`,
+                  updateCar(index, {
+                    metadata: usedCarModels.find(
+                      ({ id }) => id === usedModelId,
                     ),
-                    {
-                      metadata: usedCarModels.find(
-                        ({ id }) => id === usedModelId,
-                      ),
-                    },
-                  )
+                  })
                 }
               />
             ))
@@ -217,6 +235,14 @@ const AdminCars: FunctionComponent<AdminCarsProps> = ({ viewer }) => {
 
         .toggles {
           display: flex;
+          gap: 8px;
+          align-items: center;
+        }
+
+        .dataDate {
+          font-size: 13px;
+          margin: 0;
+          font-weight: 500;
         }
 
         .cars {
