@@ -18,6 +18,9 @@ module.exports = {
       1284, // iPhone 12 Pro Max @3x
     ],
   },
+  experimental: {
+    enableUndici: false
+  },
   async redirects() {
     return [
       {
