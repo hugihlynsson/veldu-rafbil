@@ -5,7 +5,7 @@ const newCars: Array<NewCar> = [
     make: 'Aiways',
     model: 'U5',
     heroImageName: 'aiways-u5',
-    price: 5490000,
+    price: 6890000,
     sellerURL: 'https://aiwaysaislandi.is',
     acceleration: 7.5,
     capacity: 63,
@@ -113,7 +113,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'audi-q8',
     price: 12790000,
     sellerURL:
-      'https://www.audi.de/de/brand/de/neuwagen/q8-e-tron/q8-e-tron.html',
+      'https://www.audi.is/is/web/is/models/q8-e-tron/q8-e-tron-2023.html',
     acceleration: 6.0,
     capacity: 95,
     range: 453,
@@ -129,7 +129,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'audi-q8-alt',
     price: 14290000,
     sellerURL:
-      'https://www.audi.de/de/brand/de/neuwagen/q8-e-tron/q8-e-tron.html',
+      'https://www.audi.is/is/web/is/models/q8-e-tron/q8-e-tron-2023.html',
     acceleration: 5.6,
     capacity: 114,
     range: 532,
@@ -145,7 +145,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'audi-q8-sportback',
     price: 13190000,
     sellerURL:
-      'https://www.audi.de/de/brand/de/neuwagen/q8-e-tron/q8-e-tron.html',
+      'https://www.audi.is/is/web/is/models/q8-e-tron/q8-e-tron-2023.html',
     acceleration: 6.0,
     capacity: 95,
     range: 465,
@@ -162,7 +162,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'audi-q8-sportback-alt',
     price: 14690000,
     sellerURL:
-      'https://www.audi.de/de/brand/de/neuwagen/q8-e-tron/q8-e-tron.html',
+      'https://www.audi.is/is/web/is/models/q8-e-tron/q8-e-tron-2023.html',
     acceleration: 5.6,
     capacity: 114,
     range: 548,
@@ -179,7 +179,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'audi-sq8',
     price: 19000000,
     sellerURL:
-      'https://www.audi.de/de/brand/de/neuwagen/q8-e-tron/q8-e-tron.html',
+      'https://www.audi.is/is/web/is/models/q8-e-tron/q8-e-tron-2023.html',
     acceleration: 4.5,
     capacity: 114,
     range: 494,
@@ -196,7 +196,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'audi-sq8-sportback',
     price: 19500000,
     sellerURL:
-      'https://www.audi.de/de/brand/de/neuwagen/q8-e-tron/q8-e-tron.html',
+      'https://www.audi.is/is/web/is/models/q8-e-tron/q8-e-tron-2023.html',
     acceleration: 4.5,
     capacity: 114,
     range: 513,
