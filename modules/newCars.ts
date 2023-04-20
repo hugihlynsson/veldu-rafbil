@@ -1572,7 +1572,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 200,
     timeToCharge10T080: 26,
-    expectedDelivery: 'Seinni part 2023',
+    expectedDelivery: 'Október 2023',
   },
   {
     make: 'Polestar',
@@ -1589,7 +1589,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 220,
     timeToCharge10T080: 27,
-    expectedDelivery: 'Seinni part 2023',
+    expectedDelivery: 'Október 2023',
   },
   {
     make: 'Polestar',
@@ -1606,7 +1606,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 310,
     timeToCharge10T080: 27,
-    expectedDelivery: 'Seinni part 2023',
+    expectedDelivery: 'Október 2023',
   },
   {
     make: 'Polestar',
@@ -1623,7 +1623,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 350,
     timeToCharge10T080: 27,
-    expectedDelivery: 'Seinni part 2023',
+    expectedDelivery: 'Október 2023',
   },
   {
     make: 'Polestar',
