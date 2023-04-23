@@ -1772,7 +1772,7 @@ const newCars: Array<NewCar> = [
     model: 'Megane E-Tech',
     subModel: 'EV40',
     heroImageName: 'renault-megane-etech',
-    price: 6290000,
+    price: 5990000,
     sellerURL:
       'https://www.renault.is/cars/megane-e-tech/megane-e-tech-electric.html',
     acceleration: 10.0,
@@ -1789,7 +1789,7 @@ const newCars: Array<NewCar> = [
     model: 'Megane E-Tech',
     subModel: 'EV60',
     heroImageName: 'renault-megane-etech-alt',
-    price: 7690000,
+    price: 7490000,
     sellerURL:
       'https://www.renault.is/cars/megane-e-tech/megane-e-tech-electric.html',
     acceleration: 7.4,
