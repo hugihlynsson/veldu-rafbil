@@ -2378,7 +2378,7 @@ const newCars: Array<NewCar> = [
     model: 'EX90',
     subModel: 'Twin Motor',
     heroImageName: 'volvo-ex90',
-    price: 15000000,
+    price: 15790000,
     sellerURL: 'https://www.volvocars.com/is/cars/ex90-electric/',
     acceleration: 5.9,
     capacity: 111,
@@ -2394,7 +2394,7 @@ const newCars: Array<NewCar> = [
     model: 'EX90',
     subModel: 'Twin Motor Performance',
     heroImageName: 'volvo-ex90-alt',
-    price: 16000000,
+    price: 16290000,
     sellerURL: 'https://www.volvocars.com/is/cars/ex90-electric/',
     acceleration: 4.9,
     capacity: 111,
@@ -2404,7 +2404,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 380,
     timeToCharge10T080: 32,
-    expectedDelivery: '2023',
+    expectedDelivery: 'Lok 2023',
   },
 ]
 
