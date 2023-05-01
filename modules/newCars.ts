@@ -365,7 +365,7 @@ const newCars: Array<NewCar> = [
     make: 'BYD',
     model: 'Han',
     heroImageName: 'byd-han',
-    price: 11000000,
+    price: 9980000,
     sellerURL: 'https://byd.is/typur/han-4x4/',
     acceleration: 3.9,
     capacity: 85.4,
