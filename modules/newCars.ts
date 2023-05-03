@@ -633,7 +633,7 @@ const newCars: Array<NewCar> = [
     capacity: 77.4,
     range: 583,
     evDatabaseURL:
-      'https://ev-database.org/car/1718/Hyundai-IONIQ-6-Long-Range-2WD',
+      'https://ev-database.org/car/1719/Hyundai-IONIQ-6-Long-Range-AWD',
     drive: 'AWD',
     power: 239,
     timeToCharge10T080: 16,
