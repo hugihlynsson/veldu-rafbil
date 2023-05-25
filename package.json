@@ -29,6 +29,6 @@
     "@types/smoothscroll-polyfill": "^0.3.1",
     "prettier": "^2.8.8",
     "typescript": "^5.0.4",
-    "vercel": "^29.4.0"
+    "vercel": "^30.0.0"
   }
 }
