@@ -244,7 +244,7 @@ const newCars: Array<NewCar> = [
     model: 'i4',
     subModel: 'M50',
     heroImageName: 'bmw-i4-m50',
-    price: 11990000,
+    price: 12290000,
     sellerURL:
       'https://www.bmw.is/is/all-models/m-series/i4-m50/2021/bmw-i4-m50-highlights.html',
     acceleration: 3.9,
@@ -879,7 +879,7 @@ const newCars: Array<NewCar> = [
     model: 'EQA SUV',
     subModel: '250',
     heroImageName: 'mercedes-eqa',
-    price: 8390000,
+    price: 7990000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqa/',
     acceleration: 8.9,
@@ -895,7 +895,7 @@ const newCars: Array<NewCar> = [
     model: 'EQA SUV',
     subModel: '300 4MATIC',
     heroImageName: 'mercedes-eqa-alt',
-    price: 8890000,
+    price: 8490000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqa/',
     acceleration: 6.9,
@@ -911,7 +911,7 @@ const newCars: Array<NewCar> = [
     model: 'EQA SUV',
     subModel: '350 4MATIC',
     heroImageName: 'mercedes-eqa-alt2',
-    price: 9590000,
+    price: 10790000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqa/',
     acceleration: 5.8,
@@ -927,7 +927,7 @@ const newCars: Array<NewCar> = [
     model: 'EQB SUV',
     subModel: '250',
     heroImageName: 'mercedes-eqb',
-    price: 8890000,
+    price: 8490000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqb/',
     acceleration: 9.2,
@@ -943,7 +943,7 @@ const newCars: Array<NewCar> = [
     model: 'EQB SUV',
     subModel: '300 4MATIC',
     heroImageName: 'mercedes-eqb-alt',
-    price: 9390000,
+    price: 8990000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqb/',
     acceleration: 8.0,
@@ -959,7 +959,7 @@ const newCars: Array<NewCar> = [
     model: 'EQB SUV',
     subModel: '350 4MATIC',
     heroImageName: 'mercedes-eqb',
-    price: 10090000,
+    price: 11290000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqb/',
     acceleration: 6.2,
