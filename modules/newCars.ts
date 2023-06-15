@@ -2032,12 +2032,12 @@ const newCars: Array<NewCar> = [
     price: 7359988,
     sellerURL: 'https://www.tesla.com/is_IS/model3/design',
     acceleration: 4.4,
-    capacity: 82,
+    capacity: 78.1,
     range: 602,
     evDatabaseURL:
       'https://ev-database.org/car/1591/Tesla-Model-3-Long-Range-Dual-Motor',
     drive: 'AWD',
-    power: 324,
+    power: 366,
     timeToCharge10T080: 30,
   },
   {
@@ -2048,11 +2048,11 @@ const newCars: Array<NewCar> = [
     price: 7531418,
     sellerURL: 'https://www.tesla.com/is_IS/model3/design',
     acceleration: 3.3,
-    capacity: 82,
+    capacity: 78.1,
     range: 547,
     evDatabaseURL: 'https://ev-database.org/car/1620/Tesla-Model-3-Performance',
     drive: 'AWD',
-    power: 413,
+    power: 393,
     timeToCharge10T080: 30,
   },
   {
