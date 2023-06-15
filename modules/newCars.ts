@@ -2463,6 +2463,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 200,
     timeToCharge10T080: 27,
+    expectedDelivery: 'Byrjun 2024',
   },
   {
     make: 'Volvo',
@@ -2479,6 +2480,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 200,
     timeToCharge10T080: 27,
+    expectedDelivery: 'Byrjun 2024',
   },
   {
     make: 'Volvo',
@@ -2495,6 +2497,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 315,
     timeToCharge10T080: 27,
+    expectedDelivery: 'Byrjun 2024',
   },
   {
     make: 'Volvo',
