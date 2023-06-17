@@ -2457,14 +2457,14 @@ const newCars: Array<NewCar> = [
     price: 5490000,
     sellerURL: 'https://www.volvocars.com/is/cars/ex30-electric/',
     acceleration: 5.7,
-    capacity: 69,
+    capacity: 51,
     range: 344,
     evDatabaseURL:
       'https://ev-database.org/car/1909/Volvo-EX30-Single-Motor',
     drive: 'RWD',
     power: 200,
     timeToCharge10T080: 27,
-    expectedDelivery: 'Byrjun 2024',
+    expectedDelivery: 'Apríl 2024',
   },
   {
     make: 'Volvo',
@@ -2481,7 +2481,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 200,
     timeToCharge10T080: 27,
-    expectedDelivery: 'Byrjun 2024',
+    expectedDelivery: 'Apríl 2024',
   },
   {
     make: 'Volvo',
@@ -2498,7 +2498,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 315,
     timeToCharge10T080: 27,
-    expectedDelivery: 'Byrjun 2024',
+    expectedDelivery: 'Apríl 2024',
   },
   {
     make: 'Volvo',
@@ -2514,7 +2514,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 300,
     timeToCharge10T080: 32,
-    expectedDelivery: 'Byrjun 2024',
+    expectedDelivery: 'Júní 2024',
   },
   {
     make: 'Volvo',
@@ -2531,7 +2531,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 380,
     timeToCharge10T080: 32,
-    expectedDelivery: 'Byrjun 2024',
+    expectedDelivery: 'Júní 2024',
   },
 ]
 
