@@ -1952,7 +1952,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Smart',
     model: '#1',
-    subModel: 'Pulse',
+    subModel: 'Pro+',
     heroImageName: 'smart-one',
     price: 6390000,
     sellerURL: 'https://smart.askja.is/',
@@ -1968,17 +1968,18 @@ const newCars: Array<NewCar> = [
   {
     make: 'Smart',
     model: '#1',
-    subModel: 'Pro+',
+    subModel: 'Pulse',
     heroImageName: 'smart-one',
     price: 6990000,
     sellerURL: 'https://smart.askja.is/',
-    acceleration: 4.9,
+    acceleration: 4.5,
     capacity: 66,
     range: 400,
     drive: 'AWD',
     power: 315,
     timeToCharge10T080: 27,
     expectedDelivery: 'Júní 2023',
+    evDatabaseURL: 'https://ev-database.org/car/1920/Smart-1-Pulse',
   },
   {
     make: 'Smart',
@@ -2368,7 +2369,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 150,
     timeToCharge10T080: 28,
-    expectedDelivery: 'Lok 2023'
+    expectedDelivery: 'Lok 2023',
   },
   {
     make: 'Volkswagen',
@@ -2384,7 +2385,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 210,
     timeToCharge10T080: 27,
-    expectedDelivery: 'Lok 2023'
+    expectedDelivery: 'Lok 2023',
   },
   {
     make: 'Volvo',
@@ -2459,8 +2460,7 @@ const newCars: Array<NewCar> = [
     acceleration: 5.7,
     capacity: 51,
     range: 344,
-    evDatabaseURL:
-      'https://ev-database.org/car/1909/Volvo-EX30-Single-Motor',
+    evDatabaseURL: 'https://ev-database.org/car/1909/Volvo-EX30-Single-Motor',
     drive: 'RWD',
     power: 200,
     timeToCharge10T080: 27,
