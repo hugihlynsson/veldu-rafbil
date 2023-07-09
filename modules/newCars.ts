@@ -529,6 +529,21 @@ const newCars: Array<NewCar> = [
     timeToCharge10T080: 36,
   },
   {
+    make: 'Honda',
+    model: 'e:Ny1',
+    heroImageName: 'honda-eNy1',
+    price: 6790000,
+    sellerURL: 'https://www.honda.is/honda-eny1',
+    acceleration: 7.6,
+    capacity: 68.8,
+    range: 412,
+    evDatabaseURL: 'https://ev-database.org/car/1940/Honda-eNy1',
+    drive: 'RWD',
+    power: 150,
+    timeToCharge10T080: 36,
+    expectedDelivery: "haustið 2023"
+  },
+  {
     make: 'Hongqi',
     model: 'E-HS9',
     heroImageName: 'hongqi-ehs9',
@@ -541,7 +556,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 320,
     timeToCharge10T080: 30,
-    expectedDelivery: '2023',
   },
   {
     make: 'Hongqi',
@@ -556,7 +570,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 405,
     timeToCharge10T080: 36,
-    expectedDelivery: '2023',
   },
   {
     make: 'Hongqi',
@@ -570,7 +583,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 405,
     timeToCharge10T080: 36,
-    expectedDelivery: '2023',
   },
   {
     make: 'Hyundai',
