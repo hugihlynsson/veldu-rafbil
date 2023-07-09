@@ -39,7 +39,9 @@ const UsedCar: FunctionComponent<Props> = ({ car }) => (
         margin: 0 auto;
         border-radius: 16px;
         color: inherit;
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
       }
 
       a:hover {

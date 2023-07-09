@@ -76,7 +76,7 @@ const UsedAdminCar: FunctionComponent<Props> = ({
         margin-bottom: 12px;
         margin-left: 4px;
         font-size: 14px;
-        color: #AAA;
+        color: #aaa;
         font-weight: 300;
       }
       select {

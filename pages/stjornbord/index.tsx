@@ -109,7 +109,6 @@ const AdminCars = ({ viewer }: AdminCarsProps) => {
   const filteredCount = usedCars.filter((car) => car.filtered).length
   const withNoImageCount = usedCars.filter((car) => !car.image).length
 
-
   const carsToShow = usedCars
     .map((car, index) => [car, index] as const)
     .filter(
@@ -119,8 +118,8 @@ const AdminCars = ({ viewer }: AdminCarsProps) => {
         (Boolean(car.image) || showWithNoImage),
     )
 
-    // Sort cars in decending order by firstSeen
-    carsToShow.sort(([carA, _indexA], [carB, _indexB]) => {
+  // Sort cars in decending order by firstSeen
+  carsToShow.sort(([carA, _indexA], [carB, _indexB]) => {
     if (carA.firstSeen > carB.firstSeen) {
       return -1
     } else if (carA.firstSeen == carB.firstSeen) {

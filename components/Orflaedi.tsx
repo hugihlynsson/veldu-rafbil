@@ -17,7 +17,12 @@ const Orflaedi: FunctionComponent<{}> = () => (
 
       <a href="https://www.orflaedi.is" className="card">
         Öll létt rafknúin ökutæki á einum stað
-        <img width="151" height="30" alt="Örflæði logo" src="/orflaedi-logo.svg" />
+        <img
+          width="151"
+          height="30"
+          alt="Örflæði logo"
+          src="/orflaedi-logo.svg"
+        />
       </a>
     </div>
 

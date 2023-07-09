@@ -283,7 +283,7 @@ const New: NextPage<Props> = ({
               Nýir ↓
             </LinkPill>
 
-              <LinkPill href="/notadir">Notaðir →</LinkPill>
+            <LinkPill href="/notadir">Notaðir →</LinkPill>
           </nav>
 
           <p className="description" id="nyjir" ref={descriptionRef}>
