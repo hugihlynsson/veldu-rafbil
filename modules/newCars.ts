@@ -1966,7 +1966,7 @@ const newCars: Array<NewCar> = [
     model: '#1',
     subModel: 'Pro+',
     heroImageName: 'smart-one',
-    price: 6390000,
+    price: 5990000,
     sellerURL: 'https://smart.askja.is/',
     acceleration: 6.7,
     capacity: 66,
