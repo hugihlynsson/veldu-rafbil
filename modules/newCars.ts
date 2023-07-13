@@ -1555,7 +1555,7 @@ const newCars: Array<NewCar> = [
     model: '2',
     subModel: 'Standard Range Single Motor',
     heroImageName: 'polestar-2',
-    price: 6690000,
+    price: 6790000,
     sellerURL: 'https://www.polestar.com/en-is/polestar-2/',
     acceleration: 7.4,
     capacity: 69,
