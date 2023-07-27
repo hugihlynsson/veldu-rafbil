@@ -2712,10 +2712,10 @@
   resolved "https://registry.yarnpkg.com/@vercel/hydrogen/-/hydrogen-0.0.64.tgz#94bf921e393dad723bb824e9e5301d1c37c74f35"
   integrity sha512-1rzFB664G6Yzp7j4ezW9hvVjqnaU2BhyUdhchbsxtRuxkMpGgPBZKhjzRQHFvlmkz37XLC658T5Nb1P91b4sBw==
 
-"@vercel/next@3.9.1":
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/@vercel/next/-/next-3.9.1.tgz#a7e02d6cac9b1280fe38f6a60d4be03387a8e546"
-  integrity sha512-HBz0dSNeD1KPcGwN+OcJuAabVxl7nKBmOBXTBEpgv1rdKy9JfvwcDKAMoWrcR//DdmHNXsPudqdbWCfCtocx/Q==
+"@vercel/next@3.9.2":
+  version "3.9.2"
+  resolved "https://registry.yarnpkg.com/@vercel/next/-/next-3.9.2.tgz#b94317dc99006a17a123087dabf830df1633499e"
+  integrity sha512-ashWLVn7NtLOFchBRYAs/aEE7edEq91IIGb+T8Cqcv4R1C9xb0m1UOp2r6X1HKV0FjqCWwg8MBEgt5vzK1cJ6w==
 
 "@vercel/nft@0.22.5":
   version "0.22.5"
@@ -7806,15 +7806,15 @@ vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
 
-vercel@^31.1.0:
-  version "31.1.0"
-  resolved "https://registry.yarnpkg.com/vercel/-/vercel-31.1.0.tgz#37d76995cab3d307afc404a4fcb6d4c2f602e3af"
-  integrity sha512-l7BWtn1J9pkTYSHUGm3A2rjAmA/c12X6BKK6+D9VsQw/bPSbckeKVmc1EpHB6Y2LrF8gLjgux54RnoGwc36dQw==
+vercel@^31.1.1:
+  version "31.1.1"
+  resolved "https://registry.yarnpkg.com/vercel/-/vercel-31.1.1.tgz#a6cee0aa66e1ed8655c5858d2cb883bf28671188"
+  integrity sha512-0plv2fF2qjtygPMmctOsG64I/QAXX/WE7q1ryB8x0QlIpNflhFNrhMe4jxhGEWQ9iZzYmIH7aIgQ6hqk/6pNEQ==
   dependencies:
     "@vercel/build-utils" "6.8.2"
     "@vercel/go" "2.5.1"
     "@vercel/hydrogen" "0.0.64"
-    "@vercel/next" "3.9.1"
+    "@vercel/next" "3.9.2"
     "@vercel/node" "2.15.6"
     "@vercel/python" "3.1.60"
     "@vercel/redwood" "1.1.15"
