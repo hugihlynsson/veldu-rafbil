@@ -1959,7 +1959,6 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 200,
     timeToCharge10T080: 27,
-    expectedDelivery: 'Júní 2023',
   },
   {
     make: 'Smart',
@@ -1974,7 +1973,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 315,
     timeToCharge10T080: 27,
-    expectedDelivery: 'Júní 2023',
     evDatabaseURL: 'https://ev-database.org/car/1920/Smart-1-Pulse',
   },
   {
@@ -2240,7 +2238,6 @@ const newCars: Array<NewCar> = [
     capacity: 77,
     range: 423,
     evDatabaseURL: 'https://ev-database.org/car/1651/Volkswagen-ID-Buzz-Pro',
-    expectedDelivery: '2023',
     drive: 'RWD',
     power: 150,
     timeToCharge10T080: 28,
