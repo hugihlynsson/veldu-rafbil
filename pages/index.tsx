@@ -10,13 +10,15 @@ import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
 import LinkPill from '../components/LinkPill'
 import FilterModal from '../components/FilterModal'
-import newCars from '../modules/newCars'
+import newCarsWithDiscontinued from '../modules/newCars'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
 import { colors } from '../modules/globals'
 import { NewCar, Filters, Drive } from '../types'
 
 import stableSort from '../components/stableSort'
+
+let newCars = newCarsWithDiscontinued.filter((car) => !car.discontinued)
 
 type Sorting =
   | 'name'

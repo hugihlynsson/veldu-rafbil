@@ -527,6 +527,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 113,
     timeToCharge10T080: 36,
+    discontinued: '2023-08-19',
   },
   {
     make: 'Honda',

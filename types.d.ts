@@ -52,6 +52,7 @@ export interface NewCar {
   timeToCharge10T080: number // minutes
   power: number // kW
   expectedDelivery?: string // In Icelandic, for example: "sumar 2020"
+  discontinued?: string // String representation of the date the car was found discontinued, for example: "2023-09-19"
 }
 
 export type Availability = 'available' | 'expected'
