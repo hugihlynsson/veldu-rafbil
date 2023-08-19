@@ -834,7 +834,7 @@ const newCars: Array<NewCar> = [
     model: 'UX',
     subModel: '300e',
     heroImageName: 'lexus-ux-300e',
-    price: 9990000,
+    price: 9350000,
     sellerURL: 'https://www.lexus.is/car-models/ux-300e/',
     acceleration: 7.5,
     capacity: 50,
@@ -882,7 +882,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 150,
     timeToCharge10T080: 45,
-    expectedDelivery: 'Byrjun 2023',
+    expectedDelivery: '2023',
   },
   {
     make: 'Mazda',
@@ -1371,7 +1371,7 @@ const newCars: Array<NewCar> = [
     make: 'Mini Cooper',
     model: 'SE',
     heroImageName: 'mini',
-    price: 6290000,
+    price: 5990000,
     sellerURL: 'https://www.mini.is/is_IS/home/range/electric.html',
     acceleration: 7.3,
     capacity: 33.0,
@@ -1463,7 +1463,7 @@ const newCars: Array<NewCar> = [
     make: 'Opel',
     model: 'Corsa-e',
     heroImageName: 'opel-corsa-e',
-    price: 4990000,
+    price: 4790000,
     sellerURL:
       'https://www.opelisland.is/cars/corsa-models/corsa-e/yfirsyn.html',
     acceleration: 8.1,
@@ -1478,7 +1478,7 @@ const newCars: Array<NewCar> = [
     make: 'Opel',
     model: 'Mokka-e',
     heroImageName: 'opel-mokka-e',
-    price: 5390000,
+    price: 5290000,
     sellerURL:
       'https://www.opelisland.is/cars/mokka-models/mokka-e/Yfirsyn.html',
     acceleration: 8.5,
@@ -1796,7 +1796,7 @@ const newCars: Array<NewCar> = [
     model: 'Megane E-Tech',
     subModel: 'EV40',
     heroImageName: 'renault-megane-etech',
-    price: 5990000,
+    price: 5590000,
     sellerURL:
       'https://www.renault.is/cars/megane-e-tech/megane-e-tech-electric.html',
     acceleration: 10.0,
@@ -1813,7 +1813,7 @@ const newCars: Array<NewCar> = [
     model: 'Megane E-Tech',
     subModel: 'EV60',
     heroImageName: 'renault-megane-etech-alt',
-    price: 7490000,
+    price: 6990000,
     sellerURL:
       'https://www.renault.is/cars/megane-e-tech/megane-e-tech-electric.html',
     acceleration: 7.4,
