@@ -19,6 +19,11 @@ interface Props {
   onMetadataChange: (id: string) => void
 }
 
+let getTypeSuggestions = (car: ProcessedUsedCar): UsedCarModel[] =>
+  usedCarModels.filter((model) => {
+    return model.make.toLowerCase() === car.make.toLowerCase()
+  })
+
 const UsedAdminCar: FunctionComponent<Props> = ({
   car,
   onFilteredChange,
@@ -36,6 +41,24 @@ const UsedAdminCar: FunctionComponent<Props> = ({
             )}`
           : `Fyrst séður ${new Date(car.firstSeen).toLocaleString('DE')}`}
       </p>
+
+      {!car.metadata && getTypeSuggestions(car).length > 0 ? (
+        <select onChange={({ target }) => onMetadataChange(target.value)}>
+          <option value={undefined}>Uppástungur</option>
+
+          {Object.entries(getTypeSuggestions(car).reduce(groupBy('make'), {}))
+            .sort() // Fix server-client mismatch
+            .map(([make, models]) => (
+              <optgroup label={make} key={make}>
+                {(models as Array<UsedCarModel>).map((carOption) => (
+                  <option value={carOption.id} key={carOption.id}>
+                    {carOption.model}: {carOption.id}
+                  </option>
+                ))}
+              </optgroup>
+            ))}
+        </select>
+      ) : null}
 
       <select
         value={car.metadata?.id}
