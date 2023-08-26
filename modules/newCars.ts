@@ -945,13 +945,14 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 215,
     timeToCharge10T080: 35,
+    discontinued: '2023-08-24',
   },
   {
     make: 'Mercedes-Benz',
     model: 'EQB SUV',
     subModel: '250',
     heroImageName: 'mercedes-eqb',
-    price: 8490000,
+    price: 7990000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqb/',
     acceleration: 8.9,
@@ -967,7 +968,7 @@ const newCars: Array<NewCar> = [
     model: 'EQB SUV',
     subModel: '300 4MATIC',
     heroImageName: 'mercedes-eqb-alt',
-    price: 8990000,
+    price: 8490000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqb/',
     acceleration: 8.0,
@@ -993,13 +994,14 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 215,
     timeToCharge10T080: 29,
+    discontinued: '2023-08-24',
   },
   {
     make: 'Mercedes-Benz',
     model: 'EQC',
     subModel: '400 4MATIC',
     heroImageName: 'eqc',
-    price: 10890000,
+    price: 9990000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqc/',
     acceleration: 5.1,
