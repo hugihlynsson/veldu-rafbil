@@ -10,6 +10,7 @@
     "fathom-client": "^3.5.0",
     "firebase": "^10.3.1",
     "firebase-admin": "^11.10.1",
+    "google-gax": "3.6.1",
     "next": "^13.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
