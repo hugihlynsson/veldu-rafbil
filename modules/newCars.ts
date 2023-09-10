@@ -211,7 +211,7 @@ const newCars: Array<NewCar> = [
     model: 'i4',
     subModel: 'eDrive 35',
     heroImageName: 'bmw-i4-alt',
-    price: 9000000,
+    price: 8990000,
     sellerURL:
       'https://www.bmw.is/is/all-models/bmw-i/i4/2021/bmw-i4-highlights.html',
     acceleration: 6.0,
@@ -221,7 +221,6 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 210,
     timeToCharge10T080: 31,
-    expectedDelivery: '2023',
   },
   {
     make: 'BMW',
