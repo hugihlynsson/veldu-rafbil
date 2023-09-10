@@ -1144,7 +1144,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 460,
     timeToCharge10T080: 28,
-    expectedDelivery: '2023',
   },
   {
     make: 'Mercedes-Benz',
