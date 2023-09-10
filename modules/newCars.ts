@@ -187,7 +187,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     timeToCharge10T080: 31,
     power: 370,
-    expectedDelivery: '2023',
   },
   {
     make: 'Audi',
@@ -204,7 +203,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     timeToCharge10T080: 31,
     power: 370,
-    expectedDelivery: '2023',
   },
   {
     make: 'BMW',
@@ -265,7 +263,6 @@ const newCars: Array<NewCar> = [
     capacity: 105,
     range: 625,
     evDatabaseURL: 'https://ev-database.org/car/1676/BMW-i7-xDrive60',
-    expectedDelivery: '2023',
     drive: 'AWD',
     power: 400,
     timeToCharge10T080: 35,
@@ -325,7 +322,6 @@ const newCars: Array<NewCar> = [
     capacity: 68,
     range: 438,
     evDatabaseURL: 'https://ev-database.org/car/1701/BMW-iX1-xDrive30',
-    expectedDelivery: '2023',
     drive: 'AWD',
     power: 230,
     timeToCharge10T080: 29,
@@ -358,7 +354,6 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 150,
     timeToCharge10T080: 44,
-    expectedDelivery: 'Maí 2023',
   },
   {
     make: 'BYD',
@@ -373,7 +368,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 380,
     timeToCharge10T080: 43,
-    expectedDelivery: 'Maí 2023',
   },
   {
     make: 'BYD',
@@ -388,7 +382,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 380,
     timeToCharge10T080: 44,
-    expectedDelivery: 'Maí 2023',
   },
   {
     make: 'Citroën',
@@ -707,7 +700,6 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 115,
     timeToCharge10T080: 44,
-    expectedDelivery: 'Sumar 2023',
   },
   {
     make: 'Kia',
@@ -1222,7 +1214,6 @@ const newCars: Array<NewCar> = [
     range: 616,
     evDatabaseURL:
       'https://ev-database.org/car/1674/Mercedes-EQS-SUV-450-4MATIC',
-    expectedDelivery: '2023',
     drive: 'AWD',
     power: 265,
     timeToCharge10T080: 32,
@@ -1240,7 +1231,6 @@ const newCars: Array<NewCar> = [
     range: 615,
     evDatabaseURL:
       'https://ev-database.org/car/1675/Mercedes-EQS-SUV-580-4MATIC',
-    expectedDelivery: '2023',
     drive: 'AWD',
     power: 400,
     timeToCharge10T080: 32,
