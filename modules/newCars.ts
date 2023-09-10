@@ -1741,7 +1741,7 @@ const newCars: Array<NewCar> = [
     acceleration: 4.0,
     capacity: 79.2,
     range: 407,
-    evDatabaseURL: 'https://ev-database.org/car/1237/Porsche-Taycan-4S',
+    evDatabaseURL: 'https://ev-database.org/car/1925/Porsche-Taycan-4S',
     drive: 'AWD',
     power: 390,
     timeToCharge10T080: 21,
@@ -1773,9 +1773,9 @@ const newCars: Array<NewCar> = [
     capacity: 93.4,
     range: 456,
     evDatabaseURL:
-      'https://ev-database.org/car/1186/Porsche-Taycan-4-Cross-Turismo',
+      'https://ev-database.org/car/1929/Porsche-Taycan-4-Cross-Turismo',
     drive: 'AWD',
-    power: 420,
+    power: 350,
     timeToCharge10T080: 19,
   },
   {
@@ -1789,7 +1789,7 @@ const newCars: Array<NewCar> = [
     capacity: 93.4,
     range: 452,
     evDatabaseURL:
-      'https://ev-database.org/car/1437/Porsche-Taycan-4S-Cross-Turismo',
+      'https://ev-database.org/car/1930/Porsche-Taycan-4S-Cross-Turismo',
     drive: 'AWD',
     power: 420,
     timeToCharge10T080: 19,
