@@ -968,10 +968,10 @@
     "@vercel/static-config" "3.0.0"
     ts-morph "12.0.0"
 
-"@vercel/next@4.0.5":
-  version "4.0.5"
-  resolved "https://registry.yarnpkg.com/@vercel/next/-/next-4.0.5.tgz#3fb7ce24ca9f1bf5cba2006a9d18342840fe94ff"
-  integrity sha512-wdRiMqfr//KPEzEJYlQ0Ri4SFbPdnoEJdpktdmaxAK7bREvkJeeCjFAkqBDGb1OiqjyKolxF1xwMewRvLj80MQ==
+"@vercel/next@4.0.6":
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/@vercel/next/-/next-4.0.6.tgz#1c4d723eecbc366b3625d5e5348550812f3774ac"
+  integrity sha512-SUsR+bbx4flgVYVmyOCx85PNZyd2my8LQY5uUiA1FDN3QryXL+OkQ7guS6So5gCHUEhYPHE6jPifYRgQWh73AA==
 
 "@vercel/nft@0.22.5":
   version "0.22.5"
@@ -1028,10 +1028,10 @@
     "@vercel/routing-utils" "3.0.0"
     semver "6.3.1"
 
-"@vercel/remix-builder@2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@vercel/remix-builder/-/remix-builder-2.0.5.tgz#e9de23e877f7393775c35afe8b5f9a1a43d04407"
-  integrity sha512-EzqyE/B4dNhKYmukOGBDrRl5Z/J7UkX8Q9DXOr0EBR1fs09l+T/qxLshk7rLU2ubl1oDHiIuxOYQWHVb2vtdFw==
+"@vercel/remix-builder@2.0.6":
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/@vercel/remix-builder/-/remix-builder-2.0.6.tgz#3eaaa14aeb05913274dc984b9761fa6f9a789a17"
+  integrity sha512-STWEL91loQwCdphst1SVnnrBPbXRaiYinOeviSYX4dZ+8d8T/AyiYpRtrdSs9TgwIg8vFbtgGguzwzUKjXLAAw==
   dependencies:
     "@vercel/nft" "0.22.5"
     "@vercel/static-config" "3.0.0"
@@ -3063,19 +3063,19 @@ v8-compile-cache-lib@^3.0.1:
   resolved "https://registry.yarnpkg.com/v8-compile-cache-lib/-/v8-compile-cache-lib-3.0.1.tgz#6336e8d71965cb3d35a1bbb7868445a7c05264bf"
   integrity sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==
 
-vercel@^32.2.4:
-  version "32.2.4"
-  resolved "https://registry.yarnpkg.com/vercel/-/vercel-32.2.4.tgz#c39254c45cadb01e7cfa49996cef91f24df7181b"
-  integrity sha512-Vdp/kglvpxcmY+yaQ+4/qZm8O8Hu9sn/JTpdfXNaxAcHP4Pt3GmHTZJmY0K6bQ2MoXjE0/Tp0h9BfHLUoNjRIw==
+vercel@^32.2.5:
+  version "32.2.5"
+  resolved "https://registry.yarnpkg.com/vercel/-/vercel-32.2.5.tgz#f3dff501036d8fcee4a2a452769c87b14bb11816"
+  integrity sha512-u41ysVXM9nOCQVjXXezx662wLlYzJ+6IVG4wofrYuYWylEMEIdGXVxezc9TJZsnEgwZGwnPiWJu3twxTOhkV9A==
   dependencies:
     "@vercel/build-utils" "7.2.0"
     "@vercel/go" "3.0.1"
     "@vercel/hydrogen" "1.0.1"
-    "@vercel/next" "4.0.5"
+    "@vercel/next" "4.0.6"
     "@vercel/node" "3.0.5"
     "@vercel/python" "4.0.1"
     "@vercel/redwood" "2.0.2"
-    "@vercel/remix-builder" "2.0.5"
+    "@vercel/remix-builder" "2.0.6"
     "@vercel/ruby" "2.0.2"
     "@vercel/static-build" "2.0.6"
 
