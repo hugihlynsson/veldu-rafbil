@@ -857,7 +857,7 @@ const newCars: Array<NewCar> = [
     model: 'UX',
     subModel: '300e',
     heroImageName: 'lexus-ux-300e',
-    price: 9350000,
+    price: 9990000,
     sellerURL: 'https://www.lexus.is/car-models/ux-300e/',
     acceleration: 7.5,
     capacity: 50,
