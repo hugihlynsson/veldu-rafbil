@@ -534,7 +534,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 150,
     timeToCharge10T080: 36,
-    expectedDelivery: "haustið 2023"
+    expectedDelivery: 'haustið 2023',
   },
   {
     make: 'Hongqi',
@@ -672,6 +672,38 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 150,
     timeToCharge10T080: 44,
+  },
+  {
+    make: 'Hyundai',
+    model: 'Kona Electric',
+    subModel: '48 kWh',
+    heroImageName: 'hyundai-kona-2024',
+    price: 6390000,
+    sellerURL: 'https://hyundai.is/bilarnir/kona-sx2-ev/',
+    acceleration: 7.8,
+    capacity: 48.4,
+    range: 377,
+    evDatabaseURL:
+      'https://ev-database.org/car/1829/Hyundai-Kona-Electric-48-kWh',
+    drive: 'FWD',
+    power: 115,
+    timeToCharge10T080: 43,
+  },
+  {
+    make: 'Hyundai',
+    model: 'Kona Electric',
+    subModel: '65 kWh',
+    heroImageName: 'hyundai-kona-2024-alt',
+    price: 6990000,
+    sellerURL: 'https://hyundai.is/bilarnir/kona-sx2-ev/',
+    acceleration: 8.8,
+    capacity: 65.4,
+    range: 514,
+    evDatabaseURL:
+      'https://ev-database.org/car/1830/Hyundai-Kona-Electric-65-kWh',
+    drive: 'FWD',
+    power: 160,
+    timeToCharge10T080: 41,
   },
   {
     make: 'Jaguar',
@@ -1262,7 +1294,8 @@ const newCars: Array<NewCar> = [
     acceleration: 12.1,
     capacity: 90,
     range: 361,
-    evDatabaseURL: 'https://ev-database.org/car/1615/Mercedes-eVito-Tourer-Long-90-kWh',
+    evDatabaseURL:
+      'https://ev-database.org/car/1615/Mercedes-eVito-Tourer-Long-90-kWh',
     drive: 'FWD',
     power: 150,
     timeToCharge10T080: 47,
@@ -2052,7 +2085,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 393,
     timeToCharge10T080: 30,
-    discontinued: '2023-10-01'
+    discontinued: '2023-10-01',
   },
   {
     make: 'Tesla',
