@@ -37,26 +37,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const lastSnapshot: Snapshot | undefined = await fetchLastSnapshot(database)
     if (lastSnapshot) {
-      const isFromLast24Hours =
-        new Date().getTime() - lastSnapshot.timestamp < 60 * 60 * 1000 * 24
-      if (isFromLast24Hours) {
-        const isFromLast24Hours =
-          new Date().getTime() - lastSnapshot.timestamp < 60 * 60 * 1000 * 2
-        if (isFromLast24Hours) {
-          res.setHeader('Cache-Control', 's-maxage=7200')
-        } else {
-          // Update but immediately return the slightly older data
-          console.log(
-            'Data older than 2 hours but younger than 24. Returning stale but updating',
-          )
-          fetch(`${baseUrl}/api/updateUsed`)
-        }
-        console.log('Returning snapshot from', lastSnapshot.date)
-
-        res.json({ cars: lastSnapshot.cars })
-        return
-      }
-      console.log('Snapshot too old, from:', lastSnapshot.date)
+      res.json({ cars: lastSnapshot.cars })
+      return
     }
   } catch (error) {
     console.log('Failed to fetch snapshot', error)
