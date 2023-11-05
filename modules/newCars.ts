@@ -1511,6 +1511,22 @@ const newCars: Array<NewCar> = [
     timeToCharge10T080: 31,
   },
   {
+    make: 'Ora',
+    model: 'Funky Cat',
+    subModel: '300 Pro',
+    heroImageName: 'ora-funky-cat',
+    price: 4790000,
+    sellerURL:
+      'https://www.hekla.is/is/bilar/nyir-bilar-syningasalur/ora-300-pro-1',
+    acceleration: 8.3,
+    capacity: 48,
+    range: 310,
+    evDatabaseURL: 'https://ev-database.org/car/1781/ORA-Funky-Cat-48-kWh',
+    drive: 'FWD',
+    power: 126,
+    timeToCharge10T080: 45,
+  },
+  {
     make: 'Peugeot',
     model: 'e-2008',
     heroImageName: 'e-2008',
