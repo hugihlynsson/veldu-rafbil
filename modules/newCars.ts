@@ -256,7 +256,7 @@ const newCars: Array<NewCar> = [
     make: 'BMW',
     model: 'i7',
     heroImageName: 'bmw-i7',
-    price: 24490000,
+    price: 22490000,
     sellerURL:
       'https://www.bmw.is/is/all-models/bmw-i/i7/2022/bmw-i7-sedan-highlights.html',
     acceleration: 4.7,
