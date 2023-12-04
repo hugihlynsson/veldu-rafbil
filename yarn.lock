@@ -3561,10 +3561,10 @@ v8-compile-cache-lib@^3.0.1:
   resolved "https://registry.yarnpkg.com/v8-compile-cache-lib/-/v8-compile-cache-lib-3.0.1.tgz#6336e8d71965cb3d35a1bbb7868445a7c05264bf"
   integrity sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==
 
-vercel@^32.6.0:
-  version "32.6.0"
-  resolved "https://registry.yarnpkg.com/vercel/-/vercel-32.6.0.tgz#fe808e4e0ddb72569a6d60f04804c076d4e73bfe"
-  integrity sha512-FCJ4Mg7h4L9qbiwLy3GhwV0KrQLGQYfgmx35kG/DJcWnG+kTR32faOzi53poqzwLR9/nU/ABhLP6jihhj25qKw==
+vercel@^32.6.1:
+  version "32.6.1"
+  resolved "https://registry.yarnpkg.com/vercel/-/vercel-32.6.1.tgz#a5203167cb0ab67a8a10dc3d21c5dfcd7a1901a9"
+  integrity sha512-isEjDN1/rZEEHV2HVe2lGHkxuzvmih2luBAB42fDhhecIYs2gGKRLy+vIkJweRWRTlFMHjOHGPTYo7VfzQ10Ug==
   dependencies:
     "@vercel/build-utils" "7.2.5"
     "@vercel/fun" "1.1.0"
