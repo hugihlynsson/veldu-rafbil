@@ -258,8 +258,7 @@ const newCars: Array<NewCar> = [
     subModel: 'M60',
     heroImageName: 'bmw-i5',
     price: 18690000,
-    sellerURL:
-      'https://www.bmw.is/is/all-models/bmw-i/i5/bmw-i5-overview.html',
+    sellerURL: 'https://www.bmw.is/is/all-models/bmw-i/i5/bmw-i5-overview.html',
     acceleration: 3.8,
     capacity: 84.4,
     range: 516,
@@ -355,7 +354,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 230,
     timeToCharge10T080: 29,
-    expectedDelivery: '2024'
+    expectedDelivery: '2024',
   },
   {
     make: 'BMW',
@@ -423,7 +422,8 @@ const newCars: Array<NewCar> = [
     acceleration: 11.7,
     capacity: 50,
     range: 282,
-    evDatabaseURL: 'https://ev-database.org/car/1546/Citroen-e-Berlingo-M-50-kWh',
+    evDatabaseURL:
+      'https://ev-database.org/car/1546/Citroen-e-Berlingo-M-50-kWh',
     drive: 'FWD',
     timeToCharge10T080: 26,
     power: 100,
@@ -1399,8 +1399,7 @@ const newCars: Array<NewCar> = [
     acceleration: 7.9,
     capacity: 64,
     range: 435,
-    evDatabaseURL:
-      'https://ev-database.org/car/1708/MG-MG4-Electric-64-kWh',
+    evDatabaseURL: 'https://ev-database.org/car/1708/MG-MG4-Electric-64-kWh',
     drive: 'RWD',
     power: 150,
     timeToCharge10T080: 24,
@@ -1415,8 +1414,7 @@ const newCars: Array<NewCar> = [
     acceleration: 6.5,
     capacity: 77,
     range: 520,
-    evDatabaseURL:
-      'https://ev-database.org/car/1973/MG-MG4-Electric-77-kWh',
+    evDatabaseURL: 'https://ev-database.org/car/1973/MG-MG4-Electric-77-kWh',
     drive: 'RWD',
     power: 180,
     timeToCharge10T080: 41,
@@ -1431,8 +1429,7 @@ const newCars: Array<NewCar> = [
     acceleration: 3.8,
     capacity: 64,
     range: 435,
-    evDatabaseURL:
-      'https://ev-database.org/car/1944/MG-MG4-Electric-XPOWER',
+    evDatabaseURL: 'https://ev-database.org/car/1944/MG-MG4-Electric-XPOWER',
     drive: 'AWD',
     power: 320,
     timeToCharge10T080: 24,
@@ -1582,7 +1579,8 @@ const newCars: Array<NewCar> = [
     acceleration: 8.7,
     capacity: 50,
     range: 354,
-    evDatabaseURL: 'https://ev-database.org/car/1941/Opel-Corsa-Electric-50-kWh',
+    evDatabaseURL:
+      'https://ev-database.org/car/1941/Opel-Corsa-Electric-50-kWh',
     drive: 'FWD',
     power: 100,
     timeToCharge10T080: 26,
@@ -1598,7 +1596,8 @@ const newCars: Array<NewCar> = [
     acceleration: 8.1,
     capacity: 51,
     range: 406,
-    evDatabaseURL: 'https://ev-database.org/car/1942/Opel-Corsa-Electric-51-kWh',
+    evDatabaseURL:
+      'https://ev-database.org/car/1942/Opel-Corsa-Electric-51-kWh',
     drive: 'FWD',
     power: 115,
     timeToCharge10T080: 27,
@@ -1655,8 +1654,7 @@ const newCars: Array<NewCar> = [
     subModel: '50 kWh',
     heroImageName: 'peugeot-2008',
     price: 5970000,
-    sellerURL:
-      'https://www.peugeotisland.is/tegundir/Nyr-e-2008.html',
+    sellerURL: 'https://www.peugeotisland.is/tegundir/Nyr-e-2008.html',
     acceleration: 9.9,
     capacity: 50,
     range: 345,
@@ -1671,8 +1669,7 @@ const newCars: Array<NewCar> = [
     subModel: '54 kWh',
     heroImageName: 'peugeot-2008-alt',
     price: 6270000,
-    sellerURL:
-      'https://www.peugeotisland.is/tegundir/Nyr-e-2008.html',
+    sellerURL: 'https://www.peugeotisland.is/tegundir/Nyr-e-2008.html',
     acceleration: 9.1,
     capacity: 54,
     range: 406,
@@ -1686,8 +1683,7 @@ const newCars: Array<NewCar> = [
     model: 'e-208',
     heroImageName: 'peugeot-208',
     price: 5990000,
-    sellerURL:
-      'https://www.peugeotisland.is/tegundir/nyr-e-208.html',
+    sellerURL: 'https://www.peugeotisland.is/tegundir/nyr-e-208.html',
     acceleration: 8.2,
     capacity: 51,
     range: 410,
@@ -2042,6 +2038,42 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 100,
     timeToCharge10T080: 56,
+  },
+  {
+    make: 'Renault',
+    model: 'Scenic E-Tech',
+    subModel: 'EV60',
+    heroImageName: 'renault-scenic',
+    price: 7500000,
+    sellerURL:
+      'https://www.renault.is/cars/renault-scenic-e-tech-100-rafmagn/yfirlit.html',
+    acceleration: 8.6,
+    capacity: 65,
+    range: 430,
+    evDatabaseURL:
+      'https://ev-database.org/car/2068/Renault-Scenic-E-Tech-EV60-170hp',
+    drive: 'FWD',
+    power: 125,
+    timeToCharge10T080: 35,
+    expectedDelivery: '2024',
+  },
+  {
+    make: 'Renault',
+    model: 'Scenic E-Tech',
+    subModel: 'EV87',
+    heroImageName: 'renault-scenic-alt',
+    price: 8200000,
+    sellerURL:
+      'https://www.renault.is/cars/renault-scenic-e-tech-100-rafmagn/yfirlit.html',
+    acceleration: 7.9,
+    capacity: 92,
+    range: 625,
+    evDatabaseURL:
+      'https://ev-database.org/car/2069/Renault-Scenic-E-Tech-EV87-220hp',
+    drive: 'FWD',
+    power: 160,
+    timeToCharge10T080: 40,
+    expectedDelivery: '2024',
   },
   {
     make: 'Skoda',
