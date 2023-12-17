@@ -254,6 +254,22 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'BMW',
+    model: 'i5',
+    subModel: 'M60',
+    heroImageName: 'bmw-i5',
+    price: 18690000,
+    sellerURL:
+      'https://www.bmw.is/is/all-models/bmw-i/i5/bmw-i5-overview.html',
+    acceleration: 3.8,
+    capacity: 84.4,
+    range: 516,
+    evDatabaseURL: 'https://ev-database.org/car/1907/BMW-i5-M60-xDrive-Sedan',
+    drive: 'AWD',
+    power: 442,
+    timeToCharge10T080: 28,
+  },
+  {
+    make: 'BMW',
     model: 'i7',
     heroImageName: 'bmw-i7',
     price: 22490000,
