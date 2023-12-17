@@ -548,7 +548,6 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 150,
     timeToCharge10T080: 36,
-    expectedDelivery: 'haustið 2023',
   },
   {
     make: 'Hongqi',
@@ -1508,7 +1507,6 @@ const newCars: Array<NewCar> = [
     range: 500,
     evDatabaseURL:
       'https://ev-database.org/car/1304/Nissan-Ariya-e-4ORCE-87kWh',
-    expectedDelivery: '2023',
     drive: 'AWD',
     power: 225,
     timeToCharge10T080: 35,
@@ -2069,7 +2067,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 315,
     timeToCharge10T080: 27,
-    expectedDelivery: 'September 2023',
   },
   {
     make: 'Subaru',
