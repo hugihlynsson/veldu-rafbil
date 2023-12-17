@@ -1696,7 +1696,7 @@ const newCars: Array<NewCar> = [
     make: 'Peugeot',
     model: 'e-3008',
     heroImageName: 'peugeot-e-3008',
-    price: 6500000,
+    price: 7000000,
     sellerURL: 'https://www.peugeotisland.is/tegundir/e-3008.html',
     acceleration: 7.0,
     capacity: 73,
@@ -1705,13 +1705,14 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 157,
     timeToCharge10T080: 36,
+    expectedDelivery: 'Sumar 2024'
   },
   {
     make: 'Peugeot',
     model: 'e-3008',
     subModel: 'Dual Motor',
     heroImageName: 'peugeot-e-3008-alt',
-    price: 6900000,
+    price: 7400000,
     sellerURL: 'https://www.peugeotisland.is/tegundir/e-3008.html',
     acceleration: 6.0,
     capacity: 73,
@@ -1721,13 +1722,14 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 240,
     timeToCharge10T080: 36,
+    expectedDelivery: 'Sumar 2024'
   },
   {
     make: 'Peugeot',
     model: 'e-3008',
     heroImageName: 'peugeot-e-3008',
     subModel: 'Long Range',
-    price: 7600000,
+    price: 8000000,
     sellerURL: 'https://www.peugeotisland.is/tegundir/e-3008.html',
     acceleration: 7.0,
     capacity: 98,
@@ -1737,6 +1739,7 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 170,
     timeToCharge10T080: 32,
+    expectedDelivery: 'Sumar 2024'
   },
   {
     make: 'Peugeot',
