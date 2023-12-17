@@ -1619,6 +1619,21 @@ const newCars: Array<NewCar> = [
     timeToCharge10T080: 31,
   },
   {
+    make: 'Opel',
+    model: 'Combo-e',
+    heroImageName: 'opel-combo',
+    price: 5690000,
+    sellerURL:
+      'https://www.opelisland.is/bilar/Combo-e-Life-tegundir/combo-e-life/yfirsyn.html',
+    acceleration: 11.7,
+    capacity: 50,
+    range: 285,
+    evDatabaseURL: 'https://ev-database.org/car/1544/Opel-Combo-e-Life-50-kWh',
+    drive: 'FWD',
+    power: 100,
+    timeToCharge10T080: 26,
+  },
+  {
     make: 'Ora',
     model: 'Funky Cat',
     subModel: '300 Pro',
