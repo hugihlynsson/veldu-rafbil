@@ -1760,7 +1760,7 @@ const newCars: Array<NewCar> = [
     make: 'Peugeot',
     model: 'e-Traveller',
     heroImageName: 'peugeot-e-traveller',
-    price: 10190000,
+    price: 9490000,
     sellerURL: 'https://www.peugeotisland.is/nyir-bilar/sko/e-traveller/',
     acceleration: 13.3,
     capacity: 75,
