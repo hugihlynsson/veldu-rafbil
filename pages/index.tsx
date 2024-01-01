@@ -95,20 +95,24 @@ const carSorter =
   (sorting: Sorting) =>
   (a: NewCar, b: NewCar): number => {
     let padPrice = (car: NewCar): string =>
-      car.price.toString().padStart(9, '0')
+      (car.price2024 ?? car.price).toString().padStart(9, '0')
+
     switch (sorting) {
       case 'name':
         return `${a.make} ${a.model} ${padPrice(a)}`.localeCompare(
           `${b.make} ${b.model} ${padPrice(b)}`,
         )
       case 'price':
-        return a.price - b.price
+        return (a.price2024 ?? a.price) - (b.price2024 ?? b.price)
       case 'range':
         return b.range - a.range
       case 'acceleration':
         return a.acceleration - b.acceleration
       case 'value':
-        return a.price / a.range - b.price / b.range
+        return (
+          (a.price2024 ?? a.price) / a.range -
+          (b.price2024 ?? b.price) / b.range
+        )
       case 'fastcharge':
         return (
           Number(getKmPerMinutesCharged(b.timeToCharge10T080, b.range)) -
@@ -151,12 +155,15 @@ const carFilter =
                 ) || false
               )
             case 'price':
-              return car.price <= (filters.price ?? Number.MAX_SAFE_INTEGER)
+              return (
+                (car.price2024 ?? car.price) <=
+                (filters.price ?? Number.MAX_SAFE_INTEGER)
+              )
             case 'range':
               return car.range >= (filters.range ?? 0)
             case 'value':
               return (
-                car.price / car.range <=
+                (car.price2024 ?? car.price) / car.range <=
                 (filters.value ?? Number.MAX_SAFE_INTEGER)
               )
           }
@@ -293,7 +300,12 @@ const New: NextPage<Props> = ({
             eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
             <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda en
             raundrægni er háð aðstæðum og aksturslagi.
-            <em>Verð eru birt án ábyrgðar og geta verið úrelt.</em>
+            <em>
+              Um áramótin féll niður skattaíviljun og reikna má með að verð á
+              rafbílum hækki um ~1.3 M kr. Hjá þeim bílasölum sem hafa ekki
+              uppfært verðlistana sína eru 2023 verðin birt tímabundið og merkt
+              sem slík. Verð eru birt án ábyrgðar og geta verið úrelt.
+            </em>
           </p>
 
           <div className="sorting-title">Raða eftir:</div>
@@ -491,6 +503,7 @@ const New: NextPage<Props> = ({
             display: inline-block;
             font-size: 12px;
             color: #888;
+            margin-top: 0.5em;
           }
 
           .sorting-title,

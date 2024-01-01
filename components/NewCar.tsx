@@ -10,7 +10,6 @@ import LinkPill from './LinkPill'
 
 interface Props {
   car: NewCarType
-  onGray?: boolean
   showValue?: boolean
 }
 
@@ -25,7 +24,7 @@ let getDriveLabel = (drive: Drive) => {
   }
 }
 
-const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
+const NewCar: FunctionComponent<Props> = ({ car, showValue }) => (
   <article>
     <div className="imageBox">
       <Image
@@ -52,20 +51,20 @@ const NewCar: FunctionComponent<Props> = ({ car, onGray, showValue }) => (
       </h1>
 
       <LinkPill
-        onGray={Boolean(onGray)}
         href={car.sellerURL}
         external
         extra={
           (car.expectedDelivery && 'áætlað verð ↗') ||
-          (showValue
-            ? `${addDecimalSeprators(
-                Math.round(car.price / car.range),
-              )} kr. á km.`
-            : undefined)
+          (showValue &&
+            `${addDecimalSeprators(
+              Math.round((car.price2024 ?? car.price) / car.range),
+            )} kr. á km.`) ||
+          (!car.price2024 && '2023 verð') ||
+          undefined
         }
         onClick={() => trackGoal('OBBPADY0', 0)}
       >
-        {addDecimalSeprators(car.price)} kr.
+        {addDecimalSeprators(car.price2024 ?? car.price)} kr.
         {!car.expectedDelivery && ' ↗'}
       </LinkPill>
 
