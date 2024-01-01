@@ -1882,7 +1882,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 360,
     timeToCharge10T080: 32,
-    expectedDelivery: 'Byrjun 2024',
+    expectedDelivery: 'Sumar 2024',
   },
   {
     make: 'Polestar',
@@ -1899,7 +1899,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 380,
     timeToCharge10T080: 32,
-    expectedDelivery: 'Byrjun 2024',
+    expectedDelivery: 'Sumar 2024',
   },
   {
     make: 'Porsche',
@@ -2684,7 +2684,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 315,
     timeToCharge10T080: 27,
-    expectedDelivery: 'Desember 2023',
+    expectedDelivery: 'Janúar 2024',
   },
   {
     make: 'Volvo',
