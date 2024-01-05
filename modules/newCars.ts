@@ -2463,6 +2463,7 @@ const newCars: Array<NewCar> = [
     subModel: 'Pro',
     heroImageName: 'vw-id-3-01',
     price: 5890000,
+    price2024: 6790000,
     sellerURL: 'https://www.volkswagen.is/is/bilar/the-new-id3.html',
     acceleration: 7.4,
     capacity: 58,
