@@ -199,7 +199,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             value={filters.availability ?? 'all'}
           >
             <option value="all">Allir</option>
-            <option value="availability">Fáanlegir</option>
+            <option value="available">Fáanlegir</option>
             <option value="expected">Væntanlegir</option>
           </select>
           <div className="filter-header">

@@ -86,7 +86,7 @@ export const getFiltersFromQuery = (query: ParsedUrlQuery): Filters => {
   }
   if (query.frambod) {
     filters.availability =
-      query.frambod === 'faanlegir' ? 'availible' : 'expected'
+      query.frambod === 'faanlegir' ? 'available' : 'expected'
   }
   return filters
 }
@@ -221,7 +221,7 @@ const New: NextPage<Props> = ({
     }
     if (filters.availability) {
       query.frambod =
-        filters.availability === 'availible' ? 'faanlegir' : 'vaentanlegir'
+        filters.availability === 'available' ? 'faanlegir' : 'vaentanlegir'
     }
     if (filters.drive) {
       query.drif = filters.drive
@@ -400,7 +400,7 @@ const New: NextPage<Props> = ({
                 >
                   Framboð:{' '}
                   <span>
-                    {filters.availability === 'availible'
+                    {filters.availability === 'available'
                       ? 'Fáanlegir'
                       : 'Væntanlegir'}
                   </span>
