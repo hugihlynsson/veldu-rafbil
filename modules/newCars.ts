@@ -957,6 +957,7 @@ const newCars: Array<NewCar> = [
     model: 'MX-30',
     heroImageName: 'mazda-mx-30',
     price: 4670000,
+    price2024: 5340000,
     sellerURL: 'https://www.mazda.is/is/nyir-bilar/mazda-mx-30',
     acceleration: 9.0,
     capacity: 35.5,
