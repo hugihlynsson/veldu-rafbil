@@ -302,9 +302,9 @@ const New: NextPage<Props> = ({
             raundrægni er háð aðstæðum og aksturslagi.
             <em>
               Um áramótin féll niður skattaíviljun og reikna má með að verð á
-              rafbílum hækki um ~1.3 M kr. Hjá þeim bílasölum sem hafa ekki
+              rafbílum hækki um ~1.3 M kr. Í stað þess er hægt að <a href="https://island.is/rafbilastyrkir">sækja um 900.000 kr. rafbílastyrk</a>. Hjá þeim bílasölum sem hafa ekki
               uppfært verðlistana sína eru 2023 verðin birt tímabundið og merkt
-              sem slík. Verð eru birt án ábyrgðar og geta verið úrelt.
+              sem slík. Verð eru birt án ábyrgðar og geta verið úrelt. 
             </em>
           </p>
 
@@ -504,6 +504,9 @@ const New: NextPage<Props> = ({
             font-size: 12px;
             color: #888;
             margin-top: 0.5em;
+          }
+          .description em a {
+            color: #555;
           }
 
           .sorting-title,
