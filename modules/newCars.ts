@@ -112,6 +112,7 @@ const newCars: Array<NewCar> = [
     subModel: '50 quattro',
     heroImageName: 'audi-q8',
     price: 12790000,
+    price2024: 12790000,
     sellerURL:
       'https://www.audi.is/is/web/is/models/q8-e-tron/q8-e-tron-2023.html',
     acceleration: 6.0,
@@ -128,6 +129,7 @@ const newCars: Array<NewCar> = [
     subModel: '55 quattro',
     heroImageName: 'audi-q8-alt',
     price: 14290000,
+    price2024: 14290000,
     sellerURL:
       'https://www.audi.is/is/web/is/models/q8-e-tron/q8-e-tron-2023.html',
     acceleration: 5.6,
@@ -144,6 +146,7 @@ const newCars: Array<NewCar> = [
     subModel: '50 quattro',
     heroImageName: 'audi-q8-sportback',
     price: 13190000,
+    price2024: 13190000,
     sellerURL:
       'https://www.audi.is/is/web/is/models/q8-e-tron/q8-e-tron-2023.html',
     acceleration: 6.0,
@@ -156,11 +159,12 @@ const newCars: Array<NewCar> = [
     power: 250,
   },
   {
-    make: 'Audi',
+    make: 'Audi',°
     model: 'Q8 e-tron Sportback',
     subModel: '55 quattro',
     heroImageName: 'audi-q8-sportback-alt',
     price: 14690000,
+    price2024: 14690000,
     sellerURL:
       'https://www.audi.is/is/web/is/models/q8-e-tron/q8-e-tron-2023.html',
     acceleration: 5.6,
@@ -187,6 +191,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     timeToCharge10T080: 31,
     power: 370,
+    discontinued: '2024-01-15',
   },
   {
     make: 'Audi',
@@ -203,6 +208,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     timeToCharge10T080: 31,
     power: 370,
+    discontinued: '2024-01-15',
   },
   {
     make: 'BMW',
