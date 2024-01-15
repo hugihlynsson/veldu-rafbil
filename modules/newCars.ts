@@ -159,7 +159,7 @@ const newCars: Array<NewCar> = [
     power: 250,
   },
   {
-    make: 'Audi',°
+    make: 'Audi',
     model: 'Q8 e-tron Sportback',
     subModel: '55 quattro',
     heroImageName: 'audi-q8-sportback-alt',
@@ -2538,6 +2538,7 @@ const newCars: Array<NewCar> = [
     subModel: 'Pure',
     heroImageName: 'vw-id-4',
     price: 6390000,
+    price2024: 7690000,
     sellerURL: 'https://www.volkswagen.is/is/bilar/ID4.html',
     acceleration: 10.9,
     capacity: 52,
@@ -2553,6 +2554,7 @@ const newCars: Array<NewCar> = [
     subModel: 'Pro',
     heroImageName: 'vw-id-4-alt',
     price: 7490000,
+    price2024: 8790000,
     sellerURL: 'https://www.volkswagen.is/is/bilar/ID4.html',
     acceleration: 10.4,
     capacity: 77,
@@ -2568,6 +2570,7 @@ const newCars: Array<NewCar> = [
     subModel: 'Pro 4MOTION',
     heroImageName: 'vw-id-4-alt2',
     price: 8290000,
+    price2024: 9990000,
     sellerURL: 'https://www.volkswagen.is/is/bilar/ID4.html',
     acceleration: 6.9,
     capacity: 77,
