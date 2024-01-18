@@ -95,7 +95,7 @@ const carSorter =
   (sorting: Sorting) =>
   (a: NewCar, b: NewCar): number => {
     let padPrice = (car: NewCar): string =>
-      (car.price2024 ?? car.price).toString().padStart(9, '0')
+      (car.price2024 ?? car.price + 1320000).toString().padStart(9, '0')
 
     switch (sorting) {
       case 'name':
@@ -103,15 +103,18 @@ const carSorter =
           `${b.make} ${b.model} ${padPrice(b)}`,
         )
       case 'price':
-        return (a.price2024 ?? a.price) - (b.price2024 ?? b.price)
+        return (
+          (a.price2024 ?? a.price + 1320000) -
+          (b.price2024 ?? b.price + 1320000)
+        )
       case 'range':
         return b.range - a.range
       case 'acceleration':
         return a.acceleration - b.acceleration
       case 'value':
         return (
-          (a.price2024 ?? a.price) / a.range -
-          (b.price2024 ?? b.price) / b.range
+          (a.price2024 ?? a.price + 1320000) / a.range -
+          (b.price2024 ?? b.price + 1320000) / b.range
         )
       case 'fastcharge':
         return (
@@ -302,9 +305,13 @@ const New: NextPage<Props> = ({
             raundrægni er háð aðstæðum og aksturslagi.
             <em>
               Um áramótin féll niður skattaíviljun og reikna má með að verð á
-              rafbílum hækki um ~1.3 M kr. Í stað þess er hægt að <a href="https://island.is/rafbilastyrkir">sækja um 900.000 kr. rafbílastyrk</a>. Hjá þeim bílasölum sem hafa ekki
-              uppfært verðlistana sína eru 2023 verðin birt tímabundið og merkt
-              sem slík. Verð eru birt án ábyrgðar og geta verið úrelt. 
+              rafbílum hækki um ~1.3 M kr. Í stað þess er hægt að{' '}
+              <a href="https://island.is/rafbilastyrkir">
+                sækja um 900.000 kr. rafbílastyrk
+              </a>
+              . Hjá þeim bílasölum sem hafa ekki uppfært verðlistana sína eru
+              2023 verðin birt tímabundið og merkt sem slík. Verð eru birt án
+              ábyrgðar og geta verið úrelt.
             </em>
           </p>
 
