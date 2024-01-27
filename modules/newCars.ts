@@ -1727,6 +1727,7 @@ const newCars: Array<NewCar> = [
     model: 'Zafira-e',
     heroImageName: 'opel-zafira',
     price: 9490000,
+    price2024: 9490000,
     sellerURL: 'https://www.opelisland.is/bilar/zafira-tegundir/yfirsyn.html',
     acceleration: 13.3,
     capacity: 75,
