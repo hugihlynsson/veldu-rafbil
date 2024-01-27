@@ -276,7 +276,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 250,
     timeToCharge10T080: 28,
-    expectedDelivery: 'Sumar 2024'
+    expectedDelivery: 'Sumar 2024',
   },
   {
     make: 'BMW',
@@ -285,7 +285,8 @@ const newCars: Array<NewCar> = [
     heroImageName: 'bmw-i5-m',
     price: 18690000,
     price2024: 19890000,
-    sellerURL: 'https://www.bmw.is/is/all-models/bmw-i/i5/bmw-i5-overview.html',
+    sellerURL:
+      'https://www.bmw.is/is/all-models/m-series/bmw-i5-m60/bmw-i5-m60xdrive-overview.html',
     acceleration: 3.8,
     capacity: 84.4,
     range: 516,
@@ -1726,12 +1727,12 @@ const newCars: Array<NewCar> = [
     model: 'Zafira-e',
     heroImageName: 'opel-zafira',
     price: 9490000,
-    sellerURL:
-      'https://www.opelisland.is/bilar/zafira-tegundir/yfirsyn.html',
+    sellerURL: 'https://www.opelisland.is/bilar/zafira-tegundir/yfirsyn.html',
     acceleration: 13.3,
     capacity: 75,
     range: 330,
-    evDatabaseURL: 'https://ev-database.org/car/1349/Opel-Zafira-e-Life-L-75-kWh',
+    evDatabaseURL:
+      'https://ev-database.org/car/1349/Opel-Zafira-e-Life-L-75-kWh',
     drive: 'FWD',
     power: 100,
     timeToCharge10T080: 38,
@@ -2044,7 +2045,8 @@ const newCars: Array<NewCar> = [
     acceleration: 3.3,
     capacity: 100.0,
     range: 591,
-    evDatabaseURL: 'https://ev-database.org/car/2085/Porsche-Macan-Turbo-Electric',
+    evDatabaseURL:
+      'https://ev-database.org/car/2085/Porsche-Macan-Turbo-Electric',
     drive: 'AWD',
     power: 470,
     timeToCharge10T080: 22,
