@@ -1028,10 +1028,10 @@
   resolved "https://registry.yarnpkg.com/@vercel/ruby/-/ruby-2.0.5.tgz#03206dbfab38f056b49260aa78c3731c8479d0fe"
   integrity sha512-Gfm8HDech41vf+EPleRzgoJUnDTJerKgckMm4KX0JT860gV9XBMSOWYH7eMWHmMza104+HRCWL7wT6OlpftF2Q==
 
-"@vercel/static-build@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@vercel/static-build/-/static-build-2.1.0.tgz#10b73b07eb6c92cad52ee9920b0caf650b04d34e"
-  integrity sha512-mSP3UNckqr3aqTx8fAbUiM/5E4llgJeUWFf1/RgUUqt5T5QnxZ2n10HagHSZ/fHCx1bT+J8jdty8Aq7v+vJt2Q==
+"@vercel/static-build@2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@vercel/static-build/-/static-build-2.2.0.tgz#fb31736afc39c0dfd7437cb8a9bd59c3295ef23d"
+  integrity sha512-PG8/X6bk8K6sztAKckwo/miBdOU1EUmH5ct0oSXlZl7lv80v81axJrZ8YnqSmRyFT5+WR6e9Njk0Biz5FtyQ8w==
   dependencies:
     "@vercel/gatsby-plugin-vercel-analytics" "1.0.11"
     "@vercel/gatsby-plugin-vercel-builder" "2.0.16"
@@ -3218,10 +3218,10 @@ v8-compile-cache-lib@^3.0.1:
   resolved "https://registry.yarnpkg.com/v8-compile-cache-lib/-/v8-compile-cache-lib-3.0.1.tgz#6336e8d71965cb3d35a1bbb7868445a7c05264bf"
   integrity sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==
 
-vercel@^33.4.0:
-  version "33.4.0"
-  resolved "https://registry.yarnpkg.com/vercel/-/vercel-33.4.0.tgz#bc6f3c87c30c011a6aaf960f6dc44daf9a5c6886"
-  integrity sha512-uB8XcTvARBsJtXCbhm/+F3qtV/FQXYYxx6jyUMfMU8izmOmWUlcSOmARbctL4vZ3Izj4ku+P4S25aDQFNmhGYQ==
+vercel@^33.4.1:
+  version "33.4.1"
+  resolved "https://registry.yarnpkg.com/vercel/-/vercel-33.4.1.tgz#e2af5583dc8b13a65951d72bef21ca6b7c86768b"
+  integrity sha512-WR5rM9900CW6Z+jlEltF0f87CjHoppz1dJpZ1VzLPWOrgsvVMOcCginyCRhFyxT/AmkpGT7T3DjzKW9Tpx376Q==
   dependencies:
     "@vercel/build-utils" "7.5.1"
     "@vercel/fun" "1.1.0"
@@ -3233,7 +3233,7 @@ vercel@^33.4.0:
     "@vercel/redwood" "2.0.6"
     "@vercel/remix-builder" "2.0.18"
     "@vercel/ruby" "2.0.5"
-    "@vercel/static-build" "2.1.0"
+    "@vercel/static-build" "2.2.0"
     chokidar "3.3.1"
 
 web-vitals@0.2.4:
