@@ -27,7 +27,7 @@
     "@types/react": "^18.2.51",
     "@types/react-dom": "^18.2.18",
     "@types/smoothscroll-polyfill": "^0.3.3",
-    "prettier": "^3.2.4",
+    "prettier": "^3.2.5",
     "typescript": "^5.3.3",
     "vercel": "^33.4.1"
   }
