@@ -2739,6 +2739,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 220,
     timeToCharge10T080: 30,
+    discontinued: '2024-02-04',
   },
   {
     make: 'Volkswagen',
