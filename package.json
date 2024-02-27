@@ -24,7 +24,7 @@
     "@types/atob": "^2.1.4",
     "@types/cheerio": "^0.22.35",
     "@types/node": "^18.19.18",
-    "@types/react": "^18.2.58",
+    "@types/react": "^18.2.60",
     "@types/react-dom": "^18.2.19",
     "@types/smoothscroll-polyfill": "^0.3.4",
     "prettier": "^3.2.5",
