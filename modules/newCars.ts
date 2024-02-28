@@ -1105,6 +1105,7 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 140,
     timeToCharge10T080: 29,
+    discontinued: '2024-02-28',
   },
   {
     make: 'Mercedes-Benz',
@@ -1112,6 +1113,7 @@ const newCars: Array<NewCar> = [
     subModel: '300 4MATIC',
     heroImageName: 'mercedes-eqb-alt',
     price: 8490000,
+    price2024: 9590000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqb/',
     acceleration: 8.0,
@@ -1145,6 +1147,7 @@ const newCars: Array<NewCar> = [
     subModel: '400 4MATIC',
     heroImageName: 'eqc',
     price: 9990000,
+    price2024: 10990000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqc/',
     acceleration: 5.1,
