@@ -6,6 +6,7 @@ import smoothscroll from 'smoothscroll-polyfill'
 import { ParsedUrlQuery } from 'querystring'
 
 import Car from '../components/NewCar'
+import Title from '../components/Title'
 import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
 import LinkPill from '../components/LinkPill'
@@ -288,14 +289,14 @@ const New: NextPage<Props> = ({
         </Head>
 
         <header>
-          <h1>Veldu Rafbíl</h1>
+          <Title />
 
           <nav className="headerLinks">
-            <LinkPill current onClick={handleNewPress} href="#nyjir">
+            <LinkPill current onClick={handleNewPress} href="#nyjir" large>
               Nýir ↓
             </LinkPill>
 
-            <LinkPill href="/notadir">Notaðir →</LinkPill>
+            <LinkPill large href="/notadir">Notaðir →</LinkPill>
           </nav>
 
           <p className="description" id="nyjir" ref={descriptionRef}>
@@ -478,29 +479,18 @@ const New: NextPage<Props> = ({
             max-width: 480px;
             padding: 16px;
           }
-          h1 {
-            font-size: 40px;
-            font-weight: 600;
-            line-height: 1.1;
-            margin-bottom: 0.4em;
-          }
-
-          .headerLinks {
-            display: flex;
-            margin-bottom: 10px;
-          }
 
           .description {
             line-height: 1.5;
             font-size: 14px;
             padding-top: 2em;
             margin: 0 0 2em 0;
-            color: #555;
+            color: ${colors.stone};
             max-width: 33em;
           }
           .description a {
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             color: black;
           }
           .description a:hover {
@@ -509,11 +499,11 @@ const New: NextPage<Props> = ({
           .description em {
             display: inline-block;
             font-size: 12px;
-            color: #888;
+            color: #777;
             margin-top: 0.5em;
           }
           .description em a {
-            color: #555;
+            color: #222;
           }
 
           .sorting-title,
@@ -642,9 +632,6 @@ const New: NextPage<Props> = ({
             header {
               padding: 24px;
             }
-            h1 {
-              font-size: 48px;
-            }
             .filters-reset-box {
               padding: 24px;
             }
@@ -655,9 +642,6 @@ const New: NextPage<Props> = ({
               padding-left: 40px;
               max-width: none;
               padding-bottom: 40px;
-            }
-            h1 {
-              font-size: 64px;
             }
             .description {
               font-size: 16px;

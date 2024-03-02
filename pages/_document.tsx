@@ -18,8 +18,6 @@ export default class Evs extends Document {
               }
               body {
                 margin: 0;
-                font-family: BlinkMacSystemFont, -apple-system, Roboto, Helvetica,
-                  Arial, sans-serif;
                 color: #111;
                 width: 100%;
                 min-height: 100vh;
@@ -29,6 +27,13 @@ export default class Evs extends Document {
               button, input {
                 font-family: BlinkMacSystemFont, -apple-system, Roboto, Helvetica,
                   Arial, sans-serif;
+              }
+              :root {
+                font-family: Inter, sans-serif;
+                font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
+              }
+              @supports (font-variation-settings: normal) {
+                :root { font-family: InterVariable, sans-serif; }
               }
           `}</style>
 
