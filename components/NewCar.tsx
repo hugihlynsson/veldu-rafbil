@@ -25,11 +25,11 @@ let getDriveLabel = (drive: Drive) => {
   }
 }
 
-const NewCar: FunctionComponent<Props> = ({ car, showValue }) => (
+const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => (
   <article>
     <div className="imageBox">
       <Image
-        priority
+        priority={priority}
         alt=""
         sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
         src={`/images/${car.heroImageName}.jpg`}
