@@ -11,6 +11,7 @@ import LinkPill from './LinkPill'
 interface Props {
   car: NewCarType
   showValue?: boolean
+  priority?: boolean
 }
 
 let getDriveLabel = (drive: Drive) => {
@@ -28,6 +29,7 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue }) => (
   <article>
     <div className="imageBox">
       <Image
+        priority
         alt=""
         sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
         src={`/images/${car.heroImageName}.jpg`}
