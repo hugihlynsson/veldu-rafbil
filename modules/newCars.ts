@@ -1816,7 +1816,7 @@ const newCars: Array<NewCar> = [
     model: 'e-3008',
     heroImageName: 'peugeot-e-3008',
     price: 7000000,
-    price2024: 8500000,
+    price2024: 8390000,
     sellerURL: 'https://www.peugeotisland.is/tegundir/e-3008.html',
     acceleration: 7.0,
     capacity: 73,
@@ -1825,7 +1825,7 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 157,
     timeToCharge10T080: 36,
-    expectedDelivery: 'Sumar 2024',
+    expectedDelivery: 'Júní 2024',
   },
   {
     make: 'Peugeot',
@@ -1843,7 +1843,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 240,
     timeToCharge10T080: 36,
-    expectedDelivery: 'Sumar 2024',
+    expectedDelivery: '2024',
   },
   {
     make: 'Peugeot',
@@ -1861,7 +1861,7 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 170,
     timeToCharge10T080: 32,
-    expectedDelivery: 'Sumar 2024',
+    expectedDelivery: '2024',
   },
   {
     make: 'Peugeot',
