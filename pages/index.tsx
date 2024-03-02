@@ -296,7 +296,9 @@ const New: NextPage<Props> = ({
               Nýir ↓
             </LinkPill>
 
-            <LinkPill large href="/notadir">Notaðir →</LinkPill>
+            <LinkPill large href="/notadir">
+              Notaðir →
+            </LinkPill>
           </nav>
 
           <p className="description" id="nyjir" ref={descriptionRef}>
@@ -424,8 +426,9 @@ const New: NextPage<Props> = ({
           </div>
         </header>
 
-        {stableSort(filteredCars, carSorter(sorting)).map((car) => (
+        {stableSort(filteredCars, carSorter(sorting)).map((car, index) => (
           <Car
+            priority={index <= 1}
             car={car}
             key={`${car.make} ${car.model} ${car.subModel} ${car.price}`}
             showValue={sorting === 'value' || Boolean(filters.value)}
