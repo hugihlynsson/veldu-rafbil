@@ -138,7 +138,7 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue }) => (
           display: block;
           font-weight: 500;
           font-size: 16px;
-          color: ${colors.clay};
+          color: ${colors.stone};
           margin-top: -1px;
           margin-bottom: 8px;
         }
@@ -147,7 +147,7 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue }) => (
           margin-bottom: 2px;
           font-size: 16px;
           font-weight: 500;
-          color: ${colors.clay};
+          color: ${colors.stone};
         }
 
         .info {
@@ -186,7 +186,7 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue }) => (
         .more-info {
           display: inline-block;
           font-size: 14px;
-          color: ${colors.clay};
+          color: ${colors.stone};
           text-decoration: none;
           font-weight: 500;
           transition: color 0.1s;
