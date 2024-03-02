@@ -1,4 +1,6 @@
 import { FunctionComponent } from 'react'
+
+import { colors } from '../modules/globals'
 import Orflaedi from './Orflaedi'
 
 const Footer: FunctionComponent<{}> = () => (
@@ -26,12 +28,12 @@ const Footer: FunctionComponent<{}> = () => (
           max-width: 480px;
           font-size: 14px;
           line-height: 1.5;
-          font-weight: 300;
           padding: 0 16px;
+          color: ${colors.stone};
         }
         a {
-          color: #000;
-          font-weight: 500;
+          color: ${colors.tint};
+          font-weight: 600;
           text-decoration: none;
         }
         a:hover {

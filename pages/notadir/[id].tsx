@@ -6,6 +6,7 @@ import smoothscroll from 'smoothscroll-polyfill'
 
 import Toggles from '../../components/Toggles'
 import Footer from '../../components/Footer'
+import Title from '../../components/Title'
 import stableSort from '../../components/stableSort'
 import usedCarModels from '../../apiHelpers/usedCarModels'
 
@@ -86,7 +87,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
         </Head>
 
         <header>
-          <h1>Veldu Rafbíl</h1>
+          <Title />
 
           <nav className="headerLinks">
             <LinkPill href="/notadir">Notaðir ←</LinkPill>

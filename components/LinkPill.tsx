@@ -1,6 +1,8 @@
 import React, { ReactNode, FunctionComponent } from 'react'
 import Link from 'next/link'
 
+import { colors } from '../modules/globals'
+
 interface Props {
   current?: boolean
   external?: boolean
@@ -9,6 +11,7 @@ interface Props {
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
   onGray?: boolean
   children?: ReactNode | undefined
+  large?: boolean
 }
 
 const LinkPill: FunctionComponent<Props> = ({
@@ -19,9 +22,10 @@ const LinkPill: FunctionComponent<Props> = ({
   href,
   onClick,
   onGray,
+  large,
 }) => (
   <Link
-    className={'link-pill ' + (current ? 'current' : onGray ? 'on-gray' : '')}
+    className={'link-pill ' + (current ? 'current' : onGray ? 'on-gray' : '') + (large ? ' large' : '')}
     onClick={onClick}
     href={href}
     target={external ? '_blank' : undefined}
@@ -30,8 +34,9 @@ const LinkPill: FunctionComponent<Props> = ({
     {children} {extra && <span className="extra">{extra}</span>}
     <style jsx global>{`
       .link-pill {
-        display: inline-block;
+        display: inline-flex;
         align-self: flex-start;
+        align-items: center;
         flex-shrink: 0;
         margin-top: 8px;
         color: inherit;
@@ -50,7 +55,7 @@ const LinkPill: FunctionComponent<Props> = ({
       }
       .link-pill.current,
       .link-pill.current:hover {
-        background-color: #48f;
+        background-color: ${colors.sky};
         color: #fff;
       }
       .link-pill.on-gray {
@@ -59,6 +64,9 @@ const LinkPill: FunctionComponent<Props> = ({
       .link-pill.on-gray:hover {
         background-color: #d8d8d8;
       }
+      .link-pill.large {
+        padding: 5px 14px;
+      }
       .link-pill .extra {
         text-transform: uppercase;
         font-weight: 700;
@@ -66,8 +74,8 @@ const LinkPill: FunctionComponent<Props> = ({
         background: white;
         color: #444;
         border-radius: 16px;
-        padding: 1px 6px 2px;
-        margin: 1px -6px -4px 1px;
+        padding: 2px 6px;
+        margin: 0px -7px 0px 5px;
         vertical-align: top;
         display: inline-block;
         transition: background-color 0.1s;

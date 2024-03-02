@@ -1,6 +1,6 @@
 export const colors = {
-  sky: '#4488FF',
-  skyDarker: '#357ff5',
+  sky: '#201BE3',
+  skyDarker: '#1A15B7',
   tint: '#111',
   stone: '#555',
   clay: '#888',

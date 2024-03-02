@@ -6,6 +6,7 @@ import smoothscroll from 'smoothscroll-polyfill'
 
 import { ProcessedUsedCar, UsedCarModel } from '../../types'
 import Toggles from '../../components/Toggles'
+import Title from '../../components/Title'
 import Footer from '../../components/Footer'
 import ModelCard from '../../components/UsedCarModelCard'
 import estimateWLTP from '../../modules/estimateWLTP'
@@ -157,12 +158,12 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
         </Head>
 
         <header>
-          <h1>Veldu Rafbíl</h1>
+          <Title />
 
           <nav className="">
-            <LinkPill href="/">Nýir ←</LinkPill>
+            <LinkPill href="/" large>Nýir ←</LinkPill>
 
-            <LinkPill href="#notadir" current onClick={handleNewPress}>
+            <LinkPill href="#notadir" current onClick={handleNewPress} large>
               Notaðir ↓
             </LinkPill>
           </nav>
@@ -255,11 +256,6 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
           font-weight: 600;
           line-height: 1.1;
           margin-bottom: 0.4em;
-        }
-
-        .headerLinks {
-          display: flex;
-          margin-bottom: 10px;
         }
 
         .description {

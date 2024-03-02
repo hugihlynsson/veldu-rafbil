@@ -1,5 +1,7 @@
 import { FunctionComponent } from 'react'
 
+import { colors } from '../modules/globals'
+
 const Orflaedi: FunctionComponent<{}> = () => (
   <section>
     <div className="content">
@@ -47,14 +49,14 @@ const Orflaedi: FunctionComponent<{}> = () => (
         font-size: 32px;
         max-width: 480px;
         line-height: 1.1;
-        color: #1a202c;
+        color: ${colors.tint};
       }
       p {
         margin: 0;
         max-width: 480px;
         font-size: 14px;
         line-height: 1.5;
-        color: #4a5568;
+        color: ${colors.stone};
       }
       p a {
         color: #000;
@@ -79,7 +81,7 @@ const Orflaedi: FunctionComponent<{}> = () => (
         path: white !important;
         text-decoration: none;
         font-size: 20px;
-        line-height: 1.5;
+        line-height: 1.4;
         font-weight: 600;
       }
       .card:hover {
@@ -91,7 +93,7 @@ const Orflaedi: FunctionComponent<{}> = () => (
         height: auto;
         max-width: 100%;
         height: 30px;
-        margin-top: 32px;
+        margin-top: 40px;
       }
 
       @media screen and (min-width: 375px) {
