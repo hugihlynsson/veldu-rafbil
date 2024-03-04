@@ -1823,6 +1823,7 @@ const newCars: Array<NewCar> = [
     subModel: '51 kWh',
     heroImageName: 'peugeot-208',
     price: 5990000,
+    price2024: 5990000,
     sellerURL: 'https://www.peugeotisland.is/tegundir/nyr-e-208.html',
     acceleration: 8.2,
     capacity: 51,
