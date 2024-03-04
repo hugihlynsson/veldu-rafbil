@@ -1804,6 +1804,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Peugeot',
     model: 'e-208',
+    subModel: '50 kWh',
     heroImageName: 'peugeot-208',
     price: 5990000,
     price2024: 5790000,
@@ -1819,6 +1820,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Peugeot',
     model: 'e-208',
+    subModel: '51 kWh',
     heroImageName: 'peugeot-208',
     price: 5990000,
     sellerURL: 'https://www.peugeotisland.is/tegundir/nyr-e-208.html',
