@@ -88,6 +88,7 @@ const AdminCars = ({ viewer }: AdminCarsProps) => {
   const [showTagged, setShowTagged] = useState<boolean>(false)
   const [showFiltered, setShowFiltered] = useState<boolean>(false)
   const [showWithNoImage, setShowWithNoImage] = useState<boolean>(false)
+  const [nameFilter, setNameFilter] = useState<string>('')
 
   const usedCars = carsSnapshot?.cars ?? []
 
@@ -115,7 +116,11 @@ const AdminCars = ({ viewer }: AdminCarsProps) => {
       ([car]) =>
         (!car.filtered || showFiltered) &&
         (!Boolean(car.metadata?.id) || showTagged) &&
-        (Boolean(car.image) || showWithNoImage),
+        (Boolean(car.image) || showWithNoImage) &&
+        (`${car.make} ${car.model}`
+          .toLowerCase()
+          .includes(nameFilter.toLowerCase()) ||
+          !nameFilter),
     )
 
   // Sort cars in decending order by firstSeen
@@ -190,6 +195,15 @@ const AdminCars = ({ viewer }: AdminCarsProps) => {
             items={[[`Sýna án myndar (${withNoImageCount})`, true]]}
             onClick={() => setShowWithNoImage(!showWithNoImage)}
           />
+          <p style={{ margin: 0 }}>Í lista: {carsToShow.length}</p>
+
+          <input
+            onChange={(event) => setNameFilter(event.target.value)}
+            placeholder="Leita eftir nafni"
+          />
+
+          <div style={{ display: 'flex', flexGrow: 1 }} />
+
           {carsSnapshot && (
             <p className="dataDate">
               {getDataDate(new Date(carsSnapshot.date))} <UpdateButton />
