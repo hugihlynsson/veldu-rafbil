@@ -1049,6 +1049,28 @@ const usedCarModels: Array<UsedCarModel> = [
     evDatabaseURL:
       'https://ev-database.org/car/1663/Hyundai-IONIQ-5-Long-Range-AWD',
   },
+  {
+    id: 'toyota-bz4x',
+    make: 'Toyota',
+    model: 'bZ4X',
+    price: 8690000,
+    sellerURL: 'https://www.toyota.is/new-cars/bz4x',
+    acceleration: 8.4,
+    capacity: 71.4,
+    range: 450,
+    evDatabaseURL: 'https://ev-database.org/car/1564/Toyota-bZ4X-FWD',
+  },
+  {
+    id: 'toyota-bz4x-awd',
+    make: 'Toyota',
+    model: 'bZ4X AWD',
+    price: 9190000,
+    sellerURL: 'https://www.toyota.is/new-cars/bz4x',
+    acceleration: 7.7,
+    capacity: 71.4,
+    range: 400,
+    evDatabaseURL: 'https://ev-database.org/car/1565/Toyota-bZ4X-AWD',
+  },
 ]
 
 export default usedCarModels
