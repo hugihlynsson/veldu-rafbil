@@ -1071,6 +1071,15 @@ const usedCarModels: Array<UsedCarModel> = [
     range: 400,
     evDatabaseURL: 'https://ev-database.org/car/1565/Toyota-bZ4X-AWD',
   },
+  {
+    id: 'dacia-spring',
+    make: 'Dacia',
+    model: 'Spring',
+    acceleration: 19.1,
+    capacity: 25,
+    range: 236,
+    evDatabaseURL: 'https://ev-database.org/car/1704/Dacia-Spring-Electric',
+  },
 ]
 
 export default usedCarModels
