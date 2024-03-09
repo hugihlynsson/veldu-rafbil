@@ -1080,6 +1080,17 @@ const usedCarModels: Array<UsedCarModel> = [
     range: 236,
     evDatabaseURL: 'https://ev-database.org/car/1704/Dacia-Spring-Electric',
   },
+  {
+    id: 'subaru-solterra',
+    make: 'Subaru',
+    model: 'Solterra',
+    price: 8590000,
+    sellerURL: 'https://www.subaru.is/solterra.html',
+    acceleration: 7.7,
+    capacity: 71.4,
+    range: 466,
+    evDatabaseURL: 'https://ev-database.org/car/1567/Subaru-Solterra-AWD',
+  },
 ]
 
 export default usedCarModels
