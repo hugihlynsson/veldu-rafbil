@@ -10,6 +10,7 @@ import Footer from '../../components/Footer'
 import Toggles from '../../components/Toggles'
 import UsedAdminCar from '../../components/UsedAdminCar'
 import usedCarModels from '../../apiHelpers/usedCarModels'
+import { colors } from '../../modules/globals'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCAGbbD7QXS0tV9cKbXqXYUbPR9vM4tJ1s',
@@ -152,6 +153,11 @@ const AdminCars = ({ viewer }: AdminCarsProps) => {
       : `Gögn frá ${date.toLocaleString('DE')}`
   }
 
+  let makeCounts: { [key: string]: number } = {}
+  carsToShow.forEach(([car]) => {
+    makeCounts[car.make] = (makeCounts[car.make] ?? 0) + 1
+  })
+
   return (
     <>
       <div className="root">
@@ -209,6 +215,15 @@ const AdminCars = ({ viewer }: AdminCarsProps) => {
               {getDataDate(new Date(carsSnapshot.date))} <UpdateButton />
             </p>
           )}
+        </div>
+
+        <div style={{display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 16}}>
+          {Object.entries(makeCounts).sort(([_a, countA], [_b, countB]) => countB - countA).map(([make, count]) => (
+            <span style={{ textTransform: 'capitalize', fontSize: 12, borderRadius: 16, padding: '4px 8px', backgroundColor: colors.cloud }}>
+              {make.toLowerCase()}
+              <span style={{ fontWeight: '600' }}> {count}</span>
+            </span>
+          ))}
         </div>
 
         <div className="cars">
