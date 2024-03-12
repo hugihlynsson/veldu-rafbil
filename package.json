@@ -23,7 +23,7 @@
   "devDependencies": {
     "@types/atob": "^2.1.4",
     "@types/cheerio": "^0.22.35",
-    "@types/node": "^18.19.22",
+    "@types/node": "^18.19.23",
     "@types/react": "^18.2.65",
     "@types/react-dom": "^18.2.21",
     "@types/smoothscroll-polyfill": "^0.3.4",
