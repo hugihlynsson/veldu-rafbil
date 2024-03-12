@@ -154,7 +154,7 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
     <>
       <div className="root" key="used">
         <Head>
-          <title key="title">Veldu Rafbíl – Notaðir</title>
+          <title key="title">Veldu Rafbíl - Notaðir</title>
         </Head>
 
         <header>

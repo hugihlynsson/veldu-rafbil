@@ -31,8 +31,7 @@ export default class Evs extends Document {
                 -moz-osx-font-smoothing: grayscale;
               }
               button, input {
-                font-family: BlinkMacSystemFont, -apple-system, Roboto, Helvetica,
-                  Arial, sans-serif;
+                font-family: Inter, sans-serif;
               }
               :root {
                 font-family: Inter, sans-serif;
@@ -42,6 +41,8 @@ export default class Evs extends Document {
                 :root { font-family: InterVariable, sans-serif; }
               }
           `}</style>
+          <link rel="preconnect" href="https://rsms.me/" />
+          <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
           <script
             src="https://cdn.usefathom.com/script.js"

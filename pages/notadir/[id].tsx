@@ -82,7 +82,7 @@ const UsedModel: NextPage<Props> = ({ cars, error, model }) => {
       <div className="root" key="used">
         <Head>
           <title key="title">
-            Veldu Rafbíl – Notaðir – {model.make} {model.model}
+            Veldu Rafbíl - Notaðir - {model.make} {model.model}
           </title>
         </Head>
 
