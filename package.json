@@ -30,5 +30,10 @@
     "prettier": "^3.2.5",
     "typescript": "^5.4.2",
     "vercel": "^33.5.5"
+  },
+  "resolutions": {
+    "debug": "^4.3.1",
+    "semver": "^7.5.2",
+    "undici": "^5.28.3"
   }
 }
