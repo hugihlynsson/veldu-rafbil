@@ -575,7 +575,8 @@ const newCars: Array<NewCar> = [
     heroImageName: 'ford-explorer',
     price: 8_500_000,
     price2024: 8_500_000,
-    sellerURL: 'https://ev-database.org/car/2168/Ford-Explorer-Extended-Range-RWD',
+    sellerURL:
+      'https://ev-database.org/car/2168/Ford-Explorer-Extended-Range-RWD',
     acceleration: 6.4,
     capacity: 77,
     range: 602,
@@ -593,7 +594,8 @@ const newCars: Array<NewCar> = [
     heroImageName: 'ford-explorer-alt',
     price: 9_500_000,
     price2024: 9_500_000,
-    sellerURL: 'https://ev-database.org/car/2168/Ford-Explorer-Extended-Range-RWD',
+    sellerURL:
+      'https://ev-database.org/car/2168/Ford-Explorer-Extended-Range-RWD',
     acceleration: 5.3,
     capacity: 79,
     range: 566,
@@ -1324,7 +1326,7 @@ const newCars: Array<NewCar> = [
     subModel: '350 4MATIC',
     heroImageName: 'mercedes-eqe-suv-alt',
     price: 14590000,
-    price2024: 15890000,
+    price2024: 14_890_000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
     acceleration: 6.6,
@@ -1342,7 +1344,7 @@ const newCars: Array<NewCar> = [
     subModel: '500 4MATIC',
     heroImageName: 'mercedes-eqe-suv-alt2',
     price: 17690000,
-    price2024: 17990000,
+    price2024: 16_990_000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
     acceleration: 4.9,
@@ -1360,7 +1362,7 @@ const newCars: Array<NewCar> = [
     subModel: 'AMG 43 4MATIC',
     heroImageName: 'mercedes-eqe-suv-amg',
     price: 21990000,
-    price2024: 22990000,
+    price2024: 21_990_000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
     acceleration: 4.3,
@@ -1378,7 +1380,7 @@ const newCars: Array<NewCar> = [
     subModel: 'AMG 53 4MATIC',
     heroImageName: 'mercedes-eqe-suv-amg-alt',
     price: 24000000,
-    price2024: 25490000,
+    price2024: 25_490_000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
     acceleration: 3.7,
@@ -1461,6 +1463,7 @@ const newCars: Array<NewCar> = [
     subModel: '450 4MATIC',
     heroImageName: 'mercedes-eqs-suv',
     price: 20590000,
+    price2024: 19_990_000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs/suv-x296/pad.html',
     acceleration: 5.8,
@@ -1478,6 +1481,7 @@ const newCars: Array<NewCar> = [
     subModel: '580 4MATIC',
     heroImageName: 'mercedes-eqs-suv',
     price: 26490000,
+    price2024: 26_990_000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs/suv-x296/pad.html',
     acceleration: 4.7,
@@ -1491,10 +1495,28 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Mercedes-Benz',
+    model: 'EQT',
+    subModel: '200',
+    heroImageName: 'mercedes-eqt',
+    price: 7_890_000,
+    price2024: 7_890_000,
+    sellerURL: 'https://www.mercedes-benz.is/models/eqt/',
+    acceleration: 12.6,
+    capacity: 48.0,
+    range: 282,
+    evDatabaseURL:
+      'https://ev-database.org/car/1908/Mercedes-Benz-EQT-200-Standard',
+    drive: 'FWD',
+    power: 90,
+    timeToCharge10T080: 40,
+  },
+  {
+    make: 'Mercedes-Benz',
     model: 'EQV',
     subModel: '300',
     heroImageName: 'eqv',
     price: 13690000,
+    price2024: 14_890_000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/v-class/v-class-447/eqv/labeling.module.html',
     acceleration: 12.1,
@@ -1511,6 +1533,7 @@ const newCars: Array<NewCar> = [
     subModel: 'Tourer',
     heroImageName: 'mercedes-evito-tourer',
     price: 11590000,
+    price2024: 13_390_000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/brochures-pricelists/teaser/_jcr_content/par/productinfotextimage/interactions.attachments.16.eVito_verdlisti.pdf',
     acceleration: 12.1,
