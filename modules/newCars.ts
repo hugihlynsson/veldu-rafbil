@@ -1701,6 +1701,7 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 135,
     timeToCharge10T080: 29,
+    discontinued: '2024-04-01',
   },
   {
     make: 'Nissan',
