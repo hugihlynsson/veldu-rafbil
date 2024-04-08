@@ -936,10 +936,10 @@
     etag "1.8.1"
     fs-extra "11.1.0"
 
-"@vercel/go@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@vercel/go/-/go-3.1.0.tgz#6e99fc852621ec348111935f6f6a7fa4abcf6b5c"
-  integrity sha512-bL2Vphzol//CIhgwGjx/iDjkdZT3vVX5s+F0tdbwhy54i8PTtvwoasSTjjnP27vv+jESsIbV72m3mcKdB1iApw==
+"@vercel/go@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@vercel/go/-/go-3.1.1.tgz#0894a836ef000e90ef78cee02544dc975dec6bc4"
+  integrity sha512-mrzomNYltxkjvtUmaYry5YEyvwTz6c/QQHE5Gr/pPGRIniUiP6T6OFOJ49RBN7e6pRXaNzHPVuidiuBhvHh5+Q==
 
 "@vercel/hydrogen@1.0.2":
   version "1.0.2"
@@ -3214,14 +3214,14 @@ v8-compile-cache-lib@^3.0.1:
   resolved "https://registry.yarnpkg.com/v8-compile-cache-lib/-/v8-compile-cache-lib-3.0.1.tgz#6336e8d71965cb3d35a1bbb7868445a7c05264bf"
   integrity sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==
 
-vercel@^33.6.3:
-  version "33.6.3"
-  resolved "https://registry.yarnpkg.com/vercel/-/vercel-33.6.3.tgz#c1e05e35d10f569b18037e92fc4deb0ced71d363"
-  integrity sha512-/flctkL4tI+7nOT2mHuQ99PDGichX8cKDo/hL9KcJj98YxMhyNTjp9f66LG9nt3ES3LKeAn/6l3iXsIaOuxkXA==
+vercel@^33.7.0:
+  version "33.7.0"
+  resolved "https://registry.yarnpkg.com/vercel/-/vercel-33.7.0.tgz#fd709b112e77c861021596bbce4d791b8d48010a"
+  integrity sha512-zP2NwI4qwF78AtmJ19GSwyeeAR5WVW8+Jvbnt480GVS7VO4NCAwIeoQmZ1irCD9iKINAO6bM96ry/btZmd+SZw==
   dependencies:
     "@vercel/build-utils" "7.11.0"
     "@vercel/fun" "1.1.0"
-    "@vercel/go" "3.1.0"
+    "@vercel/go" "3.1.1"
     "@vercel/hydrogen" "1.0.2"
     "@vercel/next" "4.1.6"
     "@vercel/node" "3.0.26"
