@@ -905,6 +905,7 @@ const newCars: Array<NewCar> = [
     model: 'I-PACE',
     heroImageName: 'jaguar-i-pace',
     price: 13290000,
+    price2024: 13_290_000,
     sellerURL: 'https://www.jaguarisland.is/jaguar-range-i-pace',
     acceleration: 4.8,
     capacity: 90,
