@@ -2992,7 +2992,7 @@ const newCars: Array<NewCar> = [
     subModel: 'Recharge Twin',
     heroImageName: 'volvo-c40',
     price: 9450000,
-    price2024: 9_990_000.
+    price2024: 9_990_000,
     sellerURL: 'https://www.volvocars.com/is/v/cars/c40-electric',
     acceleration: 4.7,
     capacity: 82,
