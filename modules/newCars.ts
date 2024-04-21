@@ -2333,6 +2333,7 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 96,
     timeToCharge10T080: 29,
+    discontinued: '2024-04-21',
   },
   {
     make: 'Renault',
@@ -2340,7 +2341,7 @@ const newCars: Array<NewCar> = [
     subModel: 'EV60',
     heroImageName: 'renault-megane-etech-alt',
     price: 6690000,
-    price2024: 7990000,
+    price2024: 7590000,
     sellerURL:
       'https://www.renault.is/cars/megane-e-tech/megane-e-tech-electric.html',
     acceleration: 7.4,
@@ -2358,7 +2359,7 @@ const newCars: Array<NewCar> = [
     subModel: 'R110',
     heroImageName: 'zoe-r110',
     price: 5490000,
-    price2024: 6790000,
+    price2024: 6890000,
     sellerURL: 'https://www.renault.is/cars/zoe/yfirlit.html',
     acceleration: 11.4,
     capacity: 52,
