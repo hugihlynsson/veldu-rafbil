@@ -2645,7 +2645,7 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1743/Tesla-Model-Y',
     drive: 'RWD',
     power: 239,
-    timeToCharge10T080: 30,
+    timeToCharge10T080: 25,
   },
   {
     make: 'Tesla',
@@ -2661,7 +2661,7 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/2186/Tesla-Model-Y-Long-Range-RWD',
     drive: 'RWD',
     power: 250,
-    timeToCharge10T080: 30,
+    timeToCharge10T080: 27,
   },
   {
     make: 'Tesla',
@@ -2678,7 +2678,7 @@ const newCars: Array<NewCar> = [
       'https://ev-database.org/car/1619/Tesla-Model-Y-Long-Range-Dual-Motor',
     drive: 'AWD',
     power: 324,
-    timeToCharge10T080: 30,
+    timeToCharge10T080: 27,
   },
   {
     make: 'Tesla',
@@ -2694,7 +2694,7 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1183/Tesla-Model-Y-Performance',
     drive: 'AWD',
     power: 413,
-    timeToCharge10T080: 30,
+    timeToCharge10T080: 27,
   },
   {
     make: 'Tesla',
