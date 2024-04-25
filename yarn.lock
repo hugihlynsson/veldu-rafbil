@@ -928,10 +928,10 @@
     "@vercel/static-config" "3.0.0"
     ts-morph "12.0.0"
 
-"@vercel/next@4.2.1":
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/@vercel/next/-/next-4.2.1.tgz#f44bf6c67e7fd758902dbe2ed362875fb31091d9"
-  integrity sha512-AZHYm+Zc1rDmvHlVj7Z7Frc6k4j1jSmybDbKyg5dOSQZ704VX1/bdmboj8DUb7pPMVPHJdHPH9AYRyZjN1wDgg==
+"@vercel/next@4.2.2":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@vercel/next/-/next-4.2.2.tgz#16e6688239a4f4ac996d0d3458b26fed2fdcceb1"
+  integrity sha512-VJLnC2I3KpGvVtCnuKn7p6bDMfMNDtgYw8nnd8US4oglnw7boC+OiqRF9Jo+sJkeuVafnuIUDtFkw+97lIRqSw==
   dependencies:
     "@vercel/nft" "0.26.4"
 
@@ -979,10 +979,10 @@
     typescript "4.9.5"
     undici "5.26.5"
 
-"@vercel/python@4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@vercel/python/-/python-4.1.1.tgz#91ca25a6a43c8e43f9297c09ef9895c825352fb1"
-  integrity sha512-EbAdKOZ0hPd5b59tLt7R3RQK1azNvuZTrCFRAVHNjqcIHNCmrSvjag5zBGn7Memkk8qWb3+CgBw9K/3LJKei0w==
+"@vercel/python@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@vercel/python/-/python-4.2.0.tgz#b1e8df4f58fa690f3e65993680bc7f062fef97db"
+  integrity sha512-oubkmRRxWQJGGYFq5Q49/2c94aHKCYXB+DkdtaW55syQ9N0LVBXCnCMZ4ZatSrSI18d9mMoDSx3xi4gtByy9NA==
 
 "@vercel/redwood@2.0.8":
   version "2.0.8"
@@ -3363,18 +3363,18 @@ v8-compile-cache-lib@^3.0.1:
   resolved "https://registry.yarnpkg.com/v8-compile-cache-lib/-/v8-compile-cache-lib-3.0.1.tgz#6336e8d71965cb3d35a1bbb7868445a7c05264bf"
   integrity sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==
 
-vercel@^34.1.1:
-  version "34.1.1"
-  resolved "https://registry.yarnpkg.com/vercel/-/vercel-34.1.1.tgz#7a9ef5fa5b0bb467f7c2a81e7b65f32b0587ef64"
-  integrity sha512-uloJqpeUB3+ouMl3NCgTYFwJZWCOhDhwpwcqPvnBM7Xmz0hv7kLW2aiWe8TXRqhF9Q8KPq9UDR+9AMeb2W99Cw==
+vercel@^34.1.2:
+  version "34.1.2"
+  resolved "https://registry.yarnpkg.com/vercel/-/vercel-34.1.2.tgz#fd86e71dde826157f0944cacb32571f1a81b7414"
+  integrity sha512-kfyv7sP/uhtt/8+exXpRp3bKoinl2sEOEDRnuXCQ09SNFviZwNOuyHagjdIh07Sl3qEbtHX9jVUQWouGfkcc6g==
   dependencies:
     "@vercel/build-utils" "7.12.0"
     "@vercel/fun" "1.1.0"
     "@vercel/go" "3.1.1"
     "@vercel/hydrogen" "1.0.2"
-    "@vercel/next" "4.2.1"
+    "@vercel/next" "4.2.2"
     "@vercel/node" "3.0.27"
-    "@vercel/python" "4.1.1"
+    "@vercel/python" "4.2.0"
     "@vercel/redwood" "2.0.8"
     "@vercel/remix-builder" "2.1.5"
     "@vercel/ruby" "2.0.5"
