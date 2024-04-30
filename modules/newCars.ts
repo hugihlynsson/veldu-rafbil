@@ -570,6 +570,22 @@ const newCars: Array<NewCar> = [
     power: 87,
   },
   {
+    make: 'Fiat',
+    model: '600e',
+    heroImageName: 'fiat-600e',
+    price: 5850000,
+    price2024: 5_890_000,
+    sellerURL: 'https://www.fiat.is/600-electric',
+    acceleration: 9.0,
+    capacity: 54,
+    range: 400,
+    evDatabaseURL:
+      'https://ev-database.org/car/1945/Fiat-600e',
+    drive: 'FWD',
+    timeToCharge10T080: 26,
+    power: 115,
+  },
+  {
     make: 'Ford',
     model: 'Explorer',
     subModel: 'ER RWD',
