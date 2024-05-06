@@ -2354,15 +2354,33 @@ const newCars: Array<NewCar> = [
   {
     make: 'Renault',
     model: 'Megane E-Tech',
-    subModel: 'EV60',
-    heroImageName: 'renault-megane-etech-alt',
+    subModel: 'EV60 130hp',
+    heroImageName: 'renault-megane-etech',
     price: 6690000,
     price2024: 7590000,
     sellerURL:
       'https://www.renault.is/cars/megane-e-tech/megane-e-tech-electric.html',
-    acceleration: 7.4,
+    acceleration: 10.5,
     capacity: 60,
     range: 470,
+    evDatabaseURL:
+      'https://ev-database.org/car/1588/Renault-Megane-E-Tech-EV60-130hp',
+    drive: 'FWD',
+    power: 96,
+    timeToCharge10T080: 29,
+  },
+  {
+    make: 'Renault',
+    model: 'Megane E-Tech',
+    subModel: 'EV60 220hp',
+    heroImageName: 'renault-megane-etech-alt',
+    price: 6690000,
+    price2024: 7890000,
+    sellerURL:
+      'https://www.renault.is/cars/megane-e-tech/megane-e-tech-electric.html',
+    acceleration: 7.4,
+    capacity: 60,
+    range: 450,
     evDatabaseURL:
       'https://ev-database.org/car/1521/Renault-Megane-E-Tech-EV60-220hp',
     drive: 'FWD',
