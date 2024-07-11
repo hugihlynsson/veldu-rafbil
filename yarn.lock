@@ -1823,10 +1823,10 @@ fastq@^1.6.0:
   dependencies:
     reusify "^1.0.4"
 
-fathom-client@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/fathom-client/-/fathom-client-3.7.0.tgz#8be84d95ebb8f7266aaecc31edeb974a02f339e7"
-  integrity sha512-lMEyR3lSThlkK69+f/16OEyuii743iJGcZ6aIUKT5qYH9lGi7ENTYwuxh5NWWYSO6qs57we01nLxncW8kegJlw==
+fathom-client@^3.7.2:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/fathom-client/-/fathom-client-3.7.2.tgz#819920316935974a200509dcf07774a3599676a9"
+  integrity sha512-sWtaNivhg7uwp/q1bUuIiNj4LeQZMEZ5NXXFFpZ8le4uDedAfQG84gPOdYehtVXbl+1yX2s8lmXZ2+IQ9a/xxA==
 
 faye-websocket@0.11.4:
   version "0.11.4"
