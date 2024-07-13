@@ -578,8 +578,7 @@ const newCars: Array<NewCar> = [
     acceleration: 9.0,
     capacity: 54,
     range: 400,
-    evDatabaseURL:
-      'https://ev-database.org/car/1945/Fiat-600e',
+    evDatabaseURL: 'https://ev-database.org/car/1945/Fiat-600e',
     drive: 'FWD',
     timeToCharge10T080: 26,
     power: 115,
@@ -1422,6 +1421,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 245,
     timeToCharge10T080: 32,
+    discontinued: '2024-07-13',
   },
   {
     make: 'Mercedes-Benz',
@@ -1438,6 +1438,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 265,
     timeToCharge10T080: 32,
+    discontinued: '2024-07-13',
   },
   {
     make: 'Mercedes-Benz',
@@ -1454,6 +1455,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 385,
     timeToCharge10T080: 32,
+    discontinued: '2024-07-13',
   },
   {
     make: 'Mercedes-Benz',
@@ -1471,6 +1473,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 560,
     timeToCharge10T080: 32,
+    discontinued: '2024-07-13',
   },
   {
     make: 'Mercedes-Benz',
@@ -1478,9 +1481,8 @@ const newCars: Array<NewCar> = [
     subModel: '450 4MATIC',
     heroImageName: 'mercedes-eqs-suv',
     price: 20590000,
-    price2024: 19_990_000,
-    sellerURL:
-      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs/suv-x296/pad.html',
+    price2024: 18_490_000,
+    sellerURL: 'https://www.mercedes-benz.is/models/eqs-suv/',
     acceleration: 5.8,
     capacity: 108,
     range: 616,
@@ -1496,14 +1498,13 @@ const newCars: Array<NewCar> = [
     subModel: '580 4MATIC',
     heroImageName: 'mercedes-eqs-suv',
     price: 26490000,
-    price2024: 26_990_000,
-    sellerURL:
-      'https://www.mercedes-benz.is/passengercars/mercedes-benz-cars/models/eqs/suv-x296/pad.html',
+    price2024: 24_990_000,
+    sellerURL: 'https://www.mercedes-benz.is/models/eqs-suv/',
     acceleration: 4.7,
     capacity: 108,
     range: 615,
     evDatabaseURL:
-      'https://ev-database.org/car/1675/Mercedes-EQS-SUV-580-4MATIC',
+      'https://ev-database.org/car/2090/Mercedes-Benz-EQS-SUV-580-4MATIC',
     drive: 'AWD',
     power: 400,
     timeToCharge10T080: 32,
@@ -2044,6 +2045,7 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 100,
     timeToCharge10T080: 38,
+    discontinued: '2024-07-13',
   },
   {
     make: 'Polestar',
@@ -2590,7 +2592,7 @@ const newCars: Array<NewCar> = [
     model: 'Model 3',
     heroImageName: 'tesla-model-3-alt',
     price: 6299788,
-    price2024: 6_390_302 ,
+    price2024: 6_390_302,
     sellerURL: 'https://www.tesla.com/is_IS/model3/design',
     acceleration: 6.1,
     capacity: 60.0,
@@ -2692,7 +2694,8 @@ const newCars: Array<NewCar> = [
     acceleration: 5.9,
     capacity: 78,
     range: 600,
-    evDatabaseURL: 'https://ev-database.org/car/2186/Tesla-Model-Y-Long-Range-RWD',
+    evDatabaseURL:
+      'https://ev-database.org/car/2186/Tesla-Model-Y-Long-Range-RWD',
     drive: 'RWD',
     power: 250,
     timeToCharge10T080: 27,
@@ -3032,7 +3035,8 @@ const newCars: Array<NewCar> = [
     acceleration: 4.7,
     capacity: 82,
     range: 448,
-    evDatabaseURL: 'https://ev-database.org/car/1801/Volvo-C40-Recharge-Twin-Motor',
+    evDatabaseURL:
+      'https://ev-database.org/car/1801/Volvo-C40-Recharge-Twin-Motor',
     drive: 'AWD',
     power: 300,
     timeToCharge10T080: 28,
