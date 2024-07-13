@@ -291,16 +291,6 @@ const New: NextPage<Props> = ({
         <header>
           <Title />
 
-          <nav className="headerLinks">
-            <LinkPill current onClick={handleNewPress} href="#nyjir" large>
-              Nýir ↓
-            </LinkPill>
-
-            <LinkPill large href="/notadir">
-              Notaðir →
-            </LinkPill>
-          </nav>
-
           <p className="description" id="nyjir" ref={descriptionRef}>
             Listi yfir alla {newCars.length} bílana sem eru seldir á Íslandi og
             eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
@@ -486,7 +476,7 @@ const New: NextPage<Props> = ({
           .description {
             line-height: 1.5;
             font-size: 14px;
-            padding-top: 2em;
+            padding-top: 1.5em;
             margin: 0 0 2em 0;
             color: ${colors.stone};
             max-width: 33em;

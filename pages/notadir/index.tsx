@@ -132,7 +132,7 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
 
   const descriptionRef = useRef<HTMLParagraphElement>(null)
 
-  const handleNewPress = useCallback(
+  const handleUsedPress = useCallback(
     (
       event: React.MouseEvent<
         HTMLAnchorElement | HTMLButtonElement,
@@ -161,9 +161,11 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
           <Title />
 
           <nav className="">
-            <LinkPill href="/" large>Nýir ←</LinkPill>
+            <LinkPill href="/" large>
+              Nýir ←
+            </LinkPill>
 
-            <LinkPill href="#notadir" current onClick={handleNewPress} large>
+            <LinkPill href="#notadir" current onClick={handleUsedPress} large>
               Notaðir ↓
             </LinkPill>
           </nav>
@@ -176,6 +178,22 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
             rafhlöðunnar. <strong>*</strong>Stjörnumerkt drægni er áætluð úr
             NEDC þar sem nýrri mælingar eru ekki til.
           </p>
+
+          <section className="callout">
+            <h1>Notaðir rafbílar eru óuppfærðir</h1>
+            <p>
+              Allir notaðir rafbílar á Veldu Rafbíl eru handmerktir til að
+              tryggja að þeir séu í réttum flokki. Vegna anna hefur ekki tekist
+              að halda í við þann mikla straum notaðra rafbíla á markaðnum og
+              því geta upplýsingarnar verið gamlar og það vantað nýjustu bílana
+              á söluskrá. Hægt er að finna nýjustu notuðu rafbílana á{' '}
+              <a href="https://bilasolur.is/">Bílasölur.is</a> eða á{' '}
+              <a href="https://bilaskra.is/notadir-bilar?fuel_type=2">
+                Bílaskrá.is
+              </a>
+              .
+            </p>
+          </section>
 
           <div className="sorting-title">Raða eftir:</div>
           <Toggles<Sorting>
@@ -256,6 +274,44 @@ const Used: NextPage<Props> = ({ cars, initialSorting }) => {
           font-weight: 600;
           line-height: 1.1;
           margin-bottom: 0.4em;
+        }
+
+        .callout {
+          border-radius: 8px;
+          padding: 16px;
+          background-color: #fec;
+          margin-bottom: 32px;
+          max-width: 480px;
+          border: 1px solid #dc8;
+        }
+        .callout h1 {
+          margin: 0;
+          font-size: 20px;
+          color: #530;
+        }
+        .callout h1::before {
+          display: inline-block;
+          width: 32px;
+          content: '⚠️';
+          color: #530;
+          margin-top: 8px;
+          font-family: "Apple Color Emoji", ";Segoe UI Emoji", ";Segoe UI Symbol";
+        }
+        .callout p {
+          line-height: 1.5;
+          font-size: 14px;
+          padding-left: 32px;
+          padding-right: 8px;
+          color: #530;
+        }
+        .callout p a {
+          color: inherit;
+          font-weight: 600;
+          text-decoration: none;
+        }
+        .callout p a:hover {
+          color: 000;
+          text-decoration: underline;
         }
 
         .description {
