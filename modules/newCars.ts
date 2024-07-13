@@ -30,6 +30,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 390,
     timeToCharge10T080: 21,
+    discontinued: '2024-07-13',
   },
   {
     make: 'Audi',
@@ -45,6 +46,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 475,
     timeToCharge10T080: 17,
+    discontinued: '2024-07-13',
   },
   {
     make: 'Audi',
