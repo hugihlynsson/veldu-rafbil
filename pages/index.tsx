@@ -95,7 +95,7 @@ const carSorter =
   (sorting: Sorting) =>
   (a: NewCar, b: NewCar): number => {
     let padPrice = (car: NewCar): string =>
-      (car.price2024 ?? car.price + 1320000).toString().padStart(9, '0')
+      (car.price + 1320000).toString().padStart(9, '0')
 
     switch (sorting) {
       case 'name':
@@ -103,19 +103,13 @@ const carSorter =
           `${b.make} ${b.model} ${padPrice(b)}`,
         )
       case 'price':
-        return (
-          (a.price2024 ?? a.price + 1320000) -
-          (b.price2024 ?? b.price + 1320000)
-        )
+        return a.price + 1320000 - (b.price + 1320000)
       case 'range':
         return b.range - a.range
       case 'acceleration':
         return a.acceleration - b.acceleration
       case 'value':
-        return (
-          (a.price2024 ?? a.price + 1320000) / a.range -
-          (b.price2024 ?? b.price + 1320000) / b.range
-        )
+        return (a.price + 1320000) / a.range - (b.price + 1320000) / b.range
       case 'fastcharge':
         return (
           Number(getKmPerMinutesCharged(b.timeToCharge10T080, b.range)) -
@@ -158,15 +152,12 @@ const carFilter =
                 ) || false
               )
             case 'price':
-              return (
-                (car.price2024 ?? car.price) <=
-                (filters.price ?? Number.MAX_SAFE_INTEGER)
-              )
+              return car.price <= (filters.price ?? Number.MAX_SAFE_INTEGER)
             case 'range':
               return car.range >= (filters.range ?? 0)
             case 'value':
               return (
-                (car.price2024 ?? car.price) / car.range <=
+                car.price / car.range <=
                 (filters.value ?? Number.MAX_SAFE_INTEGER)
               )
           }
@@ -296,14 +287,11 @@ const New: NextPage<Props> = ({
             <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda en
             raundrægni er háð aðstæðum og aksturslagi.
             <em>
-              Um áramótin féll niður skattaíviljun og reikna má með að verð á
-              rafbílum hækki um ~1.3 M kr. Í stað þess er hægt að{' '}
+              Kaupendur nýskráðra rafbíla sem kosta minna en 10 milljónir eiga kost á að{' '}
               <a href="https://island.is/rafbilastyrkir">
                 sækja um 900.000 kr. rafbílastyrk
               </a>
-              . Hjá þeim bílasölum sem hafa ekki uppfært verðlistana sína eru
-              2023 verðin birt tímabundið og merkt sem slík. Verð eru birt án
-              ábyrgðar og geta verið úrelt.
+              .
             </em>
           </p>
 

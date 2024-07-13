@@ -59,14 +59,13 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => (
           (car.expectedDelivery && 'áætlað verð ↗') ||
           (showValue &&
             `${addDecimalSeprators(
-              Math.round((car.price2024 ?? car.price) / car.range),
+              Math.round(car.price / car.range),
             )} kr. á km.`) ||
-          (!car.price2024 && '2023 verð') ||
           undefined
         }
         onClick={() => trackGoal('OBBPADY0', 0)}
       >
-        {addDecimalSeprators(car.price2024 ?? car.price)} kr.
+        {addDecimalSeprators(car.price)} kr.
         {!car.expectedDelivery && ' ↗'}
       </LinkPill>
 
