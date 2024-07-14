@@ -431,7 +431,7 @@ const newCars: Array<NewCar> = [
     make: 'BMW',
     model: 'iX3',
     heroImageName: 'bmw-ix3',
-    price: 9890000,
+    price: 9_490_000,
     sellerURL:
       'https://www.bmw.is/is/all-models/x-series/iX3/2021/bmw-ix3-highlights.html',
     acceleration: 6.8,
