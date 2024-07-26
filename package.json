@@ -29,7 +29,7 @@
     "@types/smoothscroll-polyfill": "^0.3.4",
     "prettier": "^3.3.3",
     "typescript": "^5.5.4",
-    "vercel": "^35.2.0"
+    "vercel": "^35.2.1"
   },
   "resolutions": {
     "debug": "^4.3.1",
