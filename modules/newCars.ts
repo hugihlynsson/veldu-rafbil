@@ -731,7 +731,7 @@ const newCars: Array<NewCar> = [
     make: 'Honda',
     model: 'e:Ny1',
     heroImageName: 'honda-eny1',
-    price: 7890000,
+    price: 4_990_000,
     sellerURL: 'https://www.honda.is/honda-eny1',
     acceleration: 7.6,
     capacity: 68.8,
