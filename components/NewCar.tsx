@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { trackGoal } from 'fathom-client'
+import { trackEvent } from 'fathom-client'
 import Image from 'next/image'
 
 import { NewCar as NewCarType, Drive } from '../types'
@@ -63,7 +63,7 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => (
             )} kr. á km.`) ||
           undefined
         }
-        onClick={() => trackGoal('OBBPADY0', 0)}
+        onClick={() => trackEvent('Seller clicked')}
       >
         {addDecimalSeprators(car.price)} kr.
         {!car.expectedDelivery && ' ↗'}
@@ -106,7 +106,7 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => (
           target="_blank"
           href={car.evDatabaseURL}
           rel="noopener"
-          onClick={() => trackGoal('DGRMWSOJ', 0)}
+          onClick={() => trackEvent('Ev Database Link Clicked')}
         >
           Nánar á ev-database.org ↗
         </a>
