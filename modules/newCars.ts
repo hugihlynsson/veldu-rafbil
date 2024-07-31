@@ -942,7 +942,7 @@ const newCars: Array<NewCar> = [
     make: 'Kia',
     model: 'Niro EV',
     heroImageName: 'kia-niro-2023',
-    price: 6890777,
+    price: 6_590_777,
     sellerURL: 'https://www.kia.com/is/nyir-bilar/niro-sg2/',
     acceleration: 7.8,
     capacity: 64.8,
