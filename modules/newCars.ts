@@ -739,7 +739,7 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1940/Honda-eNy1',
     drive: 'FWD',
     power: 150,
-    timeToCharge10T080: 36,
+    timeToCharge10T080: 46,
   },
   {
     make: 'Hongqi',
