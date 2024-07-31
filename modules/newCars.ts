@@ -1313,14 +1313,14 @@ const newCars: Array<NewCar> = [
     model: 'EQE SUV',
     subModel: '350 4MATIC',
     heroImageName: 'mercedes-eqe-suv-alt',
-    price: 14_890_000,
+    price: 13_890_000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
     acceleration: 6.6,
     capacity: 90.6,
     range: 551,
     evDatabaseURL:
-      'https://ev-database.org/car/1761/Mercedes-EQE-SUV-350-4MATIC',
+      'https://ev-database.org/car/2047/Mercedes-Benz-EQE-SUV-350-4MATIC',
     drive: 'AWD',
     power: 215,
     timeToCharge10T080: 33,
@@ -1330,14 +1330,14 @@ const newCars: Array<NewCar> = [
     model: 'EQE SUV',
     subModel: '500 4MATIC',
     heroImageName: 'mercedes-eqe-suv-alt2',
-    price: 16_990_000,
+    price: 15_990_000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
     acceleration: 4.9,
     capacity: 90.6,
     range: 552,
     evDatabaseURL:
-      'https://ev-database.org/car/1762/Mercedes-EQE-SUV-500-4MATIC',
+      'https://ev-database.org/car/2048/Mercedes-Benz-EQE-SUV-500-4MATIC',
     drive: 'AWD',
     power: 300,
     timeToCharge10T080: 28,
@@ -1347,7 +1347,7 @@ const newCars: Array<NewCar> = [
     model: 'EQE SUV',
     subModel: 'AMG 43 4MATIC',
     heroImageName: 'mercedes-eqe-suv-amg',
-    price: 21_990_000,
+    price: 20_990_000,
     sellerURL:
       'https://www.mercedes-benz.is/passengercars/models/suv/eqe/new.html',
     acceleration: 4.3,
