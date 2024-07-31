@@ -12,6 +12,7 @@ interface Props {
   onGray?: boolean
   children?: ReactNode | undefined
   large?: boolean
+  title?: string
 }
 
 const LinkPill: FunctionComponent<Props> = ({
@@ -23,6 +24,7 @@ const LinkPill: FunctionComponent<Props> = ({
   onClick,
   onGray,
   large,
+  title,
 }) => (
   <Link
     className={'link-pill ' + (current ? 'current' : onGray ? 'on-gray' : '') + (large ? ' large' : '')}
@@ -30,6 +32,7 @@ const LinkPill: FunctionComponent<Props> = ({
     href={href}
     target={external ? '_blank' : undefined}
     rel={external ? 'noopener' : undefined}
+    title={title}
   >
     {children} {extra && <span className="extra">{extra}</span>}
     <style jsx global>{`

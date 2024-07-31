@@ -5,7 +5,7 @@ import Router, { useRouter } from 'next/router'
 import smoothscroll from 'smoothscroll-polyfill'
 import { ParsedUrlQuery } from 'querystring'
 
-import Car from '../components/NewCar'
+import Car, {getPriceWithGrant} from '../components/NewCar'
 import Title from '../components/Title'
 import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
@@ -95,7 +95,7 @@ const carSorter =
   (sorting: Sorting) =>
   (a: NewCar, b: NewCar): number => {
     let padPrice = (car: NewCar): string =>
-      (car.price + 1320000).toString().padStart(9, '0')
+      (getPriceWithGrant(car.price)).toString().padStart(9, '0')
 
     switch (sorting) {
       case 'name':
@@ -103,13 +103,13 @@ const carSorter =
           `${b.make} ${b.model} ${padPrice(b)}`,
         )
       case 'price':
-        return a.price + 1320000 - (b.price + 1320000)
+        return getPriceWithGrant(a.price) - getPriceWithGrant(b.price)
       case 'range':
         return b.range - a.range
       case 'acceleration':
         return a.acceleration - b.acceleration
       case 'value':
-        return (a.price + 1320000) / a.range - (b.price + 1320000) / b.range
+        return getPriceWithGrant(a.price) / a.range - getPriceWithGrant(b.price) / b.range
       case 'fastcharge':
         return (
           Number(getKmPerMinutesCharged(b.timeToCharge10T080, b.range)) -
@@ -152,12 +152,12 @@ const carFilter =
                 ) || false
               )
             case 'price':
-              return car.price <= (filters.price ?? Number.MAX_SAFE_INTEGER)
+              return getPriceWithGrant(car.price) <= (filters.price ?? Number.MAX_SAFE_INTEGER)
             case 'range':
               return car.range >= (filters.range ?? 0)
             case 'value':
               return (
-                car.price / car.range <=
+                getPriceWithGrant(car.price) / car.range <=
                 (filters.value ?? Number.MAX_SAFE_INTEGER)
               )
           }

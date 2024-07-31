@@ -8,3 +8,5 @@ export const colors = {
   cloud: '#eee',
   lab: '#fff',
 }
+
+export const grantAmount = 900_000 // In ISK
