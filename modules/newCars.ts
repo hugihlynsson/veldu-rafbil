@@ -2986,7 +2986,7 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Volvo',
-    model: 'C40',
+    model: 'EC40',
     subModel: 'Recharge',
     heroImageName: 'volvo-c40',
     price: 9_990_000,
@@ -2995,14 +2995,14 @@ const newCars: Array<NewCar> = [
     capacity: 69,
     range: 436,
     evDatabaseURL:
-      'https://ev-database.org/car/1799/Volvo-C40-Recharge-Single-Motor',
+      'https://ev-database.org/car/2123/Volvo-EC40-Single-Motor',
     drive: 'RWD',
     power: 175,
     timeToCharge10T080: 34,
   },
   {
     make: 'Volvo',
-    model: 'C40',
+    model: 'EC40',
     subModel: 'Recharge Twin',
     heroImageName: 'volvo-c40',
     price: 10_990_000,
@@ -3011,14 +3011,14 @@ const newCars: Array<NewCar> = [
     capacity: 82,
     range: 448,
     evDatabaseURL:
-      'https://ev-database.org/car/1801/Volvo-C40-Recharge-Twin-Motor',
+      'https://ev-database.org/car/2137/Volvo-EC40-Twin-Motor',
     drive: 'AWD',
     power: 300,
     timeToCharge10T080: 28,
   },
   {
     make: 'Volvo',
-    model: 'XC40',
+    model: 'EX40',
     subModel: 'Recharge',
     heroImageName: 'volvo-xc40-alt',
     price: 9_990_000,
@@ -3027,14 +3027,14 @@ const newCars: Array<NewCar> = [
     capacity: 69,
     range: 424,
     evDatabaseURL:
-      'https://ev-database.org/car/1796/Volvo-XC40-Recharge-Single-Motor',
+      'https://ev-database.org/car/2120/Volvo-EX40-Single-Motor',
     drive: 'RWD',
     power: 175,
     timeToCharge10T080: 34,
   },
   {
     make: 'Volvo',
-    model: 'XC40',
+    model: 'EX40',
     subModel: 'Recharge Twin',
     heroImageName: 'volvo-xc40',
     price: 10_990_000,
@@ -3043,7 +3043,7 @@ const newCars: Array<NewCar> = [
     capacity: 82,
     range: 437,
     evDatabaseURL:
-      'https://ev-database.org/car/1798/Volvo-XC40-Recharge-Twin-Motor',
+      'https://ev-database.org/car/2136/Volvo-EX40-Twin-Motor',
     drive: 'AWD',
     power: 300,
     timeToCharge10T080: 28,
