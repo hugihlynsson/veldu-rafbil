@@ -600,6 +600,22 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Ford',
+    model: 'Capri',
+    heroImageName: 'ford-capri',
+    price: 8_890_000,
+    sellerURL: 'https://www.ford.is/is/nyir-bilar/capri',
+    acceleration: 5.3,
+    capacity: 79,
+    range: 592,
+    evDatabaseURL:
+      'https://ev-database.org/car/2242/Ford-Capri-Extended-Range-AWD',
+    drive: 'AWD',
+    timeToCharge10T080: 26,
+    power: 250,
+    expectedDelivery: '2024',
+  },
+  {
+    make: 'Ford',
     model: 'Explorer',
     subModel: 'ER RWD',
     heroImageName: 'ford-explorer',
