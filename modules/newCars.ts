@@ -493,7 +493,8 @@ const newCars: Array<NewCar> = [
     acceleration: 3.8,
     capacity: 82.5,
     range: 520,
-    evDatabaseURL: 'https://ev-database.org/car/2002/BYD-SEAL-825-kWh-AWD-Excellence',
+    evDatabaseURL:
+      'https://ev-database.org/car/2002/BYD-SEAL-825-kWh-AWD-Excellence',
     drive: 'AWD',
     power: 390,
     timeToCharge10T080: 38,
@@ -1147,8 +1148,7 @@ const newCars: Array<NewCar> = [
     subModel: '250',
     heroImageName: 'mercedes-eqa',
     price: 8990000,
-    sellerURL:
-      'https://www.mercedes-benz.is/models/eqa-fl/',
+    sellerURL: 'https://www.mercedes-benz.is/models/eqa-fl/',
     acceleration: 8.6,
     capacity: 66.5,
     range: 528,
@@ -1163,8 +1163,7 @@ const newCars: Array<NewCar> = [
     subModel: '300 4MATIC',
     heroImageName: 'mercedes-eqa-alt',
     price: 9490000,
-    sellerURL:
-      'https://www.mercedes-benz.is/models/eqa-fl/',
+    sellerURL: 'https://www.mercedes-benz.is/models/eqa-fl/',
     acceleration: 7.7,
     capacity: 66.5,
     range: 459,
@@ -1180,8 +1179,7 @@ const newCars: Array<NewCar> = [
     subModel: '350 4MATIC',
     heroImageName: 'mercedes-eqa-alt2',
     price: 10790000,
-    sellerURL:
-      'https://www.mercedes-benz.is/models/eqa-fl/',
+    sellerURL: 'https://www.mercedes-benz.is/models/eqa-fl/',
     acceleration: 6.0,
     capacity: 66.5,
     range: 438,
@@ -1214,12 +1212,12 @@ const newCars: Array<NewCar> = [
     subModel: '300 4MATIC',
     heroImageName: 'mercedes-eqb',
     price: 9590000,
-    sellerURL:
-      'https://www.mercedes-benz.is/models/eqb-fl/',
+    sellerURL: 'https://www.mercedes-benz.is/models/eqb-fl/',
     acceleration: 8.0,
     capacity: 66.5,
     range: 423,
-    evDatabaseURL: 'https://ev-database.org/car/1989/Mercedes-Benz-EQB-300-4MATIC',
+    evDatabaseURL:
+      'https://ev-database.org/car/1989/Mercedes-Benz-EQB-300-4MATIC',
     drive: 'AWD',
     power: 168,
     timeToCharge10T080: 29,
@@ -1247,8 +1245,7 @@ const newCars: Array<NewCar> = [
     subModel: '400 4MATIC',
     heroImageName: 'eqc',
     price: 10990000,
-    sellerURL:
-      'https://www.mercedes-benz.is/models/eqc/',
+    sellerURL: 'https://www.mercedes-benz.is/models/eqc/',
     acceleration: 5.1,
     capacity: 80,
     range: 437,
@@ -1263,8 +1260,7 @@ const newCars: Array<NewCar> = [
     subModel: '300',
     heroImageName: 'mercedes-eqe',
     price: 12290000,
-    sellerURL:
-      'https://www.mercedes-benz.is/models/eqe/',
+    sellerURL: 'https://www.mercedes-benz.is/models/eqe/',
     acceleration: 7.3,
     capacity: 90.6,
     range: 621,
@@ -1279,12 +1275,12 @@ const newCars: Array<NewCar> = [
     subModel: '350 4MATIC',
     heroImageName: 'mercedes-eqe-alt',
     price: 13490000,
-    sellerURL:
-      'https://www.mercedes-benz.is/models/eqe/',
+    sellerURL: 'https://www.mercedes-benz.is/models/eqe/',
     acceleration: 6.3,
     capacity: 90.6,
     range: 614,
-    evDatabaseURL: 'https://ev-database.org/car/2206/Mercedes-Benz-EQE-350-4MATIC',
+    evDatabaseURL:
+      'https://ev-database.org/car/2206/Mercedes-Benz-EQE-350-4MATIC',
     drive: 'AWD',
     power: 215,
     timeToCharge10T080: 28,
@@ -1295,8 +1291,7 @@ const newCars: Array<NewCar> = [
     subModel: 'AMG 43 4MATIC',
     heroImageName: 'mercedes-eqe-amg',
     price: 18290000,
-    sellerURL:
-      'https://www.mercedes-benz.is/models/eqe/',
+    sellerURL: 'https://www.mercedes-benz.is/models/eqe/',
     acceleration: 4.2,
     capacity: 90.6,
     range: 535,
@@ -1313,8 +1308,7 @@ const newCars: Array<NewCar> = [
     subModel: 'AMG 53 4MATIC+',
     heroImageName: 'mercedes-eqe-alt',
     price: 22450000,
-    sellerURL:
-      'https://www.mercedes-benz.is/models/eqe/',
+    sellerURL: 'https://www.mercedes-benz.is/models/eqe/',
     acceleration: 3.5,
     capacity: 90.6,
     range: 527,
@@ -1330,8 +1324,7 @@ const newCars: Array<NewCar> = [
     subModel: '350 4MATIC',
     heroImageName: 'mercedes-eqe-suv-alt',
     price: 13_890_000,
-    sellerURL:
-      'https://www.mercedes-benz.is/models/eqe-suv/',
+    sellerURL: 'https://www.mercedes-benz.is/models/eqe-suv/',
     acceleration: 6.6,
     capacity: 90.6,
     range: 551,
@@ -1347,8 +1340,7 @@ const newCars: Array<NewCar> = [
     subModel: '500 4MATIC',
     heroImageName: 'mercedes-eqe-suv-alt2',
     price: 15_990_000,
-    sellerURL:
-      'https://www.mercedes-benz.is/models/eqe-suv/',
+    sellerURL: 'https://www.mercedes-benz.is/models/eqe-suv/',
     acceleration: 4.9,
     capacity: 90.6,
     range: 552,
@@ -1364,8 +1356,7 @@ const newCars: Array<NewCar> = [
     subModel: 'AMG 43 4MATIC',
     heroImageName: 'mercedes-eqe-suv-amg',
     price: 20_990_000,
-    sellerURL:
-      'https://www.mercedes-benz.is/models/eqe-suv/',
+    sellerURL: 'https://www.mercedes-benz.is/models/eqe-suv/',
     acceleration: 4.3,
     capacity: 90.6,
     range: 476,
@@ -1381,8 +1372,7 @@ const newCars: Array<NewCar> = [
     subModel: 'AMG 53 4MATIC',
     heroImageName: 'mercedes-eqe-suv-amg-alt',
     price: 25_490_000,
-    sellerURL:
-      'https://www.mercedes-benz.is/models/eqe-suv/',
+    sellerURL: 'https://www.mercedes-benz.is/models/eqe-suv/',
     acceleration: 3.7,
     capacity: 90.6,
     range: 450,
@@ -1697,7 +1687,8 @@ const newCars: Array<NewCar> = [
     subModel: 'E',
     heroImageName: 'mini-countryman-e',
     price: 8_890_000,
-    sellerURL: 'https://issuu.com/hallih/docs/mini_ver__listi_09.10.2017lr?e=5814949/54144288',
+    sellerURL:
+      'https://issuu.com/hallih/docs/mini_ver__listi_09.10.2017lr?e=5814949/54144288',
     acceleration: 8.6,
     capacity: 66.5,
     range: 462,
@@ -1712,7 +1703,8 @@ const newCars: Array<NewCar> = [
     subModel: 'SE 4x4',
     heroImageName: 'mini-countryman-se',
     price: 9_690_000,
-    sellerURL: 'https://issuu.com/hallih/docs/mini_ver__listi_09.10.2017lr?e=5814949/54144288',
+    sellerURL:
+      'https://issuu.com/hallih/docs/mini_ver__listi_09.10.2017lr?e=5814949/54144288',
     acceleration: 5.6,
     capacity: 66.5,
     range: 432,
@@ -2330,7 +2322,7 @@ const newCars: Array<NewCar> = [
     model: 'Megane E-Tech',
     subModel: 'EV60 130hp',
     heroImageName: 'renault-megane-etech',
-    price: 7590000,
+    price: 7090000,
     sellerURL:
       'https://www.renault.is/cars/megane-e-tech/megane-e-tech-electric.html',
     acceleration: 10.5,
@@ -2347,7 +2339,7 @@ const newCars: Array<NewCar> = [
     model: 'Megane E-Tech',
     subModel: 'EV60 220hp',
     heroImageName: 'renault-megane-etech-alt',
-    price: 7890000,
+    price: 7390000,
     sellerURL:
       'https://www.renault.is/cars/megane-e-tech/megane-e-tech-electric.html',
     acceleration: 7.4,
@@ -2373,13 +2365,14 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 80,
     timeToCharge10T080: 56,
+    discontinued: '2024-08-07',
   },
   {
     make: 'Renault',
     model: 'Zoe',
     subModel: 'R135',
     heroImageName: 'zoe-r135',
-    price: 7290000,
+    price: 6890000,
     sellerURL: 'https://www.renault.is/cars/zoe/yfirlit.html',
     acceleration: 9.5,
     capacity: 52,
@@ -2394,7 +2387,7 @@ const newCars: Array<NewCar> = [
     model: 'Scenic E-Tech',
     subModel: 'EV60',
     heroImageName: 'renault-scenic',
-    price: 9000000,
+    price: 8_290_000,
     sellerURL:
       'https://www.renault.is/cars/renault-scenic-e-tech-100-rafmagn/yfirlit.html',
     acceleration: 8.6,
@@ -2412,7 +2405,7 @@ const newCars: Array<NewCar> = [
     model: 'Scenic E-Tech',
     subModel: 'EV87',
     heroImageName: 'renault-scenic-alt',
-    price: 9700000,
+    price: 9_190_000,
     sellerURL:
       'https://www.renault.is/cars/renault-scenic-e-tech-100-rafmagn/yfirlit.html',
     acceleration: 7.9,
@@ -3010,8 +3003,7 @@ const newCars: Array<NewCar> = [
     acceleration: 7.3,
     capacity: 69,
     range: 436,
-    evDatabaseURL:
-      'https://ev-database.org/car/2123/Volvo-EC40-Single-Motor',
+    evDatabaseURL: 'https://ev-database.org/car/2123/Volvo-EC40-Single-Motor',
     drive: 'RWD',
     power: 175,
     timeToCharge10T080: 34,
@@ -3026,8 +3018,7 @@ const newCars: Array<NewCar> = [
     acceleration: 4.7,
     capacity: 82,
     range: 448,
-    evDatabaseURL:
-      'https://ev-database.org/car/2137/Volvo-EC40-Twin-Motor',
+    evDatabaseURL: 'https://ev-database.org/car/2137/Volvo-EC40-Twin-Motor',
     drive: 'AWD',
     power: 300,
     timeToCharge10T080: 28,
@@ -3042,8 +3033,7 @@ const newCars: Array<NewCar> = [
     acceleration: 7.4,
     capacity: 69,
     range: 424,
-    evDatabaseURL:
-      'https://ev-database.org/car/2120/Volvo-EX40-Single-Motor',
+    evDatabaseURL: 'https://ev-database.org/car/2120/Volvo-EX40-Single-Motor',
     drive: 'RWD',
     power: 175,
     timeToCharge10T080: 34,
@@ -3058,8 +3048,7 @@ const newCars: Array<NewCar> = [
     acceleration: 4.9,
     capacity: 82,
     range: 437,
-    evDatabaseURL:
-      'https://ev-database.org/car/2136/Volvo-EX40-Twin-Motor',
+    evDatabaseURL: 'https://ev-database.org/car/2136/Volvo-EX40-Twin-Motor',
     drive: 'AWD',
     power: 300,
     timeToCharge10T080: 28,
@@ -3171,8 +3160,7 @@ const newCars: Array<NewCar> = [
     acceleration: 6.7,
     capacity: 92,
     range: 570,
-    evDatabaseURL:
-      'https://ev-database.org/car/2182/XPENG-G6-RWD-Long-Range',
+    evDatabaseURL: 'https://ev-database.org/car/2182/XPENG-G6-RWD-Long-Range',
     drive: 'RWD',
     power: 210,
     timeToCharge10T080: 21,
@@ -3188,8 +3176,7 @@ const newCars: Array<NewCar> = [
     acceleration: 4.1,
     capacity: 92,
     range: 550,
-    evDatabaseURL:
-      'https://ev-database.org/car/2183/XPENG-G6-AWD-Performance',
+    evDatabaseURL: 'https://ev-database.org/car/2183/XPENG-G6-AWD-Performance',
     drive: 'AWD',
     power: 350,
     timeToCharge10T080: 21,
