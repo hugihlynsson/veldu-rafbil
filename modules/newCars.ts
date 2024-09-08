@@ -934,7 +934,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'hyundai-kona-2024-alt',
     price: 7_890_000,
     sellerURL: 'https://hyundai.is/bilarnir/kona-sx2-ev/',
-    acceleration: 8.8,
+    acceleration: 7.8,
     capacity: 65.4,
     range: 514,
     evDatabaseURL:
