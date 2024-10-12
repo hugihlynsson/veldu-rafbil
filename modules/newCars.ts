@@ -20,7 +20,7 @@ const newCars: Array<NewCar> = [
     model: 'e-tron GT',
     subModel: 'quattro',
     heroImageName: 'audi-etron-gt',
-    price: 16190000,
+    price: 16_990_000,
     sellerURL: 'https://www.audi.is/is/web/is/models/e-tron-gt/e-tron-gt.html',
     acceleration: 4.1,
     capacity: 93.4,
@@ -28,8 +28,7 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/1420/Audi-e-tron-GT-quattro',
     drive: 'AWD',
     power: 390,
-    timeToCharge10T080: 21,
-    discontinued: '2024-07-13',
+    timeToCharge10T080: 17,
   },
   {
     make: 'Audi',
