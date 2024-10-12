@@ -2249,7 +2249,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 300,
     timeToCharge10T080: 21,
-    expectedDelivery: 'Lok 2024',
   },
   {
     make: 'Porsche',
@@ -2265,7 +2264,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 330,
     timeToCharge10T080: 21,
-    expectedDelivery: 'Lok 2024',
   },
   {
     make: 'Porsche',
@@ -2282,7 +2280,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 470,
     timeToCharge10T080: 21,
-    expectedDelivery: 'Lok 2024',
   },
   {
     make: 'Porsche',
