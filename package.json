@@ -6,7 +6,7 @@
   "dependencies": {
     "atob": "^2.1.2",
     "cheerio": "^1.0.0-rc.12",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
     "fathom-client": "^3.7.2",
     "firebase": "^11.0.2",
     "firebase-admin": "^12.6.0",
