@@ -317,6 +317,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 400,
     timeToCharge10T080: 35,
+    discontinued: '2025-01-13',
   },
   {
     make: 'BMW',
@@ -332,6 +333,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 240,
     timeToCharge10T080: 30,
+    discontinued: '2025-01-13',
   },
   {
     make: 'BMW',
@@ -347,6 +349,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 385,
     timeToCharge10T080: 31,
+    discontinued: '2025-01-13',
   },
   {
     make: 'BMW',
@@ -362,6 +365,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 455,
     timeToCharge10T080: 31,
+    discontinued: '2025-01-13',
   },
   {
     make: 'BMW',
@@ -407,6 +411,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 210,
     timeToCharge10T080: 33,
+    discontinued: '2025-01-13',
   },
   {
     make: 'BYD',
