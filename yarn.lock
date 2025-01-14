@@ -1123,10 +1123,10 @@
     typescript "4.9.5"
     undici "5.28.4"
 
-"@vercel/python@4.6.0":
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/@vercel/python/-/python-4.6.0.tgz#35b53793f8e2f3d3ef32a04bdc5cf5721f553079"
-  integrity sha512-43bpxcas3d3ep+F5zdziva6gW1LBc71YGQiG/XmajGlDv4cCNO312Vf8BE5SYafb5ft6rwl69+WOoFwGkI26qA==
+"@vercel/python@4.7.0":
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/@vercel/python/-/python-4.7.0.tgz#43950a228a314a8de9d0751e2e38c87b02d5dc92"
+  integrity sha512-mkHmzYYZBLFLdvSdgrnBl1Qc1+LI5YIafSNJOj8oW4YU8vvALLMbwgZp42pZnyXW0e/3uHcesiRp4P0jSB0wyg==
 
 "@vercel/redwood@2.1.12":
   version "2.1.12"
@@ -3374,10 +3374,10 @@ v8-compile-cache-lib@^3.0.1:
   resolved "https://registry.yarnpkg.com/v8-compile-cache-lib/-/v8-compile-cache-lib-3.0.1.tgz#6336e8d71965cb3d35a1bbb7868445a7c05264bf"
   integrity sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==
 
-vercel@^39.2.6:
-  version "39.2.6"
-  resolved "https://registry.yarnpkg.com/vercel/-/vercel-39.2.6.tgz#1ff709d8107969bffdbc345da011d48b4b4a3019"
-  integrity sha512-s3T8eEXeNcMcgU+NsHS2/1B7Pj1aWip+dy0IQqbDwy1ArFFI0S4IzpN2+XxfG8Y6fPJnLGUyywTe/nbFU7SWPg==
+vercel@^39.3.0:
+  version "39.3.0"
+  resolved "https://registry.yarnpkg.com/vercel/-/vercel-39.3.0.tgz#d1a9b4727cc568c217019bf0f60df37a3c96b70e"
+  integrity sha512-VyGaH5tnVVsgACcbU4PCRyQBDg/SST7/HQBaIXNnmOW7Ngjcn04wamjPgYAdFUGroiTm+ZpmNbCO1DQXzNeTjQ==
   dependencies:
     "@vercel/build-utils" "9.0.1"
     "@vercel/fun" "1.1.2"
@@ -3385,7 +3385,7 @@ vercel@^39.2.6:
     "@vercel/hydrogen" "1.0.11"
     "@vercel/next" "4.4.2"
     "@vercel/node" "5.0.2"
-    "@vercel/python" "4.6.0"
+    "@vercel/python" "4.7.0"
     "@vercel/redwood" "2.1.12"
     "@vercel/remix-builder" "5.0.2"
     "@vercel/ruby" "2.1.0"
