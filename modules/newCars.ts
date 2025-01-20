@@ -806,7 +806,7 @@ const newCars: Array<NewCar> = [
     model: 'IONIQ 6',
     subModel: 'Long Range 2WD',
     heroImageName: 'hyundai-ioniq-6',
-    price: 8_490_000,
+    price: 7_490_000,
     sellerURL: 'https://hyundai.is/bilarnir/nyr-ioniq-6/',
     acceleration: 7.4,
     capacity: 77.4,
@@ -822,7 +822,7 @@ const newCars: Array<NewCar> = [
     model: 'IONIQ 6',
     subModel: 'Long Range 4WD',
     heroImageName: 'hyundai-ioniq-6-alt',
-    price: 8_990_000,
+    price: 7_890_000,
     sellerURL: 'https://hyundai.is/bilarnir/nyr-ioniq-6/',
     acceleration: 5.1,
     capacity: 77.4,
@@ -848,13 +848,14 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 150,
     timeToCharge10T080: 44,
+    discontinued: '2025-01-20',
   },
   {
     make: 'Hyundai',
     model: 'Kona Electric',
     subModel: '48 kWh',
     heroImageName: 'hyundai-kona-2024',
-    price: 7_190_000,
+    price: 6_290_000,
     sellerURL: 'https://hyundai.is/bilarnir/kona-sx2-ev/',
     acceleration: 7.8,
     capacity: 48.4,
@@ -870,7 +871,7 @@ const newCars: Array<NewCar> = [
     model: 'Kona Electric',
     subModel: '65 kWh',
     heroImageName: 'hyundai-kona-2024-alt',
-    price: 7_890_000,
+    price: 6_890_000,
     sellerURL: 'https://hyundai.is/bilarnir/kona-sx2-ev/',
     acceleration: 7.8,
     capacity: 65.4,
@@ -2364,7 +2365,7 @@ const newCars: Array<NewCar> = [
     model: 'Megane E-Tech',
     subModel: 'EV60 130hp',
     heroImageName: 'renault-megane-etech',
-    price: 7090000,
+    price: 6_590000,
     sellerURL:
       'https://www.renault.is/cars/megane-e-tech/megane-e-tech-electric.html',
     acceleration: 10.5,
@@ -2381,7 +2382,7 @@ const newCars: Array<NewCar> = [
     model: 'Megane E-Tech',
     subModel: 'EV60 220hp',
     heroImageName: 'renault-megane-etech-alt',
-    price: 6990000,
+    price: 6_690_000,
     sellerURL:
       'https://www.renault.is/cars/megane-e-tech/megane-e-tech-electric.html',
     acceleration: 7.4,
@@ -3158,7 +3159,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 300,
     timeToCharge10T080: 32,
-    expectedDelivery: '2024',
   },
   {
     make: 'Volvo',
@@ -3175,7 +3175,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 380,
     timeToCharge10T080: 32,
-    expectedDelivery: '2024',
   },
   {
     make: 'XPENG',
@@ -3192,7 +3191,6 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 190,
     timeToCharge10T080: 21,
-    expectedDelivery: '2024',
   },
   {
     make: 'XPENG',
@@ -3208,7 +3206,6 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 210,
     timeToCharge10T080: 21,
-    expectedDelivery: '2024',
   },
   {
     make: 'XPENG',
@@ -3224,7 +3221,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 350,
     timeToCharge10T080: 21,
-    expectedDelivery: '2024',
   },
 ]
 
