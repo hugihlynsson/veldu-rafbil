@@ -494,7 +494,7 @@ const newCars: Array<NewCar> = [
     capacity: 91.3,
     range: 502,
     evDatabaseURL:
-      'https://ev-database.org/car/2002/BYD-SEAL-825-kWh-AWD-Excellence',
+      'https://ev-database.org/car/3072/BYD-SEALION-7-913-kWh-AWD-Excellence',
     drive: 'AWD',
     power: 390,
     timeToCharge10T080: 24,
@@ -509,7 +509,7 @@ const newCars: Array<NewCar> = [
     acceleration: 4.9,
     capacity: 108,
     range: 530,
-    evDatabaseURL: 'https://ev-database.org/car/3072/BYD-SEALION-7-913-kWh-AWD-Excellence',
+    evDatabaseURL: 'https://ev-database.org/car/2095/BYD-TANG-Flagship',
     drive: 'AWD',
     power: 380,
     timeToCharge10T080: 48,
