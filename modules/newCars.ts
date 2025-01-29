@@ -3010,7 +3010,7 @@ const newCars: Array<NewCar> = [
     model: 'ID.4',
     subModel: 'Pro 4MOTION',
     heroImageName: 'vw-id-4-alt2',
-    price: 8_990_000,
+    price: 8_490_000,
     sellerURL: 'https://www.volkswagen.is/is/bilar/ID4.html',
     acceleration: 6.6,
     capacity: 82,
