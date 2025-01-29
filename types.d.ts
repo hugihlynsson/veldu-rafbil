@@ -67,3 +67,19 @@ export type Filters = {
   value?: number
   availability?: availability
 }
+
+export type Sorting =
+  | 'name'
+  | 'price' 
+  | 'range'
+  | 'acceleration'
+  | 'value'
+  | 'fastcharge'
+
+export type SortingQuery =
+  | 'nafni'
+  | 'verdi'
+  | 'draegni'
+  | 'hrodun'
+  | 'virdi'
+  | 'hradhledslu'

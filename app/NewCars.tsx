@@ -1,40 +1,28 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
-import Head from 'next/head'
-import { NextPage } from 'next'
-import Router, { useRouter } from 'next/router'
-import smoothscroll from 'smoothscroll-polyfill'
-import { ParsedUrlQuery } from 'querystring'
+'use client'
 
-import Car, {getPriceWithGrant} from '../components/NewCar'
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  FunctionComponent,
+} from 'react'
+import { usePathname, useSearchParams, useRouter } from 'next/navigation'
+import smoothscroll from 'smoothscroll-polyfill'
+
+import Car, { getPriceWithGrant } from '../components/NewCar'
 import Title from '../components/Title'
-import Footer from '../components/Footer'
 import Toggles from '../components/Toggles'
 import FilterModal from '../components/FilterModal'
 import newCarsWithDiscontinued from '../modules/newCars'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
 import { colors } from '../modules/globals'
-import { NewCar, Filters, Drive } from '../types'
+import { NewCar, Filters, Sorting, SortingQuery } from '../types'
 
 import stableSort from '../modules/stableSort'
 
 let newCars = newCarsWithDiscontinued.filter((car) => !car.discontinued)
-
-type Sorting =
-  | 'name'
-  | 'price'
-  | 'range'
-  | 'acceleration'
-  | 'value'
-  | 'fastcharge'
-
-type SortingQuery =
-  | 'nafni'
-  | 'verdi'
-  | 'draegni'
-  | 'hrodun'
-  | 'virdi'
-  | 'hradhledslu'
 
 const sortingToQuery: { [key in Sorting]: SortingQuery } = {
   name: 'nafni',
@@ -45,57 +33,11 @@ const sortingToQuery: { [key in Sorting]: SortingQuery } = {
   fastcharge: 'hradhledslu',
 }
 
-const queryToSorting: { [key in SortingQuery]: Sorting } = {
-  nafni: 'name',
-  verdi: 'price',
-  draegni: 'range',
-  hrodun: 'acceleration',
-  virdi: 'value',
-  hradhledslu: 'fastcharge',
-}
-
-export const getFiltersFromQuery = (query: ParsedUrlQuery): Filters => {
-  let filters: Filters = {}
-
-  if (query.hrodun) {
-    filters.acceleration = Number(query.hrodun)
-  }
-  if (query.drif) {
-    filters.drive =
-      typeof query.drif === 'string'
-        ? [query.drif as Drive]
-        : (query.drif as Drive[])
-  }
-  if (query.hradhledsla) {
-    filters.fastcharge = Number(query.hradhledsla)
-  }
-  if (query.nafn) {
-    filters.name =
-      typeof query.nafn === 'string'
-        ? [query.nafn as string]
-        : (query.nafn as string[])
-  }
-  if (query.verd) {
-    filters.price = Number(query.verd)
-  }
-  if (query.draegni) {
-    filters.range = Number(query.draegni)
-  }
-  if (query.virdi) {
-    filters.value = Number(query.virdi)
-  }
-  if (query.frambod) {
-    filters.availability =
-      query.frambod === 'faanlegir' ? 'available' : 'expected'
-  }
-  return filters
-}
-
 const carSorter =
   (sorting: Sorting) =>
   (a: NewCar, b: NewCar): number => {
     let padPrice = (car: NewCar): string =>
-      (getPriceWithGrant(car.price)).toString().padStart(9, '0')
+      getPriceWithGrant(car.price).toString().padStart(9, '0')
 
     switch (sorting) {
       case 'name':
@@ -109,7 +51,10 @@ const carSorter =
       case 'acceleration':
         return a.acceleration - b.acceleration
       case 'value':
-        return getPriceWithGrant(a.price) / a.range - getPriceWithGrant(b.price) / b.range
+        return (
+          getPriceWithGrant(a.price) / a.range -
+          getPriceWithGrant(b.price) / b.range
+        )
       case 'fastcharge':
         return (
           Number(getKmPerMinutesCharged(b.timeToCharge10T080, b.range)) -
@@ -152,7 +97,10 @@ const carFilter =
                 ) || false
               )
             case 'price':
-              return getPriceWithGrant(car.price) <= (filters.price ?? Number.MAX_SAFE_INTEGER)
+              return (
+                getPriceWithGrant(car.price) <=
+                (filters.price ?? Number.MAX_SAFE_INTEGER)
+              )
             case 'range':
               return car.range >= (filters.range ?? 0)
             case 'value':
@@ -191,11 +139,11 @@ const useBodyScrollLock = (lock: boolean): void => {
   }, [lock])
 }
 
-const New: NextPage<Props> = ({
+const New: FunctionComponent<Props> = ({
   sorting: initialSorting,
   filters: initialFilters,
 }) => {
-  const { pathname } = useRouter()
+  const pathname = usePathname()
   const [sorting, setSorting] = useState<Sorting>(initialSorting)
   const [filters, setFilters] = useState<Filters>(initialFilters)
 
@@ -205,37 +153,43 @@ const New: NextPage<Props> = ({
 
   useBodyScrollLock(editingFilters)
 
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
   useEffect(() => {
-    const query = {} as ParsedUrlQuery
+    const query = new URLSearchParams(searchParams.toString())
+
     if (sorting !== 'name') {
-      query.radaeftir = sortingToQuery[sorting]
+      query.set('radaeftir', sortingToQuery[sorting])
     }
     if (filters.acceleration) {
-      query.hrodun = filters.acceleration.toString()
+      query.set('hrodun', filters.acceleration.toString())
     }
     if (filters.availability) {
-      query.frambod =
-        filters.availability === 'available' ? 'faanlegir' : 'vaentanlegir'
+      query.set(
+        'frambod',
+        filters.availability === 'available' ? 'faanlegir' : 'vaentanlegir',
+      )
     }
     if (filters.drive) {
-      query.drif = filters.drive
+      query.set('drif', filters.drive.join(','))
     }
     if (filters.fastcharge) {
-      query.hradhledsla = filters.fastcharge.toString()
+      query.set('hradhledsla', filters.fastcharge.toString())
     }
     if (filters.name) {
-      query.nafn = filters.name
+      query.set('nafn', filters.name.join(','))
     }
     if (filters.price) {
-      query.verd = filters.price.toString()
+      query.set('verd', filters.price.toString())
     }
     if (filters.range) {
-      query.draegni = filters.range.toString()
+      query.set('draegni', filters.range.toString())
     }
     if (filters.value) {
-      query.virdi = filters.value.toString()
+      query.set('virdi', filters.value.toString())
     }
-    Router.replace({ pathname, query }, undefined, { scroll: false })
+    router.replace(`${pathname}?${query.toString()}`, { scroll: false })
   }, [sorting, filters])
 
   const descriptionRef = useRef<HTMLParagraphElement>(null)
@@ -267,172 +221,148 @@ const New: NextPage<Props> = ({
   const filteredCarCount = newCars.length - filteredCars.length
 
   return (
-    <>
-      <div className="content">
-        <Head>
-          <title key="title">Veldu Rafbíl</title>
-          <meta
-            key="description"
-            name="description"
-            content={`Listi yfir alla ${newCars.length} bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar`}
-          />
-        </Head>
+    <div className="content">
+      <header>
+        <Title />
 
-        <header>
-          <Title />
+        <p className="description" id="nyjir" ref={descriptionRef}>
+          Listi yfir alla {newCars.length} bílana sem eru seldir á Íslandi og
+          eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
+          <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda en
+          raundrægni er háð aðstæðum og aksturslagi.
+          <em>
+            Kaupendur nýskráðra rafbíla sem kosta minna en 10 milljónir eiga
+            kost á að{' '}
+            <a href="https://island.is/rafbilastyrkir">
+              sækja um 900.000 kr. rafbílastyrk
+            </a>
+            .
+          </em>
+        </p>
 
-          <p className="description" id="nyjir" ref={descriptionRef}>
-            Listi yfir alla {newCars.length} bílana sem eru seldir á Íslandi og
-            eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
-            <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda en
-            raundrægni er háð aðstæðum og aksturslagi.
-            <em>
-              Kaupendur nýskráðra rafbíla sem kosta minna en 10 milljónir eiga kost á að{' '}
-              <a href="https://island.is/rafbilastyrkir">
-                sækja um 900.000 kr. rafbílastyrk
-              </a>
-              .
-            </em>
-          </p>
+        <div className="sorting-title">Raða eftir:</div>
 
-          <div className="sorting-title">Raða eftir:</div>
+        <Toggles<Sorting>
+          currentValue={sorting}
+          items={[
+            ['Nafni', 'name'],
+            ['Verði', 'price'],
+            ['Drægni', 'range'],
+            ['Hröðun', 'acceleration'],
+            ['Verði á km', 'value'],
+          ]}
+          onClick={setSorting}
+        />
 
-          <Toggles<Sorting>
-            currentValue={sorting}
-            items={[
-              ['Nafni', 'name'],
-              ['Verði', 'price'],
-              ['Drægni', 'range'],
-              ['Hröðun', 'acceleration'],
-              ['Verði á km', 'value'],
-            ]}
-            onClick={setSorting}
-          />
-
-          <div className="filters-box">
-            {hasFilter && (
-              <div className="filters-title">
-                {filteredCars.length}{' '}
-                {filteredCars.length.toString().match(/.*1$/m)
-                  ? 'bíll passar við:'
-                  : 'bílar passa við:'}
-              </div>
-            )}
-            <div className="filters">
-              {filters.name && (
-                <button className="filter" onClick={handleRemoveFilter('name')}>
-                  Nafn: <span>{filters.name.join(', ')}</span>
-                </button>
-              )}
-
-              {filters.price && (
-                <button
-                  className="filter"
-                  onClick={handleRemoveFilter('price')}
-                >
-                  Verð: <span>↓{addDecimalSeprators(filters.price)} kr.</span>
-                </button>
-              )}
-
-              {filters.range && (
-                <button
-                  className="filter"
-                  onClick={handleRemoveFilter('range')}
-                >
-                  Drægni: <span>↑{filters.range} km.</span>
-                </button>
-              )}
-
-              {filters.drive && (
-                <button
-                  className="filter"
-                  onClick={handleRemoveFilter('drive')}
-                >
-                  Drif: <span>{filters.drive.join(', ')}</span>
-                </button>
-              )}
-
-              {filters.acceleration && (
-                <button
-                  className="filter"
-                  onClick={handleRemoveFilter('acceleration')}
-                >
-                  Hröðun <span>↓{filters.acceleration.toFixed(1)}s</span>
-                </button>
-              )}
-
-              {filters.value && (
-                <button
-                  className="filter"
-                  onClick={handleRemoveFilter('value')}
-                >
-                  Verði á km:{' '}
-                  <span>↓{addDecimalSeprators(filters.value)} kr.</span>
-                </button>
-              )}
-
-              {filters.fastcharge && (
-                <button
-                  className="filter"
-                  onClick={handleRemoveFilter('fastcharge')}
-                >
-                  Hraðhleðsla: <span>↑{filters.fastcharge} km/min</span>
-                </button>
-              )}
-
-              {filters.availability && (
-                <button
-                  className="filter"
-                  onClick={handleRemoveFilter('availability')}
-                >
-                  Framboð:{' '}
-                  <span>
-                    {filters.availability === 'available'
-                      ? 'Fáanlegir'
-                      : 'Væntanlegir'}
-                  </span>
-                </button>
-              )}
-              <button
-                className="add-filter"
-                onClick={() => setEditingFilters(() => true)}
-              >
-                + Bæta við síu
-              </button>
+        <div className="filters-box">
+          {hasFilter && (
+            <div className="filters-title">
+              {filteredCars.length}{' '}
+              {filteredCars.length.toString().match(/.*1$/m)
+                ? 'bíll passar við:'
+                : 'bílar passa við:'}
             </div>
-          </div>
-        </header>
+          )}
+          <div className="filters">
+            {filters.name && (
+              <button className="filter" onClick={handleRemoveFilter('name')}>
+                Nafn: <span>{filters.name.join(', ')}</span>
+              </button>
+            )}
 
-        {stableSort(filteredCars, carSorter(sorting)).map((car, index) => (
-          <Car
-            priority={index <= 1}
-            car={car}
-            key={`${car.make} ${car.model} ${car.subModel} ${car.price}`}
-            showValue={sorting === 'value' || Boolean(filters.value)}
-          />
-        ))}
+            {filters.price && (
+              <button className="filter" onClick={handleRemoveFilter('price')}>
+                Verð: <span>↓{addDecimalSeprators(filters.price)} kr.</span>
+              </button>
+            )}
 
-        {hasFilter && filteredCarCount > 0 && (
-          <div className="filters-reset-box">
-            {filteredCarCount}
-            {filteredCarCount.toString().match(/.*1$/m)
-              ? ' bíll passaði '
-              : ' bílar pössuðu '}
-            ekki við síurnar{' '}
+            {filters.range && (
+              <button className="filter" onClick={handleRemoveFilter('range')}>
+                Drægni: <span>↑{filters.range} km.</span>
+              </button>
+            )}
+
+            {filters.drive && (
+              <button className="filter" onClick={handleRemoveFilter('drive')}>
+                Drif: <span>{filters.drive.join(', ')}</span>
+              </button>
+            )}
+
+            {filters.acceleration && (
+              <button
+                className="filter"
+                onClick={handleRemoveFilter('acceleration')}
+              >
+                Hröðun <span>↓{filters.acceleration.toFixed(1)}s</span>
+              </button>
+            )}
+
+            {filters.value && (
+              <button className="filter" onClick={handleRemoveFilter('value')}>
+                Verði á km:{' '}
+                <span>↓{addDecimalSeprators(filters.value)} kr.</span>
+              </button>
+            )}
+
+            {filters.fastcharge && (
+              <button
+                className="filter"
+                onClick={handleRemoveFilter('fastcharge')}
+              >
+                Hraðhleðsla: <span>↑{filters.fastcharge} km/min</span>
+              </button>
+            )}
+
+            {filters.availability && (
+              <button
+                className="filter"
+                onClick={handleRemoveFilter('availability')}
+              >
+                Framboð:{' '}
+                <span>
+                  {filters.availability === 'available'
+                    ? 'Fáanlegir'
+                    : 'Væntanlegir'}
+                </span>
+              </button>
+            )}
             <button
-              className="filters-reset-button"
-              onClick={(event) => {
-                setFilters(() => ({}))
-                handleNewPress(event)
-              }}
+              className="add-filter"
+              onClick={() => setEditingFilters(() => true)}
             >
-              Sýna alla
+              + Bæta við síu
             </button>
           </div>
-        )}
-      </div>
+        </div>
+      </header>
 
-      <Footer />
+      {stableSort(filteredCars, carSorter(sorting)).map((car, index) => (
+        <Car
+          priority={index <= 1}
+          car={car}
+          key={`${car.make} ${car.model} ${car.subModel} ${car.price}`}
+          showValue={sorting === 'value' || Boolean(filters.value)}
+        />
+      ))}
+
+      {hasFilter && filteredCarCount > 0 && (
+        <div className="filters-reset-box">
+          {filteredCarCount}
+          {filteredCarCount.toString().match(/.*1$/m)
+            ? ' bíll passaði '
+            : ' bílar pössuðu '}
+          ekki við síurnar{' '}
+          <button
+            className="filters-reset-button"
+            onClick={(event) => {
+              setFilters(() => ({}))
+              handleNewPress(event)
+            }}
+          >
+            Sýna alla
+          </button>
+        </div>
+      )}
 
       {editingFilters && (
         <FilterModal
@@ -633,13 +563,8 @@ const New: NextPage<Props> = ({
           }
         `}
       </style>
-    </>
+    </div>
   )
 }
-
-New.getInitialProps = ({ query }): Props => ({
-  sorting: queryToSorting[(query.radaeftir as SortingQuery) ?? 'nafni'],
-  filters: getFiltersFromQuery(query),
-})
 
 export default New
