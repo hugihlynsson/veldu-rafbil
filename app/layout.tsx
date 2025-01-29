@@ -1,4 +1,5 @@
 import Fathom from '../components/Fathom'
+import StyledJsxRegistry from './Registry'
 
 type Props = {
   children: React.ReactNode
@@ -55,7 +56,7 @@ button, input {
       </head>
       <body>
         <Fathom />
-        {children}
+        <StyledJsxRegistry>{children}</StyledJsxRegistry>
       </body>
     </html>
   )

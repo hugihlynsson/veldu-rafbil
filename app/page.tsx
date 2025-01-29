@@ -19,32 +19,20 @@ const getFiltersFromQuery = (query: ParsedUrlQuery): Filters => {
 
   let { hrodun, drif, hradhledsla, nafn, verd, draegni, virdi, frambod } = query
 
-  if (hrodun) {
-    filters.acceleration = Number(hrodun)
-  }
-  if (drif) {
+  if (hrodun) filters.acceleration = Number(hrodun)
+  if (drif)
     filters.drive =
       typeof drif === 'string' ? [drif as Drive] : (drif as Drive[])
-  }
-  if (hradhledsla) {
-    filters.fastcharge = Number(hradhledsla)
-  }
-  if (nafn) {
+  if (hradhledsla) filters.fastcharge = Number(hradhledsla)
+  if (nafn)
     filters.name =
       typeof nafn === 'string' ? [nafn as string] : (nafn as string[])
-  }
-  if (verd) {
-    filters.price = Number(verd)
-  }
-  if (draegni) {
-    filters.range = Number(draegni)
-  }
-  if (virdi) {
-    filters.value = Number(virdi)
-  }
-  if (frambod) {
+  if (verd) filters.price = Number(verd)
+  if (draegni) filters.range = Number(draegni)
+  if (virdi) filters.value = Number(virdi)
+  if (frambod)
     filters.availability = frambod === 'faanlegir' ? 'available' : 'expected'
-  }
+
   return filters
 }
 
