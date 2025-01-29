@@ -8,5 +8,5 @@ Veldu Rafbíl is a project on electric cars in Iceland and translates to _Choose
 This is a simple [Next.js](https://nextjs.org) project written in Typescript, deployed using [Vercel](http://vercel.com). It's a single route at `/` that lists all new electric cars available in Iceland including the most relevant information, a link to the seller and more detailed info.
 Requirements:
 
-- [Node.js](https://nodejs.org/) 18 or later
+- [Node.js](https://nodejs.org/) 18.18 or later
 - [Yarn](https://yarnpkg.com)
