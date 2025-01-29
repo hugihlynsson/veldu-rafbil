@@ -21,8 +21,8 @@ module.exports = {
   async redirects() {
     return [
       {
-        source: '/vaentanlegir',
-        destination: '/?frambod=vaentanlegir',
+        source: '/notadir',
+        destination: '/',
         permanent: true,
       },
     ]

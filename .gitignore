@@ -1,7 +1,5 @@
 .env
 node_modules/
 .next/
-.now
-scripts/choose-ev-export.json
 .vscode
 .vercel

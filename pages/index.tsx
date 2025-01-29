@@ -16,7 +16,7 @@ import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
 import { colors } from '../modules/globals'
 import { NewCar, Filters, Drive } from '../types'
 
-import stableSort from '../components/stableSort'
+import stableSort from '../modules/stableSort'
 
 let newCars = newCarsWithDiscontinued.filter((car) => !car.discontinued)
 
