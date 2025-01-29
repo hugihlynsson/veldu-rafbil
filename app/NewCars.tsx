@@ -159,36 +159,31 @@ const New: FunctionComponent<Props> = ({
   useEffect(() => {
     const query = new URLSearchParams(searchParams.toString())
 
-    if (sorting !== 'name') {
-      query.set('radaeftir', sortingToQuery[sorting])
-    }
-    if (filters.acceleration) {
-      query.set('hrodun', filters.acceleration.toString())
-    }
-    if (filters.availability) {
+    let {
+      acceleration,
+      availability,
+      drive,
+      fastcharge,
+      name,
+      price,
+      range,
+      value,
+    } = filters
+
+    if (sorting !== 'name') query.set('radaeftir', sortingToQuery[sorting])
+    if (acceleration) query.set('hrodun', acceleration.toString())
+    if (availability)
       query.set(
         'frambod',
-        filters.availability === 'available' ? 'faanlegir' : 'vaentanlegir',
+        availability === 'available' ? 'faanlegir' : 'vaentanlegir',
       )
-    }
-    if (filters.drive) {
-      query.set('drif', filters.drive.join(','))
-    }
-    if (filters.fastcharge) {
-      query.set('hradhledsla', filters.fastcharge.toString())
-    }
-    if (filters.name) {
-      query.set('nafn', filters.name.join(','))
-    }
-    if (filters.price) {
-      query.set('verd', filters.price.toString())
-    }
-    if (filters.range) {
-      query.set('draegni', filters.range.toString())
-    }
-    if (filters.value) {
-      query.set('virdi', filters.value.toString())
-    }
+    if (drive) query.set('drif', drive.join(','))
+    if (fastcharge) query.set('hradhledsla', fastcharge.toString())
+    if (name) query.set('nafn', name.join(','))
+    if (price) query.set('verd', price.toString())
+    if (range) query.set('draegni', range.toString())
+    if (value) query.set('virdi', value.toString())
+
     router.replace(`${pathname}?${query.toString()}`, { scroll: false })
   }, [sorting, filters])
 
