@@ -5,9 +5,9 @@
   "license": "MIT",
   "dependencies": {
     "fathom-client": "^3.7.2",
-    "next": "14.2.15",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "smoothscroll-polyfill": "^0.4.4"
   },
   "scripts": {
@@ -16,9 +16,8 @@
     "dev": "next dev"
   },
   "devDependencies": {
-    "@types/node": "^18.19.74",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/node": "^22.12.0",
+    "@types/react": "19.0.8",
     "@types/smoothscroll-polyfill": "^0.3.4",
     "prettier": "^3.4.2",
     "typescript": "^5.7.3"
