@@ -270,6 +270,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 210,
     timeToCharge10T080: 31,
+    discontinued: '2025-01-29',
   },
   {
     make: 'BMW',
