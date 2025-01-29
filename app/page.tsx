@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 import newCarsWithDiscontinued from '../modules/newCars'
 import { Sorting, Filters, Drive } from '../types'
-import NewCars from './newCars'
+import NewCars from './NewCars'
 import Footer from '../components/Footer'
 import { ParsedUrlQuery } from 'querystring'
 
@@ -17,8 +17,7 @@ export const metadata: Metadata = {
 const getFiltersFromQuery = (query: ParsedUrlQuery): Filters => {
   let filters: Filters = {}
 
-  let { hrodun, drif, hradhledsla, nafn, verd, draegni, virdi, frambod } =
-    query
+  let { hrodun, drif, hradhledsla, nafn, verd, draegni, virdi, frambod } = query
 
   if (hrodun) {
     filters.acceleration = Number(hrodun)
@@ -58,7 +57,7 @@ const queryToSorting: { [key: string]: Sorting } = {
   hradhledslu: 'fastcharge',
 }
 
-type Props = { searchParams: { [key: string]: string | undefined } }
+type Props = { searchParams: Promise<{ [key: string]: string | undefined }> }
 
 export default async function Page({ searchParams }: Props) {
   let { radaeftir, ...query } = await searchParams
