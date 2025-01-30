@@ -1,5 +1,5 @@
 import Fathom from '../components/Fathom'
-import StyledJsxRegistry from './Registry'
+import StyledJsxRegistry from './registry'
 
 type Props = {
   children: React.ReactNode

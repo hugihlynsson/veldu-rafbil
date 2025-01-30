@@ -21,6 +21,7 @@ import { colors } from '../modules/globals'
 import { NewCar, Filters, Sorting, SortingQuery } from '../types'
 
 import stableSort from '../modules/stableSort'
+import { ParsedUrlQuery } from 'querystring'
 
 let newCars = newCarsWithDiscontinued.filter((car) => !car.discontinued)
 
@@ -154,10 +155,9 @@ const New: FunctionComponent<Props> = ({
   useBodyScrollLock(editingFilters)
 
   const router = useRouter()
-  const searchParams = useSearchParams()
 
   useEffect(() => {
-    const query = new URLSearchParams(searchParams.toString())
+    const query: Record<string, string> = {}
 
     let {
       acceleration,
@@ -170,21 +170,22 @@ const New: FunctionComponent<Props> = ({
       value,
     } = filters
 
-    if (sorting !== 'name') query.set('radaeftir', sortingToQuery[sorting])
-    if (acceleration) query.set('hrodun', acceleration.toString())
-    if (availability)
-      query.set(
-        'frambod',
-        availability === 'available' ? 'faanlegir' : 'vaentanlegir',
-      )
-    if (drive) query.set('drif', drive.join(','))
-    if (fastcharge) query.set('hradhledsla', fastcharge.toString())
-    if (name) query.set('nafn', name.join(','))
-    if (price) query.set('verd', price.toString())
-    if (range) query.set('draegni', range.toString())
-    if (value) query.set('virdi', value.toString())
+    if (sorting !== 'name') query.radaeftir = sortingToQuery[sorting]
 
-    router.replace(`${pathname}?${query.toString()}`, { scroll: false })
+    if (acceleration) query.hrodun = acceleration.toString()
+
+    if (availability)
+      query.frambod =
+        availability === 'available' ? 'faanlegir' : 'vaentanlegir'
+    if (drive) query.drif = drive.join(',')
+    if (fastcharge) query.hradhledsla = fastcharge.toString()
+    if (name) query.nafn = name.join(',')
+    if (price) query.verd = price.toString()
+    if (range) query.draegni = range.toString()
+    if (value) query.virdi = value.toString()
+
+    let searchParams = new URLSearchParams(query)
+    router.replace(`${pathname}?${searchParams.toString()}`, { scroll: false })
   }, [sorting, filters])
 
   const descriptionRef = useRef<HTMLParagraphElement>(null)

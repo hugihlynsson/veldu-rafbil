@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 import newCarsWithDiscontinued from '../modules/newCars'
 import { Sorting, Filters, Drive } from '../types'
-import NewCars from './NewCars'
+import NewCars from './newCars'
 import Footer from '../components/Footer'
 import { ParsedUrlQuery } from 'querystring'
 
