@@ -7,7 +7,7 @@ import React, {
   useCallback,
   FunctionComponent,
 } from 'react'
-import { usePathname, useSearchParams, useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import smoothscroll from 'smoothscroll-polyfill'
 
 import Car, { getPriceWithGrant } from '../components/NewCar'
@@ -21,7 +21,6 @@ import { colors } from '../modules/globals'
 import { NewCar, Filters, Sorting, SortingQuery } from '../types'
 
 import stableSort from '../modules/stableSort'
-import { ParsedUrlQuery } from 'querystring'
 
 let newCars = newCarsWithDiscontinued.filter((car) => !car.discontinued)
 
@@ -171,9 +170,7 @@ const New: FunctionComponent<Props> = ({
     } = filters
 
     if (sorting !== 'name') query.radaeftir = sortingToQuery[sorting]
-
     if (acceleration) query.hrodun = acceleration.toString()
-
     if (availability)
       query.frambod =
         availability === 'available' ? 'faanlegir' : 'vaentanlegir'
