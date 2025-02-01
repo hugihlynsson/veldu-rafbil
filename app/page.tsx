@@ -1,14 +1,12 @@
 // `app` directory
 import { Metadata } from 'next'
 
-import newCarsWithDiscontinued from '../modules/newCars'
+import cars from '../modules/newCars'
 import { Filters, Drive } from '../types'
 import NewCars from './newCars'
 import Footer from '../components/Footer'
 import { ParsedUrlQuery } from 'querystring'
 import { getSortingFromQuery } from '../modules/sorting'
-
-let cars = newCarsWithDiscontinued.filter((car) => !car.discontinued)
 
 export const metadata: Metadata = {
   title: 'Veldu Rafbíl',

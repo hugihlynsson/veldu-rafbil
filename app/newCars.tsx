@@ -7,15 +7,13 @@ import Car, { getPriceWithGrant } from '../components/NewCar'
 import Title from '../components/Title'
 import Toggles from '../components/Toggles'
 import FilterModal from '../components/FilterModal'
-import newCarsWithDiscontinued from '../modules/newCars'
+import newCars from '../modules/newCars'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
 import { colors } from '../modules/globals'
 import { NewCar, Filters, Sorting } from '../types'
 import { carSorter, sortingToQuery } from '../modules/sorting'
 import stableSort from '../modules/stableSort'
-
-let newCars = newCarsWithDiscontinued.filter((car) => !car.discontinued)
 
 const carFilter =
   (filters: Filters) =>
