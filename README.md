@@ -9,4 +9,3 @@ This is a simple [Next.js](https://nextjs.org) project written in Typescript, de
 Requirements:
 
 - [Node.js](https://nodejs.org/) 18.18 or later
-- [Yarn](https://yarnpkg.com)
