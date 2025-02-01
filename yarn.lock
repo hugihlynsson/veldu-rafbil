@@ -193,11 +193,6 @@
   dependencies:
     csstype "^3.0.2"
 
-"@types/smoothscroll-polyfill@^0.3.4":
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/@types/smoothscroll-polyfill/-/smoothscroll-polyfill-0.3.4.tgz#80cbce8f1abe740d450288550fce07fd42e4eae8"
-  integrity sha512-w1krF+TJh7Azz/2/bEN1tmyKoNt3B6bLCn6SfJErzhKAr1w1b06ePx79NXA+3lTw+DbqXN12nk/Ce1UQDVY8yA==
-
 busboy@1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/busboy/-/busboy-1.6.0.tgz#966ea36a9502e43cdb9146962523b92f531f6893"
@@ -367,11 +362,6 @@ simple-swizzle@^0.2.2:
   integrity sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==
   dependencies:
     is-arrayish "^0.3.1"
-
-smoothscroll-polyfill@^0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/smoothscroll-polyfill/-/smoothscroll-polyfill-0.4.4.tgz#3a259131dc6930e6ca80003e1cb03b603b69abf8"
-  integrity sha512-TK5ZA9U5RqCwMpfoMq/l1mrH0JAR7y7KRvOBx0n2869aLxch+gT9GhN3yUfjiw+d/DiF1mKo14+hd62JyMmoBg==
 
 source-map-js@^1.0.2:
   version "1.0.2"

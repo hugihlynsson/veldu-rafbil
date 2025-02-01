@@ -2,10 +2,11 @@
 import { Metadata } from 'next'
 
 import newCarsWithDiscontinued from '../modules/newCars'
-import { Sorting, Filters, Drive } from '../types'
+import { Filters, Drive } from '../types'
 import NewCars from './newCars'
 import Footer from '../components/Footer'
 import { ParsedUrlQuery } from 'querystring'
+import { getSortingFromQuery } from '../modules/sorting'
 
 let cars = newCarsWithDiscontinued.filter((car) => !car.discontinued)
 
@@ -36,25 +37,15 @@ const getFiltersFromQuery = (query: ParsedUrlQuery): Filters => {
   return filters
 }
 
-const queryToSorting: { [key: string]: Sorting } = {
-  nafni: 'name',
-  verdi: 'price',
-  draegni: 'range',
-  hrodun: 'acceleration',
-  virdi: 'value',
-  hradhledslu: 'fastcharge',
-}
-
-type Props = { searchParams: Promise<{ [key: string]: string | undefined }> }
+type Props = { searchParams: Promise<Record<string, string>> }
 
 export default async function Page({ searchParams }: Props) {
-  let { radaeftir, ...query } = await searchParams
-  const sorting = queryToSorting[radaeftir ?? 'nafni']
-  const filters = await getFiltersFromQuery(query)
-
   return (
     <>
-      <NewCars sorting={sorting} filters={filters} />
+      <NewCars
+        sorting={getSortingFromQuery(await searchParams)}
+        filters={getFiltersFromQuery(await searchParams)}
+      />
       <Footer />
     </>
   )

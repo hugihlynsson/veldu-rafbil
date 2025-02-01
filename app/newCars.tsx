@@ -1,14 +1,7 @@
 'use client'
 
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  FunctionComponent,
-} from 'react'
-import { usePathname, useRouter } from 'next/navigation'
-import smoothscroll from 'smoothscroll-polyfill'
+import React, { useState, useEffect } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import Car, { getPriceWithGrant } from '../components/NewCar'
 import Title from '../components/Title'
@@ -18,103 +11,58 @@ import newCarsWithDiscontinued from '../modules/newCars'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
 import { colors } from '../modules/globals'
-import { NewCar, Filters, Sorting, SortingQuery } from '../types'
-
+import { NewCar, Filters, Sorting } from '../types'
+import { carSorter, sortingToQuery } from '../modules/sorting'
 import stableSort from '../modules/stableSort'
 
 let newCars = newCarsWithDiscontinued.filter((car) => !car.discontinued)
 
-const sortingToQuery: { [key in Sorting]: SortingQuery } = {
-  name: 'nafni',
-  price: 'verdi',
-  range: 'draegni',
-  acceleration: 'hrodun',
-  value: 'virdi',
-  fastcharge: 'hradhledslu',
-}
-
-const carSorter =
-  (sorting: Sorting) =>
-  (a: NewCar, b: NewCar): number => {
-    let padPrice = (car: NewCar): string =>
-      getPriceWithGrant(car.price).toString().padStart(9, '0')
-
-    switch (sorting) {
-      case 'name':
-        return `${a.make} ${a.model} ${padPrice(a)}`.localeCompare(
-          `${b.make} ${b.model} ${padPrice(b)}`,
-        )
-      case 'price':
-        return getPriceWithGrant(a.price) - getPriceWithGrant(b.price)
-      case 'range':
-        return b.range - a.range
-      case 'acceleration':
-        return a.acceleration - b.acceleration
-      case 'value':
-        return (
-          getPriceWithGrant(a.price) / a.range -
-          getPriceWithGrant(b.price) / b.range
-        )
-      case 'fastcharge':
-        return (
-          Number(getKmPerMinutesCharged(b.timeToCharge10T080, b.range)) -
-          Number(getKmPerMinutesCharged(a.timeToCharge10T080, a.range))
-        )
-    }
-  }
-
 const carFilter =
   (filters: Filters) =>
-  (car: NewCar): boolean =>
-    Object.keys(filters).length === 0
-      ? true
-      : Object.keys(filters).every((name): boolean => {
-          switch (name as keyof Filters) {
-            case 'acceleration':
-              return (
-                car.acceleration <=
-                (filters.acceleration ?? Number.MAX_SAFE_INTEGER)
-              )
-            case 'availability':
-              return (
-                Boolean(car.expectedDelivery) ===
-                (filters.availability === 'expected')
-              )
-            case 'drive':
-              return filters.drive?.includes(car.drive) || false
-            case 'fastcharge':
-              return (
-                Number(
-                  getKmPerMinutesCharged(car.timeToCharge10T080, car.range),
-                ) >= (filters.fastcharge ?? 0)
-              )
-            case 'name':
-              return (
-                filters.name?.some((nameFilter) =>
-                  `${car.make} ${car.model} ${car.subModel}`
-                    .toLowerCase()
-                    .includes(nameFilter.toLowerCase()),
-                ) || false
-              )
-            case 'price':
-              return (
-                getPriceWithGrant(car.price) <=
-                (filters.price ?? Number.MAX_SAFE_INTEGER)
-              )
-            case 'range':
-              return car.range >= (filters.range ?? 0)
-            case 'value':
-              return (
-                getPriceWithGrant(car.price) / car.range <=
-                (filters.value ?? Number.MAX_SAFE_INTEGER)
-              )
-          }
-        })
-
-interface Props {
-  sorting: Sorting
-  filters: Filters
-}
+  (car: NewCar): boolean => {
+    if (Object.keys(filters).length === 0) return true
+    return Object.keys(filters).every((name): boolean => {
+      switch (name as keyof Filters) {
+        case 'acceleration':
+          return (
+            car.acceleration <=
+            (filters.acceleration ?? Number.MAX_SAFE_INTEGER)
+          )
+        case 'availability':
+          return (
+            Boolean(car.expectedDelivery) ===
+            (filters.availability === 'expected')
+          )
+        case 'drive':
+          return filters.drive?.includes(car.drive) || false
+        case 'fastcharge':
+          return (
+            Number(getKmPerMinutesCharged(car.timeToCharge10T080, car.range)) >=
+            (filters.fastcharge ?? 0)
+          )
+        case 'name':
+          return (
+            filters.name?.some((nameFilter) =>
+              `${car.make} ${car.model} ${car.subModel}`
+                .toLowerCase()
+                .includes(nameFilter.toLowerCase()),
+            ) || false
+          )
+        case 'price':
+          return (
+            getPriceWithGrant(car.price) <=
+            (filters.price ?? Number.MAX_SAFE_INTEGER)
+          )
+        case 'range':
+          return car.range >= (filters.range ?? 0)
+        case 'value':
+          return (
+            getPriceWithGrant(car.price) / car.range <=
+            (filters.value ?? Number.MAX_SAFE_INTEGER)
+          )
+      }
+    })
+  }
 
 const useBodyScrollLock = (lock: boolean): void => {
   const [scrollY, setScrollY] = useState<number>(0)
@@ -139,66 +87,86 @@ const useBodyScrollLock = (lock: boolean): void => {
   }, [lock])
 }
 
-const New: FunctionComponent<Props> = ({
-  sorting: initialSorting,
-  filters: initialFilters,
-}) => {
-  const pathname = usePathname()
-  const [sorting, setSorting] = useState<Sorting>(initialSorting)
-  const [filters, setFilters] = useState<Filters>(initialFilters)
-
-  useEffect(() => smoothscroll.polyfill(), [])
-
-  let [editingFilters, setEditingFilters] = useState<boolean>(false)
-
-  useBodyScrollLock(editingFilters)
-
+const useSorting = (initial: Sorting) => {
   const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const [sorting, setSorting] = useState<Sorting>(initial)
 
   useEffect(() => {
-    const query: Record<string, string> = {}
+    let updatedSearchParams = new URLSearchParams(searchParams)
+
+    sorting === 'name'
+      ? updatedSearchParams.delete('radaeftir')
+      : updatedSearchParams.set('radaeftir', sortingToQuery[sorting])
+
+    router.replace(`${pathname}?${updatedSearchParams.toString()}`, {
+      scroll: false,
+    })
+  }, [sorting])
+
+  return [sorting, setSorting] as const
+}
+
+const useFilters = (initial: Filters) => {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const [filters, setFilters] = useState<Filters>(initial)
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams)
 
     let {
+      name,
       acceleration,
       availability,
       drive,
       fastcharge,
-      name,
       price,
       range,
       value,
     } = filters
 
-    if (sorting !== 'name') query.radaeftir = sortingToQuery[sorting]
-    if (acceleration) query.hrodun = acceleration.toString()
-    if (availability)
-      query.frambod =
-        availability === 'available' ? 'faanlegir' : 'vaentanlegir'
-    if (drive) query.drif = drive.join(',')
-    if (fastcharge) query.hradhledsla = fastcharge.toString()
-    if (name) query.nafn = name.join(',')
-    if (price) query.verd = price.toString()
-    if (range) query.draegni = range.toString()
-    if (value) query.virdi = value.toString()
+    name ? params.set('nafn', name.join(',')) : params.delete('nafn')
+    acceleration
+      ? params.set('hrodun', acceleration.toString())
+      : params.delete('hrodun')
+    availability
+      ? params.set(
+          'frambod',
+          availability === 'available' ? 'faanlegir' : 'vaentanlegir',
+        )
+      : params.delete('frambod')
+    drive ? params.set('drif', drive.join(',')) : params.delete('drif')
+    fastcharge
+      ? params.set('hradhledsla', fastcharge.toString())
+      : params.delete('hradhledsla')
+    price ? params.set('verd', price.toString()) : params.delete('verd')
+    range ? params.set('draegni', range.toString()) : params.delete('draegni')
+    value ? params.set('virdi', value.toString()) : params.delete('virdi')
 
-    let searchParams = new URLSearchParams(query)
-    router.replace(`${pathname}?${searchParams.toString()}`, { scroll: false })
-  }, [sorting, filters])
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+  }, [filters])
 
-  const descriptionRef = useRef<HTMLParagraphElement>(null)
+  return [filters, setFilters] as const
+}
 
-  const handleNewPress = useCallback(
-    (
-      event: React.MouseEvent<
-        HTMLAnchorElement | HTMLButtonElement,
-        MouseEvent
-      >,
-    ) => {
-      event.preventDefault()
-      descriptionRef.current?.scrollIntoView({ behavior: 'smooth' })
-    },
-    [descriptionRef],
-  )
+interface Props {
+  sorting: Sorting
+  filters: Filters
+}
+
+export default function NewCars({
+  sorting: initialSorting,
+  filters: initialFilters,
+}: Props) {
+  const [sorting, setSorting] = useSorting(initialSorting)
+  const [filters, setFilters] = useFilters(initialFilters)
+
+  let [editingFilters, setEditingFilters] = useState<boolean>(false)
+
+  useBodyScrollLock(editingFilters)
 
   const handleRemoveFilter = (name: keyof Filters) => () =>
     setFilters((filters) => {
@@ -218,7 +186,7 @@ const New: FunctionComponent<Props> = ({
       <header>
         <Title />
 
-        <p className="description" id="nyjir" ref={descriptionRef}>
+        <p className="description">
           Listi yfir alla {newCars.length} bílana sem eru seldir á Íslandi og
           eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
           <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda en
@@ -347,9 +315,9 @@ const New: FunctionComponent<Props> = ({
           ekki við síurnar{' '}
           <button
             className="filters-reset-button"
-            onClick={(event) => {
+            onClick={(_event) => {
               setFilters(() => ({}))
-              handleNewPress(event)
+              window.scrollTo({ top: 0 })
             }}
           >
             Sýna alla
@@ -559,5 +527,3 @@ const New: FunctionComponent<Props> = ({
     </div>
   )
 }
-
-export default New

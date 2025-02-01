@@ -5,17 +5,15 @@ import Image from 'next/image'
 import { NewCar as NewCarType, Drive } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
-import { colors, grantAmount } from '../modules/globals'
+import { colors } from '../modules/globals'
 import LinkPill from './LinkPill'
+import getPriceWithGrant from '../modules/getPriceWithGrant'
 
 interface Props {
   car: NewCarType
   showValue?: boolean
   priority?: boolean
 }
-
-let getPriceWithGrant = (price: number) =>
-  price < 10_000_000 ? price - grantAmount : price
 
 let getDriveLabel = (drive: Drive) => {
   switch (drive) {
