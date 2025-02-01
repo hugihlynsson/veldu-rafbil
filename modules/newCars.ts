@@ -1675,23 +1675,6 @@ const newCars: Array<NewCar> = [
     power: 380,
     timeToCharge10T080: 32,
   },
-  // {
-  //   make: 'Polestar',
-  //   model: '4',
-  //   subModel: 'Long Range Single Motor',
-  //   heroImageName: 'polestar-4',
-  //   price: 10_000_000,
-  //   sellerURL: 'https://www.polestar.com/en-is/polestar-4/',
-  //   acceleration: 7.4,
-  //   capacity: 100,
-  //   range: 610,
-  //   evDatabaseURL:
-  //     'https://ev-database.org/car/1841/Polestar-4-Long-Range-Single-Motor',
-  //   drive: 'RWD',
-  //   power: 200,
-  //   timeToCharge10T080: 31,
-  //   expectedDelivery: 'Lok 2024',
-  // },
   {
     make: 'Polestar',
     model: '4',
