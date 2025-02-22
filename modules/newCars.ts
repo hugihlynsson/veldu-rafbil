@@ -1419,6 +1419,22 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Opel',
+    model: 'Frontera',
+    heroImageName: 'opel-frontera',
+    price: 4_890_000,
+    sellerURL:
+      'https://www.opelisland.is/bilar/frontera/frontera-rafbill/yfirsyn.html',
+    acceleration: 12.1,
+    capacity: 44,
+    range: 305,
+    evDatabaseURL:
+      'https://ev-database.org/car/2238/Opel-Frontera-44-kWh',
+    drive: 'FWD',
+    power: 83,
+    timeToCharge10T080: 32,
+  },
+  {
+    make: 'Opel',
     model: 'Mokka-e',
     heroImageName: 'opel-mokka-e',
     price: 5_730_000,
