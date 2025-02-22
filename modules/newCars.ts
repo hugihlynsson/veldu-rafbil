@@ -338,7 +338,7 @@ const newCars: Array<NewCar> = [
     make: 'Citroën',
     model: 'ë-C4',
     heroImageName: 'citroen-ec4',
-    price: 5_590_000,
+    price: 5_990_000,
     sellerURL: 'https://www.citroen.is/tegundir/c4-e/e-c4.html',
     acceleration: 9.2,
     capacity: 54,
@@ -1388,7 +1388,7 @@ const newCars: Array<NewCar> = [
     model: 'Corsa',
     subModel: '50 kWh',
     heroImageName: 'opel-corsa',
-    price: 5_690_000,
+    price: 5_450_000,
     sellerURL:
       'https://www.opelisland.is/bilar/corsa-tegundir/corsa-e/yfirsyn.html',
     acceleration: 8.7,
@@ -1405,7 +1405,7 @@ const newCars: Array<NewCar> = [
     model: 'Corsa',
     subModel: '51 kWh',
     heroImageName: 'opel-corsa-alt',
-    price: 6_590_000,
+    price: 6_130_000,
     sellerURL:
       'https://www.opelisland.is/bilar/corsa-tegundir/corsa-e/yfirsyn.html',
     acceleration: 8.1,
@@ -1421,7 +1421,7 @@ const newCars: Array<NewCar> = [
     make: 'Opel',
     model: 'Mokka-e',
     heroImageName: 'opel-mokka-e',
-    price: 6_390_000,
+    price: 5_730_000,
     sellerURL:
       'https://www.opelisland.is/cars/mokka-models/mokka-e/Yfirsyn.html',
     acceleration: 9.0,
@@ -1436,7 +1436,7 @@ const newCars: Array<NewCar> = [
     make: 'Opel',
     model: 'Combo-e',
     heroImageName: 'opel-combo',
-    price: 6990000,
+    price: 6_990_000,
     sellerURL:
       'https://www.opelisland.is/bilar/Combo-e-Life-tegundir/combo-e-life/yfirsyn.html',
     acceleration: 11.7,
