@@ -137,13 +137,14 @@ const FiltersModal: React.FunctionComponent<Props> = ({
               />
             </svg>
           </button>
-          Síur
+          Leita
         </header>
         <div className="filters">
           <div className="filter-header">
             <label htmlFor="filter-name">Nafn</label>
           </div>
           <input
+            autoFocus
             id="filter-name"
             type="text"
             placeholder="Tesla, Kia"
@@ -241,7 +242,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
         </div>
         <footer>
           <button className="clear" onClick={() => setFilters({})}>
-            Hreinsa síur
+            Hreinsa leit
           </button>
           <button className="submit" onClick={handleDone}>
             Sýna niðurstöður{' '}
@@ -356,7 +357,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
 
         .filter-header {
           display: flex;
-          justify-content: space-between;
+          gap: 8px;
           align-items: baseline;
           margin-bottom: 4px;
           padding-left: 12px;

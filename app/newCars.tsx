@@ -289,7 +289,18 @@ export default function NewCars({
               className="add-filter"
               onClick={() => setEditingFilters(() => true)}
             >
-              + Bæta við síu
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                fill="none"
+              >
+                <path
+                  fill="#000"
+                  d="m14.298 13.202-3.87-3.87A5.514 5.514 0 0 0 11.55 6C11.55 2.94 9.061.45 6 .45 2.94.45.45 2.94.45 6c0 3.061 2.49 5.55 5.55 5.55a5.514 5.514 0 0 0 3.332-1.122l3.87 3.87a.775.775 0 1 0 1.096-1.096ZM1.55 6A4.455 4.455 0 0 1 6 1.55 4.455 4.455 0 0 1 10.45 6 4.455 4.455 0 0 1 6 10.45 4.455 4.455 0 0 1 1.55 6Z"
+                />
+              </svg>
+              Leita
             </button>
           </div>
         </div>
@@ -310,7 +321,7 @@ export default function NewCars({
           {filteredCarCount.toString().match(/.*1$/m)
             ? ' bíll passaði '
             : ' bílar pössuðu '}
-          ekki við síurnar{' '}
+          ekki við leitina{' '}
           <button
             className="filters-reset-button"
             onClick={(_event) => {
@@ -387,18 +398,18 @@ export default function NewCars({
           }
           .filters {
             display: flex;
-            max-width: 100%;
-            align-self: flex-start;
-            margin-left: -2px;
             flex-wrap: wrap;
+            gap: 8px;
+            align-self: flex-start;
+            max-width: 100%;
+            margin-left: -2px;
           }
           .filter {
             flex-shrink: 0;
             position: relative;
-            margin: 0 8px 0 0;
             font-size: 12px;
             font-weight: 600;
-            padding: 4px 6px 5px 8px;
+            padding: 4px 8px 5px 10px;
             border: 1px solid ${colors.smoke};
             border-radius: 100px;
             cursor: pointer;
@@ -409,7 +420,6 @@ export default function NewCars({
             background-color: ${colors.lab};
             transition: all 0.2s;
             color: ${colors.clay};
-            margin-bottom: 8px;
           }
           .filter span {
             color: ${colors.tint};
@@ -443,22 +453,21 @@ export default function NewCars({
           }
 
           .add-filter {
-            border: 0;
-            flex-shrink: 0;
-            margin: 0 8px 0 0;
-            font-size: 12px;
-            font-weight: 600;
-            padding: 5px 12px 5px 12px;
-            border-radius: 100px;
-            cursor: pointer;
-            text-align: center;
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-shrink: 0;
+            gap: 8px;
+            padding: 8px 14px 8px 10px;
+            border: 0;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
             background-color: #eee;
             transition: all 0.2s;
             color: ${colors.tint};
-            margin-bottom: 8px;
           }
           .add-filter:hover {
             background-color: #f8f8f8;
