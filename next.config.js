@@ -9,6 +9,7 @@ module.exports = {
       1080, // Screen wider than 1024px @2x
       1170, // iPhone 12-14, 12 Pro, 13 Pro, 16e
       1320, // iPhone 16 Pro Max
+      1920, // Full size
     ],
     minimumCacheTTL: 2592000,
   },
