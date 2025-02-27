@@ -731,7 +731,7 @@ const newCars: Array<NewCar> = [
     model: 'EV6',
     subModel: '2025 Long Range AWD',
     heroImageName: 'kia-ev6-2025',
-    price: 8890777,
+    price: 8790777,
     sellerURL: 'https://www.kia.com/is/nyir-bilar/ev6/upplifdu/',
     acceleration: 5.2,
     capacity: 84,
@@ -740,6 +740,7 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 239,
     timeToCharge10T080: 17,
+    expectedDelivery: 'Sumar 2025',
   },
   {
     make: 'Kia',
