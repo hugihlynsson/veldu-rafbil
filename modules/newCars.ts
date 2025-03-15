@@ -22,7 +22,7 @@ const newCars: Array<NewCar> = [
     heroImageName: 'audi-a6-sportback',
     price: 15_690_000,
     sellerURL: 'https://www.hekla.is/static/files/efni/verdlistar/audi/a6.pdf',
-    acceleration: 4.7,
+    acceleration: 4.5,
     capacity: 94.9,
     range: 716,
     evDatabaseURL: 'https://ev-database.org/car/3052/Audi-A6-Sportback-e-tron-quattro',
@@ -1847,6 +1847,22 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 440,
     timeToCharge10T080: 19,
+  },
+  {
+    make: 'Renault',
+    model: 'R5 E-Tech',
+    heroImageName: 'renault-r5',
+    price: 4_890_000,
+    sellerURL:
+      'https://www.renault.is/cars/renault-5/renault5-e-tech-rafmagn.html',
+    acceleration: 9.0,
+    capacity: 40,
+    range: 312,
+    evDatabaseURL:
+      'https://ev-database.org/car/2134/Renault-5-E-Tech-40kWh-120hp',
+    drive: 'FWD',
+    power: 90,
+    timeToCharge10T080: 29,
   },
   {
     make: 'Renault',
