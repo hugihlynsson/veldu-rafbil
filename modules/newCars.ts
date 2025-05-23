@@ -470,7 +470,7 @@ const newCars: Array<NewCar> = [
     make: 'Honda',
     model: 'e:Ny1',
     heroImageName: 'honda-eny1',
-    price: 5_500_000,
+    price: 5_690_000,
     sellerURL: 'https://www.honda.is/honda-eny1',
     acceleration: 7.6,
     capacity: 68.8,
@@ -479,7 +479,6 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     power: 150,
     timeToCharge10T080: 46,
-    expectedDelivery: '2025',
   },
   {
     make: 'Hongqi',
