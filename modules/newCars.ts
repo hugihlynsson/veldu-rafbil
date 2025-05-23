@@ -2371,7 +2371,7 @@ const newCars: Array<NewCar> = [
     model: 'EX30',
     subModel: 'Single Motor',
     heroImageName: 'volvo-ex30',
-    price: 6_390_000,
+    price: 6_490_000,
     sellerURL: 'https://www.volvocars.com/is/cars/ex30-electric/',
     acceleration: 5.7,
     capacity: 51,
