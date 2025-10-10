@@ -1064,22 +1064,6 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Mini',
-    model: 'Cooper',
-    subModel: 'E',
-    heroImageName: 'mini-cooper',
-    price: 5_890_000,
-    sellerURL:
-      'https://www.mini.is/is_IS/home/range/all-electric-mini-cooper.html',
-    acceleration: 7.3,
-    capacity: 40.7,
-    range: 305,
-    evDatabaseURL: 'https://ev-database.org/car/1997/Mini-Cooper-E',
-    drive: 'FWD',
-    power: 135,
-    timeToCharge10T080: 27,
-  },
-  {
-    make: 'Mini',
     model: 'Aceman',
     subModel: 'E',
     heroImageName: 'mini-aceman',
