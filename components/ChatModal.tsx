@@ -21,10 +21,9 @@ const ChatModal: React.FunctionComponent<Props> = ({
   onClearChat,
 }) => {
   const [state, setState] = useState<State>(State.Initializing)
-  const [input, setInput] = useState<string>('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  const { messages, sendMessage, status } = chatState
+  const { messages, status } = chatState
   const isLoading = status === 'in_progress'
 
   useEffect(() => {
@@ -39,21 +38,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
   const handleClose = () => {
     setState(() => State.Leaving)
     setTimeout(onDone, 300)
-  }
-
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (input.trim()) {
-      sendMessage({
-        role: 'user',
-        parts: [{ type: 'text', text: input }],
-      })
-      setInput('')
-    }
-  }
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value)
   }
 
   return (
@@ -139,35 +123,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
           )}
           <div ref={messagesEndRef} />
         </div>
-
-        <form onSubmit={onSubmit}>
-          <input
-            type="text"
-            value={input}
-            onChange={handleInputChange}
-            placeholder="Skrifaðu spurninguna þína hér..."
-            disabled={isLoading}
-            autoFocus
-          />
-          <button type="submit" disabled={isLoading || !input.trim()}>
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M2 10L18 2L10 18L8.5 11.5L2 10Z"
-                fill="currentColor"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        </form>
       </section>
 
       <style jsx>{`
@@ -178,7 +133,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
           bottom: 0;
           left: 0;
           display: flex;
-          align-items: flex-end;
+          align-items: start;
           justify-content: center;
           z-index: 1000;
         }
@@ -191,44 +146,52 @@ const ChatModal: React.FunctionComponent<Props> = ({
           bottom: 0;
           left: 0;
           background-color: rgba(0, 0, 0, 0);
-          transition: background-color 0.2s;
+          backdrop-filter: blur(0px);
+          -webkit-backdrop-filter: blur(0px);
+          transition: all 0.3s;
           transition-delay: 0.1s;
         }
         .container.visible:before {
           transition-delay: 0s;
-          background-color: rgba(0, 0, 0, 0.3);
+          background-color: rgba(0, 0, 0, 0.2);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
         }
 
         section {
           z-index: 1;
           display: flex;
           flex-direction: column;
-          border-top-left-radius: 20px;
-          border-top-right-radius: 20px;
-          background-color: #fff;
-          width: 100vw;
-          max-width: 500px;
-          height: 70vh;
-          max-height: 600px;
+          border-radius: 20px;
+          background-color: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          width: 90vw;
+          max-width: 600px;
+          height: calc(100vh - 100px);
+          height: calc(100dvh - 100px);
           overflow: hidden;
-          box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
-          transform: translateY(40px);
+          box-shadow: 0px 8px 60px rgba(0, 0, 0, 0.15);
+          transform: scale(0.95);
           opacity: 0;
           transition: all 0.3s cubic-bezier(0.32, 0, 0.67, 0);
+          margin-top: 12px;
         }
         section.visible {
           opacity: 1;
           transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
-          transform: translateY(0);
+          transform: scale(1);
         }
 
         header {
           position: relative;
-          background-color: #fff;
+          background-color: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
           font-size: 18px;
           text-align: center;
           padding: 16px;
-          border-bottom: 1px solid ${colors.cloud};
+          border-bottom: 1px solid rgba(0, 0, 0, 0.06);
           font-weight: 600;
         }
 
@@ -364,8 +327,10 @@ const ChatModal: React.FunctionComponent<Props> = ({
           padding: 16px;
           display: flex;
           gap: 8px;
-          border-top: 1px solid ${colors.cloud};
-          background-color: #fff;
+          border-top: 1px solid rgba(0, 0, 0, 0.06);
+          background-color: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
         }
 
         input {
@@ -373,7 +338,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
           border: 1px solid ${colors.cloud};
           border-radius: 20px;
           padding: 10px 16px;
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 400;
           color: ${colors.tint};
           transition: all 0.2s;
@@ -435,16 +400,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
           }
           30% {
             transform: translateY(-10px);
-          }
-        }
-
-        @media (min-height: 600px) and (min-width: 800px) {
-          .container {
-            align-items: center;
-          }
-          section {
-            border-radius: 20px;
-            height: 600px;
           }
         }
       `}</style>
