@@ -106,6 +106,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
           max-width: 90vw;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           scale: 0.98;
+          border: 1px solid rgba(0, 0, 0, 0.02);
         }
 
         .floating-chat-form.hovered {

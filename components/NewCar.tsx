@@ -30,8 +30,13 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
   const priceWithGrant = getPriceWithGrant(car.price)
   let hasGrant = priceWithGrant != car.price
 
+  // Create a unique ID for this car
+  const carId = `car-${car.make}-${car.model}-${car.subModel || 'base'}`
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+
   return (
-    <article>
+    <article id={carId}>
       <div className="imageBox">
         <Image
           priority={priority}

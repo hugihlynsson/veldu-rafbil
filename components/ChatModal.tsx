@@ -2,11 +2,15 @@
 
 import React, { useEffect, useState, useRef } from 'react'
 import { colors } from '../modules/globals'
+import MiniCar from './MiniCar'
+import newCars from '../modules/newCars'
+import { NewCar } from '../types'
 
 interface Props {
   onDone: () => void
   chatState: any
   onClearChat: () => void
+  onReleaseBodyLock: () => void
 }
 
 enum State {
@@ -15,10 +19,44 @@ enum State {
   Leaving,
 }
 
+// Helper function to find cars mentioned in text
+const findMentionedCars = (text: string) => {
+  const mentioned: NewCar[] = []
+  const lowerText = text.toLowerCase()
+
+  for (const car of newCars) {
+    // Check if the message mentions this car (make + model)
+    const carName = `${car.make} ${car.model}`.toLowerCase()
+    const carNameWithSub = car.subModel
+      ? `${car.make} ${car.model} ${car.subModel}`.toLowerCase()
+      : null
+
+    if (
+      lowerText.includes(carName) ||
+      (carNameWithSub && lowerText.includes(carNameWithSub))
+    ) {
+      // Avoid duplicates
+      if (
+        !mentioned.find(
+          (c) =>
+            c.make === car.make &&
+            c.model === car.model &&
+            c.subModel === car.subModel,
+        )
+      ) {
+        mentioned.push(car)
+      }
+    }
+  }
+
+  return mentioned
+}
+
 const ChatModal: React.FunctionComponent<Props> = ({
   onDone,
   chatState,
   onClearChat,
+  onReleaseBodyLock,
 }) => {
   const [state, setState] = useState<State>(State.Initializing)
   const messagesEndRef = useRef<HTMLDivElement>(null)
@@ -37,6 +75,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
 
   const handleClose = () => {
     setState(() => State.Leaving)
+    onReleaseBodyLock()
     setTimeout(onDone, 300)
   }
 
@@ -98,20 +137,46 @@ const ChatModal: React.FunctionComponent<Props> = ({
               </p>
             </div>
           )}
-          {messages.map((message: any) => (
-            <div
-              key={message.id}
-              className={`message ${message.role === 'user' ? 'user' : 'assistant'}`}
-            >
-              <div className="message-content">
-                {message.parts?.map((part: any, index: number) =>
-                  part.type === 'text' ? (
-                    <span key={index}>{part.text}</span>
-                  ) : null,
+          {messages.map((message: any) => {
+            // Get text content from message
+            const textContent =
+              message.parts
+                ?.filter((part: any) => part.type === 'text')
+                .map((part: any) => part.text)
+                .join(' ') || ''
+
+            // Find cars mentioned in assistant messages
+            const mentionedCars =
+              message.role === 'assistant'
+                ? findMentionedCars(textContent)
+                : []
+
+            return (
+              <div
+                key={message.id}
+                className={`message ${message.role === 'user' ? 'user' : 'assistant'}`}
+              >
+                <div className="message-content">
+                  {message.parts?.map((part: any, index: number) =>
+                    part.type === 'text' ? (
+                      <span key={index}>{part.text}</span>
+                    ) : null,
+                  )}
+                </div>
+                {mentionedCars.length > 0 && (
+                  <div className="car-cards">
+                    {mentionedCars.map((car) => (
+                      <MiniCar
+                        key={`${car.make}-${car.model}-${car.subModel}`}
+                        car={car}
+                        onClose={handleClose}
+                      />
+                    ))}
+                  </div>
                 )}
               </div>
-            </div>
-          ))}
+            )
+          })}
           {isLoading && (
             <div className="message assistant">
               <div className="message-content typing">
@@ -277,13 +342,14 @@ const ChatModal: React.FunctionComponent<Props> = ({
 
         .message {
           display: flex;
+          flex-direction: column;
           animation: fadeIn 0.3s ease-in-out;
         }
         .message.user {
-          justify-content: flex-end;
+          align-items: flex-end;
         }
         .message.assistant {
-          justify-content: flex-start;
+          align-items: flex-start;
         }
 
         .message-content {
@@ -302,6 +368,20 @@ const ChatModal: React.FunctionComponent<Props> = ({
         .message.assistant .message-content {
           background-color: ${colors.cloud};
           color: ${colors.tint};
+        }
+
+        .car-cards {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          margin-top: 8px;
+          max-width: 100%;
+        }
+
+        @media (min-width: 480px) {
+          .car-cards {
+            max-width: 80%;
+          }
         }
 
         .typing {

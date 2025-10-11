@@ -169,6 +169,13 @@ export default function NewCars({
 
   let [editingFilters, setEditingFilters] = useState<boolean>(false)
   let [showChatMessages, setShowChatMessages] = useState<boolean>(false)
+  let [releaseBodyLock, setReleaseBodyLock] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (!showChatMessages) {
+      setReleaseBodyLock(false)
+    }
+  }, [showChatMessages])
 
   // Load initial messages from localStorage
   const [initialMessages] = useState(() => {
@@ -196,7 +203,7 @@ export default function NewCars({
     localStorage.removeItem(CHAT_STORAGE_KEY)
   }
 
-  useBodyScrollLock(editingFilters || showChatMessages)
+  useBodyScrollLock((editingFilters || showChatMessages) && !releaseBodyLock)
 
   const handleRemoveFilter = (name: keyof Filters) => () =>
     setFilters((filters) => {
@@ -382,6 +389,7 @@ export default function NewCars({
           onDone={() => setShowChatMessages(() => false)}
           chatState={chatState}
           onClearChat={handleClearChat}
+          onReleaseBodyLock={() => setReleaseBodyLock(() => true)}
         />
       )}
 
