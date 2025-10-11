@@ -9,6 +9,7 @@ import Title from '../components/Title'
 import Toggles from '../components/Toggles'
 import FilterModal from '../components/FilterModal'
 import ChatModal from '../components/ChatModal'
+import FloatingChat from '../components/FloatingChat'
 import newCars from '../modules/newCars'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
@@ -167,7 +168,7 @@ export default function NewCars({
   const [filters, setFilters] = useFilters(initialFilters)
 
   let [editingFilters, setEditingFilters] = useState<boolean>(false)
-  let [chatOpen, setChatOpen] = useState<boolean>(false)
+  let [showChatMessages, setShowChatMessages] = useState<boolean>(false)
 
   // Load initial messages from localStorage
   const [initialMessages] = useState(() => {
@@ -195,7 +196,7 @@ export default function NewCars({
     localStorage.removeItem(CHAT_STORAGE_KEY)
   }
 
-  useBodyScrollLock(editingFilters || chatOpen)
+  useBodyScrollLock(editingFilters || showChatMessages)
 
   const handleRemoveFilter = (name: keyof Filters) => () =>
     setFilters((filters) => {
@@ -333,25 +334,6 @@ export default function NewCars({
               </svg>
               Leita
             </button>
-            <button
-              className="chat-button"
-              onClick={() => setChatOpen(() => true)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-              </svg>
-              Spjall
-            </button>
           </div>
         </div>
       </header>
@@ -395,13 +377,18 @@ export default function NewCars({
         />
       )}
 
-      {chatOpen && (
+      {showChatMessages && (
         <ChatModal
-          onDone={() => setChatOpen(() => false)}
+          onDone={() => setShowChatMessages(() => false)}
           chatState={chatState}
           onClearChat={handleClearChat}
         />
       )}
+
+      <FloatingChat
+        chatState={chatState}
+        onOpenChat={() => setShowChatMessages(true)}
+      />
 
       <style jsx>
         {`
@@ -530,27 +517,6 @@ export default function NewCars({
           }
           .add-filter:hover {
             background-color: #f8f8f8;
-          }
-
-          .chat-button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-            gap: 8px;
-            padding: 8px 14px 8px 10px;
-            border: 0;
-            border-radius: 100px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            text-align: center;
-            background-color: ${colors.sky};
-            transition: all 0.2s;
-            color: ${colors.lab};
-          }
-          .chat-button:hover {
-            background-color: ${colors.skyDarker};
           }
 
           .filters-reset-box {
