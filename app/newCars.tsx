@@ -3,10 +3,12 @@
 import React, { useState, useEffect } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
+import { useChat } from '@ai-sdk/react'
 import Car, { getPriceWithGrant } from '../components/NewCar'
 import Title from '../components/Title'
 import Toggles from '../components/Toggles'
 import FilterModal from '../components/FilterModal'
+import ChatModal from '../components/ChatModal'
 import newCars from '../modules/newCars'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
@@ -155,6 +157,8 @@ interface Props {
   filters: Filters
 }
 
+const CHAT_STORAGE_KEY = 'veldu-rafbil-chat-messages'
+
 export default function NewCars({
   sorting: initialSorting,
   filters: initialFilters,
@@ -163,8 +167,30 @@ export default function NewCars({
   const [filters, setFilters] = useFilters(initialFilters)
 
   let [editingFilters, setEditingFilters] = useState<boolean>(false)
+  let [chatOpen, setChatOpen] = useState<boolean>(false)
 
-  useBodyScrollLock(editingFilters)
+  // Load initial messages from localStorage
+  const [initialMessages] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem(CHAT_STORAGE_KEY)
+      return stored ? JSON.parse(stored) : []
+    }
+    return []
+  })
+
+  // Initialize useChat at parent level so it persists
+  const chatState = useChat({
+    messages: initialMessages,
+  })
+
+  // Save messages to localStorage whenever they change
+  useEffect(() => {
+    if (chatState.messages.length > 0) {
+      localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(chatState.messages))
+    }
+  }, [chatState.messages])
+
+  useBodyScrollLock(editingFilters || chatOpen)
 
   const handleRemoveFilter = (name: keyof Filters) => () =>
     setFilters((filters) => {
@@ -195,7 +221,7 @@ export default function NewCars({
             <a href="https://island.is/rafbilastyrkir">
               sækja um 900.000 kr. rafbílastyrk
             </a>
-            .
+            {' '}út árið 2025.
           </em>
         </p>
 
@@ -302,6 +328,25 @@ export default function NewCars({
               </svg>
               Leita
             </button>
+            <button
+              className="chat-button"
+              onClick={() => setChatOpen(() => true)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+              Spjall
+            </button>
           </div>
         </div>
       </header>
@@ -345,6 +390,13 @@ export default function NewCars({
         />
       )}
 
+      {chatOpen && (
+        <ChatModal
+          onDone={() => setChatOpen(() => false)}
+          chatState={chatState}
+        />
+      )}
+
       <style jsx>
         {`
           .content {
@@ -367,6 +419,7 @@ export default function NewCars({
             margin: 0 0 2em 0;
             color: ${colors.stone};
             max-width: 33em;
+            text-wrap: pretty;
           }
           .description a {
             text-decoration: none;
@@ -471,6 +524,27 @@ export default function NewCars({
           }
           .add-filter:hover {
             background-color: #f8f8f8;
+          }
+
+          .chat-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            gap: 8px;
+            padding: 8px 14px 8px 10px;
+            border: 0;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            background-color: ${colors.sky};
+            transition: all 0.2s;
+            color: ${colors.lab};
+          }
+          .chat-button:hover {
+            background-color: ${colors.skyDarker};
           }
 
           .filters-reset-box {
