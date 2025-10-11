@@ -6,6 +6,7 @@ import { colors } from '../modules/globals'
 interface Props {
   onDone: () => void
   chatState: any
+  onClearChat: () => void
 }
 
 enum State {
@@ -14,7 +15,11 @@ enum State {
   Leaving,
 }
 
-const ChatModal: React.FunctionComponent<Props> = ({ onDone, chatState }) => {
+const ChatModal: React.FunctionComponent<Props> = ({
+  onDone,
+  chatState,
+  onClearChat,
+}) => {
   const [state, setState] = useState<State>(State.Initializing)
   const [input, setInput] = useState<string>('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
@@ -77,6 +82,26 @@ const ChatModal: React.FunctionComponent<Props> = ({ onDone, chatState }) => {
             </svg>
           </button>
           Spjall
+          {messages.length > 0 && (
+            <button onClick={onClearChat} className="clear-chat">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Hreinsa spjall</title>
+                <path
+                  d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          )}
         </header>
 
         <div className="messages">
@@ -234,6 +259,29 @@ const ChatModal: React.FunctionComponent<Props> = ({ onDone, chatState }) => {
         }
         .close:hover path {
           fill: ${colors.tint};
+        }
+
+        .clear-chat {
+          position: absolute;
+          right: 11px;
+          top: 11px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 32px;
+          width: 32px;
+          border: 0;
+          padding: 0;
+          border-radius: 16px;
+          appearance: none;
+          background-color: transparent;
+          color: ${colors.stone};
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+        .clear-chat:hover {
+          background-color: ${colors.cloud};
+          color: ${colors.tint};
         }
 
         .messages {
