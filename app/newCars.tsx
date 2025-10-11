@@ -190,6 +190,11 @@ export default function NewCars({
     }
   }, [chatState.messages])
 
+  const handleClearChat = () => {
+    chatState.setMessages([])
+    localStorage.removeItem(CHAT_STORAGE_KEY)
+  }
+
   useBodyScrollLock(editingFilters || chatOpen)
 
   const handleRemoveFilter = (name: keyof Filters) => () =>
@@ -394,6 +399,7 @@ export default function NewCars({
         <ChatModal
           onDone={() => setChatOpen(() => false)}
           chatState={chatState}
+          onClearChat={handleClearChat}
         />
       )}
 
