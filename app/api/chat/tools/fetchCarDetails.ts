@@ -29,21 +29,6 @@ export const fetchCarDetailsTool = tool({
         return ''
       }
 
-      const extractSection = (sectionName: string): string => {
-        const sectionRegex = new RegExp(`<h[23][^>]*>${sectionName}[^<]*<[^>]*>([\\s\\S]*?)(?=<h[23]|<section|$)`, 'i')
-        const match = html.match(sectionRegex)
-        if (!match) return ''
-
-        // Clean up HTML tags but keep structure
-        return match[1]
-          .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-          .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
-          .replace(/<[^>]+>/g, ' ')
-          .replace(/\s+/g, ' ')
-          .trim()
-          .substring(0, 800)
-      }
-
       // Extract key specifications using exact field names from the site
       const specs = {
         carName,
