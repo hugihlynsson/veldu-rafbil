@@ -1,6 +1,8 @@
 'use client'
 
 import React, { useEffect, useState, useRef } from 'react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { colors } from '../modules/globals'
 import MiniCar from './MiniCar'
 import newCars from '../modules/newCars'
@@ -63,8 +65,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
 }) => {
   const [state, setState] = useState<State>(State.Initializing)
   const messagesEndRef = useRef<HTMLDivElement>(null)
-
-  const isLoading = status === 'streaming'
 
   useEffect(() => {
     setTimeout(() => setState(() => State.Visible), 1)
@@ -169,7 +169,9 @@ const ChatModal: React.FunctionComponent<Props> = ({
                 <div className="message-content">
                   {message.parts?.map((part, index) =>
                     part.type === 'text' ? (
-                      <span key={index}>{part.text}</span>
+                      <ReactMarkdown key={index} remarkPlugins={[remarkGfm]}>
+                        {part.text}
+                      </ReactMarkdown>
                     ) : null,
                   )}
                 </div>
@@ -222,16 +224,12 @@ const ChatModal: React.FunctionComponent<Props> = ({
           bottom: 0;
           left: 0;
           background-color: rgba(0, 0, 0, 0);
-          backdrop-filter: blur(0px);
-          -webkit-backdrop-filter: blur(0px);
           transition: all 0.3s;
           transition-delay: 0.1s;
         }
         .container.visible:before {
           transition-delay: 0s;
           background-color: rgba(0, 0, 0, 0.2);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
         }
 
         section {
@@ -372,7 +370,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
           border-radius: 16px;
           font-size: 14px;
           line-height: 1.5;
-          white-space: pre-wrap;
           word-wrap: break-word;
         }
         .message.user .message-content {
@@ -382,6 +379,72 @@ const ChatModal: React.FunctionComponent<Props> = ({
         .message.assistant .message-content {
           background-color: ${colors.cloud};
           color: ${colors.tint};
+        }
+
+        /* Markdown styling */
+        .message-content :global(p) {
+          margin: 0 0 0.5em 0;
+        }
+        .message-content :global(p:last-child) {
+          margin-bottom: 0;
+        }
+        .message-content :global(strong) {
+          font-weight: 600;
+        }
+        .message-content :global(em) {
+          font-style: italic;
+        }
+        .message-content :global(code) {
+          background-color: rgba(0, 0, 0, 0.06);
+          padding: 2px 4px;
+          border-radius: 4px;
+          font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+          font-size: 0.9em;
+        }
+        .message-content :global(pre) {
+          background-color: rgba(0, 0, 0, 0.06);
+          padding: 8px 10px;
+          border-radius: 8px;
+          overflow-x: auto;
+          margin: 0.5em 0;
+        }
+        .message-content :global(pre code) {
+          background-color: transparent;
+          padding: 0;
+        }
+        .message-content :global(ul),
+        .message-content :global(ol) {
+          margin: 0.5em 0;
+          padding-left: 1.5em;
+        }
+        .message-content :global(li) {
+          margin: 0.25em 0;
+        }
+        .message-content :global(a) {
+          color: inherit;
+          text-decoration: underline;
+        }
+        .message-content :global(a:hover) {
+          opacity: 0.8;
+        }
+        .message-content :global(table) {
+          border-collapse: collapse;
+          width: 100%;
+          margin: 0.5em 0;
+          font-size: 13px;
+        }
+        .message-content :global(th),
+        .message-content :global(td) {
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          padding: 6px 8px;
+          text-align: left;
+        }
+        .message-content :global(th) {
+          background-color: rgba(0, 0, 0, 0.04);
+          font-weight: 600;
+        }
+        .message-content :global(tr:nth-child(even)) {
+          background-color: rgba(0, 0, 0, 0.02);
         }
 
         .car-cards {
