@@ -8,6 +8,7 @@ import MiniCar from './MiniCar'
 import newCars from '../modules/newCars'
 import { NewCar } from '../types'
 import { UIDataTypes, UITools, ChatStatus, UIMessage } from 'ai'
+import { trackEvent } from 'fathom-client'
 
 interface Props {
   onDone: () => void
@@ -204,7 +205,10 @@ const ChatModal: React.FunctionComponent<Props> = ({
                   <button
                     key={index}
                     className="suggestion-button"
-                    onClick={() => onSendMessage(suggestion)}
+                    onClick={() => {
+                      onSendMessage(suggestion)
+                      trackEvent('Selected suggestion')
+                    }}
                   >
                     {suggestion}
                   </button>

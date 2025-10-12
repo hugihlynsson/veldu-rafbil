@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useRef } from 'react'
+import { trackEvent } from 'fathom-client'
 import { colors } from '../modules/globals'
 
 interface Props {
@@ -43,6 +44,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
         role: 'user',
         parts: [{ type: 'text', text: input }],
       })
+      trackEvent('Sent message')
       setInput('')
       onOpenChat()
     }
@@ -71,6 +73,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
       role: 'user',
       parts: [{ type: 'text', text: suggestion }],
     })
+    trackEvent('Selected suggestion')
     setInput('')
     setIsFocused(false)
     onOpenChat()
@@ -228,7 +231,8 @@ const FloatingChat: React.FunctionComponent<Props> = ({
         .floating-chat-form.focused,
         .floating-chat-form:has(input:focus) {
           width: 400px;
-          background: rgba(255, 255, 255, 0.8);
+          background: rgba(240, 240, 240, 0.8);
+          border-color: rgba(0, 0, 0, 0.08);
           scale: 1;
         }
 
@@ -244,7 +248,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
         }
 
         input::placeholder {
-          color: ${colors.stone};
+          color: rgba(0, 0, 0, 0.5);
         }
 
         input:disabled {
