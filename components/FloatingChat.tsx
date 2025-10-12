@@ -43,8 +43,41 @@ const FloatingChat: React.FunctionComponent<Props> = ({
     }
   }
 
+  const handleSuggestionClick = (e: React.MouseEvent, suggestion: string) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    sendMessage({
+      role: 'user',
+      parts: [{ type: 'text', text: suggestion }],
+    })
+    setInput('')
+    setIsFocused(false)
+    onOpenChat()
+  }
+
+  const suggestions = [
+    'Er hagstæðara að reka rafbíl?',
+    'Hvaða rafbílar eru með 7 sæti?',
+    'Hver hentar best fyrir langferðir?',
+  ]
+
   return (
     <div className="floating-chat-container">
+      {isFocused && messages.length === 0 && (
+        <div className="suggestions">
+          {suggestions.map((suggestion, index) => (
+            <button
+              key={index}
+              type="button"
+              className="suggestion"
+              onMouseDown={(e) => handleSuggestionClick(e, suggestion)}
+            >
+              {suggestion}
+            </button>
+          ))}
+        </div>
+      )}
       <form
         onSubmit={onSubmit}
         className={`floating-chat-form ${isHovered ? 'hovered' : ''} ${isFocused ? 'focused' : ''}`}
@@ -89,6 +122,66 @@ const FloatingChat: React.FunctionComponent<Props> = ({
           transform: translateX(-50%);
           z-index: 1000;
           pointer-events: none;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .suggestions {
+          pointer-events: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          animation: fadeInUp 0.3s ease-out;
+        }
+
+        .suggestion {
+          background: rgba(255, 255, 255, 0.7);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(0, 0, 0, 0.06);
+          border-radius: 16px;
+          padding: 12px 16px;
+          font-size: 14px;
+          font-weight: 500;
+          color: ${colors.tint};
+          cursor: pointer;
+          transition: all 0.2s;
+          text-align: left;
+          white-space: nowrap;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+          animation: fadeInUp 0.3s ease-out backwards;
+        }
+
+        .suggestion:nth-child(1) {
+          animation-delay: 0.16s;
+        }
+
+        .suggestion:nth-child(2) {
+          animation-delay: 0.08s;
+        }
+
+        .suggestion:hover {
+          background: rgba(255, 255, 255, 0.9);
+          color: ${colors.tint};
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .suggestion:active {
+          transform: translateY(0);
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(10px) rotateX(40deg) scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) rotateX(0) scale(1);
+          }
         }
 
         .floating-chat-form {
