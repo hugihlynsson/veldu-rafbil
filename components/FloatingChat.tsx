@@ -3,25 +3,14 @@
 import React, { useState, useRef } from 'react'
 import { trackEvent } from 'fathom-client'
 import { colors } from '../modules/globals'
+import { CHAT_SUGGESTIONS } from '../constants/chatSuggestions'
+import { getRandomSuggestions } from '../utils/chatHelpers'
 
 interface Props {
   chatState: any
   onOpenChat: () => void
   hide?: boolean
 }
-
-const suggestions = [
-  'Er hagstæðara að reka rafbíl?',
-  'Hvaða rafbílar bjóða upp á 7 sæti?',
-  'Hver hentar best fyrir langferðir?',
-  'Henta afturhjóladrifnir á veturna?',
-  'Hvar er best að hlaða?',
-  'Hver er með nútímalegasta viðmótið?',
-  'Hvaða rafbíll verður góður í endursölu?',
-  'Hver er öruggastur fyrir börn?',
-  'Hversu mikilvægur er hraðhleðsluhraðinn?',
-  'Hver er flottur fyrir innanbæjarakstur?'
-]
 
 const FloatingChat: React.FunctionComponent<Props> = ({
   chatState,
@@ -60,8 +49,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
       onOpenChat()
     } else {
       // Pick 3 random suggestions
-      const shuffled = [...suggestions].sort(() => Math.random() - 0.5)
-      setSelectedSuggestions(shuffled.slice(0, 3))
+      setSelectedSuggestions(getRandomSuggestions(CHAT_SUGGESTIONS, 3))
     }
   }
 
