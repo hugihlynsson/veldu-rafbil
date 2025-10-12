@@ -8,6 +8,19 @@ interface Props {
   onOpenChat: () => void
 }
 
+const suggestions = [
+  'Er hagstæðara að reka rafbíl?',
+  'Hvaða rafbílar bjóða upp á 7 sæti?',
+  'Hver hentar best fyrir langferðir?',
+  'Henta afturhjóladrifnir á veturna?',
+  'Hvar er best að hlaða?',
+  'Hver er með nútímalegasta viðmótið?',
+  'Hvaða rafbíll verður góður í endursölu?',
+  'Hver er öruggastur fyrir börn?',
+  'Hversu mikilvægur er hraðhleðsluhraðinn?',
+  'Hver er flottur fyrir innanbæjarakstur?'
+]
+
 const FloatingChat: React.FunctionComponent<Props> = ({
   chatState,
   onOpenChat,
@@ -15,6 +28,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
   const [input, setInput] = useState<string>('')
   const [isFocused, setIsFocused] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
+  const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
 
   const { messages, sendMessage, status } = chatState
@@ -40,6 +54,10 @@ const FloatingChat: React.FunctionComponent<Props> = ({
     setIsFocused(true)
     if (messages.length > 0) {
       onOpenChat()
+    } else {
+      // Pick 3 random suggestions
+      const shuffled = [...suggestions].sort(() => Math.random() - 0.5)
+      setSelectedSuggestions(shuffled.slice(0, 3))
     }
   }
 
@@ -56,17 +74,11 @@ const FloatingChat: React.FunctionComponent<Props> = ({
     onOpenChat()
   }
 
-  const suggestions = [
-    'Er hagstæðara að reka rafbíl?',
-    'Hvaða rafbílar eru með 7 sæti?',
-    'Hver hentar best fyrir langferðir?',
-  ]
-
   return (
     <div className="floating-chat-container">
       {isFocused && messages.length === 0 && (
         <div className="suggestions">
-          {suggestions.map((suggestion, index) => (
+          {selectedSuggestions.map((suggestion, index) => (
             <button
               key={index}
               type="button"
