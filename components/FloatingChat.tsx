@@ -6,6 +6,7 @@ import { colors } from '../modules/globals'
 interface Props {
   chatState: any
   onOpenChat: () => void
+  hide?: boolean
 }
 
 const suggestions = [
@@ -24,6 +25,7 @@ const suggestions = [
 const FloatingChat: React.FunctionComponent<Props> = ({
   chatState,
   onOpenChat,
+  hide = false,
 }) => {
   const [input, setInput] = useState<string>('')
   const [isFocused, setIsFocused] = useState(false)
@@ -75,7 +77,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
   }
 
   return (
-    <div className="floating-chat-container">
+    <div className={`floating-chat-container ${hide ? 'hidden' : ''}`}>
       {isFocused && messages.length === 0 && (
         <div className="suggestions">
           {selectedSuggestions.map((suggestion, index) => (
@@ -138,6 +140,11 @@ const FloatingChat: React.FunctionComponent<Props> = ({
           flex-direction: column;
           align-items: center;
           gap: 12px;
+          transition: all 0.3s;
+        }
+        .floating-chat-container.hidden {
+          opacity: 0;
+          pointer-events: none;
         }
 
         .suggestions {
@@ -218,8 +225,10 @@ const FloatingChat: React.FunctionComponent<Props> = ({
           scale: 1;
         }
 
-        .floating-chat-form.focused {
+        .floating-chat-form.focused,
+        .floating-chat-form:has(input:focus) {
           width: 400px;
+          background: rgba(255, 255, 255, 0.8);
           scale: 1;
         }
 

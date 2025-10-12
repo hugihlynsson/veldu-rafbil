@@ -397,6 +397,7 @@ export default function NewCars({
       <FloatingChat
         chatState={chatState}
         onOpenChat={() => setShowChatMessages(true)}
+        hide={editingFilters}
       />
 
       <style jsx>
@@ -512,20 +513,26 @@ export default function NewCars({
             justify-content: center;
             align-items: center;
             flex-shrink: 0;
-            gap: 8px;
-            padding: 8px 14px 8px 10px;
+            gap: 6px;
+            padding: 8px 16px 8px 12px;
             border: 0;
             border-radius: 100px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             text-align: center;
-            background-color: #eee;
+            background-color: rgba(0, 0, 0, 0.06);
             transition: all 0.2s;
             color: ${colors.tint};
           }
           .add-filter:hover {
-            background-color: #f8f8f8;
+            background-color: rgba(0, 0, 0, 0.09);
+          }
+          .add-filter:active {
+            transform: translateY(0);
+          }
+          .add-filter svg {
+            opacity: 0.7;
           }
 
           .filters-reset-box {
