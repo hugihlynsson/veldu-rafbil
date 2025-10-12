@@ -387,7 +387,8 @@ export default function NewCars({
       {showChatMessages && (
         <ChatModal
           onDone={() => setShowChatMessages(() => false)}
-          chatState={chatState}
+          messages={chatState.messages}
+          status={chatState.status}
           onClearChat={handleClearChat}
           onReleaseBodyLock={() => setReleaseBodyLock(() => true)}
         />

@@ -5,10 +5,12 @@ import { colors } from '../modules/globals'
 import MiniCar from './MiniCar'
 import newCars from '../modules/newCars'
 import { NewCar } from '../types'
+import { UIDataTypes, UITools, ChatStatus, UIMessage } from 'ai'
 
 interface Props {
   onDone: () => void
-  chatState: any
+  messages: UIMessage<unknown, UIDataTypes, UITools>[]
+  status: ChatStatus
   onClearChat: () => void
   onReleaseBodyLock: () => void
 }
@@ -54,15 +56,15 @@ const findMentionedCars = (text: string) => {
 
 const ChatModal: React.FunctionComponent<Props> = ({
   onDone,
-  chatState,
+  messages,
+  status,
   onClearChat,
   onReleaseBodyLock,
 }) => {
   const [state, setState] = useState<State>(State.Initializing)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  const { messages, status } = chatState
-  const isLoading = status === 'in_progress'
+  const isLoading = status === 'streaming'
 
   useEffect(() => {
     setTimeout(() => setState(() => State.Visible), 1)
@@ -106,7 +108,13 @@ const ChatModal: React.FunctionComponent<Props> = ({
           </button>
           Spjall
           {messages.length > 0 && (
-            <button onClick={onClearChat} className="clear-chat">
+            <button
+              onClick={() => {
+                handleClose()
+                setTimeout(onClearChat, 300)
+              }}
+              className="clear-chat"
+            >
               <svg
                 width="14"
                 height="14"
@@ -137,17 +145,19 @@ const ChatModal: React.FunctionComponent<Props> = ({
               </p>
             </div>
           )}
-          {messages.map((message: any) => {
+          {messages.map((message) => {
             // Get text content from message
             const textContent =
               message.parts
-                ?.filter((part: any) => part.type === 'text')
-                .map((part: any) => part.text)
+                ?.filter((part) => part.type === 'text')
+                .map((part) => part.text)
                 .join(' ') || ''
 
             // Find cars mentioned in assistant messages
             const mentionedCars =
-              message.role === 'assistant'
+              message.role === 'assistant' &&
+              status !== 'streaming' &&
+              messages[messages.length - 1].id === message.id
                 ? findMentionedCars(textContent)
                 : []
 
@@ -157,7 +167,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
                 className={`message ${message.role === 'user' ? 'user' : 'assistant'}`}
               >
                 <div className="message-content">
-                  {message.parts?.map((part: any, index: number) =>
+                  {message.parts?.map((part, index) =>
                     part.type === 'text' ? (
                       <span key={index}>{part.text}</span>
                     ) : null,
@@ -177,16 +187,17 @@ const ChatModal: React.FunctionComponent<Props> = ({
               </div>
             )
           })}
-          {isLoading && (
-            <div className="message assistant">
-              <div className="message-content typing">
-                <span></span>
-                <span></span>
-                <span></span>
+          {messages[messages.length - 1].role === 'user' &&
+            status !== 'error' && (
+              <div key="typing" className="message assistant">
+                <div className="message-content typing">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
               </div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
+            )}
+          <span ref={messagesEndRef} />
         </div>
       </section>
 
@@ -227,7 +238,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
           z-index: 1;
           display: flex;
           flex-direction: column;
-          border-radius: 20px;
+          border-radius: 24px 24px 32px 32px;
           background-color: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
@@ -318,7 +329,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
           padding: 20px;
           display: flex;
           flex-direction: column;
-          gap: 12px;
         }
 
         .welcome {
@@ -344,12 +354,16 @@ const ChatModal: React.FunctionComponent<Props> = ({
           display: flex;
           flex-direction: column;
           animation: fadeIn 0.3s ease-in-out;
+          margin-bottom: 16px;
         }
         .message.user {
           align-items: flex-end;
         }
         .message.assistant {
           align-items: flex-start;
+        }
+        .message:nth-last-child(2) {
+          margin-bottom: 0;
         }
 
         .message-content {
@@ -375,12 +389,12 @@ const ChatModal: React.FunctionComponent<Props> = ({
           flex-direction: column;
           gap: 12px;
           margin-top: 8px;
-          max-width: 100%;
+          width: 100%;
         }
 
         @media (min-width: 480px) {
           .car-cards {
-            max-width: 80%;
+            width: 80%;
           }
         }
 
