@@ -177,11 +177,15 @@ const FloatingChat: React.FunctionComponent<Props> = ({
         }
 
         .suggestion:nth-child(1) {
-          animation-delay: 0.16s;
+          animation-delay: 0.45s;
         }
 
         .suggestion:nth-child(2) {
-          animation-delay: 0.08s;
+          animation-delay: 0.35s;
+        }
+
+        .suggestion:nth-child(3) {
+          animation-delay: 0.25s;
         }
 
         .suggestion:hover {
