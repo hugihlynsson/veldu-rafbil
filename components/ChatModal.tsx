@@ -65,15 +65,47 @@ const ChatModal: React.FunctionComponent<Props> = ({
 }) => {
   const [state, setState] = useState<State>(State.Initializing)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const lastUserMessageRef = useRef<HTMLDivElement>(null)
+  const messagesContainerRef = useRef<HTMLDivElement>(null)
+  const hasScrolledToInitialPosition = useRef(false)
+  const initialMessageCount = useRef(messages.length)
+  const isAutoScrolling = useRef(false)
 
   useEffect(() => {
     setTimeout(() => setState(() => State.Visible), 1)
-    return
+
+    // Scroll to last user message immediately on mount (no animation)
+    setTimeout(() => {
+      if (lastUserMessageRef.current) {
+        lastUserMessageRef.current.scrollIntoView({ block: 'start' })
+        hasScrolledToInitialPosition.current = true
+      }
+    }, 10)
   }, [])
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    // Only smooth scroll if messages have changed after initial mount
+    if (hasScrolledToInitialPosition.current && messages.length > initialMessageCount.current) {
+      isAutoScrolling.current = true
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+      setTimeout(() => {
+        isAutoScrolling.current = false
+      }, 1000)
+    }
   }, [messages])
+
+  // Keep scroll at bottom during streaming to prevent jumps
+  useEffect(() => {
+    if (!messagesContainerRef.current) return
+
+    const container = messagesContainerRef.current
+    const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 100
+
+    // If already near bottom and content is streaming, keep it scrolled to bottom
+    if (isNearBottom && status === 'streaming') {
+      container.scrollTop = container.scrollHeight
+    }
+  }, [messages, status])
 
   const handleClose = () => {
     setState(() => State.Leaving)
@@ -135,7 +167,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
           )}
         </header>
 
-        <div className="messages">
+        <div className="messages" ref={messagesContainerRef}>
           {messages.length === 0 && (
             <div className="welcome">
               <p>Hæ! Ég get hjálpað þér með spurningar um rafbíla.</p>
@@ -145,7 +177,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
               </p>
             </div>
           )}
-          {messages.map((message) => {
+          {messages.map((message, index) => {
             // Get text content from message
             const textContent =
               message.parts
@@ -161,9 +193,16 @@ const ChatModal: React.FunctionComponent<Props> = ({
                 ? findMentionedCars(textContent)
                 : []
 
+            // Check if this is the last user message
+            const isLastUserMessage =
+              message.role === 'user' &&
+              index ===
+                messages.findLastIndex((m) => m.role === 'user')
+
             return (
               <div
                 key={message.id}
+                ref={isLastUserMessage ? lastUserMessageRef : null}
                 className={`message ${message.role === 'user' ? 'user' : 'assistant'}`}
               >
                 <div className="message-content">
@@ -353,6 +392,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
           flex-direction: column;
           animation: fadeIn 0.3s ease-in-out;
           margin-bottom: 16px;
+          scroll-margin-top: 20px;
         }
         .message.user {
           align-items: flex-end;
