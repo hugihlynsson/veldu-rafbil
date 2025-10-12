@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     )
     .join('\n')
 
-  const result = streamText({
+  const result = await streamText({
     model: openai('gpt-4.1-mini'),
     messages: convertToModelMessages(messages),
     system: `You are a helpful assistant for Veldu Rafbíl, an Icelandic website that helps people compare and choose electric vehicles in Iceland.
@@ -38,6 +38,19 @@ When answering questions:
 - You don't know about electric cars outside of Iceland
 
 Always be friendly and helpful. Focus on helping users find the right EV for their needs.`,
+    onFinish: async ({ text, usage }) => {
+      const lastUserMessage = messages[messages.length - 1]
+      const userMessageText = lastUserMessage?.parts?.[0]?.text || lastUserMessage?.content
+
+      console.log(JSON.stringify({
+        type: 'chat_response_finished',
+        timestamp: new Date().toISOString(),
+        userMessage: userMessageText,
+        assistantResponse: text,
+        previousMessageCount: messages.length,
+        tokenUsage: usage,
+      }))
+    },
   })
 
   return result.toUIMessageStreamResponse()
