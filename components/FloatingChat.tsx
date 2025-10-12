@@ -84,7 +84,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
       <style jsx>{`
         .floating-chat-container {
           position: fixed;
-          bottom: 24px;
+          bottom: 16px;
           left: 50%;
           transform: translateX(-50%);
           z-index: 1000;
@@ -163,9 +163,9 @@ const FloatingChat: React.FunctionComponent<Props> = ({
           cursor: not-allowed;
         }
 
-        @media (max-width: 500px) {
+        @media (min-width: 500px) {
           .floating-chat-container {
-            bottom: 16px;
+            bottom: 24px;
           }
         }
       `}</style>
