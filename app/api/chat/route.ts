@@ -5,9 +5,7 @@ import newCars from '../../../modules/newCars'
 
 export const runtime = 'edge'
 
-const axiom = new Axiom({
-  token: process.env.AXIOM_TOKEN,
-})
+const axiom = new Axiom({ token: process.env.AXIOM_TOKEN! })
 
 export async function POST(req: Request) {
   const { messages } = await req.json()
