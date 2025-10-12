@@ -1,8 +1,13 @@
 import { openai } from '@ai-sdk/openai'
 import { streamText, convertToModelMessages } from 'ai'
+import { Axiom } from '@axiomhq/js'
 import newCars from '../../../modules/newCars'
 
 export const runtime = 'edge'
+
+const axiom = new Axiom({
+  token: process.env.AXIOM_TOKEN,
+})
 
 export async function POST(req: Request) {
   const { messages } = await req.json()
@@ -40,16 +45,26 @@ When answering questions:
 Always be friendly and helpful. Focus on helping users find the right EV for their needs.`,
     onFinish: async ({ text, usage }) => {
       const lastUserMessage = messages[messages.length - 1]
-      const userMessageText = lastUserMessage?.parts?.[0]?.text || lastUserMessage?.content
+      const userMessageText =
+        lastUserMessage?.parts?.[0]?.text || lastUserMessage?.content
 
-      console.log(JSON.stringify({
+      const data = {
         type: 'chat_response_finished',
         timestamp: new Date().toISOString(),
         userMessage: userMessageText,
         assistantResponse: text,
-        previousMessageCount: messages.length,
+        messageCount: messages.length,
         tokenUsage: usage,
-      }))
+      }
+
+      console.log(data)
+
+      try {
+        await axiom.ingest('veldu-rafbil-assistant', [data])
+        await axiom.flush()
+      } catch (error) {
+        console.error('Failed to log to Axiom:', error)
+      }
     },
   })
 
