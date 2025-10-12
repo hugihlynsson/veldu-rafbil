@@ -15,7 +15,21 @@ interface Props {
   status: ChatStatus
   onClearChat: () => void
   onReleaseBodyLock: () => void
+  onSendMessage: (message: string) => void
 }
+
+const suggestions = [
+  'Er hagstæðara að reka rafbíl?',
+  'Hvaða rafbílar bjóða upp á 7 sæti?',
+  'Hver hentar best fyrir langferðir?',
+  'Henta afturhjóladrifnir á veturna?',
+  'Hvar er best að hlaða?',
+  'Hver er með nútímalegasta viðmótið?',
+  'Hvaða rafbíll verður góður í endursölu?',
+  'Hver er öruggastur fyrir börn?',
+  'Hversu mikilvægur er hraðhleðsluhraðinn?',
+  'Hver er flottur fyrir innanbæjarakstur?'
+]
 
 enum State {
   Initializing,
@@ -62,8 +76,10 @@ const ChatModal: React.FunctionComponent<Props> = ({
   status,
   onClearChat,
   onReleaseBodyLock,
+  onSendMessage,
 }) => {
   const [state, setState] = useState<State>(State.Initializing)
+  const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([])
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const lastUserMessageRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
@@ -74,6 +90,10 @@ const ChatModal: React.FunctionComponent<Props> = ({
   useEffect(() => {
     setTimeout(() => setState(() => State.Visible), 1)
 
+    // Pick random suggestions when modal opens or when conversation is ready for new input
+    const shuffled = [...suggestions].sort(() => Math.random() - 0.5)
+    setSelectedSuggestions(shuffled.slice(0, 3))
+
     // Scroll to last user message immediately on mount (no animation)
     setTimeout(() => {
       if (lastUserMessageRef.current) {
@@ -82,6 +102,14 @@ const ChatModal: React.FunctionComponent<Props> = ({
       }
     }, 10)
   }, [])
+
+  // Update suggestions when messages change (shuffle for variety)
+  useEffect(() => {
+    if (messages.length > 0 && status !== 'streaming') {
+      const shuffled = [...suggestions].sort(() => Math.random() - 0.5)
+      setSelectedSuggestions(shuffled.slice(0, 3))
+    }
+  }, [messages, status])
 
   useEffect(() => {
     // Only smooth scroll if messages have changed after initial mount
@@ -170,11 +198,18 @@ const ChatModal: React.FunctionComponent<Props> = ({
         <div className="messages" ref={messagesContainerRef}>
           {messages.length === 0 && (
             <div className="welcome">
-              <p>Hæ! Ég get hjálpað þér með spurningar um rafbíla.</p>
-              <p className="suggestion">
-                Prófaðu að spyrja: &quot;Hvað er drægni?&quot; eða &quot;Hvað
-                kostar að hlaða?&quot;
-              </p>
+              <p className="welcome-title">Hæ! Ég get hjálpað þér með spurningar um rafbíla.</p>
+              <div className="suggestions-grid">
+                {selectedSuggestions.map((suggestion, index) => (
+                  <button
+                    key={index}
+                    className="suggestion-button"
+                    onClick={() => onSendMessage(suggestion)}
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
           {messages.map((message, index) => {
@@ -228,7 +263,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
               </div>
             )
           })}
-          {messages[messages.length - 1].role === 'user' &&
+          {messages[messages.length - 1]?.role === 'user' &&
             status !== 'error' && (
               <div key="typing" className="message assistant">
                 <div className="message-content typing">
@@ -238,6 +273,23 @@ const ChatModal: React.FunctionComponent<Props> = ({
                 </div>
               </div>
             )}
+          {messages.length > 0 &&
+           messages[messages.length - 1]?.role === 'assistant' &&
+           status !== 'streaming' && (
+            <div className="follow-up-suggestions">
+              <div className="suggestions-grid">
+                {selectedSuggestions.map((suggestion, index) => (
+                  <button
+                    key={index}
+                    className="suggestion-button"
+                    onClick={() => onSendMessage(suggestion)}
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           <span ref={messagesEndRef} />
         </div>
       </section>
@@ -371,20 +423,56 @@ const ChatModal: React.FunctionComponent<Props> = ({
         .welcome {
           display: flex;
           flex-direction: column;
-          gap: 12px;
-          color: ${colors.stone};
-          text-align: center;
+          gap: 20px;
           padding: 20px 0;
+          align-items: center;
         }
-        .welcome p {
+        .welcome-title {
           margin: 0;
+          color: ${colors.tint};
+          text-align: center;
+          font-size: 16px;
+          font-weight: 600;
           text-wrap: pretty;
         }
-        .suggestion {
-          font-size: 14px;
-          color: ${colors.clay};
-          text-wrap: pretty;
-          padding: 0 20px;
+        .suggestions-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          width: 100%;
+          max-width: 500px;
+        }
+        .suggestion-button {
+          appearance: none;
+          background: rgba(255, 255, 255, 0.6);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          border-radius: 12px;
+          padding: 14px 16px;
+          font-size: 13px;
+          font-weight: 500;
+          color: ${colors.tint};
+          cursor: pointer;
+          transition: all 0.2s;
+          text-align: left;
+          line-height: 1.4;
+          width: fit-content;
+        }
+        .suggestion-button:hover {
+          background: rgba(255, 255, 255, 0.9);
+          border-color: rgba(0, 0, 0, 0.12);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .suggestion-button:active {
+          transform: translateY(0);
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        .follow-up-suggestions {
+          padding: 12px 0 8px 0;
+          animation: fadeIn 0.3s ease-in-out;
         }
 
         .message {

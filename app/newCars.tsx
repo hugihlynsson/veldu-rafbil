@@ -391,6 +391,12 @@ export default function NewCars({
           status={chatState.status}
           onClearChat={handleClearChat}
           onReleaseBodyLock={() => setReleaseBodyLock(() => true)}
+          onSendMessage={(text) => {
+            chatState.sendMessage({
+              role: 'user',
+              parts: [{ type: 'text', text }],
+            })
+          }}
         />
       )}
 
