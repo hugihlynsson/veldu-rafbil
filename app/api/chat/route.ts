@@ -1,7 +1,8 @@
 import { openai } from '@ai-sdk/openai'
-import { streamText, convertToModelMessages } from 'ai'
+import { streamText, convertToModelMessages, stepCountIs } from 'ai'
 import { Axiom } from '@axiomhq/js'
 import newCars from '../../../modules/newCars'
+import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 
 export const runtime = 'edge'
 
@@ -14,7 +15,7 @@ export async function POST(req: Request) {
   const carsSummary = newCars
     .map(
       (car) =>
-        `${car.make} ${car.model} ${car.subModel ? car.subModel : ''}: ${car.price.toLocaleString('is-IS')} kr, ${car.range} km drægni, ${car.acceleration}s hröðun, ${car.drive} drif${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}`,
+        `${car.make} ${car.model} ${car.subModel ? car.subModel : ''}: ${car.price.toLocaleString('is-IS')} kr, ${car.range} km drægni, ${car.acceleration}s hröðun, ${car.drive} drif${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseURL ? ` (more info: ${car.evDatabaseURL})` : ''}`,
     )
     .join('\n')
 
@@ -29,6 +30,7 @@ ${carsSummary}
 
 When answering questions:
 - Use the car data above to provide accurate, specific information
+- If you need MORE details about a specific car (like dimensions, cargo space, interior features, etc.), use the fetchCarDetails tool with the URL provided in the car list
 - Answer in Icelandic when the user speaks Icelandic
 - Be conversational and helpful but keep your responses concise
 - When comparing cars, highlight the key differences
@@ -43,7 +45,11 @@ When answering questions:
 
 
 Always be friendly and helpful. Focus on helping users find the right EV for their needs.`,
-    onFinish: async ({ text, usage }) => {
+    tools: {
+      fetchCarDetails: fetchCarDetailsTool,
+    },
+    stopWhen: stepCountIs(5),
+    onFinish: async ({ text, usage, toolCalls }) => {
       const lastUserMessage = messages[messages.length - 1]
       const userMessageText =
         lastUserMessage?.parts?.[0]?.text || lastUserMessage?.content
@@ -55,6 +61,7 @@ Always be friendly and helpful. Focus on helping users find the right EV for the
         assistantResponse: text,
         messageCount: messages.length,
         tokenUsage: usage,
+        toolCalls: toolCalls,
       }
 
       console.log(data)
