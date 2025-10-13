@@ -13,6 +13,7 @@ interface Props {
   isLastUserMessage: boolean
   mentionedCars: NewCar[]
   onClose: () => void
+  isInitialRender?: boolean
 }
 
 const ChatMessage: React.FunctionComponent<Props> = ({
@@ -20,10 +21,22 @@ const ChatMessage: React.FunctionComponent<Props> = ({
   isLastUserMessage,
   mentionedCars,
   onClose,
+  isInitialRender = false,
 }) => {
   return (
     <div
-      ref={isLastUserMessage ? (ref) => ref : null}
+      ref={
+        isLastUserMessage
+          ? (ref) => {
+              if (ref) {
+                ref.scrollIntoView({
+                  behavior: isInitialRender ? 'auto' : 'smooth',
+                  block: 'start',
+                })
+              }
+            }
+          : null
+      }
       className={`message ${message.role === 'user' ? 'user' : 'assistant'}`}
     >
       <div className="message-content">

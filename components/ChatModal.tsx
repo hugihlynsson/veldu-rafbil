@@ -37,7 +37,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
   const [state, setState] = useState<State>(State.Initializing)
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([])
   const messagesEndRef = useRef<HTMLDivElement>(null)
-  const lastUserMessageRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const hasScrolledToInitialPosition = useRef(false)
   const initialMessageCount = useRef(messages.length)
@@ -49,12 +48,9 @@ const ChatModal: React.FunctionComponent<Props> = ({
     // Pick random suggestions when modal opens or when conversation is ready for new input
     setSelectedSuggestions(getRandomSuggestions(CHAT_SUGGESTIONS, 3))
 
-    // Scroll to last user message immediately on mount (no animation)
+    // Mark that initial position has been set after a short delay
     setTimeout(() => {
-      if (lastUserMessageRef.current) {
-        lastUserMessageRef.current.scrollIntoView({ block: 'start' })
-        hasScrolledToInitialPosition.current = true
-      }
+      hasScrolledToInitialPosition.current = true
     }, 10)
   }, [])
 
@@ -123,7 +119,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
               }}
             />
           )}
-          {messages.map((message, index) => {
+          {messages.map((message) => {
             // Get text content from message
             const textContent =
               message.parts
@@ -142,7 +138,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
             // Check if this is the last user message
             const isLastUserMessage =
               message.role === 'user' &&
-              index === messages.findLastIndex((m) => m.role === 'user')
+              message.id === messages.findLast((m) => m.role === 'user')?.id
 
             return (
               <ChatMessage
@@ -151,6 +147,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
                 isLastUserMessage={isLastUserMessage}
                 mentionedCars={mentionedCars}
                 onClose={handleClose}
+                isInitialRender={!hasScrolledToInitialPosition.current}
               />
             )
           })}
