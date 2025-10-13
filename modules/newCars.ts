@@ -789,7 +789,7 @@ const newCars: Array<NewCar> = [
     capacity: 80,
     range: 552,
     evDatabaseURL: 'https://ev-database.org/car/3108/Mazda-6e-Long-Range-80-kWh',
-    drive: 'FWD',
+    drive: 'RWD',
     power: 180,
     timeToCharge10T080: 45,
   },
