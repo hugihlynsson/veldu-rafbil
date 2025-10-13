@@ -56,13 +56,10 @@ const ChatHeader: React.FunctionComponent<Props> = ({
       <style jsx>{`
         header {
           position: relative;
-          background-color: rgba(255, 255, 255, 0.8);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
           font-size: 18px;
           text-align: center;
           padding: 16px;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+          box-shadow: 0 1px 0px 0 rgba(0, 0, 0, 0.05);
           font-weight: 600;
         }
 

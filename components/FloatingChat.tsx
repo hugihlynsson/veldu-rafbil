@@ -223,8 +223,6 @@ const FloatingChat: React.FunctionComponent<Props> = ({
         .floating-chat-form.focused,
         .floating-chat-form:has(input:focus) {
           width: 400px;
-          background: rgba(240, 240, 240, 0.8);
-          border-color: rgba(0, 0, 0, 0.08);
           scale: 1;
         }
 

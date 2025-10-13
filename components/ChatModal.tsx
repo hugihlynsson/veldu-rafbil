@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState, useRef } from 'react'
-import { colors } from '../modules/globals'
 import { UIDataTypes, UITools, ChatStatus, UIMessage } from 'ai'
 import { trackEvent } from 'fathom-client'
 import { CHAT_SUGGESTIONS } from '../constants/chatSuggestions'
@@ -202,25 +201,33 @@ const ChatModal: React.FunctionComponent<Props> = ({
           z-index: 1;
           display: flex;
           flex-direction: column;
-          border-radius: 24px 24px 32px 32px;
           background-color: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          width: 90vw;
-          max-width: 600px;
-          height: calc(100vh - 100px);
-          height: calc(100dvh - 100px);
+          width: 100vw;
+          height: 100vh;
+          height: 100dvh;
           overflow: hidden;
-          box-shadow: 0px 8px 60px rgba(0, 0, 0, 0.15);
           transform: scale(0.95);
           opacity: 0;
           transition: all 0.3s cubic-bezier(0.32, 0, 0.67, 0);
-          margin-top: 12px;
         }
         section.visible {
           opacity: 1;
           transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
           transform: scale(1);
+        }
+
+        @media (min-width: 600px) {
+          section {
+            height: calc(100vh - 24px);
+            height: calc(100dvh - 24px);
+            max-width: 600px;
+            width: 90vw;
+            border-radius: 24px 24px 32px 32px;
+            margin-top: 12px;
+            box-shadow: 0px 8px 60px rgba(0, 0, 0, 0.15);
+          }
         }
 
         .messages {
@@ -229,6 +236,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
           padding: 20px;
           display: flex;
           flex-direction: column;
+          padding-bottom: 80px;
         }
       `}</style>
     </div>
