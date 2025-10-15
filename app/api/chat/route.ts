@@ -1,4 +1,4 @@
-import { anthropic } from '@ai-sdk/anthropic'
+import { openai } from '@ai-sdk/openai'
 import { streamText, convertToModelMessages, stepCountIs } from 'ai'
 import { Axiom } from '@axiomhq/js'
 import newCars from '../../../modules/newCars'
@@ -6,8 +6,7 @@ import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 
 export const runtime = 'edge'
 
-const modelName = 'claude-haiku-4-5'
-
+const modelName = 'gpt-4.1-mini'
 const axiom = new Axiom({ token: process.env.AXIOM_TOKEN ?? ''})
 
 
@@ -23,7 +22,7 @@ export async function POST(req: Request) {
     .join('\n')
 
   const result = await streamText({
-    model: anthropic(modelName),
+    model: openai(modelName),
     messages: convertToModelMessages(messages),
     system: `You are a helpful assistant for Veldu Rafbíl, an Icelandic website that helps people compare and choose electric vehicles in Iceland.
 
