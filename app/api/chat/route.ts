@@ -6,7 +6,10 @@ import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 
 export const runtime = 'edge'
 
+const modelName = 'claude-haiku-4-5'
+
 const axiom = new Axiom({ token: process.env.AXIOM_TOKEN ?? ''})
+
 
 export async function POST(req: Request) {
   const { messages } = await req.json()
@@ -20,7 +23,7 @@ export async function POST(req: Request) {
     .join('\n')
 
   const result = await streamText({
-    model: anthropic('claude-haiku-4-5'),
+    model: anthropic(modelName),
     messages: convertToModelMessages(messages),
     system: `You are a helpful assistant for Veldu Rafbíl, an Icelandic website that helps people compare and choose electric vehicles in Iceland.
 
@@ -39,6 +42,7 @@ When answering questions:
 - In January 2026 the subsidy will be lowered to 500,000 kr
 - Range (drægni) is based on WLTP measurements. When asked about real world range, mention that it will be lower due to factors like driving style and weather conditions in Iceland. Come up with a good approximation of the real world range.
 - Audi Q6 does not offer a 7 seater version in Iceland. When asked about 7 seaters, do not include Audi Q6
+- If the user asks something about electric vehicles in general, do you best to answer in a way that is helpful and informative.
 - If the user asks about something that's not related to electric vehicles you MUST reply that you're not sure and ask them to ask about about electric vehicles
 - You don't know about any other cars than the ones listed above
 - You don't know about electric cars outside of Iceland
@@ -62,6 +66,7 @@ Always be friendly and helpful. Focus on helping users find the right EV for the
         messageCount: messages.length,
         tokenUsage: usage,
         toolCalls: toolCalls,
+        model: modelName,
       }
 
       console.log(data)
