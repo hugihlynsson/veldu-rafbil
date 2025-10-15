@@ -1,4 +1,4 @@
-import { openai } from '@ai-sdk/openai'
+import { anthropic } from '@ai-sdk/anthropic'
 import { streamText, convertToModelMessages, stepCountIs } from 'ai'
 import { Axiom } from '@axiomhq/js'
 import newCars from '../../../modules/newCars'
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     .join('\n')
 
   const result = await streamText({
-    model: openai('gpt-4.1-mini'),
+    model: anthropic('claude-haiku-4-5'),
     messages: convertToModelMessages(messages),
     system: `You are a helpful assistant for Veldu Rafbíl, an Icelandic website that helps people compare and choose electric vehicles in Iceland.
 
