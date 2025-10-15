@@ -4,7 +4,7 @@ export const CHAT_SUGGESTIONS = [
   'Hver hentar best fyrir langferðir?',
   'Henta afturhjóladrifnir á veturna?',
   'Hvar er best að hlaða?',
-  'Hver er með nútímalegasta viðmótið?',
+  'Hver er með nútímalegasta tölvuviðmótið?',
   'Hvaða rafbíll verður góður í endursölu?',
   'Hver er öruggastur fyrir börn?',
   'Hversu mikilvægur er hraðhleðsluhraðinn?',
