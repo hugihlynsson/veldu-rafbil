@@ -23,7 +23,7 @@ const Footer: FunctionComponent<{}> = () => (
       <style jsx>{`
         footer {
           background-color: #f8f8f8;
-          padding: 32px 0;
+          padding: 32px 0 100px;
         }
         p {
           margin: 0 auto;
@@ -44,7 +44,7 @@ const Footer: FunctionComponent<{}> = () => (
 
         @media screen and (min-width: 375px) {
           footer {
-            padding: 56px 0;
+            padding: 56px 0 100px;
           }
           p {
             padding: 0 24px;
@@ -53,7 +53,7 @@ const Footer: FunctionComponent<{}> = () => (
 
         @media screen and (min-width: 768px) {
           footer {
-            padding: 56px 0;
+            padding: 56px 0 100px;
           }
           p {
             max-width: 1024px;
