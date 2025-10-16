@@ -7,13 +7,14 @@ import { colors } from '../../modules/globals'
 import MiniCar from '../MiniCar'
 import { NewCar } from '../../types'
 import { UIDataTypes, UITools, UIMessage } from 'ai'
+import { useEffect } from 'react'
+import { useRef } from 'react'
 
 interface Props {
   message: UIMessage<unknown, UIDataTypes, UITools>
   isLastUserMessage: boolean
   mentionedCars: NewCar[]
   onClose: () => void
-  isInitialRender?: boolean
 }
 
 const ChatMessage: React.FunctionComponent<Props> = ({
@@ -21,22 +22,18 @@ const ChatMessage: React.FunctionComponent<Props> = ({
   isLastUserMessage,
   mentionedCars,
   onClose,
-  isInitialRender = false,
 }) => {
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (isLastUserMessage) {
+      ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [])
+
   return (
     <div
-      ref={
-        isLastUserMessage
-          ? (ref) => {
-              if (ref) {
-                ref.scrollIntoView({
-                  behavior: isInitialRender ? 'auto' : 'smooth',
-                  block: 'start',
-                })
-              }
-            }
-          : null
-      }
+      ref={ref}
       className={`message ${message.role === 'user' ? 'user' : 'assistant'}`}
     >
       <div className="message-content">
@@ -49,14 +46,16 @@ const ChatMessage: React.FunctionComponent<Props> = ({
         )}
       </div>
       {mentionedCars.length > 0 && (
-        <div className="car-cards">
-          {mentionedCars.map((car) => (
-            <MiniCar
-              key={`${car.make}-${car.model}-${car.subModel}`}
-              car={car}
-              onClose={onClose}
-            />
-          ))}
+        <div className="car-cards-container">
+          <div className={`car-cards ${mentionedCars.length > 3 ? 'scrollable' : 'static'}`}>
+            {mentionedCars.map((car) => (
+              <MiniCar
+                key={`${car.make}-${car.model}-${car.subModel}`}
+                car={car}
+                onClose={onClose}
+              />
+            ))}
+          </div>
         </div>
       )}
 
@@ -79,7 +78,7 @@ const ChatMessage: React.FunctionComponent<Props> = ({
         }
 
         .message-content {
-          max-width: 80%;
+          max-width: 90%;
           padding: 10px 14px;
           border-radius: 16px;
           font-size: 14px;
@@ -161,18 +160,45 @@ const ChatMessage: React.FunctionComponent<Props> = ({
           background-color: rgba(0, 0, 0, 0.02);
         }
 
+        .car-cards-container {
+          margin-top: 12px;
+          width: calc(100% + 44px);
+          margin-left: -24px;
+          margin-right: -24px;
+        }
+
         .car-cards {
-          display: flex;
-          flex-direction: column;
+          display: grid;
           gap: 12px;
-          margin-top: 8px;
           width: 100%;
         }
 
-        @media (min-width: 480px) {
-          .car-cards {
-            width: 80%;
-          }
+        .car-cards.static {
+          grid-template-columns: 1fr;
+          grid-auto-rows: auto;
+        }
+
+        .car-cards.scrollable {
+          grid-auto-flow: column;
+          grid-template-rows: repeat(3, auto);
+          grid-auto-columns: 90%;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          scroll-padding-left: 24px;
+          scroll-padding-right: 24px;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none; /* Firefox */
+          -ms-overflow-style: none; /* IE and Edge */
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+
+        .car-cards.scrollable::-webkit-scrollbar {
+          display: none; /* Chrome, Safari, Opera */
+        }
+
+        .car-cards.scrollable :global(.mini-car) {
+          scroll-snap-align: start;
         }
 
         @keyframes fadeIn {

@@ -2,12 +2,10 @@
 
 import React, { useEffect, useState, useRef } from 'react'
 import { UIDataTypes, UITools, ChatStatus, UIMessage } from 'ai'
-import { trackEvent } from 'fathom-client'
 import { CHAT_SUGGESTIONS } from '../constants/chatSuggestions'
 import { findMentionedCars, getRandomSuggestions } from '../utils/chatHelpers'
 import ChatHeader from './chat/ChatHeader'
 import ChatMessage from './chat/ChatMessage'
-import WelcomeScreen from './chat/WelcomeScreen'
 import FollowUpSuggestions from './chat/FollowUpSuggestions'
 import TypingIndicator from './chat/TypingIndicator'
 
@@ -39,8 +37,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const hasScrolledToInitialPosition = useRef(false)
-  const initialMessageCount = useRef(messages.length)
-  const isAutoScrolling = useRef(false)
 
   useEffect(() => {
     setTimeout(() => setState(() => State.Visible), 1)
@@ -60,17 +56,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
       setSelectedSuggestions(getRandomSuggestions(CHAT_SUGGESTIONS, 3))
     }
   }, [messages, status])
-
-  useEffect(() => {
-    // Only smooth scroll if messages have changed after initial mount
-    if (hasScrolledToInitialPosition.current && messages.length > initialMessageCount.current) {
-      isAutoScrolling.current = true
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-      setTimeout(() => {
-        isAutoScrolling.current = false
-      }, 1000)
-    }
-  }, [messages])
 
   // Keep scroll at bottom during streaming to prevent jumps
   useEffect(() => {
@@ -110,15 +95,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
         />
 
         <div className="messages" ref={messagesContainerRef}>
-          {messages.length === 0 && (
-            <WelcomeScreen
-              suggestions={selectedSuggestions}
-              onSendMessage={(message) => {
-                onSendMessage(message)
-                trackEvent('Selected suggestion')
-              }}
-            />
-          )}
           {messages.map((message) => {
             // Get text content from message
             const textContent =
@@ -147,7 +123,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
                 isLastUserMessage={isLastUserMessage}
                 mentionedCars={mentionedCars}
                 onClose={handleClose}
-                isInitialRender={!hasScrolledToInitialPosition.current}
               />
             )
           })}

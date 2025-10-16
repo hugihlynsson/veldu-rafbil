@@ -28,7 +28,7 @@ const FollowUpSuggestions: React.FunctionComponent<Props> = ({
 
       <style jsx>{`
         .follow-up-suggestions {
-          padding: 12px 0 8px 0;
+          padding: 0px 0 8px 0;
           animation: fadeIn 0.3s ease-in-out;
         }
 
