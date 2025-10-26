@@ -149,7 +149,6 @@ const FloatingChat: React.FunctionComponent<Props> = ({
         .suggestion {
           background: rgba(255, 255, 255, 0.7);
           backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
           border: 1px solid rgba(0, 0, 0, 0.06);
           border-radius: 16px;
           padding: 12px 16px;
@@ -206,7 +205,6 @@ const FloatingChat: React.FunctionComponent<Props> = ({
           padding: 8px 8px 8px 20px;
           background: rgba(220, 220, 220, 0.7);
           backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
           border-radius: 100px;
           box-shadow: 0 4px 24px rgba(0, 0, 0, 0.0);
           width: 320px;
