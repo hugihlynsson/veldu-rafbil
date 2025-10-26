@@ -1242,6 +1242,38 @@ const newCars: Array<NewCar> = [
     timeToCharge10T080: 32,
   },
   {
+    make: 'Opel',
+    model: 'Grandland',
+    heroImageName: 'opel-grandland',
+    price: 7_890_000,
+    sellerURL:
+      'https://www.opelisland.is/bilar/grandland-tegundir/grandland-electric/yfirsyn.html',
+    acceleration: 9.0,
+    capacity: 73,
+    range: 521,
+    evDatabaseURL:
+      'https://ev-database.org/car/3037/Opel-Grandland-Electric-73-kWh',
+    drive: 'FWD',
+    power: 157,
+    timeToCharge10T080: 30,
+  },
+  {
+    make: 'Opel',
+    model: 'Grandland',
+    heroImageName: 'opel-grandland-alt',
+    price: 8_370_000,
+    sellerURL:
+      'https://www.opelisland.is/bilar/grandland-tegundir/grandland-electric/yfirsyn.html',
+    acceleration: 6.1,
+    capacity: 73,
+    range: 492,
+    evDatabaseURL:
+      'https://ev-database.org/car/3201/Opel-Grandland-Electric-73-kWh-AWD',
+    drive: 'AWD',
+    power: 239,
+    timeToCharge10T080: 30,
+  },
+  {
     make: 'GWM',
     model: 'Ora 3',
     subModel: '48 kWh',
