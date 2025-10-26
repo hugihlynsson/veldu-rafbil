@@ -4,3 +4,4 @@ node_modules/
 .next/
 .vscode
 .vercel
+.env*.local
