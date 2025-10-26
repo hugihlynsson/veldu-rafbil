@@ -43,7 +43,6 @@ const FollowUpSuggestions: React.FunctionComponent<Props> = ({
           appearance: none;
           background: rgba(255, 255, 255, 0.6);
           backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
           border: 1px solid rgba(0, 0, 0, 0.08);
           border-radius: 12px;
           padding: 14px 16px;

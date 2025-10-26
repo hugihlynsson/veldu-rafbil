@@ -175,7 +175,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
           flex-direction: column;
           background-color: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
           width: 100vw;
           height: 100vh;
           height: 100dvh;
