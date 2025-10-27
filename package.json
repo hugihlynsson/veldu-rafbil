@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@ai-sdk/openai": "^2.0.54",
-    "@ai-sdk/react": "^2.0.68",
+    "@ai-sdk/react": "^2.0.81",
     "@axiomhq/js": "^1.3.1",
     "ai": "^5.0.81",
     "fathom-client": "^3.7.2",
