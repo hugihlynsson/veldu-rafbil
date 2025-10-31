@@ -47,13 +47,18 @@ const ChatMessage: React.FunctionComponent<Props> = ({
       </div>
       {mentionedCars.length > 0 && (
         <div className="car-cards-container">
-          <div className={`car-cards ${mentionedCars.length > 3 ? 'scrollable' : 'static'}`}>
-            {mentionedCars.map((car) => (
-              <MiniCar
+          <div className={`car-cards`}>
+            {mentionedCars.map((car, index) => (
+              <div
                 key={`${car.make}-${car.model}-${car.subModel}`}
-                car={car}
-                onClose={onClose}
-              />
+                className="car-card-wrapper"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <MiniCar
+                  car={car}
+                  onClose={onClose}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -173,12 +178,7 @@ const ChatMessage: React.FunctionComponent<Props> = ({
           width: 100%;
         }
 
-        .car-cards.static {
-          grid-template-columns: 1fr;
-          grid-auto-rows: auto;
-        }
-
-        .car-cards.scrollable {
+        .car-cards {
           grid-auto-flow: column;
           grid-template-rows: repeat(3, auto);
           grid-auto-columns: 90%;
@@ -193,12 +193,28 @@ const ChatMessage: React.FunctionComponent<Props> = ({
           padding-right: 24px;
         }
 
-        .car-cards.scrollable::-webkit-scrollbar {
+        .car-cards::-webkit-scrollbar {
           display: none; /* Chrome, Safari, Opera */
         }
 
-        .car-cards.scrollable :global(.mini-car) {
+        .car-card-wrapper {
+          opacity: 0;
+          animation: slideInCar 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .car-cards.scrollable .car-card-wrapper {
           scroll-snap-align: start;
+        }
+
+        @keyframes slideInCar {
+          from {
+            opacity: 0;
+            transform: translateY(16px) scale(0.96);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
         }
 
         @keyframes fadeIn {

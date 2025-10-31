@@ -19,6 +19,7 @@ const FollowUpSuggestions: React.FunctionComponent<Props> = ({
           <button
             key={index}
             className="suggestion-button"
+            style={{ animationDelay: `${index * 0.08}s` }}
             onClick={() => onSendMessage(suggestion)}
           >
             {suggestion}
@@ -29,7 +30,6 @@ const FollowUpSuggestions: React.FunctionComponent<Props> = ({
       <style jsx>{`
         .follow-up-suggestions {
           padding: 0px 0 8px 0;
-          animation: fadeIn 0.3s ease-in-out;
         }
 
         .suggestions-grid {
@@ -54,6 +54,8 @@ const FollowUpSuggestions: React.FunctionComponent<Props> = ({
           text-align: left;
           line-height: 1.4;
           width: fit-content;
+          opacity: 0;
+          animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         .suggestion-button:hover {
           background: rgba(255, 255, 255, 0.9);
@@ -66,10 +68,10 @@ const FollowUpSuggestions: React.FunctionComponent<Props> = ({
           box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
         }
 
-        @keyframes fadeIn {
+        @keyframes slideInUp {
           from {
             opacity: 0;
-            transform: translateY(10px);
+            transform: translateY(12px);
           }
           to {
             opacity: 1;
