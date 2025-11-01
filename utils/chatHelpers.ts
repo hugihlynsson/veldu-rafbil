@@ -40,14 +40,19 @@ export const getRandomSuggestions = (suggestions: string[], count: number = 3): 
   return shuffled.slice(0, count)
 }
 
-// Parse follow-up suggestions from text in [followUp:<question>] format
+// Parse follow-up suggestions from text in [q:<question>] format
 export const parseFollowUps = (text: string): string[] => {
-  const followUpRegex = /\[followUp:([^\]]+)\]/g
+  const followUpRegex = /\[q:([^\]]+)\]/g
   const matches = [...text.matchAll(followUpRegex)]
   return matches.map(match => match[1].trim())
 }
 
 // Remove follow-up markers from text
+// Handles both complete [q:text] and incomplete [q:text (strips everything after [q: if ] is missing)
 export const stripFollowUps = (text: string): string => {
-  return text.replace(/\[followUp:[^\]]+\]/g, '').trim()
+  // First remove complete tags [q:text]
+  let result = text.replace(/\[q:[^\]]+\]/g, '')
+  // Then remove incomplete tags - everything from [q: to the end
+  result = result.replace(/\[q:.*$/gs, '')
+  return result.trim()
 }

@@ -132,12 +132,10 @@ const ChatModal: React.FunctionComponent<Props> = ({
             )
           })}
 
-          {(messages[messages.length - 1]?.role === 'user' &&
-            status !== 'error') ||
-            (status === 'streaming' &&
-              !messages[messages.length - 1]?.parts?.find(
-                (part) => part.type === 'text',
-              ) && <TypingIndicator />)}
+          {status === 'streaming' &&
+            !messages[messages.length - 1]?.parts?.find(
+              (part) => part.type === 'text',
+            ) && <TypingIndicator />}
 
           {status !== 'streaming' && lastMessageFollowUps.length > 0 && (
             <FollowUpSuggestions

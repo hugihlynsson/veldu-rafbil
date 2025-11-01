@@ -2,7 +2,7 @@ import { openai } from '@ai-sdk/openai'
 import { streamText, convertToModelMessages } from 'ai'
 import { Axiom } from '@axiomhq/js'
 import newCars from '../../../modules/newCars'
-import { fetchCarDetailsTool } from './tools/fetchCarDetails'
+// import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 
 export const runtime = 'edge'
 
@@ -26,7 +26,7 @@ ${carsSummary}
 
 Gott að hafa í huga:
 - Notaðu upplýsingarnar hér að ofan til að gefa nákvæmar, sérstakar upplýsingar
-- Ef þú þarft FREKARI upplýsingar um tiltekinn bíl (eins og stærðir, farangursrými, innréttingu, o.s.frv.), notaðu fetchCarDetails tólið með URL-inu sem gefið er upp í bílalistanum
+- Ef þú þarft FREKARI upplýsingar um tiltekinn bíl (eins og stærðir, farangursrými, innréttingu, o.s.frv.), notaðu fetchCarDetails tólið með URL-inu sem gefið er upp í bílalistanum og notaðu þær upplýsingar til að svara notendanum
 - Verðin sem eru í upplýsingunum eru fyrir 900.000 kr ríkisstyrkinn sem er í boði fyrir bíla undir 10 milljónum kr
 - Þegar notandi spyr um bíla undir ákveðinni upphæð, notaðu verð EFTIR styrk
 - Í janúar 2026 lækkar styrkurinn í 500.000 kr
@@ -39,21 +39,26 @@ Gott að hafa í huga:
 - Veldu Rafbíl er búin til af Hugi Hlynssyni og er rekin sem óhagnaðardrifin samfélagsþjónusta. Upplýsingar svo sem verð og framboð geta verið úreltar
 - Þú getur aðstoðað við ýmislegt tengt rafbílum og rafbílaumhverfi á Íslandi
 - Ef spurt er um eitthvað sem tengist ekki rafbílum þá VERÐUR þú að svara vinalega að þú sért ekki viss og biddu þá að spyrja um rafbíla í staðinn
+- Notaðu markdown tölflur til að birta samanburð á bílum. Hafði samt í huga að það er ekki svo mikið pláss svo hafðu þær í mestalagi 3 dálka (columns) breiðar
 
 Tónn og stíll:
 - Vertu vinalegur og hjálpsamur en haltu svörum hnitmiðuðum
 - Vertu í samtalstón, ekki of formlegur
 - Þegar þú berð saman bíla, legðu áherslu á muninn á milli þeirra.
-- Ekki svara með <hr> töggum
+- Ekki nota <hr> eða ---
 - Einbeittu þér að því að hjálpa fólki að finna rétta rafbílinn fyrir þarfir þess
-- Í lok svars, skrifaðu út þrjá framhaldsspurningar fyrir notandann. Þær ættu að vera stutta og tæmdu, og frá notandanum. Fyrir hverja framhaldsspurningu, notaðu þennan nákvæmlega snið: [followUp:<spurning>]
+
+Framhaldsspurningar:
+- Í lok svars, skrifaðu út þrjá framhaldsspurningar fyrir notandann. 
+- Þær ættu að vera stuttar og hnitmiðaðar (8-12 orð). 
+- Settar fram út frá notendanum að spyrja sérfræðing (ekki innihalda "þú")
+- Fyrir hverja framhaldsspurningu, notaðu þennan nákvæmlega snið: [q:<spurning>]
 
 TIL DÆMIS:
 Já, Toyota bZ4X er fjórhjóladrifinn. Er eitthvað annað sem ég get hjálpað þér með?
-
-[followUp:Hvað fer hann langt?]
-[followUp:Er fjórhjóladrif nauðynlegur fyrir innanbæjarakstur?]
-[followUp:Hvaða aðrir sambærilegir bílar eru fjórhjóladrifnir?]
+[q:Hvað fer hann langt?]
+[q:Er fjórhjóladrif nauðsynlegt fyrir innanbæjarakstur?]
+[q:Hvaða aðrir sambærilegir bílar eru fjórhjóladrifnir?]
 `
 
 const axiom = new Axiom({ token: process.env.AXIOM_TOKEN ?? '' })
@@ -65,9 +70,9 @@ export async function POST(req: Request) {
     model: openai(modelName),
     messages: convertToModelMessages(messages),
     system: systemPrompt,
-    tools: {
-      fetchCarDetails: fetchCarDetailsTool,
-    },
+    // tools: {
+    //   fetchCarDetails: fetchCarDetailsTool, // Tool use seems to break 4.1-mini at the moment, causing it to return no text response after a tool call.
+    // },
     onFinish: async ({ text, usage, toolCalls }) => {
       const lastUserMessage = messages[messages.length - 1]
       const userMessageText =

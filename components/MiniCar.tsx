@@ -31,7 +31,6 @@ const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
     // Wait for modal to start closing, then scroll
     setTimeout(() => {
       const carElement = document.getElementById(carId)
-      console.log('scrolling to carElement', carId, carElement)
       if (carElement) {
         setTimeout(() => {  
         carElement.scrollIntoView({ behavior: 'smooth', block: 'center' })

@@ -210,11 +210,11 @@ const ChatMessage: React.FunctionComponent<Props> = ({
         @keyframes slideInCar {
           from {
             opacity: 0;
-            transform: translateY(16px) scale(0.96);
+            transform: translateY(4px);
           }
           to {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
           }
         }
 
