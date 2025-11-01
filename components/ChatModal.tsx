@@ -2,11 +2,21 @@
 
 import React, { useEffect, useState, useRef } from 'react'
 import { UIDataTypes, UITools, ChatStatus, UIMessage } from 'ai'
-import { findMentionedCars, parseFollowUps } from '../utils/chatHelpers'
+import { parseFollowUps } from '../utils/chatHelpers'
 import ChatHeader from './chat/ChatHeader'
 import ChatMessage from './chat/ChatMessage'
 import FollowUpSuggestions from './chat/FollowUpSuggestions'
+import MentionedCars from './chat/MentionedCars'
 import TypingIndicator from './chat/TypingIndicator'
+
+const emptyMessageFilter = (
+  message: UIMessage<unknown, UIDataTypes, UITools>,
+) =>
+  message.parts
+    ?.filter((part) => part.type === 'text')
+    .map((part) => part.text)
+    .join(' ')
+    .trim()
 
 interface Props {
   onDone: () => void
@@ -66,7 +76,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
     setTimeout(onDone, 300)
   }
 
-  // Extract follow-ups from the last assistant message text
+  // Extract data from the last assistant message
   const lastMessage = messages[messages.length - 1]
   const lastMessageFollowUps =
     lastMessage?.role === 'assistant'
@@ -78,6 +88,11 @@ const ChatModal: React.FunctionComponent<Props> = ({
           return textContent ? parseFollowUps(textContent) : []
         })()
       : []
+
+  const showLoading =
+    (lastMessage?.role === 'user' && status !== 'error') ||
+    (status === 'streaming' &&
+      !lastMessage?.parts?.some(({ type }) => type === 'text'))
 
   return (
     <div
@@ -98,45 +113,21 @@ const ChatModal: React.FunctionComponent<Props> = ({
         />
 
         <div className="messages" ref={messagesContainerRef}>
-          {messages.map((message) => {
-            // Get text content from message
-            const textContent =
-              message.parts
-                ?.filter((part) => part.type === 'text')
-                .map((part) => part.text)
-                .join(' ') || ''
+          {messages.filter(emptyMessageFilter).map((message) => (
+            <ChatMessage
+              key={message.id}
+              message={message}
+              isLastUserMessage={
+                message.id === messages.findLast((m) => m.role === 'user')?.id
+              }
+            />
+          ))}
 
-            if (!textContent) return null
+          {showLoading && <TypingIndicator />}
 
-            // Find cars mentioned in assistant messages
-            const mentionedCars =
-              message.role === 'assistant' &&
-              status !== 'streaming' &&
-              messages[messages.length - 1].id === message.id
-                ? findMentionedCars(textContent)
-                : []
-
-            // Check if this is the last user message
-            const isLastUserMessage =
-              message.role === 'user' &&
-              message.id === messages.findLast((m) => m.role === 'user')?.id
-
-            return (
-              <ChatMessage
-                key={message.id}
-                message={message}
-                isLastUserMessage={isLastUserMessage}
-                mentionedCars={mentionedCars}
-                onClose={handleClose}
-              />
-            )
-          })}
-
-          {((messages[messages.length - 1]?.role === 'user' && status !== 'error') ||
-            (status === 'streaming' &&
-              !messages[messages.length - 1]?.parts?.find(
-                (part) => part.type === 'text',
-              ))) && <TypingIndicator />}
+          {status !== 'streaming' && lastMessage && (
+            <MentionedCars lastMessage={lastMessage} onClose={handleClose} />
+          )}
 
           {status !== 'streaming' && lastMessageFollowUps.length > 0 && (
             <FollowUpSuggestions
