@@ -3,6 +3,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
+  reactCompiler: true,
   images: {
     deviceSizes: [
       540, // Screen wider than 1024px @1x
