@@ -32,7 +32,7 @@ const ChatMessage: React.FunctionComponent<Props> = ({
     <div
       ref={ref}
       className={clsx(
-        'flex flex-col animate-[fadeIn_0.3s_ease-in-out] mb-4 scroll-mt-5 nth-last-2:mb-0',
+        'flex flex-col animate-[fadeIn_0.3s_ease-in-out] mb-4 scroll-mt-5 nth-last-2:mb-0 px-5',
         isUser ? 'items-end' : 'items-start',
       )}
     >

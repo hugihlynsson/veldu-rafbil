@@ -12,7 +12,7 @@ const FollowUpSuggestions: React.FunctionComponent<Props> = ({
   onSendMessage,
 }) => {
   return (
-    <div className="p-[0px_0_8px_0]">
+    <div className="pb-2 mx-5">
       <div className="flex flex-col gap-2.5 w-full max-w-[500px]">
         {suggestions.map((suggestion, index) => (
           <button
