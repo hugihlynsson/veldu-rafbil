@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sky: #201be3;
+  --color-sky-darker: #1a15b7;
+  --color-tint: #111;
+  --color-stone: #555;
+  --color-clay: #888;
+  --color-smoke: #ddd;
+  --color-cloud: #eee;
+  --color-lab: #fff;
+
+  --breakpoint-xs: 375px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  color: #111;
+  width: 100%;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input {
+  font-family: Inter, sans-serif;
+}
+
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typing {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInCar {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUpRotate {
+  from {
+    opacity: 0;
+    transform: translateY(10px) rotateX(40deg) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0) scale(1);
+  }
+}
+
+/* Chat message markdown styling */
+.message-content p {
+  margin: 0 0 0.5em 0;
+}
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+.message-content strong {
+  font-weight: 600;
+}
+.message-content em {
+  font-style: italic;
+}
+.message-content code {
+  background-color: rgba(0, 0, 0, 0.06);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 0.9em;
+}
+.message-content pre {
+  background-color: rgba(0, 0, 0, 0.06);
+  padding: 8px 10px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0.5em 0;
+}
+.message-content pre code {
+  background-color: transparent;
+  padding: 0;
+}
+.message-content ul,
+.message-content ol {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+}
+.message-content li {
+  margin: 0.25em 0;
+}
+.message-content a {
+  color: inherit;
+  text-decoration: underline;
+}
+.message-content a:hover {
+  opacity: 0.8;
+}
+.message-content .table-wrapper {
+  overflow-x: auto;
+  margin: 0.5em -14px;
+  padding: 0 14px;
+  -webkit-overflow-scrolling: touch;
+}
+.message-content table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+}
+.message-content th,
+.message-content td {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 6px 8px;
+  text-align: left;
+}
+.message-content th {
+  background-color: rgba(0, 0, 0, 0.04);
+  font-weight: 600;
+}
+.message-content tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02);
+}

@@ -10,84 +10,40 @@ interface Props {
   onClose: () => void
 }
 
-const MentionedCars: React.FunctionComponent<Props> = ({ lastMessage, onClose }) => {
+const MentionedCars: React.FunctionComponent<Props> = ({
+  lastMessage,
+  onClose,
+}) => {
   if (!lastMessage || lastMessage.role !== 'assistant') return null
 
   // Find cars mentioned in the last assistant message (only when not streaming)
-  const mentionedCars =
-    lastMessage.parts
-      ?.filter((part) => part.type === 'text')
-      .map((part) => part.text)
-      .join(' ')
-    ? findMentionedCars(lastMessage.parts?.filter((part) => part.type === 'text').map((part) => part.text).join(' '))
+  const mentionedCars = lastMessage.parts
+    ?.filter((part) => part.type === 'text')
+    .map((part) => part.text)
+    .join(' ')
+    ? findMentionedCars(
+        lastMessage.parts
+          ?.filter((part) => part.type === 'text')
+          .map((part) => part.text)
+          .join(' '),
+      )
     : []
 
   if (mentionedCars.length === 0) return null
 
   return (
-    <div className="car-cards-container">
-      <div className="car-cards">
+    <div className="w-[calc(100%+44px)] -ml-6 -mr-6 mb-3">
+      <div className="grid gap-3 w-full grid-flow-col auto-rows-auto auto-cols-[90%] overflow-x-auto snap-x snap-mandatory scroll-pl-6 scroll-pr-6 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none] pl-6 pr-6 [&::-webkit-scrollbar]:hidden [&.scrollable>*]:snap-start">
         {mentionedCars.map((car, index) => (
           <div
             key={`${car.make}-${car.model}-${car.subModel}`}
-            className="car-card-wrapper"
+            className="opacity-0 animate-[slideInCar_0.5s_cubic-bezier(0.16,1,0.3,1)_forwards]"
             style={{ animationDelay: `${index * 0.1}s` }}
           >
             <MiniCar car={car} onClose={onClose} />
           </div>
         ))}
       </div>
-
-      <style jsx>{`
-        .car-cards-container {
-          width: calc(100% + 44px);
-          margin-left: -24px;
-          margin-right: -24px;
-          margin-bottom: 12px;
-        }
-
-        .car-cards {
-          display: grid;
-          gap: 12px;
-          width: 100%;
-          grid-auto-flow: column;
-          grid-template-rows: repeat(2, auto);
-          grid-auto-columns: 90%;
-          overflow-x: auto;
-          scroll-snap-type: x mandatory;
-          scroll-padding-left: 24px;
-          scroll-padding-right: 24px;
-          -webkit-overflow-scrolling: touch;
-          scrollbar-width: none; /* Firefox */
-          -ms-overflow-style: none; /* IE and Edge */
-          padding-left: 24px;
-          padding-right: 24px;
-        }
-
-        .car-cards::-webkit-scrollbar {
-          display: none; /* Chrome, Safari, Opera */
-        }
-
-        .car-card-wrapper {
-          opacity: 0;
-          animation: slideInCar 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .car-cards.scrollable .car-card-wrapper {
-          scroll-snap-align: start;
-        }
-
-        @keyframes slideInCar {
-          from {
-            opacity: 0;
-            transform: translateY(4px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   )
 }

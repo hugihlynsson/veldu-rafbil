@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { Availability, Drive, Filters } from '../types'
-import { colors } from '../modules/globals'
+import clsx from 'clsx'
 
 interface Props {
   initialFilters: Filters
@@ -114,15 +114,27 @@ const FiltersModal: React.FunctionComponent<Props> = ({
 
   return (
     <div
-      className={`container ${state === State.Visible ? 'visible' : ''}`}
+      className={clsx(
+        "fixed top-0 right-0 bottom-0 left-0 flex items-end justify-center before:content-[''] before:block before:absolute before:inset-0 before:bg-black/0 before:transition-[background-color] before:duration-200 before:delay-100",
+        'min-[800px]:min-h-[600px]:items-center',
+        state === State.Visible && 'before:delay-0 before:bg-black/30',
+      )}
       onClick={handleClose}
     >
       <section
-        className={state === State.Visible ? 'visible' : ''}
+        className={clsx(
+          'z-1 flex flex-col rounded-t-[20px] bg-white w-screen max-w-[400px] max-h-[70vh] overflow-hidden shadow-[0px_0px_40px_0px_rgba(0,0,0,0.1)] translate-y-10 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.32,0,0.67,0)]',
+          'min-[800px]:min-h-[600px]:rounded-[20px] min-[800px]:min-h-[600px]:max-h-[500px]',
+          state === State.Visible &&
+            'opacity-100 ease-[cubic-bezier(0.33,1,0.68,1)] translate-y-0',
+        )}
         onClick={(event) => event.stopPropagation()}
       >
-        <header>
-          <button onClick={handleClose} className="close">
+        <header className="relative bg-white text-lg text-center p-[14px_16px] border-b border-cloud font-semibold">
+          <button
+            onClick={handleClose}
+            className="absolute left-[11px] top-[11px] flex items-center justify-center h-8 w-8 border-0 p-0 rounded-2xl appearance-none bg-transparent text-[30px] text-stone cursor-pointer transition-all duration-200 hover:bg-cloud [&_path]:transition-all [&_path]:duration-200 hover:[&_path]:fill-tint"
+          >
             <svg
               width="14"
               height="14"
@@ -133,15 +145,20 @@ const FiltersModal: React.FunctionComponent<Props> = ({
               <title>Close</title>
               <path
                 d="m2.07 13.12 4.78-4.78 4.93 4.93 1.29-1.29-4.93-4.93 4.78-4.78L11.64.98 6.85 5.77 1.91.83.63 2.1l4.94 4.94-4.79 4.79 1.29 1.28Z"
-                fill={colors.stone}
+                className="fill-stone"
               />
             </svg>
           </button>
           Leita
         </header>
-        <div className="filters">
-          <div className="filter-header">
-            <label htmlFor="filter-name">Nafn</label>
+        <div className="flex flex-col grow shrink overflow-scroll p-5 pb-2">
+          <div className="flex gap-2 items-baseline mb-1 px-3">
+            <label
+              htmlFor="filter-name"
+              className="text-tint text-xs font-semibold"
+            >
+              Nafn
+            </label>
           </div>
           <input
             autoFocus
@@ -151,10 +168,16 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             onChange={handleFilterChange('name')}
             onKeyDown={handleKeyPress}
             value={nameInput}
+            className="border border-cloud rounded bg-white p-[11px] text-sm font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
           />
-          <div className="filter-header">
-            <label htmlFor="filter-price">Verð</label>
-            <p className="label-description">Hámark</p>
+          <div className="flex gap-2 items-baseline mb-1 px-3">
+            <label
+              htmlFor="filter-price"
+              className="text-tint text-xs font-semibold"
+            >
+              Verð
+            </label>
+            <p className="m-0 text-xs text-clay">Hámark</p>
           </div>
           <input
             id="filter-price"
@@ -163,10 +186,16 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             onChange={handleFilterChange('price')}
             onKeyDown={handleKeyPress}
             value={filters.price ?? ''}
+            className="border border-cloud rounded bg-white p-[11px] text-sm font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
           />
-          <div className="filter-header">
-            <label htmlFor="filter-range">Drægni</label>
-            <p className="label-description">Lágmark</p>
+          <div className="flex gap-2 items-baseline mb-1 px-3">
+            <label
+              htmlFor="filter-range"
+              className="text-tint text-xs font-semibold"
+            >
+              Drægni
+            </label>
+            <p className="m-0 text-xs text-clay">Lágmark</p>
           </div>
           <input
             id="filter-range"
@@ -175,37 +204,55 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             onChange={handleFilterChange('range')}
             onKeyDown={handleKeyPress}
             value={filters.range ?? ''}
+            className="border border-cloud rounded bg-white p-[11px] text-sm font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
           />
-          <div className="filter-header">
-            <label htmlFor="filter-drive">Drif</label>
+          <div className="flex gap-2 items-baseline mb-1 px-3">
+            <label
+              htmlFor="filter-drive"
+              className="text-tint text-xs font-semibold"
+            >
+              Drif
+            </label>
           </div>
           <select
             id="filter-drive"
             onChange={handleFilterChange('drive')}
             onKeyDown={handleKeyPress}
             value={filters.drive?.[0] ?? 'all'}
+            className="appearance-none border border-cloud bg-lab rounded p-[11px] text-sm font-normal text-tint mb-6 cursor-pointer hover:border-clay"
           >
             <option value="all">Öll</option>
             <option value="AWD">AWD</option>
             <option value="FWD">FWD</option>
             <option value="RWD">RWD</option>
           </select>
-          <div className="filter-header">
-            <label htmlFor="filter-drive">Framboð</label>
+          <div className="flex gap-2 items-baseline mb-1 px-3">
+            <label
+              htmlFor="filter-drive"
+              className="text-tint text-xs font-semibold"
+            >
+              Framboð
+            </label>
           </div>
           <select
             id="filter-availability"
             onChange={handleFilterChange('availability')}
             onKeyDown={handleKeyPress}
             value={filters.availability ?? 'all'}
+            className="appearance-none border border-cloud bg-lab rounded p-[11px] text-sm font-normal text-tint mb-6 cursor-pointer hover:border-clay"
           >
             <option value="all">Allir</option>
             <option value="available">Fáanlegir</option>
             <option value="expected">Væntanlegir</option>
           </select>
-          <div className="filter-header">
-            <label htmlFor="filter-acceleration">Hröðun</label>
-            <p className="label-description">Lágmark, sec</p>
+          <div className="flex gap-2 items-baseline mb-1 px-3">
+            <label
+              htmlFor="filter-acceleration"
+              className="text-tint text-xs font-semibold"
+            >
+              Hröðun
+            </label>
+            <p className="m-0 text-xs text-clay">Lágmark, sec</p>
           </div>
           <input
             id="filter-acceleration"
@@ -214,10 +261,16 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             onChange={handleFilterChange('acceleration')}
             onKeyDown={handleKeyPress}
             value={filters.acceleration ?? ''}
+            className="border border-cloud rounded bg-white p-[11px] text-sm font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
           />
-          <div className="filter-header">
-            <label htmlFor="filter-value">Verði á km</label>
-            <p className="label-description">Hámark</p>
+          <div className="flex gap-2 items-baseline mb-1 px-3">
+            <label
+              htmlFor="filter-value"
+              className="text-tint text-xs font-semibold"
+            >
+              Verði á km
+            </label>
+            <p className="m-0 text-xs text-clay">Hámark</p>
           </div>
           <input
             id="filter-value"
@@ -226,10 +279,16 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             onChange={handleFilterChange('value')}
             onKeyDown={handleKeyPress}
             value={filters.value ?? ''}
+            className="border border-cloud rounded bg-white p-[11px] text-sm font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
           />
-          <div className="filter-header">
-            <label htmlFor="filter-fastcharge">Hraðhleðsla</label>
-            <p className="label-description">Lágmark, km/min</p>
+          <div className="flex gap-2 items-baseline mb-1 px-3">
+            <label
+              htmlFor="filter-fastcharge"
+              className="text-tint text-xs font-semibold"
+            >
+              Hraðhleðsla
+            </label>
+            <p className="m-0 text-xs text-clay">Lágmark, km/min</p>
           </div>
           <input
             id="filter-fastcharge"
@@ -238,227 +297,25 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             onChange={handleFilterChange('fastcharge')}
             onKeyDown={handleKeyPress}
             value={filters.fastcharge ?? ''}
+            className="border border-cloud rounded bg-white p-[11px] text-sm font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
           />
         </div>
-        <footer>
-          <button className="clear" onClick={() => setFilters({})}>
+        <footer className="p-4 flex justify-between shadow-[0_0_32px_0_rgba(0,0,0,0.1)] z-1">
+          <button
+            className="appearance-none border-0 bg-transparent p-0 pl-1 text-stone text-sm font-semibold transition-all duration-200 cursor-pointer hover:text-tint"
+            onClick={() => setFilters({})}
+          >
             Hreinsa leit
           </button>
-          <button className="submit" onClick={handleDone}>
+          <button
+            className="appearance-none p-[11px_16px_12px_16px] bg-sky border-0 rounded-full text-lab text-sm font-semibold cursor-pointer transition-all duration-200 hover:bg-sky-darker"
+            onClick={handleDone}
+          >
             Sýna niðurstöður{' '}
-            <span style={{ opacity: 0.8 }}>{getCountPreview(filters)}</span>
+            <span className="opacity-80">{getCountPreview(filters)}</span>
           </button>
         </footer>
       </section>
-
-      <style jsx>{`
-        .container {
-          position: fixed;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-        }
-        .container:before {
-          content: '';
-          display: block;
-          position: absolute;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          background-color: rgba(0, 0, 0, 0);
-          transition: background-color 0.2s;
-          transition-delay: 0.1s;
-        }
-        .container.visible:before {
-          transition-delay: 0s;
-          background-color: rgba(0, 0, 0, 0.3);
-        }
-
-        section {
-          z-index: 1;
-          display: flex;
-          flex-direction: column;
-          border-top-left-radius: 20px;
-          border-top-right-radius: 20px;
-          background-color: #fff;
-          width: 100vw;
-          max-width: 400px;
-          max-height: 70vh;
-          overflow: hidden;
-          box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.1);
-          transform: translateY(40px);
-          opacity: 0;
-          transition: all 0.3s cubic-bezier(0.32, 0, 0.67, 0); /* Ease in quad */
-        }
-        section.visible {
-          opacity: 1;
-          transition-timing-function: cubic-bezier(
-            0.33,
-            1,
-            0.68,
-            1
-          ); /* Ease out Cubic */
-          transform: translateY(0);
-        }
-
-        header {
-          position: relative;
-          background-color: #fff;
-          font-size: 18px;
-          text-align: center;
-          padding: 14px 16px;
-          border-bottom: 1px solid ${colors.cloud};
-          font-weight: 600;
-        }
-
-        .close {
-          position: absolute;
-          left: 11px;
-          top: 11px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 32px;
-          width: 32px;
-          border: 0;
-          padding: 0;
-          border-radius: 16px;
-          appearance: none;
-          background-color: transparent;
-          font-size: 30px;
-          color: ${colors.stone};
-          cursor: pointer;
-          transition: all 0.2s;
-        }
-        .close:hover {
-          background-color: ${colors.cloud};
-        }
-        .close path {
-          transition: all 0.2s;
-        }
-        .close:hover path {
-          fill: ${colors.tint};
-        }
-
-        .filters {
-          display: flex;
-          flex-direction: column;
-          flex-grow: 1;
-          flex-shring: 1;
-          overflow: scroll;
-          padding: 20px;
-          padding-bottom: 8px;
-        }
-
-        .filter-header {
-          display: flex;
-          gap: 8px;
-          align-items: baseline;
-          margin-bottom: 4px;
-          padding-left: 12px;
-          padding-right: 12px;
-        }
-
-        label {
-          color: ${colors.tint};
-          font-size: 12px;
-          font-weight: 600;
-        }
-
-        .label-description {
-          margin: 0;
-          font-size: 12px;
-          color: ${colors.clay};
-        }
-
-        input {
-          border: 1px solid ${colors.cloud};
-          border-radius: 4px;
-          padding: 11px;
-          font-size: 14px;
-          font-weight: 400;
-          color: ${colors.tint};
-          margin-bottom: 24px;
-          transition: all 0.2s;
-        }
-        input::placeholder {
-          color: ${colors.clay};
-        }
-        input:hover {
-          border-color: ${colors.clay};
-        }
-
-        select {
-          appearance: none;
-          border: 1px solid ${colors.cloud};
-          background-color: ${colors.lab};
-          border-radius: 4px;
-          padding: 11px;
-          font-size: 14px;
-          font-weight: 400;
-          color: ${colors.tint};
-          margin-bottom: 24px;
-          cursor: pointer;
-        }
-        select:hover {
-          border-color: ${colors.clay};
-        }
-
-        footer {
-          padding: 16px;
-          display: flex;
-          justify-content: space-between;
-          box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.1);
-          z-index: 1; /* Have the shadow appear above the input elements */
-        }
-
-        .clear {
-          appearance: none;
-          border: 0;
-          background-color: transparent;
-          padding: 0;
-          padding-left: 4px;
-          color: ${colors.stone};
-          font-size: 14px;
-          font-weight: 600;
-          transition: all 0.2s;
-          cursor: pointer;
-        }
-        .clear:hover {
-          color: ${colors.tint};
-        }
-
-        .submit {
-          appearance: none;
-          padding: 11px 16px 12px 16px;
-          background-color: ${colors.sky};
-          border: 0;
-          border-radius: 100px;
-          color: ${colors.lab};
-          font-size: 14px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.2s;
-        }
-        .submit:hover {
-          background-color: ${colors.skyDarker};
-        }
-
-        @media (min-height: 600px) and (min-width: 800px) {
-          .container {
-            align-items: center;
-          }
-          section {
-            border-radius: 20px;
-            max-height: 500px;
-          }
-        }
-      `}</style>
     </div>
   )
 }

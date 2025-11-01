@@ -1,7 +1,6 @@
 import React, { ReactNode, FunctionComponent } from 'react'
 import Link from 'next/link'
-
-import { colors } from '../modules/globals'
+import clsx from 'clsx'
 
 interface Props {
   current?: boolean
@@ -27,71 +26,32 @@ const LinkPill: FunctionComponent<Props> = ({
   title,
 }) => (
   <Link
-    className={'link-pill ' + (current ? 'current' : onGray ? 'on-gray' : '') + (large ? ' large' : '')}
+    className={clsx(
+      'group inline-flex self-start items-center shrink-0 mt-2 text-inherit text-sm font-semibold rounded-full no-underline -ml-0.5 mr-2.5 transition-colors duration-100',
+      large ? 'py-[5px] px-[14px]' : 'py-1 px-3',
+      current && 'bg-sky text-white hover:bg-sky',
+      onGray && !current && 'bg-[#e4e4e4] hover:bg-[#d8d8d8]',
+      !current && !onGray && 'bg-cloud hover:bg-smoke',
+    )}
     onClick={onClick}
     href={href}
     target={external ? '_blank' : undefined}
     rel={external ? 'noopener' : undefined}
     title={title}
   >
-    {children} {extra && <span className="extra">{extra}</span>}
-    <style jsx global>{`
-      .link-pill {
-        display: inline-flex;
-        align-self: flex-start;
-        align-items: center;
-        flex-shrink: 0;
-        margin-top: 8px;
-        color: inherit;
-        font-size: 14px;
-        font-weight: 600;
-        background-color: #eee;
-        border-radius: 100px;
-        padding: 4px 12px;
-        text-decoration: none;
-        margin-left: -2px;
-        margin-right: 10px;
-        transition: background-color 0.1s;
-      }
-      .link-pill:hover {
-        background-color: #ddd;
-      }
-      .link-pill.current,
-      .link-pill.current:hover {
-        background-color: ${colors.sky};
-        color: #fff;
-      }
-      .link-pill.on-gray {
-        background-color: #e4e4e4;
-      }
-      .link-pill.on-gray:hover {
-        background-color: #d8d8d8;
-      }
-      .link-pill.large {
-        padding: 5px 14px;
-      }
-      .link-pill .extra {
-        text-transform: uppercase;
-        font-weight: 700;
-        font-size: 10px;
-        background: white;
-        color: #444;
-        border-radius: 16px;
-        padding: 2px 6px;
-        margin: 0px -7px 0px 5px;
-        vertical-align: top;
-        display: inline-block;
-        transition: background-color 0.1s;
-      }
-      .link-pill.link-pill:hover .extra {
-        background: rgba(255, 255, 255, 0.8);
-      }
-      .link-pill.current:hover .extra,
-      .link-pill.current .extra {
-        color: #27f;
-        background: rgba(255, 255, 255, 0.9);
-      }
-    `}</style>
+    {children}{' '}
+    {extra && (
+      <span
+        className={clsx(
+          'uppercase font-bold text-[10px] rounded-2xl py-0.5 px-1.5 my-0 ml-[5px] -mr-[7px] align-top inline-block transition-colors duration-100',
+          current
+            ? 'text-[#27f] bg-white/90'
+            : 'text-[#444] bg-white group-hover:bg-white/80',
+        )}
+      >
+        {extra}
+      </span>
+    )}
   </Link>
 )
 

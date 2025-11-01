@@ -3,7 +3,6 @@ import Image from 'next/image'
 
 import { NewCar as NewCarType } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
-import { colors } from '../modules/globals'
 import getPriceWithGrant from '../modules/getPriceWithGrant'
 
 interface Props {
@@ -32,8 +31,8 @@ const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
     setTimeout(() => {
       const carElement = document.getElementById(carId)
       if (carElement) {
-        setTimeout(() => {  
-        carElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        setTimeout(() => {
+          carElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
         }, 150)
       }
     }, 100)
@@ -43,109 +42,41 @@ const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
     <a
       href="#"
       onClick={handleClick}
-      className="mini-car"
+      className="flex flex-row rounded-[14px] overflow-hidden no-underline text-inherit transition-all duration-200 max-w-full hover:border-smoke hover:bg-white"
     >
-      <div className="image-container">
+      <div className="relative w-[120px] min-w-[120px] h-full bg-cloud shrink-0">
         <Image
           alt={`${car.make} ${car.model}`}
           src={`/images/${car.heroImageName}.jpg`}
           width={400}
           height={267}
-          className="image"
+          className="w-full h-full object-cover block"
         />
       </div>
-      <div className="info">
-        <div className="name">
-          <span className="make">{car.make}</span>{' '}
-          <span className="model">{car.model}</span>
-          {car.subModel && <span className="subModel"> {car.subModel}</span>}
+      <div className="py-[10px] px-3 flex-1 flex flex-col justify-center border border-cloud border-l-0 rounded-tr-[14px] rounded-br-[14px]">
+        <div className="text-sm font-semibold mb-[3px] leading-[1.3]">
+          <span>{car.make}</span>{' '}
+          <span className="font-normal">{car.model}</span>
+          {car.subModel && (
+            <span className="font-medium text-xs text-stone">
+              {' '}
+              {car.subModel}
+            </span>
+          )}
         </div>
-        <div className="price">
+        <div className="text-[13px] font-semibold text-tint mb-[3px]">
           {addDecimalSeprators(priceWithGrant)} kr.
-          {hasGrant && <span className="grant"> með styrk</span>}
+          {hasGrant && (
+            <span className="text-[11px] font-medium text-clay">
+              {' '}
+              með styrk
+            </span>
+          )}
         </div>
-        <div className="specs">
+        <div className="text-[11px] text-stone font-medium">
           {car.range} km • {car.acceleration.toFixed(1)}s • {car.drive}
         </div>
       </div>
-
-      <style jsx>{`
-        .mini-car {
-          display: flex;
-          flex-direction: row;
-          border-radius: 14px;
-          overflow: hidden;
-          text-decoration: none;
-          color: inherit;
-          transition: all 0.2s;
-          max-width: 100%;
-        }
-        .mini-car:hover {
-          border-color: ${colors.smoke};
-          background: white;
-        }
-
-        .image-container {
-          position: relative;
-          width: 120px;
-          min-width: 120px;
-          height: 100%;
-          background: ${colors.cloud};
-          flex-shrink: 0;
-        }
-
-        .image-container :global(.image) {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          display: block;
-        }
-
-        .info {
-          padding: 10px 12px;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          border: 1px solid ${colors.cloud};
-          border-left: none;
-          border-top-right-radius: 14px;
-          border-bottom-right-radius: 14px;
-        }
-
-        .name {
-          font-size: 14px;
-          font-weight: 600;
-          margin-bottom: 3px;
-          line-height: 1.3;
-        }
-        .model {
-          font-weight: 400;
-        }
-        .subModel {
-          font-weight: 500;
-          font-size: 12px;
-          color: ${colors.stone};
-        }
-
-        .price {
-          font-size: 13px;
-          font-weight: 600;
-          color: ${colors.tint};
-          margin-bottom: 3px;
-        }
-        .grant {
-          font-size: 11px;
-          font-weight: 500;
-          color: ${colors.clay};
-        }
-
-        .specs {
-          font-size: 11px;
-          color: ${colors.stone};
-          font-weight: 500;
-        }
-      `}</style>
     </a>
   )
 }

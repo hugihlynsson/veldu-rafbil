@@ -101,11 +101,11 @@ const ChatModal: React.FunctionComponent<Props> = ({
 
   return (
     <div
-      className={`container ${state === State.Visible ? 'visible' : ''}`}
+      className={`fixed top-0 right-0 bottom-0 left-0 flex items-start justify-center z-1000 before:content-[''] before:block before:absolute before:inset-0 before:bg-black/0 before:transition-all before:duration-300 before:delay-100 ${state === State.Visible ? 'before:delay-0 before:bg-black/20' : ''}`}
       onClick={handleClose}
     >
       <section
-        className={state === State.Visible ? 'visible' : ''}
+        className={`z-1 flex flex-col bg-white/95 backdrop-blur-[20px] w-screen h-dvh overflow-hidden scale-95 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.32,0,0.67,0)] min-[600px]:h-[calc(100dvh-24px)] min-[600px]:max-w-[600px] min-[600px]:w-[90vw] min-[600px]:rounded-[24px_24px_32px_32px] min-[600px]:mt-3 min-[600px]:shadow-[0px_8px_60px_rgba(0,0,0,0.15)] ${state === State.Visible ? 'opacity-100 ease-[cubic-bezier(0.33,1,0.68,1)] scale-100' : ''}`}
         onClick={(event) => event.stopPropagation()}
       >
         <ChatHeader
@@ -114,7 +114,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
           onClearChat={handleClearChat}
         />
 
-        <div className="messages" ref={messagesContainerRef}>
+        <div className="flex-1 overflow-y-auto p-5 flex flex-col pb-20" ref={messagesContainerRef}>
           {messages.filter(emptyMessageFilter).map((message) => (
             <ChatMessage
               key={message.id}
@@ -140,77 +140,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
           <span ref={messagesEndRef} />
         </div>
       </section>
-
-      <style jsx>{`
-        .container {
-          position: fixed;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          display: flex;
-          align-items: start;
-          justify-content: center;
-          z-index: 1000;
-        }
-        .container:before {
-          content: '';
-          display: block;
-          position: absolute;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          background-color: rgba(0, 0, 0, 0);
-          transition: all 0.3s;
-          transition-delay: 0.1s;
-        }
-        .container.visible:before {
-          transition-delay: 0s;
-          background-color: rgba(0, 0, 0, 0.2);
-        }
-
-        section {
-          z-index: 1;
-          display: flex;
-          flex-direction: column;
-          background-color: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(20px);
-          width: 100vw;
-          height: 100vh;
-          height: 100dvh;
-          overflow: hidden;
-          transform: scale(0.95);
-          opacity: 0;
-          transition: all 0.3s cubic-bezier(0.32, 0, 0.67, 0);
-        }
-        section.visible {
-          opacity: 1;
-          transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
-          transform: scale(1);
-        }
-
-        @media (min-width: 600px) {
-          section {
-            height: calc(100vh - 24px);
-            height: calc(100dvh - 24px);
-            max-width: 600px;
-            width: 90vw;
-            border-radius: 24px 24px 32px 32px;
-            margin-top: 12px;
-            box-shadow: 0px 8px 60px rgba(0, 0, 0, 0.15);
-          }
-        }
-
-        .messages {
-          flex: 1;
-          overflow-y: auto;
-          padding: 20px;
-          display: flex;
-          flex-direction: column;
-          padding-bottom: 80px;
-        }
-      `}</style>
     </div>
   )
 }
