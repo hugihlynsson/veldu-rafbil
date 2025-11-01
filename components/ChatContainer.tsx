@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useChat } from '@ai-sdk/react'
 import ChatModal from './ChatModal'
 import FloatingChat from './FloatingChat'
@@ -66,33 +66,52 @@ export default function ChatContainer({ hide }: Props) {
     }
   }, [chatState.messages])
 
-  const handleClearChat = () => {
+  const handleClearChat = useCallback(() => {
     chatState.setMessages([])
     localStorage.removeItem(CHAT_STORAGE_KEY)
-  }
+  }, [chatState.setMessages])
+
+  const handleSendMessage = useCallback(
+    (text: string) => {
+      chatState.sendMessage({
+        role: 'user',
+        parts: [{ type: 'text', text }],
+      })
+    },
+    [chatState.sendMessage],
+  )
+
+  const handleReleaseBodyLock = useCallback(() => {
+    setReleaseBodyLock(true)
+  }, [])
+
+  const handleDone = useCallback(() => {
+    setShowChatMessages(false)
+  }, [])
+
+  const handleOpenChat = useCallback(() => {
+    setShowChatMessages(true)
+  }, [])
 
   return (
     <>
       {showChatMessages && (
         <ChatModal
-          onDone={() => setShowChatMessages(false)}
+          onDone={handleDone}
           messages={chatState.messages}
           status={chatState.status}
           onClearChat={handleClearChat}
-          onReleaseBodyLock={() => setReleaseBodyLock(true)}
-          onSendMessage={(text) => {
-            chatState.sendMessage({
-              role: 'user',
-              parts: [{ type: 'text', text }],
-            })
-          }}
+          onReleaseBodyLock={handleReleaseBodyLock}
+          onSendMessage={handleSendMessage}
         />
       )}
 
       <FloatingChat
-        chatState={chatState}
-        onOpenChat={() => setShowChatMessages(true)}
+        onOpenChat={handleOpenChat}
         hide={hide}
+        disabled={chatState.status === 'streaming'}
+        hasMessages={chatState.messages.length > 0}
+        sendMessage={handleSendMessage}
       />
     </>
   )

@@ -311,7 +311,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
           background-color: #fff;
           font-size: 18px;
           text-align: center;
-          padding: 16px;
+          padding: 14px 16px;
           border-bottom: 1px solid ${colors.cloud};
           font-weight: 600;
         }

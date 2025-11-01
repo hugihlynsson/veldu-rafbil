@@ -7,15 +7,19 @@ import { CHAT_SUGGESTIONS } from '../constants/chatSuggestions'
 import { getRandomSuggestions } from '../utils/chatHelpers'
 
 interface Props {
-  chatState: any
   onOpenChat: () => void
   hide?: boolean
+  disabled?: boolean
+  hasMessages: boolean
+  sendMessage: (message: string) => void
 }
 
 const FloatingChat: React.FunctionComponent<Props> = ({
-  chatState,
   onOpenChat,
   hide = false,
+  disabled = false,
+  hasMessages,
+  sendMessage,
 }) => {
   const [input, setInput] = useState<string>('')
   const [isFocused, setIsFocused] = useState(false)
@@ -23,16 +27,10 @@ const FloatingChat: React.FunctionComponent<Props> = ({
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const { messages, sendMessage, status } = chatState
-  const isLoading = status === 'in_progress'
-
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (input.trim()) {
-      sendMessage({
-        role: 'user',
-        parts: [{ type: 'text', text: input }],
-      })
+      sendMessage(input)
       trackEvent('Sent message')
       setInput('')
       onOpenChat()
@@ -45,7 +43,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
 
   const handleFocus = () => {
     setIsFocused(true)
-    if (messages.length > 0) {
+    if (hasMessages) {
       onOpenChat()
     } else {
       // Pick 3 random suggestions
@@ -57,10 +55,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
     e.preventDefault()
     e.stopPropagation()
 
-    sendMessage({
-      role: 'user',
-      parts: [{ type: 'text', text: suggestion }],
-    })
+    sendMessage(suggestion)
     trackEvent('Selected suggestion')
     setInput('')
     setIsFocused(false)
@@ -69,7 +64,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
 
   return (
     <div className={`floating-chat-container ${hide ? 'hidden' : ''}`}>
-      {isFocused && messages.length === 0 && (
+      {isFocused && !hasMessages && (
         <div className="suggestions">
           {selectedSuggestions.map((suggestion, index) => (
             <button
@@ -97,9 +92,9 @@ const FloatingChat: React.FunctionComponent<Props> = ({
           onFocus={handleFocus}
           onBlur={() => setIsFocused(false)}
           placeholder="Spurðu Veldu Rafbíl"
-          disabled={isLoading}
+          disabled={disabled}
         />
-        <button type="submit" disabled={isLoading || !input.trim()}>
+        <button type="submit" disabled={disabled || !input.trim()}>
           <svg
             width="20"
             height="20"
@@ -206,7 +201,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
           background: rgba(220, 220, 220, 0.7);
           backdrop-filter: blur(12px);
           border-radius: 100px;
-          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.0);
+          box-shadow: 0 4px 24px rgba(0, 0, 0, 0);
           width: 320px;
           max-width: 90vw;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
