@@ -9,6 +9,7 @@ import { NewCar } from '../../types'
 import { UIDataTypes, UITools, UIMessage } from 'ai'
 import { useEffect } from 'react'
 import { useRef } from 'react'
+import { stripFollowUps } from '../../utils/chatHelpers'
 
 interface Props {
   message: UIMessage<unknown, UIDataTypes, UITools>
@@ -40,7 +41,7 @@ const ChatMessage: React.FunctionComponent<Props> = ({
         {message.parts?.map((part, index) =>
           part.type === 'text' ? (
             <ReactMarkdown key={index} remarkPlugins={[remarkGfm]}>
-              {part.text}
+              {stripFollowUps(part.text)}
             </ReactMarkdown>
           ) : null,
         )}

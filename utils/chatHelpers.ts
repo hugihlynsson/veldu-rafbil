@@ -39,3 +39,15 @@ export const getRandomSuggestions = (suggestions: string[], count: number = 3): 
   const shuffled = [...suggestions].sort(() => Math.random() - 0.5)
   return shuffled.slice(0, count)
 }
+
+// Parse follow-up suggestions from text in [followUp:<question>] format
+export const parseFollowUps = (text: string): string[] => {
+  const followUpRegex = /\[followUp:([^\]]+)\]/g
+  const matches = [...text.matchAll(followUpRegex)]
+  return matches.map(match => match[1].trim())
+}
+
+// Remove follow-up markers from text
+export const stripFollowUps = (text: string): string => {
+  return text.replace(/\[followUp:[^\]]+\]/g, '').trim()
+}

@@ -1,5 +1,5 @@
 import { openai } from '@ai-sdk/openai'
-import { streamText, convertToModelMessages, stepCountIs } from 'ai'
+import { streamText, convertToModelMessages } from 'ai'
 import { Axiom } from '@axiomhq/js'
 import newCars from '../../../modules/newCars'
 import { fetchCarDetailsTool } from './tools/fetchCarDetails'
@@ -7,25 +7,18 @@ import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 export const runtime = 'edge'
 
 const modelName = 'gpt-4.1-mini'
-const axiom = new Axiom({ token: process.env.AXIOM_TOKEN ?? '' })
 
-export async function POST(req: Request) {
-  const { messages } = await req.json()
+// Create a summary of available cars for the LLM
+const carsSummary = newCars
+  .map(
+    (car) =>
+      `${car.make} ${car.model} ${car.subModel ? car.subModel : ''}: ${car.price.toLocaleString('is-IS')} kr, ${car.range} km drægni, ${car.acceleration}s hröðun, ${car.drive} drif${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseURL ? ` (more info: ${car.evDatabaseURL})` : ''}`,
+  )
+  .join('\n')
 
-  // Create a summary of available cars for the LLM
-  const carsSummary = newCars
-    .map(
-      (car) =>
-        `${car.make} ${car.model} ${car.subModel ? car.subModel : ''}: ${car.price.toLocaleString('is-IS')} kr, ${car.range} km drægni, ${car.acceleration}s hröðun, ${car.drive} drif${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseURL ? ` (more info: ${car.evDatabaseURL})` : ''}`,
-    )
-    .join('\n')
+const systemPrompt = `Þú ert hjálpsamur ráðgjafi fyrir Veldu Rafbíl, íslenskan vef sem hjálpar fólki að bera saman og velja alla 100% rafdrifna bíla sem eru í boði á Íslandi.
 
-  const result = await streamText({
-    model: openai(modelName),
-    messages: convertToModelMessages(messages),
-    system: `Þú ert hjálpsamur ráðgjafi fyrir Veldu Rafbíl, íslenskan vef sem hjálpar fólki að bera saman og velja alla 100% rafdrifna bíla sem eru í boði á Íslandi.
-
-- Þú ert reiprennandi á íslensku og svarar alltaf á íslensku. 
+- Þú ert reiprennandi á íslensku og svarar alltaf á íslensku.
 
 Þú hefur aðgang að upplýsingum um ${newCars.length} rafbíla sem eru fáanlegir á Íslandi:
 
@@ -35,7 +28,7 @@ Gott að hafa í huga:
 - Notaðu upplýsingarnar hér að ofan til að gefa nákvæmar, sérstakar upplýsingar
 - Ef þú þarft FREKARI upplýsingar um tiltekinn bíl (eins og stærðir, farangursrými, innréttingu, o.s.frv.), notaðu fetchCarDetails tólið með URL-inu sem gefið er upp í bílalistanum
 - Verðin sem eru í upplýsingunum eru fyrir 900.000 kr ríkisstyrkinn sem er í boði fyrir bíla undir 10 milljónum kr
-- Þegar notandi spyr um bíla undir ákveðinri upphæð, notaðu verð EFTIR styrk
+- Þegar notandi spyr um bíla undir ákveðinni upphæð, notaðu verð EFTIR styrk
 - Í janúar 2026 lækkar styrkurinn í 500.000 kr
 - Drægni byggir á WLTP mælingum
 - Þegar spurt er um raunverulega drægni, útskýrðu að hún verði minni vegna þátta eins og aksturs og veðuraðstæðna á Íslandi
@@ -52,11 +45,29 @@ Tónn og stíll:
 - Vertu í samtalstón, ekki of formlegur
 - Þegar þú berð saman bíla, legðu áherslu á muninn á milli þeirra.
 - Ekki svara með <hr> töggum
-- Einbeittu þér að því að hjálpa fólki að finna rétta rafbílinn fyrir þarfir þess`,
+- Einbeittu þér að því að hjálpa fólki að finna rétta rafbílinn fyrir þarfir þess
+- Í lok svars, skrifaðu út þrjá framhaldsspurningar fyrir notandann. Þær ættu að vera stutta og tæmdu, og frá notandanum. Fyrir hverja framhaldsspurningu, notaðu þennan nákvæmlega snið: [followUp:<spurning>]
+
+TIL DÆMIS:
+Já, Toyota bZ4X er fjórhjóladrifinn. Er eitthvað annað sem ég get hjálpað þér með?
+
+[followUp:Hvað fer hann langt?]
+[followUp:Er fjórhjóladrif nauðynlegur fyrir innanbæjarakstur?]
+[followUp:Hvaða aðrir sambærilegir bílar eru fjórhjóladrifnir?]
+`
+
+const axiom = new Axiom({ token: process.env.AXIOM_TOKEN ?? '' })
+
+export async function POST(req: Request) {
+  const { messages } = await req.json()
+
+  const result = streamText({
+    model: openai(modelName),
+    messages: convertToModelMessages(messages),
+    system: systemPrompt,
     tools: {
       fetchCarDetails: fetchCarDetailsTool,
     },
-    stopWhen: stepCountIs(5),
     onFinish: async ({ text, usage, toolCalls }) => {
       const lastUserMessage = messages[messages.length - 1]
       const userMessageText =

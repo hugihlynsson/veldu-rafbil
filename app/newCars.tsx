@@ -187,9 +187,7 @@ export default function NewCars({
   })
 
   // Initialize useChat at parent level so it persists
-  const chatState = useChat({
-    messages: initialMessages,
-  })
+  const chatState = useChat({ messages: initialMessages })
 
   // Save messages to localStorage whenever they change
   useEffect(() => {

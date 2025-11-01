@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react'
 import { UIDataTypes, UITools, ChatStatus, UIMessage } from 'ai'
-import { CHAT_SUGGESTIONS } from '../constants/chatSuggestions'
-import { findMentionedCars, getRandomSuggestions } from '../utils/chatHelpers'
+import { findMentionedCars, parseFollowUps } from '../utils/chatHelpers'
 import ChatHeader from './chat/ChatHeader'
 import ChatMessage from './chat/ChatMessage'
 import FollowUpSuggestions from './chat/FollowUpSuggestions'
@@ -33,7 +32,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
   onSendMessage,
 }) => {
   const [state, setState] = useState<State>(State.Initializing)
-  const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([])
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const hasScrolledToInitialPosition = useRef(false)
@@ -41,31 +39,23 @@ const ChatModal: React.FunctionComponent<Props> = ({
   useEffect(() => {
     setTimeout(() => setState(() => State.Visible), 1)
 
-    // Pick random suggestions when modal opens or when conversation is ready for new input
-    setSelectedSuggestions(getRandomSuggestions(CHAT_SUGGESTIONS, 3))
-
     // Mark that initial position has been set after a short delay
     setTimeout(() => {
       hasScrolledToInitialPosition.current = true
     }, 10)
   }, [])
 
-  // Update suggestions when messages change (shuffle for variety)
-  useEffect(() => {
-    if (messages.length > 0 && status !== 'streaming') {
-      setSelectedSuggestions(getRandomSuggestions(CHAT_SUGGESTIONS, 3))
-    }
-  }, [messages, status])
-
   // Keep scroll at bottom during streaming to prevent jumps
   useEffect(() => {
     if (!messagesContainerRef.current) return
 
     const container = messagesContainerRef.current
-    const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 100
+    const isNearBottom =
+      container.scrollHeight - container.scrollTop - container.clientHeight <
+      250
 
     // If already near bottom and content is streaming, keep it scrolled to bottom
-    if (isNearBottom && status === 'streaming') {
+    if (isNearBottom) {
       container.scrollTop = container.scrollHeight
     }
   }, [messages, status])
@@ -75,6 +65,19 @@ const ChatModal: React.FunctionComponent<Props> = ({
     onReleaseBodyLock()
     setTimeout(onDone, 300)
   }
+
+  // Extract follow-ups from the last assistant message text
+  const lastMessage = messages[messages.length - 1]
+  const lastMessageFollowUps =
+    lastMessage?.role === 'assistant'
+      ? (() => {
+          const textContent = lastMessage.parts
+            ?.filter((part) => part.type === 'text')
+            .map((part) => part.text)
+            .join(' ')
+          return textContent ? parseFollowUps(textContent) : []
+        })()
+      : []
 
   return (
     <div
@@ -103,6 +106,8 @@ const ChatModal: React.FunctionComponent<Props> = ({
                 .map((part) => part.text)
                 .join(' ') || ''
 
+            if (!textContent) return null
+
             // Find cars mentioned in assistant messages
             const mentionedCars =
               message.role === 'assistant' &&
@@ -126,16 +131,20 @@ const ChatModal: React.FunctionComponent<Props> = ({
               />
             )
           })}
-          {messages[messages.length - 1]?.role === 'user' &&
-            status !== 'error' && <TypingIndicator />}
-          {messages.length > 0 &&
-            messages[messages.length - 1]?.role === 'assistant' &&
-            status !== 'streaming' && (
-              <FollowUpSuggestions
-                suggestions={selectedSuggestions}
-                onSendMessage={onSendMessage}
-              />
-            )}
+
+          {(messages[messages.length - 1]?.role === 'user' &&
+            status !== 'error') ||
+            (status === 'streaming' &&
+              !messages[messages.length - 1]?.parts?.find(
+                (part) => part.type === 'text',
+              ) && <TypingIndicator />)}
+
+          {status !== 'streaming' && lastMessageFollowUps.length > 0 && (
+            <FollowUpSuggestions
+              suggestions={lastMessageFollowUps}
+              onSendMessage={onSendMessage}
+            />
+          )}
           <span ref={messagesEndRef} />
         </div>
       </section>
