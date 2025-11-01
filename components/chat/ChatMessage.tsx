@@ -40,7 +40,17 @@ const ChatMessage: React.FunctionComponent<Props> = ({
       <div className="message-content">
         {message.parts?.map((part, index) =>
           part.type === 'text' ? (
-            <ReactMarkdown key={index} remarkPlugins={[remarkGfm]}>
+            <ReactMarkdown
+              key={index}
+              remarkPlugins={[remarkGfm]}
+              components={{
+                table: ({ children }) => (
+                  <div className="table-wrapper">
+                    <table>{children}</table>
+                  </div>
+                ),
+              }}
+            >
               {stripFollowUps(part.text)}
             </ReactMarkdown>
           ) : null,
@@ -146,10 +156,15 @@ const ChatMessage: React.FunctionComponent<Props> = ({
         .message-content :global(a:hover) {
           opacity: 0.8;
         }
+        .message-content :global(.table-wrapper) {
+          overflow-x: auto;
+          margin: 0.5em -14px;
+          padding: 0 14px;
+          -webkit-overflow-scrolling: touch;
+        }
         .message-content :global(table) {
           border-collapse: collapse;
           width: 100%;
-          margin: 0.5em 0;
           font-size: 13px;
         }
         .message-content :global(th),
