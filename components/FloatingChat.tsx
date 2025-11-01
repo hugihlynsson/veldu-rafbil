@@ -2,9 +2,9 @@
 
 import React, { useState, useRef } from 'react'
 import { trackEvent } from 'fathom-client'
-import { colors } from '../modules/globals'
 import { CHAT_SUGGESTIONS } from '../constants/chatSuggestions'
 import { getRandomSuggestions } from '../utils/chatHelpers'
+import clsx from 'clsx'
 
 interface Props {
   onOpenChat: () => void
@@ -63,14 +63,27 @@ const FloatingChat: React.FunctionComponent<Props> = ({
   }
 
   return (
-    <div className={`floating-chat-container ${hide ? 'hidden' : ''}`}>
+    <div
+      className={clsx(
+        'fixed bottom-4 left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col items-center gap-3 transition-all duration-300',
+        'min-[500px]:bottom-6',
+        hide && 'opacity-0 pointer-events-none',
+      )}
+    >
       {isFocused && !hasMessages && (
-        <div className="suggestions">
+        <div className="pointer-events-auto flex flex-col gap-2 animate-[fadeInUpRotate_0.3s_ease-out]">
           {selectedSuggestions.map((suggestion, index) => (
             <button
               key={index}
               type="button"
-              className="suggestion"
+              className={clsx(
+                'bg-white/70 backdrop-blur-xl border border-black/6 rounded-2xl p-[12px_16px] text-sm font-medium text-tint cursor-pointer transition-all duration-200 text-left whitespace-nowrap shadow-[0_2px_8px_rgba(0,0,0,0.04)] animate-[fadeInUpRotate_0.3s_ease-out_backwards]',
+                'hover:bg-white/90 hover:text-tint hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]',
+                'active:translate-y-0',
+                index === 0 && '[animation-delay:0.45s]',
+                index === 1 && '[animation-delay:0.35s]',
+                index === 2 && '[animation-delay:0.25s]',
+              )}
               onMouseDown={(e) => handleSuggestionClick(e, suggestion)}
             >
               {suggestion}
@@ -80,7 +93,11 @@ const FloatingChat: React.FunctionComponent<Props> = ({
       )}
       <form
         onSubmit={onSubmit}
-        className={`floating-chat-form ${isHovered ? 'hovered' : ''} ${isFocused ? 'focused' : ''}`}
+        className={clsx(
+          'pointer-events-auto flex items-center gap-2 p-[8px_8px_8px_20px] bg-[rgba(220,220,220,0.7)] backdrop-blur-xl rounded-full shadow-[0_4px_24px_rgba(0,0,0,0)] w-80 max-w-[90vw] transition-all duration-300 ease-in-out scale-[0.98] border border-black/2',
+          isHovered && 'scale-100',
+          isFocused && 'w-[400px] scale-100',
+        )}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -93,8 +110,13 @@ const FloatingChat: React.FunctionComponent<Props> = ({
           onBlur={() => setIsFocused(false)}
           placeholder="Spurðu Veldu Rafbíl"
           disabled={disabled}
+          className="flex-1 border-0 bg-transparent p-[8px_0] text-base font-normal text-tint outline-none placeholder:text-black/50 disabled:opacity-60"
         />
-        <button type="submit" disabled={disabled || !input.trim()}>
+        <button
+          type="submit"
+          disabled={disabled || !input.trim()}
+          className="appearance-none w-9 h-9 flex items-center justify-center bg-sky border-0 rounded-full text-lab cursor-pointer transition-all duration-200 shrink-0 hover:enabled:bg-sky-darker hover:enabled:scale-105 disabled:opacity-40 disabled:cursor-not-allowed"
+        >
           <svg
             width="20"
             height="20"
@@ -113,163 +135,6 @@ const FloatingChat: React.FunctionComponent<Props> = ({
           </svg>
         </button>
       </form>
-
-      <style jsx>{`
-        .floating-chat-container {
-          position: fixed;
-          bottom: 16px;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 1000;
-          pointer-events: none;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 12px;
-          transition: all 0.3s;
-        }
-        .floating-chat-container.hidden {
-          opacity: 0;
-          pointer-events: none;
-        }
-
-        .suggestions {
-          pointer-events: auto;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          animation: fadeInUp 0.3s ease-out;
-        }
-
-        .suggestion {
-          background: rgba(255, 255, 255, 0.7);
-          backdrop-filter: blur(12px);
-          border: 1px solid rgba(0, 0, 0, 0.06);
-          border-radius: 16px;
-          padding: 12px 16px;
-          font-size: 14px;
-          font-weight: 500;
-          color: ${colors.tint};
-          cursor: pointer;
-          transition: all 0.2s;
-          text-align: left;
-          white-space: nowrap;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-          animation: fadeInUp 0.3s ease-out backwards;
-        }
-
-        .suggestion:nth-child(1) {
-          animation-delay: 0.45s;
-        }
-
-        .suggestion:nth-child(2) {
-          animation-delay: 0.35s;
-        }
-
-        .suggestion:nth-child(3) {
-          animation-delay: 0.25s;
-        }
-
-        .suggestion:hover {
-          background: rgba(255, 255, 255, 0.9);
-          color: ${colors.tint};
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .suggestion:active {
-          transform: translateY(0);
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(10px) rotateX(40deg) scale(0.95);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) rotateX(0) scale(1);
-          }
-        }
-
-        .floating-chat-form {
-          pointer-events: auto;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 8px 8px 8px 20px;
-          background: rgba(220, 220, 220, 0.7);
-          backdrop-filter: blur(12px);
-          border-radius: 100px;
-          box-shadow: 0 4px 24px rgba(0, 0, 0, 0);
-          width: 320px;
-          max-width: 90vw;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          scale: 0.98;
-          border: 1px solid rgba(0, 0, 0, 0.02);
-        }
-
-        .floating-chat-form.hovered {
-          scale: 1;
-        }
-
-        .floating-chat-form.focused,
-        .floating-chat-form:has(input:focus) {
-          width: 400px;
-          scale: 1;
-        }
-
-        input {
-          flex: 1;
-          border: none;
-          background: transparent;
-          padding: 8px 0;
-          font-size: 16px;
-          font-weight: 400;
-          color: ${colors.tint};
-          outline: none;
-        }
-
-        input::placeholder {
-          color: rgba(0, 0, 0, 0.5);
-        }
-
-        input:disabled {
-          opacity: 0.6;
-        }
-
-        button[type='submit'] {
-          appearance: none;
-          width: 36px;
-          height: 36px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background-color: ${colors.sky};
-          border: 0;
-          border-radius: 50%;
-          color: ${colors.lab};
-          cursor: pointer;
-          transition: all 0.2s;
-          flex-shrink: 0;
-        }
-
-        button[type='submit']:hover:not(:disabled) {
-          background-color: ${colors.skyDarker};
-          transform: scale(1.05);
-        }
-
-        button[type='submit']:disabled {
-          opacity: 0.4;
-          cursor: not-allowed;
-        }
-
-        @media (min-width: 500px) {
-          .floating-chat-container {
-            bottom: 24px;
-          }
-        }
-      `}</style>
     </div>
   )
 }

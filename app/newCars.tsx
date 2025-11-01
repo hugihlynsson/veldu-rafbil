@@ -12,7 +12,6 @@ import ChatContainer from '../components/ChatContainer'
 import newCars from '../modules/newCars'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
-import { colors } from '../modules/globals'
 import { NewCar, Filters, Sorting } from '../types'
 import { carSorter, sortingToQuery } from '../modules/sorting'
 import stableSort from '../modules/stableSort'
@@ -152,6 +151,9 @@ const useFilters = (initial: Filters) => {
   return [filters, setFilters] as const
 }
 
+const filterClasses =
+  "shrink-0 relative text-xs font-semibold py-1 pr-2 pl-2.5 border border-smoke rounded-full cursor-pointer text-center flex justify-center items-center bg-lab transition-all duration-200 text-clay after:content-['+'] after:rotate-45 after:ml-1.5 after:text-base after:leading-[10px] after:-mt-px after:text-clay after:transition-colors hover:bg-[#f8f8f8] hover:after:text-[#222] active:text-black"
+
 interface Props {
   sorting: Sorting
   filters: Filters
@@ -182,26 +184,35 @@ export default function NewCars({
   const filteredCarCount = newCars.length - filteredCars.length
 
   return (
-    <div className="content">
-      <header>
+    <div className="max-w-[1024px] mx-auto">
+      <header className="flex flex-col items-stretch mx-auto max-w-[480px] p-4 xs:p-6 md:pl-10 md:max-w-none md:pb-10">
         <Title />
 
-        <p className="description">
+        <p className="leading-6 text-sm pt-6 m-0 mb-8 text-stone max-w-[33em] text-pretty md:text-base">
           Listi yfir alla {newCars.length} bílana sem eru seldir á Íslandi og
           eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
-          <a href="http://wltpfacts.eu/">WLTP</a> mælingum frá framleiðenda en
-          raundrægni er háð aðstæðum og aksturslagi.
-          <em>
+          <a
+            href="http://wltpfacts.eu/"
+            className="no-underline font-semibold text-black hover:underline"
+          >
+            WLTP
+          </a>{' '}
+          mælingum frá framleiðenda en raundrægni er háð aðstæðum og
+          aksturslagi.
+          <em className="inline-block text-xs text-[#777] mt-2">
             Kaupendur nýskráðra rafbíla sem kosta minna en 10 milljónir eiga
             kost á að{' '}
-            <a href="https://island.is/rafbilastyrkir">
+            <a
+              href="https://island.is/rafbilastyrkir"
+              className="no-underline font-semibold text-[#222] hover:underline"
+            >
               sækja um 900.000 kr. rafbílastyrk
-            </a>
-            {' '}út árið 2025.
+            </a>{' '}
+            út árið 2025.
           </em>
         </p>
 
-        <div className="sorting-title">Raða eftir:</div>
+        <div className="mb-2 text-sm font-semibold">Raða eftir:</div>
 
         <Toggles<Sorting>
           currentValue={sorting}
@@ -215,72 +226,107 @@ export default function NewCars({
           onClick={setSorting}
         />
 
-        <div className="filters-box">
+        <div className="mt-5">
           {hasFilter && (
-            <div className="filters-title">
+            <div className="mb-2 text-sm font-semibold">
               {filteredCars.length}{' '}
               {filteredCars.length.toString().match(/.*1$/m)
                 ? 'bíll passar við:'
                 : 'bílar passa við:'}
             </div>
           )}
-          <div className="filters">
+          <div className="flex flex-wrap gap-2 self-start max-w-full -ml-[2px]">
             {filters.name && (
-              <button className="filter" onClick={handleRemoveFilter('name')}>
-                Nafn: <span>{filters.name.join(', ')}</span>
+              <button
+                className={filterClasses}
+                onClick={handleRemoveFilter('name')}
+              >
+                Nafn:{' '}
+                <span className="text-tint transition-colors ml-[3px]">
+                  {filters.name.join(', ')}
+                </span>
               </button>
             )}
 
             {filters.price && (
-              <button className="filter" onClick={handleRemoveFilter('price')}>
-                Verð: <span>↓{addDecimalSeprators(filters.price)} kr.</span>
+              <button
+                className={filterClasses}
+                onClick={handleRemoveFilter('price')}
+              >
+                Verð:{' '}
+                <span className="text-tint transition-colors ml-[3px]">
+                  ↓{addDecimalSeprators(filters.price)} kr.
+                </span>
               </button>
             )}
 
             {filters.range && (
-              <button className="filter" onClick={handleRemoveFilter('range')}>
-                Drægni: <span>↑{filters.range} km.</span>
+              <button
+                className={filterClasses}
+                onClick={handleRemoveFilter('range')}
+              >
+                Drægni:{' '}
+                <span className="text-tint transition-colors ml-[3px]">
+                  ↑{filters.range} km.
+                </span>
               </button>
             )}
 
             {filters.drive && (
-              <button className="filter" onClick={handleRemoveFilter('drive')}>
-                Drif: <span>{filters.drive.join(', ')}</span>
+              <button
+                className={filterClasses}
+                onClick={handleRemoveFilter('drive')}
+              >
+                Drif:{' '}
+                <span className="text-tint transition-colors ml-[3px]">
+                  {filters.drive.join(', ')}
+                </span>
               </button>
             )}
 
             {filters.acceleration && (
               <button
-                className="filter"
+                className={filterClasses}
                 onClick={handleRemoveFilter('acceleration')}
               >
-                Hröðun <span>↓{filters.acceleration.toFixed(1)}s</span>
+                Hröðun{' '}
+                <span className="text-tint transition-colors ml-[3px]">
+                  ↓{filters.acceleration.toFixed(1)}s
+                </span>
               </button>
             )}
 
             {filters.value && (
-              <button className="filter" onClick={handleRemoveFilter('value')}>
+              <button
+                className={filterClasses}
+                onClick={handleRemoveFilter('value')}
+              >
                 Verði á km:{' '}
-                <span>↓{addDecimalSeprators(filters.value)} kr.</span>
+                <span className="text-tint transition-colors ml-[3px]">
+                  ↓{addDecimalSeprators(filters.value)} kr.
+                </span>
               </button>
             )}
 
             {filters.fastcharge && (
               <button
-                className="filter"
+                className={filterClasses}
                 onClick={handleRemoveFilter('fastcharge')}
               >
-                Hraðhleðsla: <span>↑{filters.fastcharge} km/min</span>
+                Hraðhleðsla:{' '}
+                <span className="text-tint transition-colors ml-[3px]">
+                  ↑{filters.fastcharge} km/min
+                </span>
               </button>
             )}
 
             {filters.availability && (
               <button
-                className="filter"
+                className={filterClasses}
                 onClick={handleRemoveFilter('availability')}
               >
                 Framboð:{' '}
-                <span>
+                <span className="text-tint transition-colors ml-[3px]">
                   {filters.availability === 'available'
                     ? 'Fáanlegir'
                     : 'Væntanlegir'}
@@ -288,7 +334,7 @@ export default function NewCars({
               </button>
             )}
             <button
-              className="add-filter"
+              className="flex justify-center items-center shrink-0 gap-1.5 py-2 pr-4 pl-3 border-0 rounded-full text-[13px] font-semibold cursor-pointer text-center bg-black/6 transition-all duration-200 text-tint hover:bg-black/9 active:translate-y-0"
               onClick={() => setEditingFilters(() => true)}
             >
               <svg
@@ -296,6 +342,7 @@ export default function NewCars({
                 width="15"
                 height="15"
                 fill="none"
+                className="opacity-70"
               >
                 <path
                   fill="#000"
@@ -318,14 +365,14 @@ export default function NewCars({
       ))}
 
       {hasFilter && filteredCarCount > 0 && (
-        <div className="filters-reset-box">
+        <div className="p-4 flex items-center mx-auto max-w-[480px] gap-2 text-xs font-medium mb-10 xs:p-6 md:pl-10 md:max-w-none">
           {filteredCarCount}
           {filteredCarCount.toString().match(/.*1$/m)
             ? ' bíll passaði '
             : ' bílar pössuðu '}
           ekki við leitina{' '}
           <button
-            className="filters-reset-button"
+            className="border-0 shrink-0 m-0 mr-2 text-xs font-semibold py-[5px] px-3 rounded-full cursor-pointer text-center flex justify-center items-center bg-cloud transition-all duration-200 text-tint hover:bg-[#f8f8f8]"
             onClick={(_event) => {
               setFilters(() => ({}))
               window.scrollTo({ top: 0 })
@@ -348,200 +395,6 @@ export default function NewCars({
       )}
 
       <ChatContainer hide={editingFilters} />
-
-      <style jsx>
-        {`
-          .content {
-            max-width: 1024px;
-            margin: 0 auto;
-          }
-          header {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            margin: 0 auto;
-            max-width: 480px;
-            padding: 16px;
-          }
-
-          .description {
-            line-height: 1.5;
-            font-size: 14px;
-            padding-top: 1.5em;
-            margin: 0 0 2em 0;
-            color: ${colors.stone};
-            max-width: 33em;
-            text-wrap: pretty;
-          }
-          .description a {
-            text-decoration: none;
-            font-weight: 600;
-            color: black;
-          }
-          .description a:hover {
-            text-decoration: underline;
-          }
-          .description em {
-            display: inline-block;
-            font-size: 12px;
-            color: #777;
-            margin-top: 0.5em;
-          }
-          .description em a {
-            color: #222;
-          }
-
-          .sorting-title,
-          .filters-title {
-            margin-bottom: 8px;
-            font-size: 14px;
-            font-weight: 600;
-          }
-
-          .filters-box {
-            margin-top: 20px;
-          }
-          .filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            align-self: flex-start;
-            max-width: 100%;
-            margin-left: -2px;
-          }
-          .filter {
-            flex-shrink: 0;
-            position: relative;
-            font-size: 12px;
-            font-weight: 600;
-            padding: 4px 8px 5px 10px;
-            border: 1px solid ${colors.smoke};
-            border-radius: 100px;
-            cursor: pointer;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: ${colors.lab};
-            transition: all 0.2s;
-            color: ${colors.clay};
-          }
-          .filter span {
-            color: ${colors.tint};
-            transition: color 0.2s;
-            margin-left: 3px;
-          }
-          .filter:hover span {
-            color: ${colors.stone};
-          }
-          .filter::after {
-            content: '+';
-            transform: rotate(45deg);
-            margin-left: 6px;
-            font-size: 16px;
-            line-height: 10px;
-            margin-top: -1px;
-            color: ${colors.clay};
-            transition: color 0.2s;
-          }
-          .filter:last-child {
-            border-right-width: 0;
-          }
-          .filter:active {
-            color: #000;
-          }
-          .filter:hover {
-            background-color: #f8f8f8;
-          }
-          .filter:hover::after {
-            color: #222;
-          }
-
-          .add-filter {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-            gap: 6px;
-            padding: 8px 16px 8px 12px;
-            border: 0;
-            border-radius: 100px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.06);
-            transition: all 0.2s;
-            color: ${colors.tint};
-          }
-          .add-filter:hover {
-            background-color: rgba(0, 0, 0, 0.09);
-          }
-          .add-filter:active {
-            transform: translateY(0);
-          }
-          .add-filter svg {
-            opacity: 0.7;
-          }
-
-          .filters-reset-box {
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            margin: 0 auto;
-            max-width: 480px;
-            grid-gap: 8px;
-            font-size: 12px;
-            font-weight: 500;
-            margin-bottom: 40px;
-          }
-
-          .filters-reset-button {
-            border: 0;
-            flex-shrink: 0;
-            margin: 0 8px 0 0;
-            font-size: 12px;
-            font-weight: 600;
-            padding: 5px 12px 5px 12px;
-            border-radius: 100px;
-            cursor: pointer;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #eee;
-            transition: all 0.2s;
-            color: ${colors.tint};
-          }
-          .filters-reset-button:hover {
-            background-color: #f8f8f8;
-          }
-
-          @media screen and (min-width: 375px) {
-            header {
-              padding: 24px;
-            }
-            .filters-reset-box {
-              padding: 24px;
-            }
-          }
-
-          @media screen and (min-width: 768px) {
-            header {
-              padding-left: 40px;
-              max-width: none;
-              padding-bottom: 40px;
-            }
-            .description {
-              font-size: 16px;
-            }
-            .filters-reset-box {
-              padding-left: 40px;
-              max-width: none;
-            }
-          }
-        `}
-      </style>
     </div>
   )
 }

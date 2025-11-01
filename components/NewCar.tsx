@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { NewCar as NewCarType, Drive } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
-import { colors } from '../modules/globals'
 import LinkPill from './LinkPill'
 import getPriceWithGrant from '../modules/getPriceWithGrant'
 
@@ -36,8 +35,11 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
     .replace(/\s+/g, '-')
 
   return (
-    <article id={carId}>
-      <div className="imageBox">
+    <article
+      id={carId}
+      className="mb-8 md:flex md:m-0 md:mx-8 md:mb-10 md:ml-10 md:items-center"
+    >
+      <div className="md:block md:relative md:w-[40%] md:grow md:self-center">
         <Image
           priority={priority}
           alt=""
@@ -45,21 +47,23 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
           src={`/images/${car.heroImageName}.jpg`}
           width={1920}
           height={1280}
-          className="image"
+          className="w-full h-auto md:rounded-sm"
         />
       </div>
 
-      <div className="content">
+      <div className="py-[10px] px-4 mx-auto max-w-[480px] xs:py-[18px] xs:px-6 md:m-0 md:ml-8 md:p-0 md:w-[330px] md:max-w-[380px] md:shrink-0 md:grow">
         {car.expectedDelivery && (
-          <div className="expectedDelivery">
+          <div className="mb-0.5 text-base font-medium text-stone">
             Væntanlegur {car.expectedDelivery.toLowerCase()}
           </div>
         )}
 
-        <h1>
-          <span className="make">{car.make}</span>{' '}
-          <span className="model">{car.model}</span>
-          <span className="subModel">{car.subModel}</span>
+        <h1 className="m-0 font-semibold text-[32px]">
+          <span>{car.make}</span>{' '}
+          <span className="font-normal">{car.model}</span>
+          <span className="block font-medium text-base text-stone -mt-px mb-2">
+            {car.subModel}
+          </span>
         </h1>
 
         <LinkPill
@@ -88,42 +92,51 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
           {!car.expectedDelivery && ' ↗'}
         </LinkPill>
 
-        <div className="info">
-          <div className="info-item">
-            <div className="info-item-label">0-100 km/klst</div>
-            <div className="info-item-value">
+        <div className="flex mb-4 mt-6 max-w-[320px] justify-between">
+          <div className="mr-2 xs:mr-4 basis-1/3">
+            <div className="uppercase text-[10px] font-semibold tracking-wider mb-[3px] text-stone">
+              0-100 km/klst
+            </div>
+            <div className="text-2xl font-normal">
               {car.acceleration.toFixed(1)}s
             </div>
             <div
-              className="info-item-extra"
-              title={`Afl (${Math.round(car.power * 1.34102) + ' hö'})`}
+              className="mt-0.5 text-xs text-[#666] font-medium"
+              title={`Afl (${Math.round(car.power * 1.34102)} hö)`}
             >
               {car.power} kW
             </div>
           </div>
 
-          <div className="info-item" style={{ flexShrink: 0 }}>
-            <div className="info-item-label">Rafhlaða</div>
-            <div className="info-item-value">{car.capacity} kWh</div>
+          <div className="mr-2 xs:mr-4 basis-1/3 shrink-0">
+            <div className="uppercase text-[10px] font-semibold tracking-wider mb-[3px] text-stone">
+              Rafhlaða
+            </div>
+            <div className="text-2xl font-normal">{car.capacity} kWh</div>
             <div
-              className="info-item-extra"
+              className="mt-0.5 text-xs text-[#666] font-medium"
               title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10T080} min)`}
             >
               {getKmPerMinutesCharged(car.timeToCharge10T080, car.range)} km/min
             </div>
           </div>
 
-          <div className="info-item" title="Samkvæmt WLTP prófunum">
-            <div className="info-item-label">Drægni</div>
-            <div className="info-item-value">{car.range} km</div>
-            <div className="info-item-extra" title={getDriveLabel(car.drive)}>
+          <div className="mr-0 basis-1/3" title="Samkvæmt WLTP prófunum">
+            <div className="uppercase text-[10px] font-semibold tracking-wider mb-[3px] text-stone">
+              Drægni
+            </div>
+            <div className="text-2xl font-normal">{car.range} km</div>
+            <div
+              className="mt-0.5 text-xs text-[#666] font-medium"
+              title={getDriveLabel(car.drive)}
+            >
               {car.drive}
             </div>
           </div>
         </div>
         {car.evDatabaseURL && (
           <a
-            className="more-info"
+            className="inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-stone"
             target="_blank"
             href={car.evDatabaseURL}
             rel="noopener"
@@ -133,134 +146,6 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
           </a>
         )}
       </div>
-
-      <style jsx>
-        {`
-          article {
-            margin-bottom: 32px;
-          }
-
-          .content {
-            padding: 10px 16px 16px;
-            margin: 0 auto;
-            max-width: 480px;
-          }
-
-          h1 {
-            margin: 0;
-            font-weight: 600;
-            font-size: 32px;
-          }
-          .model {
-            font-weight: 400;
-          }
-          .subModel {
-            display: block;
-            font-weight: 500;
-            font-size: 16px;
-            color: ${colors.stone};
-            margin-top: -1px;
-            margin-bottom: 8px;
-          }
-
-          .expectedDelivery {
-            margin-bottom: 2px;
-            font-size: 16px;
-            font-weight: 500;
-            color: ${colors.stone};
-          }
-
-          .info {
-            display: flex;
-            margin-bottom: 16px;
-            margin-top: 24px;
-            max-width: 320px;
-            justify-content: space-between;
-          }
-          .info-item {
-            margin-right: 8px;
-            flex-basis: 33.33%;
-          }
-          .info-item:last-child {
-            margin-right: 0;
-          }
-          .info-item-label {
-            text-transform: uppercase;
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            margin-bottom: 3px;
-            color: ${colors.stone};
-          }
-          .info-item-value {
-            font-size: 24px;
-            font-weight: 400;
-          }
-          .info-item-extra {
-            margin-top: 2px;
-            font-size: 12px;
-            color: #666;
-            font-weight: 500;
-          }
-
-          .more-info {
-            display: inline-block;
-            font-size: 14px;
-            color: ${colors.stone};
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.1s;
-          }
-          .more-info:hover {
-            text-decoration: underline;
-            color: ${colors.stone};
-          }
-
-          .imageBox :global(.image) {
-            width: 100%;
-            height: auto;
-          }
-
-          @media screen and (min-width: 375px) {
-            .content {
-              padding: 18px 24px 24px;
-            }
-
-            .info-item {
-              margin-right: 16px;
-            }
-          }
-
-          @media screen and (min-width: 768px) {
-            article {
-              display: flex;
-              margin: 0 32px 40px 40px;
-              align-items: center;
-            }
-
-            .imageBox {
-              display: block;
-              position: relative;
-              width: 40%;
-              flex-grow: 1;
-              align-self: center;
-            }
-
-            .imageBox :global(.image) {
-              border-radius: 2px;
-            }
-
-            .content {
-              margin: 0 0 0 32px;
-              padding: 0;
-              width: 330px;
-              max-width: 380px;
-              flex-shrink: 0;
-              flex-grow: 1;
-            }
-          }
-        `}
-      </style>
     </article>
   )
 }
