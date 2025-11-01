@@ -51,7 +51,7 @@ const MentionedCars: React.FunctionComponent<Props> = ({ lastMessage, onClose })
           gap: 12px;
           width: 100%;
           grid-auto-flow: column;
-          grid-template-rows: repeat(3, auto);
+          grid-template-rows: repeat(2, auto);
           grid-auto-columns: 90%;
           overflow-x: auto;
           scroll-snap-type: x mandatory;

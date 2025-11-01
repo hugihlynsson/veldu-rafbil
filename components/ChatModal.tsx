@@ -62,7 +62,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
     const container = messagesContainerRef.current
     const isNearBottom =
       container.scrollHeight - container.scrollTop - container.clientHeight <
-      250
+      20
 
     // If already near bottom and content is streaming, keep it scrolled to bottom
     if (isNearBottom) {

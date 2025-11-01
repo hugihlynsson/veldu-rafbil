@@ -73,7 +73,7 @@ const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
         .mini-car {
           display: flex;
           flex-direction: row;
-          border-radius: 12px;
+          border-radius: 14px;
           overflow: hidden;
           text-decoration: none;
           color: inherit;
@@ -109,8 +109,8 @@ const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
           justify-content: center;
           border: 1px solid ${colors.cloud};
           border-left: none;
-          border-top-right-radius: 12px;
-          border-bottom-right-radius: 12px;
+          border-top-right-radius: 14px;
+          border-bottom-right-radius: 14px;
         }
 
         .name {

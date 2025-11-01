@@ -3,13 +3,12 @@
 import { useState, useEffect } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
-import { useChat } from '@ai-sdk/react'
-import Car, { getPriceWithGrant } from '../components/NewCar'
+import Car from '../components/NewCar'
+import getPriceWithGrant from '../modules/getPriceWithGrant'
 import Title from '../components/Title'
 import Toggles from '../components/Toggles'
 import FilterModal from '../components/FilterModal'
-import ChatModal from '../components/ChatModal'
-import FloatingChat from '../components/FloatingChat'
+import ChatContainer from '../components/ChatContainer'
 import newCars from '../modules/newCars'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
@@ -158,8 +157,6 @@ interface Props {
   filters: Filters
 }
 
-const CHAT_STORAGE_KEY = 'veldu-rafbil-chat-messages'
-
 export default function NewCars({
   sorting: initialSorting,
   filters: initialFilters,
@@ -168,40 +165,8 @@ export default function NewCars({
   const [filters, setFilters] = useFilters(initialFilters)
 
   let [editingFilters, setEditingFilters] = useState<boolean>(false)
-  let [showChatMessages, setShowChatMessages] = useState<boolean>(false)
-  let [releaseBodyLock, setReleaseBodyLock] = useState<boolean>(false)
 
-  useEffect(() => {
-    if (!showChatMessages) {
-      setReleaseBodyLock(false)
-    }
-  }, [showChatMessages])
-
-  // Load initial messages from localStorage
-  const [initialMessages] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem(CHAT_STORAGE_KEY)
-      return stored ? JSON.parse(stored) : []
-    }
-    return []
-  })
-
-  // Initialize useChat at parent level so it persists
-  const chatState = useChat({ messages: initialMessages })
-
-  // Save messages to localStorage whenever they change
-  useEffect(() => {
-    if (chatState.messages.length > 0) {
-      localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(chatState.messages))
-    }
-  }, [chatState.messages])
-
-  const handleClearChat = () => {
-    chatState.setMessages([])
-    localStorage.removeItem(CHAT_STORAGE_KEY)
-  }
-
-  useBodyScrollLock((editingFilters || showChatMessages) && !releaseBodyLock)
+  useBodyScrollLock(editingFilters)
 
   const handleRemoveFilter = (name: keyof Filters) => () =>
     setFilters((filters) => {
@@ -382,27 +347,7 @@ export default function NewCars({
         />
       )}
 
-      {showChatMessages && (
-        <ChatModal
-          onDone={() => setShowChatMessages(() => false)}
-          messages={chatState.messages}
-          status={chatState.status}
-          onClearChat={handleClearChat}
-          onReleaseBodyLock={() => setReleaseBodyLock(() => true)}
-          onSendMessage={(text) => {
-            chatState.sendMessage({
-              role: 'user',
-              parts: [{ type: 'text', text }],
-            })
-          }}
-        />
-      )}
-
-      <FloatingChat
-        chatState={chatState}
-        onOpenChat={() => setShowChatMessages(true)}
-        hide={editingFilters}
-      />
+      <ChatContainer hide={editingFilters} />
 
       <style jsx>
         {`
