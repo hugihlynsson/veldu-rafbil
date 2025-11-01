@@ -109,7 +109,6 @@ const FloatingChat: React.FunctionComponent<Props> = ({
           onFocus={handleFocus}
           onBlur={() => setIsFocused(false)}
           placeholder="Spurðu Veldu Rafbíl"
-          disabled={disabled}
           className="flex-1 border-0 bg-transparent p-[8px_0] text-base font-normal text-tint outline-none placeholder:text-black/50 disabled:opacity-60"
         />
         <button

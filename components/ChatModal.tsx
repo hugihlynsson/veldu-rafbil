@@ -112,7 +112,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
           }}
         />
 
-        <div className="flex-1 overflow-y-auto pb-20 flex flex-col" style={{ paddingTop: '20px' }} ref={messagesContainerRef}>
+        <div className="flex-1 overflow-y-auto pb-21 flex flex-col" style={{ paddingTop: '20px' }} ref={messagesContainerRef}>
           {messages.filter(emptyMessageFilter).map((message) => (
             <ChatMessage
               key={message.id}
