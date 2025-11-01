@@ -1,4 +1,4 @@
-import { FunctionComponent, memo } from 'react'
+import { FunctionComponent } from 'react'
 import { trackEvent } from 'fathom-client'
 import Image from 'next/image'
 
@@ -150,4 +150,4 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
   )
 }
 
-export default memo(NewCar)
+export default NewCar

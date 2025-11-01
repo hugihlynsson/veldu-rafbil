@@ -10,11 +10,7 @@ interface Props {
   onDone: () => void
 }
 
-enum State {
-  Initializing,
-  Visible,
-  Leaving,
-}
+type State = 'initializing' | 'visible' | 'leaving'
 
 const FiltersModal: React.FunctionComponent<Props> = ({
   initialFilters,
@@ -22,25 +18,25 @@ const FiltersModal: React.FunctionComponent<Props> = ({
   getCountPreview,
   onDone,
 }) => {
-  const [state, setState] = useState<State>(State.Initializing)
+  const [state, setState] = useState<State>('initializing')
   const [filters, setFilters] = useState<Filters>(initialFilters)
   const [nameInput, setNameInput] = useState<string>(
     filters.name?.join(', ') ?? '',
   )
 
   useEffect(() => {
-    setTimeout(() => setState(() => State.Visible), 1)
+    setTimeout(() => setState(() => 'visible'), 1)
     return
   }, [])
 
   const handleClose = () => {
-    setState(() => State.Leaving)
+    setState(() => 'leaving')
     setTimeout(onDone, 300)
   }
 
   const handleDone = () => {
     onSubmit(filters)
-    setState(() => State.Leaving)
+    setState(() => 'leaving')
     handleClose()
   }
 
@@ -115,22 +111,22 @@ const FiltersModal: React.FunctionComponent<Props> = ({
   return (
     <div
       className={clsx(
-        "fixed top-0 right-0 bottom-0 left-0 flex items-end justify-center before:content-[''] before:block before:absolute before:inset-0 before:bg-black/0 before:transition-[background-color] before:duration-200 before:delay-100",
-        'min-[800px]:min-h-[600px]:items-center',
-        state === State.Visible && 'before:delay-0 before:bg-black/30',
+        "fixed inset-0 flex items-end justify-center before:content-[''] before:block before:absolute before:inset-0 before:bg-black/0 before:transition-[background-color] before:duration-200 before:delay-100",
+        '[@media(min-width:800px)_and_(min-height:600px)]:items-center',
+        state === 'visible' && 'before:delay-0 before:bg-black/30',
       )}
       onClick={handleClose}
     >
       <section
         className={clsx(
           'z-1 flex flex-col rounded-t-[20px] bg-white w-screen max-w-[400px] max-h-[70vh] overflow-hidden shadow-[0px_0px_40px_0px_rgba(0,0,0,0.1)] translate-y-10 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.32,0,0.67,0)]',
-          'min-[800px]:min-h-[600px]:rounded-[20px] min-[800px]:min-h-[600px]:max-h-[500px]',
-          state === State.Visible &&
-            'opacity-100 ease-[cubic-bezier(0.33,1,0.68,1)] translate-y-0',
+          '[@media(min-width:800px)_and_(min-height:600px)]:rounded-[20px] [@media(min-width:800px)_and_(min-height:600px)]:max-h-[500px]',
+          state === 'visible' &&
+            'opacity-100 ease-[cubic-bezier(0.33,1,0.68,1)] translate-y-0!',
         )}
         onClick={(event) => event.stopPropagation()}
       >
-        <header className="relative bg-white text-lg text-center p-[14px_16px] border-b border-cloud font-semibold">
+        <header className="relative bg-white text-lg text-center px-4 py-3 border-b border-cloud font-semibold">
           <button
             onClick={handleClose}
             className="absolute left-[11px] top-[11px] flex items-center justify-center h-8 w-8 border-0 p-0 rounded-2xl appearance-none bg-transparent text-[30px] text-stone cursor-pointer transition-all duration-200 hover:bg-cloud [&_path]:transition-all [&_path]:duration-200 hover:[&_path]:fill-tint"

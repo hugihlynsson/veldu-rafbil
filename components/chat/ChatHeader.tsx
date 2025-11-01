@@ -1,6 +1,6 @@
 'use client'
 
-import React, { memo } from 'react'
+import React from 'react'
 
 interface Props {
   hasMessages: boolean
@@ -61,8 +61,4 @@ const ChatHeader: React.FunctionComponent<Props> = ({
   )
 }
 
-const MemoizedChatHeader = memo(ChatHeader)
-
-MemoizedChatHeader.displayName = 'ChatHeader'
-
-export default MemoizedChatHeader
+export default ChatHeader

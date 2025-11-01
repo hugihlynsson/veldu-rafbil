@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState, useRef, useCallback } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { UIDataTypes, UITools, ChatStatus, UIMessage } from 'ai'
 import { parseFollowUps } from '../utils/chatHelpers'
 import ChatHeader from './chat/ChatHeader'
@@ -70,16 +70,11 @@ const ChatModal: React.FunctionComponent<Props> = ({
     }
   }, [messages, status])
 
-  const handleClose = useCallback(() => {
+  const handleClose = () => {
     setState(() => State.Leaving)
     onReleaseBodyLock()
     setTimeout(onDone, 300)
-  }, [onDone, onReleaseBodyLock])
-
-  const handleClearChat = useCallback(() => {
-    handleClose()
-    setTimeout(onClearChat, 300)
-  }, [handleClose, onClearChat])
+  }
 
   // Extract data from the last assistant message
   const lastMessage = messages[messages.length - 1]
@@ -111,7 +106,10 @@ const ChatModal: React.FunctionComponent<Props> = ({
         <ChatHeader
           hasMessages={messages.length > 0}
           onClose={handleClose}
-          onClearChat={handleClearChat}
+          onClearChat={() => {
+            handleClose()
+            setTimeout(onClearChat, 300)
+          }}
         />
 
         <div className="flex-1 overflow-y-auto p-5 flex flex-col pb-20" ref={messagesContainerRef}>
