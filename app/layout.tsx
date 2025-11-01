@@ -1,3 +1,4 @@
+import './globals.css'
 import Fathom from '../components/Fathom'
 import StyledJsxRegistry from './registry'
 

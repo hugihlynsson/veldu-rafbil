@@ -1,8 +1,7 @@
 'use client'
 
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import { Streamdown } from 'streamdown'
 import { colors } from '../../modules/globals'
 import { UIDataTypes, UITools, UIMessage } from 'ai'
 import { useEffect } from 'react'
@@ -34,19 +33,18 @@ const ChatMessage: React.FunctionComponent<Props> = ({
       <div className="message-content">
         {message.parts?.map((part, index) =>
           part.type === 'text' ? (
-            <ReactMarkdown
+            <Streamdown
               key={index}
-              remarkPlugins={[remarkGfm]}
               components={{
-                table: ({ children }) => (
+                table: ({ children }: any) => (
                   <div className="table-wrapper">
                     <table>{children}</table>
                   </div>
                 ),
-              }}
+              } as any}
             >
               {stripFollowUps(part.text)}
-            </ReactMarkdown>
+            </Streamdown>
           ) : null,
         )}
       </div>

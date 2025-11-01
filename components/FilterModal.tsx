@@ -114,7 +114,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
 
   return (
     <div
-      className={`container ${state === State.Visible ? 'visible' : ''}`}
+      className={`filter-container ${state === State.Visible ? 'visible' : ''}`}
       onClick={handleClose}
     >
       <section
@@ -252,7 +252,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
       </section>
 
       <style jsx>{`
-        .container {
+        .filter-container {
           position: fixed;
           top: 0;
           right: 0;
@@ -262,7 +262,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
           align-items: flex-end;
           justify-content: center;
         }
-        .container:before {
+        .filter-container:before {
           content: '';
           display: block;
           position: absolute;
@@ -274,7 +274,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
           transition: background-color 0.2s;
           transition-delay: 0.1s;
         }
-        .container.visible:before {
+        .filter-container.visible:before {
           transition-delay: 0s;
           background-color: rgba(0, 0, 0, 0.3);
         }
@@ -311,7 +311,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
           background-color: #fff;
           font-size: 18px;
           text-align: center;
-          padding: 16px;
+          padding: 12px 16px;
           border-bottom: 1px solid ${colors.cloud};
           font-weight: 600;
         }
@@ -450,7 +450,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
         }
 
         @media (min-height: 600px) and (min-width: 800px) {
-          .container {
+          .filter-container {
             align-items: center;
           }
           section {

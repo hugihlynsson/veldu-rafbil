@@ -58,7 +58,7 @@ const ChatHeader: React.FunctionComponent<Props> = ({
           position: relative;
           font-size: 18px;
           text-align: center;
-          padding: 16px;
+          padding: 12px 16px;
           box-shadow: 0 1px 0px 0 rgba(0, 0, 0, 0.05);
           font-weight: 600;
         }

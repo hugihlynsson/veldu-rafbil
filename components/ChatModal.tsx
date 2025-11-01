@@ -73,7 +73,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
   const handleClose = () => {
     setState(() => State.Leaving)
     onReleaseBodyLock()
-    setTimeout(onDone, 300)
+    setTimeout(onDone, 500)
   }
 
   // Extract data from the last assistant message
@@ -96,11 +96,11 @@ const ChatModal: React.FunctionComponent<Props> = ({
 
   return (
     <div
-      className={`container ${state === State.Visible ? 'visible' : ''}`}
+      className={`chat-container ${state === State.Visible ? 'chat-visible' : ''}`}
       onClick={handleClose}
     >
       <section
-        className={state === State.Visible ? 'visible' : ''}
+        className={state === State.Visible ? 'chat-visible' : ''}
         onClick={(event) => event.stopPropagation()}
       >
         <ChatHeader
@@ -140,7 +140,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
       </section>
 
       <style jsx>{`
-        .container {
+        .chat-container {
           position: fixed;
           top: 0;
           right: 0;
@@ -151,7 +151,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
           justify-content: center;
           z-index: 1000;
         }
-        .container:before {
+        .chat-container:before {
           content: '';
           display: block;
           position: absolute;
@@ -163,7 +163,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
           transition: all 0.3s;
           transition-delay: 0.1s;
         }
-        .container.visible:before {
+        .chat-container.chat-visible:before {
           transition-delay: 0s;
           background-color: rgba(0, 0, 0, 0.2);
         }
@@ -182,7 +182,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
           opacity: 0;
           transition: all 0.3s cubic-bezier(0.32, 0, 0.67, 0);
         }
-        section.visible {
+        section.chat-visible {
           opacity: 1;
           transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
           transform: scale(1);
