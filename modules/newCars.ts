@@ -1310,7 +1310,7 @@ const newCars: Array<NewCar> = [
     capacity: 44,
     range: 305,
     evDatabaseURL:
-      'https://ev-database.org/car/2238/Opel-Frontera-44-kWh',
+      'https://ev-database.org/car/2238/Opel-Frontera-Electric-44-kWh',
     drive: 'FWD',
     power: 83,
     timeToCharge10T080: 32,
