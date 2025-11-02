@@ -88,6 +88,7 @@ export async function POST(req: Request) {
         tokenUsage: usage,
         toolCalls: toolCalls,
         model: modelName,
+        environment: process.env.NODE_ENV || 'development',
       }
 
       console.log(data)
