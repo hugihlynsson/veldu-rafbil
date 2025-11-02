@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { trackEvent } from 'fathom-client'
 import { CHAT_SUGGESTIONS } from '../constants/chatSuggestions'
 import { getRandomSuggestions } from '../utils/chatHelpers'
@@ -14,7 +14,7 @@ interface Props {
   sendMessage: (message: string) => void
 }
 
-const FloatingChat: React.FunctionComponent<Props> = ({
+const ChatInput: React.FunctionComponent<Props> = ({
   onOpenChat,
   hide = false,
   disabled = false,
@@ -23,9 +23,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
 }) => {
   const [input, setInput] = useState<string>('')
   const [isFocused, setIsFocused] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([])
-  const inputRef = useRef<HTMLInputElement>(null)
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -67,7 +65,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
       className={clsx(
         'fixed bottom-4 left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col items-center gap-3 transition-all duration-300',
         'min-[500px]:bottom-6',
-        hide && 'opacity-0 pointer-events-none',
+        hide && 'opacity-0',
       )}
     >
       {isFocused && !hasMessages && (
@@ -94,15 +92,11 @@ const FloatingChat: React.FunctionComponent<Props> = ({
       <form
         onSubmit={onSubmit}
         className={clsx(
-          'pointer-events-auto flex items-center gap-2 p-[8px_8px_8px_20px] bg-[rgba(220,220,220,0.7)] backdrop-blur-xl rounded-full shadow-[0_4px_24px_rgba(0,0,0,0)] w-80 max-w-[90vw] transition-all duration-300 ease-in-out scale-[0.98] border border-black/2',
-          isHovered && 'scale-100',
+          'pointer-events-auto flex items-center gap-2 p-[8px_8px_8px_20px] bg-[rgba(220,220,220,0.7)] backdrop-blur-xl rounded-full shadow-[0_4px_24px_rgba(0,0,0,0)] w-80 max-w-[90vw] transition-all duration-300 ease-in-out scale-[0.98] border border-black/2 hover:scale-100',
           isFocused && 'w-[400px] scale-100',
         )}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
       >
         <input
-          ref={inputRef}
           type="text"
           value={input}
           onChange={handleInputChange}
@@ -139,4 +133,4 @@ const FloatingChat: React.FunctionComponent<Props> = ({
   )
 }
 
-export default FloatingChat
+export default ChatInput

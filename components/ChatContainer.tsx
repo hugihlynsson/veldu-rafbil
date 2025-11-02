@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useChat } from '@ai-sdk/react'
 import ChatModal from './ChatModal'
-import FloatingChat from './FloatingChat'
+import FloatingChat from './ChatInput'
 
 const CHAT_STORAGE_KEY = 'veldu-rafbil-chat-messages'
 
