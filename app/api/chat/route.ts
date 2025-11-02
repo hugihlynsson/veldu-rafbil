@@ -1,5 +1,5 @@
 import { openai } from '@ai-sdk/openai'
-import { streamText, convertToModelMessages } from 'ai'
+import { streamText, convertToModelMessages, stepCountIs } from 'ai'
 import { Axiom } from '@axiomhq/js'
 import newCars from '../../../modules/newCars'
 import { fetchCarDetailsTool } from './tools/fetchCarDetails'
@@ -70,7 +70,7 @@ export async function POST(req: Request) {
     model: openai(modelName),
     messages: convertToModelMessages(messages),
     system: systemPrompt,
-    maxSteps: 3,
+    stopWhen: stepCountIs(5),
     tools: {
       fetchCarDetails: fetchCarDetailsTool,
     },
