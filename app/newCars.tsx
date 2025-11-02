@@ -199,7 +199,7 @@ export default function NewCars({
           </a>{' '}
           mælingum frá framleiðenda en raundrægni er háð aðstæðum og
           aksturslagi.
-          <em className="inline-block text-xs text-[#777] mt-2">
+          <em className="inline-block text-xs text-stone mt-2">
             Kaupendur nýskráðra rafbíla sem kosta minna en 10 milljónir eiga
             kost á að{' '}
             <a

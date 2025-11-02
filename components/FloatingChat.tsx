@@ -112,6 +112,7 @@ const FloatingChat: React.FunctionComponent<Props> = ({
           className="flex-1 border-0 bg-transparent p-[8px_0] text-base font-normal text-tint outline-none placeholder:text-black/50 disabled:opacity-60"
         />
         <button
+          aria-label="Send message"
           type="submit"
           disabled={disabled || !input.trim()}
           className="appearance-none w-9 h-9 flex items-center justify-center bg-sky border-0 rounded-full text-lab cursor-pointer transition-all duration-200 shrink-0 hover:enabled:bg-sky-darker hover:enabled:scale-105 disabled:opacity-40 disabled:cursor-not-allowed"
