@@ -2,7 +2,7 @@ import { tool } from 'ai'
 import { z } from 'zod'
 
 export const fetchCarDetailsTool = tool({
-  description: 'Fetch detailed information about a specific car from its EV Database URL. Use this to get more information about a car to answer a question, for example dimensions, cargo space, interior details, or other specifications not in the basic car list.',
+  description: 'Fetch detailed information about a specific car from its EV Database URL. Use this to get more information about the car, for example dimensions, cargo space, interior details, or other specifications not in the basic car list. The tool will not answer the users question: You must use this info to write a helpful answer',
   inputSchema: z.object({
     url: z.string().describe('The evDatabaseURL from the car list'),
     carName: z.string().describe('The make and model of the car'),

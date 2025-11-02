@@ -2,7 +2,7 @@ import { openai } from '@ai-sdk/openai'
 import { streamText, convertToModelMessages } from 'ai'
 import { Axiom } from '@axiomhq/js'
 import newCars from '../../../modules/newCars'
-// import { fetchCarDetailsTool } from './tools/fetchCarDetails'
+import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 
 export const runtime = 'edge'
 
@@ -70,9 +70,10 @@ export async function POST(req: Request) {
     model: openai(modelName),
     messages: convertToModelMessages(messages),
     system: systemPrompt,
-    // tools: {
-    //   fetchCarDetails: fetchCarDetailsTool, // Tool use seems to break 4.1-mini at the moment, causing it to return no text response after a tool call.
-    // },
+    maxSteps: 3,
+    tools: {
+      fetchCarDetails: fetchCarDetailsTool,
+    },
     onFinish: async ({ text, usage, toolCalls }) => {
       const lastUserMessage = messages[messages.length - 1]
       const userMessageText =
