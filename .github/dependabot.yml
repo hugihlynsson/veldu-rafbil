@@ -4,3 +4,7 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
+    auto-merge:
+      strategy: merge
+      allowed:
+        - update-type: version-update:semver-patch
