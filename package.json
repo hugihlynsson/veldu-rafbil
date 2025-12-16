@@ -7,7 +7,7 @@
     "@ai-sdk/openai": "^2.0.86",
     "@ai-sdk/react": "^2.0.109",
     "@axiomhq/js": "^1.3.1",
-    "@tailwindcss/postcss": "^4.1.16",
+    "@tailwindcss/postcss": "^4.1.18",
     "ai": "^5.0.113",
     "babel-plugin-react-compiler": "^1.0.0",
     "clsx": "^2.1.1",
