@@ -1,12 +1,11 @@
-import { openai } from '@ai-sdk/openai'
-import { streamText, convertToModelMessages, stepCountIs } from 'ai'
+import { google } from '@ai-sdk/google'
+import { streamText, convertToModelMessages } from 'ai'
 import { Axiom } from '@axiomhq/js'
 import newCars from '../../../modules/newCars'
-import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 
 export const runtime = 'edge'
 
-const modelName = 'gpt-4.1-mini'
+const modelName = 'gemini-3-flash-preview'
 
 // Create a summary of available cars for the LLM
 const carsSummary = newCars
@@ -25,8 +24,7 @@ const systemPrompt = `Þú ert hjálpsamur ráðgjafi fyrir Veldu Rafbíl, ísle
 ${carsSummary}
 
 Gott að hafa í huga:
-- Notaðu upplýsingarnar hér að ofan til að gefa nákvæmar, sérstakar upplýsingar
-- Ef þú þarft FREKARI upplýsingar um tiltekinn bíl (eins og stærðir, farangursrými, innréttingu, o.s.frv.), notaðu fetchCarDetails tólið með URL-inu sem gefið er upp í bílalistanum og notaðu þær upplýsingar til að svara notendanum
+- Notaðu upplýsingarnar hér að ofan til að gefa nákvæmar, sértækar upplýsingar
 - Verðin sem eru í upplýsingunum eru fyrir 900.000 kr ríkisstyrkinn sem er í boði fyrir bíla undir 10 milljónum kr
 - Þegar notandi spyr um bíla undir ákveðinni upphæð, notaðu verð EFTIR styrk
 - Í janúar 2026 lækkar styrkurinn í 500.000 kr
@@ -39,7 +37,8 @@ Gott að hafa í huga:
 - Veldu Rafbíl er búin til af Hugi Hlynssyni og er rekin sem óhagnaðardrifin samfélagsþjónusta. Upplýsingar svo sem verð og framboð geta verið úreltar
 - Þú getur aðstoðað við ýmislegt tengt rafbílum og rafbílaumhverfi á Íslandi
 - Ef spurt er um eitthvað sem tengist ekki rafbílum þá VERÐUR þú að svara vinalega að þú sért ekki viss og biddu þá að spyrja um rafbíla í staðinn
-- Notaðu markdown tölflur til að birta samanburð á bílum. Hafði samt í huga að það er ekki svo mikið pláss svo hafðu þær í mestalagi 3 dálka (columns) breiðar
+- Svaraðu alltaf í venjulegum texta, ALDREI í JSON sniði
+- Notaðu markdown tölflur til að birta samanburð á bílum. Hafði samt í huga að það er ekki svo mikið pláss svo hafðu þær í mesta lagi 3 dálka (columns) breiðar
 
 Tónn og stíll:
 - Vertu vinalegur og hjálpsamur en haltu svörum hnitmiðuðum
@@ -67,13 +66,9 @@ export async function POST(req: Request) {
   const { messages } = await req.json()
 
   const result = streamText({
-    model: openai(modelName),
+    model: google(modelName),
     messages: await convertToModelMessages(messages),
     system: systemPrompt,
-    stopWhen: stepCountIs(5),
-    tools: {
-      fetchCarDetails: fetchCarDetailsTool,
-    },
     onFinish: async ({ text, usage, toolCalls }) => {
       const lastUserMessage = messages[messages.length - 1]
       const userMessageText =
