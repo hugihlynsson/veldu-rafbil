@@ -68,7 +68,7 @@ export async function POST(req: Request) {
 
   const result = streamText({
     model: openai(modelName),
-    messages: convertToModelMessages(messages),
+    messages: await convertToModelMessages(messages),
     system: systemPrompt,
     stopWhen: stepCountIs(5),
     tools: {
