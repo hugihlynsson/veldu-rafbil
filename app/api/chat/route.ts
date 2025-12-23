@@ -69,6 +69,9 @@ export async function POST(req: Request) {
     model: google(modelName),
     messages: await convertToModelMessages(messages),
     system: systemPrompt,
+    providerOptions: {
+      google: { thinkingConfig: { thinkingLevel: 'minimal' } },
+    },
     onFinish: async ({ text, usage, toolCalls }) => {
       const lastUserMessage = messages[messages.length - 1]
       const userMessageText =
