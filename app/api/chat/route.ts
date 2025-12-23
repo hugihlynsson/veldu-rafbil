@@ -2,6 +2,7 @@ import { google } from '@ai-sdk/google'
 import { streamText, convertToModelMessages } from 'ai'
 import { Axiom } from '@axiomhq/js'
 import newCars from '../../../modules/newCars'
+import getPriceWithGrant from '../../../modules/getPriceWithGrant'
 
 export const runtime = 'edge'
 
@@ -11,7 +12,7 @@ const modelName = 'gemini-3-flash-preview'
 const carsSummary = newCars
   .map(
     (car) =>
-      `${car.make} ${car.model} ${car.subModel ? car.subModel : ''}: ${car.price.toLocaleString('is-IS')} kr, ${car.range} km drægni, ${car.acceleration}s hröðun, ${car.drive} drif${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseURL ? ` (more info: ${car.evDatabaseURL})` : ''}`,
+      `${car.make} ${car.model} ${car.subModel ? car.subModel : ''}: ${getPriceWithGrant(car.price).toLocaleString('is-IS')} kr, ${car.range} km drægni, ${car.acceleration}s hröðun, ${car.drive} drif${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseURL ? ` (more info: ${car.evDatabaseURL})` : ''}`,
   )
   .join('\n')
 
@@ -25,8 +26,7 @@ ${carsSummary}
 
 Gott að hafa í huga:
 - Notaðu upplýsingarnar hér að ofan til að gefa nákvæmar, sértækar upplýsingar
-- Verðin sem eru í upplýsingunum eru fyrir 900.000 kr ríkisstyrkinn sem er í boði fyrir bíla undir 10 milljónum kr
-- Þegar notandi spyr um bíla undir ákveðinni upphæð, notaðu verð EFTIR styrk
+- Verðin hér að ofan eru EFTIR 900.000 kr ríkisstyrk (fyrir bíla undir 10 milljónum kr)
 - Í janúar 2026 lækkar styrkurinn í 500.000 kr
 - Drægni byggir á WLTP mælingum
 - Þegar spurt er um raunverulega drægni, útskýrðu að hún verði minni vegna þátta eins og aksturs og veðuraðstæðna á Íslandi
