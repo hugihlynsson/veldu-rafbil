@@ -1,11 +1,12 @@
-import { google } from '@ai-sdk/google'
-import { streamText, convertToModelMessages } from 'ai'
+import { openai } from '@ai-sdk/openai'
+import { streamText, convertToModelMessages, stepCountIs } from 'ai'
 import { Axiom } from '@axiomhq/js'
 import newCars from '../../../modules/newCars'
+import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 
 export const runtime = 'edge'
 
-const modelName = 'gemini-3-flash-preview'
+const modelName = 'gpt-5.2-chat-latest'
 
 // Create a summary of available cars for the LLM
 const carsSummary = newCars
@@ -26,6 +27,7 @@ ${carsSummary}
 Gott að hafa í huga:
 - Notaðu upplýsingarnar hér að ofan til að gefa nákvæmar, sértækar upplýsingar
 - Verðin sem eru í upplýsingunum eru fyrir 900.000 kr ríkisstyrkinn sem er í boði fyrir bíla undir 10 milljónum kr
+- Ef þú þarft FREKARI upplýsingar um tiltekinn bíl (eins og stærðir, farangursrými, innréttingu, o.s.frv.), notaðu fetchCarDetails tólið með URL-inu sem gefið er upp í bílalistanum og notaðu þær upplýsingar til að svara notendanum
 - Þegar notandi spyr um bíla undir ákveðinni upphæð, notaðu verð EFTIR styrk
 - Í janúar 2026 lækkar styrkurinn í 500.000 kr
 - Drægni byggir á WLTP mælingum
@@ -66,9 +68,13 @@ export async function POST(req: Request) {
   const { messages } = await req.json()
 
   const result = streamText({
-    model: google(modelName),
+    model: openai(modelName), 
     messages: await convertToModelMessages(messages),
     system: systemPrompt,
+    stopWhen: stepCountIs(5),
+    tools: {
+      fetchCarDetails: fetchCarDetailsTool,
+    },
     onFinish: async ({ text, usage, toolCalls }) => {
       const lastUserMessage = messages[messages.length - 1]
       const userMessageText =
