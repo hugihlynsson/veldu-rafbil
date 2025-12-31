@@ -155,9 +155,8 @@ export default function NewCars({
               href="https://island.is/rafbilastyrkir"
               className="no-underline font-semibold text-[#222] hover:underline"
             >
-              sækja um 900.000 kr. rafbílastyrk
-            </a>{' '}
-            út árið 2025.
+              sækja um 500.000 kr. rafbílastyrk
+            </a>.
           </em>
         </p>
 
