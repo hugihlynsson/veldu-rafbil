@@ -2,20 +2,6 @@ import { NewCar } from '../types'
 
 const newCars: Array<NewCar> = [
   {
-    make: 'Aiways',
-    model: 'U5',
-    heroImageName: 'aiways-u5',
-    price: 6_690_000,
-    sellerURL: 'https://aiwaysaislandi.is',
-    acceleration: 7.5,
-    capacity: 63,
-    range: 410,
-    evDatabaseURL: 'https://ev-database.org/car/1678/Aiways-U5',
-    drive: 'FWD',
-    timeToCharge10T080: 35,
-    power: 150,
-  },
-  {
     make: 'Audi',
     model: 'A6 e-tron',
     subModel: 'Sportback quattro',
@@ -1910,7 +1896,7 @@ const newCars: Array<NewCar> = [
     capacity: 78,
     range: 622,
     evDatabaseURL:
-      'https://ev-database.org/car/3120/Tesla-Model-Y-Long-Range-RWD',
+      'https://ev-database.org/car/3363/Tesla-Model-Y-Premium-RWD',
     drive: 'RWD',
     power: 250,
     timeToCharge10T080: 29,
@@ -1926,7 +1912,7 @@ const newCars: Array<NewCar> = [
     capacity: 78,
     range: 600,
     evDatabaseURL:
-      'https://ev-database.org/car/3104/Tesla-Model-Y-Long-Range-AWD',
+      'https://ev-database.org/car/3333/Tesla-Model-Y-Premium-AWD',
     drive: 'AWD',
     power: 378,
     timeToCharge10T080: 29,
@@ -1940,7 +1926,7 @@ const newCars: Array<NewCar> = [
     sellerURL: 'https://www.tesla.com/is_is/modely/design',
     acceleration: 3.5,
     capacity: 78,
-    range: 600,
+    range: 580,
     evDatabaseURL:
       'https://ev-database.org/car/3269/Tesla-Model-Y-Performance',
     drive: 'AWD',
