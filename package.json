@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@ai-sdk/google": "^3.0.23",
-    "@ai-sdk/react": "^3.0.79",
+    "@ai-sdk/react": "^3.0.88",
     "@axiomhq/js": "^1.4.0",
     "@tailwindcss/postcss": "^4.1.18",
     "ai": "^6.0.78",
