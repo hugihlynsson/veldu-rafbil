@@ -26,8 +26,7 @@ ${carsSummary}
 
 Gott að hafa í huga:
 - Notaðu upplýsingarnar hér að ofan til að gefa nákvæmar, sértækar upplýsingar
-- Verðin hér að ofan eru EFTIR 900.000 kr ríkisstyrk (fyrir bíla undir 10 milljónum kr)
-- Í janúar 2026 lækkar styrkurinn í 500.000 kr
+- Verðin hér að ofan eru EFTIR 500.000 kr ríkisstyrk (fyrir bíla undir 10 milljónum kr)
 - Drægni byggir á WLTP mælingum
 - Þegar spurt er um raunverulega drægni, útskýrðu að hún verði minni vegna þátta eins og aksturs og veðuraðstæðna á Íslandi
 - Gerðu þitt besta til að meta raun-drægni (venjulega 70-85% af WLTP í köldu loftslagi eins og á Íslandi)
