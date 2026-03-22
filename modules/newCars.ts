@@ -2408,6 +2408,20 @@ const newCars: Array<NewCar> = [
     power: 350,
     timeToCharge10T080: 12,
   },
+  {
+    make: 'XPENG',
+    model: 'X9',
+    subModel: 'AWD Performance',
+    heroImageName: 'xpeng-x9',
+    price: 12_390_000,
+    sellerURL: 'https://www.xpeng.com/is/model/x9',
+    acceleration: 5.9,
+    capacity: 110,
+    range: 570,
+    drive: 'AWD',
+    power: 370,
+    timeToCharge10T080: 12,
+  },
 ]
 
 export default newCars
