@@ -7,7 +7,7 @@
     "@ai-sdk/google": "^3.0.43",
     "@ai-sdk/react": "^3.0.118",
     "@axiomhq/js": "^1.4.0",
-    "@tailwindcss/postcss": "^4.2.1",
+    "@tailwindcss/postcss": "^4.2.2",
     "ai": "^6.0.116",
     "babel-plugin-react-compiler": "^1.0.0",
     "clsx": "^2.1.1",
