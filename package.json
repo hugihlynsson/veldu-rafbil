@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@ai-sdk/google": "^3.0.43",
+    "@ai-sdk/google": "^3.0.53",
     "@ai-sdk/react": "^3.0.136",
     "@axiomhq/js": "^1.4.0",
     "@tailwindcss/postcss": "^4.2.2",
