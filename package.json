@@ -17,7 +17,7 @@
     "react-dom": "^19.2.5",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
-    "tailwindcss": "^4.1.16",
+    "tailwindcss": "^4.3.0",
     "zod": "^4.3.6"
   },
   "scripts": {
