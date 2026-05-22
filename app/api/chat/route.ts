@@ -1,10 +1,9 @@
 import { google } from '@ai-sdk/google'
-import { streamText, convertToModelMessages } from 'ai'
+import { streamText, convertToModelMessages, stepCountIs } from 'ai'
 import { Axiom } from '@axiomhq/js'
 import newCars from '../../../modules/newCars'
 import getPriceWithGrant from '../../../modules/getPriceWithGrant'
-
-export const runtime = 'edge'
+import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 
 const modelName = 'gemini-3.5-flash'
 
@@ -69,7 +68,11 @@ export async function POST(req: Request) {
     messages: await convertToModelMessages(messages),
     system: systemPrompt,
     providerOptions: {
-      google: { thinkingConfig: { thinkingLevel: 'minimal' } },
+      google: { thinkingConfig: { thinkingLevel: 'low' } },
+    },
+    stopWhen: stepCountIs(5),
+    tools: {
+      fetchCarDetails: fetchCarDetailsTool,
     },
     onFinish: async ({ text, usage, toolCalls }) => {
       const lastUserMessage = messages[messages.length - 1]
