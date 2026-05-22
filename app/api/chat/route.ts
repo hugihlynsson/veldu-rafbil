@@ -68,9 +68,9 @@ export async function POST(req: Request) {
     messages: await convertToModelMessages(messages),
     system: systemPrompt,
     providerOptions: {
-      google: { thinkingConfig: { thinkingLevel: 'low' } },
+      google: { thinkingConfig: { thinkingLevel: 'minimal' } },
     },
-    stopWhen: stepCountIs(5),
+    stopWhen: stepCountIs(10),
     tools: {
       fetchCarDetails: fetchCarDetailsTool,
     },

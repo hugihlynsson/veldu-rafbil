@@ -73,6 +73,17 @@ export default function ChatContainer({ hide }: Props) {
     })
   }
 
+  const handleRetry = () => {
+    const messages = chatState.messages
+    const lastUserIndex = messages.findLastIndex((m) => m.role === 'user')
+    if (lastUserIndex === -1) return
+    const lastUserMessage = messages[lastUserIndex]
+    const textPart = lastUserMessage.parts?.find((p) => p.type === 'text')
+    if (!textPart || !('text' in textPart)) return
+    chatState.setMessages(messages.slice(0, lastUserIndex))
+    handleSendMessage(textPart.text)
+  }
+
   return (
     <>
       {showChatMessages && (
@@ -86,6 +97,7 @@ export default function ChatContainer({ hide }: Props) {
           }}
           onReleaseBodyLock={() => setReleaseBodyLock(true)}
           onSendMessage={handleSendMessage}
+          onRetry={handleRetry}
         />
       )}
 

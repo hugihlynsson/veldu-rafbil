@@ -25,6 +25,7 @@ interface Props {
   onClearChat: () => void
   onReleaseBodyLock: () => void
   onSendMessage: (message: string) => void
+  onRetry: () => void
 }
 
 enum State {
@@ -40,6 +41,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
   onClearChat,
   onReleaseBodyLock,
   onSendMessage,
+  onRetry,
 }) => {
   const [state, setState] = useState<State>(State.Initializing)
   const messagesEndRef = useRef<HTMLDivElement>(null)
@@ -124,6 +126,18 @@ const ChatModal: React.FunctionComponent<Props> = ({
           ))}
 
           {showLoading && <TypingIndicator />}
+
+          {status === 'error' && (
+            <div className="flex items-center justify-between mx-4 mb-4 rounded-full bg-red-50 p-3 pl-4 text-sm text-red-700">
+              <p className="font-medium">Úps, eitthvað fór úrskeiðis</p>
+              <button
+                onClick={onRetry}
+                className="rounded-full bg-red-100 px-3 py-1.5 text-xs font-medium text-red-700 hover:bg-red-200 transition-colors cursor-pointer"
+              >
+                Reyna aftur
+              </button>
+            </div>
+          )}
 
           {status !== 'streaming' && lastMessage && (
             <MentionedCars lastMessage={lastMessage} onClose={handleClose} />
