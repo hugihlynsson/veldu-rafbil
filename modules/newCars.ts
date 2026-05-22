@@ -953,7 +953,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 360,
     timeToCharge10T080: 22,
-    expectedDelivery: 'Byrjun 2026',
   },
   {
     make: 'Mercedes-Benz',
@@ -1495,7 +1494,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 325,
     timeToCharge10T080: 18,
-    expectedDelivery: '2026',
   },
   {
     make: 'Porsche',
@@ -1511,7 +1509,6 @@ const newCars: Array<NewCar> = [
     drive: 'AWD',
     power: 850,
     timeToCharge10T080: 18,
-    expectedDelivery: '2026',
   },
   {
     make: 'Renault',
