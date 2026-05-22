@@ -304,7 +304,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             Hreinsa leit
           </button>
           <button
-            className="appearance-none p-[11px_16px_12px_16px] bg-sky border-0 rounded-full text-lab text-sm font-semibold cursor-pointer transition-all duration-200 hover:bg-sky-darker"
+            className="appearance-none p-[11px_16px_12px_16px] bg-sky border-0 rounded-full text-lab text-sm font-semibold cursor-pointer transition-all duration-200 hover:bg-sky-darker active:scale-[0.98]"
             onClick={handleDone}
           >
             Sýna niðurstöður{' '}

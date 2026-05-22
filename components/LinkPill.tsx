@@ -27,7 +27,7 @@ const LinkPill: FunctionComponent<Props> = ({
 }) => (
   <Link
     className={clsx(
-      'group inline-flex self-start items-center shrink-0 mt-2 text-inherit text-sm font-semibold rounded-full no-underline -ml-0.5 mr-2.5 transition-colors duration-100',
+      'group inline-flex self-start items-center shrink-0 mt-2 text-inherit text-sm font-semibold rounded-full no-underline -ml-0.5 mr-2.5 transition-all duration-100 active:scale-[0.98]',
       large ? 'py-[5px] px-[14px]' : 'py-1 px-3',
       current && 'bg-sky text-white hover:bg-sky',
       onGray && !current && 'bg-[#e4e4e4] hover:bg-[#d8d8d8]',

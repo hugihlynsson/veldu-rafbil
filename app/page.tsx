@@ -39,12 +39,12 @@ type Props = { searchParams: Promise<Record<string, string>> }
 
 export default async function Page({ searchParams }: Props) {
   return (
-    <>
+    <main>
       <NewCars
         sorting={getSortingFromQuery(await searchParams)}
         filters={getFiltersFromQuery(await searchParams)}
       />
       <Footer />
-    </>
+    </main>
   )
 }
