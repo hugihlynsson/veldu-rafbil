@@ -6,7 +6,7 @@ import getPriceWithGrant from '../../../modules/getPriceWithGrant'
 
 export const runtime = 'edge'
 
-const modelName = 'gemini-3-flash-preview'
+const modelName = 'gemini-3.5-flash'
 
 // Create a summary of available cars for the LLM
 const carsSummary = newCars
