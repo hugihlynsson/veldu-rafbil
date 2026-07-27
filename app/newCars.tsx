@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import clsx from 'clsx'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import Car from '../components/NewCar'
@@ -11,8 +12,14 @@ import ActiveFilters from '../components/ActiveFilters'
 import ChatContainer from '../components/ChatContainer'
 import newCars from '../modules/newCars'
 import carFilter from '../modules/carFilter'
-import { Filters, Sorting } from '../types'
-import { carSorter, sortingToQuery } from '../modules/sorting'
+import { Filters, Sorting, SortingDirection } from '../types'
+import {
+  carSorter,
+  defaultDirection,
+  flipDirection,
+  isDefaultDirection,
+  sortingToQuery,
+} from '../modules/sorting'
 import stableSort from '../modules/stableSort'
 
 const useBodyScrollLock = (lock: boolean): void => {
@@ -38,25 +45,42 @@ const useBodyScrollLock = (lock: boolean): void => {
   }, [lock])
 }
 
-const useSorting = (initial: Sorting) => {
+const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [sorting, setSorting] = useState<Sorting>(initial)
+  const [direction, setDirection] = useState<SortingDirection>(initialDirection)
 
   useEffect(() => {
     let updatedSearchParams = new URLSearchParams(searchParams)
+    const isDefault = isDefaultDirection(sorting, direction)
 
-    sorting === 'name'
+    sorting === 'name' && isDefault
       ? updatedSearchParams.delete('radaeftir')
       : updatedSearchParams.set('radaeftir', sortingToQuery[sorting])
+
+    isDefault
+      ? updatedSearchParams.delete('ofugt')
+      : updatedSearchParams.set('ofugt', '1')
 
     router.replace(`${pathname}?${updatedSearchParams.toString()}`, {
       scroll: false,
     })
-  }, [sorting])
+  }, [sorting, direction])
 
-  return [sorting, setSorting] as const
+  // Clicking the active sorting flips it, clicking another one starts it in
+  // its default direction
+  const toggleSorting = (value: Sorting) => {
+    if (value === sorting) {
+      setDirection(flipDirection)
+    } else {
+      setSorting(value)
+      setDirection(defaultDirection[value])
+    }
+  }
+
+  return [sorting, direction, toggleSorting] as const
 }
 
 const useFilters = (initial: Filters) => {
@@ -105,14 +129,19 @@ const useFilters = (initial: Filters) => {
 
 interface Props {
   sorting: Sorting
+  direction: SortingDirection
   filters: Filters
 }
 
 export default function NewCars({
   sorting: initialSorting,
+  direction: initialDirection,
   filters: initialFilters,
 }: Props) {
-  const [sorting, setSorting] = useSorting(initialSorting)
+  const [sorting, direction, toggleSorting] = useSorting(
+    initialSorting,
+    initialDirection,
+  )
   const [filters, setFilters] = useFilters(initialFilters)
 
   let [editingFilters, setEditingFilters] = useState<boolean>(false)
@@ -171,7 +200,18 @@ export default function NewCars({
             ['Hröðun', 'acceleration'],
             ['Verði á km', 'value'],
           ]}
-          onClick={setSorting}
+          onClick={toggleSorting}
+          indicator={
+            <span
+              aria-hidden
+              className={clsx(
+                'text-[9px] leading-none transition-transform duration-200 xs:text-[10px]',
+                direction === 'desc' && 'rotate-180',
+              )}
+            >
+              ▲
+            </span>
+          }
         />
 
         <ActiveFilters
@@ -182,14 +222,16 @@ export default function NewCars({
         />
       </header>
 
-      {stableSort(filteredCars, carSorter(sorting)).map((car, index) => (
-        <Car
-          priority={index <= 1}
-          car={car}
-          key={`${car.make} ${car.model} ${car.subModel} ${car.price}`}
-          showValue={sorting === 'value' || Boolean(filters.value)}
-        />
-      ))}
+      {stableSort(filteredCars, carSorter(sorting, direction)).map(
+        (car, index) => (
+          <Car
+            priority={index <= 1}
+            car={car}
+            key={`${car.make} ${car.model} ${car.subModel} ${car.price}`}
+            showValue={sorting === 'value' || Boolean(filters.value)}
+          />
+        ),
+      )}
 
       {hasFilter && filteredCarCount > 0 && (
         <div className="p-4 flex items-center mx-auto max-w-[480px] gap-2 text-xs font-medium mb-10 xs:p-6 md:pl-10 md:max-w-none">

@@ -1,19 +1,27 @@
+import { ReactNode } from 'react'
 import clsx from 'clsx'
 
 interface Props<P> {
   items: Array<[string, P]>
   onClick: (value: P) => void
   currentValue: P | undefined
+  /** Optional adornment rendered after the label of the active item */
+  indicator?: ReactNode
 }
 
-export default function Toggles<P>({ items, onClick, currentValue }: Props<P>) {
+export default function Toggles<P>({
+  items,
+  onClick,
+  currentValue,
+  indicator,
+}: Props<P>) {
   return (
     <div className="flex max-w-full bg-black/4 self-start rounded-[10px] p-[3px] gap-[3px] xs:rounded-xl xs:p-1 xs:gap-1">
       {items.map(([label, value]) => (
         <div
           key={label}
           className={clsx(
-            'text-xs font-semibold py-[7px] px-3 cursor-pointer text-center flex justify-center items-center whitespace-nowrap min-w-0 rounded-[7px] transition-all duration-200 ease-out relative',
+            'text-xs font-semibold py-[7px] px-3 cursor-pointer text-center flex justify-center items-center whitespace-nowrap min-w-0 rounded-[7px] transition-all duration-200 ease-out relative gap-1',
             'xs:text-[13px] xs:py-2 xs:px-4 xs:rounded-lg',
             value === currentValue
               ? 'bg-white text-tint shadow-sm'
@@ -22,6 +30,7 @@ export default function Toggles<P>({ items, onClick, currentValue }: Props<P>) {
           onClick={() => onClick(value)}
         >
           {label}
+          {value === currentValue && indicator}
         </div>
       ))}
     </div>

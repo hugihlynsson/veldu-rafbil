@@ -75,6 +75,8 @@ export type Sorting =
   | 'value'
   | 'fastcharge'
 
+export type SortingDirection = 'asc' | 'desc'
+
 export type SortingQuery =
   | 'nafni'
   | 'verdi'

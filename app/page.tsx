@@ -6,7 +6,7 @@ import { Filters, Drive } from '../types'
 import NewCars from './newCars'
 import Footer from '../components/Footer'
 import { ParsedUrlQuery } from 'querystring'
-import { getSortingFromQuery } from '../modules/sorting'
+import { getDirectionFromQuery, getSortingFromQuery } from '../modules/sorting'
 
 export const metadata: Metadata = {
   title: 'Veldu Rafbíl',
@@ -42,6 +42,7 @@ export default async function Page({ searchParams }: Props) {
     <main>
       <NewCars
         sorting={getSortingFromQuery(await searchParams)}
+        direction={getDirectionFromQuery(await searchParams)}
         filters={getFiltersFromQuery(await searchParams)}
       />
       <Footer />
