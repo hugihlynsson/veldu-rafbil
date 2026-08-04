@@ -205,11 +205,11 @@ export default function NewCars({
             <span
               aria-hidden
               className={clsx(
-                'text-[9px] leading-none transition-transform duration-200 xs:text-[10px]',
+                'leading-none ease-in-out transition-transform duration-150 -mr-1',
                 direction === 'desc' && 'rotate-180',
               )}
             >
-              ▲
+              ↑
             </span>
           }
         />
