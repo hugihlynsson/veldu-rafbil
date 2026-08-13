@@ -5,7 +5,7 @@ import newCars from '../../../modules/newCars'
 import getPriceWithGrant from '../../../modules/getPriceWithGrant'
 import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 
-const modelName = 'gemini-3.5-flash'
+const modelName = 'gemini-3.7-flash'
 
 // Create a summary of available cars for the LLM
 const carsSummary = newCars
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
     messages: await convertToModelMessages(messages),
     system: systemPrompt,
     providerOptions: {
-      google: { thinkingConfig: { thinkingLevel: 'minimal' } },
+      google: { thinkingConfig: { thinkingLevel: 'low' } },
     },
     stopWhen: stepCountIs(10),
     tools: {
