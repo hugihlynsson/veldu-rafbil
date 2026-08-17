@@ -6,7 +6,7 @@
   "dependencies": {
     "@ai-sdk/google": "^4.0.18",
     "@ai-sdk/react": "^4.0.40",
-    "@axiomhq/js": "^1.8.0",
+    "@axiomhq/js": "^2.0.0",
     "@tailwindcss/postcss": "^4.3.2",
     "ai": "^7.0.37",
     "babel-plugin-react-compiler": "^1.0.0",
