@@ -8,7 +8,7 @@
     "@ai-sdk/react": "^4.0.40",
     "@axiomhq/js": "^1.8.0",
     "@tailwindcss/postcss": "^4.3.2",
-    "ai": "^7.0.37",
+    "ai": "^7.0.65",
     "babel-plugin-react-compiler": "^1.0.0",
     "clsx": "^2.1.1",
     "fathom-client": "^3.7.2",
