@@ -72,10 +72,10 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
           extra={
             (car.expectedDelivery &&
               hasGrant &&
-              'áætlað verð (með styrk) ↗') ||
+              'áætlað verð með styrk ↗') ||
             (car.expectedDelivery && 'áætlað verð ↗') ||
             (showValue &&
-              `${hasGrant ? '(með styrk) ' : ''}${addDecimalSeprators(
+              `${hasGrant ? 'með styrk ' : ''}${addDecimalSeprators(
                 Math.round(priceWithGrant / car.range),
               )} kr. á km.`) ||
             (hasGrant && 'með styrk') ||
