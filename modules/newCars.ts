@@ -827,7 +827,7 @@ const newCars: Array<NewCar> = [
     acceleration: 7.5,
     capacity: 69.9,
     range: 420,
-    evDatabaseURL: 'https://ev-database.org/car/3040/Leapmotor-C10',
+    evDatabaseURL: 'https://ev-database.org/car/3040/Leapmotor-C10-RWD-699-kWh',
     drive: 'RWD',
     power: 160,
     timeToCharge10T080: 30,
