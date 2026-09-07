@@ -5,7 +5,7 @@ import newCars from '../../../modules/newCars'
 import getPriceWithGrant from '../../../modules/getPriceWithGrant'
 import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 
-const modelName = 'gemini-3.7-flash'
+const modelName = 'gemini-3.8-flash'
 
 // Create a summary of available cars for the LLM
 const carsSummary = newCars
