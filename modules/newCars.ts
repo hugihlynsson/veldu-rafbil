@@ -826,7 +826,7 @@ const newCars: Array<NewCar> = [
     subModel: 'Pro',
     heroImageName: 'leapmotor-b05',
     price: 3_990_000,
-    sellerURL: 'https://www.leapmotor.net/is/B5',
+    sellerURL: 'https://www.leapmotor.net/is/B05',
     acceleration: 7.5,
     capacity: 56.2,
     range: 401,
