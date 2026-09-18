@@ -122,6 +122,9 @@ const ChatModal: React.FunctionComponent<Props> = ({
               isLastUserMessage={
                 message.id === messages.findLast((m) => m.role === 'user')?.id
               }
+              isStreaming={
+                status === 'streaming' && message.id === lastMessage?.id
+              }
             />
           ))}
 

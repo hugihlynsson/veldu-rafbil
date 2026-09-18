@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../node_modules/streamdown/dist/*.js";
 
 @theme {
   --color-sky: #201be3;
@@ -11,6 +12,20 @@
   --color-lab: #fff;
 
   --breakpoint-xs: 375px;
+}
+
+:root {
+  --background: #fff;
+  --foreground: #111;
+  --card: #fff;
+  --card-foreground: #111;
+  --muted: #eee;
+  --muted-foreground: #555;
+  --border: rgba(0, 0, 0, 0.1);
+  --input: rgba(0, 0, 0, 0.1);
+  --primary: #111;
+  --primary-foreground: #fff;
+  --radius: 0.625rem;
 }
 
 *,

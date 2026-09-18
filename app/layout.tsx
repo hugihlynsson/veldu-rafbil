@@ -1,4 +1,5 @@
 import './globals.css'
+import 'streamdown/styles.css'
 import Fathom from '../components/Fathom'
 
 type Props = {

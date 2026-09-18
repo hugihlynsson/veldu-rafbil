@@ -1,8 +1,7 @@
 'use client'
 
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import { Streamdown } from 'streamdown'
 import { UIDataTypes, UITools, UIMessage } from 'ai'
 import { useEffect } from 'react'
 import { useRef } from 'react'
@@ -12,11 +11,13 @@ import clsx from 'clsx'
 interface Props {
   message: UIMessage<unknown, UIDataTypes, UITools>
   isLastUserMessage: boolean
+  isStreaming?: boolean
 }
 
 const ChatMessage: React.FunctionComponent<Props> = ({
   message,
   isLastUserMessage,
+  isStreaming = false,
 }) => {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -44,9 +45,11 @@ const ChatMessage: React.FunctionComponent<Props> = ({
       >
         {message.parts?.map((part, index) =>
           part.type === 'text' ? (
-            <ReactMarkdown
+            <Streamdown
               key={index}
-              remarkPlugins={[remarkGfm]}
+              animated
+              isAnimating={isStreaming}
+              controls={false}
               components={{
                 table: ({ children }) => (
                   <div className="table-wrapper">
@@ -56,7 +59,7 @@ const ChatMessage: React.FunctionComponent<Props> = ({
               }}
             >
               {stripFollowUps(part.text)}
-            </ReactMarkdown>
+            </Streamdown>
           ) : null,
         )}
       </div>
