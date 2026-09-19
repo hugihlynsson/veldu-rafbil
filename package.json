@@ -27,9 +27,12 @@
     "dev": "next dev",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "test:a11y": "playwright test",
     "prepare": "husky"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
     "@types/node": "^24.13.5",
     "@types/react": "^19.3.0",
     "husky": "^9.1.7",

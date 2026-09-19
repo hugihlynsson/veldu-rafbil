@@ -7,10 +7,9 @@ Tailwind v4, deployed on Vercel. One route: `/`.
 ## Verifying a change
 
 `npm test`, `npm run typecheck` and `npm run lint`, plus `npm run build` for
-anything beyond a data edit. The first three run on every pull request via
-`.github/workflows/ci.yml`; Vercel builds the preview, so CI does not repeat it.
-The build needs no environment variables; the `Missing Axiom token` lines it
-prints are expected.
+anything beyond a data edit. All of these run on every pull request via
+`.github/workflows/ci.yml`. The build needs no environment variables; the
+`Missing Axiom token` lines it prints are expected.
 
 Tests are Vitest, co-located as `modules/*.test.ts`, and cover the pure logic
 only — there are no component or route tests. Two are worth knowing about:
@@ -18,6 +17,28 @@ only — there are no component or route tests. Two are worth knowing about:
 most corrections to it have been a bad link or a hero image that does not
 resolve; `filters.test.ts` pins the URL round trip, because multi-value filters
 once came back from the URL as a single value and matched nothing.
+`vitest.config.ts` narrows the run to `modules/`, so a spec anywhere else is
+not picked up.
+
+`npm run test:a11y` is a separate Playwright suite in `a11y/`, with its own CI
+job. It builds and serves the app itself, so there is no server to start
+first. It runs in a real browser rather than jsdom deliberately: jsdom has no
+`showModal()` at all and can never decide colour contrast, which are the two
+things most worth guarding here. Half of it is axe-core over the list, the
+filtered list, both dialogs and a rendered chat answer. The other half covers
+what axe cannot see, and is the half that matters — one `h1`, the filter
+dialog's modality and focus trap, Escape returning focus to its trigger, the
+chat suggestions being reachable by keyboard, and the chat input not
+reopening the chat when it is tabbed past. Each of those guards a bug that
+was real, and axe caught none of them.
+
+Two things about that suite are load-bearing. `reducedMotion: 'reduce'` in
+`playwright.config.ts` is not a preference: without it axe scans the
+suggestions and car tiles mid-fade and reports contrast failures that vanish
+once they land. And the scans use a filtered URL as well as a bare one,
+because the bare list renders none of the hint text and would miss a contrast
+regression in the pills. Set `CHROMIUM_PATH` if your Chromium does not match
+the pinned Playwright build.
 
 Formatting takes care of itself: a husky pre-commit hook runs oxfmt over the
 staged files and then oxlint over the repo, so don't hand-format. `.oxfmtrc.json`
