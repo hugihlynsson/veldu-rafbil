@@ -26,6 +26,7 @@
     "lint": "oxlint",
     "dev": "next dev",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -35,7 +36,8 @@
     "lint-staged": "^17.5.1",
     "oxfmt": "^0.68.0",
     "oxlint": "^1.83.0",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1"
   },
   "lint-staged": {
     "*": "oxfmt --no-error-on-unmatched-pattern"

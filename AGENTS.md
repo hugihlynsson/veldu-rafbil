@@ -6,9 +6,18 @@ Tailwind v4, deployed on Vercel. One route: `/`.
 
 ## Verifying a change
 
-There is no test suite. The checks are `npm run typecheck` and `npm run lint`,
-plus `npm run build` for anything beyond a data edit. The build needs no
-environment variables; the `Missing Axiom token` lines it prints are expected.
+`npm test`, `npm run typecheck` and `npm run lint`, plus `npm run build` for
+anything beyond a data edit. The first three run on every pull request via
+`.github/workflows/ci.yml`; Vercel builds the preview, so CI does not repeat it.
+The build needs no environment variables; the `Missing Axiom token` lines it
+prints are expected.
+
+Tests are Vitest, co-located as `modules/*.test.ts`, and cover the pure logic
+only — there are no component or route tests. Two are worth knowing about:
+`newCars.test.ts` checks the car data itself, since most commits edit it and
+most corrections to it have been a bad link or a hero image that does not
+resolve; `filters.test.ts` pins the URL round trip, because multi-value filters
+once came back from the URL as a single value and matched nothing.
 
 Formatting takes care of itself: a husky pre-commit hook runs oxfmt over the
 staged files and then oxlint over the repo, so don't hand-format. `.oxfmtrc.json`
