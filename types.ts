@@ -64,7 +64,7 @@ export type Filters = {
   price?: number
   range?: number
   value?: number
-  availability?: availability
+  availability?: Availability
 }
 
 export type Sorting =
