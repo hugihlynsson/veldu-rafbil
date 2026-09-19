@@ -26,12 +26,6 @@ export default function ChatContainer({ hide }: Props) {
   const [showChatMessages, setShowChatMessages] = useState<boolean>(false)
   const [releaseBodyLock, setReleaseBodyLock] = useState<boolean>(false)
 
-  useEffect(() => {
-    if (!showChatMessages) {
-      setReleaseBodyLock(false)
-    }
-  }, [showChatMessages])
-
   // Load initial messages from localStorage
   const [initialMessages] = useState(readStoredMessages)
 
@@ -72,6 +66,9 @@ export default function ChatContainer({ hide }: Props) {
         <ChatModal
           onDone={() => {
             setShowChatMessages(false)
+            // Reset here, with the thing that closed the modal, rather than in
+            // an effect watching for it to have closed
+            setReleaseBodyLock(false)
             // The dialog normally hands focus back to whatever opened it, but
             // that can be a suggestion button which is gone by now. The input
             // is always here, and is where the reader was anyway.

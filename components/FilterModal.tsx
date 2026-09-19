@@ -29,9 +29,9 @@ const FiltersModal: React.FunctionComponent<Props> = ({
   const handleFilterChange =
     (name: keyof Filters) =>
     (event: React.FormEvent<HTMLInputElement | HTMLSelectElement>) => {
-      let value = event.currentTarget.value
+      const value = event.currentTarget.value
       setFilters((filters) => {
-        let updatedFilters = Object.assign({}, filters)
+        const updatedFilters = Object.assign({}, filters)
 
         // Name is a special filter
         if (name === 'name') {

@@ -7,6 +7,7 @@ import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
 import LinkPill from './LinkPill'
 import getPriceWithGrant from '../modules/getPriceWithGrant'
+import getCarId from '../modules/getCarId'
 
 interface Props {
   car: NewCarType
@@ -14,7 +15,7 @@ interface Props {
   priority?: boolean
 }
 
-let getDriveLabel = (drive: Drive) => {
+const getDriveLabel = (drive: Drive) => {
   switch (drive) {
     case 'AWD':
       return 'Fjórhjóladrif'
@@ -27,12 +28,9 @@ let getDriveLabel = (drive: Drive) => {
 
 const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
   const priceWithGrant = getPriceWithGrant(car.price)
-  let hasGrant = priceWithGrant !== car.price
+  const hasGrant = priceWithGrant !== car.price
 
-  // Create a unique ID for this car
-  const carId = `car-${car.make}-${car.model}-${car.subModel || 'base'}`
-    .toLowerCase()
-    .replace(/\s+/g, '-')
+  const carId = getCarId(car)
 
   return (
     <article

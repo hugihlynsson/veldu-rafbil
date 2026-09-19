@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs'
+import { existsSync, readdirSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 
 import newCars from './newCars'
@@ -21,6 +21,19 @@ describe('the car data', () => {
       expect(existsSync(`public/images/${car.heroImageName}.jpg`)).toBe(true)
     },
   )
+
+  // The other direction of the hero image check. Dropping a car used to leave
+  // its photo behind, and 23 of them had piled up unnoticed — six megabytes
+  // that every clone of the repo carried around.
+  it('leaves no photo behind for a car that is gone', () => {
+    const used = new Set(newCars.map((car) => car.heroImageName))
+    const orphans = readdirSync('public/images')
+      .filter((file) => file.endsWith('.jpg'))
+      .map((file) => file.replace(/\.jpg$/, ''))
+      .filter((name) => !used.has(name))
+
+    expect(orphans).toEqual([])
+  })
 
   // Two Peugeot e-208 entries once shared a key and React rendered them wrong.
   it('gives every car a unique React key', () => {

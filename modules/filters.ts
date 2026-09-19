@@ -19,9 +19,10 @@ const parseNumber = (value: string | Array<string>): number | undefined => {
 }
 
 export const getFiltersFromQuery = (query: SearchParams): Filters => {
-  let filters: Filters = {}
+  const filters: Filters = {}
 
-  let { hrodun, drif, hradhledsla, nafn, verd, draegni, virdi, frambod } = query
+  const { hrodun, drif, hradhledsla, nafn, verd, draegni, virdi, frambod } =
+    query
 
   if (hrodun) filters.acceleration = parseNumber(hrodun)
   if (drif) {
