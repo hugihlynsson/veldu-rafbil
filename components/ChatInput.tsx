@@ -21,6 +21,13 @@ interface Props {
    */
   value: string
   onValueChange: (value: string) => void
+  /**
+   * The ring is the caller's for the same reason as the draft: it has to
+   * outlive the move in and out of the dialog, and the caller is the only one
+   * that knows a focus it handed back itself is not the reader arriving.
+   */
+  showFocusRing: boolean
+  onFocusRingChange: (show: boolean) => void
   /** Fired on focus, before anything is sent, so the caller can warm the chat */
   onIntent?: () => void
 }
@@ -34,10 +41,11 @@ const ChatInput: React.FunctionComponent<Props> = ({
   inputRef,
   value,
   onValueChange,
+  showFocusRing,
+  onFocusRingChange,
   onIntent,
 }) => {
   const [isFocused, setIsFocused] = useState(false)
-  const [showFocusRing, setShowFocusRing] = useState(false)
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([])
   useInputModality()
 
@@ -65,7 +73,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
   // at. :focus-visible cannot make that call for a text field — see
   // utils/inputModality.
   const handleFocusRing = () => {
-    setShowFocusRing(getInputModality() === 'keyboard')
+    onFocusRingChange(getInputModality() === 'keyboard')
   }
 
   const handleFocus = () => {
@@ -106,7 +114,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
           setIsFocused(false)
-          setShowFocusRing(false)
+          onFocusRingChange(false)
         }
       }}
     >

@@ -27,6 +27,7 @@ export default function ChatContainer({ hide }: Props) {
   const [releaseBodyLock, setReleaseBodyLock] = useState<boolean>(false)
   // The draft outlives the input, which is mounted in one of two places
   const [draft, setDraft] = useState<string>('')
+  const [showFocusRing, setShowFocusRing] = useState<boolean>(false)
   const [isChatModalLoaded, setIsChatModalLoaded] = useState<boolean>(false)
 
   // The input goes inside the dialog when the chat opens, so the modal has to
@@ -46,6 +47,11 @@ export default function ChatContainer({ hide }: Props) {
     if (node && shouldFocusInput.current) {
       shouldFocusInput.current = false
       node.focus()
+      // Focus handed back as the chat closes is the input the reader was
+      // already in carrying on, not somewhere they have arrived, so it keeps
+      // no ring. Whatever the focus above asked for is still queued, and this
+      // is the later of the two.
+      setShowFocusRing(false)
     }
   }
 
@@ -100,6 +106,8 @@ export default function ChatContainer({ hide }: Props) {
       sendMessage={handleSendMessage}
       value={draft}
       onValueChange={setDraft}
+      showFocusRing={showFocusRing}
+      onFocusRingChange={setShowFocusRing}
     />
   )
 
