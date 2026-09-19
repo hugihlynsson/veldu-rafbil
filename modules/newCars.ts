@@ -1632,6 +1632,21 @@ const newCars: Array<NewCar> = [
     timeToCharge10T080: 28,
   },
   {
+    make: 'Peugeot',
+    model: 'e-Traveller',
+    heroImageName: 'peugeot-e-traveller',
+    price: 9_790_000,
+    sellerURL: 'https://www.peugeotisland.is/tegundir/E-Traveller.html',
+    acceleration: 14.3,
+    capacity: 75,
+    range: 350,
+    evDatabaseURL:
+      'https://ev-database.org/car/2258/Peugeot-e-Traveller-L2-75-kWh',
+    drive: 'FWD',
+    power: 100,
+    timeToCharge10T080: 33,
+  },
+  {
     make: 'Polestar',
     model: '2',
     subModel: 'Long Range Dual Motor',
