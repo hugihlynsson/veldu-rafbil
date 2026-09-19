@@ -34,13 +34,17 @@ const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
     let updatedSearchParams = new URLSearchParams(searchParams)
     const isDefault = isDefaultDirection(sorting, direction)
 
-    sorting === 'name' && isDefault
-      ? updatedSearchParams.delete('radaeftir')
-      : updatedSearchParams.set('radaeftir', sortingToQuery[sorting])
+    if (sorting === 'name' && isDefault) {
+      updatedSearchParams.delete('radaeftir')
+    } else {
+      updatedSearchParams.set('radaeftir', sortingToQuery[sorting])
+    }
 
-    isDefault
-      ? updatedSearchParams.delete('ofugt')
-      : updatedSearchParams.set('ofugt', '1')
+    if (isDefault) {
+      updatedSearchParams.delete('ofugt')
+    } else {
+      updatedSearchParams.set('ofugt', '1')
+    }
 
     router.replace(`${pathname}?${updatedSearchParams.toString()}`, {
       scroll: false,
@@ -81,23 +85,26 @@ const useFilters = (initial: Filters) => {
       value,
     } = filters
 
-    name?.length ? params.set('nafn', name.join(',')) : params.delete('nafn')
-    acceleration
-      ? params.set('hrodun', acceleration.toString())
-      : params.delete('hrodun')
-    availability
-      ? params.set(
-          'frambod',
-          availability === 'available' ? 'faanlegir' : 'vaentanlegir',
-        )
-      : params.delete('frambod')
-    drive?.length ? params.set('drif', drive.join(',')) : params.delete('drif')
-    fastcharge
-      ? params.set('hradhledsla', fastcharge.toString())
-      : params.delete('hradhledsla')
-    price ? params.set('verd', price.toString()) : params.delete('verd')
-    range ? params.set('draegni', range.toString()) : params.delete('draegni')
-    value ? params.set('virdi', value.toString()) : params.delete('virdi')
+    const setOrDelete = (key: string, value: string | number | undefined) => {
+      if (value) {
+        params.set(key, String(value))
+      } else {
+        params.delete(key)
+      }
+    }
+
+    setOrDelete('nafn', name?.length ? name.join(',') : undefined)
+    setOrDelete('hrodun', acceleration)
+    setOrDelete(
+      'frambod',
+      availability &&
+        (availability === 'available' ? 'faanlegir' : 'vaentanlegir'),
+    )
+    setOrDelete('drif', drive?.length ? drive.join(',') : undefined)
+    setOrDelete('hradhledsla', fastcharge)
+    setOrDelete('verd', price)
+    setOrDelete('draegni', range)
+    setOrDelete('virdi', value)
 
     router.replace(`${pathname}?${params.toString()}`, { scroll: false })
   }, [filters])

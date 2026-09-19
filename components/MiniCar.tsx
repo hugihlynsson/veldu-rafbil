@@ -12,7 +12,7 @@ interface Props {
 
 const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
   const priceWithGrant = getPriceWithGrant(car.price)
-  let hasGrant = priceWithGrant != car.price
+  let hasGrant = priceWithGrant !== car.price
 
   // Create the same ID as used in NewCar component
   const carId = `car-${car.make}-${car.model}-${car.subModel || 'base'}`

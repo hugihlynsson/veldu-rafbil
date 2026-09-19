@@ -27,7 +27,7 @@ let getDriveLabel = (drive: Drive) => {
 
 const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
   const priceWithGrant = getPriceWithGrant(car.price)
-  let hasGrant = priceWithGrant != car.price
+  let hasGrant = priceWithGrant !== car.price
 
   // Create a unique ID for this car
   const carId = `car-${car.make}-${car.model}-${car.subModel || 'base'}`
