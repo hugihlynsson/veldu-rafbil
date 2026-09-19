@@ -11,12 +11,8 @@ import { clientKey, rateLimit } from './rateLimit'
 // the advisor only answers in Icelandic, so general benchmarks don't settle it.
 // Check there before switching:
 // https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard
-//
-// 3.7 Flash over 3.8 Flash (Sept 2026): 3.7 scores slightly higher on that
-// leaderboard, and 3.8 is no better value. List price and output speed are the
-// same, but 3.8 writes ~30% more output tokens per task, which Artificial
-// Analysis measured as ~$0.58 vs ~$0.40 per task and slightly slower end to end.
-// 3.8's gains are in agentic, tool-heavy work; this is plain Icelandic chat.
+// 3.7 Flash scores above 3.8 there, and at the same price 3.8 spends ~30% more
+// output tokens per task.
 const modelName = 'gemini-3.7-flash'
 
 // Create a summary of available cars for the LLM
