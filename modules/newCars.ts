@@ -2379,7 +2379,7 @@ const newCars: Array<NewCar> = [
     sellerURL: 'https://www.toyota.is/new-cars/coming-soon/bz4x-touring',
     acceleration: 7.2,
     capacity: 74.7,
-    range: 591,
+    range: 560,
     evDatabaseURL:
       'https://ev-database.org/car/3400/Toyota-bZ4X-Touring-FWD-747-kWh',
     drive: 'FWD',
@@ -2395,7 +2395,7 @@ const newCars: Array<NewCar> = [
     sellerURL: 'https://www.toyota.is/new-cars/coming-soon/bz4x-touring',
     acceleration: 4.4,
     capacity: 74.7,
-    range: 528,
+    range: 505,
     evDatabaseURL:
       'https://ev-database.org/car/3401/Toyota-bZ4X-Touring-AWD-747-kWh',
     drive: 'AWD',
@@ -2466,7 +2466,7 @@ const newCars: Array<NewCar> = [
     make: 'Toyota',
     model: 'Proace Verso',
     heroImageName: 'toyota-proace-verso',
-    price: 10_360_000,
+    price: 10_390_000,
     sellerURL: 'https://www.toyota.is/new-cars/proace-verso',
     acceleration: 13.3,
     capacity: 75,
