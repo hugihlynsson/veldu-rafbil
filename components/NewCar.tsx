@@ -70,9 +70,7 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
           href={car.sellerURL}
           external
           extra={
-            (car.expectedDelivery &&
-              hasGrant &&
-              'áætlað verð með styrk ↗') ||
+            (car.expectedDelivery && hasGrant && 'áætlað verð með styrk ↗') ||
             (car.expectedDelivery && 'áætlað verð ↗') ||
             (showValue &&
               `${hasGrant ? 'með styrk ' : ''}${addDecimalSeprators(

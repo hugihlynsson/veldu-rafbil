@@ -63,8 +63,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
 
     const container = messagesContainerRef.current
     const isNearBottom =
-      container.scrollHeight - container.scrollTop - container.clientHeight <
-      20
+      container.scrollHeight - container.scrollTop - container.clientHeight < 20
 
     // If already near bottom and content is streaming, keep it scrolled to bottom
     if (isNearBottom) {
@@ -114,7 +113,11 @@ const ChatModal: React.FunctionComponent<Props> = ({
           }}
         />
 
-        <div className="flex-1 overflow-y-auto pb-21 flex flex-col" style={{ paddingTop: '20px' }} ref={messagesContainerRef}>
+        <div
+          className="flex-1 overflow-y-auto pb-21 flex flex-col"
+          style={{ paddingTop: '20px' }}
+          ref={messagesContainerRef}
+        >
           {messages.filter(emptyMessageFilter).map((message) => (
             <ChatMessage
               key={message.id}

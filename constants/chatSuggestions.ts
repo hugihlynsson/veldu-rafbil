@@ -8,5 +8,5 @@ export const CHAT_SUGGESTIONS = [
   'Hvaða rafbíll verður góður í endursölu?',
   'Hver er öruggastur fyrir börn?',
   'Hversu mikilvægur er hraðhleðsluhraðinn?',
-  'Hver er flottur fyrir innanbæjarakstur?'
+  'Hver er flottur fyrir innanbæjarakstur?',
 ]

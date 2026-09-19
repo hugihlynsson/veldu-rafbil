@@ -2,7 +2,8 @@ import { tool } from 'ai'
 import { z } from 'zod'
 
 export const fetchCarDetailsTool = tool({
-  description: 'Fetch detailed information about a specific car from its EV Database URL. Use this to get more information about the car, for example dimensions, cargo space, interior details, or other specifications not in the basic car list. The tool will not answer the users question: You must use this info to write a helpful answer',
+  description:
+    'Fetch detailed information about a specific car from its EV Database URL. Use this to get more information about the car, for example dimensions, cargo space, interior details, or other specifications not in the basic car list. The tool will not answer the users question: You must use this info to write a helpful answer',
   inputSchema: z.object({
     url: z.string().describe('The evDatabaseURL from the car list'),
     carName: z.string().describe('The make and model of the car'),
@@ -18,7 +19,7 @@ export const fetchCarDetailsTool = tool({
         // Pattern to match table rows with label in first td and value in second td
         const tablePattern = new RegExp(
           `<tr[^>]*>\\s*<td[^>]*>\\s*${label}\\s*</td>\\s*<td[^>]*>\\s*([^<]+)\\s*</td>`,
-          'i'
+          'i',
         )
         const match = html.match(tablePattern)
         if (match && match[1]) {
@@ -38,12 +39,14 @@ export const fetchCarDetailsTool = tool({
         height: extractData('Height'),
         wheelbase: extractData('Wheelbase'),
         // Weight & Capacity
-        weightUnladen: extractData('Weight Unladen') || extractData('Curb Weight'),
+        weightUnladen:
+          extractData('Weight Unladen') || extractData('Curb Weight'),
         grossWeight: extractData('Gross Vehicle Weight') || extractData('GVWR'),
         maxPayload: extractData('Max. Payload') || extractData('Payload'),
         // Cargo
         cargoVolume: extractData('Cargo Volume'),
-        cargoVolumeMax: extractData('Cargo Volume Max') || extractData('Cargo Max'),
+        cargoVolumeMax:
+          extractData('Cargo Volume Max') || extractData('Cargo Max'),
         frunk: extractData('Cargo Volume Frunk') || extractData('Frunk'),
         // Towing
         towingUnbraked: extractData('Towing Weight Unbraked'),
@@ -51,7 +54,7 @@ export const fetchCarDetailsTool = tool({
         towHitch: extractData('Tow Hitch') || extractData('Towbar'),
         // Other
         seats: extractData('Seats'),
-        source: url
+        source: url,
       }
 
       // Filter out empty values and format nicely
@@ -65,13 +68,13 @@ export const fetchCarDetailsTool = tool({
       return {
         carName,
         specifications: formattedSpecs || 'No specifications found',
-        source: url
+        source: url,
       }
     } catch (error) {
       return {
         carName,
         specifications: `Could not fetch details from ${url}`,
-        error: String(error)
+        error: String(error),
       }
     }
   },

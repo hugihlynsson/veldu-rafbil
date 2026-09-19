@@ -35,7 +35,10 @@ export const findMentionedCars = (text: string): NewCar[] => {
 }
 
 // Helper to get random suggestions
-export const getRandomSuggestions = (suggestions: string[], count: number = 3): string[] => {
+export const getRandomSuggestions = (
+  suggestions: string[],
+  count: number = 3,
+): string[] => {
   const shuffled = [...suggestions].sort(() => Math.random() - 0.5)
   return shuffled.slice(0, count)
 }
@@ -44,7 +47,7 @@ export const getRandomSuggestions = (suggestions: string[], count: number = 3): 
 export const parseFollowUps = (text: string): string[] => {
   const followUpRegex = /\[q:([^\]]+)\]/g
   const matches = [...text.matchAll(followUpRegex)]
-  return matches.map(match => match[1].trim())
+  return matches.map((match) => match[1].trim())
 }
 
 // Remove follow-up markers from text

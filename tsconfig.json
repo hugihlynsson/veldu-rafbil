@@ -3,10 +3,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "react-jsx",
-    "lib": [
-      "dom",
-      "es2023"
-    ],
+    "lib": ["dom", "es2023"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "noEmit": true,
@@ -30,9 +27,7 @@
       }
     ]
   },
-  "exclude": [
-    "node_modules"
-  ],
+  "exclude": ["node_modules"],
   "include": [
     "**/*.ts",
     "**/*.tsx",

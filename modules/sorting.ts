@@ -1,10 +1,5 @@
 import getKmPerMinutesCharged from './getKmPerMinutesCharged'
-import {
-  NewCar,
-  Sorting,
-  SortingDirection,
-  SortingQuery,
-} from '../types'
+import { NewCar, Sorting, SortingDirection, SortingQuery } from '../types'
 import getPriceWithGrant from './getPriceWithGrant'
 
 const queryToSorting: Record<string, Sorting> = {
