@@ -102,7 +102,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
           placeholder="Spurðu Veldu Rafbíl"
           // The focus ring lives on the form, so that it wraps the whole pill
           // rather than the bare input inside it
-          className="flex-1 border-0 bg-transparent p-[8px_0] text-base font-normal text-tint outline-none placeholder:text-black/50 disabled:opacity-60"
+          className="flex-1 border-0 bg-transparent p-[8px_0] text-base font-normal text-tint outline-none placeholder:text-black/60 disabled:opacity-60"
         />
         <button
           aria-label="Senda skilaboð"
