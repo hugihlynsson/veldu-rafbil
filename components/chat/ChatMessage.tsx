@@ -28,6 +28,10 @@ const ChatMessage: React.FunctionComponent<Props> = ({
         block: 'start',
       })
     }
+    // A message scrolls itself into view when it arrives, and never again.
+    // Adding the dependency would re-scroll an older message the moment a
+    // newer one takes the title off it.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const isUser = message.role === 'user'

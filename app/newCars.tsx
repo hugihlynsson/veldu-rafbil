@@ -40,7 +40,7 @@ const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
   const [direction, setDirection] = useState<SortingDirection>(initialDirection)
 
   useEffect(() => {
-    let updatedSearchParams = new URLSearchParams(searchParams)
+    const updatedSearchParams = new URLSearchParams(searchParams)
     const isDefault = isDefaultDirection(sorting, direction)
 
     if (sorting === 'name' && isDefault) {
@@ -83,7 +83,7 @@ const useFilters = (initial: Filters) => {
   useEffect(() => {
     const params = new URLSearchParams(searchParams)
 
-    let {
+    const {
       name,
       acceleration,
       availability,
@@ -158,13 +158,13 @@ export default function NewCars({
   )
   const [filters, setFilters] = useFilters(initialFilters)
 
-  let [editingFilters, setEditingFilters] = useState<boolean>(false)
+  const [editingFilters, setEditingFilters] = useState<boolean>(false)
 
   useBodyScrollLock(editingFilters)
 
   const handleRemoveFilter = (name: keyof Filters) =>
     setFilters((filters) => {
-      let newFilters = Object.assign({}, filters)
+      const newFilters = Object.assign({}, filters)
       delete newFilters[name]
       return newFilters
     })

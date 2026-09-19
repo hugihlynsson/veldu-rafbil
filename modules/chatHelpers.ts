@@ -34,12 +34,18 @@ export const findMentionedCars = (text: string): NewCar[] => {
   return mentioned
 }
 
-// Helper to get random suggestions
+// Fisher-Yates. sort() with a random comparator looks like a shuffle but is
+// not one: the result depends on the sort algorithm and leans towards leaving
+// things where they started, so the same few suggestions kept coming up.
 export const getRandomSuggestions = (
   suggestions: string[],
   count: number = 3,
 ): string[] => {
-  const shuffled = [...suggestions].sort(() => Math.random() - 0.5)
+  const shuffled = [...suggestions]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
   return shuffled.slice(0, count)
 }
 

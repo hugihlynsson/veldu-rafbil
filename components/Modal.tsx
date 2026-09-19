@@ -55,7 +55,9 @@ const Modal: React.FunctionComponent<Props> = ({
 
   useEffect(() => {
     dialogRef.current?.showModal()
-    initialFocusRef?.current?.focus()
+    // preventScroll: the dialog is a fixed overlay, and letting the browser
+    // scroll the page to reveal the focused field moves the list underneath
+    initialFocusRef?.current?.focus({ preventScroll: true })
     // A frame with the enter styles still applied is what gives the transition
     // something to move from
     const timer = setTimeout(() => setState('visible'), 1)
