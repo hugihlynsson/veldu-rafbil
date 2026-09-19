@@ -27,6 +27,7 @@ const Orflaedi: FunctionComponent<{}> = () => (
         className="shrink-0 block max-w-[320px] bg-[#1a202c] rounded-2xl p-6 pr-16 shadow-[0_2px_32px_rgba(0,0,0,0.2)] transition-all duration-200 text-white no-underline text-xl leading-[1.4] font-semibold hover:shadow-[0_8px_64px_rgba(0,0,0,0.3)] hover:-translate-y-1"
       >
         Öll létt rafknúin ökutæki á einum stað
+        {/* eslint-disable-next-line next/no-img-element -- an SVG logo, which next/image does not optimise without dangerouslyAllowSVG */}
         <img
           width="151"
           height="30"
