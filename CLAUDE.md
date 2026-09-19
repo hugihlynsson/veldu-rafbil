@@ -1,3 +1,5 @@
+@AGENTS.md
+
 # Veldu Rafbíl
 
 Icelandic single-page site listing every 100% electric car sold new in Iceland,
@@ -138,6 +140,12 @@ parenthesise arrow params.
 
 ## Gotchas
 
+- **`next dev` maintains `AGENTS.md` and `CLAUDE.md`.** On startup it writes its
+  own managed block (see `node_modules/next/dist/server/lib/generate-agent-files.js`).
+  Because `AGENTS.md` exists and already holds that block, it refreshes that file
+  and leaves this one alone — which is why this file starts with `@AGENTS.md`
+  instead of hosting the block itself. Don't delete `AGENTS.md`, or the next
+  `npm run dev` will start editing `CLAUDE.md` instead.
 - **React Compiler is on** (`reactCompiler: true`, `babel-plugin-react-compiler`).
   Don't add `useMemo`/`useCallback`/`memo` by hand; the compiler handles
   memoisation.
