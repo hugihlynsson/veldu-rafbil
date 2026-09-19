@@ -19,12 +19,6 @@ export default function RootLayout({ children }: Props) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-
-        <script
-          src="https://cdn.usefathom.com/script.js"
-          {...({ site: 'DDOQKVOW' } as any)}
-          defer
-        />
       </head>
       <body>
         <Fathom />
