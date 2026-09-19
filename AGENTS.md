@@ -51,6 +51,11 @@ The car database is a single file of hand-written `NewCar` literals in
 only it. Anything that reads a car field should go through the helpers rather
 than re-deriving it.
 
+`components/FilterField.tsx` is the shared half of every field in the filter
+modal: `FilterInput` and `FilterSelect` carry the label, the "Hámark" or
+"Lágmark" hint and the classes, so a new filter is one element rather than a
+copied block with an id to change in three places.
+
 `components/Modal.tsx` is the shared half of every modal — a real `<dialog>`,
 so that Escape, the backdrop and the focus trap are the browser's job, wrapped
 in the enter and leave animation `<dialog>` does not do by itself. A caller
