@@ -58,6 +58,9 @@ const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
     router.replace(`${pathname}?${updatedSearchParams.toString()}`, {
       scroll: false,
     })
+    // router/pathname/searchParams change as a result of this effect running,
+    // so depending on them would loop the URL update
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sorting, direction])
 
   // Clicking the active sorting flips it, clicking another one starts it in
@@ -116,6 +119,9 @@ const useFilters = (initial: Filters) => {
     setOrDelete('virdi', value)
 
     router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+    // router/pathname/searchParams change as a result of this effect running,
+    // so depending on them would loop the URL update
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters])
 
   return [filters, setFilters] as const
