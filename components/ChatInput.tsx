@@ -13,6 +13,8 @@ interface Props {
   hasMessages: boolean
   sendMessage: (message: string) => void
   inputRef?: React.RefObject<HTMLInputElement | null>
+  /** Fired on focus, before anything is sent, so the caller can warm the chat */
+  onIntent?: () => void
 }
 
 const ChatInput: React.FunctionComponent<Props> = ({
@@ -22,6 +24,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
   hasMessages,
   sendMessage,
   inputRef,
+  onIntent,
 }) => {
   const [input, setInput] = useState<string>('')
   const [isFocused, setIsFocused] = useState(false)
@@ -47,6 +50,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
 
   const handleFocus = () => {
     setIsFocused(true)
+    onIntent?.()
     if (!hasMessages) {
       // Pick 3 random suggestions
       setSelectedSuggestions(getRandomSuggestions(CHAT_SUGGESTIONS, 3))

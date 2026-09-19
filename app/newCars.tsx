@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import clsx from 'clsx'
+import dynamic from 'next/dynamic'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import Car from '../components/NewCar'
@@ -9,7 +10,6 @@ import Title from '../components/Title'
 import Toggles from '../components/Toggles'
 import FilterModal from '../components/FilterModal'
 import ActiveFilters from '../components/ActiveFilters'
-import ChatContainer from '../components/ChatContainer'
 import newCars from '../modules/newCars'
 import carFilter from '../modules/carFilter'
 import { Filters, Sorting, SortingDirection } from '../types'
@@ -22,6 +22,14 @@ import {
 } from '../modules/sorting'
 import stableSort from '../modules/stableSort'
 import useBodyScrollLock from '../utils/useBodyScrollLock'
+
+// The chat owns useChat, which pulls the AI SDK and zod along with it. Keeping
+// it out of the list's own chunk means the cars render and hydrate without
+// waiting for code that only the chat uses. The bar is fixed-position, so it
+// arriving a moment later shifts nothing.
+const ChatContainer = dynamic(() => import('../components/ChatContainer'), {
+  ssr: false,
+})
 
 const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
   const router = useRouter()
