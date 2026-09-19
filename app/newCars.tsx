@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import Car from '../components/NewCar'
 import Title from '../components/Title'
@@ -33,14 +32,14 @@ const ChatContainer = dynamic(() => import('../components/ChatContainer'), {
 })
 
 const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
   const [sorting, setSorting] = useState<Sorting>(initial)
   const [direction, setDirection] = useState<SortingDirection>(initialDirection)
 
+  // The URL is written straight to the history rather than through the router,
+  // which Next keeps in sync with useSearchParams. Reading it back from the
+  // location means the effect doesn't depend on the URL it updates.
   useEffect(() => {
-    const updatedSearchParams = new URLSearchParams(searchParams)
+    const updatedSearchParams = new URLSearchParams(window.location.search)
     const isDefault = isDefaultDirection(sorting, direction)
 
     if (sorting === 'name' && isDefault) {
@@ -55,9 +54,7 @@ const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
       updatedSearchParams.set('ofugt', '1')
     }
 
-    router.replace(`${pathname}?${updatedSearchParams.toString()}`, {
-      scroll: false,
-    })
+    window.history.replaceState(null, '', `?${updatedSearchParams.toString()}`)
   }, [sorting, direction])
 
   // Clicking the active sorting flips it, clicking another one starts it in
@@ -75,13 +72,10 @@ const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
 }
 
 const useFilters = (initial: Filters) => {
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
   const [filters, setFilters] = useState<Filters>(initial)
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams)
+    const params = new URLSearchParams(window.location.search)
 
     const {
       name,
@@ -115,7 +109,7 @@ const useFilters = (initial: Filters) => {
     setOrDelete('draegni', range)
     setOrDelete('virdi', value)
 
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false })
+    window.history.replaceState(null, '', `?${params.toString()}`)
   }, [filters])
 
   return [filters, setFilters] as const
