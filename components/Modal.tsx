@@ -1,6 +1,6 @@
 'use client'
 
-import React, { ReactNode, useEffect, useRef, useState } from 'react'
+import React, { ReactNode, useLayoutEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 
 /** How long the leave animation gets before the dialog actually closes */
@@ -53,7 +53,13 @@ const Modal: React.FunctionComponent<Props> = ({
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [state, setState] = useState<State>('initializing')
 
-  useEffect(() => {
+  // Layout rather than passive, for the sake of the phone keyboard. A phone
+  // raises it only for a focus that happens inside the tap that asked for it,
+  // and React holds passive effects back until after the event has been and
+  // gone — so opening from a tap left the chat input focused with no keyboard
+  // under it, which reads as not focused at all. A layout effect runs during
+  // the commit, which for a tap is still inside the event.
+  useLayoutEffect(() => {
     dialogRef.current?.showModal()
     // preventScroll: the dialog is a fixed overlay, and letting the browser
     // scroll the page to reveal the focused field moves the list underneath

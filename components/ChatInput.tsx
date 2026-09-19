@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { trackEvent } from 'fathom-client'
 import { CHAT_SUGGESTIONS } from '../constants/chatSuggestions'
 import { getRandomSuggestions } from '../modules/chatHelpers'
+import useInputModality, { getInputModality } from '../utils/inputModality'
 import clsx from 'clsx'
 
 interface Props {
@@ -12,7 +13,21 @@ interface Props {
   disabled?: boolean
   hasMessages: boolean
   sendMessage: (message: string) => void
-  inputRef?: React.RefObject<HTMLInputElement | null>
+  inputRef?: React.Ref<HTMLInputElement>
+  /**
+   * The draft is the caller's, because this input is unmounted and mounted
+   * again as it moves in and out of the chat dialog, and a half-typed question
+   * should survive that.
+   */
+  value: string
+  onValueChange: (value: string) => void
+  /**
+   * The ring is the caller's for the same reason as the draft: it has to
+   * outlive the move in and out of the dialog, and the caller is the only one
+   * that knows a focus it handed back itself is not the reader arriving.
+   */
+  showFocusRing: boolean
+  onFocusRingChange: (show: boolean) => void
   /** Fired on focus, before anything is sent, so the caller can warm the chat */
   onIntent?: () => void
 }
@@ -24,18 +39,22 @@ const ChatInput: React.FunctionComponent<Props> = ({
   hasMessages,
   sendMessage,
   inputRef,
+  value,
+  onValueChange,
+  showFocusRing,
+  onFocusRingChange,
   onIntent,
 }) => {
-  const [input, setInput] = useState<string>('')
   const [isFocused, setIsFocused] = useState(false)
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([])
+  useInputModality()
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (input.trim()) {
-      sendMessage(input)
+    if (value.trim()) {
+      sendMessage(value)
       trackEvent('Sent message')
-      setInput('')
+      onValueChange('')
       onOpenChat()
     } else if (hasMessages) {
       // Enter on an empty box reopens the conversation. Without this there is
@@ -45,10 +64,20 @@ const ChatInput: React.FunctionComponent<Props> = ({
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value)
+    onValueChange(e.target.value)
+  }
+
+  // The ring is for the reader who cannot see the caret land: it follows the
+  // tab key and the focus handed back when the chat closes, and stays out of
+  // the way of anyone who just pointed at the thing they are already looking
+  // at. :focus-visible cannot make that call for a text field — see
+  // utils/inputModality.
+  const handleFocusRing = () => {
+    onFocusRingChange(getInputModality() === 'keyboard')
   }
 
   const handleFocus = () => {
+    handleFocusRing()
     setIsFocused(true)
     onIntent?.()
     if (!hasMessages) {
@@ -70,7 +99,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
   const handleSuggestionClick = (suggestion: string) => {
     sendMessage(suggestion)
     trackEvent('Selected suggestion')
-    setInput('')
+    onValueChange('')
     setIsFocused(false)
     onOpenChat()
   }
@@ -78,13 +107,17 @@ const ChatInput: React.FunctionComponent<Props> = ({
   return (
     <div
       className={clsx(
-        'fixed bottom-4 left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col-reverse items-center gap-3 transition-all duration-300',
-        'min-[500px]:bottom-6',
+        'fixed bottom-[calc(1rem+var(--keyboard-inset))] left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col-reverse items-center gap-3',
+        'min-[500px]:bottom-[calc(1.5rem+var(--keyboard-inset))]',
+        // Only the hiding fades. The bottom has to keep up with a keyboard on
+        // its way in, and a transition on it drags the bar along behind.
+        'transition-opacity duration-300',
         hide && 'opacity-0',
       )}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
           setIsFocused(false)
+          onFocusRingChange(false)
         }
       }}
     >
@@ -92,14 +125,14 @@ const ChatInput: React.FunctionComponent<Props> = ({
         onSubmit={onSubmit}
         className={clsx(
           'pointer-events-auto flex items-center gap-2 p-[8px_8px_8px_20px] bg-[rgba(220,220,220,0.7)] backdrop-blur-xl rounded-full shadow-[0_4px_24px_rgba(0,0,0,0)] w-80 max-w-[90vw] transition-all duration-300 ease-in-out scale-[0.98] border border-black/2 hover:scale-100',
-          'focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-sky',
+          showFocusRing && 'outline-2 outline-offset-2 outline-sky',
           isFocused && 'w-[400px] scale-100',
         )}
       >
         <input
           ref={inputRef}
           type="text"
-          value={input}
+          value={value}
           onChange={handleInputChange}
           onFocus={handleFocus}
           onClick={handleClick}
@@ -109,9 +142,10 @@ const ChatInput: React.FunctionComponent<Props> = ({
           className="flex-1 border-0 bg-transparent p-[8px_0] text-base font-normal text-tint outline-none placeholder:text-black/60 disabled:opacity-60"
         />
         <button
+          onFocus={handleFocusRing}
           aria-label="Senda skilaboð"
           type="submit"
-          disabled={disabled || !input.trim()}
+          disabled={disabled || !value.trim()}
           className="appearance-none w-9 h-9 flex items-center justify-center bg-sky border-0 rounded-full text-lab cursor-pointer transition-all duration-200 shrink-0 hover:enabled:bg-sky-darker hover:enabled:scale-105 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           <svg
