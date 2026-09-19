@@ -24,6 +24,7 @@
     "build": "next build",
     "prettify": "prettier --write . '!scripts/choose-ev-export.json'",
     "dev": "next dev",
+    "typecheck": "tsc --noEmit",
     "prepare": "husky"
   },
   "devDependencies": {
