@@ -162,7 +162,9 @@ LLM leaderboard is the yardstick:
 
 The comment on the model constant in the route says why the current one won.
 Re-run that comparison before swapping the model, and update the comment with
-what you found.
+what you found. The `compare-assistant-models` skill has the process and the
+harness for replaying real conversations through candidates; the leaderboard
+alone only gets you a shortlist.
 
 - The endpoint is public and spends money, so `POST` is guarded before it
   reaches the model: a per-IP rate limit (in-memory and best effort — one window

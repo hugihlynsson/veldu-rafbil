@@ -20,3 +20,7 @@ tsconfig.tsbuildinfo
 !.claude/
 .claude/*
 !.claude/skills/
+
+# Conversation exports and model-comparison runs: real visitor questions, so
+# never committed. The compare-assistant-models skill writes here.
+.model-eval/
