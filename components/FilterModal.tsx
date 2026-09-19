@@ -280,7 +280,9 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             >
               Hröðun
             </label>
-            <p className="m-0 text-xs text-clay">Lágmark, sec</p>
+            {/* carFilter keeps cars at or under this many seconds, so it is a
+                maximum, the way Verð and Verð á km are */}
+            <p className="m-0 text-xs text-clay">Hámark, sec</p>
           </div>
           <input
             id="filter-acceleration"

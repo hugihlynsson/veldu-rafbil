@@ -21,6 +21,7 @@ import {
   sortingToQuery,
 } from '../modules/sorting'
 import stableSort from '../modules/stableSort'
+import { agree } from '../modules/plural'
 import useBodyScrollLock from '../utils/useBodyScrollLock'
 
 // The chat owns useChat, which pulls the AI SDK and zod along with it. Keeping
@@ -120,9 +121,7 @@ const useFilters = (initial: Filters) => {
   return [filters, setFilters] as const
 }
 
-// Icelandic takes the singular for a count ending in 1
-const carWord = (count: number) =>
-  count.toString().match(/.*1$/m) ? 'bíll' : 'bílar'
+const carWord = (count: number) => agree(count, 'bíll', 'bílar')
 
 const sortingLabels: Record<Sorting, string> = {
   name: 'Nafni',
@@ -264,8 +263,7 @@ export default function NewCars({
       {hasFilter && filteredCarCount > 0 && (
         <div className="p-4 flex items-center mx-auto max-w-[480px] gap-2 text-xs font-medium mb-10 xs:p-6 md:pl-10 md:max-w-none">
           {filteredCarCount} {carWord(filteredCarCount)}{' '}
-          {filteredCarCount.toString().match(/.*1$/m) ? 'passaði' : 'pössuðu'}{' '}
-          ekki við leitina{' '}
+          {agree(filteredCarCount, 'passaði', 'pössuðu')} ekki við leitina{' '}
           <button
             className="border-0 shrink-0 m-0 mr-2 text-xs font-semibold py-[5px] px-3 rounded-full cursor-pointer text-center flex justify-center items-center bg-cloud transition-all duration-200 text-tint hover:bg-[#f8f8f8]"
             onClick={(_event) => {

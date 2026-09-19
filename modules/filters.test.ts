@@ -64,6 +64,29 @@ describe('getFiltersFromQuery', () => {
     expect(getFiltersFromQuery({ drif: '' })).toEqual({})
     expect(getFiltersFromQuery({})).toEqual({})
   })
+
+  // Number('abc') is NaN and every comparison against NaN is false, so an
+  // unreadable parameter used to hide every car and render "NaN kr." in the
+  // chip that offered to remove it.
+  it.each([
+    ['verd', 'abc'],
+    ['verd', ''],
+    ['draegni', 'four hundred'],
+    ['hrodun', '-3'],
+    ['virdi', '0'],
+    ['hradhledsla', 'Infinity'],
+  ])('ignores %s=%s rather than matching nothing', (key, value) => {
+    const filters = getFiltersFromQuery({ [key]: value })
+
+    expect(filters).toEqual({})
+    expect(matches(filters)).toBe(newCars.length)
+  })
+
+  it('still reads a good number next to a bad one', () => {
+    expect(getFiltersFromQuery({ verd: 'abc', draegni: '400' })).toEqual({
+      range: 400,
+    })
+  })
 })
 
 // The bug this guards: useFilters joined multi-value filters with commas and
