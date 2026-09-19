@@ -5,6 +5,7 @@ import { useChat } from '@ai-sdk/react'
 import dynamic from 'next/dynamic'
 import FloatingChat from './ChatInput'
 import useBodyScrollLock from '../utils/useBodyScrollLock'
+import useKeyboardInset from '../utils/useKeyboardInset'
 import {
   clearStoredMessages,
   readStoredMessages,
@@ -63,6 +64,9 @@ export default function ChatContainer({ hide }: Props) {
 
   // Handle body scroll lock for chat modal
   useBodyScrollLock(isChatOpen && !releaseBodyLock)
+
+  // Keeps the input above a phone keyboard rather than behind it
+  useKeyboardInset()
 
   // Save messages to localStorage whenever they change
   useEffect(() => {

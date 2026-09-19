@@ -107,8 +107,11 @@ const ChatInput: React.FunctionComponent<Props> = ({
   return (
     <div
       className={clsx(
-        'fixed bottom-4 left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col-reverse items-center gap-3 transition-all duration-300',
-        'min-[500px]:bottom-6',
+        'fixed bottom-[calc(1rem+var(--keyboard-inset))] left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col-reverse items-center gap-3',
+        'min-[500px]:bottom-[calc(1.5rem+var(--keyboard-inset))]',
+        // Only the hiding fades. The bottom has to keep up with a keyboard on
+        // its way in, and a transition on it drags the bar along behind.
+        'transition-opacity duration-300',
         hide && 'opacity-0',
       )}
       onBlur={(event) => {

@@ -53,6 +53,8 @@ input {
 }
 
 :root {
+  /* Kept up to date by utils/useKeyboardInset while a phone keyboard is up */
+  --keyboard-inset: 0px;
   font-family: Inter, sans-serif;
   font-feature-settings:
     'liga' 1,
