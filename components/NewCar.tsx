@@ -45,7 +45,7 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
         <Image
           priority={priority}
           alt=""
-          sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
+          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 40vw, 540px"
           src={`/images/${car.heroImageName}.jpg`}
           width={1920}
           height={1280}
