@@ -53,7 +53,7 @@ const newCars: Array<NewCar> = [
     model: 'Q4 e-tron',
     subModel: '45 quattro',
     heroImageName: 'audi-q4-alt2',
-    price: 9_990_000,
+    price: 9_490_000,
     sellerURL: 'https://www.audi.is/is/models/q4-e-tron/q4-e-tron/',
     acceleration: 6.6,
     capacity: 82,
@@ -71,7 +71,7 @@ const newCars: Array<NewCar> = [
     sellerURL: 'https://www.audi.is/is/models/q6-e-tron/q6etron/',
     acceleration: 5.9,
     capacity: 94.9,
-    range: 616,
+    range: 625,
     evDatabaseURL:
       'https://ev-database.org/car/2146/Audi-Q6-SUV-e-tron-quattro',
     drive: 'AWD',
@@ -87,7 +87,7 @@ const newCars: Array<NewCar> = [
     sellerURL: 'https://www.audi.is/is/models/q6-e-tron/q6etron/',
     acceleration: 5.9,
     capacity: 94.9,
-    range: 636,
+    range: 637,
     evDatabaseURL:
       'https://ev-database.org/car/3043/Audi-Q6-Sportback-e-tron-quattro',
     drive: 'AWD',
