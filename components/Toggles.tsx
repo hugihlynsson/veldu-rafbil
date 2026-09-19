@@ -7,6 +7,10 @@ interface Props<P> {
   currentValue: P | undefined
   /** Optional adornment rendered after the label of the active item */
   indicator?: ReactNode
+  /** Read out after the active item's label, since `indicator` is decorative */
+  indicatorLabel?: string
+  /** Id of the element naming the group */
+  labelledBy?: string
 }
 
 export default function Toggles<P>({
@@ -14,9 +18,14 @@ export default function Toggles<P>({
   onClick,
   currentValue,
   indicator,
+  indicatorLabel,
+  labelledBy,
 }: Props<P>) {
   return (
-    <div className="flex max-w-full bg-black/4 self-start rounded-[10px] p-[3px] gap-[3px] xs:rounded-xl xs:p-1 xs:gap-1">
+    <fieldset
+      aria-labelledby={labelledBy}
+      className="flex max-w-full m-0 min-w-0 border-0 bg-black/4 self-start rounded-[10px] p-[3px] gap-[3px] xs:rounded-xl xs:p-1 xs:gap-1"
+    >
       {items.map(([label, value]) => (
         <button
           key={label}
@@ -33,8 +42,11 @@ export default function Toggles<P>({
         >
           {label}
           {value === currentValue && indicator}
+          {value === currentValue && indicatorLabel && (
+            <span className="sr-only">{indicatorLabel}</span>
+          )}
         </button>
       ))}
-    </div>
+    </fieldset>
   )
 }
