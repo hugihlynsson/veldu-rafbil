@@ -103,7 +103,7 @@ const useFilters = (initial: Filters) => {
       value,
     } = filters
 
-    name ? params.set('nafn', name.join(',')) : params.delete('nafn')
+    name?.length ? params.set('nafn', name.join(',')) : params.delete('nafn')
     acceleration
       ? params.set('hrodun', acceleration.toString())
       : params.delete('hrodun')
@@ -113,7 +113,7 @@ const useFilters = (initial: Filters) => {
           availability === 'available' ? 'faanlegir' : 'vaentanlegir',
         )
       : params.delete('frambod')
-    drive ? params.set('drif', drive.join(',')) : params.delete('drif')
+    drive?.length ? params.set('drif', drive.join(',')) : params.delete('drif')
     fastcharge
       ? params.set('hradhledsla', fastcharge.toString())
       : params.delete('hradhledsla')
