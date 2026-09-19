@@ -9,15 +9,15 @@ Tailwind v4, deployed on Vercel. One route: `/`.
 `npm test`, `npm run typecheck` and `npm run lint`, plus `npm run build` for
 anything beyond a data edit. The first three run on every pull request via
 `.github/workflows/ci.yml`; Vercel builds the preview, so CI does not repeat it.
-The build needs no environment variables; the `Missing Axiom token` lines it
-prints are expected.
+The build needs no environment variables and should print no warnings.
 
-Tests are Vitest, co-located as `modules/*.test.ts`, and cover the pure logic
-only — there are no component or route tests. Two are worth knowing about:
-`newCars.test.ts` checks the car data itself, since most commits edit it and
-most corrections to it have been a bad link or a hero image that does not
-resolve; `filters.test.ts` pins the URL round trip, because multi-value filters
-once came back from the URL as a single value and matched nothing.
+Tests are Vitest, co-located next to what they test, and cover the pure logic —
+there are no component tests. Three are worth knowing about: `newCars.test.ts`
+checks the car data itself, since most commits edit it and most corrections to
+it have been a bad link or a hero image that does not resolve; `filters.test.ts`
+pins the URL round trip, because multi-value filters once came back from the URL
+as a single value and matched nothing; `fetchCarDetails.test.ts` pins the tool's
+URL allowlist, which is a security boundary rather than a nicety.
 
 Formatting takes care of itself: a husky pre-commit hook runs oxfmt over the
 staged files and then oxlint over the repo, so don't hand-format. `.oxfmtrc.json`
@@ -114,7 +114,13 @@ hand.
 ## Chat advisor (`app/api/chat/route.ts`)
 
 - Streams from `gemini-3.8-flash` via `@ai-sdk/google` and the Vercel AI SDK.
-  Needs `GOOGLE_GENERATIVE_AI_API_KEY`; `AXIOM_TOKEN` is optional telemetry.
+  Needs `GOOGLE_GENERATIVE_AI_API_KEY`; `AXIOM_TOKEN` is optional telemetry and
+  the Axiom client is only constructed when it is set.
+- The endpoint is public and spends money, so `POST` is guarded before it
+  reaches the model: an in-memory fixed window per IP (`rateLimit.ts`, best
+  effort — one window per serverless instance) and a zod check on the body that
+  bounds the message count and size. The schema deliberately stays loose about
+  what is _inside_ a part; `convertToModelMessages` owns that shape.
 - The **entire car list is inlined into the system prompt** on every request, as
   post-grant prices. Changing `NewCar` fields or `getPriceWithGrant` changes what
   the model sees — keep `carsSummary` in step.
@@ -123,9 +129,15 @@ hand.
   `[q:` that appears mid-stream — keep that behaviour if you touch it.
 - `fetchCarDetails` scrapes ev-database.org HTML with regexes against
   `car.evDatabaseURL`. It is best-effort and returns a message rather than
-  throwing on failure.
-- Chat history is persisted in `localStorage` under `veldu-rafbil-chat-messages`
-  (`components/ChatContainer.tsx`).
+  throwing on failure. **The URL is checked against the set of `evDatabaseURL`
+  values in `newCars.ts` before anything is fetched** — the model chooses that
+  argument, and a model can be talked into choosing anything. Keep the
+  allowlist, the timeout and the response cap if you touch it.
+- Chat history is persisted in `localStorage` under `veldu-rafbil-chat-messages`,
+  through `utils/chatStorage.ts`. Go through it rather than touching
+  `localStorage` directly: every call there can throw (private mode, a full
+  quota, half-written JSON from an older shape) and a broken history must read
+  as an empty one rather than take the page down.
 
 ## Styling
 
@@ -140,6 +152,15 @@ and `md:` are the workhorses). Chat markdown is styled by the plain
 - **React Compiler is on** (`reactCompiler: true`, `babel-plugin-react-compiler`).
   Don't add `useMemo`/`useCallback`/`memo` by hand; the compiler handles
   memoisation.
+- **The chat is loaded lazily, on purpose.** `ChatContainer` is a `next/dynamic`
+  import in `app/newCars.tsx` (so the AI SDK is off the list's hydration path)
+  and `ChatModal` is one inside `ChatContainer` (so react-markdown is fetched
+  only once someone opens the chat, warmed on focus via `onIntent`). Importing
+  either statically puts ~60 KB gzipped back into the first load for visitors
+  who never chat, which is most of them.
+- **`next/image` `sizes` is load-bearing.** A typo in it is silent: the browser
+  falls back to `100vw` and fetches the largest candidate. `deviceSizes` in
+  `next.config.js` is tuned to the phones people actually use.
 - **Sorting and filter state lives in React _and_ in the URL** via
   `router.replace`. Adding state means updating the effect that serialises it,
   or the URL silently drifts from the UI.

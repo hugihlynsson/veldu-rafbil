@@ -1,5 +1,21 @@
 import { tool } from 'ai'
 import { z } from 'zod'
+import newCars from '../../../../modules/newCars'
+
+// The model picks the URL, and a model can be talked into picking any URL at
+// all. Without this the endpoint is a public fetcher for whatever a visitor
+// can persuade the assistant to ask for. The car list is the only place a
+// legitimate URL can come from, so it is also the whole allowlist.
+const allowedURLs = new Set(
+  newCars
+    .map((car) => car.evDatabaseURL)
+    .filter((url): url is string => Boolean(url)),
+)
+
+// ev-database pages are ~200 KB. Anything far past that is not a car page, and
+// reading it to the end would pin the request open.
+const MAX_BYTES = 2_000_000
+const TIMEOUT_MS = 8_000
 
 export const fetchCarDetailsTool = tool({
   description:
@@ -9,9 +25,20 @@ export const fetchCarDetailsTool = tool({
     carName: z.string().describe('The make and model of the car'),
   }),
   execute: async ({ url, carName }) => {
+    if (!allowedURLs.has(url)) {
+      return {
+        carName,
+        specifications:
+          'That URL is not one of the ev-database entries in the car list, so it was not fetched. Use the evDatabaseURL given for the car, or answer from the list alone.',
+        source: url,
+      }
+    }
+
     try {
-      const response = await fetch(url)
-      const html = await response.text()
+      const response = await fetch(url, {
+        signal: AbortSignal.timeout(TIMEOUT_MS),
+      })
+      const html = (await response.text()).slice(0, MAX_BYTES)
 
       // Extract structured data from EV Database
       // The site uses tables with format: <tr><td>Label</td><td>Value</td></tr>
@@ -62,8 +89,6 @@ export const fetchCarDetailsTool = tool({
         .filter(([key, value]) => value && key !== 'source')
         .map(([key, value]) => `${key}: ${value}`)
         .join('\n')
-
-      console.log('Extracted specs for', carName, ':\n', formattedSpecs)
 
       return {
         carName,
