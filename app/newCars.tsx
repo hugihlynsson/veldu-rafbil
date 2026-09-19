@@ -11,14 +11,15 @@ import FilterModal from '../components/FilterModal'
 import ActiveFilters from '../components/ActiveFilters'
 import newCars from '../modules/newCars'
 import carFilter from '../modules/carFilter'
+import { filterQueryKeys, getQueryFromFilters } from '../modules/filters'
 import getCarId from '../modules/getCarId'
 import { Filters, Sorting, SortingDirection } from '../types'
 import {
   carSorter,
   defaultDirection,
   flipDirection,
-  isDefaultDirection,
-  sortingToQuery,
+  getQueryFromSorting,
+  sortingQueryKeys,
 } from '../modules/sorting'
 import stableSort from '../modules/stableSort'
 import { agree } from '../modules/plural'
@@ -33,30 +34,37 @@ const ChatContainer = dynamic(() => import('../components/ChatContainer'), {
   ssr: false,
 })
 
+// Writes what a serialiser in modules/ produced and clears the parameters it
+// left out, so that switching a sorting or a filter off takes its parameter with
+// it while anything else in the URL stays.
+//
+// The URL goes straight to the history rather than through the router, which
+// Next keeps in sync with useSearchParams. Reading it back from the location
+// means the effects below don't depend on the URL they update.
+const replaceQuery = (
+  keys: readonly string[],
+  query: Record<string, string>,
+) => {
+  const params = new URLSearchParams(window.location.search)
+
+  for (const key of keys) {
+    const value = query[key]
+    if (value === undefined) {
+      params.delete(key)
+    } else {
+      params.set(key, value)
+    }
+  }
+
+  window.history.replaceState(null, '', `?${params.toString()}`)
+}
+
 const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
   const [sorting, setSorting] = useState<Sorting>(initial)
   const [direction, setDirection] = useState<SortingDirection>(initialDirection)
 
-  // The URL is written straight to the history rather than through the router,
-  // which Next keeps in sync with useSearchParams. Reading it back from the
-  // location means the effect doesn't depend on the URL it updates.
   useEffect(() => {
-    const updatedSearchParams = new URLSearchParams(window.location.search)
-    const isDefault = isDefaultDirection(sorting, direction)
-
-    if (sorting === 'name' && isDefault) {
-      updatedSearchParams.delete('radaeftir')
-    } else {
-      updatedSearchParams.set('radaeftir', sortingToQuery[sorting])
-    }
-
-    if (isDefault) {
-      updatedSearchParams.delete('ofugt')
-    } else {
-      updatedSearchParams.set('ofugt', '1')
-    }
-
-    window.history.replaceState(null, '', `?${updatedSearchParams.toString()}`)
+    replaceQuery(sortingQueryKeys, getQueryFromSorting(sorting, direction))
   }, [sorting, direction])
 
   // Clicking the active sorting flips it, clicking another one starts it in
@@ -77,41 +85,7 @@ const useFilters = (initial: Filters) => {
   const [filters, setFilters] = useState<Filters>(initial)
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-
-    const {
-      name,
-      acceleration,
-      availability,
-      drive,
-      fastcharge,
-      price,
-      range,
-      value,
-    } = filters
-
-    const setOrDelete = (key: string, value: string | number | undefined) => {
-      if (value) {
-        params.set(key, String(value))
-      } else {
-        params.delete(key)
-      }
-    }
-
-    setOrDelete('nafn', name?.length ? name.join(',') : undefined)
-    setOrDelete('hrodun', acceleration)
-    setOrDelete(
-      'frambod',
-      availability &&
-        (availability === 'available' ? 'faanlegir' : 'vaentanlegir'),
-    )
-    setOrDelete('drif', drive?.length ? drive.join(',') : undefined)
-    setOrDelete('hradhledsla', fastcharge)
-    setOrDelete('verd', price)
-    setOrDelete('draegni', range)
-    setOrDelete('virdi', value)
-
-    window.history.replaceState(null, '', `?${params.toString()}`)
+    replaceQuery(filterQueryKeys, getQueryFromFilters(filters))
   }, [filters])
 
   return [filters, setFilters] as const

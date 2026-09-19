@@ -25,12 +25,10 @@ carries the style and the paths oxfmt must leave alone — generated files and
 lockfiles belong to their tools.
 
 `.oxlintrc.json` keeps a few rules at warning rather than error, where the real
-fix is a bigger refactor than whatever you came here to do. Today that is the
-URL-sync effects in `app/newCars.tsx`, which go away when sorting and filter
-state stops being kept in React _and_ in the URL, and not before. Treat the
-warnings a clean checkout produces as the budget: a run after your change should
-show the same ones it showed before. A new warning is yours to fix, and
-downgrading a rule to clear a run is not a fix.
+fix would be a bigger refactor than whatever you came here to do. A clean
+checkout currently produces none of them, so the budget is zero: a warning your
+change introduces is yours to fix, and downgrading a rule to clear a run is not
+a fix.
 
 ## Layout
 
@@ -128,12 +126,20 @@ one has to split. A filter that round-trips through the URL wants a test, since
 a multi-value filter coming back as a single value matches nothing and fails
 quietly.
 
+Both directions live in the modules: `getFiltersFromQuery` and
+`getQueryFromFilters`, `getSortingFromQuery`/`getDirectionFromQuery` and
+`getQueryFromSorting`, each beside the other so a test can run state out through
+one and back in through the other. The client only applies them, clearing
+`filterQueryKeys` and `sortingQueryKeys` before writing what came back, so a new
+filter needs its key in that list or it cannot be switched off — which is what
+the `Required<Filters>` case in `filters.test.ts` is there to catch.
+
 ## Everything user-facing is Icelandic
 
 UI copy, and **the query parameters too**. Keep the code identifiers English and
-the wire format Icelandic. The mapping lives in `modules/filters.ts`,
-`modules/sorting.ts` and the hooks in `app/newCars.tsx`, and has to stay in sync
-in both directions — read it there rather than from a list in this file.
+the wire format Icelandic. The mapping lives in `modules/filters.ts` and
+`modules/sorting.ts`, both directions in each — read it there rather than from a
+list in this file.
 
 New copy that counts things needs Icelandic plural agreement: use `agree()`
 from `modules/plural.ts` rather than testing the number yourself. The singular

@@ -48,3 +48,49 @@ export const getFiltersFromQuery = (query: SearchParams): Filters => {
 
   return filters
 }
+
+// Every parameter a filter can occupy. The client clears all of them before
+// writing what getQueryFromFilters returned, so that switching a filter off
+// takes its parameter with it and anything else in the URL is left alone.
+export const filterQueryKeys = [
+  'nafn',
+  'hrodun',
+  'frambod',
+  'drif',
+  'hradhledsla',
+  'verd',
+  'draegni',
+  'virdi',
+] as const
+
+// The writing direction, which used to live in useFilters with only a copy of
+// itself in the test for company. It belongs beside the reader: the two have to
+// agree exactly, and the way they failed to was a multi-value filter written as
+// a comma list and read back as one value, which matches nothing and says
+// nothing. Now the round trip runs through both.
+export const getQueryFromFilters = (
+  filters: Filters,
+): Record<string, string> => {
+  const query: Record<string, string> = {}
+
+  // A zero, an empty list or a list of nothing but separators is no filter,
+  // which is how the reader above treats one too
+  const set = (key: string, value: string | number | undefined) => {
+    if (value) query[key] = String(value)
+  }
+
+  set('nafn', filters.name?.join(','))
+  set('hrodun', filters.acceleration)
+  set(
+    'frambod',
+    filters.availability &&
+      (filters.availability === 'available' ? 'faanlegir' : 'vaentanlegir'),
+  )
+  set('drif', filters.drive?.join(','))
+  set('hradhledsla', filters.fastcharge)
+  set('verd', filters.price)
+  set('draegni', filters.range)
+  set('virdi', filters.value)
+
+  return query
+}
