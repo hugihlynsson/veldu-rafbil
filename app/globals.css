@@ -37,6 +37,14 @@ input {
   font-family: Inter, sans-serif;
 }
 
+/* Almost every control here is appearance-none with no border, so the browser
+   default ring has nothing to draw around. Without this, tabbing through the
+   page is invisible. */
+:focus-visible {
+  outline: 2px solid var(--color-sky);
+  outline-offset: 2px;
+}
+
 :root {
   font-family: Inter, sans-serif;
   font-feature-settings:

@@ -34,7 +34,9 @@ const ChatHeader: React.FunctionComponent<Props> = ({
           />
         </svg>
       </button>
-      Spjall
+      <h2 id="chat-modal-title" className="m-0 text-lg font-semibold">
+        Spjall
+      </h2>
       {hasMessages && (
         <button
           type="button"

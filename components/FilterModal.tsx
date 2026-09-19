@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { Availability, Drive, Filters } from '../types'
 import clsx from 'clsx'
@@ -18,6 +18,8 @@ const FiltersModal: React.FunctionComponent<Props> = ({
   getCountPreview,
   onDone,
 }) => {
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const nameInputRef = useRef<HTMLInputElement>(null)
   const [state, setState] = useState<State>('initializing')
   const [filters, setFilters] = useState<Filters>(initialFilters)
   const [nameInput, setNameInput] = useState<string>(
@@ -25,22 +27,22 @@ const FiltersModal: React.FunctionComponent<Props> = ({
   )
 
   useEffect(() => {
+    dialogRef.current?.showModal()
+    // showModal moves focus to the first focusable thing, which is the close
+    // button. The name field is what the reader came for.
+    nameInputRef.current?.focus()
     setTimeout(() => setState(() => 'visible'), 1)
     return
   }, [])
 
   const handleClose = () => {
     setState(() => 'leaving')
-    setTimeout(onDone, 300)
+    setTimeout(() => {
+      // Closing before unmount is what hands focus back to whatever opened us
+      dialogRef.current?.close()
+      onDone()
+    }, 300)
   }
-
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') handleClose()
-    }
-    document.addEventListener('keydown', handleEscape)
-    return () => document.removeEventListener('keydown', handleEscape)
-  }, [])
 
   const handleDone = () => {
     onSubmit(filters)
@@ -124,13 +126,23 @@ const FiltersModal: React.FunctionComponent<Props> = ({
   }
 
   return (
-    <div
+    // oxlint and jsx-a11y do not know <dialog>: the click is backdrop dismissal
+    // and Escape is handled natively through onCancel below
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+    <dialog
+      ref={dialogRef}
+      aria-labelledby="filter-modal-title"
       className={clsx(
-        "fixed inset-0 flex items-end justify-center before:content-[''] before:block before:absolute before:inset-0 before:bg-black/0 before:transition-[background-color] before:duration-200 before:delay-100",
+        'hidden open:flex fixed inset-0 m-0 max-w-none max-h-none h-full w-full items-end justify-center border-0 bg-transparent p-0',
+        'backdrop:bg-black/0 backdrop:transition-[background-color] backdrop:duration-200 backdrop:delay-100',
         '[@media(min-width:800px)_and_(min-height:600px)]:items-center',
-        state === 'visible' && 'before:delay-0 before:bg-black/30',
+        state === 'visible' && 'backdrop:delay-0 backdrop:bg-black/30',
       )}
-      role="presentation"
+      onCancel={(event) => {
+        // Escape: animate out rather than letting the browser close instantly
+        event.preventDefault()
+        handleClose()
+      }}
       onClick={(event) => {
         if (event.target === event.currentTarget) handleClose()
       }}
@@ -163,7 +175,9 @@ const FiltersModal: React.FunctionComponent<Props> = ({
               />
             </svg>
           </button>
-          Leita
+          <h2 id="filter-modal-title" className="m-0 text-lg font-semibold">
+            Leita
+          </h2>
         </header>
         <div className="flex flex-col grow shrink overflow-scroll p-5 pb-2">
           <div className="flex gap-2 items-baseline mb-1 px-3">
@@ -175,7 +189,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             </label>
           </div>
           <input
-            autoFocus
+            ref={nameInputRef}
             id="filter-name"
             type="text"
             placeholder="Tesla, Kia"
@@ -242,7 +256,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
           </select>
           <div className="flex gap-2 items-baseline mb-1 px-3">
             <label
-              htmlFor="filter-drive"
+              htmlFor="filter-availability"
               className="text-tint text-xs font-semibold"
             >
               Framboð
@@ -330,7 +344,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
           </button>
         </footer>
       </section>
-    </div>
+    </dialog>
   )
 }
 

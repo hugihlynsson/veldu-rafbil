@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useChat } from '@ai-sdk/react'
 import ChatModal from './ChatModal'
 import FloatingChat from './ChatInput'
@@ -13,6 +13,7 @@ interface Props {
 }
 
 export default function ChatContainer({ hide }: Props) {
+  const chatInputRef = useRef<HTMLInputElement>(null)
   const [showChatMessages, setShowChatMessages] = useState<boolean>(false)
   const [releaseBodyLock, setReleaseBodyLock] = useState<boolean>(false)
 
@@ -66,7 +67,13 @@ export default function ChatContainer({ hide }: Props) {
     <>
       {showChatMessages && (
         <ChatModal
-          onDone={() => setShowChatMessages(false)}
+          onDone={() => {
+            setShowChatMessages(false)
+            // The dialog normally hands focus back to whatever opened it, but
+            // that can be a suggestion button which is gone by now. The input
+            // is always here, and is where the reader was anyway.
+            chatInputRef.current?.focus()
+          }}
           messages={chatState.messages}
           status={chatState.status}
           onClearChat={() => {
@@ -80,6 +87,7 @@ export default function ChatContainer({ hide }: Props) {
       )}
 
       <FloatingChat
+        inputRef={chatInputRef}
         onOpenChat={() => setShowChatMessages(true)}
         hide={hide}
         disabled={chatState.status === 'streaming'}

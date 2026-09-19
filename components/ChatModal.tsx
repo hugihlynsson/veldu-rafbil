@@ -43,12 +43,14 @@ const ChatModal: React.FunctionComponent<Props> = ({
   onSendMessage,
   onRetry,
 }) => {
+  const dialogRef = useRef<HTMLDialogElement>(null)
   const [state, setState] = useState<State>(State.Initializing)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const hasScrolledToInitialPosition = useRef(false)
 
   useEffect(() => {
+    dialogRef.current?.showModal()
     setTimeout(() => setState(() => State.Visible), 1)
 
     // Mark that initial position has been set after a short delay
@@ -74,7 +76,11 @@ const ChatModal: React.FunctionComponent<Props> = ({
   const handleClose = () => {
     setState(() => State.Leaving)
     onReleaseBodyLock()
-    setTimeout(onDone, 300)
+    setTimeout(() => {
+      // Closing before unmount is what hands focus back to the chat input
+      dialogRef.current?.close()
+      onDone()
+    }, 300)
   }
 
   // Extract data from the last assistant message
@@ -96,9 +102,18 @@ const ChatModal: React.FunctionComponent<Props> = ({
       !lastMessage?.parts?.some(({ type }) => type === 'text'))
 
   return (
-    <div
-      className={`fixed top-0 right-0 bottom-0 left-0 flex items-start justify-center z-1000 before:content-[''] before:block before:absolute before:inset-0 before:bg-black/0 before:transition-all before:duration-300 before:delay-100 ${state === State.Visible ? 'before:delay-0 before:bg-black/20' : ''}`}
-      role="presentation"
+    // oxlint and jsx-a11y do not know <dialog>: the click is backdrop dismissal
+    // and Escape is handled natively through onCancel below
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
+    <dialog
+      ref={dialogRef}
+      aria-labelledby="chat-modal-title"
+      className={`hidden open:flex fixed inset-0 m-0 h-full max-h-none w-full max-w-none items-start justify-center border-0 bg-transparent p-0 backdrop:bg-black/0 backdrop:transition-[background-color] backdrop:duration-300 backdrop:delay-100 ${state === State.Visible ? 'backdrop:delay-0 backdrop:bg-black/20' : ''}`}
+      onCancel={(event) => {
+        // Escape: animate out rather than letting the browser close instantly
+        event.preventDefault()
+        handleClose()
+      }}
       onClick={(event) => {
         if (event.target === event.currentTarget) handleClose()
       }}
@@ -157,7 +172,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
           <span ref={messagesEndRef} />
         </div>
       </section>
-    </div>
+    </dialog>
   )
 }
 
