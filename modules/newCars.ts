@@ -1055,7 +1055,7 @@ const newCars: Array<NewCar> = [
     model: '6e',
     subModel: 'Long Range',
     heroImageName: 'mazda-6e',
-    price: 6_370_000,
+    price: 6_390_000,
     sellerURL: 'https://www.mazda.is/bill/6e',
     acceleration: 7.8,
     capacity: 80,
