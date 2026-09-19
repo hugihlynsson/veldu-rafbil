@@ -90,7 +90,9 @@ comparing.
 
 **`addDecimalSeparators` exists because `toLocaleString()` breaks SSR** — it can
 differ between Node and the browser and cause hydration mismatches. Use it for
-every number rendered in the list UI.
+every number rendered in the list UI. It writes Icelandic: a full stop between
+thousands and a comma before the fraction. A filter arrives from the URL, so it
+can carry a fraction whatever the UI offers.
 
 **`stableSort`, not `Array.prototype.sort`**, for the car list, so equal-ranked
 cars keep a deterministic order.
