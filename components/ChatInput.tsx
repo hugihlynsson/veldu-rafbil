@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { trackEvent } from 'fathom-client'
 import { CHAT_SUGGESTIONS } from '../constants/chatSuggestions'
 import { getRandomSuggestions } from '../modules/chatHelpers'
@@ -12,7 +12,14 @@ interface Props {
   disabled?: boolean
   hasMessages: boolean
   sendMessage: (message: string) => void
-  inputRef?: React.RefObject<HTMLInputElement | null>
+  inputRef?: React.Ref<HTMLInputElement>
+  /**
+   * The draft is the caller's, because this input is unmounted and mounted
+   * again as it moves in and out of the chat dialog, and a half-typed question
+   * should survive that.
+   */
+  value: string
+  onValueChange: (value: string) => void
   /** Fired on focus, before anything is sent, so the caller can warm the chat */
   onIntent?: () => void
 }
@@ -24,18 +31,21 @@ const ChatInput: React.FunctionComponent<Props> = ({
   hasMessages,
   sendMessage,
   inputRef,
+  value,
+  onValueChange,
   onIntent,
 }) => {
-  const [input, setInput] = useState<string>('')
   const [isFocused, setIsFocused] = useState(false)
+  const [showFocusRing, setShowFocusRing] = useState(false)
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([])
+  const isPointerGesture = useRef(false)
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (input.trim()) {
-      sendMessage(input)
+    if (value.trim()) {
+      sendMessage(value)
       trackEvent('Sent message')
-      setInput('')
+      onValueChange('')
       onOpenChat()
     } else if (hasMessages) {
       // Enter on an empty box reopens the conversation. Without this there is
@@ -45,10 +55,16 @@ const ChatInput: React.FunctionComponent<Props> = ({
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value)
+    onValueChange(e.target.value)
+  }
+
+  const handleFocusRing = () => {
+    setShowFocusRing(!isPointerGesture.current)
+    isPointerGesture.current = false
   }
 
   const handleFocus = () => {
+    handleFocusRing()
     setIsFocused(true)
     onIntent?.()
     if (!hasMessages) {
@@ -67,10 +83,27 @@ const ChatInput: React.FunctionComponent<Props> = ({
     }
   }
 
+  // :focus-visible is no help for deciding whether to draw the ring: the
+  // browser matches it on a text field however focus arrived, a click
+  // included, so the pill would be ringed every time it was clicked. The
+  // pointer gesture is tracked instead, and the ring is left to the ways of
+  // arriving that do not point at it: the tab key, and the focus handed back
+  // here when the chat closes. Both controls carry it, because Safari does
+  // not focus a button on click and the flag would outlive the gesture.
+  const pointerGestureHandlers = {
+    onPointerDown: () => {
+      isPointerGesture.current = true
+      setShowFocusRing(false)
+    },
+    onPointerUp: () => {
+      isPointerGesture.current = false
+    },
+  }
+
   const handleSuggestionClick = (suggestion: string) => {
     sendMessage(suggestion)
     trackEvent('Selected suggestion')
-    setInput('')
+    onValueChange('')
     setIsFocused(false)
     onOpenChat()
   }
@@ -85,6 +118,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
           setIsFocused(false)
+          setShowFocusRing(false)
         }
       }}
     >
@@ -92,14 +126,15 @@ const ChatInput: React.FunctionComponent<Props> = ({
         onSubmit={onSubmit}
         className={clsx(
           'pointer-events-auto flex items-center gap-2 p-[8px_8px_8px_20px] bg-[rgba(220,220,220,0.7)] backdrop-blur-xl rounded-full shadow-[0_4px_24px_rgba(0,0,0,0)] w-80 max-w-[90vw] transition-all duration-300 ease-in-out scale-[0.98] border border-black/2 hover:scale-100',
-          'focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-sky',
+          showFocusRing && 'outline-2 outline-offset-2 outline-sky',
           isFocused && 'w-[400px] scale-100',
         )}
       >
         <input
+          {...pointerGestureHandlers}
           ref={inputRef}
           type="text"
-          value={input}
+          value={value}
           onChange={handleInputChange}
           onFocus={handleFocus}
           onClick={handleClick}
@@ -109,9 +144,11 @@ const ChatInput: React.FunctionComponent<Props> = ({
           className="flex-1 border-0 bg-transparent p-[8px_0] text-base font-normal text-tint outline-none placeholder:text-black/60 disabled:opacity-60"
         />
         <button
+          {...pointerGestureHandlers}
+          onFocus={handleFocusRing}
           aria-label="Senda skilaboð"
           type="submit"
-          disabled={disabled || !input.trim()}
+          disabled={disabled || !value.trim()}
           className="appearance-none w-9 h-9 flex items-center justify-center bg-sky border-0 rounded-full text-lab cursor-pointer transition-all duration-200 shrink-0 hover:enabled:bg-sky-darker hover:enabled:scale-105 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           <svg
