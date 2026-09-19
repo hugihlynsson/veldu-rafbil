@@ -6,11 +6,12 @@ Icelandic single-page site listing every 100% electric car sold new in Iceland,
 with sorting, filtering and an AI advisor chat. Next.js App Router + TypeScript +
 Tailwind v4, deployed on Vercel. One route: `/`.
 
-## Commands
+## Verifying a change
 
-There are **no tests and no ESLint**, so `npx tsc --noEmit` is the check, plus
-`npm run build` for anything beyond a data edit. The build needs no environment
-variables; the `Missing Axiom token` lines it prints are expected.
+There is no test suite, no lint script and no typecheck script, so the check is
+`npx tsc --noEmit`, plus `npm run build` for anything beyond a data edit. The
+build needs no environment variables; the `Missing Axiom token` lines it prints
+are expected.
 
 `npm run prettify` reformats the whole repo, and a good chunk of it is not
 prettier-clean, so it buries a real diff in unrelated churn. Format what you
