@@ -1918,13 +1918,15 @@ const newCars: Array<NewCar> = [
     make: 'Porsche',
     model: 'Cayenne',
     subModel: 'Coupé',
-    heroImageName: 'porsche-cayenne',
+    heroImageName: 'porsche-cayenne-coupe',
     price: 17_450_000,
     sellerURL:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
     acceleration: 4.8,
     capacity: 108,
     range: 643,
+    evDatabaseURL:
+      'https://ev-database.org/car/3560/Porsche-Cayenne-Coupe-Electric',
     drive: 'AWD',
     power: 325,
     timeToCharge10T080: 16,
@@ -1949,6 +1951,23 @@ const newCars: Array<NewCar> = [
   {
     make: 'Porsche',
     model: 'Cayenne',
+    subModel: 'S Coupé',
+    heroImageName: 'porsche-cayenne-coupe-alt',
+    price: 20_450_000,
+    sellerURL:
+      'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
+    acceleration: 3.8,
+    capacity: 108,
+    range: 670,
+    evDatabaseURL:
+      'https://ev-database.org/car/3561/Porsche-Cayenne-S-Coupe-Electric',
+    drive: 'AWD',
+    power: 490,
+    timeToCharge10T080: 16,
+  },
+  {
+    make: 'Porsche',
+    model: 'Cayenne',
     subModel: 'Turbo',
     heroImageName: 'porsche-cayenne-turbo',
     price: 26_450_000,
@@ -1959,6 +1978,23 @@ const newCars: Array<NewCar> = [
     range: 623,
     evDatabaseURL:
       'https://ev-database.org/car/3399/Porsche-Cayenne-Turbo-Electric',
+    drive: 'AWD',
+    power: 850,
+    timeToCharge10T080: 16,
+  },
+  {
+    make: 'Porsche',
+    model: 'Cayenne',
+    subModel: 'Turbo Coupé',
+    heroImageName: 'porsche-cayenne-coupe-turbo',
+    price: 26_950_000,
+    sellerURL:
+      'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
+    acceleration: 2.5,
+    capacity: 108,
+    range: 637,
+    evDatabaseURL:
+      'https://ev-database.org/car/3562/Porsche-Cayenne-Turbo-Coupe-Electric',
     drive: 'AWD',
     power: 850,
     timeToCharge10T080: 16,
