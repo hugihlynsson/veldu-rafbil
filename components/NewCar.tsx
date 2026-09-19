@@ -7,6 +7,7 @@ import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
 import LinkPill from './LinkPill'
 import getPriceWithGrant from '../modules/getPriceWithGrant'
+import getCarId from '../modules/getCarId'
 
 interface Props {
   car: NewCarType
@@ -14,7 +15,7 @@ interface Props {
   priority?: boolean
 }
 
-let getDriveLabel = (drive: Drive) => {
+const getDriveLabel = (drive: Drive) => {
   switch (drive) {
     case 'AWD':
       return 'Fjórhjóladrif'
@@ -27,23 +28,22 @@ let getDriveLabel = (drive: Drive) => {
 
 const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
   const priceWithGrant = getPriceWithGrant(car.price)
-  let hasGrant = priceWithGrant !== car.price
+  const hasGrant = priceWithGrant !== car.price
 
-  // Create a unique ID for this car
-  const carId = `car-${car.make}-${car.model}-${car.subModel || 'base'}`
-    .toLowerCase()
-    .replace(/\s+/g, '-')
+  const carId = getCarId(car)
 
   return (
     <article
       id={carId}
+      // MiniCar scrolls here from the chat, and moves focus with it
+      tabIndex={-1}
       className="mb-8 md:flex md:m-0 md:mx-8 md:mb-10 md:ml-10 md:items-center"
     >
       <div className="md:block md:relative md:w-[40%] md:grow md:self-center">
         <Image
           priority={priority}
           alt=""
-          sizes="(max-width: 767px) 100wv, (max-width: 1023px) 40wv, 540px"
+          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 40vw, 540px"
           src={`/images/${car.heroImageName}.jpg`}
           width={1920}
           height={1280}
@@ -58,13 +58,13 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
           </div>
         )}
 
-        <h1 className="m-0 font-semibold text-[32px]">
+        <h2 className="m-0 font-semibold text-[32px]">
           <span>{car.make}</span>{' '}
           <span className="font-normal">{car.model}</span>
           <span className="block font-medium text-base text-stone -mt-px mb-2">
             {car.subModel}
           </span>
-        </h1>
+        </h2>
 
         <LinkPill
           href={car.sellerURL}
@@ -102,7 +102,7 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
               className="mt-0.5 text-xs text-[#666] font-medium"
               title={`Afl (${Math.round(car.power * 1.34102)} hö)`}
             >
-              {car.power} kW
+              {car.power} kW<span className="sr-only"> afl</span>
             </div>
           </div>
 
@@ -116,6 +116,10 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
               title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10T080} min)`}
             >
               {getKmPerMinutesCharged(car.timeToCharge10T080, car.range)} km/min
+              <span className="sr-only">
+                {' '}
+                meðaldrægniaukning á hröðustu hleðslu
+              </span>
             </div>
           </div>
 
@@ -123,12 +127,15 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
             <div className="uppercase text-[10px] font-semibold tracking-wider mb-[3px] text-stone">
               Drægni
             </div>
-            <div className="text-2xl font-normal">{car.range} km</div>
+            <div className="text-2xl font-normal">
+              {car.range} km<span className="sr-only"> samkvæmt WLTP</span>
+            </div>
             <div
               className="mt-0.5 text-xs text-[#666] font-medium"
               title={getDriveLabel(car.drive)}
             >
               {car.drive}
+              <span className="sr-only">, {getDriveLabel(car.drive)}</span>
             </div>
           </div>
         </div>

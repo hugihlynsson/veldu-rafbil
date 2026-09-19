@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { UIDataTypes, UITools, ChatStatus, UIMessage } from 'ai'
-import { parseFollowUps } from '../utils/chatHelpers'
+import { parseFollowUps, stripFollowUps } from '../modules/chatHelpers'
+import Modal from './Modal'
 import ChatHeader from './chat/ChatHeader'
 import ChatMessage from './chat/ChatMessage'
 import FollowUpSuggestions from './chat/FollowUpSuggestions'
@@ -28,12 +29,6 @@ interface Props {
   onRetry: () => void
 }
 
-enum State {
-  Initializing,
-  Visible,
-  Leaving,
-}
-
 const ChatModal: React.FunctionComponent<Props> = ({
   onDone,
   messages,
@@ -43,19 +38,8 @@ const ChatModal: React.FunctionComponent<Props> = ({
   onSendMessage,
   onRetry,
 }) => {
-  const [state, setState] = useState<State>(State.Initializing)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
-  const hasScrolledToInitialPosition = useRef(false)
-
-  useEffect(() => {
-    setTimeout(() => setState(() => State.Visible), 1)
-
-    // Mark that initial position has been set after a short delay
-    setTimeout(() => {
-      hasScrolledToInitialPosition.current = true
-    }, 10)
-  }, [])
 
   // Keep scroll at bottom during streaming to prevent jumps
   useEffect(() => {
@@ -71,24 +55,18 @@ const ChatModal: React.FunctionComponent<Props> = ({
     }
   }, [messages, status])
 
-  const handleClose = () => {
-    setState(() => State.Leaving)
-    onReleaseBodyLock()
-    setTimeout(onDone, 300)
-  }
-
   // Extract data from the last assistant message
   const lastMessage = messages[messages.length - 1]
-  const lastMessageFollowUps =
+  const lastAssistantText =
     lastMessage?.role === 'assistant'
-      ? (() => {
-          const textContent = lastMessage.parts
-            ?.filter((part) => part.type === 'text')
-            .map((part) => part.text)
-            .join(' ')
-          return textContent ? parseFollowUps(textContent) : []
-        })()
-      : []
+      ? (lastMessage.parts
+          ?.filter((part) => part.type === 'text')
+          .map((part) => part.text)
+          .join(' ') ?? '')
+      : ''
+  const lastMessageFollowUps = lastAssistantText
+    ? parseFollowUps(lastAssistantText)
+    : []
 
   const showLoading =
     (lastMessage?.role === 'user' && status !== 'error') ||
@@ -96,68 +74,81 @@ const ChatModal: React.FunctionComponent<Props> = ({
       !lastMessage?.parts?.some(({ type }) => type === 'text'))
 
   return (
-    <div
-      className={`fixed top-0 right-0 bottom-0 left-0 flex items-start justify-center z-1000 before:content-[''] before:block before:absolute before:inset-0 before:bg-black/0 before:transition-all before:duration-300 before:delay-100 ${state === State.Visible ? 'before:delay-0 before:bg-black/20' : ''}`}
-      role="presentation"
-      onClick={(event) => {
-        if (event.target === event.currentTarget) handleClose()
-      }}
+    <Modal
+      labelledBy="chat-modal-title"
+      onDone={onDone}
+      onLeave={onReleaseBodyLock}
+      className="items-start backdrop:duration-300 data-[state=visible]:backdrop:bg-black/20"
     >
-      <section
-        className={`z-1 flex flex-col bg-white/95 backdrop-blur-[20px] w-screen h-dvh overflow-hidden scale-95 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.32,0,0.67,0)] min-[600px]:h-[calc(100dvh-24px)] min-[600px]:max-w-[600px] min-[600px]:w-[90vw] min-[600px]:rounded-[24px_24px_32px_32px] min-[600px]:mt-3 min-[600px]:shadow-[0px_8px_60px_rgba(0,0,0,0.15)] ${state === State.Visible ? 'opacity-100 ease-[cubic-bezier(0.33,1,0.68,1)] scale-100' : ''}`}
-      >
-        <ChatHeader
-          hasMessages={messages.length > 0}
-          onClose={handleClose}
-          onClearChat={() => {
-            handleClose()
-            setTimeout(onClearChat, 300)
-          }}
-        />
-
-        <div
-          className="flex-1 overflow-y-auto pb-21 flex flex-col"
-          style={{ paddingTop: '20px' }}
-          ref={messagesContainerRef}
+      {({ isVisible, close }) => (
+        <section
+          className={`z-1 flex flex-col bg-white/95 backdrop-blur-[20px] w-screen h-dvh overflow-hidden scale-95 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.32,0,0.67,0)] min-[600px]:h-[calc(100dvh-24px)] min-[600px]:max-w-[600px] min-[600px]:w-[90vw] min-[600px]:rounded-[24px_24px_32px_32px] min-[600px]:mt-3 min-[600px]:shadow-[0px_8px_60px_rgba(0,0,0,0.15)] ${isVisible ? 'opacity-100 ease-[cubic-bezier(0.33,1,0.68,1)] scale-100' : ''}`}
         >
-          {messages.filter(emptyMessageFilter).map((message) => (
-            <ChatMessage
-              key={message.id}
-              message={message}
-              isLastUserMessage={
-                message.id === messages.findLast((m) => m.role === 'user')?.id
-              }
-            />
-          ))}
+          <ChatHeader
+            hasMessages={messages.length > 0}
+            onClose={close}
+            onClearChat={() => {
+              close()
+              setTimeout(onClearChat, 300)
+            }}
+          />
 
-          {showLoading && <TypingIndicator />}
+          <div
+            className="flex-1 overflow-y-auto pb-21 flex flex-col"
+            style={{ paddingTop: '20px' }}
+            ref={messagesContainerRef}
+          >
+            {messages.filter(emptyMessageFilter).map((message) => (
+              <ChatMessage
+                key={message.id}
+                message={message}
+                isLastUserMessage={
+                  message.id === messages.findLast((m) => m.role === 'user')?.id
+                }
+              />
+            ))}
 
-          {status === 'error' && (
-            <div className="flex items-center justify-between mx-4 mb-4 rounded-full bg-red-50 p-3 pl-4 text-sm text-red-700">
-              <p className="font-medium">Úps, eitthvað fór úrskeiðis</p>
-              <button
-                onClick={onRetry}
-                className="rounded-full bg-red-100 px-3 py-1.5 text-xs font-medium text-red-700 hover:bg-red-200 transition-colors cursor-pointer"
+            {showLoading && <TypingIndicator />}
+
+            {status === 'error' && (
+              <div
+                role="alert"
+                className="flex items-center justify-between mx-4 mb-4 rounded-full bg-red-50 p-3 pl-4 text-sm text-red-700"
               >
-                Reyna aftur
-              </button>
-            </div>
-          )}
+                <p className="font-medium">Úps, eitthvað fór úrskeiðis</p>
+                <button
+                  onClick={onRetry}
+                  className="rounded-full bg-red-100 px-3 py-1.5 text-xs font-medium text-red-700 hover:bg-red-200 transition-colors cursor-pointer"
+                >
+                  Reyna aftur
+                </button>
+              </div>
+            )}
 
-          {status !== 'streaming' && lastMessage && (
-            <MentionedCars lastMessage={lastMessage} onClose={handleClose} />
-          )}
+            {status !== 'streaming' && lastMessage && (
+              <MentionedCars lastMessage={lastMessage} onClose={close} />
+            )}
 
-          {status !== 'streaming' && lastMessageFollowUps.length > 0 && (
-            <FollowUpSuggestions
-              suggestions={lastMessageFollowUps}
-              onSendMessage={onSendMessage}
-            />
-          )}
-          <span ref={messagesEndRef} />
-        </div>
-      </section>
-    </div>
+            {status !== 'streaming' && lastMessageFollowUps.length > 0 && (
+              <FollowUpSuggestions
+                suggestions={lastMessageFollowUps}
+                onSendMessage={onSendMessage}
+              />
+            )}
+            <span ref={messagesEndRef} />
+          </div>
+
+          {/* The answer arrives token by token into a region nothing watches.
+            Announcing only the finished text keeps a screen reader from
+            re-reading the whole message on every token. */}
+          <div aria-live="polite" className="sr-only">
+            {status !== 'streaming' && lastAssistantText
+              ? stripFollowUps(lastAssistantText)
+              : ''}
+          </div>
+        </section>
+      )}
+    </Modal>
   )
 }
 

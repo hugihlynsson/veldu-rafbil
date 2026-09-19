@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { NewCar as NewCarType } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getPriceWithGrant from '../modules/getPriceWithGrant'
+import getCarId from '../modules/getCarId'
+import prefersReducedMotion from '../utils/prefersReducedMotion'
 
 interface Props {
   car: NewCarType
@@ -12,12 +14,9 @@ interface Props {
 
 const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
   const priceWithGrant = getPriceWithGrant(car.price)
-  let hasGrant = priceWithGrant !== car.price
+  const hasGrant = priceWithGrant !== car.price
 
-  // Create the same ID as used in NewCar component
-  const carId = `car-${car.make}-${car.model}-${car.subModel || 'base'}`
-    .toLowerCase()
-    .replace(/\s+/g, '-')
+  const carId = getCarId(car)
 
   const handleClick = () => {
     // Close the chat modal
@@ -30,7 +29,12 @@ const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
       const carElement = document.getElementById(carId)
       if (carElement) {
         setTimeout(() => {
-          carElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          carElement.scrollIntoView({
+            behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+            block: 'center',
+          })
+          // Without this the reader is scrolled somewhere their focus is not
+          carElement.focus({ preventScroll: true })
         }, 150)
       }
     }, 100)

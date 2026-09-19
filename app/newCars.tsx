@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import clsx from 'clsx'
+import dynamic from 'next/dynamic'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import Car from '../components/NewCar'
@@ -9,7 +10,6 @@ import Title from '../components/Title'
 import Toggles from '../components/Toggles'
 import FilterModal from '../components/FilterModal'
 import ActiveFilters from '../components/ActiveFilters'
-import ChatContainer from '../components/ChatContainer'
 import newCars from '../modules/newCars'
 import carFilter from '../modules/carFilter'
 import { Filters, Sorting, SortingDirection } from '../types'
@@ -21,7 +21,16 @@ import {
   sortingToQuery,
 } from '../modules/sorting'
 import stableSort from '../modules/stableSort'
+import { agree } from '../modules/plural'
 import useBodyScrollLock from '../utils/useBodyScrollLock'
+
+// The chat owns useChat, which pulls the AI SDK and zod along with it. Keeping
+// it out of the list's own chunk means the cars render and hydrate without
+// waiting for code that only the chat uses. The bar is fixed-position, so it
+// arriving a moment later shifts nothing.
+const ChatContainer = dynamic(() => import('../components/ChatContainer'), {
+  ssr: false,
+})
 
 const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
   const router = useRouter()
@@ -31,7 +40,7 @@ const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
   const [direction, setDirection] = useState<SortingDirection>(initialDirection)
 
   useEffect(() => {
-    let updatedSearchParams = new URLSearchParams(searchParams)
+    const updatedSearchParams = new URLSearchParams(searchParams)
     const isDefault = isDefaultDirection(sorting, direction)
 
     if (sorting === 'name' && isDefault) {
@@ -74,7 +83,7 @@ const useFilters = (initial: Filters) => {
   useEffect(() => {
     const params = new URLSearchParams(searchParams)
 
-    let {
+    const {
       name,
       acceleration,
       availability,
@@ -112,6 +121,26 @@ const useFilters = (initial: Filters) => {
   return [filters, setFilters] as const
 }
 
+const carWord = (count: number) => agree(count, 'bíll', 'bílar')
+
+const sortingLabels: Record<Sorting, string> = {
+  name: 'Nafni',
+  price: 'Verði',
+  range: 'Drægni',
+  acceleration: 'Hröðun',
+  value: 'Verði á km',
+  fastcharge: 'Hraðhleðslu',
+}
+
+// The sortings offered as toggles, in the order they appear
+const toggleSortings: Sorting[] = [
+  'name',
+  'price',
+  'range',
+  'acceleration',
+  'value',
+]
+
 interface Props {
   sorting: Sorting
   direction: SortingDirection
@@ -129,13 +158,13 @@ export default function NewCars({
   )
   const [filters, setFilters] = useFilters(initialFilters)
 
-  let [editingFilters, setEditingFilters] = useState<boolean>(false)
+  const [editingFilters, setEditingFilters] = useState<boolean>(false)
 
   useBodyScrollLock(editingFilters)
 
   const handleRemoveFilter = (name: keyof Filters) =>
     setFilters((filters) => {
-      let newFilters = Object.assign({}, filters)
+      const newFilters = Object.assign({}, filters)
       delete newFilters[name]
       return newFilters
     })
@@ -175,18 +204,21 @@ export default function NewCars({
           </em>
         </p>
 
-        <div className="mb-2 text-sm font-semibold">Raða eftir:</div>
+        <div id="sorting-label" className="mb-2 text-sm font-semibold">
+          Raða eftir:
+        </div>
 
         <Toggles<Sorting>
           currentValue={sorting}
-          items={[
-            ['Nafni', 'name'],
-            ['Verði', 'price'],
-            ['Drægni', 'range'],
-            ['Hröðun', 'acceleration'],
-            ['Verði á km', 'value'],
-          ]}
+          items={toggleSortings.map((value): [string, Sorting] => [
+            sortingLabels[value],
+            value,
+          ])}
           onClick={toggleSorting}
+          labelledBy="sorting-label"
+          indicatorLabel={
+            direction === 'desc' ? 'lækkandi röð' : 'hækkandi röð'
+          }
           indicator={
             <span
               aria-hidden
@@ -206,6 +238,15 @@ export default function NewCars({
           onOpenFilterModal={() => setEditingFilters(true)}
           filteredCarsCount={filteredCars.length}
         />
+
+        {/* Sorting and filtering rewrite the whole list with no visible change
+            at the point of interaction. This is the only feedback a screen
+            reader gets, so it has to stay mounted to be announced at all. */}
+        <div aria-live="polite" className="sr-only">
+          {`${filteredCars.length} ${carWord(filteredCars.length)} á listanum, raðað eftir ${sortingLabels[
+            sorting
+          ].toLowerCase()}, ${direction === 'desc' ? 'lækkandi' : 'hækkandi'} röð.`}
+        </div>
       </header>
 
       {stableSort(filteredCars, carSorter(sorting, direction)).map(
@@ -221,11 +262,8 @@ export default function NewCars({
 
       {hasFilter && filteredCarCount > 0 && (
         <div className="p-4 flex items-center mx-auto max-w-[480px] gap-2 text-xs font-medium mb-10 xs:p-6 md:pl-10 md:max-w-none">
-          {filteredCarCount}
-          {filteredCarCount.toString().match(/.*1$/m)
-            ? ' bíll passaði '
-            : ' bílar pössuðu '}
-          ekki við leitina{' '}
+          {filteredCarCount} {carWord(filteredCarCount)}{' '}
+          {agree(filteredCarCount, 'passaði', 'pössuðu')} ekki við leitina{' '}
           <button
             className="border-0 shrink-0 m-0 mr-2 text-xs font-semibold py-[5px] px-3 rounded-full cursor-pointer text-center flex justify-center items-center bg-cloud transition-all duration-200 text-tint hover:bg-[#f8f8f8]"
             onClick={(_event) => {

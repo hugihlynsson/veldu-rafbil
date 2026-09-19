@@ -6,7 +6,8 @@ import remarkGfm from 'remark-gfm'
 import { UIDataTypes, UITools, UIMessage } from 'ai'
 import { useEffect } from 'react'
 import { useRef } from 'react'
-import { stripFollowUps } from '../../utils/chatHelpers'
+import { stripFollowUps } from '../../modules/chatHelpers'
+import prefersReducedMotion from '../../utils/prefersReducedMotion'
 import clsx from 'clsx'
 
 interface Props {
@@ -22,8 +23,15 @@ const ChatMessage: React.FunctionComponent<Props> = ({
 
   useEffect(() => {
     if (isLastUserMessage) {
-      ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      ref.current?.scrollIntoView({
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+        block: 'start',
+      })
     }
+    // A message scrolls itself into view when it arrives, and never again.
+    // Adding the dependency would re-scroll an older message the moment a
+    // newer one takes the title off it.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const isUser = message.role === 'user'

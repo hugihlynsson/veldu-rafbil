@@ -1,35 +1,33 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useChat } from '@ai-sdk/react'
-import ChatModal from './ChatModal'
+import dynamic from 'next/dynamic'
 import FloatingChat from './ChatInput'
 import useBodyScrollLock from '../utils/useBodyScrollLock'
+import {
+  clearStoredMessages,
+  readStoredMessages,
+  writeStoredMessages,
+} from '../utils/chatStorage'
 
-const CHAT_STORAGE_KEY = 'veldu-rafbil-chat-messages'
+// The modal drags in react-markdown and remark-gfm, which most visitors never
+// need — they came for the list. Its chunk is fetched the first time the chat
+// opens, and warmed on focus so that the open still feels instant.
+const ChatModal = dynamic(() => import('./ChatModal'))
+const warmChatModal = () => void import('./ChatModal')
 
 interface Props {
   hide: boolean
 }
 
 export default function ChatContainer({ hide }: Props) {
+  const chatInputRef = useRef<HTMLInputElement>(null)
   const [showChatMessages, setShowChatMessages] = useState<boolean>(false)
   const [releaseBodyLock, setReleaseBodyLock] = useState<boolean>(false)
 
-  useEffect(() => {
-    if (!showChatMessages) {
-      setReleaseBodyLock(false)
-    }
-  }, [showChatMessages])
-
   // Load initial messages from localStorage
-  const [initialMessages] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem(CHAT_STORAGE_KEY)
-      return stored ? JSON.parse(stored) : []
-    }
-    return []
-  })
+  const [initialMessages] = useState(readStoredMessages)
 
   // Initialize useChat
   const chatState = useChat({ messages: initialMessages })
@@ -40,7 +38,7 @@ export default function ChatContainer({ hide }: Props) {
   // Save messages to localStorage whenever they change
   useEffect(() => {
     if (chatState.messages.length > 0) {
-      localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(chatState.messages))
+      writeStoredMessages(chatState.messages)
     }
   }, [chatState.messages])
 
@@ -66,12 +64,21 @@ export default function ChatContainer({ hide }: Props) {
     <>
       {showChatMessages && (
         <ChatModal
-          onDone={() => setShowChatMessages(false)}
+          onDone={() => {
+            setShowChatMessages(false)
+            // Reset here, with the thing that closed the modal, rather than in
+            // an effect watching for it to have closed
+            setReleaseBodyLock(false)
+            // The dialog normally hands focus back to whatever opened it, but
+            // that can be a suggestion button which is gone by now. The input
+            // is always here, and is where the reader was anyway.
+            chatInputRef.current?.focus()
+          }}
           messages={chatState.messages}
           status={chatState.status}
           onClearChat={() => {
             chatState.setMessages([])
-            localStorage.removeItem(CHAT_STORAGE_KEY)
+            clearStoredMessages()
           }}
           onReleaseBodyLock={() => setReleaseBodyLock(true)}
           onSendMessage={handleSendMessage}
@@ -80,6 +87,8 @@ export default function ChatContainer({ hide }: Props) {
       )}
 
       <FloatingChat
+        inputRef={chatInputRef}
+        onIntent={warmChatModal}
         onOpenChat={() => setShowChatMessages(true)}
         hide={hide}
         disabled={chatState.status === 'streaming'}
