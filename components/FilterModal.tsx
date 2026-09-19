@@ -4,6 +4,7 @@ import { Availability, Drive, Filters } from '../types'
 import clsx from 'clsx'
 import Modal from './Modal'
 import CloseButton from './CloseButton'
+import { FilterInput, FilterSelect } from './FilterField'
 
 interface Props {
   initialFilters: Filters
@@ -131,154 +132,92 @@ const FiltersModal: React.FunctionComponent<Props> = ({
               </h2>
             </header>
             <div className="flex flex-col grow shrink overflow-scroll p-5 pb-2">
-              <div className="flex gap-2 items-baseline mb-1 px-3">
-                <label
-                  htmlFor="filter-name"
-                  className="text-tint text-xs font-semibold"
-                >
-                  Nafn
-                </label>
-              </div>
-              <input
-                ref={nameInputRef}
+              <FilterInput
+                inputRef={nameInputRef}
                 id="filter-name"
+                label="Nafn"
                 type="text"
                 placeholder="Tesla, Kia"
                 onChange={handleFilterChange('name')}
                 onKeyDown={handleKeyPress}
                 value={nameInput}
-                className="border border-cloud rounded bg-white p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
               />
-              <div className="flex gap-2 items-baseline mb-1 px-3">
-                <label
-                  htmlFor="filter-price"
-                  className="text-tint text-xs font-semibold"
-                >
-                  Verð
-                </label>
-                <p className="m-0 text-xs text-clay">Hámark</p>
-              </div>
-              <input
+              <FilterInput
                 id="filter-price"
+                label="Verð"
+                hint="Hámark"
                 type="number"
                 placeholder="25000000"
                 onChange={handleFilterChange('price')}
                 onKeyDown={handleKeyPress}
                 value={filters.price ?? ''}
-                className="border border-cloud rounded bg-white p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
               />
-              <div className="flex gap-2 items-baseline mb-1 px-3">
-                <label
-                  htmlFor="filter-range"
-                  className="text-tint text-xs font-semibold"
-                >
-                  Drægni
-                </label>
-                <p className="m-0 text-xs text-clay">Lágmark</p>
-              </div>
-              <input
+              <FilterInput
                 id="filter-range"
+                label="Drægni"
+                hint="Lágmark"
                 type="number"
                 placeholder="230"
                 onChange={handleFilterChange('range')}
                 onKeyDown={handleKeyPress}
                 value={filters.range ?? ''}
-                className="border border-cloud rounded bg-white p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
               />
-              <div className="flex gap-2 items-baseline mb-1 px-3">
-                <label
-                  htmlFor="filter-drive"
-                  className="text-tint text-xs font-semibold"
-                >
-                  Drif
-                </label>
-              </div>
-              <select
+              <FilterSelect
                 id="filter-drive"
+                label="Drif"
+                options={[
+                  ['all', 'Öll'],
+                  ['AWD', 'AWD'],
+                  ['FWD', 'FWD'],
+                  ['RWD', 'RWD'],
+                ]}
                 onChange={handleFilterChange('drive')}
                 onKeyDown={handleKeyPress}
                 value={filters.drive?.[0] ?? 'all'}
-                className="appearance-none border border-cloud bg-lab rounded p-[11px] text-base font-normal text-tint mb-6 cursor-pointer hover:border-clay"
-              >
-                <option value="all">Öll</option>
-                <option value="AWD">AWD</option>
-                <option value="FWD">FWD</option>
-                <option value="RWD">RWD</option>
-              </select>
-              <div className="flex gap-2 items-baseline mb-1 px-3">
-                <label
-                  htmlFor="filter-availability"
-                  className="text-tint text-xs font-semibold"
-                >
-                  Framboð
-                </label>
-              </div>
-              <select
+              />
+              <FilterSelect
                 id="filter-availability"
+                label="Framboð"
+                options={[
+                  ['all', 'Allir'],
+                  ['available', 'Fáanlegir'],
+                  ['expected', 'Væntanlegir'],
+                ]}
                 onChange={handleFilterChange('availability')}
                 onKeyDown={handleKeyPress}
                 value={filters.availability ?? 'all'}
-                className="appearance-none border border-cloud bg-lab rounded p-[11px] text-base font-normal text-tint mb-6 cursor-pointer hover:border-clay"
-              >
-                <option value="all">Allir</option>
-                <option value="available">Fáanlegir</option>
-                <option value="expected">Væntanlegir</option>
-              </select>
-              <div className="flex gap-2 items-baseline mb-1 px-3">
-                <label
-                  htmlFor="filter-acceleration"
-                  className="text-tint text-xs font-semibold"
-                >
-                  Hröðun
-                </label>
-                {/* carFilter keeps cars at or under this many seconds, so it is a
-                maximum, the way Verð and Verð á km are */}
-                <p className="m-0 text-xs text-clay">Hámark, sec</p>
-              </div>
-              <input
+              />
+              {/* carFilter keeps cars at or under this many seconds, so it is a
+                  maximum, the way Verð and Verð á km are */}
+              <FilterInput
                 id="filter-acceleration"
+                label="Hröðun"
+                hint="Hámark, sec"
                 type="number"
                 placeholder="8.0"
                 onChange={handleFilterChange('acceleration')}
                 onKeyDown={handleKeyPress}
                 value={filters.acceleration ?? ''}
-                className="border border-cloud rounded bg-white p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
               />
-              <div className="flex gap-2 items-baseline mb-1 px-3">
-                <label
-                  htmlFor="filter-value"
-                  className="text-tint text-xs font-semibold"
-                >
-                  Verði á km
-                </label>
-                <p className="m-0 text-xs text-clay">Hámark</p>
-              </div>
-              <input
+              <FilterInput
                 id="filter-value"
+                label="Verði á km"
+                hint="Hámark"
                 type="number"
                 placeholder="44000"
                 onChange={handleFilterChange('value')}
                 onKeyDown={handleKeyPress}
                 value={filters.value ?? ''}
-                className="border border-cloud rounded bg-white p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
               />
-              <div className="flex gap-2 items-baseline mb-1 px-3">
-                <label
-                  htmlFor="filter-fastcharge"
-                  className="text-tint text-xs font-semibold"
-                >
-                  Hraðhleðsla
-                </label>
-                <p className="m-0 text-xs text-clay">Lágmark, km/min</p>
-              </div>
-              <input
+              <FilterInput
                 id="filter-fastcharge"
+                label="Hraðhleðsla"
+                hint="Lágmark, km/min"
                 type="number"
                 placeholder="3.1"
                 onChange={handleFilterChange('fastcharge')}
                 onKeyDown={handleKeyPress}
                 value={filters.fastcharge ?? ''}
-                className="border border-cloud rounded bg-white p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
               />
             </div>
             <footer className="p-4 flex justify-between shadow-[0_0_32px_0_rgba(0,0,0,0.1)] z-1">
