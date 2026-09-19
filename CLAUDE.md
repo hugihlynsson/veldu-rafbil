@@ -8,19 +8,12 @@ Tailwind v4, deployed on Vercel. One route: `/`.
 
 ## Commands
 
-```bash
-npm run dev        # next dev
-npm run build      # next build — the real gate, no test suite exists
-npx tsc --noEmit   # typecheck (there is no `lint` script; this is it)
-npm run prettify   # prettier --write across the repo
-```
+There are **no tests and no ESLint**, so `npx tsc --noEmit` is the check, plus
+`npm run build` for anything beyond a data edit. The build needs no environment
+variables; the `Missing Axiom token` lines it prints are expected.
 
-There are **no tests and no ESLint**. After a change, run `npx tsc --noEmit` and,
-for anything beyond a data edit, `npm run build`. The build succeeds with no
-environment variables set; the `Missing Axiom token` lines it prints are expected.
-
-`npm run prettify` rewrites the _whole_ repo and ~18 files are currently
-unformatted, so running it produces a large unrelated diff. Format only what you
+`npm run prettify` reformats the whole repo, and a good chunk of it is not
+prettier-clean, so it buries a real diff in unrelated churn. Format what you
 touched instead: `npx prettier --write <files>`.
 
 ## Layout
@@ -28,14 +21,12 @@ touched instead: `npx prettier --write <files>`.
 | Path                 | What lives there                                                                                         |
 | -------------------- | -------------------------------------------------------------------------------------------------------- |
 | `modules/newCars.ts` | The entire car database — ~185 hand-written `NewCar` literals, 2800 lines. Most commits touch only this. |
-| `types.ts`           | All shared types, imported as `from '../types'`                                                          |
-| `app/page.tsx`       | Server component: turns `searchParams` into `Sorting`/`Filters` and renders the list                     |
+| `app/page.tsx`       | Server component: turns `searchParams` into `Sorting`/`Filters`                                          |
 | `app/newCars.tsx`    | `'use client'` — all list state, sorting, filtering, URL sync                                            |
-| `modules/`           | Pure domain logic (sorting, filtering, price, formatting) and the query parsing in `filters.ts`          |
-| `utils/`             | Shared helpers that touch React or the LLM output (`useBodyScrollLock`, `chatHelpers`)                   |
-| `components/`        | Presentational; `components/chat/` is the chat UI                                                        |
-| `app/api/chat/`      | Gemini-backed advisor route + its `fetchCarDetails` tool                                                 |
-| `public/images/`     | `<heroImageName>.jpg`, every one 1920×1280 (3:2)                                                         |
+| `modules/`           | Pure logic, no React: sorting, filtering, query parsing, price, formatting                               |
+
+Watch the names: `app/newCars.tsx` is the client component, `modules/newCars.ts`
+is the data. They are not related.
 
 ## Domain rules that are easy to get wrong
 
@@ -76,10 +67,6 @@ The sorting contract in `modules/sorting.ts`:
   `sortingToQuery`, `defaultDirection`, `ascendingSorter`, and the `Toggles`
   items in `app/newCars.tsx`.
 
-`carFilter` treats an _absent_ key as "no constraint"; present keys are ANDed.
-Note the asymmetry: `drive` and `name` return `false` when their value is
-missing, the numeric ones fall back to `MAX_SAFE_INTEGER`/`0`.
-
 ## Everything user-facing is Icelandic
 
 UI copy, and **the query parameters too**. Keep the code identifiers English and
@@ -94,8 +81,8 @@ to split:
 `draegni` range · `hrodun` acceleration · `virdi` value · `hradhledsla` fastcharge ·
 `drif` drive · `frambod` availability (`faanlegir` = available, `vaentanlegir` = expected)
 
-Use Icelandic characters properly (á é í ó ú ý þ æ ö ð) and mind the plural
-agreement already handled in `app/newCars.tsx` ("bíll" vs "bílar").
+New copy needs Icelandic plural agreement, as `app/newCars.tsx` already does for
+"bíll" vs "bílar".
 
 ## Adding or updating a car
 
@@ -120,8 +107,6 @@ hand.
 - The **entire car list is inlined into the system prompt** on every request, as
   post-grant prices. Changing `NewCar` fields or `getPriceWithGrant` changes what
   the model sees — keep `carsSummary` in step.
-- The prompt is Icelandic and the assistant must answer in Icelandic and refuse
-  off-topic questions.
 - Follow-up questions travel in the message text as `[q:…]` markers, parsed and
   stripped by `utils/chatHelpers.ts`. `stripFollowUps` also handles the partial
   `[q:` that appears mid-stream — keep that behaviour if you touch it.
@@ -138,9 +123,6 @@ Tailwind v4 — **no `tailwind.config.js`**. The theme is `@theme` in
 `cloud`, `lab`, plus an `xs` breakpoint at 375px (design is mobile-first, `xs:`
 and `md:` are the workhorses). Chat markdown is styled by the plain
 `.message-content` rules at the bottom of that file, not by utilities.
-
-Prettier config: **no semicolons**, single quotes, trailing commas, always
-parenthesise arrow params.
 
 ## Gotchas
 
