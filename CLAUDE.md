@@ -8,14 +8,14 @@ Tailwind v4, deployed on Vercel. One route: `/`.
 
 ## Verifying a change
 
-There is no test suite, no lint script and no typecheck script, so the check is
-`npx tsc --noEmit`, plus `npm run build` for anything beyond a data edit. The
-build needs no environment variables; the `Missing Axiom token` lines it prints
-are expected.
+There is no test suite and no lint script, so the check is `npm run typecheck`,
+plus `npm run build` for anything beyond a data edit. The build needs no
+environment variables; the `Missing Axiom token` lines it prints are expected.
 
-`npm run prettify` reformats the whole repo, and a good chunk of it is not
-prettier-clean, so it buries a real diff in unrelated churn. Format what you
-touched instead: `npx prettier --write <files>`.
+Formatting takes care of itself: a husky pre-commit hook runs prettier over
+staged files, so don't hand-format and don't run `npm run prettify` to tidy up
+after yourself. `.prettierignore` holds the files prettier must not touch —
+`next-env.d.ts` and `AGENTS.md` are generated, `package-lock.json` is npm's.
 
 ## Layout
 
