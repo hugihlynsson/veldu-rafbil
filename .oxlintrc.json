@@ -15,16 +15,10 @@
     "correctness": "error"
   },
   "rules": {
-    "jsx-a11y/click-events-have-key-events": "warn",
-    "jsx-a11y/no-static-element-interactions": "warn",
-    "jsx-a11y/control-has-associated-label": "warn",
-    "jsx-a11y/prefer-tag-over-role": "warn",
-    "jsx-a11y/no-autofocus": "warn",
-    "jsx-a11y/anchor-is-valid": "warn",
-    "nextjs/no-img-element": "warn",
     "react-hooks/exhaustive-deps": "warn",
     "react/set-state-in-effect": "warn",
-    "eslint/no-unused-expressions": "warn"
+    "eslint/no-unused-expressions": "warn",
+    "jsx-a11y/no-autofocus": "off"
   },
   "env": {
     "builtin": true

@@ -29,6 +29,11 @@ const FiltersModal: React.FunctionComponent<Props> = ({
     return
   }, [])
 
+  const handleClose = () => {
+    setState(() => 'leaving')
+    setTimeout(onDone, 300)
+  }
+
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') handleClose()
@@ -36,11 +41,6 @@ const FiltersModal: React.FunctionComponent<Props> = ({
     document.addEventListener('keydown', handleEscape)
     return () => document.removeEventListener('keydown', handleEscape)
   }, [])
-
-  const handleClose = () => {
-    setState(() => 'leaving')
-    setTimeout(onDone, 300)
-  }
 
   const handleDone = () => {
     onSubmit(filters)
