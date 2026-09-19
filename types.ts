@@ -31,9 +31,19 @@ export type Filters = {
 }
 
 export type Sorting =
-  'name' | 'price' | 'range' | 'acceleration' | 'value' | 'fastcharge'
+  | 'name'
+  | 'price'
+  | 'range'
+  | 'acceleration'
+  | 'value'
+  | 'fastcharge'
 
 export type SortingDirection = 'asc' | 'desc'
 
 export type SortingQuery =
-  'nafni' | 'verdi' | 'draegni' | 'hrodun' | 'virdi' | 'hradhledslu'
+  | 'nafni'
+  | 'verdi'
+  | 'draegni'
+  | 'hrodun'
+  | 'virdi'
+  | 'hradhledslu'
