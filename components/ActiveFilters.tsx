@@ -5,6 +5,110 @@ import { agree } from '../modules/plural'
 const filterClasses =
   "shrink-0 relative text-xs font-semibold py-1 pr-2 pl-2.5 border border-smoke rounded-full cursor-pointer text-center flex justify-center items-center bg-lab transition-all duration-200 text-clay after:content-['+'] after:rotate-45 after:ml-1.5 after:text-base after:leading-[10px] after:-mt-px after:text-clay after:transition-colors hover:bg-[#f8f8f8] hover:after:text-[#222] active:text-black"
 
+interface Chip {
+  name: keyof Filters
+  /** What the chip is called, as it reads before the value */
+  label: string
+  /** The value as the chip shows it, arrow included */
+  value: string
+  /** The whole button's label, since the visible text alone reads as a fragment */
+  removeLabel: string
+}
+
+// One entry per filter that is set, in the order they appear. The arrow says
+// which way the number is a limit — down for a maximum, up for a minimum — and
+// the aria-label names the filter in the case Icelandic wants after "Fjarlægja",
+// which is why these are written out rather than built from one pattern.
+//
+// A filter added without an entry here has no chip, so nothing on the page can
+// switch it off again.
+const activeChips = (filters: Filters): Array<Chip> => {
+  const chips: Array<Chip> = []
+
+  if (filters.name) {
+    const names = filters.name.join(', ')
+    chips.push({
+      name: 'name',
+      label: 'Nafn:',
+      value: names,
+      removeLabel: `Fjarlægja nafnasíu: ${names}`,
+    })
+  }
+
+  if (filters.price) {
+    const price = addDecimalSeprators(filters.price)
+    chips.push({
+      name: 'price',
+      label: 'Verð:',
+      value: `↓${price} kr.`,
+      removeLabel: `Fjarlægja verðsíu: hámark ${price} kr.`,
+    })
+  }
+
+  if (filters.range) {
+    chips.push({
+      name: 'range',
+      label: 'Drægni:',
+      value: `↑${filters.range} km.`,
+      removeLabel: `Fjarlægja drægnisíu: lágmark ${filters.range} km`,
+    })
+  }
+
+  if (filters.drive) {
+    const drives = filters.drive.join(', ')
+    chips.push({
+      name: 'drive',
+      label: 'Drif:',
+      value: drives,
+      removeLabel: `Fjarlægja drifsíu: ${drives}`,
+    })
+  }
+
+  if (filters.acceleration) {
+    const seconds = filters.acceleration.toFixed(1)
+    chips.push({
+      name: 'acceleration',
+      // The only one without a colon, as it has always read
+      label: 'Hröðun',
+      value: `↓${seconds}s`,
+      removeLabel: `Fjarlægja hröðunarsíu: hámark ${seconds} sekúndur`,
+    })
+  }
+
+  if (filters.value) {
+    const value = addDecimalSeprators(filters.value)
+    chips.push({
+      name: 'value',
+      label: 'Verði á km:',
+      value: `↓${value} kr.`,
+      removeLabel: `Fjarlægja síu á verði á km: hámark ${value} kr.`,
+    })
+  }
+
+  if (filters.fastcharge) {
+    chips.push({
+      name: 'fastcharge',
+      label: 'Hraðhleðsla:',
+      value: `↑${filters.fastcharge} km/min`,
+      removeLabel: `Fjarlægja hraðhleðslusíu: lágmark ${filters.fastcharge} km á mínútu`,
+    })
+  }
+
+  if (filters.availability) {
+    const isAvailable = filters.availability === 'available'
+    chips.push({
+      name: 'availability',
+      label: 'Framboð:',
+      value: isAvailable ? 'Fáanlegir' : 'Væntanlegir',
+      removeLabel: `Fjarlægja framboðssíu: ${
+        isAvailable ? 'fáanlegir' : 'væntanlegir'
+      }`,
+    })
+  }
+
+  return chips
+}
+
 interface FilterButtonsProps {
   filters: Filters
   onRemoveFilter: (name: keyof Filters) => void
@@ -29,119 +133,19 @@ const ActiveFilters = ({
         </div>
       )}
       <div className="flex flex-wrap gap-2 self-start max-w-full -ml-[2px]">
-        {filters.name && (
+        {activeChips(filters).map(({ name, label, value, removeLabel }) => (
           <button
-            aria-label={`Fjarlægja nafnasíu: ${filters.name.join(', ')}`}
+            key={name}
+            aria-label={removeLabel}
             className={filterClasses}
-            onClick={() => onRemoveFilter('name')}
+            onClick={() => onRemoveFilter(name)}
           >
-            Nafn:{' '}
+            {label}{' '}
             <span className="text-tint transition-colors ml-[3px]">
-              {filters.name.join(', ')}
+              {value}
             </span>
           </button>
-        )}
-
-        {filters.price && (
-          <button
-            aria-label={`Fjarlægja verðsíu: hámark ${addDecimalSeprators(
-              filters.price,
-            )} kr.`}
-            className={filterClasses}
-            onClick={() => onRemoveFilter('price')}
-          >
-            Verð:{' '}
-            <span className="text-tint transition-colors ml-[3px]">
-              ↓{addDecimalSeprators(filters.price)} kr.
-            </span>
-          </button>
-        )}
-
-        {filters.range && (
-          <button
-            aria-label={`Fjarlægja drægnisíu: lágmark ${filters.range} km`}
-            className={filterClasses}
-            onClick={() => onRemoveFilter('range')}
-          >
-            Drægni:{' '}
-            <span className="text-tint transition-colors ml-[3px]">
-              ↑{filters.range} km.
-            </span>
-          </button>
-        )}
-
-        {filters.drive && (
-          <button
-            aria-label={`Fjarlægja drifsíu: ${filters.drive.join(', ')}`}
-            className={filterClasses}
-            onClick={() => onRemoveFilter('drive')}
-          >
-            Drif:{' '}
-            <span className="text-tint transition-colors ml-[3px]">
-              {filters.drive.join(', ')}
-            </span>
-          </button>
-        )}
-
-        {filters.acceleration && (
-          <button
-            aria-label={`Fjarlægja hröðunarsíu: hámark ${filters.acceleration.toFixed(
-              1,
-            )} sekúndur`}
-            className={filterClasses}
-            onClick={() => onRemoveFilter('acceleration')}
-          >
-            Hröðun{' '}
-            <span className="text-tint transition-colors ml-[3px]">
-              ↓{filters.acceleration.toFixed(1)}s
-            </span>
-          </button>
-        )}
-
-        {filters.value && (
-          <button
-            aria-label={`Fjarlægja síu á verði á km: hámark ${addDecimalSeprators(
-              filters.value,
-            )} kr.`}
-            className={filterClasses}
-            onClick={() => onRemoveFilter('value')}
-          >
-            Verði á km:{' '}
-            <span className="text-tint transition-colors ml-[3px]">
-              ↓{addDecimalSeprators(filters.value)} kr.
-            </span>
-          </button>
-        )}
-
-        {filters.fastcharge && (
-          <button
-            aria-label={`Fjarlægja hraðhleðslusíu: lágmark ${filters.fastcharge} km á mínútu`}
-            className={filterClasses}
-            onClick={() => onRemoveFilter('fastcharge')}
-          >
-            Hraðhleðsla:{' '}
-            <span className="text-tint transition-colors ml-[3px]">
-              ↑{filters.fastcharge} km/min
-            </span>
-          </button>
-        )}
-
-        {filters.availability && (
-          <button
-            aria-label={`Fjarlægja framboðssíu: ${
-              filters.availability === 'available' ? 'fáanlegir' : 'væntanlegir'
-            }`}
-            className={filterClasses}
-            onClick={() => onRemoveFilter('availability')}
-          >
-            Framboð:{' '}
-            <span className="text-tint transition-colors ml-[3px]">
-              {filters.availability === 'available'
-                ? 'Fáanlegir'
-                : 'Væntanlegir'}
-            </span>
-          </button>
-        )}
+        ))}
         <button
           className="flex justify-center items-center shrink-0 gap-1.5 py-2 pr-4 pl-3 border-0 rounded-full text-[13px] font-semibold cursor-pointer text-center bg-black/6 transition-all duration-200 text-tint hover:bg-black/9 active:scale-[0.98]"
           onClick={onOpenFilterModal}
