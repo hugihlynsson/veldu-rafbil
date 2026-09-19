@@ -5,11 +5,13 @@ import {
   defaultDirection,
   flipDirection,
   getDirectionFromQuery,
+  getQueryFromSorting,
   getSortingFromQuery,
   isDefaultDirection,
+  sortingQueryKeys,
   sortingToQuery,
 } from './sorting'
-import { NewCar, Sorting } from '../types'
+import { NewCar, Sorting, SortingDirection } from '../types'
 
 const car = (over: Partial<NewCar>): NewCar => ({
   make: 'Make',
@@ -117,5 +119,53 @@ describe('carSorter', () => {
     for (const sorting of Object.keys(sortingToQuery) as Array<Sorting>) {
       expect(defaultDirection[sorting]).toMatch(/^(asc|desc)$/)
     }
+  })
+})
+
+// The writer used to live in useSorting, where nothing could check it against
+// the readers above. Adding a sorting means touching both directions of the
+// mapping, and this is what says they still meet.
+describe('sorting survives a round trip through the URL', () => {
+  const sortings = Object.keys(sortingToQuery) as Array<Sorting>
+  const directions: Array<SortingDirection> = ['asc', 'desc']
+  const cases = sortings.flatMap((sorting) =>
+    directions.map((direction): [Sorting, SortingDirection] => [
+      sorting,
+      direction,
+    ]),
+  )
+
+  it.each(cases)('%s %s comes back unchanged', (sorting, direction) => {
+    const query = getQueryFromSorting(sorting, direction)
+
+    expect(getSortingFromQuery(query)).toBe(sorting)
+    expect(getDirectionFromQuery(query)).toBe(direction)
+  })
+
+  // The tidy URL the site is meant to have when nothing has been chosen
+  it('writes nothing for the default sorting in its default direction', () => {
+    expect(getQueryFromSorting('name', defaultDirection.name)).toEqual({})
+  })
+
+  it('records a flip rather than a direction', () => {
+    // Descending is the default for range, so it is the ascending one that
+    // needs the parameter
+    expect(getQueryFromSorting('range', 'desc')).toEqual({
+      radaeftir: 'draegni',
+    })
+    expect(getQueryFromSorting('range', 'asc')).toEqual({
+      radaeftir: 'draegni',
+      ofugt: '1',
+    })
+  })
+
+  it('writes only keys the client knows to clear', () => {
+    const written = new Set(
+      cases.flatMap(([sorting, direction]) =>
+        Object.keys(getQueryFromSorting(sorting, direction)),
+      ),
+    )
+
+    expect([...written].sort()).toEqual([...sortingQueryKeys].sort())
   })
 })

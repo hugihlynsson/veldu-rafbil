@@ -99,3 +99,26 @@ export const carSorter =
     const result = ascendingSorter(sorting)(a, b)
     return direction === 'asc' ? result : -result
   }
+
+// The two parameters the sorting can occupy, cleared and rewritten together
+export const sortingQueryKeys = ['radaeftir', 'ofugt'] as const
+
+// The writing direction. It is not a mirror of the reader: the default sorting
+// leaves the URL clean, and the flip parameter records a deviation from the
+// default direction rather than "descending", so the pair only stays honest if
+// a test can run a sorting out through this and back in through the readers.
+export const getQueryFromSorting = (
+  sorting: Sorting,
+  direction: SortingDirection,
+): Record<string, string> => {
+  const query: Record<string, string> = {}
+  const isDefault = isDefaultDirection(sorting, direction)
+
+  if (sorting !== 'name' || !isDefault) {
+    query.radaeftir = sortingToQuery[sorting]
+  }
+
+  if (!isDefault) query.ofugt = '1'
+
+  return query
+}
