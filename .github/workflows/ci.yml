@@ -22,3 +22,28 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
       - run: npm test
+
+  accessibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci --ignore-scripts
+
+      # --ignore-scripts skips Playwright's own browser install
+      - run: npx playwright install --with-deps chromium
+
+      # Builds and serves the app itself, see playwright.config.ts
+      - run: npm run test:a11y
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
