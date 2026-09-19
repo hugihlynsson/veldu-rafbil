@@ -1,9 +1,10 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { trackEvent } from 'fathom-client'
 import { CHAT_SUGGESTIONS } from '../constants/chatSuggestions'
 import { getRandomSuggestions } from '../modules/chatHelpers'
+import useInputModality, { getInputModality } from '../utils/inputModality'
 import clsx from 'clsx'
 
 interface Props {
@@ -38,7 +39,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
   const [isFocused, setIsFocused] = useState(false)
   const [showFocusRing, setShowFocusRing] = useState(false)
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([])
-  const isPointerGesture = useRef(false)
+  useInputModality()
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -58,9 +59,13 @@ const ChatInput: React.FunctionComponent<Props> = ({
     onValueChange(e.target.value)
   }
 
+  // The ring is for the reader who cannot see the caret land: it follows the
+  // tab key and the focus handed back when the chat closes, and stays out of
+  // the way of anyone who just pointed at the thing they are already looking
+  // at. :focus-visible cannot make that call for a text field — see
+  // utils/inputModality.
   const handleFocusRing = () => {
-    setShowFocusRing(!isPointerGesture.current)
-    isPointerGesture.current = false
+    setShowFocusRing(getInputModality() === 'keyboard')
   }
 
   const handleFocus = () => {
@@ -81,23 +86,6 @@ const ChatInput: React.FunctionComponent<Props> = ({
     if (hasMessages) {
       onOpenChat()
     }
-  }
-
-  // :focus-visible is no help for deciding whether to draw the ring: the
-  // browser matches it on a text field however focus arrived, a click
-  // included, so the pill would be ringed every time it was clicked. The
-  // pointer gesture is tracked instead, and the ring is left to the ways of
-  // arriving that do not point at it: the tab key, and the focus handed back
-  // here when the chat closes. Both controls carry it, because Safari does
-  // not focus a button on click and the flag would outlive the gesture.
-  const pointerGestureHandlers = {
-    onPointerDown: () => {
-      isPointerGesture.current = true
-      setShowFocusRing(false)
-    },
-    onPointerUp: () => {
-      isPointerGesture.current = false
-    },
   }
 
   const handleSuggestionClick = (suggestion: string) => {
@@ -131,7 +119,6 @@ const ChatInput: React.FunctionComponent<Props> = ({
         )}
       >
         <input
-          {...pointerGestureHandlers}
           ref={inputRef}
           type="text"
           value={value}
@@ -144,7 +131,6 @@ const ChatInput: React.FunctionComponent<Props> = ({
           className="flex-1 border-0 bg-transparent p-[8px_0] text-base font-normal text-tint outline-none placeholder:text-black/60 disabled:opacity-60"
         />
         <button
-          {...pointerGestureHandlers}
           onFocus={handleFocusRing}
           aria-label="Senda skilaboð"
           type="submit"

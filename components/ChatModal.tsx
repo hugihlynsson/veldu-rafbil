@@ -36,6 +36,12 @@ interface Props {
    * containing block of the fixed things below it.
    */
   composer: React.ReactNode
+  /**
+   * The composer's input, focused once the dialog is open. showModal() lands
+   * on the first focusable thing, which is the close button, and being put
+   * there after every send is no way to hold a conversation.
+   */
+  composerRef: React.RefObject<HTMLInputElement | null>
 }
 
 const ChatModal: React.FunctionComponent<Props> = ({
@@ -47,6 +53,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
   onSendMessage,
   onRetry,
   composer,
+  composerRef,
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
@@ -88,6 +95,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
       labelledBy="chat-modal-title"
       onDone={onDone}
       onLeave={onReleaseBodyLock}
+      initialFocusRef={composerRef}
       className="items-start backdrop:duration-300 data-[state=visible]:backdrop:bg-black/20"
     >
       {({ isVisible, close }) => (
