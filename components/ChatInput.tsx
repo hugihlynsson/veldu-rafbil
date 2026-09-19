@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { trackEvent } from 'fathom-client'
 import { CHAT_SUGGESTIONS } from '../constants/chatSuggestions'
-import { getRandomSuggestions } from '../utils/chatHelpers'
+import { getRandomSuggestions } from '../modules/chatHelpers'
 import clsx from 'clsx'
 
 interface Props {

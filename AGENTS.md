@@ -34,7 +34,21 @@ findings waiting to be fixed, not a licence to add more.
 | `modules/newCars.ts` | The entire car database — ~185 hand-written `NewCar` literals, 2800 lines. Most commits touch only this. |
 | `app/page.tsx`       | Server component: turns `searchParams` into `Sorting`/`Filters`                                          |
 | `app/newCars.tsx`    | `'use client'` — all list state, sorting, filtering, URL sync                                            |
-| `modules/`           | Pure logic, no React: sorting, filtering, query parsing, price, formatting                               |
+| `modules/`           | Pure logic, no React and no browser: sorting, filtering, query parsing, price, formatting, the chat text helpers |
+| `utils/`             | The things that _do_ need React or the browser: the scroll lock, the reduced-motion check, localStorage  |
+
+That is the whole rule for which of the two a new file goes in: if it can be
+tested in plain node, it is a module. Everything in `modules/` has a test next
+to it; things in `utils/` mostly cannot have one without a DOM.
+
+`components/Modal.tsx` is the shared half of both modals — a real `<dialog>`,
+so that Escape, the backdrop and the focus trap are the browser's job, wrapped
+in the enter and leave animation `<dialog>` does not do by itself. A modal
+gives it a `labelledBy`, an `onDone`, optionally an `initialFocusRef` (because
+`showModal()` would otherwise land on the close button), and a render prop that
+receives `{ isVisible, close }`. The dialog carries `data-state`, so a caller
+styles its own backdrop with `data-[state=visible]:backdrop:bg-black/30`.
+Don't hand-roll a second one.
 
 Watch the names: `app/newCars.tsx` is the client component, `modules/newCars.ts`
 is the data. They are not related.
@@ -92,8 +106,10 @@ to split:
 `draegni` range · `hrodun` acceleration · `virdi` value · `hradhledsla` fastcharge ·
 `drif` drive · `frambod` availability (`faanlegir` = available, `vaentanlegir` = expected)
 
-New copy needs Icelandic plural agreement, as `app/newCars.tsx` already does for
-"bíll" vs "bílar".
+New copy that counts things needs Icelandic plural agreement: use `agree()`
+from `modules/plural.ts` rather than testing the number yourself. The singular
+goes with a count ending in 1 *except* one ending in 11, which is the part that
+is easy to get wrong.
 
 ## Adding or updating a car
 
@@ -125,7 +141,7 @@ hand.
   post-grant prices. Changing `NewCar` fields or `getPriceWithGrant` changes what
   the model sees — keep `carsSummary` in step.
 - Follow-up questions travel in the message text as `[q:…]` markers, parsed and
-  stripped by `utils/chatHelpers.ts`. `stripFollowUps` also handles the partial
+  stripped by `modules/chatHelpers.ts`. `stripFollowUps` also handles the partial
   `[q:` that appears mid-stream — keep that behaviour if you touch it.
 - `fetchCarDetails` scrapes ev-database.org HTML with regexes against
   `car.evDatabaseURL`. It is best-effort and returns a message rather than

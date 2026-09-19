@@ -1,4 +1,4 @@
-import newCars from '../modules/newCars'
+import newCars from './newCars'
 import { NewCar } from '../types'
 
 // Helper function to find cars mentioned in text
