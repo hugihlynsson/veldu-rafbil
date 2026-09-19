@@ -125,7 +125,7 @@ export async function POST(req: Request) {
     messages: await convertToModelMessages(messages),
     system: systemPrompt,
     providerOptions: {
-      google: { thinkingConfig: { thinkingLevel: 'low' } },
+      google: { thinkingConfig: { thinkingLevel: 'medium' } },
     },
     stopWhen: stepCountIs(10),
     tools: {
