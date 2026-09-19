@@ -29,6 +29,14 @@ const FiltersModal: React.FunctionComponent<Props> = ({
     return
   }, [])
 
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') handleClose()
+    }
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [])
+
   const handleClose = () => {
     setState(() => 'leaving')
     setTimeout(onDone, 300)
@@ -122,7 +130,10 @@ const FiltersModal: React.FunctionComponent<Props> = ({
         '[@media(min-width:800px)_and_(min-height:600px)]:items-center',
         state === 'visible' && 'before:delay-0 before:bg-black/30',
       )}
-      onClick={handleClose}
+      role="presentation"
+      onClick={(event) => {
+        if (event.target === event.currentTarget) handleClose()
+      }}
     >
       <section
         className={clsx(
@@ -131,10 +142,11 @@ const FiltersModal: React.FunctionComponent<Props> = ({
           state === 'visible' &&
             'opacity-100 ease-[cubic-bezier(0.33,1,0.68,1)] translate-y-0!',
         )}
-        onClick={(event) => event.stopPropagation()}
       >
         <header className="relative bg-white text-lg text-center px-4 py-3 border-b border-cloud font-semibold">
           <button
+            type="button"
+            aria-label="Loka"
             onClick={handleClose}
             className="absolute left-[11px] top-[11px] flex items-center justify-center h-8 w-8 border-0 p-0 rounded-2xl appearance-none bg-transparent text-[30px] text-stone cursor-pointer transition-all duration-200 hover:bg-cloud [&_path]:transition-all [&_path]:duration-200 hover:[&_path]:fill-tint"
           >
@@ -143,9 +155,8 @@ const FiltersModal: React.FunctionComponent<Props> = ({
               height="14"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              role="img"
+              aria-hidden="true"
             >
-              <title>Close</title>
               <path
                 d="m2.07 13.12 4.78-4.78 4.93 4.93 1.29-1.29-4.93-4.93 4.78-4.78L11.64.98 6.85 5.77 1.91.83.63 2.1l4.94 4.94-4.79 4.79 1.29 1.28Z"
                 className="fill-stone"

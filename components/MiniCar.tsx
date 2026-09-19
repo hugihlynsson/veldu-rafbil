@@ -19,9 +19,7 @@ const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
     .toLowerCase()
     .replace(/\s+/g, '-')
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-
+  const handleClick = () => {
     // Close the chat modal
     if (onClose) {
       onClose()
@@ -39,10 +37,10 @@ const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
   }
 
   return (
-    <a
-      href="#"
+    <button
+      type="button"
       onClick={handleClick}
-      className="flex flex-row rounded-[14px] overflow-hidden no-underline text-inherit transition-all duration-200 max-w-full hover:border-smoke hover:bg-white"
+      className="flex flex-row w-full p-0 border-0 bg-transparent cursor-pointer text-left rounded-[14px] overflow-hidden no-underline text-inherit transition-all duration-200 max-w-full hover:border-smoke hover:bg-white"
     >
       <div className="relative w-[120px] min-w-[120px] h-full bg-cloud shrink-0">
         <Image
@@ -77,7 +75,7 @@ const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
           {car.range} km • {car.acceleration.toFixed(1)}s • {car.drive}
         </div>
       </div>
-    </a>
+    </button>
   )
 }
 
