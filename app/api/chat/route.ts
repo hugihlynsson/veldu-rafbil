@@ -4,6 +4,10 @@ import { Axiom } from '@axiomhq/js'
 import { z } from 'zod'
 import newCars from '../../../modules/newCars'
 import getPriceWithGrant from '../../../modules/getPriceWithGrant'
+import {
+  grantAmountText,
+  grantCeilingDativeText,
+} from '../../../modules/grantCopy'
 import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 import { clientKey, rateLimit } from './rateLimit'
 
@@ -33,7 +37,7 @@ ${carsSummary}
 
 Gott að hafa í huga:
 - Notaðu upplýsingarnar hér að ofan til að gefa nákvæmar, sértækar upplýsingar
-- Verðin hér að ofan eru EFTIR 500.000 kr ríkisstyrk (fyrir bíla undir 10 milljónum kr)
+- Verðin hér að ofan eru EFTIR ${grantAmountText} ríkisstyrk (fyrir bíla undir ${grantCeilingDativeText} kr)
 - Drægni byggir á WLTP mælingum
 - Þegar spurt er um raunverulega drægni, útskýrðu að hún verði minni vegna þátta eins og aksturs og veðuraðstæðna á Íslandi
 - Gerðu þitt besta til að meta raun-drægni (venjulega 70-85% af WLTP í köldu loftslagi eins og á Íslandi)
