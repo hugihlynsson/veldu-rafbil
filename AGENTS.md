@@ -199,7 +199,10 @@ what you found.
   checked against the set of URLs in the car data before anything is fetched** —
   the model chooses that argument, and a model can be talked into choosing
   anything. The allowlist, the timeout and the response cap are a security
-  boundary, not a nicety; a test pins the allowlist, and all three stay.
+  boundary, not a nicety; tests pin the allowlist and the cap, and all three
+  stay. The cap works by reading the body as a stream and stopping — anything
+  that goes back to `response.text()` reads the whole page before the cap can
+  apply and gives that boundary away.
 - Chat history is persisted in `localStorage` through `utils/chatStorage.ts`. Go
   through it rather than touching `localStorage` directly: every call there can
   throw (private mode, a full quota, half-written JSON from an older shape) and a
