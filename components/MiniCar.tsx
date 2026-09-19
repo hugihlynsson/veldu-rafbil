@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { NewCar as NewCarType } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import getPriceWithGrant from '../modules/getPriceWithGrant'
+import prefersReducedMotion from '../utils/prefersReducedMotion'
 
 interface Props {
   car: NewCarType
@@ -30,7 +31,10 @@ const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
       const carElement = document.getElementById(carId)
       if (carElement) {
         setTimeout(() => {
-          carElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          carElement.scrollIntoView({
+            behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+            block: 'center',
+          })
           // Without this the reader is scrolled somewhere their focus is not
           carElement.focus({ preventScroll: true })
         }, 150)

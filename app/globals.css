@@ -5,7 +5,7 @@
   --color-sky-darker: #1a15b7;
   --color-tint: #111;
   --color-stone: #555;
-  --color-clay: #888;
+  --color-clay: #767676;
   --color-smoke: #ddd;
   --color-cloud: #eee;
   --color-lab: #fff;
@@ -55,6 +55,19 @@ input {
 @supports (font-variation-settings: normal) {
   :root {
     font-family: InterVariable, sans-serif;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after,
+  *::backdrop {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

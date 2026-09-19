@@ -7,6 +7,7 @@ import { UIDataTypes, UITools, UIMessage } from 'ai'
 import { useEffect } from 'react'
 import { useRef } from 'react'
 import { stripFollowUps } from '../../utils/chatHelpers'
+import prefersReducedMotion from '../../utils/prefersReducedMotion'
 import clsx from 'clsx'
 
 interface Props {
@@ -22,7 +23,10 @@ const ChatMessage: React.FunctionComponent<Props> = ({
 
   useEffect(() => {
     if (isLastUserMessage) {
-      ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      ref.current?.scrollIntoView({
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+        block: 'start',
+      })
     }
   }, [])
 
