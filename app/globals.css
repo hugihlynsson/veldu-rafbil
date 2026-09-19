@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-sky: #201be3;
@@ -39,7 +39,9 @@ input {
 
 :root {
   font-family: Inter, sans-serif;
-  font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
+  font-feature-settings:
+    'liga' 1,
+    'calt' 1; /* fix for Chrome */
 }
 
 @supports (font-variation-settings: normal) {
@@ -120,7 +122,9 @@ input {
   background-color: rgba(0, 0, 0, 0.06);
   padding: 2px 4px;
   border-radius: 4px;
-  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-family:
+    'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New',
+    monospace;
   font-size: 0.9em;
 }
 .message-content pre {
