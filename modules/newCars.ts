@@ -1907,7 +1907,7 @@ const newCars: Array<NewCar> = [
     sellerURL:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
     acceleration: 4.8,
-    capacity: 108,
+    capacity: 113,
     range: 642,
     evDatabaseURL: 'https://ev-database.org/car/3398/Porsche-Cayenne-Electric',
     drive: 'AWD',
@@ -1923,7 +1923,7 @@ const newCars: Array<NewCar> = [
     sellerURL:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
     acceleration: 4.8,
-    capacity: 108,
+    capacity: 113,
     range: 643,
     evDatabaseURL:
       'https://ev-database.org/car/3560/Porsche-Cayenne-Coupe-Electric',
@@ -1940,7 +1940,7 @@ const newCars: Array<NewCar> = [
     sellerURL:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
     acceleration: 3.8,
-    capacity: 108,
+    capacity: 113,
     range: 653,
     evDatabaseURL:
       'https://ev-database.org/car/3486/Porsche-Cayenne-S-Electric',
@@ -1957,7 +1957,7 @@ const newCars: Array<NewCar> = [
     sellerURL:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
     acceleration: 3.8,
-    capacity: 108,
+    capacity: 113,
     range: 670,
     evDatabaseURL:
       'https://ev-database.org/car/3561/Porsche-Cayenne-S-Coupe-Electric',
@@ -1974,7 +1974,7 @@ const newCars: Array<NewCar> = [
     sellerURL:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
     acceleration: 2.5,
-    capacity: 108,
+    capacity: 113,
     range: 623,
     evDatabaseURL:
       'https://ev-database.org/car/3399/Porsche-Cayenne-Turbo-Electric',
@@ -1991,7 +1991,7 @@ const newCars: Array<NewCar> = [
     sellerURL:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
     acceleration: 2.5,
-    capacity: 108,
+    capacity: 113,
     range: 637,
     evDatabaseURL:
       'https://ev-database.org/car/3562/Porsche-Cayenne-Turbo-Coupe-Electric',
