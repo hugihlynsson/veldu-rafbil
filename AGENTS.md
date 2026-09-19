@@ -32,13 +32,13 @@ budget; if a run shows three, the third is yours.
 
 ## Layout
 
-| Path                 | What lives there                                                                                         |
-| -------------------- | -------------------------------------------------------------------------------------------------------- |
-| `modules/newCars.ts` | The entire car database — ~185 hand-written `NewCar` literals, 2800 lines. Most commits touch only this. |
-| `app/page.tsx`       | Server component: turns `searchParams` into `Sorting`/`Filters`                                          |
-| `app/newCars.tsx`    | `'use client'` — all list state, sorting, filtering, URL sync                                            |
+| Path                 | What lives there                                                                                                 |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `modules/newCars.ts` | The entire car database — ~185 hand-written `NewCar` literals, 2800 lines. Most commits touch only this.         |
+| `app/page.tsx`       | Server component: turns `searchParams` into `Sorting`/`Filters`                                                  |
+| `app/newCars.tsx`    | `'use client'` — all list state, sorting, filtering, URL sync                                                    |
 | `modules/`           | Pure logic, no React and no browser: sorting, filtering, query parsing, price, formatting, the chat text helpers |
-| `utils/`             | The things that _do_ need React or the browser: the scroll lock, the reduced-motion check, localStorage  |
+| `utils/`             | The things that _do_ need React or the browser: the scroll lock, the reduced-motion check, localStorage          |
 
 That is the whole rule for which of the two a new file goes in: if it can be
 tested in plain node, it is a module. Everything in `modules/` has a test next
@@ -52,6 +52,15 @@ gives it a `labelledBy`, an `onDone`, optionally an `initialFocusRef` (because
 receives `{ isVisible, close }`. The dialog carries `data-state`, so a caller
 styles its own backdrop with `data-[state=visible]:backdrop:bg-black/30`.
 Don't hand-roll a second one.
+
+A modal made with `showModal()` sits in the top layer and makes the whole page
+behind it inert, so anything that has to stay usable while one is open belongs
+_inside_ the dialog. That is why `ChatContainer` renders the one `ChatInput`
+either on the page or as the chat dialog's `composer`, and why the draft lives
+in the container: the input is unmounted and mounted again by that move. Render
+it beside the panel rather than within it — the panel is scaled and blurred, and
+a transform or a filter becomes the containing block of the fixed things inside
+it.
 
 Watch the names: `app/newCars.tsx` is the client component, `modules/newCars.ts`
 is the data. They are not related.
@@ -111,7 +120,7 @@ to split:
 
 New copy that counts things needs Icelandic plural agreement: use `agree()`
 from `modules/plural.ts` rather than testing the number yourself. The singular
-goes with a count ending in 1 *except* one ending in 11, which is the part that
+goes with a count ending in 1 _except_ one ending in 11, which is the part that
 is easy to get wrong.
 
 ## Adding or updating a car
