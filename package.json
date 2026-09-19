@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": "^22.22.1 || ^24 || >=26"
+  },
   "dependencies": {
     "@ai-sdk/google": "^4.0.18",
     "@ai-sdk/react": "^4.0.68",
