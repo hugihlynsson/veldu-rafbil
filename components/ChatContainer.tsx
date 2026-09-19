@@ -2,11 +2,20 @@
 
 import { useRef, useState, useEffect } from 'react'
 import { useChat } from '@ai-sdk/react'
-import ChatModal from './ChatModal'
+import dynamic from 'next/dynamic'
 import FloatingChat from './ChatInput'
 import useBodyScrollLock from '../utils/useBodyScrollLock'
+import {
+  clearStoredMessages,
+  readStoredMessages,
+  writeStoredMessages,
+} from '../utils/chatStorage'
 
-const CHAT_STORAGE_KEY = 'veldu-rafbil-chat-messages'
+// The modal drags in react-markdown and remark-gfm, which most visitors never
+// need — they came for the list. Its chunk is fetched the first time the chat
+// opens, and warmed on focus so that the open still feels instant.
+const ChatModal = dynamic(() => import('./ChatModal'))
+const warmChatModal = () => void import('./ChatModal')
 
 interface Props {
   hide: boolean
@@ -24,13 +33,7 @@ export default function ChatContainer({ hide }: Props) {
   }, [showChatMessages])
 
   // Load initial messages from localStorage
-  const [initialMessages] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem(CHAT_STORAGE_KEY)
-      return stored ? JSON.parse(stored) : []
-    }
-    return []
-  })
+  const [initialMessages] = useState(readStoredMessages)
 
   // Initialize useChat
   const chatState = useChat({ messages: initialMessages })
@@ -41,7 +44,7 @@ export default function ChatContainer({ hide }: Props) {
   // Save messages to localStorage whenever they change
   useEffect(() => {
     if (chatState.messages.length > 0) {
-      localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(chatState.messages))
+      writeStoredMessages(chatState.messages)
     }
   }, [chatState.messages])
 
@@ -78,7 +81,7 @@ export default function ChatContainer({ hide }: Props) {
           status={chatState.status}
           onClearChat={() => {
             chatState.setMessages([])
-            localStorage.removeItem(CHAT_STORAGE_KEY)
+            clearStoredMessages()
           }}
           onReleaseBodyLock={() => setReleaseBodyLock(true)}
           onSendMessage={handleSendMessage}
@@ -88,6 +91,7 @@ export default function ChatContainer({ hide }: Props) {
 
       <FloatingChat
         inputRef={chatInputRef}
+        onIntent={warmChatModal}
         onOpenChat={() => setShowChatMessages(true)}
         hide={hide}
         disabled={chatState.status === 'streaming'}
