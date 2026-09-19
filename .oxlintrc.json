@@ -17,8 +17,8 @@
   "rules": {
     "react-hooks/exhaustive-deps": "warn",
     "react/set-state-in-effect": "warn",
-    "eslint/no-unused-expressions": "warn",
-    "jsx-a11y/no-autofocus": "off"
+    "jsx-a11y/no-autofocus": "off",
+    "eslint/eqeqeq": "error"
   },
   "env": {
     "builtin": true

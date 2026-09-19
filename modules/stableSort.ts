@@ -19,7 +19,7 @@ export default function stableSort<T>(
   let stabilized = clonedItems.map<[T, number]>((el, index) => [el, index])
   let stableCmp: Comparator<[T, number]> = (a, b) => {
     let order = cmp(a[0], b[0])
-    if (order != 0) return order
+    if (order !== 0) return order
     return a[1] - b[1]
   }
 
