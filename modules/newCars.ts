@@ -1758,6 +1758,22 @@ const newCars: Array<NewCar> = [
     timeToCharge10T080: 31,
   },
   {
+    make: 'Polestar',
+    model: '4',
+    subModel: 'SUV Long Range Dual Motor',
+    heroImageName: 'polestar-4-suv',
+    price: 9_790_000,
+    sellerURL:
+      'https://www.polestar.com/is-is/polestar-4-models/polestar-4-suv/',
+    acceleration: 3.9,
+    capacity: 100,
+    range: 600,
+    evDatabaseURL: 'https://ev-database.org/car/3715/Polestar-4-SUV-Dual-Motor',
+    drive: 'AWD',
+    power: 400,
+    timeToCharge10T080: 30,
+  },
+  {
     make: 'Porsche',
     model: 'Macan',
     subModel: '4 Electric',
