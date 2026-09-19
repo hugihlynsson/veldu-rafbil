@@ -11,7 +11,8 @@ const newCars: Array<NewCar> = [
     acceleration: 4.5,
     capacity: 94.9,
     range: 712,
-    evDatabaseURL: 'https://ev-database.org/car/3052/Audi-A6-Sportback-e-tron-quattro',
+    evDatabaseURL:
+      'https://ev-database.org/car/3052/Audi-A6-Sportback-e-tron-quattro',
     drive: 'AWD',
     timeToCharge10T080: 21,
     power: 340,
@@ -26,7 +27,8 @@ const newCars: Array<NewCar> = [
     acceleration: 4.5,
     capacity: 94.9,
     range: 674,
-    evDatabaseURL: 'https://ev-database.org/car/3054/Audi-A6-Avant-e-tron-quattro',
+    evDatabaseURL:
+      'https://ev-database.org/car/3054/Audi-A6-Avant-e-tron-quattro',
     drive: 'AWD',
     timeToCharge10T080: 21,
     power: 340,
@@ -70,7 +72,8 @@ const newCars: Array<NewCar> = [
     acceleration: 5.9,
     capacity: 94.9,
     range: 616,
-    evDatabaseURL: 'https://ev-database.org/car/2146/Audi-Q6-SUV-e-tron-quattro',
+    evDatabaseURL:
+      'https://ev-database.org/car/2146/Audi-Q6-SUV-e-tron-quattro',
     drive: 'AWD',
     timeToCharge10T080: 21,
     power: 285,
@@ -85,7 +88,8 @@ const newCars: Array<NewCar> = [
     acceleration: 5.9,
     capacity: 94.9,
     range: 636,
-    evDatabaseURL: 'https://ev-database.org/car/3043/Audi-Q6-Sportback-e-tron-quattro',
+    evDatabaseURL:
+      'https://ev-database.org/car/3043/Audi-Q6-Sportback-e-tron-quattro',
     drive: 'AWD',
     timeToCharge10T080: 21,
     power: 285,
@@ -471,8 +475,7 @@ const newCars: Array<NewCar> = [
     acceleration: 10.6,
     capacity: 49,
     range: 370,
-    evDatabaseURL:
-      'https://ev-database.org/car/2231/Hyundai-INSTER-Long-Range',
+    evDatabaseURL: 'https://ev-database.org/car/2231/Hyundai-INSTER-Long-Range',
     drive: 'FWD',
     power: 85,
     timeToCharge10T080: 30,
@@ -765,7 +768,8 @@ const newCars: Array<NewCar> = [
     model: 'PV5',
     heroImageName: 'kia-pv5',
     price: 7_890_777,
-    sellerURL: 'https://www.kia.com/is/fyrirtaekjalausnir/pbv/vehicles/pv5-passenger/',
+    sellerURL:
+      'https://www.kia.com/is/fyrirtaekjalausnir/pbv/vehicles/pv5-passenger/',
     acceleration: 10.6,
     capacity: 77.4,
     range: 412,
@@ -833,8 +837,8 @@ const newCars: Array<NewCar> = [
     evDatabaseURL: 'https://ev-database.org/car/3563/Leapmotor-B05-562-kWh',
     drive: 'RWD',
     power: 160,
-      timeToCharge10T080: 23,
-      expectedDelivery: '2026',
+    timeToCharge10T080: 23,
+    expectedDelivery: '2026',
   },
   {
     make: 'Leapmotor',
@@ -850,7 +854,7 @@ const newCars: Array<NewCar> = [
     drive: 'RWD',
     power: 160,
     timeToCharge10T080: 26,
-      expectedDelivery: '2026',
+    expectedDelivery: '2026',
   },
   {
     make: 'Leapmotor',
@@ -1039,7 +1043,8 @@ const newCars: Array<NewCar> = [
     acceleration: 7.8,
     capacity: 80,
     range: 552,
-    evDatabaseURL: 'https://ev-database.org/car/3108/Mazda-6e-Long-Range-80-kWh',
+    evDatabaseURL:
+      'https://ev-database.org/car/3108/Mazda-6e-Long-Range-80-kWh',
     drive: 'RWD',
     power: 180,
     timeToCharge10T080: 45,
@@ -1070,7 +1075,8 @@ const newCars: Array<NewCar> = [
     acceleration: 4.0,
     capacity: 95,
     range: 762,
-    evDatabaseURL: 'https://ev-database.org/car/3551/Mercedes-Benz-C-400-4MATIC',
+    evDatabaseURL:
+      'https://ev-database.org/car/3551/Mercedes-Benz-C-400-4MATIC',
     drive: 'AWD',
     power: 360,
     timeToCharge10T080: 22,
@@ -1100,7 +1106,8 @@ const newCars: Array<NewCar> = [
     acceleration: 4.9,
     capacity: 85,
     range: 770,
-    evDatabaseURL: 'https://ev-database.org/car/3140/Mercedes-Benz-CLA-350-4MATIC',
+    evDatabaseURL:
+      'https://ev-database.org/car/3140/Mercedes-Benz-CLA-350-4MATIC',
     drive: 'AWD',
     power: 260,
     timeToCharge10T080: 22,
@@ -1239,8 +1246,7 @@ const newCars: Array<NewCar> = [
     subModel: '580 EQ',
     heroImageName: 'mercedes-benz-g-class',
     price: 30_490_000,
-    sellerURL:
-      'https://www.mercedes-benz.is/models/g-class-n465/',
+    sellerURL: 'https://www.mercedes-benz.is/models/g-class-n465/',
     acceleration: 4.7,
     capacity: 116,
     range: 473,
@@ -1255,8 +1261,7 @@ const newCars: Array<NewCar> = [
     subModel: 'Tourer',
     heroImageName: 'mercedes-evito-tourer',
     price: 13_390_000,
-    sellerURL:
-      'https://www.mercedes-benz.is/vans/van-models/evito-tourer/',
+    sellerURL: 'https://www.mercedes-benz.is/vans/van-models/evito-tourer/',
     acceleration: 12.1,
     capacity: 90,
     range: 361,
@@ -1291,7 +1296,8 @@ const newCars: Array<NewCar> = [
     acceleration: 9.6,
     capacity: 42,
     range: 325,
-    evDatabaseURL: 'https://ev-database.org/car/3470/MG-MG4-Urban-Standard-Range',
+    evDatabaseURL:
+      'https://ev-database.org/car/3470/MG-MG4-Urban-Standard-Range',
     drive: 'FWD',
     power: 110,
     timeToCharge10T080: 28,
@@ -1306,7 +1312,8 @@ const newCars: Array<NewCar> = [
     acceleration: 9.5,
     capacity: 53,
     range: 416,
-    evDatabaseURL: 'https://ev-database.org/car/3471/MG-MG4-Urban-Comfort-Long-Range',
+    evDatabaseURL:
+      'https://ev-database.org/car/3471/MG-MG4-Urban-Comfort-Long-Range',
     drive: 'FWD',
     power: 118,
     timeToCharge10T080: 30,
@@ -1336,7 +1343,8 @@ const newCars: Array<NewCar> = [
     acceleration: 5.1,
     capacity: 77,
     range: 485,
-    evDatabaseURL: 'https://ev-database.org/car/3419/MG-MGS6-EV-Dual-Motor-77-kWh',
+    evDatabaseURL:
+      'https://ev-database.org/car/3419/MG-MGS6-EV-Dual-Motor-77-kWh',
     drive: 'AWD',
     power: 266,
     timeToCharge10T080: 36,
@@ -1425,7 +1433,8 @@ const newCars: Array<NewCar> = [
     subModel: 'Standard Range',
     heroImageName: 'nissan-leaf',
     price: 5_990_000,
-    sellerURL: 'https://www.nissan.is/vehicles/new-vehicles/new-nissan-leaf.html',
+    sellerURL:
+      'https://www.nissan.is/vehicles/new-vehicles/new-nissan-leaf.html',
     acceleration: 8.3,
     capacity: 52,
     range: 445,
@@ -1441,7 +1450,8 @@ const newCars: Array<NewCar> = [
     subModel: 'Extended Range',
     heroImageName: 'nissan-leaf-alt',
     price: 6_990_000,
-    sellerURL: 'https://www.nissan.is/vehicles/new-vehicles/new-nissan-leaf.html',
+    sellerURL:
+      'https://www.nissan.is/vehicles/new-vehicles/new-nissan-leaf.html',
     acceleration: 7.6,
     capacity: 75,
     range: 622,
@@ -1568,8 +1578,7 @@ const newCars: Array<NewCar> = [
     acceleration: 9.7,
     capacity: 73,
     range: 502,
-    evDatabaseURL:
-      'https://ev-database.org/car/2149/Peugeot-e-5008-73-kWh',
+    evDatabaseURL: 'https://ev-database.org/car/2149/Peugeot-e-5008-73-kWh',
     drive: 'FWD',
     power: 157,
     timeToCharge10T080: 36,
@@ -1689,7 +1698,8 @@ const newCars: Array<NewCar> = [
     subModel: '4 Electric',
     heroImageName: 'porsche-macan',
     price: 13_950_000,
-    sellerURL: 'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Macan-Electric',
+    sellerURL:
+      'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Macan-Electric',
     acceleration: 5.2,
     capacity: 100.0,
     range: 611,
@@ -1704,7 +1714,8 @@ const newCars: Array<NewCar> = [
     subModel: '4s Electric',
     heroImageName: 'porsche-macan',
     price: 15_450_000,
-    sellerURL: 'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Macan-Electric',
+    sellerURL:
+      'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Macan-Electric',
     acceleration: 4.1,
     capacity: 100.0,
     range: 611,
@@ -1764,11 +1775,13 @@ const newCars: Array<NewCar> = [
     subModel: '4 Cross Turismo',
     heroImageName: 'porsche-taycan-cross-turismo',
     price: 17_950_000,
-    sellerURL: 'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Taycan-Cross-Turismo',
+    sellerURL:
+      'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Taycan-Cross-Turismo',
     acceleration: 4.7,
     capacity: 105,
     range: 613,
-    evDatabaseURL: 'https://ev-database.org/car/2110/Porsche-Taycan-4-Cross-Turismo',
+    evDatabaseURL:
+      'https://ev-database.org/car/2110/Porsche-Taycan-4-Cross-Turismo',
     drive: 'AWD',
     power: 320,
     timeToCharge10T080: 16,
@@ -1779,11 +1792,13 @@ const newCars: Array<NewCar> = [
     subModel: '4s Cross Turismo',
     heroImageName: 'porsche-taycan-cross-turismo-alt',
     price: 19_950_000,
-    sellerURL: 'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Taycan-Cross-Turismo',
+    sellerURL:
+      'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Taycan-Cross-Turismo',
     acceleration: 3.8,
     capacity: 105,
     range: 610,
-    evDatabaseURL: 'https://ev-database.org/car/2111/Porsche-Taycan-4S-Cross-Turismo',
+    evDatabaseURL:
+      'https://ev-database.org/car/2111/Porsche-Taycan-4S-Cross-Turismo',
     drive: 'AWD',
     power: 440,
     timeToCharge10T080: 16,
@@ -1812,7 +1827,8 @@ const newCars: Array<NewCar> = [
     acceleration: 3.8,
     capacity: 108,
     range: 653,
-    evDatabaseURL: 'https://ev-database.org/car/3486/Porsche-Cayenne-S-Electric',
+    evDatabaseURL:
+      'https://ev-database.org/car/3486/Porsche-Cayenne-S-Electric',
     drive: 'AWD',
     power: 490,
     timeToCharge10T080: 16,
@@ -1827,7 +1843,8 @@ const newCars: Array<NewCar> = [
     acceleration: 2.5,
     capacity: 108,
     range: 623,
-    evDatabaseURL: 'https://ev-database.org/car/3399/Porsche-Cayenne-Turbo-Electric',
+    evDatabaseURL:
+      'https://ev-database.org/car/3399/Porsche-Cayenne-Turbo-Electric',
     drive: 'AWD',
     power: 850,
     timeToCharge10T080: 16,
@@ -2160,7 +2177,8 @@ const newCars: Array<NewCar> = [
     acceleration: 4.9,
     capacity: 77,
     range: 495,
-    evDatabaseURL: 'https://ev-database.org/car/3437/Subaru-Uncharted-77-kWh-AWD',
+    evDatabaseURL:
+      'https://ev-database.org/car/3437/Subaru-Uncharted-77-kWh-AWD',
     drive: 'AWD',
     power: 252,
     timeToCharge10T080: 28,
@@ -2222,8 +2240,7 @@ const newCars: Array<NewCar> = [
     acceleration: 4.4,
     capacity: 78.1,
     range: 660,
-    evDatabaseURL:
-      'https://ev-database.org/car/3405/Tesla-Model-3-Premium-AWD',
+    evDatabaseURL: 'https://ev-database.org/car/3405/Tesla-Model-3-Premium-AWD',
     drive: 'AWD',
     power: 366,
     timeToCharge10T080: 27,
@@ -2253,7 +2270,8 @@ const newCars: Array<NewCar> = [
     acceleration: 7.2,
     capacity: 60,
     range: 505,
-    evDatabaseURL: 'https://ev-database.org/car/3362/Tesla-Model-Y-Standard-RWD',
+    evDatabaseURL:
+      'https://ev-database.org/car/3362/Tesla-Model-Y-Standard-RWD',
     drive: 'RWD',
     power: 220,
     timeToCharge10T080: 29,
@@ -2268,8 +2286,7 @@ const newCars: Array<NewCar> = [
     acceleration: 5.6,
     capacity: 78,
     range: 609,
-    evDatabaseURL:
-      'https://ev-database.org/car/3595/Tesla-Model-Y-Premium-RWD',
+    evDatabaseURL: 'https://ev-database.org/car/3595/Tesla-Model-Y-Premium-RWD',
     drive: 'RWD',
     power: 220,
     timeToCharge10T080: 29,
@@ -2284,8 +2301,7 @@ const newCars: Array<NewCar> = [
     acceleration: 4.8,
     capacity: 78,
     range: 600,
-    evDatabaseURL:
-      'https://ev-database.org/car/3333/Tesla-Model-Y-Premium-AWD',
+    evDatabaseURL: 'https://ev-database.org/car/3333/Tesla-Model-Y-Premium-AWD',
     drive: 'AWD',
     power: 378,
     timeToCharge10T080: 29,
@@ -2300,8 +2316,7 @@ const newCars: Array<NewCar> = [
     acceleration: 3.5,
     capacity: 78,
     range: 580,
-    evDatabaseURL:
-      'https://ev-database.org/car/3269/Tesla-Model-Y-Performance',
+    evDatabaseURL: 'https://ev-database.org/car/3269/Tesla-Model-Y-Performance',
     drive: 'AWD',
     power: 461,
     timeToCharge10T080: 29,
@@ -2343,7 +2358,8 @@ const newCars: Array<NewCar> = [
     acceleration: 7.2,
     capacity: 74.7,
     range: 591,
-    evDatabaseURL: 'https://ev-database.org/car/3400/Toyota-bZ4X-Touring-FWD-747-kWh',
+    evDatabaseURL:
+      'https://ev-database.org/car/3400/Toyota-bZ4X-Touring-FWD-747-kWh',
     drive: 'FWD',
     power: 167,
     timeToCharge10T080: 29,
@@ -2358,7 +2374,8 @@ const newCars: Array<NewCar> = [
     acceleration: 4.4,
     capacity: 74.7,
     range: 528,
-    evDatabaseURL: 'https://ev-database.org/car/3401/Toyota-bZ4X-Touring-AWD-747-kWh',
+    evDatabaseURL:
+      'https://ev-database.org/car/3401/Toyota-bZ4X-Touring-AWD-747-kWh',
     drive: 'AWD',
     power: 280,
     timeToCharge10T080: 29,
@@ -2402,7 +2419,8 @@ const newCars: Array<NewCar> = [
     acceleration: 5.2,
     capacity: 77,
     range: 505,
-    evDatabaseURL: 'https://ev-database.org/car/3395/Toyota-C-HRplus-77-kWh-AWD',
+    evDatabaseURL:
+      'https://ev-database.org/car/3395/Toyota-C-HRplus-77-kWh-AWD',
     drive: 'AWD',
     power: 252,
     timeToCharge10T080: 29,
@@ -2447,7 +2465,8 @@ const newCars: Array<NewCar> = [
     acceleration: 8.7,
     capacity: 59.8,
     range: 426,
-    evDatabaseURL: 'https://ev-database.org/car/3209/Toyota-Urban-Cruiser-611-kWh',
+    evDatabaseURL:
+      'https://ev-database.org/car/3209/Toyota-Urban-Cruiser-611-kWh',
     drive: 'FWD',
     power: 128,
     timeToCharge10T080: 44,
@@ -2462,7 +2481,8 @@ const newCars: Array<NewCar> = [
     acceleration: 7.4,
     capacity: 59.8,
     range: 395,
-    evDatabaseURL: 'https://ev-database.org/car/3210/Toyota-Urban-Cruiser-611-kWh-AWD',
+    evDatabaseURL:
+      'https://ev-database.org/car/3210/Toyota-Urban-Cruiser-611-kWh-AWD',
     drive: 'AWD',
     power: 135,
     timeToCharge10T080: 44,
@@ -2477,7 +2497,8 @@ const newCars: Array<NewCar> = [
     acceleration: 6.5,
     capacity: 86,
     range: 473,
-    evDatabaseURL: 'https://ev-database.org/car/2157/Volkswagen-ID-Buzz-LWB-GTX-',
+    evDatabaseURL:
+      'https://ev-database.org/car/2157/Volkswagen-ID-Buzz-LWB-GTX-',
     drive: 'AWD',
     power: 250,
     timeToCharge10T080: 26,
@@ -2491,7 +2512,8 @@ const newCars: Array<NewCar> = [
     acceleration: 7.1,
     capacity: 52,
     range: 454,
-    evDatabaseURL: 'https://ev-database.org/car/3581/Volkswagen-ID-Polo-155-kW---52-kWh',
+    evDatabaseURL:
+      'https://ev-database.org/car/3581/Volkswagen-ID-Polo-155-kW---52-kWh',
     drive: 'FWD',
     power: 155,
     timeToCharge10T080: 24,
@@ -2506,7 +2528,8 @@ const newCars: Array<NewCar> = [
     acceleration: 7.1,
     capacity: 52,
     range: 427,
-    evDatabaseURL: 'https://ev-database.org/car/3673/Volkswagen-ID-Cross-155-kW---52-kWh',
+    evDatabaseURL:
+      'https://ev-database.org/car/3673/Volkswagen-ID-Cross-155-kW---52-kWh',
     drive: 'FWD',
     power: 155,
     timeToCharge10T080: 24,
@@ -2552,8 +2575,7 @@ const newCars: Array<NewCar> = [
     acceleration: 5.4,
     capacity: 79,
     range: 529,
-    evDatabaseURL:
-      'https://ev-database.org/car/3252/Volkswagen-ID4-GTX',
+    evDatabaseURL: 'https://ev-database.org/car/3252/Volkswagen-ID4-GTX',
     drive: 'AWD',
     power: 250,
     timeToCharge10T080: 28,
@@ -2568,7 +2590,8 @@ const newCars: Array<NewCar> = [
     acceleration: 6.6,
     capacity: 82,
     range: 536,
-    evDatabaseURL: 'https://ev-database.org/car/3251/Volkswagen-ID4-Pro-4MOTION',
+    evDatabaseURL:
+      'https://ev-database.org/car/3251/Volkswagen-ID4-Pro-4MOTION',
     drive: 'AWD',
     power: 210,
     timeToCharge10T080: 28,

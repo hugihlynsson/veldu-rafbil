@@ -185,7 +185,8 @@ export default function NewCars({
               className="no-underline font-semibold text-[#222] hover:underline"
             >
               sækja um 500.000 kr. rafbílastyrk
-            </a>.
+            </a>
+            .
           </em>
         </p>
 
