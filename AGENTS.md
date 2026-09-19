@@ -171,7 +171,12 @@ what you found.
   _inside_ a message part; the SDK's conversion owns that shape.
 - The **entire car list is inlined into the system prompt** on every request, as
   post-grant prices. Changing `NewCar` fields or the grant changes what the model
-  sees — keep the summary in step.
+  sees — keep the summary in step. Gemini's implicit prompt caching (on by
+  default, no config) is what makes that affordable: it only hits on an
+  identical prefix, so keep the system prompt free of anything per-request
+  (timestamps, user data) and ahead of the conversation. Whether it is hitting
+  shows up as `inputTokenDetails.cacheReadTokens` in the `tokenUsage` logged to
+  Axiom.
 - Follow-up questions travel inside the message text as markers, parsed and
   stripped by `modules/chatHelpers.ts`. The stripping also has to handle a
   partial marker arriving mid-stream — keep that behaviour if you touch it.
