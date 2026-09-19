@@ -21,6 +21,7 @@ interface Props {
 }
 
 export default function ChatContainer({ hide }: Props) {
+  const chatInputRef = useRef<HTMLInputElement>(null)
   const shouldFocusInput = useRef<boolean>(false)
   const [showChatMessages, setShowChatMessages] = useState<boolean>(false)
   const [releaseBodyLock, setReleaseBodyLock] = useState<boolean>(false)
@@ -41,6 +42,7 @@ export default function ChatContainer({ hide }: Props) {
   // takes its place. So closing claims the focus and the node takes it as it
   // arrives, which is the first moment there is anything to give it to.
   const focusInputOnArrival = (node: HTMLInputElement | null) => {
+    chatInputRef.current = node
     if (node && shouldFocusInput.current) {
       shouldFocusInput.current = false
       node.focus()
@@ -122,6 +124,7 @@ export default function ChatContainer({ hide }: Props) {
       onSendMessage={handleSendMessage}
       onRetry={handleRetry}
       composer={chatInput}
+      composerRef={chatInputRef}
     />
   )
 }
