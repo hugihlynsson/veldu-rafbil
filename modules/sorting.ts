@@ -1,5 +1,11 @@
 import getKmPerMinutesCharged from './getKmPerMinutesCharged'
-import { NewCar, Sorting, SortingDirection, SortingQuery } from '../types'
+import {
+  NewCar,
+  SearchParams,
+  Sorting,
+  SortingDirection,
+  SortingQuery,
+} from '../types'
 import getPriceWithGrant from './getPriceWithGrant'
 
 const queryToSorting: Record<string, Sorting> = {
@@ -33,14 +39,22 @@ export const defaultDirection: Record<Sorting, SortingDirection> = {
 export const flipDirection = (direction: SortingDirection): SortingDirection =>
   direction === 'asc' ? 'desc' : 'asc'
 
-export const getSortingFromQuery = ({ radaeftir }: Record<string, string>) =>
-  radaeftir in queryToSorting ? queryToSorting[radaeftir] : 'name'
+// A repeated parameter arrives as an array. Neither of these is a list, so the
+// first one given wins rather than the pair turning into a nonsense key.
+const first = (
+  value: string | Array<string> | undefined,
+): string | undefined => (Array.isArray(value) ? value[0] : value)
+
+export const getSortingFromQuery = ({ radaeftir }: SearchParams): Sorting => {
+  const value = first(radaeftir)
+  return value && value in queryToSorting ? queryToSorting[value] : 'name'
+}
 
 export const getDirectionFromQuery = (
-  query: Record<string, string>,
+  query: SearchParams,
 ): SortingDirection => {
   const base = defaultDirection[getSortingFromQuery(query)]
-  return query.ofugt === '1' ? flipDirection(base) : base
+  return first(query.ofugt) === '1' ? flipDirection(base) : base
 }
 
 export const isDefaultDirection = (

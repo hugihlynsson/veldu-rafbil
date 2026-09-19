@@ -1,5 +1,4 @@
-import { ParsedUrlQuery } from 'querystring'
-import { Drive, Filters } from '../types'
+import { Drive, Filters, SearchParams } from '../types'
 
 // The multi-value filters are written to the URL as a comma separated list
 // (see useFilters in app/newCars), so they have to be split apart again. A
@@ -19,7 +18,7 @@ const parseNumber = (value: string | Array<string>): number | undefined => {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined
 }
 
-export const getFiltersFromQuery = (query: ParsedUrlQuery): Filters => {
+export const getFiltersFromQuery = (query: SearchParams): Filters => {
   let filters: Filters = {}
 
   let { hrodun, drif, hradhledsla, nafn, verd, draegni, virdi, frambod } = query
