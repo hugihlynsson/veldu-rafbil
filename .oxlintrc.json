@@ -16,9 +16,11 @@
   },
   "rules": {
     "react-hooks/exhaustive-deps": "warn",
-    "react/set-state-in-effect": "warn",
+    "react/set-state-in-effect": "error",
     "jsx-a11y/no-autofocus": "off",
-    "eslint/eqeqeq": "error"
+    "eslint/eqeqeq": "error",
+    "eslint/prefer-const": "error",
+    "eslint/no-var": "error"
   },
   "env": {
     "builtin": true

@@ -3,7 +3,7 @@
 import React from 'react'
 import MiniCar from '../MiniCar'
 import { UIDataTypes, UIMessage, UITools } from 'ai'
-import { findMentionedCars } from '../../utils/chatHelpers'
+import { findMentionedCars } from '../../modules/chatHelpers'
 
 interface Props {
   lastMessage?: UIMessage<unknown, UIDataTypes, UITools>
@@ -17,17 +17,12 @@ const MentionedCars: React.FunctionComponent<Props> = ({
   if (!lastMessage || lastMessage.role !== 'assistant') return null
 
   // Find cars mentioned in the last assistant message (only when not streaming)
-  const mentionedCars = lastMessage.parts
-    ?.filter((part) => part.type === 'text')
-    .map((part) => part.text)
-    .join(' ')
-    ? findMentionedCars(
-        lastMessage.parts
-          ?.filter((part) => part.type === 'text')
-          .map((part) => part.text)
-          .join(' '),
-      )
-    : []
+  const text =
+    lastMessage.parts
+      ?.filter((part) => part.type === 'text')
+      .map((part) => part.text)
+      .join(' ') ?? ''
+  const mentionedCars = text ? findMentionedCars(text) : []
 
   if (mentionedCars.length === 0) return null
 

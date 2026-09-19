@@ -28,16 +28,27 @@ const car = (over: Partial<NewCar>): NewCar => ({
 
 describe('reading the sorting out of the query', () => {
   it('defaults to name when the param is missing or unknown', () => {
-    expect(getSortingFromQuery({} as never)).toBe('name')
-    expect(getSortingFromQuery({ radaeftir: 'bogus' } as never)).toBe('name')
+    expect(getSortingFromQuery({})).toBe('name')
+    expect(getSortingFromQuery({ radaeftir: 'bogus' })).toBe('name')
   })
 
   it.each(Object.entries(sortingToQuery))(
     'round trips %s through its Icelandic param',
     (sorting, query) => {
-      expect(getSortingFromQuery({ radaeftir: query } as never)).toBe(sorting)
+      expect(getSortingFromQuery({ radaeftir: query })).toBe(sorting)
     },
   )
+
+  // Next hands a repeated param over as an array. Neither of these is a list,
+  // so the first one given wins.
+  it('takes the first value when the param is given twice', () => {
+    expect(getSortingFromQuery({ radaeftir: ['draegni', 'verdi'] })).toBe(
+      'range',
+    )
+    expect(
+      getDirectionFromQuery({ radaeftir: ['verdi'], ofugt: ['1', '0'] }),
+    ).toBe('desc')
+  })
 })
 
 // ofugt means "flipped from this sorting's default", not "descending", so the

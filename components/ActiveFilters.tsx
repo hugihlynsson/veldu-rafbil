@@ -1,5 +1,6 @@
 import { Filters } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
+import { agree } from '../modules/plural'
 
 const filterClasses =
   "shrink-0 relative text-xs font-semibold py-1 pr-2 pl-2.5 border border-smoke rounded-full cursor-pointer text-center flex justify-center items-center bg-lab transition-all duration-200 text-clay after:content-['+'] after:rotate-45 after:ml-1.5 after:text-base after:leading-[10px] after:-mt-px after:text-clay after:transition-colors hover:bg-[#f8f8f8] hover:after:text-[#222] active:text-black"
@@ -24,9 +25,7 @@ const ActiveFilters = ({
       {hasFilter && (
         <div className="mb-2 text-sm font-semibold">
           {filteredCarsCount}{' '}
-          {filteredCarsCount.toString().match(/.*1$/m)
-            ? 'bíll passar við:'
-            : 'bílar passa við:'}
+          {agree(filteredCarsCount, 'bíll passar við:', 'bílar passa við:')}
         </div>
       )}
       <div className="flex flex-wrap gap-2 self-start max-w-full -ml-[2px]">
