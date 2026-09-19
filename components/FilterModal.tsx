@@ -147,7 +147,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 onChange={handleFilterChange('name')}
                 onKeyDown={handleKeyPress}
                 value={nameInput}
-                className="border border-cloud rounded bg-white p-[11px] text-sm font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
+                className="border border-cloud rounded bg-white p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
               />
               <div className="flex gap-2 items-baseline mb-1 px-3">
                 <label
@@ -165,7 +165,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 onChange={handleFilterChange('price')}
                 onKeyDown={handleKeyPress}
                 value={filters.price ?? ''}
-                className="border border-cloud rounded bg-white p-[11px] text-sm font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
+                className="border border-cloud rounded bg-white p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
               />
               <div className="flex gap-2 items-baseline mb-1 px-3">
                 <label
@@ -183,7 +183,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 onChange={handleFilterChange('range')}
                 onKeyDown={handleKeyPress}
                 value={filters.range ?? ''}
-                className="border border-cloud rounded bg-white p-[11px] text-sm font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
+                className="border border-cloud rounded bg-white p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
               />
               <div className="flex gap-2 items-baseline mb-1 px-3">
                 <label
@@ -198,7 +198,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 onChange={handleFilterChange('drive')}
                 onKeyDown={handleKeyPress}
                 value={filters.drive?.[0] ?? 'all'}
-                className="appearance-none border border-cloud bg-lab rounded p-[11px] text-sm font-normal text-tint mb-6 cursor-pointer hover:border-clay"
+                className="appearance-none border border-cloud bg-lab rounded p-[11px] text-base font-normal text-tint mb-6 cursor-pointer hover:border-clay"
               >
                 <option value="all">Öll</option>
                 <option value="AWD">AWD</option>
@@ -218,7 +218,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 onChange={handleFilterChange('availability')}
                 onKeyDown={handleKeyPress}
                 value={filters.availability ?? 'all'}
-                className="appearance-none border border-cloud bg-lab rounded p-[11px] text-sm font-normal text-tint mb-6 cursor-pointer hover:border-clay"
+                className="appearance-none border border-cloud bg-lab rounded p-[11px] text-base font-normal text-tint mb-6 cursor-pointer hover:border-clay"
               >
                 <option value="all">Allir</option>
                 <option value="available">Fáanlegir</option>
@@ -242,7 +242,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 onChange={handleFilterChange('acceleration')}
                 onKeyDown={handleKeyPress}
                 value={filters.acceleration ?? ''}
-                className="border border-cloud rounded bg-white p-[11px] text-sm font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
+                className="border border-cloud rounded bg-white p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
               />
               <div className="flex gap-2 items-baseline mb-1 px-3">
                 <label
@@ -260,7 +260,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 onChange={handleFilterChange('value')}
                 onKeyDown={handleKeyPress}
                 value={filters.value ?? ''}
-                className="border border-cloud rounded bg-white p-[11px] text-sm font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
+                className="border border-cloud rounded bg-white p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
               />
               <div className="flex gap-2 items-baseline mb-1 px-3">
                 <label
@@ -278,7 +278,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 onChange={handleFilterChange('fastcharge')}
                 onKeyDown={handleKeyPress}
                 value={filters.fastcharge ?? ''}
-                className="border border-cloud rounded bg-white p-[11px] text-sm font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
+                className="border border-cloud rounded bg-white p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay"
               />
             </div>
             <footer className="p-4 flex justify-between shadow-[0_0_32px_0_rgba(0,0,0,0.1)] z-1">
