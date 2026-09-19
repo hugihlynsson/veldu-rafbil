@@ -21,6 +21,7 @@ import {
 } from '../modules/sorting'
 import stableSort from '../modules/stableSort'
 import { agree } from '../modules/plural'
+import { grantAmountText, grantCeilingText } from '../modules/grantCopy'
 import useBodyScrollLock from '../utils/useBodyScrollLock'
 
 // The chat owns useChat, which pulls the AI SDK and zod along with it. Keeping
@@ -186,13 +187,15 @@ export default function NewCars({
           mælingum frá framleiðenda en raundrægni er háð aðstæðum og
           aksturslagi.
           <em className="inline-block text-xs text-stone mt-2">
-            Kaupendur nýskráðra rafbíla sem kosta minna en 10 milljónir eiga
-            kost á að{' '}
+            Kaupendur nýskráðra rafbíla sem kosta minna en {
+              grantCeilingText
+            }{' '}
+            eiga kost á að{' '}
             <a
               href="https://island.is/rafbilastyrkir"
               className="no-underline font-semibold text-[#222] hover:underline"
             >
-              sækja um 500.000 kr. rafbílastyrk
+              sækja um {grantAmountText} rafbílastyrk
             </a>
             .
           </em>

@@ -74,12 +74,19 @@ differ only by extension. They are not related.
 ## Domain rules that are easy to get wrong
 
 **The grant is baked into every displayed price.** Cars under a price ceiling
-get a government grant; both numbers live in `modules/` and change by
-legislation, so read them, never inline them. `car.price` is the _list_ price;
-anything user-facing — display, sorting by price, sorting by value, the
-price/range/value filters, and the car summary fed to the LLM — must go through
-`getPriceWithGrant()`. Never compare or render `car.price` raw except as the
-"full price without grant" tooltip.
+get a government grant; both numbers are `grantAmount` and `grantPriceCeiling`
+in `modules/globals.ts` and change by legislation, so read them, never inline
+them. `car.price` is the _list_ price; anything user-facing — display, sorting
+by price, sorting by value, the price/range/value filters, and the car summary
+fed to the LLM — must go through `getPriceWithGrant()`. Never compare or render
+`car.price` raw except as the "full price without grant" tooltip.
+
+The copy that _names_ those numbers — the note under the intro and the line in
+the assistant's system prompt — reads them too, through
+`modules/grantCopy.ts`, which declines the ceiling for the case each sentence
+needs. New copy about the grant goes through it rather than writing the amount
+out again, the same way copy that counts cars interpolates the length of the
+list.
 
 **Range is WLTP**, a manufacturer figure. Real Icelandic range is lower, and the
 system prompt tells the assistant to say so.
