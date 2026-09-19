@@ -26,4 +26,4 @@ GOOGLE_GENERATIVE_AI_API_KEY=...
 
 ## Contributing
 
-Most changes are adding or updating a car in `modules/newCars.ts`. [CLAUDE.md](CLAUDE.md) covers the conventions and the things that are easy to get wrong.
+Most changes are adding or updating a car in `modules/newCars.ts`. [AGENTS.md](AGENTS.md) covers the conventions and the things that are easy to get wrong.
