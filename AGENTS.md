@@ -4,12 +4,6 @@ Icelandic single-page site listing every 100% electric car sold new in Iceland,
 with sorting, filtering and an AI advisor chat. Next.js App Router + TypeScript +
 Tailwind v4, deployed on Vercel.
 
-This file is meant to be the _why_: the invariants, the conventions and the traps
-that the code does not state about itself. It stays away from counts,
-inventories and current values — the code owns those, and a copy of them here
-only goes stale and misleads. So: name the file that holds a fact rather than
-repeating the fact, and when you learn something durable, add it here.
-
 ## Verifying a change
 
 `npm test`, `npm run typecheck` and `npm run lint`, plus `npm run build` for
