@@ -13,3 +13,10 @@ next-env.d.ts
 
 # tsc --incremental's cache
 tsconfig.tsbuildinfo
+
+# A global gitignore often hides .claude/ wholesale, which would leave the
+# project's skills out of every commit. Track the skills, and keep the rest of
+# the directory (settings.local.json is personal) ignored.
+!.claude/
+.claude/*
+!.claude/skills/
