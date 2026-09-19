@@ -83,8 +83,11 @@ missing, the numeric ones fall back to `MAX_SAFE_INTEGER`/`0`.
 
 UI copy, and **the query parameters too**. Keep the code identifiers English and
 the wire format Icelandic; the mapping lives in `getFiltersFromQuery`
-(`app/page.tsx`) and `useFilters`/`useSorting` (`app/newCars.tsx`) and must stay
-in sync in both directions:
+(`modules/filters.ts`), `getSortingFromQuery` (`modules/sorting.ts`) and
+`useFilters`/`useSorting` (`app/newCars.tsx`), and must stay in sync in both
+directions. The multi-value filters (`nafn`, `drif`) travel as a comma separated
+list, so anything that writes them has to join and anything that reads them has
+to split:
 
 `radaeftir` sorting · `ofugt` flipped · `nafn` name · `verd` price ·
 `draegni` range · `hrodun` acceleration · `virdi` value · `hradhledsla` fastcharge ·
@@ -149,16 +152,20 @@ parenthesise arrow params.
 - **React Compiler is on** (`reactCompiler: true`, `babel-plugin-react-compiler`).
   Don't add `useMemo`/`useCallback`/`memo` by hand; the compiler handles
   memoisation.
-- `useBodyScrollLock` is copy-pasted into both `app/newCars.tsx` and
-  `components/ChatContainer.tsx`. Fix one, fix both. `reactStrictMode` is on, so
-  its effects double-invoke in dev.
+- `useBodyScrollLock` (`utils/useBodyScrollLock.ts`) is used by both the filter
+  modal and the chat modal, and its unlock effect also runs on mount, before
+  anything has been locked. It returns early when there is no stored offset —
+  without that guard it scrolls the page to the top on every mount.
+  `reactStrictMode` is on, so effects double-invoke in dev.
 - Sorting and filter state lives in React _and_ in the URL via `router.replace`.
   Adding state means updating the effect that serialises it, or the URL silently
   drifts from the UI.
-- Fathom analytics is loaded twice on purpose-ish: a `<script>` in `app/layout.tsx`
-  and `fathom-client` in `components/Fathom.tsx`. Site ID `DDOQKVOW` is hardcoded.
-  Use `trackEvent('…')` for new events.
+- Fathom analytics is loaded once, by `fathom-client` in `components/Fathom.tsx`,
+  which injects the script itself and tracks pageviews across client side
+  navigations. Don't add a second `<script>` for it. Site ID `DDOQKVOW` is
+  hardcoded; use `trackEvent('…')` for new events.
 - Image `deviceSizes` in `next.config.js` are tuned to specific iPhone widths with
   comments; don't prune them casually.
-- `/notadir` (the retired used-cars route) permanently redirects to `/`. `UsedCar`,
-  `ProcessedUsedCar` and `Snapshot` in `types.ts` are leftovers from it.
+- `/notadir` (the retired used-cars route) permanently redirects to `/`. The site
+  has covered new cars only since then, so anything mentioning used cars is a
+  leftover.
