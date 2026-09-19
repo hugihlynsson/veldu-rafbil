@@ -33,11 +33,26 @@ way in; the next run depends on it.
   hybrids and diesel siblings of the EV. Skip them. Lists also mix in commercial
   vehicles: cargo vans and pickups (Kia PV5 Cargo, Toyota Hilux, Proace) are not
   in the list, while people carriers (PV5 Passenger, Proace Verso) are.
-- **`price` is the list price, before the grant, with VAT.** Icelandic price
-  lists print two rows per trim: the price, and "Verð með rafbílastyrk" (the
-  grant already deducted). Take the first. The site subtracts the grant itself;
-  recording the second row deducts it twice. Van rows add a third, "Verð án
-  vsk", which is without VAT; that is not the price either.
+- **`price` is always the price before the grant, with VAT.** The site
+  subtracts the grant itself, so a figure that already has it deducted gets it
+  deducted twice. Lists differ in what they print, and nearly all of them label
+  it:
+  - **Both, labelled.** The usual case: "Verð" and "Verð með rafbílastyrk" (or
+    "Verð með styrk", "Verð með 500.000 kr. styrk frá Orkusjóði"), as rows in
+    Kia's lists and as columns in Audi's, Mazda's and Polestar's. Take the
+    unlabelled one; the fine print sometimes says so outright ("verð án
+    sérstaks styrks … er fullt verð").
+  - **Only the price with the grant.** Add the grant back. Read the amount from
+    `grantAmount` in `modules/globals.ts` rather than typing it, and check the
+    sum is still under the ceiling in `modules/getPriceWithGrant.ts`; a car over
+    it gets no grant, so a figure labelled "með styrk" cannot belong to one.
+  - **Only one figure and no label.** Toyota's and Lexus's lists print a single
+    "VERÐ", and it is the pre-grant price: it equals what the list already has.
+    When a list is unlabelled, compare it with the existing entry before
+    deciding.
+  - Van rows add a "Verð án vsk", without VAT. That is not the price either.
+  - **A change of exactly the grant amount is a red flag.** It is what a row read
+    from the wrong column looks like. Re-read the label before applying it.
 - Price digits are real. Askja lists end in `…777`; keep them (`4_490_777`).
 
 ## The process
@@ -121,11 +136,16 @@ which the existing numbers appear to follow (the EV2 entry has 8.5 s and 30 min
 where the brochure says 8.6 s and 29 min). Do not overwrite a spec because the
 brochure differs in the last digit. Change it when the car itself changed.
 
-Expect a lot of these: the first sweep found a range that differed from the
-brochure on about a dozen cars, by anything from 1 to 30 km (Polestar 3 610 vs
-628, Audi Q6 616 vs 635). Most will be a newer model year or ev-database's
-different test rating, and only the owner can say which. List them in the
-report as a group and leave the numbers.
+**Range is the exception, and it follows a rule.** `range` is the lower of the
+two WLTP figures, the brochure's and ev-database's. Expect it to move often: the
+first sweep changed eleven, by 1 to 31 km (Polestar 3 610 → 628, Toyota bZ4X
+Touring 591 → 560). Read ev-database's headline figure (TEL, the one listed
+first) for its side; its page shows a second, lower rating (TEH), which is not
+what the rule refers to. Say in the report which range changes you made, so the
+owner can look them over.
+
+The brochure side only exists for a make whose list you read this run. A car you
+did not read a list for keeps the range it has.
 
 ### 4. Adding a car
 
@@ -137,11 +157,12 @@ Follow the "Adding or updating a car" steps in `AGENTS.md`, plus:
   (`/car/3491/Kia-EV2-61-kWh`), and a wrong slug is a 404 even for a real id.
   Sibling variants often have adjacent ids, which helps only once you know the
   slug. Every `evDatabaseURL` must be unique to one entry; a test fails
-  otherwise. `acceleration`, `range` (WLTP), `power` and `timeToCharge10T080`
-  come from that page, cross-checked against the brochure's spec page. `capacity`
+  otherwise. `acceleration`, `power` and `timeToCharge10T080` come from that
+  page, cross-checked against the brochure's spec page, and `range` is the lower
+  of the two, as under "Specs on existing cars". `capacity`
   is the nominal figure, as the existing entries have it (EV2: 42.2 in the list,
-  where ev-database's usable figure is 41.0). Where ev-database and the brochure
-  disagree by more than rounding, say so in the report instead of choosing
+  where ev-database's usable figure is 41.0). Where the two disagree on any
+  other spec by more than rounding, say so in the report instead of choosing
   silently.
 - **If ev-database has no entry yet**, leave `evDatabaseURL` out and use the
   brochure's figures, and say so in the report.
@@ -209,11 +230,13 @@ with a short plain message in the repo's style: `Update Skoda lineup`,
 
 End with what the user needs to act on, not with the diff:
 
-- **Changed**, grouped by make: old price → new price, added, removed.
+- **Changed**, grouped by make: old price → new price, old range → new range,
+  added, removed.
 - **Not finished**: cars found but held back for want of a photo, with the
   entry ready to paste; cars with no ev-database entry.
-- **Doubtful**: cars missing from a list but not confirmed gone, spec
-  disagreements between brochure and ev-database.
+- **Doubtful**: cars missing from a list but not confirmed gone, a price whose
+  label you could not read, and spec disagreements other than range, which the
+  lower-of-two rule already settles.
 - **Not checked**: makes whose source was blocked, unreadable, or not in
   `sources.md`, so the user knows what the sweep did not cover.
 
