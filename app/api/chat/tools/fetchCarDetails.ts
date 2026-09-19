@@ -17,6 +17,37 @@ const allowedURLs = new Set(
 const MAX_BYTES = 2_000_000
 const TIMEOUT_MS = 8_000
 
+// Slicing the string that response.text() returns is no cap at all: text()
+// reads the body to the end first, so the bytes past the cap were fetched,
+// decoded and held in memory before being thrown away, and a response that
+// trickles or never ends held the request open for the whole timeout. Reading
+// the stream here stops at the cap and drops the connection with it.
+const readCapped = async (response: Response): Promise<string> => {
+  const reader = response.body?.getReader()
+  if (!reader) return ''
+
+  const decoder = new TextDecoder()
+  let html = ''
+  let bytes = 0
+
+  try {
+    while (bytes < MAX_BYTES) {
+      const { done, value } = await reader.read()
+      if (done) break
+      bytes += value.byteLength
+      html += decoder.decode(value, { stream: true })
+    }
+    // Flushes whatever the last chunk left mid-character
+    html += decoder.decode()
+  } finally {
+    // Nothing else is going to read this, whether we stopped at the cap or the
+    // body ended on its own
+    await reader.cancel().catch(() => {})
+  }
+
+  return html
+}
+
 export const fetchCarDetailsTool = tool({
   description:
     'Fetch detailed information about a specific car from its EV Database URL. Use this to get more information about the car, for example dimensions, cargo space, interior details, or other specifications not in the basic car list. The tool will not answer the users question: You must use this info to write a helpful answer',
@@ -38,7 +69,18 @@ export const fetchCarDetailsTool = tool({
       const response = await fetch(url, {
         signal: AbortSignal.timeout(TIMEOUT_MS),
       })
-      const html = (await response.text()).slice(0, MAX_BYTES)
+
+      // An error page parses to nothing anyway, and saying which status came
+      // back tells the model to fall back to the list rather than try again
+      if (!response.ok) {
+        return {
+          carName,
+          specifications: `The ev-database page answered ${response.status}, so there are no specifications to read. Answer from the car list instead.`,
+          source: url,
+        }
+      }
+
+      const html = await readCapped(response)
 
       // Extract structured data from EV Database
       // The site uses tables with format: <tr><td>Label</td><td>Value</td></tr>
