@@ -144,29 +144,19 @@ parenthesise arrow params.
 
 ## Gotchas
 
-- **`next dev` maintains `AGENTS.md` and `CLAUDE.md`.** On startup it writes its
-  own managed block (see `node_modules/next/dist/server/lib/generate-agent-files.js`).
-  Because `AGENTS.md` exists and already holds that block, it refreshes that file
-  and leaves this one alone — which is why this file starts with `@AGENTS.md`
-  instead of hosting the block itself. Don't delete `AGENTS.md`, or the next
-  `npm run dev` will start editing `CLAUDE.md` instead.
 - **React Compiler is on** (`reactCompiler: true`, `babel-plugin-react-compiler`).
   Don't add `useMemo`/`useCallback`/`memo` by hand; the compiler handles
   memoisation.
-- `useBodyScrollLock` (`utils/useBodyScrollLock.ts`) is used by both the filter
-  modal and the chat modal, and its unlock effect also runs on mount, before
-  anything has been locked. It returns early when there is no stored offset —
-  without that guard it scrolls the page to the top on every mount.
-  `reactStrictMode` is on, so effects double-invoke in dev.
-- Sorting and filter state lives in React _and_ in the URL via `router.replace`.
-  Adding state means updating the effect that serialises it, or the URL silently
-  drifts from the UI.
-- Fathom analytics is loaded once, by `fathom-client` in `components/Fathom.tsx`,
-  which injects the script itself and tracks pageviews across client side
-  navigations. Don't add a second `<script>` for it. Site ID `DDOQKVOW` is
-  hardcoded; use `trackEvent('…')` for new events.
-- Image `deviceSizes` in `next.config.js` are tuned to specific iPhone widths with
-  comments; don't prune them casually.
-- `/notadir` (the retired used-cars route) permanently redirects to `/`. The site
-  has covered new cars only since then, so anything mentioning used cars is a
-  leftover.
+- **Sorting and filter state lives in React _and_ in the URL** via
+  `router.replace`. Adding state means updating the effect that serialises it,
+  or the URL silently drifts from the UI.
+- **`useBodyScrollLock` (`utils/useBodyScrollLock.ts`) returns early when there
+  is no stored offset.** Its unlock effect also runs on mount, before anything
+  has been locked; without that guard it scrolls the page to the top every time.
+  Don't simplify it away.
+- Fathom analytics is loaded by `components/Fathom.tsx`, which injects the script
+  itself. Use `trackEvent('…')` for new events, and don't add a second `<script>`
+  for it.
+- **Don't delete `AGENTS.md`.** `next dev` writes a managed block of Next.js
+  rules into an agent file on startup; `AGENTS.md` exists to absorb it so this
+  file is left alone. That's what the `@AGENTS.md` line at the top is for.
