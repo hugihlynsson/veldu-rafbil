@@ -58,13 +58,13 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
           </div>
         )}
 
-        <h1 className="m-0 font-semibold text-[32px]">
+        <h2 className="m-0 font-semibold text-[32px]">
           <span>{car.make}</span>{' '}
           <span className="font-normal">{car.model}</span>
           <span className="block font-medium text-base text-stone -mt-px mb-2">
             {car.subModel}
           </span>
-        </h1>
+        </h2>
 
         <LinkPill
           href={car.sellerURL}
