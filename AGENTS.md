@@ -143,7 +143,11 @@ is easy to get wrong.
 4. `expectedDelivery` is a lowercase-able Icelandic phrase and is what makes a
    car count as "expected" rather than available — it drives both the
    availability filter and the badge on the card.
-5. Commit messages for this are short and plain: `Add BMW iX3 40`,
+5. Two variants of one model need `subModel`s that tell them apart. Make, model
+   and subModel are a car's identity — `getCarId()` builds the anchor on the
+   card, the target the chat scrolls to and the React key out of them, so two
+   entries differing only in price collide, and a test over the data fails.
+6. Commit messages for this are short and plain: `Add BMW iX3 40`,
    `Update Skoda lineup`, `Fix B05 seller link`.
 
 Copy that counts cars — the site's own description, the assistant's system

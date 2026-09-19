@@ -1,33 +1,30 @@
 import newCars from './newCars'
+import getCarId from './getCarId'
 import { NewCar } from '../types'
 
-// Helper function to find cars mentioned in text
+// The cars an answer talks about, in the order they appear in the list, for the
+// row of MiniCars under it
 export const findMentionedCars = (text: string): NewCar[] => {
   const mentioned: NewCar[] = []
+  const seen = new Set<string>()
   const lowerText = text.toLowerCase()
 
   for (const car of newCars) {
-    // Check if the message mentions this car (make + model)
     const carName = `${car.make} ${car.model}`.toLowerCase()
     const carNameWithSub = car.subModel
       ? `${car.make} ${car.model} ${car.subModel}`.toLowerCase()
       : null
 
-    if (
+    const isMentioned =
       lowerText.includes(carName) ||
-      (carNameWithSub && lowerText.includes(carNameWithSub))
-    ) {
-      // Avoid duplicates
-      if (
-        !mentioned.find(
-          (c) =>
-            c.make === car.make &&
-            c.model === car.model &&
-            c.subModel === car.subModel,
-        )
-      ) {
-        mentioned.push(car)
-      }
+      (carNameWithSub !== null && lowerText.includes(carNameWithSub))
+
+    // The same identity the row keys itself by, so that what counts as one car
+    // here and what counts as one car there cannot drift apart
+    const id = getCarId(car)
+    if (isMentioned && !seen.has(id)) {
+      seen.add(id)
+      mentioned.push(car)
     }
   }
 

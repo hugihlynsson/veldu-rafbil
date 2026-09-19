@@ -2,6 +2,7 @@ import { existsSync, readdirSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 
 import newCars from './newCars'
+import getCarId from './getCarId'
 import { NewCar } from '../types'
 
 const label = (car: NewCar) =>
@@ -36,11 +37,20 @@ describe('the car data', () => {
   })
 
   // Two Peugeot e-208 entries once shared a key and React rendered them wrong.
-  it('gives every car a unique React key', () => {
-    const keys = newCars.map(
-      (car) => `${car.make} ${car.model} ${car.subModel} ${car.price}`,
-    )
-    expect(keys).toHaveLength(new Set(keys).size)
+  // The same id is now the anchor on the card and the target the chat scrolls
+  // to, so a collision is three bugs rather than one: two cards answering to
+  // one id, the chat scrolling to whichever came first, and a list React cannot
+  // tell apart. Give the second variant a subModel that says what it is.
+  it('gives every car an id of its own', () => {
+    const byId = new Map<string, Array<string>>()
+    for (const car of newCars) {
+      const id = getCarId(car)
+      byId.set(id, [...(byId.get(id) ?? []), `${label(car)} @ ${car.price}`])
+    }
+
+    const collisions = [...byId].filter(([, cars]) => cars.length > 1)
+
+    expect(collisions).toEqual([])
   })
 
   it.each(newCars.map((car) => [label(car), car] as const))(
