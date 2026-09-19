@@ -26,7 +26,7 @@ touched instead: `npx prettier --write <files>`.
 | Path                 | What lives there                                                                                         |
 | -------------------- | -------------------------------------------------------------------------------------------------------- |
 | `modules/newCars.ts` | The entire car database — ~185 hand-written `NewCar` literals, 2800 lines. Most commits touch only this. |
-| `types.d.ts`         | All shared types, imported as `from '../types'`                                                          |
+| `types.ts`           | All shared types, imported as `from '../types'`                                                          |
 | `app/page.tsx`       | Server component: parses `searchParams` into `Sorting`/`Filters`                                         |
 | `app/newCars.tsx`    | `'use client'` — all list state, sorting, filtering, URL sync                                            |
 | `modules/`           | Pure domain logic (sorting, filtering, price, formatting)                                                |
@@ -138,12 +138,6 @@ parenthesise arrow params.
 
 ## Gotchas
 
-- **`types.d.ts` is never type-checked.** `skipLibCheck: true` in `tsconfig.json`
-  covers every `.d.ts`, including this one, so typos there fail silently. There
-  is a live example: `Filters.availability` is declared as `availability`
-  (lowercase, undefined) instead of `Availability`, which makes the field `any`.
-  After editing `types.d.ts`, verify the type actually binds — e.g. assign a
-  deliberately wrong value at a use site and confirm `tsc` complains.
 - **React Compiler is on** (`reactCompiler: true`, `babel-plugin-react-compiler`).
   Don't add `useMemo`/`useCallback`/`memo` by hand; the compiler handles
   memoisation.
@@ -159,4 +153,4 @@ parenthesise arrow params.
 - Image `deviceSizes` in `next.config.js` are tuned to specific iPhone widths with
   comments; don't prune them casually.
 - `/notadir` (the retired used-cars route) permanently redirects to `/`. `UsedCar`,
-  `ProcessedUsedCar` and `Snapshot` in `types.d.ts` are leftovers from it.
+  `ProcessedUsedCar` and `Snapshot` in `types.ts` are leftovers from it.
