@@ -80,10 +80,17 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             updatedFilters.fastcharge = Number(value)
             break
           case 'name':
-            updatedFilters.name = value
+            const names = value
               .split(',')
               .map((name) => name.trim())
               .filter((name) => name)
+            // Input of only separators is no filter at all, not a filter that
+            // matches nothing
+            if (names.length) {
+              updatedFilters.name = names
+            } else {
+              delete updatedFilters.name
+            }
             break
           case 'price':
             updatedFilters.price = Number(value)
