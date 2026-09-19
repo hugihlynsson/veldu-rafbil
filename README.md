@@ -9,7 +9,7 @@ This is a [Next.js](https://nextjs.org) project written in Typescript and styled
 
 ## Running it
 
-Requires [Node.js](https://nodejs.org/) 20.9 or later.
+Requires an LTS release of [Node.js](https://nodejs.org/), 22.22.1 or later.
 
 ```bash
 npm install
