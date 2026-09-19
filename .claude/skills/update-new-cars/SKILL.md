@@ -21,12 +21,23 @@ way in; the next run depends on it.
   EV2 has two batteries and three trims each; the list carries one entry per
   battery, at the entry trim's price. Trim ladders (Light/Air/Earth) are not
   entries. Look at how the make's existing entries are split and follow that.
+  Two things fold into an existing entry instead of making a new one: a variant
+  with the same battery and drive that differs only in wheel size (the Mazda
+  CX-6e has a 484 km and a 468 km row for 19" and 21" wheels), and a trim that is
+  only a step up in equipment.
+- **A variant sold as an option package is the base plus the package.** The
+  Polestar 2 "Long Range Performance" is the Long Range Dual Motor plus a
+  900.000 kr. Performance package, and its price is derived that way, so when the
+  base moves the variant moves with it.
 - **Only 100% electric cars.** The importers' lists are full of hybrids, plug-in
-  hybrids and diesel siblings of the EV. Skip them.
-- **`price` is the list price, before the grant.** Icelandic price lists print
-  two rows per trim: the price, and "Verð með rafbílastyrk" (the grant already
-  deducted). Take the first. The site subtracts the grant itself; recording the
-  second row deducts it twice.
+  hybrids and diesel siblings of the EV. Skip them. Lists also mix in commercial
+  vehicles: cargo vans and pickups (Kia PV5 Cargo, Toyota Hilux, Proace) are not
+  in the list, while people carriers (PV5 Passenger, Proace Verso) are.
+- **`price` is the list price, before the grant, with VAT.** Icelandic price
+  lists print two rows per trim: the price, and "Verð með rafbílastyrk" (the
+  grant already deducted). Take the first. The site subtracts the grant itself;
+  recording the second row deducts it twice. Van rows add a third, "Verð án
+  vsk", which is without VAT; that is not the price either.
 - Price digits are real. Askja lists end in `…777`; keep them (`4_490_777`).
 
 ## The process
@@ -41,31 +52,50 @@ Before opening a price list, pull up what the list currently says for that make
 looking for a difference, so know the starting point.
 
 To see which makes are worth a look first, check the freshness signals instead
-of opening everything: the issuu listings show what was published recently,
-dated price-list filenames (Polestar) carry their own date, and the last time
-the make was touched is `git log -1 --format=%ad -S"make: 'Kia'" -- modules/newCars.ts`.
+of opening everything. The last time the make was touched is
+`git log -1 --format=%ad -S"make: 'Kia'" -- modules/newCars.ts`; a price list
+uploaded after that date has not been applied yet. The upload date of an issuu
+document comes from `scripts/issuu-pages.sh`, and dated filenames (Polestar)
+carry their own. A list older than the last touch can be skipped, and it is
+worth saying so in the report.
 
 ### 2. Get the current price list
 
-Follow [sources.md](sources.md) for the make. The three shapes you will meet:
+Follow [sources.md](sources.md) for the make. Prefer text to images wherever
+the source has any: digits come out exactly, where a page image can be misread.
+The shapes you will meet, best first:
 
-- **A PDF at a URL.** Download it into the scratchpad and read it with the Read
-  tool (`pages` for anything over ten pages). That needs `pdftoppm`; if it is
-  missing (`brew install poppler`) tell the user rather than working around it.
+- **An iPaper flipbook** (Toyota and Lexus). The page's HTML carries the text of
+  every page. `scripts/ipaper-text.py <url>` prints it, one line per page. No
+  browser is needed, and the `?page=N` in the URL changes nothing.
+- **A PDF at a URL.** Download it into the scratchpad. On a Mac,
+  `scripts/pdf.swift` reads it without installing anything; compile it once
+  with `swiftc -O scripts/pdf.swift -o <scratchpad>/pdf` (running the source
+  directly recompiles every time and takes half a minute).
+  - `pdf text <pdf>` prints the text layer. Audi's and Polestar's price tables
+    are in it as one line per model.
+  - Some PDFs keep the price table as an image, so it is missing from the text
+    (Mazda's). Use `pdf pages <pdf> <dir> [scale]` to render JPEGs for the Read
+    tool. Where the content is small on a large sheet, render at scale 5 and
+    crop the table with `sips` to read the digits.
+  - Without a Mac, `pdftotext` and `pdftoppm` from poppler do the same.
 - **An issuu flipbook.** Issuu has no text layer, only page images.
-  `scripts/issuu-pages.sh <doc url> <dir>` downloads every page as a JPEG;
-  read those with the Read tool. The script also prints the upload date taken
-  from the document id.
-  **That date, not the date on the publisher's listing, says how fresh the list
-  is.** Importers re-upload over the same document, and the listing keeps the
-  date of the first publish.
+  `scripts/issuu-pages.sh <doc url> <dir>` downloads every page as a JPEG; read
+  those with the Read tool. A price list is one or two pages, and page 1 carries
+  the price table with the headline specs. Read page 2 only for the figures
+  page 1 lacks.
+  The script also prints the upload date taken from the document id. **That
+  date, not the date on the publisher's listing, says how fresh the list is.**
+  Importers re-upload over the same document, and the listing keeps the date of
+  the first publish (an EV2 list listed in April was uploaded in September).
 - **A JS-rendered page or a blocked one** (Audi and Tesla answer 403 to WebFetch
   and curl). Use the built-in browser: `get_page_text` for prices printed on
-  the page, `javascript_exec` to pull link `href`s, screenshots for flipbooks.
-  The browser pane must be showing for screenshots to work.
+  the page, `javascript_exec` to pull link `href`s. The browser pane must be
+  showing for screenshots to work. Look for what the page links to before
+  reading the page itself; Audi's page is a shell around PDFs that plain curl
+  can fetch.
 
-Page images are big. Read the price page and the spec page of a brochure, not
-the equipment lists.
+Read the price table and the spec page of a brochure, not the equipment lists.
 
 ### 3. Compare
 
@@ -91,25 +121,45 @@ which the existing numbers appear to follow (the EV2 entry has 8.5 s and 30 min
 where the brochure says 8.6 s and 29 min). Do not overwrite a spec because the
 brochure differs in the last digit. Change it when the car itself changed.
 
+Expect a lot of these: the first sweep found a range that differed from the
+brochure on about a dozen cars, by anything from 1 to 30 km (Polestar 3 610 vs
+628, Audi Q6 616 vs 635). Most will be a newer model year or ev-database's
+different test rating, and only the owner can say which. List them in the
+report as a group and leave the numbers.
+
 ### 4. Adding a car
 
 Follow the "Adding or updating a car" steps in `AGENTS.md`, plus:
 
-- **Specs come from ev-database.** Find the variant there (`WebFetch` works on
-  `ev-database.org`) and take its `evDatabaseURL`. Every URL must be unique to
-  one entry; a test fails otherwise. `acceleration`, `capacity`, `range` (WLTP),
-  `power` and `timeToCharge10T080` come from that page, cross-checked against
-  the brochure's spec page. Where the two disagree by more than rounding, say so
-  in the report instead of choosing silently.
+- **Specs come from ev-database.** Find the variant with `WebSearch` limited to
+  `ev-database.org` (`"ev-database Kia EV2 61 kWh"`), then read the page with
+  `WebFetch`. Guessing the URL does not work: the path needs the exact slug
+  (`/car/3491/Kia-EV2-61-kWh`), and a wrong slug is a 404 even for a real id.
+  Sibling variants often have adjacent ids, which helps only once you know the
+  slug. Every `evDatabaseURL` must be unique to one entry; a test fails
+  otherwise. `acceleration`, `range` (WLTP), `power` and `timeToCharge10T080`
+  come from that page, cross-checked against the brochure's spec page. `capacity`
+  is the nominal figure, as the existing entries have it (EV2: 42.2 in the list,
+  where ev-database's usable figure is 41.0). Where ev-database and the brochure
+  disagree by more than rounding, say so in the report instead of choosing
+  silently.
 - **If ev-database has no entry yet**, leave `evDatabaseURL` out and use the
   brochure's figures, and say so in the report.
 - **`sellerURL` is the car's own model page**, not the importer's front page.
   Seven cars once pointed at a site root and had to be fixed.
 - **`subModel`** names the variant. Front- and all-wheel-drive siblings must not
-  share a name.
-- **The hero photo** follows the steps under "Hero photos" below. A test fails
-  until the file exists, so a car added without one is not finished, and the
-  report has to say so.
+  share a name. When a second variant joins a model that had none, name the
+  existing one as well (the EV2 became "Standard Range" beside a new "Long
+  Range", as the EV3 already is).
+- **A sibling variant can share the photo.** Two i4 entries use `bmw-i4`, and
+  the EV2 Long Range uses `kia-ev2`. Check whether the model's existing photo
+  fits before looking for a new one.
+- **A new body style needs its own photo.** A test fails until the file exists,
+  and a car with the wrong photo is worse than a missing car. Do not add the
+  entry with a photo that does not exist: leave the tree passing, and put the
+  finished entry, with every field filled in, in the report along with what is
+  waiting on (the photo, per "Hero photos" below). The Polestar 4 SUV was found
+  this way.
 
 #### Hero photos
 
@@ -160,7 +210,8 @@ with a short plain message in the repo's style: `Update Skoda lineup`,
 End with what the user needs to act on, not with the diff:
 
 - **Changed**, grouped by make: old price → new price, added, removed.
-- **Not finished**: cars added without a photo, cars with no ev-database entry.
+- **Not finished**: cars found but held back for want of a photo, with the
+  entry ready to paste; cars with no ev-database entry.
 - **Doubtful**: cars missing from a list but not confirmed gone, spec
   disagreements between brochure and ev-database.
 - **Not checked**: makes whose source was blocked, unreadable, or not in
