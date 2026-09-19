@@ -118,7 +118,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
         return (
           <section
             className={clsx(
-              'z-1 flex flex-col rounded-t-[20px] bg-white w-screen max-w-[400px] max-h-[70vh] overflow-hidden shadow-[0px_0px_40px_0px_rgba(0,0,0,0.1)] translate-y-10 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.32,0,0.67,0)]',
+              'z-1 flex flex-col rounded-t-[20px] bg-white w-screen max-w-[400px] max-h-[85vh] overflow-hidden shadow-[0px_0px_40px_0px_rgba(0,0,0,0.1)] translate-y-10 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.32,0,0.67,0)]',
               '[@media(min-width:800px)_and_(min-height:600px)]:rounded-[20px] [@media(min-width:800px)_and_(min-height:600px)]:max-h-[500px]',
               isVisible &&
                 'opacity-100 ease-[cubic-bezier(0.33,1,0.68,1)] translate-y-0!',
