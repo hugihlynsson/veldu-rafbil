@@ -21,29 +21,7 @@ import {
   sortingToQuery,
 } from '../modules/sorting'
 import stableSort from '../modules/stableSort'
-
-const useBodyScrollLock = (lock: boolean): void => {
-  const [scrollY, setScrollY] = useState<number>(0)
-
-  useEffect(() => {
-    setScrollY(window.scrollY)
-    const handleScroll = () => setScrollY(window.scrollY)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    if (lock) {
-      document.body.style.position = 'fixed'
-      document.body.style.top = `-${scrollY}px`
-    } else {
-      const scrollY = document.body.style.top
-      document.body.style.position = ''
-      document.body.style.top = ''
-      window.scrollTo(0, parseInt(scrollY) * -1)
-    }
-  }, [lock])
-}
+import useBodyScrollLock from '../utils/useBodyScrollLock'
 
 const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
   const router = useRouter()

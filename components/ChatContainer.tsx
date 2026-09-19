@@ -4,31 +4,9 @@ import { useState, useEffect } from 'react'
 import { useChat } from '@ai-sdk/react'
 import ChatModal from './ChatModal'
 import FloatingChat from './ChatInput'
+import useBodyScrollLock from '../utils/useBodyScrollLock'
 
 const CHAT_STORAGE_KEY = 'veldu-rafbil-chat-messages'
-
-const useBodyScrollLock = (lock: boolean): void => {
-  const [scrollY, setScrollY] = useState<number>(0)
-
-  useEffect(() => {
-    setScrollY(window.scrollY)
-    const handleScroll = () => setScrollY(window.scrollY)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    if (lock) {
-      document.body.style.position = 'fixed'
-      document.body.style.top = `-${scrollY}px`
-    } else {
-      const scrollY = document.body.style.top
-      document.body.style.position = ''
-      document.body.style.top = ''
-      window.scrollTo(0, parseInt(scrollY) * -1)
-    }
-  }, [lock])
-}
 
 interface Props {
   hide: boolean
