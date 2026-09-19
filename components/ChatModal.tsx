@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react'
 import { UIDataTypes, UITools, ChatStatus, UIMessage } from 'ai'
-import { parseFollowUps } from '../utils/chatHelpers'
+import { parseFollowUps, stripFollowUps } from '../utils/chatHelpers'
 import ChatHeader from './chat/ChatHeader'
 import ChatMessage from './chat/ChatMessage'
 import FollowUpSuggestions from './chat/FollowUpSuggestions'
@@ -85,16 +85,16 @@ const ChatModal: React.FunctionComponent<Props> = ({
 
   // Extract data from the last assistant message
   const lastMessage = messages[messages.length - 1]
-  const lastMessageFollowUps =
+  const lastAssistantText =
     lastMessage?.role === 'assistant'
-      ? (() => {
-          const textContent = lastMessage.parts
-            ?.filter((part) => part.type === 'text')
-            .map((part) => part.text)
-            .join(' ')
-          return textContent ? parseFollowUps(textContent) : []
-        })()
-      : []
+      ? (lastMessage.parts
+          ?.filter((part) => part.type === 'text')
+          .map((part) => part.text)
+          .join(' ') ?? '')
+      : ''
+  const lastMessageFollowUps = lastAssistantText
+    ? parseFollowUps(lastAssistantText)
+    : []
 
   const showLoading =
     (lastMessage?.role === 'user' && status !== 'error') ||
@@ -148,7 +148,10 @@ const ChatModal: React.FunctionComponent<Props> = ({
           {showLoading && <TypingIndicator />}
 
           {status === 'error' && (
-            <div className="flex items-center justify-between mx-4 mb-4 rounded-full bg-red-50 p-3 pl-4 text-sm text-red-700">
+            <div
+              role="alert"
+              className="flex items-center justify-between mx-4 mb-4 rounded-full bg-red-50 p-3 pl-4 text-sm text-red-700"
+            >
               <p className="font-medium">Úps, eitthvað fór úrskeiðis</p>
               <button
                 onClick={onRetry}
@@ -170,6 +173,15 @@ const ChatModal: React.FunctionComponent<Props> = ({
             />
           )}
           <span ref={messagesEndRef} />
+        </div>
+
+        {/* The answer arrives token by token into a region nothing watches.
+            Announcing only the finished text keeps a screen reader from
+            re-reading the whole message on every token. */}
+        <div aria-live="polite" className="sr-only">
+          {status !== 'streaming' && lastAssistantText
+            ? stripFollowUps(lastAssistantText)
+            : ''}
         </div>
       </section>
     </dialog>

@@ -112,6 +112,28 @@ const useFilters = (initial: Filters) => {
   return [filters, setFilters] as const
 }
 
+// Icelandic takes the singular for a count ending in 1
+const carWord = (count: number) =>
+  count.toString().match(/.*1$/m) ? 'bíll' : 'bílar'
+
+const sortingLabels: Record<Sorting, string> = {
+  name: 'Nafni',
+  price: 'Verði',
+  range: 'Drægni',
+  acceleration: 'Hröðun',
+  value: 'Verði á km',
+  fastcharge: 'Hraðhleðslu',
+}
+
+// The sortings offered as toggles, in the order they appear
+const toggleSortings: Sorting[] = [
+  'name',
+  'price',
+  'range',
+  'acceleration',
+  'value',
+]
+
 interface Props {
   sorting: Sorting
   direction: SortingDirection
@@ -179,13 +201,10 @@ export default function NewCars({
 
         <Toggles<Sorting>
           currentValue={sorting}
-          items={[
-            ['Nafni', 'name'],
-            ['Verði', 'price'],
-            ['Drægni', 'range'],
-            ['Hröðun', 'acceleration'],
-            ['Verði á km', 'value'],
-          ]}
+          items={toggleSortings.map((value): [string, Sorting] => [
+            sortingLabels[value],
+            value,
+          ])}
           onClick={toggleSorting}
           indicator={
             <span
@@ -206,6 +225,15 @@ export default function NewCars({
           onOpenFilterModal={() => setEditingFilters(true)}
           filteredCarsCount={filteredCars.length}
         />
+
+        {/* Sorting and filtering rewrite the whole list with no visible change
+            at the point of interaction. This is the only feedback a screen
+            reader gets, so it has to stay mounted to be announced at all. */}
+        <div aria-live="polite" className="sr-only">
+          {`${filteredCars.length} ${carWord(filteredCars.length)} á listanum, raðað eftir ${sortingLabels[
+            sorting
+          ].toLowerCase()}, ${direction === 'desc' ? 'lækkandi' : 'hækkandi'} röð.`}
+        </div>
       </header>
 
       {stableSort(filteredCars, carSorter(sorting, direction)).map(
@@ -221,10 +249,8 @@ export default function NewCars({
 
       {hasFilter && filteredCarCount > 0 && (
         <div className="p-4 flex items-center mx-auto max-w-[480px] gap-2 text-xs font-medium mb-10 xs:p-6 md:pl-10 md:max-w-none">
-          {filteredCarCount}
-          {filteredCarCount.toString().match(/.*1$/m)
-            ? ' bíll passaði '
-            : ' bílar pössuðu '}
+          {filteredCarCount} {carWord(filteredCarCount)}{' '}
+          {filteredCarCount.toString().match(/.*1$/m) ? 'passaði' : 'pössuðu'}{' '}
           ekki við leitina{' '}
           <button
             className="border-0 shrink-0 m-0 mr-2 text-xs font-semibold py-[5px] px-3 rounded-full cursor-pointer text-center flex justify-center items-center bg-cloud transition-all duration-200 text-tint hover:bg-[#f8f8f8]"
