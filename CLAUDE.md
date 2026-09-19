@@ -132,10 +132,6 @@ and `md:` are the workhorses). Chat markdown is styled by the plain
 - **Sorting and filter state lives in React _and_ in the URL** via
   `router.replace`. Adding state means updating the effect that serialises it,
   or the URL silently drifts from the UI.
-- **`useBodyScrollLock` (`utils/useBodyScrollLock.ts`) returns early when there
-  is no stored offset.** Its unlock effect also runs on mount, before anything
-  has been locked; without that guard it scrolls the page to the top every time.
-  Don't simplify it away.
 - Fathom analytics is loaded by `components/Fathom.tsx`, which injects the script
   itself. Use `trackEvent('…')` for new events, and don't add a second `<script>`
   for it.
