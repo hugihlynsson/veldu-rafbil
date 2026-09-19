@@ -31,6 +31,8 @@ const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
       if (carElement) {
         setTimeout(() => {
           carElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          // Without this the reader is scrolled somewhere their focus is not
+          carElement.focus({ preventScroll: true })
         }, 150)
       }
     }, 100)

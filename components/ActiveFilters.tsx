@@ -32,6 +32,7 @@ const ActiveFilters = ({
       <div className="flex flex-wrap gap-2 self-start max-w-full -ml-[2px]">
         {filters.name && (
           <button
+            aria-label={`Fjarlægja nafnasíu: ${filters.name.join(', ')}`}
             className={filterClasses}
             onClick={() => onRemoveFilter('name')}
           >
@@ -44,6 +45,9 @@ const ActiveFilters = ({
 
         {filters.price && (
           <button
+            aria-label={`Fjarlægja verðsíu: hámark ${addDecimalSeprators(
+              filters.price,
+            )} kr.`}
             className={filterClasses}
             onClick={() => onRemoveFilter('price')}
           >
@@ -56,6 +60,7 @@ const ActiveFilters = ({
 
         {filters.range && (
           <button
+            aria-label={`Fjarlægja drægnisíu: lágmark ${filters.range} km`}
             className={filterClasses}
             onClick={() => onRemoveFilter('range')}
           >
@@ -68,6 +73,7 @@ const ActiveFilters = ({
 
         {filters.drive && (
           <button
+            aria-label={`Fjarlægja drifsíu: ${filters.drive.join(', ')}`}
             className={filterClasses}
             onClick={() => onRemoveFilter('drive')}
           >
@@ -80,6 +86,9 @@ const ActiveFilters = ({
 
         {filters.acceleration && (
           <button
+            aria-label={`Fjarlægja hröðunarsíu: hámark ${filters.acceleration.toFixed(
+              1,
+            )} sekúndur`}
             className={filterClasses}
             onClick={() => onRemoveFilter('acceleration')}
           >
@@ -92,6 +101,9 @@ const ActiveFilters = ({
 
         {filters.value && (
           <button
+            aria-label={`Fjarlægja síu á verði á km: hámark ${addDecimalSeprators(
+              filters.value,
+            )} kr.`}
             className={filterClasses}
             onClick={() => onRemoveFilter('value')}
           >
@@ -104,6 +116,7 @@ const ActiveFilters = ({
 
         {filters.fastcharge && (
           <button
+            aria-label={`Fjarlægja hraðhleðslusíu: lágmark ${filters.fastcharge} km á mínútu`}
             className={filterClasses}
             onClick={() => onRemoveFilter('fastcharge')}
           >
@@ -116,6 +129,9 @@ const ActiveFilters = ({
 
         {filters.availability && (
           <button
+            aria-label={`Fjarlægja framboðssíu: ${
+              filters.availability === 'available' ? 'fáanlegir' : 'væntanlegir'
+            }`}
             className={filterClasses}
             onClick={() => onRemoveFilter('availability')}
           >
@@ -136,6 +152,7 @@ const ActiveFilters = ({
             width="15"
             height="15"
             fill="none"
+            aria-hidden="true"
             className="opacity-70"
           >
             <path

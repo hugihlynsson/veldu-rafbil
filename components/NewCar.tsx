@@ -37,6 +37,8 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
   return (
     <article
       id={carId}
+      // MiniCar scrolls here from the chat, and moves focus with it
+      tabIndex={-1}
       className="mb-8 md:flex md:m-0 md:mx-8 md:mb-10 md:ml-10 md:items-center"
     >
       <div className="md:block md:relative md:w-[40%] md:grow md:self-center">
@@ -102,7 +104,7 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
               className="mt-0.5 text-xs text-[#666] font-medium"
               title={`Afl (${Math.round(car.power * 1.34102)} hö)`}
             >
-              {car.power} kW
+              {car.power} kW<span className="sr-only"> afl</span>
             </div>
           </div>
 
@@ -116,6 +118,10 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
               title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10T080} min)`}
             >
               {getKmPerMinutesCharged(car.timeToCharge10T080, car.range)} km/min
+              <span className="sr-only">
+                {' '}
+                meðaldrægniaukning á hröðustu hleðslu
+              </span>
             </div>
           </div>
 
@@ -123,12 +129,15 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
             <div className="uppercase text-[10px] font-semibold tracking-wider mb-[3px] text-stone">
               Drægni
             </div>
-            <div className="text-2xl font-normal">{car.range} km</div>
+            <div className="text-2xl font-normal">
+              {car.range} km<span className="sr-only"> samkvæmt WLTP</span>
+            </div>
             <div
               className="mt-0.5 text-xs text-[#666] font-medium"
               title={getDriveLabel(car.drive)}
             >
               {car.drive}
+              <span className="sr-only">, {getDriveLabel(car.drive)}</span>
             </div>
           </div>
         </div>

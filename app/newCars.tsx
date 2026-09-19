@@ -197,7 +197,9 @@ export default function NewCars({
           </em>
         </p>
 
-        <div className="mb-2 text-sm font-semibold">Raða eftir:</div>
+        <div id="sorting-label" className="mb-2 text-sm font-semibold">
+          Raða eftir:
+        </div>
 
         <Toggles<Sorting>
           currentValue={sorting}
@@ -206,6 +208,10 @@ export default function NewCars({
             value,
           ])}
           onClick={toggleSorting}
+          labelledBy="sorting-label"
+          indicatorLabel={
+            direction === 'desc' ? 'lækkandi röð' : 'hækkandi röð'
+          }
           indicator={
             <span
               aria-hidden
