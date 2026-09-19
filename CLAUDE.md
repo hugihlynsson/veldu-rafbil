@@ -29,9 +29,10 @@ touched instead: `npx prettier --write <files>`.
 | -------------------- | -------------------------------------------------------------------------------------------------------- |
 | `modules/newCars.ts` | The entire car database — ~185 hand-written `NewCar` literals, 2800 lines. Most commits touch only this. |
 | `types.ts`           | All shared types, imported as `from '../types'`                                                          |
-| `app/page.tsx`       | Server component: parses `searchParams` into `Sorting`/`Filters`                                         |
+| `app/page.tsx`       | Server component: turns `searchParams` into `Sorting`/`Filters` and renders the list                     |
 | `app/newCars.tsx`    | `'use client'` — all list state, sorting, filtering, URL sync                                            |
-| `modules/`           | Pure domain logic (sorting, filtering, price, formatting)                                                |
+| `modules/`           | Pure domain logic (sorting, filtering, price, formatting) and the query parsing in `filters.ts`          |
+| `utils/`             | Shared helpers that touch React or the LLM output (`useBodyScrollLock`, `chatHelpers`)                   |
 | `components/`        | Presentational; `components/chat/` is the chat UI                                                        |
 | `app/api/chat/`      | Gemini-backed advisor route + its `fetchCarDetails` tool                                                 |
 | `public/images/`     | `<heroImageName>.jpg`, every one 1920×1280 (3:2)                                                         |
