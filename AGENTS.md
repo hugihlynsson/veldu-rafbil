@@ -158,6 +158,18 @@ SDK. The model name and provider are config, not architecture: read the route
 rather than assuming. It needs the provider's API key; telemetry is optional and
 its client is only constructed when its token is set.
 
+**The model is picked on Icelandic performance, not on general benchmarks.** The
+advisor only ever answers in Icelandic, so a model that tops the English
+leaderboards and stumbles here is no use, and the trade-off to weigh is score
+against cost and speed — the chat is public and free to use. Miðeind's Icelandic
+LLM leaderboard is the yardstick:
+
+<https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard>
+
+The comment on the model constant in the route says why the current one won.
+Re-run that comparison before swapping the model, and update the comment with
+what you found.
+
 - The endpoint is public and spends money, so `POST` is guarded before it
   reaches the model: a per-IP rate limit (in-memory and best effort — one window
   per serverless instance) and a schema check on the body that bounds the

@@ -7,6 +7,10 @@ import getPriceWithGrant from '../../../modules/getPriceWithGrant'
 import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 import { clientKey, rateLimit } from './rateLimit'
 
+// Best score against cost and speed on Miðeind's Icelandic LLM leaderboard —
+// the advisor only answers in Icelandic, so general benchmarks don't settle it.
+// Check there before switching:
+// https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard
 const modelName = 'gemini-3.8-flash'
 
 // Create a summary of available cars for the LLM
