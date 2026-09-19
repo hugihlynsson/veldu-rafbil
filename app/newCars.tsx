@@ -11,6 +11,7 @@ import FilterModal from '../components/FilterModal'
 import ActiveFilters from '../components/ActiveFilters'
 import newCars from '../modules/newCars'
 import carFilter from '../modules/carFilter'
+import getCarId from '../modules/getCarId'
 import { Filters, Sorting, SortingDirection } from '../types'
 import {
   carSorter,
@@ -248,7 +249,7 @@ export default function NewCars({
           <Car
             priority={index <= 1}
             car={car}
-            key={`${car.make} ${car.model} ${car.subModel} ${car.price}`}
+            key={getCarId(car)}
             showValue={sorting === 'value' || Boolean(filters.value)}
           />
         ),
