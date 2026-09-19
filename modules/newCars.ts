@@ -1888,7 +1888,7 @@ const newCars: Array<NewCar> = [
     make: 'Range Rover',
     model: 'Electric',
     subModel: 'EV550',
-    heroImageName: 'range-rover-electric',
+    heroImageName: 'range-rover-electric-alt',
     price: 28_290_000,
     sellerURL: 'https://www.rangerover.com/en-gb/range-rover/electric.html',
     acceleration: 4.5,
