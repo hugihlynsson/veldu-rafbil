@@ -66,5 +66,12 @@ have not needed a browser.
 ## Makes with no page from the owner
 
 BYD, Citroën, Fiat, Ford, GWM, Jeep, KGM, Leapmotor, Maxus, Opel, Peugeot,
-Suzuki, Volvo. Some may be on the BL or Askja issuu pages; check those listings
-first. Otherwise, the importer's site as linked from the existing entries.
+Range Rover, Suzuki, Volvo. Some may be on the BL or Askja issuu pages; check
+those listings first. Otherwise, the importer's site as linked from the existing
+entries.
+
+**Range Rover is the one that cannot be started from its entries.** Both
+Electric rows point at `rangerover.com/en-gb`, the manufacturer's UK site rather
+than an Icelandic seller, so there is no importer page to work back to and no
+price to check against. Find the Icelandic importer's model page, fix
+`sellerURL` on both rows, and record the price list here.
