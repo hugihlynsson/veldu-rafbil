@@ -111,12 +111,15 @@ offers to remove it and breaks the zero-padded price tiebreak in the name sort,
 which puts a 9.5m car after a 12m one. Acceleration and capacity are
 measurements, not prices, and are fractional on purpose.
 
-**`seats` is the configuration sold here, not the one the brochure offers.** A
-third row that costs extra does not count: the entry is priced at its cheapest
-trim, so the seat count has to describe that same trim. A Mercedes GLB that can
-be had as a seven-seater here is still a `5`, the way a trim ladder is not a
-second entry. This is also why the assistant no longer carries a hand-written
-line about which cars are not seven-seaters in Iceland — the data says so.
+**`seats` is the most the model can be ordered with here, options included.** A
+third row that costs extra still counts, so a Mercedes GLB sold with an optional
+third row is a `7`. The filter is the reason: someone who needs seven seats wants
+every car that _can_ carry seven, not only the ones that do it for free. This is
+the one field that deliberately does not describe the trim the entry is priced
+at — `price` is the cheapest trim's, so a `7` can cost more than the number
+beside it, and the copy that quotes both says so. What still does not count is a
+configuration Iceland never gets, which is why the assistant no longer needs a
+hand-written line about cars that are seven-seaters elsewhere.
 
 **Range is WLTP**, a manufacturer figure. Real Icelandic range is lower, and the
 system prompt tells the assistant to say so.
@@ -180,8 +183,8 @@ is easy to get wrong.
 2. `price` in ISK using numeric separators: `9_990_000`. List price, pre-grant.
 3. Drop the photo in `public/images/`, named after the car's hero image field
    and matching the dimensions and aspect ratio of the ones already there.
-4. `seats` is the seat count of that trim as the Icelandic seller lists it —
-   read the rule above before taking a number off the manufacturer's site.
+4. `seats` is the most seats that model can be ordered with here, paid options
+   included — read the rule above before taking a number off a brochure.
 5. `expectedDelivery` is a lowercase-able Icelandic phrase and is what makes a
    car count as "expected" rather than available — it drives both the
    availability filter and the badge on the card.
