@@ -5,6 +5,7 @@ import NewCars from './newCars'
 import Footer from '../components/Footer'
 import { getDirectionFromQuery, getSortingFromQuery } from '../modules/sorting'
 import { getFiltersFromQuery } from '../modules/filters'
+import { getViewFromQuery } from '../modules/view'
 import { SearchParams } from '../types'
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default async function Page({ searchParams }: Props) {
         sorting={getSortingFromQuery(query)}
         direction={getDirectionFromQuery(query)}
         filters={getFiltersFromQuery(query)}
+        view={getViewFromQuery(query)}
       />
       <Footer />
     </main>

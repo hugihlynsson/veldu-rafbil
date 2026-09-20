@@ -108,6 +108,11 @@ and the toggle list in the client component. The exhaustive switches and the
 `Required<Filters>` case in `filters.test.ts` are there to be your checklist —
 let the failing compile lead you rather than working from a list in this file.
 
+`modules/view.ts` is a third slice of that state and the same shape: one car
+per row (`listi`) or a grid of them (`yfirlit`). The two are not a style switch
+— the row is the photo beside the specs, the grid cell is the photo above them
+— so the card takes the view and renders one or the other.
+
 Read a parameter through `modules/searchParams.ts`, never with an
 `Array.isArray` at the call site. A filter that round-trips through the URL
 wants a test: a multi-value filter coming back as a single value matches
@@ -176,7 +181,10 @@ styled by plain CSS rules at the bottom of that file, not by utilities.
   first load for visitors who never chat, which is most of them.
 - **`next/image` `sizes` is load-bearing.** A typo in it is silent: the browser
   falls back to `100vw` and fetches the largest candidate. `deviceSizes` in
-  `next.config.js` is tuned to the phones people actually use. A `sizes` with
+  `next.config.js` is tuned to the phones people actually use. The card carries
+  one `sizes` per layout, and the grid's copy spells out the column widths
+  `app/newCars.tsx` resolves to — change the column counts there and that string
+  is the other half of the edit. A `sizes` with
   no `vw` in it is worse than none — Next then puts every configured width in
   the srcset — and an image without one gets a 1x/2x pair off its `width`
   prop, so that prop has to be the size the box really renders at.
