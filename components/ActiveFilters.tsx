@@ -7,7 +7,6 @@ const filterClasses =
 
 interface Chip {
   name: keyof Filters
-  /** What the chip is called, as it reads before the value */
   label: string
   /** The value as the chip shows it, arrow included */
   value: string
@@ -15,13 +14,8 @@ interface Chip {
   removeLabel: string
 }
 
-// One entry per filter that is set, in the order they appear. The arrow says
-// which way the number is a limit — down for a maximum, up for a minimum — and
-// the aria-label names the filter in the case Icelandic wants after "Fjarlægja",
-// which is why these are written out rather than built from one pattern.
-//
-// A filter added without an entry here has no chip, so nothing on the page can
-// switch it off again.
+// Written out one by one because the aria-label needs the Icelandic case after
+// "Fjarlægja". A filter with no entry here cannot be switched off again.
 const activeChips = (filters: Filters): Array<Chip> => {
   const chips: Array<Chip> = []
 

@@ -10,8 +10,6 @@ interface Props {
   title?: string
 }
 
-// `current`, `onGray` and `large` were props with styling behind them that
-// nothing had passed in a long time, so the branches went with them.
 const LinkPill: FunctionComponent<Props> = ({
   children,
   external,

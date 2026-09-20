@@ -19,8 +19,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
   getCountPreview,
   onDone,
 }) => {
-  // The close button is what showModal would focus; the name field is what the
-  // reader came for
+  // showModal would focus the close button; the name field is the point
   const nameInputRef = useRef<HTMLInputElement>(null)
   const [filters, setFilters] = useState<Filters>(initialFilters)
   const [nameInput, setNameInput] = useState<string>(
@@ -185,8 +184,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 onKeyDown={handleKeyPress}
                 value={filters.availability ?? 'all'}
               />
-              {/* carFilter keeps cars at or under this many seconds, so it is a
-                  maximum, the way Verð and Verð á km are */}
+              {/* carFilter keeps cars at or under this, so it is a maximum */}
               <FilterInput
                 id="filter-acceleration"
                 label="Hröðun"

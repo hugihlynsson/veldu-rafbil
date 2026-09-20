@@ -4,7 +4,6 @@ interface Props {
   onClick: () => void
 }
 
-/** The X in the corner of a modal header, the same one in both of them */
 const CloseButton: React.FunctionComponent<Props> = ({ onClick }) => (
   <button
     type="button"

@@ -37,14 +37,8 @@ input {
   font-family: Inter, sans-serif;
 }
 
-/* Almost every control here is appearance-none with no border, so the browser
-   default ring has nothing to draw around. Without this, tabbing through the
-   page is invisible.
-
-   It belongs in the base layer: unlayered, it outranks every Tailwind utility
-   no matter the specificity, so a control that draws its own ring somewhere
-   else — the chat input, whose ring lives on the pill around it — got this one
-   on top of its own. */
+/* Controls here are appearance-none, so there is no default ring to draw. In
+   the base layer, or it outranks a control that draws its own. */
 @layer base {
   :focus-visible {
     outline: 2px solid var(--color-sky);
@@ -135,7 +129,6 @@ input {
   }
 }
 
-/* Chat message markdown styling */
 .message-content p {
   margin: 0 0 0.5em 0;
 }

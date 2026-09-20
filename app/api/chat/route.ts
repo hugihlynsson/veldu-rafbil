@@ -11,12 +11,9 @@ import {
 import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 import { clientKey, rateLimit } from './rateLimit'
 
-// Best score against cost and speed on Miðeind's Icelandic LLM leaderboard —
-// the advisor only answers in Icelandic, so general benchmarks don't settle it.
-// Check there before switching:
+// Picked on Icelandic performance, not general benchmarks: 3.7 scores above
+// 3.8 there and spends ~30% fewer output tokens at the same price.
 // https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard
-// 3.7 Flash scores above 3.8 there, and at the same price 3.8 spends ~30% more
-// output tokens per task.
 const modelName = 'gemini-3.7-flash'
 
 const carsSummary = newCars
@@ -69,17 +66,13 @@ Já, Toyota bZ4X er fjórhjóladrifinn. Er eitthvað annað sem ég get hjálpa�
 [q:Hvaða aðrir sambærilegir bílar eru fjórhjóladrifnir?]
 `
 
-// Only built when there is a token to build it with, so that a local or
-// preview run without one stays quiet instead of announcing it on every call
+// Left unbuilt without a token, so a local or preview run stays quiet
 const axiom = process.env.AXIOM_TOKEN
   ? new Axiom({ token: process.env.AXIOM_TOKEN })
   : undefined
 
-// The shape the AI SDK's useChat sends. Loose on purpose — convertToModelMessages
-// owns the real shape and it moves with the SDK. What this pins down is that the
-// body is a bounded list of messages and not something arbitrary, so that a
-// malformed or oversized post is a 400 here rather than a 500 somewhere deeper,
-// or a very long prompt billed to us.
+// Loose on purpose — convertToModelMessages owns the real shape. This only
+// bounds the body, so an oversized post is a 400 rather than a bill.
 const requestSchema = z.object({
   messages: z
     .array(
@@ -119,8 +112,6 @@ export async function POST(req: Request) {
     return Response.json({ error: 'Invalid request body' }, { status: 400 })
   }
 
-  // The schema checks the envelope; the parts inside are the SDK's own union,
-  // which convertToModelMessages is the thing that actually understands.
   const messages = parsed.data.messages as UIMessage[]
 
   const result = streamText({
@@ -142,9 +133,6 @@ export async function POST(req: Request) {
       const userMessageText =
         firstPart && 'text' in firstPart ? firstPart.text : undefined
 
-      // Conversations go to Axiom, which is the telemetry this is for. They
-      // used to also go to console, which put every question and answer in the
-      // platform logs a second time, for nobody to read.
       try {
         await axiom.ingest('veldu-rafbil-assistant', [
           {

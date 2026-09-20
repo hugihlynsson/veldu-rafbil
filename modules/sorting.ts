@@ -39,8 +39,7 @@ export const defaultDirection: Record<Sorting, SortingDirection> = {
 export const flipDirection = (direction: SortingDirection): SortingDirection =>
   direction === 'asc' ? 'desc' : 'asc'
 
-// A repeated parameter arrives as an array. Neither of these is a list, so the
-// first one given wins rather than the pair turning into a nonsense key.
+// A repeated parameter arrives as an array; neither of these is a list
 const first = (
   value: string | Array<string> | undefined,
 ): string | undefined => (Array.isArray(value) ? value[0] : value)
@@ -103,10 +102,8 @@ export const carSorter =
 // The two parameters the sorting can occupy, cleared and rewritten together
 export const sortingQueryKeys = ['radaeftir', 'ofugt'] as const
 
-// The writing direction. It is not a mirror of the reader: the default sorting
-// leaves the URL clean, and the flip parameter records a deviation from the
-// default direction rather than "descending", so the pair only stays honest if
-// a test can run a sorting out through this and back in through the readers.
+// Not a mirror of the readers: the default leaves the URL clean, and the flip
+// parameter records a deviation from it rather than "descending".
 export const getQueryFromSorting = (
   sorting: Sorting,
   direction: SortingDirection,

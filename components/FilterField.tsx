@@ -1,10 +1,5 @@
 import React, { ReactNode } from 'react'
 
-// Every field in the filter modal is a label, sometimes a word saying which way
-// the number is a limit, and a control. The classes below were written out once
-// per field, which is what made adding a filter a matter of copying twenty
-// lines and remembering to change the id in three of them.
-
 const controlClasses =
   'border border-cloud rounded bg-white p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay'
 
@@ -51,7 +46,6 @@ interface InputProps {
   inputRef?: React.Ref<HTMLInputElement>
 }
 
-/** A labelled text or number field */
 export const FilterInput: React.FunctionComponent<InputProps> = ({
   id,
   label,
@@ -87,7 +81,7 @@ interface SelectProps {
   onKeyDown: (event: ControlKeyEvent) => void
 }
 
-/** A labelled select, where "all" is the option that means no filter */
+/** "all" is the option that means no filter */
 export const FilterSelect: React.FunctionComponent<SelectProps> = ({
   id,
   label,

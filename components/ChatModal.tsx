@@ -27,20 +27,9 @@ interface Props {
   onReleaseBodyLock: () => void
   onSendMessage: (message: string) => void
   onRetry: () => void
-  /**
-   * The chat input. It has to render inside the dialog: showModal() puts this
-   * in the top layer and makes the rest of the page inert, so the floating
-   * pill left behind out there is both hidden under the backdrop and dead to
-   * every click. It sits next to the panel rather than inside it because the
-   * panel is scaled and blurred, and a transform or a filter makes itself the
-   * containing block of the fixed things below it.
-   */
+  /** Inside the dialog, since showModal() makes the page outside it inert */
   composer: React.ReactNode
-  /**
-   * The composer's input, focused once the dialog is open. showModal() lands
-   * on the first focusable thing, which is the close button, and being put
-   * there after every send is no way to hold a conversation.
-   */
+  /** Focused after open: showModal() would land on the close button */
   composerRef: React.RefObject<HTMLInputElement | null>
 }
 
@@ -65,8 +54,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
     const isNearBottom =
       container.scrollHeight - container.scrollTop - container.clientHeight < 20
 
-    // Only snaps to bottom when already there, so scrolling up to reread an
-    // earlier message doesn't get yanked back down mid-stream
+    // Only when already at the bottom, so reading back is not yanked down
     if (isNearBottom) {
       container.scrollTop = container.scrollHeight
     }
@@ -157,9 +145,8 @@ const ChatModal: React.FunctionComponent<Props> = ({
               <span ref={messagesEndRef} />
             </div>
 
-            {/* The answer arrives token by token into a region nothing watches.
-            Announcing only the finished text keeps a screen reader from
-            re-reading the whole message on every token. */}
+            {/* Announcing only the finished text keeps a screen reader from
+            re-reading the whole message on every token */}
             <div aria-live="polite" className="sr-only">
               {status !== 'streaming' && lastAssistantText
                 ? stripFollowUps(lastAssistantText)

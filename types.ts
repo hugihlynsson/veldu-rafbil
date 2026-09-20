@@ -1,8 +1,6 @@
 /**
  * What Next hands a page as `searchParams`. A parameter given more than once
- * arrives as an array rather than a string, which is why everything that reads
- * one has to cope with both — declaring it as Record<string, string> only made
- * the compiler stop asking.
+ * arrives as an array rather than a string, so every reader copes with both.
  */
 export type SearchParams = Record<string, string | Array<string> | undefined>
 

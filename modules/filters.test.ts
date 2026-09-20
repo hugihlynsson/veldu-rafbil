@@ -61,9 +61,7 @@ describe('getFiltersFromQuery', () => {
     expect(getFiltersFromQuery({})).toEqual({})
   })
 
-  // Number('abc') is NaN and every comparison against NaN is false, so an
-  // unreadable parameter used to hide every car and render "NaN kr." in the
-  // chip that offered to remove it.
+  // An unreadable parameter is no filter, not one that matches nothing
   it.each([
     ['verd', 'abc'],
     ['verd', ''],
@@ -78,12 +76,9 @@ describe('getFiltersFromQuery', () => {
     expect(matches(filters)).toBe(newCars.length)
   })
 
-  // ISK has no subunit, and the UI cannot produce a fraction — but the filters
-  // come out of the URL, and a fractional price is not a price: it renders as
-  // one, and it breaks the zero-padded tiebreak in the name sort.
+  // A fraction renders as a price and breaks the tiebreak in the name sort
   it.each([
-    // Both of these are maxima, and a half króna either way is nothing next to
-    // a price quoted in thousands, so it is the nearest whole one
+    // Both are maxima, so the nearest whole króna either way is nothing
     ['verd', '9500000.5', 9_500_001],
     ['verd', '6000000.4', 6_000_000],
     ['verd', '9499999.5', 9_500_000],
@@ -100,8 +95,7 @@ describe('getFiltersFromQuery', () => {
     expect(getFiltersFromQuery({ virdi: '0.2' })).toEqual({})
   })
 
-  // The ones that are not prices: seconds and km per minute are measurements,
-  // and the modal offers 8.0 and 3.1 as the example of each
+  // Seconds and km per minute are measurements, not prices
   it('leaves the filters that are not prices fractional', () => {
     expect(getFiltersFromQuery({ hrodun: '7.25' }).acceleration).toBe(7.25)
     expect(getFiltersFromQuery({ hradhledsla: '3.1' }).fastcharge).toBe(3.1)
@@ -114,10 +108,7 @@ describe('getFiltersFromQuery', () => {
   })
 })
 
-// The bug this guards: useFilters joined multi-value filters with commas and
-// getFiltersFromQuery parsed the whole string back as one value, so picking two
-// makes and reloading matched nothing. It now runs through the writer the client
-// actually uses rather than through a copy of it kept in this file.
+// Two makes picked and reloaded used to match nothing
 describe('filters survive a round trip through the URL', () => {
   const cases: Array<[string, Filters]> = [
     ['two names', { name: ['tesla', 'kia'] }],
@@ -160,8 +151,7 @@ describe('filters survive a round trip through the URL', () => {
     expect(matches(roundTrip(filters))).toBe(before)
   })
 
-  // Both ends agree that these are the absence of a filter rather than a filter
-  // that matches nothing, so they do not survive the trip — and must not
+  // These are the absence of a filter, so they must not survive the trip
   it.each<[string, Filters]>([
     ['a zero', { price: 0 }],
     ['an empty list', { name: [] }],
@@ -171,10 +161,8 @@ describe('filters survive a round trip through the URL', () => {
     expect(roundTrip(filters)).toEqual({})
   })
 
-  // Required<Filters> is the tripwire: a new filter field fails to compile here
-  // until it is listed, and then fails this until its key joins the list the
-  // client clears before writing. A key missing from that list is a filter that
-  // cannot be switched off.
+  // Required<Filters> is the tripwire: a new filter fails to compile here until
+  // it is listed, and a key left out of filterQueryKeys cannot be switched off
   it('writes only keys the client knows to clear', () => {
     const everyFilter: Required<Filters> = {
       name: ['tesla'],
