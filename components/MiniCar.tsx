@@ -45,11 +45,13 @@ const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
       className="flex flex-row w-full p-0 border-0 bg-transparent cursor-pointer text-left rounded-[14px] overflow-hidden no-underline text-inherit transition-all duration-200 max-w-full hover:border-smoke hover:bg-white"
     >
       <div className="relative w-[120px] min-w-[120px] h-full bg-cloud shrink-0">
+        {/* The size the box really renders at, so the 1x/2x pair lands on
+            128 and 256 rather than the hero's 540 and 1080 */}
         <Image
           alt={`${car.make} ${car.model}`}
           src={`/images/${car.heroImageName}.jpg`}
-          width={400}
-          height={267}
+          width={120}
+          height={80}
           className="w-full h-full object-cover block"
         />
       </div>

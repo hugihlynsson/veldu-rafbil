@@ -176,7 +176,10 @@ styled by plain CSS rules at the bottom of that file, not by utilities.
   first load for visitors who never chat, which is most of them.
 - **`next/image` `sizes` is load-bearing.** A typo in it is silent: the browser
   falls back to `100vw` and fetches the largest candidate. `deviceSizes` in
-  `next.config.js` is tuned to the phones people actually use.
+  `next.config.js` is tuned to the phones people actually use. A `sizes` with
+  no `vw` in it is worse than none — Next then puts every configured width in
+  the srcset — and an image without one gets a 1x/2x pair off its `width`
+  prop, so that prop has to be the size the box really renders at.
 - **Nothing rendered on both sides may read the runtime's default locale.** It
   is not the same in node as in an Icelandic browser, and it surfaces as a
   hydration mismatch rather than an error.
