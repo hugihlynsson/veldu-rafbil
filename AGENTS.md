@@ -234,6 +234,29 @@ what you found.
   throw (private mode, a full quota, half-written JSON from an older shape) and a
   broken history must read as an empty one rather than take the page down.
 
+## Published data
+
+Two routes exist for readers who are not a browser: `/api/cars` and `/llms.txt`.
+Both are `force-static`, so they are built at deploy and served from the CDN —
+no function runs, which is why neither needs the rate limiting `/api/chat` has.
+That route spends money per call; these are files with a route's name. Both send
+`Access-Control-Allow-Origin: *`, because the data is public and read-only.
+
+`modules/carApi.ts` owns the wire format and `modules/llmsText.ts` the text; the
+routes are four lines each. **The published shape is deliberately not `NewCar`.**
+A consumer has no AGENTS.md telling it that `price` is the list price, so every
+field is named for what it is: `price.list` and `price.withGrant` are separate,
+`range` is `rangeWltpKm`, and the derived figures — the post-grant price, the
+real-world range, the charge rate — are spelled out rather than left to be
+worked out. Adding a field to `NewCar` does not add it here, and that is the
+point: this shape is a promise to people who cannot see the commit that changes
+it. `carApi.test.ts` fails if an internal name leaks back into it.
+
+`llms.txt` is the one thing on the site written in English — its readers are
+agents and whoever is pointing one at us, not Icelandic car buyers. It
+interpolates the car count and the grant figures for the same reason the page's
+description and the system prompt do.
+
 ## Styling
 
 Tailwind v4 — **no `tailwind.config.js`**. The theme, colours and the extra
