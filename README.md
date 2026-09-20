@@ -35,7 +35,11 @@ an Icelandic real-world estimate beside it. The envelope carries the grant
 figures, those caveats and a `generatedAt`.
 
 `/llms.txt` is the short version of the same thing, for AI agents, following
-the [llms.txt convention](https://llmstxt.org).
+the [llms.txt convention](https://llmstxt.org). `/robots.txt` lets crawlers at
+both and keeps them off `/api/chat`, the one route that costs money to read.
+
+The car photos are not in the JSON — they are served for this site, not for
+others to hotlink.
 
 Prices come from sellers' published price lists and are kept up by hand, so they
 can lag. Credit and a link back are appreciated.

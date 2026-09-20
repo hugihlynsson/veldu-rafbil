@@ -1,0 +1,16 @@
+# Veldu Rafbíl — https://github.com/hugihlynsson/veldu-rafbil
+#
+# Nearly all of this site is one public page and one public data file, and both
+# are meant to be read. Crawl them.
+
+User-Agent: *
+Allow: /
+
+# The assistant endpoint. It takes POST only, so there is nothing here to index,
+# and every call bills a hosted model — this is the one route on the site that
+# spends money when someone reads it.
+Disallow: /api/chat
+
+# Worth reading instead, for anything automated:
+#   /llms.txt   what this site holds and how to read the figures
+#   /api/cars   every car as JSON, prices already adjusted for the grant

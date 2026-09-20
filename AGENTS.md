@@ -236,11 +236,15 @@ what you found.
 
 ## Published data
 
-Two routes exist for readers who are not a browser: `/api/cars` and `/llms.txt`.
-Both are `force-static`, so they are built at deploy and served from the CDN —
-no function runs, which is why neither needs the rate limiting `/api/chat` has.
-That route spends money per call; these are files with a route's name. Both send
+Three things here are for readers who are not a browser: `/api/cars`,
+`/llms.txt` and `/robots.txt`. The first two are `force-static` route handlers,
+so they are built at deploy and served from the CDN — no function runs, which is
+why neither needs the rate limiting `/api/chat` has. That route spends money per
+call; these are files with a route's name. Both send
 `Access-Control-Allow-Origin: *`, because the data is public and read-only.
+`app/robots.txt` is a literal file rather than a generated one: it has nothing
+to interpolate, and a real file can carry the comments saying why `/api/chat` is
+the one path disallowed.
 
 `modules/carApi.ts` owns the wire format and `modules/llmsText.ts` the text; the
 routes are four lines each. **The published shape is deliberately not `NewCar`.**
@@ -251,6 +255,11 @@ real-world range, the charge rate — are spelled out rather than left to be
 worked out. Adding a field to `NewCar` does not add it here, and that is the
 point: this shape is a promise to people who cannot see the commit that changes
 it. `carApi.test.ts` fails if an internal name leaks back into it.
+
+**The hero photos stay unpublished.** A path to them in a public document is an
+invitation to hotlink, and that bill lands on the image optimiser. If they are
+ever worth serving to others it will be as a URL on a CDN meant for it, which is
+a new field rather than this one — a test pins that none is published today.
 
 `llms.txt` is the one thing on the site written in English — its readers are
 agents and whoever is pointing one at us, not Icelandic car buyers. It

@@ -1,4 +1,3 @@
-import { existsSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 
 import { buildCarsPayload, toApiCar } from './carApi'
@@ -75,9 +74,8 @@ describe('the published car payload', () => {
     }
   })
 
-  it('points at an image that exists and an anchor the page carries', () => {
+  it('points at an anchor the page carries', () => {
     for (const car of payload.cars) {
-      expect(existsSync(`public${car.imagePath}`), car.id).toBe(true)
       expect(car.pagePath, car.id).toBe(`/#${car.id}`)
     }
     // The anchor is the card's id, so the two have to keep agreeing
@@ -121,6 +119,17 @@ describe('the published car payload', () => {
       )
     }
     expect(typeof payload.cars[0]!.price).toBe('object')
+  })
+
+  // The photos are ours to serve and nobody else's to hotlink: a path to them
+  // in a public document is an invitation, and the bill lands on the image
+  // optimiser. Publishing them later means a CDN URL, which is a new field.
+  it('publishes no path to the photos', () => {
+    const serialised = JSON.stringify(payload)
+    expect(serialised).not.toContain('/images/')
+    for (const car of payload.cars) {
+      expect(car, car.id).not.toHaveProperty('imagePath')
+    }
   })
 
   // A caveat only helps if it travels with the thing it is about
