@@ -11,13 +11,16 @@ export const realRangeHighFactor = 0.85
 
 // Not NewCar: a consumer has no AGENTS.md telling it that `price` is the list
 // price, so each field is named for what it is and the derived ones published.
-// Adding a field to NewCar does not add it here.
+// Adding a field to NewCar does not add it here — this shape is a promise to
+// people who cannot see the commit that changes it, so it changes on purpose.
 export interface ApiCar {
   id: string
   make: string
   model: string
   subModel?: string
-  // `withGrant` is what a buyer pays and what the site shows everywhere
+  // `withGrant` is what a buyer pays and what the site shows everywhere. Both
+  // are published because most of the list qualifies, so a lone `price` would
+  // be the wrong number more often than not.
   price: {
     currency: 'ISK'
     list: number
