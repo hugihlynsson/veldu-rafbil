@@ -125,29 +125,38 @@ hand-written line about cars that are seven-seaters elsewhere.
 system prompt tells the assistant to say so.
 
 **Fast-charge is derived, not stored.** `getKmPerMinutesCharged` computes it and
-returns a fixed-precision **string**, so callers wrap it in `Number()` before
-comparing.
+returns a **number**, rounded to the three significant figures the figure is
+quoted at, so sorting and the fastcharge filter can compare it directly. The
+list UI wants the same figure with its trailing zeroes, and that is
+`formatKmPerMinutesCharged` beside it — as a number, 20.0 renders as "20" and
+the column jumps about.
 
 **`addDecimalSeparators` exists because `toLocaleString()` breaks SSR** — it can
 differ between Node and the browser and cause hydration mismatches. Use it for
 every number rendered in the list UI.
 
-**`stableSort`, not `Array.prototype.sort`**, for the car list, so equal-ranked
-cars keep a deterministic order.
+**`sortCars()` is the only way the list gets ordered.** It derives each car's
+key once rather than inside every comparison, and `Array.prototype.sort` is
+stable by specification, so equal-ranked cars keep the order the data gave them
+without a decorated copy to hold them there. Its collator is pinned to `is`:
+`localeCompare` with no locale answers to whatever the runtime's default is,
+and node's is not an Icelandic browser's, so a make starting with Ö would sort
+one way on the server and another after hydration.
 
 ## Sorting and filtering
 
 The contract in `modules/sorting.ts`:
 
-- `ascendingSorter` always compares ascending; `carSorter` negates afterwards for
-  `desc`. Add a new `Sorting` case there and TypeScript's exhaustive switch will
-  flag everywhere else that needs it.
+- `sortingKey` says what a car is ranked by, always ascending; `sortCars`
+  applies the direction to the comparison afterwards. Add a new `Sorting` case
+  there and TypeScript's exhaustive switch will flag everywhere else that needs
+  it.
 - `defaultDirection` is the "most useful first" direction per sorting. The URL
   only records deviations from it — the flip parameter means "flipped from the
   default", not "descending".
 - Adding a sorting means touching every link in that chain: the `Sorting` and
   query types, both directions of the query mapping, the default direction, the
-  sorter, and the toggle list in the client component. Let the exhaustive
+  key, and the toggle list in the client component. Let the exhaustive
   switches lead you.
 
 Filters follow the same shape, and the multi-value ones travel as a comma
@@ -155,6 +164,18 @@ separated list — anything that writes one has to join and anything that reads
 one has to split. A filter that round-trips through the URL wants a test, since
 a multi-value filter coming back as a single value matches nothing and fails
 quietly.
+
+Reading a parameter at all goes through `modules/searchParams.ts` rather than
+an `Array.isArray` at each call site: a parameter given twice arrives as an
+array, and `first`, `list` and `oneOf` are the three shapes anything here wants
+out of one. `oneOf` is also what keeps a value nobody wrote from becoming a
+filter — it looks the value up with `Object.hasOwn`, because every object has a
+`toString` and `?radaeftir=toString` is a URL somebody can type.
+
+`carFilter` compiles the filters it is given into one check each, reading the
+values out before the list is walked rather than switching on a key per car.
+Its switch over `keyof Filters` is what makes a new filter fail to compile
+until it has one.
 
 Both directions live in the modules: `getFiltersFromQuery` and
 `getQueryFromFilters`, `getSortingFromQuery`/`getDirectionFromQuery` and
@@ -229,11 +250,16 @@ what you found.
   caching, which only hits on an identical prefix, so keep anything per-request
   out of the system prompt. Hits show as `inputTokenDetails.cacheReadTokens` in
   the `tokenUsage` logged to Axiom.
+- A message is a list of parts, only some of them text. `getMessageText` in
+  `modules/chatHelpers.ts` is how anything reads one — the bubble, the row of
+  mentioned cars, the retry and what is logged all want the same joined string.
 - Follow-up questions travel inside the message text as markers, parsed and
   stripped by `modules/chatHelpers.ts`. The stripping also has to handle a
   partial marker arriving mid-stream — keep that behaviour if you touch it.
-- The car-details tool scrapes an external database with regexes. It is
-  best-effort and returns a message rather than throwing on failure. **The URL is
+- The car-details tool scrapes an external database, reading its spec tables in
+  a single pass into a label/value map rather than running a regex over the
+  whole page per field. It is best-effort and returns a message rather than
+  throwing on failure. **The URL is
   checked against the set of URLs in the car data before anything is fetched** —
   the model chooses that argument, and a model can be talked into choosing
   anything. The allowlist, the timeout and the response cap are a security
