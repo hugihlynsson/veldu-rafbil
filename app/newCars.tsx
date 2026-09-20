@@ -218,6 +218,7 @@ export default function NewCars({
             car={car}
             key={getCarId(car)}
             showValue={sorting === 'value' || Boolean(filters.value)}
+            showSeats={Boolean(filters.seats)}
           />
         ),
       )}

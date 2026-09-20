@@ -12,6 +12,7 @@ import getCarId from '../modules/getCarId'
 interface Props {
   car: NewCarType
   showValue?: boolean
+  showSeats?: boolean
   priority?: boolean
 }
 
@@ -26,11 +27,22 @@ const getDriveLabel = (drive: Drive) => {
   }
 }
 
-const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
+const NewCar: FunctionComponent<Props> = ({
+  car,
+  showValue,
+  showSeats,
+  priority,
+}) => {
   const priceWithGrant = getPriceWithGrant(car.price)
   const hasGrant = priceWithGrant !== car.price
 
   const carId = getCarId(car)
+
+  // Not agree(): sæti is neuter and reads the same at every count. A car
+  // without a subModel gets the seat count on its own rather than a lone dot.
+  const subTitle = [car.subModel, showSeats && `${car.seats} sæti`]
+    .filter(Boolean)
+    .join(' · ')
 
   return (
     <article
@@ -62,7 +74,7 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
           <span>{car.make}</span>{' '}
           <span className="font-normal">{car.model}</span>
           <span className="block font-medium text-base text-stone -mt-px mb-2">
-            {car.subModel}
+            {subTitle}
           </span>
         </h2>
 
@@ -90,7 +102,7 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
           {!car.expectedDelivery && ' ↗'}
         </LinkPill>
 
-        <div className="flex mb-2 mt-6 max-w-[320px] justify-between">
+        <div className="flex mb-4 mt-6 max-w-[320px] justify-between">
           <div className="mr-2 xs:mr-4 basis-1/3">
             <div className="uppercase text-[10px] font-semibold tracking-wider mb-[3px] text-stone">
               0-100 km/klst
@@ -138,11 +150,6 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
               <span className="sr-only">, {getDriveLabel(car.drive)}</span>
             </div>
           </div>
-        </div>
-
-        {/* Neuter, so the count does not decline it: "1 sæti", "7 sæti" */}
-        <div className="mb-4 text-xs text-[#666] font-medium">
-          {car.seats} sæti
         </div>
 
         {car.evDatabaseURL && (
