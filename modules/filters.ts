@@ -18,6 +18,23 @@ const parseNumber = (value: string | Array<string>): number | undefined => {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined
 }
 
+// ISK has no subunit: a price is a whole number of krónur, and so is the
+// price-per-km these two compare against. Nothing in the UI can produce a
+// fraction, but the filters come out of the URL, where a shared or hand-edited
+// link can carry one — and a fractional price is not a price. It renders as
+// one in the chip offering to remove it, reads out to a screen reader the
+// same, and breaks the zero-padded tiebreak in the name sort, which puts a
+// 9.5m car after a 12m one. Round it to krónur at the boundary, so nothing
+// downstream has to know this can happen.
+const parseKronur = (value: string | Array<string>): number | undefined => {
+  const parsed = parseNumber(value)
+  if (parsed === undefined) return undefined
+
+  const kronur = Math.round(parsed)
+  // Rounding can land on zero, which is no more a price than a negative one is
+  return kronur > 0 ? kronur : undefined
+}
+
 export const getFiltersFromQuery = (query: SearchParams): Filters => {
   const filters: Filters = {}
 
@@ -34,9 +51,9 @@ export const getFiltersFromQuery = (query: SearchParams): Filters => {
     const name = parseList(nafn)
     if (name.length) filters.name = name
   }
-  if (verd) filters.price = parseNumber(verd)
+  if (verd) filters.price = parseKronur(verd)
   if (draegni) filters.range = parseNumber(draegni)
-  if (virdi) filters.value = parseNumber(virdi)
+  if (virdi) filters.value = parseKronur(virdi)
   if (frambod)
     filters.availability = frambod === 'faanlegir' ? 'available' : 'expected'
 

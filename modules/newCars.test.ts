@@ -57,6 +57,10 @@ describe('the car data', () => {
     'has plausible numbers for %s',
     (_name, car) => {
       expect(car.price).toBeGreaterThan(0)
+      // ISK has no subunit. A fraction here would also break the zero-padded
+      // price tiebreak in the name sort, putting a cheaper car after a dearer
+      // one. Capacity and acceleration are measurements and may be fractional.
+      expect(Number.isInteger(car.price)).toBe(true)
       expect(car.range).toBeGreaterThan(0)
       expect(car.range).toBeLessThan(1200)
       expect(car.acceleration).toBeGreaterThan(0)

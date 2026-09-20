@@ -13,7 +13,7 @@ export interface NewCar {
   model: string
   subModel?: string
   heroImageName: string
-  price: number // ISK
+  price: number // ISK, whole krónur
   sellerURL: string
   acceleration: number // 0-100 km/h
   capacity: number // kWh
