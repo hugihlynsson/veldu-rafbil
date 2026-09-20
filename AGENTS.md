@@ -32,6 +32,17 @@ warnings a clean checkout produces as the budget: a run after your change should
 show the same ones it showed before. A new warning is yours to fix, and
 downgrading a rule to clear a run is not a fix.
 
+## Comments
+
+Default to none — good names and structure should carry the meaning. Add one
+only when it explains a non-obvious *why*: a workaround, an invariant, a
+constraint the code itself doesn't show. Keep it to one line.
+
+Don't write a comment that restates what the code already says, narrates the
+change ("removed X", "added for the Y fix"), or explains something a reader
+gets from the name. If you'd delete the comment and the code would still be
+just as clear, don't write it.
+
 ## Layout
 
 | Path              | What lives there                                                     |
