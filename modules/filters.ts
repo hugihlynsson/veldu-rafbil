@@ -1,23 +1,16 @@
-import { Drive, Filters, SearchParams } from '../types'
-
-// Multi-value filters travel as a comma separated list, and a repeated
-// parameter arrives as an array, so handle both shapes.
-const parseList = (value: string | Array<string>): Array<string> =>
-  (Array.isArray(value) ? value : [value])
-    .flatMap((entry) => entry.split(','))
-    .map((entry) => entry.trim())
-    .filter((entry) => entry)
+import { Availability, Drive, Filters, SearchParams } from '../types'
+import { first, list, oneOf } from './searchParams'
 
 // Number() of an unreadable parameter is NaN, and every comparison against NaN
 // is false, so it would empty the list rather than filter it.
-const parseNumber = (value: string | Array<string>): number | undefined => {
-  const parsed = Number(Array.isArray(value) ? value[0] : value)
+const parseNumber = (value: SearchParams[string]): number | undefined => {
+  const parsed = Number(first(value))
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined
 }
 
 // A price is a whole number of krónur, and the URL can carry a fraction: it
 // renders as a price and breaks the zero-padded tiebreak in the name sort.
-const parseKronur = (value: string | Array<string>): number | undefined => {
+const parseKronur = (value: SearchParams[string]): number | undefined => {
   const parsed = parseNumber(value)
   if (parsed === undefined) return undefined
 
@@ -26,49 +19,46 @@ const parseKronur = (value: string | Array<string>): number | undefined => {
   return kronur > 0 ? kronur : undefined
 }
 
+const parseNonEmptyList = (
+  value: SearchParams[string],
+): Array<string> | undefined => {
+  const entries = list(value)
+  return entries.length ? entries : undefined
+}
+
 // A seat count is a whole number of people. The UI offers a short list, but
 // the URL can carry anything, and half a seat would render in the chip.
-const parseSeats = (value: string | Array<string>): number | undefined => {
+const parseSeats = (value: SearchParams[string]): number | undefined => {
   const parsed = parseNumber(value)
   return parsed === undefined ? undefined : Math.ceil(parsed)
+}
+
+const queryToAvailability: Record<string, Availability> = {
+  faanlegir: 'available',
+  vaentanlegir: 'expected',
 }
 
 export const getFiltersFromQuery = (query: SearchParams): Filters => {
   const filters: Filters = {}
 
-  const {
-    hrodun,
-    drif,
-    hradhledsla,
-    nafn,
-    verd,
-    draegni,
-    saeti,
-    virdi,
-    frambod,
-  } = query
+  // Assigned only when the parameter reads as a filter, so "is there a filter"
+  // can go on being asked with Object.keys/values all over the UI
+  const set = <Key extends keyof Filters>(
+    key: Key,
+    value: Filters[Key] | undefined,
+  ) => {
+    if (value !== undefined) filters[key] = value
+  }
 
-  if (hrodun) filters.acceleration = parseNumber(hrodun)
-  if (drif) {
-    const drive = parseList(drif) as Array<Drive>
-    if (drive.length) filters.drive = drive
-  }
-  if (hradhledsla) filters.fastcharge = parseNumber(hradhledsla)
-  if (nafn) {
-    const name = parseList(nafn)
-    if (name.length) filters.name = name
-  }
-  if (verd) filters.price = parseKronur(verd)
-  if (draegni) filters.range = parseNumber(draegni)
-  if (saeti) filters.seats = parseSeats(saeti)
-  if (virdi) filters.value = parseKronur(virdi)
-  if (frambod)
-    filters.availability = frambod === 'faanlegir' ? 'available' : 'expected'
-
-  // "Is there a filter" is asked with Object.keys/values all over the UI
-  for (const key of Object.keys(filters) as Array<keyof Filters>) {
-    if (filters[key] === undefined) delete filters[key]
-  }
+  set('acceleration', parseNumber(query.hrodun))
+  set('drive', parseNonEmptyList(query.drif) as Array<Drive> | undefined)
+  set('fastcharge', parseNumber(query.hradhledsla))
+  set('name', parseNonEmptyList(query.nafn))
+  set('price', parseKronur(query.verd))
+  set('range', parseNumber(query.draegni))
+  set('seats', parseSeats(query.saeti))
+  set('value', parseKronur(query.virdi))
+  set('availability', oneOf(query.frambod, queryToAvailability))
 
   return filters
 }
