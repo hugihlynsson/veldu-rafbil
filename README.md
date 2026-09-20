@@ -46,4 +46,4 @@ can lag. Credit and a link back are appreciated.
 
 ## Contributing
 
-Most changes are adding or updating a car in `modules/newCars.ts`. [AGENTS.md](AGENTS.md) covers the conventions and the things that are easy to get wrong.
+Most changes are adding or updating a car in `modules/newCars.ts`. [AGENTS.md](AGENTS.md) covers the repo's conventions; the rules about a car field are comments in the module that owns it.
