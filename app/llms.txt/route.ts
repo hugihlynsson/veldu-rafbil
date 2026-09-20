@@ -1,9 +1,7 @@
 import buildLlmsText from '../../modules/llmsText'
 
-// A route rather than a file in public/ so that the counts and the grant
-// figures in it come from the data, the way the page's own description and the
-// assistant's system prompt do. A hand-written public/llms.txt would go stale
-// the first time a car was added.
+// A route rather than a file in public/ so the counts and grant figures come
+// from the data, the way the page description and the system prompt do
 export const dynamic = 'force-static'
 
 const headers = {

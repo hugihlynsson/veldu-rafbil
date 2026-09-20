@@ -6,9 +6,7 @@ import { grantAmount, grantPriceCeiling } from './globals'
 
 const text = buildLlmsText()
 
-// The point of generating this rather than writing it into public/ is that the
-// numbers in it come from the data. If they stop doing that, it is a file
-// telling models a car count and a grant that the site no longer uses.
+// Generated rather than written into public/ so the numbers cannot go stale
 describe('llms.txt', () => {
   it('counts the cars from the list', () => {
     expect(text).toContain(String(newCars.length))

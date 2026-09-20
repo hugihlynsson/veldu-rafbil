@@ -1,13 +1,10 @@
 import { buildCarsPayload } from '../../../modules/carApi'
 
-// Built once at deploy and served from the CDN. The data only changes when
-// somebody edits the car list and deploys, so there is nothing for a request
-// to compute: no function runs, which is also why this endpoint needs none of
-// the guarding /api/chat needs. That route spends money on every call and is
-// rate limited for it. This one is a static file with a route's name.
+// Built at deploy, so no function runs and this needs none of the guarding
+// /api/chat has — that route spends money per call, this one is a static file
 export const dynamic = 'force-static'
 
-// Public, read-only, no credentials, so any page may read it from the browser
+// Public and read-only, so any page may read it from the browser
 const headers = {
   'Content-Type': 'application/json; charset=utf-8',
   'Access-Control-Allow-Origin': '*',
@@ -22,7 +19,6 @@ export function GET() {
     process.env.VERCEL_GIT_COMMIT_SHA,
   )
 
-  // Compact on purpose: the readers this is for are models paying by the token,
-  // and whitespace is most of what pretty-printing would send them
+  // Compact: the readers this is for are models paying by the token
   return new Response(JSON.stringify(payload), { headers })
 }

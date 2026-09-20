@@ -5,50 +5,26 @@ import getPriceWithGrant from './getPriceWithGrant'
 import getKmPerMinutesCharged from './getKmPerMinutesCharged'
 import { grantAmount, grantPriceCeiling } from './globals'
 
-// The wire format /api/cars publishes. It is deliberately not `NewCar`: a
-// consumer outside this repo has no AGENTS.md telling it that `price` is the
-// list price and that everything user-facing goes through getPriceWithGrant,
-// so a field named `price` alone is a field half of them will render wrong.
-// Every number here says in its own name what it is, and the two that are
-// derived rather than stored — the post-grant price and the real-world range —
-// are spelled out rather than left for the reader to work out.
-//
-// Adding a field to NewCar does not add it here. That is the point: this shape
-// is a promise to people who cannot see the commit that changes it, so it
-// changes on purpose, and `carApi.test.ts` fails if a car stops satisfying it.
-//
-// The hero photos are deliberately left out. Publishing a path to them invites
-// other sites to hotlink ours, and the bill for that lands on the image
-// optimiser. If they are ever worth publishing it will be as a URL on a CDN
-// that is meant to serve them, and adding the field then breaks nobody.
-
-/**
- * What the site's own copy and the assistant both tell people: WLTP is a
- * manufacturer figure measured somewhere warmer and flatter than Iceland, and
- * real range lands well under it. These are the same bounds the assistant's
- * system prompt is given.
- */
+// The same bounds the assistant's system prompt is given for Icelandic driving
 export const realRangeLowFactor = 0.7
 export const realRangeHighFactor = 0.85
 
+// Not NewCar: a consumer has no AGENTS.md telling it that `price` is the list
+// price, so each field is named for what it is and the derived ones published.
+// Adding a field to NewCar does not add it here.
 export interface ApiCar {
-  /** Stable across responses; the same id the site anchors the car's card to */
   id: string
   make: string
   model: string
   subModel?: string
+  // `withGrant` is what a buyer pays and what the site shows everywhere
   price: {
     currency: 'ISK'
-    /** Before the grant. Almost never the number to show a buyer */
     list: number
-    /** What the buyer pays, and what the site displays, sorts and filters on */
     withGrant: number
-    /** 0 when the car is over the ceiling and gets nothing */
     grantApplied: number
   }
-  /** Manufacturer WLTP figure */
   rangeWltpKm: number
-  /** WLTP scaled to Icelandic conditions. An estimate, not a measurement */
   estimatedRealRangeKm: { min: number; max: number }
   batteryCapacityKwh: number
   acceleration0To100S: number
@@ -56,19 +32,19 @@ export interface ApiCar {
   drive: Drive
   fastCharge: {
     minutes10To80: number
-    /** Range added per minute on a fast charger, at the low real-range factor */
     kmPerMinute: number
   }
-  /** `expected` means it is not on the road here yet */
   availability: Availability
-  /** Icelandic, e.g. "sumar 2026". Only on an `expected` car */
+  // Icelandic, e.g. "sumar 2026", and only on an `expected` car
   expectedDelivery?: string
   sellerUrl: string
   evDatabaseUrl?: string
-  /** Relative to this response's origin; deep-links to the car on the site */
+  // Relative to the origin this was served from
   pagePath: string
 }
 
+// The photos stay unpublished: a path to them invites hotlinking and the bill
+// lands on the image optimiser. Serving them later means a CDN URL, a new field.
 export const toApiCar = (car: NewCar): ApiCar => {
   const withGrant = getPriceWithGrant(car.price)
 
@@ -115,18 +91,13 @@ export interface CarsPayload {
     repository: string
     attribution: string
   }
-  /** The same caveat the site puts under its intro, for a reader who only has this */
   disclaimer: string
-  /** When this document was built. The list is rebuilt on every deploy, and a
-   *  deploy is what a price change is, so this doubles as the data's age */
   generatedAt: string
-  /** The commit the data came from, when the platform says what it is */
   commit?: string
   grant: {
     name: string
     currency: 'ISK'
     amount: number
-    /** List price at or above this gets nothing. Exclusive */
     priceCeiling: number
     note: string
   }
@@ -139,6 +110,8 @@ export interface CarsPayload {
   cars: Array<ApiCar>
 }
 
+// The caveats ride in the envelope so a reader holding only this knows how old
+// the figures are and what they mean
 export const buildCarsPayload = (
   generatedAt: Date,
   commit?: string,

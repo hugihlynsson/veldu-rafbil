@@ -12,10 +12,7 @@ const label = (car: NewCar) =>
 
 const payload = buildCarsPayload(new Date('2026-01-01T00:00:00.000Z'), 'abc123')
 
-// Everything here is a promise to somebody who cannot see this repo. A field
-// that quietly changes name or meaning breaks them silently, which is what
-// these are for — not to re-test the helpers, which have their own tests, but
-// to pin the shape those helpers get published in.
+// A field that quietly changes name or meaning breaks a consumer silently
 describe('the published car payload', () => {
   it('publishes every car', () => {
     expect(payload.cars).toHaveLength(newCars.length)
@@ -30,14 +27,17 @@ describe('the published car payload', () => {
     expect(buildCarsPayload(new Date())).not.toHaveProperty('commit')
   })
 
-  // The one mistake this whole shape exists to prevent. `price.withGrant` is
-  // what the site shows, sorts and filters on; a consumer quoting `price.list`
-  // for a car that qualifies overstates it by the grant.
+  // A consumer quoting price.list for a car that qualifies overstates it
   it('applies the grant the same way the site does', () => {
     for (const car of newCars) {
       const { price } = toApiCar(car)
       expect(price.withGrant, label(car)).toBe(getPriceWithGrant(car.price))
       expect(price.list - price.withGrant, label(car)).toBe(price.grantApplied)
+
+      // ISK has no subunit, and this is where a consumer reads a price
+      expect(Number.isInteger(price.list), label(car)).toBe(true)
+      expect(Number.isInteger(price.withGrant), label(car)).toBe(true)
+      expect(Number.isInteger(price.grantApplied), label(car)).toBe(true)
     }
   })
 
@@ -52,8 +52,7 @@ describe('the published car payload', () => {
     expect(at.price.withGrant).toBe(grantPriceCeiling)
   })
 
-  // The ids are what a consumer joins on between two fetches of this document,
-  // so a collision is their bug to hit and ours to have caused
+  // A consumer joins on these between two fetches of the document
   it('gives every car an id of its own', () => {
     const ids = payload.cars.map((car) => car.id)
     expect(new Set(ids).size).toBe(ids.length)
@@ -78,7 +77,6 @@ describe('the published car payload', () => {
     for (const car of payload.cars) {
       expect(car.pagePath, car.id).toBe(`/#${car.id}`)
     }
-    // The anchor is the card's id, so the two have to keep agreeing
     expect(payload.cars.map((car) => car.id)).toEqual(newCars.map(getCarId))
   })
 
@@ -97,10 +95,8 @@ describe('the published car payload', () => {
     }
   })
 
-  // The wire format is not NewCar, and the way it stops being NewCar again is
-  // somebody spreading a car into it. These are the internal names: if one
-  // turns up here, a consumer is reading a list price called `price` and a
-  // WLTP figure called `range`.
+  // Spreading a car into the wire format would hand a consumer a list price
+  // called `price` and a WLTP figure called `range`
   it('publishes the named fields and none of the internal ones', () => {
     const published = new Set(Object.keys(payload.cars[0]!))
     for (const internal of [
@@ -121,9 +117,7 @@ describe('the published car payload', () => {
     expect(typeof payload.cars[0]!.price).toBe('object')
   })
 
-  // The photos are ours to serve and nobody else's to hotlink: a path to them
-  // in a public document is an invitation, and the bill lands on the image
-  // optimiser. Publishing them later means a CDN URL, which is a new field.
+  // A path to them in a public document invites hotlinking
   it('publishes no path to the photos', () => {
     const serialised = JSON.stringify(payload)
     expect(serialised).not.toContain('/images/')

@@ -2,17 +2,9 @@ import newCars from './newCars'
 import { grantAmount, grantPriceCeiling } from './globals'
 import { realRangeHighFactor, realRangeLowFactor } from './carApi'
 
-// The /llms.txt convention (https://llmstxt.org): one markdown file telling a
-// model what a site holds and where the machine-readable version of it is.
-//
-// English, unlike everything else people read here. It is the one thing on the
-// site whose audience is not an Icelandic car buyer — it is read by agents and
-// by whoever is pointing one at us, and the convention's own examples are
-// English. What it describes stays Icelandic, and it says so.
-//
-// The counts and the grant figures are interpolated for the same reason the
-// site's description and the assistant's system prompt interpolate them: a
-// number written out in prose is a number nobody remembers to change.
+// https://llmstxt.org: one markdown file telling a model what a site holds.
+// English, unlike the rest of the site — its readers are agents and whoever is
+// pointing one at us, and it says the content itself is Icelandic.
 
 const percent = (factor: number) => `${Math.round(factor * 100)}%`
 
