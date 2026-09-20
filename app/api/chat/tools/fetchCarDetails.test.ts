@@ -77,6 +77,44 @@ describe('fetchCarDetails', () => {
     expect(result.specifications).toContain('503')
   })
 
+  it('reads the spec table, whatever case and spelling it is in', async () => {
+    const allowed = newCars.find((car) => car.evDatabaseURL)!.evDatabaseURL!
+
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(
+        `<table>
+          <tr><td>Length</td><td>4750 mm</td></tr>
+          <tr><td>Cargo Volume</td><td>No Data</td></tr>
+          <tr class="x"><td>CURB WEIGHT</td><td>2100 kg</td></tr>
+          <tr><td>Seats</td><td>5</td></tr>
+          <tr><td>Seats</td><td>7</td></tr>
+        </table>`,
+        { status: 200 },
+      ),
+    )
+
+    const result = await run(allowed)
+
+    expect(result.specifications).toContain('length: 4750 mm')
+    // Curb Weight is the older spelling of Weight Unladen
+    expect(result.specifications).toContain('weightUnladen: 2100 kg')
+    // "No Data" is the site saying it has none, not a specification
+    expect(result.specifications).not.toContain('cargoVolume')
+    // The first row answers, the way a search from the top of the page did
+    expect(result.specifications).toContain('seats: 5')
+    expect(result.specifications).not.toContain('seats: 7')
+  })
+
+  it('says so rather than inventing figures for a page with no table', async () => {
+    const allowed = newCars.find((car) => car.evDatabaseURL)!.evDatabaseURL!
+
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response('<p>Ekkert hér</p>', { status: 200 }),
+    )
+
+    expect((await run(allowed)).specifications).toBe('No specifications found')
+  })
+
   it('fetches a URL that a car in the list actually points at', async () => {
     const allowed = newCars.find((car) => car.evDatabaseURL)?.evDatabaseURL
     expect(allowed).toBeDefined()
