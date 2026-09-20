@@ -5,6 +5,7 @@ import NewCars from './newCars'
 import Footer from '../components/Footer'
 import { getDirectionFromQuery, getSortingFromQuery } from '../modules/sorting'
 import { getFiltersFromQuery } from '../modules/filters'
+import { buildDatasetSchema, serialiseSchema } from '../modules/carSchema'
 import { SearchParams } from '../types'
 
 export const metadata: Metadata = {
@@ -19,6 +20,12 @@ export default async function Page({ searchParams }: Props) {
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serialiseSchema(buildDatasetSchema()),
+        }}
+      />
       <NewCars
         sorting={getSortingFromQuery(query)}
         direction={getDirectionFromQuery(query)}
