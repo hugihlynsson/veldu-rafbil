@@ -209,6 +209,13 @@ And, for a car that is genuinely new to the list:
 The photo is `public/images/<heroImageName>.jpg`, 1920×1280 (3:2), like every
 other one there.
 
+**Replacing a photo means giving it a new filename.** `minimumCacheTTL` in
+`next.config.js` is 31 days and there is no way to invalidate the image cache,
+so a better shot dropped in over the old one goes on serving the old one for up
+to a month. Name the replacement something else, point `heroImageName` at it
+and delete the file it replaces — the orphan test catches the delete if you
+forget it, but nothing catches the stale cache.
+
 1. **Find a press photo.** Search for `<make> <model> press photos`; the
    manufacturer's media site or a press-photo gallery is the source. Pick a
    clean shot of the car at about 45 degrees, front three-quarter, without text,
