@@ -34,12 +34,10 @@ const FiltersModal: React.FunctionComponent<Props> = ({
       setFilters((filters) => {
         const updatedFilters = Object.assign({}, filters)
 
-        // Name is a special filter
         if (name === 'name') {
           setNameInput(() => value)
         }
 
-        // Need to handle deletion separately
         if (value === '') {
           delete updatedFilters[name]
           return updatedFilters

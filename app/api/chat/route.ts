@@ -19,7 +19,6 @@ import { clientKey, rateLimit } from './rateLimit'
 // output tokens per task.
 const modelName = 'gemini-3.7-flash'
 
-// Create a summary of available cars for the LLM
 const carsSummary = newCars
   .map(
     (car) =>

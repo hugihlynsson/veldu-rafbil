@@ -58,7 +58,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
 
-  // Keep scroll at bottom during streaming to prevent jumps
   useEffect(() => {
     if (!messagesContainerRef.current) return
 
@@ -66,13 +65,13 @@ const ChatModal: React.FunctionComponent<Props> = ({
     const isNearBottom =
       container.scrollHeight - container.scrollTop - container.clientHeight < 20
 
-    // If already near bottom and content is streaming, keep it scrolled to bottom
+    // Only snaps to bottom when already there, so scrolling up to reread an
+    // earlier message doesn't get yanked back down mid-stream
     if (isNearBottom) {
       container.scrollTop = container.scrollHeight
     }
   }, [messages, status])
 
-  // Extract data from the last assistant message
   const lastMessage = messages[messages.length - 1]
   const lastAssistantText =
     lastMessage?.role === 'assistant'
