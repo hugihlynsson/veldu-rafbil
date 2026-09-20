@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from 'react'
 import { useChat } from '@ai-sdk/react'
 import dynamic from 'next/dynamic'
 import FloatingChat from './ChatInput'
+import { getMessageText } from '../modules/chatHelpers'
 import useBodyScrollLock from '../utils/useBodyScrollLock'
 import useKeyboardInset from '../utils/useKeyboardInset'
 import {
@@ -72,11 +73,10 @@ export default function ChatContainer({ hide }: Props) {
     const messages = chatState.messages
     const lastUserIndex = messages.findLastIndex((m) => m.role === 'user')
     if (lastUserIndex === -1) return
-    const lastUserMessage = messages[lastUserIndex]
-    const textPart = lastUserMessage.parts?.find((p) => p.type === 'text')
-    if (!textPart || !('text' in textPart)) return
+    const text = getMessageText(messages[lastUserIndex])
+    if (!text) return
     chatState.setMessages(messages.slice(0, lastUserIndex))
-    handleSendMessage(textPart.text)
+    handleSendMessage(text)
   }
 
   // One input in two places: showModal() makes everything outside it inert

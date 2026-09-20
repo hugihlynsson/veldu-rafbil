@@ -3,7 +3,7 @@
 import React from 'react'
 import MiniCar from '../MiniCar'
 import { UIDataTypes, UIMessage, UITools } from 'ai'
-import { findMentionedCars } from '../../modules/chatHelpers'
+import { findMentionedCars, getMessageText } from '../../modules/chatHelpers'
 import getCarId from '../../modules/getCarId'
 
 interface Props {
@@ -17,12 +17,7 @@ const MentionedCars: React.FunctionComponent<Props> = ({
 }) => {
   if (!lastMessage || lastMessage.role !== 'assistant') return null
 
-  const text =
-    lastMessage.parts
-      ?.filter((part) => part.type === 'text')
-      .map((part) => part.text)
-      .join(' ') ?? ''
-  const mentionedCars = text ? findMentionedCars(text) : []
+  const mentionedCars = findMentionedCars(getMessageText(lastMessage))
 
   if (mentionedCars.length === 0) return null
 

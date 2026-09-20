@@ -1,32 +1,29 @@
+import { UIMessage } from 'ai'
+
 import newCars from './newCars'
-import getCarId from './getCarId'
 import { NewCar } from '../types'
 
-// In list order, for the row of MiniCars under an answer
+/**
+ * The text of a message. A message is a list of parts, only some of them text,
+ * and everything here — the bubble, the mentioned cars, the follow-ups, what
+ * is logged — wants the same joined string out of it.
+ */
+export const getMessageText = (message: UIMessage | undefined): string =>
+  (message?.parts ?? [])
+    .filter((part) => part.type === 'text')
+    .map((part) => part.text)
+    .join(' ')
+    .trim()
+
+// Lowercased once: an answer is searched for every car in the list every time
+// the row under it renders
+const carNames = newCars.map((car) => `${car.make} ${car.model}`.toLowerCase())
+
+/** In list order, for the row of MiniCars under an answer */
 export const findMentionedCars = (text: string): NewCar[] => {
-  const mentioned: NewCar[] = []
-  const seen = new Set<string>()
   const lowerText = text.toLowerCase()
-
-  for (const car of newCars) {
-    const carName = `${car.make} ${car.model}`.toLowerCase()
-    const carNameWithSub = car.subModel
-      ? `${car.make} ${car.model} ${car.subModel}`.toLowerCase()
-      : null
-
-    const isMentioned =
-      lowerText.includes(carName) ||
-      (carNameWithSub !== null && lowerText.includes(carNameWithSub))
-
-    // The same identity the row keys itself by, so the two cannot drift apart
-    const id = getCarId(car)
-    if (isMentioned && !seen.has(id)) {
-      seen.add(id)
-      mentioned.push(car)
-    }
-  }
-
-  return mentioned
+  // A subModel only ever extends the name, so make and model answer for both
+  return newCars.filter((_car, index) => lowerText.includes(carNames[index]))
 }
 
 // Fisher-Yates — sort() with a random comparator is not a shuffle
