@@ -33,7 +33,7 @@ a fix.
 ## Comments
 
 Default to none — good names and structure should carry the meaning. Add one
-only when it explains a non-obvious *why*: a workaround, an invariant, a
+only when it explains a non-obvious _why_: a workaround, an invariant, a
 constraint the code itself doesn't show. Keep it to one line.
 
 Don't write a comment that restates what the code already says, narrates the
