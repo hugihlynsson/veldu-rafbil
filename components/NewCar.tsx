@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 import { NewCar as NewCarType, Drive } from '../types'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
-import getKmPerMinutesCharged from '../modules/getKmPerMinutesCharged'
+import { formatKmPerMinutesCharged } from '../modules/getKmPerMinutesCharged'
 import LinkPill from './LinkPill'
 import getPriceWithGrant from '../modules/getPriceWithGrant'
 import getCarId from '../modules/getCarId'
@@ -127,7 +127,8 @@ const NewCar: FunctionComponent<Props> = ({
               className="mt-0.5 text-xs text-[#666] font-medium"
               title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10T080} min)`}
             >
-              {getKmPerMinutesCharged(car.timeToCharge10T080, car.range)} km/min
+              {formatKmPerMinutesCharged(car.timeToCharge10T080, car.range)}{' '}
+              km/min
               <span className="sr-only">
                 {' '}
                 meðaldrægniaukning á hröðustu hleðslu

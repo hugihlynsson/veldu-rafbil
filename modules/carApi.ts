@@ -78,10 +78,7 @@ export const toApiCar = (car: NewCar): ApiCar => {
     seats: car.seats,
     fastCharge: {
       minutes10To80: car.timeToCharge10T080,
-      // The helper returns a fixed-precision string, as the list UI wants it
-      kmPerMinute: Number(
-        getKmPerMinutesCharged(car.timeToCharge10T080, car.range),
-      ),
+      kmPerMinute: getKmPerMinutesCharged(car.timeToCharge10T080, car.range),
     },
     availability: car.expectedDelivery ? 'expected' : 'available',
     ...(car.expectedDelivery ? { expectedDelivery: car.expectedDelivery } : {}),

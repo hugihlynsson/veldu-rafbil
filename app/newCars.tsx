@@ -15,13 +15,12 @@ import { filterQueryKeys, getQueryFromFilters } from '../modules/filters'
 import getCarId from '../modules/getCarId'
 import { Filters, Sorting, SortingDirection } from '../types'
 import {
-  carSorter,
   defaultDirection,
   flipDirection,
   getQueryFromSorting,
+  sortCars,
   sortingQueryKeys,
 } from '../modules/sorting'
-import stableSort from '../modules/stableSort'
 import { agree } from '../modules/plural'
 import { grantAmountText, grantCeilingText } from '../modules/grantCopy'
 import useBodyScrollLock from '../utils/useBodyScrollLock'
@@ -211,17 +210,15 @@ export default function NewCars({
         </div>
       </header>
 
-      {stableSort(filteredCars, carSorter(sorting, direction)).map(
-        (car, index) => (
-          <Car
-            priority={index <= 1}
-            car={car}
-            key={getCarId(car)}
-            showValue={sorting === 'value' || Boolean(filters.value)}
-            showSeats={Boolean(filters.seats)}
-          />
-        ),
-      )}
+      {sortCars(filteredCars, sorting, direction).map((car, index) => (
+        <Car
+          priority={index <= 1}
+          car={car}
+          key={getCarId(car)}
+          showValue={sorting === 'value' || Boolean(filters.value)}
+          showSeats={Boolean(filters.seats)}
+        />
+      ))}
 
       {hasFilter && filteredCarCount > 0 && (
         <div className="p-4 flex items-center mx-auto max-w-[480px] gap-2 text-xs font-medium mb-10 xs:p-6 md:pl-10 md:max-w-none">

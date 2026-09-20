@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest'
 
 import {
-  carSorter,
   defaultDirection,
   flipDirection,
   getDirectionFromQuery,
   getQueryFromSorting,
   getSortingFromQuery,
   isDefaultDirection,
+  sortCars,
   sortingQueryKeys,
   sortingToQuery,
 } from './sorting'
@@ -33,6 +33,8 @@ describe('reading the sorting out of the query', () => {
   it('defaults to name when the param is missing or unknown', () => {
     expect(getSortingFromQuery({})).toBe('name')
     expect(getSortingFromQuery({ radaeftir: 'bogus' })).toBe('name')
+    // `in` used to answer for these, and a function is not a Sorting
+    expect(getSortingFromQuery({ radaeftir: 'toString' })).toBe('name')
   })
 
   it.each(Object.entries(sortingToQuery))(
@@ -80,42 +82,82 @@ describe('direction', () => {
   })
 })
 
-describe('carSorter', () => {
+describe('sortCars', () => {
+  const sortings = Object.keys(sortingToQuery) as Array<Sorting>
+
   it('sorts price by what the buyer pays, after the grant', () => {
     // 10,100,000 gets no grant; 9,900,000 drops to 9,400,000.
     const expensive = car({ price: 10_100_000 })
     const cheap = car({ price: 9_900_000 })
-    expect([expensive, cheap].sort(carSorter('price'))).toEqual([
-      cheap,
-      expensive,
-    ])
+    expect(sortCars([expensive, cheap], 'price')).toEqual([cheap, expensive])
   })
 
   it('puts the longest range first by default', () => {
     const short = car({ range: 300 })
     const long = car({ range: 600 })
-    expect([short, long].sort(carSorter('range'))).toEqual([long, short])
+    expect(sortCars([short, long], 'range')).toEqual([long, short])
   })
 
   it('applies direction on top of the underlying order', () => {
     const short = car({ range: 300 })
     const long = car({ range: 600 })
-    expect([long, short].sort(carSorter('range', 'asc'))).toEqual([short, long])
+    expect(sortCars([long, short], 'range', 'asc')).toEqual([short, long])
   })
 
-  it.each(Object.keys(sortingToQuery) as Array<Sorting>)(
-    'handles %s without returning undefined',
-    (sorting) => {
-      const result = carSorter(sorting)(
-        car({ range: 300 }),
-        car({ range: 600 }),
-      )
-      expect(Number.isFinite(result)).toBe(true)
+  it('ranks fastcharge by km per minute rather than as text', () => {
+    // 3.5 and 17.5 km/min: as strings "17.5" would come first
+    const slow = car({ range: 300, timeToCharge10T080: 60 })
+    const fast = car({ range: 500, timeToCharge10T080: 20 })
+    expect(sortCars([slow, fast], 'fastcharge')).toEqual([fast, slow])
+  })
+
+  it.each(sortings)('returns every car it was given for %s', (sorting) => {
+    const cars = [car({ range: 300 }), car({ range: 600 }), car({ range: 450 })]
+    const sorted = sortCars(cars, sorting)
+
+    expect(sorted).toHaveLength(cars.length)
+    expect(new Set(sorted)).toEqual(new Set(cars))
+  })
+
+  it('leaves the list it was given alone', () => {
+    const short = car({ range: 300 })
+    const long = car({ range: 600 })
+    const cars = [short, long]
+
+    sortCars(cars, 'range')
+
+    expect(cars).toEqual([short, long])
+  })
+
+  // What stableSort used to be there for, now the sort's own guarantee
+  it.each<SortingDirection>(['asc', 'desc'])(
+    'keeps equal-ranked cars in data order, %s',
+    (direction) => {
+      const cars = [
+        car({ model: 'First', range: 400 }),
+        car({ model: 'Second', range: 400 }),
+        car({ model: 'Third', range: 400 }),
+      ]
+
+      expect(sortCars(cars, 'range', direction).map((c) => c.model)).toEqual([
+        'First',
+        'Second',
+        'Third',
+      ])
     },
   )
 
+  // The server and an Icelandic browser do not share a default locale, so a
+  // collation left to the runtime would order these two differently
+  it('collates names in Icelandic rather than the runtime default', () => {
+    const o = car({ make: 'Örn' })
+    const v = car({ make: 'Volvo' })
+
+    expect(sortCars([o, v], 'name')).toEqual([v, o])
+  })
+
   it('has a default direction for every sorting', () => {
-    for (const sorting of Object.keys(sortingToQuery) as Array<Sorting>) {
+    for (const sorting of sortings) {
       expect(defaultDirection[sorting]).toMatch(/^(asc|desc)$/)
     }
   })
