@@ -17,7 +17,6 @@ const MentionedCars: React.FunctionComponent<Props> = ({
 }) => {
   if (!lastMessage || lastMessage.role !== 'assistant') return null
 
-  // Find cars mentioned in the last assistant message (only when not streaming)
   const text =
     lastMessage.parts
       ?.filter((part) => part.type === 'text')

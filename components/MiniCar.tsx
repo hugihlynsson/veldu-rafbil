@@ -19,7 +19,6 @@ const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
   const carId = getCarId(car)
 
   const handleClick = () => {
-    // Close the chat modal
     if (onClose) {
       onClose()
     }

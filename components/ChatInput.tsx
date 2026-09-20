@@ -81,7 +81,6 @@ const ChatInput: React.FunctionComponent<Props> = ({
     setIsFocused(true)
     onIntent?.()
     if (!hasMessages) {
-      // Pick 3 random suggestions
       setSelectedSuggestions(getRandomSuggestions(CHAT_SUGGESTIONS, 3))
     }
   }

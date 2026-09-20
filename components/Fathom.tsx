@@ -8,12 +8,10 @@ function TrackPageView() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  // Load the Fathom script on mount
   useEffect(() => {
     load('DDOQKVOW', { auto: false })
   }, [])
 
-  // Record a pageview when route changes
   useEffect(() => {
     if (!pathname) return
 

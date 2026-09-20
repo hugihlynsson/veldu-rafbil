@@ -56,19 +56,14 @@ export default function ChatContainer({ hide }: Props) {
     }
   }
 
-  // Load initial messages from localStorage
   const [initialMessages] = useState(readStoredMessages)
-
-  // Initialize useChat
   const chatState = useChat({ messages: initialMessages })
 
-  // Handle body scroll lock for chat modal
   useBodyScrollLock(isChatOpen && !releaseBodyLock)
 
   // Keeps the input above a phone keyboard rather than behind it
   useKeyboardInset()
 
-  // Save messages to localStorage whenever they change
   useEffect(() => {
     if (chatState.messages.length > 0) {
       writeStoredMessages(chatState.messages)

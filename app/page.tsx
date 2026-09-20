@@ -1,4 +1,3 @@
-// `app` directory
 import { Metadata } from 'next'
 
 import cars from '../modules/newCars'

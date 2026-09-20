@@ -82,10 +82,8 @@ export const fetchCarDetailsTool = tool({
 
       const html = await readCapped(response)
 
-      // Extract structured data from EV Database
-      // The site uses tables with format: <tr><td>Label</td><td>Value</td></tr>
+      // The site's spec tables are rows of <td>Label</td><td>Value</td>
       const extractData = (label: string): string => {
-        // Pattern to match table rows with label in first td and value in second td
         const tablePattern = new RegExp(
           `<tr[^>]*>\\s*<td[^>]*>\\s*${label}\\s*</td>\\s*<td[^>]*>\\s*([^<]+)\\s*</td>`,
           'i',
@@ -93,40 +91,33 @@ export const fetchCarDetailsTool = tool({
         const match = html.match(tablePattern)
         if (match && match[1]) {
           const value = match[1].trim()
-          // Filter out "No Data" entries
           return value === 'No Data' ? '' : value
         }
         return ''
       }
 
-      // Extract key specifications using exact field names from the site
+      // Labels have to match the site's own field names exactly
       const specs = {
         carName,
-        // Dimensions
         length: extractData('Length'),
         width: extractData('Width'),
         height: extractData('Height'),
         wheelbase: extractData('Wheelbase'),
-        // Weight & Capacity
         weightUnladen:
           extractData('Weight Unladen') || extractData('Curb Weight'),
         grossWeight: extractData('Gross Vehicle Weight') || extractData('GVWR'),
         maxPayload: extractData('Max. Payload') || extractData('Payload'),
-        // Cargo
         cargoVolume: extractData('Cargo Volume'),
         cargoVolumeMax:
           extractData('Cargo Volume Max') || extractData('Cargo Max'),
         frunk: extractData('Cargo Volume Frunk') || extractData('Frunk'),
-        // Towing
         towingUnbraked: extractData('Towing Weight Unbraked'),
         towingBraked: extractData('Towing Weight Braked'),
         towHitch: extractData('Tow Hitch') || extractData('Towbar'),
-        // Other
         seats: extractData('Seats'),
         source: url,
       }
 
-      // Filter out empty values and format nicely
       const formattedSpecs = Object.entries(specs)
         .filter(([key, value]) => value && key !== 'source')
         .map(([key, value]) => `${key}: ${value}`)
