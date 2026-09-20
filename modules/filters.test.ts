@@ -82,6 +82,35 @@ describe('getFiltersFromQuery', () => {
     expect(matches(filters)).toBe(newCars.length)
   })
 
+  // ISK has no subunit, and the UI cannot produce a fraction — but the filters
+  // come out of the URL, and a fractional price is not a price: it renders as
+  // one, and it breaks the zero-padded tiebreak in the name sort.
+  it.each([
+    // Both of these are maxima, and a half króna either way is nothing next to
+    // a price quoted in thousands, so it is the nearest whole one
+    ['verd', '9500000.5', 9_500_001],
+    ['verd', '6000000.4', 6_000_000],
+    ['verd', '9499999.5', 9_500_000],
+    ['virdi', '20000.6', 20_001],
+  ])('reads %s=%s as %d whole krónur', (key, value, expected) => {
+    const filters = getFiltersFromQuery({ [key]: value })
+
+    expect(Object.values(filters)).toEqual([expected])
+    expect(Object.values(filters).every(Number.isInteger)).toBe(true)
+  })
+
+  it('treats a price that rounds to nothing as no filter', () => {
+    expect(getFiltersFromQuery({ verd: '0.4' })).toEqual({})
+    expect(getFiltersFromQuery({ virdi: '0.2' })).toEqual({})
+  })
+
+  // The ones that are not prices: seconds and km per minute are measurements,
+  // and the modal offers 8.0 and 3.1 as the example of each
+  it('leaves the filters that are not prices fractional', () => {
+    expect(getFiltersFromQuery({ hrodun: '7.25' }).acceleration).toBe(7.25)
+    expect(getFiltersFromQuery({ hradhledsla: '3.1' }).fastcharge).toBe(3.1)
+  })
+
   it('still reads a good number next to a bad one', () => {
     expect(getFiltersFromQuery({ verd: 'abc', draegni: '400' })).toEqual({
       range: 400,

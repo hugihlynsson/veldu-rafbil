@@ -93,6 +93,15 @@ needs. New copy about the grant goes through it rather than writing the amount
 out again, the same way copy that counts cars interpolates the length of the
 list.
 
+**A price is a whole number of krónur.** ISK has no subunit, so `car.price`,
+the price after the grant and the price-per-km threshold are all integers, and
+a data test pins it. The UI cannot produce a fraction, but the price and
+price-per-km filters come out of the URL, so `modules/filters.ts` rounds them
+to krónur as it reads them — a fraction renders as a price in the chip that
+offers to remove it and breaks the zero-padded price tiebreak in the name sort,
+which puts a 9.5m car after a 12m one. Acceleration and capacity are
+measurements, not prices, and are fractional on purpose.
+
 **Range is WLTP**, a manufacturer figure. Real Icelandic range is lower, and the
 system prompt tells the assistant to say so.
 
