@@ -2,8 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import addDecimalSeparators from './addDecimalSeparators'
 
-// This exists instead of toLocaleString because that can differ between node
-// and the browser and break hydration, so the output must be fixed.
+// Fixed output, because toLocaleString() can differ between node and browser
 describe('addDecimalSeparators', () => {
   it.each([
     [1, '1'],

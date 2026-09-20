@@ -1,31 +1,22 @@
 import { Drive, Filters, SearchParams } from '../types'
 
-// The multi-value filters are written to the URL as a comma separated list
-// (see useFilters in app/newCars), so they have to be split apart again. A
-// repeated param arrives as an array instead, so handle both shapes.
+// Multi-value filters travel as a comma separated list, and a repeated
+// parameter arrives as an array, so handle both shapes.
 const parseList = (value: string | Array<string>): Array<string> =>
   (Array.isArray(value) ? value : [value])
     .flatMap((entry) => entry.split(','))
     .map((entry) => entry.trim())
     .filter((entry) => entry)
 
-// Every numeric filter is a threshold that gets compared against a car. Number
-// of anything unparseable is NaN, and every comparison against NaN is false,
-// so one hand-edited or truncated parameter used to empty the whole list and
-// put "NaN kr." in the chip above it. A parameter we cannot read is no filter.
+// Number() of an unreadable parameter is NaN, and every comparison against NaN
+// is false, so it would empty the list rather than filter it.
 const parseNumber = (value: string | Array<string>): number | undefined => {
   const parsed = Number(Array.isArray(value) ? value[0] : value)
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined
 }
 
-// ISK has no subunit: a price is a whole number of krónur, and so is the
-// price-per-km these two compare against. Nothing in the UI can produce a
-// fraction, but the filters come out of the URL, where a shared or hand-edited
-// link can carry one — and a fractional price is not a price. It renders as
-// one in the chip offering to remove it, reads out to a screen reader the
-// same, and breaks the zero-padded tiebreak in the name sort, which puts a
-// 9.5m car after a 12m one. Round it to krónur at the boundary, so nothing
-// downstream has to know this can happen.
+// A price is a whole number of krónur, and the URL can carry a fraction: it
+// renders as a price and breaks the zero-padded tiebreak in the name sort.
 const parseKronur = (value: string | Array<string>): number | undefined => {
   const parsed = parseNumber(value)
   if (parsed === undefined) return undefined
@@ -57,8 +48,7 @@ export const getFiltersFromQuery = (query: SearchParams): Filters => {
   if (frambod)
     filters.availability = frambod === 'faanlegir' ? 'available' : 'expected'
 
-  // An unreadable number leaves the key behind with undefined against it, and
-  // "is there a filter" is asked with Object.keys/values all over the UI
+  // "Is there a filter" is asked with Object.keys/values all over the UI
   for (const key of Object.keys(filters) as Array<keyof Filters>) {
     if (filters[key] === undefined) delete filters[key]
   }
@@ -66,9 +56,7 @@ export const getFiltersFromQuery = (query: SearchParams): Filters => {
   return filters
 }
 
-// Every parameter a filter can occupy. The client clears all of them before
-// writing what getQueryFromFilters returned, so that switching a filter off
-// takes its parameter with it and anything else in the URL is left alone.
+// Cleared before writing, so switching a filter off takes its parameter
 export const filterQueryKeys = [
   'nafn',
   'hrodun',
@@ -80,18 +68,12 @@ export const filterQueryKeys = [
   'virdi',
 ] as const
 
-// The writing direction, which used to live in useFilters with only a copy of
-// itself in the test for company. It belongs beside the reader: the two have to
-// agree exactly, and the way they failed to was a multi-value filter written as
-// a comma list and read back as one value, which matches nothing and says
-// nothing. Now the round trip runs through both.
 export const getQueryFromFilters = (
   filters: Filters,
 ): Record<string, string> => {
   const query: Record<string, string> = {}
 
-  // A zero, an empty list or a list of nothing but separators is no filter,
-  // which is how the reader above treats one too
+  // A zero or an empty list is no filter, the way the reader treats one too
   const set = (key: string, value: string | number | undefined) => {
     if (value) query[key] = String(value)
   }

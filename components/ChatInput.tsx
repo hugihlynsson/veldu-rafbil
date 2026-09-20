@@ -14,18 +14,10 @@ interface Props {
   hasMessages: boolean
   sendMessage: (message: string) => void
   inputRef?: React.Ref<HTMLInputElement>
-  /**
-   * The draft is the caller's, because this input is unmounted and mounted
-   * again as it moves in and out of the chat dialog, and a half-typed question
-   * should survive that.
-   */
+  /** Held by the caller: this input is remounted as it moves in and out */
   value: string
   onValueChange: (value: string) => void
-  /**
-   * The ring is the caller's for the same reason as the draft: it has to
-   * outlive the move in and out of the dialog, and the caller is the only one
-   * that knows a focus it handed back itself is not the reader arriving.
-   */
+  /** The caller's too: only it knows a handed-back focus is not an arrival */
   showFocusRing: boolean
   onFocusRingChange: (show: boolean) => void
   /** Fired on focus, before anything is sent, so the caller can warm the chat */
@@ -57,8 +49,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
       onValueChange('')
       onOpenChat()
     } else if (hasMessages) {
-      // Enter on an empty box reopens the conversation. Without this there is
-      // no keyboard route back into a chat you already have.
+      // Without this there is no keyboard route back into an open chat
       onOpenChat()
     }
   }
@@ -67,11 +58,8 @@ const ChatInput: React.FunctionComponent<Props> = ({
     onValueChange(e.target.value)
   }
 
-  // The ring is for the reader who cannot see the caret land: it follows the
-  // tab key and the focus handed back when the chat closes, and stays out of
-  // the way of anyone who just pointed at the thing they are already looking
-  // at. :focus-visible cannot make that call for a text field — see
-  // utils/inputModality.
+  // :focus-visible matches a text field however focus arrived, click
+  // included, so a text field drawing its own ring has to decide for itself
   const handleFocusRing = () => {
     onFocusRingChange(getInputModality() === 'keyboard')
   }
@@ -85,10 +73,8 @@ const ChatInput: React.FunctionComponent<Props> = ({
     }
   }
 
-  // Opening the chat on focus alone made this input a keyboard trap: with a
-  // history, every attempt to tab onto or past it reopened the modal, and
-  // closing the modal put focus back here and reopened it again. A click is
-  // the same single gesture for pointer users, and Enter covers the keyboard.
+  // Opening on focus alone made this a keyboard trap: every tab onto it
+  // reopened the modal, which put the focus back here
   const handleClick = () => {
     if (hasMessages) {
       onOpenChat()
@@ -108,8 +94,8 @@ const ChatInput: React.FunctionComponent<Props> = ({
       className={clsx(
         'fixed bottom-[calc(1rem+var(--keyboard-inset))] left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col-reverse items-center gap-3',
         'min-[500px]:bottom-[calc(1.5rem+var(--keyboard-inset))]',
-        // Only the hiding fades. The bottom has to keep up with a keyboard on
-        // its way in, and a transition on it drags the bar along behind.
+        // Only the hiding fades: a transition on the bottom drags the bar
+        // behind a keyboard on its way in
         'transition-opacity duration-300',
         hide && 'opacity-0',
       )}
@@ -136,8 +122,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
           onFocus={handleFocus}
           onClick={handleClick}
           placeholder="Spurðu Veldu Rafbíl"
-          // The focus ring lives on the form, so that it wraps the whole pill
-          // rather than the bare input inside it
+          // The ring lives on the form, so it wraps the whole pill
           className="flex-1 border-0 bg-transparent p-[8px_0] text-base font-normal text-tint outline-none placeholder:text-black/60 disabled:opacity-60"
         />
         <button
@@ -184,9 +169,8 @@ const ChatInput: React.FunctionComponent<Props> = ({
                 index === 1 && '[animation-delay:0.35s]',
                 index === 2 && '[animation-delay:0.25s]',
               )}
-              // Keeping the input focused means the blur above never fires and
-              // the suggestion survives long enough to be clicked. Safari does
-              // not focus buttons on click, so onClick alone would not do.
+              // Keeps the blur above from firing before the click lands;
+              // Safari does not focus buttons on click
               onMouseDown={(event) => event.preventDefault()}
               onClick={() => handleSuggestionClick(suggestion)}
             >

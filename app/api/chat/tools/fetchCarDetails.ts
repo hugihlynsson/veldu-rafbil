@@ -2,26 +2,18 @@ import { tool } from 'ai'
 import { z } from 'zod'
 import newCars from '../../../../modules/newCars'
 
-// The model picks the URL, and a model can be talked into picking any URL at
-// all. Without this the endpoint is a public fetcher for whatever a visitor
-// can persuade the assistant to ask for. The car list is the only place a
-// legitimate URL can come from, so it is also the whole allowlist.
+// Without this the model can be talked into fetching any URL at all
 const allowedURLs = new Set(
   newCars
     .map((car) => car.evDatabaseURL)
     .filter((url): url is string => Boolean(url)),
 )
 
-// ev-database pages are ~200 KB. Anything far past that is not a car page, and
-// reading it to the end would pin the request open.
+// ev-database pages are ~200 KB; anything far past that is not a car page
 const MAX_BYTES = 2_000_000
 const TIMEOUT_MS = 8_000
 
-// Slicing the string that response.text() returns is no cap at all: text()
-// reads the body to the end first, so the bytes past the cap were fetched,
-// decoded and held in memory before being thrown away, and a response that
-// trickles or never ends held the request open for the whole timeout. Reading
-// the stream here stops at the cap and drops the connection with it.
+// response.text() would read the whole body before any cap could apply
 const readCapped = async (response: Response): Promise<string> => {
   const reader = response.body?.getReader()
   if (!reader) return ''
@@ -40,8 +32,7 @@ const readCapped = async (response: Response): Promise<string> => {
     // Flushes whatever the last chunk left mid-character
     html += decoder.decode()
   } finally {
-    // Nothing else is going to read this, whether we stopped at the cap or the
-    // body ended on its own
+    // Nothing else reads this, whether we stopped at the cap or the body ended
     await reader.cancel().catch(() => {})
   }
 
@@ -70,8 +61,7 @@ export const fetchCarDetailsTool = tool({
         signal: AbortSignal.timeout(TIMEOUT_MS),
       })
 
-      // An error page parses to nothing anyway, and saying which status came
-      // back tells the model to fall back to the list rather than try again
+      // Naming the status tells the model to fall back to the list, not retry
       if (!response.ok) {
         return {
           carName,

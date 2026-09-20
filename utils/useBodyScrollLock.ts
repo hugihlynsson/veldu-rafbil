@@ -1,16 +1,9 @@
 import { useEffect, useRef } from 'react'
 
-// Locks the page behind a modal by pinning the body at the current offset, and
-// puts the reader back where they were when it opens up again.
-//
-// The offset has to be tracked on the way past rather than read when the lock
-// goes on. A modal is a child, child effects run before parent ones, and
-// showModal() scrolls the page to the top on the way — so by the time this
-// hook runs, window.scrollY is already 0 and the reader has lost their place.
-//
-// It is a ref rather than state because it is only ever read here. As state it
-// re-rendered the whole car list on every scroll event.
+// Tracks the offset on the way past rather than reading it when the lock goes
+// on: showModal() has already scrolled the page to the top by then.
 const useBodyScrollLock = (lock: boolean): void => {
+  // As state this re-rendered the whole car list on every scroll event
   const scrollY = useRef(0)
 
   useEffect(() => {

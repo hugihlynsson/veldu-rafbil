@@ -2,8 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { grantAmount } from './globals'
 
-// Loads the copy against a law other than the one in force, which is the case
-// it exists for: both numbers are legislation and have changed before.
+// Both numbers are legislation and have changed before
 const copyWith = async (amount: number, ceiling: number) => {
   vi.resetModules()
   vi.doMock('./globals', () => ({
@@ -13,10 +12,7 @@ const copyWith = async (amount: number, ceiling: number) => {
   return import('./grantCopy')
 }
 
-// The note under the intro and the assistant's system prompt name the grant and
-// the ceiling in prose. These pin that the prose is derived, so that raising
-// either number carries through instead of leaving the site, and the assistant,
-// quoting the old law.
+// Pins that the prose is derived, so raising a number carries through
 describe('the grant copy', () => {
   afterEach(() => {
     vi.doUnmock('./globals')

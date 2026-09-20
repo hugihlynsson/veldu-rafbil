@@ -1,4 +1,4 @@
-// number.toLocaleString() can be inconsistent between node and client, breaking SSR
+// toLocaleString() can differ between node and client and break hydration
 const addDecimalSeparators = (value: number): string =>
   value
     .toString()

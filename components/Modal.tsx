@@ -22,11 +22,7 @@ interface Props {
   onDone: () => void
   /** Called as the leave animation starts, for anything that should not wait */
   onLeave?: () => void
-  /**
-   * Focused after the dialog opens. showModal() puts focus on the first
-   * focusable thing, which is the close button in both of ours, so anything
-   * that wants focus elsewhere has to ask for it after that, not before.
-   */
+  /** Focused after open: showModal() lands on the close button otherwise */
   initialFocusRef?: React.RefObject<HTMLElement | null>
   /** Layout and backdrop for this particular dialog */
   className?: string
@@ -34,13 +30,8 @@ interface Props {
 }
 
 /**
- * The shared half of a modal: a real <dialog>, so that Escape, the backdrop and
- * the focus trap are the browser's job rather than ours, wrapped in the enter
- * and leave animation that <dialog> does not do on its own.
- *
- * `data-state` is on the dialog element, so a caller can drive its backdrop
- * from Tailwind (`data-[state=visible]:backdrop:bg-black/30`), and the panel
- * inside gets `isVisible` to animate with.
+ * A real <dialog>, so that Escape, the backdrop and the focus trap are the
+ * browser's job, wrapped in the animation it does not do on its own.
  */
 const Modal: React.FunctionComponent<Props> = ({
   labelledBy,
@@ -53,23 +44,16 @@ const Modal: React.FunctionComponent<Props> = ({
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [state, setState] = useState<State>('initializing')
 
-  // Layout rather than passive, for the sake of the phone keyboard. A phone
-  // raises it only for a focus that happens inside the tap that asked for it,
-  // and React holds passive effects back until after the event has been and
-  // gone — so opening from a tap left the chat input focused with no keyboard
-  // under it, which reads as not focused at all. A layout effect runs during
-  // the commit, which for a tap is still inside the event.
+  // Layout rather than passive: a phone raises the keyboard only for a focus
+  // inside the tap that asked for it, and passive effects run after the event
   useLayoutEffect(() => {
     dialogRef.current?.showModal()
-    // preventScroll: the dialog is a fixed overlay, and letting the browser
-    // scroll the page to reveal the focused field moves the list underneath
+    // preventScroll: the dialog is fixed, and scrolling to it moves the list
     initialFocusRef?.current?.focus({ preventScroll: true })
-    // A frame with the enter styles still applied is what gives the transition
-    // something to move from
+    // A frame with the enter styles gives the transition something to move from
     const timer = setTimeout(() => setState('visible'), 1)
     return () => clearTimeout(timer)
-    // Opening happens once, on mount. A ref is not reactive, so the dependency
-    // the rule asks for here would mean nothing.
+    // Opening happens once, on mount; a ref is not reactive
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -84,8 +68,7 @@ const Modal: React.FunctionComponent<Props> = ({
   }
 
   return (
-    // oxlint and jsx-a11y do not know <dialog>: the click is backdrop dismissal
-    // and Escape is handled natively through onCancel below
+    // <dialog>: the click is backdrop dismissal, Escape is handled by onCancel
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
     <dialog
       ref={dialogRef}

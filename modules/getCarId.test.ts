@@ -18,8 +18,7 @@ const car = (over: Partial<NewCar>): NewCar => ({
   ...over,
 })
 
-// It ends up in an HTML id, in getElementById and in a React key, so what it
-// does with a name is not cosmetic.
+// It ends up in an HTML id, in getElementById and in a React key
 describe('getCarId', () => {
   it('builds an id out of make, model and subModel', () => {
     expect(getCarId(car({ subModel: 'Long Range' }))).toBe(

@@ -23,7 +23,6 @@ const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
       onClose()
     }
 
-    // Wait for modal to start closing, then scroll
     setTimeout(() => {
       const carElement = document.getElementById(carId)
       if (carElement) {

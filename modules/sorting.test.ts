@@ -41,8 +41,7 @@ describe('reading the sorting out of the query', () => {
     },
   )
 
-  // Next hands a repeated param over as an array. Neither of these is a list,
-  // so the first one given wins.
+  // A repeated param arrives as an array; neither of these is a list
   it('takes the first value when the param is given twice', () => {
     expect(getSortingFromQuery({ radaeftir: ['draegni', 'verdi'] })).toBe(
       'range',
@@ -53,8 +52,7 @@ describe('reading the sorting out of the query', () => {
   })
 })
 
-// ofugt means "flipped from this sorting's default", not "descending", so the
-// same param means opposite directions for different sortings.
+// ofugt means "flipped from the default", not "descending"
 describe('direction', () => {
   it('starts each sorting in its most useful direction', () => {
     expect(getDirectionFromQuery({ radaeftir: 'verdi' })).toBe('asc')
@@ -122,9 +120,7 @@ describe('carSorter', () => {
   })
 })
 
-// The writer used to live in useSorting, where nothing could check it against
-// the readers above. Adding a sorting means touching both directions of the
-// mapping, and this is what says they still meet.
+// Adding a sorting means touching both directions; this is what says they meet
 describe('sorting survives a round trip through the URL', () => {
   const sortings = Object.keys(sortingToQuery) as Array<Sorting>
   const directions: Array<SortingDirection> = ['asc', 'desc']
@@ -148,8 +144,7 @@ describe('sorting survives a round trip through the URL', () => {
   })
 
   it('records a flip rather than a direction', () => {
-    // Descending is the default for range, so it is the ascending one that
-    // needs the parameter
+    // Descending is range's default, so ascending is what needs the parameter
     expect(getQueryFromSorting('range', 'desc')).toEqual({
       radaeftir: 'draegni',
     })

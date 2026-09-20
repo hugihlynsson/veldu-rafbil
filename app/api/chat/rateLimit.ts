@@ -1,12 +1,4 @@
-// A fixed window per client, held in memory.
-//
-// This is deliberately modest: serverless means one of these per warm instance,
-// so a determined caller spread across instances gets a multiple of the limit.
-// It is not a defence against a botnet — it is the difference between a stray
-// script costing a few krónur and costing a few thousand, which is the failure
-// this site actually has to survive. Anything stronger needs shared state
-// (Vercel KV, Upstash) and a running cost of its own.
-
+// In memory, so a caller spread across warm instances gets a multiple of this
 const WINDOW_MS = 60_000
 const MAX_REQUESTS = 12
 
@@ -45,8 +37,7 @@ export const rateLimit = (key: string): RateLimitResult => {
   }
 }
 
-// Vercel sets x-forwarded-for; the left-most entry is the client. Everything
-// here is spoofable, so this buys ordinary politeness, not identity.
+// x-forwarded-for is spoofable, so this buys politeness, not identity
 export const clientKey = (request: Request): string =>
   request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
   request.headers.get('x-real-ip') ||

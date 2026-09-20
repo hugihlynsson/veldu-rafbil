@@ -7,7 +7,7 @@ describe('takesSingular', () => {
     expect(takesSingular(count)).toBe(true)
   })
 
-  // The case the old regex got wrong: it matched anything ending in 1
+  // Ends in 1, but is not singular — the half that is easy to get wrong
   it.each([11, 111, 211, 1011])('is plural for %i', (count) => {
     expect(takesSingular(count)).toBe(false)
   })

@@ -8,9 +8,7 @@ import { NewCar } from '../types'
 const label = (car: NewCar) =>
   `${car.make} ${car.model} ${car.subModel ?? ''}`.trim()
 
-// Most commits to newCars.ts are data edits, and most corrections to it have
-// been bad links or a hero image that does not resolve. These catch the classes
-// of mistake that can be checked without knowing the real-world values.
+// Most corrections to this file have been a bad link or a missing photo
 describe('the car data', () => {
   it('has cars in it', () => {
     expect(newCars.length).toBeGreaterThan(100)
@@ -23,9 +21,7 @@ describe('the car data', () => {
     },
   )
 
-  // The other direction of the hero image check. Dropping a car used to leave
-  // its photo behind, and 23 of them had piled up unnoticed — six megabytes
-  // that every clone of the repo carried around.
+  // Dropping a car used to leave its photo behind, and they piled up
   it('leaves no photo behind for a car that is gone', () => {
     const used = new Set(newCars.map((car) => car.heroImageName))
     const orphans = readdirSync('public/images')
@@ -36,11 +32,8 @@ describe('the car data', () => {
     expect(orphans).toEqual([])
   })
 
-  // Two Peugeot e-208 entries once shared a key and React rendered them wrong.
-  // The same id is now the anchor on the card and the target the chat scrolls
-  // to, so a collision is three bugs rather than one: two cards answering to
-  // one id, the chat scrolling to whichever came first, and a list React cannot
-  // tell apart. Give the second variant a subModel that says what it is.
+  // A collision is three bugs at once: two cards on one id, the chat scrolling
+  // to whichever came first, and a list React cannot tell apart.
   it('gives every car an id of its own', () => {
     const byId = new Map<string, Array<string>>()
     for (const car of newCars) {
@@ -57,9 +50,7 @@ describe('the car data', () => {
     'has plausible numbers for %s',
     (_name, car) => {
       expect(car.price).toBeGreaterThan(0)
-      // ISK has no subunit. A fraction here would also break the zero-padded
-      // price tiebreak in the name sort, putting a cheaper car after a dearer
-      // one. Capacity and acceleration are measurements and may be fractional.
+      // ISK has no subunit, unlike the measurements below
       expect(Number.isInteger(car.price)).toBe(true)
       expect(car.range).toBeGreaterThan(0)
       expect(car.range).toBeLessThan(1200)

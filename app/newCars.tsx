@@ -26,21 +26,14 @@ import { agree } from '../modules/plural'
 import { grantAmountText, grantCeilingText } from '../modules/grantCopy'
 import useBodyScrollLock from '../utils/useBodyScrollLock'
 
-// The chat owns useChat, which pulls the AI SDK and zod along with it. Keeping
-// it out of the list's own chunk means the cars render and hydrate without
-// waiting for code that only the chat uses. The bar is fixed-position, so it
-// arriving a moment later shifts nothing.
+// Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
+// so arriving a moment later shifts nothing.
 const ChatContainer = dynamic(() => import('../components/ChatContainer'), {
   ssr: false,
 })
 
-// Writes what a serialiser in modules/ produced and clears the parameters it
-// left out, so that switching a sorting or a filter off takes its parameter with
-// it while anything else in the URL stays.
-//
-// The URL goes straight to the history rather than through the router, which
-// Next keeps in sync with useSearchParams. Reading it back from the location
-// means the effects below don't depend on the URL they update.
+// Clears the keys the serialiser left out, so switching a filter off takes its
+// parameter. Straight to the history, so the effects below don't depend on it.
 const replaceQuery = (
   keys: readonly string[],
   query: Record<string, string>,
@@ -67,8 +60,7 @@ const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
     replaceQuery(sortingQueryKeys, getQueryFromSorting(sorting, direction))
   }, [sorting, direction])
 
-  // Clicking the active sorting flips it, clicking another one starts it in
-  // its default direction
+  // The active sorting flips; another one starts in its default direction
   const toggleSorting = (value: Sorting) => {
     if (value === sorting) {
       setDirection(flipDirection)
@@ -102,7 +94,6 @@ const sortingLabels: Record<Sorting, string> = {
   fastcharge: 'Hraðhleðslu',
 }
 
-// The sortings offered as toggles, in the order they appear
 const toggleSortings: Sorting[] = [
   'name',
   'price',
@@ -211,9 +202,8 @@ export default function NewCars({
           filteredCarsCount={filteredCars.length}
         />
 
-        {/* Sorting and filtering rewrite the whole list with no visible change
-            at the point of interaction. This is the only feedback a screen
-            reader gets, so it has to stay mounted to be announced at all. */}
+        {/* The only feedback a screen reader gets for a sort or a filter, so
+            it has to stay mounted to be announced at all */}
         <div aria-live="polite" className="sr-only">
           {`${filteredCars.length} ${carWord(filteredCars.length)} á listanum, raðað eftir ${sortingLabels[
             sorting

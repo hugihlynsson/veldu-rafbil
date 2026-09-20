@@ -12,9 +12,7 @@ import {
   writeStoredMessages,
 } from '../utils/chatStorage'
 
-// The modal drags in react-markdown and remark-gfm, which most visitors never
-// need — they came for the list. Its chunk is fetched the first time the chat
-// opens, and warmed on focus so that the open still feels instant.
+// react-markdown is fetched the first time the chat opens, warmed on focus
 const ChatModal = dynamic(() => import('./ChatModal'))
 
 interface Props {
@@ -31,27 +29,20 @@ export default function ChatContainer({ hide }: Props) {
   const [showFocusRing, setShowFocusRing] = useState<boolean>(false)
   const [isChatModalLoaded, setIsChatModalLoaded] = useState<boolean>(false)
 
-  // The input goes inside the dialog when the chat opens, so the modal has to
-  // be here before the switch rather than after it: handing over while its
-  // chunk was still in flight would take the input off the page along with it.
+  // Handing over while the chunk is in flight would take the input with it
   const loadChatModal = () => {
     void import('./ChatModal').then(() => setIsChatModalLoaded(true))
   }
   const isChatOpen = showChatMessages && isChatModalLoaded
 
-  // The dialog hands focus back to whatever opened it, but that is gone by
-  // then: the input moves out of the dialog as the chat closes and a new node
-  // takes its place. So closing claims the focus and the node takes it as it
-  // arrives, which is the first moment there is anything to give it to.
+  // The node the dialog would hand focus back to is gone by the time it
+  // closes, so the new one claims the focus as it arrives
   const focusInputOnArrival = (node: HTMLInputElement | null) => {
     chatInputRef.current = node
     if (node && shouldFocusInput.current) {
       shouldFocusInput.current = false
       node.focus()
-      // Focus handed back as the chat closes is the input the reader was
-      // already in carrying on, not somewhere they have arrived, so it keeps
-      // no ring. Whatever the focus above asked for is still queued, and this
-      // is the later of the two.
+      // Focus handed back on close is the reader carrying on, not arriving
       setShowFocusRing(false)
     }
   }
@@ -88,9 +79,7 @@ export default function ChatContainer({ hide }: Props) {
     handleSendMessage(textPart.text)
   }
 
-  // One input, rendered either on the page or inside the chat dialog, because
-  // a dialog opened with showModal() makes everything outside it inert. Only
-  // its place in the tree changes; the draft above is what carries across.
+  // One input in two places: showModal() makes everything outside it inert
   const chatInput = (
     <FloatingChat
       inputRef={focusInputOnArrival}
@@ -117,8 +106,7 @@ export default function ChatContainer({ hide }: Props) {
       onDone={() => {
         shouldFocusInput.current = true
         setShowChatMessages(false)
-        // Reset here, with the thing that closed the modal, rather than in
-        // an effect watching for it to have closed
+        // Reset with the thing that closed the modal, not in an effect
         setReleaseBodyLock(false)
       }}
       messages={chatState.messages}

@@ -3,8 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { fetchCarDetailsTool } from './fetchCarDetails'
 import newCars from '../../../../modules/newCars'
 
-// The model chooses this argument, so the allowlist is the only thing standing
-// between a prompt and an arbitrary fetch from our server.
+// The allowlist is all that stands between a prompt and an arbitrary fetch
 const run = async (url: string): Promise<{ specifications: string }> => {
   // The options are only along for the ride; this tool reads none of them
   const result = await fetchCarDetailsTool.execute!({ url, carName: 'Test' }, {
@@ -19,8 +18,7 @@ afterEach(() => {
   vi.restoreAllMocks()
 })
 
-// 2 MB of 64 KB chunks is 32 of them; the margin is for the stream reading one
-// ahead. A run that reaches this is not stopping.
+// 2 MB of 64 KB chunks is 32; the margin is for the stream reading ahead
 const MAX_CHUNKS = 64
 
 describe('fetchCarDetails', () => {
@@ -39,10 +37,7 @@ describe('fetchCarDetails', () => {
     expect(result.specifications).toMatch(/not one of the ev-database entries/)
   })
 
-  // The cap is part of the same boundary as the allowlist. Reading the body to
-  // the end first meant a page that trickles or never stops held the request
-  // open for the whole timeout and cost us the memory it sent; this test hangs
-  // against that version rather than passing.
+  // Against an uncapped read this hangs rather than fails
   it('stops reading a body that never ends', async () => {
     const allowed = newCars.find((car) => car.evDatabaseURL)!.evDatabaseURL!
     const encoder = new TextEncoder()
@@ -65,8 +60,6 @@ describe('fetchCarDetails', () => {
 
     const result = await run(allowed)
 
-    // It read what it came for and let go, rather than following 64 KB at a
-    // time for as long as the other end cared to send
     expect(result.specifications).toContain('seats: 5')
     expect(chunksSent).toBeLessThan(MAX_CHUNKS)
   })

@@ -38,8 +38,7 @@ describe('stripFollowUps', () => {
     ).toBe('Svarið.')
   })
 
-  // The behaviour that keeps a half-written marker from flashing up in the
-  // bubble while the answer is still streaming in
+  // Keeps a half-written marker from flashing up mid-stream
   it('removes a marker that is still being written', () => {
     expect(stripFollowUps('Svarið. [q:Hvað fer hann')).toBe('Svarið.')
     expect(stripFollowUps('Svarið. [q:')).toBe('Svarið.')
