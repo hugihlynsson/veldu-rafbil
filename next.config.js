@@ -12,7 +12,15 @@ module.exports = {
       1320, // iPhone 16 Pro Max
       1920, // Full size
     ],
-    minimumCacheTTL: 2592000,
+    // The two widths either side of MiniCar's 120px box, which is all that
+    // reads this list
+    imageSizes: [128, 256],
+    // No query string, so a photo already cached cannot be asked for again
+    // under a fresh URL
+    localPatterns: [{ pathname: '/images/**', search: '' }],
+    qualities: [75],
+    // 31 days: the point Vercel stops counting the cache write
+    minimumCacheTTL: 2678400,
   },
   async redirects() {
     return [
