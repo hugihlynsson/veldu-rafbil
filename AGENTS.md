@@ -247,7 +247,7 @@ to interpolate, and a real file can carry the comments saying why `/api/chat` is
 the one path disallowed.
 
 `modules/carApi.ts` owns the wire format and `modules/llmsText.ts` the text; the
-routes are four lines each. **The published shape is deliberately not `NewCar`.**
+routes are a handful of lines each. **The published shape is deliberately not `NewCar`.**
 A consumer has no AGENTS.md telling it that `price` is the list price, so every
 field is named for what it is: `price.list` and `price.withGrant` are separate,
 `range` is `rangeWltpKm`, and the derived figures — the post-grant price, the
