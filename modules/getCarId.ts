@@ -1,5 +1,9 @@
 import { NewCar } from '../types'
 
+/** Make, model and subModel — what a car is called, and its identity with it */
+export const carLabel = (car: NewCar): string =>
+  `${car.make} ${car.model}${car.subModel ? ` ${car.subModel}` : ''}`
+
 // The anchor on the card, the target the chat scrolls to and the React key, so
 // it has to be unique across the car data or all three break at once.
 const getCarId = (car: NewCar): string =>
