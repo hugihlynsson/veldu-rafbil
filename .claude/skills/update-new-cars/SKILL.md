@@ -1,6 +1,6 @@
 ---
 name: update-new-cars
-description: Refresh the car list in modules/newCars.ts against the sellers' current price lists — prices, new and discontinued variants, expected deliveries. Use when asked to update, sweep, or check prices for one make or all of them.
+description: Refresh the car list in modules/newCars.ts against the sellers' current price lists — prices, new and discontinued variants, expected deliveries, seat counts. Use when asked to update, sweep, or check prices or seats for one make or all of them.
 ---
 
 # Updating the car list
@@ -44,8 +44,8 @@ way in; the next run depends on it.
     sérstaks styrks … er fullt verð").
   - **Only the price with the grant.** Add the grant back. Read the amount from
     `grantAmount` in `modules/globals.ts` rather than typing it, and check the
-    sum is still under the ceiling in `modules/getPriceWithGrant.ts`; a car over
-    it gets no grant, so a figure labelled "með styrk" cannot belong to one.
+    sum is still under `grantPriceCeiling` beside it; a car over it gets no
+    grant, so a figure labelled "með styrk" cannot belong to one.
   - **Only one figure and no label.** Toyota's and Lexus's lists print a single
     "VERÐ", and it is the pre-grant price: it equals what the list already has.
     When a list is unlabelled, compare it with the existing entry before
@@ -111,6 +111,8 @@ The shapes you will meet, best first:
   can fetch.
 
 Read the price table and the spec page of a brochure, not the equipment lists.
+`seats` is the exception: a third row is usually an option, so the options and
+equipment rows are where its figure lives. See "Seats" under Compare.
 
 ### 3. Compare
 
@@ -124,6 +126,7 @@ For each electric variant in the list, sort it into one of:
 | Now shipping                  | Delete `expectedDelivery`                                    |
 | Delivery date changed         | Edit `expectedDelivery`                                      |
 | Spec really changed           | Edit — new model year, bigger battery, not a rounding change |
+| Seat option added or dropped  | Edit `seats` (see below)                                     |
 
 **Removing a car.** A car missing from a price list is not proof it is gone —
 lists get split, renamed and sometimes just not uploaded. Remove one only when
@@ -135,6 +138,28 @@ flag it in the report. Removing a car also means deleting its photo in
 which the existing numbers appear to follow (the EV2 entry has 8.5 s and 30 min
 where the brochure says 8.6 s and 29 min). Do not overwrite a spec because the
 brochure differs in the last digit. Change it when the car itself changed.
+
+**Seats are the field a brochure will mislead you on.** `seats` is the most the
+model can be ordered with in Iceland, paid options included — the AGENTS.md rule
+says why. Two things follow from that, and both cut against the habits above:
+
+- **The options list is the source, not the spec page.** A spec page prints the
+  seat count of the trim it describes, which is the five-seat one whenever the
+  third row costs extra. The figure you want is in the options, the equipment
+  rows, or a "7 sæti" line item with a price beside it. This is the only field
+  worth opening those rows for.
+- **ev-database is European, and the rule is Icelandic.** Its Seats field
+  describes the configuration sold somewhere, not the one this importer will
+  order. Use it to learn that an option exists, then confirm from the Icelandic
+  list that it is offered here. A car that is a seven-seater abroad and a
+  five-seater here is a `5`, and getting that backwards is the bug the
+  assistant's system prompt used to carry a hand-written line about.
+
+When the list neither confirms nor denies a third row, leave the number alone
+and put the car under **Doubtful** in the report. The seat counts now in the
+data were taken from model knowledge rather than from price lists — the sweep
+that reads a make's list is the first chance to check them, so say in the report
+which ones you confirmed, not only which ones you changed.
 
 **Range is the exception, and it follows a rule.** `range` is the lower of the
 two WLTP figures, the brochure's and ev-database's. Expect it to move often: the
@@ -163,7 +188,9 @@ Follow the "Adding or updating a car" steps in `AGENTS.md`, plus:
   is the nominal figure, as the existing entries have it (EV2: 42.2 in the list,
   where ev-database's usable figure is 41.0). Where the two disagree on any
   other spec by more than rounding, say so in the report instead of choosing
-  silently.
+  silently. **`seats` is not one of these** — ev-database gives a European
+  configuration and the field wants the Icelandic maximum, so take it from the
+  importer's own list per "Seats" above.
 - **If ev-database has no entry yet**, leave `evDatabaseURL` out and use the
   brochure's figures, and say so in the report.
 - **`sellerURL` is the car's own model page**, not the importer's front page.
@@ -231,12 +258,14 @@ with a short plain message in the repo's style: `Update Skoda lineup`,
 End with what the user needs to act on, not with the diff:
 
 - **Changed**, grouped by make: old price → new price, old range → new range,
-  added, removed.
+  old seats → new seats, added, removed.
+- **Confirmed**: seat counts the list bore out, since they went in unverified.
 - **Not finished**: cars found but held back for want of a photo, with the
   entry ready to paste; cars with no ev-database entry.
 - **Doubtful**: cars missing from a list but not confirmed gone, a price whose
-  label you could not read, and spec disagreements other than range, which the
-  lower-of-two rule already settles.
+  label you could not read, a seat count the list neither confirmed nor denied,
+  and spec disagreements other than range, which the lower-of-two rule already
+  settles.
 - **Not checked**: makes whose source was blocked, unreadable, or not in
   `sources.md`, so the user knows what the sweep did not cover.
 
