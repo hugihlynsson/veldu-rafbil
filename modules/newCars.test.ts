@@ -59,6 +59,10 @@ describe('the car data', () => {
       expect(car.capacity).toBeGreaterThan(0)
       expect(car.power).toBeGreaterThan(0)
       expect(car.timeToCharge10T080).toBeGreaterThan(0)
+      // People, so whole ones, and a passenger car is neither a bike nor a bus
+      expect(Number.isInteger(car.seats)).toBe(true)
+      expect(car.seats).toBeGreaterThanOrEqual(2)
+      expect(car.seats).toBeLessThanOrEqual(9)
     },
   )
 

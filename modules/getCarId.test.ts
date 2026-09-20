@@ -13,6 +13,7 @@ const car = (over: Partial<NewCar>): NewCar => ({
   capacity: 75,
   range: 500,
   drive: 'AWD',
+  seats: 5,
   timeToCharge10T080: 25,
   power: 250,
   ...over,

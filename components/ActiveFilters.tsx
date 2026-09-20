@@ -48,6 +48,15 @@ const activeChips = (filters: Filters): Array<Chip> => {
     })
   }
 
+  if (filters.seats) {
+    chips.push({
+      name: 'seats',
+      label: 'Sæti:',
+      value: `${filters.seats}+`,
+      removeLabel: `Fjarlægja sætasíu: lágmark ${filters.seats} sæti`,
+    })
+  }
+
   if (filters.drive) {
     const drives = filters.drive.join(', ')
     chips.push({

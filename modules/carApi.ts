@@ -33,6 +33,9 @@ export interface ApiCar {
   acceleration0To100S: number
   powerKw: number
   drive: Drive
+  // The configuration the Icelandic seller lists at this price; a third row
+  // sold as an extra is not counted, so this is what the buyer gets as standard
+  seats: number
   fastCharge: {
     minutes10To80: number
     kmPerMinute: number
@@ -71,6 +74,7 @@ export const toApiCar = (car: NewCar): ApiCar => {
     acceleration0To100S: car.acceleration,
     powerKw: car.power,
     drive: car.drive,
+    seats: car.seats,
     fastCharge: {
       minutes10To80: car.timeToCharge10T080,
       // The helper returns a fixed-precision string, as the list UI wants it

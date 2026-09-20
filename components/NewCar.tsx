@@ -90,7 +90,7 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
           {!car.expectedDelivery && ' ↗'}
         </LinkPill>
 
-        <div className="flex mb-4 mt-6 max-w-[320px] justify-between">
+        <div className="flex mb-2 mt-6 max-w-[320px] justify-between">
           <div className="mr-2 xs:mr-4 basis-1/3">
             <div className="uppercase text-[10px] font-semibold tracking-wider mb-[3px] text-stone">
               0-100 km/klst
@@ -139,6 +139,12 @@ const NewCar: FunctionComponent<Props> = ({ car, showValue, priority }) => {
             </div>
           </div>
         </div>
+
+        {/* Neuter, so the count does not decline it: "1 sæti", "7 sæti" */}
+        <div className="mb-4 text-xs text-[#666] font-medium">
+          {car.seats} sæti
+        </div>
+
         {car.evDatabaseURL && (
           <a
             className="inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-stone"

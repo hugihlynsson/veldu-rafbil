@@ -80,6 +80,13 @@ describe('the published car payload', () => {
     expect(payload.cars.map((car) => car.id)).toEqual(newCars.map(getCarId))
   })
 
+  // Same name inside and out, because it already says what it is
+  it('publishes the seat count unchanged', () => {
+    for (const car of newCars) {
+      expect(toApiCar(car).seats, label(car)).toBe(car.seats)
+    }
+  })
+
   it('turns the fixed-precision charge rate back into a number', () => {
     for (const car of payload.cars) {
       expect(Number.isFinite(car.fastCharge.kmPerMinute), car.id).toBe(true)

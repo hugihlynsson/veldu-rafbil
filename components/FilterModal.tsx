@@ -82,6 +82,13 @@ const FiltersModal: React.FunctionComponent<Props> = ({
           case 'range':
             updatedFilters.range = Number(value)
             break
+          case 'seats':
+            if (value === 'all') {
+              delete updatedFilters.seats
+            } else {
+              updatedFilters.seats = Number(value)
+            }
+            break
           case 'value':
             updatedFilters.value = Number(value)
             break
@@ -171,6 +178,20 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 onChange={handleFilterChange('drive')}
                 onKeyDown={handleKeyPress}
                 value={filters.drive?.[0] ?? 'all'}
+              />
+              <FilterSelect
+                id="filter-seats"
+                label="Sæti"
+                options={[
+                  ['all', 'Öll'],
+                  ['4', '4+'],
+                  ['5', '5+'],
+                  ['6', '6+'],
+                  ['7', '7+'],
+                ]}
+                onChange={handleFilterChange('seats')}
+                onKeyDown={handleKeyPress}
+                value={filters.seats?.toString() ?? 'all'}
               />
               <FilterSelect
                 id="filter-availability"
