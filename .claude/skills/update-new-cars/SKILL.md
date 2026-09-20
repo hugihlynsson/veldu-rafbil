@@ -7,9 +7,9 @@ description: Refresh the car list in modules/newCars.ts against the sellers' cur
 
 The list is `modules/newCars.ts`: hand-written `NewCar` literals, one per
 variant. Updating it means reading each importer's current price list, comparing
-it with what is there, and editing the difference. Read the "Adding or updating
-a car" and "Domain rules" sections of `AGENTS.md` first; this file covers the
-process and does not repeat them.
+it with what is there, and editing the difference. `AGENTS.md` covers the
+repo's conventions; the rules about a car field are comments in the module that
+owns it. This file is the process, end to end.
 
 Where each make's price list lives, and how to get at it, is in
 [sources.md](sources.md). Fix that file when a URL rots or you learn a better
@@ -149,7 +149,28 @@ did not read a list for keeps the range it has.
 
 ### 4. Adding a car
 
-Follow the "Adding or updating a car" steps in `AGENTS.md`, plus:
+A `NewCar` literal goes in with its make — the list is roughly alphabetical by
+make, then model. The fields that are easy to get wrong:
+
+- **`price`** in ISK with numeric separators, `9_990_000`. The list price,
+  before the grant, per "What counts as one entry" above.
+- **`seats` is the most the model can be ordered with here, paid options
+  included.** A third row that costs extra still counts, so a Mercedes GLB sold
+  with an optional third row is a `7`. This is the one field that does not
+  describe the trim the entry is priced at: someone filtering for seven seats
+  wants every car that _can_ carry seven. A configuration Iceland never gets
+  does not count, so read the Icelandic list, not the international brochure.
+- **`expectedDelivery`** is a lowercase-able Icelandic phrase (`sumar 2026`),
+  and having one at all is what makes a car count as expected rather than
+  available — it drives both the availability filter and the badge on the card.
+  Leave it out for a car that is on the road here.
+- **`heroImageName`** names the photo under "Hero photos" below. A test fails
+  while the file is missing.
+- **Make, model and `subModel` are a car's identity.** `getCarId()` builds the
+  card's anchor, the target the chat scrolls to and the React key out of them,
+  so two entries differing only in price collide and a test fails.
+
+And, for a car that is genuinely new to the list:
 
 - **Specs come from ev-database.** Find the variant with `WebSearch` limited to
   `ev-database.org` (`"ev-database Kia EV2 61 kWh"`), then read the page with
@@ -168,10 +189,11 @@ Follow the "Adding or updating a car" steps in `AGENTS.md`, plus:
   brochure's figures, and say so in the report.
 - **`sellerURL` is the car's own model page**, not the importer's front page.
   Seven cars once pointed at a site root and had to be fixed.
-- **`subModel`** names the variant. Front- and all-wheel-drive siblings must not
-  share a name. When a second variant joins a model that had none, name the
-  existing one as well (the EV2 became "Standard Range" beside a new "Long
-  Range", as the EV3 already is).
+- **`subModel`** names the variant, and per the identity rule above two entries
+  must not share one. Front- and all-wheel-drive siblings must not share a name.
+  When a second variant joins a model that had none, name the existing one as
+  well (the EV2 became "Standard Range" beside a new "Long Range", as the EV3
+  already is).
 - **A sibling variant can share the photo.** Two i4 entries use `bmw-i4`, and
   the EV2 Long Range uses `kia-ev2`. Check whether the model's existing photo
   fits before looking for a new one.
