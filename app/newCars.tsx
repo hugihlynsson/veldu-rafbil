@@ -12,8 +12,9 @@ import ActiveFilters from '../components/ActiveFilters'
 import newCars from '../modules/newCars'
 import carFilter from '../modules/carFilter'
 import { filterQueryKeys, getQueryFromFilters } from '../modules/filters'
+import { getQueryFromView, viewQueryKeys } from '../modules/view'
 import getCarId from '../modules/getCarId'
-import { Filters, Sorting, SortingDirection } from '../types'
+import { Filters, Sorting, SortingDirection, View } from '../types'
 import {
   defaultDirection,
   flipDirection,
@@ -72,6 +73,16 @@ const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
   return [sorting, direction, toggleSorting] as const
 }
 
+const useView = (initial: View) => {
+  const [view, setView] = useState<View>(initial)
+
+  useEffect(() => {
+    replaceQuery(viewQueryKeys, getQueryFromView(view))
+  }, [view])
+
+  return [view, setView] as const
+}
+
 const useFilters = (initial: Filters) => {
   const [filters, setFilters] = useState<Filters>(initial)
 
@@ -105,18 +116,26 @@ interface Props {
   sorting: Sorting
   direction: SortingDirection
   filters: Filters
+  view: View
 }
+
+const viewLabels: Array<[string, View]> = [
+  ['Listi', 'list'],
+  ['Yfirlit', 'overview'],
+]
 
 export default function NewCars({
   sorting: initialSorting,
   direction: initialDirection,
   filters: initialFilters,
+  view: initialView,
 }: Props) {
   const [sorting, direction, toggleSorting] = useSorting(
     initialSorting,
     initialDirection,
   )
   const [filters, setFilters] = useFilters(initialFilters)
+  const [view, setView] = useView(initialView)
 
   const [editingFilters, setEditingFilters] = useState<boolean>(false)
 
@@ -135,8 +154,15 @@ export default function NewCars({
 
   const filteredCarCount = newCars.length - filteredCars.length
 
+  const isOverview = view === 'overview'
+
   return (
-    <div className="max-w-[1024px] mx-auto">
+    <div
+      className={clsx(
+        'mx-auto',
+        isOverview ? 'max-w-[1920px]' : 'max-w-[1024px]',
+      )}
+    >
       <header className="flex flex-col items-stretch mx-auto max-w-[480px] p-4 xs:p-6 md:pl-10 md:max-w-none md:pb-10">
         <Title />
 
@@ -166,33 +192,49 @@ export default function NewCars({
           </em>
         </p>
 
-        <div id="sorting-label" className="mb-2 text-sm font-semibold">
-          Raða eftir:
-        </div>
+        <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
+          <div className="min-w-0 max-w-full">
+            <div id="sorting-label" className="mb-2 text-sm font-semibold">
+              Raða eftir:
+            </div>
 
-        <Toggles<Sorting>
-          currentValue={sorting}
-          items={toggleSortings.map((value): [string, Sorting] => [
-            sortingLabels[value],
-            value,
-          ])}
-          onClick={toggleSorting}
-          labelledBy="sorting-label"
-          indicatorLabel={
-            direction === 'desc' ? 'lækkandi röð' : 'hækkandi röð'
-          }
-          indicator={
-            <span
-              aria-hidden
-              className={clsx(
-                'leading-none ease-in-out transition-transform duration-150 -mr-1',
-                direction === 'desc' && 'rotate-180',
-              )}
-            >
-              ↑
-            </span>
-          }
-        />
+            <Toggles<Sorting>
+              currentValue={sorting}
+              items={toggleSortings.map((value): [string, Sorting] => [
+                sortingLabels[value],
+                value,
+              ])}
+              onClick={toggleSorting}
+              labelledBy="sorting-label"
+              indicatorLabel={
+                direction === 'desc' ? 'lækkandi röð' : 'hækkandi röð'
+              }
+              indicator={
+                <span
+                  aria-hidden
+                  className={clsx(
+                    'leading-none ease-in-out transition-transform duration-150 -mr-1',
+                    direction === 'desc' && 'rotate-180',
+                  )}
+                >
+                  ↑
+                </span>
+              }
+            />
+          </div>
+
+          <div className="min-w-0 max-w-full">
+            <div id="view-label" className="mb-2 text-sm font-semibold">
+              Útlit:
+            </div>
+            <Toggles<View>
+              currentValue={view}
+              items={viewLabels}
+              onClick={setView}
+              labelledBy="view-label"
+            />
+          </div>
+        </div>
 
         <ActiveFilters
           filters={filters}
@@ -210,15 +252,23 @@ export default function NewCars({
         </div>
       </header>
 
-      {sortCars(filteredCars, sorting, direction).map((car, index) => (
-        <Car
-          preload={index <= 1}
-          car={car}
-          key={getCarId(car)}
-          showValue={sorting === 'value' || Boolean(filters.value)}
-          showSeats={Boolean(filters.seats)}
-        />
-      ))}
+      <div
+        className={clsx(
+          isOverview &&
+            'grid gap-x-6 gap-y-10 px-4 pb-4 xs:px-6 sm:grid-cols-2 md:px-10 lg:grid-cols-3 2xl:grid-cols-4',
+        )}
+      >
+        {sortCars(filteredCars, sorting, direction).map((car, index) => (
+          <Car
+            preload={index <= 1}
+            car={car}
+            key={getCarId(car)}
+            view={view}
+            showValue={sorting === 'value' || Boolean(filters.value)}
+            showSeats={Boolean(filters.seats)}
+          />
+        ))}
+      </div>
 
       {hasFilter && filteredCarCount > 0 && (
         <div className="p-4 flex items-center mx-auto max-w-[480px] gap-2 text-xs font-medium mb-10 xs:p-6 md:pl-10 md:max-w-none">

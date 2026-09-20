@@ -39,6 +39,11 @@ export type Filters = {
   availability?: Availability
 }
 
+/** How the list is laid out: one car per row, or a grid of them */
+export type View = 'list' | 'overview'
+
+export type ViewQuery = 'listi' | 'yfirlit'
+
 export type Sorting =
   | 'name'
   | 'price'
