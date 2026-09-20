@@ -15,12 +15,27 @@ module.exports = {
     // The two widths either side of MiniCar's 120px box, which is all that
     // reads this list
     imageSizes: [128, 256],
-    // No query string, so a photo already cached cannot be asked for again
-    // under a fresh URL
-    localPatterns: [{ pathname: '/images/**', search: '' }],
-    qualities: [75],
-    // 31 days: the point Vercel stops counting the cache write
-    minimumCacheTTL: 2678400,
+    // The photos are rendered at build time, so nothing reaches `/_next/image`
+    // and the knobs on the built-in optimiser no longer apply. The widths above
+    // still shape the srcset, and `scripts/buildImageVariants.mjs` renders the
+    // same list.
+    loader: 'custom',
+    loaderFile: './modules/heroImageLoader.ts',
+  },
+  async headers() {
+    return [
+      {
+        // The name carries the source photo's hash, so a changed photo is a
+        // changed URL and this can never go stale
+        source: '/rendered/:file*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ]
   },
   async redirects() {
     return [
