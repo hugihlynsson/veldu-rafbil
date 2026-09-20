@@ -158,6 +158,11 @@ not add it here, and the hero photos stay out of it entirely.
 `modules/carApi.ts` owns the wire format and `modules/llmsText.ts` the text; the
 reasoning is in the comments there and `carApi.test.ts` fails if it is broken.
 
+The page carries one JSON-LD `Dataset` block, from `modules/carSchema.ts`, whose
+only job is to point a crawler at `/api/cars`. The cars themselves are not
+marked up: an `ItemList` of all of them doubles the page, and the comment there
+says why.
+
 ## Styling
 
 Tailwind v4 — **no `tailwind.config.js`**. The theme, colours and the extra
