@@ -34,7 +34,7 @@ a fix.
 
 Default to none — good names and structure should carry the meaning. Add one
 only when it explains a non-obvious _why_: a workaround, an invariant, a
-constraint the code itself doesn't show. Keep it to one line.
+constraint the code itself doesn't show. Most comments should be one-liners.
 
 Don't write a comment that restates what the code already says, narrates the
 change ("removed X", "added for the Y fix"), or explains something a reader
