@@ -8,6 +8,7 @@ import {
   grantAmountText,
   grantCeilingDativeText,
 } from '../../../modules/grantCopy'
+import { getMessageText } from '../../../modules/chatHelpers'
 import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 import { clientKey, rateLimit } from './rateLimit'
 
@@ -128,17 +129,12 @@ export async function POST(req: Request) {
     onFinish: async ({ text, usage, toolCalls }) => {
       if (!axiom) return
 
-      const lastUserMessage = messages[messages.length - 1]
-      const firstPart = lastUserMessage?.parts?.[0]
-      const userMessageText =
-        firstPart && 'text' in firstPart ? firstPart.text : undefined
-
       try {
         await axiom.ingest('veldu-rafbil-assistant', [
           {
             type: 'chat_response_finished',
             timestamp: new Date().toISOString(),
-            userMessage: userMessageText,
+            userMessage: getMessageText(messages[messages.length - 1]),
             assistantResponse: text,
             messageCount: messages.length,
             tokenUsage: usage,

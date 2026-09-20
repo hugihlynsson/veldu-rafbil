@@ -1,12 +1,42 @@
 import { describe, expect, it } from 'vitest'
 
+import { UIMessage } from 'ai'
+
 import {
   findMentionedCars,
+  getMessageText,
   getRandomSuggestions,
   parseFollowUps,
   stripFollowUps,
 } from './chatHelpers'
 import newCars from './newCars'
+
+const message = (parts: UIMessage['parts']): UIMessage => ({
+  id: 'a-message',
+  role: 'assistant',
+  parts,
+})
+
+describe('getMessageText', () => {
+  it('joins the text parts and leaves the rest out', () => {
+    expect(
+      getMessageText(
+        message([
+          { type: 'text', text: 'Fyrri hluti' },
+          { type: 'step-start' },
+          { type: 'text', text: 'seinni hluti' },
+        ]),
+      ),
+    ).toBe('Fyrri hluti seinni hluti')
+  })
+
+  // The chat reads this before the first token, and on a tool call with no text
+  it('reads a message with nothing to say as empty', () => {
+    expect(getMessageText(message([]))).toBe('')
+    expect(getMessageText(message([{ type: 'step-start' }]))).toBe('')
+    expect(getMessageText(undefined)).toBe('')
+  })
+})
 
 describe('parseFollowUps', () => {
   it('pulls the questions out of the markers', () => {

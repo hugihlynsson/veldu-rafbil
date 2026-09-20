@@ -2,22 +2,17 @@
 
 import React, { useEffect, useRef } from 'react'
 import { UIDataTypes, UITools, ChatStatus, UIMessage } from 'ai'
-import { parseFollowUps, stripFollowUps } from '../modules/chatHelpers'
+import {
+  getMessageText,
+  parseFollowUps,
+  stripFollowUps,
+} from '../modules/chatHelpers'
 import Modal from './Modal'
 import ChatHeader from './chat/ChatHeader'
 import ChatMessage from './chat/ChatMessage'
 import FollowUpSuggestions from './chat/FollowUpSuggestions'
 import MentionedCars from './chat/MentionedCars'
 import TypingIndicator from './chat/TypingIndicator'
-
-const emptyMessageFilter = (
-  message: UIMessage<unknown, UIDataTypes, UITools>,
-) =>
-  message.parts
-    ?.filter((part) => part.type === 'text')
-    .map((part) => part.text)
-    .join(' ')
-    .trim()
 
 interface Props {
   onDone: () => void
@@ -62,15 +57,12 @@ const ChatModal: React.FunctionComponent<Props> = ({
 
   const lastMessage = messages[messages.length - 1]
   const lastAssistantText =
-    lastMessage?.role === 'assistant'
-      ? (lastMessage.parts
-          ?.filter((part) => part.type === 'text')
-          .map((part) => part.text)
-          .join(' ') ?? '')
-      : ''
-  const lastMessageFollowUps = lastAssistantText
-    ? parseFollowUps(lastAssistantText)
-    : []
+    lastMessage?.role === 'assistant' ? getMessageText(lastMessage) : ''
+  const lastMessageFollowUps = parseFollowUps(lastAssistantText)
+
+  // Found once rather than per message, which is what reading it inside the
+  // map below came to
+  const lastUserMessageId = messages.findLast((m) => m.role === 'user')?.id
 
   const showLoading =
     (lastMessage?.role === 'user' && status !== 'error') ||
@@ -104,16 +96,15 @@ const ChatModal: React.FunctionComponent<Props> = ({
               style={{ paddingTop: '20px' }}
               ref={messagesContainerRef}
             >
-              {messages.filter(emptyMessageFilter).map((message) => (
-                <ChatMessage
-                  key={message.id}
-                  message={message}
-                  isLastUserMessage={
-                    message.id ===
-                    messages.findLast((m) => m.role === 'user')?.id
-                  }
-                />
-              ))}
+              {messages
+                .filter((message) => getMessageText(message))
+                .map((message) => (
+                  <ChatMessage
+                    key={message.id}
+                    message={message}
+                    isLastUserMessage={message.id === lastUserMessageId}
+                  />
+                ))}
 
               {showLoading && <TypingIndicator />}
 
