@@ -40,6 +40,15 @@ describe('getFiltersFromQuery', () => {
     )
   })
 
+  // Anything but the two words it knows used to come back as "expected", and a
+  // repeated parameter is an array, which is never either of them
+  it('ignores an availability it cannot read', () => {
+    expect(getFiltersFromQuery({ frambod: 'kannski' })).toEqual({})
+    expect(
+      getFiltersFromQuery({ frambod: ['faanlegir', 'vaentanlegir'] }),
+    ).toEqual({ availability: 'available' })
+  })
+
   it('splits a comma separated list back into separate values', () => {
     expect(getFiltersFromQuery({ nafn: 'tesla,kia' }).name).toEqual([
       'tesla',
