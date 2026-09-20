@@ -16,6 +16,11 @@ import { grantAmount, grantPriceCeiling } from './globals'
 // Adding a field to NewCar does not add it here. That is the point: this shape
 // is a promise to people who cannot see the commit that changes it, so it
 // changes on purpose, and `carApi.test.ts` fails if a car stops satisfying it.
+//
+// The hero photos are deliberately left out. Publishing a path to them invites
+// other sites to hotlink ours, and the bill for that lands on the image
+// optimiser. If they are ever worth publishing it will be as a URL on a CDN
+// that is meant to serve them, and adding the field then breaks nobody.
 
 /**
  * What the site's own copy and the assistant both tell people: WLTP is a
@@ -60,8 +65,6 @@ export interface ApiCar {
   expectedDelivery?: string
   sellerUrl: string
   evDatabaseUrl?: string
-  /** Relative to this response's origin */
-  imagePath: string
   /** Relative to this response's origin; deep-links to the car on the site */
   pagePath: string
 }
@@ -100,7 +103,6 @@ export const toApiCar = (car: NewCar): ApiCar => {
     ...(car.expectedDelivery ? { expectedDelivery: car.expectedDelivery } : {}),
     sellerUrl: car.sellerURL,
     ...(car.evDatabaseURL ? { evDatabaseUrl: car.evDatabaseURL } : {}),
-    imagePath: `/images/${car.heroImageName}.jpg`,
     pagePath: `/#${getCarId(car)}`,
   }
 }
@@ -164,8 +166,7 @@ export const buildCarsPayload = (
   notes: {
     range: `rangeWltpKm is the manufacturer WLTP figure. Real range in Iceland is lower — cold, wind and hills — and usually lands between ${Math.round(realRangeLowFactor * 100)}% and ${Math.round(realRangeHighFactor * 100)}% of it, which is what estimatedRealRangeKm reports. Those are estimates, not measurements.`,
     fastCharge: `minutes10To80 is the time from 10% to 80% on a fast charger. kmPerMinute is derived from it and from range at the ${Math.round(realRangeLowFactor * 100)}% factor.`,
-    paths:
-      'imagePath and pagePath are relative to the origin this document was served from.',
+    paths: 'pagePath is relative to the origin this document was served from.',
   },
   count: newCars.length,
   cars: newCars.map(toApiCar),
