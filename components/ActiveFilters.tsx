@@ -3,7 +3,7 @@ import addDecimalSeprators from '../modules/addDecimalSeparators'
 import { agree } from '../modules/plural'
 
 const filterClasses =
-  "shrink-0 relative text-xs font-semibold py-1 pr-2 pl-2.5 border border-smoke rounded-full cursor-pointer text-center flex justify-center items-center bg-lab transition-all duration-200 text-clay after:content-['+'] after:rotate-45 after:ml-1.5 after:text-base after:leading-[10px] after:-mt-px after:text-clay after:transition-colors hover:bg-[#f8f8f8] hover:after:text-[#222] active:text-black"
+  "shrink-0 relative text-xs font-semibold py-1 pr-2 pl-2.5 border border-line-strong rounded-full cursor-pointer text-center flex justify-center items-center bg-lab transition-all duration-200 text-clay after:content-['+'] after:rotate-45 after:ml-1.5 after:text-base after:leading-[10px] after:-mt-px after:text-clay after:transition-colors hover:bg-haze hover:after:text-tint active:text-tint"
 
 interface Chip {
   name: keyof Filters
@@ -150,7 +150,7 @@ const ActiveFilters = ({
           </button>
         ))}
         <button
-          className="flex justify-center items-center shrink-0 gap-1.5 py-2 pr-4 pl-3 border-0 rounded-full text-[13px] font-semibold cursor-pointer text-center bg-black/6 transition-all duration-200 text-tint hover:bg-black/9 active:scale-[0.98]"
+          className="flex justify-center items-center shrink-0 gap-1.5 py-2 pr-4 pl-3 border-0 rounded-full text-[13px] font-semibold cursor-pointer text-center bg-scrim/6 transition-all duration-200 text-tint hover:bg-scrim/9 active:scale-[0.98]"
           onClick={onOpenFilterModal}
         >
           <svg
@@ -162,7 +162,7 @@ const ActiveFilters = ({
             className="opacity-70"
           >
             <path
-              fill="#000"
+              fill="currentColor"
               d="m14.298 13.202-3.87-3.87A5.514 5.514 0 0 0 11.55 6C11.55 2.94 9.061.45 6 .45 2.94.45.45 2.94.45 6c0 3.061 2.49 5.55 5.55 5.55a5.514 5.514 0 0 0 3.332-1.122l3.87 3.87a.775.775 0 1 0 1.096-1.096ZM1.55 6A4.455 4.455 0 0 1 6 1.55 4.455 4.455 0 0 1 10.45 6 4.455 4.455 0 0 1 6 10.45 4.455 4.455 0 0 1 1.55 6Z"
             />
           </svg>

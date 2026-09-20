@@ -15,7 +15,7 @@ const ChatHeader: React.FunctionComponent<Props> = ({
   onClearChat,
 }) => {
   return (
-    <header className="relative text-lg text-center p-[14px_16px] shadow-[0_1px_0px_0_rgba(0,0,0,0.05)] font-semibold">
+    <header className="relative text-lg text-center p-[14px_16px] shadow-(--shadow-hairline) font-semibold">
       <CloseButton onClick={onClose} />
       <h2 id="chat-modal-title" className="m-0 text-lg font-semibold">
         Spjall

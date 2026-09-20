@@ -75,12 +75,12 @@ const ChatModal: React.FunctionComponent<Props> = ({
       onDone={onDone}
       onLeave={onReleaseBodyLock}
       initialFocusRef={composerRef}
-      className="items-start backdrop:duration-300 data-[state=visible]:backdrop:bg-black/20"
+      className="items-start backdrop:duration-300 data-[state=visible]:backdrop:bg-backdrop"
     >
       {({ isVisible, close }) => (
         <>
           <section
-            className={`z-1 flex flex-col bg-white/95 backdrop-blur-[20px] w-screen h-[calc(100dvh-var(--keyboard-inset))] overflow-hidden scale-95 opacity-0 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.32,0,0.67,0)] min-[600px]:h-[calc(100dvh-24px-var(--keyboard-inset))] min-[600px]:max-w-[600px] min-[600px]:w-[90vw] min-[600px]:rounded-[24px_24px_32px_32px] min-[600px]:mt-3 min-[600px]:shadow-[0px_8px_60px_rgba(0,0,0,0.15)] ${isVisible ? 'opacity-100 ease-[cubic-bezier(0.33,1,0.68,1)] scale-100' : ''}`}
+            className={`z-1 flex flex-col bg-glass/95 backdrop-blur-[20px] w-screen h-[calc(100dvh-var(--keyboard-inset))] overflow-hidden scale-95 opacity-0 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.32,0,0.67,0)] min-[600px]:h-[calc(100dvh-24px-var(--keyboard-inset))] min-[600px]:max-w-[600px] min-[600px]:w-[90vw] min-[600px]:rounded-[24px_24px_32px_32px] min-[600px]:mt-3 min-[600px]:shadow-(--shadow-modal) ${isVisible ? 'opacity-100 ease-[cubic-bezier(0.33,1,0.68,1)] scale-100' : ''}`}
           >
             <ChatHeader
               hasMessages={messages.length > 0}
@@ -111,12 +111,12 @@ const ChatModal: React.FunctionComponent<Props> = ({
               {status === 'error' && (
                 <div
                   role="alert"
-                  className="flex items-center justify-between mx-4 mb-4 rounded-full bg-red-50 p-3 pl-4 text-sm text-red-700"
+                  className="flex items-center justify-between mx-4 mb-4 rounded-full bg-alarm-surface p-3 pl-4 text-sm text-alarm"
                 >
                   <p className="font-medium">Úps, eitthvað fór úrskeiðis</p>
                   <button
                     onClick={onRetry}
-                    className="rounded-full bg-red-100 px-3 py-1.5 text-xs font-medium text-red-700 hover:bg-red-200 transition-colors cursor-pointer"
+                    className="rounded-full bg-alarm-fill px-3 py-1.5 text-xs font-medium text-alarm hover:bg-alarm-fill-hover transition-colors cursor-pointer"
                   >
                     Reyna aftur
                   </button>

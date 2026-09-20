@@ -6,7 +6,7 @@ import Orflaedi from './Orflaedi'
 const Footer: FunctionComponent<{}> = () => (
   <>
     <Orflaedi />
-    <footer className="bg-[#f8f8f8] py-8 pb-[100px] xs:pt-14 md:pt-14">
+    <footer className="bg-haze py-8 pb-[100px] xs:pt-14 md:pt-14">
       <p className="mx-auto max-w-[480px] text-sm leading-6 px-4 text-stone xs:px-6 md:max-w-[1024px] md:px-10">
         Veldu Rafbíl er smíðuð af{' '}
         <a

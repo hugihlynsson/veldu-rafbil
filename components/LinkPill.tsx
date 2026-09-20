@@ -28,7 +28,7 @@ const LinkPill: FunctionComponent<Props> = ({
   >
     {children}{' '}
     {extra && (
-      <span className="uppercase font-bold text-[10px] rounded-2xl py-0.5 px-1.5 my-0 ml-[5px] -mr-[7px] align-top inline-block text-[#444] bg-white transition-colors duration-100 group-hover:bg-white/80">
+      <span className="uppercase font-bold text-[10px] rounded-2xl py-0.5 px-1.5 my-0 ml-[5px] -mr-[7px] align-top inline-block text-stone bg-raised transition-colors duration-100 group-hover:bg-raised/80">
         {extra}
       </span>
     )}

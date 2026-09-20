@@ -145,7 +145,7 @@ export default function NewCars({
           eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
           <a
             href="http://wltpfacts.eu/"
-            className="no-underline font-semibold text-black hover:underline"
+            className="no-underline font-semibold text-tint hover:underline"
           >
             WLTP
           </a>{' '}
@@ -158,7 +158,7 @@ export default function NewCars({
             eiga kost á að{' '}
             <a
               href="https://island.is/rafbilastyrkir"
-              className="no-underline font-semibold text-[#222] hover:underline"
+              className="no-underline font-semibold text-tint hover:underline"
             >
               sækja um {grantAmountText} rafbílastyrk
             </a>
@@ -225,7 +225,7 @@ export default function NewCars({
           {filteredCarCount} {carWord(filteredCarCount)}{' '}
           {agree(filteredCarCount, 'passaði', 'pössuðu')} ekki við leitina{' '}
           <button
-            className="border-0 shrink-0 m-0 mr-2 text-xs font-semibold py-[5px] px-3 rounded-full cursor-pointer text-center flex justify-center items-center bg-cloud transition-all duration-200 text-tint hover:bg-[#f8f8f8]"
+            className="border-0 shrink-0 m-0 mr-2 text-xs font-semibold py-[5px] px-3 rounded-full cursor-pointer text-center flex justify-center items-center bg-cloud transition-all duration-200 text-tint hover:bg-haze"
             onClick={(_event) => {
               setFilters(() => ({}))
               window.scrollTo({ top: 0 })

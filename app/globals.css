@@ -1,16 +1,125 @@
 @import 'tailwindcss';
 
+/* Every colour in the UI is one of these roles, and the block below is the
+   only place a role takes a different value. A component asks for the role it
+   means — `bg-lab`, `text-stone`, `border-line` — and never for a theme, so
+   there is no `dark:` variant anywhere in `components/`. */
 @theme {
+  /* Brand. `on-sky` is what goes on top of a sky fill, and it is not `tint`:
+     in dark the fill is light and its text has to go dark with it */
   --color-sky: #201be3;
-  --color-sky-darker: #1a15b7;
+  --color-sky-hover: #1a15b7;
+  --color-on-sky: #fff;
+
+  /* Text, strongest first */
   --color-tint: #111;
   --color-stone: #555;
   --color-clay: #767676;
-  --color-smoke: #ddd;
-  --color-cloud: #eee;
-  --color-lab: #fff;
+
+  /* Surfaces, from the page outwards. In light they descend from white; in
+     dark they climb from the page, which is the same ladder read upside down */
+  --color-lab: #fff; /* the page */
+  --color-haze: #f8f8f8; /* a band set back from it: the footer, a hover */
+  --color-surface: #fff; /* a panel over it: the filter sheet */
+  --color-glass: #fff; /* a translucent panel, always used with an alpha */
+  --color-veil: #dcdcdc; /* the chat bar, likewise */
+  --color-cloud: #eee; /* a fill on the page: pills, chat bubbles */
+  --color-smoke: #ddd; /* the same fill, hovered */
+  --color-raised: #fff; /* a control lifted off a tinted track */
+
+  /* Lines */
+  --color-line: #eee; /* a divider */
+  --color-line-strong: #ddd; /* the edge of something you can click or type in */
+
+  /* Overlays. `scrim` is the page's own ink, so `bg-scrim/6` is a tint in
+     light and a wash in dark without either one naming a colour */
+  --color-scrim: #000;
+  --color-backdrop: rgb(0 0 0 / 0.2);
+  --color-backdrop-strong: rgb(0 0 0 / 0.3);
+
+  /* The Örflæði band, which is its own small palette */
+  --color-mist: #e2e8f0;
+  --color-ink: #1a202c;
+  --color-on-ink: #fff;
+
+  /* The chat's error state */
+  --color-alarm: #b42318;
+  --color-alarm-surface: #fef3f2;
+  --color-alarm-fill: #fee4e2;
+  --color-alarm-fill-hover: #fecdca;
 
   --breakpoint-xs: 375px;
+}
+
+/* Shadows are deliberately not `@theme`: Tailwind inlines a theme shadow into
+   the utility itself, so redefining one below would never reach it. As plain
+   properties they stay references, read as `shadow-(--shadow-chip)`. A black
+   blur over a black page is invisible, so dark gets its own depths. */
+:root {
+  --shadow-hairline: 0 1px 0px 0 rgb(0 0 0 / 0.05);
+  --shadow-raised:
+    0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-pill: 0 4px 24px rgb(0 0 0 / 0);
+  --shadow-chip: 0 2px 8px rgb(0 0 0 / 0.04);
+  --shadow-chip-hover: 0 4px 12px rgb(0 0 0 / 0.08);
+  --shadow-chip-press: 0 2px 6px rgb(0 0 0 / 0.06);
+  --shadow-sheet: 0px 0px 40px 0px rgb(0 0 0 / 0.1);
+  --shadow-sheet-footer: 0 0 32px 0 rgb(0 0 0 / 0.1);
+  --shadow-modal: 0px 8px 60px rgb(0 0 0 / 0.15);
+  --shadow-card: 0 2px 32px rgb(0 0 0 / 0.2);
+  --shadow-card-hover: 0 8px 64px rgb(0 0 0 / 0.3);
+}
+
+/* The dark values. Every one of them was picked against the surface it lands
+   on rather than by eye: body text clears 4.5:1 everywhere it appears, the
+   quiet greys clear it on every fill they sit on, and the lines that bound a
+   control clear 3:1. Read a pair off the ladder above before adding one. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-sky: #9fb0ff;
+    --color-sky-hover: #bcc6ff;
+    --color-on-sky: #10131c;
+
+    --color-tint: #f2f3f6;
+    --color-stone: #b4b9c3;
+    --color-clay: #939aa6;
+
+    --color-lab: #14161a;
+    --color-haze: #101217;
+    --color-surface: #1b1e24;
+    --color-glass: #17191f;
+    --color-veil: #31353d;
+    --color-cloud: #24272e;
+    --color-smoke: #30343c;
+    --color-raised: #353942;
+
+    --color-line: #383c45;
+    --color-line-strong: #6c7384;
+
+    --color-scrim: #fff;
+    --color-backdrop: rgb(0 0 0 / 0.55);
+    --color-backdrop-strong: rgb(0 0 0 / 0.65);
+
+    --color-mist: #1e2430;
+    --color-ink: #0b0e14;
+
+    --color-alarm: #ffb4a8;
+    --color-alarm-surface: #3b1a15;
+    --color-alarm-fill: #55261f;
+    --color-alarm-fill-hover: #6d3329;
+
+    --shadow-hairline: 0 1px 0px 0 rgb(255 255 255 / 0.07);
+    --shadow-raised: 0 1px 2px 0 rgb(0 0 0 / 0.6);
+    --shadow-pill: 0 6px 24px rgb(0 0 0 / 0.55);
+    --shadow-chip: 0 2px 8px rgb(0 0 0 / 0.4);
+    --shadow-chip-hover: 0 4px 14px rgb(0 0 0 / 0.5);
+    --shadow-chip-press: 0 2px 6px rgb(0 0 0 / 0.45);
+    --shadow-sheet: 0px 0px 48px 0px rgb(0 0 0 / 0.75);
+    --shadow-sheet-footer: 0 0 32px 0 rgb(0 0 0 / 0.6);
+    --shadow-modal: 0px 8px 60px rgb(0 0 0 / 0.8);
+    --shadow-card: 0 2px 32px rgb(0 0 0 / 0.6);
+    --shadow-card-hover: 0 8px 64px rgb(0 0 0 / 0.8);
+  }
 }
 
 *,
@@ -25,7 +134,8 @@ html {
 
 body {
   margin: 0;
-  color: #111;
+  color: var(--color-tint);
+  background-color: var(--color-lab);
   width: 100%;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -47,6 +157,9 @@ input {
 }
 
 :root {
+  /* Both themes, so the number spinners, the select menu, the scrollbars and
+     the caret follow the page rather than staying white under it */
+  color-scheme: light dark;
   /* Kept up to date by utils/useKeyboardInset while a phone keyboard is up */
   --keyboard-inset: 0px;
   font-family: Inter, sans-serif;
@@ -129,6 +242,9 @@ input {
   }
 }
 
+/* The chrome inside a message is mixed out of `currentColor` rather than any
+   token: these rules run inside both bubbles, and the bubbles carry opposite
+   text colours in either theme. Tinting with the text is right in all four. */
 .message-content p {
   margin: 0 0 0.5em 0;
 }
@@ -142,7 +258,7 @@ input {
   font-style: italic;
 }
 .message-content code {
-  background-color: rgba(0, 0, 0, 0.06);
+  background-color: color-mix(in srgb, currentColor 6%, transparent);
   padding: 2px 4px;
   border-radius: 4px;
   font-family:
@@ -151,7 +267,7 @@ input {
   font-size: 0.9em;
 }
 .message-content pre {
-  background-color: rgba(0, 0, 0, 0.06);
+  background-color: color-mix(in srgb, currentColor 6%, transparent);
   padding: 8px 10px;
   border-radius: 8px;
   overflow-x: auto;
@@ -195,14 +311,14 @@ input {
 }
 .message-content th,
 .message-content td {
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
   padding: 6px 8px;
   text-align: left;
 }
 .message-content th {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: color-mix(in srgb, currentColor 4%, transparent);
   font-weight: 600;
 }
 .message-content tr:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: color-mix(in srgb, currentColor 2%, transparent);
 }

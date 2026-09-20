@@ -17,7 +17,7 @@ const FollowUpSuggestions: React.FunctionComponent<Props> = ({
         {suggestions.map((suggestion, index) => (
           <button
             key={index}
-            className="appearance-none bg-white/60 backdrop-blur-lg border border-black/8 rounded-xl p-[14px_16px] text-[13px] font-medium text-tint cursor-pointer transition-all duration-200 text-left leading-[1.4] w-fit opacity-0 animate-[slideInUp_0.4s_cubic-bezier(0.16,1,0.3,1)_forwards] hover:bg-white/90 hover:border-black/12 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] active:translate-y-0 active:shadow-[0_2px_6px_rgba(0,0,0,0.06)]"
+            className="appearance-none bg-raised/60 backdrop-blur-lg border border-scrim/8 rounded-xl p-[14px_16px] text-[13px] font-medium text-tint cursor-pointer transition-all duration-200 text-left leading-[1.4] w-fit opacity-0 animate-[slideInUp_0.4s_cubic-bezier(0.16,1,0.3,1)_forwards] hover:bg-raised/90 hover:border-scrim/12 hover:-translate-y-0.5 hover:shadow-(--shadow-chip-hover) active:translate-y-0 active:shadow-(--shadow-chip-press)"
             style={{ animationDelay: `${index * 0.08}s` }}
             onClick={() => onSendMessage(suggestion)}
           >
