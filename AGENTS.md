@@ -233,9 +233,10 @@ styled by plain CSS rules at the bottom of that file, not by utilities.
 - **`next/image` `sizes` is load-bearing.** A typo in it is silent: the browser
   falls back to `100vw` and fetches the largest candidate. `deviceSizes` in
   `next.config.js` is tuned to the phones people actually use.
-- **Sorting and filter state lives in React _and_ in the URL** via
-  `router.replace`. Adding state means updating the effect that serialises it,
-  or the URL silently drifts from the UI.
+- **Sorting and filter state lives in React _and_ in the URL**, written with
+  `history.replaceState` rather than through the router. Adding state means
+  updating the serialiser in `modules/` and the key list beside it, or the URL
+  silently drifts from the UI.
 - Analytics is loaded by a component that injects the script itself. Use its
   `trackEvent` helper for new events, and don't add a second `<script>` for it.
 - **Leave the `nextjs-agent-rules` block at the bottom of this file alone.**
