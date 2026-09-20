@@ -18,7 +18,7 @@ export interface NewCar {
   range: number // WLTP
   evDatabaseURL?: string
   drive: Drive
-  // As the Icelandic seller lists the variant; an optional third row is not counted
+  // The most the model can be ordered with here, paid options included
   seats: number
   timeToCharge10T080: number // minutes
   power: number // kW

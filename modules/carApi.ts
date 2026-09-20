@@ -33,8 +33,9 @@ export interface ApiCar {
   acceleration0To100S: number
   powerKw: number
   drive: Drive
-  // The configuration the Icelandic seller lists at this price; a third row
-  // sold as an extra is not counted, so this is what the buyer gets as standard
+  // The most seats the model can be ordered with in Iceland, a third row that
+  // costs extra included. `price` is the cheapest trim's, so seating this many
+  // can cost more than the figure beside it.
   seats: number
   fastCharge: {
     minutes10To80: number
