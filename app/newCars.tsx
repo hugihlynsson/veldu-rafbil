@@ -212,7 +212,7 @@ export default function NewCars({
 
       {sortCars(filteredCars, sorting, direction).map((car, index) => (
         <Car
-          priority={index <= 1}
+          preload={index <= 1}
           car={car}
           key={getCarId(car)}
           showValue={sorting === 'value' || Boolean(filters.value)}

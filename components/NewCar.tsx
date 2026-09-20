@@ -13,7 +13,7 @@ interface Props {
   car: NewCarType
   showValue?: boolean
   showSeats?: boolean
-  priority?: boolean
+  preload?: boolean
 }
 
 const getDriveLabel = (drive: Drive) => {
@@ -31,7 +31,7 @@ const NewCar: FunctionComponent<Props> = ({
   car,
   showValue,
   showSeats,
-  priority,
+  preload,
 }) => {
   const priceWithGrant = getPriceWithGrant(car.price)
   const hasGrant = priceWithGrant !== car.price
@@ -53,7 +53,7 @@ const NewCar: FunctionComponent<Props> = ({
     >
       <div className="md:block md:relative md:w-[40%] md:grow md:self-center">
         <Image
-          priority={priority}
+          preload={preload}
           alt=""
           sizes="(max-width: 767px) 100vw, (max-width: 1023px) 40vw, 540px"
           src={`/images/${car.heroImageName}.jpg`}

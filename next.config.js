@@ -7,10 +7,10 @@ module.exports = {
   images: {
     deviceSizes: [
       540, // Screen wider than 1024px @1x
+      828, // DPR2 phones and tablets, which otherwise round up to 1080
       1080, // Screen wider than 1024px @2x
       1170, // iPhone 12-14, 12 Pro, 13 Pro, 16e
-      1320, // iPhone 16 Pro Max
-      1920, // Full size
+      1320, // iPhone 16 Pro Max, and the widest anything here asks for
     ],
     // The two widths either side of MiniCar's 120px box, which is all that
     // reads this list
