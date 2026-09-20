@@ -14,6 +14,7 @@ const car = (over: Partial<NewCar>): NewCar => ({
   capacity: 75,
   range: 500,
   drive: 'AWD',
+  seats: 5,
   timeToCharge10T080: 25,
   power: 250,
   ...over,
@@ -32,6 +33,13 @@ describe('carFilter', () => {
     expect(keep({ acceleration: 5 }, car({ acceleration: 6 }))).toBe(false)
     expect(keep({ range: 400 }, car({ range: 500 }))).toBe(true)
     expect(keep({ range: 600 }, car({ range: 500 }))).toBe(false)
+  })
+
+  // "7+" has to keep the eight-seat vans, not just the exact sevens
+  it('treats seats as a minimum', () => {
+    expect(keep({ seats: 5 }, car({ seats: 5 }))).toBe(true)
+    expect(keep({ seats: 7 }, car({ seats: 5 }))).toBe(false)
+    expect(keep({ seats: 7 }, car({ seats: 8 }))).toBe(true)
   })
 
   it('compares price after the grant', () => {

@@ -19,6 +19,7 @@ describe('getFiltersFromQuery', () => {
         hradhledsla: '5',
         verd: '6000000',
         draegni: '400',
+        saeti: '7',
         virdi: '12000',
         frambod: 'faanlegir',
       }),
@@ -27,6 +28,7 @@ describe('getFiltersFromQuery', () => {
       fastcharge: 5,
       price: 6000000,
       range: 400,
+      seats: 7,
       value: 12000,
       availability: 'available',
     })
@@ -69,6 +71,8 @@ describe('getFiltersFromQuery', () => {
     ['hrodun', '-3'],
     ['virdi', '0'],
     ['hradhledsla', 'Infinity'],
+    ['saeti', '0'],
+    ['saeti', 'nine'],
   ])('ignores %s=%s rather than matching nothing', (key, value) => {
     const filters = getFiltersFromQuery({ [key]: value })
 
@@ -95,6 +99,12 @@ describe('getFiltersFromQuery', () => {
     expect(getFiltersFromQuery({ virdi: '0.2' })).toEqual({})
   })
 
+  // Half a seat would render in the chip that offers to remove the filter
+  it('rounds a fractional seat count up to a whole seat', () => {
+    expect(getFiltersFromQuery({ saeti: '6.2' }).seats).toBe(7)
+    expect(getFiltersFromQuery({ saeti: '7' }).seats).toBe(7)
+  })
+
   // Seconds and km per minute are measurements, not prices
   it('leaves the filters that are not prices fractional', () => {
     expect(getFiltersFromQuery({ hrodun: '7.25' }).acceleration).toBe(7.25)
@@ -117,6 +127,7 @@ describe('filters survive a round trip through the URL', () => {
     ['one drive', { drive: ['FWD'] }],
     ['a price', { price: 6_000_000 }],
     ['a range', { range: 400 }],
+    ['a seat count', { seats: 7 }],
     ['an acceleration', { acceleration: 7 }],
     ['a value', { value: 20_000 }],
     ['a fastcharge', { fastcharge: 3 }],
@@ -130,6 +141,7 @@ describe('filters survive a round trip through the URL', () => {
         drive: ['AWD', 'RWD'],
         price: 9_000_000,
         range: 300,
+        seats: 5,
         acceleration: 9,
         value: 30_000,
         fastcharge: 2,
@@ -169,6 +181,7 @@ describe('filters survive a round trip through the URL', () => {
       drive: ['AWD'],
       price: 9_000_000,
       range: 300,
+      seats: 5,
       acceleration: 9,
       value: 30_000,
       fastcharge: 2,

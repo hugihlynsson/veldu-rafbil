@@ -18,6 +18,8 @@ export interface NewCar {
   range: number // WLTP
   evDatabaseURL?: string
   drive: Drive
+  // As the Icelandic seller lists the variant; an optional third row is not counted
+  seats: number
   timeToCharge10T080: number // minutes
   power: number // kW
   expectedDelivery?: string // In Icelandic, for example: "sumar 2020"
@@ -32,6 +34,7 @@ export type Filters = {
   name?: string[]
   price?: number
   range?: number
+  seats?: number
   value?: number
   availability?: Availability
 }

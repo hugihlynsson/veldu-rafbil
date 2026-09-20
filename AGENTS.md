@@ -111,6 +111,13 @@ offers to remove it and breaks the zero-padded price tiebreak in the name sort,
 which puts a 9.5m car after a 12m one. Acceleration and capacity are
 measurements, not prices, and are fractional on purpose.
 
+**`seats` is the configuration sold here, not the one the brochure offers.** A
+third row that costs extra does not count: the entry is priced at its cheapest
+trim, so the seat count has to describe that same trim. A Mercedes GLB that can
+be had as a seven-seater here is still a `5`, the way a trim ladder is not a
+second entry. This is also why the assistant no longer carries a hand-written
+line about which cars are not seven-seaters in Iceland — the data says so.
+
 **Range is WLTP**, a manufacturer figure. Real Icelandic range is lower, and the
 system prompt tells the assistant to say so.
 
@@ -173,14 +180,16 @@ is easy to get wrong.
 2. `price` in ISK using numeric separators: `9_990_000`. List price, pre-grant.
 3. Drop the photo in `public/images/`, named after the car's hero image field
    and matching the dimensions and aspect ratio of the ones already there.
-4. `expectedDelivery` is a lowercase-able Icelandic phrase and is what makes a
+4. `seats` is the seat count of that trim as the Icelandic seller lists it —
+   read the rule above before taking a number off the manufacturer's site.
+5. `expectedDelivery` is a lowercase-able Icelandic phrase and is what makes a
    car count as "expected" rather than available — it drives both the
    availability filter and the badge on the card.
-5. Two variants of one model need `subModel`s that tell them apart. Make, model
+6. Two variants of one model need `subModel`s that tell them apart. Make, model
    and subModel are a car's identity — `getCarId()` builds the anchor on the
    card, the target the chat scrolls to and the React key out of them, so two
    entries differing only in price collide, and a test over the data fails.
-6. Commit messages for this are short and plain: `Add BMW iX3 40`,
+7. Commit messages for this are short and plain: `Add BMW iX3 40`,
    `Update Skoda lineup`, `Fix B05 seller link`.
 
 Copy that counts cars — the site's own description, the assistant's system

@@ -19,7 +19,7 @@ const modelName = 'gemini-3.7-flash'
 const carsSummary = newCars
   .map(
     (car) =>
-      `${car.make} ${car.model} ${car.subModel ? car.subModel : ''}: ${getPriceWithGrant(car.price).toLocaleString('is-IS')} kr, ${car.range} km drægni, ${car.acceleration}s hröðun, ${car.drive} drif${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseURL ? ` (more info: ${car.evDatabaseURL})` : ''}`,
+      `${car.make} ${car.model} ${car.subModel ? car.subModel : ''}: ${getPriceWithGrant(car.price).toLocaleString('is-IS')} kr, ${car.range} km drægni, ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseURL ? ` (more info: ${car.evDatabaseURL})` : ''}`,
   )
   .join('\n')
 
@@ -39,7 +39,7 @@ Gott að hafa í huga:
 - Gerðu þitt besta til að meta raun-drægni (venjulega 70-85% af WLTP í köldu loftslagi eins og á Íslandi)
 - Þú veist EINUNGIS um bílana sem eru taldir upp hér að ofan
 - Þú veist EINUNGIS um rafbíla á Íslandi
-- Audi Q6 og Aiways U5 eru EKKI fáanlegir sem 7 manna/sæta bíla á Íslandi. Ekki minnast á þá ef notandi spyr um 7-sæta bíla
+- Sætafjöldinn að ofan er sá sem seljandinn á Íslandi skráir á þessa útfærslu, og þriðja sætaröð sem kostar aukalega telst ekki með. Svaraðu spurningum um sæti út frá honum, ekki út frá því sem bíllinn býður í öðrum löndum
 - Veldu Rafbíl er búin til af Hugi Hlynssyni og er rekin sem óhagnaðardrifin samfélagsþjónusta. Upplýsingar svo sem verð og framboð geta verið úreltar
 - Þú getur aðstoðað við ýmislegt tengt rafbílum og rafbílaumhverfi á Íslandi
 - Ef spurt er um eitthvað sem tengist ekki rafbílum þá VERÐUR þú að svara vinalega að þú sért ekki viss og biddu þá að spyrja um rafbíla í staðinn

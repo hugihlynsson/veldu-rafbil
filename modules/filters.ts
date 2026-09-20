@@ -26,11 +26,27 @@ const parseKronur = (value: string | Array<string>): number | undefined => {
   return kronur > 0 ? kronur : undefined
 }
 
+// A seat count is a whole number of people. The UI offers a short list, but
+// the URL can carry anything, and half a seat would render in the chip.
+const parseSeats = (value: string | Array<string>): number | undefined => {
+  const parsed = parseNumber(value)
+  return parsed === undefined ? undefined : Math.ceil(parsed)
+}
+
 export const getFiltersFromQuery = (query: SearchParams): Filters => {
   const filters: Filters = {}
 
-  const { hrodun, drif, hradhledsla, nafn, verd, draegni, virdi, frambod } =
-    query
+  const {
+    hrodun,
+    drif,
+    hradhledsla,
+    nafn,
+    verd,
+    draegni,
+    saeti,
+    virdi,
+    frambod,
+  } = query
 
   if (hrodun) filters.acceleration = parseNumber(hrodun)
   if (drif) {
@@ -44,6 +60,7 @@ export const getFiltersFromQuery = (query: SearchParams): Filters => {
   }
   if (verd) filters.price = parseKronur(verd)
   if (draegni) filters.range = parseNumber(draegni)
+  if (saeti) filters.seats = parseSeats(saeti)
   if (virdi) filters.value = parseKronur(virdi)
   if (frambod)
     filters.availability = frambod === 'faanlegir' ? 'available' : 'expected'
@@ -65,6 +82,7 @@ export const filterQueryKeys = [
   'hradhledsla',
   'verd',
   'draegni',
+  'saeti',
   'virdi',
 ] as const
 
@@ -89,6 +107,7 @@ export const getQueryFromFilters = (
   set('hradhledsla', filters.fastcharge)
   set('verd', filters.price)
   set('draegni', filters.range)
+  set('saeti', filters.seats)
   set('virdi', filters.value)
 
   return query

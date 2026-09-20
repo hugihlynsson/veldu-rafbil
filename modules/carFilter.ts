@@ -40,6 +40,8 @@ const carFilter =
           )
         case 'range':
           return car.range >= (filters.range ?? 0)
+        case 'seats':
+          return car.seats >= (filters.seats ?? 0)
         case 'value':
           return (
             getPriceWithGrant(car.price) / car.range <=
