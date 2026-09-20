@@ -165,6 +165,18 @@ breakpoint are the `@theme` block in `app/globals.css`; read the palette there
 rather than guessing a colour name. Design is mobile-first. Chat markdown is
 styled by plain CSS rules at the bottom of that file, not by utilities.
 
+Light and dark share one set of names. Every colour token is a role — text,
+surface, line, overlay — and the `prefers-color-scheme` block under `@theme`
+is the only place a role takes a different value. So there is no `dark:`
+variant in the codebase, and a new colour should not add one: give the role a
+value in both blocks instead of a literal and a variant beside it. The dark
+values were each picked against the surface they land on rather than by eye,
+so take a pair off the ladder in that file rather than inventing one.
+
+Shadows are the exception that has to live outside `@theme`, read as
+`shadow-(--shadow-chip)`: Tailwind inlines a theme shadow into the utility
+itself, where a dark override would never reach it.
+
 ## Gotchas
 
 - **React Compiler is on.** Don't add `useMemo`/`useCallback`/`memo` by hand;

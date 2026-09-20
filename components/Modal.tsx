@@ -76,7 +76,7 @@ const Modal: React.FunctionComponent<Props> = ({
       aria-labelledby={labelledBy}
       className={clsx(
         'hidden open:flex fixed inset-0 m-0 h-full w-full max-h-none max-w-none border-0 bg-transparent p-0 justify-center',
-        'backdrop:bg-black/0 backdrop:transition-[background-color] backdrop:delay-100 data-[state=visible]:backdrop:delay-0',
+        'backdrop:bg-transparent backdrop:transition-[background-color] backdrop:delay-100 data-[state=visible]:backdrop:delay-0',
         className,
       )}
       onCancel={(event) => {

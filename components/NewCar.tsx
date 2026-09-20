@@ -111,7 +111,7 @@ const NewCar: FunctionComponent<Props> = ({
               {car.acceleration.toFixed(1)}s
             </div>
             <div
-              className="mt-0.5 text-xs text-[#666] font-medium"
+              className="mt-0.5 text-xs text-stone font-medium"
               title={`Afl (${Math.round(car.power * 1.34102)} hö)`}
             >
               {car.power} kW<span className="sr-only"> afl</span>
@@ -124,7 +124,7 @@ const NewCar: FunctionComponent<Props> = ({
             </div>
             <div className="text-2xl font-normal">{car.capacity} kWh</div>
             <div
-              className="mt-0.5 text-xs text-[#666] font-medium"
+              className="mt-0.5 text-xs text-stone font-medium"
               title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10T080} min)`}
             >
               {formatKmPerMinutesCharged(car.timeToCharge10T080, car.range)}{' '}
@@ -144,7 +144,7 @@ const NewCar: FunctionComponent<Props> = ({
               {car.range} km<span className="sr-only"> samkvæmt WLTP</span>
             </div>
             <div
-              className="mt-0.5 text-xs text-[#666] font-medium"
+              className="mt-0.5 text-xs text-stone font-medium"
               title={getDriveLabel(car.drive)}
             >
               {car.drive}

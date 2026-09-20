@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 
 const Orflaedi: FunctionComponent<{}> = () => (
-  <section className="bg-[#e2e8f0] mb-0.5">
+  <section className="bg-mist mb-0.5">
     <div className="flex flex-col items-center mx-auto py-8 px-4 xs:max-w-[480px] xs:py-14 xs:px-6 md:py-14 md:px-10 md:flex-row md:justify-between md:items-center md:max-w-[1024px]">
       <div className="mb-6 md:mb-0 md:mr-8">
         <h2 className="m-0 mb-5 font-black text-[32px] max-w-[480px] leading-[1.1] text-tint">
@@ -11,7 +11,7 @@ const Orflaedi: FunctionComponent<{}> = () => (
         <p className="m-0 max-w-[480px] text-sm leading-6 text-stone">
           <a
             href="https://www.orflaedi.is"
-            className="text-black font-medium no-underline hover:underline"
+            className="text-tint font-medium no-underline hover:underline"
           >
             Örflæði.is
           </a>{' '}
@@ -24,7 +24,7 @@ const Orflaedi: FunctionComponent<{}> = () => (
 
       <a
         href="https://www.orflaedi.is"
-        className="shrink-0 block max-w-[320px] bg-[#1a202c] rounded-2xl p-6 pr-16 shadow-[0_2px_32px_rgba(0,0,0,0.2)] transition-all duration-200 text-white no-underline text-xl leading-[1.4] font-semibold hover:shadow-[0_8px_64px_rgba(0,0,0,0.3)] hover:-translate-y-1"
+        className="shrink-0 block max-w-[320px] bg-ink rounded-2xl p-6 pr-16 shadow-(--shadow-card) transition-all duration-200 text-on-ink no-underline text-xl leading-[1.4] font-semibold hover:shadow-(--shadow-card-hover) hover:-translate-y-1"
       >
         Öll létt rafknúin ökutæki á einum stað
         {/* eslint-disable-next-line next/no-img-element -- an SVG logo, which next/image does not optimise without dangerouslyAllowSVG */}

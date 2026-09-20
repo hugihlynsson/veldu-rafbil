@@ -109,7 +109,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
       <form
         onSubmit={onSubmit}
         className={clsx(
-          'pointer-events-auto flex items-center gap-2 p-[8px_8px_8px_20px] bg-[rgba(220,220,220,0.7)] backdrop-blur-xl rounded-full shadow-[0_4px_24px_rgba(0,0,0,0)] w-80 max-w-[90vw] transition-all duration-300 ease-in-out scale-[0.98] border border-black/2 hover:scale-100',
+          'pointer-events-auto flex items-center gap-2 p-[8px_8px_8px_20px] bg-veil/70 backdrop-blur-xl rounded-full shadow-(--shadow-pill) w-80 max-w-[90vw] transition-all duration-300 ease-in-out scale-[0.98] border border-scrim/2 hover:scale-100',
           showFocusRing && 'outline-2 outline-offset-2 outline-sky',
           isFocused && 'w-[400px] scale-100',
         )}
@@ -123,14 +123,14 @@ const ChatInput: React.FunctionComponent<Props> = ({
           onClick={handleClick}
           placeholder="Spurðu Veldu Rafbíl"
           // The ring lives on the form, so it wraps the whole pill
-          className="flex-1 border-0 bg-transparent p-[8px_0] text-base font-normal text-tint outline-none placeholder:text-black/60 disabled:opacity-60"
+          className="flex-1 border-0 bg-transparent p-[8px_0] text-base font-normal text-tint outline-none placeholder:text-scrim/60 disabled:opacity-60"
         />
         <button
           onFocus={handleFocusRing}
           aria-label="Senda skilaboð"
           type="submit"
           disabled={disabled || !value.trim()}
-          className="appearance-none w-9 h-9 flex items-center justify-center bg-sky border-0 rounded-full text-lab cursor-pointer transition-all duration-200 shrink-0 hover:enabled:bg-sky-darker hover:enabled:scale-105 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="appearance-none w-9 h-9 flex items-center justify-center bg-sky border-0 rounded-full text-on-sky cursor-pointer transition-all duration-200 shrink-0 hover:enabled:bg-sky-hover hover:enabled:scale-105 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           <svg
             width="20"
@@ -162,8 +162,8 @@ const ChatInput: React.FunctionComponent<Props> = ({
               key={index}
               type="button"
               className={clsx(
-                'bg-white/70 backdrop-blur-xl border border-black/6 rounded-2xl p-[12px_16px] text-sm font-medium text-tint cursor-pointer transition-all duration-200 text-left whitespace-nowrap shadow-[0_2px_8px_rgba(0,0,0,0.04)] animate-[fadeInUpRotate_0.3s_ease-out_backwards]',
-                'hover:bg-white/90 hover:text-tint hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]',
+                'bg-raised/70 backdrop-blur-xl border border-scrim/6 rounded-2xl p-[12px_16px] text-sm font-medium text-tint cursor-pointer transition-all duration-200 text-left whitespace-nowrap shadow-(--shadow-chip) animate-[fadeInUpRotate_0.3s_ease-out_backwards]',
+                'hover:bg-raised/90 hover:text-tint hover:-translate-y-0.5 hover:shadow-(--shadow-chip-hover)',
                 'active:translate-y-0',
                 index === 0 && '[animation-delay:0.45s]',
                 index === 1 && '[animation-delay:0.35s]',

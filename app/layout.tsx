@@ -17,6 +17,18 @@ export default function RootLayout({ children }: Props) {
           type="image/png"
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        {/* --color-lab in app/globals.css, for the browser chrome around the
+            page: a white bar over a dark page is the one seam CSS cannot reach */}
+        <meta
+          name="theme-color"
+          media="(prefers-color-scheme: light)"
+          content="#ffffff"
+        />
+        <meta
+          name="theme-color"
+          media="(prefers-color-scheme: dark)"
+          content="#14161a"
+        />
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </head>
