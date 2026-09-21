@@ -111,7 +111,7 @@
     --color-backdrop-strong: rgb(0 0 0 / 0.65);
 
     --color-mist: #1a1a1a;
-    --color-ink: #333;
+    --color-ink: #111;
 
     --color-alarm: #ffb4a8;
     --color-alarm-surface: #3b1a15;
@@ -130,8 +130,13 @@
     --shadow-sheet: 0px 0px 48px 0px rgb(0 0 0 / 0.75);
     --shadow-sheet-footer: 0 0 32px 0 rgb(0 0 0 / 0.6);
     --shadow-modal: 0px 8px 60px rgb(0 0 0 / 0.8);
-    --shadow-card: 0 2px 32px rgb(0 0 0 / 0.6);
-    --shadow-card-hover: 0 8px 64px rgb(0 0 0 / 0.8);
+    /* The inset hairline is what keeps the Örflæði card off the band it sits
+       on, now that both are near black. It rides in the shadow rather than
+       on a border, which would take a pixel of layout with it in light */
+    --shadow-card:
+      0 2px 32px rgb(0 0 0 / 0.6), inset 0 0 0 1px rgb(255 255 255 / 0.16);
+    --shadow-card-hover:
+      0 8px 64px rgb(0 0 0 / 0.8), inset 0 0 0 1px rgb(255 255 255 / 0.22);
   }
 }
 
