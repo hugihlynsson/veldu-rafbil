@@ -33,7 +33,7 @@ const Orflaedi: FunctionComponent<{}> = () => (
           height="30"
           alt="Örflæði logo"
           src="/orflaedi-logo.svg"
-          className="block max-w-full h-[30px] mt-10"
+          className="block max-w-full h-[30px] mt-10 [filter:var(--ink-logo-filter)]"
         />
       </a>
     </div>
