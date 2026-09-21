@@ -132,7 +132,7 @@ For each electric variant in the list, sort it into one of:
 lists get split, renamed and sometimes just not uploaded. Remove one only when
 the importer's own site or list says it is discontinued; otherwise leave it and
 flag it in the report. Removing a car also means deleting its photo in
-`public/images/`: a test fails on photos no car uses.
+`assets/images/`: a test fails on photos no car uses.
 
 **Specs on existing cars.** The brochures round differently from ev-database,
 which the existing numbers appear to follow (the EV2 entry has 8.5 s and 30 min
@@ -233,8 +233,17 @@ And, for a car that is genuinely new to the list:
 
 #### Hero photos
 
-The photo is `public/images/<heroImageName>.jpg`, 1920×1280 (3:2), like every
-other one there.
+The photo is `assets/images/<heroImageName>.jpg`, 1920×1280 (3:2), like every
+other one there. `assets/` is not served — the build renders each photo into
+`public/` at the widths the site asks for, so the source is the master copy and
+never something a browser fetches.
+
+**Replacing a photo means giving it a new filename.** `minimumCacheTTL` in
+`next.config.js` is 31 days and there is no way to invalidate the image cache,
+so a better shot dropped in over the old one goes on serving the old one for up
+to a month. Name the replacement something else, point `heroImageName` at it
+and delete the file it replaces — the orphan test catches the delete if you
+forget it, but nothing catches the stale cache.
 
 1. **Find a press photo.** Search for `<make> <model> press photos`; the
    manufacturer's media site or a press-photo gallery is the source. Pick a
@@ -250,7 +259,7 @@ other one there.
    ```bash
    sips --cropToHeightWidth <H> <W> --cropOffset <Y> <X> source.jpg --out crop.jpg
    sips --resampleWidth 1920 -s format jpeg -s formatOptions 80 crop.jpg \
-     --out public/images/<heroImageName>.jpg
+     --out assets/images/<heroImageName>.jpg
    ```
 
    Aim near the sizes already there (a couple of hundred KB, none over a
@@ -260,7 +269,7 @@ other one there.
    (`audi-q6.jpg` is a good reference for framing). Check the dimensions with
    `sips -g pixelWidth -g pixelHeight`, and that nothing is cut off or blurry.
 
-Work in the scratchpad and only the final JPEG goes into `public/images/`.
+Work in the scratchpad and only the final JPEG goes into `assets/images/`.
 
 ### 5. Verify
 

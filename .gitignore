@@ -20,3 +20,6 @@ tsconfig.tsbuildinfo
 !.claude/
 .claude/*
 !.claude/skills/
+
+# Rendered by scripts/buildImageVariants.mjs at build time
+public/rendered/
