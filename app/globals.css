@@ -41,10 +41,9 @@
   --color-backdrop: rgb(0 0 0 / 0.2);
   --color-backdrop-strong: rgb(0 0 0 / 0.3);
 
-  /* The Örflæði band, which is its own small palette. The card is the same
-     navy card on a pale band. Dark keeps the shape and drops the hue: the
-     band settles just off the page and the card lifts off it, because the
-     only way down from a near-black band is back into the page */
+  /* The Örflæði band, which is its own small palette: a card that inverts the
+     page it sits on, against a band that barely leaves it. Dark inverts both
+     halves of that — a white card with dark type on a near-black band */
   --color-mist: #e2e8f0;
   --color-ink: #1a202c;
   --color-on-ink: #fff;
@@ -63,6 +62,11 @@
    properties they stay references, read as `shadow-(--shadow-chip)`. A black
    blur over a black page is invisible, so dark gets its own depths. */
 :root {
+  /* The Örflæði logo is a fixed white SVG served as an <img>, so it cannot
+     take a colour from the page. Inverting it is what lets the card it sits
+     on flip: none while the card is dark, invert(1) once the card is white */
+  --ink-logo-filter: none;
+
   --shadow-hairline: 0 1px 0px 0 rgb(0 0 0 / 0.05);
   --shadow-raised:
     0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
@@ -111,7 +115,9 @@
     --color-backdrop-strong: rgb(0 0 0 / 0.65);
 
     --color-mist: #1a1a1a;
-    --color-ink: #111;
+    --color-ink: #fff;
+    --color-on-ink: #111;
+    --ink-logo-filter: invert(1);
 
     --color-alarm: #ffb4a8;
     --color-alarm-surface: #3b1a15;
