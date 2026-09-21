@@ -81,9 +81,12 @@ await Promise.all(
 const stale = (await readdir(CACHE)).filter((file) => !wanted.has(file))
 await Promise.all(stale.map((file) => rm(path.join(CACHE, file))))
 
+// Sorted, because the renders finish in whatever order they finish in and an
+// unsorted manifest reshuffles itself on every run.
 await writeFile(
   'modules/heroImageHashes.json',
-  JSON.stringify(manifest, null, 2) + '\n',
+  JSON.stringify(Object.fromEntries(Object.entries(manifest).sort()), null, 2) +
+    '\n',
 )
 
 console.log(
