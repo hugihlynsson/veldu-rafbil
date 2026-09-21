@@ -1,20 +1,61 @@
+import { createHash } from 'node:crypto'
+import { readFileSync, readdirSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { readdirSync } from 'node:fs'
 
 import newCars from './newCars'
 import heroImageLoader from './heroImageLoader'
+import hashes from './heroImageHashes.json'
+import widths from './heroImageWidths.json'
 
-const rendered = new Set(readdirSync('public/rendered'))
+// CI runs the tests without building, so nothing here may read the rendered
+// files. What it can pin is that the three things the build has to agree on —
+// the widths, the hashes and the loader — still say the same.
+const config = require('../next.config.js')
 
 describe('the hero image loader', () => {
-  // The loader is the only thing standing between a card and a 404, and a
-  // missing variant is invisible until someone loads the page on that device.
+  it('renders every width next.config.js can ask for', () => {
+    const asked = [
+      ...config.images.deviceSizes,
+      ...config.images.imageSizes,
+    ].sort((a: number, b: number) => a - b)
+
+    expect(widths).toEqual(asked)
+  })
+
+  // The manifest is committed because CI typechecks without running the
+  // render, so it can go stale against the photos beside it.
+  it('has a hash for every photo and a photo for every hash', () => {
+    const onDisk = readdirSync('assets/images')
+      .filter((file) => file.endsWith('.jpg'))
+      .map((file) => file.replace(/\.jpg$/, ''))
+
+    expect(Object.keys(hashes).sort()).toEqual(onDisk.sort())
+  })
+
+  it.each(Object.keys(hashes))('has the current hash for %s', (name) => {
+    const digest = createHash('sha256')
+      .update(readFileSync(`assets/images/${name}.jpg`))
+      .digest('hex')
+      .slice(0, 8)
+
+    expect(hashes[name as keyof typeof hashes]).toBe(digest)
+  })
+
   it.each(newCars.map((car) => car.heroImageName))(
-    'resolves every width for %s',
+    'points %s at a rendered width for any request',
     (name) => {
-      for (const width of [1, 128, 256, 540, 828, 1080, 1180, 1320, 4000]) {
-        const url = heroImageLoader({ src: `/images/${name}.jpg`, width })
-        expect(rendered.has(url.replace('/rendered/', ''))).toBe(true)
+      const hash = hashes[name as keyof typeof hashes]
+
+      // Under the smallest, between two, exactly on one, and past the largest
+      for (const [asked, served] of [
+        [1, widths[0]],
+        [500, 540],
+        [828, 828],
+        [4000, widths.at(-1)],
+      ]) {
+        expect(
+          heroImageLoader({ src: `/images/${name}.jpg`, width: asked! }),
+        ).toBe(`/rendered/${name}.${hash}.${served}.webp`)
       }
     },
   )

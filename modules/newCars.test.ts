@@ -17,14 +17,14 @@ describe('the car data', () => {
   it.each(newCars.map((car) => [label(car), car] as const))(
     'has a hero image for %s',
     (_name, car) => {
-      expect(existsSync(`public/images/${car.heroImageName}.jpg`)).toBe(true)
+      expect(existsSync(`assets/images/${car.heroImageName}.jpg`)).toBe(true)
     },
   )
 
   // Dropping a car used to leave its photo behind, and they piled up
   it('leaves no photo behind for a car that is gone', () => {
     const used = new Set(newCars.map((car) => car.heroImageName))
-    const orphans = readdirSync('public/images')
+    const orphans = readdirSync('assets/images')
       .filter((file) => file.endsWith('.jpg'))
       .map((file) => file.replace(/\.jpg$/, ''))
       .filter((name) => !used.has(name))

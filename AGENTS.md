@@ -51,6 +51,7 @@ governs rather than here, and pin it with a test.
 | `modules/`        | Pure logic: no React, no browser. The car data lives here too        |
 | `utils/`          | The things that _do_ need React or the browser                       |
 | `components/`     | The UI, including the chat                                           |
+| `assets/`         | The hero photos. Not served — the build renders them into `public/`  |
 | `app/page.tsx`    | Server component: turns `searchParams` into sorting and filter state |
 | `app/newCars.tsx` | `'use client'` — all list state, sorting, filtering, URL sync        |
 

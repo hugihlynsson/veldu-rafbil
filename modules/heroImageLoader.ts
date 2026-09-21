@@ -1,7 +1,9 @@
 import hashes from './heroImageHashes.json'
+import widths from './heroImageWidths.json'
 
-// The widths `scripts/buildImageVariants.mjs` renders, ascending.
-const RENDERED = [128, 256, 540, 828, 1080, 1180, 1320]
+// Shared with the render script, and pinned to next.config.js by a test: a
+// width the config asks for but nothing renders is served silently small.
+const RENDERED: Array<number> = widths
 
 /**
  * Points `next/image` at a file rendered at build time instead of at
@@ -23,8 +25,10 @@ export default function heroImageLoader({
   const name = src.replace(/^\/images\//, '').replace(/\.jpg$/, '')
   const hash = (hashes as Record<string, string>)[name]
 
-  // A photo with no rendered variant would 404 silently; the source still
-  // resolves, so fall back to it rather than to nothing.
+  // Nothing is served under `/images/` — the sources live in `assets/` — so
+  // this 404s rather than recovering. It is the loud failure on purpose: the
+  // data test and the one beside this file both fail first, and a broken photo
+  // is easier to notice than a silently wrong one.
   if (!hash) return src
 
   const rendered = RENDERED.find((w) => w >= width) ?? RENDERED.at(-1)

@@ -1,6 +1,10 @@
-// Pre-renders every hero photo at the widths next.config.js asks for, so the
-// browser can be pointed at a static file instead of `/_next/image`. Runs
-// before `next build`; the output is generated and git-ignored.
+// Pre-renders every hero photo in `assets/` at the widths next.config.js asks
+// for and writes them into `public/`, so the browser can be pointed at a static
+// file instead of `/_next/image`. Runs before `next build`; the output is
+// generated and git-ignored.
+//
+// The sources are the only copy of a photo that is not served: nothing reads
+// them at runtime, so they stay out of `public/` and off the deployment.
 //
 // Rendering happens in `.next/cache`, which Vercel carries between builds, and
 // the results are copied into `public/` from there. Rendering straight into
@@ -22,11 +26,14 @@ import path from 'node:path'
 const require = createRequire(import.meta.url)
 const sharp = require('sharp')
 
-const SOURCE = 'public/images'
+const SOURCE = 'assets/images'
 const CACHE = '.next/cache/hero-variants'
 const OUT = 'public/rendered'
-// The hero widths, plus the two `imageSizes` MiniCar's thumbnail reaches.
-const WIDTHS = [128, 256, 540, 828, 1080, 1180, 1320]
+// Shared with the loader so the two cannot drift; a test pins both to the
+// widths next.config.js asks for.
+const WIDTHS = JSON.parse(
+  await readFile('modules/heroImageWidths.json', 'utf8'),
+)
 const QUALITY = 75
 
 const started = Date.now()
