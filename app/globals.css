@@ -118,7 +118,10 @@
     --color-alarm-fill-hover: #6d3329;
 
     --shadow-hairline: 0 1px 0px 0 rgb(255 255 255 / 0.07);
-    --shadow-raised: 0 1px 2px 0 rgb(0 0 0 / 0.6);
+    /* None: the sorting tabs are the only thing that reads this, and the
+       active one already sits lighter than its track. A drop shadow under a
+       pill that is lighter than what it sits on lights it from below */
+    --shadow-raised: none;
     --shadow-pill: 0 6px 24px rgb(0 0 0 / 0.55);
     --shadow-chip: 0 2px 8px rgb(0 0 0 / 0.4);
     --shadow-chip-hover: 0 4px 14px rgb(0 0 0 / 0.5);
