@@ -42,8 +42,9 @@
   --color-backdrop-strong: rgb(0 0 0 / 0.3);
 
   /* The Örflæði band, which is its own small palette. The card is the same
-     navy in both themes; in dark it is the band that moves, lifting until the
-     card reads as a navy object on a panel rather than a hole in the page */
+     navy card on a pale band. Dark keeps the shape and drops the hue: the
+     band settles just off the page and the card lifts off it, because the
+     only way down from a near-black band is back into the page */
   --color-mist: #e2e8f0;
   --color-ink: #1a202c;
   --color-on-ink: #fff;
@@ -109,8 +110,8 @@
     --color-backdrop: rgb(0 0 0 / 0.55);
     --color-backdrop-strong: rgb(0 0 0 / 0.65);
 
-    /* `ink` is absent with the brand above: only the band it sits on lifts */
-    --color-mist: #3b4757;
+    --color-mist: #202020;
+    --color-ink: #333;
 
     --color-alarm: #ffb4a8;
     --color-alarm-surface: #3b1a15;
