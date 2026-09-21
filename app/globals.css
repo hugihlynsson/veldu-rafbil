@@ -5,11 +5,15 @@
    means — `bg-lab`, `text-stone`, `border-line` — and never for a theme, so
    there is no `dark:` variant anywhere in `components/`. */
 @theme {
-  /* Brand. `on-sky` is what goes on top of a sky fill, and it is not `tint`:
-     in dark the fill is light and its text has to go dark with it */
+  /* Brand. `sky` and the white on it are the same in both themes — the blue is
+     the one thing on the page that should not shift. Only the hover moves,
+     since a darker blue on a dark page reads as nothing happening. `focus` is
+     a separate token because a 2px ring of #201be3 on a dark page is a ring
+     nobody can see; it is the brand lightened until it clears 3:1 */
   --color-sky: #201be3;
   --color-sky-hover: #1a15b7;
   --color-on-sky: #fff;
+  --color-focus: #201be3;
 
   /* Text, strongest first */
   --color-tint: #111;
@@ -37,7 +41,9 @@
   --color-backdrop: rgb(0 0 0 / 0.2);
   --color-backdrop-strong: rgb(0 0 0 / 0.3);
 
-  /* The Örflæði band, which is its own small palette */
+  /* The Örflæði band, which is its own small palette. The card is the same
+     navy in both themes; in dark it is the band that moves, lifting until the
+     card reads as a navy object on a panel rather than a hole in the page */
   --color-mist: #e2e8f0;
   --color-ink: #1a202c;
   --color-on-ink: #fff;
@@ -73,35 +79,38 @@
 /* The dark values. Every one of them was picked against the surface it lands
    on rather than by eye: body text clears 4.5:1 everywhere it appears, the
    quiet greys clear it on every fill they sit on, and the lines that bound a
-   control clear 3:1. Read a pair off the ladder above before adding one. */
+   control clear 3:1. Read a pair off the ladder above before adding one.
+
+   The surfaces are neutral grey on purpose. Nothing here carries a hue, so
+   the brand blue and the Örflæði band are the only colour on the page. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-sky: #9fb0ff;
-    --color-sky-hover: #bcc6ff;
-    --color-on-sky: #10131c;
+    /* `sky` and `on-sky` are absent: the brand does not change theme */
+    --color-sky-hover: #4039ef;
+    --color-focus: #8f9bff;
 
-    --color-tint: #f2f3f6;
-    --color-stone: #b4b9c3;
-    --color-clay: #939aa6;
+    --color-tint: #f4f4f4;
+    --color-stone: #b9b9b9;
+    --color-clay: #999;
 
-    --color-lab: #14161a;
-    --color-haze: #101217;
-    --color-surface: #1b1e24;
-    --color-glass: #17191f;
-    --color-veil: #31353d;
-    --color-cloud: #24272e;
-    --color-smoke: #30343c;
-    --color-raised: #353942;
+    --color-lab: #151515;
+    --color-haze: #0f0f0f;
+    --color-surface: #1e1e1e;
+    --color-glass: #181818;
+    --color-veil: #343434;
+    --color-cloud: #262626;
+    --color-smoke: #303030;
+    --color-raised: #383838;
 
-    --color-line: #383c45;
-    --color-line-strong: #6c7384;
+    --color-line: #3a3a3a;
+    --color-line-strong: #757575;
 
     --color-scrim: #fff;
     --color-backdrop: rgb(0 0 0 / 0.55);
     --color-backdrop-strong: rgb(0 0 0 / 0.65);
 
-    --color-mist: #1e2430;
-    --color-ink: #0b0e14;
+    /* `ink` is absent with the brand above: only the band it sits on lifts */
+    --color-mist: #3b4757;
 
     --color-alarm: #ffb4a8;
     --color-alarm-surface: #3b1a15;
@@ -151,7 +160,7 @@ input {
    the base layer, or it outranks a control that draws its own. */
 @layer base {
   :focus-visible {
-    outline: 2px solid var(--color-sky);
+    outline: 2px solid var(--color-focus);
     outline-offset: 2px;
   }
 }
