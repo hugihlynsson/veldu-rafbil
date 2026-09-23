@@ -1,26 +1,28 @@
 import { describe, expect, it } from 'vitest'
 
 import carFilter from './carFilter'
+import { deriveCar, Car } from './cars'
 import { NewCar } from '../types'
 
-const car = (over: Partial<NewCar>): NewCar => ({
-  make: 'Tesla',
-  model: 'Model Y',
-  subModel: 'Long Range',
-  heroImageName: 'x',
-  price: 8_000_000,
-  sellerURL: 'https://example.is',
-  acceleration: 6,
-  capacity: 75,
-  range: 500,
-  drive: 'AWD',
-  seats: 5,
-  timeToCharge10T080: 25,
-  power: 250,
-  ...over,
-})
+const car = (over: Partial<NewCar>): Car =>
+  deriveCar({
+    make: 'Tesla',
+    model: 'Model Y',
+    subModel: 'Long Range',
+    heroImageName: 'x',
+    price: 8_000_000,
+    sellerURL: 'https://example.is',
+    acceleration: 6,
+    capacity: 75,
+    range: 500,
+    drive: 'AWD',
+    seats: 5,
+    timeToCharge10T080: 25,
+    power: 250,
+    ...over,
+  })
 
-const keep = (filters: Parameters<typeof carFilter>[0], c: NewCar) =>
+const keep = (filters: Parameters<typeof carFilter>[0], c: Car) =>
   carFilter(filters)(c)
 
 describe('carFilter', () => {

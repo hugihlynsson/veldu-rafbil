@@ -5,8 +5,7 @@ import { agree } from '../modules/plural'
 const filterClasses =
   "shrink-0 relative text-xs font-semibold py-1 pr-2 pl-2.5 border border-line-strong rounded-full cursor-pointer text-center flex justify-center items-center bg-lab transition-all duration-200 text-clay after:content-['+'] after:rotate-45 after:ml-1.5 after:text-base after:leading-[10px] after:-mt-px after:text-clay after:transition-colors hover:bg-haze hover:after:text-tint active:text-tint"
 
-interface Chip {
-  name: keyof Filters
+type ChipText = {
   label: string
   /** The value as the chip shows it, arrow included */
   value: string
@@ -15,102 +14,83 @@ interface Chip {
 }
 
 // Written out one by one because the aria-label needs the Icelandic case after
-// "Fjarlægja". A filter with no entry here cannot be switched off again.
-const activeChips = (filters: Filters): Array<Chip> => {
-  const chips: Array<Chip> = []
-
-  if (filters.name) {
-    const names = filters.name.join(', ')
-    chips.push({
-      name: 'name',
-      label: 'Nafn:',
-      value: names,
-      removeLabel: `Fjarlægja nafnasíu: ${names}`,
-    })
-  }
-
-  if (filters.price) {
-    const price = addDecimalSeprators(filters.price)
-    chips.push({
-      name: 'price',
+// "Fjarlægja". Mapped over `Filters`, so a new filter has to be given a chip
+// before it compiles, and a filter on the page can always be switched off.
+const chipText: {
+  [Key in keyof Filters]-?: (value: NonNullable<Filters[Key]>) => ChipText
+} = {
+  name: (names) => ({
+    label: 'Nafn:',
+    value: names.join(', '),
+    removeLabel: `Fjarlægja nafnasíu: ${names.join(', ')}`,
+  }),
+  price: (max) => {
+    const price = addDecimalSeprators(max)
+    return {
       label: 'Verð:',
       value: `↓${price} kr.`,
       removeLabel: `Fjarlægja verðsíu: hámark ${price} kr.`,
-    })
-  }
-
-  if (filters.range) {
-    chips.push({
-      name: 'range',
-      label: 'Drægni:',
-      value: `↑${filters.range} km.`,
-      removeLabel: `Fjarlægja drægnisíu: lágmark ${filters.range} km`,
-    })
-  }
-
-  if (filters.seats) {
-    chips.push({
-      name: 'seats',
-      label: 'Sæti:',
-      value: `${filters.seats}+`,
-      removeLabel: `Fjarlægja sætasíu: lágmark ${filters.seats} sæti`,
-    })
-  }
-
-  if (filters.drive) {
-    const drives = filters.drive.join(', ')
-    chips.push({
-      name: 'drive',
-      label: 'Drif:',
-      value: drives,
-      removeLabel: `Fjarlægja drifsíu: ${drives}`,
-    })
-  }
-
-  if (filters.acceleration) {
-    const seconds = filters.acceleration.toFixed(1)
-    chips.push({
-      name: 'acceleration',
+    }
+  },
+  range: (min) => ({
+    label: 'Drægni:',
+    value: `↑${min} km.`,
+    removeLabel: `Fjarlægja drægnisíu: lágmark ${min} km`,
+  }),
+  seats: (min) => ({
+    label: 'Sæti:',
+    value: `${min}+`,
+    removeLabel: `Fjarlægja sætasíu: lágmark ${min} sæti`,
+  }),
+  drive: (drives) => ({
+    label: 'Drif:',
+    value: drives.join(', '),
+    removeLabel: `Fjarlægja drifsíu: ${drives.join(', ')}`,
+  }),
+  acceleration: (max) => {
+    const seconds = max.toFixed(1)
+    return {
       // The only one without a colon, as it has always read
       label: 'Hröðun',
       value: `↓${seconds}s`,
       removeLabel: `Fjarlægja hröðunarsíu: hámark ${seconds} sekúndur`,
-    })
-  }
-
-  if (filters.value) {
-    const value = addDecimalSeprators(filters.value)
-    chips.push({
-      name: 'value',
+    }
+  },
+  value: (max) => {
+    const value = addDecimalSeprators(max)
+    return {
       label: 'Verði á km:',
       value: `↓${value} kr.`,
       removeLabel: `Fjarlægja síu á verði á km: hámark ${value} kr.`,
-    })
-  }
-
-  if (filters.fastcharge) {
-    chips.push({
-      name: 'fastcharge',
-      label: 'Hraðhleðsla:',
-      value: `↑${filters.fastcharge} km/min`,
-      removeLabel: `Fjarlægja hraðhleðslusíu: lágmark ${filters.fastcharge} km á mínútu`,
-    })
-  }
-
-  if (filters.availability) {
-    const isAvailable = filters.availability === 'available'
-    chips.push({
-      name: 'availability',
+    }
+  },
+  fastcharge: (min) => ({
+    label: 'Hraðhleðsla:',
+    value: `↑${min} km/min`,
+    removeLabel: `Fjarlægja hraðhleðslusíu: lágmark ${min} km á mínútu`,
+  }),
+  availability: (availability) => {
+    const isAvailable = availability === 'available'
+    return {
       label: 'Framboð:',
       value: isAvailable ? 'Fáanlegir' : 'Væntanlegir',
       removeLabel: `Fjarlægja framboðssíu: ${
         isAvailable ? 'fáanlegir' : 'væntanlegir'
       }`,
-    })
-  }
-
-  return chips
+    }
+  },
 }
+
+// In the order the chips have always stood, whatever order the filters came in
+const chipOrder = Object.keys(chipText) as Array<keyof Filters>
+
+const activeChips = (filters: Filters) =>
+  chipOrder.flatMap((name) => {
+    const value = filters[name]
+    if (value === undefined) return []
+    const text = (chipText[name] as (value: unknown) => ChipText)(value)
+    return [{ name, ...text }]
+  })
 
 interface FilterButtonsProps {
   filters: Filters

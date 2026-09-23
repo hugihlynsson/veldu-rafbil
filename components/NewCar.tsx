@@ -2,15 +2,14 @@ import { FunctionComponent } from 'react'
 import { trackEvent } from 'fathom-client'
 import Image from 'next/image'
 
-import { NewCar as NewCarType, Drive } from '../types'
+import { Drive } from '../types'
+import { Car } from '../modules/cars'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
 import { formatKmPerMinutesCharged } from '../modules/getKmPerMinutesCharged'
 import LinkPill from './LinkPill'
-import getPriceWithGrant from '../modules/getPriceWithGrant'
-import getCarId from '../modules/getCarId'
 
 interface Props {
-  car: NewCarType
+  car: Car
   showValue?: boolean
   showSeats?: boolean
   preload?: boolean
@@ -33,10 +32,8 @@ const NewCar: FunctionComponent<Props> = ({
   showSeats,
   preload,
 }) => {
-  const priceWithGrant = getPriceWithGrant(car.price)
+  const { id: carId, priceWithGrant } = car
   const hasGrant = priceWithGrant !== car.price
-
-  const carId = getCarId(car)
 
   // Not agree(): sæti is neuter and reads the same at every count. A car
   // without a subModel gets the seat count on its own rather than a lone dot.
@@ -86,7 +83,7 @@ const NewCar: FunctionComponent<Props> = ({
             (car.expectedDelivery && 'áætlað verð ↗') ||
             (showValue &&
               `${hasGrant ? 'með styrk ' : ''}${addDecimalSeprators(
-                Math.round(priceWithGrant / car.range),
+                Math.round(car.pricePerKm),
               )} kr. á km.`) ||
             (hasGrant && 'með styrk') ||
             undefined

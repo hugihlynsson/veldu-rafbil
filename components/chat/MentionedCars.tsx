@@ -4,7 +4,6 @@ import React from 'react'
 import MiniCar from '../MiniCar'
 import { UIDataTypes, UIMessage, UITools } from 'ai'
 import { findMentionedCars, getMessageText } from '../../modules/chatHelpers'
-import getCarId from '../../modules/getCarId'
 
 interface Props {
   lastMessage?: UIMessage<unknown, UIDataTypes, UITools>
@@ -26,7 +25,7 @@ const MentionedCars: React.FunctionComponent<Props> = ({
       <div className="flex gap-3 w-full overflow-x-auto pl-5 pr-20 scroll-pl-5 scroll-pr-20 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {mentionedCars.map((car, index) => (
           <div
-            key={getCarId(car)}
+            key={car.id}
             className="opacity-0 animate-[slideInCar_0.5s_cubic-bezier(0.16,1,0.3,1)_forwards] shrink-0"
             style={{ animationDelay: `${index * 0.1}s` }}
           >

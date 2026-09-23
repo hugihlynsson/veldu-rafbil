@@ -1,8 +1,5 @@
-import { Availability, Drive, NewCar } from '../types'
-import newCars from './newCars'
-import getCarId from './getCarId'
-import getPriceWithGrant from './getPriceWithGrant'
-import getKmPerMinutesCharged from './getKmPerMinutesCharged'
+import { Availability, Drive } from '../types'
+import cars, { Car } from './cars'
 import { grantAmount, grantPriceCeiling } from './globals'
 
 // The same bounds the assistant's system prompt is given for Icelandic driving
@@ -52,41 +49,37 @@ export interface ApiCar {
 
 // The photos stay unpublished: a path to them invites hotlinking and the bill
 // lands on the image optimiser. Serving them later means a CDN URL, a new field.
-export const toApiCar = (car: NewCar): ApiCar => {
-  const withGrant = getPriceWithGrant(car.price)
-
-  return {
-    id: getCarId(car),
-    make: car.make,
-    model: car.model,
-    ...(car.subModel ? { subModel: car.subModel } : {}),
-    price: {
-      currency: 'ISK',
-      list: car.price,
-      withGrant,
-      grantApplied: car.price - withGrant,
-    },
-    rangeWltpKm: car.range,
-    estimatedRealRangeKm: {
-      min: Math.round(car.range * realRangeLowFactor),
-      max: Math.round(car.range * realRangeHighFactor),
-    },
-    batteryCapacityKwh: car.capacity,
-    acceleration0To100S: car.acceleration,
-    powerKw: car.power,
-    drive: car.drive,
-    seats: car.seats,
-    fastCharge: {
-      minutes10To80: car.timeToCharge10T080,
-      kmPerMinute: getKmPerMinutesCharged(car.timeToCharge10T080, car.range),
-    },
-    availability: car.expectedDelivery ? 'expected' : 'available',
-    ...(car.expectedDelivery ? { expectedDelivery: car.expectedDelivery } : {}),
-    sellerUrl: car.sellerURL,
-    ...(car.evDatabaseURL ? { evDatabaseUrl: car.evDatabaseURL } : {}),
-    pagePath: `/#${getCarId(car)}`,
-  }
-}
+export const toApiCar = (car: Car): ApiCar => ({
+  id: car.id,
+  make: car.make,
+  model: car.model,
+  ...(car.subModel ? { subModel: car.subModel } : {}),
+  price: {
+    currency: 'ISK',
+    list: car.price,
+    withGrant: car.priceWithGrant,
+    grantApplied: car.price - car.priceWithGrant,
+  },
+  rangeWltpKm: car.range,
+  estimatedRealRangeKm: {
+    min: Math.round(car.range * realRangeLowFactor),
+    max: Math.round(car.range * realRangeHighFactor),
+  },
+  batteryCapacityKwh: car.capacity,
+  acceleration0To100S: car.acceleration,
+  powerKw: car.power,
+  drive: car.drive,
+  seats: car.seats,
+  fastCharge: {
+    minutes10To80: car.timeToCharge10T080,
+    kmPerMinute: car.kmPerMinuteCharged,
+  },
+  availability: car.availability,
+  ...(car.expectedDelivery ? { expectedDelivery: car.expectedDelivery } : {}),
+  sellerUrl: car.sellerURL,
+  ...(car.evDatabaseURL ? { evDatabaseUrl: car.evDatabaseURL } : {}),
+  pagePath: `/#${car.id}`,
+})
 
 export interface CarsPayload {
   source: {
@@ -146,6 +139,6 @@ export const buildCarsPayload = (
     fastCharge: `minutes10To80 is the time from 10% to 80% on a fast charger. kmPerMinute is derived from it and from range at the ${Math.round(realRangeLowFactor * 100)}% factor.`,
     paths: 'pagePath is relative to the origin this document was served from.',
   },
-  count: newCars.length,
-  cars: newCars.map(toApiCar),
+  count: cars.length,
+  cars: cars.map(toApiCar),
 })

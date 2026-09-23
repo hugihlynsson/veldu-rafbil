@@ -1,15 +1,15 @@
 import { describe, expect, it } from 'vitest'
 
 import carFilter from './carFilter'
-import newCars from './newCars'
-import {
-  filterQueryKeys,
-  getFiltersFromQuery,
-  getQueryFromFilters,
-} from './filters'
+import cars from './cars'
+import { filterUrlKeys, getFiltersFromQuery, serializeFilters } from './filters'
 import { Filters } from '../types'
 
-const matches = (filters: Filters) => newCars.filter(carFilter(filters)).length
+const matches = (filters: Filters) => cars.filter(carFilter(filters)).length
+
+// What the browser would put back in the address bar, as Next hands it over
+const getQueryFromFilters = (filters: Filters): Record<string, string> =>
+  Object.fromEntries(new URLSearchParams(serializeFilters(filters)))
 
 describe('getFiltersFromQuery', () => {
   it('maps the Icelandic params onto the English fields', () => {
@@ -69,6 +69,12 @@ describe('getFiltersFromQuery', () => {
   it('treats separators on their own as no filter at all', () => {
     expect(getFiltersFromQuery({ nafn: ' , , ' })).toEqual({})
     expect(getFiltersFromQuery({ drif: '' })).toEqual({})
+  })
+
+  // A drive nobody sells is not a filter that hides every car
+  it('keeps only the drives it knows', () => {
+    expect(getFiltersFromQuery({ drif: 'AWD,4WD' }).drive).toEqual(['AWD'])
+    expect(getFiltersFromQuery({ drif: '4WD' })).toEqual({})
     expect(getFiltersFromQuery({})).toEqual({})
   })
 
@@ -86,7 +92,7 @@ describe('getFiltersFromQuery', () => {
     const filters = getFiltersFromQuery({ [key]: value })
 
     expect(filters).toEqual({})
-    expect(matches(filters)).toBe(newCars.length)
+    expect(matches(filters)).toBe(cars.length)
   })
 
   // A fraction renders as a price and breaks the tiebreak in the name sort
@@ -183,8 +189,8 @@ describe('filters survive a round trip through the URL', () => {
   })
 
   // Required<Filters> is the tripwire: a new filter fails to compile here until
-  // it is listed, and a key left out of filterQueryKeys cannot be switched off
-  it('writes only keys the client knows to clear', () => {
+  // it is listed, and one written under the wrong key would not read back
+  it('writes every filter under its own key', () => {
     const everyFilter: Required<Filters> = {
       name: ['tesla'],
       drive: ['AWD'],
@@ -198,7 +204,8 @@ describe('filters survive a round trip through the URL', () => {
     }
 
     expect(Object.keys(getQueryFromFilters(everyFilter)).sort()).toEqual(
-      [...filterQueryKeys].sort(),
+      Object.values(filterUrlKeys).sort(),
     )
+    expect(roundTrip(everyFilter)).toEqual(everyFilter)
   })
 })

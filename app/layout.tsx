@@ -1,4 +1,6 @@
 import './globals.css'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
+
 import Fathom from '../components/Fathom'
 
 type Props = {
@@ -34,7 +36,7 @@ export default function RootLayout({ children }: Props) {
       </head>
       <body>
         <Fathom />
-        {children}
+        <NuqsAdapter>{children}</NuqsAdapter>
       </body>
     </html>
   )

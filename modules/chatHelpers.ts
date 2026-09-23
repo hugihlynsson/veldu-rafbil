@@ -1,7 +1,6 @@
 import { UIMessage } from 'ai'
 
-import newCars from './newCars'
-import { NewCar } from '../types'
+import cars, { Car } from './cars'
 
 /**
  * The text of a message. A message is a list of parts, only some of them text,
@@ -17,13 +16,13 @@ export const getMessageText = (message: UIMessage | undefined): string =>
 
 // Lowercased once: an answer is searched for every car in the list every time
 // the row under it renders
-const carNames = newCars.map((car) => `${car.make} ${car.model}`.toLowerCase())
+const carNames = cars.map((car) => `${car.make} ${car.model}`.toLowerCase())
 
 /** In list order, for the row of MiniCars under an answer */
-export const findMentionedCars = (text: string): NewCar[] => {
+export const findMentionedCars = (text: string): Car[] => {
   const lowerText = text.toLowerCase()
   // A subModel only ever extends the name, so make and model answer for both
-  return newCars.filter((_car, index) => lowerText.includes(carNames[index]))
+  return cars.filter((_car, index) => lowerText.includes(carNames[index]))
 }
 
 // Fisher-Yates — sort() with a random comparator is not a shuffle

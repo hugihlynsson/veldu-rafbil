@@ -3,72 +3,80 @@ import { describe, expect, it } from 'vitest'
 import {
   defaultDirection,
   flipDirection,
-  getDirectionFromQuery,
-  getQueryFromSorting,
   getSortingFromQuery,
   isDefaultDirection,
+  serializeSorting,
   sortCars,
-  sortingQueryKeys,
   sortingToQuery,
+  sortingUrlKeys,
 } from './sorting'
-import { NewCar, Sorting, SortingDirection } from '../types'
+import { deriveCar, Car } from './cars'
+import { NewCar, SearchParams, Sorting, SortingDirection } from '../types'
 
-const car = (over: Partial<NewCar>): NewCar => ({
-  make: 'Make',
-  model: 'Model',
-  heroImageName: 'x',
-  price: 5_000_000,
-  sellerURL: 'https://example.is',
-  acceleration: 7,
-  capacity: 60,
-  range: 400,
-  drive: 'FWD',
-  seats: 5,
-  timeToCharge10T080: 30,
-  power: 150,
-  ...over,
-})
+const readSorting = (query: SearchParams) => getSortingFromQuery(query).sorting
+const readDirection = (query: SearchParams) =>
+  getSortingFromQuery(query).direction
+
+// What the browser would put back in the address bar, as Next hands it over
+const getQueryFromSorting = (
+  sorting: Sorting,
+  direction: SortingDirection,
+): Record<string, string> =>
+  Object.fromEntries(
+    new URLSearchParams(serializeSorting({ sorting, direction })),
+  )
+
+const car = (over: Partial<NewCar>): Car =>
+  deriveCar({
+    make: 'Make',
+    model: 'Model',
+    heroImageName: 'x',
+    price: 5_000_000,
+    sellerURL: 'https://example.is',
+    acceleration: 7,
+    capacity: 60,
+    range: 400,
+    drive: 'FWD',
+    seats: 5,
+    timeToCharge10T080: 30,
+    power: 150,
+    ...over,
+  })
 
 describe('reading the sorting out of the query', () => {
   it('defaults to name when the param is missing or unknown', () => {
-    expect(getSortingFromQuery({})).toBe('name')
-    expect(getSortingFromQuery({ radaeftir: 'bogus' })).toBe('name')
+    expect(readSorting({})).toBe('name')
+    expect(readSorting({ radaeftir: 'bogus' })).toBe('name')
     // `in` used to answer for these, and a function is not a Sorting
-    expect(getSortingFromQuery({ radaeftir: 'toString' })).toBe('name')
+    expect(readSorting({ radaeftir: 'toString' })).toBe('name')
   })
 
   it.each(Object.entries(sortingToQuery))(
     'round trips %s through its Icelandic param',
     (sorting, query) => {
-      expect(getSortingFromQuery({ radaeftir: query })).toBe(sorting)
+      expect(readSorting({ radaeftir: query })).toBe(sorting)
     },
   )
 
   // A repeated param arrives as an array; neither of these is a list
   it('takes the first value when the param is given twice', () => {
-    expect(getSortingFromQuery({ radaeftir: ['draegni', 'verdi'] })).toBe(
-      'range',
+    expect(readSorting({ radaeftir: ['draegni', 'verdi'] })).toBe('range')
+    expect(readDirection({ radaeftir: ['verdi'], ofugt: ['1', '0'] })).toBe(
+      'desc',
     )
-    expect(
-      getDirectionFromQuery({ radaeftir: ['verdi'], ofugt: ['1', '0'] }),
-    ).toBe('desc')
   })
 })
 
 // ofugt means "flipped from the default", not "descending"
 describe('direction', () => {
   it('starts each sorting in its most useful direction', () => {
-    expect(getDirectionFromQuery({ radaeftir: 'verdi' })).toBe('asc')
-    expect(getDirectionFromQuery({ radaeftir: 'draegni' })).toBe('desc')
+    expect(readDirection({ radaeftir: 'verdi' })).toBe('asc')
+    expect(readDirection({ radaeftir: 'draegni' })).toBe('desc')
   })
 
   it('reads ofugt as a flip of that default, not as descending', () => {
-    expect(getDirectionFromQuery({ radaeftir: 'verdi', ofugt: '1' })).toBe(
-      'desc',
-    )
-    expect(getDirectionFromQuery({ radaeftir: 'draegni', ofugt: '1' })).toBe(
-      'asc',
-    )
+    expect(readDirection({ radaeftir: 'verdi', ofugt: '1' })).toBe('desc')
+    expect(readDirection({ radaeftir: 'draegni', ofugt: '1' })).toBe('asc')
   })
 
   it('knows when a direction is the default one', () => {
@@ -177,8 +185,8 @@ describe('sorting survives a round trip through the URL', () => {
   it.each(cases)('%s %s comes back unchanged', (sorting, direction) => {
     const query = getQueryFromSorting(sorting, direction)
 
-    expect(getSortingFromQuery(query)).toBe(sorting)
-    expect(getDirectionFromQuery(query)).toBe(direction)
+    expect(readSorting(query)).toBe(sorting)
+    expect(readDirection(query)).toBe(direction)
   })
 
   // The tidy URL the site is meant to have when nothing has been chosen
@@ -197,13 +205,13 @@ describe('sorting survives a round trip through the URL', () => {
     })
   })
 
-  it('writes only keys the client knows to clear', () => {
+  it('writes only its own two keys', () => {
     const written = new Set(
       cases.flatMap(([sorting, direction]) =>
         Object.keys(getQueryFromSorting(sorting, direction)),
       ),
     )
 
-    expect([...written].sort()).toEqual([...sortingQueryKeys].sort())
+    expect([...written].sort()).toEqual(Object.values(sortingUrlKeys).sort())
   })
 })

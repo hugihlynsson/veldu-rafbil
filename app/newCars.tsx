@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 
@@ -9,78 +9,20 @@ import Title from '../components/Title'
 import Toggles from '../components/Toggles'
 import FilterModal from '../components/FilterModal'
 import ActiveFilters from '../components/ActiveFilters'
-import newCars from '../modules/newCars'
+import cars from '../modules/cars'
 import carFilter from '../modules/carFilter'
-import { filterQueryKeys, getQueryFromFilters } from '../modules/filters'
-import getCarId from '../modules/getCarId'
-import { Filters, Sorting, SortingDirection } from '../types'
-import {
-  defaultDirection,
-  flipDirection,
-  getQueryFromSorting,
-  sortCars,
-  sortingQueryKeys,
-} from '../modules/sorting'
+import { Filters, Sorting } from '../types'
+import { sortCars } from '../modules/sorting'
 import { agree } from '../modules/plural'
 import { grantAmountText, grantCeilingText } from '../modules/grantCopy'
 import useBodyScrollLock from '../utils/useBodyScrollLock'
+import { useFilters, useSorting } from '../utils/useListState'
 
 // Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
 // so arriving a moment later shifts nothing.
 const ChatContainer = dynamic(() => import('../components/ChatContainer'), {
   ssr: false,
 })
-
-// Clears the keys the serialiser left out, so switching a filter off takes its
-// parameter. Straight to the history, so the effects below don't depend on it.
-const replaceQuery = (
-  keys: readonly string[],
-  query: Record<string, string>,
-) => {
-  const params = new URLSearchParams(window.location.search)
-
-  for (const key of keys) {
-    const value = query[key]
-    if (value === undefined) {
-      params.delete(key)
-    } else {
-      params.set(key, value)
-    }
-  }
-
-  window.history.replaceState(null, '', `?${params.toString()}`)
-}
-
-const useSorting = (initial: Sorting, initialDirection: SortingDirection) => {
-  const [sorting, setSorting] = useState<Sorting>(initial)
-  const [direction, setDirection] = useState<SortingDirection>(initialDirection)
-
-  useEffect(() => {
-    replaceQuery(sortingQueryKeys, getQueryFromSorting(sorting, direction))
-  }, [sorting, direction])
-
-  // The active sorting flips; another one starts in its default direction
-  const toggleSorting = (value: Sorting) => {
-    if (value === sorting) {
-      setDirection(flipDirection)
-    } else {
-      setSorting(value)
-      setDirection(defaultDirection[value])
-    }
-  }
-
-  return [sorting, direction, toggleSorting] as const
-}
-
-const useFilters = (initial: Filters) => {
-  const [filters, setFilters] = useState<Filters>(initial)
-
-  useEffect(() => {
-    replaceQuery(filterQueryKeys, getQueryFromFilters(filters))
-  }, [filters])
-
-  return [filters, setFilters] as const
-}
 
 const carWord = (count: number) => agree(count, 'bíll', 'bílar')
 
@@ -101,39 +43,19 @@ const toggleSortings: Sorting[] = [
   'value',
 ]
 
-interface Props {
-  sorting: Sorting
-  direction: SortingDirection
-  filters: Filters
-}
-
-export default function NewCars({
-  sorting: initialSorting,
-  direction: initialDirection,
-  filters: initialFilters,
-}: Props) {
-  const [sorting, direction, toggleSorting] = useSorting(
-    initialSorting,
-    initialDirection,
-  )
-  const [filters, setFilters] = useFilters(initialFilters)
+export default function NewCars() {
+  const { sorting, direction, toggleSorting } = useSorting()
+  const { filters, setFilters, removeFilter } = useFilters()
 
   const [editingFilters, setEditingFilters] = useState<boolean>(false)
 
   useBodyScrollLock(editingFilters)
 
-  const handleRemoveFilter = (name: keyof Filters) =>
-    setFilters((filters) => {
-      const newFilters = Object.assign({}, filters)
-      delete newFilters[name]
-      return newFilters
-    })
-
-  const filteredCars = newCars.filter(carFilter(filters))
+  const filteredCars = cars.filter(carFilter(filters))
 
   const hasFilter = Object.values(filters).length > 0
 
-  const filteredCarCount = newCars.length - filteredCars.length
+  const filteredCarCount = cars.length - filteredCars.length
 
   return (
     <div className="max-w-[1024px] mx-auto">
@@ -141,8 +63,8 @@ export default function NewCars({
         <Title />
 
         <p className="leading-6 text-sm pt-6 m-0 mb-8 text-stone max-w-[33em] text-pretty md:text-base">
-          Listi yfir alla {newCars.length} bílana sem eru seldir á Íslandi og
-          eru 100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
+          Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og eru
+          100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
           <a
             href="http://wltpfacts.eu/"
             className="no-underline font-semibold text-tint hover:underline"
@@ -196,7 +118,7 @@ export default function NewCars({
 
         <ActiveFilters
           filters={filters}
-          onRemoveFilter={handleRemoveFilter}
+          onRemoveFilter={removeFilter}
           onOpenFilterModal={() => setEditingFilters(true)}
           filteredCarsCount={filteredCars.length}
         />
@@ -214,7 +136,7 @@ export default function NewCars({
         <Car
           preload={index <= 1}
           car={car}
-          key={getCarId(car)}
+          key={car.id}
           showValue={sorting === 'value' || Boolean(filters.value)}
           showSeats={Boolean(filters.seats)}
         />
@@ -227,7 +149,7 @@ export default function NewCars({
           <button
             className="border-0 shrink-0 m-0 mr-2 text-xs font-semibold py-[5px] px-3 rounded-full cursor-pointer text-center flex justify-center items-center bg-cloud transition-all duration-200 text-tint hover:bg-haze"
             onClick={(_event) => {
-              setFilters(() => ({}))
+              setFilters({})
               window.scrollTo({ top: 0 })
             }}
           >
@@ -239,10 +161,10 @@ export default function NewCars({
       {editingFilters && (
         <FilterModal
           initialFilters={filters}
-          onSubmit={(filters: Filters) => setFilters(() => filters)}
+          onSubmit={setFilters}
           onDone={() => setEditingFilters(() => false)}
           getCountPreview={(filters: Filters) =>
-            newCars.filter(carFilter(filters)).length
+            cars.filter(carFilter(filters)).length
           }
         />
       )}
