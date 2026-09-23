@@ -2,8 +2,7 @@ import { google } from '@ai-sdk/google'
 import { streamText, convertToModelMessages, stepCountIs, UIMessage } from 'ai'
 import { Axiom } from '@axiomhq/js'
 import { z } from 'zod'
-import newCars from '../../../modules/newCars'
-import getPriceWithGrant from '../../../modules/getPriceWithGrant'
+import cars from '../../../modules/cars'
 import {
   grantAmountText,
   grantCeilingDativeText,
@@ -17,10 +16,10 @@ import { clientKey, rateLimit } from './rateLimit'
 // https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard
 const modelName = 'gemini-3.7-flash'
 
-const carsSummary = newCars
+const carsSummary = cars
   .map(
     (car) =>
-      `${car.make} ${car.model} ${car.subModel ? car.subModel : ''}: ${getPriceWithGrant(car.price).toLocaleString('is-IS')} kr, ${car.range} km drægni, ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseURL ? ` (more info: ${car.evDatabaseURL})` : ''}`,
+      `${car.label}: ${car.priceWithGrant.toLocaleString('is-IS')} kr, ${car.range} km drægni, ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseURL ? ` (more info: ${car.evDatabaseURL})` : ''}`,
   )
   .join('\n')
 
@@ -28,7 +27,7 @@ const systemPrompt = `Þú ert hjálpsamur ráðgjafi fyrir Veldu Rafbíl, ísle
 
 - Þú ert reiprennandi á íslensku og svarar alltaf á íslensku.
 
-Þú hefur aðgang að upplýsingum um ${newCars.length} rafbíla sem eru fáanlegir á Íslandi:
+Þú hefur aðgang að upplýsingum um ${cars.length} rafbíla sem eru fáanlegir á Íslandi:
 
 ${carsSummary}
 

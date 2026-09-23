@@ -1,13 +1,7 @@
-import getKmPerMinutesCharged from './getKmPerMinutesCharged'
-import {
-  NewCar,
-  SearchParams,
-  Sorting,
-  SortingDirection,
-  SortingQuery,
-} from '../types'
-import getPriceWithGrant from './getPriceWithGrant'
-import { first, oneOf } from './searchParams'
+import { createLoader, createParser, createSerializer } from 'nuqs/server'
+
+import { SearchParams, Sorting, SortingDirection, SortingQuery } from '../types'
+import { Car } from './cars'
 
 const queryToSorting: Record<string, Sorting> = {
   nafni: 'name',
@@ -40,44 +34,34 @@ export const defaultDirection: Record<Sorting, SortingDirection> = {
 export const flipDirection = (direction: SortingDirection): SortingDirection =>
   direction === 'asc' ? 'desc' : 'asc'
 
-export const getSortingFromQuery = (query: SearchParams): Sorting =>
-  oneOf(query.radaeftir, queryToSorting) ?? 'name'
-
-export const getDirectionFromQuery = (
-  query: SearchParams,
-): SortingDirection => {
-  const base = defaultDirection[getSortingFromQuery(query)]
-  return first(query.ofugt) === '1' ? flipDirection(base) : base
-}
-
 export const isDefaultDirection = (
   sorting: Sorting,
   direction: SortingDirection,
 ): boolean => defaultDirection[sorting] === direction
 
 // Zero padded so the name sort can break its ties on price as text
-const padPrice = (car: NewCar): string =>
-  getPriceWithGrant(car.price).toString().padStart(9, '0')
+const padPrice = (car: Car): string =>
+  car.priceWithGrant.toString().padStart(9, '0')
 
 /**
  * What a car is ranked by, always ascending — the direction is applied to the
  * comparison afterwards. Add a `Sorting` case here and TypeScript's exhaustive
  * switch will flag everywhere else that needs it.
  */
-const sortingKey = (sorting: Sorting, car: NewCar): number | string => {
+const sortingKey = (sorting: Sorting, car: Car): number | string => {
   switch (sorting) {
     case 'name':
       return `${car.make} ${car.model} ${padPrice(car)}`
     case 'price':
-      return getPriceWithGrant(car.price)
+      return car.priceWithGrant
     case 'range':
       return car.range
     case 'acceleration':
       return car.acceleration
     case 'value':
-      return getPriceWithGrant(car.price) / car.range
+      return car.pricePerKm
     case 'fastcharge':
-      return getKmPerMinutesCharged(car.timeToCharge10T080, car.range)
+      return car.kmPerMinuteCharged
   }
 }
 
@@ -98,13 +82,13 @@ const compareKeys = (a: number | string, b: number | string): number =>
  * so equal-ranked cars keep the order the data gave them.
  */
 export const sortCars = (
-  cars: ReadonlyArray<NewCar>,
+  cars: ReadonlyArray<Car>,
   sorting: Sorting,
   direction: SortingDirection = defaultDirection[sorting],
-): Array<NewCar> => {
+): Array<Car> => {
   const order = direction === 'asc' ? 1 : -1
   const keyed = cars.map(
-    (car) => [car, sortingKey(sorting, car)] as [NewCar, number | string],
+    (car) => [car, sortingKey(sorting, car)] as [Car, number | string],
   )
 
   keyed.sort(([, a], [, b]) => order * compareKeys(a, b))
@@ -112,23 +96,63 @@ export const sortCars = (
   return keyed.map(([car]) => car)
 }
 
-// The two parameters the sorting can occupy, cleared and rewritten together
-export const sortingQueryKeys = ['radaeftir', 'ofugt'] as const
+const parseAsSorting = createParser<Sorting>({
+  parse: (value) =>
+    Object.hasOwn(queryToSorting, value) ? queryToSorting[value] : null,
+  serialize: (sorting) => sortingToQuery[sorting],
+})
 
-// Not a mirror of the readers: the default leaves the URL clean, and the flip
-// parameter records a deviation from it rather than "descending".
-export const getQueryFromSorting = (
-  sorting: Sorting,
-  direction: SortingDirection,
-): Record<string, string> => {
-  const query: Record<string, string> = {}
-  const isDefault = isDefaultDirection(sorting, direction)
+// ofugt records a flip from the sorting's default, not "descending", so the
+// default leaves the URL clean whichever way that default points
+const parseAsFlip = createParser<boolean>({
+  parse: (value) => value === '1',
+  serialize: () => '1',
+})
 
-  if (sorting !== 'name' || !isDefault) {
-    query.radaeftir = sortingToQuery[sorting]
-  }
-
-  if (!isDefault) query.ofugt = '1'
-
-  return query
+// What nuqs is handed, on the server and in the browser alike
+export const sortingParsers = {
+  sorting: parseAsSorting.withDefault('name'),
+  flipped: parseAsFlip.withDefault(false),
 }
+export const sortingUrlKeys = { sorting: 'radaeftir', flipped: 'ofugt' }
+
+export interface SortingState {
+  sorting: Sorting
+  direction: SortingDirection
+}
+
+export const stateFromSortingValues = ({
+  sorting,
+  flipped,
+}: {
+  sorting: Sorting
+  flipped: boolean
+}): SortingState => ({
+  sorting,
+  direction: flipped
+    ? flipDirection(defaultDirection[sorting])
+    : defaultDirection[sorting],
+})
+
+export const sortingValuesFromState = ({
+  sorting,
+  direction,
+}: SortingState) => ({
+  sorting,
+  flipped: !isDefaultDirection(sorting, direction),
+})
+
+const loadSortingValues = createLoader(sortingParsers, {
+  urlKeys: sortingUrlKeys,
+})
+
+export const getSortingFromQuery = (query: SearchParams): SortingState =>
+  stateFromSortingValues(loadSortingValues(query))
+
+const serializeSortingValues = createSerializer(sortingParsers, {
+  urlKeys: sortingUrlKeys,
+})
+
+/** The query string for a sorting, `?` and all, or '' for the default */
+export const serializeSorting = (state: SortingState): string =>
+  serializeSortingValues(sortingValuesFromState(state))

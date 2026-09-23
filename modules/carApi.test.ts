@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { buildCarsPayload, toApiCar } from './carApi'
 import newCars from './newCars'
+import cars, { deriveCar } from './cars'
 import getCarId from './getCarId'
 import getPriceWithGrant from './getPriceWithGrant'
 import { grantAmount, grantPriceCeiling } from './globals'
@@ -29,7 +30,7 @@ describe('the published car payload', () => {
 
   // A consumer quoting price.list for a car that qualifies overstates it
   it('applies the grant the same way the site does', () => {
-    for (const car of newCars) {
+    for (const car of cars) {
       const { price } = toApiCar(car)
       expect(price.withGrant, label(car)).toBe(getPriceWithGrant(car.price))
       expect(price.list - price.withGrant, label(car)).toBe(price.grantApplied)
@@ -42,12 +43,14 @@ describe('the published car payload', () => {
   })
 
   it('gives the grant to a car under the ceiling and not to one over it', () => {
-    const under = toApiCar({ ...newCars[0]!, price: grantPriceCeiling - 1 })
+    const under = toApiCar(
+      deriveCar({ ...newCars[0]!, price: grantPriceCeiling - 1 }),
+    )
     expect(under.price.grantApplied).toBe(grantAmount)
     expect(under.price.withGrant).toBe(grantPriceCeiling - 1 - grantAmount)
 
     // The ceiling is exclusive
-    const at = toApiCar({ ...newCars[0]!, price: grantPriceCeiling })
+    const at = toApiCar(deriveCar({ ...newCars[0]!, price: grantPriceCeiling }))
     expect(at.price.grantApplied).toBe(0)
     expect(at.price.withGrant).toBe(grantPriceCeiling)
   })
@@ -59,7 +62,7 @@ describe('the published car payload', () => {
   })
 
   it('derives availability from the expected delivery, both ways', () => {
-    for (const car of newCars) {
+    for (const car of cars) {
       const published = toApiCar(car)
       if (car.expectedDelivery) {
         expect(published.availability, label(car)).toBe('expected')
@@ -82,7 +85,7 @@ describe('the published car payload', () => {
 
   // Same name inside and out, because it already says what it is
   it('publishes the seat count unchanged', () => {
-    for (const car of newCars) {
+    for (const car of cars) {
       expect(toApiCar(car).seats, label(car)).toBe(car.seats)
     }
   })

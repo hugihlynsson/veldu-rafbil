@@ -1,22 +1,18 @@
 import { FunctionComponent } from 'react'
 import Image from 'next/image'
 
-import { NewCar as NewCarType } from '../types'
+import { Car } from '../modules/cars'
 import addDecimalSeprators from '../modules/addDecimalSeparators'
-import getPriceWithGrant from '../modules/getPriceWithGrant'
-import getCarId from '../modules/getCarId'
 import prefersReducedMotion from '../utils/prefersReducedMotion'
 
 interface Props {
-  car: NewCarType
+  car: Car
   onClose?: () => void
 }
 
 const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
-  const priceWithGrant = getPriceWithGrant(car.price)
+  const { id: carId, priceWithGrant } = car
   const hasGrant = priceWithGrant !== car.price
-
-  const carId = getCarId(car)
 
   const handleClick = () => {
     if (onClose) {

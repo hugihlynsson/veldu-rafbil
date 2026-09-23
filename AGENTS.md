@@ -46,13 +46,18 @@ governs rather than here, and pin it with a test.
 
 ## Layout
 
-| Path              | What lives there                                                     |
-| ----------------- | -------------------------------------------------------------------- |
-| `modules/`        | Pure logic: no React, no browser. The car data lives here too        |
-| `utils/`          | The things that _do_ need React or the browser                       |
-| `components/`     | The UI, including the chat                                           |
-| `app/page.tsx`    | Server component: turns `searchParams` into sorting and filter state |
-| `app/newCars.tsx` | `'use client'` — all list state, sorting, filtering, URL sync        |
+| Path              | What lives there                                                    |
+| ----------------- | ------------------------------------------------------------------- |
+| `modules/`        | Pure logic: no React, no browser. The car data lives here too       |
+| `utils/`          | The things that _do_ need React or the browser                      |
+| `components/`     | The UI, including the chat                                          |
+| `app/page.tsx`    | Server component, rendered per request so the list arrives in order |
+| `app/newCars.tsx` | `'use client'` — the list, its sorting and filters held by nuqs     |
+
+The car data is read through `modules/cars.ts`, not `newCars.ts`: each `Car`
+carries its id, label, price after the grant and charge rate, derived once. The
+URL state is one table in `modules/filters.ts` and two parsers in
+`modules/sorting.ts`, which nuqs reads on the server and writes in the browser.
 
 The whole rule for which of the first two a new file goes in: if it can be
 tested in plain node, it is a module, and it gets a test next to it. If it
