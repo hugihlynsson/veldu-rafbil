@@ -80,8 +80,10 @@ the largest file in the repo and most commits touch only it. Adding or updating
 a car is the `update-new-cars` skill — read it rather than working from a
 brochure directly.
 
-Never re-derive a car field. Money, range, charge rate and identity each have a
-module that owns them, and the rule is the comment there:
+Never re-derive a car field. Read cars through `modules/cars.ts`, whose `Car`
+already carries `id`, `label`, `priceWithGrant`, `pricePerKm` and
+`kmPerMinuteCharged`. Each of those has a module that owns the rule, and the
+rule is the comment there:
 
 | Before you                                  | Read                           |
 | ------------------------------------------- | ------------------------------ |
@@ -92,8 +94,8 @@ module that owns them, and the rule is the comment there:
 | build an anchor, React key or scroll target | `getCarId`                     |
 
 The grant is worth stating twice, because getting it wrong is silent:
-`car.price` is the _list_ price, everything user-facing goes through
-`getPriceWithGrant()`, and raw `car.price` is only ever the "full price without
+`car.price` is the _list_ price, everything user-facing reads
+`car.priceWithGrant`, and raw `car.price` is only ever the "full price without
 grant" tooltip.
 
 No number about the data is written out by hand — copy that counts cars
@@ -102,21 +104,19 @@ figures. Keep it that way.
 
 ## Sorting and filtering
 
-State lives in React _and_ in the URL, written with `history.replaceState`
-rather than through the router. Both directions of every mapping live beside
-each other in `modules/sorting.ts` and `modules/filters.ts`, so a test can run
-state out through one and back in through the other.
+State lives in the URL, held by [nuqs](https://nuqs.dev): the same parsers
+read it on the server and write it in the browser with a shallow
+`history.replaceState`. Every filter is one entry in `filterDefinitions` in
+`modules/filters.ts` — its Icelandic key, its parser and the test it puts a car
+to — and the sorting is two parsers in `modules/sorting.ts`.
 
-Adding a sorting or a filter means touching every link in that chain: the types,
-both directions of the mapping, the key list the client clears before it writes,
-and the toggle list in the client component. The exhaustive switches and the
-`Required<Filters>` case in `filters.test.ts` are there to be your checklist —
-let the failing compile lead you rather than working from a list in this file.
-
-Read a parameter through `modules/searchParams.ts`, never with an
-`Array.isArray` at the call site. A filter that round-trips through the URL
-wants a test: a multi-value filter coming back as a single value matches
-nothing, and fails quietly.
+Adding a filter is an entry in that table plus its chip in `ActiveFilters.tsx`;
+both are mapped over `Filters`, so the compile tells you what is missing. A
+sorting needs its key in `sorting.ts` and a place in the toggle list in the
+client component. Write your own parser with `createParser` rather than an
+`Array.isArray` at a call site, and give a filter that round-trips through the
+URL a test: a multi-value filter coming back as a single value matches nothing,
+and fails quietly.
 
 ## Everything user-facing is Icelandic
 
