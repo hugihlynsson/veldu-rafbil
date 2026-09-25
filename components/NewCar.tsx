@@ -102,7 +102,7 @@ const NewCar: FunctionComponent<Props> = ({
           {!car.expectedDelivery && ' ↗'}
         </LinkPill>
 
-        <div className="flex mb-4 mt-6 max-w-[320px] justify-between">
+        <div className="flex mb-4 mt-6 max-w-[320px] justify-between xs:max-w-[360px]">
           <div className="mr-2 xs:mr-4 basis-1/3">
             <div className="uppercase text-[10px] font-semibold tracking-wider mb-[3px] text-stone">
               0-100 km/klst
