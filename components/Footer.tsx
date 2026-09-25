@@ -7,7 +7,7 @@ const Footer: FunctionComponent<{}> = () => (
   <>
     <Orflaedi />
     <footer className="bg-haze py-8 pb-[100px] xs:pt-14 md:pt-14">
-      <p className="mx-auto max-w-[480px] text-sm leading-6 px-4 text-stone xs:px-6 md:max-w-[1024px] md:px-10">
+      <p className="mx-auto max-w-[480px] text-sm leading-6 px-(--gutter) text-stone md:max-w-[1024px] md:px-10">
         Veldu Rafbíl er smíðuð af{' '}
         <a
           href="https://hugihlynsson.com"
@@ -25,7 +25,7 @@ const Footer: FunctionComponent<{}> = () => (
         .{' '}
       </p>
 
-      <p className="mx-auto max-w-[480px] text-sm leading-6 px-4 text-stone xs:px-6 md:max-w-[1024px] md:px-10">
+      <p className="mx-auto max-w-[480px] text-sm leading-6 px-(--gutter) text-stone md:max-w-[1024px] md:px-10">
         Ef þú ert með ábendingu eða fyrirspurn geturu sent póst á{' '}
         <a
           href="mailto:hugi@hey.com"

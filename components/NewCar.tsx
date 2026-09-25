@@ -63,7 +63,7 @@ const NewCar: FunctionComponent<Props> = ({
         />
       </div>
 
-      <div className="py-[10px] px-4 mx-auto max-w-[480px] xs:py-[18px] xs:px-6 md:m-0 md:ml-8 md:p-0 md:w-[330px] md:max-w-[380px] md:shrink-0 md:grow">
+      <div className="py-[10px] px-(--gutter) mx-auto max-w-[480px] xs:py-[18px] md:m-0 md:ml-8 md:p-0 md:w-[330px] md:max-w-[380px] md:shrink-0 md:grow">
         {car.expectedDelivery && (
           <div className="mb-0.5 text-base font-medium text-stone">
             Væntanlegur {car.expectedDelivery.toLowerCase()}

@@ -27,7 +27,7 @@ export default function RootLayout({ children }: Props) {
         <meta
           name="theme-color"
           media="(prefers-color-scheme: dark)"
-          content="#14161a"
+          content="#000000"
         />
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
