@@ -30,6 +30,7 @@
   --color-cloud: #eee; /* a fill on the page: pills, chat bubbles */
   --color-smoke: #ddd; /* the same fill, hovered */
   --color-raised: #fff; /* a control lifted off a tinted track */
+  --color-track: rgb(0 0 0 / 0.04); /* that track: the sorting tabs */
 
   /* Lines */
   --color-line: #eee; /* a divider */
@@ -70,7 +71,7 @@
   /* The side margin of text on a phone, where the photos run edge to edge.
      Light needs a real gutter to hold text off the black bezel; dark is
      black to the bezel, so the page and the phone read as one surface and
-     text only needs to clear the edge of the glass */
+     text only needs to clear the rounded edge of the glass */
   --gutter: 1rem;
 
   --shadow-hairline: 0 1px 0px 0 rgb(0 0 0 / 0.05);
@@ -118,6 +119,7 @@
     --color-cloud: #262626;
     --color-smoke: #303030;
     --color-raised: #383838;
+    --color-track: rgb(255 255 255 / 0.09);
 
     --color-line: #3a3a3a;
     --color-line-strong: #757575;
@@ -130,7 +132,7 @@
     --color-ink: #fff;
     --color-on-ink: #111;
     --ink-logo-filter: invert(1);
-    --gutter: 1px;
+    --gutter: 10px;
 
     --color-alarm: #ffb4a8;
     --color-alarm-surface: #3b1a15;

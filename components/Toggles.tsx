@@ -24,7 +24,7 @@ export default function Toggles<P>({
   return (
     <fieldset
       aria-labelledby={labelledBy}
-      className="flex max-w-full m-0 min-w-0 border-0 bg-scrim/4 self-start rounded-[10px] p-[3px] gap-[3px] xs:rounded-xl xs:p-1 xs:gap-1"
+      className="flex max-w-full m-0 min-w-0 border-0 bg-track self-start rounded-[10px] p-[3px] gap-[3px] xs:rounded-xl xs:p-1 xs:gap-1"
     >
       {items.map(([label, value]) => (
         <button
