@@ -137,7 +137,7 @@ export default function NewCars({
 
   return (
     <div className="max-w-[1024px] mx-auto">
-      <header className="flex flex-col items-stretch mx-auto max-w-[480px] p-4 xs:p-6 md:pl-10 md:max-w-none md:pb-10">
+      <header className="flex flex-col items-stretch mx-auto max-w-[480px] py-4 px-(--gutter) xs:py-6 md:pl-10 md:pr-6 md:max-w-none md:pb-10">
         <Title />
 
         <p className="leading-6 text-sm pt-6 m-0 mb-8 text-stone max-w-[33em] text-pretty md:text-base">
@@ -221,7 +221,7 @@ export default function NewCars({
       ))}
 
       {hasFilter && filteredCarCount > 0 && (
-        <div className="p-4 flex items-center mx-auto max-w-[480px] gap-2 text-xs font-medium mb-10 xs:p-6 md:pl-10 md:max-w-none">
+        <div className="flex items-center mx-auto max-w-[480px] gap-2 text-xs font-medium mb-10 py-4 px-(--gutter) xs:py-6 md:pl-10 md:pr-6 md:max-w-none">
           {filteredCarCount} {carWord(filteredCarCount)}{' '}
           {agree(filteredCarCount, 'passaði', 'pössuðu')} ekki við leitina{' '}
           <button

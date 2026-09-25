@@ -67,6 +67,12 @@
      on flip: none while the card is dark, invert(1) once the card is white */
   --ink-logo-filter: none;
 
+  /* The side margin of text on a phone, where the photos run edge to edge.
+     Light needs a real gutter to hold text off the black bezel; dark is
+     black to the bezel, so the page and the phone read as one surface and
+     text only needs to clear the edge of the glass */
+  --gutter: 1rem;
+
   --shadow-hairline: 0 1px 0px 0 rgb(0 0 0 / 0.05);
   --shadow-raised:
     0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
@@ -79,6 +85,12 @@
   --shadow-modal: 0px 8px 60px rgb(0 0 0 / 0.15);
   --shadow-card: 0 2px 32px rgb(0 0 0 / 0.2);
   --shadow-card-hover: 0 8px 64px rgb(0 0 0 / 0.3);
+}
+
+@media (min-width: 375px) {
+  :root {
+    --gutter: 1.5rem;
+  }
 }
 
 /* The dark values. Every one of them was picked against the surface it lands
@@ -98,7 +110,7 @@
     --color-stone: #b9b9b9;
     --color-clay: #999;
 
-    --color-lab: #151515;
+    --color-lab: #000;
     --color-haze: #0f0f0f;
     --color-surface: #1e1e1e;
     --color-glass: #181818;
@@ -118,6 +130,7 @@
     --color-ink: #fff;
     --color-on-ink: #111;
     --ink-logo-filter: invert(1);
+    --gutter: 1px;
 
     --color-alarm: #ffb4a8;
     --color-alarm-surface: #3b1a15;
