@@ -9,7 +9,7 @@ import {
 
 import { Availability, Drive, Filters, SearchParams } from '@/types'
 import { Car } from './cars'
-import { driveSchema } from './newCarSchema'
+import { drives } from './drives'
 
 type Value<Key extends keyof Filters> = NonNullable<Filters[Key]>
 
@@ -66,8 +66,6 @@ const parseAsList = <T extends string>(accept: (entry: string) => entry is T) =>
       a.length === b.length && a.every((entry, i) => entry === b[i]),
   })
 
-const drives: ReadonlyArray<string> = driveSchema.options
-
 /**
  * A lookup rather than parseAsStringLiteral, as the URL words are Icelandic.
  * hasOwn rather than `in`: every object has a `toString`, and it is not one of
@@ -103,7 +101,9 @@ export const filterDefinitions: {
   },
   drive: {
     urlKey: 'drif',
-    parser: parseAsList((entry): entry is Drive => drives.includes(entry)),
+    parser: parseAsList((entry): entry is Drive =>
+      (drives as ReadonlyArray<string>).includes(entry),
+    ),
     test: (drives) => (car) => drives.includes(car.drive),
   },
   fastcharge: {

@@ -1,6 +1,8 @@
 import { z } from 'zod'
 
-export const driveSchema = z.enum(['AWD', 'FWD', 'RWD'])
+import { drives } from './drives'
+
+export const driveSchema = z.enum(drives)
 
 /**
  * What a hand-written entry in newCars.ts has to be. The bounds are
