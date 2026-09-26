@@ -1,10 +1,12 @@
 import newCars from './newCars'
+import { filterUrlKeys } from './filters'
 import {
   grantAmount,
   grantPriceCeiling,
   realRangeHighFactor,
   realRangeLowFactor,
 } from './globals'
+import { sortingUrlKeys } from './sorting'
 
 // https://llmstxt.org: one markdown file telling a model what a site holds.
 // English, unlike the rest of the site — its readers are agents and whoever is
@@ -12,11 +14,14 @@ import {
 
 const percent = (factor: number) => `${Math.round(factor * 100)}%`
 
+// From the tables nuqs reads, so a name given here is one the list answers to
+const param = (key: string) => `\`${key}\``
+
 const buildLlmsText = (): string => `# Veldu Rafbíl
 
 > Veldu Rafbíl ("choose an electric car") lists every 100% electric car sold new in Iceland — currently ${newCars.length} — with price, range, charging and drivetrain figures, a link to the seller, and an AI advisor that answers questions about them in Icelandic. It is run as a non-profit community service by Hugi Hlynsson.
 
-The site itself is a single page in Icelandic, at \`/\`. Sorting and filtering travel in the query string, and those parameter names are Icelandic too (\`verdi\`, \`draegni\`, \`hrodun\`). To read the cars, use the JSON below rather than scraping the page.
+The site itself is a single page in Icelandic, at \`/\`. Sorting and filtering travel in the query string, and those parameter names are Icelandic too: ${param(sortingUrlKeys.sorting)} sorts, and ${param(filterUrlKeys.price)} and ${param(filterUrlKeys.range)} are two of the filters. To read the cars, use the JSON below rather than scraping the page.
 
 ## Data
 
