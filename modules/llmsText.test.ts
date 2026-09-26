@@ -2,7 +2,9 @@ import { describe, expect, it } from 'vitest'
 
 import buildLlmsText from './llmsText'
 import newCars from './newCars'
+import { filterUrlKeys } from './filters'
 import { grantAmount, grantPriceCeiling } from './globals'
+import { sortingUrlKeys } from './sorting'
 
 const text = buildLlmsText()
 
@@ -27,5 +29,21 @@ describe('llms.txt', () => {
 
   it('points at the machine-readable list', () => {
     expect(text).toContain('(/api/cars)')
+  })
+
+  // An agent that builds a link from a name that is not a parameter gets the
+  // whole list back, sorted by name, and no hint that anything went wrong
+  it('names only query parameters the list reads', () => {
+    const line = text.split('\n').find((line) => line.includes('query string'))
+    const named = [...(line ?? '').matchAll(/`([a-z]+)`/g)].map(
+      ([, name]) => name,
+    )
+    const keys: string[] = [
+      ...Object.values(sortingUrlKeys),
+      ...Object.values(filterUrlKeys),
+    ]
+
+    expect(named.length).toBeGreaterThan(0)
+    expect(named.filter((name) => !keys.includes(name))).toEqual([])
   })
 })
