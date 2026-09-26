@@ -10,7 +10,12 @@ import {
   convertReadableStreamToArray,
 } from 'ai/test'
 
-import { parseChatRequest, streamChat, type ChatFinish } from './chat'
+import {
+  parseChatRequest,
+  streamChat,
+  trimHistory,
+  type ChatFinish,
+} from './chat'
 import { MAX_QUESTION_LENGTH, type ChatMessage } from '@/modules/chatMessage'
 
 const question: ChatMessage = {
@@ -131,6 +136,63 @@ describe('streamChat', () => {
   })
 })
 
+describe('trimHistory', () => {
+  const answerOf = (id: string, length: number): ChatMessage => ({
+    id,
+    role: 'assistant',
+    parts: [{ type: 'text', text: 'a'.repeat(length) }],
+  })
+  const questionOf = (id: string): ChatMessage => ({ ...question, id })
+
+  it('keeps a conversation that fits', () => {
+    const messages = [questionOf('q1'), answerOf('a1', 500), questionOf('q2')]
+    expect(trimHistory(messages)).toEqual(messages)
+  })
+
+  it('drops the oldest exchanges past the budget, keeping the newest', () => {
+    const messages = [
+      questionOf('q1'),
+      answerOf('a1', 80_000),
+      questionOf('q2'),
+      answerOf('a2', 30_000),
+      questionOf('q3'),
+    ]
+    expect(trimHistory(messages).map((message) => message.id)).toEqual([
+      'q2',
+      'a2',
+      'q3',
+    ])
+  })
+
+  it('starts on a question rather than an orphaned answer', () => {
+    const messages = [
+      questionOf('q1'),
+      answerOf('a1', 80_000),
+      answerOf('a2', 30_000),
+      questionOf('q2'),
+    ]
+    expect(trimHistory(messages).map((message) => message.id)).toEqual(['q2'])
+  })
+
+  it('always keeps the question being asked', () => {
+    const messages = [answerOf('a1', 200_000), questionOf('q1')]
+    expect(trimHistory(messages).map((message) => message.id)).toEqual(['q1'])
+  })
+
+  it('sends the model only what was kept', async () => {
+    const model = modelSaying(['Svar.'])
+    await read(
+      await streamChat({
+        model,
+        messages: [questionOf('q1'), answerOf('a1', 200_000), questionOf('q2')],
+      }),
+    )
+
+    const prompt = JSON.stringify(model.doStreamCalls[0].prompt)
+    expect(prompt.length).toBeLessThan(200_000)
+  })
+})
+
 // The body schema is a security boundary: it has to keep refusing these
 describe('parseChatRequest', () => {
   const answer: ChatMessage = {
@@ -214,6 +276,10 @@ describe('parseChatRequest', () => {
           },
         ],
       },
+    ],
+    [
+      'a conversation that does not end on a question',
+      { messages: [question, answer] },
     ],
     [
       'a text part without text',

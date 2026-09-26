@@ -46,12 +46,14 @@ const answerSchema = z
 // Only bounds the body, so an oversized post is a 400 rather than a bill; the
 // shape of each message is validateUIMessages' to check. No `system`: the
 // instructions are ours, and a client sending its own is refused here rather
-// than failing inside streamText.
+// than failing inside streamText. Ending on a question keeps the one message
+// trimHistory never drops a small one.
 const requestSchema = z.object({
   messages: z
     .array(z.discriminatedUnion('role', [questionSchema, answerSchema]))
     .min(1)
-    .max(100),
+    .max(100)
+    .refine((messages) => messages.at(-1)?.role === 'user'),
 })
 
 /** The conversation a request carries, or null if it is not one we answer */
@@ -62,6 +64,33 @@ export const parseChatRequest = async (
   if (!bounded.success) return null
 
   return validateChatMessages(bounded.data.messages, tools)
+}
+
+// Characters of JSON, roughly 30k tokens, where the body limit alone would let
+// a forged history bill close to a million
+const HISTORY_BUDGET = 100_000
+
+/**
+ * The newest messages that fit the budget, oldest dropped first. Trimmed
+ * rather than refused, so a long conversation goes on with the model having
+ * forgotten its start. The last message, the question, is always kept.
+ */
+export const trimHistory = (messages: ChatMessage[]): ChatMessage[] => {
+  let start = messages.length - 1
+  let size = JSON.stringify(messages[start]).length
+
+  while (start > 0) {
+    size += JSON.stringify(messages[start - 1]).length
+    if (size > HISTORY_BUDGET) break
+    start -= 1
+  }
+
+  // Dropping from the front can leave an answer to a question no longer there
+  while (start < messages.length - 1 && messages[start].role !== 'user') {
+    start += 1
+  }
+
+  return messages.slice(start)
 }
 
 /** What a finished answer came to, for the log */
@@ -95,7 +124,7 @@ export const streamChat = async ({
   const result = streamText({
     model,
     system: systemPrompt,
-    messages: await convertToModelMessages(messages, { tools }),
+    messages: await convertToModelMessages(trimHistory(messages), { tools }),
     providerOptions,
     stopWhen: stepCountIs(10),
     tools,
