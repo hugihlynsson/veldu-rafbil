@@ -93,6 +93,10 @@ export const trimHistory = (messages: ChatMessage[]): ChatMessage[] => {
   return messages.slice(start)
 }
 
+// Per step, and it counts the model's thinking as well as its answer, so it is
+// set to stop a runaway rather than to shorten a real one
+const MAX_OUTPUT_TOKENS = 16_384
+
 /** What a finished answer came to, for the log */
 export interface ChatFinish {
   text: string
@@ -126,6 +130,7 @@ export const streamChat = async ({
     system: systemPrompt,
     messages: await convertToModelMessages(trimHistory(messages), { tools }),
     providerOptions,
+    maxOutputTokens: MAX_OUTPUT_TOKENS,
     stopWhen: stepCountIs(10),
     tools,
     experimental_transform: followUpTransform(followUps),

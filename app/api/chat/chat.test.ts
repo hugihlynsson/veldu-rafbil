@@ -124,6 +124,13 @@ describe('streamChat', () => {
     expect(finish?.usage.totalTokens).toBe(30)
   })
 
+  it('bounds how much the model may write', async () => {
+    const model = modelSaying(['Svar.'])
+    await read(await streamChat({ model, messages: [question] }))
+
+    expect(model.doStreamCalls[0].maxOutputTokens).toBeGreaterThan(0)
+  })
+
   it('sends no metadata for an answer without follow-ups', async () => {
     const { message } = await read(
       await streamChat({
