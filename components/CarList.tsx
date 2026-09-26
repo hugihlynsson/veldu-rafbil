@@ -10,7 +10,7 @@ import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/FilterModal'
 import ActiveFilters from '@/components/ActiveFilters'
 import cars from '@/modules/cars'
-import carFilter from '@/modules/carFilter'
+import carFilter, { filtersShowing } from '@/modules/carFilter'
 import { normalizeFilters } from '@/modules/filters'
 import { Filters, Sorting } from '@/types'
 import { sortCars } from '@/modules/sorting'
@@ -170,7 +170,12 @@ export default function CarList() {
         />
       )}
 
-      <ChatContainer hide={editingFilters} />
+      <ChatContainer
+        hide={editingFilters}
+        onShowCar={(car) => {
+          if (!carFilter(filters)(car)) setFilters(filtersShowing(filters, car))
+        }}
+      />
     </div>
   )
 }

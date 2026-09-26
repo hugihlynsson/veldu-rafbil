@@ -2,17 +2,20 @@
 
 import React from 'react'
 import MiniCar from '@/components/MiniCar'
+import type { Car } from '@/modules/cars'
 import { findMentionedCars } from '@/modules/chatHelpers'
 import { getMessageText, type ChatMessage } from '@/modules/chatMessage'
 
 interface Props {
   lastMessage?: ChatMessage
   onClose: () => void
+  onShowCar: (car: Car) => void
 }
 
 const MentionedCars: React.FunctionComponent<Props> = ({
   lastMessage,
   onClose,
+  onShowCar,
 }) => {
   if (!lastMessage || lastMessage.role !== 'assistant') return null
 
@@ -29,7 +32,13 @@ const MentionedCars: React.FunctionComponent<Props> = ({
             className="opacity-0 animate-[slideInCar_0.5s_cubic-bezier(0.16,1,0.3,1)_forwards] shrink-0"
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            <MiniCar car={car} onClose={onClose} />
+            <MiniCar
+              car={car}
+              onSelect={() => {
+                onShowCar(car)
+                onClose()
+              }}
+            />
           </div>
         ))}
       </div>
