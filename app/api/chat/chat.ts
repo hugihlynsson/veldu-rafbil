@@ -15,9 +15,13 @@ import {
   trimHistory,
 } from '@/modules/chatRequest'
 import { followUpTransform } from '@/modules/followUps'
-import { fetchCarDetailsTool } from './tools/fetchCarDetails'
+import { createFetchCarDetailsTool } from './tools/fetchCarDetails'
 
-const tools = { fetchCarDetails: fetchCarDetailsTool }
+const createTools = () => ({ fetchCarDetails: createFetchCarDetailsTool() })
+
+// Reading a conversation asks only for the tools' schemas; an answer is given
+// tools of its own, as the car-details tool counts its calls
+const tools = createTools()
 
 // Only bounds the body, so an oversized post is a 400 rather than a bill.
 // Ending on a question keeps the one message trimHistory never drops a small
@@ -71,15 +75,18 @@ export const streamChat = async ({
   onFinish,
 }: StreamChatOptions): Promise<Response> => {
   const followUps: string[] = []
+  const answerTools = createTools()
 
   const result = streamText({
     model,
     system: systemPrompt,
-    messages: await convertToModelMessages(trimHistory(messages), { tools }),
+    messages: await convertToModelMessages(trimHistory(messages), {
+      tools: answerTools,
+    }),
     providerOptions,
     maxOutputTokens: MAX_OUTPUT_TOKENS,
     stopWhen: stepCountIs(10),
-    tools,
+    tools: answerTools,
     experimental_transform: followUpTransform(followUps),
     onFinish: ({ text, totalUsage, steps }) =>
       onFinish?.({

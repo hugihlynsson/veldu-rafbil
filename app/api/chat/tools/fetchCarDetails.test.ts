@@ -1,12 +1,20 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { fetchCarDetailsTool } from './fetchCarDetails'
+import {
+  createFetchCarDetailsTool,
+  MAX_CALLS_PER_ANSWER,
+} from './fetchCarDetails'
 import newCars from '@/modules/newCars'
 
+type Tool = ReturnType<typeof createFetchCarDetailsTool>
+
 // The allowlist is all that stands between a prompt and an arbitrary fetch
-const run = async (url: string): Promise<{ specifications: string }> => {
+const run = async (
+  url: string,
+  tool: Tool = createFetchCarDetailsTool(),
+): Promise<{ specifications: string }> => {
   // The options are only along for the ride; this tool reads none of them
-  const result = await fetchCarDetailsTool.execute!({ url, carName: 'Test' }, {
+  const result = await tool.execute!({ url, carName: 'Test' }, {
     toolCallId: 'test',
     messages: [],
   } as never)
@@ -113,6 +121,28 @@ describe('fetchCarDetails', () => {
     )
 
     expect((await run(allowed)).specifications).toBe('No specifications found')
+  })
+
+  it('fetches no more cars than one answer is allowed', async () => {
+    const allowed = newCars
+      .map((car) => car.evDatabaseUrl)
+      .filter((url): url is string => Boolean(url))
+      .slice(0, MAX_CALLS_PER_ANSWER + 1)
+    const fetchSpy = vi
+      .spyOn(globalThis, 'fetch')
+      .mockImplementation(
+        async () =>
+          new Response('<tr><td>Seats</td><td>5</td></tr>', { status: 200 }),
+      )
+
+    const tool = createFetchCarDetailsTool()
+    const results = []
+    for (const url of allowed) results.push(await run(url, tool))
+
+    expect(fetchSpy).toHaveBeenCalledTimes(MAX_CALLS_PER_ANSWER)
+    expect(results.at(-1)?.specifications).toMatch(/already been fetched/)
+    // The next answer starts over
+    expect((await run(allowed[0])).specifications).toContain('seats: 5')
   })
 
   it('fetches a URL that a car in the list actually points at', async () => {
