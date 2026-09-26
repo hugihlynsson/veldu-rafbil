@@ -114,8 +114,10 @@ read it on the server and write it in the browser with a shallow
 `modules/filters.ts` — its Icelandic key, its parser and the test it puts a car
 to — and the sorting is two parsers in `modules/sorting.ts`.
 
-Adding a filter is an entry in that table plus its chip in `ActiveFilters.tsx`;
-both are mapped over `Filters`, so the compile tells you what is missing. A
+Adding a filter is an entry in that table, its chip in `ActiveFilters.tsx`, and
+its field and `case` in `FilterModal.tsx`. The first two are mapped over
+`Filters` and the modal's switch is exhaustive, so the compile tells you what
+is missing; only the field is on you. A
 sorting needs its key in `sorting.ts` and a place in the toggle list in the
 client component. Write your own parser with `createParser` rather than an
 `Array.isArray` at a call site, and give a filter that round-trips through the

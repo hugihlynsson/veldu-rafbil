@@ -195,6 +195,14 @@ export const valuesFromFilters = (filters: Filters): FilterValues =>
     }),
   ) as FilterValues
 
+/**
+ * The filters as the list will apply them once they are in the URL. The
+ * filter modal counts its preview from this, so a zero or a negative it holds
+ * while someone types is no filter there either, as it is in the list.
+ */
+export const normalizeFilters = (filters: Filters): Filters =>
+  filtersFromValues(valuesFromFilters(filters))
+
 const loadFilterValues = createLoader(filterParsers, { urlKeys: filterUrlKeys })
 
 export const getFiltersFromQuery = (query: SearchParams): Filters =>
