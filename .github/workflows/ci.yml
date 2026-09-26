@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # The ends of the range package.json engines promises
-        node: [22, 24]
+        # Every major package.json engines promises
+        node: [22, 24, 26]
     steps:
       - uses: actions/checkout@v5
 
