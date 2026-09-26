@@ -5,7 +5,22 @@ updates:
     schedule:
       interval: 'weekly'
       day: 'saturday'
-    auto-merge:
-      strategy: merge
-      allowed:
-        - update-type: version-update:semver-patch
+    groups:
+      # ai and @ai-sdk/* release together and only work at matching versions,
+      # majors included
+      ai-sdk:
+        patterns: ['ai', '@ai-sdk/*']
+      # The week's updates as one pull request. A major stays out of it, so one
+      # that needs work does not hold the rest back.
+      npm:
+        patterns: ['*']
+        update-types: ['minor', 'patch']
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'saturday'
+    groups:
+      actions:
+        patterns: ['*']
