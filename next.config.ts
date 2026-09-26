@@ -41,7 +41,7 @@ const nextConfig: NextConfig = {
       // Only ever reached through the rewrite below, which redirects do not
       // see; asked for by name, it is the list at its one address
       {
-        source: '/listi',
+        source: '/with-query',
         destination: '/',
         permanent: true,
       },
@@ -54,7 +54,7 @@ const nextConfig: NextConfig = {
       beforeFiles: listQueryKeys.map((key) => ({
         source: '/',
         has: [{ type: 'query' as const, key }],
-        destination: '/listi',
+        destination: '/with-query',
       })),
       afterFiles: [],
       fallback: [],
