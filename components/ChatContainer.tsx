@@ -5,6 +5,7 @@ import { useChat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
 import dynamic from 'next/dynamic'
 import FloatingChat from './ChatInput'
+import type { Car } from '@/modules/cars'
 import { getMessageText, type ChatMessage } from '@/modules/chatMessage'
 import { trimHistory } from '@/modules/chatRequest'
 import useBodyScrollLock from '@/utils/useBodyScrollLock'
@@ -28,9 +29,11 @@ const transport = new DefaultChatTransport<ChatMessage>({
 
 interface Props {
   hide: boolean
+  /** An answer can point at a car the list's filters are hiding */
+  onShowCar: (car: Car) => void
 }
 
-export default function ChatContainer({ hide }: Props) {
+export default function ChatContainer({ hide, onShowCar }: Props) {
   const chatInputRef = useRef<HTMLInputElement>(null)
   const shouldFocusInput = useRef<boolean>(false)
   const [showChatMessages, setShowChatMessages] = useState<boolean>(false)
@@ -145,6 +148,7 @@ export default function ChatContainer({ hide }: Props) {
       onReleaseBodyLock={() => setReleaseBodyLock(true)}
       onSendMessage={handleSendMessage}
       onRetry={handleRetry}
+      onShowCar={onShowCar}
       composer={chatInput}
       composerRef={chatInputRef}
     />

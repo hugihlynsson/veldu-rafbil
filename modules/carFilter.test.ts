@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 
-import carFilter from './carFilter'
-import { deriveCar, Car } from './cars'
-import { NewCar } from '@/types'
+import carFilter, { filtersShowing } from './carFilter'
+import cars, { deriveCar, Car } from './cars'
+import { Filters, NewCar } from '@/types'
 
 const car = (over: Partial<NewCar>): Car =>
   deriveCar({
@@ -81,5 +81,42 @@ describe('carFilter', () => {
     const subject = car({ range: 500, drive: 'AWD' })
     expect(keep({ range: 400, drive: ['AWD'] }, subject)).toBe(true)
     expect(keep({ range: 600, drive: ['AWD'] }, subject)).toBe(false)
+  })
+})
+
+describe('filtersShowing', () => {
+  it('takes off only the filters the car fails', () => {
+    const filters: Filters = {
+      price: 5_000_000,
+      drive: ['AWD'],
+      name: ['polestar'],
+    }
+    expect(filtersShowing(filters, car({ drive: 'AWD' }))).toEqual({
+      drive: ['AWD'],
+    })
+  })
+
+  it('leaves filters the car already passes', () => {
+    const filters: Filters = { range: 400, seats: 5 }
+    expect(filtersShowing(filters, car({}))).toEqual(filters)
+  })
+
+  // Whatever the chat points at has to be on the list once it gets there
+  it('always leaves a list that shows the car', () => {
+    const strict: Required<Filters> = {
+      acceleration: 3,
+      availability: 'expected',
+      drive: ['FWD'],
+      fastcharge: 20,
+      name: ['nothing by this name'],
+      price: 1_000_000,
+      range: 900,
+      seats: 9,
+      value: 1_000,
+    }
+    const hidden = cars.filter(
+      (listed) => !carFilter(filtersShowing(strict, listed))(listed),
+    )
+    expect(hidden.map((listed) => listed.label)).toEqual([])
   })
 })

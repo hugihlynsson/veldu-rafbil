@@ -7,17 +7,16 @@ import prefersReducedMotion from '@/utils/prefersReducedMotion'
 
 interface Props {
   car: Car
-  onClose?: () => void
+  /** Before the scroll: whatever closes the chat and puts the car on the list */
+  onSelect?: () => void
 }
 
-const MiniCar: FunctionComponent<Props> = ({ car, onClose }) => {
+const MiniCar: FunctionComponent<Props> = ({ car, onSelect }) => {
   const { id: carId, priceWithGrant } = car
   const hasGrant = priceWithGrant !== car.price
 
   const handleClick = () => {
-    if (onClose) {
-      onClose()
-    }
+    onSelect?.()
 
     setTimeout(() => {
       const carElement = document.getElementById(carId)

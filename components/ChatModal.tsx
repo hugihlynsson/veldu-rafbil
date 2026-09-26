@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react'
 import type { ChatStatus } from 'ai'
+import type { Car } from '@/modules/cars'
 import {
   getFollowUps,
   getMessageText,
@@ -24,6 +25,8 @@ interface Props {
   onReleaseBodyLock: () => void
   onSendMessage: (message: string) => void
   onRetry: () => void
+  /** Puts a car the answer mentions on the list, before it is scrolled to */
+  onShowCar: (car: Car) => void
   /** Inside the dialog, since showModal() makes the page outside it inert */
   composer: React.ReactNode
   /** Focused after open: showModal() would land on the close button */
@@ -39,6 +42,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
   onReleaseBodyLock,
   onSendMessage,
   onRetry,
+  onShowCar,
   composer,
   composerRef,
 }) => {
@@ -125,7 +129,11 @@ const ChatModal: React.FunctionComponent<Props> = ({
               )}
 
               {status !== 'streaming' && lastMessage && (
-                <MentionedCars lastMessage={lastMessage} onClose={close} />
+                <MentionedCars
+                  lastMessage={lastMessage}
+                  onClose={close}
+                  onShowCar={onShowCar}
+                />
               )}
 
               {status !== 'streaming' && lastMessageFollowUps.length > 0 && (
