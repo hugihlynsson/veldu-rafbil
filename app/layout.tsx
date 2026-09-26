@@ -18,7 +18,6 @@ export default function RootLayout({ children }: Props) {
           sizes="512x512"
           type="image/png"
         />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         {/* --color-lab in app/globals.css, for the browser chrome around the
             page: a white bar over a dark page is the one seam CSS cannot reach */}
         <meta
