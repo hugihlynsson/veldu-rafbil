@@ -163,9 +163,10 @@ provider's implicit prompt caching worth having — it only hits on an identical
 prefix, so keep anything per-request out of the system prompt.
 
 The endpoint is public and spends money. The rate limit, the body schema, and
-the allowlist, timeout and response cap on the car-details tool are a security
-boundary, not a nicety: the model chooses the URL that tool fetches, and a model
-can be talked into choosing anything. Tests pin them, and all of them stay.
+the allowlist, redirect check, timeout, response cap and per-answer call limit
+on the car-details tool are a security boundary, not a nicety: the model
+chooses the URL that tool fetches, and a model can be talked into choosing
+anything. Tests pin them, and all of them stay.
 
 `route.ts` holds only what needs the request or the provider — the rate limit,
 the model and the logging, which runs in `after()` so it never holds the stream
