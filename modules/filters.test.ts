@@ -2,7 +2,12 @@ import { describe, expect, it } from 'vitest'
 
 import carFilter from './carFilter'
 import cars from './cars'
-import { filterUrlKeys, getFiltersFromQuery, serializeFilters } from './filters'
+import {
+  filterUrlKeys,
+  getFiltersFromQuery,
+  normalizeFilters,
+  serializeFilters,
+} from './filters'
 import { Filters } from '@/types'
 
 const matches = (filters: Filters) => cars.filter(carFilter(filters)).length
@@ -207,5 +212,22 @@ describe('filters survive a round trip through the URL', () => {
       Object.values(filterUrlKeys).sort(),
     )
     expect(roundTrip(everyFilter)).toEqual(everyFilter)
+  })
+})
+
+// The modal's count preview used to test a negative price as typed, and showed
+// no cars for a filter the list then dropped and showed all of them for
+describe('normalizeFilters', () => {
+  it.each<[string, Filters, Filters]>([
+    ['a negative price', { price: -5 }, {}],
+    ['a zero range', { range: 0 }, {}],
+    ['a fractional price', { price: 6_000_000.4 }, { price: 6_000_000 }],
+    ['an empty list of names', { name: [] }, {}],
+    ['a filter it keeps', { range: 400 }, { range: 400 }],
+  ])('reads %s the way the URL will', (_label, filters, expected) => {
+    expect(normalizeFilters(filters)).toEqual(expected)
+    expect(normalizeFilters(filters)).toEqual(
+      getFiltersFromQuery(getQueryFromFilters(filters)),
+    )
   })
 })

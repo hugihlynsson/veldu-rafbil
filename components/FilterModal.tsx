@@ -30,12 +30,10 @@ const FiltersModal: React.FunctionComponent<Props> = ({
     (name: keyof Filters) =>
     (event: React.FormEvent<HTMLInputElement | HTMLSelectElement>) => {
       const value = event.currentTarget.value
+      if (name === 'name') setNameInput(value)
+
       setFilters((filters) => {
         const updatedFilters = Object.assign({}, filters)
-
-        if (name === 'name') {
-          setNameInput(() => value)
-        }
 
         if (value === '') {
           delete updatedFilters[name]
@@ -92,6 +90,9 @@ const FiltersModal: React.FunctionComponent<Props> = ({
           case 'value':
             updatedFilters.value = Number(value)
             break
+          default:
+            // A filter without a case would be dropped here as it was typed
+            name satisfies never
         }
 
         return updatedFilters
@@ -240,7 +241,10 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             <footer className="p-4 flex justify-between shadow-(--shadow-sheet-footer) z-1">
               <button
                 className="appearance-none border-0 bg-transparent p-0 pl-1 text-stone text-sm font-semibold transition-all duration-200 cursor-pointer hover:text-tint"
-                onClick={() => setFilters({})}
+                onClick={() => {
+                  setFilters({})
+                  setNameInput('')
+                }}
               >
                 Hreinsa leit
               </button>
