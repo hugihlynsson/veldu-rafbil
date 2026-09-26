@@ -2,14 +2,10 @@ import { existsSync, readdirSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 
 import newCars from './newCars'
-import getCarId from './getCarId'
+import getCarId, { carLabel } from './getCarId'
 import { z } from 'zod'
 
 import { newCarSchema } from './newCarSchema'
-import { NewCar } from '@/types'
-
-const label = (car: NewCar) =>
-  `${car.make} ${car.model} ${car.subModel ?? ''}`.trim()
 
 // Most corrections to this file have been a bad link or a missing photo
 describe('the car data', () => {
@@ -17,7 +13,7 @@ describe('the car data', () => {
     expect(newCars.length).toBeGreaterThan(100)
   })
 
-  it.each(newCars.map((car) => [label(car), car] as const))(
+  it.each(newCars.map((car) => [carLabel(car), car] as const))(
     'has a hero image for %s',
     (_name, car) => {
       expect(existsSync(`public/images/${car.heroImageName}.jpg`)).toBe(true)
@@ -41,7 +37,7 @@ describe('the car data', () => {
     const byId = new Map<string, Array<string>>()
     for (const car of newCars) {
       const id = getCarId(car)
-      byId.set(id, [...(byId.get(id) ?? []), `${label(car)} @ ${car.price}`])
+      byId.set(id, [...(byId.get(id) ?? []), `${carLabel(car)} @ ${car.price}`])
     }
 
     const collisions = [...byId].filter(([, cars]) => cars.length > 1)
@@ -50,7 +46,7 @@ describe('the car data', () => {
   })
 
   // A strict object, so a misspelt optional field is caught rather than dropped
-  it.each(newCars.map((car) => [label(car), car] as const))(
+  it.each(newCars.map((car) => [carLabel(car), car] as const))(
     'matches the schema: %s',
     (_name, car) => {
       const result = newCarSchema.safeParse(car)
