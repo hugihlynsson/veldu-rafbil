@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { trackEvent } from 'fathom-client'
 import { CHAT_SUGGESTIONS } from '@/modules/chatSuggestions'
 import { getRandomSuggestions } from '@/modules/chatHelpers'
+import { MAX_QUESTION_LENGTH } from '@/modules/chatMessage'
 import useInputModality, { getInputModality } from '@/utils/inputModality'
 import clsx from 'clsx'
 
@@ -117,6 +118,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
         <input
           ref={inputRef}
           type="text"
+          maxLength={MAX_QUESTION_LENGTH}
           value={value}
           onChange={handleInputChange}
           onFocus={handleFocus}
