@@ -73,7 +73,7 @@ export default function CarList() {
           </a>{' '}
           mælingum frá framleiðenda en raundrægni er háð aðstæðum og
           aksturslagi.
-          <em className="inline-block text-xs text-stone mt-2">
+          <span className="inline-block text-xs text-stone mt-2">
             Kaupendur nýskráðra rafbíla sem kosta minna en {
               grantCeilingText
             }{' '}
@@ -85,7 +85,7 @@ export default function CarList() {
               sækja um {grantAmountText} rafbílastyrk
             </a>
             .
-          </em>
+          </span>
         </p>
 
         <div id="sorting-label" className="mb-2 text-sm font-semibold">
