@@ -46,12 +46,13 @@ governs rather than here, and pin it with a test.
 
 ## Layout
 
-| Path           | What lives there                                                    |
-| -------------- | ------------------------------------------------------------------- |
-| `modules/`     | Pure logic: no React, no browser. The car data lives here too       |
-| `utils/`       | The things that _do_ need React or the browser                      |
-| `components/`  | The UI, including the chat                                          |
-| `app/page.tsx` | Server component, rendered per request so the list arrives in order |
+| Path           | What lives there                                                |
+| -------------- | --------------------------------------------------------------- |
+| `modules/`     | Pure logic: no React, no browser. The car data lives here too   |
+| `utils/`       | The things that _do_ need React or the browser                  |
+| `components/`  | The UI, including the chat                                      |
+| `app/page.tsx` | The list, built once at deploy for a URL with no sort or filter |
+| `app/listi/`   | The same list rendered per request, for a URL with one          |
 
 The car data is read through `modules/cars.ts`, not `newCars.ts`: each `Car`
 carries its id, label, price after the grant and charge rate, derived once. The
@@ -113,6 +114,13 @@ read it on the server and write it in the browser with a shallow
 `history.replaceState`. Every filter is one entry in `filterDefinitions` in
 `modules/filters.ts` — its Icelandic key, its parser and the test it puts a car
 to — and the sorting is two parsers in `modules/sorting.ts`.
+
+Most visits arrive at a bare `/`, which is built once and served from the CDN.
+A URL carrying any of those keys is rewritten in `next.config.ts` to
+`app/listi`, which renders per request, so a shared link arrives sorted and
+filtered rather than reordering once it hydrates. The rewrite reads its keys
+from the same two tables, and `next.config.test.ts` puts every sorting and
+filter through it, so a new one needs nothing more here.
 
 Adding a filter is an entry in that table, its chip in `ActiveFilters.tsx`, and
 its field and `case` in `FilterModal.tsx`. The first two are mapped over
@@ -224,6 +232,9 @@ itself, where a dark override would never reach it.
 - **Nothing rendered on both sides may read the runtime's default locale.** It
   is not the same in node as in an Icelandic browser, and it surfaces as a
   hydration mismatch rather than an error.
+- **Functions run in Dublin**, `regions` in `vercel.json`: the Vercel region
+  nearest Iceland, where nearly every visitor is. Set it there, not with
+  `preferredRegion` in a route, which this Next deprecates with a build warning.
 - Analytics is loaded by a component that injects the script itself. Use its
   `trackEvent` helper for new events, and don't add a second `<script>` for it.
 - Commit messages are short and plain: `Add BMW iX3 40`, `Update Skoda lineup`,
