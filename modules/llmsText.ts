@@ -1,6 +1,10 @@
 import newCars from './newCars'
-import { grantAmount, grantPriceCeiling } from './globals'
-import { realRangeHighFactor, realRangeLowFactor } from './carApi'
+import {
+  grantAmount,
+  grantPriceCeiling,
+  realRangeHighFactor,
+  realRangeLowFactor,
+} from './globals'
 
 // https://llmstxt.org: one markdown file telling a model what a site holds.
 // English, unlike the rest of the site — its readers are agents and whoever is

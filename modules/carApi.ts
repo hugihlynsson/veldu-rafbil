@@ -1,10 +1,12 @@
 import { Availability, Drive } from '@/types'
 import cars, { Car } from './cars'
-import { grantAmount, grantPriceCeiling } from './globals'
-
-// The same bounds the assistant's system prompt is given for Icelandic driving
-export const realRangeLowFactor = 0.7
-export const realRangeHighFactor = 0.85
+import { chargeWindowShare } from './getKmPerMinutesCharged'
+import {
+  grantAmount,
+  grantPriceCeiling,
+  realRangeHighFactor,
+  realRangeLowFactor,
+} from './globals'
 
 // Not NewCar: a consumer has no AGENTS.md telling it that `price` is the list
 // price, so each field is named for what it is and the derived ones published.
@@ -136,7 +138,7 @@ export const buildCarsPayload = (
   },
   notes: {
     range: `rangeWltpKm is the manufacturer WLTP figure. Real range in Iceland is lower — cold, wind and hills — and usually lands between ${Math.round(realRangeLowFactor * 100)}% and ${Math.round(realRangeHighFactor * 100)}% of it, which is what estimatedRealRangeKm reports. Those are estimates, not measurements.`,
-    fastCharge: `minutes10To80 is the time from 10% to 80% on a fast charger. kmPerMinute is derived from it and from range at the ${Math.round(realRangeLowFactor * 100)}% factor.`,
+    fastCharge: `minutes10To80 is the time from 10% to 80% on a fast charger. kmPerMinute is the WLTP range that window covers, ${Math.round(chargeWindowShare * 100)}% of it, divided by those minutes.`,
     paths: 'pagePath is relative to the origin this document was served from.',
   },
   count: cars.length,
