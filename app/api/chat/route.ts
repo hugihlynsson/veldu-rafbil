@@ -2,6 +2,7 @@ import { google } from '@ai-sdk/google'
 import { Axiom } from '@axiomhq/js'
 import { after } from 'next/server'
 import { getMessageText } from '@/modules/chatMessage'
+import { rateLimitedText } from '@/modules/chatProgress'
 import { parseChatRequest, streamChat, type ChatFinish } from './chat'
 import { clientKey, rateLimit } from './rateLimit'
 
@@ -19,7 +20,7 @@ export async function POST(req: Request) {
   const limit = rateLimit(clientKey(req))
   if (!limit.ok) {
     return Response.json(
-      { error: 'Aðeins of margar fyrirspurnir, reyndu aftur eftir augnablik' },
+      { error: rateLimitedText },
       {
         status: 429,
         headers: { 'Retry-After': String(limit.retryAfterSeconds) },

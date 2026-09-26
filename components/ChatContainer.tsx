@@ -127,6 +127,7 @@ export default function ChatContainer({ hide }: Props) {
       }}
       messages={chatState.messages}
       status={chatState.status}
+      error={chatState.error}
       onClearChat={() => {
         chatState.setMessages([])
         clearStoredMessages()

@@ -7,6 +7,7 @@ import {
   getMessageText,
   type ChatMessage as Message,
 } from '@/modules/chatMessage'
+import { isAwaitingText, unansweredReason } from '@/modules/chatProgress'
 import Modal from './Modal'
 import ChatHeader from './chat/ChatHeader'
 import ChatMessage from './chat/ChatMessage'
@@ -18,6 +19,7 @@ interface Props {
   onDone: () => void
   messages: Message[]
   status: ChatStatus
+  error: Error | undefined
   onClearChat: () => void
   onReleaseBodyLock: () => void
   onSendMessage: (message: string) => void
@@ -32,6 +34,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
   onDone,
   messages,
   status,
+  error,
   onClearChat,
   onReleaseBodyLock,
   onSendMessage,
@@ -64,10 +67,8 @@ const ChatModal: React.FunctionComponent<Props> = ({
   // map below came to
   const lastUserMessageId = messages.findLast((m) => m.role === 'user')?.id
 
-  const showLoading =
-    (lastMessage?.role === 'user' && status !== 'error') ||
-    (status === 'streaming' &&
-      !lastMessage?.parts?.some(({ type }) => type === 'text'))
+  const showLoading = isAwaitingText(messages, status)
+  const unanswered = unansweredReason(messages, status, error)
 
   return (
     <Modal
@@ -108,12 +109,12 @@ const ChatModal: React.FunctionComponent<Props> = ({
 
               {showLoading && <TypingIndicator />}
 
-              {status === 'error' && (
+              {unanswered && (
                 <div
                   role="alert"
                   className="flex items-center justify-between mx-4 mb-4 rounded-full bg-alarm-surface p-3 pl-4 text-sm text-alarm"
                 >
-                  <p className="font-medium">Úps, eitthvað fór úrskeiðis</p>
+                  <p className="font-medium">{unanswered}</p>
                   <button
                     onClick={onRetry}
                     className="rounded-full bg-alarm-fill px-3 py-1.5 text-xs font-medium text-alarm hover:bg-alarm-fill-hover transition-colors cursor-pointer"
