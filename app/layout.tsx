@@ -6,12 +6,10 @@ import Fathom from '@/components/Fathom'
 
 // rsms's InterVariable 4.1 rather than Google's cut, which drops glyphs the
 // list uses, ↗ among them. Served from here, so the first paint waits on no
-// other host.
+// other host. One file: italic is the browser slanting it, as the separate
+// italic would be another 379 KB for a line or two.
 const inter = localFont({
-  src: [
-    { path: './fonts/InterVariable.woff2', style: 'normal' },
-    { path: './fonts/InterVariable-Italic.woff2', style: 'italic' },
-  ],
+  src: './fonts/InterVariable.woff2',
   weight: '100 900',
   variable: '--font-inter',
 })
