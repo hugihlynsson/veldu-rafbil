@@ -146,7 +146,9 @@ yardstick — <https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard>.
 Re-run that comparison before swapping the model, and say in the comment on the
 model constant what you found.
 
-The whole car list is inlined into the system prompt, which is what makes the
+The system prompt is built in `modules/chatPrompt.ts`, from the same data and
+constants as the rest of the site, and tested there. The whole car list is
+inlined into it, which is what makes the
 provider's implicit prompt caching worth having — it only hits on an identical
 prefix, so keep anything per-request out of the system prompt.
 

@@ -1,6 +1,8 @@
 // Drægni rather than kWh: 10-80% is 70% of the battery, so 70% of the range
+export const chargeWindowShare = 0.8 - 0.1
+
 const rate = (timeToCharge10To80: number, range: number): number =>
-  (range * 0.7) / timeToCharge10To80
+  (range * chargeWindowShare) / timeToCharge10To80
 
 /** Three significant figures, which is the precision the figure is quoted at */
 const getKmPerMinutesCharged = (
