@@ -1,6 +1,5 @@
 import {
   convertToModelMessages,
-  safeValidateUIMessages,
   stepCountIs,
   streamText,
   type LanguageModel,
@@ -9,7 +8,7 @@ import {
 import { z } from 'zod'
 
 import systemPrompt from '@/modules/chatPrompt'
-import { chatMetadataSchema, type ChatMessage } from '@/modules/chatHelpers'
+import { validateChatMessages, type ChatMessage } from '@/modules/chatMessage'
 import { followUpTransform } from '@/modules/followUps'
 import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 
@@ -40,13 +39,7 @@ export const parseChatRequest = async (
   const bounded = requestSchema.safeParse(body)
   if (!bounded.success) return null
 
-  const validated = await safeValidateUIMessages<ChatMessage>({
-    messages: bounded.data.messages,
-    metadataSchema: chatMetadataSchema,
-    tools,
-  })
-
-  return validated.success ? validated.data : null
+  return validateChatMessages(bounded.data.messages, tools)
 }
 
 /** What a finished answer came to, for the log */

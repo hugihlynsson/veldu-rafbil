@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import type { TextStreamPart, ToolSet } from 'ai'
+import {
+  convertArrayToReadableStream,
+  convertReadableStreamToArray,
+} from 'ai/test'
 
 import {
   createFollowUpSplitter,
@@ -108,15 +112,11 @@ describe('splitting follow-ups out of an answer', () => {
 describe('followUpTransform', () => {
   const run = async (parts: TextStreamPart<ToolSet>[]) => {
     const found: string[] = []
-    const stream = new ReadableStream<TextStreamPart<ToolSet>>({
-      start(controller) {
-        parts.forEach((part) => controller.enqueue(part))
-        controller.close()
-      },
-    }).pipeThrough(followUpTransform(found)())
-
-    const out: TextStreamPart<ToolSet>[] = []
-    for await (const part of stream) out.push(part)
+    const out = await convertReadableStreamToArray(
+      convertArrayToReadableStream(parts).pipeThrough(
+        followUpTransform(found)(),
+      ),
+    )
     return { out, found }
   }
 

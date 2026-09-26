@@ -2,11 +2,8 @@
 
 import React from 'react'
 import MiniCar from '@/components/MiniCar'
-import {
-  findMentionedCars,
-  getMessageText,
-  type ChatMessage,
-} from '@/modules/chatHelpers'
+import { findMentionedCars } from '@/modules/chatHelpers'
+import { getMessageText, type ChatMessage } from '@/modules/chatMessage'
 
 interface Props {
   lastMessage?: ChatMessage

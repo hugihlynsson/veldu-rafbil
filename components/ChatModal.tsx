@@ -6,7 +6,7 @@ import {
   getFollowUps,
   getMessageText,
   type ChatMessage as Message,
-} from '@/modules/chatHelpers'
+} from '@/modules/chatMessage'
 import Modal from './Modal'
 import ChatHeader from './chat/ChatHeader'
 import ChatMessage from './chat/ChatMessage'

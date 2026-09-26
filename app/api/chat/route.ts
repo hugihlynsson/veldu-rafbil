@@ -1,7 +1,7 @@
 import { google } from '@ai-sdk/google'
 import { Axiom } from '@axiomhq/js'
 import { after } from 'next/server'
-import { getMessageText } from '@/modules/chatHelpers'
+import { getMessageText } from '@/modules/chatMessage'
 import { parseChatRequest, streamChat, type ChatFinish } from './chat'
 import { clientKey, rateLimit } from './rateLimit'
 
