@@ -23,6 +23,8 @@ jobs:
       # husky's prepare script has nothing to install in CI
       - run: npm ci --ignore-scripts
 
+      # The pre-commit hook formats, but a commit from the web editor skips it
+      - run: npx oxfmt --check
       - run: npm run typecheck
       - run: npm run lint
       - run: npm test
