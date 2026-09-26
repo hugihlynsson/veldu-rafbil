@@ -19,7 +19,7 @@ jobs:
       GH_REPO: ${{ github.repository }}
       TITLE: Broken car links
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       # A dealer site that turns bots away answers 403 whether or not the page
       # is there, so only an answer that says the page is gone is reported.
