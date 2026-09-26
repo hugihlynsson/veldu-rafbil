@@ -157,6 +157,18 @@ the allowlist, timeout and response cap on the car-details tool are a security
 boundary, not a nicety: the model chooses the URL that tool fetches, and a model
 can be talked into choosing anything. Tests pin them, and all of them stay.
 
+`route.ts` holds only what needs the request or the provider — the rate limit,
+the model and the logging, which runs in `after()` so it never holds the stream
+open. Everything else is `chat.ts`, which takes the model as a parameter so
+`chat.test.ts` can run it against a mock model: `parseChatRequest` bounds the
+body and validates each message with `validateUIMessages`, and `streamChat`
+streams the answer.
+
+The prompt still asks for `[q:…]` follow-up markers, but they never reach the
+browser: a stream transform in `modules/followUps.ts` takes them out of the text
+and they arrive as the message's `metadata.followUps`. Histories stored before
+that are upgraded as they are read.
+
 ## Published data
 
 `/api/cars`, `/llms.txt` and `/robots.txt` are for readers who are not a

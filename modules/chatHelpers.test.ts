@@ -1,17 +1,17 @@
 import { describe, expect, it } from 'vitest'
 
-import { UIMessage } from 'ai'
-
 import {
   findMentionedCars,
   getMessageText,
+  getFollowUps,
   getRandomSuggestions,
-  parseFollowUps,
-  stripFollowUps,
+  parseStoredMessages,
+  upgradeStoredMessage,
+  type ChatMessage,
 } from './chatHelpers'
 import newCars from './newCars'
 
-const message = (parts: UIMessage['parts']): UIMessage => ({
+const message = (parts: ChatMessage['parts']): ChatMessage => ({
   id: 'a-message',
   role: 'assistant',
   parts,
@@ -38,55 +38,109 @@ describe('getMessageText', () => {
   })
 })
 
-describe('parseFollowUps', () => {
-  it('pulls the questions out of the markers', () => {
+describe('getFollowUps', () => {
+  it('reads the questions off an answer', () => {
     expect(
-      parseFollowUps('Svarið.\n[q:Hvað fer hann langt?]\n[q:Er hann dýr?]'),
-    ).toEqual(['Hvað fer hann langt?', 'Er hann dýr?'])
+      getFollowUps({
+        ...message([{ type: 'text', text: 'Svarið.' }]),
+        metadata: { followUps: ['Hvað fer hann langt?'] },
+      }),
+    ).toEqual(['Hvað fer hann langt?'])
   })
 
-  it('trims what it finds', () => {
-    expect(parseFollowUps('[q:   Hvað fer hann langt?   ]')).toEqual([
-      'Hvað fer hann langt?',
-    ])
-  })
-
-  it('finds nothing in an answer without markers', () => {
-    expect(parseFollowUps('Bara venjulegt svar.')).toEqual([])
-  })
-
-  // A half-written marker is what the stream looks like mid-token
-  it('ignores a marker that has not been closed yet', () => {
-    expect(parseFollowUps('Svarið. [q:Hvað fer hann')).toEqual([])
+  it('finds none on an answer without them, or on a question', () => {
+    expect(getFollowUps(message([{ type: 'text', text: 'Svarið.' }]))).toEqual(
+      [],
+    )
+    expect(
+      getFollowUps({
+        ...message([]),
+        role: 'user',
+        metadata: { followUps: ['x'] },
+      }),
+    ).toEqual([])
+    expect(getFollowUps(undefined)).toEqual([])
   })
 })
 
-describe('stripFollowUps', () => {
-  it('removes finished markers and keeps the answer', () => {
-    expect(
-      stripFollowUps('Svarið.\n[q:Hvað fer hann langt?]\n[q:Er hann dýr?]'),
-    ).toBe('Svarið.')
+// The history in localStorage predates the metadata, and outlives the deploy
+describe('upgradeStoredMessage', () => {
+  it('moves the markers of a stored answer into its metadata', () => {
+    const stored = message([
+      { type: 'step-start' },
+      {
+        type: 'text',
+        text: 'Svarið.\n[q:Hvað fer hann langt?]\n[q:Er hann dýr?]',
+      },
+    ])
+
+    expect(upgradeStoredMessage(stored)).toEqual({
+      ...stored,
+      parts: [{ type: 'step-start' }, { type: 'text', text: 'Svarið.' }],
+      metadata: { followUps: ['Hvað fer hann langt?', 'Er hann dýr?'] },
+    })
   })
 
-  // Keeps a half-written marker from flashing up mid-stream
-  it('removes a marker that is still being written', () => {
-    expect(stripFollowUps('Svarið. [q:Hvað fer hann')).toBe('Svarið.')
-    expect(stripFollowUps('Svarið. [q:')).toBe('Svarið.')
-    expect(stripFollowUps('Svarið. [')).toBe('Svarið. [')
+  it('leaves an answer that is already upgraded, or needs none, alone', () => {
+    const upgraded: ChatMessage = {
+      ...message([{ type: 'text', text: 'Svarið.' }]),
+      metadata: { followUps: ['Er hann dýr?'] },
+    }
+    const plain = message([{ type: 'text', text: 'Svarið.' }])
+
+    expect(upgradeStoredMessage(upgraded)).toBe(upgraded)
+    expect(upgradeStoredMessage(plain)).toEqual(plain)
   })
 
-  it('removes a partial marker that runs over a newline', () => {
-    expect(stripFollowUps('Svarið.\n[q:Hvað fer\nhann')).toBe('Svarið.')
+  // Someone asking about the format is not the model offering follow-ups
+  it('leaves what a user typed alone', () => {
+    const typed: ChatMessage = {
+      ...message([{ type: 'text', text: 'Hvað þýðir [q:x]?' }]),
+      role: 'user',
+    }
+    expect(upgradeStoredMessage(typed)).toBe(typed)
+  })
+})
+
+describe('parseStoredMessages', () => {
+  const question: ChatMessage = {
+    id: 'q',
+    role: 'user',
+    parts: [{ type: 'text', text: 'Er hann dýr?' }],
+  }
+
+  it('reads back what was stored', async () => {
+    const answer: ChatMessage = {
+      ...message([{ type: 'text', text: 'Nei.' }]),
+      metadata: { followUps: ['Hvað fer hann langt?'] },
+    }
+    const stored = JSON.stringify([question, answer])
+
+    expect(await parseStoredMessages(stored)).toEqual([question, answer])
   })
 
-  it('leaves an answer without markers alone', () => {
-    expect(stripFollowUps('Bara venjulegt svar.')).toBe('Bara venjulegt svar.')
+  // What every history written before this change looks like
+  it('reads and upgrades a history from before the metadata', async () => {
+    const stored = JSON.stringify([
+      question,
+      message([{ type: 'text', text: 'Nei.\n[q:Hvað fer hann langt?]' }]),
+    ])
+
+    expect(await parseStoredMessages(stored)).toEqual([
+      question,
+      {
+        ...message([{ type: 'text', text: 'Nei.' }]),
+        metadata: { followUps: ['Hvað fer hann langt?'] },
+      },
+    ])
   })
 
-  it('leaves square brackets that are not markers alone', () => {
-    expect(stripFollowUps('Sjá [hlekk](http://x) hér')).toBe(
-      'Sjá [hlekk](http://x) hér',
-    )
+  it.each([
+    ['not JSON', '{'],
+    ['not a list', '{"id":"q"}'],
+    ['a message without parts', '[{"id":"q","role":"user"}]'],
+  ])('reads %s as no history', async (_label, stored) => {
+    expect(await parseStoredMessages(stored)).toEqual([])
   })
 })
 
