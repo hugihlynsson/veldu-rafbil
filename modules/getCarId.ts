@@ -1,4 +1,4 @@
-import { NewCar } from '../types'
+import { NewCar } from '@/types'
 
 /** Make, model and subModel — what a car is called, and its identity with it */
 export const carLabel = (car: NewCar): string =>

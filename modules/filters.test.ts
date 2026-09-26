@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import carFilter from './carFilter'
 import cars from './cars'
 import { filterUrlKeys, getFiltersFromQuery, serializeFilters } from './filters'
-import { Filters } from '../types'
+import { Filters } from '@/types'
 
 const matches = (filters: Filters) => cars.filter(carFilter(filters)).length
 

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import carFilter from './carFilter'
 import { deriveCar, Car } from './cars'
-import { NewCar } from '../types'
+import { NewCar } from '@/types'
 
 const car = (over: Partial<NewCar>): Car =>
   deriveCar({

@@ -1,9 +1,9 @@
 'use client'
 
 import React from 'react'
-import MiniCar from '../MiniCar'
+import MiniCar from '@/components/MiniCar'
 import { UIDataTypes, UIMessage, UITools } from 'ai'
-import { findMentionedCars, getMessageText } from '../../modules/chatHelpers'
+import { findMentionedCars, getMessageText } from '@/modules/chatHelpers'
 
 interface Props {
   lastMessage?: UIMessage<unknown, UIDataTypes, UITools>

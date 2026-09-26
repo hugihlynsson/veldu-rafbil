@@ -1,4 +1,4 @@
-import { buildCarsPayload } from '../../../modules/carApi'
+import { buildCarsPayload } from '@/modules/carApi'
 
 // Built at deploy, so no function runs and this needs none of the guarding
 // /api/chat has — that route spends money per call, this one is a static file

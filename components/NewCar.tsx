@@ -2,10 +2,10 @@ import { FunctionComponent } from 'react'
 import { trackEvent } from 'fathom-client'
 import Image from 'next/image'
 
-import { Drive } from '../types'
-import { Car } from '../modules/cars'
-import addDecimalSeprators from '../modules/addDecimalSeparators'
-import { formatKmPerMinutesCharged } from '../modules/getKmPerMinutesCharged'
+import { Drive } from '@/types'
+import { Car } from '@/modules/cars'
+import addDecimalSeprators from '@/modules/addDecimalSeparators'
+import { formatKmPerMinutesCharged } from '@/modules/getKmPerMinutesCharged'
 import LinkPill from './LinkPill'
 
 interface Props {

@@ -8,12 +8,16 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # The ends of the range package.json engines promises
+        node: [22, 24]
     steps:
       - uses: actions/checkout@v5
 
       - uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version: ${{ matrix.node }}
           cache: npm
 
       # husky's prepare script has nothing to install in CI

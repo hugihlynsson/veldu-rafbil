@@ -1,7 +1,6 @@
-// @ts-check
+import type { NextConfig } from 'next'
 
-/** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig: NextConfig = {
   reactStrictMode: true,
   reactCompiler: true,
   images: {
@@ -32,3 +31,5 @@ module.exports = {
     ]
   },
 }
+
+export default nextConfig

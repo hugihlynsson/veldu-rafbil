@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { fetchCarDetailsTool } from './fetchCarDetails'
-import newCars from '../../../../modules/newCars'
+import newCars from '@/modules/newCars'
 
 // The allowlist is all that stands between a prompt and an arbitrary fetch
 const run = async (url: string): Promise<{ specifications: string }> => {

@@ -6,7 +6,7 @@ import cars, { deriveCar } from './cars'
 import getCarId from './getCarId'
 import getPriceWithGrant from './getPriceWithGrant'
 import { grantAmount, grantPriceCeiling } from './globals'
-import { NewCar } from '../types'
+import { NewCar } from '@/types'
 
 const label = (car: NewCar) =>
   `${car.make} ${car.model} ${car.subModel ?? ''}`.trim()

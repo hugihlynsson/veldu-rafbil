@@ -2,9 +2,9 @@ import { Metadata } from 'next'
 
 import { connection } from 'next/server'
 
-import cars from '../modules/newCars'
-import NewCars from './newCars'
-import Footer from '../components/Footer'
+import cars from '@/modules/cars'
+import CarList from '@/components/CarList'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Veldu Rafbíl',
@@ -18,7 +18,7 @@ export default async function Page() {
 
   return (
     <main>
-      <NewCars />
+      <CarList />
       <Footer />
     </main>
   )

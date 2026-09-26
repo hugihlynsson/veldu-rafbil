@@ -7,7 +7,7 @@ import {
   type SingleParserBuilder,
 } from 'nuqs/server'
 
-import { Availability, Drive, Filters, SearchParams } from '../types'
+import { Availability, Drive, Filters, SearchParams } from '@/types'
 import { Car } from './cars'
 
 type Value<Key extends keyof Filters> = NonNullable<Filters[Key]>

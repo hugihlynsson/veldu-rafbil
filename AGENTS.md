@@ -46,13 +46,12 @@ governs rather than here, and pin it with a test.
 
 ## Layout
 
-| Path              | What lives there                                                    |
-| ----------------- | ------------------------------------------------------------------- |
-| `modules/`        | Pure logic: no React, no browser. The car data lives here too       |
-| `utils/`          | The things that _do_ need React or the browser                      |
-| `components/`     | The UI, including the chat                                          |
-| `app/page.tsx`    | Server component, rendered per request so the list arrives in order |
-| `app/newCars.tsx` | `'use client'` — the list, its sorting and filters held by nuqs     |
+| Path           | What lives there                                                    |
+| -------------- | ------------------------------------------------------------------- |
+| `modules/`     | Pure logic: no React, no browser. The car data lives here too       |
+| `utils/`       | The things that _do_ need React or the browser                      |
+| `components/`  | The UI, including the chat                                          |
+| `app/page.tsx` | Server component, rendered per request so the list arrives in order |
 
 The car data is read through `modules/cars.ts`, not `newCars.ts`: each `Car`
 carries its id, label, price after the grant and charge rate, derived once. The
@@ -70,8 +69,9 @@ stay usable while one is open belongs _inside_ it, and anything fixed belongs
 beside the panel rather than within it — a transform or a filter becomes the
 containing block of the fixed things inside it.
 
-Watch the names: a client component and a data module can share a name and
-differ only by extension. They are not related.
+`components/CarList.tsx` is the `'use client'` list, its sorting and filters
+held by nuqs. Import across folders with `@/` (`@/modules/cars`), and with `./`
+within one.
 
 ## The car data
 
@@ -197,7 +197,7 @@ itself, where a dark override would never reach it.
   first load for visitors who never chat, which is most of them.
 - **`next/image` `sizes` is load-bearing.** A typo in it is silent: the browser
   falls back to `100vw` and fetches the largest candidate. `deviceSizes` in
-  `next.config.js` is tuned to the phones people actually use. A `sizes` with
+  `next.config.ts` is tuned to the phones people actually use. A `sizes` with
   no `vw` in it is worse than none — Next then puts every configured width in
   the srcset — and an image without one gets a 1x/2x pair off its `width`
   prop, so that prop has to be the size the box really renders at.

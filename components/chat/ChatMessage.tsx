@@ -6,8 +6,8 @@ import remarkGfm from 'remark-gfm'
 import { UIDataTypes, UITools, UIMessage } from 'ai'
 import { useEffect } from 'react'
 import { useRef } from 'react'
-import { stripFollowUps } from '../../modules/chatHelpers'
-import prefersReducedMotion from '../../utils/prefersReducedMotion'
+import { stripFollowUps } from '@/modules/chatHelpers'
+import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import clsx from 'clsx'
 
 interface Props {

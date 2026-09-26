@@ -1,18 +1,18 @@
 import { useQueryStates } from 'nuqs'
 
-import { Filters, Sorting } from '../types'
+import { Filters, Sorting } from '@/types'
 import {
   FilterValues,
   filterParsers,
   filterUrlKeys,
   filtersFromValues,
   valuesFromFilters,
-} from '../modules/filters'
+} from '@/modules/filters'
 import {
   sortingParsers,
   sortingUrlKeys,
   stateFromSortingValues,
-} from '../modules/sorting'
+} from '@/modules/sorting'
 
 // Shallow, and replacing rather than pushing, both nuqs defaults: a sort or a
 // filter is a view of the one page, not a page of its own to go back to

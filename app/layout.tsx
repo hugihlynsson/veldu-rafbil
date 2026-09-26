@@ -1,7 +1,7 @@
 import './globals.css'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
-import Fathom from '../components/Fathom'
+import Fathom from '@/components/Fathom'
 
 type Props = {
   children: React.ReactNode
