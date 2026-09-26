@@ -40,6 +40,23 @@ describe('getCarId', () => {
     expect(id).toBe('car-mercedes-benz-eqs-suv-450-4matic')
   })
 
+  // /api/cars publishes the id as /#<id>, and these were in it as typed
+  it.each<[Partial<NewCar>, string]>([
+    [{ make: 'smart', model: '#1', subModel: 'Pro+' }, 'car-smart-1-pro'],
+    [{ make: 'Citroën', model: 'ë-C4' }, 'car-citroen-e-c4-base'],
+    [
+      { make: 'Porsche', model: 'Cayenne', subModel: 'Coupé' },
+      'car-porsche-cayenne-coupe',
+    ],
+    [
+      { make: 'Volkswagen', model: 'ID.3', subModel: 'Pro' },
+      'car-volkswagen-id-3-pro',
+    ],
+    [{ make: 'Toyota', model: 'C-HR+' }, 'car-toyota-c-hr-base'],
+  ])('keeps %o to letters, digits and dashes', (over, id) => {
+    expect(getCarId(car(over))).toBe(id)
+  })
+
   it('tells two subModels of one model apart', () => {
     expect(getCarId(car({ subModel: 'Long Range' }))).not.toBe(
       getCarId(car({ subModel: 'Performance' })),
