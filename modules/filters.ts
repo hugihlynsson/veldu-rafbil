@@ -9,6 +9,7 @@ import {
 
 import { Availability, Drive, Filters, SearchParams } from '@/types'
 import { Car } from './cars'
+import { driveSchema } from './newCarSchema'
 
 type Value<Key extends keyof Filters> = NonNullable<Filters[Key]>
 
@@ -65,7 +66,7 @@ const parseAsList = <T extends string>(accept: (entry: string) => entry is T) =>
       a.length === b.length && a.every((entry, i) => entry === b[i]),
   })
 
-const drives: ReadonlyArray<string> = ['AWD', 'FWD', 'RWD'] satisfies Drive[]
+const drives: ReadonlyArray<string> = driveSchema.options
 
 /**
  * A lookup rather than parseAsStringLiteral, as the URL words are Icelandic.
