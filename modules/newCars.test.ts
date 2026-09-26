@@ -45,6 +45,15 @@ describe('the car data', () => {
     expect(collisions).toEqual([])
   })
 
+  // /api/cars publishes it as a URL fragment, which a # or a + does not survive
+  it('gives every car an id a URL can carry as it is', () => {
+    const unsafe = newCars
+      .map(getCarId)
+      .filter((id) => !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(id))
+
+    expect(unsafe).toEqual([])
+  })
+
   // A strict object, so a misspelt optional field is caught rather than dropped
   it.each(newCars.map((car) => [carLabel(car), car] as const))(
     'matches the schema: %s',
