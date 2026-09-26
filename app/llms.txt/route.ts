@@ -1,4 +1,4 @@
-import buildLlmsText from '../../modules/llmsText'
+import buildLlmsText from '@/modules/llmsText'
 
 // A route rather than a file in public/ so the counts and grant figures come
 // from the data, the way the page description and the system prompt do

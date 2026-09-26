@@ -6,7 +6,7 @@ import {
   getMessageText,
   parseFollowUps,
   stripFollowUps,
-} from '../modules/chatHelpers'
+} from '@/modules/chatHelpers'
 import Modal from './Modal'
 import ChatHeader from './chat/ChatHeader'
 import ChatMessage from './chat/ChatMessage'

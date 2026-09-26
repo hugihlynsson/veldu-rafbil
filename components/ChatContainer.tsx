@@ -4,14 +4,14 @@ import { useRef, useState, useEffect } from 'react'
 import { useChat } from '@ai-sdk/react'
 import dynamic from 'next/dynamic'
 import FloatingChat from './ChatInput'
-import { getMessageText } from '../modules/chatHelpers'
-import useBodyScrollLock from '../utils/useBodyScrollLock'
-import useKeyboardInset from '../utils/useKeyboardInset'
+import { getMessageText } from '@/modules/chatHelpers'
+import useBodyScrollLock from '@/utils/useBodyScrollLock'
+import useKeyboardInset from '@/utils/useKeyboardInset'
 import {
   clearStoredMessages,
   readStoredMessages,
   writeStoredMessages,
-} from '../utils/chatStorage'
+} from '@/utils/chatStorage'
 
 // react-markdown is fetched the first time the chat opens, warmed on focus
 const ChatModal = dynamic(() => import('./ChatModal'))

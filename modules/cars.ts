@@ -1,4 +1,4 @@
-import { Availability, NewCar } from '../types'
+import { Availability, NewCar } from '@/types'
 import newCars from './newCars'
 import getCarId, { carLabel } from './getCarId'
 import getPriceWithGrant from './getPriceWithGrant'

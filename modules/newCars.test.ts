@@ -6,7 +6,7 @@ import getCarId from './getCarId'
 import { z } from 'zod'
 
 import { newCarSchema } from './newCarSchema'
-import { NewCar } from '../types'
+import { NewCar } from '@/types'
 
 const label = (car: NewCar) =>
   `${car.make} ${car.model} ${car.subModel ?? ''}`.trim()

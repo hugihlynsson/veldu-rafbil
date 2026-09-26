@@ -4,23 +4,23 @@ import { useState } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 
-import Car from '../components/NewCar'
-import Title from '../components/Title'
-import Toggles from '../components/Toggles'
-import FilterModal from '../components/FilterModal'
-import ActiveFilters from '../components/ActiveFilters'
-import cars from '../modules/cars'
-import carFilter from '../modules/carFilter'
-import { Filters, Sorting } from '../types'
-import { sortCars } from '../modules/sorting'
-import { agree } from '../modules/plural'
-import { grantAmountText, grantCeilingText } from '../modules/grantCopy'
-import useBodyScrollLock from '../utils/useBodyScrollLock'
-import { useFilters, useSorting } from '../utils/useListState'
+import Car from '@/components/NewCar'
+import Title from '@/components/Title'
+import Toggles from '@/components/Toggles'
+import FilterModal from '@/components/FilterModal'
+import ActiveFilters from '@/components/ActiveFilters'
+import cars from '@/modules/cars'
+import carFilter from '@/modules/carFilter'
+import { Filters, Sorting } from '@/types'
+import { sortCars } from '@/modules/sorting'
+import { agree } from '@/modules/plural'
+import { grantAmountText, grantCeilingText } from '@/modules/grantCopy'
+import useBodyScrollLock from '@/utils/useBodyScrollLock'
+import { useFilters, useSorting } from '@/utils/useListState'
 
 // Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
 // so arriving a moment later shifts nothing.
-const ChatContainer = dynamic(() => import('../components/ChatContainer'), {
+const ChatContainer = dynamic(() => import('@/components/ChatContainer'), {
   ssr: false,
 })
 
@@ -43,7 +43,7 @@ const toggleSortings: Sorting[] = [
   'value',
 ]
 
-export default function NewCars() {
+export default function CarList() {
   const { sorting, direction, toggleSorting } = useSorting()
   const { filters, setFilters, removeFilter } = useFilters()
 

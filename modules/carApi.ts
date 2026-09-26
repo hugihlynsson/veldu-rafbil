@@ -1,4 +1,4 @@
-import { Availability, Drive } from '../types'
+import { Availability, Drive } from '@/types'
 import cars, { Car } from './cars'
 import { grantAmount, grantPriceCeiling } from './globals'
 

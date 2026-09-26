@@ -11,7 +11,7 @@ import {
   sortingUrlKeys,
 } from './sorting'
 import { deriveCar, Car } from './cars'
-import { NewCar, SearchParams, Sorting, SortingDirection } from '../types'
+import { NewCar, SearchParams, Sorting, SortingDirection } from '@/types'
 
 const readSorting = (query: SearchParams) => getSortingFromQuery(query).sorting
 const readDirection = (query: SearchParams) =>

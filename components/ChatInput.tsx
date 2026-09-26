@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react'
 import { trackEvent } from 'fathom-client'
-import { CHAT_SUGGESTIONS } from '../constants/chatSuggestions'
-import { getRandomSuggestions } from '../modules/chatHelpers'
-import useInputModality, { getInputModality } from '../utils/inputModality'
+import { CHAT_SUGGESTIONS } from '@/constants/chatSuggestions'
+import { getRandomSuggestions } from '@/modules/chatHelpers'
+import useInputModality, { getInputModality } from '@/utils/inputModality'
 import clsx from 'clsx'
 
 interface Props {

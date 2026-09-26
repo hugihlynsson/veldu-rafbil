@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 
-import { Availability, Drive, Filters } from '../types'
+import { Availability, Drive, Filters } from '@/types'
 import clsx from 'clsx'
 import Modal from './Modal'
 import CloseButton from './CloseButton'

@@ -1,4 +1,4 @@
-import { Filters } from '../types'
+import { Filters } from '@/types'
 import { Car } from './cars'
 import { filterDefinitions } from './filters'
 

@@ -2,12 +2,9 @@ import { google } from '@ai-sdk/google'
 import { streamText, convertToModelMessages, stepCountIs, UIMessage } from 'ai'
 import { Axiom } from '@axiomhq/js'
 import { z } from 'zod'
-import cars from '../../../modules/cars'
-import {
-  grantAmountText,
-  grantCeilingDativeText,
-} from '../../../modules/grantCopy'
-import { getMessageText } from '../../../modules/chatHelpers'
+import cars from '@/modules/cars'
+import { grantAmountText, grantCeilingDativeText } from '@/modules/grantCopy'
+import { getMessageText } from '@/modules/chatHelpers'
 import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 import { clientKey, rateLimit } from './rateLimit'
 

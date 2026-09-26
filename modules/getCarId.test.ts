@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import getCarId from './getCarId'
-import { NewCar } from '../types'
+import { NewCar } from '@/types'
 
 const car = (over: Partial<NewCar>): NewCar => ({
   make: 'Tesla',

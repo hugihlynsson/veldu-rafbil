@@ -1,6 +1,6 @@
 import { createLoader, createParser, createSerializer } from 'nuqs/server'
 
-import { SearchParams, Sorting, SortingDirection, SortingQuery } from '../types'
+import { SearchParams, Sorting, SortingDirection, SortingQuery } from '@/types'
 import { Car } from './cars'
 
 const queryToSorting: Record<string, Sorting> = {

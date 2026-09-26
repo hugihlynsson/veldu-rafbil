@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react'
 import Image from 'next/image'
 
-import { Car } from '../modules/cars'
-import addDecimalSeprators from '../modules/addDecimalSeparators'
-import prefersReducedMotion from '../utils/prefersReducedMotion'
+import { Car } from '@/modules/cars'
+import addDecimalSeprators from '@/modules/addDecimalSeparators'
+import prefersReducedMotion from '@/utils/prefersReducedMotion'
 
 interface Props {
   car: Car

@@ -1,6 +1,6 @@
 import { tool } from 'ai'
 import { z } from 'zod'
-import newCars from '../../../../modules/newCars'
+import newCars from '@/modules/newCars'
 
 // Without this the model can be talked into fetching any URL at all
 const allowedURLs = new Set(
