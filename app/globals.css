@@ -178,7 +178,7 @@ body {
 
 button,
 input {
-  font-family: Inter, sans-serif;
+  font-family: var(--font-inter), sans-serif;
 }
 
 /* Controls here are appearance-none, so there is no default ring to draw. In
@@ -196,16 +196,10 @@ input {
   color-scheme: light dark;
   /* Kept up to date by utils/useKeyboardInset while a phone keyboard is up */
   --keyboard-inset: 0px;
-  font-family: Inter, sans-serif;
+  font-family: var(--font-inter), sans-serif;
   font-feature-settings:
     'liga' 1,
     'calt' 1; /* fix for Chrome */
-}
-
-@supports (font-variation-settings: normal) {
-  :root {
-    font-family: InterVariable, sans-serif;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
