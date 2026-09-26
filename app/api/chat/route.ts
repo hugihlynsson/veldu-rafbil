@@ -1,10 +1,8 @@
 import { google } from '@ai-sdk/google'
-import { streamText, convertToModelMessages, stepCountIs, UIMessage } from 'ai'
 import { Axiom } from '@axiomhq/js'
-import { z } from 'zod'
+import { after } from 'next/server'
 import { getMessageText } from '@/modules/chatHelpers'
-import systemPrompt from '@/modules/chatPrompt'
-import { fetchCarDetailsTool } from './tools/fetchCarDetails'
+import { parseChatRequest, streamChat, type ChatFinish } from './chat'
 import { clientKey, rateLimit } from './rateLimit'
 
 // Picked on Icelandic performance, not general benchmarks: 3.7 scores above
@@ -16,23 +14,6 @@ const modelName = 'gemini-3.7-flash'
 const axiom = process.env.AXIOM_TOKEN
   ? new Axiom({ token: process.env.AXIOM_TOKEN })
   : undefined
-
-// Loose on purpose — convertToModelMessages owns the real shape. This only
-// bounds the body, so an oversized post is a 400 rather than a bill.
-const requestSchema = z.object({
-  messages: z
-    .array(
-      z
-        .object({
-          id: z.string().optional(),
-          role: z.enum(['user', 'assistant', 'system']),
-          parts: z.array(z.object({ type: z.string() }).loose()).max(50),
-        })
-        .loose(),
-    )
-    .min(1)
-    .max(100),
-})
 
 export async function POST(req: Request) {
   const limit = rateLimit(clientKey(req))
@@ -53,47 +34,48 @@ export async function POST(req: Request) {
     return Response.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  const parsed = requestSchema.safeParse(body)
-  if (!parsed.success) {
+  const messages = await parseChatRequest(body)
+  if (!messages) {
     return Response.json({ error: 'Invalid request body' }, { status: 400 })
   }
 
-  const messages = parsed.data.messages as UIMessage[]
+  // Kept by onFinish and logged by after(), which runs once the response has
+  // gone, so the Axiom round trip never holds the stream open. An answer that
+  // errors or is aborted never finishes, and has nothing to log.
+  let finished: ChatFinish | undefined
 
-  const result = streamText({
+  after(async () => {
+    if (!axiom || !finished) return
+
+    try {
+      await axiom.ingest('veldu-rafbil-assistant', [
+        {
+          type: 'chat_response_finished',
+          timestamp: new Date().toISOString(),
+          userMessage: getMessageText(messages[messages.length - 1]),
+          assistantResponse: finished.text,
+          followUps: finished.followUps,
+          messageCount: messages.length,
+          tokenUsage: finished.usage,
+          toolCalls: finished.toolCalls,
+          model: modelName,
+          environment: process.env.NODE_ENV || 'development',
+        },
+      ])
+      await axiom.flush()
+    } catch (error) {
+      console.error('Failed to log to Axiom:', error)
+    }
+  })
+
+  return streamChat({
     model: google(modelName),
-    messages: await convertToModelMessages(messages),
-    system: systemPrompt,
+    messages,
     providerOptions: {
       google: { thinkingConfig: { thinkingLevel: 'medium' } },
     },
-    stopWhen: stepCountIs(10),
-    tools: {
-      fetchCarDetails: fetchCarDetailsTool,
-    },
-    onFinish: async ({ text, usage, toolCalls }) => {
-      if (!axiom) return
-
-      try {
-        await axiom.ingest('veldu-rafbil-assistant', [
-          {
-            type: 'chat_response_finished',
-            timestamp: new Date().toISOString(),
-            userMessage: getMessageText(messages[messages.length - 1]),
-            assistantResponse: text,
-            messageCount: messages.length,
-            tokenUsage: usage,
-            toolCalls: toolCalls,
-            model: modelName,
-            environment: process.env.NODE_ENV || 'development',
-          },
-        ])
-        await axiom.flush()
-      } catch (error) {
-        console.error('Failed to log to Axiom:', error)
-      }
+    onFinish: (event) => {
+      finished = event
     },
   })
-
-  return result.toUIMessageStreamResponse()
 }

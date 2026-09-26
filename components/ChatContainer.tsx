@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from 'react'
 import { useChat } from '@ai-sdk/react'
 import dynamic from 'next/dynamic'
 import FloatingChat from './ChatInput'
-import { getMessageText } from '@/modules/chatHelpers'
+import { getMessageText, type ChatMessage } from '@/modules/chatHelpers'
 import useBodyScrollLock from '@/utils/useBodyScrollLock'
 import useKeyboardInset from '@/utils/useKeyboardInset'
 import {
@@ -48,8 +48,18 @@ export default function ChatContainer({ hide }: Props) {
     }
   }
 
-  const [initialMessages] = useState(readStoredMessages)
-  const chatState = useChat({ messages: initialMessages })
+  const chatState = useChat<ChatMessage>()
+  const { setMessages } = chatState
+
+  // Read after mount, as validating it is async. A question already sent in
+  // the meantime has started a conversation of its own, so it is not replaced.
+  useEffect(() => {
+    void readStoredMessages().then((stored) => {
+      if (stored.length > 0) {
+        setMessages((current) => (current.length > 0 ? current : stored))
+      }
+    })
+  }, [setMessages])
 
   useBodyScrollLock(isChatOpen && !releaseBodyLock)
 

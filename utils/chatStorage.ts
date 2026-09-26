@@ -1,24 +1,18 @@
-import { UIDataTypes, UIMessage, UITools } from 'ai'
+import { parseStoredMessages, type ChatMessage } from '@/modules/chatHelpers'
 
 export const CHAT_STORAGE_KEY = 'veldu-rafbil-chat-messages'
 
-type StoredMessage = UIMessage<unknown, UIDataTypes, UITools>
-
-// Any of these can throw — private mode, a full quota, JSON from an older
-// shape — and a broken history must read as an empty one.
-export const readStoredMessages = (): StoredMessage[] => {
-  if (typeof window === 'undefined') return []
+// Private mode can make even reading throw
+export const readStoredMessages = async (): Promise<ChatMessage[]> => {
   try {
     const stored = localStorage.getItem(CHAT_STORAGE_KEY)
-    if (!stored) return []
-    const parsed = JSON.parse(stored)
-    return Array.isArray(parsed) ? parsed : []
+    return stored ? await parseStoredMessages(stored) : []
   } catch {
     return []
   }
 }
 
-export const writeStoredMessages = (messages: StoredMessage[]): void => {
+export const writeStoredMessages = (messages: ChatMessage[]): void => {
   try {
     localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(messages))
   } catch {

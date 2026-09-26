@@ -3,15 +3,14 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { UIDataTypes, UITools, UIMessage } from 'ai'
 import { useEffect } from 'react'
 import { useRef } from 'react'
-import { stripFollowUps } from '@/modules/chatHelpers'
+import type { ChatMessage as Message } from '@/modules/chatHelpers'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import clsx from 'clsx'
 
 interface Props {
-  message: UIMessage<unknown, UIDataTypes, UITools>
+  message: Message
   isLastUserMessage: boolean
 }
 
@@ -61,7 +60,7 @@ const ChatMessage: React.FunctionComponent<Props> = ({
                 ),
               }}
             >
-              {stripFollowUps(part.text)}
+              {part.text}
             </ReactMarkdown>
           ) : null,
         )}

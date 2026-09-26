@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react'
-import { UIDataTypes, UITools, ChatStatus, UIMessage } from 'ai'
+import type { ChatStatus } from 'ai'
 import {
+  getFollowUps,
   getMessageText,
-  parseFollowUps,
-  stripFollowUps,
+  type ChatMessage as Message,
 } from '@/modules/chatHelpers'
 import Modal from './Modal'
 import ChatHeader from './chat/ChatHeader'
@@ -16,7 +16,7 @@ import TypingIndicator from './chat/TypingIndicator'
 
 interface Props {
   onDone: () => void
-  messages: UIMessage<unknown, UIDataTypes, UITools>[]
+  messages: Message[]
   status: ChatStatus
   onClearChat: () => void
   onReleaseBodyLock: () => void
@@ -58,7 +58,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
   const lastMessage = messages[messages.length - 1]
   const lastAssistantText =
     lastMessage?.role === 'assistant' ? getMessageText(lastMessage) : ''
-  const lastMessageFollowUps = parseFollowUps(lastAssistantText)
+  const lastMessageFollowUps = getFollowUps(lastMessage)
 
   // Found once rather than per message, which is what reading it inside the
   // map below came to
@@ -139,9 +139,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
             {/* Announcing only the finished text keeps a screen reader from
             re-reading the whole message on every token */}
             <div aria-live="polite" className="sr-only">
-              {status !== 'streaming' && lastAssistantText
-                ? stripFollowUps(lastAssistantText)
-                : ''}
+              {status !== 'streaming' ? lastAssistantText : ''}
             </div>
           </section>
 
