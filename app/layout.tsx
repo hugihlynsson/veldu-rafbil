@@ -1,15 +1,18 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 import Fathom from '@/components/Fathom'
 
-// Served from this site, so the first paint waits on no other host. Google's
-// cut has no ↗, which falls back to the system font's arrow.
-const inter = Inter({
-  subsets: ['latin'],
-  style: ['normal', 'italic'],
-  axes: ['opsz'],
+// rsms's InterVariable 4.1 rather than Google's cut, which drops glyphs the
+// list uses, ↗ among them. Served from here, so the first paint waits on no
+// other host.
+const inter = localFont({
+  src: [
+    { path: './fonts/InterVariable.woff2', style: 'normal' },
+    { path: './fonts/InterVariable-Italic.woff2', style: 'italic' },
+  ],
+  weight: '100 900',
   variable: '--font-inter',
 })
 
