@@ -1483,7 +1483,7 @@ const newCars: Array<NewCar> = [
     acceleration: 6.3,
     capacity: 64,
     range: 465,
-    evDatabaseUrl: 'https://ev-database.org/car/3147/MG-MGS5--EV-64-kWh',
+    evDatabaseUrl: 'https://ev-database.org/car/3147/MG-MGS5-EV-64-kWh',
     drive: 'RWD',
     seats: 5,
     power: 170,
