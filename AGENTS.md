@@ -172,7 +172,9 @@ the model and the logging, which runs in `after()` so it never holds the stream
 open. Everything else is `chat.ts`, which takes the model as a parameter so
 `chat.test.ts` can run it against a mock model: `parseChatRequest` bounds the
 body and validates each message with `validateUIMessages`, and `streamChat`
-streams the answer.
+streams the answer. The bounds live in `modules/chatRequest.ts` beside
+`trimHistory`, which the browser cuts a conversation with before sending it, so
+the stored history never grows into a request the route refuses.
 
 The prompt still asks for `[q:…]` follow-up markers, but they never reach the
 browser: a stream transform in `modules/followUps.ts` takes them out of the text
