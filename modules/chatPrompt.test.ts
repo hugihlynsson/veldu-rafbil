@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import systemPrompt from './chatPrompt'
+import addDecimalSeparators from './addDecimalSeparators'
 import cars from './cars'
 import { grantAmountText } from './grantCopy'
 import { realRangeHighFactor, realRangeLowFactor } from './globals'
@@ -9,8 +10,20 @@ describe('the assistant system prompt', () => {
   it('lists every car by its label and the price a buyer pays', () => {
     for (const car of cars) {
       expect(systemPrompt, car.id).toContain(
-        `${car.label}: ${car.priceWithGrant.toLocaleString('is-IS')} kr`,
+        `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr`,
       )
+    }
+  })
+
+  // Without them a question about charging was answered from the model's
+  // memory, and could disagree with the card beside the chat
+  it('gives every car the battery and fast-charge figures its card shows', () => {
+    const lines = systemPrompt.split('\n')
+    for (const car of cars) {
+      const line = lines.find((line) => line.startsWith(`${car.label}: `))
+      expect(line, car.id).toContain(`${car.capacity} kWh`)
+      expect(line, car.id).toContain(`${car.timeToCharge10To80} mín`)
+      expect(line, car.id).toContain(`${car.kmPerMinuteCharged} km/mín`)
     }
   })
 

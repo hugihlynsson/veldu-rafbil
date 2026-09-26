@@ -1,13 +1,16 @@
+import addDecimalSeparators from './addDecimalSeparators'
 import cars from './cars'
 import { grantAmountText, grantCeilingDativeText } from './grantCopy'
 import { realRangeHighFactor, realRangeLowFactor } from './globals'
 
 const percent = (factor: number) => `${Math.round(factor * 100)}%`
 
+// The figures each card shows, so an answer about charging or battery size
+// comes from the list rather than from whatever the model remembers
 const carsSummary = cars
   .map(
     (car) =>
-      `${car.label}: ${car.priceWithGrant.toLocaleString('is-IS')} kr, ${car.range} km drægni, ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseUrl ? ` (more info: ${car.evDatabaseUrl})` : ''}`,
+      `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr, ${car.range} km drægni, ${car.capacity} kWh rafhlaða, hraðhleðsla 10-80% á ${car.timeToCharge10To80} mín (${car.kmPerMinuteCharged} km/mín), ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseUrl ? ` (more info: ${car.evDatabaseUrl})` : ''}`,
   )
   .join('\n')
 
@@ -25,6 +28,7 @@ Gott að hafa í huga:
 - Notaðu upplýsingarnar hér að ofan til að gefa nákvæmar, sértækar upplýsingar
 - Verðin hér að ofan eru EFTIR ${grantAmountText} ríkisstyrk (fyrir bíla undir ${grantCeilingDativeText} kr)
 - Drægni byggir á WLTP mælingum
+- Hraðhleðslan er tíminn frá 10% upp í 80% á hröðustu hleðslu, og km/mín er meðaldrægniaukningin á mínútu á því bili, reiknuð út frá WLTP drægni
 - Þegar spurt er um raunverulega drægni, útskýrðu að hún verði minni vegna þátta eins og aksturs og veðuraðstæðna á Íslandi
 - Gerðu þitt besta til að meta raun-drægni (venjulega ${percent(realRangeLowFactor)}-${percent(realRangeHighFactor)} af WLTP í köldu loftslagi eins og á Íslandi)
 - Þú veist EINUNGIS um bílana sem eru taldir upp hér að ofan
