@@ -116,12 +116,12 @@ const ChatModal: React.FunctionComponent<Props> = ({
               {unanswered && (
                 <div
                   role="alert"
-                  className="flex items-center justify-between mx-4 mb-4 rounded-full bg-alarm-surface p-3 pl-4 text-sm text-alarm"
+                  className="flex items-center justify-between gap-3 mx-4 mb-4 rounded-full bg-alarm-surface p-3 pl-4 text-sm text-alarm"
                 >
                   <p className="font-medium">{unanswered}</p>
                   <button
                     onClick={onRetry}
-                    className="rounded-full bg-alarm-fill px-3 py-1.5 text-xs font-medium text-alarm hover:bg-alarm-fill-hover transition-colors cursor-pointer"
+                    className="shrink-0 rounded-full bg-alarm-fill px-3 py-1.5 text-xs font-medium text-alarm hover:bg-alarm-fill-hover transition-colors cursor-pointer"
                   >
                     Reyna aftur
                   </button>
