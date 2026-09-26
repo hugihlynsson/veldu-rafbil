@@ -12,6 +12,30 @@ const allowedURLs = new Set(
 // ev-database pages are ~200 KB; anything far past that is not a car page
 const MAX_BYTES = 2_000_000
 const TIMEOUT_MS = 8_000
+const MAX_REDIRECTS = 3
+
+// fetch would follow a redirect before anything here saw it, and the allowlist
+// vouches only for the URL it was asked for: a hop is followed while it stays
+// on that URL's site, and any other is not requested at all
+const fetchOnSite = async (url: string): Promise<Response | null> => {
+  const { origin } = new URL(url)
+  const signal = AbortSignal.timeout(TIMEOUT_MS)
+  let next = url
+
+  for (let hop = 0; hop <= MAX_REDIRECTS; hop++) {
+    const response = await fetch(next, { redirect: 'manual', signal })
+    const location = response.headers.get('location')
+    const isRedirect = response.status >= 300 && response.status < 400
+    if (!isRedirect || !location) return response
+
+    await response.body?.cancel()
+    const target = new URL(location, next)
+    if (target.origin !== origin) return null
+    next = target.href
+  }
+
+  return null
+}
 
 // response.text() would read the whole body before any cap could apply
 const readCapped = async (response: Response): Promise<string> => {
@@ -57,6 +81,54 @@ const readSpecTable = (html: string): Map<string, string> => {
   return table
 }
 
+/** The fields the list does not carry, as the model is handed them */
+const readSpecs = (html: string): string => {
+  const specTable = readSpecTable(html)
+
+  // The label has to match the site's own field name; the first spelling that
+  // answers wins, as the site has renamed a field or two over time
+  const spec = (...labels: Array<string>): string => {
+    for (const label of labels) {
+      const value = specTable.get(label.toLowerCase())
+      if (value) return value
+    }
+    return ''
+  }
+
+  // Only what the page said: carName and source are the tool's own fields, and
+  // listing them here left a page with no table reporting the name it was given
+  // as its specifications
+  const specs = {
+    length: spec('Length'),
+    width: spec('Width'),
+    height: spec('Height'),
+    wheelbase: spec('Wheelbase'),
+    weightUnladen: spec('Weight Unladen', 'Curb Weight'),
+    grossWeight: spec('Gross Vehicle Weight', 'GVWR'),
+    maxPayload: spec('Max. Payload', 'Payload'),
+    cargoVolume: spec('Cargo Volume'),
+    cargoVolumeMax: spec('Cargo Volume Max', 'Cargo Max'),
+    frunk: spec('Cargo Volume Frunk', 'Frunk'),
+    towingUnbraked: spec('Towing Weight Unbraked'),
+    towingBraked: spec('Towing Weight Braked'),
+    towHitch: spec('Tow Hitch', 'Towbar'),
+    seats: spec('Seats'),
+  }
+
+  const formatted = Object.entries(specs)
+    .filter(([, value]) => value)
+    .map(([key, value]) => `${key}: ${value}`)
+    .join('\n')
+
+  return formatted || 'No specifications found'
+}
+
+// A car's dimensions do not change within a day, and without this every answer
+// that asks is another page from ev-database. Only allowed URLs are kept, so it
+// holds at most one entry per car in the list; a failure is not kept.
+const CACHE_MS = 24 * 60 * 60 * 1000
+const specCache = new Map<string, { specifications: string; expires: number }>()
+
 // Each call is a page from ev-database, and a part of the answer the browser
 // sends back with every later question. A model fanning out over the whole
 // list would do both once per car, so the description asks for no more than
@@ -96,10 +168,22 @@ export const createFetchCarDetailsTool = () => {
         }
       }
 
+      const cached = specCache.get(url)
+      if (cached && cached.expires > Date.now()) {
+        return { carName, specifications: cached.specifications, source: url }
+      }
+
       try {
-        const response = await fetch(url, {
-          signal: AbortSignal.timeout(TIMEOUT_MS),
-        })
+        const response = await fetchOnSite(url)
+
+        if (!response) {
+          return {
+            carName,
+            specifications:
+              'The ev-database page redirected somewhere this tool does not follow, so there are no specifications to read. Answer from the car list instead.',
+            source: url,
+          }
+        }
 
         // Naming the status tells the model to fall back to the list, not retry
         if (!response.ok) {
@@ -110,48 +194,10 @@ export const createFetchCarDetailsTool = () => {
           }
         }
 
-        const specTable = readSpecTable(await readCapped(response))
+        const specifications = readSpecs(await readCapped(response))
+        specCache.set(url, { specifications, expires: Date.now() + CACHE_MS })
 
-        // The label has to match the site's own field name; the first spelling
-        // that answers wins, as the site has renamed a field or two over time
-        const spec = (...labels: Array<string>): string => {
-          for (const label of labels) {
-            const value = specTable.get(label.toLowerCase())
-            if (value) return value
-          }
-          return ''
-        }
-
-        // Only what the page said: carName and source are the tool's own fields,
-        // and listing them here left a page with no table reporting the name it
-        // was given as its specifications
-        const specs = {
-          length: spec('Length'),
-          width: spec('Width'),
-          height: spec('Height'),
-          wheelbase: spec('Wheelbase'),
-          weightUnladen: spec('Weight Unladen', 'Curb Weight'),
-          grossWeight: spec('Gross Vehicle Weight', 'GVWR'),
-          maxPayload: spec('Max. Payload', 'Payload'),
-          cargoVolume: spec('Cargo Volume'),
-          cargoVolumeMax: spec('Cargo Volume Max', 'Cargo Max'),
-          frunk: spec('Cargo Volume Frunk', 'Frunk'),
-          towingUnbraked: spec('Towing Weight Unbraked'),
-          towingBraked: spec('Towing Weight Braked'),
-          towHitch: spec('Tow Hitch', 'Towbar'),
-          seats: spec('Seats'),
-        }
-
-        const formattedSpecs = Object.entries(specs)
-          .filter(([, value]) => value)
-          .map(([key, value]) => `${key}: ${value}`)
-          .join('\n')
-
-        return {
-          carName,
-          specifications: formattedSpecs || 'No specifications found',
-          source: url,
-        }
+        return { carName, specifications, source: url }
       } catch (error) {
         return {
           carName,
