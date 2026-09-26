@@ -19,7 +19,7 @@ const modelName = 'gemini-3.7-flash'
 const carsSummary = cars
   .map(
     (car) =>
-      `${car.label}: ${car.priceWithGrant.toLocaleString('is-IS')} kr, ${car.range} km drægni, ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseURL ? ` (more info: ${car.evDatabaseURL})` : ''}`,
+      `${car.label}: ${car.priceWithGrant.toLocaleString('is-IS')} kr, ${car.range} km drægni, ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseUrl ? ` (more info: ${car.evDatabaseUrl})` : ''}`,
   )
   .join('\n')
 

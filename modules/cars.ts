@@ -28,7 +28,7 @@ export const deriveCar = (car: NewCar): Car => {
     priceWithGrant,
     pricePerKm: priceWithGrant / car.range,
     kmPerMinuteCharged: getKmPerMinutesCharged(
-      car.timeToCharge10T080,
+      car.timeToCharge10To80,
       car.range,
     ),
     availability: car.expectedDelivery ? 'expected' : 'available',

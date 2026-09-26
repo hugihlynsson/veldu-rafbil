@@ -4,26 +4,9 @@
  */
 export type SearchParams = Record<string, string | Array<string> | undefined>
 
-export type Drive = 'AWD' | 'FWD' | 'RWD'
+import type { Drive, NewCar } from './modules/newCarSchema'
 
-export interface NewCar {
-  make: string
-  model: string
-  subModel?: string
-  heroImageName: string
-  price: number // ISK, whole krónur
-  sellerURL: string
-  acceleration: number // 0-100 km/h
-  capacity: number // kWh
-  range: number // WLTP
-  evDatabaseURL?: string
-  drive: Drive
-  // The most the model can be ordered with here, paid options included
-  seats: number
-  timeToCharge10T080: number // minutes
-  power: number // kW
-  expectedDelivery?: string // In Icelandic, for example: "sumar 2020"
-}
+export type { Drive, NewCar }
 
 export type Availability = 'available' | 'expected'
 

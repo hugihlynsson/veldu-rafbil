@@ -39,7 +39,7 @@ describe('fetchCarDetails', () => {
 
   // Against an uncapped read this hangs rather than fails
   it('stops reading a body that never ends', async () => {
-    const allowed = newCars.find((car) => car.evDatabaseURL)!.evDatabaseURL!
+    const allowed = newCars.find((car) => car.evDatabaseUrl)!.evDatabaseUrl!
     const encoder = new TextEncoder()
     const filler = encoder.encode('x'.repeat(64 * 1024))
     let chunksSent = 0
@@ -65,7 +65,7 @@ describe('fetchCarDetails', () => {
   })
 
   it('does not read an error page for specifications', async () => {
-    const allowed = newCars.find((car) => car.evDatabaseURL)!.evDatabaseURL!
+    const allowed = newCars.find((car) => car.evDatabaseUrl)!.evDatabaseUrl!
 
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(
       new Response('<tr><td>Seats</td><td>5</td></tr>', { status: 503 }),
@@ -78,7 +78,7 @@ describe('fetchCarDetails', () => {
   })
 
   it('reads the spec table, whatever case and spelling it is in', async () => {
-    const allowed = newCars.find((car) => car.evDatabaseURL)!.evDatabaseURL!
+    const allowed = newCars.find((car) => car.evDatabaseUrl)!.evDatabaseUrl!
 
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(
       new Response(
@@ -106,7 +106,7 @@ describe('fetchCarDetails', () => {
   })
 
   it('says so rather than inventing figures for a page with no table', async () => {
-    const allowed = newCars.find((car) => car.evDatabaseURL)!.evDatabaseURL!
+    const allowed = newCars.find((car) => car.evDatabaseUrl)!.evDatabaseUrl!
 
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(
       new Response('<p>Ekkert hér</p>', { status: 200 }),
@@ -116,7 +116,7 @@ describe('fetchCarDetails', () => {
   })
 
   it('fetches a URL that a car in the list actually points at', async () => {
-    const allowed = newCars.find((car) => car.evDatabaseURL)?.evDatabaseURL
+    const allowed = newCars.find((car) => car.evDatabaseUrl)?.evDatabaseUrl
     expect(allowed).toBeDefined()
 
     const fetchSpy = vi

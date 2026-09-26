@@ -115,16 +115,22 @@ describe('the published car payload', () => {
       'capacity',
       'acceleration',
       'power',
-      'sellerURL',
-      'evDatabaseURL',
       'heroImageName',
-      'timeToCharge10T080',
+      'timeToCharge10To80',
     ]) {
       expect(published.has(internal), internal).toBe(
         internal === 'price', // The one name kept, and it is an object, not a number
       )
     }
     expect(typeof payload.cars[0]!.price).toBe('object')
+  })
+
+  // The links mean the same inside and out, so they keep one name
+  it('publishes the links under the names the data uses', () => {
+    const car = cars.find((car) => car.evDatabaseUrl)!
+    const published = toApiCar(car)
+    expect(published.sellerUrl).toBe(car.sellerUrl)
+    expect(published.evDatabaseUrl).toBe(car.evDatabaseUrl)
   })
 
   // A path to them in a public document invites hotlinking

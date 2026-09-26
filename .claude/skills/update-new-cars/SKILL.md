@@ -202,8 +202,8 @@ And, for a car that is genuinely new to the list:
   `WebFetch`. Guessing the URL does not work: the path needs the exact slug
   (`/car/3491/Kia-EV2-61-kWh`), and a wrong slug is a 404 even for a real id.
   Sibling variants often have adjacent ids, which helps only once you know the
-  slug. Every `evDatabaseURL` must be unique to one entry; a test fails
-  otherwise. `acceleration`, `power` and `timeToCharge10T080` come from that
+  slug. Every `evDatabaseUrl` must be unique to one entry; a test fails
+  otherwise. `acceleration`, `power` and `timeToCharge10To80` come from that
   page, cross-checked against the brochure's spec page, and `range` is the lower
   of the two, as under "Specs on existing cars". `capacity`
   is the nominal figure, as the existing entries have it (EV2: 42.2 in the list,
@@ -212,9 +212,9 @@ And, for a car that is genuinely new to the list:
   silently. **`seats` is not one of these** — ev-database gives a European
   configuration and the field wants the Icelandic maximum, so take it from the
   importer's own list per "Seats" above.
-- **If ev-database has no entry yet**, leave `evDatabaseURL` out and use the
+- **If ev-database has no entry yet**, leave `evDatabaseUrl` out and use the
   brochure's figures, and say so in the report.
-- **`sellerURL` is the car's own model page**, not the importer's front page.
+- **`sellerUrl` is the car's own model page**, not the importer's front page.
   Seven cars once pointed at a site root and had to be fixed.
 - **`subModel`** names the variant, and per the identity rule above two entries
   must not share one. Front- and all-wheel-drive siblings must not share a name.

@@ -80,6 +80,10 @@ the largest file in the repo and most commits touch only it. Adding or updating
 a car is the `update-new-cars` skill — read it rather than working from a
 brochure directly.
 
+`NewCar` is inferred from the Zod schema in `modules/newCarSchema.ts`, and
+`newCars.test.ts` checks every entry against it. A field is added there, with
+its bounds, rather than in `types.ts`.
+
 Never re-derive a car field. Read cars through `modules/cars.ts`, whose `Car`
 already carries `id`, `label`, `priceWithGrant`, `pricePerKm` and
 `kmPerMinuteCharged`. Each of those has a module that owns the rule, and the

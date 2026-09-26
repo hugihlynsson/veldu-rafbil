@@ -5,7 +5,7 @@ import newCars from '../../../../modules/newCars'
 // Without this the model can be talked into fetching any URL at all
 const allowedURLs = new Set(
   newCars
-    .map((car) => car.evDatabaseURL)
+    .map((car) => car.evDatabaseUrl)
     .filter((url): url is string => Boolean(url)),
 )
 
@@ -61,7 +61,7 @@ export const fetchCarDetailsTool = tool({
   description:
     'Fetch detailed information about a specific car from its EV Database URL. Use this to get more information about the car, for example dimensions, cargo space, interior details, or other specifications not in the basic car list. The tool will not answer the users question: You must use this info to write a helpful answer',
   inputSchema: z.object({
-    url: z.string().describe('The evDatabaseURL from the car list'),
+    url: z.string().describe('The evDatabaseUrl from the car list'),
     carName: z.string().describe('The make and model of the car'),
   }),
   execute: async ({ url, carName }) => {
@@ -69,7 +69,7 @@ export const fetchCarDetailsTool = tool({
       return {
         carName,
         specifications:
-          'That URL is not one of the ev-database entries in the car list, so it was not fetched. Use the evDatabaseURL given for the car, or answer from the list alone.',
+          'That URL is not one of the ev-database entries in the car list, so it was not fetched. Use the evDatabaseUrl given for the car, or answer from the list alone.',
         source: url,
       }
     }
