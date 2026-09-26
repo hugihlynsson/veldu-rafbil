@@ -101,7 +101,11 @@ export default function ChatContainer({ hide }: Props) {
         setShowChatMessages(true)
       }}
       hide={hide}
-      disabled={chatState.status === 'streaming'}
+      // Waiting on the first token counts: a question sent then is answered
+      // alongside the one before it, and the two answers interleave
+      disabled={
+        chatState.status === 'submitted' || chatState.status === 'streaming'
+      }
       hasMessages={chatState.messages.length > 0}
       sendMessage={handleSendMessage}
       value={draft}
