@@ -10,13 +10,9 @@ import {
   convertReadableStreamToArray,
 } from 'ai/test'
 
-import {
-  parseChatRequest,
-  streamChat,
-  trimHistory,
-  type ChatFinish,
-} from './chat'
+import { parseChatRequest, streamChat, type ChatFinish } from './chat'
 import { MAX_QUESTION_LENGTH, type ChatMessage } from '@/modules/chatMessage'
+import { trimHistory } from '@/modules/chatRequest'
 
 const question: ChatMessage = {
   id: 'q1',
@@ -143,55 +139,68 @@ describe('streamChat', () => {
   })
 })
 
-describe('trimHistory', () => {
-  const answerOf = (id: string, length: number): ChatMessage => ({
+// The browser trims what it sends with trimHistory, so a conversation it holds
+// is never one the route turns away whole
+describe('a trimmed conversation', () => {
+  const answerOf = (id: string, parts: ChatMessage['parts']): ChatMessage => ({
     id,
     role: 'assistant',
-    parts: [{ type: 'text', text: 'a'.repeat(length) }],
+    parts,
   })
-  const questionOf = (id: string): ChatMessage => ({ ...question, id })
+  const exchange = (i: number): ChatMessage[] => [
+    { ...question, id: `q${i}` },
+    answerOf(`a${i}`, [{ type: 'text', text: 'Já.' }]),
+  ]
 
-  it('keeps a conversation that fits', () => {
-    const messages = [questionOf('q1'), answerOf('a1', 500), questionOf('q2')]
-    expect(trimHistory(messages)).toEqual(messages)
-  })
-
-  it('drops the oldest exchanges past the budget, keeping the newest', () => {
+  it('is one the route accepts, however long it has grown', async () => {
     const messages = [
-      questionOf('q1'),
-      answerOf('a1', 80_000),
-      questionOf('q2'),
-      answerOf('a2', 30_000),
-      questionOf('q3'),
+      ...Array.from({ length: 80 }, (_, i) => exchange(i)).flat(),
+      { ...question, id: 'last' },
     ]
-    expect(trimHistory(messages).map((message) => message.id)).toEqual([
-      'q2',
-      'a2',
-      'q3',
+
+    expect(await parseChatRequest({ messages })).toBeNull()
+    expect(await parseChatRequest({ messages: trimHistory(messages) })).toEqual(
+      trimHistory(messages),
+    )
+  })
+
+  it('is one the route accepts after an answer too big to send', async () => {
+    const wide = answerOf('wide', [
+      { type: 'step-start' },
+      ...Array.from({ length: 60 }, (_, i) => ({
+        type: 'tool-fetchCarDetails' as const,
+        toolCallId: `c${i}`,
+        state: 'output-available' as const,
+        input: { url: 'https://ev-database.org/car/1/x', carName: 'x' },
+        output: { carName: 'x', specifications: 'seats: 5', source: 'x' },
+      })),
+      { type: 'text', text: 'Svar.' },
     ])
-  })
-
-  it('starts on a question rather than an orphaned answer', () => {
     const messages = [
-      questionOf('q1'),
-      answerOf('a1', 80_000),
-      answerOf('a2', 30_000),
-      questionOf('q2'),
+      { ...question, id: 'q0' },
+      wide,
+      ...exchange(1),
+      { ...question, id: 'q2' },
     ]
-    expect(trimHistory(messages).map((message) => message.id)).toEqual(['q2'])
+
+    expect(await parseChatRequest({ messages })).toBeNull()
+    expect(
+      (await parseChatRequest({ messages: trimHistory(messages) }))?.map(
+        (message) => message.id,
+      ),
+    ).toEqual(['q1', 'a1', 'q2'])
   })
 
-  it('always keeps the question being asked', () => {
-    const messages = [answerOf('a1', 200_000), questionOf('q1')]
-    expect(trimHistory(messages).map((message) => message.id)).toEqual(['q1'])
-  })
-
-  it('sends the model only what was kept', async () => {
+  it('reaches the model only as what was kept', async () => {
     const model = modelSaying(['Svar.'])
     await read(
       await streamChat({
         model,
-        messages: [questionOf('q1'), answerOf('a1', 200_000), questionOf('q2')],
+        messages: [
+          { ...question, id: 'q1' },
+          answerOf('a1', [{ type: 'text', text: 'a'.repeat(200_000) }]),
+          { ...question, id: 'q2' },
+        ],
       }),
     )
 

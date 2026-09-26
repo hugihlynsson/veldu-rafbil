@@ -2,9 +2,11 @@
 
 import { useRef, useState, useEffect } from 'react'
 import { useChat } from '@ai-sdk/react'
+import { DefaultChatTransport } from 'ai'
 import dynamic from 'next/dynamic'
 import FloatingChat from './ChatInput'
 import { getMessageText, type ChatMessage } from '@/modules/chatMessage'
+import { trimHistory } from '@/modules/chatRequest'
 import useBodyScrollLock from '@/utils/useBodyScrollLock'
 import useKeyboardInset from '@/utils/useKeyboardInset'
 import {
@@ -15,6 +17,14 @@ import {
 
 // react-markdown is fetched the first time the chat opens, warmed on focus
 const ChatModal = dynamic(() => import('./ChatModal'))
+
+// The stored conversation grows without end, and the route refuses one past
+// its bounds whole, so what is sent is cut to fit the way the route cuts it
+const transport = new DefaultChatTransport<ChatMessage>({
+  prepareSendMessagesRequest: ({ body, messages }) => ({
+    body: { ...body, messages: trimHistory(messages) },
+  }),
+})
 
 interface Props {
   hide: boolean
@@ -48,7 +58,7 @@ export default function ChatContainer({ hide }: Props) {
     }
   }
 
-  const chatState = useChat<ChatMessage>()
+  const chatState = useChat<ChatMessage>({ transport })
   const { setMessages } = chatState
 
   // Read after mount, as validating it is async. A question already sent in
