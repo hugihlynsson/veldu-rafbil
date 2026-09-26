@@ -66,11 +66,13 @@ export default function ChatContainer({ hide }: Props) {
   // Keeps the input above a phone keyboard rather than behind it
   useKeyboardInset()
 
+  // Messages change on every streamed chunk, and each write serialises the
+  // whole history, so the answer is stored once it has arrived
   useEffect(() => {
-    if (chatState.messages.length > 0) {
+    if (chatState.status !== 'streaming' && chatState.messages.length > 0) {
       writeStoredMessages(chatState.messages)
     }
-  }, [chatState.messages])
+  }, [chatState.messages, chatState.status])
 
   const handleSendMessage = (text: string) => {
     chatState.sendMessage({
