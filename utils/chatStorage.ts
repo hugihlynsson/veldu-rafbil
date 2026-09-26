@@ -1,6 +1,6 @@
-import { parseStoredMessages, type ChatMessage } from '@/modules/chatHelpers'
+import { parseStoredMessages, type ChatMessage } from '@/modules/chatMessage'
 
-export const CHAT_STORAGE_KEY = 'veldu-rafbil-chat-messages'
+const CHAT_STORAGE_KEY = 'veldu-rafbil-chat-messages'
 
 // Private mode can make even reading throw
 export const readStoredMessages = async (): Promise<ChatMessage[]> => {

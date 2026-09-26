@@ -30,49 +30,37 @@ export const createFollowUpSplitter = () => {
   const questions: string[] = []
   let pending = ''
 
+  // Only completed markers are cut here. What is held back — an unfinished
+  // marker, a possible start of one, and the whitespace before either — is
+  // decided once, after the loop.
   const drain = (): string => {
-    let visible = ''
+    let from = 0
+    let unfinished: number | undefined
 
     for (;;) {
-      const start = pending.indexOf(open)
+      const start = pending.indexOf(open, from)
       if (start === -1) break
 
-      const end = pending.indexOf(close, start + open.length)
-      if (end === -1) {
-        if (pending.length - start > longestMarker) {
-          visible += pending.slice(0, start + open.length)
-          pending = pending.slice(start + open.length)
-          continue
-        }
-        // Unfinished: the rest of it is still on its way
-        const before = pending.slice(0, start).trimEnd()
-        visible += before
-        pending = pending.slice(before.length)
-        return visible
-      }
-      if (end - start > longestMarker) {
-        visible += pending.slice(0, start + open.length)
-        pending = pending.slice(start + open.length)
+      const end = pending.indexOf(close, start)
+      if ((end === -1 ? pending.length : end) - start > longestMarker) {
+        from = start + open.length
         continue
       }
+      if (end === -1) {
+        unfinished = start
+        break
+      }
 
-      // The whitespace before a marker stays pending: it is only part of the
-      // answer if more of the answer follows
-      const before = pending.slice(0, start)
-      const gap = before.length - before.trimEnd().length
-      visible += before.slice(0, before.length - gap)
       const question = pending.slice(start + open.length, end).trim()
       if (question) questions.push(question)
-      pending =
-        before.slice(before.length - gap) + pending.slice(end + close.length)
+      pending = pending.slice(0, start) + pending.slice(end + close.length)
+      from = start
     }
 
-    const shown = pending
-      .slice(0, pending.length - heldOpening(pending))
-      .trimEnd().length
-    visible += pending.slice(0, shown)
+    const held = unfinished ?? pending.length - heldOpening(pending)
+    const shown = pending.slice(0, held).trimEnd().length
+    const visible = pending.slice(0, shown)
     pending = pending.slice(shown)
-
     return visible
   }
 
@@ -99,7 +87,7 @@ export const splitFollowUps = (
 ): { text: string; questions: string[] } => {
   const splitter = createFollowUpSplitter()
   const visible = splitter.push(text) + splitter.end()
-  return { text: visible.trim(), questions: splitter.questions() }
+  return { text: visible, questions: splitter.questions() }
 }
 
 /**
@@ -119,24 +107,25 @@ export const followUpTransform =
       transform(part, controller) {
         if (part.type === 'text-start') {
           splitters.set(part.id, createFollowUpSplitter())
-        } else if (part.type === 'text-delta') {
-          const splitter = splitters.get(part.id)
-          if (splitter) {
-            const text = splitter.push(part.text)
-            if (text) controller.enqueue({ ...part, text })
-            return
-          }
-        } else if (part.type === 'text-end') {
-          const splitter = splitters.get(part.id)
-          if (splitter) {
-            const text = splitter.end()
-            if (text)
-              controller.enqueue({ type: 'text-delta', id: part.id, text })
-            questions.push(...splitter.questions())
-            splitters.delete(part.id)
-          }
+          return controller.enqueue(part)
         }
 
+        if (part.type !== 'text-delta' && part.type !== 'text-end') {
+          return controller.enqueue(part)
+        }
+        const splitter = splitters.get(part.id)
+        if (!splitter) return controller.enqueue(part)
+
+        if (part.type === 'text-delta') {
+          const text = splitter.push(part.text)
+          if (text) controller.enqueue({ ...part, text })
+          return
+        }
+
+        const text = splitter.end()
+        if (text) controller.enqueue({ type: 'text-delta', id: part.id, text })
+        questions.push(...splitter.questions())
+        splitters.delete(part.id)
         controller.enqueue(part)
       },
     })

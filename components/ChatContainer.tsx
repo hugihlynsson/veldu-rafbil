@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from 'react'
 import { useChat } from '@ai-sdk/react'
 import dynamic from 'next/dynamic'
 import FloatingChat from './ChatInput'
-import { getMessageText, type ChatMessage } from '@/modules/chatHelpers'
+import { getMessageText, type ChatMessage } from '@/modules/chatMessage'
 import useBodyScrollLock from '@/utils/useBodyScrollLock'
 import useKeyboardInset from '@/utils/useKeyboardInset'
 import {

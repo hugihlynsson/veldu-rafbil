@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { useEffect } from 'react'
 import { useRef } from 'react'
-import type { ChatMessage as Message } from '@/modules/chatHelpers'
+import type { ChatMessage as Message } from '@/modules/chatMessage'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import clsx from 'clsx'
 

@@ -169,6 +169,10 @@ browser: a stream transform in `modules/followUps.ts` takes them out of the text
 and they arrive as the message's `metadata.followUps`. Histories stored before
 that are upgraded as they are read.
 
+`modules/chatMessage.ts` owns the `ChatMessage` type and its one validator,
+shared by the route and the stored history, so the two cannot disagree on
+what a message is.
+
 ## Published data
 
 `/api/cars`, `/llms.txt` and `/robots.txt` are for readers who are not a

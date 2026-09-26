@@ -1,9 +1,17 @@
 import { describe, expect, it } from 'vitest'
-import { readUIMessageStream, type UIMessageChunk } from 'ai'
-import { MockLanguageModelV4, convertArrayToReadableStream } from 'ai/test'
+import {
+  parseJsonEventStream,
+  readUIMessageStream,
+  uiMessageChunkSchema,
+} from 'ai'
+import {
+  MockLanguageModelV4,
+  convertArrayToReadableStream,
+  convertReadableStreamToArray,
+} from 'ai/test'
 
 import { parseChatRequest, streamChat, type ChatFinish } from './chat'
-import type { ChatMessage } from '@/modules/chatHelpers'
+import type { ChatMessage } from '@/modules/chatMessage'
 
 const question: ChatMessage = {
   id: 'q1',
@@ -40,11 +48,16 @@ const modelSaying = (chunks: string[]) =>
 
 // The SSE body back into chunks, and the chunks into the message useChat builds
 const read = async (response: Response) => {
-  const body = await response.text()
-  const chunks = body
-    .split('\n')
-    .filter((line) => line.startsWith('data: ') && line !== 'data: [DONE]')
-    .map((line) => JSON.parse(line.slice('data: '.length)) as UIMessageChunk)
+  const parsed = await convertReadableStreamToArray(
+    parseJsonEventStream({
+      stream: response.body!,
+      schema: uiMessageChunkSchema,
+    }),
+  )
+  const chunks = parsed.map((result) => {
+    if (!result.success) throw result.error
+    return result.value
+  })
 
   let message: ChatMessage | undefined
   for await (const built of readUIMessageStream<ChatMessage>({
