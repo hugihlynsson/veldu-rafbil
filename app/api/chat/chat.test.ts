@@ -11,7 +11,7 @@ import {
 } from 'ai/test'
 
 import { parseChatRequest, streamChat, type ChatFinish } from './chat'
-import type { ChatMessage } from '@/modules/chatMessage'
+import { MAX_QUESTION_LENGTH, type ChatMessage } from '@/modules/chatMessage'
 
 const question: ChatMessage = {
   id: 'q1',
@@ -150,6 +150,14 @@ describe('parseChatRequest', () => {
     expect(await parseChatRequest({ messages })).toEqual(messages)
   })
 
+  it('accepts a question as long as the input lets one be', async () => {
+    const long = {
+      ...question,
+      parts: [{ type: 'text', text: 'a'.repeat(MAX_QUESTION_LENGTH) }],
+    }
+    expect(await parseChatRequest({ messages: [long] })).toEqual([long])
+  })
+
   it('refuses instructions of the client’s own', async () => {
     const system = {
       id: 's',
@@ -167,6 +175,44 @@ describe('parseChatRequest', () => {
       'too many parts',
       {
         messages: [{ ...question, parts: Array(51).fill(question.parts[0]) }],
+      },
+    ],
+    [
+      'a question longer than the input allows',
+      {
+        messages: [
+          {
+            ...question,
+            parts: [
+              { type: 'text', text: 'a'.repeat(MAX_QUESTION_LENGTH + 1) },
+            ],
+          },
+        ],
+      },
+    ],
+    [
+      'a question in two parts',
+      {
+        messages: [
+          { ...question, parts: [question.parts[0], question.parts[0]] },
+        ],
+      },
+    ],
+    [
+      'a question carrying a file',
+      {
+        messages: [
+          {
+            ...question,
+            parts: [
+              {
+                type: 'file',
+                mediaType: 'image/png',
+                url: 'data:image/png;base64,AAAA',
+              },
+            ],
+          },
+        ],
       },
     ],
     [

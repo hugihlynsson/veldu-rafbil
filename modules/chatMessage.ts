@@ -14,6 +14,10 @@ const chatMetadataSchema = z
 
 export type ChatMessage = UIMessage<z.infer<typeof chatMetadataSchema>>
 
+// The input stops typing here and the route refuses past it, so a question is
+// never the thing that makes a request expensive
+export const MAX_QUESTION_LENGTH = 2_000
+
 type Tools = NonNullable<
   Parameters<typeof safeValidateUIMessages<ChatMessage>>[0]['tools']
 >

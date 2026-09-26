@@ -8,11 +8,40 @@ import {
 import { z } from 'zod'
 
 import systemPrompt from '@/modules/chatPrompt'
-import { validateChatMessages, type ChatMessage } from '@/modules/chatMessage'
+import {
+  MAX_QUESTION_LENGTH,
+  validateChatMessages,
+  type ChatMessage,
+} from '@/modules/chatMessage'
 import { followUpTransform } from '@/modules/followUps'
 import { fetchCarDetailsTool } from './tools/fetchCarDetails'
 
 const tools = { fetchCarDetails: fetchCarDetailsTool }
+
+// The input sends a question as one text part, and nothing else in one is ours
+// to pay for: a file part would reach the model as an upload
+const questionSchema = z
+  .object({
+    role: z.literal('user'),
+    parts: z
+      .array(
+        z
+          .object({
+            type: z.literal('text'),
+            text: z.string().max(MAX_QUESTION_LENGTH),
+          })
+          .loose(),
+      )
+      .length(1),
+  })
+  .loose()
+
+const answerSchema = z
+  .object({
+    role: z.literal('assistant'),
+    parts: z.array(z.object({ type: z.string() }).loose()).max(50),
+  })
+  .loose()
 
 // Only bounds the body, so an oversized post is a 400 rather than a bill; the
 // shape of each message is validateUIMessages' to check. No `system`: the
@@ -20,14 +49,7 @@ const tools = { fetchCarDetails: fetchCarDetailsTool }
 // than failing inside streamText.
 const requestSchema = z.object({
   messages: z
-    .array(
-      z
-        .object({
-          role: z.enum(['user', 'assistant']),
-          parts: z.array(z.object({ type: z.string() }).loose()).max(50),
-        })
-        .loose(),
-    )
+    .array(z.discriminatedUnion('role', [questionSchema, answerSchema]))
     .min(1)
     .max(100),
 })
