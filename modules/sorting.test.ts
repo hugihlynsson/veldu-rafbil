@@ -32,13 +32,13 @@ const car = (over: Partial<NewCar>): Car =>
     model: 'Model',
     heroImageName: 'x',
     price: 5_000_000,
-    sellerURL: 'https://example.is',
+    sellerUrl: 'https://example.is',
     acceleration: 7,
     capacity: 60,
     range: 400,
     drive: 'FWD',
     seats: 5,
-    timeToCharge10T080: 30,
+    timeToCharge10To80: 30,
     power: 150,
     ...over,
   })
@@ -114,8 +114,8 @@ describe('sortCars', () => {
 
   it('ranks fastcharge by km per minute rather than as text', () => {
     // 3.5 and 17.5 km/min: as strings "17.5" would come first
-    const slow = car({ range: 300, timeToCharge10T080: 60 })
-    const fast = car({ range: 500, timeToCharge10T080: 20 })
+    const slow = car({ range: 300, timeToCharge10To80: 60 })
+    const fast = car({ range: 500, timeToCharge10To80: 20 })
     expect(sortCars([slow, fast], 'fastcharge')).toEqual([fast, slow])
   })
 

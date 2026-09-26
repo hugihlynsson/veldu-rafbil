@@ -3,6 +3,9 @@ import { describe, expect, it } from 'vitest'
 
 import newCars from './newCars'
 import getCarId from './getCarId'
+import { z } from 'zod'
+
+import { newCarSchema } from './newCarSchema'
 import { NewCar } from '../types'
 
 const label = (car: NewCar) =>
@@ -46,41 +49,18 @@ describe('the car data', () => {
     expect(collisions).toEqual([])
   })
 
+  // A strict object, so a misspelt optional field is caught rather than dropped
   it.each(newCars.map((car) => [label(car), car] as const))(
-    'has plausible numbers for %s',
+    'matches the schema: %s',
     (_name, car) => {
-      expect(car.price).toBeGreaterThan(0)
-      // ISK has no subunit, unlike the measurements below
-      expect(Number.isInteger(car.price)).toBe(true)
-      expect(car.range).toBeGreaterThan(0)
-      expect(car.range).toBeLessThan(1200)
-      expect(car.acceleration).toBeGreaterThan(0)
-      expect(car.acceleration).toBeLessThan(30)
-      expect(car.capacity).toBeGreaterThan(0)
-      expect(car.power).toBeGreaterThan(0)
-      expect(car.timeToCharge10T080).toBeGreaterThan(0)
-      // People, so whole ones, and a passenger car is neither a bike nor a bus
-      expect(Number.isInteger(car.seats)).toBe(true)
-      expect(car.seats).toBeGreaterThanOrEqual(2)
-      expect(car.seats).toBeLessThanOrEqual(9)
-    },
-  )
-
-  it.each(newCars.map((car) => [label(car), car] as const))(
-    'has usable links for %s',
-    (_name, car) => {
-      expect(car.sellerURL).toMatch(/^https:\/\//)
-      if (car.evDatabaseURL) {
-        expect(car.evDatabaseURL).toMatch(
-          /^https:\/\/ev-database\.org\/car\/\d+\//,
-        )
-      }
+      const result = newCarSchema.safeParse(car)
+      expect(result.success ? [] : z.prettifyError(result.error)).toEqual([])
     },
   )
 
   it('never points two cars at the same ev-database entry', () => {
     const urls = newCars
-      .map((car) => car.evDatabaseURL)
+      .map((car) => car.evDatabaseUrl)
       .filter((url): url is string => Boolean(url))
     const duplicates = urls.filter((url, i) => urls.indexOf(url) !== i)
     expect([...new Set(duplicates)]).toEqual([])

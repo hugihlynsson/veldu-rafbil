@@ -9,7 +9,7 @@ just that its page loaded. Where a make says "listing only", the page was
 fetched and its links seen, but no list was read yet.
 
 A make that appears in the car list but not here has no known price-list page.
-Start from the `sellerURL` of its existing entries, and say in the report that
+Start from the `sellerUrl` of its existing entries, and say in the report that
 it was a guess.
 
 ## Importers with one page for several makes
@@ -74,4 +74,4 @@ entries.
 Electric rows point at `rangerover.com/en-gb`, the manufacturer's UK site rather
 than an Icelandic seller, so there is no importer page to work back to and no
 price to check against. Find the Icelandic importer's model page, fix
-`sellerURL` on both rows, and record the price list here.
+`sellerUrl` on both rows, and record the price list here.

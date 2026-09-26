@@ -76,7 +76,7 @@ const NewCar: FunctionComponent<Props> = ({
         </h2>
 
         <LinkPill
-          href={car.sellerURL}
+          href={car.sellerUrl}
           external
           extra={
             (car.expectedDelivery && hasGrant && 'áætlað verð með styrk ↗') ||
@@ -122,9 +122,9 @@ const NewCar: FunctionComponent<Props> = ({
             <div className="text-2xl font-normal">{car.capacity} kWh</div>
             <div
               className="mt-0.5 text-xs text-stone font-medium"
-              title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10T080} min)`}
+              title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10To80} min)`}
             >
-              {formatKmPerMinutesCharged(car.timeToCharge10T080, car.range)}{' '}
+              {formatKmPerMinutesCharged(car.timeToCharge10To80, car.range)}{' '}
               km/min
               <span className="sr-only">
                 {' '}
@@ -150,11 +150,11 @@ const NewCar: FunctionComponent<Props> = ({
           </div>
         </div>
 
-        {car.evDatabaseURL && (
+        {car.evDatabaseUrl && (
           <a
             className="inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-stone"
             target="_blank"
-            href={car.evDatabaseURL}
+            href={car.evDatabaseUrl}
             rel="noopener"
             onClick={() => trackEvent('Ev Database Link Clicked')}
           >

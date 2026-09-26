@@ -71,13 +71,13 @@ export const toApiCar = (car: Car): ApiCar => ({
   drive: car.drive,
   seats: car.seats,
   fastCharge: {
-    minutes10To80: car.timeToCharge10T080,
+    minutes10To80: car.timeToCharge10To80,
     kmPerMinute: car.kmPerMinuteCharged,
   },
   availability: car.availability,
   ...(car.expectedDelivery ? { expectedDelivery: car.expectedDelivery } : {}),
-  sellerUrl: car.sellerURL,
-  ...(car.evDatabaseURL ? { evDatabaseUrl: car.evDatabaseURL } : {}),
+  sellerUrl: car.sellerUrl,
+  ...(car.evDatabaseUrl ? { evDatabaseUrl: car.evDatabaseUrl } : {}),
   pagePath: `/#${car.id}`,
 })
 
