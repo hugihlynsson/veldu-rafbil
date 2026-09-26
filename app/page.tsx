@@ -4,10 +4,10 @@ import cars from '@/modules/cars'
 import CarList from '@/components/CarList'
 import Footer from '@/components/Footer'
 
-// Built once at deploy, for a visit with no sort or filter in its URL. One with
-// either is rewritten to app/listi and rendered per request (next.config.ts).
-// Forced, as nuqs reads the URL through useSearchParams, which would otherwise
-// leave the list out of the build for the browser to render.
+// Built once at deploy, for a visit with no sort or filter in its URL; one
+// with either is rewritten to app/with-query (next.config.ts). Forced, as nuqs
+// reads the URL through useSearchParams, which would otherwise leave the list
+// out of the build for the browser to render.
 export const dynamic = 'force-static'
 
 export const metadata: Metadata = {

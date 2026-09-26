@@ -49,7 +49,7 @@ describe('the list a URL is served', () => {
     ]),
   ])('is rendered per request for %s', async (_label, query) => {
     expect(query).not.toBe('')
-    expect(await servedFrom(query)).toBe('/listi')
+    expect(await servedFrom(query)).toBe('/with-query')
   })
 
   it.each([
@@ -60,6 +60,6 @@ describe('the list a URL is served', () => {
   })
 
   it('is rewritten to a page that exists', () => {
-    expect(existsSync('app/listi/page.tsx')).toBe(true)
+    expect(existsSync('app/with-query/page.tsx')).toBe(true)
   })
 })

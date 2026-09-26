@@ -46,13 +46,13 @@ governs rather than here, and pin it with a test.
 
 ## Layout
 
-| Path           | What lives there                                                |
-| -------------- | --------------------------------------------------------------- |
-| `modules/`     | Pure logic: no React, no browser. The car data lives here too   |
-| `utils/`       | The things that _do_ need React or the browser                  |
-| `components/`  | The UI, including the chat                                      |
-| `app/page.tsx` | The list, built once at deploy for a URL with no sort or filter |
-| `app/listi/`   | The same list rendered per request, for a URL with one          |
+| Path              | What lives there                                                |
+| ----------------- | --------------------------------------------------------------- |
+| `modules/`        | Pure logic: no React, no browser. The car data lives here too   |
+| `utils/`          | The things that _do_ need React or the browser                  |
+| `components/`     | The UI, including the chat                                      |
+| `app/page.tsx`    | The list, built once at deploy for a URL with no sort or filter |
+| `app/with-query/` | The same list rendered per request, for a URL with one          |
 
 The car data is read through `modules/cars.ts`, not `newCars.ts`: each `Car`
 carries its id, label, price after the grant and charge rate, derived once. The
@@ -117,7 +117,7 @@ to — and the sorting is two parsers in `modules/sorting.ts`.
 
 Most visits arrive at a bare `/`, which is built once and served from the CDN.
 A URL carrying any of those keys is rewritten in `next.config.ts` to
-`app/listi`, which renders per request, so a shared link arrives sorted and
+`app/with-query`, which renders per request, so a shared link arrives sorted and
 filtered rather than reordering once it hydrates. The rewrite reads its keys
 from the same two tables, and `next.config.test.ts` puts every sorting and
 filter through it, so a new one needs nothing more here.
