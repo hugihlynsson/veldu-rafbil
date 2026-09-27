@@ -89,3 +89,16 @@ export const parseStoredMessages = async (
 
   return (await validateChatMessages(messages))?.map(upgradeStoredMessage) ?? []
 }
+
+/**
+ * The messages grouped by question: each turn starts at a user message and
+ * runs up to the next. Anything before the first question is a turn of its
+ * own.
+ */
+export const groupIntoTurns = (messages: ChatMessage[]): ChatMessage[][] =>
+  messages.reduce<ChatMessage[][]>((turns, message) => {
+    const current = turns.at(-1)
+    if (message.role === 'user' || !current) turns.push([message])
+    else current.push(message)
+    return turns
+  }, [])

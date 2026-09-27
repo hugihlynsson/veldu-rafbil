@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import {
   getFollowUps,
   getMessageText,
+  groupIntoTurns,
   parseStoredMessages,
   upgradeStoredMessage,
   type ChatMessage,
@@ -138,5 +139,36 @@ describe('parseStoredMessages', () => {
     ['a message without parts', '[{"id":"q","role":"user"}]'],
   ])('reads %s as no history', async (_label, stored) => {
     expect(await parseStoredMessages(stored)).toEqual([])
+  })
+})
+
+describe('groupIntoTurns', () => {
+  const at = (id: string, role: ChatMessage['role']): ChatMessage => ({
+    id,
+    role,
+    parts: [{ type: 'text', text: id }],
+  })
+
+  it('starts a turn at every question', () => {
+    const turns = groupIntoTurns([
+      at('q1', 'user'),
+      at('a1', 'assistant'),
+      at('q2', 'user'),
+      at('a2', 'assistant'),
+      at('a2b', 'assistant'),
+    ])
+    expect(turns.map((turn) => turn.map((m) => m.id))).toEqual([
+      ['q1', 'a1'],
+      ['q2', 'a2', 'a2b'],
+    ])
+  })
+
+  it('keeps what comes before the first question as its own turn', () => {
+    const turns = groupIntoTurns([at('a0', 'assistant'), at('q1', 'user')])
+    expect(turns.map((turn) => turn.map((m) => m.id))).toEqual([['a0'], ['q1']])
+  })
+
+  it('has no turns without messages', () => {
+    expect(groupIntoTurns([])).toEqual([])
   })
 })
