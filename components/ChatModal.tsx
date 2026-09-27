@@ -1,11 +1,13 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
+import clsx from 'clsx'
 import type { ChatStatus } from 'ai'
 import type { Car } from '@/modules/cars'
 import {
   getFollowUps,
   getMessageText,
+  groupIntoTurns,
   type ChatMessage as Message,
 } from '@/modules/chatMessage'
 import { isAwaitingText, unansweredReason } from '@/modules/chatProgress'
@@ -46,22 +48,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
   composer,
   composerRef,
 }) => {
-  const messagesEndRef = useRef<HTMLDivElement>(null)
-  const messagesContainerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (!messagesContainerRef.current) return
-
-    const container = messagesContainerRef.current
-    const isNearBottom =
-      container.scrollHeight - container.scrollTop - container.clientHeight < 20
-
-    // Only when already at the bottom, so reading back is not yanked down
-    if (isNearBottom) {
-      container.scrollTop = container.scrollHeight
-    }
-  }, [messages, status])
-
   const lastMessage = messages[messages.length - 1]
   const lastAssistantText =
     lastMessage?.role === 'assistant' ? getMessageText(lastMessage) : ''
@@ -71,8 +57,26 @@ const ChatModal: React.FunctionComponent<Props> = ({
   // map below came to
   const lastUserMessageId = messages.findLast((m) => m.role === 'user')?.id
 
+  const turns = groupIntoTurns(
+    messages.filter((message) => getMessageText(message)),
+  )
+
   const showLoading = isAwaitingText(messages, status)
   const unanswered = unansweredReason(messages, status, error)
+  const unansweredAlert = unanswered && (
+    <div
+      role="alert"
+      className="flex items-center justify-between gap-3 mx-4 mb-4 rounded-full bg-alarm-surface p-3 pl-4 text-sm text-alarm"
+    >
+      <p className="font-medium">{unanswered}</p>
+      <button
+        onClick={onRetry}
+        className="shrink-0 rounded-full bg-alarm-fill px-3 py-1.5 text-xs font-medium text-alarm hover:bg-alarm-fill-hover transition-colors cursor-pointer"
+      >
+        Reyna aftur
+      </button>
+    </div>
+  )
 
   return (
     <Modal
@@ -99,50 +103,51 @@ const ChatModal: React.FunctionComponent<Props> = ({
             <div
               className="flex-1 overflow-y-auto pb-21 flex flex-col"
               style={{ paddingTop: '20px' }}
-              ref={messagesContainerRef}
             >
-              {messages
-                .filter((message) => getMessageText(message))
-                .map((message) => (
-                  <ChatMessage
-                    key={message.id}
-                    message={message}
-                    isLastUserMessage={message.id === lastUserMessageId}
-                  />
-                ))}
-
-              {showLoading && <TypingIndicator />}
-
-              {unanswered && (
-                <div
-                  role="alert"
-                  className="flex items-center justify-between gap-3 mx-4 mb-4 rounded-full bg-alarm-surface p-3 pl-4 text-sm text-alarm"
-                >
-                  <p className="font-medium">{unanswered}</p>
-                  <button
-                    onClick={onRetry}
-                    className="shrink-0 rounded-full bg-alarm-fill px-3 py-1.5 text-xs font-medium text-alarm hover:bg-alarm-fill-hover transition-colors cursor-pointer"
+              {turns.map((turn, index) => {
+                const isLastTurn = index === turns.length - 1
+                return (
+                  // The last turn is at least a screen tall, so its question
+                  // can scroll to the top and leave the rest to the answer
+                  <div
+                    key={turn[0].id}
+                    className={clsx(
+                      'flex flex-col shrink-0 mb-4 last:mb-0',
+                      isLastTurn && 'min-h-full',
+                    )}
                   >
-                    Reyna aftur
-                  </button>
-                </div>
-              )}
+                    {turn.map((message) => (
+                      <ChatMessage
+                        key={message.id}
+                        message={message}
+                        isLastUserMessage={message.id === lastUserMessageId}
+                      />
+                    ))}
 
-              {status !== 'streaming' && lastMessage && (
-                <MentionedCars
-                  lastMessage={lastMessage}
-                  onClose={close}
-                  onShowCar={onShowCar}
-                />
-              )}
-
-              {status !== 'streaming' && lastMessageFollowUps.length > 0 && (
-                <FollowUpSuggestions
-                  suggestions={lastMessageFollowUps}
-                  onSendMessage={onSendMessage}
-                />
-              )}
-              <span ref={messagesEndRef} />
+                    {isLastTurn && (
+                      <>
+                        {showLoading && <TypingIndicator />}
+                        {unansweredAlert}
+                        {status !== 'streaming' && lastMessage && (
+                          <MentionedCars
+                            lastMessage={lastMessage}
+                            onClose={close}
+                            onShowCar={onShowCar}
+                          />
+                        )}
+                        {status !== 'streaming' &&
+                          lastMessageFollowUps.length > 0 && (
+                            <FollowUpSuggestions
+                              suggestions={lastMessageFollowUps}
+                              onSendMessage={onSendMessage}
+                            />
+                          )}
+                      </>
+                    )}
+                  </div>
+                )
+              })}
+              {turns.length === 0 && unansweredAlert}
             </div>
 
             {/* Announcing only the finished text keeps a screen reader from
