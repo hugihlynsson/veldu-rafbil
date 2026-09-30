@@ -24,12 +24,15 @@ jobs:
       # A dealer site that turns bots away answers 403 whether or not the page
       # is there, so only an answer that says the page is gone is reported.
       # ev-database is most of the list, so it is asked slowly.
+      # bmw.is and mini.is drop the connection for anything that is not a
+      # browser, so they answer nothing to report and are left unchecked.
       - id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
           args: >-
             --no-progress
             --accept '200..=299,403,429'
+            --exclude '^https://www\.(bmw|mini)\.is/'
             --host-concurrency 2
             --host-request-interval 1s
             --max-retries 3
