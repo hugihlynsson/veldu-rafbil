@@ -81,6 +81,12 @@ const chipText: {
   },
 }
 
+/** How a filter reads on a chip, applied or suggested */
+export const filterChipText = <Key extends keyof Filters>(
+  name: Key,
+  value: NonNullable<Filters[Key]>,
+): ChipText => (chipText[name] as (value: unknown) => ChipText)(value)
+
 // In the order the chips have always stood, whatever order the filters came in
 const chipOrder = Object.keys(chipText) as Array<keyof Filters>
 
@@ -88,8 +94,7 @@ const activeChips = (filters: Filters) =>
   chipOrder.flatMap((name) => {
     const value = filters[name]
     if (value === undefined) return []
-    const text = (chipText[name] as (value: unknown) => ChipText)(value)
-    return [{ name, ...text }]
+    return [{ name, ...filterChipText(name, value) }]
   })
 
 interface FilterButtonsProps {
