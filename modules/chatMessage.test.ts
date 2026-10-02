@@ -4,8 +4,10 @@ import {
   getFollowUps,
   getMessageText,
   groupIntoTurns,
+  MAX_TAGGED_CARS,
   parseStoredMessages,
   upgradeStoredMessage,
+  validateChatMessages,
   type ChatMessage,
 } from './chatMessage'
 
@@ -61,6 +63,36 @@ describe('getFollowUps', () => {
   })
 })
 
+// The route and the stored history read metadata through this one validator
+describe('validateChatMessages', () => {
+  const withMetadata = (metadata: unknown) => [
+    { ...message([{ type: 'text', text: 'Svarið.' }]), metadata },
+  ]
+
+  it.each<[string, unknown]>([
+    ['follow-ups alone', { followUps: ['Er hann dýr?'] }],
+    ['cars alone', { cars: ['car-kia-ev3-long-range'] }],
+    ['both', { followUps: ['Er hann dýr?'], cars: ['car-byd-seal-base'] }],
+  ])('takes an answer with %s', async (_label, metadata) => {
+    expect(await validateChatMessages(withMetadata(metadata))).toEqual(
+      withMetadata(metadata),
+    )
+  })
+
+  it.each<[string, unknown]>([
+    ['cars that are not a list', { cars: 'car-byd-seal-base' }],
+    ['an empty list of cars', { cars: [] }],
+    ['an empty car id', { cars: [''] }],
+    ['a car id longer than any', { cars: ['a'.repeat(101)] }],
+    [
+      'more cars than an answer tags',
+      { cars: Array.from({ length: MAX_TAGGED_CARS + 1 }, (_, i) => `c${i}`) },
+    ],
+  ])('refuses %s', async (_label, metadata) => {
+    expect(await validateChatMessages(withMetadata(metadata))).toBeNull()
+  })
+})
+
 // The history in localStorage predates the metadata, and outlives the deploy
 describe('upgradeStoredMessage', () => {
   it('moves the markers of a stored answer into its metadata', () => {
@@ -82,7 +114,7 @@ describe('upgradeStoredMessage', () => {
   it('leaves an answer that is already upgraded, or needs none, alone', () => {
     const upgraded: ChatMessage = {
       ...message([{ type: 'text', text: 'Svarið.' }]),
-      metadata: { followUps: ['Er hann dýr?'] },
+      metadata: { followUps: ['Er hann dýr?'], cars: ['car-byd-seal-base'] },
     }
     const plain = message([{ type: 'text', text: 'Svarið.' }])
 
@@ -110,6 +142,20 @@ describe('parseStoredMessages', () => {
   it('reads back what was stored', async () => {
     const answer: ChatMessage = {
       ...message([{ type: 'text', text: 'Nei.' }]),
+      metadata: {
+        followUps: ['Hvað fer hann langt?'],
+        cars: ['car-byd-seal-base'],
+      },
+    }
+    const stored = JSON.stringify([question, answer])
+
+    expect(await parseStoredMessages(stored)).toEqual([question, answer])
+  })
+
+  // Its cars are left to the fallback on the names in its text
+  it('reads a history from before the cars were tagged', async () => {
+    const answer: ChatMessage = {
+      ...message([{ type: 'text', text: 'Nei.' }]),
       metadata: { followUps: ['Hvað fer hann langt?'] },
     }
     const stored = JSON.stringify([question, answer])
@@ -117,7 +163,7 @@ describe('parseStoredMessages', () => {
     expect(await parseStoredMessages(stored)).toEqual([question, answer])
   })
 
-  // What every history written before this change looks like
+  // What every history written before the metadata looks like
   it('reads and upgrades a history from before the metadata', async () => {
     const stored = JSON.stringify([
       question,

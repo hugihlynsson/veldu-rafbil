@@ -56,6 +56,7 @@ export async function POST(req: Request) {
           userMessage: getMessageText(messages[messages.length - 1]),
           assistantResponse: finished.text,
           followUps: finished.followUps,
+          cars: finished.cars,
           messageCount: messages.length,
           tokenUsage: finished.usage,
           toolCalls: finished.toolCalls,
