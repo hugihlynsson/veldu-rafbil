@@ -1,4 +1,4 @@
-import { google } from '@ai-sdk/google'
+import { openai } from '@ai-sdk/openai'
 import { Axiom } from '@axiomhq/js'
 import { after } from 'next/server'
 import { getMessageText } from '@/modules/chatMessage'
@@ -6,10 +6,10 @@ import { rateLimitedText } from '@/modules/chatProgress'
 import { parseChatRequest, streamChat, type ChatFinish } from './chat'
 import { clientKey, rateLimit } from './rateLimit'
 
-// Picked on Icelandic performance, not general benchmarks: 3.7 scores above
-// 3.8 there and spends ~30% fewer output tokens at the same price.
+// On trial against gemini-3.7-flash: OpenAI's cheapest tier, not yet
+// compared on Icelandic performance.
 // https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard
-const modelName = 'gemini-3.7-flash'
+const modelName = 'gpt-6-luna'
 
 // Left unbuilt without a token, so a local or preview run stays quiet
 const axiom = process.env.AXIOM_TOKEN
@@ -71,10 +71,10 @@ export async function POST(req: Request) {
   })
 
   return streamChat({
-    model: google(modelName),
+    model: openai(modelName),
     messages,
     providerOptions: {
-      google: { thinkingConfig: { thinkingLevel: 'medium' } },
+      openai: { reasoningEffort: 'medium' },
     },
     onFinish: (event) => {
       finished = event

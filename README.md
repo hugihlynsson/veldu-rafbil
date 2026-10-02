@@ -16,10 +16,10 @@ npm install
 npm run dev
 ```
 
-The site itself needs no configuration. The AI advisor also needs a [Google AI Studio](https://aistudio.google.com) key in `.env.local`:
+The site itself needs no configuration. The AI advisor also needs a [OpenAI API](https://platform.openai.com/api-keys) key in `.env.local`:
 
 ```
-GOOGLE_GENERATIVE_AI_API_KEY=...
+OPENAI_API_KEY=...
 ```
 
 `npm run build` makes a production build.
