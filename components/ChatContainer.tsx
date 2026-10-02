@@ -6,6 +6,7 @@ import { DefaultChatTransport } from 'ai'
 import dynamic from 'next/dynamic'
 import FloatingChat from './ChatInput'
 import type { Car } from '@/modules/cars'
+import type { Filters } from '@/types'
 import { getMessageText, type ChatMessage } from '@/modules/chatMessage'
 import { trimHistory } from '@/modules/chatRequest'
 import useBodyScrollLock from '@/utils/useBodyScrollLock'
@@ -31,9 +32,16 @@ interface Props {
   hide: boolean
   /** An answer can point at a car the list's filters are hiding */
   onShowCar: (car: Car) => void
+  filters: Filters
+  onApplyFilters: (filters: Filters) => void
 }
 
-export default function ChatContainer({ hide, onShowCar }: Props) {
+export default function ChatContainer({
+  hide,
+  onShowCar,
+  filters,
+  onApplyFilters,
+}: Props) {
   const chatInputRef = useRef<HTMLInputElement>(null)
   const shouldFocusInput = useRef<boolean>(false)
   const [showChatMessages, setShowChatMessages] = useState<boolean>(false)
@@ -125,6 +133,9 @@ export default function ChatContainer({ hide, onShowCar }: Props) {
       onValueChange={setDraft}
       showFocusRing={showFocusRing}
       onFocusRingChange={setShowFocusRing}
+      filterSuggestions={
+        isChatOpen ? undefined : { filters, onApply: onApplyFilters }
+      }
     />
   )
 

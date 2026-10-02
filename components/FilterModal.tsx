@@ -2,14 +2,9 @@ import React, { useRef, useState } from 'react'
 
 import { Availability, Drive, Filters } from '@/types'
 import clsx from 'clsx'
-import dynamic from 'next/dynamic'
 import Modal from './Modal'
 import CloseButton from './CloseButton'
 import { FilterInput, FilterSelect } from './FilterField'
-
-// Fetched once someone starts describing a car, so the parser and its
-// patterns stay out of the list's first load
-const FilterSuggestions = dynamic(() => import('./FilterSuggestions'))
 
 interface Props {
   initialFilters: Filters
@@ -30,12 +25,6 @@ const FiltersModal: React.FunctionComponent<Props> = ({
   const [nameInput, setNameInput] = useState<string>(
     filters.name?.join(', ') ?? '',
   )
-  const [description, setDescription] = useState<string>('')
-
-  const applySuggestions = (next: Filters) => {
-    setFilters(next)
-    setNameInput(next.name?.join(', ') ?? '')
-  }
 
   const handleFilterChange =
     (name: keyof Filters) =>
@@ -148,23 +137,6 @@ const FiltersModal: React.FunctionComponent<Props> = ({
               </h2>
             </header>
             <div className="flex flex-col grow shrink overflow-scroll p-5 pb-2">
-              <FilterInput
-                id="filter-description"
-                label="Lýstu bílnum"
-                hint="Við stingum upp á síum"
-                type="text"
-                placeholder="Fjórhjóladrifinn, 7 sæti, undir 9 m.kr."
-                onChange={(event) => setDescription(event.currentTarget.value)}
-                onKeyDown={handleKeyPress}
-                value={description}
-              />
-              {description.trim() && (
-                <FilterSuggestions
-                  text={description}
-                  filters={filters}
-                  onApply={applySuggestions}
-                />
-              )}
               <FilterInput
                 inputRef={nameInputRef}
                 id="filter-name"

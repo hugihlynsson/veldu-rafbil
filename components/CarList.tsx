@@ -175,6 +175,8 @@ export default function CarList() {
         onShowCar={(car) => {
           if (!carFilter(filters)(car)) setFilters(filtersShowing(filters, car))
         }}
+        filters={filters}
+        onApplyFilters={setFilters}
       />
     </div>
   )
