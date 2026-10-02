@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { trackEvent } from 'fathom-client'
 import clsx from 'clsx'
 
 import { Filters } from '@/types'
@@ -15,8 +16,13 @@ import {
 import { agree } from '@/modules/plural'
 import { filterChipText } from './ActiveFilters'
 
-const chipClasses =
-  'shrink-0 text-xs font-semibold py-1 px-2.5 border border-line-strong rounded-full cursor-pointer bg-surface text-clay transition-all duration-200 hover:bg-cloud active:text-tint'
+const pillClasses = clsx(
+  'bg-raised/70 backdrop-blur-xl border border-scrim/6 rounded-2xl p-[12px_16px] text-sm font-medium text-tint cursor-pointer transition-all duration-200 text-left whitespace-nowrap shadow-(--shadow-chip) animate-[fadeInUpRotate_0.3s_ease-out_backwards]',
+  'hover:bg-raised/90 hover:text-tint hover:-translate-y-0.5 hover:shadow-(--shadow-chip-hover)',
+  'active:translate-y-0',
+)
+
+const carCount = (count: number) => `${count} ${agree(count, 'bíll', 'bílar')}`
 
 interface Props {
   text: string
@@ -25,8 +31,8 @@ interface Props {
 }
 
 /**
- * Chips for the filters a description asks for, each to be tapped rather
- * than applied, as a wrong one quietly empties the list. What the text says
+ * Pills for the filters the text asks for, each to be tapped rather than
+ * applied, as a wrong one quietly empties the list. What the text says
  * outright is read here as it is typed; only what is left goes to the route.
  */
 export default function FilterSuggestions({ text, filters, onApply }: Props) {
@@ -58,7 +64,7 @@ export default function FilterSuggestions({ text, filters, onApply }: Props) {
           suggestions: readSuggestions(await response.json()),
         })
       } catch {
-        // Aborted by the next keystroke, or offline: the text's chips stand
+        // Aborted by the next keystroke, or offline: the text's pills stand
       }
     }, 300)
 
@@ -75,49 +81,64 @@ export default function FilterSuggestions({ text, filters, onApply }: Props) {
       : suggestionsFromFilters(parsed.filters, 'text'),
     filters,
   )
-  const reading = asksModel && !answered
 
-  if (!suggestions.length && !reading) return null
+  if (!suggestions.length) return null
+
+  const pills = [
+    ...suggestions.map((suggestion) => {
+      const { label, value } = filterChipText(suggestion.key, suggestion.value)
+      return {
+        // Keyed by filter alone, so a value refined by the next keystroke
+        // changes in place rather than animating in again
+        key: suggestion.key,
+        text: `${label} ${value}`,
+        count: suggestion.count,
+        onClick: () => {
+          trackEvent('Applied filter suggestion')
+          onApply(withSuggestion(filters, suggestion))
+        },
+      }
+    }),
+    ...(suggestions.length > 1
+      ? [
+          {
+            key: 'all',
+            text: 'Bæta öllum síum við',
+            count,
+            onClick: () => {
+              trackEvent('Applied all filter suggestions')
+              onApply(combined)
+            },
+          },
+        ]
+      : []),
+  ]
 
   return (
-    <div className="flex flex-wrap items-center gap-2 -mt-4 mb-6 px-1">
-      {suggestions.map((suggestion) => {
-        const { label, value } = filterChipText(
-          suggestion.key,
-          suggestion.value,
-        )
-        const cars = agree(suggestion.count, 'bíll', 'bílar')
-        return (
-          <button
-            key={suggestion.key}
-            type="button"
-            aria-label={`Bæta við síu: ${label} ${value}, ${suggestion.count} ${cars}`}
-            // Dashed where it is a guess at what the words meant
-            className={clsx(
-              chipClasses,
-              suggestion.source === 'model' && 'border-dashed',
-            )}
-            onClick={() => onApply(withSuggestion(filters, suggestion))}
-          >
-            + {label} <span className="text-tint">{value}</span>{' '}
-            <span className="font-normal">· {suggestion.count}</span>
-          </button>
-        )
-      })}
-      {suggestions.length > 1 && (
+    <fieldset
+      aria-label="Tillögur að síum"
+      className="pointer-events-auto m-0 flex min-w-0 flex-col gap-2 border-0 p-0"
+    >
+      {pills.map((pill, index) => (
         <button
+          key={pill.key}
           type="button"
-          className={clsx(chipClasses, 'text-tint')}
-          onClick={() => onApply(combined)}
+          aria-label={`${pill.key === 'all' ? pill.text : `Bæta við síu: ${pill.text}`}, ${carCount(pill.count)}`}
+          className={pillClasses}
+          // Rising from the input, as the question suggestions do
+          style={{ animationDelay: `${(pills.length - 1 - index) * 0.06}s` }}
+          // Keeps the input's blur from firing before the click lands;
+          // Safari does not focus buttons on click
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={pill.onClick}
         >
-          Nota allar <span className="font-normal text-clay">· {count}</span>
+          {pill.key === 'all' ? pill.text : `+ ${pill.text}`}
+          <span className="font-normal text-scrim/60">
+            {' '}
+            · {carCount(pill.count)}
+          </span>
         </button>
-      )}
-      {reading && (
-        <span aria-hidden className="text-xs text-clay">
-          …
-        </span>
-      )}
-    </div>
+      ))}
+    </fieldset>
   )
 }

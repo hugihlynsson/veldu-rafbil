@@ -1,12 +1,18 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import { trackEvent } from 'fathom-client'
 import { CHAT_SUGGESTIONS } from '@/modules/chatSuggestions'
 import { getRandomSuggestions } from '@/modules/chatHelpers'
 import { MAX_QUESTION_LENGTH } from '@/modules/chatMessage'
 import useInputModality, { getInputModality } from '@/utils/inputModality'
 import clsx from 'clsx'
+import dynamic from 'next/dynamic'
+import type { Filters } from '@/types'
+
+// The parser and its patterns are fetched once someone focuses the input,
+// rather than with the chat
+const FilterSuggestions = dynamic(() => import('./FilterSuggestions'))
 
 interface Props {
   onOpenChat: () => void
@@ -23,6 +29,11 @@ interface Props {
   onFocusRingChange: (show: boolean) => void
   /** Fired on focus, before anything is sent, so the caller can warm the chat */
   onIntent?: () => void
+  /** Left out where the list is not what is in view, as inside the chat */
+  filterSuggestions?: {
+    filters: Filters
+    onApply: (filters: Filters) => void
+  }
 }
 
 const ChatInput: React.FunctionComponent<Props> = ({
@@ -37,6 +48,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
   showFocusRing,
   onFocusRingChange,
   onIntent,
+  filterSuggestions,
 }) => {
   const [isFocused, setIsFocused] = useState(false)
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([])
@@ -69,6 +81,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
     handleFocusRing()
     setIsFocused(true)
     onIntent?.()
+    if (filterSuggestions) void import('./FilterSuggestions')
     if (!hasMessages) {
       setSelectedSuggestions(getRandomSuggestions(CHAT_SUGGESTIONS, 3))
     }
@@ -154,7 +167,19 @@ const ChatInput: React.FunctionComponent<Props> = ({
         </button>
       </form>
 
-      {isFocused && !hasMessages && (
+      {isFocused && filterSuggestions && value.trim() && (
+        // Its own boundary: suspending on the chunk would otherwise swap out
+        // the input mid-word, and the keystrokes typed meanwhile with it
+        <Suspense fallback={null}>
+          <FilterSuggestions
+            text={value}
+            filters={filterSuggestions.filters}
+            onApply={filterSuggestions.onApply}
+          />
+        </Suspense>
+      )}
+
+      {isFocused && !hasMessages && !value && (
         <fieldset
           aria-label="Tillögur að spurningum"
           className="pointer-events-auto m-0 flex min-w-0 flex-col gap-2 border-0 p-0 animate-[fadeInUpRotate_0.3s_ease-out]"
