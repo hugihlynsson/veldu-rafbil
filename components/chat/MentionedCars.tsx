@@ -3,8 +3,8 @@
 import React from 'react'
 import MiniCar from '@/components/MiniCar'
 import type { Car } from '@/modules/cars'
-import { findMentionedCars } from '@/modules/chatHelpers'
-import { getMessageText, type ChatMessage } from '@/modules/chatMessage'
+import { getAnswerCars } from '@/modules/chatCars'
+import type { ChatMessage } from '@/modules/chatMessage'
 
 interface Props {
   lastMessage?: ChatMessage
@@ -19,7 +19,7 @@ const MentionedCars: React.FunctionComponent<Props> = ({
 }) => {
   if (!lastMessage || lastMessage.role !== 'assistant') return null
 
-  const mentionedCars = findMentionedCars(getMessageText(lastMessage))
+  const mentionedCars = getAnswerCars(lastMessage)
 
   if (mentionedCars.length === 0) return null
 

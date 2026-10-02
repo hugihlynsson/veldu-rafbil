@@ -177,10 +177,13 @@ streams the answer. The bounds live in `modules/chatRequest.ts` beside
 `trimHistory`, which the browser cuts a conversation with before sending it, so
 the stored history never grows into a request the route refuses.
 
-The prompt still asks for `[q:…]` follow-up markers, but they never reach the
-browser: a stream transform in `modules/followUps.ts` takes them out of the text
-and they arrive as the message's `metadata.followUps`. Histories stored before
-that are upgraded as they are read.
+The prompt asks for `[car:…]` markers for the cars an answer recommends and
+`[q:…]` follow-up markers, but neither reaches the browser: a stream transform
+in `modules/answerMarkers.ts` takes them out of the text and they arrive as the
+message's `metadata.cars`, checked against the car list in
+`modules/chatCars.ts`, and `metadata.followUps`. Histories stored before the
+follow-ups moved are upgraded as they are read; answers without cars fall back
+to the names in their text.
 
 `modules/chatMessage.ts` owns the `ChatMessage` type and its one validator,
 shared by the route and the stored history, so the two cannot disagree on
