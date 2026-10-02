@@ -11,6 +11,7 @@
     "@ai-sdk/react": "^4.0.126",
     "@axiomhq/js": "^2.0.0",
     "@tailwindcss/postcss": "^4.3.2",
+    "@typesafe-ai/sdk": "^0.6.0",
     "ai": "^7.0.97",
     "babel-plugin-react-compiler": "^1.0.0",
     "clsx": "^2.1.1",

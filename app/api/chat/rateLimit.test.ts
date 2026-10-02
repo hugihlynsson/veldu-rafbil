@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { clientKey, rateLimit } from './rateLimit'
+import { clientKey, createRateLimit, rateLimit } from './rateLimit'
 
 // The windows outlive each test, so every test asks for addresses of its own
 describe('rateLimit', () => {
@@ -44,6 +44,14 @@ describe('rateLimit', () => {
     for (let i = 0; i < 10_001; i++) rateLimit(`sweep-${i}`)
 
     expect(rateLimit('10.0.0.6').ok).toBe(false)
+  })
+
+  it('keeps each limiter to its own windows', () => {
+    const other = createRateLimit(1)
+    ask('10.0.0.7', 13)
+
+    expect(other('10.0.0.7').ok).toBe(true)
+    expect(other('10.0.0.7').ok).toBe(false)
   })
 })
 
