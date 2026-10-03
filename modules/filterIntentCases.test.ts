@@ -1,9 +1,46 @@
 import { describe, expect, it } from 'vitest'
 
 import { parseFilterIntent } from './filterIntent'
-import { intentCases, scoreCase, summarize } from './filterIntentCases'
+import {
+  bracketValues,
+  intentCases,
+  scoreCase,
+  summarize,
+} from './filterIntentCases'
 
 const literal = intentCases.filter((testCase) => testCase.kind === 'literal')
+
+describe('the eval set', () => {
+  // A label that names no option would score every answer as wrong
+  it('names only brackets the model is offered', () => {
+    const unknown = intentCases.flatMap((testCase) =>
+      Object.entries(testCase.expect).flatMap(([key, expected]) =>
+        expected && typeof expected === 'object' && 'oneOf' in expected
+          ? expected.oneOf
+              .filter(
+                (label) =>
+                  !bracketValues(key as keyof typeof testCase.expect).has(
+                    label,
+                  ),
+              )
+              .map((label) => `${testCase.text}: ${key} ${label}`)
+          : [],
+      ),
+    )
+    expect(unknown).toEqual([])
+  })
+
+  it('scores a bracket by the value it stands for', () => {
+    const testCase = intentCases.find(
+      ({ text }) => text === 'ódýrasti bíllinn',
+    )!
+    const cheap = bracketValues('price').get('cheap') as number
+    const loose = bracketValues('price').get('not_the_priciest') as number
+
+    expect(scoreCase(testCase, { price: cheap }).right).toEqual(['price'])
+    expect(scoreCase(testCase, { price: loose }).wrong).toEqual(['price'])
+  })
+})
 
 describe('the parser on the eval set', () => {
   it.each(literal.map((testCase) => [testCase.text, testCase] as const))(

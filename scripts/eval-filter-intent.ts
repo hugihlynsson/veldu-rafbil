@@ -1,15 +1,19 @@
 /**
  * Scores the filter suggestions against modules/filterIntentCases.ts: the
- * parser alone, and, when TYPESAFE_API_KEY is set, the parser with Jev, its
- * questions put once in English and once in Icelandic.
+ * parser alone, and, when TYPESAFE_API_KEY is set, the parser with Jev. The
+ * requests are Icelandic either way; what changes between the two Jev runs is
+ * the language of the instructions and options it is asked to choose from.
  *
- *   npx tsx scripts/eval-filter-intent.ts [--verbose]
+ *   npx tsx --env-file=.env.local scripts/eval-filter-intent.ts [--verbose]
  *
- * Each Jev case is a real, billed request (a few hundred input tokens).
+ * Each case the parser cannot finish is a real, billed request, of about
+ * 1,200 input tokens. Jev's answers vary a little from run to run, so a
+ * difference of a few cases between two runs is noise rather than a result.
  */
 import { TypeSafeClient } from '@typesafe-ai/sdk'
 
 import { Filters } from '@/types'
+import { filterDefinitions } from '@/modules/filters'
 import { parseFilterIntent, rankSuggestions } from '@/modules/filterIntent'
 import {
   CaseScore,
@@ -50,6 +54,7 @@ const report = (run: Run) => {
     'literal',
     'mixed',
     'vague',
+    'question',
     'all',
   ]
   for (const kind of kinds) {
@@ -65,7 +70,35 @@ const report = (run: Run) => {
   if (run.millis.length) {
     console.log(
       `  latency p50 ${percentile(run.millis, 0.5)} ms, p95 ${percentile(run.millis, 0.95)} ms;` +
-        ` ${run.inputTokens} input tokens; model ${JSON.stringify(run.statuses)}`,
+        ` ${Math.round(run.inputTokens / run.millis.length)} input tokens a request;` +
+        ` model ${JSON.stringify(run.statuses)}`,
+    )
+  }
+  reportFilters(run)
+}
+
+// Where the mistakes are: a filter with many extras is one the model reads
+// into requests that never asked for it
+const reportFilters = (run: Run) => {
+  const rows = (Object.keys(filterDefinitions) as Array<keyof Filters>)
+    .map((key) => {
+      const count = (pick: (score: CaseScore) => Array<keyof Filters>) =>
+        run.scores.filter((score) => pick(score).includes(key)).length
+      return {
+        key,
+        right: count((score) => score.right),
+        wrong: count((score) => score.wrong),
+        missed: count((score) => score.missed),
+        extra: count((score) => score.extra),
+      }
+    })
+    .filter(({ wrong, missed, extra }) => wrong + missed + extra > 0)
+  if (!rows.length) return
+  console.log('  mistakes by filter')
+  for (const { key, right, wrong, missed, extra } of rows) {
+    console.log(
+      `    ${key.padEnd(13)} right ${String(right).padStart(2)}  wrong ${wrong}` +
+        `  missed ${String(missed).padStart(2)}  extra ${String(extra).padStart(2)}`,
     )
   }
 }
@@ -99,13 +132,14 @@ const parserOnly = (): Run => {
 
 const withModel = async (client: TypeSafeClient, language: Language) => {
   const run: Run = {
-    name: `Parser + Jev, questions in ${language === 'en' ? 'English' : 'Icelandic'}`,
+    name: `Parser + Jev, Icelandic requests, instructions in ${language === 'en' ? 'English' : 'Icelandic'}`,
     scores: [],
     millis: [],
     inputTokens: 0,
     statuses: {},
   }
   const got: Filters[] = []
+  if (verbose) console.log(`\n${run.name}: answers`)
 
   for (const testCase of intentCases) {
     let millis: number | undefined

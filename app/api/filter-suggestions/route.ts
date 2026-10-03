@@ -5,10 +5,13 @@ import { clientKey, createRateLimit } from '@/app/api/chat/rateLimit'
 import { MAX_INTENT_LENGTH } from '@/modules/filterIntent'
 import { suggestFilters, type AskModel } from '@/modules/filterIntentModel'
 
-// Not yet measured on Icelandic, which TypeSafe says works "less well" than
-// English. `npx tsx scripts/eval-filter-intent.ts` scores it against the parser
-// alone on modules/filterIntentCases.ts: run it with a key before relying on
-// this, and again before following "latest" to a new model.
+// Measured on the 102 Icelandic requests in modules/filterIntentCases.ts
+// (October 2026, two runs): with the parser it gets 76–80 exactly right to the
+// parser's 62, recall 88–92% to 61%, at 81–84% precision, p95 ~330 ms. Asked
+// in Icelandic it scores the same within run-to-run noise, on ~20% more tokens,
+// so the questions stay English. Its mistakes are extras: "fast" read as both
+// charging and acceleration, and "available now" added unasked. Re-run
+// scripts/eval-filter-intent.ts before following "latest" to a new model.
 const modelName = 'jev-latest'
 
 // Someone who has typed on has no use for the answer, so it is not waited for
