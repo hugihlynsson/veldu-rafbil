@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from 'react'
 import { useChat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
 import dynamic from 'next/dynamic'
-import FloatingChat from './ChatInput'
+import ChatInput from './ChatInput'
 import type { Car } from '@/modules/data/cars'
 import type { Filters } from '@/modules/list/filters'
 import { getMessageText, type ChatMessage } from '@/modules/chat/message'
@@ -120,7 +120,7 @@ export default function ChatContainer({
 
   // One input in two places: showModal() makes everything outside it inert
   const chatInput = (
-    <FloatingChat
+    <ChatInput
       inputRef={focusInputOnArrival}
       onIntent={loadChatModal}
       onOpenChat={() => {
