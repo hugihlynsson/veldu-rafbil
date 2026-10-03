@@ -17,7 +17,7 @@ type State = 'initializing' | 'visible' | 'leaving'
  * individual property, which a transform transition never reaches.
  */
 export const panelMotion =
-  'opacity-0 translate-y-10 transition-[opacity,translate] duration-300 ease-[cubic-bezier(0.32,0,0.67,0)] group-data-[state=visible]/modal:opacity-100 group-data-[state=visible]/modal:translate-y-0 group-data-[state=visible]/modal:ease-[cubic-bezier(0.33,1,0.68,1)] group-data-[state=leaving]/modal:duration-200'
+  'opacity-0 translate-y-6 transition-[opacity,translate] duration-300 ease-[cubic-bezier(0.32,0,0.67,0)] group-data-[state=visible]/modal:opacity-100 group-data-[state=visible]/modal:translate-y-0 group-data-[state=visible]/modal:ease-[cubic-bezier(0.33,1,0.68,1)] group-data-[state=leaving]/modal:duration-200'
 
 interface Modal {
   /** Animates out, then closes and unmounts */

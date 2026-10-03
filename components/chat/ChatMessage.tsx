@@ -12,11 +12,13 @@ import clsx from 'clsx'
 interface Props {
   message: Message
   isLastUserMessage: boolean
+  animate: boolean
 }
 
 const ChatMessage: React.FunctionComponent<Props> = ({
   message,
   isLastUserMessage,
+  animate,
 }) => {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -37,7 +39,8 @@ const ChatMessage: React.FunctionComponent<Props> = ({
     <div
       ref={ref}
       className={clsx(
-        'flex flex-col animate-[fadeIn_0.3s_ease-in-out] mb-4 scroll-mt-5 last:mb-0 px-5',
+        'flex flex-col mb-4 scroll-mt-5 last:mb-0 px-5',
+        animate && 'animate-[fadeIn_0.3s_ease-in-out]',
         isUser ? 'items-end' : 'items-start',
       )}
     >
