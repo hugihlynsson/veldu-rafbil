@@ -81,7 +81,7 @@ interface SelectProps {
   onKeyDown: (event: ControlKeyEvent) => void
 }
 
-/** "all" is the option that means no filter */
+/** An option with the value "" is the one that means no filter */
 export const FilterSelect: React.FunctionComponent<SelectProps> = ({
   id,
   label,
