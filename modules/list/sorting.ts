@@ -20,6 +20,8 @@ interface SortingDefinition {
   defaultDirection: SortingDirection
 }
 
+// A new sorting also needs a label in CarList, which the compile asks for, and
+// a place in its toggle list to be offered at all, which it does not
 export const sortingDefinitions: Record<Sorting, SortingDefinition> = {
   name: { urlWord: 'nafni', defaultDirection: 'asc' },
   price: { urlWord: 'verdi', defaultDirection: 'asc' },
