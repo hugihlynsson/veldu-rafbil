@@ -39,7 +39,7 @@ const MiniCar: FunctionComponent<Props> = ({ car, onSelect }) => {
       onClick={handleClick}
       className="flex flex-row w-full p-0 border-0 bg-transparent cursor-pointer text-left rounded-card overflow-hidden no-underline text-inherit transition-all duration-200 max-w-full hover:border-line-strong hover:bg-raised"
     >
-      <div className="relative w-[120px] min-w-[120px] h-full bg-cloud shrink-0">
+      <div className="relative w-[120px] min-w-[120px] bg-cloud shrink-0">
         {/* The size the box really renders at, so the 1x/2x pair lands on
             128 and 256 rather than the hero's 540 and 1080 */}
         <Image
