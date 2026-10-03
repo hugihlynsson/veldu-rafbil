@@ -453,6 +453,89 @@ export const intentCases: IntentCase[] = [
     kind: 'question',
     expect: { name: ['Model 3', 'Model Y'] },
   },
+
+  // Written before the questions were worded against the cases above, and
+  // first run only after, as a check that the wording was not fitted to them
+  {
+    text: 'á viðráðanlegu verði',
+    kind: 'vague',
+    expect: { price: { oneOf: ['cheap', 'mid_priced'] } },
+  },
+  {
+    text: 'snöggur og ódýr',
+    kind: 'vague',
+    expect: {
+      acceleration: 'any',
+      price: { oneOf: ['cheap', 'mid_priced'] },
+    },
+  },
+  {
+    text: 'ódýrt og kemst langt',
+    kind: 'vague',
+    expect: { price: { oneOf: ['cheap', 'mid_priced'] }, range: 'any' },
+    allow: ['value'],
+  },
+  { text: 'sprækur bíll', kind: 'vague', expect: { acceleration: 'any' } },
+  {
+    text: 'fljótur upp í hundrað',
+    kind: 'vague',
+    expect: { acceleration: 'any' },
+  },
+  {
+    text: 'stutt hleðslustopp á ferðinni',
+    kind: 'vague',
+    expect: { fastcharge: 'any' },
+    allow: ['range'],
+  },
+  { text: 'kemst langt á hleðslunni', kind: 'vague', expect: { range: 'any' } },
+  { text: 'hjón með fimm börn', kind: 'vague', expect: { seats: 7 } },
+  {
+    text: 'við erum fimm í fjölskyldunni',
+    kind: 'vague',
+    expect: {},
+    allow: ['seats'],
+  },
+  { text: 'oft í snjó og hálku', kind: 'vague', expect: { drive: ['AWD'] } },
+  {
+    text: 'bíll sem ég get fengið í næstu viku',
+    kind: 'vague',
+    expect: { availability: 'available' },
+  },
+  {
+    text: 'bíð eftir nýju módelunum',
+    kind: 'vague',
+    expect: { availability: 'expected' },
+  },
+  {
+    text: 'besta drægni miðað við verð',
+    kind: 'vague',
+    expect: { value: 'any' },
+    allow: ['price', 'range'],
+  },
+  { text: 'lúxusbíll', kind: 'vague', expect: {}, allow: ['acceleration'] },
+  {
+    text: 'hvað kostar ódýrasti bíllinn?',
+    kind: 'question',
+    expect: {},
+    allow: ['price'],
+  },
+  {
+    text: 'eru jeppar betri á veturna?',
+    kind: 'question',
+    expect: {},
+    allow: ['drive'],
+  },
+  {
+    text: 'hvaða bíll hleður hraðast?',
+    kind: 'question',
+    expect: {},
+    allow: ['fastcharge'],
+  },
+  {
+    text: 'get ég hlaðið í fjölbýli?',
+    kind: 'question',
+    expect: {},
+  },
 ]
 
 const questions = buildIntentQuestions()
