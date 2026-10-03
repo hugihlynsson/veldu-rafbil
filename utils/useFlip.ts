@@ -5,12 +5,16 @@ import prefersReducedMotion from './prefersReducedMotion'
 type Point = { x: number; y: number }
 
 // By layout alone: a bounding rect would take in an entrance still playing,
-// and every later move would start off by its transform
+// and every later move would start off by its transform. The centre rather
+// than a corner, so a box whose own text grows or shrinks is not moved.
 const layoutPosition = (node: HTMLElement): Point | null => {
   const parent = node.offsetParent
   if (!parent) return null
   const { left, top } = parent.getBoundingClientRect()
-  return { x: left + node.offsetLeft, y: top + node.offsetTop }
+  return {
+    x: left + node.offsetLeft + node.offsetWidth / 2,
+    y: top + node.offsetTop + node.offsetHeight / 2,
+  }
 }
 
 // What is left of a move still playing, so the next starts where the box is
