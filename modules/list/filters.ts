@@ -90,7 +90,7 @@ const parseAsList = <T extends string>(accept: (entry: string) => entry is T) =>
  * hasOwn rather than `in`: every object has a `toString`, and it is not one of
  * these, however plausible the URL that asks for it looks.
  */
-const parseAsWord = <T extends string>(words: Record<string, T>) =>
+export const parseAsWord = <T extends string>(words: Record<string, T>) =>
   createParser<T>({
     parse: (value) => (Object.hasOwn(words, value) ? words[value] : null),
     serialize: (value) =>

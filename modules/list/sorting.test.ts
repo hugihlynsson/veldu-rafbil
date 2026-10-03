@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest'
 
 import {
-  defaultDirection,
   flipDirection,
   getSortingFromQuery,
   isDefaultDirection,
   serializeSorting,
   sortCars,
-  sortingToQuery,
+  sortingDefinitions,
+  sortings,
   sortingUrlKeys,
 } from './sorting'
 import { deriveCar, Car } from '@/modules/data/cars'
@@ -53,12 +53,11 @@ describe('reading the sorting out of the query', () => {
     expect(readSorting({ radaeftir: 'toString' })).toBe('name')
   })
 
-  it.each(Object.entries(sortingToQuery))(
-    'round trips %s through its Icelandic param',
-    (sorting, query) => {
-      expect(readSorting({ radaeftir: query })).toBe(sorting)
-    },
-  )
+  it.each(sortings)('round trips %s through its Icelandic param', (sorting) => {
+    expect(
+      readSorting({ radaeftir: sortingDefinitions[sorting].urlWord }),
+    ).toBe(sorting)
+  })
 
   // A repeated param arrives as an array; neither of these is a list
   it('takes the first value when the param is given twice', () => {
@@ -93,8 +92,6 @@ describe('direction', () => {
 })
 
 describe('sortCars', () => {
-  const sortings = Object.keys(sortingToQuery) as Array<Sorting>
-
   it('sorts price by what the buyer pays, after the grant', () => {
     // 10,100,000 gets no grant; 9,900,000 drops to 9,400,000.
     const expensive = car({ price: 10_100_000 })
@@ -168,14 +165,14 @@ describe('sortCars', () => {
 
   it('has a default direction for every sorting', () => {
     for (const sorting of sortings) {
-      expect(defaultDirection[sorting]).toMatch(/^(asc|desc)$/)
+      expect(sortingDefinitions[sorting].defaultDirection).toMatch(
+        /^(asc|desc)$/,
+      )
     }
   })
 })
 
-// Adding a sorting means touching both directions; this is what says they meet
 describe('sorting survives a round trip through the URL', () => {
-  const sortings = Object.keys(sortingToQuery) as Array<Sorting>
   const directions: Array<SortingDirection> = ['asc', 'desc']
   const cases = sortings.flatMap((sorting) =>
     directions.map((direction): [Sorting, SortingDirection] => [
@@ -193,7 +190,9 @@ describe('sorting survives a round trip through the URL', () => {
 
   // The tidy URL the site is meant to have when nothing has been chosen
   it('writes nothing for the default sorting in its default direction', () => {
-    expect(getQueryFromSorting('name', defaultDirection.name)).toEqual({})
+    expect(
+      getQueryFromSorting('name', sortingDefinitions.name.defaultDirection),
+    ).toEqual({})
   })
 
   it('records a flip rather than a direction', () => {
