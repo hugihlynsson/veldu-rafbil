@@ -1,4 +1,4 @@
-import addDecimalSeprators from '@/modules/copy/addDecimalSeparators'
+import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { filterKeys, type FilterKey, type Filters } from './filters'
 
 export type ChipText = {
@@ -21,7 +21,7 @@ const chipText: {
     removeLabel: `Fjarlægja nafnasíu: ${names.join(', ')}`,
   }),
   price: (max) => {
-    const price = addDecimalSeprators(max)
+    const price = addDecimalSeparators(max)
     return {
       label: 'Verð:',
       value: `↓${price} kr.`,
@@ -53,7 +53,7 @@ const chipText: {
     }
   },
   value: (max) => {
-    const value = addDecimalSeprators(max)
+    const value = addDecimalSeparators(max)
     return {
       label: 'Verði á km:',
       value: `↓${value} kr.`,

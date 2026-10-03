@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 import type { Drive } from '@/modules/data/newCarSchema'
 import { Car } from '@/modules/data/cars'
-import addDecimalSeprators from '@/modules/copy/addDecimalSeparators'
+import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { formatKmPerMinutesCharged } from '@/modules/data/getKmPerMinutesCharged'
 import LinkPill from '@/components/LinkPill'
 
@@ -82,7 +82,7 @@ const NewCar: FunctionComponent<Props> = ({
             (car.expectedDelivery && hasGrant && 'áætlað verð með styrk ↗') ||
             (car.expectedDelivery && 'áætlað verð ↗') ||
             (showValue &&
-              `${hasGrant ? 'með styrk ' : ''}${addDecimalSeprators(
+              `${hasGrant ? 'með styrk ' : ''}${addDecimalSeparators(
                 Math.round(car.pricePerKm),
               )} kr. á km.`) ||
             (hasGrant && 'með styrk') ||
@@ -90,12 +90,12 @@ const NewCar: FunctionComponent<Props> = ({
           }
           title={
             hasGrant
-              ? `Fullt verð án styrks: ${addDecimalSeprators(car.price)} kr.`
+              ? `Fullt verð án styrks: ${addDecimalSeparators(car.price)} kr.`
               : undefined
           }
           onClick={() => trackEvent('Seller clicked')}
         >
-          {addDecimalSeprators(priceWithGrant)} kr.
+          {addDecimalSeparators(priceWithGrant)} kr.
           {!car.expectedDelivery && ' ↗'}
         </LinkPill>
 

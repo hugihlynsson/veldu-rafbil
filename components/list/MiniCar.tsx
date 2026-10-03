@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import Image from 'next/image'
 
 import { Car } from '@/modules/data/cars'
-import addDecimalSeprators from '@/modules/copy/addDecimalSeparators'
+import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 
 interface Props {
   car: Car
@@ -42,7 +42,7 @@ const MiniCar: FunctionComponent<Props> = ({ car, onSelect }) => {
           )}
         </div>
         <div className="text-[13px] font-semibold text-tint mb-[3px]">
-          {addDecimalSeprators(priceWithGrant)} kr.
+          {addDecimalSeparators(priceWithGrant)} kr.
           {hasGrant && (
             <span className="text-[11px] font-medium text-clay">
               {' '}
