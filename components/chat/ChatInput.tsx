@@ -119,7 +119,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
     <div
       className={clsx(
         'fixed bottom-[calc(1rem+var(--keyboard-inset))] left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col-reverse items-center gap-3',
-        'min-[500px]:bottom-[calc(1.5rem+var(--keyboard-inset))]',
+        'sm:bottom-[calc(1.5rem+var(--keyboard-inset))]',
         // Only the hiding fades: a transition on the bottom drags the bar
         // behind a keyboard on its way in
         'transition-opacity duration-300',

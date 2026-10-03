@@ -57,7 +57,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
       initialFocusRef={nameInputRef}
       className={clsx(
         'items-end data-[state=visible]:backdrop:bg-backdrop-strong',
-        '[@media(min-width:800px)_and_(min-height:600px)]:items-center',
+        'sheet-panel:items-center',
       )}
     >
       {({ close }) => {
@@ -77,7 +77,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             className={clsx(
               'z-1 flex flex-col rounded-t-sheet bg-surface w-screen max-w-[400px] max-h-[85vh] overflow-hidden shadow-(--shadow-sheet)',
               panelMotion,
-              '[@media(min-width:800px)_and_(min-height:600px)]:rounded-sheet [@media(min-width:800px)_and_(min-height:600px)]:max-h-[500px]',
+              'sheet-panel:rounded-sheet sheet-panel:max-h-[500px]',
             )}
           >
             <header className="relative bg-surface text-lg text-center px-4 py-3 border-b border-line font-semibold">

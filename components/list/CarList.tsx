@@ -26,6 +26,10 @@ const ChatContainer = dynamic(() => import('@/components/chat/ChatContainer'), {
   ssr: false,
 })
 
+// The header and the line under the list share the text column of a card
+const column =
+  'mx-auto max-w-column py-4 px-(--gutter) xs:py-6 md:pl-10 md:pr-6 md:max-w-none'
+
 const carWord = (count: number) => agree(count, 'bíll', 'bílar')
 
 const sortingLabels: Record<Sorting, string> = {
@@ -103,8 +107,8 @@ export default function CarList() {
   const filteredCarCount = cars.length - filteredCars.length
 
   return (
-    <div className="max-w-[1024px] mx-auto">
-      <header className="flex flex-col items-stretch mx-auto max-w-[480px] py-4 px-(--gutter) xs:py-6 md:pl-10 md:pr-6 md:max-w-none md:pb-10">
+    <div className="max-w-page mx-auto">
+      <header className={clsx('flex flex-col items-stretch md:pb-10', column)}>
         <Title />
 
         <p className="leading-6 text-sm pt-6 m-0 mb-8 text-stone max-w-[33em] text-pretty md:text-base">
@@ -192,7 +196,12 @@ export default function CarList() {
       ))}
 
       {hasFilter && filteredCarCount > 0 && (
-        <div className="flex items-center mx-auto max-w-[480px] gap-2 text-xs font-medium mb-10 py-4 px-(--gutter) xs:py-6 md:pl-10 md:pr-6 md:max-w-none">
+        <div
+          className={clsx(
+            'flex items-center gap-2 text-xs font-medium mb-10',
+            column,
+          )}
+        >
           {filteredCarCount} {carWord(filteredCarCount)}{' '}
           {agree(filteredCarCount, 'passaði', 'pössuðu')} ekki við leitina{' '}
           <button

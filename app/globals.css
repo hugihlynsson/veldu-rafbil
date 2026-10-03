@@ -43,6 +43,9 @@
      it, so `line-strong` clears 3:1 on white and on `haze` */
   --color-line: #eee; /* a divider */
   --color-line-strong: #8f8f8f; /* the edge of something you can click or type in */
+  /* A filter chip's edge, softer than a field's: its own text is what tells
+     you it is there, so the line is only a shape around it */
+  --color-line-chip: #ddd;
 
   /* Overlays. `scrim` is the page's own ink, so `bg-scrim/6` is a tint in
      light and a wash in dark without either one naming a colour */
@@ -63,7 +66,16 @@
   --color-alarm-fill: #fee4e2;
   --color-alarm-fill-hover: #fecdca;
 
+  /* The steps the layout takes. Cleared first, like the colours, so a
+     `lg:` that nothing defines generates nothing */
+  --breakpoint-*: initial;
   --breakpoint-xs: 375px;
+  --breakpoint-sm: 500px;
+  --breakpoint-md: 768px;
+
+  /* The column a car's text sits in on a phone, and the page at its widest */
+  --container-column: 480px;
+  --container-page: 1024px;
 
   /* Radii, written at their round-corner size. A squircle of the same radius
      hugs the corner more tightly, so `--corner` grows them where one is drawn
@@ -80,6 +92,12 @@
   --radius-card: calc(14px * var(--corner));
   --radius-sheet: calc(20px * var(--corner));
 }
+
+/* Where each modal stops filling a phone and floats as a panel. The filter
+   sheet waits for the height too: centred on a short screen, it would scroll
+   more of its fields than it shows */
+@custom-variant chat-panel (@media (width >= 600px));
+@custom-variant sheet-panel (@media (width >= 800px) and (height >= 600px));
 
 /* Inline, as the face is a variable next/font sets on <html> */
 @theme inline {
@@ -115,8 +133,8 @@
   --shadow-card-hover: 0 8px 64px rgb(0 0 0 / 0.3);
 }
 
-@media (min-width: 375px) {
-  :root {
+:root {
+  @variant xs {
     --gutter: 1.5rem;
   }
 }
@@ -150,6 +168,7 @@
 
     --color-line: #3a3a3a;
     --color-line-strong: #757575;
+    --color-line-chip: #757575;
 
     --color-scrim: #fff;
     --color-backdrop: rgb(0 0 0 / 0.55);

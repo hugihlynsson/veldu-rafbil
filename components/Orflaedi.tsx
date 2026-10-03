@@ -2,13 +2,13 @@ import { FunctionComponent } from 'react'
 
 const Orflaedi: FunctionComponent<{}> = () => (
   <section className="bg-mist mb-0.5">
-    <div className="flex flex-col items-center mx-auto py-8 px-4 xs:max-w-[480px] xs:py-14 xs:px-6 md:py-14 md:px-10 md:flex-row md:justify-between md:items-center md:max-w-[1024px]">
+    <div className="flex flex-col items-center mx-auto py-8 px-4 xs:max-w-column xs:py-14 xs:px-6 md:py-14 md:px-10 md:flex-row md:justify-between md:items-center md:max-w-page">
       <div className="mb-6 md:mb-0 md:mr-8">
-        <h2 className="m-0 mb-5 font-black text-[32px] max-w-[480px] leading-[1.1] text-tint">
+        <h2 className="m-0 mb-5 font-black text-[32px] max-w-column leading-[1.1] text-tint">
           Ertu að leita að enn hagkvæmara ökutæki?
         </h2>
 
-        <p className="m-0 max-w-[480px] text-sm leading-6 text-stone">
+        <p className="m-0 max-w-column text-sm leading-6 text-stone">
           <a
             href="https://www.orflaedi.is"
             className="text-tint font-medium no-underline hover:underline"

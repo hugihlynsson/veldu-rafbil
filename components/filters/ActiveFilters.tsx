@@ -4,7 +4,7 @@ import { agree } from '@/modules/copy/plural'
 import SearchIcon from '@/components/SearchIcon'
 
 const filterClasses =
-  "shrink-0 relative text-xs font-semibold py-1 pr-2 pl-2.5 border border-line-strong rounded-full cursor-pointer text-center flex justify-center items-center bg-lab transition-all duration-200 text-clay after:content-['+'] after:rotate-45 after:ml-1.5 after:text-base after:leading-[10px] after:-mt-px after:text-clay after:transition-colors hover:bg-haze hover:after:text-tint active:text-tint"
+  "shrink-0 relative text-xs font-semibold py-1 pr-2 pl-2.5 border border-line-chip rounded-full cursor-pointer text-center flex justify-center items-center bg-lab transition-all duration-200 text-clay after:content-['+'] after:rotate-45 after:ml-1.5 after:text-base after:leading-[10px] after:-mt-px after:text-clay after:transition-colors hover:bg-haze hover:after:text-tint active:text-tint"
 
 interface FilterButtonsProps {
   filters: Filters
