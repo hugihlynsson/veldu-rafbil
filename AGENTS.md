@@ -63,8 +63,10 @@ The whole rule for which of the first two a new file goes in: if it can be
 tested in plain node, it is a module, and it gets a test next to it. If it
 reaches for the DOM, a hook or storage, it is a util.
 
-Two components exist so a third copy never gets written — `FilterField.tsx` for
-a field in the filter modal, `Modal.tsx` for a modal. Don't hand-roll either.
+Three components exist so another copy never gets written — `FilterField.tsx`
+for a field in the filter modal, `Modal.tsx` for a modal, and
+`SuggestionPills.tsx` for a stack of pills above the chat input. Don't
+hand-roll any of them.
 A `showModal()` dialog makes the page behind it inert, so anything that must
 stay usable while one is open belongs _inside_ it, and anything fixed belongs
 beside the panel rather than within it — a transform or a filter becomes the

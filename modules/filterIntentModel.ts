@@ -78,45 +78,24 @@ const floorTenth = (value: number) => floorTo(value * 10, 1) / 10
  * written out, so "cheap" keeps meaning the cheap end as prices move.
  */
 export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
-  const of = (pick: (car: Car) => number) => list.map(pick)
-  const price = (share: number) =>
-    ceilTo(
-      quantile(
-        of((car) => car.priceWithGrant),
-        share,
-      ),
-      100_000,
-    )
-  const range = (share: number) =>
-    floorTo(
-      quantile(
-        of((car) => car.range),
-        share,
-      ),
-      10,
-    )
-  const acceleration = (share: number) =>
-    ceilTenth(
-      quantile(
-        of((car) => car.acceleration),
-        share,
-      ),
-    )
-  const fastcharge = (share: number) =>
-    floorTenth(
-      quantile(
-        of((car) => car.kmPerMinuteCharged),
-        share,
-      ),
-    )
-  const value = (share: number) =>
-    ceilTo(
-      quantile(
-        of((car) => car.pricePerKm),
-        share,
-      ),
-      100,
-    )
+  const bracket =
+    (pick: (car: Car) => number, round: (value: number) => number) =>
+    (share: number) =>
+      round(quantile(list.map(pick), share))
+  const price = bracket(
+    (car) => car.priceWithGrant,
+    (value) => ceilTo(value, 100_000),
+  )
+  const range = bracket(
+    (car) => car.range,
+    (value) => floorTo(value, 10),
+  )
+  const acceleration = bracket((car) => car.acceleration, ceilTenth)
+  const fastcharge = bracket((car) => car.kmPerMinuteCharged, floorTenth)
+  const value = bracket(
+    (car) => car.pricePerKm,
+    (value) => ceilTo(value, 100),
+  )
 
   const questions: { [Key in FilterKey]?: IntentQuestion<Key> } = {
     price: {

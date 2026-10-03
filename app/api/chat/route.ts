@@ -3,8 +3,8 @@ import { Axiom } from '@axiomhq/js'
 import { after } from 'next/server'
 import { getMessageText } from '@/modules/chatMessage'
 import { rateLimitedText } from '@/modules/chatProgress'
+import { chatRateLimit, clientKey } from '@/modules/rateLimit'
 import { parseChatRequest, streamChat, type ChatFinish } from './chat'
-import { clientKey, rateLimit } from './rateLimit'
 
 // Picked on Icelandic performance, not general benchmarks: 3.7 scores above
 // 3.8 there and spends ~30% fewer output tokens at the same price.
@@ -17,7 +17,7 @@ const axiom = process.env.AXIOM_TOKEN
   : undefined
 
 export async function POST(req: Request) {
-  const limit = rateLimit(clientKey(req))
+  const limit = chatRateLimit(clientKey(req))
   if (!limit.ok) {
     return Response.json(
       { error: rateLimitedText },
