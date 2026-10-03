@@ -5,6 +5,7 @@ import cars from '@/modules/data/cars'
 import {
   fieldFromFilter,
   fieldsFromFilters,
+  filterKeys,
   filterUrlKeys,
   filtersFromFields,
   getFiltersFromQuery,
@@ -285,5 +286,23 @@ describe('the filter modal fields', () => {
     expect(filtersFromFields({ name: ' Tesla ,Kia, ' })).toEqual({
       name: ['Tesla', 'Kia'],
     })
+  })
+})
+
+// The chips and the filter suggestions both stand in this order, and the
+// suggestions cut from its end, so price and seats outlast the narrower asks
+describe('filterKeys', () => {
+  it('keeps the order the chips have always stood in', () => {
+    expect(filterKeys).toEqual([
+      'name',
+      'price',
+      'range',
+      'seats',
+      'drive',
+      'acceleration',
+      'value',
+      'fastcharge',
+      'availability',
+    ])
   })
 })

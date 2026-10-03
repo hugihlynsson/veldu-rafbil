@@ -3,9 +3,13 @@ import { z } from 'zod'
 import type { Drive } from '@/modules/data/newCarSchema'
 import cars, { Car } from '@/modules/data/cars'
 import carFilter from './carFilter'
-import { normalizeFilters, type Filters } from './filters'
+import {
+  filterKeys,
+  normalizeFilters,
+  type FilterKey,
+  type Filters,
+} from './filters'
 
-type FilterKey = keyof Filters
 type Value<Key extends FilterKey> = NonNullable<Filters[Key]>
 
 // A sentence or two. Shared by the input and the route, which refuses longer.
@@ -419,21 +423,6 @@ export type FilterSuggestion = {
 
 // In the order the chips stand in the list, so when MAX_SUGGESTIONS cuts what
 // the text says, it cuts the narrower asks rather than price or seats
-const suggestionOrder: Record<FilterKey, number> = {
-  name: 0,
-  price: 1,
-  range: 2,
-  seats: 3,
-  drive: 4,
-  acceleration: 5,
-  value: 6,
-  fastcharge: 7,
-  availability: 8,
-}
-const filterKeys = (Object.keys(suggestionOrder) as FilterKey[]).sort(
-  (a, b) => suggestionOrder[a] - suggestionOrder[b],
-)
-
 export const suggestionsFromFilters = (
   filters: Filters,
   source: SuggestionSource,
