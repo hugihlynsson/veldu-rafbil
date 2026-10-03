@@ -9,7 +9,7 @@ import {
   parseFilterIntent,
   rankSuggestions,
   readSuggestions,
-  suggestionsFromFilters,
+  pendingSuggestions,
   withSuggestion,
 } from '@/modules/filterIntent'
 import { agree } from '@/modules/plural'
@@ -75,11 +75,14 @@ export default function FilterSuggestions({
     }
   }, [request, asksModel])
 
+  // Guesses about text since cleared are no help with what is typed next
+  if (request === '' && answer) setAnswer(undefined)
+
   const answered = answer?.text === request
   const { suggestions, combined, count } = rankSuggestions(
     answered
       ? answer.suggestions
-      : suggestionsFromFilters(parsed.filters, 'text'),
+      : pendingSuggestions(parsed, asksModel ? answer?.suggestions : []),
     filters,
   )
 
