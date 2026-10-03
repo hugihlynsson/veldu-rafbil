@@ -46,17 +46,20 @@ governs rather than here, and pin it with a test.
 
 ## Layout
 
-| Path                        | What lives there                                                     |
-| --------------------------- | -------------------------------------------------------------------- |
-| `modules/data/`             | The car data, its schema, and every field derived from it            |
-| `modules/list/`             | Sorting and filtering: the URL state and the parser for typed text   |
-| `modules/copy/`             | Icelandic text and numbers: plurals, separators, the grant's wording |
-| `modules/chat/`             | What the chat route and the browser both read: the message format    |
-| `utils/`                    | The things that _do_ need React or the browser                       |
-| `components/`               | The UI, including the chat                                           |
-| `app/page.tsx`              | The list, built once at deploy for a URL with no sort or filter      |
-| `app/with-query/`           | The same list rendered per request, for a URL with one               |
-| `app/api/`, `app/llms.txt/` | Each endpoint, with the logic only it uses beside it                 |
+| Path                        | What lives there                                                      |
+| --------------------------- | --------------------------------------------------------------------- |
+| `modules/data/`             | The car data, its schema, and every field derived from it             |
+| `modules/list/`             | Sorting and filtering: the URL state and the parser for typed text    |
+| `modules/copy/`             | Icelandic text and numbers: plurals, separators, the grant's wording  |
+| `modules/chat/`             | What the chat route and the browser both read: the message format     |
+| `utils/`                    | The things that _do_ need React or the browser                        |
+| `components/list/`          | The list and the car cards in it                                      |
+| `components/filters/`       | The filter modal, its chips, and the suggestions above the chat input |
+| `components/chat/`          | The chat, from its input to the modal and each answer                 |
+| `components/`               | What the parts share — `Modal`, `Toggles`, the pills — and the page   |
+| `app/page.tsx`              | The list, built once at deploy for a URL with no sort or filter       |
+| `app/with-query/`           | The same list rendered per request, for a URL with one                |
+| `app/api/`, `app/llms.txt/` | Each endpoint, with the logic only it uses beside it                  |
 
 The car data is read through `modules/data/cars.ts`, not `newCars.ts`: each
 `Car` carries its id, label, price after the grant and charge rate, derived
@@ -84,7 +87,7 @@ stay usable while one is open belongs _inside_ it, and anything fixed belongs
 beside the panel rather than within it — a transform or a filter becomes the
 containing block of the fixed things inside it.
 
-`components/CarList.tsx` is the `'use client'` list, its sorting and filters
+`components/list/CarList.tsx` is the `'use client'` list, its sorting and filters
 held by nuqs. Import across folders with `@/` (`@/modules/data/cars`), and with `./`
 within one.
 

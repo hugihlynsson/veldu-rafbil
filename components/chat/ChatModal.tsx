@@ -11,12 +11,12 @@ import {
   type ChatMessage as Message,
 } from '@/modules/chat/message'
 import { isAwaitingText, unansweredReason } from '@/modules/chat/progress'
-import Modal, { panelMotion } from './Modal'
-import ChatHeader from './chat/ChatHeader'
-import ChatMessage from './chat/ChatMessage'
-import FollowUpSuggestions from './chat/FollowUpSuggestions'
-import MentionedCars from './chat/MentionedCars'
-import TypingIndicator from './chat/TypingIndicator'
+import Modal, { panelMotion } from '@/components/Modal'
+import ChatHeader from './ChatHeader'
+import ChatMessage from './ChatMessage'
+import FollowUpSuggestions from './FollowUpSuggestions'
+import MentionedCars from './MentionedCars'
+import TypingIndicator from './TypingIndicator'
 
 interface Props {
   onDone: () => void

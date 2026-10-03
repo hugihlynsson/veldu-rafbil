@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react'
 
 import { Availability, Drive, Filters } from '@/types'
 import clsx from 'clsx'
-import Modal, { panelMotion } from './Modal'
-import CloseButton from './CloseButton'
+import Modal, { panelMotion } from '@/components/Modal'
+import CloseButton from '@/components/CloseButton'
 import { FilterInput, FilterSelect } from './FilterField'
 
 interface Props {

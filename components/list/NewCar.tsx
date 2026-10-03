@@ -6,7 +6,7 @@ import { Drive } from '@/types'
 import { Car } from '@/modules/data/cars'
 import addDecimalSeprators from '@/modules/copy/addDecimalSeparators'
 import { formatKmPerMinutesCharged } from '@/modules/data/getKmPerMinutesCharged'
-import LinkPill from './LinkPill'
+import LinkPill from '@/components/LinkPill'
 
 interface Props {
   car: Car
