@@ -415,7 +415,22 @@ export type FilterSuggestion = {
   }
 }[FilterKey]
 
-const filterKeys = Object.keys(filterDefinitions) as FilterKey[]
+// In the order the chips stand in the list, so when MAX_SUGGESTIONS cuts what
+// the text says, it cuts the narrower asks rather than price or seats
+const suggestionOrder: Record<FilterKey, number> = {
+  name: 0,
+  price: 1,
+  range: 2,
+  seats: 3,
+  drive: 4,
+  acceleration: 5,
+  value: 6,
+  fastcharge: 7,
+  availability: 8,
+}
+const filterKeys = (Object.keys(suggestionOrder) as FilterKey[]).sort(
+  (a, b) => suggestionOrder[a] - suggestionOrder[b],
+)
 
 export const suggestionsFromFilters = (
   filters: Filters,
@@ -467,6 +482,10 @@ export type RankedSuggestion = FilterSuggestion & {
   count: number
 }
 
+// Four, and the pill that adds them all, fit above the input on a phone with
+// the keyboard up
+export const MAX_SUGGESTIONS = 4
+
 /**
  * The suggestions worth a chip, best first, each counted against the filters
  * already set. What the text says is always offered, even when it matches
@@ -492,6 +511,7 @@ export const rankSuggestions = (
   let combined = current
   const kept: RankedSuggestion[] = []
   for (const suggestion of ordered) {
+    if (kept.length === MAX_SUGGESTIONS) break
     if (sameValue(current[suggestion.key], suggestion.value)) continue
     if (kept.some(({ key }) => key === suggestion.key)) continue
 
