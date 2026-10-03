@@ -118,15 +118,16 @@ export default function FilterSuggestions({
   })
 
   if (pills.length > 1) {
+    const addAll = `Bæta ${pills.length === 2 ? 'báðum' : 'öllum'} síum við`
     pills.push({
       key: 'all',
       content: (
         <>
-          Bæta öllum síum við
+          {addAll}
           <CarCount count={count} />
         </>
       ),
-      ariaLabel: `Bæta öllum síum við, ${carCount(count)}`,
+      ariaLabel: `${addAll}, ${carCount(count)}`,
       onClick: () => {
         trackEvent('Applied all filter suggestions')
         onApply(combined)
