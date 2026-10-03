@@ -1,10 +1,19 @@
 import { Filters } from '@/types'
+import { buildIntentQuestions } from './filterIntentModel'
 
 type FilterKey = keyof Filters
 
-/** A value the filter must hold, or 'any' where only its presence is judged */
+/** The labels of the model's options any one of which reads the request right */
+export interface Brackets {
+  oneOf: string[]
+}
+
+/**
+ * A value the filter must hold, the brackets it may land in, or 'any' where
+ * only its presence is judged
+ */
 export type Expectation = {
-  [Key in FilterKey]?: NonNullable<Filters[Key]> | 'any'
+  [Key in FilterKey]?: NonNullable<Filters[Key]> | Brackets | 'any'
 }
 
 export interface IntentCase {
@@ -12,8 +21,10 @@ export interface IntentCase {
   /**
    * literal: the text states every filter, and the parser must read them all.
    * mixed: it states some and implies others. vague: it states none.
+   * question: one put to the advisor, as the chat input that shows the
+   * suggestions mostly receives, which should only rarely become a filter.
    */
-  kind: 'literal' | 'mixed' | 'vague'
+  kind: 'literal' | 'mixed' | 'vague' | 'question'
   expect: Expectation
   /** Filters a reasonable reader might or might not add, judged neither way */
   allow?: FilterKey[]
@@ -21,8 +32,9 @@ export interface IntentCase {
 
 /**
  * Requests as people type them: inflected, abbreviated, missing the Icelandic
- * letters, and sometimes misspelled. The vague ones expect 'any' for a number,
- * as the brackets a model picks from are cut from the car data and move with it.
+ * letters, and sometimes misspelled. The vague ones name brackets rather than
+ * numbers, as the brackets a model picks from are cut from the car data and
+ * move with it, or 'any' where every bracket is a fair reading.
  */
 export const intentCases: IntentCase[] = [
   { text: 'undir 8 milljónum', kind: 'literal', expect: { price: 8_000_000 } },
@@ -174,7 +186,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'ódýr fjölskyldubíll með 7 sætum',
     kind: 'mixed',
-    expect: { seats: 7, price: 'any' },
+    expect: { seats: 7, price: { oneOf: ['cheap', 'mid_priced'] } },
   },
   {
     text: 'Tesla sem kemst til Akureyrar án þess að hlaða',
@@ -184,7 +196,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'sportlegur og hraður, undir 12 milljónum',
     kind: 'mixed',
-    expect: { price: 12_000_000, acceleration: 'any' },
+    expect: { price: 12_000_000, acceleration: { oneOf: ['fast', 'fastest'] } },
   },
   {
     text: 'góður í snjó og ófærð, 5 sæti',
@@ -196,8 +208,43 @@ export const intentCases: IntentCase[] = [
     kind: 'mixed',
     expect: { seats: 7, range: 'any' },
   },
+  {
+    text: 'sjö sæta og ekki of dýr',
+    kind: 'mixed',
+    expect: { seats: 7, price: 'any' },
+  },
+  {
+    text: 'fjórhjóladrifinn og hleður hratt',
+    kind: 'mixed',
+    expect: { drive: ['AWD'], fastcharge: 'any' },
+  },
+  {
+    text: 'Kia sem dugar alla leið til Akureyrar',
+    kind: 'mixed',
+    expect: { name: ['Kia'], range: 'any' },
+  },
+  {
+    text: 'undir 7 milljónum og snöggur',
+    kind: 'mixed',
+    expect: { price: 7_000_000, acceleration: 'any' },
+  },
+  {
+    text: 'fáanlegur strax og langdrægur',
+    kind: 'mixed',
+    expect: { availability: 'available', range: 'any' },
+  },
+  {
+    text: '5 sæti og mikið fyrir peninginn',
+    kind: 'mixed',
+    expect: { seats: 5, value: 'any' },
+    allow: ['price'],
+  },
 
-  { text: 'ódýr borgarbíll', kind: 'vague', expect: { price: 'any' } },
+  {
+    text: 'ódýr borgarbíll',
+    kind: 'vague',
+    expect: { price: { oneOf: ['cheap', 'mid_priced'] } },
+  },
   { text: 'bíll fyrir veturinn', kind: 'vague', expect: { drive: ['AWD'] } },
   {
     text: 'fyrir sveitina, mikið um malarvegi og snjó',
@@ -216,10 +263,14 @@ export const intentCases: IntentCase[] = [
   {
     text: 'hagkvæmur og ódýr',
     kind: 'vague',
-    expect: { price: 'any' },
+    expect: { price: { oneOf: ['cheap', 'mid_priced'] } },
     allow: ['value'],
   },
-  { text: 'mjög snöggur', kind: 'vague', expect: { acceleration: 'any' } },
+  {
+    text: 'mjög snöggur',
+    kind: 'vague',
+    expect: { acceleration: { oneOf: ['fast', 'fastest'] } },
+  },
   {
     text: 'fer oft vestur á firði og norður',
     kind: 'vague',
@@ -229,7 +280,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'ekkert of dýrt, helst ekki yfir meðallagi',
     kind: 'vague',
-    expect: { price: 'any' },
+    expect: { price: { oneOf: ['cheap', 'mid_priced'] } },
   },
   {
     text: 'lúxus jeppi',
@@ -242,7 +293,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'hraðskreiður sportbíll',
     kind: 'vague',
-    expect: { acceleration: 'any' },
+    expect: { acceleration: { oneOf: ['fast', 'fastest'] } },
   },
   {
     text: 'fyrir hundinn og útileguna',
@@ -256,13 +307,181 @@ export const intentCases: IntentCase[] = [
     expect: { drive: ['AWD'] },
     allow: ['range'],
   },
+
+  // A word like "hratt" fits several questions, and should answer only one
+  { text: 'fljótur að hlaða', kind: 'vague', expect: { fastcharge: 'any' } },
+  {
+    text: 'hleður hratt á ferðalögum',
+    kind: 'vague',
+    expect: { fastcharge: 'any' },
+    allow: ['range'],
+  },
+  { text: 'kraftmikill', kind: 'vague', expect: { acceleration: 'any' } },
+  {
+    text: 'sportbíll',
+    kind: 'vague',
+    expect: { acceleration: { oneOf: ['fast', 'fastest'] } },
+  },
+  {
+    text: 'snöggur en þarf ekki að hlaða hratt',
+    kind: 'vague',
+    expect: { acceleration: 'any' },
+  },
+
+  // Every price option is a ceiling, so wanting to spend more sets none
+  {
+    text: 'dýr og flottur',
+    kind: 'vague',
+    expect: {},
+    allow: ['acceleration'],
+  },
+  {
+    text: 'peningar skipta ekki máli',
+    kind: 'vague',
+    expect: {},
+  },
+
+  // Seats are counted with the parents
+  { text: 'við erum sex', kind: 'vague', expect: { seats: 7 } },
+  { text: 'fimm krakkar', kind: 'vague', expect: { seats: 7 } },
+  {
+    text: 'tvö börn og hundur',
+    kind: 'vague',
+    expect: {},
+    allow: ['seats'],
+  },
+  {
+    text: 'fjolskyldubill',
+    kind: 'vague',
+    expect: {},
+    allow: ['seats'],
+  },
+
+  // Saying little about a need is no need
+  {
+    text: 'keyri bara innanbæjar',
+    kind: 'vague',
+    expect: {},
+    allow: ['price'],
+  },
+  { text: 'stutt í vinnuna', kind: 'vague', expect: {}, allow: ['price'] },
+  {
+    text: 'bý á Ísafirði',
+    kind: 'vague',
+    expect: {},
+    allow: ['drive', 'range'],
+  },
+
+  {
+    text: 'eitthvað ódýrt',
+    kind: 'vague',
+    expect: { price: { oneOf: ['cheap', 'mid_priced'] } },
+  },
+  {
+    text: 'ódýrasti bíllinn',
+    kind: 'vague',
+    expect: { price: { oneOf: ['cheap'] } },
+  },
+  { text: 'jeppi fyrir fjallvegi', kind: 'vague', expect: { drive: ['AWD'] } },
+  { text: 'hálka og brekkur', kind: 'vague', expect: { drive: ['AWD'] } },
+  {
+    text: 'nýr bíll sem er ekki kominn til landsins',
+    kind: 'vague',
+    expect: { availability: 'expected' },
+  },
+  {
+    text: 'mest fyrir peninginn',
+    kind: 'vague',
+    expect: { value: 'any' },
+    allow: ['price'],
+  },
+  {
+    text: 'ódýr en langdrægur',
+    kind: 'vague',
+    expect: { price: { oneOf: ['cheap', 'mid_priced'] }, range: 'any' },
+    allow: ['value'],
+  },
+  {
+    text: 'langdrægur jeppi á góðu verði',
+    kind: 'vague',
+    expect: { range: 'any', price: 'any' },
+    allow: ['drive', 'value'],
+  },
+
+  { text: 'hvað kostar að hlaða heima?', kind: 'question', expect: {} },
+  { text: 'hvaða bíl mælir þú með?', kind: 'question', expect: {} },
+  { text: 'er rafbíll góður á Íslandi?', kind: 'question', expect: {} },
+  { text: 'hvað endist rafhlaðan lengi?', kind: 'question', expect: {} },
+  { text: 'hvernig virkar rafbílastyrkurinn?', kind: 'question', expect: {} },
+  {
+    text: 'hvað tekur langan tíma að hlaða?',
+    kind: 'question',
+    expect: {},
+    allow: ['fastcharge'],
+  },
+  {
+    text: 'er hægt að draga kerru?',
+    kind: 'question',
+    expect: {},
+    allow: ['drive'],
+  },
+  {
+    text: 'borgar sig að bíða eftir nýjum bílum?',
+    kind: 'question',
+    expect: {},
+    allow: ['availability'],
+  },
+  {
+    text: 'hvaða bíll er með mestu drægnina?',
+    kind: 'question',
+    expect: {},
+    allow: ['range'],
+  },
+  {
+    text: 'hver er ódýrasti 7 sæta bíllinn?',
+    kind: 'question',
+    expect: { seats: 7 },
+    allow: ['price'],
+  },
+  {
+    text: 'hvaða bílar eru til á lager?',
+    kind: 'question',
+    expect: { availability: 'available' },
+  },
+  {
+    text: 'hver er munurinn á Model 3 og Model Y?',
+    kind: 'question',
+    expect: { name: ['Model 3', 'Model Y'] },
+  },
 ]
 
-const sameValue = (expected: unknown, actual: unknown) =>
-  expected === 'any' ||
-  (Array.isArray(expected) && Array.isArray(actual)
+const questions = buildIntentQuestions()
+
+/** The value each bracket label stands for, as the cars are now */
+export const bracketValues = (key: FilterKey): Map<string, unknown> =>
+  new Map(
+    (questions[key]?.options ?? []).map((option) => [
+      option.label,
+      option.value,
+    ]),
+  )
+
+const sameValue = (
+  key: FilterKey,
+  expected: Expectation[FilterKey],
+  actual: unknown,
+): boolean => {
+  if (expected === 'any') return true
+  if (expected && typeof expected === 'object' && 'oneOf' in expected) {
+    const values = bracketValues(key)
+    return expected.oneOf.some((label) =>
+      sameValue(key, values.get(label) as Expectation[FilterKey], actual),
+    )
+  }
+  return Array.isArray(expected) && Array.isArray(actual)
     ? [...expected].sort().join() === [...actual].sort().join()
-    : expected === actual)
+    : expected === actual
+}
 
 export interface CaseScore {
   /** Expected, present and right */
@@ -283,11 +502,13 @@ export const scoreCase = (testCase: IntentCase, got: Filters): CaseScore => {
   return {
     right: expected.filter(
       (key) =>
-        got[key] !== undefined && sameValue(testCase.expect[key], got[key]),
+        got[key] !== undefined &&
+        sameValue(key, testCase.expect[key], got[key]),
     ),
     wrong: expected.filter(
       (key) =>
-        got[key] !== undefined && !sameValue(testCase.expect[key], got[key]),
+        got[key] !== undefined &&
+        !sameValue(key, testCase.expect[key], got[key]),
     ),
     missed: expected.filter((key) => got[key] === undefined),
     extra: present.filter(
