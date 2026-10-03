@@ -3,14 +3,23 @@
 import React, { ReactNode, useLayoutEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 
-/** How long the leave animation gets before the dialog actually closes */
+/**
+ * How long the leave animation gets before the dialog actually closes. The
+ * leave transitions are shorter, since they only start once React re-renders.
+ */
 const LEAVE_MS = 300
 
 type State = 'initializing' | 'visible' | 'leaving'
 
+/**
+ * The enter and leave of the panel inside, the same for every modal. It
+ * transitions `translate` rather than `transform`: Tailwind v4 sets the
+ * individual property, which a transform transition never reaches.
+ */
+export const panelMotion =
+  'opacity-0 translate-y-10 transition-[opacity,translate] duration-300 ease-[cubic-bezier(0.32,0,0.67,0)] group-data-[state=visible]/modal:opacity-100 group-data-[state=visible]/modal:translate-y-0 group-data-[state=visible]/modal:ease-[cubic-bezier(0.33,1,0.68,1)] group-data-[state=leaving]/modal:duration-200'
+
 interface Modal {
-  /** True once the enter animation should be running */
-  isVisible: boolean
   /** Animates out, then closes and unmounts */
   close: () => void
 }
@@ -75,8 +84,8 @@ const Modal: React.FunctionComponent<Props> = ({
       data-state={state}
       aria-labelledby={labelledBy}
       className={clsx(
-        'hidden open:flex fixed inset-0 m-0 h-full w-full max-h-none max-w-none border-0 bg-transparent p-0 justify-center',
-        'backdrop:bg-transparent backdrop:transition-[background-color] backdrop:delay-100 data-[state=visible]:backdrop:delay-0',
+        'group/modal hidden open:flex fixed inset-0 m-0 h-full w-full max-h-none max-w-none border-0 bg-transparent p-0 justify-center',
+        'backdrop:bg-transparent backdrop:transition-[background-color] backdrop:duration-300 data-[state=leaving]:backdrop:duration-200 data-[state=leaving]:backdrop:delay-50',
         className,
       )}
       onCancel={(event) => {
@@ -88,7 +97,7 @@ const Modal: React.FunctionComponent<Props> = ({
         if (event.target === event.currentTarget) close()
       }}
     >
-      {children({ isVisible: state === 'visible', close })}
+      {children({ close })}
     </dialog>
   )
 }

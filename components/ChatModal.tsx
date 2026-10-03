@@ -11,7 +11,7 @@ import {
   type ChatMessage as Message,
 } from '@/modules/chatMessage'
 import { isAwaitingText, unansweredReason } from '@/modules/chatProgress'
-import Modal from './Modal'
+import Modal, { panelMotion } from './Modal'
 import ChatHeader from './chat/ChatHeader'
 import ChatMessage from './chat/ChatMessage'
 import FollowUpSuggestions from './chat/FollowUpSuggestions'
@@ -84,12 +84,15 @@ const ChatModal: React.FunctionComponent<Props> = ({
       onDone={onDone}
       onLeave={onReleaseBodyLock}
       initialFocusRef={composerRef}
-      className="items-start backdrop:duration-300 data-[state=visible]:backdrop:bg-backdrop"
+      className="items-start data-[state=visible]:backdrop:bg-backdrop"
     >
-      {({ isVisible, close }) => (
+      {({ close }) => (
         <>
           <section
-            className={`z-1 flex flex-col bg-glass/95 backdrop-blur-[20px] w-screen h-[calc(100dvh-var(--keyboard-inset))] overflow-hidden scale-95 opacity-0 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.32,0,0.67,0)] min-[600px]:h-[calc(100dvh-24px-var(--keyboard-inset))] min-[600px]:max-w-[600px] min-[600px]:w-[90vw] min-[600px]:rounded-t-3xl min-[600px]:rounded-b-4xl min-[600px]:mt-3 min-[600px]:shadow-(--shadow-modal) ${isVisible ? 'opacity-100 ease-[cubic-bezier(0.33,1,0.68,1)] scale-100' : ''}`}
+            className={clsx(
+              'z-1 flex flex-col bg-glass/95 backdrop-blur-[20px] w-screen h-[calc(100dvh-var(--keyboard-inset))] overflow-hidden min-[600px]:h-[calc(100dvh-24px-var(--keyboard-inset))] min-[600px]:max-w-[600px] min-[600px]:w-[90vw] min-[600px]:rounded-t-3xl min-[600px]:rounded-b-4xl min-[600px]:mt-3 min-[600px]:shadow-(--shadow-modal)',
+              panelMotion,
+            )}
           >
             <ChatHeader
               hasMessages={messages.length > 0}
