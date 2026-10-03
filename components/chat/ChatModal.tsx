@@ -27,7 +27,7 @@ interface Props {
   onReleaseBodyLock: () => void
   onSendMessage: (message: string) => void
   onRetry: () => void
-  /** Puts a car the answer mentions on the list, before it is scrolled to */
+  /** A car the answer mentions was picked, and the chat is closing for it */
   onShowCar: (car: Car) => void
   /** Inside the dialog, since showModal() makes the page outside it inert */
   composer: React.ReactNode

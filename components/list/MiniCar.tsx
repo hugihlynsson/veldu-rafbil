@@ -3,40 +3,20 @@ import Image from 'next/image'
 
 import { Car } from '@/modules/data/cars'
 import addDecimalSeprators from '@/modules/copy/addDecimalSeparators'
-import prefersReducedMotion from '@/utils/prefersReducedMotion'
 
 interface Props {
   car: Car
-  /** Before the scroll: whatever closes the chat and puts the car on the list */
-  onSelect?: () => void
+  onSelect: () => void
 }
 
 const MiniCar: FunctionComponent<Props> = ({ car, onSelect }) => {
-  const { id: carId, priceWithGrant } = car
+  const { priceWithGrant } = car
   const hasGrant = priceWithGrant !== car.price
-
-  const handleClick = () => {
-    onSelect?.()
-
-    setTimeout(() => {
-      const carElement = document.getElementById(carId)
-      if (carElement) {
-        setTimeout(() => {
-          carElement.scrollIntoView({
-            behavior: prefersReducedMotion() ? 'auto' : 'smooth',
-            block: 'center',
-          })
-          // Without this the reader is scrolled somewhere their focus is not
-          carElement.focus({ preventScroll: true })
-        }, 150)
-      }
-    }, 100)
-  }
 
   return (
     <button
       type="button"
-      onClick={handleClick}
+      onClick={onSelect}
       className="flex flex-row w-full p-0 border-0 bg-transparent cursor-pointer text-left rounded-card overflow-hidden no-underline text-inherit transition-all duration-200 max-w-full hover:border-line-strong hover:bg-raised"
     >
       <div className="relative w-[120px] min-w-[120px] bg-cloud shrink-0">

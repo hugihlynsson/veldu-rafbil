@@ -30,7 +30,7 @@ const transport = new DefaultChatTransport<ChatMessage>({
 
 interface Props {
   hide: boolean
-  /** An answer can point at a car the list's filters are hiding */
+  /** Called once the chat has closed, so the car's card can take the focus */
   onShowCar: (car: Car) => void
   filters: Filters
   onApplyFilters: (filters: Filters) => void
@@ -44,6 +44,9 @@ export default function ChatContainer({
 }: Props) {
   const chatInputRef = useRef<HTMLInputElement>(null)
   const shouldFocusInput = useRef<boolean>(false)
+  // Held until the dialog has closed: the page behind it is inert until then,
+  // and the card could not take the focus
+  const carToShow = useRef<Car | null>(null)
   const [showChatMessages, setShowChatMessages] = useState<boolean>(false)
   const [releaseBodyLock, setReleaseBodyLock] = useState<boolean>(false)
   // The draft outlives the input, which is mounted in one of two places
@@ -149,10 +152,14 @@ export default function ChatContainer({
   return (
     <ChatModal
       onDone={() => {
-        shouldFocusInput.current = true
+        const car = carToShow.current
+        carToShow.current = null
+        // A car picked from the answer takes the focus instead
+        shouldFocusInput.current = !car
         setShowChatMessages(false)
         // Reset with the thing that closed the modal, not in an effect
         setReleaseBodyLock(false)
+        if (car) onShowCar(car)
       }}
       messages={chatState.messages}
       status={chatState.status}
@@ -164,7 +171,9 @@ export default function ChatContainer({
       onReleaseBodyLock={() => setReleaseBodyLock(true)}
       onSendMessage={handleSendMessage}
       onRetry={handleRetry}
-      onShowCar={onShowCar}
+      onShowCar={(car) => {
+        carToShow.current = car
+      }}
       composer={chatInput}
       composerRef={chatInputRef}
     />
