@@ -135,9 +135,9 @@ const ChatInput: React.FunctionComponent<Props> = ({
       <form
         onSubmit={onSubmit}
         className={clsx(
-          'pointer-events-auto flex items-center gap-2 p-[8px_8px_8px_20px] bg-veil/70 backdrop-blur-xl rounded-full shadow-(--shadow-pill) w-80 max-w-[90vw] transition-all duration-300 ease-in-out scale-[0.98] border border-scrim/2 hover:scale-100',
+          'pointer-events-auto flex items-center gap-2 p-[8px_8px_8px_20px] bg-veil/70 backdrop-blur-xl rounded-full shadow-(--shadow-pill) w-80 max-w-[90vw] transition-all duration-300 ease-in-out border border-scrim/2',
           showFocusRing && 'outline-2 outline-offset-2 outline-focus',
-          isFocused && 'w-[400px] scale-100',
+          isFocused ? 'w-[400px] scale-100' : 'scale-[0.98] hover:scale-100',
           animateIn &&
             'animate-[fadeIn_0.5s_cubic-bezier(0.16,1,0.3,1)_backwards]',
         )}
