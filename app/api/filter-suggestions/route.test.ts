@@ -51,14 +51,14 @@ describe('POST /api/filter-suggestions', () => {
     }
   })
 
-  it('refuses a caller past thirty a minute', async () => {
+  it('refuses a caller past sixty a minute', async () => {
     const post = await loadPost('')
     const statuses = []
-    for (let i = 0; i < 31; i++) {
+    for (let i = 0; i < 61; i++) {
       statuses.push((await post({ text: 'rafbíll' })).status)
     }
-    expect(statuses.slice(0, 30).every((status) => status === 200)).toBe(true)
-    expect(statuses[30]).toBe(429)
+    expect(statuses.slice(0, 60).every((status) => status === 200)).toBe(true)
+    expect(statuses[60]).toBe(429)
     expect((await post({ text: 'rafbíll' }, '10.1.0.2')).status).toBe(200)
   })
 })
