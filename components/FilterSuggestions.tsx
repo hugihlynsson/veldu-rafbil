@@ -84,7 +84,7 @@ export default function FilterSuggestions({
           setShown({ text: request, suggestions: read })
         }
       }
-    }, 300)
+    }, 100)
 
     return () => {
       clearTimeout(timer)
