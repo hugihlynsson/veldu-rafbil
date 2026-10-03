@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 
 import { Availability, Drive, Filters } from '@/types'
 import clsx from 'clsx'
-import Modal from './Modal'
+import Modal, { panelMotion } from './Modal'
 import CloseButton from './CloseButton'
 import { FilterInput, FilterSelect } from './FilterField'
 
@@ -105,11 +105,11 @@ const FiltersModal: React.FunctionComponent<Props> = ({
       onDone={onDone}
       initialFocusRef={nameInputRef}
       className={clsx(
-        'items-end backdrop:duration-200 data-[state=visible]:backdrop:bg-backdrop-strong',
+        'items-end data-[state=visible]:backdrop:bg-backdrop-strong',
         '[@media(min-width:800px)_and_(min-height:600px)]:items-center',
       )}
     >
-      {({ isVisible, close }) => {
+      {({ close }) => {
         const handleDone = () => {
           onSubmit(filters)
           close()
@@ -124,10 +124,9 @@ const FiltersModal: React.FunctionComponent<Props> = ({
         return (
           <section
             className={clsx(
-              'z-1 flex flex-col rounded-t-sheet bg-surface w-screen max-w-[400px] max-h-[85vh] overflow-hidden shadow-(--shadow-sheet) translate-y-10 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.32,0,0.67,0)]',
+              'z-1 flex flex-col rounded-t-sheet bg-surface w-screen max-w-[400px] max-h-[85vh] overflow-hidden shadow-(--shadow-sheet)',
+              panelMotion,
               '[@media(min-width:800px)_and_(min-height:600px)]:rounded-sheet [@media(min-width:800px)_and_(min-height:600px)]:max-h-[500px]',
-              isVisible &&
-                'opacity-100 ease-[cubic-bezier(0.33,1,0.68,1)] translate-y-0!',
             )}
           >
             <header className="relative bg-surface text-lg text-center px-4 py-3 border-b border-line font-semibold">
