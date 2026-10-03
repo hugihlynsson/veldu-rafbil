@@ -141,6 +141,14 @@ describe('suggestionsFromAnswers', () => {
     ])
   })
 
+  it('takes seven seats when the model leans there, rather than the safer five', () => {
+    expect(
+      suggestionsFromAnswers({
+        seats: choice({ none: 0.01, five: 0.26, seven: 0.73 }),
+      }),
+    ).toEqual([{ key: 'seats', value: 7, source: 'model', probability: 0.73 }])
+  })
+
   it('ignores answers it did not ask for, or cannot read', () => {
     expect(
       suggestionsFromAnswers({

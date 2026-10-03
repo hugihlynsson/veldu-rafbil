@@ -5,12 +5,13 @@ import { clientKey, createRateLimit } from '@/app/api/chat/rateLimit'
 import { MAX_INTENT_LENGTH } from '@/modules/filterIntent'
 import { suggestFilters, type AskModel } from '@/modules/filterIntentModel'
 
-// Measured on the 102 Icelandic requests in modules/filterIntentCases.ts
-// (October 2026, two runs): with the parser it gets 76–80 exactly right to the
-// parser's 62, recall 88–92% to 61%, at 81–84% precision, p95 ~330 ms. Asked
-// in Icelandic it scores the same within run-to-run noise, on ~20% more tokens,
-// so the questions stay English. Its mistakes are extras: "fast" read as both
-// charging and acceleration, and "available now" added unasked. Re-run
+// Measured on the 120 Icelandic requests in modules/filterIntentCases.ts
+// (October 2026, two runs): with the parser it gets 114–115 exactly right to
+// the parser's 62, at 96–97% precision and 97–98% recall, p95 ~300 ms, ~1,600
+// input tokens a request. 16 of the 18 held-out cases, which the wording was
+// not tuned on, to 11 before it was. Asked in Icelandic it scores the same
+// within run-to-run noise on ~28% more tokens, so the questions stay English,
+// with the Icelandic words for each filter glossed in them. Re-run
 // scripts/eval-filter-intent.ts before following "latest" to a new model.
 const modelName = 'jev-latest'
 

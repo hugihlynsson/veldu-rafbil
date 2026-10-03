@@ -138,12 +138,12 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
       key: 'price',
       ordered: true,
       instructions: {
-        en: 'How much is the person in `request` willing to pay for a new electric car in Iceland?',
-        is: 'Hversu miklu er sá sem skrifar `request` til í að eyða í nýjan rafbíl á Íslandi?',
+        en: 'Does the person in `request` want a cheap car, or set a limit on what a new electric car in Iceland may cost? In Icelandic, ódýr, ódýrt, ódýrasti, á góðu verði and ekki of dýr ask for a lower price, even alongside other wishes.',
+        is: 'Vill sá sem skrifar `request` ódýran bíl, eða setur þak á hvað nýr rafbíll á Íslandi má kosta? Ódýr, ódýrt, ódýrasti, á góðu verði og ekki of dýr biðja um lægra verð, líka innan um aðrar óskir.',
       },
       none: {
-        en: 'No budget or price wish is stated or implied',
-        is: 'Ekkert kemur fram um verð eða fjárhag',
+        en: 'No limit on price: nothing is said about cost, or the person wants an expensive, premium or luxury car',
+        is: 'Ekkert verðþak: ekkert kemur fram um verð, eða viðkomandi vill dýran, vandaðan eða lúxusbíl',
       },
       options: [
         {
@@ -179,12 +179,12 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
       key: 'range',
       ordered: true,
       instructions: {
-        en: 'How much driving range does the person in `request` need from an electric car in Iceland?',
-        is: 'Hversu mikla drægni þarf sá sem skrifar `request` á rafbíl á Íslandi?',
+        en: 'Does the person in `request` need more driving range than usual from an electric car in Iceland? In Icelandic, langdrægur, mikil drægni, kemst langt and langferðir ask for range.',
+        is: 'Þarf sá sem skrifar `request` meiri drægni en gengur og gerist á rafbíl á Íslandi? Langdrægur, mikil drægni, kemst langt og langferðir biðja um drægni.',
       },
       none: {
-        en: 'Range or trips are not mentioned or implied',
-        is: 'Ekkert kemur fram um drægni eða ferðalög',
+        en: 'No particular range: neither range nor long trips are mentioned, or the driving is short, such as commuting or in town',
+        is: 'Engin sérstök drægni: hvorki drægni né langferðir koma fram, eða aksturinn er stuttur, til dæmis í vinnuna eða innanbæjar',
       },
       options: [
         {
@@ -218,10 +218,12 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
     },
     seats: {
       key: 'seats',
-      ordered: true,
+      // A pick, not a scale: with two brackets the cautious quantile would
+      // want four chances in five before it offered seven
+      ordered: false,
       instructions: {
-        en: 'How many seats does the person in `request` need?',
-        is: 'Hversu mörg sæti þarf sá sem skrifar `request`?',
+        en: 'How many seats does the person in `request` need? Count everyone who rides along: the children and one or two adults.',
+        is: 'Hversu mörg sæti þarf sá sem skrifar `request`? Teldu alla sem ferðast með: börnin og einn eða tvo fullorðna.',
       },
       none: {
         en: 'The number of seats or passengers is not mentioned or implied',
@@ -232,16 +234,16 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
           label: 'five',
           value: 5,
           description: {
-            en: 'Five seats: room for a family of four or five',
-            is: 'Fimm sæti: pláss fyrir fjögurra eða fimm manna fjölskyldu',
+            en: 'Five seats: up to five people, such as two adults and up to three children',
+            is: 'Fimm sæti: allt að fimm manns, til dæmis tveir fullorðnir og allt að þrjú börn',
           },
         },
         {
           label: 'seven',
           value: 7,
           description: {
-            en: 'Seven or more seats: a large family, a third row of seats',
-            is: 'Sjö sæti eða fleiri: stór fjölskylda, þriðja sætaröðin',
+            en: 'Seven or more seats: six people or more, such as four or more children, or a third row of seats',
+            is: 'Sjö sæti eða fleiri: sex manns eða fleiri, til dæmis fjögur börn eða fleiri, eða þriðja sætaröðin',
           },
         },
       ],
@@ -250,12 +252,12 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
       key: 'drive',
       ordered: false,
       instructions: {
-        en: 'Which drive does the person in `request` need?',
-        is: 'Hvaða drif þarf sá sem skrifar `request`?',
+        en: 'Which drive does the person in `request` need? In Icelandic, fjórhjóladrif, jeppi, snjór, hálka, ófærð, malarvegir, brekkur and hálendið point to all-wheel drive.',
+        is: 'Hvaða drif þarf sá sem skrifar `request`? Fjórhjóladrif, jeppi, snjór, hálka, ófærð, malarvegir, brekkur og hálendið benda á fjórhjóladrif.',
       },
       none: {
-        en: 'Drive is not mentioned or implied',
-        is: 'Ekkert kemur fram um drif',
+        en: 'Drive is not mentioned, and nothing is said about winter, snow, gravel, the highlands or towing; long trips alone need no particular drive',
+        is: 'Ekkert kemur fram um drif, og ekkert um vetur, snjó, möl, hálendið eða drátt; langferðir einar og sér kalla ekki á sérstakt drif',
       },
       options: [
         {
@@ -288,12 +290,12 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
       key: 'availability',
       ordered: false,
       instructions: {
-        en: 'When does the person in `request` want the car?',
-        is: 'Hvenær vill sá sem skrifar `request` fá bílinn?',
+        en: 'Does the person in `request` say when they want to get the car? In Icelandic, strax, á lager and fljótlega mean now; væntanlegur and á leiðinni mean upcoming.',
+        is: 'Kemur fram í `request` hvenær viðkomandi vill fá bílinn? Strax, á lager og fljótlega merkja núna; væntanlegur og á leiðinni merkja síðar.',
       },
       none: {
-        en: 'Timing is not mentioned or implied',
-        is: 'Ekkert kemur fram um hvenær',
+        en: 'Nothing is said about when to get the car. A quick car or fast charging describes the car, not when it is wanted, and a season or a trip is not a delivery date',
+        is: 'Ekkert kemur fram um hvenær bíllinn á að koma. Snöggur bíll eða hröð hleðsla lýsa bílnum, ekki afhendingu, og árstíð eða ferðalag er ekki afhendingartími',
       },
       options: [
         {
@@ -318,12 +320,12 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
       key: 'acceleration',
       ordered: true,
       instructions: {
-        en: 'How quick does the person in `request` want the car to be?',
-        is: 'Hversu snöggan bíl vill sá sem skrifar `request`?',
+        en: 'Does the person in `request` want a car that accelerates quickly? Charging fast is charging speed, not acceleration. In Icelandic, snöggur, sprækur, kraftmikill, hraðskreiður, hraður and sportlegur describe a quick car.',
+        is: 'Vill sá sem skrifar `request` bíl sem er snöggur af stað? Hröð hleðsla er hleðsluhraði, ekki hröðun. Snöggur, sprækur, kraftmikill, hraðskreiður, hraður og sportlegur lýsa snöggum bíl.',
       },
       none: {
-        en: 'Speed or acceleration is not mentioned or implied',
-        is: 'Ekkert kemur fram um hraða eða hröðun',
+        en: 'Acceleration is not mentioned: nothing about a quick, powerful or sporty car. Fast charging or range is not acceleration',
+        is: 'Ekkert kemur fram um hröðun: ekkert um snöggan, kraftmikinn eða sportlegan bíl. Hröð hleðsla eða drægni er ekki hröðun',
       },
       options: [
         {
@@ -359,12 +361,12 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
       key: 'fastcharge',
       ordered: true,
       instructions: {
-        en: 'How fast does the person in `request` want the car to charge?',
-        is: 'Hversu hratt vill sá sem skrifar `request` að bíllinn hlaði?',
+        en: 'Does the person in `request` want a car that charges quickly? A quick or fast car is acceleration, not charging speed. In Icelandic, hleður hratt, fljótur að hlaða, hraðhleðsla and stutt hleðslustopp ask for fast charging.',
+        is: 'Vill sá sem skrifar `request` bíl sem hleður hratt? Snöggur eða hraður bíll er hröðun, ekki hleðsluhraði. Hleður hratt, fljótur að hlaða, hraðhleðsla og stutt hleðslustopp biðja um hraða hleðslu.',
       },
       none: {
-        en: 'Charging speed is not mentioned or implied',
-        is: 'Ekkert kemur fram um hleðsluhraða',
+        en: 'Charging is not mentioned: nothing about charging quickly or charging stops. A quick or powerful car is not charging speed',
+        is: 'Ekkert kemur fram um hleðslu: ekkert um að hlaða hratt eða hleðslustopp. Snöggur eða kraftmikill bíll er ekki hleðsluhraði',
       },
       options: [
         {
@@ -395,8 +397,8 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
         is: 'Vill sá sem skrifar `request` sem mesta drægni fyrir peninginn?',
       },
       none: {
-        en: 'Value for money is not mentioned or implied',
-        is: 'Ekkert kemur fram um hagkvæmni',
+        en: 'Value for money is not mentioned: nothing about range for the price. A low price alone is not value for money',
+        is: 'Ekkert kemur fram um hagkvæmni: ekkert um drægni miðað við verð. Lágt verð eitt og sér er ekki hagkvæmni',
       },
       options: [
         {
