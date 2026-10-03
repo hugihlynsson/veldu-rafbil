@@ -59,7 +59,7 @@ export default function SuggestionPills({ label, pills }: Props) {
           // Out of reach while it goes, so a tap cannot land on one that has
           inert={leaving}
           className={clsx(
-            'bg-raised/70 backdrop-blur-xl border border-scrim/6 rounded-2xl px-4 py-3 text-sm font-medium text-tint cursor-pointer transition duration-200 text-left whitespace-nowrap shadow-(--shadow-chip)',
+            'bg-raised/70 backdrop-blur-xl border border-edge rounded-2xl px-4 py-3 text-sm font-medium text-tint cursor-pointer transition duration-200 text-left whitespace-nowrap shadow-(--shadow-chip)',
             'hover:bg-raised/90 hover:text-tint hover:-translate-y-0.5 hover:shadow-(--shadow-chip-hover)',
             'active:translate-y-0',
             leaving

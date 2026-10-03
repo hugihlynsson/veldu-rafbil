@@ -46,10 +46,13 @@
   /* A filter chip's edge, softer than a field's: its own text is what tells
      you it is there, so the line is only a shape around it */
   --color-line-chip: #ddd;
+  /* The edge of a translucent panel: the chat bar and the pills over the
+     page. What is behind it changes, so it is the page's ink at an alpha
+     rather than a grey that would only suit one background */
+  --color-edge: rgb(0 0 0 / 0.06);
+  --color-edge-strong: rgb(0 0 0 / 0.12);
 
-  /* Overlays. `scrim` is the page's own ink, so `bg-scrim/6` is a tint in
-     light and a wash in dark without either one naming a colour */
-  --color-scrim: #000;
+  /* Overlays */
   --color-backdrop: rgb(0 0 0 / 0.2);
   --color-backdrop-strong: rgb(0 0 0 / 0.3);
 
@@ -232,8 +235,9 @@
     --color-line: #3a3a3a;
     --color-line-strong: #757575;
     --color-line-chip: #757575;
+    --color-edge: rgb(255 255 255 / 0.06);
+    --color-edge-strong: rgb(255 255 255 / 0.12);
 
-    --color-scrim: #fff;
     --color-backdrop: rgb(0 0 0 / 0.55);
     --color-backdrop-strong: rgb(0 0 0 / 0.65);
 
@@ -334,83 +338,86 @@
   }
 }
 
-/* The chrome inside a message is mixed out of `currentColor` rather than any
+/* In the components layer, under the utilities, like every other rule here.
+   The chrome inside a message is mixed out of `currentColor` rather than any
    token: these rules run inside both bubbles, and the bubbles carry opposite
    text colours in either theme. Tinting with the text is right in all four. */
-.message-content p {
-  margin: 0 0 0.5em 0;
-}
-.message-content p:last-child {
-  margin-bottom: 0;
-}
-.message-content strong {
-  font-weight: 600;
-}
-.message-content em {
-  font-style: italic;
-}
-.message-content code {
-  background-color: color-mix(in srgb, currentColor 6%, transparent);
-  padding: 2px 4px;
-  border-radius: var(--radius-sm);
-  font-family:
-    'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New',
-    monospace;
-  font-size: 0.9em;
-}
-.message-content pre {
-  background-color: color-mix(in srgb, currentColor 6%, transparent);
-  padding: 8px 10px;
-  border-radius: var(--radius-lg);
-  overflow-x: auto;
-  margin: 0.5em 0;
-}
-.message-content pre code {
-  background-color: transparent;
-  padding: 0;
-}
-.message-content ul,
-.message-content ol {
-  margin: 0.5em 0;
-  padding-left: 1.5em;
-}
-.message-content ul {
-  list-style-type: disc;
-}
-.message-content ol {
-  list-style-type: decimal;
-}
-.message-content li {
-  margin: 0.25em 0;
-}
-.message-content a {
-  color: inherit;
-  text-decoration: underline;
-}
-.message-content a:hover {
-  opacity: 0.8;
-}
-.message-content .table-wrapper {
-  /* Out to the bubble's edges, which its px-3.5 holds the text off */
-  overflow-x: auto;
-  margin: 0.5em calc(var(--spacing) * -3.5);
-  padding: 0 calc(var(--spacing) * 3.5);
-}
-.message-content table {
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 13px;
-}
-.message-content th,
-.message-content td {
-  border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
-  padding: 6px 8px;
-  text-align: left;
-}
-.message-content th {
-  background-color: color-mix(in srgb, currentColor 4%, transparent);
-  font-weight: 600;
-}
-.message-content tr:nth-child(even) {
-  background-color: color-mix(in srgb, currentColor 2%, transparent);
+@layer components {
+  .message-content p {
+    margin: 0 0 0.5em 0;
+  }
+  .message-content p:last-child {
+    margin-bottom: 0;
+  }
+  .message-content strong {
+    font-weight: 600;
+  }
+  .message-content em {
+    font-style: italic;
+  }
+  .message-content code {
+    background-color: color-mix(in srgb, currentColor 6%, transparent);
+    padding: 2px 4px;
+    border-radius: var(--radius-sm);
+    font-family:
+      'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas,
+      'Courier New', monospace;
+    font-size: 0.9em;
+  }
+  .message-content pre {
+    background-color: color-mix(in srgb, currentColor 6%, transparent);
+    padding: 8px 10px;
+    border-radius: var(--radius-lg);
+    overflow-x: auto;
+    margin: 0.5em 0;
+  }
+  .message-content pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+  .message-content ul,
+  .message-content ol {
+    margin: 0.5em 0;
+    padding-left: 1.5em;
+  }
+  .message-content ul {
+    list-style-type: disc;
+  }
+  .message-content ol {
+    list-style-type: decimal;
+  }
+  .message-content li {
+    margin: 0.25em 0;
+  }
+  .message-content a {
+    color: inherit;
+    text-decoration: underline;
+  }
+  .message-content a:hover {
+    opacity: 0.8;
+  }
+  .message-content .table-wrapper {
+    /* Out to the bubble's edges, which its px-3.5 holds the text off */
+    overflow-x: auto;
+    margin: 0.5em calc(var(--spacing) * -3.5);
+    padding: 0 calc(var(--spacing) * 3.5);
+  }
+  .message-content table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 13px;
+  }
+  .message-content th,
+  .message-content td {
+    border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+    padding: 6px 8px;
+    text-align: left;
+  }
+  .message-content th {
+    background-color: color-mix(in srgb, currentColor 4%, transparent);
+    font-weight: 600;
+  }
+  .message-content tr:nth-child(even) {
+    background-color: color-mix(in srgb, currentColor 2%, transparent);
+  }
 }
