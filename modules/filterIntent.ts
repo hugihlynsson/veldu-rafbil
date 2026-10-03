@@ -76,8 +76,15 @@ const smallNumber = (raw: string): number =>
 const within = (value: number, min: number, max: number) =>
   Number.isFinite(value) && value >= min && value <= max
 
+// What a rule has read is blanked with this rather than cut, so later indices
+// still hold
+const READ = '\u0000'
+
+// Back no further than what a rule has read: the "undir" in "undir 10
+// milljónum 500 km" bounds the price, not the range after it
 const lastWords = (before: string, count: number): string[] =>
   before
+    .slice(before.lastIndexOf(READ) + 1)
     .split(/[^\p{L}\p{N}]+/u)
     .filter(Boolean)
     .slice(-count)
@@ -234,7 +241,6 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
   const drives: Drive[] = []
   const names: Array<{ index: number; entry: NameEntry }> = []
 
-  // Read spans are blanked rather than cut, so later indices still hold
   const take = (
     source: string,
     read: (match: RegExpExecArray, before: string) => boolean | void,
@@ -244,7 +250,7 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
       if (read(match, before) === false) continue
       rest =
         before +
-        ' '.repeat(match[0].length) +
+        READ.repeat(match[0].length) +
         rest.slice(match.index + match[0].length)
     }
   }

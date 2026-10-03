@@ -23,6 +23,13 @@ describe('foldText', () => {
 })
 
 describe('parseFilterIntent', () => {
+  it('reads a bound word only into the number it stands before', () => {
+    expect(read('undir 10 milljónum 500 km drægni')).toEqual({
+      price: 10_000_000,
+      range: 500,
+    })
+  })
+
   it('reads a price in every way people write one', () => {
     expect(read('8.000.000 kr')).toEqual({ price: 8_000_000 })
     expect(read('8000000')).toEqual({ price: 8_000_000 })
