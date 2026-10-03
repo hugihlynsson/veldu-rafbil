@@ -49,7 +49,9 @@ const packagesImportedBy = (entry: string): Set<string> => {
 // and its modal are loaded behind next/dynamic, and everything they need can
 // wait with them
 describe("the list's first load", () => {
-  const packages = packagesImportedBy(path.join(root, 'components/CarList.tsx'))
+  const packages = packagesImportedBy(
+    path.join(root, 'components/list/CarList.tsx'),
+  )
 
   it('reads its imports', () => {
     expect(packages).toContain('nuqs')

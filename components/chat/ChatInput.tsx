@@ -11,11 +11,13 @@ import useInputModality, { getInputModality } from '@/utils/inputModality'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import type { Filters } from '@/types'
-import SuggestionPills from './SuggestionPills'
+import SuggestionPills from '@/components/SuggestionPills'
 
 // The parser and its patterns are fetched once someone focuses the input,
 // rather than with the chat
-const FilterSuggestions = dynamic(() => import('./FilterSuggestions'))
+const FilterSuggestions = dynamic(
+  () => import('@/components/filters/FilterSuggestions'),
+)
 
 interface Props {
   onOpenChat: () => void
@@ -88,7 +90,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
     handleFocusRing()
     setIsFocused(true)
     onIntent?.()
-    if (filterSuggestions) void import('./FilterSuggestions')
+    if (filterSuggestions) void import('@/components/filters/FilterSuggestions')
     if (!hasMessages) {
       setSelectedSuggestions(getRandomSuggestions(CHAT_SUGGESTIONS, 3))
     }

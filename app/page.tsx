@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 import cars from '@/modules/data/cars'
-import CarList from '@/components/CarList'
+import CarList from '@/components/list/CarList'
 import Footer from '@/components/Footer'
 
 // Built once at deploy, for a visit with no sort or filter in its URL; one

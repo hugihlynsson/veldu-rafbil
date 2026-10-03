@@ -14,8 +14,8 @@ import {
 } from '@/modules/list/filterIntent'
 import { agree } from '@/modules/copy/plural'
 import { filterChipText } from './ActiveFilters'
-import SearchIcon from './SearchIcon'
-import SuggestionPills, { type Pill } from './SuggestionPills'
+import SearchIcon from '@/components/SearchIcon'
+import SuggestionPills, { type Pill } from '@/components/SuggestionPills'
 
 const carCount = (count: number) => `${count} ${agree(count, 'bíll', 'bílar')}`
 

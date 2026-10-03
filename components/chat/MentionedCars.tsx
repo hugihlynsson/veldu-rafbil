@@ -2,7 +2,7 @@
 
 import React from 'react'
 import clsx from 'clsx'
-import MiniCar from '@/components/MiniCar'
+import MiniCar from '@/components/list/MiniCar'
 import type { Car } from '@/modules/data/cars'
 import { getAnswerCars } from '@/modules/chat/cars'
 import type { ChatMessage } from '@/modules/chat/message'

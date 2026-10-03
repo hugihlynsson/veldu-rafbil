@@ -4,11 +4,11 @@ import { useRef, useState } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 
-import Car from '@/components/NewCar'
+import Car from './NewCar'
 import Title from '@/components/Title'
 import Toggles from '@/components/Toggles'
-import FilterModal from '@/components/FilterModal'
-import ActiveFilters from '@/components/ActiveFilters'
+import FilterModal from '@/components/filters/FilterModal'
+import ActiveFilters from '@/components/filters/ActiveFilters'
 import cars from '@/modules/data/cars'
 import carFilter, { filtersShowing } from '@/modules/list/carFilter'
 import { normalizeFilters } from '@/modules/list/filters'
@@ -22,7 +22,7 @@ import { useFilters, useSorting } from '@/utils/useListState'
 
 // Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
 // so arriving a moment later shifts nothing.
-const ChatContainer = dynamic(() => import('@/components/ChatContainer'), {
+const ChatContainer = dynamic(() => import('@/components/chat/ChatContainer'), {
   ssr: false,
 })
 
