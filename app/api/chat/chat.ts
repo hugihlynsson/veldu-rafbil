@@ -14,7 +14,8 @@ import {
   MAX_MESSAGES,
   trimHistory,
 } from '@/modules/chatRequest'
-import { followUpTransform } from '@/modules/followUps'
+import { markerTransform, type AnswerMarkers } from '@/modules/answerMarkers'
+import { resolveCarRefs } from '@/modules/chatCars'
 import { createFetchCarDetailsTool } from './tools/fetchCarDetails'
 
 const createTools = () => ({ fetchCarDetails: createFetchCarDetailsTool() })
@@ -52,6 +53,7 @@ const MAX_OUTPUT_TOKENS = 16_384
 export interface ChatFinish {
   text: string
   followUps: string[]
+  cars: string[]
   usage: LanguageModelUsage
   toolCalls: Array<{ toolName: string; input: unknown }>
 }
@@ -63,10 +65,22 @@ interface StreamChatOptions {
   onFinish?: (finish: ChatFinish) => void
 }
 
+const metadataOf = ({
+  followUps,
+  cars,
+}: AnswerMarkers): ChatMessage['metadata'] => {
+  const ids = resolveCarRefs(cars)
+  if (followUps.length === 0 && ids.length === 0) return undefined
+  return {
+    ...(followUps.length > 0 && { followUps }),
+    ...(ids.length > 0 && { cars: ids }),
+  }
+}
+
 /**
- * The answer as a UI message stream. The follow-up markers the prompt asks for
- * are taken out of the text on the way and sent as the message's metadata
- * when it finishes, so the client never has to parse them.
+ * The answer as a UI message stream. The follow-up and car markers the prompt
+ * asks for are taken out of the text on the way and sent as the message's
+ * metadata when it finishes, so the client never has to parse them.
  */
 export const streamChat = async ({
   model,
@@ -74,7 +88,7 @@ export const streamChat = async ({
   providerOptions,
   onFinish,
 }: StreamChatOptions): Promise<Response> => {
-  const followUps: string[] = []
+  const markers: AnswerMarkers = { followUps: [], cars: [] }
   const answerTools = createTools()
 
   const result = streamText({
@@ -87,11 +101,12 @@ export const streamChat = async ({
     maxOutputTokens: MAX_OUTPUT_TOKENS,
     stopWhen: stepCountIs(10),
     tools: answerTools,
-    experimental_transform: followUpTransform(followUps),
+    experimental_transform: markerTransform(markers),
     onFinish: ({ text, totalUsage, steps }) =>
       onFinish?.({
         text,
-        followUps,
+        followUps: markers.followUps,
+        cars: resolveCarRefs(markers.cars),
         usage: totalUsage,
         toolCalls: steps.flatMap((step) =>
           step.toolCalls.map(({ toolName, input }) => ({ toolName, input })),
@@ -102,8 +117,6 @@ export const streamChat = async ({
   return result.toUIMessageStreamResponse<ChatMessage>({
     // `finish` comes after every text part, so the list is complete by then
     messageMetadata: ({ part }) =>
-      part.type === 'finish' && followUps.length > 0
-        ? { followUps }
-        : undefined,
+      part.type === 'finish' ? metadataOf(markers) : undefined,
   })
 }

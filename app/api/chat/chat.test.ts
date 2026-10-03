@@ -11,7 +11,13 @@ import {
 } from 'ai/test'
 
 import { parseChatRequest, streamChat, type ChatFinish } from './chat'
-import { MAX_QUESTION_LENGTH, type ChatMessage } from '@/modules/chatMessage'
+import cars from '@/modules/cars'
+import { carRef } from '@/modules/chatCars'
+import {
+  MAX_QUESTION_LENGTH,
+  MAX_TAGGED_CARS,
+  type ChatMessage,
+} from '@/modules/chatMessage'
 import { trimHistory } from '@/modules/chatRequest'
 
 const question: ChatMessage = {
@@ -71,8 +77,11 @@ const read = async (response: Response) => {
 }
 
 describe('streamChat', () => {
+  const [first, second] = cars
   const chunks = [
-    'Já, hann er fjórhjóladrifinn.\n\n[q:Hvað fer',
+    'Já, hann er fjórhjóladrifinn.\n\n[car:',
+    `${carRef(second)}]\n[car:tesla-model-z]\n[ca`,
+    `r:${carRef(first)}]\n[car:${carRef(second)}]\n[q:Hvað fer`,
     ' hann langt?]\n[',
     'q:Er hann dýr?]\n',
   ]
@@ -90,17 +99,34 @@ describe('streamChat', () => {
     }
   })
 
-  it('sends the follow-ups as the finished message metadata', async () => {
+  it('sends the follow-ups and the cars as the finished message metadata', async () => {
     const { message } = await read(
       await streamChat({ model: modelSaying(chunks), messages: [question] }),
     )
 
     expect(message.metadata).toEqual({
       followUps: ['Hvað fer hann langt?', 'Er hann dýr?'],
+      cars: [second.id, first.id],
     })
   })
 
-  it('reports the clean answer and its follow-ups when it finishes', async () => {
+  it('sends cars without follow-ups, and no more than a message may carry', async () => {
+    const { message } = await read(
+      await streamChat({
+        model: modelSaying([
+          'Svar.\n',
+          ...cars.map((car) => `[car:${carRef(car)}]\n`),
+        ]),
+        messages: [question],
+      }),
+    )
+
+    expect(message.metadata).toEqual({
+      cars: cars.slice(0, MAX_TAGGED_CARS).map((car) => car.id),
+    })
+  })
+
+  it('reports the clean answer and its markers when it finishes', async () => {
     let finish: ChatFinish | undefined
     await read(
       await streamChat({
@@ -115,6 +141,7 @@ describe('streamChat', () => {
     expect(finish).toMatchObject({
       text: 'Já, hann er fjórhjóladrifinn.',
       followUps: ['Hvað fer hann langt?', 'Er hann dýr?'],
+      cars: [second.id, first.id],
       toolCalls: [],
     })
     expect(finish?.usage.totalTokens).toBe(30)
@@ -127,10 +154,10 @@ describe('streamChat', () => {
     expect(model.doStreamCalls[0].maxOutputTokens).toBeGreaterThan(0)
   })
 
-  it('sends no metadata for an answer without follow-ups', async () => {
+  it('sends no metadata for an answer without follow-ups or cars', async () => {
     const { message } = await read(
       await streamChat({
-        model: modelSaying(['Bara svar.']),
+        model: modelSaying(['Bara svar.\n[car:tesla-model-z]']),
         messages: [question],
       }),
     )
@@ -215,7 +242,10 @@ describe('parseChatRequest', () => {
     id: 'a1',
     role: 'assistant',
     parts: [{ type: 'text', text: 'Já.' }],
-    metadata: { followUps: ['Hvað fer hann langt?'] },
+    metadata: {
+      followUps: ['Hvað fer hann langt?'],
+      cars: ['car-byd-seal-base'],
+    },
   }
 
   // Every question is one, so refusing it would refuse every request
@@ -308,6 +338,10 @@ describe('parseChatRequest', () => {
     [
       'follow-ups that are not a list',
       { messages: [{ ...answer, metadata: { followUps: 'x' } }] },
+    ],
+    [
+      'cars that are not a list',
+      { messages: [{ ...answer, metadata: { cars: 'x' } }] },
     ],
     [
       'a car-details call with the wrong input',

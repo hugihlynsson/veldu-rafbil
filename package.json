@@ -7,8 +7,8 @@
     "node": "^22.22.1 || ^24 || >=26"
   },
   "dependencies": {
-    "@ai-sdk/google": "^4.0.78",
-    "@ai-sdk/react": "^4.0.115",
+    "@ai-sdk/google": "^4.0.86",
+    "@ai-sdk/react": "^4.0.126",
     "@axiomhq/js": "^2.0.0",
     "@tailwindcss/postcss": "^4.3.2",
     "@typesafe-ai/sdk": "^0.6.0",
@@ -16,7 +16,7 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "clsx": "^2.1.1",
     "fathom-client": "^3.7.2",
-    "next": "^16.3.6",
+    "next": "^16.3.7",
     "nuqs": "^2.10.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
@@ -35,14 +35,14 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@types/node": "^24.13.5",
+    "@types/node": "^24.19.0",
     "@types/react": "^19.3.0",
     "husky": "^9.1.7",
-    "lint-staged": "^17.5.1",
-    "oxfmt": "^0.70.0",
-    "oxlint": "^1.85.0",
+    "lint-staged": "^17.6.0",
+    "oxfmt": "^0.71.0",
+    "oxlint": "^1.86.0",
     "typescript": "^7.0.2",
-    "vitest": "^5.0.1"
+    "vitest": "^5.0.2"
   },
   "lint-staged": {
     "*": "oxfmt --no-error-on-unmatched-pattern"

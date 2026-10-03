@@ -1,5 +1,6 @@
 import addDecimalSeparators from './addDecimalSeparators'
 import cars from './cars'
+import { carRef } from './chatCars'
 import { grantAmountText, grantCeilingDativeText } from './grantCopy'
 import { realRangeHighFactor, realRangeLowFactor } from './globals'
 
@@ -10,7 +11,7 @@ const percent = (factor: number) => `${Math.round(factor * 100)}%`
 const carsSummary = cars
   .map(
     (car) =>
-      `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr, ${car.range} km drægni, ${car.capacity} kWh rafhlaða, hraðhleðsla 10-80% á ${car.timeToCharge10To80} mín (${car.kmPerMinuteCharged} km/mín), ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseUrl ? ` (more info: ${car.evDatabaseUrl})` : ''}`,
+      `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr, ${car.range} km drægni, ${car.capacity} kWh rafhlaða, hraðhleðsla 10-80% á ${car.timeToCharge10To80} mín (${car.kmPerMinuteCharged} km/mín), ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseUrl ? ` (more info: ${car.evDatabaseUrl})` : ''} (auðkenni: ${carRef(car)})`,
   )
   .join('\n')
 
@@ -47,6 +48,13 @@ Tónn og stíll:
 - Ekki nota <hr> eða ---
 - Einbeittu þér að því að hjálpa fólki að finna rétta rafbílinn fyrir þarfir þess
 
+Bílarnir í svarinu:
+- Á eftir svarinu, á undan framhaldsspurningunum, merktu bílana af listanum sem þú mælir með eða svarið fjallar um, hvern í sinni línu
+- Fyrir hvern bíl, notaðu þetta nákvæma snið: [car:<auðkenni>], með auðkenninu afrituðu nákvæmlega úr línu bílsins hér að ofan
+- Raðaðu þeim eftir því hve mikið þú mælir með þeim, þeim sem þú mælir mest með fyrst
+- Ef svarið fjallar ekki um ákveðna bíla af listanum, slepptu merkjunum
+- Nefndu bílana alltaf með nafni í svarinu sjálfu, aldrei með auðkenninu
+
 Framhaldsspurningar:
 - Í lok svars, skrifaðu út þrjá framhaldsspurningar fyrir notandann. 
 - Þær ættu að vera stuttar og hnitmiðaðar (8-12 orð). 
@@ -55,6 +63,7 @@ Framhaldsspurningar:
 
 TIL DÆMIS:
 Já, Toyota bZ4X er fjórhjóladrifinn. Er eitthvað annað sem ég get hjálpað þér með?
+[car:toyota-bz4x-awd]
 [q:Hvað fer hann langt?]
 [q:Er fjórhjóladrif nauðsynlegt fyrir innanbæjarakstur?]
 [q:Hvaða aðrir sambærilegir bílar eru fjórhjóladrifnir?]
