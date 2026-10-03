@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react'
 
 const controlClasses =
-  'border border-line-strong rounded bg-surface p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay'
+  'border border-line-strong rounded-2xl bg-surface p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay'
 
 const selectClasses =
-  'appearance-none border border-line-strong bg-surface rounded p-[11px] text-base font-normal text-tint mb-6 cursor-pointer hover:border-clay'
+  'appearance-none border border-line-strong bg-surface rounded-2xl p-[11px] text-base font-normal text-tint mb-6 cursor-pointer hover:border-clay'
 
 interface LabelProps {
   id: string
