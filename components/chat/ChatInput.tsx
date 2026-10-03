@@ -119,7 +119,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
     <div
       className={clsx(
         'fixed bottom-[calc(1rem+var(--keyboard-inset))] left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col-reverse items-center gap-3',
-        'min-[500px]:bottom-[calc(1.5rem+var(--keyboard-inset))]',
+        'sm:bottom-[calc(1.5rem+var(--keyboard-inset))]',
         // Only the hiding fades: a transition on the bottom drags the bar
         // behind a keyboard on its way in
         'transition-opacity duration-300',
@@ -135,11 +135,10 @@ const ChatInput: React.FunctionComponent<Props> = ({
       <form
         onSubmit={onSubmit}
         className={clsx(
-          'pointer-events-auto flex items-center gap-2 p-[8px_8px_8px_20px] bg-veil/70 backdrop-blur-xl rounded-full shadow-(--shadow-pill) w-80 max-w-[90vw] transition-all duration-300 ease-in-out border border-scrim/2',
+          'pointer-events-auto flex items-center gap-2 p-2 pl-5 bg-veil/70 backdrop-blur-xl rounded-full shadow-(--shadow-pill) w-80 max-w-[90vw] transition-[width,scale] duration-300 ease-in-out border border-scrim/2',
           showFocusRing && 'outline-2 outline-offset-2 outline-focus',
           isFocused ? 'w-[400px] scale-100' : 'scale-[0.98] hover:scale-100',
-          animateIn &&
-            'animate-[fadeIn_0.5s_cubic-bezier(0.16,1,0.3,1)_backwards]',
+          animateIn && 'animate-bar-in',
         )}
       >
         <input
@@ -152,14 +151,14 @@ const ChatInput: React.FunctionComponent<Props> = ({
           onClick={handleClick}
           placeholder="Spurðu Veldu Rafbíl"
           // The ring lives on the form, so it wraps the whole pill
-          className="flex-1 border-0 bg-transparent p-[8px_0] text-base font-normal text-tint outline-none placeholder:text-scrim/60 disabled:opacity-60"
+          className="flex-1 border-0 bg-transparent py-2 text-base font-normal text-tint outline-none placeholder:text-scrim/60 disabled:opacity-60"
         />
         <button
           onFocus={handleFocusRing}
           aria-label="Senda skilaboð"
           type="submit"
           disabled={disabled || !value.trim()}
-          className="appearance-none w-9 h-9 flex items-center justify-center bg-sky border-0 rounded-full text-on-sky cursor-pointer transition-all duration-200 shrink-0 hover:enabled:bg-sky-hover hover:enabled:scale-105 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="appearance-none w-9 h-9 flex items-center justify-center bg-sky border-0 rounded-full text-on-sky cursor-pointer transition duration-200 shrink-0 hover:enabled:bg-sky-hover hover:enabled:scale-105 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           <svg
             width="20"

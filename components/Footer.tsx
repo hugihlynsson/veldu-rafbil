@@ -2,38 +2,28 @@
 
 import { FunctionComponent } from 'react'
 import Orflaedi from './Orflaedi'
+import TextLink from './TextLink'
+
+const paragraph =
+  'mx-auto max-w-column text-sm leading-6 px-(--gutter) text-stone md:max-w-page md:px-10'
 
 const Footer: FunctionComponent<{}> = () => (
   <>
     <Orflaedi />
-    <footer className="bg-haze py-8 pb-[100px] xs:pt-14 md:pt-14">
-      <p className="mx-auto max-w-[480px] text-sm leading-6 px-(--gutter) text-stone md:max-w-[1024px] md:px-10">
+    <footer className="bg-haze pt-8 pb-25 xs:pt-14">
+      <p className={paragraph}>
         Veldu Rafbíl er smíðuð af{' '}
-        <a
-          href="https://hugihlynsson.com"
-          className="text-tint font-semibold no-underline hover:underline"
-        >
-          Huga Hlynssyni
-        </a>{' '}
-        og er geymd á{' '}
-        <a
-          href="https://github.com/hugihlynsson/veldu-rafbil"
-          className="text-tint font-semibold no-underline hover:underline"
-        >
+        <TextLink href="https://hugihlynsson.com">Huga Hlynssyni</TextLink> og
+        er geymd á{' '}
+        <TextLink href="https://github.com/hugihlynsson/veldu-rafbil">
           GitHub
-        </a>
+        </TextLink>
         .{' '}
       </p>
 
-      <p className="mx-auto max-w-[480px] text-sm leading-6 px-(--gutter) text-stone md:max-w-[1024px] md:px-10">
+      <p className={paragraph}>
         Ef þú ert með ábendingu eða fyrirspurn geturu sent póst á{' '}
-        <a
-          href="mailto:hugi@hey.com"
-          className="text-tint font-semibold no-underline hover:underline"
-        >
-          hugi@hey.com
-        </a>
-        .
+        <TextLink href="mailto:hugi@hey.com">hugi@hey.com</TextLink>.
       </p>
     </footer>
   </>

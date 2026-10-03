@@ -99,7 +99,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
         <>
           <section
             className={clsx(
-              'z-1 flex flex-col bg-glass/95 backdrop-blur-[20px] w-screen h-[calc(100dvh-var(--keyboard-inset))] overflow-hidden min-[600px]:h-[calc(100dvh-24px-var(--keyboard-inset))] min-[600px]:max-w-[600px] min-[600px]:w-[90vw] min-[600px]:rounded-t-3xl min-[600px]:rounded-b-4xl min-[600px]:mt-3 min-[600px]:shadow-(--shadow-modal)',
+              'z-1 flex flex-col bg-glass/95 backdrop-blur-[20px] w-screen h-[calc(100dvh-var(--keyboard-inset))] overflow-hidden chat-panel:h-[calc(100dvh-24px-var(--keyboard-inset))] chat-panel:max-w-[600px] chat-panel:w-[90vw] chat-panel:rounded-t-3xl chat-panel:rounded-b-4xl chat-panel:mt-3 chat-panel:shadow-(--shadow-modal)',
               panelMotion,
             )}
           >
@@ -112,10 +112,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
               }}
             />
 
-            <div
-              className="flex-1 overflow-y-auto pb-21 flex flex-col"
-              style={{ paddingTop: '20px' }}
-            >
+            <div className="flex-1 overflow-y-auto pt-5 pb-21 flex flex-col">
               {turns.map((turn, index) => {
                 const isLastTurn = index === turns.length - 1
                 return (

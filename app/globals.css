@@ -43,6 +43,9 @@
      it, so `line-strong` clears 3:1 on white and on `haze` */
   --color-line: #eee; /* a divider */
   --color-line-strong: #8f8f8f; /* the edge of something you can click or type in */
+  /* A filter chip's edge, softer than a field's: its own text is what tells
+     you it is there, so the line is only a shape around it */
+  --color-line-chip: #ddd;
 
   /* Overlays. `scrim` is the page's own ink, so `bg-scrim/6` is a tint in
      light and a wash in dark without either one naming a colour */
@@ -63,7 +66,22 @@
   --color-alarm-fill: #fee4e2;
   --color-alarm-fill-hover: #fecdca;
 
+  /* Sizes the default type scale lacks, named for what they set */
+  --text-eyebrow: 0.625rem; /* the uppercase label over a figure */
+  --text-fine: 0.6875rem; /* the small print on a car in the chat */
+  --text-control: 0.8125rem; /* a control's label, a step under `sm` */
+  --text-display: 2rem; /* a car's name, and the Örflæði heading */
+
+  /* The steps the layout takes. Cleared first, like the colours, so a
+     `lg:` that nothing defines generates nothing */
+  --breakpoint-*: initial;
   --breakpoint-xs: 375px;
+  --breakpoint-sm: 500px;
+  --breakpoint-md: 768px;
+
+  /* The column a car's text sits in on a phone, and the page at its widest */
+  --container-column: 480px;
+  --container-page: 1024px;
 
   /* Radii, written at their round-corner size. A squircle of the same radius
      hugs the corner more tightly, so `--corner` grows them where one is drawn
@@ -79,7 +97,70 @@
   --radius-toggle: calc(10px * var(--corner));
   --radius-card: calc(14px * var(--corner));
   --radius-sheet: calc(20px * var(--corner));
+
+  /* Motion. Everything that arrives rises the same way; `--rise` shortens
+     the distance for the cars under an answer, which are big enough that
+     10px reads as a jump */
+  --ease-in-cubic: cubic-bezier(0.32, 0, 0.67, 0);
+  --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-message-in: rise 0.3s ease-in-out;
+  --animate-bar-in: rise 0.5s var(--ease-out-expo) backwards;
+  --animate-follow-up-in: rise 0.4s var(--ease-out-expo) backwards;
+  --animate-car-in: rise 0.5s var(--ease-out-expo) backwards;
+  --animate-pill-in: pill-in 0.3s ease-out backwards;
+  --animate-pill-out: pill-out 0.2s ease-in forwards;
+  --animate-typing: typing 1.4s infinite;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(var(--rise, 10px));
+    }
+  }
+
+  /* Tipped back as they come in from the input. The perspective is what
+     makes the tilt read as depth; without one, rotateX only squashes */
+  @keyframes pill-in {
+    from {
+      opacity: 0;
+      transform: perspective(400px) translateY(10px) rotateX(40deg) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: perspective(400px) translateY(0) rotateX(0) scale(1);
+    }
+  }
+
+  @keyframes pill-out {
+    from {
+      opacity: 1;
+      transform: perspective(400px) translateY(0) rotateX(0) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: perspective(400px) translateY(10px) rotateX(40deg) scale(0.95);
+    }
+  }
+
+  @keyframes typing {
+    0%,
+    60%,
+    100% {
+      transform: translateY(0);
+    }
+    30% {
+      transform: translateY(-10px);
+    }
+  }
 }
+
+/* Where each modal stops filling a phone and floats as a panel. The filter
+   sheet waits for the height too: centred on a short screen, it would scroll
+   more of its fields than it shows */
+@custom-variant chat-panel (@media (width >= 600px));
+@custom-variant sheet-panel (@media (width >= 800px) and (height >= 600px));
 
 /* Inline, as the face is a variable next/font sets on <html> */
 @theme inline {
@@ -115,8 +196,8 @@
   --shadow-card-hover: 0 8px 64px rgb(0 0 0 / 0.3);
 }
 
-@media (min-width: 375px) {
-  :root {
+:root {
+  @variant xs {
     --gutter: 1.5rem;
   }
 }
@@ -150,6 +231,7 @@
 
     --color-line: #3a3a3a;
     --color-line-strong: #757575;
+    --color-line-chip: #757575;
 
     --color-scrim: #fff;
     --color-backdrop: rgb(0 0 0 / 0.55);
@@ -252,72 +334,6 @@
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes typing {
-  0%,
-  60%,
-  100% {
-    transform: translateY(0);
-  }
-  30% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInCar {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInUpRotate {
-  from {
-    opacity: 0;
-    transform: translateY(10px) rotateX(40deg) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) rotateX(0) scale(1);
-  }
-}
-
-@keyframes fadeOutDownRotate {
-  from {
-    opacity: 1;
-    transform: translateY(0) rotateX(0) scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(10px) rotateX(40deg) scale(0.95);
-  }
-}
-
 /* The chrome inside a message is mixed out of `currentColor` rather than any
    token: these rules run inside both bubbles, and the bubbles carry opposite
    text colours in either theme. Tinting with the text is right in all four. */
@@ -375,10 +391,10 @@
   opacity: 0.8;
 }
 .message-content .table-wrapper {
+  /* Out to the bubble's edges, which its px-3.5 holds the text off */
   overflow-x: auto;
-  margin: 0.5em -14px;
-  padding: 0 14px;
-  -webkit-overflow-scrolling: touch;
+  margin: 0.5em calc(var(--spacing) * -3.5);
+  padding: 0 calc(var(--spacing) * 3.5);
 }
 .message-content table {
   border-collapse: collapse;

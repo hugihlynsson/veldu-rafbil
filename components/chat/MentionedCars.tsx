@@ -28,14 +28,13 @@ const MentionedCars: React.FunctionComponent<Props> = ({
 
   return (
     <div className="mb-3">
-      <div className="flex gap-3 w-full overflow-x-auto pl-5 pr-20 scroll-pl-5 scroll-pr-20 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      <div className="flex gap-3 w-full overflow-x-auto pl-5 pr-20 scroll-pl-5 scroll-pr-20 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {mentionedCars.map((car, index) => (
           <div
             key={car.id}
             className={clsx(
               'shrink-0',
-              animate &&
-                'opacity-0 animate-[slideInCar_0.5s_cubic-bezier(0.16,1,0.3,1)_forwards]',
+              animate && 'animate-car-in [--rise:4px]',
             )}
             style={animate ? { animationDelay: `${index * 0.1}s` } : undefined}
           >

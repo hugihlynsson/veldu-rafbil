@@ -1,10 +1,11 @@
 import React, { ReactNode } from 'react'
 
 const controlClasses =
-  'border border-line-strong rounded-xl bg-surface p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay'
+  'block w-full border border-line-strong rounded-xl bg-surface p-2.75 text-base font-normal text-tint transition-[border-color] duration-200 hover:border-clay'
 
-const selectClasses =
-  'appearance-none w-full border border-line-strong bg-surface rounded-xl p-[11px] pr-10 text-base font-normal text-tint cursor-pointer hover:border-clay'
+const inputClasses = `${controlClasses} placeholder:text-clay`
+
+const selectClasses = `${controlClasses} appearance-none pr-10 cursor-pointer`
 
 interface LabelProps {
   id: string
@@ -20,7 +21,7 @@ const Field: React.FunctionComponent<LabelProps> = ({
   hint,
   children,
 }) => (
-  <>
+  <div>
     <div className="flex gap-2 items-baseline mb-1 px-3">
       <label htmlFor={id} className="text-tint text-xs font-semibold">
         {label}
@@ -28,7 +29,7 @@ const Field: React.FunctionComponent<LabelProps> = ({
       {hint && <p className="m-0 text-xs text-clay">{hint}</p>}
     </div>
     {children}
-  </>
+  </div>
 )
 
 type ControlEvent = React.FormEvent<HTMLInputElement | HTMLSelectElement>
@@ -66,7 +67,7 @@ export const FilterInput: React.FunctionComponent<InputProps> = ({
       onChange={onChange}
       onKeyDown={onKeyDown}
       value={value}
-      className={controlClasses}
+      className={inputClasses}
     />
   </Field>
 )
@@ -93,7 +94,7 @@ export const FilterSelect: React.FunctionComponent<SelectProps> = ({
   <Field id={id} label={label}>
     {/* appearance-none takes the browser's chevron, which is all that tells a
         select from a text field, so it is drawn back */}
-    <div className="relative mb-6">
+    <div className="relative">
       <select
         id={id}
         onChange={onChange}

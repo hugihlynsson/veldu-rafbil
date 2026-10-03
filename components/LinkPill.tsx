@@ -1,7 +1,10 @@
 import React, { ReactNode, FunctionComponent } from 'react'
 import Link from 'next/link'
+import clsx from 'clsx'
 
 interface Props {
+  /** Where it sits: the pill sets none of its own margins */
+  className?: string
   external?: boolean
   extra?: string
   href: React.ComponentProps<typeof Link>['href']
@@ -12,6 +15,7 @@ interface Props {
 
 const LinkPill: FunctionComponent<Props> = ({
   children,
+  className,
   external,
   extra,
   href,
@@ -19,7 +23,10 @@ const LinkPill: FunctionComponent<Props> = ({
   title,
 }) => (
   <Link
-    className="group inline-flex self-start items-center shrink-0 mt-2 py-1 px-3 text-inherit text-sm font-semibold rounded-full no-underline -ml-0.5 mr-2.5 bg-cloud transition-all duration-100 hover:bg-smoke active:scale-[0.98]"
+    className={clsx(
+      'group inline-flex self-start items-center shrink-0 py-1 px-3 text-inherit text-sm font-semibold rounded-full no-underline bg-cloud transition duration-100 hover:bg-smoke active:scale-[0.98]',
+      className,
+    )}
     onClick={onClick}
     href={href}
     target={external ? '_blank' : undefined}
@@ -28,7 +35,7 @@ const LinkPill: FunctionComponent<Props> = ({
   >
     {children}{' '}
     {extra && (
-      <span className="uppercase font-bold text-[10px] rounded-full py-0.5 px-1.5 my-0 ml-[5px] -mr-[7px] align-top inline-block text-stone bg-raised transition-colors duration-100 group-hover:bg-raised/80">
+      <span className="uppercase font-bold text-eyebrow rounded-full py-0.5 px-1.5 my-0 ml-1.25 -mr-1.75 align-top inline-block text-stone bg-raised transition-colors duration-100 group-hover:bg-raised/80">
         {extra}
       </span>
     )}

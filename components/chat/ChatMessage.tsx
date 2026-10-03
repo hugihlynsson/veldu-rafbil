@@ -40,13 +40,13 @@ const ChatMessage: React.FunctionComponent<Props> = ({
       ref={ref}
       className={clsx(
         'flex flex-col mb-4 scroll-mt-5 last:mb-0 px-5',
-        animate && 'animate-[fadeIn_0.3s_ease-in-out]',
+        animate && 'animate-message-in',
         isUser ? 'items-end' : 'items-start',
       )}
     >
       <div
         className={clsx(
-          'message-content max-w-[90%] p-[10px_14px] rounded-2xl text-sm leading-6 wrap-break-word',
+          'message-content max-w-[90%] px-3.5 py-2.5 rounded-2xl text-sm leading-6 wrap-break-word',
           isUser ? 'bg-sky text-on-sky' : 'bg-cloud text-tint',
         )}
       >

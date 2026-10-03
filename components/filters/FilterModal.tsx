@@ -57,7 +57,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
       initialFocusRef={nameInputRef}
       className={clsx(
         'items-end data-[state=visible]:backdrop:bg-backdrop-strong',
-        '[@media(min-width:800px)_and_(min-height:600px)]:items-center',
+        'sheet-panel:items-center',
       )}
     >
       {({ close }) => {
@@ -75,18 +75,18 @@ const FiltersModal: React.FunctionComponent<Props> = ({
         return (
           <section
             className={clsx(
-              'z-1 flex flex-col rounded-t-sheet bg-surface w-screen max-w-[400px] max-h-[85vh] overflow-hidden shadow-(--shadow-sheet)',
+              'z-1 flex flex-col rounded-t-sheet bg-surface w-screen max-w-[400px] max-h-[85dvh] overflow-hidden shadow-(--shadow-sheet)',
               panelMotion,
-              '[@media(min-width:800px)_and_(min-height:600px)]:rounded-sheet [@media(min-width:800px)_and_(min-height:600px)]:max-h-[500px]',
+              'sheet-panel:rounded-sheet sheet-panel:max-h-[500px]',
             )}
           >
-            <header className="relative bg-surface text-lg text-center px-4 py-3 border-b border-line font-semibold">
+            <header className="relative bg-surface text-center px-4 py-3 border-b border-line">
               <CloseButton onClick={close} />
               <h2 id="filter-modal-title" className="m-0 text-lg font-semibold">
                 Leita
               </h2>
             </header>
-            <div className="flex flex-col grow shrink overflow-scroll p-5 pb-2">
+            <div className="flex flex-col gap-6 grow shrink overflow-y-auto p-5 pb-8">
               <FilterInput
                 inputRef={nameInputRef}
                 id="filter-name"
@@ -185,13 +185,13 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             </div>
             <footer className="p-4 flex justify-between shadow-(--shadow-sheet-footer) z-1">
               <button
-                className="appearance-none border-0 bg-transparent p-0 pl-1 text-stone text-sm font-semibold transition-all duration-200 cursor-pointer hover:text-tint"
+                className="appearance-none border-0 bg-transparent p-0 pl-1 text-stone text-sm font-semibold transition-colors duration-200 cursor-pointer hover:text-tint"
                 onClick={() => setFields({})}
               >
                 Hreinsa leit
               </button>
               <button
-                className="appearance-none p-[11px_16px_12px_16px] bg-sky border-0 rounded-full text-on-sky text-sm font-semibold cursor-pointer transition-all duration-200 hover:bg-sky-hover active:scale-[0.98]"
+                className="appearance-none px-4 pt-2.75 pb-3 bg-sky border-0 rounded-full text-on-sky text-sm font-semibold cursor-pointer transition duration-200 hover:bg-sky-hover active:scale-[0.98]"
                 onClick={handleDone}
               >
                 Sýna niðurstöður{' '}

@@ -59,12 +59,12 @@ export default function SuggestionPills({ label, pills }: Props) {
           // Out of reach while it goes, so a tap cannot land on one that has
           inert={leaving}
           className={clsx(
-            'bg-raised/70 backdrop-blur-xl border border-scrim/6 rounded-2xl p-[12px_16px] text-sm font-medium text-tint cursor-pointer transition-all duration-200 text-left whitespace-nowrap shadow-(--shadow-chip)',
+            'bg-raised/70 backdrop-blur-xl border border-scrim/6 rounded-2xl px-4 py-3 text-sm font-medium text-tint cursor-pointer transition duration-200 text-left whitespace-nowrap shadow-(--shadow-chip)',
             'hover:bg-raised/90 hover:text-tint hover:-translate-y-0.5 hover:shadow-(--shadow-chip-hover)',
             'active:translate-y-0',
             leaving
-              ? 'pointer-events-none animate-[fadeOutDownRotate_0.2s_ease-in_forwards]'
-              : 'animate-[fadeInUpRotate_0.3s_ease-out_backwards]',
+              ? 'pointer-events-none animate-pill-out'
+              : 'animate-pill-in',
           )}
           style={
             leaving ? undefined : { animationDelay: `${pill.enterDelay ?? 0}s` }
@@ -74,7 +74,7 @@ export default function SuggestionPills({ label, pills }: Props) {
           onMouseDown={(event) => event.preventDefault()}
           onClick={pill.onClick}
           onAnimationEnd={(event) => {
-            if (event.animationName === 'fadeOutDownRotate') {
+            if (event.animationName === 'pill-out') {
               setRendered((current) => depart(current, pill.key))
             }
           }}
