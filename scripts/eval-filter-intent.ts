@@ -4,7 +4,7 @@
  * requests are Icelandic either way; what changes between the two Jev runs is
  * the language of the instructions and options it is asked to choose from.
  *
- *   npx tsx --env-file=.env.local scripts/eval-filter-intent.ts [--verbose]
+ *   npx tsx --env-file=.env.local scripts/eval-filter-intent.ts [--verbose] [--language en|is]
  *
  * Each case the parser cannot finish is a real, billed request, of about
  * 1,200 input tokens. Jev's answers vary a little from run to run, so a
@@ -29,6 +29,11 @@ import {
 } from '@/modules/filterIntentModel'
 
 const verbose = process.argv.includes('--verbose')
+const languageArgument = process.argv[process.argv.indexOf('--language') + 1]
+const languages: Language[] =
+  languageArgument === 'en' || languageArgument === 'is'
+    ? [languageArgument]
+    : ['en', 'is']
 
 interface Run {
   name: string
@@ -187,8 +192,7 @@ const main = async () => {
   }
 
   const client = new TypeSafeClient({ retry: { maxRetries: 0 } })
-  await withModel(client, 'en')
-  await withModel(client, 'is')
+  for (const language of languages) await withModel(client, language)
 }
 
 main().catch((error) => {
