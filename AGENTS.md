@@ -186,6 +186,38 @@ that are upgraded as they are read.
 shared by the route and the stored history, so the two cannot disagree on
 what a message is.
 
+## Filter suggestions
+
+While the chat is closed, typing in its input offers the filters the text asks
+for as pills above it. They are tapped, never applied for you, since a wrong
+filter quietly empties the list.
+
+**The parser reads first, and a model only reads what it left.**
+`parseFilterIntent` in `modules/filterIntent.ts` turns what a request states
+outright — numbers with their units, seats, drive, makes and models — into
+filters in the browser, exactly and for free. Only when words are left over
+does the browser ask `/api/filter-suggestions`, which puts them to a model
+through `modules/filterIntentModel.ts`. A literal request never costs a call,
+and without a key, or when the model fails, the parser's reading still stands.
+
+**The model picks from our brackets; it never writes a value.** Each filter is
+a multiple-choice question whose options are cut from the car data, so "ódýr"
+keeps meaning the cheap end as prices move, and the worst a model can do is
+pick the wrong option from our own list. `rankSuggestions` then drops a guess
+that narrows nothing or would leave the suggestions matching no car.
+
+**The model and the wording are chosen on the eval.**
+`scripts/eval-filter-intent.ts` scores the parser and the model on the
+Icelandic requests in `modules/filterIntentCases.ts`, and the comment on the
+model constant in the route says what it found. Re-run it before changing
+either, and say what you found there too. Its answers vary between runs, so
+run it twice before believing a small difference.
+
+The endpoint is public and spends money, as the chat's does. The body schema,
+the rate limit, and `readSuggestions` — which puts every suggestion back
+through its filter's own parser before the browser shows it — are a security
+boundary in the same way, and tests pin them.
+
 ## Published data
 
 `/api/cars`, `/llms.txt` and `/robots.txt` are for readers who are not a
