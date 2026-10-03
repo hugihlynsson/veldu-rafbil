@@ -270,6 +270,17 @@ input {
   }
 }
 
+@keyframes fadeOutDownRotate {
+  from {
+    opacity: 1;
+    transform: translateY(0) rotateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px) rotateX(40deg) scale(0.95);
+  }
+}
+
 /* The chrome inside a message is mixed out of `currentColor` rather than any
    token: these rules run inside both bubbles, and the bubbles carry opposite
    text colours in either theme. Tinting with the text is right in all four. */

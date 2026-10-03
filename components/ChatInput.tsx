@@ -9,6 +9,7 @@ import useInputModality, { getInputModality } from '@/utils/inputModality'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import type { Filters } from '@/types'
+import SuggestionPills from './SuggestionPills'
 
 // The parser and its patterns are fetched once someone focuses the input,
 // rather than with the chat
@@ -52,6 +53,9 @@ const ChatInput: React.FunctionComponent<Props> = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false)
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([])
+  // The filter pills are fetched on the first keystroke, then kept mounted so
+  // they can play their exit when the text is cleared or the input left
+  const [hasTyped, setHasTyped] = useState(value !== '')
   useInputModality()
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -69,6 +73,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onValueChange(e.target.value)
+    if (e.target.value) setHasTyped(true)
   }
 
   // :focus-visible matches a text field however focus arrived, click
@@ -167,11 +172,12 @@ const ChatInput: React.FunctionComponent<Props> = ({
         </button>
       </form>
 
-      {isFocused && filterSuggestions && value.trim() && (
+      {filterSuggestions && hasTyped && (
         // Its own boundary: suspending on the chunk would otherwise swap out
         // the input mid-word, and the keystrokes typed meanwhile with it
         <Suspense fallback={null}>
           <FilterSuggestions
+            active={isFocused && value.trim() !== ''}
             text={value}
             filters={filterSuggestions.filters}
             onApply={filterSuggestions.onApply}
@@ -179,33 +185,20 @@ const ChatInput: React.FunctionComponent<Props> = ({
         </Suspense>
       )}
 
-      {isFocused && !hasMessages && !value && (
-        <fieldset
-          aria-label="Tillögur að spurningum"
-          className="pointer-events-auto m-0 flex min-w-0 flex-col gap-2 border-0 p-0 animate-[fadeInUpRotate_0.3s_ease-out]"
-        >
-          {selectedSuggestions.map((suggestion, index) => (
-            <button
-              key={index}
-              type="button"
-              className={clsx(
-                'bg-raised/70 backdrop-blur-xl border border-scrim/6 rounded-2xl p-[12px_16px] text-sm font-medium text-tint cursor-pointer transition-all duration-200 text-left whitespace-nowrap shadow-(--shadow-chip) animate-[fadeInUpRotate_0.3s_ease-out_backwards]',
-                'hover:bg-raised/90 hover:text-tint hover:-translate-y-0.5 hover:shadow-(--shadow-chip-hover)',
-                'active:translate-y-0',
-                index === 0 && '[animation-delay:0.45s]',
-                index === 1 && '[animation-delay:0.35s]',
-                index === 2 && '[animation-delay:0.25s]',
-              )}
-              // Keeps the blur above from firing before the click lands;
-              // Safari does not focus buttons on click
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={() => handleSuggestionClick(suggestion)}
-            >
-              {suggestion}
-            </button>
-          ))}
-        </fieldset>
-      )}
+      <SuggestionPills
+        label="Tillögur að spurningum"
+        pills={
+          isFocused && !hasMessages && !value
+            ? selectedSuggestions.map((suggestion, index) => ({
+                key: suggestion,
+                content: suggestion,
+                onClick: () => handleSuggestionClick(suggestion),
+                // Top last, once the input has widened under them
+                enterDelay: 0.45 - index * 0.1,
+              }))
+            : []
+        }
+      />
     </div>
   )
 }
