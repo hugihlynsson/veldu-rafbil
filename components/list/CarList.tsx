@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 
@@ -9,7 +9,7 @@ import Title from '@/components/Title'
 import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/filters/FilterModal'
 import ActiveFilters from '@/components/filters/ActiveFilters'
-import cars from '@/modules/data/cars'
+import cars, { type Car as CarData } from '@/modules/data/cars'
 import carFilter, { filtersShowing } from '@/modules/list/carFilter'
 import { normalizeFilters, type Filters } from '@/modules/list/filters'
 import type { Sorting } from '@/modules/list/sorting'
@@ -66,6 +66,33 @@ export default function CarList() {
       })
     }
   }
+
+  // The chat can point at a car the filters are hiding, and its card is only
+  // there to scroll to once the render without them has happened
+  const carToReveal = useRef<string | null>(null)
+
+  const revealCar = (id: string) => {
+    const card = document.getElementById(id)
+    if (!card) return
+    card.scrollIntoView({
+      behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+      block: 'center',
+    })
+    // Without this the reader is scrolled somewhere their focus is not
+    card.focus({ preventScroll: true })
+  }
+
+  const showCar = (car: CarData) => {
+    if (carFilter(filters)(car)) return revealCar(car.id)
+    carToReveal.current = car.id
+    setFilters(filtersShowing(filters, car))
+  }
+
+  useEffect(() => {
+    if (!carToReveal.current) return
+    revealCar(carToReveal.current)
+    carToReveal.current = null
+  })
 
   useBodyScrollLock(editingFilters)
 
@@ -193,9 +220,7 @@ export default function CarList() {
 
       <ChatContainer
         hide={editingFilters}
-        onShowCar={(car) => {
-          if (!carFilter(filters)(car)) setFilters(filtersShowing(filters, car))
-        }}
+        onShowCar={showCar}
         filters={filters}
         onApplyFilters={applySuggestedFilters}
       />
