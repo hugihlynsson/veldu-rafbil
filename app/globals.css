@@ -75,8 +75,7 @@
 
 /* Shadows are deliberately not `@theme`: Tailwind inlines a theme shadow into
    the utility itself, so redefining one below would never reach it. As plain
-   properties they stay references, read as `shadow-(--shadow-chip)`. A black
-   blur over a black page is invisible, so dark gets its own depths. */
+   properties they stay references, read as `shadow-(--shadow-chip)`. */
 :root {
   /* The Örflæði logo is a fixed white SVG served as an <img>, so it cannot
      take a colour from the page. Inverting it is what lets the card it sits
@@ -154,20 +153,21 @@
     --color-alarm-fill: #55261f;
     --color-alarm-fill-hover: #6d3329;
 
+    /* Dark draws depth with the surface ladder, not with shadows: everything
+       that casts one in light already sits a step lighter than what is under
+       it here. The two left are hairlines, edges where the fill is the same
+       on both sides */
     --shadow-hairline: 0 1px 0px 0 rgb(255 255 255 / 0.07);
-    /* None: the sorting tabs are the only thing that reads this, and the
-       active one already sits lighter than its track. A drop shadow under a
-       pill that is lighter than what it sits on lights it from below */
     --shadow-raised: none;
-    --shadow-pill: 0 6px 24px rgb(0 0 0 / 0.55);
-    --shadow-chip: 0 2px 8px rgb(0 0 0 / 0.4);
-    --shadow-chip-hover: 0 4px 14px rgb(0 0 0 / 0.5);
-    --shadow-chip-press: 0 2px 6px rgb(0 0 0 / 0.45);
-    --shadow-sheet: 0px 0px 48px 0px rgb(0 0 0 / 0.75);
-    --shadow-sheet-footer: 0 0 32px 0 rgb(0 0 0 / 0.6);
-    --shadow-modal: 0px 8px 60px rgb(0 0 0 / 0.8);
-    --shadow-card: 0 2px 32px rgb(0 0 0 / 0.6);
-    --shadow-card-hover: 0 8px 64px rgb(0 0 0 / 0.8);
+    --shadow-pill: none;
+    --shadow-chip: none;
+    --shadow-chip-hover: none;
+    --shadow-chip-press: none;
+    --shadow-sheet: none;
+    --shadow-sheet-footer: 0 -1px 0px 0 rgb(255 255 255 / 0.07);
+    --shadow-modal: none;
+    --shadow-card: none;
+    --shadow-card-hover: none;
   }
 }
 
