@@ -23,7 +23,7 @@ const client = process.env.TYPESAFE_API_KEY
   : undefined
 
 // Typing asks more often than chatting does, debounced as it is
-const rateLimit = createRateLimit(30)
+const rateLimit = createRateLimit(60)
 
 const requestSchema = z.strictObject({
   text: z.string().trim().min(1).max(MAX_INTENT_LENGTH),
