@@ -37,7 +37,7 @@ const MiniCar: FunctionComponent<Props> = ({ car, onSelect }) => {
     <button
       type="button"
       onClick={handleClick}
-      className="flex flex-row w-full p-0 border-0 bg-transparent cursor-pointer text-left rounded-[14px] overflow-hidden no-underline text-inherit transition-all duration-200 max-w-full hover:border-line-strong hover:bg-raised"
+      className="flex flex-row w-full p-0 border-0 bg-transparent cursor-pointer text-left rounded-card overflow-hidden no-underline text-inherit transition-all duration-200 max-w-full hover:border-line-strong hover:bg-raised"
     >
       <div className="relative w-[120px] min-w-[120px] h-full bg-cloud shrink-0">
         {/* The size the box really renders at, so the 1x/2x pair lands on
@@ -50,7 +50,7 @@ const MiniCar: FunctionComponent<Props> = ({ car, onSelect }) => {
           className="w-full h-full object-cover block"
         />
       </div>
-      <div className="py-[10px] px-3 flex-1 flex flex-col justify-center border border-line border-l-0 rounded-tr-[14px] rounded-br-[14px]">
+      <div className="py-[10px] px-3 flex-1 flex flex-col justify-center border border-line border-l-0 rounded-r-card">
         <div className="text-sm font-semibold mb-[3px] leading-[1.3]">
           <span>{car.make}</span>{' '}
           <span className="font-normal">{car.model}</span>
