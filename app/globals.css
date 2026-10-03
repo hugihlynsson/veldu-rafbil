@@ -56,6 +56,21 @@
   --color-alarm-fill-hover: #fecdca;
 
   --breakpoint-xs: 375px;
+
+  /* Radii, written at their round-corner size. A squircle of the same radius
+     hugs the corner more tightly, so `--corner` grows them where one is drawn
+     (below) and they read as soft as before. Every radius goes through here,
+     arbitrary ones included, or it misses the scaling */
+  --radius: calc(0.25rem * var(--corner));
+  --radius-sm: calc(0.25rem * var(--corner));
+  --radius-lg: calc(0.5rem * var(--corner));
+  --radius-xl: calc(0.75rem * var(--corner));
+  --radius-2xl: calc(1rem * var(--corner));
+  --radius-3xl: calc(1.5rem * var(--corner));
+  --radius-4xl: calc(2rem * var(--corner));
+  --radius-toggle: calc(10px * var(--corner));
+  --radius-card: calc(14px * var(--corner));
+  --radius-sheet: calc(20px * var(--corner));
 }
 
 /* Shadows are deliberately not `@theme`: Tailwind inlines a theme shadow into
@@ -190,6 +205,27 @@ input {
   }
 }
 
+/* iOS-style continuous corners where the browser can draw them, and plain
+   round ones elsewhere. A pill keeps round ends: a squircle there reads as a
+   squashed rectangle, so anything meant to be a pill or a circle is
+   `rounded-full`, whatever its size */
+:root {
+  --corner: 1;
+}
+@supports (corner-shape: squircle) {
+  :root {
+    --corner: 1.6;
+  }
+  @layer base {
+    * {
+      corner-shape: squircle;
+    }
+    .rounded-full {
+      corner-shape: round;
+    }
+  }
+}
+
 :root {
   /* Both themes, so the number spinners, the select menu, the scrollbars and
      the caret follow the page rather than staying white under it */
@@ -299,7 +335,7 @@ input {
 .message-content code {
   background-color: color-mix(in srgb, currentColor 6%, transparent);
   padding: 2px 4px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   font-family:
     'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New',
     monospace;
@@ -308,7 +344,7 @@ input {
 .message-content pre {
   background-color: color-mix(in srgb, currentColor 6%, transparent);
   padding: 8px 10px;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   overflow-x: auto;
   margin: 0.5em 0;
 }
