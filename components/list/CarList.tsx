@@ -11,7 +11,7 @@ import FilterModal from '@/components/filters/FilterModal'
 import ActiveFilters from '@/components/filters/ActiveFilters'
 import cars from '@/modules/data/cars'
 import carFilter, { filtersShowing } from '@/modules/list/carFilter'
-import { normalizeFilters, type Filters } from '@/modules/list/filters'
+import type { Filters } from '@/modules/list/filters'
 import type { Sorting } from '@/modules/list/sorting'
 import { sortCars } from '@/modules/list/sorting'
 import { agree } from '@/modules/copy/plural'
@@ -186,7 +186,7 @@ export default function CarList() {
           onSubmit={setFilters}
           onDone={() => setEditingFilters(() => false)}
           getCountPreview={(filters: Filters) =>
-            cars.filter(carFilter(normalizeFilters(filters))).length
+            cars.filter(carFilter(filters)).length
           }
         />
       )}

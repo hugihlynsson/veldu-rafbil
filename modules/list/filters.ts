@@ -215,9 +215,8 @@ export const valuesFromFilters = (filters: Filters): FilterValues =>
   ) as FilterValues
 
 /**
- * The filters as the list will apply them once they are in the URL. The
- * filter modal counts its preview from this, so a zero or a negative it holds
- * while someone types is no filter there either, as it is in the list.
+ * The filters as the list will apply them once they are in the URL, so a
+ * suggestion is counted against what the list would really show.
  */
 export const normalizeFilters = (filters: Filters): Filters =>
   filtersFromValues(valuesFromFilters(filters))
@@ -234,3 +233,34 @@ const serializeFilterValues = createSerializer(filterParsers, {
 /** The query string for a set of filters, `?` and all, or '' for none */
 export const serializeFilters = (filters: Filters): string =>
   serializeFilterValues(valuesFromFilters(filters))
+
+/**
+ * The filter modal's fields, as typed. Each is read by its filter's own URL
+ * parser, so a field means what the same text in a link would, and a zero or
+ * a lone comma typed on the way to something else is no filter.
+ */
+export type FilterFields = Partial<Record<FilterKey, string>>
+
+/** A value as its field holds it, which for a select is the option's value */
+export const fieldFromFilter = <Key extends FilterKey>(
+  key: Key,
+  value: Value<Key>,
+): string => {
+  // As people type a list, where the URL leaves out the space
+  if (Array.isArray(value)) return value.join(', ')
+  const { parser } = filterDefinitions[key] as FilterDefinition<FilterKey>
+  return parser.serialize(value as never) as string
+}
+
+export const fieldsFromFilters = (filters: Filters): FilterFields =>
+  Object.fromEntries(
+    filterKeys.flatMap((key) => {
+      const value = filters[key]
+      return value === undefined ? [] : [[key, fieldFromFilter(key, value)]]
+    }),
+  )
+
+const loadFilterFields = createLoader(filterParsers)
+
+export const filtersFromFields = (fields: FilterFields): Filters =>
+  filtersFromValues(loadFilterFields(fields) as FilterValues)

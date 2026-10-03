@@ -1,8 +1,12 @@
 import React, { useRef, useState } from 'react'
 
-import type { Availability } from '@/modules/data/cars'
-import type { Drive } from '@/modules/data/newCarSchema'
-import type { Filters } from '@/modules/list/filters'
+import {
+  fieldFromFilter,
+  fieldsFromFilters,
+  filtersFromFields,
+  type FilterFields,
+  type Filters,
+} from '@/modules/list/filters'
 import clsx from 'clsx'
 import Modal, { panelMotion } from '@/components/Modal'
 import CloseButton from '@/components/CloseButton'
@@ -23,82 +27,27 @@ const FiltersModal: React.FunctionComponent<Props> = ({
 }) => {
   // showModal would focus the close button; the name field is the point
   const nameInputRef = useRef<HTMLInputElement>(null)
-  const [filters, setFilters] = useState<Filters>(initialFilters)
-  const [nameInput, setNameInput] = useState<string>(
-    filters.name?.join(', ') ?? '',
+  const [fields, setFields] = useState<FilterFields>(() =>
+    fieldsFromFilters(initialFilters),
   )
+  const filters = filtersFromFields(fields)
+
+  const driveOptions: Array<[string, string]> = [
+    ['', 'Öll'],
+    ['AWD', 'AWD'],
+    ['FWD', 'FWD'],
+    ['RWD', 'RWD'],
+  ]
+  // A link or a suggestion can ask for two drives, which no one option is
+  if (fields.drive && !driveOptions.some(([value]) => value === fields.drive)) {
+    driveOptions.push([fields.drive, fields.drive])
+  }
 
   const handleFilterChange =
     (name: keyof Filters) =>
     (event: React.FormEvent<HTMLInputElement | HTMLSelectElement>) => {
       const value = event.currentTarget.value
-      if (name === 'name') setNameInput(value)
-
-      setFilters((filters) => {
-        const updatedFilters = Object.assign({}, filters)
-
-        if (value === '') {
-          delete updatedFilters[name]
-          return updatedFilters
-        }
-
-        switch (name) {
-          case 'acceleration':
-            updatedFilters.acceleration = Number(value)
-            break
-          case 'availability':
-            if (value === 'all') {
-              delete updatedFilters.availability
-            } else {
-              updatedFilters.availability = value as Availability
-            }
-            break
-          case 'drive':
-            if (value === 'all') {
-              delete updatedFilters.drive
-            } else {
-              updatedFilters.drive = [value as Drive]
-            }
-            break
-          case 'fastcharge':
-            updatedFilters.fastcharge = Number(value)
-            break
-          case 'name':
-            const names = value
-              .split(',')
-              .map((name) => name.trim())
-              .filter((name) => name)
-            // Input of only separators is no filter at all, not a filter that
-            // matches nothing
-            if (names.length) {
-              updatedFilters.name = names
-            } else {
-              delete updatedFilters.name
-            }
-            break
-          case 'price':
-            updatedFilters.price = Number(value)
-            break
-          case 'range':
-            updatedFilters.range = Number(value)
-            break
-          case 'seats':
-            if (value === 'all') {
-              delete updatedFilters.seats
-            } else {
-              updatedFilters.seats = Number(value)
-            }
-            break
-          case 'value':
-            updatedFilters.value = Number(value)
-            break
-          default:
-            // A filter without a case would be dropped here as it was typed
-            name satisfies never
-        }
-
-        return updatedFilters
-      })
+      setFields((fields) => ({ ...fields, [name]: value }))
     }
 
   return (
@@ -146,7 +95,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 placeholder="Tesla, Kia"
                 onChange={handleFilterChange('name')}
                 onKeyDown={handleKeyPress}
-                value={nameInput}
+                value={fields.name ?? ''}
               />
               <FilterInput
                 id="filter-price"
@@ -156,7 +105,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 placeholder="25000000"
                 onChange={handleFilterChange('price')}
                 onKeyDown={handleKeyPress}
-                value={filters.price ?? ''}
+                value={fields.price ?? ''}
               />
               <FilterInput
                 id="filter-range"
@@ -166,26 +115,21 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 placeholder="230"
                 onChange={handleFilterChange('range')}
                 onKeyDown={handleKeyPress}
-                value={filters.range ?? ''}
+                value={fields.range ?? ''}
               />
               <FilterSelect
                 id="filter-drive"
                 label="Drif"
-                options={[
-                  ['all', 'Öll'],
-                  ['AWD', 'AWD'],
-                  ['FWD', 'FWD'],
-                  ['RWD', 'RWD'],
-                ]}
+                options={driveOptions}
                 onChange={handleFilterChange('drive')}
                 onKeyDown={handleKeyPress}
-                value={filters.drive?.[0] ?? 'all'}
+                value={fields.drive ?? ''}
               />
               <FilterSelect
                 id="filter-seats"
                 label="Sæti"
                 options={[
-                  ['all', 'Öll'],
+                  ['', 'Öll'],
                   ['4', '4+'],
                   ['5', '5+'],
                   ['6', '6+'],
@@ -193,19 +137,19 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 ]}
                 onChange={handleFilterChange('seats')}
                 onKeyDown={handleKeyPress}
-                value={filters.seats?.toString() ?? 'all'}
+                value={fields.seats ?? ''}
               />
               <FilterSelect
                 id="filter-availability"
                 label="Framboð"
                 options={[
-                  ['all', 'Allir'],
-                  ['available', 'Fáanlegir'],
-                  ['expected', 'Væntanlegir'],
+                  ['', 'Allir'],
+                  [fieldFromFilter('availability', 'available'), 'Fáanlegir'],
+                  [fieldFromFilter('availability', 'expected'), 'Væntanlegir'],
                 ]}
                 onChange={handleFilterChange('availability')}
                 onKeyDown={handleKeyPress}
-                value={filters.availability ?? 'all'}
+                value={fields.availability ?? ''}
               />
               {/* carFilter keeps cars at or under this, so it is a maximum */}
               <FilterInput
@@ -216,7 +160,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 placeholder="8.0"
                 onChange={handleFilterChange('acceleration')}
                 onKeyDown={handleKeyPress}
-                value={filters.acceleration ?? ''}
+                value={fields.acceleration ?? ''}
               />
               <FilterInput
                 id="filter-value"
@@ -226,7 +170,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 placeholder="44000"
                 onChange={handleFilterChange('value')}
                 onKeyDown={handleKeyPress}
-                value={filters.value ?? ''}
+                value={fields.value ?? ''}
               />
               <FilterInput
                 id="filter-fastcharge"
@@ -236,16 +180,13 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 placeholder="3.1"
                 onChange={handleFilterChange('fastcharge')}
                 onKeyDown={handleKeyPress}
-                value={filters.fastcharge ?? ''}
+                value={fields.fastcharge ?? ''}
               />
             </div>
             <footer className="p-4 flex justify-between shadow-(--shadow-sheet-footer) z-1">
               <button
                 className="appearance-none border-0 bg-transparent p-0 pl-1 text-stone text-sm font-semibold transition-all duration-200 cursor-pointer hover:text-tint"
-                onClick={() => {
-                  setFilters({})
-                  setNameInput('')
-                }}
+                onClick={() => setFields({})}
               >
                 Hreinsa leit
               </button>

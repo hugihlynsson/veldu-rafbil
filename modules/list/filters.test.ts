@@ -3,7 +3,10 @@ import { describe, expect, it } from 'vitest'
 import carFilter from './carFilter'
 import cars from '@/modules/data/cars'
 import {
+  fieldFromFilter,
+  fieldsFromFilters,
   filterUrlKeys,
+  filtersFromFields,
   getFiltersFromQuery,
   normalizeFilters,
   serializeFilters,
@@ -229,5 +232,58 @@ describe('normalizeFilters', () => {
     expect(normalizeFilters(filters)).toEqual(
       getFiltersFromQuery(getQueryFromFilters(filters)),
     )
+  })
+})
+
+// The filter modal holds what is typed and reads it the way a link is read, so
+// opening it on the list's filters and closing it untouched changes nothing
+describe('the filter modal fields', () => {
+  const everyFilter: Filters = {
+    name: ['tesla', 'kia'],
+    drive: ['AWD', 'RWD'],
+    price: 9_000_000,
+    range: 300,
+    seats: 5,
+    acceleration: 9.5,
+    value: 30_000,
+    fastcharge: 2.5,
+    availability: 'expected',
+  }
+
+  it('gives back the filters it was opened on', () => {
+    expect(filtersFromFields(fieldsFromFilters(everyFilter))).toEqual(
+      everyFilter,
+    )
+  })
+
+  it('writes a list as it is typed', () => {
+    expect(fieldsFromFilters({ name: ['tesla', 'kia'] })).toEqual({
+      name: 'tesla, kia',
+    })
+  })
+
+  // The select's option values have to be what the field is read as
+  it('reads an availability option by its URL word', () => {
+    expect(
+      filtersFromFields({
+        availability: fieldFromFilter('availability', 'available'),
+      }),
+    ).toEqual({ availability: 'available' })
+  })
+
+  it.each<[string, Record<string, string>]>([
+    ['an emptied field', { price: '' }],
+    ['a zero on the way to a number', { range: '0' }],
+    ['a negative', { value: '-5' }],
+    ['separators alone', { name: ' , , ' }],
+    ['a select left on its first option', { drive: '', seats: '' }],
+  ])('reads %s as no filter', (_label, fields) => {
+    expect(filtersFromFields(fields)).toEqual({})
+  })
+
+  it('trims what is typed around the names', () => {
+    expect(filtersFromFields({ name: ' Tesla ,Kia, ' })).toEqual({
+      name: ['Tesla', 'Kia'],
+    })
   })
 })
