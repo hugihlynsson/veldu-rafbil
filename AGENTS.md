@@ -7,7 +7,9 @@ Tailwind v4, deployed on Vercel.
 This file holds the conventions, not the contracts. A rule about how one module
 behaves is a comment in that module with a test beside it — read it there, where
 the next reader is already looking and where the change that breaks it has to
-touch it. What is here is what the code cannot tell you on its own.
+touch it. What is here is what the code cannot tell you on its own, so a file
+is named here only where it is the place to start, and a refactor should rarely
+need to touch this file.
 
 ## Verifying a change
 
@@ -25,10 +27,11 @@ Formatting takes care of itself — a husky pre-commit hook runs oxfmt over the
 staged files and then oxlint over the repo, so don't hand-format.
 
 Tests are Vitest and live next to what they test. They cover the pure logic in
-`modules/` and beside the routes; there are no component tests. Two kinds are worth writing: tests
-that pin a contract two places have to agree on (a URL round trip, a query
-mapping), and tests over the car data itself — most commits edit that file, and
-most corrections to it have been a bad link or a photo that does not resolve.
+`modules/` and beside the routes; there are no component tests. Two kinds are
+worth writing: tests that pin a contract two places have to agree on (a URL
+round trip, a query mapping), and tests over the car data itself — most
+commits edit that file, and most corrections to it have been a bad link or a
+photo that does not resolve.
 
 ## Comments
 
@@ -44,76 +47,41 @@ just as clear, don't write it.
 This is also where a rule about the domain goes. Write it next to the code it
 governs rather than here, and pin it with a test.
 
-## Layout
+## Where code goes
 
-| Path                        | What lives there                                                      |
-| --------------------------- | --------------------------------------------------------------------- |
-| `modules/data/`             | The car data, its schema, and every field derived from it             |
-| `modules/list/`             | Sorting and filtering: the URL state and the parser for typed text    |
-| `modules/copy/`             | Icelandic text and numbers: plurals, separators, the grant's wording  |
-| `modules/chat/`             | What the chat route and the browser both read: the message format     |
-| `utils/`                    | The things that _do_ need React or the browser                        |
-| `components/list/`          | The list and the car cards in it                                      |
-| `components/filters/`       | The filter modal, its chips, and the suggestions above the chat input |
-| `components/chat/`          | The chat, from its input to the modal and each answer                 |
-| `components/`               | What the parts share — `Modal`, `Toggles`, the pills — and the page   |
-| `app/page.tsx`              | The list, built once at deploy for a URL with no sort or filter       |
-| `app/with-query/`           | The same list rendered per request, for a URL with one                |
-| `app/api/`, `app/llms.txt/` | Each endpoint, with the logic only it uses beside it                  |
-
-The car data is read through `modules/data/cars.ts`, not `newCars.ts`: each
-`Car` carries its id, label, price after the grant and charge rate, derived
-once. The URL state is one table in `modules/list/filters.ts` and two parsers in
-`modules/list/sorting.ts`, which nuqs reads on the server and writes in the
-browser.
-
-Where a new file goes: if it reaches for the DOM, a hook or storage, it is a
-util. Otherwise it is pure logic with a test next to it, and it lives beside the
-one route that uses it — `app/api/chat/prompt.ts`, `app/api/cars/carApi.ts` —
-or in `modules/` once anything else does, in the folder of the part of the site
-it belongs to. A file in `app/` is only served if it is a `route.ts` or a
-`page.tsx`, so the rest are safe there. Code the browser must never load, like
-the system prompt and the model calls, belongs beside its route, where an import
-from a component would look as wrong as it is. No `index.ts` that re-exports a
-folder: one import would pull the whole folder into the list's first load,
-which `firstLoad.test.ts` guards.
+- Anything that reaches for the DOM, a hook or storage is a util, in `utils/`.
+- Everything else is pure logic with a test next to it. It lives beside the one
+  route that uses it, and moves to `modules/`, in the folder for its part of the
+  site, once anything else does. A file in `app/` is only served if it is a
+  `route.ts` or a `page.tsx`, so the rest are safe there.
+- Code the browser must never load, like the system prompt and the model calls,
+  stays beside its route, where an import from a component would look as wrong
+  as it is.
+- No `index.ts` that re-exports a folder: one import would pull the whole folder
+  into the list's first load, which `firstLoad.test.ts` guards.
+- Import across folders with `@/` and within one with `./`.
 
 Three components exist so another copy never gets written — `FilterField.tsx`
 for a field in the filter modal, `Modal.tsx` for a modal, and
 `SuggestionPills.tsx` for a stack of pills above the chat input. Don't
 hand-roll any of them.
-A `showModal()` dialog makes the page behind it inert, so anything that must
-stay usable while one is open belongs _inside_ it, and anything fixed belongs
-beside the panel rather than within it — a transform or a filter becomes the
-containing block of the fixed things inside it.
-
-`components/list/CarList.tsx` is the `'use client'` list, its sorting and filters
-held by nuqs. Import across folders with `@/` (`@/modules/data/cars`), and with `./`
-within one.
 
 ## The car data
 
-`modules/data/newCars.ts` is one file of hand-written `NewCar` literals. It is by far
-the largest file in the repo and most commits touch only it. Adding or updating
-a car is the `update-new-cars` skill — read it rather than working from a
-brochure directly.
+`modules/data/newCars.ts` is one file of hand-written `NewCar` literals. It is by
+far the largest file in the repo and most commits touch only it. Adding or
+updating a car is the `update-new-cars` skill — read it rather than working from
+a brochure directly.
 
 `NewCar` is inferred from the Zod schema in `modules/data/newCarSchema.ts`, and
 `newCars.test.ts` checks every entry against it. A field is added there, with
 its bounds, rather than as a type of its own.
 
-Never re-derive a car field. Read cars through `modules/data/cars.ts`, whose `Car`
-already carries `id`, `label`, `priceWithGrant`, `pricePerKm` and
-`kmPerMinuteCharged`. Each of those has a module that owns the rule, and the
-rule is the comment there:
-
-| Before you                                  | Read                           |
-| ------------------------------------------- | ------------------------------ |
-| price, sort or filter on money              | `getPriceWithGrant`, `globals` |
-| write copy that names the grant             | `grantCopy`                    |
-| show or rank a charge rate                  | `getKmPerMinutesCharged`       |
-| render any number in the list UI            | `addDecimalSeparators`         |
-| build an anchor, React key or scroll target | `getCarId`                     |
+Never re-derive a car field. Read cars through `modules/data/cars.ts`: each
+`Car` already carries its id, label, price after the grant, price per km and
+charge rate, and the module that works each one out holds its rule. Copy that
+names the grant reads `modules/copy/grantCopy.ts`, and every number in the list
+UI goes through `addDecimalSeparators`.
 
 The grant is worth stating twice, because getting it wrong is silent:
 `car.price` is the _list_ price, everything user-facing reads
@@ -126,129 +94,51 @@ figures. Keep it that way.
 
 ## Sorting and filtering
 
-State lives in the URL, held by [nuqs](https://nuqs.dev): the same parsers
-read it on the server and write it in the browser with a shallow
-`history.replaceState`. Every filter is one entry in `filterDefinitions` in
-`modules/list/filters.ts` — its Icelandic key, its parser and the test it puts a car
-to — and the sorting is two parsers in `modules/list/sorting.ts`.
-
-Most visits arrive at a bare `/`, which is built once and served from the CDN.
-A URL carrying any of those keys is rewritten in `next.config.ts` to
-`app/with-query`, which renders per request, so a shared link arrives sorted and
-filtered rather than reordering once it hydrates. The rewrite reads its keys
-from the same two tables, and `next.config.test.ts` puts every sorting and
-filter through it, so a new one needs nothing more here.
-
-Adding a filter is an entry in that table, its chip in `filterChips.ts`, and
-its field in `FilterModal.tsx`, which reads what is typed through the filter's
-own parser. The first two are mapped over `Filters`, so the compile tells you
-what is missing; only the field is on you. A sorting is an entry in
-`sortingDefinitions` in `sorting.ts`, and a label and a place in the toggle
-list in `CarList.tsx`. Write your own parser with `createParser` rather than an
-`Array.isArray` at a call site, and give a filter that round-trips through the
-URL a test: a multi-value filter coming back as a single value matches nothing,
-and fails quietly.
+The state lives in the URL, held by [nuqs](https://nuqs.dev), so a shared link
+arrives sorted and filtered. Each filter is one entry in `filterDefinitions` in
+`modules/list/filters.ts` and each sorting one in `sortingDefinitions` in
+`modules/list/sorting.ts`; the comment on each table says what else a new one
+needs.
 
 ## Everything user-facing is Icelandic
 
 UI copy, and **the query parameters too**. Keep the code identifiers English and
-the wire format Icelandic; the mapping is in `modules/list/filters.ts` and
-`modules/list/sorting.ts`. `llms.txt` is the one exception on the site — its readers
-are agents, not Icelandic car buyers.
+the wire format Icelandic. `llms.txt` is the one exception on the site — its
+readers are agents, not Icelandic car buyers.
 
 Copy that counts things needs Icelandic plural agreement: use `agree()` from
 `modules/copy/plural.ts` rather than testing the number yourself.
 
-## Chat advisor
+## The AI endpoints
 
-`app/api/chat/` streams from a hosted model through the Vercel AI SDK. The model
-and the provider are config, not architecture: read the route rather than
-assuming.
+`/api/chat`, the advisor, and `/api/filter-suggestions`, the filter pills above
+the chat input, are public, free to use, and spend money on every call.
 
-**The model is picked on Icelandic performance, not general benchmarks.** The
-advisor only ever answers in Icelandic, so one that tops the English
-leaderboards and stumbles here is no use; the trade-off is score against cost
-and speed, since the chat is public and free. Miðeind's leaderboard is the
-yardstick — <https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard>.
-Re-run that comparison before swapping the model, and say in the comment on the
-model constant what you found.
-
-The system prompt is built in `app/api/chat/prompt.ts`, from the same data and
-constants as the rest of the site, and tested there. The whole car list is
-inlined into it, which is what makes the
-provider's implicit prompt caching worth having — it only hits on an identical
-prefix, so keep anything per-request out of the system prompt.
-
-The endpoint is public and spends money. The rate limit, the body schema, and
-the allowlist, redirect check, timeout, response cap and per-answer call limit
-on the car-details tool are a security boundary, not a nicety: the model
-chooses the URL that tool fetches, and a model can be talked into choosing
-anything. Tests pin them, and all of them stay.
-
-`route.ts` holds only what needs the request or the provider — the rate limit,
-the model and the logging, which runs in `after()` so it never holds the stream
-open. Everything else is `chat.ts`, which takes the model as a parameter so
-`chat.test.ts` can run it against a mock model: `parseChatRequest` bounds the
-body and validates each message with `validateUIMessages`, and `streamChat`
-streams the answer. The bounds live in `modules/chat/request.ts` beside
-`trimHistory`, which the browser cuts a conversation with before sending it, so
-the stored history never grows into a request the route refuses.
-
-The prompt asks for `[car:…]` markers for the cars an answer recommends and
-`[q:…]` follow-up markers, but neither reaches the browser: a stream transform
-in `modules/chat/answerMarkers.ts` takes them out of the text and they arrive as the
-message's `metadata.cars`, checked against the car list in
-`modules/chat/cars.ts`, and `metadata.followUps`. Histories stored before the
-follow-ups moved are upgraded as they are read; answers without cars fall back
-to the names in their text.
-
-`modules/chat/message.ts` owns the `ChatMessage` type and its one validator,
-shared by the route and the stored history, so the two cannot disagree on
-what a message is.
-
-## Filter suggestions
-
-While the chat is closed, typing in its input offers the filters the text asks
-for as pills above it. They are tapped, never applied for you, since a wrong
-filter quietly empties the list.
-
-**The parser reads first, and a model only reads what it left.**
-`parseFilterIntent` in `modules/list/filterIntent.ts` turns what a request states
-outright — numbers with their units, seats, drive, makes and models — into
-filters in the browser, exactly and for free. Only when words are left over
-does the browser ask `/api/filter-suggestions`, which puts them to a model
-through `model.ts` beside the route. A literal request never costs a call,
-and without a key, or when the model fails, the parser's reading still stands.
-
-**The model picks from our brackets; it never writes a value.** Each filter is
-a multiple-choice question whose options are cut from the car data, so "ódýr"
-keeps meaning the cheap end as prices move, and the worst a model can do is
-pick the wrong option from our own list. `rankSuggestions` then drops a guess
-that narrows nothing or would leave the suggestions matching no car.
-
-**The model and the wording are chosen on the eval.**
-`scripts/eval-filter-intent.ts` scores the parser and the model on the
-Icelandic requests in `app/api/filter-suggestions/cases.ts`, and the comment on the
-model constant in the route says what it found. Re-run it before changing
-either, and say what you found there too. Its answers vary between runs, so
-run it twice before believing a small difference.
-
-The endpoint is public and spends money, as the chat's does. The body schema,
-the rate limit, and `readSuggestions` — which puts every suggestion back
-through its filter's own parser before the browser shows it — are a security
-boundary in the same way, and tests pin them.
+- **Their limits are a security boundary, not a nicety.** The rate limits, the
+  body schemas, the car-details tool's allowlist, redirect check, timeout,
+  response cap and per-answer call limit, and `readSuggestions` putting every
+  suggestion back through its filter's parser: tests pin each one, and all of
+  them stay. The model chooses the URL that tool fetches, and a model can be
+  talked into choosing anything.
+- **A model is chosen on Icelandic, not on general benchmarks.** The advisor
+  only ever answers in Icelandic, so one that tops the English leaderboards and
+  stumbles here is no use; the trade-off is score against cost and speed. The
+  comment on each model constant says what the last comparison found and how to
+  re-run it — do that before changing the model, and update the comment.
+- **Keep anything per-request out of the chat's system prompt.** It inlines the
+  whole car list, and the provider's prompt caching only hits on an identical
+  prefix.
+- **A model never writes a filter value.** The parser reads what a request
+  states outright, for free; a model only picks from options cut from the car
+  data. A suggestion is tapped, never applied for you, since a wrong filter
+  quietly empties the list.
 
 ## Published data
 
-`/api/cars`, `/llms.txt` and `/robots.txt` are for readers who are not a
-browser. The first two are `force-static`, built at deploy and served from the
-CDN, which is why neither needs the rate limiting `/api/chat` has.
-
-**The published shape is deliberately not `NewCar`.** It is a promise to people
-who cannot see the commit that changes it, so adding a field to `NewCar` does
-not add it here, and the hero photos stay out of it entirely.
-`app/api/cars/carApi.ts` owns the wire format and `app/llms.txt/llmsText.ts` the text; the
-reasoning is in the comments there and `carApi.test.ts` fails if it is broken.
+`/api/cars` and `/llms.txt` are for readers who cannot see the commit that
+changes them, so their shape is a promise and deliberately not `NewCar`: a field
+added to a car does not reach them unless it is added there on purpose. The
+reasoning is in `app/api/cars/carApi.ts`, and its test fails if it is broken.
 
 ## Styling
 
@@ -284,6 +174,10 @@ itself, where a dark override would never reach it.
   no `vw` in it is worse than none — Next then puts every configured width in
   the srcset — and an image without one gets a 1x/2x pair off its `width`
   prop, so that prop has to be the size the box really renders at.
+- **A `showModal()` dialog makes the page behind it inert**, so anything that
+  must stay usable while one is open belongs _inside_ it, and anything fixed
+  belongs beside the panel rather than within it — a transform or a filter
+  becomes the containing block of the fixed things inside it.
 - **Nothing rendered on both sides may read the runtime's default locale.** It
   is not the same in node as in an Icelandic browser, and it surfaces as a
   hydration mismatch rather than an error.

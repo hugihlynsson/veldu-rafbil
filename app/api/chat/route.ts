@@ -7,7 +7,8 @@ import { chatRateLimit, clientKey } from '@/modules/rateLimit'
 import { parseChatRequest, streamChat, type ChatFinish } from './chat'
 
 // Picked on Icelandic performance, not general benchmarks: 3.7 scores above
-// 3.8 there and spends ~30% fewer output tokens at the same price.
+// 3.8 there and spends ~30% fewer output tokens at the same price. Re-run the
+// comparison before changing it, and say here what it found.
 // https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard
 const modelName = 'gemini-3.7-flash'
 
