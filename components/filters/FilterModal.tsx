@@ -185,13 +185,13 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             </div>
             <footer className="p-4 flex justify-between shadow-(--shadow-sheet-footer) z-1">
               <button
-                className="appearance-none border-0 bg-transparent p-0 pl-1 text-stone text-sm font-semibold transition-all duration-200 cursor-pointer hover:text-tint"
+                className="appearance-none border-0 bg-transparent p-0 pl-1 text-stone text-sm font-semibold transition-colors duration-200 cursor-pointer hover:text-tint"
                 onClick={() => setFields({})}
               >
                 Hreinsa leit
               </button>
               <button
-                className="appearance-none p-[11px_16px_12px_16px] bg-sky border-0 rounded-full text-on-sky text-sm font-semibold cursor-pointer transition-all duration-200 hover:bg-sky-hover active:scale-[0.98]"
+                className="appearance-none p-[11px_16px_12px_16px] bg-sky border-0 rounded-full text-on-sky text-sm font-semibold cursor-pointer transition duration-200 hover:bg-sky-hover active:scale-[0.98]"
                 onClick={handleDone}
               >
                 Sýna niðurstöður{' '}

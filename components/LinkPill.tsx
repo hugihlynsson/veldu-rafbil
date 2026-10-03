@@ -19,7 +19,7 @@ const LinkPill: FunctionComponent<Props> = ({
   title,
 }) => (
   <Link
-    className="group inline-flex self-start items-center shrink-0 mt-2 py-1 px-3 text-inherit text-sm font-semibold rounded-full no-underline -ml-0.5 mr-2.5 bg-cloud transition-all duration-100 hover:bg-smoke active:scale-[0.98]"
+    className="group inline-flex self-start items-center shrink-0 mt-2 py-1 px-3 text-inherit text-sm font-semibold rounded-full no-underline -ml-0.5 mr-2.5 bg-cloud transition duration-100 hover:bg-smoke active:scale-[0.98]"
     onClick={onClick}
     href={href}
     target={external ? '_blank' : undefined}

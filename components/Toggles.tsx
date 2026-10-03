@@ -32,7 +32,7 @@ export default function Toggles<P>({
           type="button"
           aria-pressed={value === currentValue}
           className={clsx(
-            'border-0 text-xs font-semibold py-[7px] px-3 cursor-pointer text-center flex justify-center items-center whitespace-nowrap min-w-0 rounded-[calc(var(--radius-toggle)-3px)] transition-all duration-200 ease-out relative gap-1',
+            'border-0 text-xs font-semibold py-[7px] px-3 cursor-pointer text-center flex justify-center items-center whitespace-nowrap min-w-0 rounded-[calc(var(--radius-toggle)-3px)] transition duration-200 ease-out relative gap-1',
             'xs:text-[13px] xs:py-2 xs:px-4 xs:rounded-[calc(var(--radius-xl)-4px)]',
             value === currentValue
               ? 'bg-raised text-tint shadow-(--shadow-raised)'

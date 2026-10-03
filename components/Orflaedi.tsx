@@ -24,7 +24,7 @@ const Orflaedi: FunctionComponent<{}> = () => (
 
       <a
         href="https://www.orflaedi.is"
-        className="shrink-0 block max-w-[320px] bg-ink rounded-2xl p-6 pr-16 shadow-(--shadow-card) transition-all duration-200 text-on-ink no-underline text-xl leading-[1.4] font-semibold hover:shadow-(--shadow-card-hover) hover:-translate-y-1"
+        className="shrink-0 block max-w-[320px] bg-ink rounded-2xl p-6 pr-16 shadow-(--shadow-card) transition duration-200 text-on-ink no-underline text-xl leading-[1.4] font-semibold hover:shadow-(--shadow-card-hover) hover:-translate-y-1"
       >
         Öll létt rafknúin ökutæki á einum stað
         {/* eslint-disable-next-line next/no-img-element -- an SVG logo, which next/image does not optimise without dangerouslyAllowSVG */}

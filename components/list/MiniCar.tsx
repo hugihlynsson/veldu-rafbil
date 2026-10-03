@@ -17,7 +17,7 @@ const MiniCar: FunctionComponent<Props> = ({ car, onSelect }) => {
     <button
       type="button"
       onClick={onSelect}
-      className="flex flex-row w-full p-0 border-0 bg-transparent cursor-pointer text-left rounded-card overflow-hidden no-underline text-inherit transition-all duration-200 max-w-full hover:bg-cloud"
+      className="flex flex-row w-full p-0 border-0 bg-transparent cursor-pointer text-left rounded-card overflow-hidden no-underline text-inherit transition-colors duration-200 max-w-full hover:bg-cloud"
     >
       <div className="relative w-[120px] min-w-[120px] bg-cloud shrink-0">
         {/* The size the box really renders at, so the 1x/2x pair lands on

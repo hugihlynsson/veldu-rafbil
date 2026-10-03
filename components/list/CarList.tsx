@@ -205,7 +205,7 @@ export default function CarList() {
           {filteredCarCount} {carWord(filteredCarCount)}{' '}
           {agree(filteredCarCount, 'passaði', 'pössuðu')} ekki við leitina{' '}
           <button
-            className="border-0 shrink-0 m-0 mr-2 text-xs font-semibold py-[5px] px-3 rounded-full cursor-pointer text-center flex justify-center items-center bg-cloud transition-all duration-200 text-tint hover:bg-smoke"
+            className="border-0 shrink-0 m-0 mr-2 text-xs font-semibold py-[5px] px-3 rounded-full cursor-pointer text-center flex justify-center items-center bg-cloud transition-colors duration-200 text-tint hover:bg-smoke"
             onClick={(_event) => {
               setFilters({})
               window.scrollTo({ top: 0 })

@@ -91,6 +91,63 @@
   --radius-toggle: calc(10px * var(--corner));
   --radius-card: calc(14px * var(--corner));
   --radius-sheet: calc(20px * var(--corner));
+
+  /* Motion. Everything that arrives rises the same way; `--rise` shortens
+     the distance for the cars under an answer, which are big enough that
+     10px reads as a jump */
+  --ease-in-cubic: cubic-bezier(0.32, 0, 0.67, 0);
+  --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-message-in: rise 0.3s ease-in-out;
+  --animate-bar-in: rise 0.5s var(--ease-out-expo) backwards;
+  --animate-follow-up-in: rise 0.4s var(--ease-out-expo) backwards;
+  --animate-car-in: rise 0.5s var(--ease-out-expo) backwards;
+  --animate-pill-in: pill-in 0.3s ease-out backwards;
+  --animate-pill-out: pill-out 0.2s ease-in forwards;
+  --animate-typing: typing 1.4s infinite;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(var(--rise, 10px));
+    }
+  }
+
+  /* Tipped back as they come in from the input. The perspective is what
+     makes the tilt read as depth; without one, rotateX only squashes */
+  @keyframes pill-in {
+    from {
+      opacity: 0;
+      transform: perspective(400px) translateY(10px) rotateX(40deg) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: perspective(400px) translateY(0) rotateX(0) scale(1);
+    }
+  }
+
+  @keyframes pill-out {
+    from {
+      opacity: 1;
+      transform: perspective(400px) translateY(0) rotateX(0) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: perspective(400px) translateY(10px) rotateX(40deg) scale(0.95);
+    }
+  }
+
+  @keyframes typing {
+    0%,
+    60%,
+    100% {
+      transform: translateY(0);
+    }
+    30% {
+      transform: translateY(-10px);
+    }
+  }
 }
 
 /* Where each modal stops filling a phone and floats as a panel. The filter
@@ -268,72 +325,6 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes typing {
-  0%,
-  60%,
-  100% {
-    transform: translateY(0);
-  }
-  30% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInCar {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInUpRotate {
-  from {
-    opacity: 0;
-    transform: translateY(10px) rotateX(40deg) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) rotateX(0) scale(1);
-  }
-}
-
-@keyframes fadeOutDownRotate {
-  from {
-    opacity: 1;
-    transform: translateY(0) rotateX(0) scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(10px) rotateX(40deg) scale(0.95);
   }
 }
 
