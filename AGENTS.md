@@ -142,9 +142,9 @@ filter through it, so a new one needs nothing more here.
 Adding a filter is an entry in that table, its chip in `filterChips.ts`, and
 its field in `FilterModal.tsx`, which reads what is typed through the filter's
 own parser. The first two are mapped over `Filters`, so the compile tells you
-what is missing; only the field is on you. A
-sorting needs its key in `sorting.ts` and a place in the toggle list in the
-client component. Write your own parser with `createParser` rather than an
+what is missing; only the field is on you. A sorting is an entry in
+`sortingDefinitions` in `sorting.ts`, and a label and a place in the toggle
+list in `CarList.tsx`. Write your own parser with `createParser` rather than an
 `Array.isArray` at a call site, and give a filter that round-trips through the
 URL a test: a multi-value filter coming back as a single value matches nothing,
 and fails quietly.

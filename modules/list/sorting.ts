@@ -1,6 +1,6 @@
 import { createLoader, createParser, createSerializer } from 'nuqs/server'
 
-import type { SearchParams } from './filters'
+import { parseAsWord, type SearchParams } from './filters'
 import type { Car } from '@/modules/data/cars'
 
 export type Sorting =
@@ -13,41 +13,26 @@ export type Sorting =
 
 export type SortingDirection = 'asc' | 'desc'
 
-export type SortingQuery =
-  | 'nafni'
-  | 'verdi'
-  | 'draegni'
-  | 'hrodun'
-  | 'virdi'
-  | 'hradhledslu'
-
-const queryToSorting: Record<string, Sorting> = {
-  nafni: 'name',
-  verdi: 'price',
-  draegni: 'range',
-  hrodun: 'acceleration',
-  virdi: 'value',
-  hradhledslu: 'fastcharge',
+interface SortingDefinition {
+  // Icelandic, and part of every link to a sorted list that has been shared
+  urlWord: string
+  // The direction it starts in, i.e. the "most useful first" order
+  defaultDirection: SortingDirection
 }
 
-export const sortingToQuery: Record<Sorting, SortingQuery> = {
-  name: 'nafni',
-  price: 'verdi',
-  range: 'draegni',
-  acceleration: 'hrodun',
-  value: 'virdi',
-  fastcharge: 'hradhledslu',
+export const sortingDefinitions: Record<Sorting, SortingDefinition> = {
+  name: { urlWord: 'nafni', defaultDirection: 'asc' },
+  price: { urlWord: 'verdi', defaultDirection: 'asc' },
+  range: { urlWord: 'draegni', defaultDirection: 'desc' },
+  acceleration: { urlWord: 'hrodun', defaultDirection: 'asc' },
+  value: { urlWord: 'virdi', defaultDirection: 'asc' },
+  fastcharge: { urlWord: 'hradhledslu', defaultDirection: 'desc' },
 }
 
-// The direction each sorting starts in, i.e. the "most useful first" order
-export const defaultDirection: Record<Sorting, SortingDirection> = {
-  name: 'asc',
-  price: 'asc',
-  range: 'desc',
-  acceleration: 'asc',
-  value: 'asc',
-  fastcharge: 'desc',
-}
+export const sortings = Object.keys(sortingDefinitions) as Array<Sorting>
+
+const defaultDirection = (sorting: Sorting): SortingDirection =>
+  sortingDefinitions[sorting].defaultDirection
 
 export const flipDirection = (direction: SortingDirection): SortingDirection =>
   direction === 'asc' ? 'desc' : 'asc'
@@ -55,7 +40,7 @@ export const flipDirection = (direction: SortingDirection): SortingDirection =>
 export const isDefaultDirection = (
   sorting: Sorting,
   direction: SortingDirection,
-): boolean => defaultDirection[sorting] === direction
+): boolean => defaultDirection(sorting) === direction
 
 // Zero padded so the name sort can break its ties on price as text
 const padPrice = (car: Car): string =>
@@ -102,7 +87,7 @@ const compareKeys = (a: number | string, b: number | string): number =>
 export const sortCars = (
   cars: ReadonlyArray<Car>,
   sorting: Sorting,
-  direction: SortingDirection = defaultDirection[sorting],
+  direction: SortingDirection = defaultDirection(sorting),
 ): Array<Car> => {
   const order = direction === 'asc' ? 1 : -1
   const keyed = cars.map(
@@ -114,11 +99,11 @@ export const sortCars = (
   return keyed.map(([car]) => car)
 }
 
-const parseAsSorting = createParser<Sorting>({
-  parse: (value) =>
-    Object.hasOwn(queryToSorting, value) ? queryToSorting[value] : null,
-  serialize: (sorting) => sortingToQuery[sorting],
-})
+const parseAsSorting = parseAsWord<Sorting>(
+  Object.fromEntries(
+    sortings.map((sorting) => [sortingDefinitions[sorting].urlWord, sorting]),
+  ),
+)
 
 // ofugt records a flip from the sorting's default, not "descending", so the
 // default leaves the URL clean whichever way that default points
@@ -148,8 +133,8 @@ export const stateFromSortingValues = ({
 }): SortingState => ({
   sorting,
   direction: flipped
-    ? flipDirection(defaultDirection[sorting])
-    : defaultDirection[sorting],
+    ? flipDirection(defaultDirection(sorting))
+    : defaultDirection(sorting),
 })
 
 export const sortingValuesFromState = ({
