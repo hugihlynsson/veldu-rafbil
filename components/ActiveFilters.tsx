@@ -1,30 +1,7 @@
 import { Filters } from '@/types'
 import addDecimalSeprators from '@/modules/addDecimalSeparators'
 import { agree } from '@/modules/plural'
-
-/** The magnifier on the search button, and on the filters suggested from text */
-export const SearchIcon = ({
-  size,
-  className,
-}: {
-  size: number
-  className?: string
-}) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={size}
-    height={size}
-    viewBox="0 0 15 15"
-    fill="none"
-    aria-hidden="true"
-    className={className}
-  >
-    <path
-      fill="currentColor"
-      d="m14.298 13.202-3.87-3.87A5.514 5.514 0 0 0 11.55 6C11.55 2.94 9.061.45 6 .45 2.94.45.45 2.94.45 6c0 3.061 2.49 5.55 5.55 5.55a5.514 5.514 0 0 0 3.332-1.122l3.87 3.87a.775.775 0 1 0 1.096-1.096ZM1.55 6A4.455 4.455 0 0 1 6 1.55 4.455 4.455 0 0 1 10.45 6 4.455 4.455 0 0 1 6 10.45 4.455 4.455 0 0 1 1.55 6Z"
-    />
-  </svg>
-)
+import SearchIcon from './SearchIcon'
 
 const filterClasses =
   "shrink-0 relative text-xs font-semibold py-1 pr-2 pl-2.5 border border-line-strong rounded-full cursor-pointer text-center flex justify-center items-center bg-lab transition-all duration-200 text-clay after:content-['+'] after:rotate-45 after:ml-1.5 after:text-base after:leading-[10px] after:-mt-px after:text-clay after:transition-colors hover:bg-haze hover:after:text-tint active:text-tint"

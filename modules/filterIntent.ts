@@ -1,7 +1,9 @@
+import { z } from 'zod'
+
 import { Drive, Filters } from '@/types'
 import cars, { Car } from './cars'
 import carFilter from './carFilter'
-import { filterDefinitions, normalizeFilters } from './filters'
+import { normalizeFilters } from './filters'
 
 type FilterKey = keyof Filters
 type Value<Key extends FilterKey> = NonNullable<Filters[Key]>
@@ -453,27 +455,32 @@ const sameValue = (a: unknown, b: unknown) =>
     ? [...a].sort().join() === [...b].sort().join()
     : a === b
 
+const suggestionSchema = z.object({
+  key: z.enum(filterKeys as [FilterKey, ...FilterKey[]]),
+  value: z.unknown(),
+  source: z.enum(['text', 'model']),
+  probability: z.number().min(0).max(1),
+})
+
 /**
  * Suggestions as they arrive from the route, each put through the filter's own
  * parser: anything that would not survive the URL is no suggestion.
  */
 export const readSuggestions = (json: unknown): FilterSuggestion[] => {
-  const list =
-    json && typeof json === 'object' && 'suggestions' in json
-      ? json.suggestions
-      : undefined
-  if (!Array.isArray(list)) return []
+  const response = z
+    .object({ suggestions: z.array(z.unknown()) })
+    .safeParse(json)
+  if (!response.success) return []
 
-  return list.flatMap((item: unknown) => {
-    if (!item || typeof item !== 'object') return []
-    const { key, value, source, probability } = item as Record<string, unknown>
-    if (typeof key !== 'string' || !Object.hasOwn(filterDefinitions, key))
-      return []
-    if (source !== 'text' && source !== 'model') return []
-    if (typeof probability !== 'number' || !within(probability, 0, 1)) return []
-    const parsed = normalizeFilters({ [key]: value })[key as FilterKey]
-    if (parsed === undefined) return []
-    return [{ key, value: parsed, source, probability } as FilterSuggestion]
+  // One at a time, so a suggestion that fails costs only itself
+  return response.data.suggestions.flatMap((item) => {
+    const read = suggestionSchema.safeParse(item)
+    if (!read.success) return []
+    const { key, value, source, probability } = read.data
+    const parsed = normalizeFilters({ [key]: value })[key]
+    return parsed === undefined
+      ? []
+      : [{ key, value: parsed, source, probability } as FilterSuggestion]
   })
 }
 

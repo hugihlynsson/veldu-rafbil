@@ -1,9 +1,9 @@
 import { TypeSafeClient } from '@typesafe-ai/sdk'
 import { z } from 'zod'
 
-import { clientKey, createRateLimit } from '@/app/api/chat/rateLimit'
 import { MAX_INTENT_LENGTH } from '@/modules/filterIntent'
 import { suggestFilters, type AskModel } from '@/modules/filterIntentModel'
+import { clientKey, filterSuggestionsRateLimit } from '@/modules/rateLimit'
 
 // Measured on the 120 Icelandic requests in modules/filterIntentCases.ts
 // (October 2026, two runs): with the parser it gets 114–115 exactly right to
@@ -21,21 +21,18 @@ const modelName = 'jev-latest'
 const client = process.env.TYPESAFE_API_KEY
   ? new TypeSafeClient({
       defaultModel: modelName,
-      timeout: 2_000,
+      timeout: 1_000,
       retry: { maxRetries: 0 },
       logLevel: 'error',
     })
   : undefined
-
-// Typing asks more often than chatting does, debounced as it is
-const rateLimit = createRateLimit(60)
 
 const requestSchema = z.strictObject({
   text: z.string().trim().min(1).max(MAX_INTENT_LENGTH),
 })
 
 export async function POST(req: Request) {
-  const limit = rateLimit(clientKey(req))
+  const limit = filterSuggestionsRateLimit(clientKey(req))
   if (!limit.ok) {
     return Response.json(
       { error: 'Of margar fyrirspurnir, reyndu aftur eftir smástund' },

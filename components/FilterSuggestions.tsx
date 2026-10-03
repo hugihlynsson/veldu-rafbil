@@ -13,7 +13,8 @@ import {
   withSuggestion,
 } from '@/modules/filterIntent'
 import { agree } from '@/modules/plural'
-import { filterChipText, SearchIcon } from './ActiveFilters'
+import { filterChipText } from './ActiveFilters'
+import SearchIcon from './SearchIcon'
 import SuggestionPills, { type Pill } from './SuggestionPills'
 
 const carCount = (count: number) => `${count} ${agree(count, 'bíll', 'bílar')}`
