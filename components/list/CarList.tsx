@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 
 import Car from './NewCar'
+import TextLink from '@/components/TextLink'
 import Title from '@/components/Title'
 import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/filters/FilterModal'
@@ -114,25 +115,16 @@ export default function CarList() {
         <p className="leading-6 text-sm pt-6 m-0 mb-8 text-stone max-w-[33em] text-pretty md:text-base">
           Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og eru
           100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
-          <a
-            href="http://wltpfacts.eu/"
-            className="no-underline font-semibold text-tint hover:underline"
-          >
-            WLTP
-          </a>{' '}
-          mælingum frá framleiðenda en raundrægni er háð aðstæðum og
-          aksturslagi.
+          <TextLink href="http://wltpfacts.eu/">WLTP</TextLink> mælingum frá
+          framleiðenda en raundrægni er háð aðstæðum og aksturslagi.
           <span className="inline-block text-xs text-stone mt-2">
             Kaupendur nýskráðra rafbíla sem kosta minna en {
               grantCeilingText
             }{' '}
             eiga kost á að{' '}
-            <a
-              href="https://island.is/rafbilastyrkir"
-              className="no-underline font-semibold text-tint hover:underline"
-            >
+            <TextLink href="https://island.is/rafbilastyrkir">
               sækja um {grantAmountText} rafbílastyrk
-            </a>
+            </TextLink>
             .
           </span>
         </p>
@@ -205,7 +197,7 @@ export default function CarList() {
           {filteredCarCount} {carWord(filteredCarCount)}{' '}
           {agree(filteredCarCount, 'passaði', 'pössuðu')} ekki við leitina{' '}
           <button
-            className="border-0 shrink-0 m-0 mr-2 text-xs font-semibold py-[5px] px-3 rounded-full cursor-pointer text-center flex justify-center items-center bg-cloud transition-colors duration-200 text-tint hover:bg-smoke"
+            className="border-0 shrink-0 m-0 mr-2 text-xs font-semibold py-1.25 px-3 rounded-full cursor-pointer text-center flex justify-center items-center bg-cloud transition-colors duration-200 text-tint hover:bg-smoke"
             onClick={(_event) => {
               setFilters({})
               window.scrollTo({ top: 0 })

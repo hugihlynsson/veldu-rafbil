@@ -9,7 +9,7 @@ const TypingIndicator: React.FunctionComponent = () => {
       <span className="sr-only">Skrifar svar</span>
       <div
         aria-hidden="true"
-        className="max-w-[80%] p-[14px_16px] rounded-2xl text-sm leading-6 wrap-break-word bg-cloud text-tint flex gap-1"
+        className="max-w-[80%] px-4 py-3.5 rounded-2xl text-sm leading-6 wrap-break-word bg-cloud text-tint flex gap-1"
       >
         <span className="w-1.5 h-1.5 rounded-full bg-clay animate-typing"></span>
         <span className="w-1.5 h-1.5 rounded-full bg-clay animate-typing [animation-delay:0.2s]"></span>

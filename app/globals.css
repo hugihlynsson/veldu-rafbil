@@ -66,6 +66,12 @@
   --color-alarm-fill: #fee4e2;
   --color-alarm-fill-hover: #fecdca;
 
+  /* Sizes the default type scale lacks, named for what they set */
+  --text-eyebrow: 0.625rem; /* the uppercase label over a figure */
+  --text-fine: 0.6875rem; /* the small print on a car in the chat */
+  --text-control: 0.8125rem; /* a control's label, a step under `sm` */
+  --text-display: 2rem; /* a car's name, and the Örflæði heading */
+
   /* The steps the layout takes. Cleared first, like the colours, so a
      `lg:` that nothing defines generates nothing */
   --breakpoint-*: initial;
@@ -385,10 +391,10 @@
   opacity: 0.8;
 }
 .message-content .table-wrapper {
+  /* Out to the bubble's edges, which its px-3.5 holds the text off */
   overflow-x: auto;
-  margin: 0.5em -14px;
-  padding: 0 14px;
-  -webkit-overflow-scrolling: touch;
+  margin: 0.5em calc(var(--spacing) * -3.5);
+  padding: 0 calc(var(--spacing) * 3.5);
 }
 .message-content table {
   border-collapse: collapse;

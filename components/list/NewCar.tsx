@@ -15,6 +15,11 @@ interface Props {
   preload?: boolean
 }
 
+const statLabel =
+  'uppercase text-eyebrow font-semibold tracking-wider mb-0.75 text-stone'
+const statValue = 'text-2xl font-normal'
+const statDetail = 'mt-0.5 text-xs text-stone font-medium'
+
 const getDriveLabel = (drive: Drive) => {
   switch (drive) {
     case 'AWD':
@@ -48,7 +53,7 @@ const NewCar: FunctionComponent<Props> = ({
       tabIndex={-1}
       className="mb-8 md:flex md:m-0 md:mx-8 md:mb-10 md:ml-10 md:items-center"
     >
-      <div className="md:block md:relative md:w-[40%] md:grow md:self-center">
+      <div className="md:w-[40%] md:grow md:self-center">
         <Image
           preload={preload}
           alt=""
@@ -60,14 +65,14 @@ const NewCar: FunctionComponent<Props> = ({
         />
       </div>
 
-      <div className="py-[10px] px-(--gutter) mx-auto max-w-column xs:py-[18px] md:m-0 md:ml-8 md:p-0 md:w-[330px] md:max-w-[380px] md:shrink-0 md:grow">
+      <div className="py-2.5 px-(--gutter) mx-auto max-w-column xs:py-4.5 md:m-0 md:ml-8 md:p-0 md:w-[330px] md:max-w-[380px] md:shrink-0 md:grow">
         {car.expectedDelivery && (
           <div className="mb-0.5 text-base font-medium text-stone">
             Væntanlegur {car.expectedDelivery.toLowerCase()}
           </div>
         )}
 
-        <h2 className="m-0 font-semibold text-[32px]">
+        <h2 className="m-0 font-semibold text-display">
           <span>{car.make}</span>{' '}
           <span className="font-normal">{car.model}</span>
           <span className="block font-medium text-base text-stone -mt-px mb-2">
@@ -76,6 +81,7 @@ const NewCar: FunctionComponent<Props> = ({
         </h2>
 
         <LinkPill
+          className="mt-2 -ml-0.5"
           href={car.sellerUrl}
           external
           extra={
@@ -101,14 +107,10 @@ const NewCar: FunctionComponent<Props> = ({
 
         <div className="flex mb-4 mt-6 max-w-[320px] justify-between xs:max-w-[360px]">
           <div className="mr-2 xs:mr-4 basis-1/3">
-            <div className="uppercase text-[10px] font-semibold tracking-wider mb-[3px] text-stone">
-              0-100 km/klst
-            </div>
-            <div className="text-2xl font-normal">
-              {car.acceleration.toFixed(1)}s
-            </div>
+            <div className={statLabel}>0-100 km/klst</div>
+            <div className={statValue}>{car.acceleration.toFixed(1)}s</div>
             <div
-              className="mt-0.5 text-xs text-stone font-medium"
+              className={statDetail}
               title={`Afl (${Math.round(car.power * 1.34102)} hö)`}
             >
               {car.power} kW<span className="sr-only"> afl</span>
@@ -116,12 +118,10 @@ const NewCar: FunctionComponent<Props> = ({
           </div>
 
           <div className="mr-2 xs:mr-4 basis-1/3 shrink-0">
-            <div className="uppercase text-[10px] font-semibold tracking-wider mb-[3px] text-stone">
-              Rafhlaða
-            </div>
-            <div className="text-2xl font-normal">{car.capacity} kWh</div>
+            <div className={statLabel}>Rafhlaða</div>
+            <div className={statValue}>{car.capacity} kWh</div>
             <div
-              className="mt-0.5 text-xs text-stone font-medium"
+              className={statDetail}
               title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10To80} min)`}
             >
               {formatKmPerMinutesCharged(car.timeToCharge10To80, car.range)}{' '}
@@ -134,16 +134,11 @@ const NewCar: FunctionComponent<Props> = ({
           </div>
 
           <div className="mr-0 basis-1/3" title="Samkvæmt WLTP prófunum">
-            <div className="uppercase text-[10px] font-semibold tracking-wider mb-[3px] text-stone">
-              Drægni
-            </div>
-            <div className="text-2xl font-normal">
+            <div className={statLabel}>Drægni</div>
+            <div className={statValue}>
               {car.range} km<span className="sr-only"> samkvæmt WLTP</span>
             </div>
-            <div
-              className="mt-0.5 text-xs text-stone font-medium"
-              title={getDriveLabel(car.drive)}
-            >
+            <div className={statDetail} title={getDriveLabel(car.drive)}>
               {car.drive}
               <span className="sr-only">, {getDriveLabel(car.drive)}</span>
             </div>

@@ -46,7 +46,7 @@ const ChatMessage: React.FunctionComponent<Props> = ({
     >
       <div
         className={clsx(
-          'message-content max-w-[90%] p-[10px_14px] rounded-2xl text-sm leading-6 wrap-break-word',
+          'message-content max-w-[90%] px-3.5 py-2.5 rounded-2xl text-sm leading-6 wrap-break-word',
           isUser ? 'bg-sky text-on-sky' : 'bg-cloud text-tint',
         )}
       >

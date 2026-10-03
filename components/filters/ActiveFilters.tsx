@@ -29,7 +29,7 @@ const ActiveFilters = ({
           {agree(filteredCarsCount, 'bíll passar við:', 'bílar passa við:')}
         </div>
       )}
-      <div className="flex flex-wrap gap-2 self-start max-w-full -ml-[2px]">
+      <div className="flex flex-wrap gap-2 self-start max-w-full -ml-0.5">
         {activeChips(filters).map(({ name, label, value, removeLabel }) => (
           <button
             key={name}
@@ -38,13 +38,11 @@ const ActiveFilters = ({
             onClick={() => onRemoveFilter(name)}
           >
             {label}{' '}
-            <span className="text-tint transition-colors ml-[3px]">
-              {value}
-            </span>
+            <span className="text-tint transition-colors ml-0.75">{value}</span>
           </button>
         ))}
         <button
-          className="flex justify-center items-center shrink-0 gap-1.5 py-2 pr-4 pl-3 border-0 rounded-full text-[13px] font-semibold cursor-pointer text-center bg-cloud transition duration-200 text-tint hover:bg-smoke active:scale-[0.98]"
+          className="flex justify-center items-center shrink-0 gap-1.5 py-2 pr-4 pl-3 border-0 rounded-full text-control font-semibold cursor-pointer text-center bg-cloud transition duration-200 text-tint hover:bg-smoke active:scale-[0.98]"
           onClick={onOpenFilterModal}
         >
           <SearchIcon size={15} className="opacity-70" />

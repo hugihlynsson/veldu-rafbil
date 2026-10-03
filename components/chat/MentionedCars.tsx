@@ -28,7 +28,7 @@ const MentionedCars: React.FunctionComponent<Props> = ({
 
   return (
     <div className="mb-3">
-      <div className="flex gap-3 w-full overflow-x-auto pl-5 pr-20 scroll-pl-5 scroll-pr-20 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      <div className="flex gap-3 w-full overflow-x-auto pl-5 pr-20 scroll-pl-5 scroll-pr-20 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {mentionedCars.map((car, index) => (
           <div
             key={car.id}

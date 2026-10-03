@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 
 const Title: FunctionComponent<{}> = () => (
-  <h1 className="mt-10 mb-4 md:mt-[60px] md:mb-5">
+  <h1 className="mt-10 mb-4 md:mt-15 md:mb-5">
     <svg
       viewBox="0 0 359 53"
       fill="none"

@@ -9,7 +9,7 @@ const CloseButton: React.FunctionComponent<Props> = ({ onClick }) => (
     type="button"
     aria-label="Loka"
     onClick={onClick}
-    className="absolute left-[11px] top-[11px] flex items-center justify-center h-8 w-8 border-0 p-0 rounded-full appearance-none bg-transparent text-stone cursor-pointer transition-colors duration-200 hover:bg-cloud hover:text-tint"
+    className="absolute left-2.75 top-2.75 flex items-center justify-center h-8 w-8 border-0 p-0 rounded-full appearance-none bg-transparent text-stone cursor-pointer transition-colors duration-200 hover:bg-cloud hover:text-tint"
   >
     <svg
       width="14"

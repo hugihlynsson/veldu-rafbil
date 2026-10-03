@@ -112,10 +112,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
               }}
             />
 
-            <div
-              className="flex-1 overflow-y-auto pb-21 flex flex-col"
-              style={{ paddingTop: '20px' }}
-            >
+            <div className="flex-1 overflow-y-auto pt-5 pb-21 flex flex-col">
               {turns.map((turn, index) => {
                 const isLastTurn = index === turns.length - 1
                 return (
