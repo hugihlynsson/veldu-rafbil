@@ -13,7 +13,7 @@ import {
   withSuggestion,
 } from '@/modules/filterIntent'
 import { agree } from '@/modules/plural'
-import { filterChipText } from './ActiveFilters'
+import { filterChipText, SearchIcon } from './ActiveFilters'
 import SuggestionPills, { type Pill } from './SuggestionPills'
 
 const carCount = (count: number) => `${count} ${agree(count, 'bíll', 'bílar')}`
@@ -105,7 +105,11 @@ export default function FilterSuggestions({
       key: suggestion.key,
       content: (
         <>
-          + {label} {value}
+          <SearchIcon
+            size={13}
+            className="inline-block align-[-1px] mr-2 text-scrim/60"
+          />
+          {label} {value}
           <CarCount count={suggestion.count} />
         </>
       ),
