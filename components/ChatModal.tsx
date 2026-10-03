@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import clsx from 'clsx'
 import type { ChatStatus } from 'ai'
 import type { Car } from '@/modules/cars'
@@ -49,6 +49,15 @@ const ChatModal: React.FunctionComponent<Props> = ({
   composerRef,
 }) => {
   const lastMessage = messages[messages.length - 1]
+  // Reopening shows what was already said as it was left; only what arrives
+  // while the chat is open animates in, over the panel's own entrance
+  const [idsOnOpen] = useState(() => new Set(messages.map(({ id }) => id)))
+  // The cars and follow-ups wait for the stream, so they were only on screen
+  // if it had finished
+  const [settledIdOnOpen] = useState(() =>
+    status === 'streaming' ? undefined : lastMessage?.id,
+  )
+  const animateExtras = lastMessage?.id !== settledIdOnOpen
   const lastAssistantText =
     lastMessage?.role === 'assistant' ? getMessageText(lastMessage) : ''
   const lastMessageFollowUps = getFollowUps(lastMessage)
@@ -124,6 +133,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
                         key={message.id}
                         message={message}
                         isLastUserMessage={message.id === lastUserMessageId}
+                        animate={!idsOnOpen.has(message.id)}
                       />
                     ))}
 
@@ -134,6 +144,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
                         {status !== 'streaming' && lastMessage && (
                           <MentionedCars
                             lastMessage={lastMessage}
+                            animate={animateExtras}
                             onClose={close}
                             onShowCar={onShowCar}
                           />
@@ -142,6 +153,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
                           lastMessageFollowUps.length > 0 && (
                             <FollowUpSuggestions
                               suggestions={lastMessageFollowUps}
+                              animate={animateExtras}
                               onSendMessage={onSendMessage}
                             />
                           )}

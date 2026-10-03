@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import clsx from 'clsx'
 import MiniCar from '@/components/MiniCar'
 import type { Car } from '@/modules/cars'
 import { getAnswerCars } from '@/modules/chatCars'
@@ -8,12 +9,14 @@ import type { ChatMessage } from '@/modules/chatMessage'
 
 interface Props {
   lastMessage?: ChatMessage
+  animate: boolean
   onClose: () => void
   onShowCar: (car: Car) => void
 }
 
 const MentionedCars: React.FunctionComponent<Props> = ({
   lastMessage,
+  animate,
   onClose,
   onShowCar,
 }) => {
@@ -29,8 +32,12 @@ const MentionedCars: React.FunctionComponent<Props> = ({
         {mentionedCars.map((car, index) => (
           <div
             key={car.id}
-            className="opacity-0 animate-[slideInCar_0.5s_cubic-bezier(0.16,1,0.3,1)_forwards] shrink-0"
-            style={{ animationDelay: `${index * 0.1}s` }}
+            className={clsx(
+              'shrink-0',
+              animate &&
+                'opacity-0 animate-[slideInCar_0.5s_cubic-bezier(0.16,1,0.3,1)_forwards]',
+            )}
+            style={animate ? { animationDelay: `${index * 0.1}s` } : undefined}
           >
             <MiniCar
               car={car}
