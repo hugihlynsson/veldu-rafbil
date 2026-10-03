@@ -46,7 +46,9 @@ export default function SuggestionPills({ label, pills }: Props) {
   return (
     <fieldset
       aria-label={label}
-      className="pointer-events-auto m-0 flex min-w-0 flex-col gap-2 border-0 p-0"
+      // Centred rather than stretched, so a pill keeps its own width and place
+      // when a longer one arrives
+      className="pointer-events-auto m-0 flex min-w-0 flex-col items-center gap-2 border-0 p-0"
     >
       {shown.map(({ pill, leaving }) => (
         <button
