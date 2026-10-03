@@ -50,6 +50,9 @@ export default function ChatContainer({
   const [draft, setDraft] = useState<string>('')
   const [showFocusRing, setShowFocusRing] = useState<boolean>(false)
   const [isChatModalLoaded, setIsChatModalLoaded] = useState<boolean>(false)
+  // The input remounts each time it moves in and out of the modal, and only
+  // its first arrival on the page is an entrance
+  const [hasOpenedChat, setHasOpenedChat] = useState<boolean>(false)
 
   // Handing over while the chunk is in flight would take the input with it
   const loadChatModal = () => {
@@ -120,7 +123,9 @@ export default function ChatContainer({
       onOpenChat={() => {
         loadChatModal()
         setShowChatMessages(true)
+        setHasOpenedChat(true)
       }}
+      animateIn={!hasOpenedChat}
       hide={hide}
       // Waiting on the first token counts: a question sent then is answered
       // alongside the one before it, and the two answers interleave
