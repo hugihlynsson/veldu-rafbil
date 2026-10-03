@@ -1,11 +1,11 @@
 ---
 name: update-new-cars
-description: Refresh the car list in modules/newCars.ts against the sellers' current price lists — prices, new and discontinued variants, expected deliveries, seat counts. Use when asked to update, sweep, or check prices or seats for one make or all of them.
+description: Refresh the car list in modules/data/newCars.ts against the sellers' current price lists — prices, new and discontinued variants, expected deliveries, seat counts. Use when asked to update, sweep, or check prices or seats for one make or all of them.
 ---
 
 # Updating the car list
 
-The list is `modules/newCars.ts`: hand-written `NewCar` literals, one per
+The list is `modules/data/newCars.ts`: hand-written `NewCar` literals, one per
 variant. Updating it means reading each importer's current price list, comparing
 it with what is there, and editing the difference. `AGENTS.md` covers the
 repo's conventions; the rules about a car field are comments in the module that
@@ -43,7 +43,7 @@ way in; the next run depends on it.
     unlabelled one; the fine print sometimes says so outright ("verð án
     sérstaks styrks … er fullt verð").
   - **Only the price with the grant.** Add the grant back. Read the amount from
-    `grantAmount` in `modules/globals.ts` rather than typing it, and check the
+    `grantAmount` in `modules/data/globals.ts` rather than typing it, and check the
     sum is still under `grantPriceCeiling` beside it; a car over it gets no
     grant, so a figure labelled "með styrk" cannot belong to one.
   - **Only one figure and no label.** Toyota's and Lexus's lists print a single
@@ -63,12 +63,12 @@ Work per make. If the user named makes, do those; otherwise sweep all of them,
 in alphabetical order so the diff stays readable.
 
 Before opening a price list, pull up what the list currently says for that make
-(`grep -n "make: 'Kia'" modules/newCars.ts`, then read the entries). You are
+(`grep -n "make: 'Kia'" modules/data/newCars.ts`, then read the entries). You are
 looking for a difference, so know the starting point.
 
 To see which makes are worth a look first, check the freshness signals instead
 of opening everything. The last time the make was touched is
-`git log -1 --format=%ad -S"make: 'Kia'" -- modules/newCars.ts`; a price list
+`git log -1 --format=%ad -S"make: 'Kia'" -- modules/data/newCars.ts`; a price list
 uploaded after that date has not been applied yet. The upload date of an issuu
 document comes from `scripts/issuu-pages.sh`, and dated filenames (Polestar)
 carry their own. A list older than the last touch can be skipped, and it is

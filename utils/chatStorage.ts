@@ -1,4 +1,4 @@
-import { parseStoredMessages, type ChatMessage } from '@/modules/chatMessage'
+import { parseStoredMessages, type ChatMessage } from '@/modules/chat/message'
 
 const CHAT_STORAGE_KEY = 'veldu-rafbil-chat-messages'
 

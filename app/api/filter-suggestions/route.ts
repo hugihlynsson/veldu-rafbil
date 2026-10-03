@@ -1,11 +1,11 @@
 import { TypeSafeClient } from '@typesafe-ai/sdk'
 import { z } from 'zod'
 
-import { MAX_INTENT_LENGTH } from '@/modules/filterIntent'
-import { suggestFilters, type AskModel } from '@/modules/filterIntentModel'
+import { MAX_INTENT_LENGTH } from '@/modules/list/filterIntent'
+import { suggestFilters, type AskModel } from './model'
 import { clientKey, filterSuggestionsRateLimit } from '@/modules/rateLimit'
 
-// Measured on the 120 Icelandic requests in modules/filterIntentCases.ts
+// Measured on the 120 Icelandic requests in cases.ts
 // (October 2026, two runs): with the parser it gets 114–115 exactly right to
 // the parser's 62, at 96–97% precision and 97–98% recall, p95 ~300 ms, ~1,600
 // input tokens a request. 16 of the 18 held-out cases, which the wording was
