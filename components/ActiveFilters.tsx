@@ -1,6 +1,6 @@
 import { Filters } from '@/types'
-import addDecimalSeprators from '@/modules/addDecimalSeparators'
-import { agree } from '@/modules/plural'
+import addDecimalSeprators from '@/modules/copy/addDecimalSeparators'
+import { agree } from '@/modules/copy/plural'
 import SearchIcon from './SearchIcon'
 
 const filterClasses =

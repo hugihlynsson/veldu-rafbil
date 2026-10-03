@@ -2,9 +2,11 @@
 
 import React, { Suspense, useState } from 'react'
 import { trackEvent } from 'fathom-client'
-import { CHAT_SUGGESTIONS } from '@/modules/chatSuggestions'
-import { getRandomSuggestions } from '@/modules/chatHelpers'
-import { MAX_QUESTION_LENGTH } from '@/modules/chatMessage'
+import {
+  CHAT_SUGGESTIONS,
+  getRandomSuggestions,
+} from '@/modules/chat/suggestions'
+import { MAX_QUESTION_LENGTH } from '@/modules/chat/message'
 import useInputModality, { getInputModality } from '@/utils/inputModality'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'

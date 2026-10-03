@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { MAX_INTENT_LENGTH } from '@/modules/filterIntent'
+import { MAX_INTENT_LENGTH } from '@/modules/list/filterIntent'
 
 // The client is built as the route loads, so each test loads it afresh with
 // the key it means: a key in the shell running the tests must not be spent

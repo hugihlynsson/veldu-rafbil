@@ -3,14 +3,14 @@
 import React, { useState } from 'react'
 import clsx from 'clsx'
 import type { ChatStatus } from 'ai'
-import type { Car } from '@/modules/cars'
+import type { Car } from '@/modules/data/cars'
 import {
   getFollowUps,
   getMessageText,
   groupIntoTurns,
   type ChatMessage as Message,
-} from '@/modules/chatMessage'
-import { isAwaitingText, unansweredReason } from '@/modules/chatProgress'
+} from '@/modules/chat/message'
+import { isAwaitingText, unansweredReason } from '@/modules/chat/progress'
 import Modal, { panelMotion } from './Modal'
 import ChatHeader from './chat/ChatHeader'
 import ChatMessage from './chat/ChatMessage'

@@ -7,15 +7,18 @@ import {
 } from 'ai'
 import { z } from 'zod'
 
-import systemPrompt from '@/modules/chatPrompt'
-import { validateChatMessages, type ChatMessage } from '@/modules/chatMessage'
+import systemPrompt from './prompt'
+import { validateChatMessages, type ChatMessage } from '@/modules/chat/message'
 import {
   boundedMessageSchema,
   MAX_MESSAGES,
   trimHistory,
-} from '@/modules/chatRequest'
-import { markerTransform, type AnswerMarkers } from '@/modules/answerMarkers'
-import { resolveCarRefs } from '@/modules/chatCars'
+} from '@/modules/chat/request'
+import {
+  markerTransform,
+  type AnswerMarkers,
+} from '@/modules/chat/answerMarkers'
+import { resolveCarRefs } from '@/modules/chat/cars'
 import { createFetchCarDetailsTool } from './tools/fetchCarDetails'
 
 const createTools = () => ({ fetchCarDetails: createFetchCarDetailsTool() })

@@ -4,7 +4,7 @@
  */
 export type SearchParams = Record<string, string | Array<string> | undefined>
 
-import type { Drive, NewCar } from './modules/newCarSchema'
+import type { Drive, NewCar } from './modules/data/newCarSchema'
 
 export type { Drive, NewCar }
 

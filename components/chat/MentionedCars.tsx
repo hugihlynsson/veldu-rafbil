@@ -3,9 +3,9 @@
 import React from 'react'
 import clsx from 'clsx'
 import MiniCar from '@/components/MiniCar'
-import type { Car } from '@/modules/cars'
-import { getAnswerCars } from '@/modules/chatCars'
-import type { ChatMessage } from '@/modules/chatMessage'
+import type { Car } from '@/modules/data/cars'
+import { getAnswerCars } from '@/modules/chat/cars'
+import type { ChatMessage } from '@/modules/chat/message'
 
 interface Props {
   lastMessage?: ChatMessage

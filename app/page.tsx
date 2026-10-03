@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import cars from '@/modules/cars'
+import cars from '@/modules/data/cars'
 import CarList from '@/components/CarList'
 import Footer from '@/components/Footer'
 

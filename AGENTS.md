@@ -25,7 +25,7 @@ Formatting takes care of itself — a husky pre-commit hook runs oxfmt over the
 staged files and then oxlint over the repo, so don't hand-format.
 
 Tests are Vitest and live next to what they test. They cover the pure logic in
-`modules/`; there are no component tests. Two kinds are worth writing: tests
+`modules/` and beside the routes; there are no component tests. Two kinds are worth writing: tests
 that pin a contract two places have to agree on (a URL round trip, a query
 mapping), and tests over the car data itself — most commits edit that file, and
 most corrections to it have been a bad link or a photo that does not resolve.
@@ -46,22 +46,34 @@ governs rather than here, and pin it with a test.
 
 ## Layout
 
-| Path              | What lives there                                                |
-| ----------------- | --------------------------------------------------------------- |
-| `modules/`        | Pure logic: no React, no browser. The car data lives here too   |
-| `utils/`          | The things that _do_ need React or the browser                  |
-| `components/`     | The UI, including the chat                                      |
-| `app/page.tsx`    | The list, built once at deploy for a URL with no sort or filter |
-| `app/with-query/` | The same list rendered per request, for a URL with one          |
+| Path                        | What lives there                                                     |
+| --------------------------- | -------------------------------------------------------------------- |
+| `modules/data/`             | The car data, its schema, and every field derived from it            |
+| `modules/list/`             | Sorting and filtering: the URL state and the parser for typed text   |
+| `modules/copy/`             | Icelandic text and numbers: plurals, separators, the grant's wording |
+| `modules/chat/`             | What the chat route and the browser both read: the message format    |
+| `utils/`                    | The things that _do_ need React or the browser                       |
+| `components/`               | The UI, including the chat                                           |
+| `app/page.tsx`              | The list, built once at deploy for a URL with no sort or filter      |
+| `app/with-query/`           | The same list rendered per request, for a URL with one               |
+| `app/api/`, `app/llms.txt/` | Each endpoint, with the logic only it uses beside it                 |
 
-The car data is read through `modules/cars.ts`, not `newCars.ts`: each `Car`
-carries its id, label, price after the grant and charge rate, derived once. The
-URL state is one table in `modules/filters.ts` and two parsers in
-`modules/sorting.ts`, which nuqs reads on the server and writes in the browser.
+The car data is read through `modules/data/cars.ts`, not `newCars.ts`: each
+`Car` carries its id, label, price after the grant and charge rate, derived
+once. The URL state is one table in `modules/list/filters.ts` and two parsers in
+`modules/list/sorting.ts`, which nuqs reads on the server and writes in the
+browser.
 
-The whole rule for which of the first two a new file goes in: if it can be
-tested in plain node, it is a module, and it gets a test next to it. If it
-reaches for the DOM, a hook or storage, it is a util.
+Where a new file goes: if it reaches for the DOM, a hook or storage, it is a
+util. Otherwise it is pure logic with a test next to it, and it lives beside the
+one route that uses it — `app/api/chat/prompt.ts`, `app/api/cars/carApi.ts` —
+or in `modules/` once anything else does, in the folder of the part of the site
+it belongs to. A file in `app/` is only served if it is a `route.ts` or a
+`page.tsx`, so the rest are safe there. Code the browser must never load, like
+the system prompt and the model calls, belongs beside its route, where an import
+from a component would look as wrong as it is. No `index.ts` that re-exports a
+folder: one import would pull the whole folder into the list's first load,
+which `firstLoad.test.ts` guards.
 
 Three components exist so another copy never gets written — `FilterField.tsx`
 for a field in the filter modal, `Modal.tsx` for a modal, and
@@ -73,21 +85,21 @@ beside the panel rather than within it — a transform or a filter becomes the
 containing block of the fixed things inside it.
 
 `components/CarList.tsx` is the `'use client'` list, its sorting and filters
-held by nuqs. Import across folders with `@/` (`@/modules/cars`), and with `./`
+held by nuqs. Import across folders with `@/` (`@/modules/data/cars`), and with `./`
 within one.
 
 ## The car data
 
-`modules/newCars.ts` is one file of hand-written `NewCar` literals. It is by far
+`modules/data/newCars.ts` is one file of hand-written `NewCar` literals. It is by far
 the largest file in the repo and most commits touch only it. Adding or updating
 a car is the `update-new-cars` skill — read it rather than working from a
 brochure directly.
 
-`NewCar` is inferred from the Zod schema in `modules/newCarSchema.ts`, and
+`NewCar` is inferred from the Zod schema in `modules/data/newCarSchema.ts`, and
 `newCars.test.ts` checks every entry against it. A field is added there, with
 its bounds, rather than in `types.ts`.
 
-Never re-derive a car field. Read cars through `modules/cars.ts`, whose `Car`
+Never re-derive a car field. Read cars through `modules/data/cars.ts`, whose `Car`
 already carries `id`, `label`, `priceWithGrant`, `pricePerKm` and
 `kmPerMinuteCharged`. Each of those has a module that owns the rule, and the
 rule is the comment there:
@@ -114,8 +126,8 @@ figures. Keep it that way.
 State lives in the URL, held by [nuqs](https://nuqs.dev): the same parsers
 read it on the server and write it in the browser with a shallow
 `history.replaceState`. Every filter is one entry in `filterDefinitions` in
-`modules/filters.ts` — its Icelandic key, its parser and the test it puts a car
-to — and the sorting is two parsers in `modules/sorting.ts`.
+`modules/list/filters.ts` — its Icelandic key, its parser and the test it puts a car
+to — and the sorting is two parsers in `modules/list/sorting.ts`.
 
 Most visits arrive at a bare `/`, which is built once and served from the CDN.
 A URL carrying any of those keys is rewritten in `next.config.ts` to
@@ -137,12 +149,12 @@ and fails quietly.
 ## Everything user-facing is Icelandic
 
 UI copy, and **the query parameters too**. Keep the code identifiers English and
-the wire format Icelandic; the mapping is in `modules/filters.ts` and
-`modules/sorting.ts`. `llms.txt` is the one exception on the site — its readers
+the wire format Icelandic; the mapping is in `modules/list/filters.ts` and
+`modules/list/sorting.ts`. `llms.txt` is the one exception on the site — its readers
 are agents, not Icelandic car buyers.
 
 Copy that counts things needs Icelandic plural agreement: use `agree()` from
-`modules/plural.ts` rather than testing the number yourself.
+`modules/copy/plural.ts` rather than testing the number yourself.
 
 ## Chat advisor
 
@@ -158,7 +170,7 @@ yardstick — <https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard>.
 Re-run that comparison before swapping the model, and say in the comment on the
 model constant what you found.
 
-The system prompt is built in `modules/chatPrompt.ts`, from the same data and
+The system prompt is built in `app/api/chat/prompt.ts`, from the same data and
 constants as the rest of the site, and tested there. The whole car list is
 inlined into it, which is what makes the
 provider's implicit prompt caching worth having — it only hits on an identical
@@ -175,19 +187,19 @@ the model and the logging, which runs in `after()` so it never holds the stream
 open. Everything else is `chat.ts`, which takes the model as a parameter so
 `chat.test.ts` can run it against a mock model: `parseChatRequest` bounds the
 body and validates each message with `validateUIMessages`, and `streamChat`
-streams the answer. The bounds live in `modules/chatRequest.ts` beside
+streams the answer. The bounds live in `modules/chat/request.ts` beside
 `trimHistory`, which the browser cuts a conversation with before sending it, so
 the stored history never grows into a request the route refuses.
 
 The prompt asks for `[car:…]` markers for the cars an answer recommends and
 `[q:…]` follow-up markers, but neither reaches the browser: a stream transform
-in `modules/answerMarkers.ts` takes them out of the text and they arrive as the
+in `modules/chat/answerMarkers.ts` takes them out of the text and they arrive as the
 message's `metadata.cars`, checked against the car list in
-`modules/chatCars.ts`, and `metadata.followUps`. Histories stored before the
+`modules/chat/cars.ts`, and `metadata.followUps`. Histories stored before the
 follow-ups moved are upgraded as they are read; answers without cars fall back
 to the names in their text.
 
-`modules/chatMessage.ts` owns the `ChatMessage` type and its one validator,
+`modules/chat/message.ts` owns the `ChatMessage` type and its one validator,
 shared by the route and the stored history, so the two cannot disagree on
 what a message is.
 
@@ -198,11 +210,11 @@ for as pills above it. They are tapped, never applied for you, since a wrong
 filter quietly empties the list.
 
 **The parser reads first, and a model only reads what it left.**
-`parseFilterIntent` in `modules/filterIntent.ts` turns what a request states
+`parseFilterIntent` in `modules/list/filterIntent.ts` turns what a request states
 outright — numbers with their units, seats, drive, makes and models — into
 filters in the browser, exactly and for free. Only when words are left over
 does the browser ask `/api/filter-suggestions`, which puts them to a model
-through `modules/filterIntentModel.ts`. A literal request never costs a call,
+through `model.ts` beside the route. A literal request never costs a call,
 and without a key, or when the model fails, the parser's reading still stands.
 
 **The model picks from our brackets; it never writes a value.** Each filter is
@@ -213,7 +225,7 @@ that narrows nothing or would leave the suggestions matching no car.
 
 **The model and the wording are chosen on the eval.**
 `scripts/eval-filter-intent.ts` scores the parser and the model on the
-Icelandic requests in `modules/filterIntentCases.ts`, and the comment on the
+Icelandic requests in `app/api/filter-suggestions/cases.ts`, and the comment on the
 model constant in the route says what it found. Re-run it before changing
 either, and say what you found there too. Its answers vary between runs, so
 run it twice before believing a small difference.
@@ -232,7 +244,7 @@ CDN, which is why neither needs the rate limiting `/api/chat` has.
 **The published shape is deliberately not `NewCar`.** It is a promise to people
 who cannot see the commit that changes it, so adding a field to `NewCar` does
 not add it here, and the hero photos stay out of it entirely.
-`modules/carApi.ts` owns the wire format and `modules/llmsText.ts` the text; the
+`app/api/cars/carApi.ts` owns the wire format and `app/llms.txt/llmsText.ts` the text; the
 reasoning is in the comments there and `carApi.test.ts` fails if it is broken.
 
 ## Styling
