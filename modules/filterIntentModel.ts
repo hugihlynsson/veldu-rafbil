@@ -12,14 +12,10 @@ import {
 type FilterKey = keyof Filters
 type Value<Key extends FilterKey> = NonNullable<Filters[Key]>
 
-/** The language the questions are put in; the request is Icelandic either way */
-export type Language = 'en' | 'is'
-type Text = Record<Language, string>
-
 interface Option<Key extends FilterKey> {
   label: string
   value: Value<Key>
-  description: Text
+  description: string
 }
 
 interface IntentQuestion<Key extends FilterKey> {
@@ -29,8 +25,8 @@ interface IntentQuestion<Key extends FilterKey> {
    * answer is read as a distribution over them. Unordered ones are a pick.
    */
   ordered: boolean
-  instructions: Text
-  none: Text
+  instructions: string
+  none: string
   options: Option<Key>[]
 }
 
@@ -67,13 +63,7 @@ const quantile = (values: number[], share: number): number => {
   return sorted[Math.round(share * (sorted.length - 1))]
 }
 
-const millions = (kronur: number, language: Language) => {
-  const figure = (kronur / 1_000_000).toFixed(1)
-  return language === 'is' ? figure.replace('.', ',') : figure
-}
-
-const tenths = (value: number, language: Language) =>
-  language === 'is' ? String(value).replace('.', ',') : String(value)
+const millions = (kronur: number) => (kronur / 1_000_000).toFixed(1)
 
 // Rounded the way that keeps the car the bracket was cut at
 const ceilTo = (value: number, step: number) =>
@@ -82,11 +72,6 @@ const floorTo = (value: number, step: number) =>
   Math.floor(Math.round((value / step) * 1000) / 1000) * step
 const ceilTenth = (value: number) => ceilTo(value * 10, 1) / 10
 const floorTenth = (value: number) => floorTo(value * 10, 1) / 10
-
-const both = (describe: (language: Language) => string): Text => ({
-  en: describe('en'),
-  is: describe('is'),
-})
 
 /**
  * Every question, with the brackets cut from the cars on the list rather than
@@ -137,82 +122,48 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
     price: {
       key: 'price',
       ordered: true,
-      instructions: {
-        en: 'Does the person in `request` want a cheap car, or set a limit on what a new electric car in Iceland may cost? In Icelandic, ódýr, ódýrt, ódýrasti, á góðu verði and ekki of dýr ask for a lower price, even alongside other wishes.',
-        is: 'Vill sá sem skrifar `request` ódýran bíl, eða setur þak á hvað nýr rafbíll á Íslandi má kosta? Ódýr, ódýrt, ódýrasti, á góðu verði og ekki of dýr biðja um lægra verð, líka innan um aðrar óskir.',
-      },
-      none: {
-        en: 'No limit on price: nothing is said about cost, or the person wants an expensive, premium or luxury car',
-        is: 'Ekkert verðþak: ekkert kemur fram um verð, eða viðkomandi vill dýran, vandaðan eða lúxusbíl',
-      },
+      instructions:
+        'Does the person in `request` want a cheap car, or set a limit on what a new electric car in Iceland may cost? In Icelandic, ódýr, ódýrt, ódýrasti, á góðu verði and ekki of dýr ask for a lower price, even alongside other wishes.',
+      none: 'No limit on price: nothing is said about cost, or the person wants an expensive, premium or luxury car',
       options: [
         {
           label: 'not_the_priciest',
           value: price(0.75),
-          description: both((language) =>
-            language === 'en'
-              ? `Not among the most expensive: up to about ${millions(price(0.75), language)} million ISK`
-              : `Ekki með þeim dýrustu: allt að um ${millions(price(0.75), language)} milljónum króna`,
-          ),
+          description: `Not among the most expensive: up to about ${millions(price(0.75))} million ISK`,
         },
         {
           label: 'mid_priced',
           value: price(0.5),
-          description: both((language) =>
-            language === 'en'
-              ? `Mid-priced or below: up to about ${millions(price(0.5), language)} million ISK`
-              : `Í meðallagi eða ódýrari: allt að um ${millions(price(0.5), language)} milljónum króna`,
-          ),
+          description: `Mid-priced or below: up to about ${millions(price(0.5))} million ISK`,
         },
         {
           label: 'cheap',
           value: price(0.25),
-          description: both((language) =>
-            language === 'en'
-              ? `Cheap, affordable, on a budget: up to about ${millions(price(0.25), language)} million ISK`
-              : `Ódýr, á viðráðanlegu verði: allt að um ${millions(price(0.25), language)} milljónum króna`,
-          ),
+          description: `Cheap, affordable, on a budget: up to about ${millions(price(0.25))} million ISK`,
         },
       ],
     },
     range: {
       key: 'range',
       ordered: true,
-      instructions: {
-        en: 'Does the person in `request` need more driving range than usual from an electric car in Iceland? In Icelandic, langdrægur, mikil drægni, kemst langt and langferðir ask for range.',
-        is: 'Þarf sá sem skrifar `request` meiri drægni en gengur og gerist á rafbíl á Íslandi? Langdrægur, mikil drægni, kemst langt og langferðir biðja um drægni.',
-      },
-      none: {
-        en: 'No particular range: neither range nor long trips are mentioned, or the driving is short, such as commuting or in town',
-        is: 'Engin sérstök drægni: hvorki drægni né langferðir koma fram, eða aksturinn er stuttur, til dæmis í vinnuna eða innanbæjar',
-      },
+      instructions:
+        'Does the person in `request` need more driving range than usual from an electric car in Iceland? In Icelandic, langdrægur, mikil drægni, kemst langt and langferðir ask for range.',
+      none: 'No particular range: neither range nor long trips are mentioned, or the driving is short, such as commuting or in town',
       options: [
         {
           label: 'decent',
           value: range(0.25),
-          description: both((language) =>
-            language === 'en'
-              ? `Enough for commuting and day trips out of town: at least ${range(0.25)} km WLTP`
-              : `Dugar í vinnuna og dagsferðir út úr bænum: minnst ${range(0.25)} km WLTP`,
-          ),
+          description: `Enough for commuting and day trips out of town: at least ${range(0.25)} km WLTP`,
         },
         {
           label: 'long_trips',
           value: range(0.5),
-          description: both((language) =>
-            language === 'en'
-              ? `Long trips around the country, such as Reykjavík to Akureyri: at least ${range(0.5)} km WLTP`
-              : `Langferðir um landið, til dæmis frá Reykjavík til Akureyrar: minnst ${range(0.5)} km WLTP`,
-          ),
+          description: `Long trips around the country, such as Reykjavík to Akureyri: at least ${range(0.5)} km WLTP`,
         },
         {
           label: 'longest',
           value: range(0.75),
-          description: both((language) =>
-            language === 'en'
-              ? `As much range as possible: at least ${range(0.75)} km WLTP`
-              : `Sem allra mesta drægni: minnst ${range(0.75)} km WLTP`,
-          ),
+          description: `As much range as possible: at least ${range(0.75)} km WLTP`,
         },
       ],
     },
@@ -221,201 +172,128 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
       // A pick, not a scale: with two brackets the cautious quantile would
       // want four chances in five before it offered seven
       ordered: false,
-      instructions: {
-        en: 'How many seats does the person in `request` need? Count everyone who rides along: the children and one or two adults.',
-        is: 'Hversu mörg sæti þarf sá sem skrifar `request`? Teldu alla sem ferðast með: börnin og einn eða tvo fullorðna.',
-      },
-      none: {
-        en: 'The number of seats or passengers is not mentioned or implied',
-        is: 'Ekkert kemur fram um fjölda sæta eða farþega',
-      },
+      instructions:
+        'How many seats does the person in `request` need? Count everyone who rides along: the children and one or two adults.',
+      none: 'The number of seats or passengers is not mentioned or implied',
       options: [
         {
           label: 'five',
           value: 5,
-          description: {
-            en: 'Five seats: up to five people, such as two adults and up to three children',
-            is: 'Fimm sæti: allt að fimm manns, til dæmis tveir fullorðnir og allt að þrjú börn',
-          },
+          description:
+            'Five seats: up to five people, such as two adults and up to three children',
         },
         {
           label: 'seven',
           value: 7,
-          description: {
-            en: 'Seven or more seats: six people or more, such as four or more children, or a third row of seats',
-            is: 'Sjö sæti eða fleiri: sex manns eða fleiri, til dæmis fjögur börn eða fleiri, eða þriðja sætaröðin',
-          },
+          description:
+            'Seven or more seats: six people or more, such as four or more children, or a third row of seats',
         },
       ],
     },
     drive: {
       key: 'drive',
       ordered: false,
-      instructions: {
-        en: 'Which drive does the person in `request` need? In Icelandic, fjórhjóladrif, jeppi, snjór, hálka, ófærð, malarvegir, brekkur and hálendið point to all-wheel drive.',
-        is: 'Hvaða drif þarf sá sem skrifar `request`? Fjórhjóladrif, jeppi, snjór, hálka, ófærð, malarvegir, brekkur og hálendið benda á fjórhjóladrif.',
-      },
-      none: {
-        en: 'Drive is not mentioned, and nothing is said about winter, snow, gravel, the highlands or towing; long trips alone need no particular drive',
-        is: 'Ekkert kemur fram um drif, og ekkert um vetur, snjó, möl, hálendið eða drátt; langferðir einar og sér kalla ekki á sérstakt drif',
-      },
+      instructions:
+        'Which drive does the person in `request` need? In Icelandic, fjórhjóladrif, jeppi, snjór, hálka, ófærð, malarvegir, brekkur and hálendið point to all-wheel drive.',
+      none: 'Drive is not mentioned, and nothing is said about winter, snow, gravel, the highlands or towing; long trips alone need no particular drive',
       options: [
         {
           label: 'all_wheel_drive',
           value: ['AWD'],
-          description: {
-            en: 'All-wheel drive: winter, snow, ice, gravel roads, the highlands, towing',
-            is: 'Fjórhjóladrif: vetur, snjór, hálka, malarvegir, hálendið, dráttur',
-          },
+          description:
+            'All-wheel drive: winter, snow, ice, gravel roads, the highlands, towing',
         },
         {
           label: 'rear_wheel_drive',
           value: ['RWD'],
-          description: {
-            en: 'Rear-wheel drive',
-            is: 'Afturhjóladrif',
-          },
+          description: 'Rear-wheel drive',
         },
         {
           label: 'front_wheel_drive',
           value: ['FWD'],
-          description: {
-            en: 'Front-wheel drive',
-            is: 'Framhjóladrif',
-          },
+          description: 'Front-wheel drive',
         },
       ],
     },
     availability: {
       key: 'availability',
       ordered: false,
-      instructions: {
-        en: 'Does the person in `request` say when they want to get the car? In Icelandic, strax, á lager and fljótlega mean now; væntanlegur and á leiðinni mean upcoming.',
-        is: 'Kemur fram í `request` hvenær viðkomandi vill fá bílinn? Strax, á lager og fljótlega merkja núna; væntanlegur og á leiðinni merkja síðar.',
-      },
-      none: {
-        en: 'Nothing is said about when to get the car. A quick car or fast charging describes the car, not when it is wanted, and a season or a trip is not a delivery date',
-        is: 'Ekkert kemur fram um hvenær bíllinn á að koma. Snöggur bíll eða hröð hleðsla lýsa bílnum, ekki afhendingu, og árstíð eða ferðalag er ekki afhendingartími',
-      },
+      instructions:
+        'Does the person in `request` say when they want to get the car? In Icelandic, strax, á lager and fljótlega mean now; væntanlegur and á leiðinni mean upcoming.',
+      none: 'Nothing is said about when to get the car. A quick car or fast charging describes the car, not when it is wanted, and a season or a trip is not a delivery date',
       options: [
         {
           label: 'available_now',
           value: 'available',
-          description: {
-            en: 'Available now: in stock, needed soon',
-            is: 'Fáanlegur núna: til á lager, vantar fljótlega',
-          },
+          description: 'Available now: in stock, needed soon',
         },
         {
           label: 'upcoming',
           value: 'expected',
-          description: {
-            en: 'Upcoming models that are not yet delivered',
-            is: 'Væntanlegir bílar sem eru ekki enn komnir',
-          },
+          description: 'Upcoming models that are not yet delivered',
         },
       ],
     },
     acceleration: {
       key: 'acceleration',
       ordered: true,
-      instructions: {
-        en: 'Does the person in `request` want a car that accelerates quickly? Charging fast is charging speed, not acceleration. In Icelandic, snöggur, sprækur, kraftmikill, hraðskreiður, hraður and sportlegur describe a quick car.',
-        is: 'Vill sá sem skrifar `request` bíl sem er snöggur af stað? Hröð hleðsla er hleðsluhraði, ekki hröðun. Snöggur, sprækur, kraftmikill, hraðskreiður, hraður og sportlegur lýsa snöggum bíl.',
-      },
-      none: {
-        en: 'Acceleration is not mentioned: nothing about a quick, powerful or sporty car. Fast charging or range is not acceleration',
-        is: 'Ekkert kemur fram um hröðun: ekkert um snöggan, kraftmikinn eða sportlegan bíl. Hröð hleðsla eða drægni er ekki hröðun',
-      },
+      instructions:
+        'Does the person in `request` want a car that accelerates quickly? Charging fast is charging speed, not acceleration. In Icelandic, snöggur, sprækur, kraftmikill, hraðskreiður, hraður and sportlegur describe a quick car.',
+      none: 'Acceleration is not mentioned: nothing about a quick, powerful or sporty car. Fast charging or range is not acceleration',
       options: [
         {
           label: 'brisk',
           value: acceleration(0.5),
-          description: both((language) =>
-            language === 'en'
-              ? `Quicker than average: 0-100 km/h in at most ${tenths(acceleration(0.5), language)} s`
-              : `Snarpari en gengur og gerist: 0-100 km/klst á mest ${tenths(acceleration(0.5), language)} sek`,
-          ),
+          description: `Quicker than average: 0-100 km/h in at most ${acceleration(0.5)} s`,
         },
         {
           label: 'fast',
           value: acceleration(0.25),
-          description: both((language) =>
-            language === 'en'
-              ? `Fast and sporty: at most ${tenths(acceleration(0.25), language)} s`
-              : `Hraður og sportlegur: mest ${tenths(acceleration(0.25), language)} sek`,
-          ),
+          description: `Fast and sporty: at most ${acceleration(0.25)} s`,
         },
         {
           label: 'fastest',
           value: acceleration(0.1),
-          description: both((language) =>
-            language === 'en'
-              ? `Among the fastest, a sports car: at most ${tenths(acceleration(0.1), language)} s`
-              : `Með þeim hröðustu, sportbíll: mest ${tenths(acceleration(0.1), language)} sek`,
-          ),
+          description: `Among the fastest, a sports car: at most ${acceleration(0.1)} s`,
         },
       ],
     },
     fastcharge: {
       key: 'fastcharge',
       ordered: true,
-      instructions: {
-        en: 'Does the person in `request` want a car that charges quickly? A quick or fast car is acceleration, not charging speed. In Icelandic, hleður hratt, fljótur að hlaða, hraðhleðsla and stutt hleðslustopp ask for fast charging.',
-        is: 'Vill sá sem skrifar `request` bíl sem hleður hratt? Snöggur eða hraður bíll er hröðun, ekki hleðsluhraði. Hleður hratt, fljótur að hlaða, hraðhleðsla og stutt hleðslustopp biðja um hraða hleðslu.',
-      },
-      none: {
-        en: 'Charging is not mentioned: nothing about charging quickly or charging stops. A quick or powerful car is not charging speed',
-        is: 'Ekkert kemur fram um hleðslu: ekkert um að hlaða hratt eða hleðslustopp. Snöggur eða kraftmikill bíll er ekki hleðsluhraði',
-      },
+      instructions:
+        'Does the person in `request` want a car that charges quickly? A quick or fast car is acceleration, not charging speed. In Icelandic, hleður hratt, fljótur að hlaða, hraðhleðsla and stutt hleðslustopp ask for fast charging.',
+      none: 'Charging is not mentioned: nothing about charging quickly or charging stops. A quick or powerful car is not charging speed',
       options: [
         {
           label: 'fast',
           value: fastcharge(0.5),
-          description: both((language) =>
-            language === 'en'
-              ? `Charges faster than average: at least ${tenths(fastcharge(0.5), language)} km of range a minute on a fast charger`
-              : `Hleður hraðar en gengur og gerist: minnst ${tenths(fastcharge(0.5), language)} km drægni á mínútu í hraðhleðslu`,
-          ),
+          description: `Charges faster than average: at least ${fastcharge(0.5)} km of range a minute on a fast charger`,
         },
         {
           label: 'fastest',
           value: fastcharge(0.75),
-          description: both((language) =>
-            language === 'en'
-              ? `Among the fastest to charge: at least ${tenths(fastcharge(0.75), language)} km a minute`
-              : `Með þeim sem hlaða hraðast: minnst ${tenths(fastcharge(0.75), language)} km á mínútu`,
-          ),
+          description: `Among the fastest to charge: at least ${fastcharge(0.75)} km a minute`,
         },
       ],
     },
     value: {
       key: 'value',
       ordered: true,
-      instructions: {
-        en: 'Does the person in `request` want the most range for the money?',
-        is: 'Vill sá sem skrifar `request` sem mesta drægni fyrir peninginn?',
-      },
-      none: {
-        en: 'Value for money is not mentioned: nothing about range for the price. A low price alone is not value for money',
-        is: 'Ekkert kemur fram um hagkvæmni: ekkert um drægni miðað við verð. Lágt verð eitt og sér er ekki hagkvæmni',
-      },
+      instructions:
+        'Does the person in `request` want the most range for the money?',
+      none: 'Value for money is not mentioned: nothing about range for the price. A low price alone is not value for money',
       options: [
         {
           label: 'good_value',
           value: value(0.5),
-          description: {
-            en: 'Good value: a below-average price per km of range',
-            is: 'Hagkvæmur: verð á hvern km drægni undir meðallagi',
-          },
+          description: 'Good value: a below-average price per km of range',
         },
         {
           label: 'best_value',
           value: value(0.25),
-          description: {
-            en: 'The best value: among the lowest prices per km of range',
-            is: 'Hagkvæmastur: með lægsta verð á hvern km drægni',
-          },
+          description:
+            'The best value: among the lowest prices per km of range',
         },
       ],
     },
@@ -427,18 +305,12 @@ const intentQuestions = buildIntentQuestions()
 
 type Questions = Record<string, ChoiceQuestion>
 
-const toChoice = (
-  question: IntentQuestion<FilterKey>,
-  language: Language,
-): ChoiceQuestion => ({
+const toChoice = (question: IntentQuestion<FilterKey>): ChoiceQuestion => ({
   type: 'choice',
-  instructions: question.instructions[language],
+  instructions: question.instructions,
   criteria: Object.fromEntries([
-    ['none', question.none[language]],
-    ...question.options.map((option) => [
-      option.label,
-      option.description[language],
-    ]),
+    ['none', question.none],
+    ...question.options.map((option) => [option.label, option.description]),
   ]),
 })
 
@@ -450,7 +322,6 @@ const toChoice = (
 export const intentRequest = (
   text: string,
   skip: ReadonlyArray<FilterKey>,
-  language: Language = 'en',
   questions = intentQuestions,
 ): SystemOneRequest<Questions> => ({
   state: { request: text },
@@ -459,7 +330,7 @@ export const intentRequest = (
       .filter((question) => !skip.includes(question.key))
       .map((question) => [
         question.key,
-        toChoice(question as IntentQuestion<FilterKey>, language),
+        toChoice(question as IntentQuestion<FilterKey>),
       ]),
   ),
 })
@@ -538,7 +409,6 @@ export interface SuggestionResult {
 export const suggestFilters = async (
   text: string,
   ask: AskModel | undefined,
-  language: Language = 'en',
 ): Promise<SuggestionResult> => {
   const parsed = parseFilterIntent(text)
   const fromText = suggestionsFromFilters(parsed.filters, 'text')
@@ -547,7 +417,6 @@ export const suggestFilters = async (
   const request = intentRequest(
     text,
     Object.keys(parsed.filters) as FilterKey[],
-    language,
   )
   if (Object.keys(request.questions).length === 0)
     return { suggestions: fromText, model: 'not-needed' }
