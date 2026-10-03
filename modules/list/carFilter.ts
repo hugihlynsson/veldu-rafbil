@@ -1,6 +1,5 @@
-import { Filters } from '@/types'
 import { Car } from '@/modules/data/cars'
-import { filterDefinitions } from './filters'
+import { filterDefinitions, type Filters } from './filters'
 
 type Check = (car: Car) => boolean
 

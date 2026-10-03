@@ -7,10 +7,28 @@ import {
   type SingleParserBuilder,
 } from 'nuqs/server'
 
-import { Availability, Drive, Filters, SearchParams } from '@/types'
-import { Car } from '@/modules/data/cars'
+import type { Car, Availability } from '@/modules/data/cars'
+import type { Drive } from '@/modules/data/newCarSchema'
 // Relative: next.config.ts loads this file, and its loader cannot resolve @/
 import { drives } from '../data/drives'
+
+/**
+ * What Next hands a page as `searchParams`. A parameter given more than once
+ * arrives as an array rather than a string, so every reader copes with both.
+ */
+export type SearchParams = Record<string, string | Array<string> | undefined>
+
+export type Filters = {
+  acceleration?: number
+  drive?: Drive[]
+  fastcharge?: number
+  name?: string[]
+  price?: number
+  range?: number
+  seats?: number
+  value?: number
+  availability?: Availability
+}
 
 type Value<Key extends keyof Filters> = NonNullable<Filters[Key]>
 

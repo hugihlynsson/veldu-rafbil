@@ -1,4 +1,4 @@
-import { Filters } from '@/types'
+import type { Filters } from '@/modules/list/filters'
 import { buildIntentQuestions } from './model'
 
 type FilterKey = keyof Filters

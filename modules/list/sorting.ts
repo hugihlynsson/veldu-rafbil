@@ -1,7 +1,25 @@
 import { createLoader, createParser, createSerializer } from 'nuqs/server'
 
-import { SearchParams, Sorting, SortingDirection, SortingQuery } from '@/types'
-import { Car } from '@/modules/data/cars'
+import type { SearchParams } from './filters'
+import type { Car } from '@/modules/data/cars'
+
+export type Sorting =
+  | 'name'
+  | 'price'
+  | 'range'
+  | 'acceleration'
+  | 'value'
+  | 'fastcharge'
+
+export type SortingDirection = 'asc' | 'desc'
+
+export type SortingQuery =
+  | 'nafni'
+  | 'verdi'
+  | 'draegni'
+  | 'hrodun'
+  | 'virdi'
+  | 'hradhledslu'
 
 const queryToSorting: Record<string, Sorting> = {
   nafni: 'name',

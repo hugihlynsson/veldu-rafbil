@@ -1,6 +1,6 @@
 import type { ChoiceQuestion, SystemOneRequest } from '@typesafe-ai/sdk'
 
-import { Filters } from '@/types'
+import type { Filters } from '@/modules/list/filters'
 import cars, { Car } from '@/modules/data/cars'
 import {
   FilterSuggestion,

@@ -1,4 +1,4 @@
-import { NewCar } from '@/types'
+import type { NewCar } from './newCarSchema'
 
 /** Make, model and subModel — what a car is called, and its identity with it */
 export const carLabel = (car: NewCar): string =>

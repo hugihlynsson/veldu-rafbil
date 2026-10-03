@@ -10,7 +10,7 @@ import {
   suggestFilters,
   suggestionsFromAnswers,
 } from './model'
-import { Filters } from '@/types'
+import type { Filters } from '@/modules/list/filters'
 
 const choice = (probabilities: Record<string, number>) => ({
   type: 'choice',

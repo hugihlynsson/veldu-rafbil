@@ -1,4 +1,5 @@
-import { Availability, Drive } from '@/types'
+import type { Availability } from '@/modules/data/cars'
+import type { Drive } from '@/modules/data/newCarSchema'
 import cars, { Car } from '@/modules/data/cars'
 import { chargeWindowShare } from '@/modules/data/getKmPerMinutesCharged'
 import {

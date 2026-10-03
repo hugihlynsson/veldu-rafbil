@@ -1,8 +1,10 @@
-import { Availability, NewCar } from '@/types'
+import type { NewCar } from './newCarSchema'
 import newCars from './newCars'
 import getCarId, { carLabel } from './getCarId'
 import getPriceWithGrant from './getPriceWithGrant'
 import getKmPerMinutesCharged from './getKmPerMinutesCharged'
+
+export type Availability = 'available' | 'expected'
 
 /**
  * A car with the figures every view ranks, filters or prints worked out once,

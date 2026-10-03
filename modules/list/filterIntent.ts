@@ -1,9 +1,9 @@
 import { z } from 'zod'
 
-import { Drive, Filters } from '@/types'
+import type { Drive } from '@/modules/data/newCarSchema'
 import cars, { Car } from '@/modules/data/cars'
 import carFilter from './carFilter'
-import { normalizeFilters } from './filters'
+import { normalizeFilters, type Filters } from './filters'
 
 type FilterKey = keyof Filters
 type Value<Key extends FilterKey> = NonNullable<Filters[Key]>

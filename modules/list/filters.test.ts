@@ -8,7 +8,7 @@ import {
   normalizeFilters,
   serializeFilters,
 } from './filters'
-import { Filters } from '@/types'
+import type { Filters } from './filters'
 
 const matches = (filters: Filters) => cars.filter(carFilter(filters)).length
 

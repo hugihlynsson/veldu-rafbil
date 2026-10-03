@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react'
 
-import { Availability, Drive, Filters } from '@/types'
+import type { Availability } from '@/modules/data/cars'
+import type { Drive } from '@/modules/data/newCarSchema'
+import type { Filters } from '@/modules/list/filters'
 import clsx from 'clsx'
 import Modal, { panelMotion } from '@/components/Modal'
 import CloseButton from '@/components/CloseButton'

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { trackEvent } from 'fathom-client'
 
-import { Filters } from '@/types'
+import type { Filters } from '@/modules/list/filters'
 import {
   FilterSuggestion,
   MAX_INTENT_LENGTH,
