@@ -139,7 +139,7 @@ filtered rather than reordering once it hydrates. The rewrite reads its keys
 from the same two tables, and `next.config.test.ts` puts every sorting and
 filter through it, so a new one needs nothing more here.
 
-Adding a filter is an entry in that table, its chip in `ActiveFilters.tsx`, and
+Adding a filter is an entry in that table, its chip in `filterChips.ts`, and
 its field in `FilterModal.tsx`, which reads what is typed through the filter's
 own parser. The first two are mapped over `Filters`, so the compile tells you
 what is missing; only the field is on you. A

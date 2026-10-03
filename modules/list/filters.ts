@@ -100,36 +100,12 @@ const parseAsWord = <T extends string>(words: Record<string, T>) =>
 /**
  * Every filter, whole: where it lives in the URL, how it reads from there and
  * what it asks of a car. Mapped over `Filters`, so a new filter does not
- * compile until it has all three.
+ * compile until it has all three. In the order the chips stand in, which the
+ * filter suggestions keep as well.
  */
 export const filterDefinitions: {
   [Key in keyof Filters]-?: FilterDefinition<Key>
 } = {
-  acceleration: {
-    urlKey: 'hrodun',
-    parser: parseAsPositive,
-    test: (max) => (car) => car.acceleration <= max,
-  },
-  availability: {
-    urlKey: 'frambod',
-    parser: parseAsWord<Availability>({
-      faanlegir: 'available',
-      vaentanlegir: 'expected',
-    }),
-    test: (availability) => (car) => car.availability === availability,
-  },
-  drive: {
-    urlKey: 'drif',
-    parser: parseAsList((entry): entry is Drive =>
-      (drives as ReadonlyArray<string>).includes(entry),
-    ),
-    test: (drives) => (car) => drives.includes(car.drive),
-  },
-  fastcharge: {
-    urlKey: 'hradhledsla',
-    parser: parseAsPositive,
-    test: (min) => (car) => car.kmPerMinuteCharged >= min,
-  },
   name: {
     urlKey: 'nafn',
     parser: parseAsList((entry): entry is string => entry !== ''),
@@ -156,16 +132,41 @@ export const filterDefinitions: {
     parser: parseAsSeats,
     test: (min) => (car) => car.seats >= min,
   },
+  drive: {
+    urlKey: 'drif',
+    parser: parseAsList((entry): entry is Drive =>
+      (drives as ReadonlyArray<string>).includes(entry),
+    ),
+    test: (drives) => (car) => drives.includes(car.drive),
+  },
+  acceleration: {
+    urlKey: 'hrodun',
+    parser: parseAsPositive,
+    test: (max) => (car) => car.acceleration <= max,
+  },
   value: {
     urlKey: 'virdi',
     parser: parseAsKronur,
     test: (max) => (car) => car.pricePerKm <= max,
   },
+  fastcharge: {
+    urlKey: 'hradhledsla',
+    parser: parseAsPositive,
+    test: (min) => (car) => car.kmPerMinuteCharged >= min,
+  },
+  availability: {
+    urlKey: 'frambod',
+    parser: parseAsWord<Availability>({
+      faanlegir: 'available',
+      vaentanlegir: 'expected',
+    }),
+    test: (availability) => (car) => car.availability === availability,
+  },
 }
 
-type FilterKey = keyof Filters
+export type FilterKey = keyof Filters
 
-const filterKeys = Object.keys(filterDefinitions) as Array<FilterKey>
+export const filterKeys = Object.keys(filterDefinitions) as Array<FilterKey>
 
 const mapDefinitions = <T>(
   pick: (definition: FilterDefinition<FilterKey>) => T,
