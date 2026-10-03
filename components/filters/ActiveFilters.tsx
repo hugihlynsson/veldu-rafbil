@@ -1,4 +1,4 @@
-import { Filters } from '@/types'
+import type { Filters } from '@/modules/list/filters'
 import addDecimalSeprators from '@/modules/copy/addDecimalSeparators'
 import { agree } from '@/modules/copy/plural'
 import SearchIcon from '@/components/SearchIcon'

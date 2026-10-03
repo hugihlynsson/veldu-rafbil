@@ -12,7 +12,7 @@ import {
   readSuggestions,
   suggestionsFromFilters,
 } from './filterIntent'
-import { NewCar } from '@/types'
+import type { NewCar } from '@/modules/data/newCarSchema'
 
 const read = (text: string) => parseFilterIntent(text).filters
 

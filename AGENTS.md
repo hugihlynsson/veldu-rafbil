@@ -100,7 +100,7 @@ brochure directly.
 
 `NewCar` is inferred from the Zod schema in `modules/data/newCarSchema.ts`, and
 `newCars.test.ts` checks every entry against it. A field is added there, with
-its bounds, rather than in `types.ts`.
+its bounds, rather than as a type of its own.
 
 Never re-derive a car field. Read cars through `modules/data/cars.ts`, whose `Car`
 already carries `id`, `label`, `priceWithGrant`, `pricePerKm` and

@@ -1,4 +1,4 @@
-import { NewCar } from '@/types'
+import type { NewCar } from './newCarSchema'
 
 const newCars: Array<NewCar> = [
   {

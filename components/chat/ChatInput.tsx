@@ -10,7 +10,7 @@ import { MAX_QUESTION_LENGTH } from '@/modules/chat/message'
 import useInputModality, { getInputModality } from '@/utils/inputModality'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
-import type { Filters } from '@/types'
+import type { Filters } from '@/modules/list/filters'
 import SuggestionPills from '@/components/SuggestionPills'
 
 // The parser and its patterns are fetched once someone focuses the input,

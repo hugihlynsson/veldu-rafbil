@@ -1,6 +1,7 @@
 import { useQueryStates } from 'nuqs'
 
-import { Filters, Sorting } from '@/types'
+import type { Filters } from '@/modules/list/filters'
+import type { Sorting } from '@/modules/list/sorting'
 import {
   FilterValues,
   filterParsers,

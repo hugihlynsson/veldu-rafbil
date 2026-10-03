@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { trackEvent } from 'fathom-client'
 import Image from 'next/image'
 
-import { Drive } from '@/types'
+import type { Drive } from '@/modules/data/newCarSchema'
 import { Car } from '@/modules/data/cars'
 import addDecimalSeprators from '@/modules/copy/addDecimalSeparators'
 import { formatKmPerMinutesCharged } from '@/modules/data/getKmPerMinutesCharged'
