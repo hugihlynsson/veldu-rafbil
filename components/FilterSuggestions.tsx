@@ -9,7 +9,7 @@ import {
   parseFilterIntent,
   rankSuggestions,
   readSuggestions,
-  pendingSuggestions,
+  suggestionsFromFilters,
   withSuggestion,
 } from '@/modules/filterIntent'
 import { agree } from '@/modules/plural'
@@ -28,8 +28,9 @@ interface Props {
 
 /**
  * Pills for the filters the text asks for, each to be tapped rather than
- * applied, as a wrong one quietly empties the list. What the text says
- * outright is read here as it is typed; only what is left goes to the route.
+ * applied, as a wrong one quietly empties the list. They change once per
+ * pause in typing: what the text says outright, and the model's reading of
+ * the rest when there is any, arrive together rather than one after the other.
  */
 export default function FilterSuggestions({
   active,
@@ -37,21 +38,31 @@ export default function FilterSuggestions({
   filters,
   onApply,
 }: Props) {
-  const [answer, setAnswer] = useState<{
+  const [shown, setShown] = useState<{
     text: string
     suggestions: FilterSuggestion[]
-  }>()
+  }>({ text: '', suggestions: [] })
 
   // The route refuses a longer one, and the parser reads no further
   const request = active ? text.trim().slice(0, MAX_INTENT_LENGTH) : ''
-  const parsed = parseFilterIntent(request)
-  const asksModel = request !== '' && needsModel(parsed)
+
+  // Cleared or left, the pills go at once rather than after the pause
+  if (request === '' && shown.text !== '') {
+    setShown({ text: '', suggestions: [] })
+  }
 
   useEffect(() => {
-    if (!asksModel) return
+    if (request === '') return
 
+    const parsed = parseFilterIntent(request)
+    const read = suggestionsFromFilters(parsed.filters, 'text')
     const controller = new AbortController()
+
     const timer = setTimeout(async () => {
+      if (!needsModel(parsed)) {
+        setShown({ text: request, suggestions: read })
+        return
+      }
       try {
         const response = await fetch('/api/filter-suggestions', {
           method: 'POST',
@@ -59,13 +70,19 @@ export default function FilterSuggestions({
           body: JSON.stringify({ text: request }),
           signal: controller.signal,
         })
-        if (!response.ok) return
-        setAnswer({
+        // The route sends back what the text says along with the guesses
+        setShown({
           text: request,
-          suggestions: readSuggestions(await response.json()),
+          suggestions: response.ok
+            ? readSuggestions(await response.json())
+            : read,
         })
       } catch {
-        // Aborted by the next keystroke, or offline: the text's pills stand
+        // Offline or failed, the text's own reading still stands; aborted, a
+        // later keystroke has its own request coming
+        if (!controller.signal.aborted) {
+          setShown({ text: request, suggestions: read })
+        }
       }
     }, 300)
 
@@ -73,16 +90,10 @@ export default function FilterSuggestions({
       clearTimeout(timer)
       controller.abort()
     }
-  }, [request, asksModel])
+  }, [request])
 
-  // Guesses about text since cleared are no help with what is typed next
-  if (request === '' && answer) setAnswer(undefined)
-
-  const answered = answer?.text === request
   const { suggestions, combined, count } = rankSuggestions(
-    answered
-      ? answer.suggestions
-      : pendingSuggestions(parsed, asksModel ? answer?.suggestions : []),
+    shown.suggestions,
     filters,
   )
 
