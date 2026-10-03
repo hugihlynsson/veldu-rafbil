@@ -50,16 +50,17 @@ export default function CarList() {
   const { filters, setFilters, removeFilter } = useFilters()
 
   const [editingFilters, setEditingFilters] = useState<boolean>(false)
-  const activeFiltersRef = useRef<HTMLDivElement>(null)
+  const controlsRef = useRef<HTMLDivElement>(null)
 
   // A suggested filter replaces the cars under the reader, so a place halfway
-  // down the old list means nothing: bring back the chips, and the start of the
-  // new list, when they have been scrolled past. Focus stays in the chat input.
+  // down the old list means nothing: bring back the sorting and the filters,
+  // and the start of the new list, when they have been scrolled past. Focus
+  // stays in the chat input.
   const applySuggestedFilters = (next: Filters) => {
     setFilters(next)
-    const chips = activeFiltersRef.current
-    if (chips && chips.getBoundingClientRect().top < 0) {
-      chips.scrollIntoView({
+    const controls = controlsRef.current
+    if (controls && controls.getBoundingClientRect().top < 0) {
+      controls.scrollIntoView({
         behavior: prefersReducedMotion() ? 'auto' : 'smooth',
         block: 'start',
       })
@@ -105,7 +106,11 @@ export default function CarList() {
           </span>
         </p>
 
-        <div id="sorting-label" className="mb-2 text-sm font-semibold">
+        <div
+          ref={controlsRef}
+          id="sorting-label"
+          className="mb-2 text-sm font-semibold scroll-mt-4"
+        >
           Raða eftir:
         </div>
 
@@ -134,7 +139,6 @@ export default function CarList() {
         />
 
         <ActiveFilters
-          ref={activeFiltersRef}
           filters={filters}
           onRemoveFilter={removeFilter}
           onOpenFilterModal={() => setEditingFilters(true)}
