@@ -1,5 +1,5 @@
 /**
- * Scores the filter suggestions against modules/filterIntentCases.ts: the
+ * Scores the filter suggestions against app/api/filter-suggestions/cases.ts: the
  * parser alone, and, when TYPESAFE_API_KEY is set, the parser with Jev.
  *
  *   npx tsx --env-file=.env.local scripts/eval-filter-intent.ts [--verbose]
@@ -11,16 +11,19 @@
 import { TypeSafeClient } from '@typesafe-ai/sdk'
 
 import { Filters } from '@/types'
-import { filterDefinitions } from '@/modules/filters'
-import { parseFilterIntent, rankSuggestions } from '@/modules/filterIntent'
+import { filterDefinitions } from '@/modules/list/filters'
+import { parseFilterIntent, rankSuggestions } from '@/modules/list/filterIntent'
 import {
   CaseScore,
   IntentCase,
   intentCases,
   scoreCase,
   summarize,
-} from '@/modules/filterIntentCases'
-import { suggestFilters, type AskModel } from '@/modules/filterIntentModel'
+} from '@/app/api/filter-suggestions/cases'
+import {
+  suggestFilters,
+  type AskModel,
+} from '@/app/api/filter-suggestions/model'
 
 const verbose = process.argv.includes('--verbose')
 

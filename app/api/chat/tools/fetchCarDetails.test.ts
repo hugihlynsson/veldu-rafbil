@@ -4,7 +4,7 @@ import {
   createFetchCarDetailsTool,
   MAX_CALLS_PER_ANSWER,
 } from './fetchCarDetails'
-import newCars from '@/modules/newCars'
+import newCars from '@/modules/data/newCars'
 
 type Tool = ReturnType<typeof createFetchCarDetailsTool>
 

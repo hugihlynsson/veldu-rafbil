@@ -2,8 +2,8 @@ import { existsSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 
 import nextConfig from './next.config'
-import { serializeFilters } from './modules/filters'
-import { serializeSorting } from './modules/sorting'
+import { serializeFilters } from './modules/list/filters'
+import { serializeSorting } from './modules/list/sorting'
 import { Filters } from './types'
 
 // Where a visit to / with this query is served from: the rewrite's

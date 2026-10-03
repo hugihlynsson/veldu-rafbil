@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next'
 
-import { filterUrlKeys } from './modules/filters'
-import { sortingUrlKeys } from './modules/sorting'
+import { filterUrlKeys } from './modules/list/filters'
+import { sortingUrlKeys } from './modules/list/sorting'
 
 // Every parameter that changes what the list shows, read from the tables nuqs
 // reads, so a new filter is rendered per request without being listed here

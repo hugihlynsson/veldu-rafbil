@@ -3,9 +3,9 @@ import { trackEvent } from 'fathom-client'
 import Image from 'next/image'
 
 import { Drive } from '@/types'
-import { Car } from '@/modules/cars'
-import addDecimalSeprators from '@/modules/addDecimalSeparators'
-import { formatKmPerMinutesCharged } from '@/modules/getKmPerMinutesCharged'
+import { Car } from '@/modules/data/cars'
+import addDecimalSeprators from '@/modules/copy/addDecimalSeparators'
+import { formatKmPerMinutesCharged } from '@/modules/data/getKmPerMinutesCharged'
 import LinkPill from './LinkPill'
 
 interface Props {

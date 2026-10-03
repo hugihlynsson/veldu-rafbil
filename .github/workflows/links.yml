@@ -37,7 +37,7 @@ jobs:
             --host-request-interval 1s
             --max-retries 3
             --timeout 30
-            modules/newCars.ts
+            modules/data/newCars.ts
           fail: false
 
       # One issue, updated each week until the links are fixed
@@ -57,4 +57,4 @@ jobs:
       - if: steps.lychee.outputs.exit_code == 0 && steps.open.outputs.number
         run: >-
           gh issue close ${{ steps.open.outputs.number }}
-          --comment 'Every link in modules/newCars.ts answers again.'
+          --comment 'Every link in modules/data/newCars.ts answers again.'

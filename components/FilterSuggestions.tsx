@@ -11,8 +11,8 @@ import {
   readSuggestions,
   suggestionsFromFilters,
   withSuggestion,
-} from '@/modules/filterIntent'
-import { agree } from '@/modules/plural'
+} from '@/modules/list/filterIntent'
+import { agree } from '@/modules/copy/plural'
 import { filterChipText } from './ActiveFilters'
 import SearchIcon from './SearchIcon'
 import SuggestionPills, { type Pill } from './SuggestionPills'

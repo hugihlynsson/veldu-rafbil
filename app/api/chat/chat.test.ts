@@ -11,14 +11,14 @@ import {
 } from 'ai/test'
 
 import { parseChatRequest, streamChat, type ChatFinish } from './chat'
-import cars from '@/modules/cars'
-import { carRef } from '@/modules/chatCars'
+import cars from '@/modules/data/cars'
+import { carRef } from '@/modules/chat/cars'
 import {
   MAX_QUESTION_LENGTH,
   MAX_TAGGED_CARS,
   type ChatMessage,
-} from '@/modules/chatMessage'
-import { trimHistory } from '@/modules/chatRequest'
+} from '@/modules/chat/message'
+import { trimHistory } from '@/modules/chat/request'
 
 const question: ChatMessage = {
   id: 'q1',

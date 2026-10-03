@@ -7,12 +7,12 @@ import {
   filterUrlKeys,
   filtersFromValues,
   valuesFromFilters,
-} from '@/modules/filters'
+} from '@/modules/list/filters'
 import {
   sortingParsers,
   sortingUrlKeys,
   stateFromSortingValues,
-} from '@/modules/sorting'
+} from '@/modules/list/sorting'
 
 // Shallow, and replacing rather than pushing, both nuqs defaults: a sort or a
 // filter is a view of the one page, not a page of its own to go back to
