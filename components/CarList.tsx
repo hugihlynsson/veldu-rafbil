@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 
@@ -16,6 +16,7 @@ import { Filters, Sorting } from '@/types'
 import { sortCars } from '@/modules/sorting'
 import { agree } from '@/modules/plural'
 import { grantAmountText, grantCeilingText } from '@/modules/grantCopy'
+import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import useBodyScrollLock from '@/utils/useBodyScrollLock'
 import { useFilters, useSorting } from '@/utils/useListState'
 
@@ -49,6 +50,21 @@ export default function CarList() {
   const { filters, setFilters, removeFilter } = useFilters()
 
   const [editingFilters, setEditingFilters] = useState<boolean>(false)
+  const activeFiltersRef = useRef<HTMLDivElement>(null)
+
+  // A suggested filter replaces the cars under the reader, so a place halfway
+  // down the old list means nothing: bring back the chips, and the start of the
+  // new list, when they have been scrolled past. Focus stays in the chat input.
+  const applySuggestedFilters = (next: Filters) => {
+    setFilters(next)
+    const chips = activeFiltersRef.current
+    if (chips && chips.getBoundingClientRect().top < 0) {
+      chips.scrollIntoView({
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+        block: 'start',
+      })
+    }
+  }
 
   useBodyScrollLock(editingFilters)
 
@@ -118,6 +134,7 @@ export default function CarList() {
         />
 
         <ActiveFilters
+          ref={activeFiltersRef}
           filters={filters}
           onRemoveFilter={removeFilter}
           onOpenFilterModal={() => setEditingFilters(true)}
@@ -176,7 +193,7 @@ export default function CarList() {
           if (!carFilter(filters)(car)) setFilters(filtersShowing(filters, car))
         }}
         filters={filters}
-        onApplyFilters={setFilters}
+        onApplyFilters={applySuggestedFilters}
       />
     </div>
   )
