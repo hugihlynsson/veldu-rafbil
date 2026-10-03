@@ -96,6 +96,12 @@ export default function FilterSuggestions({
     shown.suggestions,
     filters,
   )
+  const hasSuggestions = suggestions.length > 0
+
+  // Once each time the pills appear, as what the taps are counted against
+  useEffect(() => {
+    if (hasSuggestions) trackEvent('Shown filter suggestions')
+  }, [hasSuggestions])
 
   const pills: Pill[] = suggestions.map((suggestion) => {
     const { label, value } = filterChipText(suggestion.key, suggestion.value)
@@ -148,7 +154,15 @@ export default function FilterSuggestions({
     pill.enterDelay = (pills.length - 1 - index) * 0.06
   })
 
-  return <SuggestionPills label="Tillögur að síum" pills={pills} />
+  return (
+    <>
+      <div aria-live="polite" className="sr-only">
+        {hasSuggestions &&
+          `${suggestions.length} ${agree(suggestions.length, 'tillaga að síu', 'tillögur að síum')}`}
+      </div>
+      <SuggestionPills label="Tillögur að síum" pills={pills} />
+    </>
+  )
 }
 
 const CarCount = ({ count }: { count: number }) => (

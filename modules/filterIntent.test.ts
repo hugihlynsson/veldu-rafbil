@@ -5,10 +5,12 @@ import {
   FilterSuggestion,
   foldText,
   MAX_INTENT_LENGTH,
+  MAX_SUGGESTIONS,
   needsModel,
   parseFilterIntent,
   rankSuggestions,
   readSuggestions,
+  suggestionsFromFilters,
 } from './filterIntent'
 import { NewCar } from '@/types'
 
@@ -209,6 +211,38 @@ describe('rankSuggestions', () => {
     )
     expect(combined).toEqual({ drive: ['AWD'], price: 8_000_000 })
     expect(count).toBe(1)
+  })
+
+  it('offers no more than fit, and adds together only those', () => {
+    const { suggestions, combined } = rankSuggestions(
+      [
+        text({ key: 'drive', value: ['AWD'] }),
+        text({ key: 'seats', value: 5 }),
+        text({ key: 'price', value: 20_000_000 }),
+        text({ key: 'range', value: 100 }),
+        text({ key: 'acceleration', value: 20 }),
+      ],
+      {},
+      list,
+    )
+    expect(suggestions).toHaveLength(MAX_SUGGESTIONS)
+    expect(combined).not.toHaveProperty('acceleration')
+  })
+
+  it('keeps price, range and seats when the text says more than fits', () => {
+    const { filters } = parseFilterIntent(
+      '7 sæta fjórhjóladrifinn undir 10 milljónum 500 km drægni fáanlegur strax 15 km/min 0-100 undir 5 sek',
+    )
+    const { suggestions } = rankSuggestions(
+      suggestionsFromFilters(filters, 'text'),
+      {},
+    )
+    expect(suggestions.map(({ key }) => key)).toEqual([
+      'price',
+      'range',
+      'seats',
+      'drive',
+    ])
   })
 })
 
