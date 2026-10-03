@@ -3,8 +3,15 @@
 /* Every colour in the UI is one of these roles, and the block below is the
    only place a role takes a different value. A component asks for the role it
    means — `bg-lab`, `text-stone`, `border-line` — and never for a theme, so
-   there is no `dark:` variant anywhere in `components/`. */
+   there is no `dark:` variant anywhere in `components/`. Tailwind's own
+   colours, radii and shadows are cleared, so `bg-gray-100` or `shadow-md`
+   generates nothing rather than a value that ignores the dark block, the
+   corner scaling or the shadows' overrides. */
 @theme {
+  --color-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+
   /* Brand. `sky` and the white on it are the same in both themes — the blue is
      the one thing on the page that should not shift. Only the hover moves,
      since a darker blue on a dark page reads as nothing happening. `focus` is
@@ -32,9 +39,10 @@
   --color-raised: #fff; /* a control lifted off a tinted track */
   --color-track: rgb(0 0 0 / 0.04); /* that track: the sorting tabs */
 
-  /* Lines */
+  /* Lines. A divider is decoration; the edge of a field is how anyone finds
+     it, so `line-strong` clears 3:1 on white and on `haze` */
   --color-line: #eee; /* a divider */
-  --color-line-strong: #ddd; /* the edge of something you can click or type in */
+  --color-line-strong: #8f8f8f; /* the edge of something you can click or type in */
 
   /* Overlays. `scrim` is the page's own ink, so `bg-scrim/6` is a tint in
      light and a wash in dark without either one naming a colour */
@@ -71,6 +79,11 @@
   --radius-toggle: calc(10px * var(--corner));
   --radius-card: calc(14px * var(--corner));
   --radius-sheet: calc(20px * var(--corner));
+}
+
+/* Inline, as the face is a variable next/font sets on <html> */
+@theme inline {
+  --font-sans: var(--font-inter), sans-serif;
 }
 
 /* Shadows are deliberately not `@theme`: Tailwind inlines a theme shadow into
@@ -171,34 +184,34 @@
   }
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  min-height: 100vh;
-}
-
-body {
-  margin: 0;
-  color: var(--color-tint);
-  background-color: var(--color-lab);
-  width: 100%;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-button,
-input {
-  font-family: var(--font-inter), sans-serif;
-}
-
-/* Controls here are appearance-none, so there is no default ring to draw. In
-   the base layer, or it outranks a control that draws its own. */
+/* In the base layer like everything global: a rule outside a layer outranks
+   every utility, whatever its specificity */
 @layer base {
+  :root {
+    /* Both themes, so the number spinners, the select menu, the scrollbars
+       and the caret follow the page rather than staying white under it */
+    color-scheme: light dark;
+    /* Kept up to date by utils/useKeyboardInset while a phone keyboard is up */
+    --keyboard-inset: 0px;
+    font-feature-settings:
+      'liga' 1,
+      'calt' 1; /* fix for Chrome */
+  }
+
+  html {
+    min-height: 100vh;
+  }
+
+  body {
+    color: var(--color-tint);
+    background-color: var(--color-lab);
+    width: 100%;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Controls here are appearance-none, so there is no default ring to draw */
   :focus-visible {
     outline: 2px solid var(--color-focus);
     outline-offset: 2px;
@@ -224,18 +237,6 @@ input {
       corner-shape: round;
     }
   }
-}
-
-:root {
-  /* Both themes, so the number spinners, the select menu, the scrollbars and
-     the caret follow the page rather than staying white under it */
-  color-scheme: light dark;
-  /* Kept up to date by utils/useKeyboardInset while a phone keyboard is up */
-  --keyboard-inset: 0px;
-  font-family: var(--font-inter), sans-serif;
-  font-feature-settings:
-    'liga' 1,
-    'calt' 1; /* fix for Chrome */
 }
 
 @media (prefers-reduced-motion: reduce) {
