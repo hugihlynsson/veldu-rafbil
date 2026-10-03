@@ -47,7 +47,7 @@ const START = String.raw`(?<![\p{L}\p{N}])`
 const END = String.raw`(?![\p{L}\p{N}])`
 const NUM = String.raw`(\d+(?:[.,]\d+)*)`
 const SMALL = String.raw`(\d|${Object.keys(numberWords).join('|')})`
-const MILLION = String.raw`(?:m\.?\s?kr\.?|mkr|milljon\w*|miljon\w*|millj\w*|milj\w*|millu\w*|millur|m)`
+const MILLION = String.raw`(?:m\.?\s?kr\.?|mkr|milljon\w*|miljon\w*|millj\w*|milj\w*|millu\w*|millur|mill\.?|m)`
 const KRONUR = String.raw`(?:kr\.?|kronur\w*|isk)`
 
 const pattern = (source: string) => new RegExp(source, 'gu')
@@ -421,6 +421,23 @@ export const suggestionsFromFilters = (
       ? []
       : [{ key, value: filters[key], source, probability } as FilterSuggestion],
   )
+
+/**
+ * What to show while the model is asked about changed text: what the text now
+ * says outright, and the model's last guesses for the filters it does not.
+ * Dropping those guesses until the answer comes would make the pills change
+ * twice, once down to the text's and once back up.
+ */
+export const pendingSuggestions = (
+  parsed: ParsedIntent,
+  previous: ReadonlyArray<FilterSuggestion> = [],
+): FilterSuggestion[] => [
+  ...suggestionsFromFilters(parsed.filters, 'text'),
+  ...previous.filter(
+    ({ key, source }) =>
+      source === 'model' && parsed.filters[key] === undefined,
+  ),
+]
 
 export const withSuggestion = (
   filters: Filters,
