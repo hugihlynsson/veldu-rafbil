@@ -1,13 +1,11 @@
 /**
  * Scores the filter suggestions against modules/filterIntentCases.ts: the
- * parser alone, and, when TYPESAFE_API_KEY is set, the parser with Jev. The
- * requests are Icelandic either way; what changes between the two Jev runs is
- * the language of the instructions and options it is asked to choose from.
+ * parser alone, and, when TYPESAFE_API_KEY is set, the parser with Jev.
  *
- *   npx tsx --env-file=.env.local scripts/eval-filter-intent.ts [--verbose] [--language en|is]
+ *   npx tsx --env-file=.env.local scripts/eval-filter-intent.ts [--verbose]
  *
  * Each case the parser cannot finish is a real, billed request, of about
- * 1,200 input tokens. Jev's answers vary a little from run to run, so a
+ * 1,600 input tokens. Jev's answers vary a little from run to run, so a
  * difference of a few cases between two runs is noise rather than a result.
  */
 import { TypeSafeClient } from '@typesafe-ai/sdk'
@@ -22,18 +20,9 @@ import {
   scoreCase,
   summarize,
 } from '@/modules/filterIntentCases'
-import {
-  suggestFilters,
-  type AskModel,
-  type Language,
-} from '@/modules/filterIntentModel'
+import { suggestFilters, type AskModel } from '@/modules/filterIntentModel'
 
 const verbose = process.argv.includes('--verbose')
-const languageArgument = process.argv[process.argv.indexOf('--language') + 1]
-const languages: Language[] =
-  languageArgument === 'en' || languageArgument === 'is'
-    ? [languageArgument]
-    : ['en', 'is']
 
 interface Run {
   name: string
@@ -135,9 +124,9 @@ const parserOnly = (): Run => {
   return run
 }
 
-const withModel = async (client: TypeSafeClient, language: Language) => {
+const withModel = async (client: TypeSafeClient) => {
   const run: Run = {
-    name: `Parser + Jev, Icelandic requests, instructions in ${language === 'en' ? 'English' : 'Icelandic'}`,
+    name: 'Parser + Jev',
     scores: [],
     millis: [],
     inputTokens: 0,
@@ -168,7 +157,7 @@ const withModel = async (client: TypeSafeClient, language: Language) => {
       return result
     }
 
-    const result = await suggestFilters(testCase.text, ask, language)
+    const result = await suggestFilters(testCase.text, ask)
     if (millis !== undefined) run.millis.push(millis)
     run.statuses[result.model] = (run.statuses[result.model] ?? 0) + 1
     // As the chips would offer them on an unfiltered list
@@ -192,7 +181,7 @@ const main = async () => {
   }
 
   const client = new TypeSafeClient({ retry: { maxRetries: 0 } })
-  for (const language of languages) await withModel(client, language)
+  await withModel(client)
 }
 
 main().catch((error) => {

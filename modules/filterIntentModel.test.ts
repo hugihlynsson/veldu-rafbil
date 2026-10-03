@@ -49,12 +49,10 @@ describe('the brackets, over the car data', () => {
     },
   )
 
-  it('names its numbers the same in both languages', () => {
+  it('names the figure a bracket filters on', () => {
     const price = buildIntentQuestions().price!
     const cheap = price.options.at(-1)!
-    const millions = (cheap.value / 1_000_000).toFixed(1)
-    expect(cheap.description.en).toContain(millions)
-    expect(cheap.description.is).toContain(millions.replace('.', ','))
+    expect(cheap.description).toContain((cheap.value / 1_000_000).toFixed(1))
   })
 })
 
@@ -73,12 +71,12 @@ describe('intentRequest', () => {
   })
 
   it('gives every question a way to say it does not apply', () => {
-    const { questions } = intentRequest('ódýr', [], 'is')
+    const { questions } = intentRequest('ódýr', [])
     for (const question of Object.values(questions)) {
       expect(question.type).toBe('choice')
       expect(Object.keys(question.criteria)[0]).toBe('none')
     }
-    expect(questions.drive.instructions).toContain('drif')
+    expect(questions.drive.instructions).toContain('drive')
   })
 })
 

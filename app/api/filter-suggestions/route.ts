@@ -9,9 +9,10 @@ import { suggestFilters, type AskModel } from '@/modules/filterIntentModel'
 // (October 2026, two runs): with the parser it gets 114–115 exactly right to
 // the parser's 62, at 96–97% precision and 97–98% recall, p95 ~300 ms, ~1,600
 // input tokens a request. 16 of the 18 held-out cases, which the wording was
-// not tuned on, to 11 before it was. Asked in Icelandic it scores the same
-// within run-to-run noise on ~28% more tokens, so the questions stay English,
-// with the Icelandic words for each filter glossed in them. Re-run
+// not tuned on, to 11 before it was. Asked in Icelandic it scored the same
+// within run-to-run noise on ~28% more tokens, so the questions are English,
+// with the Icelandic words for each filter glossed in them (the Icelandic set
+// is in 48af344, should a later model do better with it). Re-run
 // scripts/eval-filter-intent.ts before following "latest" to a new model.
 const modelName = 'jev-latest'
 
