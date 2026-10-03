@@ -4,7 +4,7 @@ const controlClasses =
   'border border-line-strong rounded-xl bg-surface p-[11px] text-base font-normal text-tint mb-6 transition-all duration-200 placeholder:text-clay hover:border-clay'
 
 const selectClasses =
-  'appearance-none border border-line-strong bg-surface rounded-xl p-[11px] text-base font-normal text-tint mb-6 cursor-pointer hover:border-clay'
+  'appearance-none w-full border border-line-strong bg-surface rounded-xl p-[11px] pr-10 text-base font-normal text-tint cursor-pointer hover:border-clay'
 
 interface LabelProps {
   id: string
@@ -91,18 +91,38 @@ export const FilterSelect: React.FunctionComponent<SelectProps> = ({
   onKeyDown,
 }) => (
   <Field id={id} label={label}>
-    <select
-      id={id}
-      onChange={onChange}
-      onKeyDown={onKeyDown}
-      value={value}
-      className={selectClasses}
-    >
-      {options.map(([optionValue, optionLabel]) => (
-        <option key={optionValue} value={optionValue}>
-          {optionLabel}
-        </option>
-      ))}
-    </select>
+    {/* appearance-none takes the browser's chevron, which is all that tells a
+        select from a text field, so it is drawn back */}
+    <div className="relative mb-6">
+      <select
+        id={id}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        value={value}
+        className={selectClasses}
+      >
+        {options.map(([optionValue, optionLabel]) => (
+          <option key={optionValue} value={optionValue}>
+            {optionLabel}
+          </option>
+        ))}
+      </select>
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 12 12"
+        fill="none"
+        aria-hidden="true"
+        className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-stone"
+      >
+        <path
+          d="m2.5 4.5 3.5 3.5 3.5-3.5"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
   </Field>
 )

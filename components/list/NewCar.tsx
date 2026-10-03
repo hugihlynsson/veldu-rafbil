@@ -152,7 +152,7 @@ const NewCar: FunctionComponent<Props> = ({
 
         {car.evDatabaseUrl && (
           <a
-            className="inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-stone"
+            className="inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-tint"
             target="_blank"
             href={car.evDatabaseUrl}
             rel="noopener"
