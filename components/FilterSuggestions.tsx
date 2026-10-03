@@ -127,6 +127,10 @@ export default function FilterSuggestions({
       key: 'all',
       content: (
         <>
+          <SearchIcon
+            size={13}
+            className="inline-block align-[-1px] mr-2 text-scrim/60"
+          />
           {addAll}
           <CarCount count={count} />
         </>
