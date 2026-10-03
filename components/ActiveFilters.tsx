@@ -1,3 +1,4 @@
+import type React from 'react'
 import { Filters } from '@/types'
 import addDecimalSeprators from '@/modules/addDecimalSeparators'
 import { agree } from '@/modules/plural'
@@ -126,9 +127,11 @@ interface FilterButtonsProps {
   onRemoveFilter: (name: keyof Filters) => void
   onOpenFilterModal: () => void
   filteredCarsCount: number
+  ref?: React.Ref<HTMLDivElement>
 }
 
 const ActiveFilters = ({
+  ref,
   filters,
   onRemoveFilter,
   onOpenFilterModal,
@@ -137,7 +140,7 @@ const ActiveFilters = ({
   const hasFilter = Object.values(filters).length > 0
 
   return (
-    <div className="mt-5">
+    <div ref={ref} className="mt-5 scroll-mt-4">
       {hasFilter && (
         <div className="mb-2 text-sm font-semibold">
           {filteredCarsCount}{' '}
