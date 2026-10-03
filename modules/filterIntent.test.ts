@@ -7,7 +7,6 @@ import {
   MAX_INTENT_LENGTH,
   needsModel,
   parseFilterIntent,
-  pendingSuggestions,
   rankSuggestions,
   readSuggestions,
 } from './filterIntent'
@@ -144,46 +143,6 @@ const ranked = (suggestions: FilterSuggestion[], current = {}) =>
   rankSuggestions(suggestions, current, list).suggestions.map(
     ({ key, count }) => [key, count],
   )
-
-describe('pendingSuggestions', () => {
-  const guess = (key: 'price' | 'seats', value: number): FilterSuggestion => ({
-    key,
-    value,
-    source: 'model',
-    probability: 0.8,
-  })
-
-  it('keeps the last guesses while the text is asked about again', () => {
-    expect(
-      pendingSuggestions(parseFilterIntent('fjölskyldubíll, awd'), [
-        guess('seats', 7),
-      ]),
-    ).toEqual([
-      { key: 'drive', value: ['AWD'], source: 'text', probability: 1 },
-      guess('seats', 7),
-    ])
-  })
-
-  it('lets what the text now says replace a guess for the same filter', () => {
-    expect(
-      pendingSuggestions(parseFilterIntent('undir 8 milljónum'), [
-        guess('price', 6_000_000),
-      ]),
-    ).toEqual([
-      { key: 'price', value: 8_000_000, source: 'text', probability: 1 },
-    ])
-  })
-
-  it('leaves out what the last answer read from the text', () => {
-    expect(
-      pendingSuggestions(parseFilterIntent('awd'), [
-        { key: 'seats', value: 7, source: 'text', probability: 1 },
-      ]),
-    ).toEqual([
-      { key: 'drive', value: ['AWD'], source: 'text', probability: 1 },
-    ])
-  })
-})
 
 describe('rankSuggestions', () => {
   it('puts the text first, then the likeliest guess', () => {
