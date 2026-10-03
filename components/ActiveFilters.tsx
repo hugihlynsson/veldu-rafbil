@@ -136,7 +136,7 @@ const ActiveFilters = ({
           </button>
         ))}
         <button
-          className="flex justify-center items-center shrink-0 gap-1.5 py-2 pr-4 pl-3 border-0 rounded-full text-[13px] font-semibold cursor-pointer text-center bg-scrim/6 transition-all duration-200 text-tint hover:bg-scrim/9 active:scale-[0.98]"
+          className="flex justify-center items-center shrink-0 gap-1.5 py-2 pr-4 pl-3 border-0 rounded-full text-[13px] font-semibold cursor-pointer text-center bg-cloud transition-all duration-200 text-tint hover:bg-smoke active:scale-[0.98]"
           onClick={onOpenFilterModal}
         >
           <SearchIcon size={15} className="opacity-70" />
