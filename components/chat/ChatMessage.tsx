@@ -3,8 +3,7 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { useEffect } from 'react'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { ChatMessage as Message } from '@/modules/chat/message'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import clsx from 'clsx'
@@ -21,17 +20,18 @@ const ChatMessage: React.FunctionComponent<Props> = ({
   animate,
 }) => {
   const ref = useRef<HTMLDivElement>(null)
+  // As it was on arrival: a question scrolls into view once, and not again
+  // when a later one makes it the last no longer
+  const [scrollsOnArrival] = useState(isLastUserMessage)
 
   useEffect(() => {
-    if (isLastUserMessage) {
+    if (scrollsOnArrival) {
       ref.current?.scrollIntoView({
         behavior: prefersReducedMotion() ? 'auto' : 'smooth',
         block: 'start',
       })
     }
-    // Scrolls once, on arrival: the dependency would re-scroll an older one
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [scrollsOnArrival])
 
   const isUser = message.role === 'user'
 
