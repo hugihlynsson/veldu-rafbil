@@ -19,6 +19,29 @@ import SuggestionPills, { type Pill } from '@/components/SuggestionPills'
 
 const carCount = (count: number) => `${count} ${agree(count, 'bíll', 'bílar')}`
 
+/**
+ * What the route reads in the text, along with what the text says outright,
+ * or null when offline, failed or refused, where the text's own reading still
+ * stands. Apart from the component, which the React Compiler cannot compile
+ * around a try/catch holding a conditional.
+ */
+const askRoute = async (
+  text: string,
+  signal: AbortSignal,
+): Promise<FilterSuggestion[] | null> => {
+  try {
+    const response = await fetch('/api/filter-suggestions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text }),
+      signal,
+    })
+    return response.ok ? readSuggestions(await response.json()) : null
+  } catch {
+    return null
+  }
+}
+
 interface Props {
   /** Mounted on while hidden, so the pills it showed can play their exit */
   active: boolean
@@ -60,31 +83,12 @@ export default function FilterSuggestions({
     const controller = new AbortController()
 
     const timer = setTimeout(async () => {
-      if (!needsModel(parsed)) {
-        setShown({ text: request, suggestions: read })
-        return
-      }
-      try {
-        const response = await fetch('/api/filter-suggestions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text: request }),
-          signal: controller.signal,
-        })
-        // The route sends back what the text says along with the guesses
-        setShown({
-          text: request,
-          suggestions: response.ok
-            ? readSuggestions(await response.json())
-            : read,
-        })
-      } catch {
-        // Offline or failed, the text's own reading still stands; aborted, a
-        // later keystroke has its own request coming
-        if (!controller.signal.aborted) {
-          setShown({ text: request, suggestions: read })
-        }
-      }
+      const asked = needsModel(parsed)
+        ? await askRoute(request, controller.signal)
+        : null
+      // A later keystroke has its own request coming
+      if (controller.signal.aborted) return
+      setShown({ text: request, suggestions: asked ?? read })
     }, 100)
 
     return () => {

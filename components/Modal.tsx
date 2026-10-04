@@ -1,6 +1,13 @@
 'use client'
 
-import React, { ReactNode, useLayoutEffect, useRef, useState } from 'react'
+import React, {
+  ReactNode,
+  useEffect,
+  useEffectEvent,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react'
 import clsx from 'clsx'
 
 /**
@@ -62,18 +69,26 @@ const Modal: React.FunctionComponent<Props> = ({
     // A frame with the enter styles gives the transition something to move from
     const timer = setTimeout(() => setState('visible'), 1)
     return () => clearTimeout(timer)
-    // Opening happens once, on mount; a ref is not reactive
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    // Once, on mount: a ref object keeps its identity across renders
+  }, [initialFocusRef])
+
+  // Closing before unmount is what hands focus back to whatever opened us
+  const finishClosing = useEffectEvent(() => {
+    dialogRef.current?.close()
+    onDone()
+  })
+
+  // Here rather than in close: the children are handed close during render,
+  // so it reads no ref, and a second close while leaving finishes once
+  useEffect(() => {
+    if (state !== 'leaving') return
+    const timer = setTimeout(finishClosing, LEAVE_MS)
+    return () => clearTimeout(timer)
+  }, [state])
 
   const close = () => {
     setState('leaving')
     onLeave?.()
-    setTimeout(() => {
-      // Closing before unmount is what hands focus back to whatever opened us
-      dialogRef.current?.close()
-      onDone()
-    }, LEAVE_MS)
   }
 
   return (
