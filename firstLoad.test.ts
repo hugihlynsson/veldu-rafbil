@@ -19,16 +19,16 @@ const resolveLocal = (specifier: string, from: string): string | undefined => {
   )
 }
 
-/** Every package the file pulls into the chunk it is part of */
-const packagesImportedBy = (entry: string): Set<string> => {
+/** Every file and package the entry pulls into the chunk it is part of */
+const importedBy = (entry: string) => {
   const packages = new Set<string>()
-  const seen = new Set<string>()
+  const files = new Set<string>()
   const queue = [entry]
 
   while (queue.length > 0) {
     const file = queue.pop()!
-    if (seen.has(file)) continue
-    seen.add(file)
+    if (files.has(file)) continue
+    files.add(file)
 
     for (const [, specifier] of readFileSync(file, 'utf8').matchAll(
       staticImport,
@@ -42,8 +42,16 @@ const packagesImportedBy = (entry: string): Set<string> => {
     }
   }
 
-  return packages
+  return { files, packages }
 }
+
+/** The files the entry imports with import(), each a chunk loaded later */
+const loadedLaterBy = (entry: string): string[] =>
+  [
+    ...readFileSync(entry, 'utf8').matchAll(
+      /\bimport\(\s*['"]([^'"]+)['"]\s*\)/g,
+    ),
+  ].flatMap(([, specifier]) => resolveLocal(specifier, entry) ?? [])
 
 const heavyPackages = [
   'zod',
@@ -59,12 +67,13 @@ const importsOf = (packages: Set<string>, name: string): string[] =>
   )
 
 const carList = path.join(root, 'components/list/CarList.tsx')
+const lazyFromList = loadedLaterBy(carList)
 
 // The list is what every visitor downloads before the page responds; the chat
 // and its modal are loaded behind next/dynamic, and everything they need can
 // wait with them
 describe("the list's first load", () => {
-  const packages = packagesImportedBy(carList)
+  const { packages } = importedBy(carList)
 
   it('reads its imports', () => {
     expect(packages).toContain('nuqs')
@@ -78,18 +87,40 @@ describe("the list's first load", () => {
 // The bar arrives just after the list on every visit, though most visitors
 // never chat; what answers them is loaded once they start to
 describe('the chat bar', () => {
-  const bar = readFileSync(carList, 'utf8').match(
-    /dynamic\(\s*\(\)\s*=>\s*import\(\s*['"]([^'"]+)['"]/,
-  )?.[1]
-  const entry = bar && resolveLocal(bar, carList)
-  const packages = entry ? packagesImportedBy(entry) : new Set<string>()
+  const entry = lazyFromList.find((file) =>
+    /components\/chat\/\w+\.tsx$/.test(file),
+  )
+  const { packages } = entry
+    ? importedBy(entry)
+    : { packages: new Set<string>() }
 
   it('is what the list loads behind next/dynamic', () => {
-    expect(entry).toMatch(/components\/chat\/\w+\.tsx$/)
+    expect(entry).toBeDefined()
     expect(packages).toContain('next/dynamic')
   })
 
   it.each(heavyPackages)('leaves out %s', (name) => {
     expect(importsOf(packages, name)).toEqual([])
+  })
+})
+
+// Few visitors ever search, so the modal is fetched once the list has
+// hydrated rather than with it. Nothing else on the list opens a modal, so the shared one goes too.
+describe('the filter modal', () => {
+  const { files } = importedBy(carList)
+
+  it('is a chunk the list loads later', () => {
+    expect(lazyFromList).toContain(
+      path.join(root, 'components/filters/FilterModal.tsx'),
+    )
+  })
+
+  it.each([
+    'components/filters/FilterModal.tsx',
+    'components/filters/FilterField.tsx',
+    'components/Modal.tsx',
+    'components/CloseButton.tsx',
+  ])('leaves %s out of the first load', (file) => {
+    expect(files).not.toContain(path.join(root, file))
   })
 })

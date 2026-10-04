@@ -8,8 +8,8 @@ import Car from './NewCar'
 import TextLink from '@/components/TextLink'
 import Title from '@/components/Title'
 import Toggles from '@/components/Toggles'
-import FilterModal from '@/components/filters/FilterModal'
 import ActiveFilters from '@/components/filters/ActiveFilters'
+import type FilterModalComponent from '@/components/filters/FilterModal'
 import cars, { type Car as CarData } from '@/modules/data/cars'
 import carFilter, { filtersShowing } from '@/modules/list/carFilter'
 import type { Filters } from '@/modules/list/filters'
@@ -27,6 +27,11 @@ import { useFilters, useSorting } from '@/utils/useListState'
 const ChatContainer = dynamic(() => import('@/components/chat/ChatContainer'), {
   ssr: false,
 })
+
+// Most visitors never open it, so it is left out of the first load and fetched
+// once the list has hydrated. Written outside the component, as an import()
+// inside one makes the React Compiler skip it.
+const importFilterModal = () => import('@/components/filters/FilterModal')
 
 // The header and the line under the list share the text column of a card
 const column =
@@ -56,6 +61,12 @@ export default function CarList() {
   const { filters, setFilters, removeFilter } = useFilters()
 
   const [editingFilters, setEditingFilters] = useState<boolean>(false)
+  // Held as a component rather than behind next/dynamic, which suspends on its
+  // first render: a tap has to open it in the same task, or a phone will not
+  // raise the keyboard for the field Modal focuses
+  const [FilterModal, setFilterModal] = useState<
+    typeof FilterModalComponent | null
+  >(null)
   const controlsRef = useRef<HTMLDivElement>(null)
 
   // A suggested filter replaces the cars under the reader, so a place halfway
@@ -97,7 +108,17 @@ export default function CarList() {
     carToReveal.current = null
   })
 
-  useBodyScrollLock(editingFilters)
+  useEffect(() => {
+    void importFilterModal().then((module) =>
+      setFilterModal(() => module.default),
+    )
+  }, [])
+
+  // A tap in the moment before it arrives opens it once it has, and the page
+  // is not locked nor the chat bar hidden behind a modal yet to appear
+  const isFilterModalOpen = editingFilters && FilterModal !== null
+
+  useBodyScrollLock(isFilterModalOpen)
 
   const filteredCars = cars.filter(carFilter(filters))
 
@@ -206,7 +227,7 @@ export default function CarList() {
         </div>
       )}
 
-      {editingFilters && (
+      {editingFilters && FilterModal && (
         <FilterModal
           initialFilters={filters}
           onSubmit={setFilters}
@@ -218,7 +239,7 @@ export default function CarList() {
       )}
 
       <ChatContainer
-        hide={editingFilters}
+        hide={isFilterModalOpen}
         onShowCar={showCar}
         filters={filters}
         onApplyFilters={applySuggestedFilters}
