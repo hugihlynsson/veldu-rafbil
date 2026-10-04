@@ -4,11 +4,18 @@ import { filterUrlKeys } from './modules/list/filters'
 import { sortingUrlKeys } from './modules/list/sorting'
 
 // Every parameter that changes what the list shows, read from the tables nuqs
-// reads, so a new filter is rendered per request without being listed here
+// reads, so a new filter is rendered per request and cached at the CDN without
+// being listed here
 const listQueryKeys = [
   ...Object.values(sortingUrlKeys),
   ...Object.values(filterUrlKeys),
 ]
+
+// One rule per key, as the conditions within a rule must all hold
+const listQueryRules = listQueryKeys.map((key) => ({
+  source: '/',
+  has: [{ type: 'query' as const, key }],
+}))
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -47,13 +54,21 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+  async headers() {
+    // Next marks the rewritten page uncacheable, but its HTML depends on
+    // nothing but the URL and the deployment, which is part of Vercel's cache
+    // key. This header reaches only Vercel's CDN, so the browser still
+    // revalidates and no cache downstream outlives a deploy.
+    return listQueryRules.map((rule) => ({
+      ...rule,
+      headers: [{ key: 'Vercel-CDN-Cache-Control', value: 'max-age=31536000' }],
+    }))
+  },
   async rewrites() {
     return {
-      // Before the static / is served: one rule per key, as the conditions
-      // within a rule must all hold
-      beforeFiles: listQueryKeys.map((key) => ({
-        source: '/',
-        has: [{ type: 'query' as const, key }],
+      // Before the static / is served
+      beforeFiles: listQueryRules.map((rule) => ({
+        ...rule,
         destination: '/with-query',
       })),
       afterFiles: [],
