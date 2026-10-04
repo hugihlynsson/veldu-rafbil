@@ -82,8 +82,10 @@
   --breakpoint-sm: 500px;
   --breakpoint-md: 768px;
 
-  /* The column a car's text sits in on a phone, and the page at its widest */
+  /* The column a car's text sits in on a phone, the widest it gets beside the
+     photo from md, and the page at its widest */
   --container-column: 480px;
+  --container-card-text: 380px;
   --container-page: 1024px;
 
   /* Radii, written at their round-corner size. A squircle of the same radius
