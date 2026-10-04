@@ -45,26 +45,51 @@ const packagesImportedBy = (entry: string): Set<string> => {
   return packages
 }
 
+const heavyPackages = [
+  'zod',
+  'ai',
+  '@ai-sdk/react',
+  'react-markdown',
+  'remark-gfm',
+]
+
+const importsOf = (packages: Set<string>, name: string): string[] =>
+  [...packages].filter(
+    (imported) => imported === name || imported.startsWith(`${name}/`),
+  )
+
+const carList = path.join(root, 'components/list/CarList.tsx')
+
 // The list is what every visitor downloads before the page responds; the chat
 // and its modal are loaded behind next/dynamic, and everything they need can
 // wait with them
 describe("the list's first load", () => {
-  const packages = packagesImportedBy(
-    path.join(root, 'components/list/CarList.tsx'),
-  )
+  const packages = packagesImportedBy(carList)
 
   it('reads its imports', () => {
     expect(packages).toContain('nuqs')
   })
 
-  it.each(['zod', 'ai', '@ai-sdk/react', 'react-markdown', 'remark-gfm'])(
-    'leaves out %s',
-    (name) => {
-      expect(
-        [...packages].filter(
-          (imported) => imported === name || imported.startsWith(`${name}/`),
-        ),
-      ).toEqual([])
-    },
-  )
+  it.each(heavyPackages)('leaves out %s', (name) => {
+    expect(importsOf(packages, name)).toEqual([])
+  })
+})
+
+// The bar arrives just after the list on every visit, though most visitors
+// never chat; what answers them is loaded once they start to
+describe('the chat bar', () => {
+  const bar = readFileSync(carList, 'utf8').match(
+    /dynamic\(\s*\(\)\s*=>\s*import\(\s*['"]([^'"]+)['"]/,
+  )?.[1]
+  const entry = bar && resolveLocal(bar, carList)
+  const packages = entry ? packagesImportedBy(entry) : new Set<string>()
+
+  it('is what the list loads behind next/dynamic', () => {
+    expect(entry).toMatch(/components\/chat\/\w+\.tsx$/)
+    expect(packages).toContain('next/dynamic')
+  })
+
+  it.each(heavyPackages)('leaves out %s', (name) => {
+    expect(importsOf(packages, name)).toEqual([])
+  })
 })

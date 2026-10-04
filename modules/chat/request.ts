@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
-import { MAX_QUESTION_LENGTH, type ChatMessage } from './message'
+import type { ChatMessage } from './message'
+import { MAX_QUESTION_LENGTH } from './questionLength'
 
 // The input sends a question as one text part, and nothing else in one is ours
 // to pay for: a file part would reach the model as an upload
