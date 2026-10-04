@@ -127,6 +127,11 @@ For each electric variant in the list, sort it into one of:
 | Delivery date changed         | Edit `expectedDelivery`                                      |
 | Spec really changed           | Edit — new model year, bigger battery, not a rounding change |
 | Seat option added or dropped  | Edit `seats` (see below)                                     |
+| Estimated price now listed    | Replace the estimate with the list price                     |
+
+**An expected car's price may be an estimate.** Nothing in the data marks one,
+so read the price of every car with `expectedDelivery` off the list rather than
+assuming it is current, and say in the report which estimates were replaced.
 
 **Removing a car.** A car missing from a price list is not proof it is gone —
 lists get split, renamed and sometimes just not uploaded. Remove one only when
@@ -230,6 +235,33 @@ And, for a car that is genuinely new to the list:
   finished entry, with every field filled in, in the report along with what is
   waiting on (the photo, per "Hero photos" below). The Polestar 4 SUV was found
   this way.
+
+#### Estimating a price
+
+An importer often announces a model before it prices it ("Væntanlegt" in the
+price column). It can still go in, with an estimated `price`, when the owner
+asks for it; otherwise it goes under **Not finished** in the report. The
+estimate is worked out the same way every time:
+
+1. **Start from the German price on ev-database.** Every model page has one,
+   and it is the one base that is there for every make.
+2. **Work out the make's kr/€ ratio.** For each car of that make already in the
+   list, divide its `price` (before the grant) by its own ev-database German
+   price.
+3. **Interpolate between the two nearest cars.** The ratio falls as the price
+   rises (Hyundai in 2026: INSTER 182, IONIQ 9 153, IONIQ 5 140), so the nearest
+   car alone is biased. Take the cars whose German price is just below and just
+   above the new one, and weight their ratios by how close it is to each. With
+   nothing close on one side, use the nearest car alone.
+4. **No car of the make in the list?** Use the same importer's other makes,
+   which tend to price alike. Another importer is the last resort.
+5. **Round to the nearest 100.000 kr. and add 500.000 kr.** An estimate that
+   errs high lets the real price come in cheaper, and the round figure reads as
+   an estimate (the IONIQ 3 Standard Range: €28,950 × 177 ≈ 5.130.000 →
+   5.600.000).
+6. **Show the working in the report and the PR**: the German price, the cars
+   and ratios used, and the result, so the next sweep knows the price is one to
+   replace.
 
 #### Hero photos
 
