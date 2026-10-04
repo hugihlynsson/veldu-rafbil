@@ -8,8 +8,19 @@ import Fathom from '@/components/Fathom'
 // list uses, ↗ among them. Served from here, so the first paint waits on no
 // other host. Upright only: the italic is another 379 KB, so emphasis in a
 // chat answer is the browser slanting this one.
+//
+// Cut from the release's 352 KB to 70 KB, both axes kept: Latin-1 and
+// Extended-A, punctuation, the arrows, € ™ ₂ and the maths signs a chat answer
+// reaches for. Anything else falls back to the system font, and
+// fonts/fonts.test.ts fails when the source uses it. Only the features that
+// shape text are kept, so `tabular-nums` and the like would do nothing. The
+// name table stays whole because it carries the OFL notice. From the release:
+//   pyftsubset InterVariable.woff2 --flavor=woff2 --name-IDs='*' \
+//     --layout-features=kern,mark,mkmk,ccmp,locl,calt,case \
+//     --unicodes=U+0000-017F,U+2000-206F,U+2082,U+20AC,U+2122,U+2190-2199,U+2212,U+2248,U+2260,U+2264-2265,U+2713 \
+//     --output-file=InterVariable-subset.woff2
 const inter = localFont({
-  src: './fonts/InterVariable.woff2',
+  src: './fonts/InterVariable-subset.woff2',
   weight: '100 900',
   variable: '--font-inter',
 })
