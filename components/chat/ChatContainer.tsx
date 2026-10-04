@@ -14,8 +14,12 @@ import { hasStoredMessages } from '@/utils/chatStorage'
 // warmed on focus, or on load when a conversation is waiting in storage
 const ChatEngine = dynamic(() => import('./ChatEngine'))
 
-// react-markdown is fetched the first time the chat opens, warmed on focus
-const ChatModal = dynamic(() => import('./ChatModal'))
+// react-markdown is fetched the first time the chat opens, warmed on focus.
+// One import for both: written twice, each is built as a copy of its own and
+// the warm-up fetches the other, and an import() inside the component makes
+// the React Compiler skip it.
+const importChatModal = () => import('./ChatModal')
+const ChatModal = dynamic(importChatModal)
 
 interface Props {
   hide: boolean
@@ -54,7 +58,7 @@ export default function ChatContainer({
 
   // Handing over while the chunk is in flight would take the input with it
   const loadChatModal = () => {
-    void import('./ChatModal').then(() => setIsChatModalLoaded(true))
+    void importChatModal().then(() => setIsChatModalLoaded(true))
   }
 
   // The session too: the modal keeps what it was opened on to tell the
