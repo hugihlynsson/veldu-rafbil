@@ -18,6 +18,7 @@ import { sortCars } from '@/modules/list/sorting'
 import { agree } from '@/modules/copy/plural'
 import { grantAmountText, grantCeilingText } from '@/modules/copy/grantCopy'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
+import scrollToCenter from '@/utils/scrollToCenter'
 import useBodyScrollLock from '@/utils/useBodyScrollLock'
 import { useFilters, useSorting } from '@/utils/useListState'
 
@@ -79,28 +80,7 @@ export default function CarList() {
   const revealCar = (id: string) => {
     const card = document.getElementById(id)
     if (!card) return
-    const center = () =>
-      card.scrollIntoView({
-        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
-        block: 'center',
-      })
-    center()
-    // The cards out of view are laid out at a guessed height, so the scroll
-    // lands off by the difference once the ones it passed are drawn. Anything
-    // the reader does before it ends means they have moved on.
-    const settle = new AbortController()
-    const options = { once: true, passive: true, signal: settle.signal }
-    window.addEventListener(
-      'scrollend',
-      () => {
-        settle.abort()
-        center()
-      },
-      options,
-    )
-    for (const type of ['wheel', 'touchstart', 'pointerdown', 'keydown']) {
-      window.addEventListener(type, () => settle.abort(), options)
-    }
+    scrollToCenter(card)
     // Without this the reader is scrolled somewhere their focus is not
     card.focus({ preventScroll: true })
   }

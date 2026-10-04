@@ -21,12 +21,14 @@ const statLabel =
 const statValue = 'text-2xl font-normal'
 const statDetail = 'mt-0.5 text-xs text-stone font-medium'
 
-// Out of view a card skips layout and stands in at this height: its photo, 2:3
-// of its width, and the text under it, or from md beside it, where the photo
-// gets the page less the margins and the text column. The chat's scroll to a
-// car is aimed with it, so the closer it is the less that scroll has to correct.
-const offscreen =
-  '[content-visibility:auto] [contain-intrinsic-size:auto_calc(100vw*2/3+280px)] md:[contain-intrinsic-size:auto_max(243px,(min(100vw,var(--container-page))-484px)*2/3)]'
+// Out of view a card skips layout and stands in at this height, so the scroll
+// to a car from the chat is aimed with it and corrects less the closer it is.
+// Under md: the photo, full width at 3:2, over its text, which measures 280px
+// on average at every phone width. From md: the photo gets the page less the
+// card's margins and gap (ml-10, mr-8, ml-8: 26 steps) and the text column,
+// unless the text beside it, 243px on average, is taller.
+const skipLayoutOutOfView =
+  '[content-visibility:auto] [contain-intrinsic-size:auto_calc(100vw*2/3+280px)] md:[contain-intrinsic-size:auto_max(243px,(min(100vw,var(--container-page))-var(--container-card-text)-var(--spacing)*26)*2/3)]'
 
 const getDriveLabel = (drive: Drive) => {
   switch (drive) {
@@ -61,7 +63,7 @@ const NewCar: FunctionComponent<Props> = ({
       tabIndex={-1}
       className={clsx(
         'mb-8 md:flex md:m-0 md:mx-8 md:mb-10 md:ml-10 md:items-center',
-        offscreen,
+        skipLayoutOutOfView,
       )}
     >
       <div className="md:w-[40%] md:grow md:self-center">
@@ -76,7 +78,7 @@ const NewCar: FunctionComponent<Props> = ({
         />
       </div>
 
-      <div className="py-2.5 px-(--gutter) mx-auto max-w-column xs:py-4.5 md:m-0 md:ml-8 md:p-0 md:w-[330px] md:max-w-[380px] md:shrink-0 md:grow">
+      <div className="py-2.5 px-(--gutter) mx-auto max-w-column xs:py-4.5 md:m-0 md:ml-8 md:p-0 md:w-[330px] md:max-w-card-text md:shrink-0 md:grow">
         {car.expectedDelivery && (
           <div className="mb-0.5 text-base font-medium text-stone">
             Væntanlegur {car.expectedDelivery.toLowerCase()}
