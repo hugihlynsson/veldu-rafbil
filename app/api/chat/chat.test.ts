@@ -13,11 +13,8 @@ import {
 import { parseChatRequest, streamChat, type ChatFinish } from './chat'
 import cars from '@/modules/data/cars'
 import { carRef } from '@/modules/chat/cars'
-import {
-  MAX_QUESTION_LENGTH,
-  MAX_TAGGED_CARS,
-  type ChatMessage,
-} from '@/modules/chat/message'
+import { MAX_TAGGED_CARS, type ChatMessage } from '@/modules/chat/message'
+import { MAX_QUESTION_LENGTH } from '@/modules/chat/questionLength'
 import { trimHistory } from '@/modules/chat/request'
 
 const question: ChatMessage = {

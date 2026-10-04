@@ -6,7 +6,7 @@ import {
   CHAT_SUGGESTIONS,
   getRandomSuggestions,
 } from '@/modules/chat/suggestions'
-import { MAX_QUESTION_LENGTH } from '@/modules/chat/message'
+import { MAX_QUESTION_LENGTH } from '@/modules/chat/questionLength'
 import useInputModality, { getInputModality } from '@/utils/inputModality'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'

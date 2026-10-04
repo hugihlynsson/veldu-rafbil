@@ -165,11 +165,12 @@ itself, where a dark override would never reach it.
 
 - **React Compiler is on.** Don't add `useMemo`/`useCallback`/`memo` by hand;
   the compiler handles memoisation.
-- **The chat is loaded lazily, on purpose** — the container is a `next/dynamic`
-  import so the AI SDK is off the list's hydration path, and the modal is
-  another inside it so the markdown renderer is fetched only once someone opens
-  the chat. Importing either statically puts tens of kilobytes back into the
-  first load for visitors who never chat, which is most of them.
+- **The chat is loaded lazily, on purpose** — the bar is a `next/dynamic`
+  import so it is off the list's hydration path, the engine holding `useChat`
+  is another inside it so the AI SDK and zod wait until someone focuses the
+  bar, and the modal a third so the markdown renderer is fetched only once
+  someone opens the chat. Importing any of them statically puts tens of
+  kilobytes back into what every visitor downloads, though most never chat.
 - **`next/image` `sizes` is load-bearing.** A typo in it is silent: the browser
   falls back to `100vw` and fetches the largest candidate. `deviceSizes` in
   `next.config.ts` is tuned to the phones people actually use. A `sizes` with
