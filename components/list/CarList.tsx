@@ -177,7 +177,9 @@ export default function CarList() {
 
       {sortCars(filteredCars, sorting, direction).map((car, index) => (
         <Car
-          preload={index <= 1}
+          // The first photo is the largest paint; the second starts below the
+          // fold on a phone and would only split the bandwidth with it
+          preload={index === 0}
           car={car}
           key={car.id}
           showValue={sorting === 'value' || Boolean(filters.value)}
