@@ -14,7 +14,7 @@ const Title: FunctionComponent<{}> = () => (
       </g>
       <defs>
         <clipPath id="a">
-          <path fill="#fff" d="M0 0h359v52.5H0z" />
+          <path d="M0 0h359v52.5H0z" />
         </clipPath>
       </defs>
     </svg>

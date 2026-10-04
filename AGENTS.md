@@ -142,10 +142,12 @@ reasoning is in `app/api/cars/carApi.ts`, and its test fails if it is broken.
 
 ## Styling
 
-Tailwind v4 — **no `tailwind.config.js`**. The theme, colours and the extra
-breakpoint are the `@theme` block in `app/globals.css`; read the palette there
-rather than guessing a colour name. Design is mobile-first. Chat markdown is
-styled by plain CSS rules at the bottom of that file, not by utilities.
+Tailwind v4 — **no `tailwind.config.js`**; the theme is the `@theme` block in
+`app/globals.css`. Tailwind's default palette, radii, shadows and breakpoints
+are cleared there, so `bg-gray-100` or `lg:` silently compiles to nothing. Use
+the names defined there, and add one there when a value repeats rather than
+writing it in brackets. Design is mobile-first. Chat markdown is styled by
+plain CSS rules at the bottom of that file, not by utilities.
 
 Light and dark share one set of names. Every colour token is a role — text,
 surface, line, overlay — and the `prefers-color-scheme` block under `@theme`

@@ -114,7 +114,7 @@ export default function FilterSuggestions({
         <>
           <SearchIcon
             size={13}
-            className="inline-block align-[-1px] mr-2 text-scrim/60"
+            className="inline-block align-[-1px] mr-2 text-stone"
           />
           {label} {value}
           <CarCount count={suggestion.count} />
@@ -136,7 +136,7 @@ export default function FilterSuggestions({
         <>
           <SearchIcon
             size={13}
-            className="inline-block align-[-1px] mr-2 text-scrim/60"
+            className="inline-block align-[-1px] mr-2 text-stone"
           />
           {addAll}
           <CarCount count={count} />
@@ -167,5 +167,5 @@ export default function FilterSuggestions({
 }
 
 const CarCount = ({ count }: { count: number }) => (
-  <span className="font-normal text-scrim/60"> · {carCount(count)}</span>
+  <span className="font-normal text-stone"> · {carCount(count)}</span>
 )
