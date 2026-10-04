@@ -75,7 +75,8 @@ export async function POST(req: Request) {
     model: google(modelName),
     messages,
     providerOptions: {
-      google: { thinkingConfig: { thinkingLevel: 'medium' } },
+      // Every answer waits on the thinking before its first visible token
+      google: { thinkingConfig: { thinkingLevel: 'low' } },
     },
     onFinish: (event) => {
       finished = event
