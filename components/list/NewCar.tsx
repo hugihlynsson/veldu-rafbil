@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react'
+import clsx from 'clsx'
 import { trackEvent } from 'fathom-client'
 import Image from 'next/image'
 
@@ -19,6 +20,13 @@ const statLabel =
   'uppercase text-eyebrow font-semibold tracking-wider mb-0.75 text-stone'
 const statValue = 'text-2xl font-normal'
 const statDetail = 'mt-0.5 text-xs text-stone font-medium'
+
+// Out of view a card skips layout and stands in at this height: its photo, 2:3
+// of its width, and the text under it, or from md beside it, where the photo
+// gets the page less the margins and the text column. The chat's scroll to a
+// car is aimed with it, so the closer it is the less that scroll has to correct.
+const offscreen =
+  '[content-visibility:auto] [contain-intrinsic-size:auto_calc(100vw*2/3+280px)] md:[contain-intrinsic-size:auto_max(243px,(min(100vw,var(--container-page))-484px)*2/3)]'
 
 const getDriveLabel = (drive: Drive) => {
   switch (drive) {
@@ -51,7 +59,10 @@ const NewCar: FunctionComponent<Props> = ({
       id={carId}
       // MiniCar scrolls here from the chat, and moves focus with it
       tabIndex={-1}
-      className="mb-8 md:flex md:m-0 md:mx-8 md:mb-10 md:ml-10 md:items-center"
+      className={clsx(
+        'mb-8 md:flex md:m-0 md:mx-8 md:mb-10 md:ml-10 md:items-center',
+        offscreen,
+      )}
     >
       <div className="md:w-[40%] md:grow md:self-center">
         <Image
