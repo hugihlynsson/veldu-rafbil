@@ -33,6 +33,8 @@ const Orflaedi: FunctionComponent<{}> = () => (
           height="30"
           alt="Örflæði logo"
           src="/orflaedi-logo.svg"
+          // Without it React preloads it in the head, though it sits below the list
+          loading="lazy"
           className="block max-w-full h-7.5 mt-10 [filter:var(--ink-logo-filter)]"
         />
       </a>
