@@ -551,7 +551,7 @@ const newCars: Array<NewCar> = [
     model: 'IONIQ 3',
     subModel: 'Long Range',
     heroImageName: 'hyundai-ioniq-3-alt',
-    price: 6_300_000,
+    price: 6_000_000,
     sellerUrl: 'https://hyundai.is/bilarnir/nyr-ioniq-3/',
     acceleration: 9.5,
     capacity: 61,
