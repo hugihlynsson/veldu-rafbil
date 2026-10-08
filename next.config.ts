@@ -20,6 +20,11 @@ const listQueryRules = listQueryKeys.map((key) => ({
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   reactCompiler: true,
+  experimental: {
+    // Turned off, the compiler falls back to babel-plugin-react-compiler,
+    // which is no longer installed
+    turbopackRustReactCompiler: true,
+  },
   images: {
     deviceSizes: [
       540, // Screen wider than 1024px @1x
