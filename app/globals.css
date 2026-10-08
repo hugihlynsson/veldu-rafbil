@@ -327,11 +327,28 @@
   }
 }
 
+/* A click while cards move reaches the page rather than their snapshots */
+::view-transition {
+  pointer-events: none;
+}
+
+/* The list's old cards are gone before the new are half in, so the text of
+   a card leaving and one arriving never reads on top of each other */
+::view-transition-old(.car-list) {
+  animation-duration: 100ms;
+}
+::view-transition-new(.car-list) {
+  animation-delay: 60ms;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after,
-  *::backdrop {
+  *::backdrop,
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
     animation-duration: 0.01ms !important;
     animation-delay: 0s !important;
     animation-iteration-count: 1 !important;

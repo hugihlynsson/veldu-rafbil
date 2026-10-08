@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useRef, ViewTransition } from 'react'
 import clsx from 'clsx'
 import { trackEvent } from 'fathom-client'
 import Image from 'next/image'
@@ -8,6 +8,7 @@ import { Car } from '@/modules/data/cars'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { formatKmPerMinutesCharged } from '@/modules/data/getKmPerMinutesCharged'
 import LinkPill from '@/components/LinkPill'
+import useNearScreen from '@/utils/useNearScreen'
 
 interface Props {
   car: Car
@@ -48,6 +49,8 @@ const NewCar: FunctionComponent<Props> = ({
   preload,
 }) => {
   const { id: carId, priceWithGrant } = car
+  const ref = useRef<HTMLElement>(null)
+  const nearScreen = useNearScreen(ref)
   const hasGrant = priceWithGrant !== car.price
 
   // Not agree(): sæti is neuter and reads the same at every count. A car
@@ -56,121 +59,128 @@ const NewCar: FunctionComponent<Props> = ({
     .filter(Boolean)
     .join(' · ')
 
+  // A sort or a filter slides the card to its new place, or fades it if it
+  // leaves. Only near the screen: React measures every armed card before a
+  // change, which out of view would undo skipLayoutOutOfView for the whole
+  // list. A card arriving from further off fades in with the list.
   return (
-    <article
-      id={carId}
-      // MiniCar scrolls here from the chat, and moves focus with it
-      tabIndex={-1}
-      className={clsx(
-        'mb-8 md:flex md:m-0 md:mx-8 md:mb-10 md:ml-10 md:items-center',
-        skipLayoutOutOfView,
-      )}
-    >
-      <div className="md:w-[40%] md:grow md:self-center">
-        <Image
-          preload={preload}
-          alt=""
-          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 40vw, 540px"
-          src={`/images/${car.heroImageName}.jpg`}
-          width={1920}
-          height={1280}
-          className="w-full h-auto md:rounded-sm"
-        />
-      </div>
-
-      <div className="py-2.5 px-(--gutter) mx-auto max-w-column xs:py-4.5 md:m-0 md:ml-8 md:p-0 md:w-[330px] md:max-w-card-text md:shrink-0 md:grow">
-        {car.expectedDelivery && (
-          <div className="mb-0.5 text-base font-medium text-stone">
-            Væntanlegur {car.expectedDelivery.toLowerCase()}
-          </div>
+    <ViewTransition default={nearScreen ? 'car-list' : 'none'}>
+      <article
+        ref={ref}
+        id={carId}
+        // MiniCar scrolls here from the chat, and moves focus with it
+        tabIndex={-1}
+        className={clsx(
+          'mb-8 md:flex md:m-0 md:mx-8 md:mb-10 md:ml-10 md:items-center',
+          skipLayoutOutOfView,
         )}
-
-        <h2 className="m-0 font-semibold text-display">
-          <span>{car.make}</span>{' '}
-          <span className="font-normal">{car.model}</span>
-          <span className="block font-medium text-base text-stone -mt-px mb-2">
-            {subTitle}
-          </span>
-        </h2>
-
-        <LinkPill
-          className="mt-2 -ml-0.5"
-          href={car.sellerUrl}
-          external
-          extra={
-            (car.expectedDelivery && hasGrant && 'áætlað verð með styrk ↗') ||
-            (car.expectedDelivery && 'áætlað verð ↗') ||
-            (showValue &&
-              `${hasGrant ? 'með styrk ' : ''}${addDecimalSeparators(
-                Math.round(car.pricePerKm),
-              )} kr. á km.`) ||
-            (hasGrant && 'með styrk') ||
-            undefined
-          }
-          title={
-            hasGrant
-              ? `Fullt verð án styrks: ${addDecimalSeparators(car.price)} kr.`
-              : undefined
-          }
-          onClick={() => trackEvent('Seller clicked')}
-        >
-          {addDecimalSeparators(priceWithGrant)} kr.
-          {!car.expectedDelivery && ' ↗'}
-        </LinkPill>
-
-        <div className="flex mb-4 mt-6 max-w-[320px] justify-between xs:max-w-[360px]">
-          <div className="mr-2 xs:mr-4 basis-1/3">
-            <div className={statLabel}>0-100 km/klst</div>
-            <div className={statValue}>{car.acceleration.toFixed(1)}s</div>
-            <div
-              className={statDetail}
-              title={`Afl (${Math.round(car.power * 1.34102)} hö)`}
-            >
-              {car.power} kW<span className="sr-only"> afl</span>
-            </div>
-          </div>
-
-          <div className="mr-2 xs:mr-4 basis-1/3 shrink-0">
-            <div className={statLabel}>Rafhlaða</div>
-            <div className={statValue}>{car.capacity} kWh</div>
-            <div
-              className={statDetail}
-              title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10To80} min)`}
-            >
-              {formatKmPerMinutesCharged(car.timeToCharge10To80, car.range)}{' '}
-              km/min
-              <span className="sr-only">
-                {' '}
-                meðaldrægniaukning á hröðustu hleðslu
-              </span>
-            </div>
-          </div>
-
-          <div className="mr-0 basis-1/3" title="Samkvæmt WLTP prófunum">
-            <div className={statLabel}>Drægni</div>
-            <div className={statValue}>
-              {car.range} km<span className="sr-only"> samkvæmt WLTP</span>
-            </div>
-            <div className={statDetail} title={getDriveLabel(car.drive)}>
-              {car.drive}
-              <span className="sr-only">, {getDriveLabel(car.drive)}</span>
-            </div>
-          </div>
+      >
+        <div className="md:w-[40%] md:grow md:self-center">
+          <Image
+            preload={preload}
+            alt=""
+            sizes="(max-width: 767px) 100vw, (max-width: 1023px) 40vw, 540px"
+            src={`/images/${car.heroImageName}.jpg`}
+            width={1920}
+            height={1280}
+            className="w-full h-auto md:rounded-sm"
+          />
         </div>
 
-        {car.evDatabaseUrl && (
-          <a
-            className="inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-tint"
-            target="_blank"
-            href={car.evDatabaseUrl}
-            rel="noopener"
-            onClick={() => trackEvent('Ev Database Link Clicked')}
+        <div className="py-2.5 px-(--gutter) mx-auto max-w-column xs:py-4.5 md:m-0 md:ml-8 md:p-0 md:w-[330px] md:max-w-card-text md:shrink-0 md:grow">
+          {car.expectedDelivery && (
+            <div className="mb-0.5 text-base font-medium text-stone">
+              Væntanlegur {car.expectedDelivery.toLowerCase()}
+            </div>
+          )}
+
+          <h2 className="m-0 font-semibold text-display">
+            <span>{car.make}</span>{' '}
+            <span className="font-normal">{car.model}</span>
+            <span className="block font-medium text-base text-stone -mt-px mb-2">
+              {subTitle}
+            </span>
+          </h2>
+
+          <LinkPill
+            className="mt-2 -ml-0.5"
+            href={car.sellerUrl}
+            external
+            extra={
+              (car.expectedDelivery && hasGrant && 'áætlað verð með styrk ↗') ||
+              (car.expectedDelivery && 'áætlað verð ↗') ||
+              (showValue &&
+                `${hasGrant ? 'með styrk ' : ''}${addDecimalSeparators(
+                  Math.round(car.pricePerKm),
+                )} kr. á km.`) ||
+              (hasGrant && 'með styrk') ||
+              undefined
+            }
+            title={
+              hasGrant
+                ? `Fullt verð án styrks: ${addDecimalSeparators(car.price)} kr.`
+                : undefined
+            }
+            onClick={() => trackEvent('Seller clicked')}
           >
-            Nánar á ev-database.org ↗
-          </a>
-        )}
-      </div>
-    </article>
+            {addDecimalSeparators(priceWithGrant)} kr.
+            {!car.expectedDelivery && ' ↗'}
+          </LinkPill>
+
+          <div className="flex mb-4 mt-6 max-w-[320px] justify-between xs:max-w-[360px]">
+            <div className="mr-2 xs:mr-4 basis-1/3">
+              <div className={statLabel}>0-100 km/klst</div>
+              <div className={statValue}>{car.acceleration.toFixed(1)}s</div>
+              <div
+                className={statDetail}
+                title={`Afl (${Math.round(car.power * 1.34102)} hö)`}
+              >
+                {car.power} kW<span className="sr-only"> afl</span>
+              </div>
+            </div>
+
+            <div className="mr-2 xs:mr-4 basis-1/3 shrink-0">
+              <div className={statLabel}>Rafhlaða</div>
+              <div className={statValue}>{car.capacity} kWh</div>
+              <div
+                className={statDetail}
+                title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10To80} min)`}
+              >
+                {formatKmPerMinutesCharged(car.timeToCharge10To80, car.range)}{' '}
+                km/min
+                <span className="sr-only">
+                  {' '}
+                  meðaldrægniaukning á hröðustu hleðslu
+                </span>
+              </div>
+            </div>
+
+            <div className="mr-0 basis-1/3" title="Samkvæmt WLTP prófunum">
+              <div className={statLabel}>Drægni</div>
+              <div className={statValue}>
+                {car.range} km<span className="sr-only"> samkvæmt WLTP</span>
+              </div>
+              <div className={statDetail} title={getDriveLabel(car.drive)}>
+                {car.drive}
+                <span className="sr-only">, {getDriveLabel(car.drive)}</span>
+              </div>
+            </div>
+          </div>
+
+          {car.evDatabaseUrl && (
+            <a
+              className="inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-tint"
+              target="_blank"
+              href={car.evDatabaseUrl}
+              rel="noopener"
+              onClick={() => trackEvent('Ev Database Link Clicked')}
+            >
+              Nánar á ev-database.org ↗
+            </a>
+          )}
+        </div>
+      </article>
+    </ViewTransition>
   )
 }
 

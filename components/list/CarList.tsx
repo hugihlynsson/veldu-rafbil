@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, ViewTransition } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 
@@ -175,15 +175,21 @@ export default function CarList() {
         </div>
       </header>
 
-      {sortCars(filteredCars, sorting, direction).map((car, index) => (
-        <Car
-          preload={index <= 1}
-          car={car}
-          key={car.id}
-          showValue={sorting === 'value' || Boolean(filters.value)}
-          showSeats={Boolean(filters.seats)}
-        />
-      ))}
+      {/* A card without a transition of its own, as when a sort brings it up
+          from far down the list, fades in with the list */}
+      <ViewTransition default="car-list">
+        <div>
+          {sortCars(filteredCars, sorting, direction).map((car, index) => (
+            <Car
+              preload={index <= 1}
+              car={car}
+              key={car.id}
+              showValue={sorting === 'value' || Boolean(filters.value)}
+              showSeats={Boolean(filters.seats)}
+            />
+          ))}
+        </div>
+      </ViewTransition>
 
       {hasFilter && filteredCarCount > 0 && (
         <div
