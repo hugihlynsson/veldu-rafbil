@@ -14,18 +14,22 @@ const readBase128 = (bytes: Buffer, at: number): [number, number] => {
   throw new Error('Bad UIntBase128')
 }
 
-/** The cmap table of a WOFF2 font, which WOFF2 stores untransformed */
-const woff2Cmap = (woff2: Buffer): Buffer => {
+// Their indices in the WOFF2 spec's table of known tags
+const cmapTag = 0
+const fvarTag = 47
+
+/** A table of a WOFF2 font that WOFF2 stores untransformed, as cmap and fvar */
+const woff2Table = (woff2: Buffer, tag: number): Buffer => {
   const numTables = woff2.readUInt16BE(12)
   const compressedLength = woff2.readUInt32BE(20)
   const lengths: number[] = []
-  let cmapIndex = -1
+  let tableIndex = -1
   let at = 48
 
   for (let i = 0; i < numTables; i++) {
     const flags = woff2[at++]
     const known = flags & 0x3f
-    if (known === 0) cmapIndex = i
+    if (known === tag) tableIndex = i
     if (known === 0x3f) at += 4
     const transformed =
       known === 10 || known === 11 ? flags >> 6 === 0 : flags >> 6 !== 0
@@ -36,8 +40,8 @@ const woff2Cmap = (woff2: Buffer): Buffer => {
   }
 
   const data = brotliDecompressSync(woff2.subarray(at, at + compressedLength))
-  const offset = lengths.slice(0, cmapIndex).reduce((sum, l) => sum + l, 0)
-  return data.subarray(offset, offset + lengths[cmapIndex])
+  const offset = lengths.slice(0, tableIndex).reduce((sum, l) => sum + l, 0)
+  return data.subarray(offset, offset + lengths[tableIndex])
 }
 
 /** Every code point the Windows BMP subtable (format 4) maps to a glyph */
@@ -76,6 +80,21 @@ const codePoints = (cmap: Buffer): Set<number> => {
   return mapped
 }
 
+/** The least and most of the weight axis in a variable font's fvar table */
+const weightAxis = (fvar: Buffer): [number, number] => {
+  const axes = fvar.readUInt16BE(4)
+  const axisSize = fvar.readUInt16BE(10)
+  for (let i = 0; i < fvar.readUInt16BE(8); i++) {
+    const at = axes + i * axisSize
+    if (fvar.toString('latin1', at, at + 4) === 'wght')
+      return [
+        fvar.readInt32BE(at + 4) / 65536,
+        fvar.readInt32BE(at + 12) / 65536,
+      ]
+  }
+  throw new Error('No weight axis')
+}
+
 const read = (folder: string, extension: RegExp) =>
   readdirSync(path.join(root, folder), { recursive: true, encoding: 'utf8' })
     .filter((file) => extension.test(file))
@@ -86,13 +105,12 @@ const read = (folder: string, extension: RegExp) =>
 
 const layout = readFileSync(path.join(root, 'app/layout.tsx'), 'utf8')
 const fontFile = layout.match(/src: '\.\/(fonts\/[^']+\.woff2)'/)?.[1] ?? ''
+const font = readFileSync(path.join(root, 'app', fontFile))
 
 // The font is cut to a character set, and a character outside it renders in
 // the system font, mid-word, with nothing to say so
 describe('the font layout.tsx loads', () => {
-  const covered = codePoints(
-    woff2Cmap(readFileSync(path.join(root, 'app', fontFile))),
-  )
+  const covered = codePoints(woff2Table(font, cmapTag))
   const missing = (text: string) =>
     [...new Set(text)].filter(
       (c) => c > '\x7f' && !covered.has(c.codePointAt(0)!),
@@ -133,5 +151,39 @@ describe('the font layout.tsx loads', () => {
       )
       .map(({ file }) => file)
     expect(asking).toEqual([])
+  })
+
+  // A weight below the cut is drawn at its lightest, with nothing to say so
+  describe('weights', () => {
+    const [lightest, heaviest] = weightAxis(woff2Table(font, fvarTag))
+    const named: Record<string, number> = {
+      thin: 100,
+      extralight: 200,
+      light: 300,
+    }
+
+    it('declares the ones it carries', () => {
+      expect(layout).toContain(`weight: '${lightest} ${heaviest}'`)
+    })
+
+    it('is asked for none it lacks', () => {
+      const asking = [
+        ...read('components', /\.tsx$/),
+        ...read('app', /\.(tsx|css)$/),
+      ].flatMap(({ file, source }) =>
+        [
+          ...source.matchAll(
+            /\bfont-(thin|extralight|light)\b|font-weight:\s*(\d+)|\bfont-\[(\d+)\]/g,
+          ),
+        ]
+          .map(
+            ([, name, css, arbitrary]) =>
+              named[name] ?? Number(css ?? arbitrary),
+          )
+          .filter((weight) => weight < lightest || weight > heaviest)
+          .map((weight) => `${weight} in ${file}`),
+      )
+      expect(asking).toEqual([])
+    })
   })
 })
