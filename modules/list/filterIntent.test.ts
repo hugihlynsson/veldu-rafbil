@@ -52,6 +52,12 @@ describe('parseFilterIntent', () => {
 
   it('reads "ekki yfir" as a ceiling and "ekki undir" as a floor', () => {
     expect(read('ekki yfir 7 milljónir')).toEqual({ price: 7_000_000 })
+    expect(read('má ekki kosta meira en 6.000.000')).toEqual({
+      price: 6_000_000,
+    })
+    expect(read('ekki fjórhjóladrif, undir 6 milljónum')).toEqual({
+      price: 6_000_000,
+    })
     expect(read('ekki undir 400 km')).toEqual({ range: 400 })
     expect(read('undir 300 km')).toEqual({})
   })
@@ -95,6 +101,33 @@ describe('parseFilterIntent', () => {
     expect(read('3 börn')).toEqual({})
   })
 
+  it('reads when the car can be had, but never suggests it', () => {
+    expect(parseFilterIntent('fáanlegur strax')).toEqual({
+      filters: {},
+      unread: [],
+      numbers: [],
+    })
+  })
+
+  it('leaves a number it cannot place for a model, as written', () => {
+    expect(parseFilterIntent('kemst 600, 7 sæti, kostar 6,5').numbers).toEqual([
+      '600',
+      '6,5',
+    ])
+  })
+
+  it('leaves a number spelled out for a model too', () => {
+    expect(parseFilterIntent('við erum átta, 7 sæti').numbers).toEqual(['atta'])
+  })
+
+  it('reads 0-100 as the sprint, not as two numbers', () => {
+    expect(parseFilterIntent('0-100 á 5 sek')).toEqual({
+      filters: { acceleration: 5 },
+      unread: [],
+      numbers: [],
+    })
+  })
+
   it('only reads the first sentence or two', () => {
     const long = `${'a'.repeat(MAX_INTENT_LENGTH)} 7 sæti`
     expect(read(long)).toEqual({})
@@ -112,6 +145,10 @@ describe('needsModel', () => {
     const parsed = parseFilterIntent('ódýr fjölskyldubíll með 7 sætum')
     expect(parsed.unread).toEqual(['odyr', 'fjolskyldubill'])
     expect(needsModel(parsed)).toBe(true)
+  })
+
+  it('is true when a number is left that no rule could place', () => {
+    expect(needsModel(parseFilterIntent('undir 600'))).toBe(true)
   })
 })
 

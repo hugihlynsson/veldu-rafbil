@@ -5,7 +5,7 @@
  *   npx tsx --env-file=.env.local scripts/eval-filter-intent.ts [--verbose]
  *
  * Each case the parser cannot finish is a real, billed request, of about
- * 1,600 input tokens. Jev's answers vary a little from run to run, so a
+ * 1,650 input tokens. Jev's answers vary a little from run to run, so a
  * difference of a few cases between two runs is noise rather than a result.
  */
 import { TypeSafeClient } from '@typesafe-ai/sdk'
@@ -51,6 +51,7 @@ const report = (run: Run) => {
     'literal',
     'mixed',
     'vague',
+    'number',
     'question',
     'all',
   ]

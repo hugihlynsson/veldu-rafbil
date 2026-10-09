@@ -5,11 +5,13 @@ import { MAX_INTENT_LENGTH } from '@/modules/list/filterIntent'
 import { suggestFilters, type AskModel } from './model'
 import { clientKey, filterSuggestionsRateLimit } from '@/modules/rateLimit'
 
-// Measured on the 120 Icelandic requests in cases.ts
-// (October 2026, two runs): with the parser it gets 114–115 exactly right to
-// the parser's 62, at 96–97% precision and 97–98% recall, p95 ~300 ms, ~1,600
-// input tokens a request. 16 of the 18 held-out cases, which the wording was
-// not tuned on, to 11 before it was. Asked in Icelandic it scored the same
+// Measured on the 151 Icelandic requests in cases.ts
+// (October 2026, two runs): with the parser it gets 144 exactly right to
+// the parser's 86, at 96% precision and 96% recall, p95 ~300 ms, ~1,650
+// input tokens a request; 14 of the 17 that give a bare number for it to place,
+// and all 29 questions to the advisor. When the brackets were last
+// worded, 16 of the 18 held-out cases, which the wording was not tuned on, to
+// 11 before it was. Asked in Icelandic it scored the same
 // within run-to-run noise on ~28% more tokens, so the questions are English,
 // with the Icelandic words for each filter glossed in them (the Icelandic set
 // is in 48af344, should a later model do better with it). Re-run

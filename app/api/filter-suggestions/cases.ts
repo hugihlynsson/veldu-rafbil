@@ -21,10 +21,12 @@ export interface IntentCase {
   /**
    * literal: the text states every filter, and the parser must read them all.
    * mixed: it states some and implies others. vague: it states none.
-   * question: one put to the advisor, as the chat input that shows the
-   * suggestions mostly receives, which should only rarely become a filter.
+   * number: it gives a number with no unit the parser can place, which a
+   * model is offered as it stands. question: one put to the advisor, as the
+   * chat input that shows the suggestions mostly receives, which should only
+   * rarely become a filter.
    */
-  kind: 'literal' | 'mixed' | 'vague' | 'question'
+  kind: 'literal' | 'mixed' | 'vague' | 'number' | 'question'
   expect: Expectation
   /** Filters a reasonable reader might or might not add, judged neither way */
   allow?: FilterKey[]
@@ -87,16 +89,9 @@ export const intentCases: IntentCase[] = [
     kind: 'literal',
     expect: { fastcharge: 15 },
   },
-  {
-    text: 'fáanlegur strax, 5 sæti',
-    kind: 'literal',
-    expect: { availability: 'available', seats: 5 },
-  },
-  {
-    text: 'væntanlegir bílar',
-    kind: 'literal',
-    expect: { availability: 'expected' },
-  },
+  // When the car can be had is never suggested
+  { text: 'fáanlegur strax, 5 sæti', kind: 'literal', expect: { seats: 5 } },
+  { text: 'væntanlegir bílar', kind: 'literal', expect: {} },
   { text: 'afturhjóladrifinn', kind: 'literal', expect: { drive: ['RWD'] } },
   {
     text: 'framhjóladrif undir 5 milljónum',
@@ -166,15 +161,11 @@ export const intentCases: IntentCase[] = [
     kind: 'literal',
     expect: { drive: ['AWD'], seats: 7 },
   },
-  {
-    text: 'eitthvað sem er til núna',
-    kind: 'literal',
-    expect: { availability: 'available' },
-  },
+  { text: 'eitthvað sem er til núna', kind: 'literal', expect: {} },
   {
     text: 'nýjustu bílarnir sem eru á leiðinni',
     kind: 'literal',
-    expect: { availability: 'expected' },
+    expect: {},
   },
 
   {
@@ -230,8 +221,8 @@ export const intentCases: IntentCase[] = [
   },
   {
     text: 'fáanlegur strax og langdrægur',
-    kind: 'mixed',
-    expect: { availability: 'available', range: 'any' },
+    kind: 'vague',
+    expect: { range: 'any' },
   },
   {
     text: '5 sæti og mikið fyrir peninginn',
@@ -387,7 +378,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'nýr bíll sem er ekki kominn til landsins',
     kind: 'vague',
-    expect: { availability: 'expected' },
+    expect: {},
   },
   {
     text: 'mest fyrir peninginn',
@@ -406,6 +397,65 @@ export const intentCases: IntentCase[] = [
     kind: 'vague',
     expect: { range: 'any', price: 'any' },
     allow: ['drive', 'value'],
+  },
+
+  { text: 'kemst 600 á hleðslunni', kind: 'number', expect: { range: 600 } },
+  { text: 'við erum 8', kind: 'number', expect: { seats: 8 } },
+  {
+    text: 'ekki dýrari en 8',
+    kind: 'number',
+    expect: { price: 8_000_000 },
+  },
+  {
+    text: 'má kosta 6.000.000 og komast 450',
+    kind: 'number',
+    expect: { price: 6_000_000, range: 450 },
+  },
+  {
+    text: 'kostar 7 og kemst 400',
+    kind: 'number',
+    expect: { price: 7_000_000, range: 400 },
+  },
+  {
+    text: 'budget upp á 6,5',
+    kind: 'number',
+    expect: { price: 6_500_000 },
+  },
+  {
+    text: 'snöggur, 5 í hundraðið',
+    kind: 'number',
+    expect: { acceleration: 5 },
+  },
+  {
+    text: 'langdrægur, helst 500 eða meira',
+    kind: 'number',
+    expect: { range: 500 },
+  },
+  {
+    text: '600 á einni hleðslu og fjórhjóladrif',
+    kind: 'number',
+    expect: { range: 600, drive: ['AWD'] },
+  },
+  {
+    text: 'tveir fullorðnir og fjögur börn, ekki yfir 10',
+    kind: 'number',
+    expect: { price: 10_000_000, seats: 7 },
+  },
+  {
+    text: 'við erum 3 og keyrum 300 á dag',
+    kind: 'number',
+    expect: { range: 'any' },
+    allow: ['seats'],
+  },
+  {
+    text: '5 sæti og ekki meira en 9',
+    kind: 'number',
+    expect: { seats: 5, price: 9_000_000 },
+  },
+  {
+    text: 'má ekki kosta meira en 6.000.000',
+    kind: 'literal',
+    expect: { price: 6_000_000 },
   },
 
   { text: 'hvað kostar að hlaða heima?', kind: 'question', expect: {} },
@@ -429,7 +479,6 @@ export const intentCases: IntentCase[] = [
     text: 'borgar sig að bíða eftir nýjum bílum?',
     kind: 'question',
     expect: {},
-    allow: ['availability'],
   },
   {
     text: 'hvaða bíll er með mestu drægnina?',
@@ -443,11 +492,7 @@ export const intentCases: IntentCase[] = [
     expect: { seats: 7 },
     allow: ['price'],
   },
-  {
-    text: 'hvaða bílar eru til á lager?',
-    kind: 'question',
-    expect: { availability: 'available' },
-  },
+  { text: 'hvaða bílar eru til á lager?', kind: 'question', expect: {} },
   {
     text: 'hver er munurinn á Model 3 og Model Y?',
     kind: 'question',
@@ -496,16 +541,8 @@ export const intentCases: IntentCase[] = [
     allow: ['seats'],
   },
   { text: 'oft í snjó og hálku', kind: 'vague', expect: { drive: ['AWD'] } },
-  {
-    text: 'bíll sem ég get fengið í næstu viku',
-    kind: 'vague',
-    expect: { availability: 'available' },
-  },
-  {
-    text: 'bíð eftir nýju módelunum',
-    kind: 'vague',
-    expect: { availability: 'expected' },
-  },
+  { text: 'bíll sem ég get fengið í næstu viku', kind: 'vague', expect: {} },
+  { text: 'bíð eftir nýju módelunum', kind: 'vague', expect: {} },
   {
     text: 'besta drægni miðað við verð',
     kind: 'vague',
@@ -535,6 +572,93 @@ export const intentCases: IntentCase[] = [
     text: 'get ég hlaðið í fjölbýli?',
     kind: 'question',
     expect: {},
+  },
+
+  // Written before numbers in words were offered to the model or questions
+  // to the advisor were told apart, and first run only after
+  { text: 'við erum átta', kind: 'number', expect: { seats: 8 } },
+  { text: 'má kosta sjö', kind: 'number', expect: { price: 7_000_000 } },
+  {
+    text: 'fimm milljónir hámark',
+    kind: 'number',
+    expect: { price: 5_000_000 },
+  },
+  { text: 'með 4 börn', kind: 'number', expect: { seats: 7 } },
+  {
+    text: 'þrjú börn og hundur',
+    kind: 'number',
+    expect: {},
+    allow: ['seats'],
+  },
+  {
+    text: 'hvaða bíl mælir þú með fyrir fjögurra manna fjölskyldu?',
+    kind: 'question',
+    expect: { seats: 4 },
+  },
+  {
+    text: 'hvaða rafbíll er með bestu hröðunina?',
+    kind: 'question',
+    expect: {},
+    allow: ['acceleration'],
+  },
+  {
+    text: 'hvað kostar Tesla Model Y?',
+    kind: 'question',
+    expect: { name: ['Model Y'] },
+  },
+  {
+    text: 'hvaða bíll er ódýrastur?',
+    kind: 'question',
+    expect: {},
+    allow: ['price'],
+  },
+  {
+    text: 'hvernig er drægnin á veturna?',
+    kind: 'question',
+    expect: {},
+    allow: ['range'],
+  },
+  {
+    text: 'er fjórhjóladrif nauðsynlegt á Íslandi?',
+    kind: 'question',
+    expect: {},
+    allow: ['drive'],
+  },
+  {
+    text: 'hvaða bíll hentar best í langferðir?',
+    kind: 'question',
+    expect: {},
+    allow: ['range'],
+  },
+  { text: 'hvað er WLTP?', kind: 'question', expect: {} },
+  {
+    text: 'hvaða bílar eru með 7 sætum?',
+    kind: 'question',
+    expect: { seats: 7 },
+  },
+  {
+    text: 'hversu langt kemst ódýrasti bíllinn?',
+    kind: 'question',
+    expect: {},
+    allow: ['price', 'range'],
+  },
+  {
+    text: 'hvað tekur langan tíma að hlaða á hraðhleðslustöð?',
+    kind: 'question',
+    expect: {},
+    allow: ['fastcharge'],
+  },
+  {
+    text: 'get ég dregið hjólhýsi á rafbíl?',
+    kind: 'question',
+    expect: {},
+    allow: ['drive'],
+  },
+  {
+    text: 'hvaða sjö sæta bíll er ódýrastur?',
+    kind: 'question',
+    expect: { seats: 7 },
+    allow: ['price'],
   },
 ]
 

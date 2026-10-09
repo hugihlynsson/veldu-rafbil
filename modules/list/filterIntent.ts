@@ -76,8 +76,9 @@ const parseNumber = (raw: string, preferDecimal = false): number => {
   return thousands ? Number(whole + fraction) : Number(`${whole}.${fraction}`)
 }
 
-const smallNumber = (raw: string): number =>
-  numberWords[raw] ?? parseNumber(raw)
+/** A number as the parser left it, in digits or spelled out */
+export const readNumber = (raw: string, preferDecimal = false): number =>
+  numberWords[raw] ?? parseNumber(raw, preferDecimal)
 
 const within = (value: number, min: number, max: number) =>
   Number.isFinite(value) && value >= min && value <= max
@@ -101,13 +102,14 @@ const upperBoundWords = new Set(['undir', 'hamark', 'max', 'innan'])
 const upperBoundPhrases = ['minna en', 'mesta lagi']
 
 type Bound = 'lower' | 'upper'
+const boundVerbs = new Set(['kosta', 'kostar', 'fara', 'vera'])
 
 /**
  * Which way the words just before a number point. "ekki yfir" is a ceiling
  * and "ekki undir" a floor, which is most of what a negation does to a number.
  */
 const boundBefore = (before: string): Bound | undefined => {
-  const words = lastWords(before, 3)
+  const words = lastWords(before, 4)
   const last = words.at(-1) ?? ''
   const pair = words.slice(-2).join(' ')
 
@@ -122,8 +124,12 @@ const boundBefore = (before: string): Bound | undefined => {
           : undefined
   if (!found) return undefined
 
+  // "má ekki kosta meira en" puts a verb between the negation and the bound
   const [bound, length] = found
-  if (words.at(-length - 1) !== 'ekki') return bound
+  const gap = words.at(-length - 1) ?? ''
+  const negated =
+    gap === 'ekki' || (boundVerbs.has(gap) && words.at(-length - 2) === 'ekki')
+  if (!negated) return bound
   return bound === 'lower' ? 'upper' : 'lower'
 }
 
@@ -215,7 +221,7 @@ const nameEntries = buildNameEntries(cars)
  */
 const fillerWords = new Set(
   `
-  og eda en sem er eru ad a i um med fyrir til fra af vid mig mer eg okkur
+  og eda en sem er eru ad a i um med fyrir til fra af vid mig mer eg okkur ma
   vantar langar leita leitum vil viljum thad helst gjarnan takk kaupa nyjan
   nyr nytt ca bil bill bilinn bilnum bila bilar bilum bils rafbil rafbill
   rafbila rafbilar rafmagnsbil rafmagnsbill kr krona kronur sirka uth
@@ -233,13 +239,15 @@ export interface ParsedIntent {
   filters: Filters
   /** Words no rule read, and that are not filler */
   unread: string[]
+  /** Numbers no rule read, as written, for a model to place */
+  numbers: string[]
 }
 
 /**
  * The filters a request states in so many words: numbers with their units,
- * seat counts, drive, availability, makes and models. Exact and free, so
- * whatever it reads is never asked of a model, and it never guesses — a word
- * it does not know is left in `unread` for one that can.
+ * seat counts, drive, makes and models. Exact and free, so whatever it reads
+ * is never asked of a model, and it never guesses — a word it does not know is
+ * left in `unread`, and a number it cannot place in `numbers`, for one that can.
  */
 export const parseFilterIntent = (text: string): ParsedIntent => {
   let rest = foldText(text.slice(0, MAX_INTENT_LENGTH))
@@ -265,6 +273,12 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
     filters[key] ??= value
   }
 
+  // The 0 and 100 of "0-100" name the sprint, not a value of any filter
+  take(
+    String.raw`${START}0\s*(?:-|–|i|til|upp i)\s*100(?:\s*km\s*(?:\/|a|per)?\s*(?:klst|kl|h|t))?${END}`,
+    () => {},
+  )
+
   take(String.raw`${START}${NUM}\s*km\s*(?:\/|a|per)\s*min\w*`, ([, raw]) => {
     const min = parseNumber(raw)
     if (within(min, 1, 60)) set('fastcharge', min)
@@ -284,13 +298,21 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
     () => set('seats', 7),
   )
 
-  take(String.raw`${START}${NUM}\s*${MILLION}${END}`, ([, raw], before) => {
-    const max = parseNumber(raw, true) * 1_000_000
-    // There is no lowest price to filter on, so "yfir 5 milljónum" is read
-    // and dropped rather than mistaken for a ceiling
-    if (within(max, 1_000_000, 100_000_000) && boundBefore(before) !== 'lower')
-      set('price', max)
-  })
+  // The lower end of "5 til 8 milljónir" is no filter, so it is read with the
+  // ceiling rather than left for a model to place
+  take(
+    String.raw`${START}(?:\d+(?:[.,]\d+)*\s*(?:-|–|til)\s*)?${NUM}\s*${MILLION}${END}`,
+    ([, raw], before) => {
+      const max = parseNumber(raw, true) * 1_000_000
+      // There is no lowest price to filter on, so "yfir 5 milljónum" is read
+      // and dropped rather than mistaken for a ceiling
+      if (
+        within(max, 1_000_000, 100_000_000) &&
+        boundBefore(before) !== 'lower'
+      )
+        set('price', max)
+    },
+  )
 
   take(
     String.raw`${START}${NUM}\s*(?:thusund\w*|thus\.?)\s*${KRONUR}?${END}`,
@@ -328,14 +350,14 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
   take(
     String.raw`${START}${SMALL}\s*\+?\s*(?:saet\w*|sati|sata|seta|seti|manna|manns|farthega\w*)${END}`,
     ([, raw]) => {
-      const min = smallNumber(raw)
+      const min = readNumber(raw)
       if (!within(min, 2, 9)) return false
       set('seats', min)
     },
   )
 
   take(String.raw`${START}fyrir\s+${SMALL}${END}`, ([, raw]) => {
-    const min = smallNumber(raw)
+    const min = readNumber(raw)
     if (!within(min, 2, 9)) return false
     set('seats', min)
   })
@@ -371,12 +393,11 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
   }
   if (drives.length) set('drive', drives)
 
+  // When the car can be had is not suggested, as it says little about which
+  // car someone wants. The words are still read, so they ask no model.
   take(
-    String.raw`${START}(?:faanleg\w*|a lager\w*|lagerbil\w*|strax|sem fyrst|til afhendingar|til nuna)${END}`,
-    () => set('availability', 'available'),
-  )
-  take(String.raw`${START}(?:vaentanleg\w*|a leidinni)${END}`, () =>
-    set('availability', 'expected'),
+    String.raw`${START}(?:faanleg\w*|a lager\w*|lagerbil\w*|strax|sem fyrst|til afhendingar|til nuna|vaentanleg\w*|a leidinni)${END}`,
+    () => {},
   )
 
   for (const entry of nameEntries) {
@@ -402,12 +423,16 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
     .split(/[^\p{L}]+/u)
     .filter((word) => word.length > 1 && !fillerWords.has(word))
 
-  return { filters: normalizeFilters(filters), unread }
+  const numbers = [
+    ...new Set(rest.match(pattern(`${START}(?:${NUM}|${SMALL})${END}`)) ?? []),
+  ].filter((raw) => readNumber(raw) > 0)
+
+  return { filters: normalizeFilters(filters), unread, numbers }
 }
 
 /** Whether anything is left that only a model could read */
 export const needsModel = (parsed: ParsedIntent): boolean =>
-  parsed.unread.length > 0
+  parsed.unread.length > 0 || parsed.numbers.length > 0
 
 export type SuggestionSource = 'text' | 'model'
 

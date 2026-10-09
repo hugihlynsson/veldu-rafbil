@@ -1,4 +1,8 @@
-import type { ChoiceQuestion, SystemOneRequest } from '@typesafe-ai/sdk'
+import type {
+  ChoiceQuestion,
+  NoulQuestion,
+  SystemOneRequest,
+} from '@typesafe-ai/sdk'
 
 import type { Filters } from '@/modules/list/filters'
 import cars, { Car } from '@/modules/data/cars'
@@ -6,6 +10,7 @@ import {
   FilterSuggestion,
   needsModel,
   parseFilterIntent,
+  readNumber,
   suggestionsFromFilters,
 } from '@/modules/list/filterIntent'
 
@@ -16,6 +21,8 @@ interface Option<Key extends FilterKey> {
   label: string
   value: Value<Key>
   description: string
+  /** The number in the request the option was made from */
+  number?: string
 }
 
 interface IntentQuestion<Key extends FilterKey> {
@@ -28,6 +35,10 @@ interface IntentQuestion<Key extends FilterKey> {
   instructions: string
   none: string
   options: Option<Key>[]
+  /** The option a number in the request makes, where it could be this filter */
+  fromNumber?: (text: string) => Option<Key> | undefined
+  /** Those options, for the request at hand */
+  stated?: Option<Key>[]
 }
 
 // The share of the probability that has to be off "none" for a filter to be
@@ -72,6 +83,35 @@ const floorTo = (value: number, step: number) =>
   Math.floor(Math.round((value / step) * 1000) / 1000) * step
 const ceilTenth = (value: number) => ceilTo(value * 10, 1) / 10
 const floorTenth = (value: number) => floorTo(value * 10, 1) / 10
+
+const within = (value: number, min: number, max: number) =>
+  Number.isFinite(value) && value >= min && value <= max
+
+// A label is a key the model answers with, so it holds no dot
+const slug = (value: number) => String(value).replace('.', '_')
+
+// The request is folded by then, so a number spelled out is shown as a figure
+// too: "atta" alone is a word the model has to place first
+const theNumber = (text: string) =>
+  `The ${/\d/.test(text) ? text : `"${text}" (${readNumber(text)})`} in \`request\``
+
+// The parser's bounds for each unit, so a number is offered to a filter only
+// where it would have read it with the unit written out
+const statedNumber =
+  <Key extends 'range' | 'acceleration' | 'fastcharge' | 'value'>(
+    [min, max]: [number, number],
+    label: (value: number) => string,
+    description: (value: number) => string,
+  ) =>
+  (text: string): Option<Key> | undefined => {
+    const value = readNumber(text)
+    if (!within(value, min, max)) return undefined
+    return {
+      label: label(value),
+      value: value as Value<Key>,
+      description: `${theNumber(text)} ${description(value)}`,
+    }
+  }
 
 /**
  * Every question, with the brackets cut from the cars on the list rather than
@@ -121,6 +161,23 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
           description: `Cheap, affordable, on a budget: up to about ${millions(price(0.25))} million ISK`,
         },
       ],
+      // A bare "8" or "6,5" is a budget in millions, as the parser reads
+      // "undir 8"
+      fromNumber: (text) => {
+        const kronur = readNumber(text)
+        const inMillions = Math.round(readNumber(text, true) * 1_000_000)
+        const max = within(kronur, 1_000_000, 100_000_000)
+          ? kronur
+          : within(inMillions, 1_000_000, 60_000_000)
+            ? inMillions
+            : undefined
+        if (max === undefined) return undefined
+        return {
+          label: `up_to_${max}_isk`,
+          value: max,
+          description: `${theNumber(text)} as the most the car may cost: up to ${millions(max)} million ISK`,
+        }
+      },
     },
     range: {
       key: 'range',
@@ -145,6 +202,12 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
           description: `As much range as possible: at least ${range(0.75)} km WLTP`,
         },
       ],
+      fromNumber: statedNumber(
+        [50, 1500],
+        (min) => `at_least_${min}_km`,
+        (min) =>
+          `as the distance the car must go on a charge: at least ${min} km WLTP`,
+      ),
     },
     seats: {
       key: 'seats',
@@ -168,6 +231,17 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
             'Seven or more seats: six people or more, such as four or more children, or a third row of seats',
         },
       ],
+      // Nearly every car seats five, so a smaller number narrows nothing, and
+      // it is mostly a count of the children, which the brackets add up
+      fromNumber: (text) => {
+        const seats = readNumber(text)
+        if (!Number.isInteger(seats) || !within(seats, 6, 9)) return undefined
+        return {
+          label: `seats_${seats}`,
+          value: seats,
+          description: `${theNumber(text)} as everyone riding along, adults included: at least ${seats} seats`,
+        }
+      },
     },
     drive: {
       key: 'drive',
@@ -194,25 +268,6 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
         },
       ],
     },
-    availability: {
-      key: 'availability',
-      ordered: false,
-      instructions:
-        'Does the person in `request` say when they want to get the car? In Icelandic, strax, á lager and fljótlega mean now; væntanlegur and á leiðinni mean upcoming.',
-      none: 'Nothing is said about when to get the car. A quick car or fast charging describes the car, not when it is wanted, and a season or a trip is not a delivery date',
-      options: [
-        {
-          label: 'available_now',
-          value: 'available',
-          description: 'Available now: in stock, needed soon',
-        },
-        {
-          label: 'upcoming',
-          value: 'expected',
-          description: 'Upcoming models that are not yet delivered',
-        },
-      ],
-    },
     acceleration: {
       key: 'acceleration',
       ordered: true,
@@ -236,6 +291,11 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
           description: `Among the fastest, a sports car: at most ${acceleration(0.1)} s`,
         },
       ],
+      fromNumber: statedNumber(
+        [1.5, 20],
+        (max) => `under_${slug(max)}_seconds`,
+        (max) => `as acceleration: 0-100 km/h in at most ${max} s`,
+      ),
     },
     fastcharge: {
       key: 'fastcharge',
@@ -255,6 +315,12 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
           description: `Among the fastest to charge: at least ${fastcharge(0.75)} km a minute`,
         },
       ],
+      fromNumber: statedNumber(
+        [1, 60],
+        (min) => `${slug(min)}_km_a_minute`,
+        (min) =>
+          `as charging speed: at least ${min} km of range a minute on a fast charger`,
+      ),
     },
     value: {
       key: 'value',
@@ -275,6 +341,11 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
             'The best value: among the lowest prices per km of range',
         },
       ],
+      fromNumber: statedNumber(
+        [1000, 200_000],
+        (max) => `${max}_isk_a_km`,
+        (max) => `as the price per km of range: at most ${max} ISK a km`,
+      ),
     },
   }
   return questions
@@ -282,37 +353,107 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
 
 const intentQuestions = buildIntentQuestions()
 
-type Questions = Record<string, ChoiceQuestion>
+type IntentQuestions = typeof intentQuestions
 
-const toChoice = (question: IntentQuestion<FilterKey>): ChoiceQuestion => ({
-  type: 'choice',
-  instructions: question.instructions,
-  criteria: Object.fromEntries([
-    ['none', question.none],
-    ...question.options.map((option) => [option.label, option.description]),
-  ]),
-})
+/**
+ * The questions for one request, each offered the numbers the parser could
+ * not place that could be its filter. So the model says which filter a bare
+ * "600" belongs to, and the value is still the one the person typed.
+ */
+export const withNumbers = (
+  numbers: ReadonlyArray<string>,
+  questions: IntentQuestions = intentQuestions,
+): IntentQuestions =>
+  Object.fromEntries(
+    Object.entries(questions).map(([key, question]) => {
+      const { options, fromNumber } = question as IntentQuestion<FilterKey>
+      // "five" is the "fimm" in "fimm milljónir" too, and has to give way to
+      // the filter that number is about
+      const claimed = options.map((option) => ({
+        ...option,
+        number: numbers.find((text) => readNumber(text) === option.value),
+      }))
+      const stated = numbers
+        .flatMap((text) => {
+          const option = fromNumber?.(text)
+          return option ? [{ ...option, number: text }] : []
+        })
+        .filter(
+          (option, index, all) =>
+            all.findIndex(({ label }) => label === option.label) === index,
+        )
+      return [key, { ...question, options: claimed, stated }]
+    }),
+  )
+
+type Questions = Record<string, ChoiceQuestion | NoulQuestion>
+
+// Not a filter key, so it can sit beside them in one request
+export const ADVISOR_KEY = 'asksAdvisor'
+
+// Above this, the request is a question for the advisor rather than a wish.
+// On cases.ts every question but two scored 0.8 or more and every wish but two
+// under 0.5; those two, short wishes with no verb, came to 0.55–0.77, so it
+// sits close above them.
+export const ADVISOR_THRESHOLD = 0.8
+
+const advisorQuestion: NoulQuestion = {
+  type: 'noul',
+  instructions:
+    'Is `request` a question put to an advisor on electric cars, rather than a description of the car the person wants? In Icelandic, hvað, hvaða, hver, hvernig, hversu, er and get ég open a question.',
+  criteria: {
+    true: 'A question: it asks for facts, a comparison or a recommendation',
+    false:
+      'A wish: it says what the car should have or what the person needs, even in a few words',
+  },
+}
+
+// Every question is answered on its own, so each is told what the words
+// around a number mean, or a "7" that is a price is read as seats too
+const statedInstructions =
+  'Options that name a number are read off `request`. Take one only when the words around that number say it is about this: kosta, verð, dýr and milljónir are price; km, kemst, drægni and keyra are distance; sæti, manna, erum and börn are people; sek and í hundraðið are acceleration.'
+
+const toChoice = (question: IntentQuestion<FilterKey>): ChoiceQuestion => {
+  const stated = question.stated ?? []
+  return {
+    type: 'choice',
+    instructions: stated.length
+      ? `${question.instructions} ${statedInstructions}`
+      : question.instructions,
+    criteria: Object.fromEntries([
+      ['none', question.none],
+      ...[...question.options, ...stated].map((option) => [
+        option.label,
+        option.description,
+      ]),
+    ]),
+  }
+}
 
 /**
  * One choice per filter the text has not set, each with "none" among its
- * options, so a single pass says both whether a filter applies and where. The
- * name filter is never asked: a make is in the text or it is not.
+ * options, so a single pass says both whether a filter applies and where, and
+ * whether the request is a question for the advisor at all. The name filter
+ * is never asked: a make is in the text or it is not.
  */
 export const intentRequest = (
   text: string,
   skip: ReadonlyArray<FilterKey>,
   questions = intentQuestions,
-): SystemOneRequest<Questions> => ({
-  state: { request: text },
-  questions: Object.fromEntries(
-    Object.values(questions)
-      .filter((question) => !skip.includes(question.key))
-      .map((question) => [
-        question.key,
-        toChoice(question as IntentQuestion<FilterKey>),
-      ]),
-  ),
-})
+): SystemOneRequest<Questions> => {
+  const filters = Object.values(questions)
+    .filter((question) => !skip.includes(question.key))
+    .map((question) => [
+      question.key,
+      toChoice(question as IntentQuestion<FilterKey>),
+    ])
+  return {
+    state: { request: text },
+    questions: Object.fromEntries(
+      filters.length ? [...filters, [ADVISOR_KEY, advisorQuestion]] : [],
+    ),
+  }
+}
 
 // The response is whatever came back over the wire, so it is read defensively
 const readProbabilities = (
@@ -332,42 +473,102 @@ const readProbabilities = (
   return total > 0 ? values.map((value) => value / total) : null
 }
 
+const readNoul = (answer: unknown): number | null => {
+  if (!answer || typeof answer !== 'object') return null
+  const noul = (answer as { noul?: unknown }).noul
+  return typeof noul === 'number' && within(noul, 0, 1) ? noul : null
+}
+
 /**
  * The model's answers as suggestions. It can only ever pick one of the
  * options it was given, so the worst it can do is a wrong filter from our own
- * list, never a value of its own.
+ * list or from the request's own numbers, never a value of its own.
  */
 export const suggestionsFromAnswers = (
   answers: Record<string, unknown>,
   questions = intentQuestions,
-): FilterSuggestion[] =>
-  Object.values(questions).flatMap((question) => {
-    const { key, options, ordered } = question as IntentQuestion<FilterKey>
+): FilterSuggestion[] => {
+  const picks = Object.values(questions).flatMap((question) => {
+    const {
+      key,
+      options,
+      ordered,
+      stated = [],
+    } = question as IntentQuestion<FilterKey>
     if (!Object.hasOwn(answers, key)) return []
+    const all = [...options, ...stated]
     const probabilities = readProbabilities(answers[key], [
       'none',
-      ...options.map((option) => option.label),
+      ...all.map((option) => option.label),
     ])
     if (!probabilities) return []
 
     const [none, ...rest] = probabilities
-    const suggest = (option: Option<FilterKey>, probability: number) =>
-      [
-        { key, value: option.value, source: 'model', probability },
-      ] as FilterSuggestion[]
+    const pick = (
+      option: Option<FilterKey>,
+      probability: number,
+      share = probability,
+    ) => [
+      {
+        suggestion: {
+          key,
+          value: option.value,
+          source: 'model',
+          probability,
+        } as FilterSuggestion,
+        number: option.number,
+        share,
+      },
+    ]
 
     if (ordered) {
       const applies = 1 - none
       if (applies < APPLY_THRESHOLD) return []
-      const index = conservativeIndex(rest.map((share) => share / applies))
-      return suggest(options[index], applies)
+      const brackets = rest.slice(0, options.length)
+      const numbers = rest.slice(options.length)
+      const onBrackets = brackets.reduce((sum, share) => sum + share, 0)
+      // What the person typed is taken as it stands, rather than leaned loose
+      // like a bracket: there is no reading of it to be too tight about
+      const likeliest = numbers.indexOf(Math.max(...numbers))
+      if (numbers.length && numbers[likeliest] >= onBrackets)
+        return pick(stated[likeliest], applies, numbers[likeliest])
+      const index = conservativeIndex(
+        brackets.map((share) => share / onBrackets),
+      )
+      return pick(options[index], applies)
     }
 
-    const best = rest.indexOf(Math.max(...rest))
-    return rest[best] >= APPLY_THRESHOLD
-      ? suggest(options[best], rest[best])
-      : []
+    // "seven" and the 7 in the request are one answer, and count as one
+    const byValue = all.map((option) =>
+      all.reduce(
+        (sum, other, index) =>
+          other.value === option.value ? sum + rest[index] : sum,
+        0,
+      ),
+    )
+    const best = byValue.indexOf(Math.max(...byValue))
+    if (byValue[best] < APPLY_THRESHOLD) return []
+    const option =
+      stated.find(({ value }) => value === all[best].value) ?? all[best]
+    return pick(option, byValue[best])
   })
+
+  // A question states no wish, so what the model reads into one is no filter;
+  // a number the person typed in it still is
+  const asksAdvisor = (readNoul(answers[ADVISOR_KEY]) ?? 0) >= ADVISOR_THRESHOLD
+
+  // A number says one thing, so it goes to the filter surest it is about it
+  return picks
+    .filter(
+      ({ number, share }) =>
+        (number !== undefined || !asksAdvisor) &&
+        (number === undefined ||
+          !picks.some(
+            (other) => other.number === number && other.share > share,
+          )),
+    )
+    .map(({ suggestion }) => suggestion)
+}
 
 export type ModelStatus = 'answered' | 'not-needed' | 'unavailable' | 'failed'
 
@@ -393,9 +594,11 @@ export const suggestFilters = async (
   const fromText = suggestionsFromFilters(parsed.filters, 'text')
   if (!needsModel(parsed)) return { suggestions: fromText, model: 'not-needed' }
 
+  const questions = withNumbers(parsed.numbers)
   const request = intentRequest(
     text,
     Object.keys(parsed.filters) as FilterKey[],
+    questions,
   )
   if (Object.keys(request.questions).length === 0)
     return { suggestions: fromText, model: 'not-needed' }
@@ -407,7 +610,7 @@ export const suggestFilters = async (
       Object.keys(request.questions).map((key) => [key, answers[key]]),
     )
     return {
-      suggestions: [...fromText, ...suggestionsFromAnswers(asked)],
+      suggestions: [...fromText, ...suggestionsFromAnswers(asked, questions)],
       model: 'answered',
     }
   } catch {
