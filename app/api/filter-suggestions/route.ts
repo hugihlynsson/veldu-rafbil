@@ -1,8 +1,11 @@
+import { Axiom } from '@axiomhq/js'
 import { TypeSafeClient } from '@typesafe-ai/sdk'
+import { after } from 'next/server'
 import { z } from 'zod'
 
 import { MAX_INTENT_LENGTH } from '@/modules/list/filterIntent'
 import { suggestFilters, type AskModel } from './model'
+import { suggestionsLogEvent } from './log'
 import { clientKey, filterSuggestionsRateLimit } from '@/modules/rateLimit'
 
 // Measured on the 151 Icelandic requests in cases.ts
@@ -27,6 +30,11 @@ const client = process.env.TYPESAFE_API_KEY
       retry: { maxRetries: 0 },
       logLevel: 'error',
     })
+  : undefined
+
+// Left unbuilt without a token, so a local or preview run stays quiet
+const axiom = process.env.AXIOM_TOKEN
+  ? new Axiom({ token: process.env.AXIOM_TOKEN })
   : undefined
 
 const requestSchema = z.strictObject({
@@ -57,13 +65,53 @@ export async function POST(req: Request) {
     return Response.json({ error: 'Invalid request body' }, { status: 400 })
   }
 
+  const started = performance.now()
+  let answered:
+    | { answers: Record<string, unknown>; usage: { input_tokens: number } }
+    | undefined
   const ask: AskModel | undefined =
     client &&
     ((request) =>
-      client.systemOne(request, { signal: req.signal }).catch((error) => {
-        console.error('Filter suggestions model failed:', error)
-        throw error
-      }))
+      client
+        .systemOne(request, { signal: req.signal })
+        .then((result) => {
+          answered = result
+          return result
+        })
+        .catch((error) => {
+          console.error('Filter suggestions model failed:', error)
+          throw error
+        }))
 
-  return Response.json(await suggestFilters(parsed.data.text, ask))
+  const result = await suggestFilters(parsed.data.text, ask)
+  const millis = Math.round(performance.now() - started)
+  // Read now: the client aborts a request it has typed past, and once the
+  // response is sent there is no telling that apart from a closed connection
+  const superseded = req.signal.aborted
+
+  // Logged once the response has gone, so the Axiom round trip never holds
+  // the pills back
+  if (axiom)
+    after(async () => {
+      try {
+        axiom.ingest('veldu-rafbil-assistant', [
+          suggestionsLogEvent({
+            timestamp: new Date().toISOString(),
+            text: parsed.data.text,
+            result,
+            answers: answered?.answers,
+            inputTokens: answered?.usage.input_tokens,
+            superseded,
+            millis,
+            model: modelName,
+            environment: process.env.NODE_ENV || 'development',
+          }),
+        ])
+        await axiom.flush()
+      } catch (error) {
+        console.error('Failed to log to Axiom:', error)
+      }
+    })
+
+  return Response.json(result)
 }
