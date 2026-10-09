@@ -2,11 +2,12 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { MAX_INTENT_LENGTH } from '@/modules/list/filterIntent'
 
-// The client is built as the route loads, so each test loads it afresh with
-// the key it means: a key in the shell running the tests must not be spent
+// The clients are built as the route loads, so each test loads it afresh with
+// the keys it means: a key in the shell running the tests must not be spent
 const loadPost = async (key: string) => {
   vi.resetModules()
   vi.stubEnv('TYPESAFE_API_KEY', key)
+  vi.stubEnv('AXIOM_TOKEN', '')
   const { POST } = await import('./route')
   return (body: unknown, address = '10.1.0.1') =>
     POST(
