@@ -7,6 +7,7 @@ import { getMessageText, type ChatMessage } from '@/modules/chat/message'
 import { trimHistory } from '@/modules/chat/request'
 import {
   clearStoredMessages,
+  getConversationId,
   readStoredMessages,
   writeStoredMessages,
 } from '@/utils/chatStorage'
@@ -15,7 +16,11 @@ import {
 // its bounds whole, so what is sent is cut to fit the way the route cuts it
 const transport = new DefaultChatTransport<ChatMessage>({
   prepareSendMessagesRequest: ({ body, messages }) => ({
-    body: { ...body, messages: trimHistory(messages) },
+    body: {
+      ...body,
+      messages: trimHistory(messages),
+      conversationId: getConversationId(),
+    },
   }),
 })
 

@@ -4,7 +4,8 @@ import { after } from 'next/server'
 import { getMessageText } from '@/modules/chat/message'
 import { rateLimitedText } from '@/modules/chat/progress'
 import { chatRateLimit, clientKey } from '@/modules/rateLimit'
-import { parseChatRequest, streamChat, type ChatFinish } from './chat'
+import { parseChatRequest, parseConversationId, streamChat } from './chat'
+import { chatLogEvent, questionSource, type ChatOutcome } from './log'
 
 // Picked on Icelandic performance, not general benchmarks: 3.7 scores above
 // 3.8 there and spends ~30% fewer output tokens at the same price. Re-run the
@@ -18,6 +19,9 @@ const axiom = process.env.AXIOM_TOKEN
   : undefined
 
 export async function POST(req: Request) {
+  const startedAt = performance.now()
+  const elapsed = () => Math.round(performance.now() - startedAt)
+
   const limit = chatRateLimit(clientKey(req))
   if (!limit.ok) {
     return Response.json(
@@ -41,29 +45,33 @@ export async function POST(req: Request) {
     return Response.json({ error: 'Invalid request body' }, { status: 400 })
   }
 
-  // Kept by onFinish and logged by after(), which runs once the response has
-  // gone, so the Axiom round trip never holds the stream open. An answer that
-  // errors or is aborted never finishes, and has nothing to log.
-  let finished: ChatFinish | undefined
+  const turn = {
+    timestamp: new Date().toISOString(),
+    conversationId: parseConversationId(body),
+    userMessage: getMessageText(messages[messages.length - 1]),
+    source: questionSource(messages),
+    messageCount: messages.length,
+    model: modelName,
+    // NODE_ENV is production on a preview deploy too
+    environment: process.env.VERCEL_ENV ?? 'development',
+    commit: process.env.VERCEL_GIT_COMMIT_SHA,
+  }
+
+  // Kept by the answer's callbacks and logged by after(), which runs once the
+  // response has gone, so the Axiom round trip never holds the stream open.
+  // The first to arrive wins: an error can still be followed by a finish.
+  let outcome: ChatOutcome | undefined
+  let firstTextMs: number | undefined
 
   after(async () => {
-    if (!axiom || !finished) return
+    if (!axiom) return
+    // Read as the response closes, which is the answer ending or the visitor
+    // leaving
+    const timing = { firstTextMs, durationMs: elapsed() }
 
     try {
       await axiom.ingest('veldu-rafbil-assistant', [
-        {
-          type: 'chat_response_finished',
-          timestamp: new Date().toISOString(),
-          userMessage: getMessageText(messages[messages.length - 1]),
-          assistantResponse: finished.text,
-          followUps: finished.followUps,
-          cars: finished.cars,
-          messageCount: messages.length,
-          tokenUsage: finished.usage,
-          toolCalls: finished.toolCalls,
-          model: modelName,
-          environment: process.env.NODE_ENV || 'development',
-        },
+        chatLogEvent(turn, outcome, timing),
       ])
       await axiom.flush()
     } catch (error) {
@@ -71,15 +79,27 @@ export async function POST(req: Request) {
     }
   })
 
-  return streamChat({
-    model: google(modelName),
-    messages,
-    providerOptions: {
-      // Every answer waits on the thinking before its first visible token
-      google: { thinkingConfig: { thinkingLevel: 'low' } },
-    },
-    onFinish: (event) => {
-      finished = event
-    },
-  })
+  try {
+    return await streamChat({
+      model: google(modelName),
+      messages,
+      providerOptions: {
+        // Every answer waits on the thinking before its first visible token
+        google: { thinkingConfig: { thinkingLevel: 'low' } },
+      },
+      onFinish: (finish) => {
+        outcome ??= { finish }
+      },
+      onError: (error) => {
+        console.error('Chat answer failed:', error)
+        outcome ??= { error }
+      },
+      onFirstText: () => {
+        firstTextMs = elapsed()
+      },
+    })
+  } catch (error) {
+    outcome ??= { error }
+    throw error
+  }
 }
