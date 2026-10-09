@@ -104,7 +104,7 @@ export async function POST(req: Request) {
             superseded,
             millis,
             model: modelName,
-            environment: process.env.NODE_ENV || 'development',
+            environment: process.env.VERCEL_ENV ?? 'development',
           }),
         ])
         await axiom.flush()
