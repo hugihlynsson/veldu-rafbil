@@ -48,6 +48,13 @@ export const parseChatRequest = async (
   return validateChatMessages(bounded.data.messages, tools)
 }
 
+// Ours to log, not to trust: anything but a UUID is dropped rather than written
+const conversationSchema = z.object({ conversationId: z.uuid() })
+
+/** Which conversation a request continues, if it says */
+export const parseConversationId = (body: unknown): string | undefined =>
+  conversationSchema.safeParse(body).data?.conversationId
+
 // Per step, and it counts the model's thinking as well as its answer, so it is
 // set to stop a runaway rather than to shorten a real one
 const MAX_OUTPUT_TOKENS = 16_384
@@ -66,6 +73,9 @@ interface StreamChatOptions {
   messages: ChatMessage[]
   providerOptions?: Parameters<typeof streamText>[0]['providerOptions']
   onFinish?: (finish: ChatFinish) => void
+  onError?: (error: unknown) => void
+  /** When the first of the answer's text arrives, after any thinking or tools */
+  onFirstText?: () => void
 }
 
 const metadataOf = ({
@@ -90,9 +100,12 @@ export const streamChat = async ({
   messages,
   providerOptions,
   onFinish,
+  onError,
+  onFirstText,
 }: StreamChatOptions): Promise<Response> => {
   const markers: AnswerMarkers = { followUps: [], cars: [] }
   const answerTools = createTools()
+  let hasText = false
 
   const result = streamText({
     model,
@@ -105,6 +118,13 @@ export const streamChat = async ({
     stopWhen: stepCountIs(10),
     tools: answerTools,
     experimental_transform: markerTransform(markers),
+    // Left unset without one, as setting it silences the SDK's own logging
+    onError: onError && (({ error }) => onError(error)),
+    onChunk: ({ chunk }) => {
+      if (chunk.type !== 'text-delta' || hasText) return
+      hasText = true
+      onFirstText?.()
+    },
     onFinish: ({ text, totalUsage, steps }) =>
       onFinish?.({
         text,

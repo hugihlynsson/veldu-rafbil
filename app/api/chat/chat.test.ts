@@ -10,7 +10,12 @@ import {
   convertReadableStreamToArray,
 } from 'ai/test'
 
-import { parseChatRequest, streamChat, type ChatFinish } from './chat'
+import {
+  parseChatRequest,
+  parseConversationId,
+  streamChat,
+  type ChatFinish,
+} from './chat'
 import cars from '@/modules/data/cars'
 import { carRef } from '@/modules/chat/cars'
 import { MAX_TAGGED_CARS, type ChatMessage } from '@/modules/chat/message'
@@ -144,6 +149,47 @@ describe('streamChat', () => {
     expect(finish?.usage.totalTokens).toBe(30)
   })
 
+  // The route logs whichever arrives first, so the error has to come before
+  // the finish that still follows it
+  it('reports an answer that fails part way, before it finishes', async () => {
+    const model = new MockLanguageModelV4({
+      doStream: async () => ({
+        stream: convertArrayToReadableStream([
+          { type: 'stream-start', warnings: [] },
+          { type: 'text-start', id: 't' },
+          { type: 'text-delta', id: 't', delta: 'Já, ' },
+          { type: 'error', error: new Error('Quota exceeded') },
+        ]),
+      }),
+    })
+    const events: unknown[] = []
+    await read(
+      await streamChat({
+        model,
+        messages: [question],
+        onError: (error) => events.push(error),
+        onFinish: () => events.push('finish'),
+      }),
+    )
+
+    expect(events).toEqual([new Error('Quota exceeded'), 'finish'])
+  })
+
+  // The route times the wait a visitor sees by it
+  it('reports the first of the text once, before it finishes', async () => {
+    const events: string[] = []
+    await read(
+      await streamChat({
+        model: modelSaying(chunks),
+        messages: [question],
+        onFirstText: () => events.push('text'),
+        onFinish: () => events.push('finish'),
+      }),
+    )
+
+    expect(events).toEqual(['text', 'finish'])
+  })
+
   it('bounds how much the model may write', async () => {
     const model = modelSaying(['Svar.'])
     await read(await streamChat({ model, messages: [question] }))
@@ -230,6 +276,24 @@ describe('a trimmed conversation', () => {
 
     const prompt = JSON.stringify(model.doStreamCalls[0].prompt)
     expect(prompt.length).toBeLessThan(200_000)
+  })
+})
+
+describe('parseConversationId', () => {
+  const id = '4f8a2c3e-9b1d-4e6f-8a7b-2c3d4e5f6a7b'
+
+  it('reads the id a request carries', () => {
+    expect(parseConversationId({ conversationId: id, messages: [] })).toBe(id)
+  })
+
+  // It is written to the log as sent, so only one of ours gets that far
+  it.each<[string, unknown]>([
+    ['no body', undefined],
+    ['no id', { messages: [] }],
+    ['an id that is not a UUID', { conversationId: 'x'.repeat(10_000) }],
+    ['an id that is not a string', { conversationId: 42 }],
+  ])('drops %s', (_label, body) => {
+    expect(parseConversationId(body)).toBeUndefined()
   })
 })
 
