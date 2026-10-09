@@ -3,12 +3,14 @@ import { describe, expect, it, vi } from 'vitest'
 import carFilter from '@/modules/list/carFilter'
 import cars from '@/modules/data/cars'
 import {
+  ADVISOR_KEY,
   APPLY_THRESHOLD,
   buildIntentQuestions,
   conservativeIndex,
   intentRequest,
   suggestFilters,
   suggestionsFromAnswers,
+  withNumbers,
 } from './model'
 import type { Filters } from '@/modules/list/filters'
 
@@ -62,7 +64,7 @@ describe('intentRequest', () => {
     expect(state).toEqual({ request: 'ódýr' })
     expect(Object.keys(questions).sort()).toEqual([
       'acceleration',
-      'availability',
+      ADVISOR_KEY,
       'drive',
       'fastcharge',
       'range',
@@ -70,13 +72,71 @@ describe('intentRequest', () => {
     ])
   })
 
-  it('gives every question a way to say it does not apply', () => {
+  it('gives every filter question a way to say it does not apply', () => {
     const { questions } = intentRequest('ódýr', [])
-    for (const question of Object.values(questions)) {
+    const { [ADVISOR_KEY]: advisor, ...filters } = questions
+    expect(advisor.type).toBe('noul')
+    for (const question of Object.values(filters)) {
       expect(question.type).toBe('choice')
-      expect(Object.keys(question.criteria)[0]).toBe('none')
+      expect(Object.keys(question.criteria ?? {})[0]).toBe('none')
     }
-    expect(questions.drive.instructions).toContain('drive')
+    expect(filters.drive.instructions).toContain('drive')
+  })
+
+  it('asks nothing when the text set every filter', () => {
+    const every = Object.keys(buildIntentQuestions()) as Array<keyof Filters>
+    expect(intentRequest('x', every).questions).toEqual({})
+  })
+})
+
+describe('withNumbers', () => {
+  const stated = (numbers: string[]) =>
+    Object.fromEntries(
+      Object.values(withNumbers(numbers)).map((question) => [
+        question.key,
+        question.stated?.map((option) => option.value),
+      ]),
+    )
+
+  it('offers a number to every filter it could be, as typed', () => {
+    expect(stated(['8', '600'])).toEqual({
+      price: [8_000_000],
+      range: [600],
+      seats: [8],
+      drive: [],
+      acceleration: [8],
+      fastcharge: [8],
+      value: [],
+    })
+  })
+
+  it('reads a number spelled out, and shows it as a figure', () => {
+    expect(stated(['atta']).seats).toEqual([8])
+    expect(stated(['fimm']).price).toEqual([5_000_000])
+    const { questions } = intentRequest('atta', [], withNumbers(['atta']))
+    expect(
+      (questions.seats.criteria as Record<string, string>).seats_8,
+    ).toContain('"atta" (8)')
+  })
+
+  it('offers seats only for more people than nearly every car seats', () => {
+    expect(stated(['4', '5', '6']).seats).toEqual([6])
+  })
+
+  it('reads a price written out or in millions', () => {
+    expect(stated(['6.000.000', '6,5', '6.500']).price).toEqual([
+      6_000_000, 6_500_000,
+    ])
+  })
+
+  it('names the number in the request it stands for', () => {
+    const { questions } = intentRequest('kemst 600', [], withNumbers(['600']))
+    expect(questions.range.criteria).toHaveProperty('at_least_600_km')
+    expect(
+      (questions.range.criteria as Record<string, string>).at_least_600_km,
+    ).toContain('The 600 in')
+    expect(questions.range.instructions).toContain('number')
+    expect(questions.drive.instructions).not.toContain('number')
   })
 })
 
@@ -147,6 +207,100 @@ describe('suggestionsFromAnswers', () => {
     ).toEqual([{ key: 'seats', value: 7, source: 'model', probability: 0.73 }])
   })
 
+  it('takes a number from the request as it stands', () => {
+    expect(
+      suggestionsFromAnswers(
+        {
+          range: choice({
+            none: 0.1,
+            decent: 0.2,
+            long_trips: 0.1,
+            at_least_600_km: 0.6,
+          }),
+        },
+        withNumbers(['600']),
+      ),
+    ).toEqual([{ key: 'range', value: 600, source: 'model', probability: 0.9 }])
+  })
+
+  it('falls back to the brackets when they outweigh the number', () => {
+    const [decent] = buildIntentQuestions().range!.options
+    expect(
+      suggestionsFromAnswers(
+        {
+          range: choice({
+            none: 0.1,
+            decent: 0.4,
+            long_trips: 0.2,
+            at_least_600_km: 0.3,
+          }),
+        },
+        withNumbers(['600']),
+      ),
+    ).toEqual([
+      { key: 'range', value: decent.value, source: 'model', probability: 0.9 },
+    ])
+  })
+
+  it('picks a number for an unordered filter like any other option', () => {
+    expect(
+      suggestionsFromAnswers(
+        { seats: choice({ none: 0.1, five: 0.1, seven: 0.1, seats_8: 0.7 }) },
+        withNumbers(['8']),
+      ),
+    ).toEqual([{ key: 'seats', value: 8, source: 'model', probability: 0.7 }])
+  })
+
+  it('counts an option and a number for the same value as one answer', () => {
+    expect(
+      suggestionsFromAnswers(
+        { seats: choice({ none: 0.2, seven: 0.4, seats_7: 0.4 }) },
+        withNumbers(['7']),
+      ),
+    ).toEqual([{ key: 'seats', value: 7, source: 'model', probability: 0.8 }])
+  })
+
+  it('gives a number only to the filter surest of it', () => {
+    expect(
+      suggestionsFromAnswers(
+        {
+          price: choice({ none: 0.1, up_to_7000000_isk: 0.9 }),
+          acceleration: choice({ none: 0.3, under_7_seconds: 0.7 }),
+          range: choice({ none: 0.1, at_least_400_km: 0.9 }),
+        },
+        withNumbers(['7', '400']),
+      ).map(({ key, value }) => [key, value]),
+    ).toEqual([
+      ['price', 7_000_000],
+      ['range', 400],
+    ])
+  })
+
+  it('offers only the numbers typed in a question to the advisor', () => {
+    expect(
+      suggestionsFromAnswers(
+        {
+          [ADVISOR_KEY]: { type: 'noul', noul: 0.9 },
+          drive: choice({ none: 0, all_wheel_drive: 1 }),
+          range: choice({ none: 0, at_least_600_km: 1 }),
+        },
+        withNumbers(['600']),
+      ).map(({ key }) => key),
+    ).toEqual(['range'])
+  })
+
+  it('gives a number to the filter surest of it over a bracket of that value', () => {
+    expect(
+      suggestionsFromAnswers(
+        {
+          price: choice({ none: 0, up_to_5000000_isk: 1 }),
+          seats: choice({ none: 0.3, five: 0.7 }),
+        },
+        withNumbers(['fimm']),
+      ).map(({ key }) => key),
+    ).toEqual(['price'])
+  })
+
   it('ignores answers it did not ask for, or cannot read', () => {
     expect(
       suggestionsFromAnswers({
@@ -184,6 +338,21 @@ describe('suggestFilters', () => {
     const result = await suggestFilters('ódýr með 7 sætum', ask)
     expect(result.model).toBe('failed')
     expect(result.suggestions).toHaveLength(1)
+  })
+
+  it('asks the model about a number the text left, as an option', async () => {
+    const ask = vi.fn().mockResolvedValue({
+      answers: { range: choice({ none: 0, at_least_600_km: 1 }) },
+    })
+    const result = await suggestFilters('fjórhjóladrif, 600', ask)
+
+    expect(ask.mock.calls[0][0].questions.range.criteria).toHaveProperty(
+      'at_least_600_km',
+    )
+    expect(result.suggestions).toEqual([
+      { key: 'drive', value: ['AWD'], source: 'text', probability: 1 },
+      { key: 'range', value: 600, source: 'model', probability: 1 },
+    ])
   })
 
   it('asks the model only about what the text left open', async () => {

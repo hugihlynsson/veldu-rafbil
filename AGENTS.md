@@ -130,8 +130,8 @@ the chat input, are public, free to use, and spend money on every call.
   prefix.
 - **A model never writes a filter value.** The parser reads what a request
   states outright, for free; a model only picks from options cut from the car
-  data. A suggestion is tapped, never applied for you, since a wrong filter
-  quietly empties the list.
+  data or from the numbers the request gives. A suggestion is tapped, never
+  applied for you, since a wrong filter quietly empties the list.
 
 ## Published data
 
