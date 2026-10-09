@@ -10,8 +10,11 @@ import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 const percent = (factor: number) => `${Math.round(factor * 100)}%`
 
 // The figures each card shows, so an answer about charging or battery size
-// comes from the list rather than from whatever the model remembers
+// comes from the list rather than from whatever the model remembers. Cheapest
+// first: asked for a cheap car that is also good at something, the model
+// otherwise reaches for the ones it has heard of rather than reading the list.
 const carsSummary = cars
+  .toSorted((a, b) => a.priceWithGrant - b.priceWithGrant)
   .map(
     (car) =>
       `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr, ${car.range} km drægni, ${car.capacity} kWh rafhlaða, hraðhleðsla 10-80% á ${car.timeToCharge10To80} mín (${car.kmPerMinuteCharged} km/mín), ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseUrl ? ` (more info: ${car.evDatabaseUrl})` : ''} (auðkenni: ${carRef(car)})`,
@@ -24,12 +27,13 @@ const systemPrompt = `Þú ert hjálpsamur ráðgjafi fyrir Veldu Rafbíl, ísle
 
 - Þú ert reiprennandi á íslensku og svarar alltaf á íslensku.
 
-Þú hefur aðgang að upplýsingum um ${cars.length} rafbíla sem eru fáanlegir á Íslandi:
+Þú hefur aðgang að upplýsingum um ${cars.length} rafbíla sem eru fáanlegir á Íslandi, í verðröð, sá ódýrasti fyrst:
 
 ${carsSummary}
 
 Gott að hafa í huga:
 - Notaðu upplýsingarnar hér að ofan til að gefa nákvæmar, sértækar upplýsingar
+- Þegar spurt er um tvennt í senn án talna, til dæmis ódýran og hraðan bíl, farðu yfir allan listann og berðu hvern bíl saman við hvort tveggja. Nefndu aldrei bíl ef annar bíll á listanum er bæði ódýrari og betri í hinu atriðinu, nefndu þann frekar
 - Verðin hér að ofan eru EFTIR ${grantAmountText} ríkisstyrk (fyrir bíla undir ${grantCeilingDativeText} kr)
 - Drægni byggir á WLTP mælingum
 - Hraðhleðslan er tíminn frá 10% upp í 80% á hröðustu hleðslu, og km/mín er meðaldrægniaukningin á mínútu á því bili, reiknuð út frá WLTP drægni

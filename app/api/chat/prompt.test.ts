@@ -31,6 +31,15 @@ describe('the assistant system prompt', () => {
     }
   })
 
+  // The prompt says so, and asked for a cheap car that is also good at
+  // something, the model only read past the cars it knew once they were
+  it('lists the cars cheapest first', () => {
+    const prices = cars
+      .toSorted((a, b) => lines.indexOf(lineOf(a)!) - lines.indexOf(lineOf(b)!))
+      .map((car) => car.priceWithGrant)
+    expect(prices).toEqual(prices.toSorted((a, b) => a - b))
+  })
+
   it('counts the cars from the list', () => {
     expect(systemPrompt).toContain(`upplýsingum um ${cars.length} rafbíla`)
   })
