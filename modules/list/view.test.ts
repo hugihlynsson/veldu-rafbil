@@ -11,6 +11,7 @@ describe('reading the view out of the query', () => {
   it('reads the Icelandic words', () => {
     expect(getViewFromQuery({ utlit: 'yfirlit' })).toBe('grid')
     expect(getViewFromQuery({ utlit: 'listi' })).toBe('list')
+    expect(getViewFromQuery({ utlit: 'tafla' })).toBe('table')
   })
 
   it('falls back to the list for anything it does not know', () => {

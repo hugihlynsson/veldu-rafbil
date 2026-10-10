@@ -60,6 +60,7 @@ const listQueries: [string, string][] = [
     serializeSorting({ sorting: 'name', direction: 'desc' }),
   ],
   ['the grid', serializeView('grid')],
+  ['the table', serializeView('table')],
   ...Object.entries(everyFilter).map(([key, value]): [string, string] => [
     `the ${key} filter`,
     serializeFilters({ [key]: value } as Filters),

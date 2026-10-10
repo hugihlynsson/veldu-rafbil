@@ -5,8 +5,8 @@ import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import { trackEvent } from 'fathom-client'
 
-import Car from './NewCar'
-import { GridIcon, ListIcon } from './ViewIcons'
+import Car, { TableHeader } from './NewCar'
+import { GridIcon, ListIcon, TableIcon } from './ViewIcons'
 import Title from '@/components/Title'
 import Intro from './Intro'
 import Toggles from '@/components/Toggles'
@@ -47,13 +47,20 @@ const toggleSortings: Sorting[] = [
 ]
 
 // From lg the grid outgrows the page, centred on it and kept clear of the
-// window's edges, while the header above stays where the list has it
-const gridLayout =
-  'md:grid md:grid-cols-2 md:gap-x-6 md:ml-10 md:mr-8 lg:grid-cols-3 lg:mx-[calc((100%_-_min(100vw_-_5rem,_var(--container-grid)))_/_2)]'
+// window's edges, while the header above stays where the list has it. The
+// table keeps to the page, and gains the ev-database link as a last column
+// from lg.
+const layouts: Record<View, string> = {
+  list: '',
+  grid: 'md:grid md:grid-cols-2 md:gap-x-6 md:ml-10 md:mr-8 lg:grid-cols-3 lg:mx-[calc((100%_-_min(100vw_-_5rem,_var(--container-grid)))_/_2)]',
+  table:
+    'md:grid md:grid-cols-[auto_minmax(0,1fr)_repeat(4,auto)] md:gap-x-5 md:ml-10 md:mr-8 lg:grid-cols-[auto_minmax(0,1fr)_repeat(5,auto)] lg:gap-x-6',
+}
 
 const viewItems: Array<[string, View, ReactNode]> = [
   ['Listi', 'list', <ListIcon key="list" />],
   ['Yfirlit', 'grid', <GridIcon key="grid" />],
+  ['Tafla', 'table', <TableIcon key="table" />],
 ]
 
 export default function CarList() {
@@ -64,7 +71,7 @@ export default function CarList() {
   const changeView = (next: View) => {
     if (next === view) return
     setView(next)
-    trackEvent(next === 'grid' ? 'Switched to grid' : 'Switched to list')
+    trackEvent(`Switched to ${next}`)
   }
 
   const [editingFilters, setEditingFilters] = useState<boolean>(false)
@@ -133,7 +140,7 @@ export default function CarList() {
             }
           />
 
-          {/* Below md the grid would be one column, the list again */}
+          {/* Below md the grid and the table would be the list again */}
           <div className="hidden md:block">
             <Toggles<View>
               currentValue={view}
@@ -160,7 +167,8 @@ export default function CarList() {
         </div>
       </header>
 
-      <div className={clsx(view === 'grid' && gridLayout)}>
+      <div className={layouts[view]}>
+        {view === 'table' && <TableHeader />}
         {sortCars(filteredCars, sorting, direction).map((car, index) => (
           <Car
             preload={index <= 1}
