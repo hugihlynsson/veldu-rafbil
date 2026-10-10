@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import ChatInput from './ChatInput'
 import type { Car } from '@/modules/data/cars'
 import type { Filters } from '@/modules/list/filters'
+import useChunk from '@/utils/useChunk'
 import useComposer from '@/utils/useComposer'
 import useConversation from '@/utils/useConversation'
 import useKeyboardInset from '@/utils/useKeyboardInset'
@@ -30,23 +31,19 @@ export default function ChatContainer({
   filters,
   onApplyFilters,
 }: Props) {
-  const [showChatMessages, setShowChatMessages] = useState<boolean>(false)
-  const [isChatModalLoaded, setIsChatModalLoaded] = useState<boolean>(false)
+  const conversation = useConversation()
+  const composer = useComposer()
+  const chatModal = useChunk(importChatModal)
+  const [wantsChatOpen, setWantsChatOpen] = useState<boolean>(false)
   // The input remounts each time it moves in and out of the modal, and only
   // its first arrival on the page is an entrance
   const [hasOpenedChat, setHasOpenedChat] = useState<boolean>(false)
-  const conversation = useConversation()
-  const composer = useComposer()
+
+  // Waits for the modal's chunk, as handing over while it is in flight would
+  // take the input with it, and for the session, as the modal keeps what it
+  // was opened on to tell the messages already said from the ones arriving
   const { session } = conversation
-
-  // Handing over while the chunk is in flight would take the input with it
-  const loadChatModal = () => {
-    void importChatModal().then(() => setIsChatModalLoaded(true))
-  }
-
-  // The session too: the modal keeps what it was opened on to tell the
-  // messages already said from the ones arriving
-  const isChatOpen = showChatMessages && isChatModalLoaded && session !== null
+  const isChatOpen = wantsChatOpen && chatModal.isLoaded && session !== null
 
   // Keeps the input above a phone keyboard rather than behind it
   useKeyboardInset()
@@ -56,12 +53,12 @@ export default function ChatContainer({
     <ChatInput
       {...composer.inputProps}
       onIntent={() => {
-        loadChatModal()
+        chatModal.load()
         conversation.load()
       }}
       onOpenChat={() => {
-        loadChatModal()
-        setShowChatMessages(true)
+        chatModal.load()
+        setWantsChatOpen(true)
         setHasOpenedChat(true)
       }}
       animateIn={!hasOpenedChat}
@@ -75,29 +72,24 @@ export default function ChatContainer({
     />
   )
 
-  if (!isChatOpen) {
-    return (
-      <>
-        {conversation.engine}
-        {chatInput}
-      </>
-    )
-  }
-
   return (
     <>
       {conversation.engine}
-      <ChatModal
-        onDone={(pickedCar) => {
-          setShowChatMessages(false)
-          // A car picked from the answer takes the focus instead
-          if (pickedCar) onShowCar(pickedCar)
-          else composer.focusOnArrival()
-        }}
-        session={session}
-        composer={chatInput}
-        composerRef={composer.ref}
-      />
+      {isChatOpen ? (
+        <ChatModal
+          session={session}
+          composer={chatInput}
+          composerRef={composer.ref}
+          onDone={(pickedCar) => {
+            setWantsChatOpen(false)
+            // A car picked from the answer takes the focus instead
+            if (pickedCar) onShowCar(pickedCar)
+            else composer.focusOnArrival()
+          }}
+        />
+      ) : (
+        chatInput
+      )}
     </>
   )
 }
