@@ -1,10 +1,11 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import ChatInput from './ChatInput'
 import type { Car } from '@/modules/data/cars'
 import type { Filters } from '@/modules/list/filters'
+import useComposer from '@/utils/useComposer'
 import useConversation from '@/utils/useConversation'
 import useKeyboardInset from '@/utils/useKeyboardInset'
 
@@ -29,17 +30,13 @@ export default function ChatContainer({
   filters,
   onApplyFilters,
 }: Props) {
-  const chatInputRef = useRef<HTMLInputElement>(null)
-  const shouldFocusInput = useRef<boolean>(false)
   const [showChatMessages, setShowChatMessages] = useState<boolean>(false)
-  // The draft outlives the input, which is mounted in one of two places
-  const [draft, setDraft] = useState<string>('')
-  const [showFocusRing, setShowFocusRing] = useState<boolean>(false)
   const [isChatModalLoaded, setIsChatModalLoaded] = useState<boolean>(false)
   // The input remounts each time it moves in and out of the modal, and only
   // its first arrival on the page is an entrance
   const [hasOpenedChat, setHasOpenedChat] = useState<boolean>(false)
   const conversation = useConversation()
+  const composer = useComposer()
   const { session } = conversation
 
   // Handing over while the chunk is in flight would take the input with it
@@ -51,25 +48,13 @@ export default function ChatContainer({
   // messages already said from the ones arriving
   const isChatOpen = showChatMessages && isChatModalLoaded && session !== null
 
-  // The node the dialog would hand focus back to is gone by the time it
-  // closes, so the new one claims the focus as it arrives
-  const focusInputOnArrival = (node: HTMLInputElement | null) => {
-    chatInputRef.current = node
-    if (node && shouldFocusInput.current) {
-      shouldFocusInput.current = false
-      node.focus()
-      // Focus handed back on close is the reader carrying on, not arriving
-      setShowFocusRing(false)
-    }
-  }
-
   // Keeps the input above a phone keyboard rather than behind it
   useKeyboardInset()
 
   // One input in two places: showModal() makes everything outside it inert
   const chatInput = (
     <ChatInput
-      inputRef={focusInputOnArrival}
+      {...composer.inputProps}
       onIntent={() => {
         loadChatModal()
         conversation.load()
@@ -84,10 +69,6 @@ export default function ChatContainer({
       disabled={conversation.isBusy}
       hasMessages={conversation.hasMessages}
       sendMessage={conversation.send}
-      value={draft}
-      onValueChange={setDraft}
-      showFocusRing={showFocusRing}
-      onFocusRingChange={setShowFocusRing}
       filterSuggestions={
         isChatOpen ? undefined : { filters, onApply: onApplyFilters }
       }
@@ -108,10 +89,10 @@ export default function ChatContainer({
       {conversation.engine}
       <ChatModal
         onDone={(pickedCar) => {
-          // A car picked from the answer takes the focus instead
-          shouldFocusInput.current = !pickedCar
           setShowChatMessages(false)
+          // A car picked from the answer takes the focus instead
           if (pickedCar) onShowCar(pickedCar)
+          else composer.focusOnArrival()
         }}
         messages={session.messages}
         status={session.status}
@@ -120,7 +101,7 @@ export default function ChatContainer({
         onSendMessage={conversation.send}
         onRetry={session.retry}
         composer={chatInput}
-        composerRef={chatInputRef}
+        composerRef={composer.ref}
       />
     </>
   )
