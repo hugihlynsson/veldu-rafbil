@@ -74,9 +74,18 @@ const ComparisonView: FunctionComponent<Props> = ({
         </h1>
       </header>
 
-      <div className={clsx(grid, gutter)}>
+      {/* Each photo reaches 4px past its column on either side, and the gaps
+          are 8px wider to leave the same space between them */}
+      <div
+        className={clsx(
+          'grid md:gap-x-8',
+          crowded ? 'gap-x-4' : 'gap-x-5',
+          columns[cars.length],
+          gutter,
+        )}
+      >
         {cars.map((car) => (
-          <div key={car.id} className="relative">
+          <div key={car.id} className="relative -mx-1">
             <Image
               alt=""
               sizes={`(max-width: 1023px) ${Math.ceil(100 / cars.length)}vw, ${Math.ceil(1024 / cars.length)}px`}
@@ -110,7 +119,7 @@ const ComparisonView: FunctionComponent<Props> = ({
         className={clsx(
           grid,
           gutter,
-          'sticky top-0 z-10 py-2.5 bg-lab/90 backdrop-blur-md border-b border-line/50',
+          'sticky top-0 z-10 py-2.5 md:py-4 bg-lab/90 backdrop-blur-md border-b border-line/50',
         )}
       >
         {cars.map((car) => (
@@ -118,13 +127,13 @@ const ComparisonView: FunctionComponent<Props> = ({
             key={car.id}
             className={clsx(
               'm-0 min-w-0 font-semibold leading-tight',
-              crowded ? 'text-sm' : 'text-base md:text-xl',
+              crowded ? 'text-sm md:text-2xl' : 'text-base md:text-2xl',
             )}
           >
             <span>{car.make}</span>{' '}
             <span className="font-normal">{car.model}</span>
             {car.subModel && (
-              <span className="block mt-0.5 text-xs font-medium text-stone">
+              <span className="block mt-0.5 text-xs font-medium text-stone md:mt-1 md:text-base">
                 {car.subModel}
               </span>
             )}
@@ -161,7 +170,9 @@ const ComparisonView: FunctionComponent<Props> = ({
                   ) : (
                     <div
                       className={clsx(
-                        crowded ? 'text-sm' : 'text-base md:text-lg',
+                        crowded
+                          ? 'text-sm md:text-2xl'
+                          : 'text-base md:text-2xl',
                         cell.best ? 'font-semibold' : 'font-normal',
                       )}
                     >
