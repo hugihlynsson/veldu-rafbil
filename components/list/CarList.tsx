@@ -108,8 +108,7 @@ export default function CarList() {
           Raða eftir:
         </div>
 
-        {/* Ends where the cards do, mr-8 to the header's pr-6 */}
-        <div className="flex items-start justify-between gap-4 md:mr-2">
+        <div className="flex items-start gap-3">
           <Toggles<Sorting>
             currentValue={sorting}
             items={toggleSortings.map((value): [string, Sorting] => [
