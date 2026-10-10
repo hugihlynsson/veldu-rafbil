@@ -88,6 +88,7 @@
   --container-column: 480px;
   --container-card-text: 380px;
   --container-page: 1024px;
+  --container-grid: 1200px; /* the grid, which reaches past the page from lg */
 
   /* Radii, written at their round-corner size. A squircle of the same radius
      hugs the corner more tightly, so `--corner` grows them where one is drawn

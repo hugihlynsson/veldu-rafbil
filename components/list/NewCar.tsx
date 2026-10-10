@@ -40,11 +40,12 @@ const skipLayoutOutOfViewInList =
 const sharedRowsInGrid =
   'md:grid md:grid-rows-subgrid md:row-span-5 md:[content-visibility:visible]'
 
-// What CarList's grid resolves to: from md two columns of the page less its
-// margins (ml-10, mr-8) and the gap (gap-x-6), from lg three of 1024px
+// What CarList's grid resolves to, plus the photo's 8px overhang (-mx-1): from
+// md two columns of the page less its margins (ml-10, mr-8) and the gap
+// (gap-x-6); from lg three of the window less 5rem, up to --container-grid
 const sizes = {
   list: '(max-width: 767px) 100vw, (max-width: 1023px) 40vw, 540px',
-  grid: '(max-width: 767px) 100vw, (max-width: 1023px) calc(50vw - 48px), 302px',
+  grid: '(max-width: 767px) 100vw, (max-width: 1023px) calc(50vw - 40px), (max-width: 1279px) calc(33.3vw - 34px), 392px',
 }
 
 const getDriveLabel = (drive: Drive) => {
@@ -90,7 +91,11 @@ const NewCar: FunctionComponent<Props> = ({
             ],
       )}
     >
-      <div className={clsx(!grid && 'md:w-[40%] md:grow md:self-center')}>
+      <div
+        className={clsx(
+          grid ? 'md:-mx-1' : 'md:w-[40%] md:grow md:self-center',
+        )}
+      >
         <Image
           preload={preload}
           alt=""
