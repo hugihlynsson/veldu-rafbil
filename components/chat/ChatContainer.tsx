@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic'
 import ChatInput from './ChatInput'
 import type { Car } from '@/modules/data/cars'
 import type { Filters } from '@/modules/list/filters'
-import useBodyScrollLock from '@/utils/useBodyScrollLock'
 import useConversation from '@/utils/useConversation'
 import useKeyboardInset from '@/utils/useKeyboardInset'
 
@@ -36,7 +35,6 @@ export default function ChatContainer({
   // and the card could not take the focus
   const carToShow = useRef<Car | null>(null)
   const [showChatMessages, setShowChatMessages] = useState<boolean>(false)
-  const [releaseBodyLock, setReleaseBodyLock] = useState<boolean>(false)
   // The draft outlives the input, which is mounted in one of two places
   const [draft, setDraft] = useState<string>('')
   const [showFocusRing, setShowFocusRing] = useState<boolean>(false)
@@ -67,8 +65,6 @@ export default function ChatContainer({
       setShowFocusRing(false)
     }
   }
-
-  useBodyScrollLock(isChatOpen && !releaseBodyLock)
 
   // Keeps the input above a phone keyboard rather than behind it
   useKeyboardInset()
@@ -120,15 +116,12 @@ export default function ChatContainer({
           // A car picked from the answer takes the focus instead
           shouldFocusInput.current = !car
           setShowChatMessages(false)
-          // Reset with the thing that closed the modal, not in an effect
-          setReleaseBodyLock(false)
           if (car) onShowCar(car)
         }}
         messages={session.messages}
         status={session.status}
         error={session.error}
         onClearChat={session.clear}
-        onReleaseBodyLock={() => setReleaseBodyLock(true)}
         onSendMessage={conversation.send}
         onRetry={session.retry}
         onShowCar={(car) => {

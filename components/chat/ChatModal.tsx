@@ -24,7 +24,6 @@ interface Props {
   status: ChatStatus
   error: Error | undefined
   onClearChat: () => void
-  onReleaseBodyLock: () => void
   onSendMessage: (message: string) => void
   onRetry: () => void
   /** A car the answer mentions was picked, and the chat is closing for it */
@@ -41,7 +40,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
   status,
   error,
   onClearChat,
-  onReleaseBodyLock,
   onSendMessage,
   onRetry,
   onShowCar,
@@ -89,7 +87,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
     <Modal
       labelledBy="chat-modal-title"
       onDone={onDone}
-      onLeave={onReleaseBodyLock}
       initialFocusRef={composerRef}
       className="items-start data-[state=visible]:backdrop:bg-backdrop"
     >

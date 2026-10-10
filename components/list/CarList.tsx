@@ -20,7 +20,6 @@ import {
 } from '@/modules/list/sorting'
 import { agree } from '@/modules/copy/plural'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
-import useBodyScrollLock from '@/utils/useBodyScrollLock'
 import { useFilters, useSorting } from '@/utils/useListState'
 import useRevealCar from '@/utils/useRevealCar'
 
@@ -67,8 +66,6 @@ export default function CarList() {
   }
 
   const showCar = useRevealCar(filters, setFilters)
-
-  useBodyScrollLock(editingFilters)
 
   const filteredCars = cars.filter(carFilter(filters))
 
