@@ -105,8 +105,8 @@ export const parseAsWord = <T extends string>(words: Record<string, T>) =>
  * compile until it has all three. In the order the chips stand in, which the
  * filter suggestions keep as well.
  *
- * A new filter also needs its chip in filterChips.ts, which the compile asks
- * for, and its field in FilterModal.tsx, which it does not. Give it a parser
+ * A new filter also needs its chip in filterChips.ts and its field in
+ * FilterModal.tsx, both of which the compile asks for. Give it a parser
  * of its own rather than an Array.isArray at a call site, and a test that it
  * round-trips through the URL: a list that comes back as one value matches
  * nothing, and fails quietly.

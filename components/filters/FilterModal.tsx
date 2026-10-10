@@ -5,12 +5,113 @@ import {
   fieldsFromFilters,
   filtersFromFields,
   type FilterFields,
+  type FilterKey,
   type Filters,
 } from '@/modules/list/filters'
 import clsx from 'clsx'
 import Modal, { panelMotion } from '@/components/Modal'
 import CloseButton from '@/components/CloseButton'
 import { FilterInput, FilterSelect } from './FilterField'
+
+type Field =
+  | {
+      kind: 'input'
+      label: string
+      hint?: string
+      type: 'text' | 'number'
+      placeholder: string
+    }
+  | {
+      kind: 'select'
+      label: string
+      options: Array<[string, string]>
+    }
+
+// Mapped over `Filters`, so a new filter does not compile until it has a
+// field. In the order the modal shows them.
+const fields: { [Key in FilterKey]-?: Field } = {
+  name: {
+    kind: 'input',
+    label: 'Nafn',
+    type: 'text',
+    placeholder: 'Tesla, Kia',
+  },
+  price: {
+    kind: 'input',
+    label: 'Verð',
+    hint: 'Hámark',
+    type: 'number',
+    placeholder: '25000000',
+  },
+  range: {
+    kind: 'input',
+    label: 'Drægni',
+    hint: 'Lágmark',
+    type: 'number',
+    placeholder: '230',
+  },
+  drive: {
+    kind: 'select',
+    label: 'Drif',
+    options: [
+      ['', 'Öll'],
+      ['AWD', 'AWD'],
+      ['FWD', 'FWD'],
+      ['RWD', 'RWD'],
+    ],
+  },
+  seats: {
+    kind: 'select',
+    label: 'Sæti',
+    options: [
+      ['', 'Öll'],
+      ['4', '4+'],
+      ['5', '5+'],
+      ['6', '6+'],
+      ['7', '7+'],
+    ],
+  },
+  availability: {
+    kind: 'select',
+    label: 'Framboð',
+    options: [
+      ['', 'Allir'],
+      [fieldFromFilter('availability', 'available'), 'Fáanlegir'],
+      [fieldFromFilter('availability', 'expected'), 'Væntanlegir'],
+    ],
+  },
+  acceleration: {
+    kind: 'input',
+    label: 'Hröðun',
+    hint: 'Hámark, sec',
+    type: 'number',
+    placeholder: '8.0',
+  },
+  value: {
+    kind: 'input',
+    label: 'Verði á km',
+    hint: 'Hámark',
+    type: 'number',
+    placeholder: '44000',
+  },
+  fastcharge: {
+    kind: 'input',
+    label: 'Hraðhleðsla',
+    hint: 'Lágmark, km/min',
+    type: 'number',
+    placeholder: '3.1',
+  },
+}
+
+// A link or a suggestion can ask for what no one option is, two drives or
+// eight seats, and a select cannot show a value it has no option for
+const withCurrent = (
+  options: Array<[string, string]>,
+  current: string | undefined,
+): Array<[string, string]> =>
+  current && !options.some(([value]) => value === current)
+    ? [...options, [current, current]]
+    : options
 
 interface Props {
   initialFilters: Filters
@@ -27,27 +128,16 @@ const FiltersModal: React.FunctionComponent<Props> = ({
 }) => {
   // showModal would focus the close button; the name field is the point
   const nameInputRef = useRef<HTMLInputElement>(null)
-  const [fields, setFields] = useState<FilterFields>(() =>
+  const [values, setValues] = useState<FilterFields>(() =>
     fieldsFromFilters(initialFilters),
   )
-  const filters = filtersFromFields(fields)
-
-  const driveOptions: Array<[string, string]> = [
-    ['', 'Öll'],
-    ['AWD', 'AWD'],
-    ['FWD', 'FWD'],
-    ['RWD', 'RWD'],
-  ]
-  // A link or a suggestion can ask for two drives, which no one option is
-  if (fields.drive && !driveOptions.some(([value]) => value === fields.drive)) {
-    driveOptions.push([fields.drive, fields.drive])
-  }
+  const filters = filtersFromFields(values)
 
   const handleFilterChange =
-    (name: keyof Filters) =>
+    (name: FilterKey) =>
     (event: React.FormEvent<HTMLInputElement | HTMLSelectElement>) => {
       const value = event.currentTarget.value
-      setFields((fields) => ({ ...fields, [name]: value }))
+      setValues((values) => ({ ...values, [name]: value }))
     }
 
   return (
@@ -87,106 +177,40 @@ const FiltersModal: React.FunctionComponent<Props> = ({
               </h2>
             </header>
             <div className="flex flex-col gap-6 grow shrink overflow-y-auto p-5 pb-8">
-              <FilterInput
-                inputRef={nameInputRef}
-                id="filter-name"
-                label="Nafn"
-                type="text"
-                placeholder="Tesla, Kia"
-                onChange={handleFilterChange('name')}
-                onKeyDown={handleKeyPress}
-                value={fields.name ?? ''}
-              />
-              <FilterInput
-                id="filter-price"
-                label="Verð"
-                hint="Hámark"
-                type="number"
-                placeholder="25000000"
-                onChange={handleFilterChange('price')}
-                onKeyDown={handleKeyPress}
-                value={fields.price ?? ''}
-              />
-              <FilterInput
-                id="filter-range"
-                label="Drægni"
-                hint="Lágmark"
-                type="number"
-                placeholder="230"
-                onChange={handleFilterChange('range')}
-                onKeyDown={handleKeyPress}
-                value={fields.range ?? ''}
-              />
-              <FilterSelect
-                id="filter-drive"
-                label="Drif"
-                options={driveOptions}
-                onChange={handleFilterChange('drive')}
-                onKeyDown={handleKeyPress}
-                value={fields.drive ?? ''}
-              />
-              <FilterSelect
-                id="filter-seats"
-                label="Sæti"
-                options={[
-                  ['', 'Öll'],
-                  ['4', '4+'],
-                  ['5', '5+'],
-                  ['6', '6+'],
-                  ['7', '7+'],
-                ]}
-                onChange={handleFilterChange('seats')}
-                onKeyDown={handleKeyPress}
-                value={fields.seats ?? ''}
-              />
-              <FilterSelect
-                id="filter-availability"
-                label="Framboð"
-                options={[
-                  ['', 'Allir'],
-                  [fieldFromFilter('availability', 'available'), 'Fáanlegir'],
-                  [fieldFromFilter('availability', 'expected'), 'Væntanlegir'],
-                ]}
-                onChange={handleFilterChange('availability')}
-                onKeyDown={handleKeyPress}
-                value={fields.availability ?? ''}
-              />
-              {/* carFilter keeps cars at or under this, so it is a maximum */}
-              <FilterInput
-                id="filter-acceleration"
-                label="Hröðun"
-                hint="Hámark, sec"
-                type="number"
-                placeholder="8.0"
-                onChange={handleFilterChange('acceleration')}
-                onKeyDown={handleKeyPress}
-                value={fields.acceleration ?? ''}
-              />
-              <FilterInput
-                id="filter-value"
-                label="Verði á km"
-                hint="Hámark"
-                type="number"
-                placeholder="44000"
-                onChange={handleFilterChange('value')}
-                onKeyDown={handleKeyPress}
-                value={fields.value ?? ''}
-              />
-              <FilterInput
-                id="filter-fastcharge"
-                label="Hraðhleðsla"
-                hint="Lágmark, km/min"
-                type="number"
-                placeholder="3.1"
-                onChange={handleFilterChange('fastcharge')}
-                onKeyDown={handleKeyPress}
-                value={fields.fastcharge ?? ''}
-              />
+              {(Object.keys(fields) as FilterKey[]).map((key) => {
+                const field = fields[key]
+                const id = `filter-${key}`
+                const value = values[key] ?? ''
+                return field.kind === 'input' ? (
+                  <FilterInput
+                    key={key}
+                    id={id}
+                    inputRef={key === 'name' ? nameInputRef : undefined}
+                    label={field.label}
+                    hint={field.hint}
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    onChange={handleFilterChange(key)}
+                    onKeyDown={handleKeyPress}
+                    value={value}
+                  />
+                ) : (
+                  <FilterSelect
+                    key={key}
+                    id={id}
+                    label={field.label}
+                    options={withCurrent(field.options, values[key])}
+                    onChange={handleFilterChange(key)}
+                    onKeyDown={handleKeyPress}
+                    value={value}
+                  />
+                )
+              })}
             </div>
             <footer className="p-4 flex justify-between shadow-(--shadow-sheet-footer) z-1">
               <button
                 className="appearance-none border-0 bg-transparent p-0 pl-1 text-stone text-sm font-semibold transition-colors duration-200 cursor-pointer hover:text-tint"
-                onClick={() => setFields({})}
+                onClick={() => setValues({})}
               >
                 Hreinsa leit
               </button>
