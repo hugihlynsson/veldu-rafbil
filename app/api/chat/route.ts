@@ -10,10 +10,11 @@ import {
 import { parseChatRequest, parseConversationId, streamChat } from './chat'
 import { chatLogEvent, questionSource, type ChatOutcome } from './log'
 
-// Picked on Icelandic performance, not general benchmarks. 3.8 is here because
-// Google deprecated 3.7, which scored slightly above it on Icelandic and spent
-// ~30% fewer output tokens at the same price. Re-run the comparison before
-// changing it, and say here what it found.
+// Picked on Icelandic performance, not general benchmarks. Oct 2026, at the
+// thinking level below: 3.7 Flash 63.3, 3.8 Flash 62.3, GPT-6 Luna (high) 57.
+// 3.8 is here only because Google deprecated 3.7, which also spent ~30% fewer
+// output tokens at the same price. Re-run the comparison before changing it,
+// and say here what it found.
 // https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard
 const modelName = 'gemini-3.8-flash'
 
