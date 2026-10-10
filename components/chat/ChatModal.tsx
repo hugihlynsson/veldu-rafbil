@@ -62,8 +62,6 @@ const ChatModal: React.FunctionComponent<Props> = ({
     lastMessage?.role === 'assistant' ? getMessageText(lastMessage) : ''
   const lastMessageFollowUps = getFollowUps(lastMessage)
 
-  // Found once rather than per message, which is what reading it inside the
-  // map below came to
   const lastUserMessageId = messages.findLast((m) => m.role === 'user')?.id
 
   const turns = groupIntoTurns(
