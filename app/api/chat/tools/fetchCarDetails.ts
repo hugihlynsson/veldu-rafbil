@@ -73,7 +73,6 @@ const readSpecTable = (html: string): Map<string, string> => {
   const table = new Map<string, string>()
 
   for (const [, label, value] of html.matchAll(specRow)) {
-    // The first row wins, the way a search from the top of the page did
     const key = label.toLowerCase()
     if (!table.has(key)) table.set(key, value === 'No Data' ? '' : value)
   }
@@ -95,9 +94,8 @@ const readSpecs = (html: string): string => {
     return ''
   }
 
-  // Only what the page said: carName and source are the tool's own fields, and
-  // listing them here left a page with no table reporting the name it was given
-  // as its specifications
+  // Only what the page said, not the tool's own carName and source: a page
+  // with no table must read as having no specifications
   const specs = {
     length: spec('Length'),
     width: spec('Width'),

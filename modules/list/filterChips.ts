@@ -1,5 +1,10 @@
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
-import { filterKeys, type FilterKey, type Filters } from './filters'
+import {
+  filterKeys,
+  type FilterKey,
+  type Filters,
+  type FilterValue,
+} from './filters'
 
 export type ChipText = {
   label: string
@@ -13,7 +18,7 @@ export type ChipText = {
 // "Fjarlægja". Mapped over `Filters`, so a new filter has to be given a chip
 // before it compiles, and a filter on the page can always be switched off.
 const chipText: {
-  [Key in keyof Filters]-?: (value: NonNullable<Filters[Key]>) => ChipText
+  [Key in keyof Filters]-?: (value: FilterValue<Key>) => ChipText
 } = {
   name: (names) => ({
     label: 'Nafn:',
@@ -80,7 +85,7 @@ const chipText: {
 /** How a filter reads on a chip, applied or suggested */
 export const filterChipText = <Key extends FilterKey>(
   name: Key,
-  value: NonNullable<Filters[Key]>,
+  value: FilterValue<Key>,
 ): ChipText => (chipText[name] as (value: unknown) => ChipText)(value)
 
 /** The chips for the filters set, in their order whatever order they came in */

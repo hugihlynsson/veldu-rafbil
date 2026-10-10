@@ -1,8 +1,10 @@
 import { parseFilterIntent } from '@/modules/list/filterIntent'
-import { ADVISOR_KEY, type SuggestionResult } from './model'
+import { ADVISOR_KEY } from './questions'
+import type { SuggestionResult } from './model'
+import type { Deployment } from '../publicEndpoint'
 
 /** What is known about a request once its suggestions are answered */
-export interface SuggestionsTurn {
+export interface SuggestionsTurn extends Deployment {
   timestamp: string
   text: string
   result: SuggestionResult
@@ -13,7 +15,6 @@ export interface SuggestionsTurn {
   superseded: boolean
   millis: number
   model: string
-  environment: string
 }
 
 // Two decimals say all a threshold is tuned on, and the rest of a
@@ -67,5 +68,6 @@ export const suggestionsLogEvent = (turn: SuggestionsTurn) => {
     inputTokens: turn.inputTokens,
     model: turn.model,
     environment: turn.environment,
+    commit: turn.commit,
   }
 }

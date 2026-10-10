@@ -1,7 +1,5 @@
-import type { Filters } from '@/modules/list/filters'
-import { buildIntentQuestions } from './model'
-
-type FilterKey = keyof Filters
+import type { FilterKey, Filters, FilterValue } from '@/modules/list/filters'
+import { buildIntentQuestions } from './questions'
 
 /** The labels of the model's options any one of which reads the request right */
 export interface Brackets {
@@ -13,7 +11,7 @@ export interface Brackets {
  * only its presence is judged
  */
 export type Expectation = {
-  [Key in FilterKey]?: NonNullable<Filters[Key]> | Brackets | 'any'
+  [Key in FilterKey]?: FilterValue<Key> | Brackets | 'any'
 }
 
 export interface IntentCase {

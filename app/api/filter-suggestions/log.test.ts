@@ -12,6 +12,7 @@ const turn = (over: Partial<SuggestionsTurn>): SuggestionsTurn => ({
   millis: 250,
   model: 'jev-latest',
   environment: 'production',
+  commit: 'd791754',
   ...over,
 })
 

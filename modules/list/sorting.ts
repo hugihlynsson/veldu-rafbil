@@ -14,21 +14,59 @@ export type Sorting =
 export type SortingDirection = 'asc' | 'desc'
 
 interface SortingDefinition {
+  // As the toggle reads, after "Raða eftir:"
+  label: string
   // Icelandic, and part of every link to a sorted list that has been shared
   urlWord: string
   // The direction it starts in, i.e. the "most useful first" order
   defaultDirection: SortingDirection
+  // What a car is ranked by, ascending; the direction is applied afterwards.
+  // The same type for every car.
+  rank: (car: Car) => number | string
 }
 
-// A new sorting also needs a label in CarList, which the compile asks for, and
-// a place in its toggle list to be offered at all, which it does not
+// Zero padded so the name sort can break its ties on price as text
+const padPrice = (car: Car): string =>
+  car.priceWithGrant.toString().padStart(9, '0')
+
+// A new sorting is offered only once it has a place in CarList's toggles
 export const sortingDefinitions: Record<Sorting, SortingDefinition> = {
-  name: { urlWord: 'nafni', defaultDirection: 'asc' },
-  price: { urlWord: 'verdi', defaultDirection: 'asc' },
-  range: { urlWord: 'draegni', defaultDirection: 'desc' },
-  acceleration: { urlWord: 'hrodun', defaultDirection: 'asc' },
-  value: { urlWord: 'virdi', defaultDirection: 'asc' },
-  fastcharge: { urlWord: 'hradhledslu', defaultDirection: 'desc' },
+  name: {
+    label: 'Nafni',
+    urlWord: 'nafni',
+    defaultDirection: 'asc',
+    rank: (car) => `${car.make} ${car.model} ${padPrice(car)}`,
+  },
+  price: {
+    label: 'Verði',
+    urlWord: 'verdi',
+    defaultDirection: 'asc',
+    rank: (car) => car.priceWithGrant,
+  },
+  range: {
+    label: 'Drægni',
+    urlWord: 'draegni',
+    defaultDirection: 'desc',
+    rank: (car) => car.range,
+  },
+  acceleration: {
+    label: 'Hröðun',
+    urlWord: 'hrodun',
+    defaultDirection: 'asc',
+    rank: (car) => car.acceleration,
+  },
+  value: {
+    label: 'Verði á km',
+    urlWord: 'virdi',
+    defaultDirection: 'asc',
+    rank: (car) => car.pricePerKm,
+  },
+  fastcharge: {
+    label: 'Hraðhleðslu',
+    urlWord: 'hradhledslu',
+    defaultDirection: 'desc',
+    rank: (car) => car.kmPerMinuteCharged,
+  },
 }
 
 export const sortings = Object.keys(sortingDefinitions) as Array<Sorting>
@@ -44,32 +82,6 @@ export const isDefaultDirection = (
   direction: SortingDirection,
 ): boolean => defaultDirection(sorting) === direction
 
-// Zero padded so the name sort can break its ties on price as text
-const padPrice = (car: Car): string =>
-  car.priceWithGrant.toString().padStart(9, '0')
-
-/**
- * What a car is ranked by, always ascending — the direction is applied to the
- * comparison afterwards. Add a `Sorting` case here and TypeScript's exhaustive
- * switch will flag everywhere else that needs it.
- */
-const sortingKey = (sorting: Sorting, car: Car): number | string => {
-  switch (sorting) {
-    case 'name':
-      return `${car.make} ${car.model} ${padPrice(car)}`
-    case 'price':
-      return car.priceWithGrant
-    case 'range':
-      return car.range
-    case 'acceleration':
-      return car.acceleration
-    case 'value':
-      return car.pricePerKm
-    case 'fastcharge':
-      return car.kmPerMinuteCharged
-  }
-}
-
 // localeCompare with no locale answers to whatever the runtime's default is,
 // which is not the same in node as in the browser: an Ö or a Þ would sort one
 // way on the server and another after hydration. One collator, reused.
@@ -78,8 +90,7 @@ const collator = new Intl.Collator('is')
 const compareKeys = (a: number | string, b: number | string): number =>
   typeof a === 'string' && typeof b === 'string'
     ? collator.compare(a, b)
-    : // A sorting's key has the same type for every car, so this is the number case
-      (a as number) - (b as number)
+    : (a as number) - (b as number)
 
 /**
  * The car list in the order the page shows it. Each car's key is derived once
@@ -92,9 +103,8 @@ export const sortCars = (
   direction: SortingDirection = defaultDirection(sorting),
 ): Array<Car> => {
   const order = direction === 'asc' ? 1 : -1
-  const keyed = cars.map(
-    (car) => [car, sortingKey(sorting, car)] as [Car, number | string],
-  )
+  const { rank } = sortingDefinitions[sorting]
+  const keyed = cars.map((car) => [car, rank(car)] as const)
 
   keyed.sort(([, a], [, b]) => order * compareKeys(a, b))
 

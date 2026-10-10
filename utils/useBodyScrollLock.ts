@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 // Tracks the offset on the way past rather than reading it when the lock goes
 // on: showModal() has already scrolled the page to the top by then.
 const useBodyScrollLock = (lock: boolean): void => {
-  // As state this re-rendered the whole car list on every scroll event
+  // A ref: as state, every scroll event would re-render the whole car list
   const scrollY = useRef(0)
 
   useEffect(() => {

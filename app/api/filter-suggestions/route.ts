@@ -1,12 +1,16 @@
-import { Axiom } from '@axiomhq/js'
 import { TypeSafeClient } from '@typesafe-ai/sdk'
-import { after } from 'next/server'
 import { z } from 'zod'
 
 import { MAX_INTENT_LENGTH } from '@/modules/list/filterIntent'
+import { filterSuggestionsRateLimit } from '@/modules/rateLimit'
+import {
+  deployment,
+  invalidBody,
+  logAfterResponse,
+  readGuardedBody,
+} from '../publicEndpoint'
 import { suggestFilters, type AskModel } from './model'
 import { suggestionsLogEvent } from './log'
-import { clientKey, filterSuggestionsRateLimit } from '@/modules/rateLimit'
 
 // Measured on the 162 Icelandic requests in cases.ts
 // (October 2026, three runs): with the parser it gets 154–155 exactly right to
@@ -32,38 +36,16 @@ const client = process.env.TYPESAFE_API_KEY
     })
   : undefined
 
-// Left unbuilt without a token, so a local or preview run stays quiet
-const axiom = process.env.AXIOM_TOKEN
-  ? new Axiom({ token: process.env.AXIOM_TOKEN })
-  : undefined
-
 const requestSchema = z.strictObject({
   text: z.string().trim().min(1).max(MAX_INTENT_LENGTH),
 })
 
 export async function POST(req: Request) {
-  const limit = filterSuggestionsRateLimit(clientKey(req))
-  if (!limit.ok) {
-    return Response.json(
-      { error: 'Of margar fyrirspurnir, reyndu aftur eftir smástund' },
-      {
-        status: 429,
-        headers: { 'Retry-After': String(limit.retryAfterSeconds) },
-      },
-    )
-  }
+  const read = await readGuardedBody(req, filterSuggestionsRateLimit)
+  if (read instanceof Response) return read
 
-  let body: unknown
-  try {
-    body = await req.json()
-  } catch {
-    return Response.json({ error: 'Invalid JSON' }, { status: 400 })
-  }
-
-  const parsed = requestSchema.safeParse(body)
-  if (!parsed.success) {
-    return Response.json({ error: 'Invalid request body' }, { status: 400 })
-  }
+  const parsed = requestSchema.safeParse(read.body)
+  if (!parsed.success) return invalidBody()
 
   const started = performance.now()
   let answered:
@@ -89,29 +71,19 @@ export async function POST(req: Request) {
   // response is sent there is no telling that apart from a closed connection
   const superseded = req.signal.aborted
 
-  // Logged once the response has gone, so the Axiom round trip never holds
-  // the pills back
-  if (axiom)
-    after(async () => {
-      try {
-        axiom.ingest('veldu-rafbil-assistant', [
-          suggestionsLogEvent({
-            timestamp: new Date().toISOString(),
-            text: parsed.data.text,
-            result,
-            answers: answered?.answers,
-            inputTokens: answered?.usage.input_tokens,
-            superseded,
-            millis,
-            model: modelName,
-            environment: process.env.VERCEL_ENV ?? 'development',
-          }),
-        ])
-        await axiom.flush()
-      } catch (error) {
-        console.error('Failed to log to Axiom:', error)
-      }
-    })
+  logAfterResponse(() =>
+    suggestionsLogEvent({
+      timestamp: new Date().toISOString(),
+      text: parsed.data.text,
+      result,
+      answers: answered?.answers,
+      inputTokens: answered?.usage.input_tokens,
+      superseded,
+      millis,
+      model: modelName,
+      ...deployment(),
+    }),
+  )
 
   return Response.json(result)
 }

@@ -1,26 +1,28 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 
 import Car from './NewCar'
-import TextLink from '@/components/TextLink'
 import Title from '@/components/Title'
+import Intro from './Intro'
 import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/filters/FilterModal'
 import ActiveFilters from '@/components/filters/ActiveFilters'
-import cars, { type Car as CarData } from '@/modules/data/cars'
-import carFilter, { filtersShowing } from '@/modules/list/carFilter'
+import cars from '@/modules/data/cars'
+import carFilter from '@/modules/list/carFilter'
 import type { Filters } from '@/modules/list/filters'
-import type { Sorting } from '@/modules/list/sorting'
-import { sortCars } from '@/modules/list/sorting'
+import {
+  sortCars,
+  sortingDefinitions,
+  type Sorting,
+} from '@/modules/list/sorting'
 import { agree } from '@/modules/copy/plural'
-import { grantAmountText, grantCeilingText } from '@/modules/copy/grantCopy'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
-import scrollToCenter from '@/utils/scrollToCenter'
 import useBodyScrollLock from '@/utils/useBodyScrollLock'
 import { useFilters, useSorting } from '@/utils/useListState'
+import useRevealCar from '@/utils/useRevealCar'
 
 // Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
 // so arriving a moment later shifts nothing.
@@ -33,15 +35,6 @@ const column =
   'mx-auto max-w-column py-4 px-(--gutter) xs:py-6 md:pl-10 md:pr-6 md:max-w-none'
 
 const carWord = (count: number) => agree(count, 'bíll', 'bílar')
-
-const sortingLabels: Record<Sorting, string> = {
-  name: 'Nafni',
-  price: 'Verði',
-  range: 'Drægni',
-  acceleration: 'Hröðun',
-  value: 'Verði á km',
-  fastcharge: 'Hraðhleðslu',
-}
 
 const toggleSortings: Sorting[] = [
   'name',
@@ -73,29 +66,7 @@ export default function CarList() {
     }
   }
 
-  // The chat can point at a car the filters are hiding, and its card is only
-  // there to scroll to once the render without them has happened
-  const carToReveal = useRef<string | null>(null)
-
-  const revealCar = (id: string) => {
-    const card = document.getElementById(id)
-    if (!card) return
-    scrollToCenter(card)
-    // Without this the reader is scrolled somewhere their focus is not
-    card.focus({ preventScroll: true })
-  }
-
-  const showCar = (car: CarData) => {
-    if (carFilter(filters)(car)) return revealCar(car.id)
-    carToReveal.current = car.id
-    setFilters(filtersShowing(filters, car))
-  }
-
-  useEffect(() => {
-    if (!carToReveal.current) return
-    revealCar(carToReveal.current)
-    carToReveal.current = null
-  })
+  const showCar = useRevealCar(filters, setFilters)
 
   useBodyScrollLock(editingFilters)
 
@@ -110,22 +81,7 @@ export default function CarList() {
       <header className={clsx('flex flex-col items-stretch md:pb-10', column)}>
         <Title />
 
-        <p className="leading-6 text-sm pt-6 m-0 mb-8 text-stone max-w-[33em] text-pretty md:text-base">
-          Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og eru
-          100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
-          <TextLink href="http://wltpfacts.eu/">WLTP</TextLink> mælingum frá
-          framleiðenda en raundrægni er háð aðstæðum og aksturslagi.
-          <span className="inline-block text-xs text-stone mt-2">
-            Kaupendur nýskráðra rafbíla sem kosta minna en {
-              grantCeilingText
-            }{' '}
-            eiga kost á að{' '}
-            <TextLink href="https://island.is/rafbilastyrkir">
-              sækja um {grantAmountText} rafbílastyrk
-            </TextLink>
-            .
-          </span>
-        </p>
+        <Intro />
 
         <div
           ref={controlsRef}
@@ -138,7 +94,7 @@ export default function CarList() {
         <Toggles<Sorting>
           currentValue={sorting}
           items={toggleSortings.map((value): [string, Sorting] => [
-            sortingLabels[value],
+            sortingDefinitions[value].label,
             value,
           ])}
           onClick={toggleSorting}
@@ -169,9 +125,9 @@ export default function CarList() {
         {/* The only feedback a screen reader gets for a sort or a filter, so
             it has to stay mounted to be announced at all */}
         <div aria-live="polite" className="sr-only">
-          {`${filteredCars.length} ${carWord(filteredCars.length)} á listanum, raðað eftir ${sortingLabels[
+          {`${filteredCars.length} ${carWord(filteredCars.length)} á listanum, raðað eftir ${sortingDefinitions[
             sorting
-          ].toLowerCase()}, ${direction === 'desc' ? 'lækkandi' : 'hækkandi'} röð.`}
+          ].label.toLowerCase()}, ${direction === 'desc' ? 'lækkandi' : 'hækkandi'} röð.`}
         </div>
       </header>
 

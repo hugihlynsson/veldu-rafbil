@@ -30,14 +30,16 @@ export type Filters = {
   availability?: Availability
 }
 
-type Value<Key extends keyof Filters> = NonNullable<Filters[Key]>
+export type FilterValue<Key extends keyof Filters> = NonNullable<Filters[Key]>
 
 interface FilterDefinition<Key extends keyof Filters> {
   // Icelandic, and part of every link to the list that has been shared
   urlKey: string
-  parser: SingleParserBuilder<Value<Key>> | MultiParserBuilder<Value<Key>>
+  parser:
+    | SingleParserBuilder<FilterValue<Key>>
+    | MultiParserBuilder<FilterValue<Key>>
   // Built from the value once, so the per-car work is a comparison
-  test: (value: Value<Key>) => (car: Car) => boolean
+  test: (value: FilterValue<Key>) => (car: Car) => boolean
 }
 
 // Number() of an unreadable parameter is NaN, and every comparison against NaN
@@ -103,8 +105,8 @@ export const parseAsWord = <T extends string>(words: Record<string, T>) =>
  * compile until it has all three. In the order the chips stand in, which the
  * filter suggestions keep as well.
  *
- * A new filter also needs its chip in filterChips.ts, which the compile asks
- * for, and its field in FilterModal.tsx, which it does not. Give it a parser
+ * A new filter also needs its chip in filterChips.ts and its field in
+ * FilterModal.tsx, both of which the compile asks for. Give it a parser
  * of its own rather than an Array.isArray at a call site, and a test that it
  * round-trips through the URL: a list that comes back as one value matches
  * nothing, and fails quietly.
@@ -193,7 +195,7 @@ export const filterParsers = mapDefinitions(
 export const filterUrlKeys = mapDefinitions((definition) => definition.urlKey)
 
 /** nuqs speaks in nulls; the rest of the site in absent keys */
-export type FilterValues = { [Key in FilterKey]: Value<Key> | null }
+export type FilterValues = { [Key in FilterKey]: FilterValue<Key> | null }
 
 // Assigned only when the parameter reads as a filter, so "is there a filter"
 // can go on being asked with Object.keys/values all over the UI
@@ -251,7 +253,7 @@ export type FilterFields = Partial<Record<FilterKey, string>>
 /** A value as its field holds it, which for a select is the option's value */
 export const fieldFromFilter = <Key extends FilterKey>(
   key: Key,
-  value: Value<Key>,
+  value: FilterValue<Key>,
 ): string => {
   // As people type a list, where the URL leaves out the space
   if (Array.isArray(value)) return value.join(', ')
