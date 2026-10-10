@@ -7,7 +7,6 @@ interface Props {
   className?: string
   external?: boolean
   extra?: string
-  extraClassName?: string
   href: React.ComponentProps<typeof Link>['href']
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
   children?: ReactNode
@@ -19,7 +18,6 @@ const LinkPill: FunctionComponent<Props> = ({
   className,
   external,
   extra,
-  extraClassName,
   href,
   onClick,
   title,
@@ -37,12 +35,7 @@ const LinkPill: FunctionComponent<Props> = ({
   >
     {children}{' '}
     {extra && (
-      <span
-        className={clsx(
-          'uppercase font-bold text-eyebrow rounded-full py-0.5 px-1.5 my-0 ml-1.25 -mr-1.75 align-top inline-block text-stone bg-raised transition-colors duration-100 group-hover:bg-raised/80',
-          extraClassName,
-        )}
-      >
+      <span className="uppercase font-bold text-eyebrow rounded-full py-0.5 px-1.5 my-0 ml-1.25 -mr-1.75 align-top inline-block text-stone bg-raised transition-colors duration-100 group-hover:bg-raised/80">
         {extra}
       </span>
     )}
