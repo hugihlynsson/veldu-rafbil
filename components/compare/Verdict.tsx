@@ -1,6 +1,12 @@
 'use client'
 
-import { FunctionComponent, ReactNode, useEffect, useState } from 'react'
+import {
+  FunctionComponent,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import clsx from 'clsx'
 
 import type { Car } from '@/modules/data/cars'
@@ -10,40 +16,64 @@ import {
   type Verdict as VerdictData,
 } from '@/modules/compare/verdictEvents'
 import {
+  FIRST_PHRASE,
   lookupPhrase,
   phraseDuration,
   thinkingPhrases,
+  type ThinkingPhrases,
 } from '@/modules/compare/thinkingPhrases'
 import { CHAT_INPUT_ID } from '@/modules/chat/inputId'
 
 const eyebrow =
   'm-0 uppercase text-eyebrow font-semibold tracking-wider text-stone'
 
-const Card: FunctionComponent<{ children: ReactNode; className?: string }> = ({
-  children,
-  className,
-}) => (
+const Card: FunctionComponent<{
+  children: ReactNode
+  className?: string
+  title?: string
+}> = ({ children, className, title = 'Í stuttu máli' }) => (
   <section
     aria-labelledby="verdict"
-    className="px-(--gutter) md:px-10 mt-5 mb-3"
+    className="px-(--gutter) md:px-10 mt-8 mb-6"
   >
-    <div className={clsx('p-4 rounded-card bg-cloud md:p-6', className)}>
+    <div
+      className={clsx(
+        // 65ch of the wrapper's 16px, not the 18px text, keeps lines near 70
+        'max-w-prose',
+        className,
+      )}
+    >
       <h2 id="verdict" className={eyebrow}>
-        Í stuttu máli
+        {title}
       </h2>
       {children}
     </div>
   </section>
 )
 
+// Roughly the lines a verdict of about 160 words fills
+const skeletonWidths = [
+  'w-full',
+  'w-11/12',
+  'w-full',
+  'w-4/5',
+  'w-full',
+  'w-2/3',
+]
+
+/** The verdict's lines before it is written */
+const Skeleton: FunctionComponent = () => (
+  <div aria-hidden className="mt-4 flex flex-col gap-2.5 animate-pulse">
+    {skeletonWidths.map((width, index) => (
+      <div key={index} className={clsx('h-3.5 rounded-full bg-smoke', width)} />
+    ))}
+  </div>
+)
+
 /** The verdict's place while the page checks for one already written */
 export const VerdictPlaceholder: FunctionComponent = () => (
   <Card>
-    <div aria-hidden className="mt-3 flex flex-col gap-2 animate-pulse">
-      <div className="h-3.5 w-full rounded-full bg-smoke" />
-      <div className="h-3.5 w-4/5 rounded-full bg-smoke" />
-      <div className="h-3.5 w-3/5 rounded-full bg-smoke" />
-    </div>
+    <Skeleton />
   </Card>
 )
 
@@ -84,10 +114,12 @@ const ThinkingLine: FunctionComponent<{
   names: ReadonlyArray<string>
   lookedUp: ReadonlyArray<string>
 }> = ({ names, lookedUp }) => {
-  const [{ phrases, loopFrom }] = useState(() => thinkingPhrases(names))
+  // Drawn in the browser on the first turn, as a draw on the server would
+  // not be the one it hydrates with
+  const sequence = useRef<ThinkingPhrases | null>(null)
   const [line, setLine] = useState<Line>({
-    text: phrases[0],
-    phrase: 1,
+    text: FIRST_PHRASE,
+    phrase: 0,
     lookups: 0,
     key: 0,
   })
@@ -102,8 +134,10 @@ const ThinkingLine: FunctionComponent<{
   }, [line, leaving])
 
   // A car the model has started looking up goes before the next made-up line
-  const next = ({ phrase, lookups, key }: Line): Line =>
-    lookups < lookedUp.length
+  const next = ({ phrase, lookups, key }: Line): Line => {
+    sequence.current ??= thinkingPhrases(names)
+    const { phrases, loopFrom } = sequence.current
+    return lookups < lookedUp.length
       ? {
           text: lookupPhrase(lookedUp[lookups]),
           phrase,
@@ -116,6 +150,7 @@ const ThinkingLine: FunctionComponent<{
           lookups,
           key: key + 1,
         }
+  }
 
   return (
     <span
@@ -140,7 +175,7 @@ const Working: FunctionComponent<{
   names: ReadonlyArray<string>
   lookedUp: ReadonlyArray<string>
 }> = ({ names, lookedUp }) => (
-  <Card>
+  <Card title="Ber saman bílana…">
     {/* Two lines tall whatever the line, so the card holds still as they turn */}
     <output className="mt-3 flex items-start gap-2 min-h-[2lh] text-sm leading-snug">
       <span
@@ -151,10 +186,7 @@ const Working: FunctionComponent<{
       <ThinkingLine names={names} lookedUp={lookedUp} />
     </output>
 
-    <p className="mt-3 mb-0 text-fine font-medium text-clay">
-      Gervigreindin skrifar samantekt. Hún er skrifuð einu sinni og geymd, svo
-      þetta tekur bara tíma í fyrsta sinn.
-    </p>
+    <Skeleton />
   </Card>
 )
 
