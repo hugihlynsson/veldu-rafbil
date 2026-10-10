@@ -48,8 +48,10 @@ const ComparisonMarker: React.FunctionComponent<Props> = ({
   return (
     <div
       className={clsx(
-        'flex justify-end px-5 mb-4',
-        !pending && '-mt-2',
+        // On the assistant's side, as what it answers with in view, and
+        // close over the answer it leads into
+        'flex justify-start px-5',
+        pending ? 'mb-4' : 'mb-2',
         animate && 'animate-message-in',
       )}
     >
