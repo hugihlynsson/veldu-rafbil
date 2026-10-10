@@ -10,9 +10,6 @@ interface Props {
 }
 
 const MiniCar: FunctionComponent<Props> = ({ car, onSelect }) => {
-  const { priceWithGrant } = car
-  const hasGrant = priceWithGrant !== car.price
-
   return (
     <button
       type="button"
@@ -42,8 +39,8 @@ const MiniCar: FunctionComponent<Props> = ({ car, onSelect }) => {
           )}
         </div>
         <div className="text-control font-semibold text-tint mb-0.75">
-          {addDecimalSeparators(priceWithGrant)} kr.
-          {hasGrant && (
+          {addDecimalSeparators(car.priceWithGrant)} kr.
+          {car.hasGrant && (
             <span className="text-fine font-medium text-clay"> með styrk</span>
           )}
         </div>

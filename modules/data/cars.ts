@@ -15,6 +15,8 @@ export interface Car extends NewCar {
   label: string
   // What a buyer pays, and what the site shows everywhere
   priceWithGrant: number
+  // Whether the grant came off, which the price shown has to say
+  hasGrant: boolean
   pricePerKm: number
   kmPerMinuteCharged: number
   availability: Availability
@@ -28,6 +30,7 @@ export const deriveCar = (car: NewCar): Car => {
     id: getCarId(car),
     label: carLabel(car),
     priceWithGrant,
+    hasGrant: priceWithGrant < car.price,
     pricePerKm: priceWithGrant / car.range,
     kmPerMinuteCharged: getKmPerMinutesCharged(
       car.timeToCharge10To80,
