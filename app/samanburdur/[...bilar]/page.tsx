@@ -14,6 +14,7 @@ import { carSlug } from '@/modules/data/getCarId'
 import ComparisonView from '@/components/compare/ComparisonView'
 import Verdict, { VerdictPlaceholder } from '@/components/compare/Verdict'
 import Footer from '@/components/Footer'
+import ComparisonChat from '@/components/compare/ComparisonChat'
 import { peekVerdict } from '@/app/api/comparison/[...slugs]/verdict'
 
 interface Props {
@@ -83,6 +84,7 @@ export default async function Page(props: Props) {
         }
       />
       <Footer />
+      <ComparisonChat cars={cars} />
     </>
   )
 }

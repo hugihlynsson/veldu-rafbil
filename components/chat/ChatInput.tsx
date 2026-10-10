@@ -7,6 +7,7 @@ import {
   getRandomSuggestions,
 } from '@/modules/chat/suggestions'
 import { MAX_QUESTION_LENGTH } from '@/modules/chat/questionLength'
+import { CHAT_INPUT_ID } from '@/modules/chat/inputId'
 import useInputModality, { getInputModality } from '@/utils/inputModality'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
@@ -143,6 +144,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
         )}
       >
         <input
+          id={CHAT_INPUT_ID}
           ref={inputRef}
           type="text"
           maxLength={MAX_QUESTION_LENGTH}

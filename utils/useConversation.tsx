@@ -2,6 +2,7 @@ import { Suspense, useRef, useState, type ReactNode } from 'react'
 import dynamic from 'next/dynamic'
 
 import type { ChatSession } from '@/components/chat/ChatEngine'
+import type { ChatMessage } from '@/modules/chat/message'
 import { hasStoredMessages } from './chatStorage'
 
 // The AI SDK and zod, fetched once the chat is used rather than with the bar:
@@ -27,7 +28,9 @@ export interface Conversation {
  * The chat's conversation, the same to its callers before the engine holding
  * it has loaded as after
  */
-const useConversation = (): Conversation => {
+const useConversation = (
+  questionMetadata?: ChatMessage['metadata'],
+): Conversation => {
   // Never server-rendered, so storage can be read as it first renders
   const [hadStoredChat] = useState<boolean>(hasStoredMessages)
   const [isWanted, setIsWanted] = useState<boolean>(hadStoredChat)
@@ -63,7 +66,10 @@ const useConversation = (): Conversation => {
     engine: isWanted && (
       // Its own boundary, so the bar does not wait on the chunk
       <Suspense fallback={null}>
-        <ChatEngine onChange={handleChange} />
+        <ChatEngine
+          onChange={handleChange}
+          questionMetadata={questionMetadata}
+        />
       </Suspense>
     ),
   }

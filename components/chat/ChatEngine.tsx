@@ -24,9 +24,10 @@ const transport = new DefaultChatTransport<ChatMessage>({
   }),
 })
 
-const asQuestion = (text: string) => ({
+const asQuestion = (text: string, metadata: ChatMessage['metadata']) => ({
   role: 'user' as const,
   parts: [{ type: 'text' as const, text }],
+  ...(metadata && { metadata }),
 })
 
 export interface ChatSession {
@@ -41,13 +42,15 @@ export interface ChatSession {
 interface Props {
   /** Called once the stored conversation is in, and on every change after */
   onChange: (session: ChatSession) => void
+  /** Sent with each question: the page it was asked on, where that matters */
+  questionMetadata?: ChatMessage['metadata']
 }
 
 /**
  * The conversation, apart from the bar so the AI SDK loads once it is used.
  * Read through utils/useConversation, which renders it.
  */
-export default function ChatEngine({ onChange }: Props) {
+export default function ChatEngine({ onChange, questionMetadata }: Props) {
   const { messages, status, error, sendMessage, setMessages } =
     useChat<ChatMessage>({ transport })
   const [hasRestored, setHasRestored] = useState<boolean>(false)
@@ -73,7 +76,7 @@ export default function ChatEngine({ onChange }: Props) {
     if (!hasRestored) return
 
     const send = (text: string) => {
-      void sendMessage(asQuestion(text))
+      void sendMessage(asQuestion(text, questionMetadata))
     }
 
     onChange({
@@ -94,7 +97,16 @@ export default function ChatEngine({ onChange }: Props) {
         clearStoredMessages()
       },
     })
-  }, [hasRestored, messages, status, error, sendMessage, setMessages, onChange])
+  }, [
+    hasRestored,
+    messages,
+    status,
+    error,
+    sendMessage,
+    setMessages,
+    onChange,
+    questionMetadata,
+  ])
 
   return null
 }

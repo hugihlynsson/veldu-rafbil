@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  comparisonsStarted,
   getFollowUps,
   getMessageText,
   groupIntoTurns,
@@ -216,5 +217,56 @@ describe('groupIntoTurns', () => {
 
   it('has no turns without messages', () => {
     expect(groupIntoTurns([])).toEqual([])
+  })
+})
+
+describe('comparisonsStarted', () => {
+  const question = (id: string, comparing?: string[]): ChatMessage => ({
+    id,
+    role: 'user',
+    parts: [{ type: 'text', text: id }],
+    ...(comparing && { metadata: { comparing } }),
+  })
+  const reply = (id: string): ChatMessage => ({
+    id,
+    role: 'assistant',
+    parts: [{ type: 'text', text: id }],
+  })
+
+  it('marks the first question asked on a comparison', () => {
+    expect(
+      comparisonsStarted([
+        question('list'),
+        reply('a'),
+        question('first', ['kia', 'tesla']),
+        reply('b'),
+        question('again', ['kia', 'tesla']),
+      ]),
+    ).toEqual(new Map([['first', ['kia', 'tesla']]]))
+  })
+
+  it('marks it again once the cars change', () => {
+    expect([
+      ...comparisonsStarted([
+        question('first', ['kia', 'tesla']),
+        question('more', ['kia', 'tesla', 'skoda']),
+      ]).keys(),
+    ]).toEqual(['first', 'more'])
+  })
+
+  it('marks a comparison come back to after a question on the list', () => {
+    expect([
+      ...comparisonsStarted([
+        question('first', ['kia', 'tesla']),
+        question('list'),
+        question('back', ['kia', 'tesla']),
+      ]).keys(),
+    ]).toEqual(['first', 'back'])
+  })
+
+  it('takes no more cars than a comparison holds', async () => {
+    expect(
+      await validateChatMessages([question('q', ['a', 'b', 'c', 'd', 'e'])]),
+    ).toBeNull()
   })
 })

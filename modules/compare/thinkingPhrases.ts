@@ -1,7 +1,8 @@
 // What the comparison's verdict shows while the model writes it. The model's
 // own thoughts arrive in English whatever it is asked, so these stand in for
 // them: a few lines to start, some about the cars themselves, and the last
-// few on a loop until the verdict is in. The names are left uninflected, as
+// few on a loop until the verdict is in. Each car it really looks up takes
+// the next turn, as a line of its own. The names are left uninflected, as
 // a foreign car's name is in Icelandic.
 
 const intro = [
@@ -86,6 +87,10 @@ export const thinkingPhrases = (
     loopFrom: opening.length + middle.length,
   }
 }
+
+/** The line for a car the model is really looking up, shown next in turn */
+export const lookupPhrase = (name: string): string =>
+  `Flettir upp ${name} á ev-database.org…`
 
 /** Long enough to read the line at an easy pace, and never so long it seems stuck */
 export const phraseDuration = (phrase: string): number =>

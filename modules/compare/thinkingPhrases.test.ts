@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
-import { phraseDuration, thinkingPhrases } from './thinkingPhrases'
+import {
+  lookupPhrase,
+  phraseDuration,
+  thinkingPhrases,
+} from './thinkingPhrases'
 
 const two = ['Kia EV3', 'Tesla Model Y']
 const four = ['Kia EV3', 'Tesla Model Y', 'Skoda Elroq', 'Volkswagen ID.4']
@@ -44,5 +48,13 @@ describe('phraseDuration', () => {
   it('holds a line between two and a half and five seconds or so', () => {
     expect(phraseDuration('Velur réttu orðin…')).toBeGreaterThanOrEqual(2200)
     expect(phraseDuration('x'.repeat(200))).toBe(4500)
+  })
+})
+
+describe('lookupPhrase', () => {
+  it('names the car being looked up', () => {
+    expect(lookupPhrase('Kia EV3')).toBe(
+      'Flettir upp Kia EV3 á ev-database.org…',
+    )
   })
 })

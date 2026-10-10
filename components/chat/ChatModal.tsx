@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react'
 import clsx from 'clsx'
 import type { Car } from '@/modules/data/cars'
 import {
+  comparisonsStarted,
   getFollowUps,
   getMessageText,
   groupIntoTurns,
@@ -14,6 +15,7 @@ import Modal, { panelMotion } from '@/components/Modal'
 import type { ChatSession } from './ChatEngine'
 import ChatHeader from './ChatHeader'
 import ChatMessage from './ChatMessage'
+import ComparisonMarker from './ComparisonMarker'
 import FollowUpSuggestions from './FollowUpSuggestions'
 import MentionedCars from './MentionedCars'
 import CompareAnswerCars from './CompareAnswerCars'
@@ -56,6 +58,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
     lastMessage?.role === 'assistant' ? getAnswerComparison(lastMessage) : []
 
   const lastUserMessageId = messages.findLast((m) => m.role === 'user')?.id
+  const comparisons = comparisonsStarted(messages)
 
   const turns = groupIntoTurns(
     messages.filter((message) => getMessageText(message)),
@@ -119,12 +122,21 @@ const ChatModal: React.FunctionComponent<Props> = ({
                     )}
                   >
                     {turn.map((message) => (
-                      <ChatMessage
-                        key={message.id}
-                        message={message}
-                        isLastUserMessage={message.id === lastUserMessageId}
-                        animate={!idsOnOpen.has(message.id)}
-                      />
+                      <React.Fragment key={message.id}>
+                        <ChatMessage
+                          message={message}
+                          isLastUserMessage={message.id === lastUserMessageId}
+                          animate={!idsOnOpen.has(message.id)}
+                        />
+                        {/* Under the question rather than over it, as a
+                            question scrolls to the top as it is sent */}
+                        {comparisons.has(message.id) && (
+                          <ComparisonMarker
+                            slugs={comparisons.get(message.id)!}
+                            animate={!idsOnOpen.has(message.id)}
+                          />
+                        )}
+                      </React.Fragment>
                     ))}
 
                     {isLastTurn && (
