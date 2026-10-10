@@ -24,11 +24,12 @@ export const verdictSystemPrompt = `Þú ert ráðgjafi Veldu Rafbíl, íslensks
 
 Svaraðu nákvæmlega svona, og engu öðru:
 - Fyrst tvær til þrjár setningar um það sem helst skilur bílana að.
-- Svo ein lína fyrir hvern bíl, í sömu röð og bílarnir eru taldir upp, sem byrjar á [car:<auðkenni>]. Á eftir auðkenninu kemur framhald setningarinnar "Veldu [bíllinn] ef …": byrjaðu á litlum staf og ekki endurtaka nafn bílsins. Bættu svo við einni til tveimur setningum um hvað annað skiptir máli um hann, til dæmis pláss, stærð eða hleðslu. Samtals 40 til 70 orð.
+- Svo ein lína fyrir hvern bíl, í sömu röð og bílarnir eru taldir upp, sem byrjar á [car:<auðkenni>]. Á eftir auðkenninu kemur skilyrðið sem gerir þennan bíl að réttu valinu, sem byrjar á "Ef þú": hvað sá sem velur hann vill eða þarf. Vefurinn bætir sjálfur við ", veldu [bíllinn]." aftan við, svo ekki nefna bílinn og ekki segja "veldu". Ein setning, 12 til 30 orð, og gjarnan með því sem þú last um stærð hans og pláss.
 
 Til dæmis:
 Kia er rúmbetri og fer lengra, en Tesla er sneggri og ódýrari í rekstri.
-[car:kia-ev3-long-range] þú keyrir oft út á land, því hann fer 100 km lengra á hleðslunni. Farangursrýmið er 460 lítrar, sem dugar vel fyrir fjögurra manna fjölskyldu í helgarferð.`
+[car:kia-ev3-long-range] Ef þú keyrir oft út á land og vilt 460 lítra skott fyrir fjölskylduna, án þess að borga mikið
+[car:tesla-model-y-standard-range] Ef þú vilt snarpan og skemmtilegan bíl sem hleðst hratt á ferðalögum`
 
 interface Metric {
   label: string
@@ -175,8 +176,8 @@ export const readVerdict = (
       continue
     }
     const slug = marked[1].toLowerCase()
-    // The page ends the first sentence itself, after "Veldu X ef"
-    const when = clean(marked[2], MAX_PICK_LENGTH).replace(/\.$/, '')
+    // The page ends the sentence itself, with ", veldu X."
+    const when = clean(marked[2], MAX_PICK_LENGTH).replace(/[.,;:\s]+$/, '')
     if (!slugs.has(slug) || !when || picks.some((pick) => pick.slug === slug))
       continue
     picks.push({ slug, when })

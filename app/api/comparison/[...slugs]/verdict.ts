@@ -77,18 +77,14 @@ const write = async (
     stopWhen: stepCountIs(compared.length + 2),
     providerOptions: {
       // Written once and kept, so it can afford to think longer than the chat
-      google: {
-        thinkingConfig: { thinkingLevel: 'medium', includeThoughts: true },
-      },
+      google: { thinkingConfig: { thinkingLevel: 'medium' } },
     },
     maxOutputTokens: 16_384,
     abortSignal: AbortSignal.timeout(TIMEOUT_MS),
   })
 
   for await (const part of result.stream) {
-    if (part.type === 'reasoning-delta') {
-      emit({ type: 'reasoning', text: part.text })
-    } else if (part.type === 'tool-call' && !part.dynamic) {
+    if (part.type === 'tool-call' && !part.dynamic) {
       usage.lookups++
       emit({
         type: 'lookup',

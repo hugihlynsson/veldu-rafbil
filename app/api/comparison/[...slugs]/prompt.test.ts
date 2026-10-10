@@ -64,14 +64,14 @@ describe('readVerdict', () => {
   it('reads the summary, then a pick a marked line', () => {
     expect(
       readVerdict(
-        `Ólíkir bílar.\nHvor á sitt.\n[car:${k}] þú keyrir langt. Hann er rúmgóður.\n[car:${t}] þú vilt snerpu.`,
+        `Ólíkir bílar.\nHvor á sitt.\n[car:${k}] Ef þú keyrir langt og vilt pláss,\n[car:${t}] Ef þú vilt snerpu.`,
         [kia, tesla],
       ),
     ).toEqual({
       summary: 'Ólíkir bílar. Hvor á sitt.',
       picks: [
-        { slug: k, when: 'þú keyrir langt. Hann er rúmgóður' },
-        { slug: t, when: 'þú vilt snerpu' },
+        { slug: k, when: 'Ef þú keyrir langt og vilt pláss' },
+        { slug: t, when: 'Ef þú vilt snerpu' },
       ],
     })
   })

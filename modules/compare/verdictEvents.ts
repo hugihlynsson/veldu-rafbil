@@ -7,11 +7,10 @@ export interface Verdict {
 
 /**
  * What the verdict's endpoint sends, one JSON object a line, while the model
- * works: its thinking as it goes, each car it looks up, and then the verdict
- * or the news that there will be none.
+ * works: each car it looks up, and then the verdict or the news that there
+ * will be none.
  */
 export type VerdictEvent =
-  | { type: 'reasoning'; text: string }
   | { type: 'lookup'; id: string; car: string; done: boolean }
   | { type: 'verdict'; verdict: Verdict }
   | { type: 'error' }

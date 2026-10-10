@@ -10,6 +10,10 @@ import {
   decodeEvents,
   type Verdict as VerdictData,
 } from '@/modules/compare/verdictEvents'
+import {
+  phraseDuration,
+  thinkingPhrases,
+} from '@/modules/compare/thinkingPhrases'
 
 const eyebrow =
   'm-0 uppercase text-eyebrow font-semibold tracking-wider text-stone'
@@ -63,10 +67,11 @@ const VerdictCard: FunctionComponent<{
         <ul className="mt-4 mb-0 p-0 list-none flex flex-col gap-3">
           {picks.map(({ car, when }) => (
             <li key={car.id} className="text-sm leading-normal md:text-base">
+              {when},{' '}
               <span className="font-semibold">
-                Veldu {comparedName(car, cars)}
-              </span>{' '}
-              ef {when}.
+                veldu {comparedName(car, cars)}
+              </span>
+              .
             </li>
           ))}
         </ul>
@@ -84,30 +89,44 @@ interface Lookup {
   done: boolean
 }
 
-// Gemini's thoughts come as a bold heading over a paragraph; the heading is
-// the step it is on, and the paragraph what it is thinking there
-const latestHeading = (thinking: string): string | undefined =>
-  [...thinking.matchAll(/\*\*(.+?)\*\*/g)].at(-1)?.[1]
+const ThinkingLine: FunctionComponent<{ names: ReadonlyArray<string> }> = ({
+  names,
+}) => {
+  const [{ phrases, loopFrom }] = useState(() => thinkingPhrases(names))
+  const [index, setIndex] = useState(0)
 
-const withoutHeadings = (thinking: string): string =>
-  thinking
-    .replace(/\*\*(.+?)\*\*/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
+  useEffect(() => {
+    const timer = setTimeout(
+      () => setIndex(index + 1 < phrases.length ? index + 1 : loopFrom),
+      phraseDuration(phrases[index]),
+    )
+    return () => clearTimeout(timer)
+  }, [index, phrases, loopFrom])
+
+  return (
+    <span
+      key={index}
+      aria-hidden
+      className="font-semibold leading-snug animate-message-in"
+    >
+      {phrases[index]}
+    </span>
+  )
+}
 
 const Working: FunctionComponent<{
-  thinking: string
+  names: ReadonlyArray<string>
   lookups: ReadonlyArray<Lookup>
-}> = ({ thinking, lookups }) => (
+}> = ({ names, lookups }) => (
   <Card>
-    <output className="mt-3 flex items-center gap-2 text-sm">
+    {/* Two lines tall whatever the line, so the card holds still as they turn */}
+    <output className="mt-3 flex items-start gap-2 min-h-[2lh] text-sm leading-snug">
       <span
         aria-hidden
-        className="w-2 h-2 shrink-0 rounded-full bg-stone animate-pulse"
+        className="w-2 h-2 mt-1.5 shrink-0 rounded-full bg-stone animate-pulse"
       />
-      <span className="font-semibold">
-        {latestHeading(thinking) ?? 'Ber bílana saman…'}
-      </span>
+      <span className="sr-only">Gervigreindin ber bílana saman</span>
+      <ThinkingLine names={names} />
     </output>
 
     {lookups.length > 0 && (
@@ -123,16 +142,6 @@ const Working: FunctionComponent<{
           </li>
         ))}
       </ul>
-    )}
-
-    {thinking && (
-      // The newest of it at the foot, the start faded out over the top
-      <div
-        aria-hidden
-        className="mt-3 max-h-24 overflow-hidden flex flex-col justify-end text-xs leading-relaxed text-clay [mask-image:linear-gradient(to_bottom,transparent,black_60%)]"
-      >
-        <p className="m-0">{withoutHeadings(thinking)}</p>
-      </div>
     )}
 
     <p className="mt-3 mb-0 text-fine font-medium text-clay">
@@ -151,13 +160,12 @@ interface Props {
 }
 
 /**
- * The model's verdict, or the model at work on it: what it is thinking and
- * which cars it is reading up on, until the verdict arrives
+ * The model's verdict, or the model at work on it: a line about what it might
+ * be weighing, and the cars it is reading up on, until the verdict arrives
  */
 const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
   const [verdict, setVerdict] = useState(written)
   const [failed, setFailed] = useState(false)
-  const [thinking, setThinking] = useState('')
   const [lookups, setLookups] = useState<Lookup[]>([])
 
   useEffect(() => {
@@ -178,9 +186,7 @@ const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
         const { events, rest } = decodeEvents(buffered + value)
         buffered = rest
         for (const event of events) {
-          if (event.type === 'reasoning') {
-            setThinking((before) => before + event.text)
-          } else if (event.type === 'lookup') {
+          if (event.type === 'lookup') {
             setLookups((before) =>
               before.some(({ id }) => id === event.id)
                 ? before.map((lookup) =>
@@ -209,7 +215,12 @@ const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
 
   if (verdict) return <VerdictCard cars={cars} verdict={verdict} />
   if (failed) return null
-  return <Working thinking={thinking} lookups={lookups} />
+  return (
+    <Working
+      names={cars.map((car) => comparedName(car, cars))}
+      lookups={lookups}
+    />
+  )
 }
 
 export default Verdict
