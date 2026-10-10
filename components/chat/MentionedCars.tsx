@@ -10,15 +10,13 @@ import type { ChatMessage } from '@/modules/chat/message'
 interface Props {
   lastMessage?: ChatMessage
   animate: boolean
-  onClose: () => void
-  onShowCar: (car: Car) => void
+  onPick: (car: Car) => void
 }
 
 const MentionedCars: React.FunctionComponent<Props> = ({
   lastMessage,
   animate,
-  onClose,
-  onShowCar,
+  onPick,
 }) => {
   if (!lastMessage || lastMessage.role !== 'assistant') return null
 
@@ -38,13 +36,7 @@ const MentionedCars: React.FunctionComponent<Props> = ({
             )}
             style={animate ? { animationDelay: `${index * 0.1}s` } : undefined}
           >
-            <MiniCar
-              car={car}
-              onSelect={() => {
-                onShowCar(car)
-                onClose()
-              }}
-            />
+            <MiniCar car={car} onSelect={() => onPick(car)} />
           </div>
         ))}
       </div>

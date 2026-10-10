@@ -31,9 +31,6 @@ export default function ChatContainer({
 }: Props) {
   const chatInputRef = useRef<HTMLInputElement>(null)
   const shouldFocusInput = useRef<boolean>(false)
-  // Held until the dialog has closed: the page behind it is inert until then,
-  // and the card could not take the focus
-  const carToShow = useRef<Car | null>(null)
   const [showChatMessages, setShowChatMessages] = useState<boolean>(false)
   // The draft outlives the input, which is mounted in one of two places
   const [draft, setDraft] = useState<string>('')
@@ -110,13 +107,11 @@ export default function ChatContainer({
     <>
       {conversation.engine}
       <ChatModal
-        onDone={() => {
-          const car = carToShow.current
-          carToShow.current = null
+        onDone={(pickedCar) => {
           // A car picked from the answer takes the focus instead
-          shouldFocusInput.current = !car
+          shouldFocusInput.current = !pickedCar
           setShowChatMessages(false)
-          if (car) onShowCar(car)
+          if (pickedCar) onShowCar(pickedCar)
         }}
         messages={session.messages}
         status={session.status}
@@ -124,9 +119,6 @@ export default function ChatContainer({
         onClearChat={session.clear}
         onSendMessage={conversation.send}
         onRetry={session.retry}
-        onShowCar={(car) => {
-          carToShow.current = car
-        }}
         composer={chatInput}
         composerRef={chatInputRef}
       />

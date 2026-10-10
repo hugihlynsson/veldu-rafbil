@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import clsx from 'clsx'
 import type { ChatStatus } from 'ai'
 import type { Car } from '@/modules/data/cars'
@@ -19,15 +19,14 @@ import MentionedCars from './MentionedCars'
 import TypingIndicator from './TypingIndicator'
 
 interface Props {
-  onDone: () => void
+  /** Once the chat has closed, with the car picked from an answer if one was */
+  onDone: (pickedCar?: Car) => void
   messages: Message[]
   status: ChatStatus
   error: Error | undefined
   onClearChat: () => void
   onSendMessage: (message: string) => void
   onRetry: () => void
-  /** A car the answer mentions was picked, and the chat is closing for it */
-  onShowCar: (car: Car) => void
   /** Inside the dialog, since showModal() makes the page outside it inert */
   composer: React.ReactNode
   /** Focused after open: showModal() would land on the close button */
@@ -42,10 +41,12 @@ const ChatModal: React.FunctionComponent<Props> = ({
   onClearChat,
   onSendMessage,
   onRetry,
-  onShowCar,
   composer,
   composerRef,
 }) => {
+  // Held until the dialog has closed: the page behind it is inert until then,
+  // and the car's card could not take the focus
+  const pickedCar = useRef<Car | undefined>(undefined)
   const lastMessage = messages[messages.length - 1]
   // Reopening shows what was already said as it was left; only what arrives
   // while the chat is open animates in, over the panel's own entrance
@@ -86,7 +87,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
   return (
     <Modal
       labelledBy="chat-modal-title"
-      onDone={onDone}
+      onDone={() => onDone(pickedCar.current)}
       initialFocusRef={composerRef}
       className="items-start data-[state=visible]:backdrop:bg-backdrop"
     >
@@ -137,8 +138,10 @@ const ChatModal: React.FunctionComponent<Props> = ({
                           <MentionedCars
                             lastMessage={lastMessage}
                             animate={animateExtras}
-                            onClose={close}
-                            onShowCar={onShowCar}
+                            onPick={(car) => {
+                              pickedCar.current = car
+                              close()
+                            }}
                           />
                         )}
                         {status !== 'streaming' &&
