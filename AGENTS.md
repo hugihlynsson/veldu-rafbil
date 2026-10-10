@@ -144,7 +144,7 @@ reasoning is in `app/api/cars/carApi.ts`, and its test fails if it is broken.
 
 Tailwind v4 — **no `tailwind.config.js`**; the theme is the `@theme` block in
 `app/globals.css`. Tailwind's default palette, radii, shadows and breakpoints
-are cleared there, so `bg-gray-100` or `lg:` silently compiles to nothing. Use
+are cleared there, so `bg-gray-100` or `xl:` silently compiles to nothing. Use
 the names defined there, and add one there when a value repeats rather than
 writing it in brackets. Design is mobile-first. Chat markdown is styled by
 plain CSS rules at the bottom of that file, not by utilities.
