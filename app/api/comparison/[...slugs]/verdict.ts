@@ -100,7 +100,7 @@ const write = async (
   }
 
   usage.total = await result.totalUsage
-  const verdict = readVerdict(await result.text, compared)
+  const verdict = readVerdict(await result.text)
   // Thrown rather than returned, as an empty verdict would be cached
   if (!verdict) throw new Error('The model gave no verdict')
   return verdict

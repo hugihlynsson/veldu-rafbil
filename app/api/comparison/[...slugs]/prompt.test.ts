@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
 import { deriveCar } from '@/modules/data/cars'
-import { carSlug } from '@/modules/data/getCarId'
 import type { NewCar } from '@/modules/data/newCarSchema'
 import { readVerdict, verdictFacts } from './prompt'
 
@@ -37,9 +36,9 @@ const tesla = deriveCar({
 describe('verdictFacts', () => {
   const facts = verdictFacts([kia, tesla])
 
-  it('names each car by the slug the answer has to use', () => {
-    expect(facts).toContain(`${carSlug(kia)}: Kia EV3 Long Range`)
-    expect(facts).toContain(`${carSlug(tesla)}: Tesla Model Y`)
+  it('names each car in full', () => {
+    expect(facts).toContain('- Kia EV3 Long Range, ')
+    expect(facts).toContain('- Tesla Model Y, ')
   })
 
   // The model copies a gap; left to subtract, it gets one wrong now and then
@@ -59,45 +58,19 @@ describe('verdictFacts', () => {
 })
 
 describe('readVerdict', () => {
-  const [k, t] = [carSlug(kia), carSlug(tesla)]
-
-  it('reads the summary, then a pick a marked line', () => {
+  it('reads the answer a paragraph at a time', () => {
     expect(
-      readVerdict(
-        `Ólíkir bílar.\nHvor á sitt.\n[car:${k}] Ef þú keyrir langt og vilt pláss,\n[car:${t}] Ef þú vilt snerpu.`,
-        [kia, tesla],
-      ),
-    ).toEqual({
-      summary: 'Ólíkir bílar. Hvor á sitt.',
-      picks: [
-        { slug: k, when: 'Ef þú keyrir langt og vilt pláss' },
-        { slug: t, when: 'Ef þú vilt snerpu' },
-      ],
-    })
+      readVerdict('Ólíkir bílar.\nHvor á sitt.\n\n  Kia fer lengra. \n'),
+    ).toEqual({ paragraphs: ['Ólíkir bílar. Hvor á sitt.', 'Kia fer lengra.'] })
   })
 
   it('takes out the markdown it was asked not to write', () => {
-    expect(
-      readVerdict(`**Ólíkir** bílar.\n- [car:${k}] þú **keyrir** langt`, [
-        kia,
-        tesla,
-      ]),
-    ).toEqual({
-      summary: 'Ólíkir bílar.',
-      picks: [{ slug: k, when: 'þú keyrir langt' }],
+    expect(readVerdict('## Samanburður\n\n**Kia** fer - lengra')).toEqual({
+      paragraphs: ['Samanburður', 'Kia fer - lengra'],
     })
   })
 
-  it('keeps one pick a car, and none for a car not compared', () => {
-    expect(
-      readVerdict(
-        `Ólíkir.\n[car:${k}] fyrst\n[car:${k}] aftur\n[car:some-other-car] nei`,
-        [kia, tesla],
-      )?.picks,
-    ).toEqual([{ slug: k, when: 'fyrst' }])
-  })
-
   it('has nothing to show for an empty answer', () => {
-    expect(readVerdict(' \n ', [kia, tesla])).toBeNull()
+    expect(readVerdict(' \n\n ')).toBeNull()
   })
 })

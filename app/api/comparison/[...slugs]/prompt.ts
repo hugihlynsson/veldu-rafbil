@@ -1,6 +1,5 @@
 import type { Car } from '@/modules/data/cars'
 import type { Verdict } from '@/modules/compare/verdictEvents'
-import { carSlug } from '@/modules/data/getCarId'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { grantAmountText } from '@/modules/copy/grantCopy'
 import { driveLabels } from '@/modules/data/drives'
@@ -20,16 +19,9 @@ export const verdictSystemPrompt = `Þú ert ráðgjafi Veldu Rafbíl, íslensks
 - Verðin eru eftir ${grantAmountText} ríkisstyrk þar sem hann á við.
 - Drægnin er samkvæmt WLTP. Í íslenskum vetri er hún nær ${Math.round(realRangeLowFactor * 100)}–${Math.round(realRangeHighFactor * 100)}% af því.
 - Byggðu aðeins á gögnunum hér að neðan og því sem fetchCarDetails skilar, ekki á því sem þú heldur að þú vitir um bílana.
-- Ekkert markdown, engin feitletrun, engir listar.
+- Ekkert markdown, engin feitletrun, engir listar, engar fyrirsagnir.
 
-Svaraðu nákvæmlega svona, og engu öðru:
-- Fyrst tvær til þrjár setningar um það sem helst skilur bílana að.
-- Svo ein lína fyrir hvern bíl, í sömu röð og bílarnir eru taldir upp, sem byrjar á [car:<auðkenni>]. Á eftir auðkenninu kemur skilyrðið sem gerir þennan bíl að réttu valinu, sem byrjar á "Ef þú": hvað sá sem velur hann vill eða þarf. Vefurinn bætir sjálfur við ", veldu [bíllinn]." aftan við, svo ekki nefna bílinn og ekki segja "veldu". Ein setning, 12 til 30 orð, og gjarnan með því sem þú last um stærð hans og pláss.
-
-Til dæmis:
-Kia er rúmbetri og fer lengra, en Tesla er sneggri og ódýrari í rekstri.
-[car:kia-ev3-long-range] Ef þú keyrir oft út á land og vilt 460 lítra skott fyrir fjölskylduna, án þess að borga mikið
-[car:tesla-model-y-standard-range] Ef þú vilt snarpan og skemmtilegan bíl sem hleðst hratt á ferðalögum`
+Svaraðu með hnitmiðuðum samanburði á bílunum, um 160 orðum í tveimur eða þremur stuttum efnisgreinum og engu öðru. Byrjaðu á því sem helst skilur þá að, segðu svo hverjum hver þeirra hentar og hvers vegna, gjarnan með því sem þú last um stærð þeirra og pláss. Nefndu bílana með tegund og gerð, til dæmis Kia EV3.`
 
 interface Metric {
   label: string
@@ -96,7 +88,7 @@ const metrics: Metric[] = [
 
 const describeCar = (car: Car): string =>
   [
-    `${carSlug(car)}: ${car.label}`,
+    car.label,
     car.evDatabaseUrl
       ? `ev-database: ${car.evDatabaseUrl}`
       : 'engin ev-database slóð',
@@ -142,47 +134,24 @@ export const verdictFacts = (compared: ReadonlyArray<Car>): string =>
     .map((metric) => `- ${describeMetric(metric, compared)}`)
     .join('\n')}`
 
-// Generous bounds that only stop a runaway; the prompt asks for far less
-const MAX_SUMMARY_LENGTH = 800
-const MAX_PICK_LENGTH = 800
-
-const clean = (text: string, max: number) =>
-  text
-    // The prompt asks for plain text, and a model writes markdown anyway
-    .replace(/\*\*|__|^[-*•]\s+/gm, '')
-    .trim()
-    .replace(/\s+/g, ' ')
-    .slice(0, max)
-
-const pickLine = /^\s*[-*•]?\s*\[car:\s*([^\]\s]+)\s*\]\s*(.*)$/
+// A bound that only stops a runaway; the prompt asks for a fraction of it
+const MAX_LENGTH = 3000
 
 /**
- * The answer as the page shows it: the lines before the first car marker are
- * the summary, and each marked line is that car's pick. A marker naming a car
- * not compared is dropped, and so is a second one for the same car.
+ * The answer as the page shows it: its paragraphs, with the markdown the
+ * prompt asks it not to write taken out anyway
  */
-export const readVerdict = (
-  text: string,
-  compared: ReadonlyArray<Car>,
-): Verdict | null => {
-  const slugs = new Set(compared.map(carSlug))
-  const summary: string[] = []
-  const picks: Verdict['picks'] = []
+export const readVerdict = (text: string): Verdict | null => {
+  const paragraphs = text
+    .slice(0, MAX_LENGTH)
+    .split(/\n\s*\n/)
+    .map((paragraph) =>
+      paragraph
+        .replace(/\*\*|__|^#+\s*|^[-*•]\s+/gm, '')
+        .replace(/\s+/g, ' ')
+        .trim(),
+    )
+    .filter(Boolean)
 
-  for (const line of text.split('\n')) {
-    const marked = line.match(pickLine)
-    if (!marked) {
-      if (picks.length === 0) summary.push(line)
-      continue
-    }
-    const slug = marked[1].toLowerCase()
-    // The page ends the sentence itself, with ", veldu X."
-    const when = clean(marked[2], MAX_PICK_LENGTH).replace(/[.,;:\s]+$/, '')
-    if (!slugs.has(slug) || !when || picks.some((pick) => pick.slug === slug))
-      continue
-    picks.push({ slug, when })
-  }
-
-  const joined = clean(summary.join(' '), MAX_SUMMARY_LENGTH)
-  return joined || picks.length > 0 ? { summary: joined, picks } : null
+  return paragraphs.length > 0 ? { paragraphs } : null
 }

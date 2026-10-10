@@ -1,8 +1,6 @@
 /** What the model made of a comparison, as the page shows it */
 export interface Verdict {
-  summary: string
-  /** Each car once at most, by slug */
-  picks: Array<{ slug: string; when: string }>
+  paragraphs: string[]
 }
 
 /**

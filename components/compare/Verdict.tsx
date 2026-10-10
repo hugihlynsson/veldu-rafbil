@@ -4,7 +4,6 @@ import { FunctionComponent, ReactNode, useEffect, useState } from 'react'
 import clsx from 'clsx'
 
 import type { Car } from '@/modules/data/cars'
-import { carSlug } from '@/modules/data/getCarId'
 import { comparedName } from '@/modules/compare/comparison'
 import {
   decodeEvents,
@@ -46,42 +45,23 @@ export const VerdictPlaceholder: FunctionComponent = () => (
   </Card>
 )
 
-const VerdictCard: FunctionComponent<{
-  cars: ReadonlyArray<Car>
-  verdict: VerdictData
-}> = ({ cars, verdict }) => {
-  // In the columns' order, which the cached verdict cannot know
-  const picks = cars.flatMap((car) => {
-    const pick = verdict.picks.find(({ slug }) => slug === carSlug(car))
-    return pick ? [{ car, when: pick.when }] : []
-  })
-
-  return (
-    <Card className="animate-message-in">
-      {verdict.summary && (
-        <p className="mt-2 mb-0 text-base leading-snug md:text-lg">
-          {verdict.summary}
-        </p>
-      )}
-      {picks.length > 0 && (
-        <ul className="mt-4 mb-0 p-0 list-none flex flex-col gap-3">
-          {picks.map(({ car, when }) => (
-            <li key={car.id} className="text-sm leading-normal md:text-base">
-              {when},{' '}
-              <span className="font-semibold">
-                veldu {comparedName(car, cars)}
-              </span>
-              .
-            </li>
-          ))}
-        </ul>
-      )}
-      <p className="mt-4 mb-0 text-fine font-medium text-clay">
-        Skrifað af gervigreind út frá tölunum hér fyrir neðan og ev-database.org
+const VerdictCard: FunctionComponent<{ verdict: VerdictData }> = ({
+  verdict,
+}) => (
+  <Card className="animate-message-in">
+    {verdict.paragraphs.map((paragraph) => (
+      <p
+        key={paragraph}
+        className="mt-2 mb-0 text-base leading-normal md:text-lg [&+&]:mt-3"
+      >
+        {paragraph}
       </p>
-    </Card>
-  )
-}
+    ))}
+    <p className="mt-4 mb-0 text-fine font-medium text-clay">
+      Skrifað af gervigreind út frá tölunum hér fyrir neðan og ev-database.org
+    </p>
+  </Card>
+)
 
 interface Lookup {
   id: string
@@ -94,20 +74,32 @@ const ThinkingLine: FunctionComponent<{ names: ReadonlyArray<string> }> = ({
 }) => {
   const [{ phrases, loopFrom }] = useState(() => thinkingPhrases(names))
   const [index, setIndex] = useState(0)
+  const [leaving, setLeaving] = useState(false)
 
+  // A line stays for its time, then plays its exit, and the next arrives once
+  // that has finished
   useEffect(() => {
+    if (leaving) return
     const timer = setTimeout(
-      () => setIndex(index + 1 < phrases.length ? index + 1 : loopFrom),
+      () => setLeaving(true),
       phraseDuration(phrases[index]),
     )
     return () => clearTimeout(timer)
-  }, [index, phrases, loopFrom])
+  }, [index, leaving, phrases])
 
   return (
     <span
       key={index}
       aria-hidden
-      className="font-semibold leading-snug animate-message-in"
+      onAnimationEnd={() => {
+        if (!leaving) return
+        setLeaving(false)
+        setIndex(index + 1 < phrases.length ? index + 1 : loopFrom)
+      }}
+      className={clsx(
+        'font-semibold leading-snug',
+        leaving ? 'animate-phrase-out' : 'animate-phrase-in',
+      )}
     >
       {phrases[index]}
     </span>
@@ -213,7 +205,7 @@ const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
     return () => controller.abort()
   }, [written, endpoint])
 
-  if (verdict) return <VerdictCard cars={cars} verdict={verdict} />
+  if (verdict) return <VerdictCard verdict={verdict} />
   if (failed) return null
   return (
     <Working
