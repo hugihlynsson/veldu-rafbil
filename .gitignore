@@ -20,3 +20,7 @@ tsconfig.tsbuildinfo
 !.claude/
 .claude/*
 !.claude/skills/
+
+# Playwright
+/test-results/
+/playwright-report/

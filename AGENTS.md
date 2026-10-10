@@ -18,6 +18,10 @@ anything beyond a data edit. The first three run on every pull request; Vercel
 builds the preview, so CI does not repeat the build. The build needs no
 environment variables and should print no warnings.
 
+For a change to the chat or a modal, run `npm run test:e2e` as well: it drives
+them in a browser against `next dev`, with `/api/chat` stubbed, and CI runs it
+on every pull request. Locally it uses the installed Chrome.
+
 The lint budget is zero. `.oxlintrc.json` keeps a few rules at warning rather
 than error, where the real fix would be a bigger refactor than whatever you came
 here to do, and a clean checkout produces none of them. A warning your change
@@ -27,7 +31,8 @@ Formatting takes care of itself — a husky pre-commit hook runs oxfmt over the
 staged files and then oxlint over the repo, so don't hand-format.
 
 Tests are Vitest and live next to what they test. They cover the pure logic in
-`modules/` and beside the routes; there are no component tests. Two kinds are
+`modules/` and beside the routes; there are no component tests, and the
+browser tests in `e2e/` cover the chat's flows end to end. Two kinds are
 worth writing: tests that pin a contract two places have to agree on (a URL
 round trip, a query mapping), and tests over the car data itself — most
 commits edit that file, and most corrections to it have been a bad link or a
@@ -197,7 +202,7 @@ itself, where a dark override would never reach it.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
-# This is NOT the Next.js you know
+## This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 
