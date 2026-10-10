@@ -10,7 +10,7 @@ const paragraph =
 const Footer: FunctionComponent<{}> = () => (
   <>
     <Orflaedi />
-    <footer className="bg-haze pt-8 pb-25 xs:pt-14">
+    <footer className="bg-haze pt-8 pb-34 xs:pt-14">
       <p className={paragraph}>
         Veldu Rafbíl er smíðuð af{' '}
         <TextLink href="https://hugihlynsson.com">Huga Hlynssyni</TextLink> og

@@ -121,9 +121,10 @@ const ChatInput: React.FunctionComponent<Props> = ({
         'fixed bottom-[calc(1rem+var(--keyboard-inset))] left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col-reverse items-center gap-3',
         'sm:bottom-[calc(1.5rem+var(--keyboard-inset))]',
         // Only the hiding fades: a transition on the bottom drags the bar
-        // behind a keyboard on its way in
-        'transition-opacity duration-300',
-        hide && 'opacity-0',
+        // behind a keyboard on its way in. Invisible once it has, so a
+        // hidden bar takes no tab or tap meant for what is in its place.
+        'transition-[opacity,visibility] duration-300',
+        hide && 'opacity-0 invisible',
       )}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {

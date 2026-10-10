@@ -50,8 +50,12 @@ export const chatRateLimit = createRateLimit(12)
 // Typing asks more often than chatting does, debounced as it is
 export const filterSuggestionsRateLimit = createRateLimit(60)
 
+// Only a comparison no one has opened before reaches the model; the rest are
+// read from the cache and never count
+export const comparisonVerdictRateLimit = createRateLimit(10)
+
 // x-forwarded-for is spoofable, so this buys politeness, not identity
-export const clientKey = (request: Request): string =>
+export const clientKey = (request: Pick<Request, 'headers'>): string =>
   request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
   request.headers.get('x-real-ip') ||
   'unknown'

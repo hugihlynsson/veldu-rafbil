@@ -7,9 +7,11 @@ User-Agent: *
 Allow: /
 
 # The assistant endpoint. It takes POST only, so there is nothing here to index,
-# and every call bills a hosted model — this is the one route on the site that
-# spends money when someone reads it.
+# and every call bills a hosted model.
 Disallow: /api/chat
+
+# A comparison page bills a hosted model too, but once per set of cars and
+# deploy, so it stays open: it is a link people share, and it should unfurl.
 
 # Worth reading instead, for anything automated:
 #   /llms.txt   what this site holds and how to read the figures

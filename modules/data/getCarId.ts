@@ -17,4 +17,8 @@ const getCarId = (car: NewCar): string =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/-$/, '')
 
+/** The id less the `car-` every id starts with: how a URL or a prompt names a car */
+export const carSlug = (car: { id: string }): string =>
+  car.id.replace(/^car-/, '')
+
 export default getCarId

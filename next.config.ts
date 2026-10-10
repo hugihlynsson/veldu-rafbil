@@ -36,7 +36,7 @@ const nextConfig: NextConfig = {
       1320, // iPhone 16 Pro Max, and the widest anything here asks for
     ],
     // The two widths either side of MiniCar's 120px box, which is all that
-    // reads this list
+    // reads this list but the comparison tray's smaller thumbnails
     imageSizes: [128, 256],
     // No query string, so a photo already cached cannot be asked for again
     // under a fresh URL
@@ -44,6 +44,11 @@ const nextConfig: NextConfig = {
     qualities: [75],
     // 31 days: the point Vercel stops counting the cache write
     minimumCacheTTL: 2678400,
+  },
+  // The comparison's share image draws the cars' photos, which are otherwise
+  // left to the CDN rather than bundled with a function
+  outputFileTracingIncludes: {
+    '/mynd/samanburdur/**': ['./public/images/*.jpg', './app/fonts/*-og.woff'],
   },
   async redirects() {
     return [
