@@ -31,9 +31,11 @@
     "dev": "next dev",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.64.0",
     "@types/node": "^24.19.0",
     "@types/react": "^19.3.0",
     "husky": "^9.1.7",
