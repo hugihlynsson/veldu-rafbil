@@ -10,6 +10,8 @@ import React, {
 } from 'react'
 import clsx from 'clsx'
 
+import lockBodyScroll from '@/utils/lockBodyScroll'
+
 /**
  * How long the leave animation gets before the dialog actually closes. The
  * leave transitions are shorter, since they only start once React re-renders.
@@ -36,8 +38,6 @@ interface Props {
   labelledBy: string
   /** Called once the leave animation has finished and the dialog is closed */
   onDone: () => void
-  /** Called as the leave animation starts, for anything that should not wait */
-  onLeave?: () => void
   /** Focused after open: showModal() lands on the close button otherwise */
   initialFocusRef?: React.RefObject<HTMLElement | null>
   /** Layout and backdrop for this particular dialog */
@@ -52,23 +52,28 @@ interface Props {
 const Modal: React.FunctionComponent<Props> = ({
   labelledBy,
   onDone,
-  onLeave,
   initialFocusRef,
   className,
   children,
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null)
+  const unlockBodyScroll = useRef<(() => void) | null>(null)
   const [state, setState] = useState<State>('initializing')
 
   // Layout rather than passive: a phone raises the keyboard only for a focus
   // inside the tap that asked for it, and passive effects run after the event
   useLayoutEffect(() => {
+    const unlock = lockBodyScroll()
+    unlockBodyScroll.current = unlock
     dialogRef.current?.showModal()
     // preventScroll: the dialog is fixed, and scrolling to it moves the list
     initialFocusRef?.current?.focus({ preventScroll: true })
     // A frame with the enter styles gives the transition something to move from
     const timer = setTimeout(() => setState('visible'), 1)
-    return () => clearTimeout(timer)
+    return () => {
+      clearTimeout(timer)
+      unlock()
+    }
     // Once, on mount: a ref object keeps its identity across renders
   }, [initialFocusRef])
 
@@ -82,14 +87,14 @@ const Modal: React.FunctionComponent<Props> = ({
   // so it reads no ref, and a second close while leaving finishes once
   useEffect(() => {
     if (state !== 'leaving') return
+    // As the leave starts, so the page is in place to scroll and to take
+    // focus by the time the dialog is gone
+    unlockBodyScroll.current?.()
     const timer = setTimeout(finishClosing, LEAVE_MS)
     return () => clearTimeout(timer)
   }, [state])
 
-  const close = () => {
-    setState('leaving')
-    onLeave?.()
-  }
+  const close = () => setState('leaving')
 
   return (
     // <dialog>: the click is backdrop dismissal, Escape is handled by onCancel

@@ -1,17 +1,16 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import clsx from 'clsx'
-import type { ChatStatus } from 'ai'
 import type { Car } from '@/modules/data/cars'
 import {
   getFollowUps,
   getMessageText,
   groupIntoTurns,
-  type ChatMessage as Message,
 } from '@/modules/chat/message'
 import { isAwaitingText, unansweredReason } from '@/modules/chat/progress'
 import Modal, { panelMotion } from '@/components/Modal'
+import type { ChatSession } from './ChatEngine'
 import ChatHeader from './ChatHeader'
 import ChatMessage from './ChatMessage'
 import FollowUpSuggestions from './FollowUpSuggestions'
@@ -19,16 +18,9 @@ import MentionedCars from './MentionedCars'
 import TypingIndicator from './TypingIndicator'
 
 interface Props {
-  onDone: () => void
-  messages: Message[]
-  status: ChatStatus
-  error: Error | undefined
-  onClearChat: () => void
-  onReleaseBodyLock: () => void
-  onSendMessage: (message: string) => void
-  onRetry: () => void
-  /** A car the answer mentions was picked, and the chat is closing for it */
-  onShowCar: (car: Car) => void
+  /** Once the chat has closed, with the car picked from an answer if one was */
+  onDone: (pickedCar?: Car) => void
+  session: ChatSession
   /** Inside the dialog, since showModal() makes the page outside it inert */
   composer: React.ReactNode
   /** Focused after open: showModal() would land on the close button */
@@ -37,18 +29,15 @@ interface Props {
 
 const ChatModal: React.FunctionComponent<Props> = ({
   onDone,
-  messages,
-  status,
-  error,
-  onClearChat,
-  onReleaseBodyLock,
-  onSendMessage,
-  onRetry,
-  onShowCar,
+  session,
   composer,
   composerRef,
 }) => {
-  const lastMessage = messages[messages.length - 1]
+  // Held until the dialog has closed: the page behind it is inert until then,
+  // and the car's card could not take the focus
+  const pickedCar = useRef<Car | undefined>(undefined)
+  const { messages, status, error } = session
+  const lastMessage = messages.at(-1)
   // Reopening shows what was already said as it was left; only what arrives
   // while the chat is open animates in, over the panel's own entrance
   const [idsOnOpen] = useState(() => new Set(messages.map(({ id }) => id)))
@@ -77,7 +66,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
     >
       <p className="font-medium">{unanswered}</p>
       <button
-        onClick={onRetry}
+        onClick={session.retry}
         className="shrink-0 rounded-full bg-alarm-fill px-3 py-1.5 text-xs font-medium text-alarm hover:bg-alarm-fill-hover transition-colors cursor-pointer"
       >
         Reyna aftur
@@ -88,8 +77,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
   return (
     <Modal
       labelledBy="chat-modal-title"
-      onDone={onDone}
-      onLeave={onReleaseBodyLock}
+      onDone={() => onDone(pickedCar.current)}
       initialFocusRef={composerRef}
       className="items-start data-[state=visible]:backdrop:bg-backdrop"
     >
@@ -106,7 +94,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
               onClose={close}
               onClearChat={() => {
                 close()
-                setTimeout(onClearChat, 300)
+                setTimeout(session.clear, 300)
               }}
             />
 
@@ -140,8 +128,10 @@ const ChatModal: React.FunctionComponent<Props> = ({
                           <MentionedCars
                             lastMessage={lastMessage}
                             animate={animateExtras}
-                            onClose={close}
-                            onShowCar={onShowCar}
+                            onPick={(car) => {
+                              pickedCar.current = car
+                              close()
+                            }}
                           />
                         )}
                         {status !== 'streaming' &&
@@ -149,7 +139,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
                             <FollowUpSuggestions
                               suggestions={lastMessageFollowUps}
                               animate={animateExtras}
-                              onSendMessage={onSendMessage}
+                              onSendMessage={session.send}
                             />
                           )}
                       </>

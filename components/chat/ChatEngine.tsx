@@ -39,25 +39,21 @@ export interface ChatSession {
 }
 
 interface Props {
-  /** Sent once the stored conversation is in, so it is asked as part of it */
-  queuedQuestion: string | null
-  onQueuedQuestionSent: () => void
   /** Called once the stored conversation is in, and on every change after */
   onChange: (session: ChatSession) => void
 }
 
-/** The conversation, apart from the bar so the AI SDK loads once it is used */
-export default function ChatEngine({
-  queuedQuestion,
-  onQueuedQuestionSent,
-  onChange,
-}: Props) {
+/**
+ * The conversation, apart from the bar so the AI SDK loads once it is used.
+ * Read through utils/useConversation, which renders it.
+ */
+export default function ChatEngine({ onChange }: Props) {
   const { messages, status, error, sendMessage, setMessages } =
     useChat<ChatMessage>({ transport })
   const [hasRestored, setHasRestored] = useState<boolean>(false)
 
   // Nothing can be sent until this is in, as the session is held back until
-  // then, so a question asked meanwhile is never replaced by it
+  // then
   useEffect(() => {
     void readStoredMessages().then((stored) => {
       if (stored.length > 0) setMessages(stored)
@@ -72,14 +68,6 @@ export default function ChatEngine({
       writeStoredMessages(messages)
     }
   }, [messages, status])
-
-  // sendMessage is the chat's own and never changes, so this cannot run
-  // again for the same question and pay for it twice
-  useEffect(() => {
-    if (!hasRestored || queuedQuestion === null) return
-    void sendMessage(asQuestion(queuedQuestion))
-    onQueuedQuestionSent()
-  }, [hasRestored, queuedQuestion, sendMessage, onQueuedQuestionSent])
 
   useEffect(() => {
     if (!hasRestored) return
