@@ -14,7 +14,6 @@ interface Props<P> {
   labelledBy?: string
   /** Names the group when nothing on the page does */
   label?: string
-  className?: string
 }
 
 export default function Toggles<P>({
@@ -25,16 +24,12 @@ export default function Toggles<P>({
   indicatorLabel,
   labelledBy,
   label,
-  className,
 }: Props<P>) {
   return (
     <fieldset
       aria-labelledby={labelledBy}
       aria-label={label}
-      className={clsx(
-        'flex max-w-full m-0 min-w-0 border-0 bg-track self-start rounded-toggle p-0.75 gap-0.75 xs:rounded-xl xs:p-1 xs:gap-1',
-        className,
-      )}
+      className="flex max-w-full m-0 min-w-0 border-0 bg-track self-start rounded-toggle p-0.75 gap-0.75 xs:rounded-xl xs:p-1 xs:gap-1"
     >
       {items.map(([label, value, icon]) => (
         <button

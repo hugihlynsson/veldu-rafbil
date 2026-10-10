@@ -8,7 +8,7 @@ export type View = 'list' | 'grid'
 
 export const views: Array<View> = ['list', 'grid']
 
-export const parseAsView = parseAsWord<View>({ listi: 'list', yfirlit: 'grid' })
+const parseAsView = parseAsWord<View>({ listi: 'list', yfirlit: 'grid' })
 
 // The list is the default, and leaves the URL clean
 export const viewParsers = { view: parseAsView.withDefault('list') }

@@ -35,8 +35,10 @@ const skipLayoutOutOfView =
 const skipLayoutOutOfViewInList =
   'md:[contain-intrinsic-size:auto_max(243px,(min(100vw,var(--container-page))-var(--container-card-text)-var(--spacing)*26)*2/3)]'
 // A grid card lays its parts out on rows its whole row of cards shares, so the
-// prices and the figures line up across it. Containment would cut it off from
-// them, and a card a third as tall has less to skip.
+// prices and the figures line up across it: five, one for each child it hands
+// the grid through md:contents (photo, heading, price, figures, link), and a
+// part added to the card needs a row added here. Containment would cut it off
+// from them, and a card a third as tall has less to skip.
 const sharedRowsInGrid =
   'md:grid md:grid-rows-subgrid md:row-span-5 md:[content-visibility:visible]'
 
@@ -70,14 +72,12 @@ const NewCar: FunctionComponent<Props> = ({
   const { id: carId, priceWithGrant, hasGrant } = car
 
   // Not agree(): sæti is neuter and reads the same at every count. A car
-  // without a subModel gets what follows on its own rather than a lone dot.
-  const subTitle = [
-    car.subModel,
-    showSeats && `${car.seats} sæti`,
-    car.expectedDelivery && `Væntanlegur ${car.expectedDelivery.toLowerCase()}`,
-  ]
+  // without a subModel gets the seat count on its own rather than a lone dot.
+  const subTitle = [car.subModel, showSeats && `${car.seats} sæti`]
     .filter(Boolean)
     .join(' · ')
+  const delivery =
+    car.expectedDelivery && `Væntanlegur ${car.expectedDelivery.toLowerCase()}`
 
   return (
     <article
@@ -137,8 +137,17 @@ const NewCar: FunctionComponent<Props> = ({
             )}
           >
             {subTitle}
+            {/* Shown on the subtitle's line, but read after the heading
+                rather than as part of the car's name */}
+            {delivery && (
+              <span aria-hidden>
+                {subTitle && ' · '}
+                {delivery}
+              </span>
+            )}
           </span>
         </h2>
+        {delivery && <p className="sr-only">{delivery}</p>}
 
         <LinkPill
           className={clsx(

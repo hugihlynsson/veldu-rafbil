@@ -47,7 +47,8 @@ const toggleSortings: Sorting[] = [
 ]
 
 // From lg the grid outgrows the page, centred on it and kept clear of the
-// window's edges, while the header above stays where the list has it
+// window's edges, while the header above stays where the list has it. NewCar's
+// grid `sizes` is worked out from these widths: change one, change both.
 const gridLayout =
   'md:grid md:grid-cols-2 md:gap-x-6 md:ml-10 md:mr-8 lg:grid-cols-3 lg:mx-[calc((100%_-_min(100vw_-_5rem,_var(--container-grid)))_/_2)]'
 
