@@ -120,6 +120,13 @@ describe('parseFilterIntent', () => {
     expect(parseFilterIntent('við erum átta, 7 sæti').numbers).toEqual(['atta'])
   })
 
+  it('leaves no number in kW or kWh for a model, but the word that asks', () => {
+    expect(parseFilterIntent('200kw hleðsla, 80 kWh')).toMatchObject({
+      unread: ['kw', 'kwh'],
+      numbers: [],
+    })
+  })
+
   it('reads 0-100 as the sprint, not as two numbers', () => {
     expect(parseFilterIntent('0-100 á 5 sek')).toEqual({
       filters: { acceleration: 5 },

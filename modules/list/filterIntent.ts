@@ -279,6 +279,14 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
     () => {},
   )
 
+  // Charging power or battery size, which no filter holds. The number is no
+  // value of any filter, but the word is left for a model, as "200 kW
+  // hleðsla" still asks for fast charging.
+  take(
+    String.raw`${START}${NUM}(?=\s*(?:kwh|kw|kilowott\w*|kilovott\w*)${END})`,
+    () => {},
+  )
+
   take(String.raw`${START}${NUM}\s*km\s*(?:\/|a|per)\s*min\w*`, ([, raw]) => {
     const min = parseNumber(raw)
     if (within(min, 1, 60)) set('fastcharge', min)
