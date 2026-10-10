@@ -9,12 +9,14 @@ import {
   groupIntoTurns,
 } from '@/modules/chat/message'
 import { isAwaitingText, unansweredReason } from '@/modules/chat/progress'
+import { getAnswerComparison } from '@/modules/chat/cars'
 import Modal, { panelMotion } from '@/components/Modal'
 import type { ChatSession } from './ChatEngine'
 import ChatHeader from './ChatHeader'
 import ChatMessage from './ChatMessage'
 import FollowUpSuggestions from './FollowUpSuggestions'
 import MentionedCars from './MentionedCars'
+import CompareAnswerCars from './CompareAnswerCars'
 import TypingIndicator from './TypingIndicator'
 
 interface Props {
@@ -50,6 +52,8 @@ const ChatModal: React.FunctionComponent<Props> = ({
   const lastAssistantText =
     lastMessage?.role === 'assistant' ? getMessageText(lastMessage) : ''
   const lastMessageFollowUps = getFollowUps(lastMessage)
+  const answerComparison =
+    lastMessage?.role === 'assistant' ? getAnswerComparison(lastMessage) : []
 
   const lastUserMessageId = messages.findLast((m) => m.role === 'user')?.id
 
@@ -137,6 +141,13 @@ const ChatModal: React.FunctionComponent<Props> = ({
                             }}
                           />
                         )}
+                        {status !== 'streaming' &&
+                          answerComparison.length > 0 && (
+                            <CompareAnswerCars
+                              cars={answerComparison}
+                              animate={animateExtras}
+                            />
+                          )}
                         {status !== 'streaming' &&
                           lastMessageFollowUps.length > 0 && (
                             <FollowUpSuggestions
