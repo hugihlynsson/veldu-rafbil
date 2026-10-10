@@ -1581,7 +1581,7 @@ const newCars: Array<NewCar> = [
     make: 'Nissan',
     model: 'Ariya',
     heroImageName: 'nissan-ariya-alt',
-    price: 8_680_000,
+    price: 7_990_000,
     sellerUrl: 'https://www.nissan.is/vehicles/new-vehicles/ariya.html',
     acceleration: 7.6,
     capacity: 87,
@@ -1614,7 +1614,7 @@ const newCars: Array<NewCar> = [
     model: 'Leaf',
     subModel: 'Standard Range',
     heroImageName: 'nissan-leaf',
-    price: 5_990_000,
+    price: 5_490_000,
     sellerUrl:
       'https://www.nissan.is/vehicles/new-vehicles/new-nissan-leaf.html',
     acceleration: 8.3,
@@ -1632,7 +1632,7 @@ const newCars: Array<NewCar> = [
     model: 'Leaf',
     subModel: 'Extended Range',
     heroImageName: 'nissan-leaf-alt',
-    price: 6_990_000,
+    price: 6_390_000,
     sellerUrl:
       'https://www.nissan.is/vehicles/new-vehicles/new-nissan-leaf.html',
     acceleration: 7.6,
