@@ -1,17 +1,17 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 
 import Car from './NewCar'
-import TextLink from '@/components/TextLink'
 import Title from '@/components/Title'
+import Intro from './Intro'
 import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/filters/FilterModal'
 import ActiveFilters from '@/components/filters/ActiveFilters'
-import cars, { type Car as CarData } from '@/modules/data/cars'
-import carFilter, { filtersShowing } from '@/modules/list/carFilter'
+import cars from '@/modules/data/cars'
+import carFilter from '@/modules/list/carFilter'
 import type { Filters } from '@/modules/list/filters'
 import {
   sortCars,
@@ -19,11 +19,10 @@ import {
   type Sorting,
 } from '@/modules/list/sorting'
 import { agree } from '@/modules/copy/plural'
-import { grantAmountText, grantCeilingText } from '@/modules/copy/grantCopy'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
-import scrollToCenter from '@/utils/scrollToCenter'
 import useBodyScrollLock from '@/utils/useBodyScrollLock'
 import { useFilters, useSorting } from '@/utils/useListState'
+import useRevealCar from '@/utils/useRevealCar'
 
 // Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
 // so arriving a moment later shifts nothing.
@@ -67,29 +66,7 @@ export default function CarList() {
     }
   }
 
-  // The chat can point at a car the filters are hiding, and its card is only
-  // there to scroll to once the render without them has happened
-  const carToReveal = useRef<string | null>(null)
-
-  const revealCar = (id: string) => {
-    const card = document.getElementById(id)
-    if (!card) return
-    scrollToCenter(card)
-    // Without this the reader is scrolled somewhere their focus is not
-    card.focus({ preventScroll: true })
-  }
-
-  const showCar = (car: CarData) => {
-    if (carFilter(filters)(car)) return revealCar(car.id)
-    carToReveal.current = car.id
-    setFilters(filtersShowing(filters, car))
-  }
-
-  useEffect(() => {
-    if (!carToReveal.current) return
-    revealCar(carToReveal.current)
-    carToReveal.current = null
-  })
+  const showCar = useRevealCar(filters, setFilters)
 
   useBodyScrollLock(editingFilters)
 
@@ -104,22 +81,7 @@ export default function CarList() {
       <header className={clsx('flex flex-col items-stretch md:pb-10', column)}>
         <Title />
 
-        <p className="leading-6 text-sm pt-6 m-0 mb-8 text-stone max-w-[33em] text-pretty md:text-base">
-          Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og eru
-          100% rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
-          <TextLink href="http://wltpfacts.eu/">WLTP</TextLink> mælingum frá
-          framleiðenda en raundrægni er háð aðstæðum og aksturslagi.
-          <span className="inline-block text-xs text-stone mt-2">
-            Kaupendur nýskráðra rafbíla sem kosta minna en {
-              grantCeilingText
-            }{' '}
-            eiga kost á að{' '}
-            <TextLink href="https://island.is/rafbilastyrkir">
-              sækja um {grantAmountText} rafbílastyrk
-            </TextLink>
-            .
-          </span>
-        </p>
+        <Intro />
 
         <div
           ref={controlsRef}
