@@ -6,7 +6,7 @@ import Image from 'next/image'
 import type { Drive } from '@/modules/data/newCarSchema'
 import { Car } from '@/modules/data/cars'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
-import { formatKmPerMinutesCharged } from '@/modules/data/getKmPerMinutesCharged'
+import { formatKmPerMinute } from '@/modules/data/getKmPerMinutesCharged'
 import LinkPill from '@/components/LinkPill'
 
 interface Props {
@@ -137,8 +137,7 @@ const NewCar: FunctionComponent<Props> = ({
               className={statDetail}
               title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10To80} min)`}
             >
-              {formatKmPerMinutesCharged(car.timeToCharge10To80, car.range)}{' '}
-              km/min
+              {formatKmPerMinute(car.kmPerMinuteCharged)} km/min
               <span className="sr-only">
                 {' '}
                 meðaldrægniaukning á hröðustu hleðslu

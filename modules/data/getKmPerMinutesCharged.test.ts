@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import getKmPerMinutesCharged, {
-  formatKmPerMinutesCharged,
+  formatKmPerMinute,
 } from './getKmPerMinutesCharged'
 
 describe('getKmPerMinutesCharged', () => {
@@ -19,16 +19,13 @@ describe('getKmPerMinutesCharged', () => {
   })
 })
 
-describe('formatKmPerMinutesCharged', () => {
+describe('formatKmPerMinute', () => {
   it('writes the same figure the list UI shows', () => {
-    expect(formatKmPerMinutesCharged(21, 712)).toBe('23.7')
+    expect(formatKmPerMinute(getKmPerMinutesCharged(21, 712))).toBe('23.7')
   })
 
   // A number would render this as "20", and the column would jump about
   it('keeps a trailing zero the number form loses', () => {
-    expect(formatKmPerMinutesCharged(10.5, 300)).toBe('20.0')
-    expect(Number(formatKmPerMinutesCharged(10.5, 300))).toBe(
-      getKmPerMinutesCharged(10.5, 300),
-    )
+    expect(formatKmPerMinute(getKmPerMinutesCharged(10.5, 300))).toBe('20.0')
   })
 })
