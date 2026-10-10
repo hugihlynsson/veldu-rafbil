@@ -57,6 +57,25 @@ describe('fetchCarDetails', () => {
     expect(result.specifications).toMatch(/not one of the ev-database entries/)
   })
 
+  it('refuses a car outside the ones it was narrowed to', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch')
+    const [mine, other] = [aCar(), aCar()]
+
+    const result = await run(other, createFetchCarDetailsTool(new Set([mine])))
+
+    expect(fetchSpy).not.toHaveBeenCalled()
+    expect(result.specifications).toMatch(/not one of the ev-database entries/)
+  })
+
+  it('cannot be narrowed to a page off the list', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch')
+    const url = 'http://169.254.169.254/latest/meta-data/'
+
+    await run(url, createFetchCarDetailsTool(new Set([url])))
+
+    expect(fetchSpy).not.toHaveBeenCalled()
+  })
+
   // Against an uncapped read this hangs rather than fails
   it('stops reading a body that never ends', async () => {
     const encoder = new TextEncoder()

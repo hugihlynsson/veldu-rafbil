@@ -11,12 +11,10 @@ import {
   shareImageSize,
 } from '@/modules/compare/comparison'
 import { carSlug } from '@/modules/data/getCarId'
-import ComparisonView, {
-  VerdictCard,
-  VerdictPlaceholder,
-} from '@/components/compare/ComparisonView'
+import ComparisonView from '@/components/compare/ComparisonView'
+import Verdict, { VerdictPlaceholder } from '@/components/compare/Verdict'
 import Footer from '@/components/Footer'
-import { getVerdict } from './verdict'
+import { peekVerdict } from '@/app/api/comparison/[...slugs]/verdict'
 
 interface Props {
   params: Promise<{ bilar: string[] }>
@@ -53,18 +51,14 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
   }
 }
 
-const Verdict = async ({ cars }: { cars: ReadonlyArray<Car> }) => {
-  const verdict = await getVerdict(cars)
-  if (!verdict) return null
-
-  // In the columns' order, which the cached verdict cannot know
-  const picks = cars.flatMap((car) => {
-    const pick = verdict.picks.find(({ slug }) => slug === carSlug(car))
-    return pick ? [{ car, when: pick.when }] : []
-  })
-
-  return <VerdictCard cars={cars} summary={verdict.summary} picks={picks} />
-}
+// Its own boundary, so the figures never wait on the cache
+const WrittenVerdict = async ({ cars }: { cars: ReadonlyArray<Car> }) => (
+  <Verdict
+    cars={cars}
+    written={await peekVerdict(cars)}
+    endpoint={`/api/comparison/${cars.map(carSlug).join('/')}`}
+  />
+)
 
 export default async function Page(props: Props) {
   const segments = (await props.params).bilar
@@ -84,7 +78,7 @@ export default async function Page(props: Props) {
         goneCount={goneCount}
         verdict={
           <Suspense fallback={<VerdictPlaceholder />}>
-            <Verdict cars={cars} />
+            <WrittenVerdict cars={cars} />
           </Suspense>
         }
       />

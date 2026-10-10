@@ -3,13 +3,14 @@ import { describe, expect, it } from 'vitest'
 import { deriveCar } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import type { NewCar } from '@/modules/data/newCarSchema'
-import { readVerdict, verdictFacts, verdictSchema } from './prompt'
+import { readVerdict, verdictFacts } from './prompt'
 
 const base: NewCar = {
   make: 'Kia',
   model: 'EV3',
   subModel: 'Long Range',
   heroImageName: 'kia-ev3',
+  evDatabaseUrl: 'https://ev-database.org/car/3004/Kia-EV3-Long-Range',
   price: 6_290_777,
   sellerUrl: 'https://kia.is',
   acceleration: 7.7,
@@ -48,43 +49,55 @@ describe('verdictFacts', () => {
     expect(facts).toContain('Kia EV3 Long Range 7.7 s (0.5 s hægari)')
   })
 
+  it('gives the model each page it may look a car up on', () => {
+    expect(facts).toContain(`ev-database: ${kia.evDatabaseUrl}`)
+  })
+
   it('quotes the price after the grant', () => {
     expect(facts).toContain('5.790.777 kr. eftir styrk')
   })
 })
 
-describe('verdictSchema', () => {
-  it('takes only the cars compared', () => {
-    const schema = verdictSchema([kia, tesla])
-    const answer = (car: string) => ({
-      summary: 'Ólíkir bílar',
-      picks: [{ car, when: 'þú vilt' }],
-    })
-    expect(schema.safeParse(answer(carSlug(kia))).success).toBe(true)
-    expect(schema.safeParse(answer('some-other-car')).success).toBe(false)
-  })
-})
-
 describe('readVerdict', () => {
-  it('keeps one pick a car and ends no sentence twice', () => {
+  const [k, t] = [carSlug(kia), carSlug(tesla)]
+
+  it('reads the summary, then a pick a marked line', () => {
     expect(
       readVerdict(
-        {
-          summary: '  Ólíkir   bílar. ',
-          picks: [
-            { car: carSlug(kia), when: 'þú keyrir langt.' },
-            { car: carSlug(kia), when: 'eitthvað annað' },
-          ],
-        },
+        `Ólíkir bílar.\nHvor á sitt.\n[car:${k}] þú keyrir langt. Hann er rúmgóður.\n[car:${t}] þú vilt snerpu.`,
         [kia, tesla],
       ),
     ).toEqual({
-      summary: 'Ólíkir bílar.',
-      picks: [{ slug: carSlug(kia), when: 'þú keyrir langt' }],
+      summary: 'Ólíkir bílar. Hvor á sitt.',
+      picks: [
+        { slug: k, when: 'þú keyrir langt. Hann er rúmgóður' },
+        { slug: t, when: 'þú vilt snerpu' },
+      ],
     })
   })
 
+  it('takes out the markdown it was asked not to write', () => {
+    expect(
+      readVerdict(`**Ólíkir** bílar.\n- [car:${k}] þú **keyrir** langt`, [
+        kia,
+        tesla,
+      ]),
+    ).toEqual({
+      summary: 'Ólíkir bílar.',
+      picks: [{ slug: k, when: 'þú keyrir langt' }],
+    })
+  })
+
+  it('keeps one pick a car, and none for a car not compared', () => {
+    expect(
+      readVerdict(
+        `Ólíkir.\n[car:${k}] fyrst\n[car:${k}] aftur\n[car:some-other-car] nei`,
+        [kia, tesla],
+      )?.picks,
+    ).toEqual([{ slug: k, when: 'fyrst' }])
+  })
+
   it('has nothing to show for an empty answer', () => {
-    expect(readVerdict({ summary: ' ', picks: [] }, [kia, tesla])).toBeNull()
+    expect(readVerdict(' \n ', [kia, tesla])).toBeNull()
   })
 })

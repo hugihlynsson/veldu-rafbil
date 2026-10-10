@@ -6,7 +6,6 @@ import Link from 'next/link'
 import type { Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import {
-  comparedName,
   comparisonPath,
   comparisonTitle,
   MIN_COMPARED,
@@ -221,56 +220,3 @@ const ComparisonView: FunctionComponent<Props> = ({
 }
 
 export default ComparisonView
-
-/** The verdict's place while the model writes it, the height it will roughly take */
-export const VerdictPlaceholder: FunctionComponent = () => (
-  <div className={clsx(gutter, 'mt-5 mb-3')}>
-    <div className="p-4 rounded-card bg-cloud">
-      <p className={eyebrow}>Í stuttu máli</p>
-      <div aria-hidden className="mt-3 flex flex-col gap-2 animate-pulse">
-        <div className="h-3.5 w-full rounded-full bg-smoke" />
-        <div className="h-3.5 w-4/5 rounded-full bg-smoke" />
-        <div className="h-3.5 w-3/5 rounded-full bg-smoke" />
-      </div>
-      <p className="mt-3 mb-0 text-fine font-medium text-clay">
-        Gervigreindin ber bílana saman…
-      </p>
-    </div>
-  </div>
-)
-
-interface VerdictProps {
-  cars: ReadonlyArray<Car>
-  summary: string
-  picks: ReadonlyArray<{ car: Car; when: string }>
-}
-
-export const VerdictCard: FunctionComponent<VerdictProps> = ({
-  cars,
-  summary,
-  picks,
-}) => (
-  <section aria-labelledby="verdict" className={clsx(gutter, 'mt-5 mb-3')}>
-    <div className="p-4 rounded-card bg-cloud animate-message-in">
-      <h2 id="verdict" className={eyebrow}>
-        Í stuttu máli
-      </h2>
-      {summary && <p className="mt-2 mb-0 text-base leading-snug">{summary}</p>}
-      {picks.length > 0 && (
-        <ul className="mt-3 mb-0 p-0 list-none flex flex-col gap-2">
-          {picks.map(({ car, when }) => (
-            <li key={car.id} className="text-sm leading-snug">
-              <span className="font-semibold">
-                Veldu {comparedName(car, cars)}
-              </span>{' '}
-              ef {when}.
-            </li>
-          ))}
-        </ul>
-      )}
-      <p className="mt-3 mb-0 text-fine font-medium text-clay">
-        Skrifað af gervigreind út frá tölunum hér fyrir neðan
-      </p>
-    </div>
-  </section>
-)
