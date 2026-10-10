@@ -2,7 +2,9 @@ import { useEffect } from 'react'
 
 /**
  * Publishes the keyboard's height as `--keyboard-inset`: it shrinks the visual
- * viewport only, and `position: fixed` answers to the layout one.
+ * viewport only, and `position: fixed` answers to the layout one. And as
+ * `--viewport-offset`, how far the browser has panned the layout viewport up
+ * to reveal the focused field, for anything pinned to the top to follow.
  */
 const useKeyboardInset = (): void => {
   useEffect(() => {
@@ -19,6 +21,10 @@ const useKeyboardInset = (): void => {
         '--keyboard-inset',
         `${Math.round(inset)}px`,
       )
+      document.documentElement.style.setProperty(
+        '--viewport-offset',
+        `${Math.round(Math.max(0, viewport.offsetTop))}px`,
+      )
     }
 
     update()
@@ -28,6 +34,7 @@ const useKeyboardInset = (): void => {
       viewport.removeEventListener('resize', update)
       viewport.removeEventListener('scroll', update)
       document.documentElement.style.removeProperty('--keyboard-inset')
+      document.documentElement.style.removeProperty('--viewport-offset')
     }
   }, [])
 }

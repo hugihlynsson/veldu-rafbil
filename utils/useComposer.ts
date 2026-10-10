@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { getInputModality } from '@/utils/inputModality'
 
 /**
  * What the chat input holds that has to outlive it. One input stands on the
@@ -26,8 +27,10 @@ const useComposer = () => {
   return {
     ref,
     /** Focuses the next input to arrive, which is the reader's way back */
+    // Not on a touch screen: a focus outside the tap raises no keyboard there,
+    // and the bar would sit widened for a focus nobody can see
     focusOnArrival: () => {
-      shouldFocus.current = true
+      shouldFocus.current = getInputModality() !== 'touch'
     },
     inputProps: {
       inputRef,

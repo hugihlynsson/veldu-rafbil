@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-type Modality = 'pointer' | 'keyboard'
+type Modality = 'pointer' | 'touch' | 'keyboard'
 
 // :focus-visible will not answer for a text field, and this outlives the chat
 // input, which is remounted as it moves in and out of the dialog.
@@ -9,8 +9,8 @@ let isTracking = false
 
 export const getInputModality = (): Modality => modality
 
-const handlePointerDown = () => {
-  modality = 'pointer'
+const handlePointerDown = (event: PointerEvent) => {
+  modality = event.pointerType === 'touch' ? 'touch' : 'pointer'
 }
 
 const handleKeyDown = (event: KeyboardEvent) => {
