@@ -42,7 +42,8 @@ newest price lists first. Fetch the listing with WebFetch, then run
 
 Askja documents read so far, as slugs under `issuu.com/askja/docs/`:
 `kia_ev2_ver_listi`, `ev3_20240910`, `kia_ev4_verdlisti`, `kia_ev5_verdlisti`,
-`kia_ev6_ver_listi`, `kia_ev9_gt_verdlisti`, `kia_pv5_verdlisti`.
+`kia_ev6_ver_listi`, `kia_ev9_gt_verdlisti`, `kia_pv5_verdlisti`,
+`eqs_ver_listi`.
 
 ## Per make
 

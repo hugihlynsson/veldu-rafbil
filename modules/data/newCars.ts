@@ -1344,6 +1344,23 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Mercedes-Benz',
+    model: 'EQS',
+    subModel: '580 4MATIC',
+    heroImageName: 'mercedes-eqs',
+    price: 25_990_000,
+    sellerUrl: 'https://www.mercedes-benz.is/new-models/eqs/',
+    acceleration: 4.1,
+    capacity: 122,
+    range: 869,
+    evDatabaseUrl:
+      'https://ev-database.org/car/3580/Mercedes-Benz-EQS-580-4MATIC',
+    drive: 'AWD',
+    seats: 5,
+    power: 430,
+    timeToCharge10To80: 28,
+  },
+  {
+    make: 'Mercedes-Benz',
     model: 'EQS SUV',
     subModel: '450 4MATIC',
     heroImageName: 'mercedes-eqs-suv',
