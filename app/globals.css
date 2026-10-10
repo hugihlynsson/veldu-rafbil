@@ -398,6 +398,10 @@
   .message-content a:hover {
     opacity: 0.8;
   }
+  .message-content hr {
+    border-top-color: color-mix(in srgb, currentColor 10%, transparent);
+    margin: 1em 0;
+  }
   .message-content .table-wrapper {
     /* Out to the bubble's edges, which its px-3.5 holds the text off */
     overflow-x: auto;
