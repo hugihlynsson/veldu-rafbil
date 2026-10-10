@@ -1,18 +1,13 @@
 'use client'
 
-import { Suspense, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import ChatInput from './ChatInput'
-import type { ChatSession } from './ChatEngine'
 import type { Car } from '@/modules/data/cars'
 import type { Filters } from '@/modules/list/filters'
 import useBodyScrollLock from '@/utils/useBodyScrollLock'
+import useConversation from '@/utils/useConversation'
 import useKeyboardInset from '@/utils/useKeyboardInset'
-import { hasStoredMessages } from '@/utils/chatStorage'
-
-// The AI SDK and zod, fetched once the chat is used rather than with the bar:
-// warmed on focus, or on load when a conversation is waiting in storage
-const ChatEngine = dynamic(() => import('./ChatEngine'))
 
 // react-markdown is fetched the first time the chat opens, warmed on focus.
 // One import for both: written twice, each is built as a copy of its own and
@@ -49,12 +44,8 @@ export default function ChatContainer({
   // The input remounts each time it moves in and out of the modal, and only
   // its first arrival on the page is an entrance
   const [hasOpenedChat, setHasOpenedChat] = useState<boolean>(false)
-  // Never server-rendered, so storage can be read as it first renders
-  const [hadStoredChat] = useState<boolean>(hasStoredMessages)
-  const [isEngineWanted, setIsEngineWanted] = useState<boolean>(hadStoredChat)
-  const [session, setSession] = useState<ChatSession | null>(null)
-  // Asked before the engine had arrived, and sent the moment it does
-  const [queuedQuestion, setQueuedQuestion] = useState<string | null>(null)
+  const conversation = useConversation()
+  const { session } = conversation
 
   // Handing over while the chunk is in flight would take the input with it
   const loadChatModal = () => {
@@ -82,22 +73,13 @@ export default function ChatContainer({
   // Keeps the input above a phone keyboard rather than behind it
   useKeyboardInset()
 
-  const handleSendMessage = (text: string) => {
-    if (session) {
-      session.send(text)
-    } else {
-      setQueuedQuestion(text)
-      setIsEngineWanted(true)
-    }
-  }
-
   // One input in two places: showModal() makes everything outside it inert
   const chatInput = (
     <ChatInput
       inputRef={focusInputOnArrival}
       onIntent={() => {
         loadChatModal()
-        setIsEngineWanted(true)
+        conversation.load()
       }}
       onOpenChat={() => {
         loadChatModal()
@@ -106,15 +88,9 @@ export default function ChatContainer({
       }}
       animateIn={!hasOpenedChat}
       hide={hide}
-      // Waiting on the first token counts: a question sent then is answered
-      // alongside the one before it, and the two answers interleave
-      disabled={
-        session
-          ? session.status === 'submitted' || session.status === 'streaming'
-          : queuedQuestion !== null
-      }
-      hasMessages={session ? session.messages.length > 0 : hadStoredChat}
-      sendMessage={handleSendMessage}
+      disabled={conversation.isBusy}
+      hasMessages={conversation.hasMessages}
+      sendMessage={conversation.send}
       value={draft}
       onValueChange={setDraft}
       showFocusRing={showFocusRing}
@@ -125,21 +101,10 @@ export default function ChatContainer({
     />
   )
 
-  const engine = isEngineWanted && (
-    // Its own boundary, so the bar does not wait on the chunk
-    <Suspense fallback={null}>
-      <ChatEngine
-        queuedQuestion={queuedQuestion}
-        onQueuedQuestionSent={() => setQueuedQuestion(null)}
-        onChange={setSession}
-      />
-    </Suspense>
-  )
-
   if (!isChatOpen) {
     return (
       <>
-        {engine}
+        {conversation.engine}
         {chatInput}
       </>
     )
@@ -147,7 +112,7 @@ export default function ChatContainer({
 
   return (
     <>
-      {engine}
+      {conversation.engine}
       <ChatModal
         onDone={() => {
           const car = carToShow.current
@@ -164,7 +129,7 @@ export default function ChatContainer({
         error={session.error}
         onClearChat={session.clear}
         onReleaseBodyLock={() => setReleaseBodyLock(true)}
-        onSendMessage={handleSendMessage}
+        onSendMessage={conversation.send}
         onRetry={session.retry}
         onShowCar={(car) => {
           carToShow.current = car
