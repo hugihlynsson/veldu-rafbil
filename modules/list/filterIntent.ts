@@ -75,7 +75,7 @@ const parseNumber = (raw: string, preferDecimal = false): number => {
 export const readNumber = (raw: string, preferDecimal = false): number =>
   numberWords[raw] ?? parseNumber(raw, preferDecimal)
 
-const within = (value: number, min: number, max: number) =>
+export const within = (value: number, min: number, max: number) =>
   Number.isFinite(value) && value >= min && value <= max
 
 // What a rule has read is blanked with this rather than cut, so later indices

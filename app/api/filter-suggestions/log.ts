@@ -1,5 +1,6 @@
 import { parseFilterIntent } from '@/modules/list/filterIntent'
-import { ADVISOR_KEY, type SuggestionResult } from './model'
+import { ADVISOR_KEY } from './questions'
+import type { SuggestionResult } from './model'
 import type { Deployment } from '../publicEndpoint'
 
 /** What is known about a request once its suggestions are answered */

@@ -1,5 +1,5 @@
 import type { FilterKey, Filters, FilterValue } from '@/modules/list/filters'
-import { buildIntentQuestions } from './model'
+import { buildIntentQuestions } from './questions'
 
 /** The labels of the model's options any one of which reads the request right */
 export interface Brackets {
