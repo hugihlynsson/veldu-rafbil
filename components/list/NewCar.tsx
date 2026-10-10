@@ -84,23 +84,22 @@ const layouts = {
     more: 'md:justify-self-start md:self-start md:text-xs',
   },
   table: {
-    card: 'md:grid md:grid-cols-subgrid md:col-span-full md:items-center md:m-0 md:py-3 md:border-b md:border-line/50 md:[content-visibility:visible]',
-    // A step smaller under lg, where the name column has no room to spare
-    photoBox: 'md:w-24 lg:w-32',
+    card: 'md:grid md:grid-cols-subgrid md:col-span-full md:items-center md:m-0 md:py-1.5 md:border-b md:border-line md:[content-visibility:visible]',
+    photoBox: 'md:w-16',
     // TablePhoto's own
     photo: '',
     sizes: '',
     text: 'md:contents',
     heading: '',
-    delivery: 'md:m-0 md:text-sm',
-    name: 'md:text-lg',
-    subtitle: 'md:m-0 md:text-sm',
+    delivery: 'md:m-0 md:text-xs',
+    name: 'md:text-sm',
+    subtitle: 'md:m-0 md:text-xs',
     price: 'md:m-0',
     stats: 'md:contents',
     stat: 'md:m-0',
     // TableHeader names the columns once
     label: 'md:sr-only',
-    value: 'md:text-lg',
+    value: 'md:text-base',
     more: 'md:hidden lg:inline-block lg:text-xs',
   },
 } satisfies Record<View, Record<string, string | string[]>>
@@ -116,7 +115,7 @@ export const TableHeader = () => (
   <div
     aria-hidden
     className={clsx(
-      'hidden md:grid md:grid-cols-subgrid md:col-span-full sticky top-0 z-10 py-2 bg-lab border-b border-line/50',
+      'hidden md:grid md:grid-cols-subgrid md:col-span-full sticky top-0 z-10 py-2 bg-lab border-b border-line',
       eyebrow,
     )}
   >
@@ -138,7 +137,7 @@ export const TableHeader = () => (
 const TablePhoto = ({ src }: { src: string }) => {
   const {
     props: { srcSet: thumbnail },
-  } = getImageProps({ alt: '', src, width: 128, height: 85 })
+  } = getImageProps({ alt: '', src, width: 64, height: 43 })
   const { props: photo } = getImageProps({
     alt: '',
     src,
@@ -150,7 +149,7 @@ const TablePhoto = ({ src }: { src: string }) => {
   return (
     <picture>
       <source media="(width >= 768px)" srcSet={thumbnail} />
-      <img {...photo} alt="" className="w-full h-auto md:rounded" />
+      <img {...photo} alt="" className="w-full h-auto md:rounded-sm" />
     </picture>
   )
 }
