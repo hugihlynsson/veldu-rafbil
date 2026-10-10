@@ -52,11 +52,6 @@
   --color-edge: rgb(0 0 0 / 0.06);
   --color-edge-strong: rgb(0 0 0 / 0.12);
 
-  /* A comparison's bars: the car ahead on a figure, and the rest. The lead
-     is the brand, lightened in dark as `focus` is, to stay a bar at all */
-  --color-bar: #e4e4e4;
-  --color-bar-lead: #201be3;
-
   /* Overlays */
   --color-backdrop: rgb(0 0 0 / 0.2);
   --color-backdrop-strong: rgb(0 0 0 / 0.3);
@@ -246,9 +241,6 @@
     --color-line-chip: #757575;
     --color-edge: rgb(255 255 255 / 0.06);
     --color-edge-strong: rgb(255 255 255 / 0.12);
-
-    --color-bar: #333;
-    --color-bar-lead: #8f9bff;
 
     --color-backdrop: rgb(0 0 0 / 0.55);
     --color-backdrop-strong: rgb(0 0 0 / 0.65);

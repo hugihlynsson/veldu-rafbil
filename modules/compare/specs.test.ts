@@ -63,18 +63,11 @@ describe('compareSpecs', () => {
     expect(cells?.map((cell) => cell.best)).toEqual([true, true, false])
   })
 
-  it('draws each bar against the largest figure', () => {
-    const cells = row('range', car({ range: 300 }), car({ range: 600 }))?.cells
-    expect(cells?.map((cell) => cell.share)).toEqual([0.5, 1])
-  })
-
   it('ranks neither drive nor seats', () => {
     const compared = [car({ seats: 7, drive: 'AWD' }), car({})]
     for (const key of ['drive', 'seats']) {
       const cells = row(key, ...compared)?.cells
-      expect(
-        cells?.every((cell) => !cell.best && cell.share === undefined),
-      ).toBe(true)
+      expect(cells?.every((cell) => !cell.best)).toBe(true)
     }
   })
 

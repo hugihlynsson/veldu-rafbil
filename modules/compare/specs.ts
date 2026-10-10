@@ -20,10 +20,11 @@ const specs: Record<string, Spec> = {
     better: 'lower',
     value: (car) => car.priceWithGrant,
     text: (car) => `${addDecimalSeparators(car.priceWithGrant)} kr.`,
+    // What the list's price pill says in its badge, which a column has no room for
     detail: (car) =>
-      [car.expectedDelivery && 'áætlað', car.hasGrant && 'með styrk']
+      [car.expectedDelivery && 'áætlað verð', car.hasGrant && 'með styrk']
         .filter(Boolean)
-        .join(', ') || undefined,
+        .join(' ') || undefined,
   },
   range: {
     label: 'Drægni',
@@ -88,8 +89,6 @@ const specs: Record<string, Spec> = {
 export interface SpecCell {
   text: string
   detail?: string
-  /** Its figure as a share of the largest compared, for a bar */
-  share?: number
   /** Ahead of at least one other car, and behind none */
   best: boolean
 }
@@ -99,9 +98,6 @@ export interface SpecRow {
   label: string
   cells: SpecCell[]
 }
-
-const shareOf = (value: number, largest: number) =>
-  largest > 0 ? value / largest : 0
 
 /** The rows a comparison shows, with a cell per car in the order given */
 export const compareSpecs = (compared: ReadonlyArray<Car>): SpecRow[] =>
@@ -121,7 +117,6 @@ export const compareSpecs = (compared: ReadonlyArray<Car>): SpecRow[] =>
         cells: compared.map((car, index) => ({
           text: spec.text(car),
           detail: spec.detail?.(car),
-          share: values && shareOf(values[index], largest),
           best: Boolean(values && differs && values[index] === winning),
         })),
       }

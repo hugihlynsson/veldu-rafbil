@@ -5,9 +5,9 @@ import Image from 'next/image'
 
 import { driveLabels } from '@/modules/data/drives'
 import { Car } from '@/modules/data/cars'
-import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { formatKmPerMinute } from '@/modules/data/getKmPerMinutesCharged'
-import LinkPill from '@/components/LinkPill'
+import PricePill from '@/components/PricePill'
+import EvDatabaseLink from '@/components/EvDatabaseLink'
 import type { View } from '@/modules/list/view'
 import CompareToggle from '@/components/compare/CompareToggle'
 
@@ -65,7 +65,7 @@ const NewCar: FunctionComponent<Props> = ({
   onToggleCompare,
 }) => {
   const grid = view === 'grid'
-  const { id: carId, priceWithGrant, hasGrant } = car
+  const { id: carId } = car
 
   // Not agree(): sæti is neuter and reads the same at every count. A car
   // without a subModel gets the seat count on its own rather than a lone dot.
@@ -151,29 +151,7 @@ const NewCar: FunctionComponent<Props> = ({
             grid && 'md:mt-1 md:justify-self-start',
           )}
         >
-          <LinkPill
-            href={car.sellerUrl}
-            external
-            extra={
-              (car.expectedDelivery && hasGrant && 'áætlað verð með styrk ↗') ||
-              (car.expectedDelivery && 'áætlað verð ↗') ||
-              (showValue &&
-                `${hasGrant ? 'með styrk ' : ''}${addDecimalSeparators(
-                  Math.round(car.pricePerKm),
-                )} kr. á km.`) ||
-              (hasGrant && 'með styrk') ||
-              undefined
-            }
-            title={
-              hasGrant
-                ? `Fullt verð án styrks: ${addDecimalSeparators(car.price)} kr.`
-                : undefined
-            }
-            onClick={() => trackEvent('Seller clicked')}
-          >
-            {addDecimalSeparators(priceWithGrant)} kr.
-            {!car.expectedDelivery && ' ↗'}
-          </LinkPill>
+          <PricePill car={car} showValue={showValue} />
 
           <CompareToggle
             selected={compared}
@@ -234,18 +212,12 @@ const NewCar: FunctionComponent<Props> = ({
         </div>
 
         {car.evDatabaseUrl && (
-          <a
+          <EvDatabaseLink
+            href={car.evDatabaseUrl}
             className={clsx(
-              'inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-tint',
               grid && 'md:justify-self-start md:self-start md:text-xs',
             )}
-            target="_blank"
-            href={car.evDatabaseUrl}
-            rel="noopener"
-            onClick={() => trackEvent('Ev Database Link Clicked')}
-          >
-            Nánar á ev-database.org ↗
-          </a>
+          />
         )}
       </div>
     </article>

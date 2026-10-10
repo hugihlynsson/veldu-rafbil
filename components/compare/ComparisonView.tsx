@@ -13,6 +13,8 @@ import {
 } from '@/modules/compare/comparison'
 import { compareSpecs } from '@/modules/compare/specs'
 import { agree } from '@/modules/copy/plural'
+import PricePill from '@/components/PricePill'
+import EvDatabaseLink from '@/components/EvDatabaseLink'
 import CompareMoreLink from './CompareMoreLink'
 import ShareButton from './ShareButton'
 
@@ -45,8 +47,13 @@ const ComparisonView: FunctionComponent<Props> = ({
   verdict,
 }) => {
   const title = comparisonTitle(cars)
-  const grid = clsx('grid gap-x-3 md:gap-x-6', columns[cars.length])
   const crowded = cars.length > 3
+  // Narrower gaps at four, which a price pill needs every pixel of
+  const grid = clsx(
+    'grid md:gap-x-6',
+    crowded ? 'gap-x-2' : 'gap-x-3',
+    columns[cars.length],
+  )
   const canRemove = cars.length > MIN_COMPARED
 
   return (
@@ -103,24 +110,19 @@ const ComparisonView: FunctionComponent<Props> = ({
         className={clsx(
           grid,
           gutter,
-          'sticky top-0 z-10 py-2.5 bg-lab/90 backdrop-blur-md shadow-(--shadow-hairline)',
+          'sticky top-0 z-10 py-2.5 bg-lab/90 backdrop-blur-md border-b border-line/50',
         )}
       >
         {cars.map((car) => (
-          // The make over the model rather than beside it, as a make like
-          // Volkswagen is wider than a phone's fourth of the page
-          <h2 key={car.id} className="m-0 min-w-0 leading-tight">
-            <span className="block text-xs font-semibold text-stone">
-              {car.make}
-            </span>
-            <span
-              className={clsx(
-                'block font-semibold [overflow-wrap:anywhere]',
-                crowded ? 'text-sm' : 'text-base md:text-xl',
-              )}
-            >
-              {car.model}
-            </span>
+          <h2
+            key={car.id}
+            className={clsx(
+              'm-0 min-w-0 font-semibold leading-tight',
+              crowded ? 'text-sm' : 'text-base md:text-xl',
+            )}
+          >
+            <span>{car.make}</span>{' '}
+            <span className="font-normal">{car.model}</span>
             {car.subModel && (
               <span className="block mt-0.5 text-xs font-medium text-stone">
                 {car.subModel}
@@ -143,73 +145,51 @@ const ComparisonView: FunctionComponent<Props> = ({
 
       <dl className={clsx(gutter, 'mt-2 mb-0')}>
         {compareSpecs(cars).map((row) => (
-          <div key={row.key} className="py-3.5 border-b border-line">
+          <div key={row.key} className="py-3.5 border-b border-line/50">
             <dt className={eyebrow}>{row.label}</dt>
             <dd className={clsx(grid, 'm-0 mt-1.5')}>
               {row.cells.map((cell, index) => (
                 <div key={cars[index].id} className="min-w-0">
-                  <div
-                    className={clsx(
-                      crowded ? 'text-sm' : 'text-base md:text-lg',
-                      cell.best ? 'font-semibold' : 'font-normal',
-                    )}
-                  >
-                    {cell.text}
-                    {cell.best && <span className="sr-only">, fremstur</span>}
-                  </div>
+                  {row.key === 'price' ? (
+                    <PricePill
+                      car={cars[index]}
+                      light={!cell.best}
+                      compact={crowded}
+                      bare
+                      className="max-w-full -ml-0.5"
+                    />
+                  ) : (
+                    <div
+                      className={clsx(
+                        crowded ? 'text-sm' : 'text-base md:text-lg',
+                        cell.best ? 'font-semibold' : 'font-normal',
+                      )}
+                    >
+                      {cell.text}
+                    </div>
+                  )}
+                  {cell.best && <span className="sr-only">, fremstur</span>}
                   {cell.detail && (
                     <div className="mt-0.5 text-xs font-medium text-stone">
                       {cell.detail}
                     </div>
-                  )}
-                  {cell.share !== undefined && (
-                    <div
-                      aria-hidden
-                      className={clsx(
-                        'mt-1.5 h-1 rounded-full',
-                        cell.best ? 'bg-bar-lead' : 'bg-bar',
-                      )}
-                      style={{ width: `${Math.max(cell.share * 100, 4)}%` }}
-                    />
                   )}
                 </div>
               ))}
             </dd>
           </div>
         ))}
-
-        <div className="py-3.5">
-          <dt className={eyebrow}>Nánar</dt>
-          <dd className={clsx(grid, 'm-0 mt-1.5')}>
-            {cars.map((car) => (
-              <div
-                key={car.id}
-                className="flex flex-col items-start gap-1 text-sm font-medium"
-              >
-                <a
-                  href={car.sellerUrl}
-                  target="_blank"
-                  rel="noopener"
-                  className="text-tint font-semibold no-underline hover:underline"
-                >
-                  Seljandi ↗
-                </a>
-                {car.evDatabaseUrl && (
-                  <a
-                    href={car.evDatabaseUrl}
-                    target="_blank"
-                    rel="noopener"
-                    title="ev-database.org"
-                    className="text-stone no-underline hover:underline hover:text-tint"
-                  >
-                    Ítarefni ↗
-                  </a>
-                )}
-              </div>
-            ))}
-          </dd>
-        </div>
       </dl>
+
+      {cars.some((car) => car.evDatabaseUrl) && (
+        <div className={clsx(grid, gutter, 'mt-4')}>
+          {cars.map((car) => (
+            <div key={car.id} className="min-w-0">
+              {car.evDatabaseUrl && <EvDatabaseLink href={car.evDatabaseUrl} />}
+            </div>
+          ))}
+        </div>
+      )}
 
       <div
         className={clsx(
