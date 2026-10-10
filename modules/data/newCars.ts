@@ -1449,7 +1449,7 @@ const newCars: Array<NewCar> = [
     make: 'Mercedes-Benz',
     model: 'VLE',
     subModel: '300',
-    heroImageName: 'mercedes-vle',
+    heroImageName: 'mercedes-vle-300',
     price: 15_300_000,
     sellerUrl: 'https://www.mercedes-benz.is/new-models/alrafmagnadur-vle/',
     acceleration: 8.9,
