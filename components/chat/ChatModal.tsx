@@ -85,7 +85,10 @@ const ChatModal: React.FunctionComponent<Props> = ({
         <>
           <section
             className={clsx(
-              'z-1 flex flex-col bg-glass/95 backdrop-blur-[20px] w-screen h-[calc(100dvh-var(--keyboard-inset))] overflow-hidden chat-panel:h-[calc(100dvh-24px-var(--keyboard-inset))] chat-panel:max-w-[600px] chat-panel:w-[90vw] chat-panel:rounded-t-3xl chat-panel:rounded-b-4xl chat-panel:mt-3 chat-panel:shadow-(--shadow-modal)',
+              'z-1 flex flex-col bg-glass/95 backdrop-blur-[20px] w-screen h-[calc(100dvh-var(--keyboard-inset)-var(--viewport-offset))] overflow-hidden chat-panel:h-[calc(100dvh-24px-var(--keyboard-inset)-var(--viewport-offset))] chat-panel:max-w-[600px] chat-panel:w-[90vw] chat-panel:rounded-t-3xl chat-panel:rounded-b-4xl chat-panel:shadow-(--shadow-modal)',
+              // A phone pans the page up as its keyboard comes in, to reveal
+              // the input, and the header would go with it
+              'mt-(--viewport-offset) chat-panel:mt-[calc(12px+var(--viewport-offset))]',
               panelMotion,
             )}
           >

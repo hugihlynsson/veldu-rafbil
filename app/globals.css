@@ -281,6 +281,7 @@
     color-scheme: light dark;
     /* Kept up to date by utils/useKeyboardInset while a phone keyboard is up */
     --keyboard-inset: 0px;
+    --viewport-offset: 0px;
     font-feature-settings:
       'liga' 1,
       'calt' 1; /* fix for Chrome */
