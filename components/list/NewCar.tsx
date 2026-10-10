@@ -47,8 +47,7 @@ const NewCar: FunctionComponent<Props> = ({
   showSeats,
   preload,
 }) => {
-  const { id: carId, priceWithGrant } = car
-  const hasGrant = priceWithGrant !== car.price
+  const { id: carId, priceWithGrant, hasGrant } = car
 
   // Not agree(): sæti is neuter and reads the same at every count. A car
   // without a subModel gets the seat count on its own rather than a lone dot.
