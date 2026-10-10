@@ -3,15 +3,17 @@ import { trackEvent } from 'fathom-client'
 
 import type { Filters } from '@/modules/list/filters'
 import {
-  FilterSuggestion,
   MAX_INTENT_LENGTH,
   needsModel,
   parseFilterIntent,
+} from '@/modules/list/filterIntent'
+import {
   rankSuggestions,
   readSuggestions,
   suggestionsFromFilters,
   withSuggestion,
-} from '@/modules/list/filterIntent'
+  type FilterSuggestion,
+} from '@/modules/list/filterSuggestions'
 import { filterChipText } from '@/modules/list/filterChips'
 import { agree } from '@/modules/copy/plural'
 import SearchIcon from '@/components/SearchIcon'

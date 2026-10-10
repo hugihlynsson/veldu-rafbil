@@ -12,7 +12,8 @@ import { TypeSafeClient } from '@typesafe-ai/sdk'
 
 import type { Filters } from '@/modules/list/filters'
 import { filterDefinitions } from '@/modules/list/filters'
-import { parseFilterIntent, rankSuggestions } from '@/modules/list/filterIntent'
+import { parseFilterIntent } from '@/modules/list/filterIntent'
+import { rankSuggestions } from '@/modules/list/filterSuggestions'
 import {
   CaseScore,
   IntentCase,

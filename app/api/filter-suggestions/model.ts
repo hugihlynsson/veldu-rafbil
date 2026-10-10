@@ -4,22 +4,21 @@ import type {
   SystemOneRequest,
 } from '@typesafe-ai/sdk'
 
-import type { Filters } from '@/modules/list/filters'
-import cars, { Car } from '@/modules/data/cars'
+import type { FilterKey, FilterValue } from '@/modules/list/filters'
+import cars, { type Car } from '@/modules/data/cars'
 import {
-  FilterSuggestion,
   needsModel,
   parseFilterIntent,
   readNumber,
-  suggestionsFromFilters,
 } from '@/modules/list/filterIntent'
-
-type FilterKey = keyof Filters
-type Value<Key extends FilterKey> = NonNullable<Filters[Key]>
+import {
+  suggestionsFromFilters,
+  type FilterSuggestion,
+} from '@/modules/list/filterSuggestions'
 
 interface Option<Key extends FilterKey> {
   label: string
-  value: Value<Key>
+  value: FilterValue<Key>
   description: string
   /** The number in the request the option was made from */
   number?: string
@@ -108,7 +107,7 @@ const statedNumber =
     if (!within(value, min, max)) return undefined
     return {
       label: label(value),
-      value: value as Value<Key>,
+      value: value as FilterValue<Key>,
       description: `${theNumber(text)} ${description(value)}`,
     }
   }
