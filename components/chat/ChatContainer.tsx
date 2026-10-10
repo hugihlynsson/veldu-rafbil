@@ -94,12 +94,7 @@ export default function ChatContainer({
           if (pickedCar) onShowCar(pickedCar)
           else composer.focusOnArrival()
         }}
-        messages={session.messages}
-        status={session.status}
-        error={session.error}
-        onClearChat={session.clear}
-        onSendMessage={conversation.send}
-        onRetry={session.retry}
+        session={session}
         composer={chatInput}
         composerRef={composer.ref}
       />
