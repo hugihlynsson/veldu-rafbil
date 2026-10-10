@@ -125,7 +125,7 @@ const NewCar: FunctionComponent<Props> = ({
         <h2
           className={clsx(
             'm-0 font-semibold text-display',
-            grid && 'md:pt-3 md:text-[1.375rem]',
+            grid && 'md:pt-3 md:text-2xl',
           )}
         >
           <span>{car.make}</span>{' '}
@@ -143,7 +143,7 @@ const NewCar: FunctionComponent<Props> = ({
         <LinkPill
           className={clsx(
             'mt-2 -ml-0.5',
-            grid && 'md:mt-0.5 md:justify-self-start',
+            grid && 'md:mt-1 md:justify-self-start',
           )}
           href={car.sellerUrl}
           external
@@ -171,7 +171,7 @@ const NewCar: FunctionComponent<Props> = ({
         <div
           className={clsx(
             'flex mb-4 mt-6 max-w-[320px] justify-between xs:max-w-[360px]',
-            grid && 'md:mt-4 md:mb-3.5 md:max-w-none',
+            grid && 'md:mt-4 md:mb-4 md:max-w-none',
           )}
         >
           <div className="mr-2 xs:mr-4 basis-1/3">
