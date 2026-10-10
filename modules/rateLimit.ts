@@ -10,7 +10,12 @@ export interface RateLimitResult {
  * allowance does not spend another's. In memory, so a caller spread across
  * warm instances gets a multiple of this.
  */
-export const createRateLimit = (maxRequests: number, windowMs = 60_000) => {
+export type RateLimit = (key: string) => RateLimitResult
+
+export const createRateLimit = (
+  maxRequests: number,
+  windowMs = 60_000,
+): RateLimit => {
   const windows = new Map<string, Window>()
 
   // Without this the map grows one entry per address for the life of the instance

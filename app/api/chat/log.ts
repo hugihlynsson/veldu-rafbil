@@ -1,4 +1,5 @@
 import type { ChatFinish } from './chat'
+import type { Deployment } from '../publicEndpoint'
 import {
   getFollowUps,
   getMessageText,
@@ -12,17 +13,13 @@ export type ChatOutcome = { finish: ChatFinish } | { error: unknown }
 export type QuestionSource = 'typed' | 'starter' | 'followUp'
 
 /** What is known about a turn before its answer starts */
-export interface ChatTurn {
+export interface ChatTurn extends Deployment {
   timestamp: string
   conversationId: string | undefined
   userMessage: string
   source: QuestionSource
   messageCount: number
   model: string
-  environment: string
-  // Which deploy answered, so a wrong figure can be traced to the car data
-  // and prompt it was given
-  commit: string | undefined
 }
 
 /** Milliseconds from the request arriving */
