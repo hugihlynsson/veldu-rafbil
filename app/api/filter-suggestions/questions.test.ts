@@ -82,7 +82,7 @@ describe('withNumbers', () => {
       seats: [8],
       drive: [],
       acceleration: [8],
-      fastcharge: [8],
+      fastcharge: [],
       value: [],
     })
   })

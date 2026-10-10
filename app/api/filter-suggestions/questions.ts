@@ -59,7 +59,7 @@ const theNumber = (text: string) =>
 // The parser's bounds for each unit, so a number is offered to a filter only
 // where it would have read it with the unit written out
 const statedNumber =
-  <Key extends 'range' | 'acceleration' | 'fastcharge' | 'value'>(
+  <Key extends 'range' | 'acceleration' | 'value'>(
     [min, max]: [number, number],
     label: (value: number) => string,
     description: (value: number) => string,
@@ -209,7 +209,7 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
       ordered: false,
       instructions:
         'Which drive does the person in `request` need? In Icelandic, fjórhjóladrif, jeppi, snjór, hálka, ófærð, malarvegir, brekkur and hálendið point to all-wheel drive.',
-      none: 'Drive is not mentioned, and nothing is said about winter, snow, gravel, the highlands or towing; long trips alone need no particular drive',
+      none: 'Drive is not mentioned, and nothing is said about winter, snow, gravel, the highlands or towing; long trips alone need no particular drive, and nor does power or charging',
       options: [
         {
           label: 'all_wheel_drive',
@@ -262,26 +262,22 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
       key: 'fastcharge',
       ordered: true,
       instructions:
-        'Does the person in `request` want a car that charges quickly? A quick or fast car is acceleration, not charging speed. In Icelandic, hleður hratt, fljótur að hlaða, hraðhleðsla and stutt hleðslustopp ask for fast charging.',
-      none: 'Charging is not mentioned: nothing about charging quickly or charging stops. A quick or powerful car is not charging speed',
+        'Does the person in `request` want short charging stops, or a car that charges quickly on a fast charger? A quick or fast car is acceleration, not charging speed. In Icelandic, hleður hratt, hlaða hratt, fljótur að hlaða, hraðhleðsla, öflug hleðsla, stutt stopp, bíða ekki lengi and án þess að stoppa lengi ask for fast charging, and so does a charging power in kW.',
+      none: 'Charging is not mentioned: nothing about charging quickly, the stops on a trip or charging power. A quick or powerful car is not charging speed, and how far the car goes on a charge (á hleðslunni, á einni hleðslu) or a long trip with nothing said about its stops is range',
       options: [
         {
           label: 'fast',
           value: fastcharge(0.5),
-          description: `Charges faster than average: at least ${fastcharge(0.5)} km of range a minute on a fast charger`,
+          description: `Shorter stops: charges faster than average, at least ${fastcharge(0.5)} km of range a minute on a fast charger`,
         },
         {
           label: 'fastest',
           value: fastcharge(0.75),
-          description: `Among the fastest to charge: at least ${fastcharge(0.75)} km a minute`,
+          description: `The shortest stops: among the fastest to charge, at least ${fastcharge(0.75)} km a minute`,
         },
       ],
-      fromNumber: statedNumber(
-        [1, 60],
-        (min) => `${slug(min)}_km_a_minute`,
-        (min) =>
-          `as charging speed: at least ${min} km of range a minute on a fast charger`,
-      ),
+      // No number is offered: nobody asks for charging in km a minute, and a
+      // stray "7" offered as one only competes with the filter it is about
     },
     value: {
       key: 'value',

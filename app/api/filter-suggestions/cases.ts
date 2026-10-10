@@ -658,6 +658,61 @@ export const intentCases: IntentCase[] = [
     expect: { seats: 7 },
     allow: ['price'],
   },
+
+  // Charging as people ask for it: by the stop, the charger or its kW, never
+  // in km a minute. Written before the fast charging question was worded for
+  // them, and first run only after.
+  {
+    text: 'Ég vil geta farið frá Reykjavík til Egilsstaða án þess að stoppa lengi',
+    kind: 'vague',
+    expect: { range: 'any', fastcharge: 'any' },
+  },
+  {
+    text: 'Ég vil geta hlaðið hratt á hraðhleðslustöð',
+    kind: 'vague',
+    expect: { fastcharge: 'any' },
+  },
+  {
+    text: 'Ég vil 200kw hleðslu',
+    kind: 'vague',
+    expect: { fastcharge: 'any' },
+  },
+  { text: '250 kW hraðhleðsla', kind: 'vague', expect: { fastcharge: 'any' } },
+  {
+    text: 'vil ekki bíða lengi á hleðslustöðinni',
+    kind: 'vague',
+    expect: { fastcharge: 'any' },
+  },
+  {
+    text: 'stutt stopp á leiðinni norður',
+    kind: 'vague',
+    expect: { fastcharge: 'any' },
+    allow: ['range'],
+  },
+  { text: 'öflug hleðsla', kind: 'vague', expect: { fastcharge: 'any' } },
+  {
+    text: 'langferðabíll sem hleður hratt',
+    kind: 'vague',
+    expect: { range: 'any', fastcharge: 'any' },
+  },
+  {
+    text: 'kraftmikill, 300 kW',
+    kind: 'vague',
+    expect: { acceleration: 'any' },
+    allow: ['fastcharge'],
+  },
+  {
+    text: 'stór rafhlaða, 80 kWh',
+    kind: 'vague',
+    expect: {},
+    allow: ['range'],
+  },
+  {
+    text: 'hvað tekur langan tíma að hlaða á 150 kW stöð?',
+    kind: 'question',
+    expect: {},
+    allow: ['fastcharge'],
+  },
 ]
 
 const questions = buildIntentQuestions()

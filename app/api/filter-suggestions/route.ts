@@ -12,9 +12,9 @@ import {
 import { suggestFilters, type AskModel } from './model'
 import { suggestionsLogEvent } from './log'
 
-// Measured on the 151 Icelandic requests in cases.ts
-// (October 2026, two runs): with the parser it gets 144 exactly right to
-// the parser's 86, at 96% precision and 96% recall, p95 ~300 ms, ~1,650
+// Measured on the 162 Icelandic requests in cases.ts
+// (October 2026, three runs): with the parser it gets 154–155 exactly right to
+// the parser's 88, at 95–97% precision and 97% recall, p95 ~280 ms, ~1,700
 // input tokens a request; 14 of the 17 that give a bare number for it to place,
 // and all 29 questions to the advisor. When the brackets were last
 // worded, 16 of the 18 held-out cases, which the wording was not tuned on, to
