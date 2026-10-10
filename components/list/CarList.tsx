@@ -13,8 +13,11 @@ import ActiveFilters from '@/components/filters/ActiveFilters'
 import cars, { type Car as CarData } from '@/modules/data/cars'
 import carFilter, { filtersShowing } from '@/modules/list/carFilter'
 import type { Filters } from '@/modules/list/filters'
-import type { Sorting } from '@/modules/list/sorting'
-import { sortCars } from '@/modules/list/sorting'
+import {
+  sortCars,
+  sortingDefinitions,
+  type Sorting,
+} from '@/modules/list/sorting'
 import { agree } from '@/modules/copy/plural'
 import { grantAmountText, grantCeilingText } from '@/modules/copy/grantCopy'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
@@ -33,15 +36,6 @@ const column =
   'mx-auto max-w-column py-4 px-(--gutter) xs:py-6 md:pl-10 md:pr-6 md:max-w-none'
 
 const carWord = (count: number) => agree(count, 'bíll', 'bílar')
-
-const sortingLabels: Record<Sorting, string> = {
-  name: 'Nafni',
-  price: 'Verði',
-  range: 'Drægni',
-  acceleration: 'Hröðun',
-  value: 'Verði á km',
-  fastcharge: 'Hraðhleðslu',
-}
 
 const toggleSortings: Sorting[] = [
   'name',
@@ -138,7 +132,7 @@ export default function CarList() {
         <Toggles<Sorting>
           currentValue={sorting}
           items={toggleSortings.map((value): [string, Sorting] => [
-            sortingLabels[value],
+            sortingDefinitions[value].label,
             value,
           ])}
           onClick={toggleSorting}
@@ -169,9 +163,9 @@ export default function CarList() {
         {/* The only feedback a screen reader gets for a sort or a filter, so
             it has to stay mounted to be announced at all */}
         <div aria-live="polite" className="sr-only">
-          {`${filteredCars.length} ${carWord(filteredCars.length)} á listanum, raðað eftir ${sortingLabels[
+          {`${filteredCars.length} ${carWord(filteredCars.length)} á listanum, raðað eftir ${sortingDefinitions[
             sorting
-          ].toLowerCase()}, ${direction === 'desc' ? 'lækkandi' : 'hækkandi'} röð.`}
+          ].label.toLowerCase()}, ${direction === 'desc' ? 'lækkandi' : 'hækkandi'} röð.`}
         </div>
       </header>
 
