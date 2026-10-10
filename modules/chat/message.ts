@@ -146,3 +146,37 @@ export const comparisonsStarted = (
 
   return started
 }
+
+/**
+ * Whether a question asked now, on a page comparing these cars, brings in a
+ * comparison the conversation is not already on: the marker for it shows
+ * before it is asked, so the reader knows the advisor can see it
+ */
+export const isNewComparison = (
+  messages: ChatMessage[],
+  comparing: string[] | undefined,
+): boolean =>
+  comparing !== undefined &&
+  !sameCars(
+    messages.findLast(({ role }) => role === 'user')?.metadata?.comparing,
+    comparing,
+  )
+
+/**
+ * Whether the conversation's last question was asked somewhere else than
+ * here: on the list, on another comparison, or on none when this is one. Its
+ * follow-ups are about there, and read wrong here.
+ */
+export const askedElsewhere = (
+  messages: ChatMessage[],
+  comparing: string[] | undefined,
+): boolean => {
+  const last = messages.findLast(({ role }) => role === 'user')
+  return last !== undefined && !sameCars(last.metadata?.comparing, comparing)
+}
+
+/** The same cars, in whatever order */
+export const sameCarSet = (
+  a: ReadonlyArray<string>,
+  b: ReadonlyArray<string>,
+) => a.toSorted().join('/') === b.toSorted().join('/')

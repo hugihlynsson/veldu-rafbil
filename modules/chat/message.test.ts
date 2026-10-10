@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  askedElsewhere,
   comparisonsStarted,
+  isNewComparison,
+  sameCarSet,
   getFollowUps,
   getMessageText,
   groupIntoTurns,
@@ -268,5 +271,63 @@ describe('comparisonsStarted', () => {
     expect(
       await validateChatMessages([question('q', ['a', 'b', 'c', 'd', 'e'])]),
     ).toBeNull()
+  })
+})
+
+describe('isNewComparison', () => {
+  const question = (comparing?: string[]): ChatMessage => ({
+    id: 'q',
+    role: 'user',
+    parts: [{ type: 'text', text: 'q' }],
+    ...(comparing && { metadata: { comparing } }),
+  })
+
+  it('is new on a comparison the last question was not asked on', () => {
+    expect(isNewComparison([question()], ['kia', 'tesla'])).toBe(true)
+    expect(isNewComparison([], ['kia', 'tesla'])).toBe(true)
+    expect(isNewComparison([question(['kia'])], ['kia', 'tesla'])).toBe(true)
+  })
+
+  it('is not on the comparison the last question was asked on', () => {
+    expect(
+      isNewComparison([question(['kia', 'tesla'])], ['kia', 'tesla']),
+    ).toBe(false)
+  })
+
+  it('is never off a comparison page', () => {
+    expect(isNewComparison([question(['kia'])], undefined)).toBe(false)
+  })
+})
+
+describe('sameCarSet', () => {
+  it('reads the cars in any order', () => {
+    expect(sameCarSet(['a', 'b'], ['b', 'a'])).toBe(true)
+    expect(sameCarSet(['a', 'b'], ['a', 'c'])).toBe(false)
+  })
+})
+
+describe('askedElsewhere', () => {
+  const asked = (comparing?: string[]): ChatMessage[] => [
+    {
+      id: 'q',
+      role: 'user',
+      parts: [{ type: 'text', text: 'q' }],
+      ...(comparing && { metadata: { comparing } }),
+    },
+  ]
+
+  it('is not where the last question was asked', () => {
+    expect(askedElsewhere(asked(), undefined)).toBe(false)
+    expect(askedElsewhere(asked(['a', 'b']), ['a', 'b'])).toBe(false)
+  })
+
+  it('is on another page than the last question', () => {
+    expect(askedElsewhere(asked(), ['a', 'b'])).toBe(true)
+    expect(askedElsewhere(asked(['a', 'b']), undefined)).toBe(true)
+    expect(askedElsewhere(asked(['a', 'b']), ['a', 'c'])).toBe(true)
+  })
+
+  it('is nowhere before anything is asked', () => {
+    expect(askedElsewhere([], ['a', 'b'])).toBe(false)
   })
 })

@@ -37,6 +37,8 @@ interface Props {
   onIntent?: () => void
   /** Fades the pill in as it mounts */
   animateIn?: boolean
+  /** The questions offered to start on; the general ones when left out */
+  starters?: string[]
   /** Left out where the list is not what is in view, as inside the chat */
   filterSuggestions?: {
     filters: Filters
@@ -57,6 +59,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
   onFocusRingChange,
   onIntent,
   animateIn = false,
+  starters = CHAT_SUGGESTIONS,
   filterSuggestions,
 }) => {
   const [isFocused, setIsFocused] = useState(false)
@@ -96,7 +99,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
     onIntent?.()
     if (filterSuggestions) void importFilterSuggestions()
     if (!hasMessages) {
-      setSelectedSuggestions(getRandomSuggestions(CHAT_SUGGESTIONS, 3))
+      setSelectedSuggestions(getRandomSuggestions(starters, 3))
     }
   }
 

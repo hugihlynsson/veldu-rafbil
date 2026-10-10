@@ -13,35 +13,59 @@ import {
 interface Props {
   slugs: ReadonlyArray<string>
   animate: boolean
+  /** The comparison the page is showing, which a link would only reload */
+  current: boolean
+  /** Shown before any question is asked on it, at the foot of the chat */
+  pending?: boolean
 }
 
 /**
  * Where a comparison came into the conversation, under the question that
- * brought it, so one that reads as being about "them" names the cars it means
+ * brought it, so one that reads as being about "them" names the cars it means.
+ * On a comparison page not yet asked about, it waits at the foot of the chat
+ * for the question that will bring it.
  */
 const ComparisonMarker: React.FunctionComponent<Props> = ({
   slugs,
   animate,
+  current,
+  pending,
 }) => {
   // A stored conversation can name a car that has since left the list
   const comparison = resolveComparison(slugs)
   const { cars } = comparison
   if (cars.length === 0) return null
 
+  const chip =
+    'max-w-full py-1 px-3 rounded-2xl bg-cloud text-xs leading-snug font-medium text-stone no-underline text-balance'
+  const label = (
+    <>
+      <span className="font-semibold">Samanburður:</span>{' '}
+      {cars.map((car) => comparedName(car, cars)).join(', ')}
+    </>
+  )
+
   return (
     <div
       className={clsx(
-        'flex justify-end px-5 -mt-2 mb-4',
+        'flex justify-end px-5 mb-4',
+        !pending && '-mt-2',
         animate && 'animate-message-in',
       )}
     >
-      <Link
-        href={comparisonPath(comparison.slugs)}
-        className="max-w-full py-1 px-3 rounded-full bg-cloud text-xs font-medium text-stone no-underline truncate transition-colors duration-100 hover:text-tint hover:bg-smoke"
-      >
-        <span className="font-semibold">Samanburður:</span>{' '}
-        {cars.map((car) => comparedName(car, cars)).join(', ')}
-      </Link>
+      {current ? (
+        <span className={chip}>{label}</span>
+      ) : (
+        <Link
+          href={comparisonPath(comparison.slugs)}
+          className={clsx(
+            chip,
+            'transition-colors duration-100 hover:text-tint hover:bg-smoke',
+          )}
+        >
+          {label}
+        </Link>
+      )}
     </div>
   )
 }

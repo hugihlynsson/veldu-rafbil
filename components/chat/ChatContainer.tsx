@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import ChatInput from './ChatInput'
 import type { Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
+import { comparisonSuggestions } from '@/modules/chat/suggestions'
 import type { Filters } from '@/modules/list/filters'
 import useChunk from '@/utils/useChunk'
 import useComposer from '@/utils/useComposer'
@@ -73,6 +74,7 @@ export default function ChatContainer({
       disabled={conversation.isBusy}
       hasMessages={conversation.hasMessages}
       sendMessage={conversation.send}
+      starters={comparing && comparisonSuggestions(comparing.length)}
       filterSuggestions={
         !isChatOpen && filters && onApplyFilters
           ? { filters, onApply: onApplyFilters }
@@ -94,6 +96,7 @@ export default function ChatContainer({
             session={session}
             composer={chatInput}
             composerRef={composer.ref}
+            comparing={comparing?.map(carSlug)}
             onDone={(pickedCar) => {
               setWantsChatOpen(false)
               // A car picked from the answer takes the focus instead
