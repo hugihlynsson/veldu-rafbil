@@ -10,11 +10,12 @@ import {
 import { parseChatRequest, parseConversationId, streamChat } from './chat'
 import { chatLogEvent, questionSource, type ChatOutcome } from './log'
 
-// Picked on Icelandic performance, not general benchmarks: 3.7 scores above
-// 3.8 there and spends ~30% fewer output tokens at the same price. Re-run the
-// comparison before changing it, and say here what it found.
+// Picked on Icelandic performance, not general benchmarks. 3.8 is here because
+// Google deprecated 3.7, which scored slightly above it on Icelandic and spent
+// ~30% fewer output tokens at the same price. Re-run the comparison before
+// changing it, and say here what it found.
 // https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard
-const modelName = 'gemini-3.7-flash'
+const modelName = 'gemini-3.8-flash'
 
 export async function POST(req: Request) {
   const startedAt = performance.now()
