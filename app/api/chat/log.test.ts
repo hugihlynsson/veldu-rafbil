@@ -11,7 +11,7 @@ const turn: ChatTurn = {
   userMessage: 'Hver er ódýrasti bíllinn?',
   source: 'typed',
   messageCount: 3,
-  model: 'gemini-3.7-flash',
+  model: 'gemini-3.8-flash',
   environment: 'production',
   commit: 'd791754',
 }
