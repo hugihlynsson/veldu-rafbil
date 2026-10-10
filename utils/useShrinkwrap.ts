@@ -1,9 +1,10 @@
 import { measureLineStats, prepareWithSegments } from '@chenglou/pretext'
 import { useLayoutEffect, useRef } from 'react'
 
-// Holds a bubble of pre-line text to its widest line. CSS sizes a box that
-// wraps to its full max-width, leaving a gap beside every shorter line, and
-// has no way to ask for the width the lines actually took.
+// Holds a bubble of pre-line text to the narrowest width that wraps it into
+// no more lines than its max-width does, so the lines come out even rather
+// than one long one over a short last one. CSS can neither balance a box's
+// lines nor size it to the lines it ends up with.
 const useShrinkwrap = <T extends HTMLElement>(text: string) => {
   const ref = useRef<T>(null)
 
@@ -40,14 +41,26 @@ const useShrinkwrap = <T extends HTMLElement>(text: string) => {
         const maxWidth = style.maxWidth.endsWith('%')
           ? (parentWidth * parseFloat(style.maxWidth)) / 100
           : Math.min(parentWidth, parseFloat(style.maxWidth) || Infinity)
-        const maxLineWidth = Math.max(
-          ...paragraphs.map(
-            (paragraph) =>
-              measureLineStats(paragraph, maxWidth - padding).maxLineWidth,
-          ),
+        const stats = (width: number) =>
+          paragraphs.map((paragraph) => measureLineStats(paragraph, width))
+        const lineCount = (width: number) =>
+          stats(width).reduce((sum, { lineCount }) => sum + lineCount, 0)
+
+        // Each paragraph's count only falls as the width grows, so the total
+        // does too, and the narrowest width that keeps it can be searched for
+        const lines = lineCount(maxWidth - padding)
+        let low = 1
+        let high = Math.max(1, Math.ceil(maxWidth - padding))
+        while (low < high) {
+          const mid = Math.floor((low + high) / 2)
+          if (lineCount(mid) <= lines) high = mid
+          else low = mid + 1
+        }
+        const widest = Math.max(
+          ...stats(low).map(({ maxLineWidth }) => maxLineWidth),
         )
         // Rounded up, as a fraction short would wrap the widest line again
-        element.style.width = `${Math.min(maxWidth, Math.ceil(maxLineWidth) + padding)}px`
+        element.style.width = `${Math.min(maxWidth, Math.ceil(widest) + padding)}px`
       }
 
       resize()
