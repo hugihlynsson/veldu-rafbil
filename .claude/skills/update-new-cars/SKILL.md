@@ -281,12 +281,18 @@ other one there.
 
    ```bash
    sips --cropToHeightWidth <H> <W> --cropOffset <Y> <X> source.jpg --out crop.jpg
-   sips --resampleWidth 1920 -s format jpeg -s formatOptions 80 crop.jpg \
-     --out public/images/<heroImageName>.jpg
    ```
 
-   Aim near the sizes already there (a couple of hundred KB, none over a
-   megabyte); lower `formatOptions` if the file is far above that.
+   Then resize and compress with sharp's mozjpeg encoder, which `next`
+   already installs. The target is about 200 KB, what the owner gets from
+   TinyPNG; `sips` needs a visibly worse quality to get there. Raise or lower
+   `quality` until the size lands near it (77 did for the EQS):
+
+   ```bash
+   node -e "require('sharp')('crop.jpg').resize(1920,1280)
+     .jpeg({quality:77,mozjpeg:true}).toFile('public/images/<heroImageName>.jpg')
+     .then(i=>console.log(i.size))"
+   ```
 
 4. **Look at the result** with the Read tool and compare it with a neighbour
    (`audi-q6.jpg` is a good reference for framing). Check the dimensions with
