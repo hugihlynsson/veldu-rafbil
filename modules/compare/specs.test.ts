@@ -71,13 +71,6 @@ describe('compareSpecs', () => {
     }
   })
 
-  it('shows delivery only when a compared car is still to come', () => {
-    expect(row('delivery', car({}), car({}))).toBeUndefined()
-    expect(
-      row('delivery', car({}), car({ expectedDelivery: 'Sumar 2027' }))?.cells,
-    ).toMatchObject([{ text: 'Í sölu' }, { text: 'Væntanlegur sumar 2027' }])
-  })
-
   it('writes prices with the list grouping', () => {
     expect(
       row('price', car({ price: 6_490_000 }), car({}))?.cells[0],

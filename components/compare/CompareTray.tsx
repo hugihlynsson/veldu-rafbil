@@ -10,6 +10,7 @@ import {
   MAX_COMPARED,
   MIN_COMPARED,
 } from '@/modules/compare/comparison'
+import { rememberListSearch } from '@/utils/listReturn'
 
 interface Props {
   cars: ReadonlyArray<Car>
@@ -44,7 +45,10 @@ const CompareTray: FunctionComponent<Props> = ({ cars, onRemove }) => {
           {ready ? (
             <Link
               href={comparisonPathOf(cars)}
-              onClick={() => trackEvent('Comparison opened')}
+              onClick={() => {
+                rememberListSearch(window.location.search)
+                trackEvent('Comparison opened')
+              }}
               className={clsx(
                 button,
                 'bg-sky text-on-sky transition duration-100 hover:bg-sky-hover active:scale-[0.98]',

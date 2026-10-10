@@ -10,8 +10,6 @@ interface Spec {
   value?: (car: Car) => number
   text: (car: Car) => string
   detail?: (car: Car) => string | undefined
-  /** Left out when no compared car has anything to say in it */
-  shown?: (compared: ReadonlyArray<Car>) => boolean
 }
 
 const specs: Record<string, Spec> = {
@@ -76,14 +74,6 @@ const specs: Record<string, Spec> = {
     label: 'Sæti',
     text: (car) => String(car.seats),
   },
-  delivery: {
-    label: 'Afhending',
-    text: (car) =>
-      car.expectedDelivery
-        ? `Væntanlegur ${car.expectedDelivery.toLowerCase()}`
-        : 'Í sölu',
-    shown: (compared) => compared.some((car) => car.expectedDelivery),
-  },
 }
 
 export interface SpecCell {
@@ -101,23 +91,21 @@ export interface SpecRow {
 
 /** The rows a comparison shows, with a cell per car in the order given */
 export const compareSpecs = (compared: ReadonlyArray<Car>): SpecRow[] =>
-  Object.entries(specs)
-    .filter(([, spec]) => spec.shown?.(compared) ?? true)
-    .map(([key, spec]) => {
-      const values = spec.value ? compared.map(spec.value) : undefined
-      const largest = values ? Math.max(...values) : 0
-      const winning =
-        values && spec.better === 'lower' ? Math.min(...values) : largest
-      // A tie all round leaves nobody ahead
-      const differs = values ? new Set(values).size > 1 : false
+  Object.entries(specs).map(([key, spec]) => {
+    const values = spec.value ? compared.map(spec.value) : undefined
+    const largest = values ? Math.max(...values) : 0
+    const winning =
+      values && spec.better === 'lower' ? Math.min(...values) : largest
+    // A tie all round leaves nobody ahead
+    const differs = values ? new Set(values).size > 1 : false
 
-      return {
-        key,
-        label: spec.label,
-        cells: compared.map((car, index) => ({
-          text: spec.text(car),
-          detail: spec.detail?.(car),
-          best: Boolean(values && differs && values[index] === winning),
-        })),
-      }
-    })
+    return {
+      key,
+      label: spec.label,
+      cells: compared.map((car, index) => ({
+        text: spec.text(car),
+        detail: spec.detail?.(car),
+        best: Boolean(values && differs && values[index] === winning),
+      })),
+    }
+  })

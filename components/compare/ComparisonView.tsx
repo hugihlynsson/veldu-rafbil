@@ -15,6 +15,7 @@ import { agree } from '@/modules/copy/plural'
 import PricePill from '@/components/PricePill'
 import EvDatabaseLink from '@/components/EvDatabaseLink'
 import CompareMoreLink from './CompareMoreLink'
+import ListLink from './ListLink'
 import ShareButton from './ShareButton'
 
 interface Props {
@@ -31,6 +32,9 @@ const eyebrow =
   'm-0 uppercase text-eyebrow font-semibold tracking-wider text-stone'
 const secondaryButton =
   'inline-flex items-center justify-center gap-1.5 py-2 px-4 text-sm font-semibold rounded-full no-underline bg-cloud text-tint transition duration-100 hover:bg-smoke active:scale-[0.98]'
+
+const deliveryText = (expectedDelivery: string) =>
+  `Væntanlegur ${expectedDelivery.toLowerCase()}`
 
 const columns: Record<number, string> = {
   1: 'grid-cols-1',
@@ -54,17 +58,17 @@ const ComparisonView: FunctionComponent<Props> = ({
     columns[cars.length],
   )
   const canRemove = cars.length > MIN_COMPARED
+  // Three or four outgrow the page from lg, as the list's grid does
+  const wide = cars.length > 2
+  const pageWidth = wide ? 1200 : 1024
 
   return (
-    <main className="max-w-page mx-auto pb-14">
+    <main className={clsx('max-w-page mx-auto pb-14', wide && 'lg:max-w-grid')}>
       <header className={clsx(gutter, 'pt-6 pb-5 md:pt-10 md:pb-8')}>
         <div className="flex items-center justify-between gap-4 mb-6">
-          <Link
-            href="/"
-            className="text-sm font-semibold text-stone no-underline transition-colors duration-100 hover:text-tint"
-          >
+          <ListLink className="text-sm font-semibold text-stone no-underline transition-colors duration-100 hover:text-tint">
             ← Allir rafbílar
-          </Link>
+          </ListLink>
           <ShareButton title={title} quiet />
         </div>
         <p className={eyebrow}>Samanburður</p>
@@ -87,7 +91,7 @@ const ComparisonView: FunctionComponent<Props> = ({
           <div key={car.id} className="relative -mx-1">
             <Image
               alt=""
-              sizes={`(max-width: 1023px) ${Math.ceil(100 / cars.length)}vw, ${Math.ceil(1024 / cars.length)}px`}
+              sizes={`(max-width: ${pageWidth - 1}px) ${Math.ceil(100 / cars.length)}vw, ${Math.ceil(pageWidth / cars.length)}px`}
               src={`/images/${car.heroImageName}.jpg`}
               width={1920}
               height={1280}
@@ -131,13 +135,29 @@ const ComparisonView: FunctionComponent<Props> = ({
           >
             <span>{car.make}</span>{' '}
             <span className="font-normal">{car.model}</span>
-            {car.subModel && (
+            {(car.subModel || car.expectedDelivery) && (
               <span className="block mt-0.5 text-xs font-medium text-stone md:mt-1 md:text-base">
                 {car.subModel}
+                {/* Beside the variant as on the list's cards, but read after
+                    the heading rather than as part of the car's name */}
+                {car.expectedDelivery && (
+                  <span aria-hidden>
+                    {car.subModel && ' · '}
+                    {deliveryText(car.expectedDelivery)}
+                  </span>
+                )}
               </span>
             )}
           </h2>
         ))}
+        {cars.map(
+          (car) =>
+            car.expectedDelivery && (
+              <p key={car.id} className="sr-only">
+                {car.label}: {deliveryText(car.expectedDelivery)}
+              </p>
+            ),
+        )}
       </div>
 
       {goneCount > 0 && (

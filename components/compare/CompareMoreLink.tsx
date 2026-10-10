@@ -2,10 +2,10 @@
 
 import { FunctionComponent, ReactNode } from 'react'
 import { trackEvent } from 'fathom-client'
-import Link from 'next/link'
 
 import type { Car } from '@/modules/data/cars'
 import { setComparedCars } from '@/utils/useComparison'
+import ListLink from './ListLink'
 
 interface Props {
   cars: ReadonlyArray<Car>
@@ -19,8 +19,7 @@ const CompareMoreLink: FunctionComponent<Props> = ({
   className,
   children,
 }) => (
-  <Link
-    href="/"
+  <ListLink
     className={className}
     onClick={() => {
       setComparedCars(cars)
@@ -28,7 +27,7 @@ const CompareMoreLink: FunctionComponent<Props> = ({
     }}
   >
     {children}
-  </Link>
+  </ListLink>
 )
 
 export default CompareMoreLink
