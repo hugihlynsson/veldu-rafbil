@@ -20,6 +20,7 @@ import {
 } from '@/modules/chat/answerMarkers'
 import { resolveCarRefs } from '@/modules/chat/cars'
 import { createFetchCarDetailsTool } from './tools/fetchCarDetails'
+import { withComparisonContext } from './comparisonContext'
 
 const createTools = () => ({ fetchCarDetails: createFetchCarDetailsTool() })
 
@@ -110,9 +111,12 @@ export const streamChat = async ({
   const result = streamText({
     model,
     system: systemPrompt,
-    messages: await convertToModelMessages(trimHistory(messages), {
-      tools: answerTools,
-    }),
+    messages: await convertToModelMessages(
+      await withComparisonContext(trimHistory(messages)),
+      {
+        tools: answerTools,
+      },
+    ),
     providerOptions,
     maxOutputTokens: MAX_OUTPUT_TOKENS,
     stopWhen: stepCountIs(10),

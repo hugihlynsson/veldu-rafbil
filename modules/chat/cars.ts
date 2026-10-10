@@ -1,4 +1,6 @@
 import cars, { type Car } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
+import { MIN_COMPARED } from '@/modules/compare/comparison'
 import { findMentionedCars } from './mentionedCars'
 import { getMessageText, MAX_TAGGED_CARS, type ChatMessage } from './message'
 
@@ -8,7 +10,7 @@ import { getMessageText, MAX_TAGGED_CARS, type ChatMessage } from './message'
  * misremembered names no car and is dropped, where a wrong number would show
  * the wrong one.
  */
-export const carRef = (car: Car): string => car.id.replace(/^car-/, '')
+export const carRef = (car: Car): string => carSlug(car)
 
 const carsByRef = new Map(cars.map((car) => [carRef(car), car]))
 const carsById = new Map(cars.map((car) => [car.id, car]))
@@ -30,4 +32,17 @@ export const getAnswerCars = (message: ChatMessage): Car[] => {
     (id) => carsById.get(id) ?? [],
   )
   return tagged.length > 0 ? tagged : findMentionedCars(getMessageText(message))
+}
+
+// Three is enough to choose between, and the most a comparison shows in
+// columns without crowding a phone
+export const COMPARED_FROM_ANSWER = 3
+
+/**
+ * The cars an answer's comparison link compares: the first it recommends,
+ * as it lists them best first. None for an answer about one car or none.
+ */
+export const getAnswerComparison = (message: ChatMessage): Car[] => {
+  const answerCars = getAnswerCars(message).slice(0, COMPARED_FROM_ANSWER)
+  return answerCars.length >= MIN_COMPARED ? answerCars : []
 }

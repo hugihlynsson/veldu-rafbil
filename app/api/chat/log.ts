@@ -5,7 +5,10 @@ import {
   getMessageText,
   type ChatMessage,
 } from '@/modules/chat/message'
-import { CHAT_SUGGESTIONS } from '@/modules/chat/suggestions'
+import {
+  CHAT_SUGGESTIONS,
+  comparisonSuggestions,
+} from '@/modules/chat/suggestions'
 
 /** How an answer ended, if the route saw it end */
 export type ChatOutcome = { finish: ChatFinish } | { error: unknown }
@@ -36,7 +39,14 @@ export interface ChatTiming {
 export const questionSource = (messages: ChatMessage[]): QuestionSource => {
   const question = getMessageText(messages.at(-1))
   if (getFollowUps(messages.at(-2)).includes(question)) return 'followUp'
-  if (CHAT_SUGGESTIONS.includes(question)) return 'starter'
+  if (
+    [
+      ...CHAT_SUGGESTIONS,
+      ...comparisonSuggestions(2),
+      ...comparisonSuggestions(3),
+    ].includes(question)
+  )
+    return 'starter'
   return 'typed'
 }
 

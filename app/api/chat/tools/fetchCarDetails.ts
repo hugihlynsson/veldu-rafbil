@@ -136,9 +136,11 @@ export const MAX_CALLS_PER_ANSWER = 10
 /**
  * The car-details tool for one answer. Built per answer because it counts its
  * calls; reading a conversation asks only for its schemas, which every one of
- * them shares.
+ * them shares. An answer about a few cars can narrow it to their pages.
  */
-export const createFetchCarDetailsTool = () => {
+export const createFetchCarDetailsTool = (
+  allowed: ReadonlySet<string> = allowedURLs,
+) => {
   let calls = 0
 
   return tool({
@@ -148,7 +150,7 @@ export const createFetchCarDetailsTool = () => {
       carName: z.string().describe('The make and model of the car'),
     }),
     execute: async ({ url, carName }) => {
-      if (!allowedURLs.has(url)) {
+      if (!allowedURLs.has(url) || !allowed.has(url)) {
         return {
           carName,
           specifications:

@@ -2,6 +2,7 @@ import { safeValidateUIMessages, type UIMessage } from 'ai'
 import { z } from 'zod'
 
 import { splitMarkers } from './answerMarkers'
+import { MAX_COMPARED } from '@/modules/compare/comparison'
 
 // The most cars an answer tags. The route sends no more than this, as a
 // stored answer over any bound here would have the next request refused.
@@ -22,6 +23,13 @@ const chatMetadataSchema = z
       .array(z.string().min(1).max(100))
       .min(1)
       .max(MAX_TAGGED_CARS)
+      .optional(),
+    // On a question asked on a comparison page: the slugs of the cars it
+    // compares, which the route looks up rather than trusts
+    comparing: z
+      .array(z.string().min(1).max(100))
+      .min(1)
+      .max(MAX_COMPARED)
       .optional(),
   })
   .optional()
@@ -112,3 +120,63 @@ export const groupIntoTurns = (messages: ChatMessage[]): ChatMessage[][] =>
     else current.push(message)
     return turns
   }, [])
+
+const sameCars = (a: string[] | undefined, b: string[] | undefined) =>
+  (a ?? []).join('/') === (b ?? []).join('/')
+
+/**
+ * The questions that bring a comparison into the conversation, by id, with
+ * the cars they compare: the first asked on a comparison page, and the first
+ * after the cars change. Asked again on the same cars, it is the same one.
+ */
+export const comparisonsStarted = (
+  messages: ChatMessage[],
+): Map<string, string[]> => {
+  const started = new Map<string, string[]>()
+  let before: string[] | undefined
+
+  for (const message of messages) {
+    if (message.role !== 'user') continue
+    const comparing = message.metadata?.comparing
+    if (comparing && !sameCars(comparing, before)) {
+      started.set(message.id, comparing)
+    }
+    before = comparing
+  }
+
+  return started
+}
+
+/**
+ * Whether a question asked now, on a page comparing these cars, brings in a
+ * comparison the conversation is not already on: the marker for it shows
+ * before it is asked, so the reader knows the advisor can see it
+ */
+export const isNewComparison = (
+  messages: ChatMessage[],
+  comparing: string[] | undefined,
+): boolean =>
+  comparing !== undefined &&
+  !sameCars(
+    messages.findLast(({ role }) => role === 'user')?.metadata?.comparing,
+    comparing,
+  )
+
+/**
+ * Whether the conversation's last question was asked somewhere else than
+ * here: on the list, on another comparison, or on none when this is one. Its
+ * follow-ups are about there, and read wrong here.
+ */
+export const askedElsewhere = (
+  messages: ChatMessage[],
+  comparing: string[] | undefined,
+): boolean => {
+  const last = messages.findLast(({ role }) => role === 'user')
+  return last !== undefined && !sameCars(last.metadata?.comparing, comparing)
+}
+
+/** The same cars, in whatever order */
+export const sameCarSet = (
+  a: ReadonlyArray<string>,
+  b: ReadonlyArray<string>,
+) => a.toSorted().join('/') === b.toSorted().join('/')

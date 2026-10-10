@@ -119,6 +119,8 @@
   --animate-pill-in: pill-in 0.3s ease-out backwards;
   --animate-pill-out: pill-out 0.2s ease-in forwards;
   --animate-typing: typing 1.4s infinite;
+  --animate-phrase-in: phrase-in 0.35s var(--ease-out-cubic) backwards;
+  --animate-phrase-out: phrase-out 0.25s var(--ease-in-cubic) forwards;
 
   @keyframes rise {
     from {
@@ -148,6 +150,23 @@
     to {
       opacity: 0;
       transform: perspective(400px) translateY(10px) rotateX(40deg) scale(0.95);
+    }
+  }
+
+  /* A line that turns into the next, softened at both ends by a slight blur */
+  @keyframes phrase-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+      filter: blur(2px);
+    }
+  }
+
+  @keyframes phrase-out {
+    to {
+      opacity: 0;
+      transform: translateY(-6px);
+      filter: blur(2px);
     }
   }
 

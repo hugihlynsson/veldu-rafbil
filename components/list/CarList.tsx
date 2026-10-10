@@ -25,6 +25,8 @@ import { agree } from '@/modules/copy/plural'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import { useFilters, useSorting, useView } from '@/utils/useListState'
 import useRevealCar from '@/utils/useRevealCar'
+import useComparison from '@/utils/useComparison'
+import CompareTray from '@/components/compare/CompareTray'
 
 // Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
 // so arriving a moment later shifts nothing.
@@ -87,6 +89,9 @@ export default function CarList() {
   }
 
   const showCar = useRevealCar(filters, setFilters)
+
+  const comparison = useComparison()
+  const isComparing = comparison.selected.length > 0
 
   const filteredCars = cars.filter(carFilter(filters))
 
@@ -170,6 +175,9 @@ export default function CarList() {
             view={view}
             showValue={sorting === 'value' || Boolean(filters.value)}
             showSeats={Boolean(filters.seats)}
+            compared={comparison.isSelected(car)}
+            compareFull={comparison.isFull}
+            onToggleCompare={() => comparison.toggle(car)}
           />
         ))}
       </div>
@@ -206,8 +214,13 @@ export default function CarList() {
         />
       )}
 
+      {isComparing && (
+        <CompareTray cars={comparison.selected} onRemove={comparison.remove} />
+      )}
+
+      {/* The tray takes the bar's place while there is a car in it */}
       <ChatContainer
-        hide={editingFilters}
+        hide={editingFilters || isComparing}
         onShowCar={showCar}
         filters={filters}
         onApplyFilters={applySuggestedFilters}

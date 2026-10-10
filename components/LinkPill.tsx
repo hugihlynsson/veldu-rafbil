@@ -7,6 +7,10 @@ interface Props {
   className?: string
   external?: boolean
   extra?: string
+  /** The regular weight, for a pill beside a bold one it should not compete with */
+  light?: boolean
+  /** A size down, for a column a quarter of a phone wide */
+  compact?: boolean
   href: React.ComponentProps<typeof Link>['href']
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
   children?: ReactNode
@@ -18,13 +22,17 @@ const LinkPill: FunctionComponent<Props> = ({
   className,
   external,
   extra,
+  light,
+  compact,
   href,
   onClick,
   title,
 }) => (
   <Link
     className={clsx(
-      'group inline-flex self-start items-center shrink-0 py-1 px-3 text-inherit text-sm font-semibold rounded-full no-underline bg-cloud transition duration-100 hover:bg-smoke active:scale-[0.98]',
+      'group inline-flex self-start items-center shrink-0 text-inherit rounded-full no-underline bg-cloud transition duration-100 hover:bg-smoke active:scale-[0.98]',
+      compact ? 'py-1 px-2 text-xs md:px-3 md:text-sm' : 'py-1 px-3 text-sm',
+      light ? 'font-normal' : 'font-semibold',
       className,
     )}
     onClick={onClick}

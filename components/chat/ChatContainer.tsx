@@ -4,6 +4,8 @@ import { Suspense, useState } from 'react'
 import dynamic from 'next/dynamic'
 import ChatInput from './ChatInput'
 import type { Car } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
+import { comparisonSuggestions } from '@/modules/chat/suggestions'
 import type { Filters } from '@/modules/list/filters'
 import useChunk from '@/utils/useChunk'
 import useComposer from '@/utils/useComposer'
@@ -21,8 +23,11 @@ interface Props {
   hide: boolean
   /** Called once the chat has closed, so the car's card can take the focus */
   onShowCar: (car: Car) => void
-  filters: Filters
-  onApplyFilters: (filters: Filters) => void
+  /** The list's filters, which the bar suggests changes to as it is typed in */
+  filters?: Filters
+  onApplyFilters?: (filters: Filters) => void
+  /** The cars compared on the page it is on, which each question carries */
+  comparing?: ReadonlyArray<Car>
 }
 
 export default function ChatContainer({
@@ -30,8 +35,11 @@ export default function ChatContainer({
   onShowCar,
   filters,
   onApplyFilters,
+  comparing,
 }: Props) {
-  const conversation = useConversation()
+  const conversation = useConversation(
+    comparing && { comparing: comparing.map(carSlug) },
+  )
   const composer = useComposer()
   const chatModal = useChunk(importChatModal)
   const [wantsChatOpen, setWantsChatOpen] = useState<boolean>(false)
@@ -66,8 +74,11 @@ export default function ChatContainer({
       disabled={conversation.isBusy}
       hasMessages={conversation.hasMessages}
       sendMessage={conversation.send}
+      starters={comparing && comparisonSuggestions(comparing.length)}
       filterSuggestions={
-        isChatOpen ? undefined : { filters, onApply: onApplyFilters }
+        !isChatOpen && filters && onApplyFilters
+          ? { filters, onApply: onApplyFilters }
+          : undefined
       }
     />
   )
@@ -85,6 +96,7 @@ export default function ChatContainer({
             session={session}
             composer={chatInput}
             composerRef={composer.ref}
+            comparing={comparing?.map(carSlug)}
             onDone={(pickedCar) => {
               setWantsChatOpen(false)
               // A car picked from the answer takes the focus instead

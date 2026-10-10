@@ -1,21 +1,60 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import type { Car } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
 import {
+  askedElsewhere,
+  comparisonsStarted,
   getFollowUps,
+  isNewComparison,
+  sameCarSet,
   getMessageText,
   groupIntoTurns,
 } from '@/modules/chat/message'
 import { isAwaitingText, unansweredReason } from '@/modules/chat/progress'
+import { getAnswerComparison } from '@/modules/chat/cars'
+import {
+  comparisonSuggestions,
+  getRandomSuggestions,
+} from '@/modules/chat/suggestions'
 import Modal, { panelMotion } from '@/components/Modal'
 import type { ChatSession } from './ChatEngine'
 import ChatHeader from './ChatHeader'
 import ChatMessage from './ChatMessage'
+import ComparisonMarker from './ComparisonMarker'
 import FollowUpSuggestions from './FollowUpSuggestions'
 import MentionedCars from './MentionedCars'
+import CompareAnswerCars from './CompareAnswerCars'
 import TypingIndicator from './TypingIndicator'
+
+/**
+ * The comparison on the page, at the foot of a conversation not yet on it,
+ * with questions to start on. Scrolled to as the chat opens, past the last
+ * question's own scroll, as it is what is new here.
+ */
+const PendingComparison: React.FunctionComponent<{
+  slugs: string[]
+  suggestions: string[]
+  onSendMessage: (text: string) => void
+}> = ({ slugs, suggestions, onSendMessage }) => {
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    ref.current?.scrollIntoView({ block: 'end' })
+  }, [])
+
+  return (
+    <div ref={ref} className="scroll-mb-24">
+      <ComparisonMarker slugs={slugs} animate={false} current pending />
+      <FollowUpSuggestions
+        suggestions={suggestions}
+        animate={false}
+        onSendMessage={onSendMessage}
+      />
+    </div>
+  )
+}
 
 interface Props {
   /** Once the chat has closed, with the car picked from an answer if one was */
@@ -25,6 +64,8 @@ interface Props {
   composer: React.ReactNode
   /** Focused after open: showModal() would land on the close button */
   composerRef: React.RefObject<HTMLInputElement | null>
+  /** The slugs of the cars the page compares, when it is a comparison */
+  comparing?: string[]
 }
 
 const ChatModal: React.FunctionComponent<Props> = ({
@@ -32,6 +73,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
   session,
   composer,
   composerRef,
+  comparing,
 }) => {
   // Held until the dialog has closed: the page behind it is inert until then,
   // and the car's card could not take the focus
@@ -50,8 +92,36 @@ const ChatModal: React.FunctionComponent<Props> = ({
   const lastAssistantText =
     lastMessage?.role === 'assistant' ? getMessageText(lastMessage) : ''
   const lastMessageFollowUps = getFollowUps(lastMessage)
+  // The last answer's offers are about where it was asked, which this page
+  // may not be: its follow-ups and its comparison wait for a question here
+  const elsewhere = askedElsewhere(messages, comparing)
+  const followUps = elsewhere ? [] : lastMessageFollowUps
+  const answerCars =
+    lastMessage?.role === 'assistant' && !elsewhere
+      ? getAnswerComparison(lastMessage)
+      : []
+  // Nor is a link to the comparison the page already is any use
+  const answerComparison =
+    comparing && sameCarSet(answerCars.map(carSlug), comparing)
+      ? []
+      : answerCars
+  const [comparisonStarters] = useState(() =>
+    comparing
+      ? getRandomSuggestions(comparisonSuggestions(comparing.length), 3)
+      : [],
+  )
 
   const lastUserMessageId = messages.findLast((m) => m.role === 'user')?.id
+  const comparisons = comparisonsStarted(messages)
+  const isCurrent = (slugs: string[]) =>
+    comparing !== undefined && sameCarSet(slugs, comparing)
+  const pendingComparison = isNewComparison(messages, comparing) && (
+    <PendingComparison
+      slugs={comparing!}
+      suggestions={comparisonStarters}
+      onSendMessage={session.send}
+    />
+  )
 
   const turns = groupIntoTurns(
     messages.filter((message) => getMessageText(message)),
@@ -115,12 +185,22 @@ const ChatModal: React.FunctionComponent<Props> = ({
                     )}
                   >
                     {turn.map((message) => (
-                      <ChatMessage
-                        key={message.id}
-                        message={message}
-                        isLastUserMessage={message.id === lastUserMessageId}
-                        animate={!idsOnOpen.has(message.id)}
-                      />
+                      <React.Fragment key={message.id}>
+                        <ChatMessage
+                          message={message}
+                          isLastUserMessage={message.id === lastUserMessageId}
+                          animate={!idsOnOpen.has(message.id)}
+                        />
+                        {/* Under the question rather than over it, as a
+                            question scrolls to the top as it is sent */}
+                        {comparisons.has(message.id) && (
+                          <ComparisonMarker
+                            slugs={comparisons.get(message.id)!}
+                            animate={!idsOnOpen.has(message.id)}
+                            current={isCurrent(comparisons.get(message.id)!)}
+                          />
+                        )}
+                      </React.Fragment>
                     ))}
 
                     {isLastTurn && (
@@ -138,19 +218,27 @@ const ChatModal: React.FunctionComponent<Props> = ({
                           />
                         )}
                         {status !== 'streaming' &&
-                          lastMessageFollowUps.length > 0 && (
-                            <FollowUpSuggestions
-                              suggestions={lastMessageFollowUps}
+                          answerComparison.length > 0 && (
+                            <CompareAnswerCars
+                              cars={answerComparison}
                               animate={animateExtras}
-                              onSendMessage={session.send}
                             />
                           )}
+                        {status !== 'streaming' && followUps.length > 0 && (
+                          <FollowUpSuggestions
+                            suggestions={followUps}
+                            animate={animateExtras}
+                            onSendMessage={session.send}
+                          />
+                        )}
+                        {pendingComparison}
                       </>
                     )}
                   </div>
                 )
               })}
               {turns.length === 0 && unansweredAlert}
+              {turns.length === 0 && pendingComparison}
             </div>
 
             {/* Announcing only the finished text keeps a screen reader from

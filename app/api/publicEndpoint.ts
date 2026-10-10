@@ -55,13 +55,16 @@ const axiom = process.env.AXIOM_TOKEN
 
 /**
  * Logs once the response has gone, so the Axiom round trip never holds it
- * open. The event is built then, so it can say how the response ended.
+ * open. The event is built then, so it can say how the response ended, and
+ * can wait on work that outlives the response.
  */
-export const logAfterResponse = (event: () => object): void => {
+export const logAfterResponse = (
+  event: () => object | Promise<object>,
+): void => {
   if (!axiom) return
   after(async () => {
     try {
-      axiom.ingest('veldu-rafbil-assistant', [event()])
+      axiom.ingest('veldu-rafbil-assistant', [await event()])
       await axiom.flush()
     } catch (error) {
       console.error('Failed to log to Axiom:', error)

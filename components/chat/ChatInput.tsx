@@ -7,6 +7,7 @@ import {
   getRandomSuggestions,
 } from '@/modules/chat/suggestions'
 import { MAX_QUESTION_LENGTH } from '@/modules/chat/questionLength'
+import { CHAT_INPUT_ID } from '@/modules/chat/inputId'
 import useInputModality, { getInputModality } from '@/utils/inputModality'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
@@ -36,6 +37,8 @@ interface Props {
   onIntent?: () => void
   /** Fades the pill in as it mounts */
   animateIn?: boolean
+  /** The questions offered to start on; the general ones when left out */
+  starters?: string[]
   /** Left out where the list is not what is in view, as inside the chat */
   filterSuggestions?: {
     filters: Filters
@@ -56,6 +59,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
   onFocusRingChange,
   onIntent,
   animateIn = false,
+  starters = CHAT_SUGGESTIONS,
   filterSuggestions,
 }) => {
   const [isFocused, setIsFocused] = useState(false)
@@ -95,7 +99,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
     onIntent?.()
     if (filterSuggestions) void importFilterSuggestions()
     if (!hasMessages) {
-      setSelectedSuggestions(getRandomSuggestions(CHAT_SUGGESTIONS, 3))
+      setSelectedSuggestions(getRandomSuggestions(starters, 3))
     }
   }
 
@@ -121,9 +125,10 @@ const ChatInput: React.FunctionComponent<Props> = ({
         'fixed bottom-[calc(1rem+var(--keyboard-inset))] left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col-reverse items-center gap-3',
         'sm:bottom-[calc(1.5rem+var(--keyboard-inset))]',
         // Only the hiding fades: a transition on the bottom drags the bar
-        // behind a keyboard on its way in
-        'transition-opacity duration-300',
-        hide && 'opacity-0',
+        // behind a keyboard on its way in. Invisible once it has, so a
+        // hidden bar takes no tab or tap meant for what is in its place.
+        'transition-[opacity,visibility] duration-300',
+        hide && 'opacity-0 invisible',
       )}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
@@ -142,6 +147,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
         )}
       >
         <input
+          id={CHAT_INPUT_ID}
           ref={inputRef}
           type="text"
           maxLength={MAX_QUESTION_LENGTH}
