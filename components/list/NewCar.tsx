@@ -70,8 +70,12 @@ const NewCar: FunctionComponent<Props> = ({
   const { id: carId, priceWithGrant, hasGrant } = car
 
   // Not agree(): sæti is neuter and reads the same at every count. A car
-  // without a subModel gets the seat count on its own rather than a lone dot.
-  const subTitle = [car.subModel, showSeats && `${car.seats} sæti`]
+  // without a subModel gets what follows on its own rather than a lone dot.
+  const subTitle = [
+    car.subModel,
+    showSeats && `${car.seats} sæti`,
+    car.expectedDelivery && `Væntanlegur ${car.expectedDelivery.toLowerCase()}`,
+  ]
     .filter(Boolean)
     .join(' · ')
 
@@ -118,36 +122,23 @@ const NewCar: FunctionComponent<Props> = ({
             : 'md:m-0 md:ml-8 md:p-0 md:w-[330px] md:max-w-card-text md:shrink-0 md:grow',
         )}
       >
-        <div className={clsx(grid && 'md:pt-3')}>
-          {car.expectedDelivery && (
-            <div
-              className={clsx(
-                'mb-0.5 text-base font-medium text-stone',
-                grid && 'md:text-sm',
-              )}
-            >
-              Væntanlegur {car.expectedDelivery.toLowerCase()}
-            </div>
+        <h2
+          className={clsx(
+            'm-0 font-semibold text-display',
+            grid && 'md:pt-3 md:text-xl',
           )}
-
-          <h2
+        >
+          <span>{car.make}</span>{' '}
+          <span className="font-normal">{car.model}</span>
+          <span
             className={clsx(
-              'm-0 font-semibold text-display',
-              grid && 'md:text-xl',
+              'block font-medium text-base text-stone -mt-px mb-2',
+              grid && 'md:mt-0 md:text-sm',
             )}
           >
-            <span>{car.make}</span>{' '}
-            <span className="font-normal">{car.model}</span>
-            <span
-              className={clsx(
-                'block font-medium text-base text-stone -mt-px mb-2',
-                grid && 'md:mt-0 md:text-sm',
-              )}
-            >
-              {subTitle}
-            </span>
-          </h2>
-        </div>
+            {subTitle}
+          </span>
+        </h2>
 
         <LinkPill
           className={clsx(
