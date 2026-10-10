@@ -45,6 +45,17 @@ Askja documents read so far, as slugs under `issuu.com/askja/docs/`:
 `kia_ev6_ver_listi`, `kia_ev9_gt_verdlisti`, `kia_pv5_verdlisti`,
 `eqs_ver_listi`.
 
+BL documents read so far, under `issuu.com/hallih/docs/`:
+`subaru_ver__listi_sept2015lr` (all three Subaru EVs), `mg_ver_listi`,
+`nissan_ver__listi_febr__ar_2016lr` and `renault_ver__listi___g__st_2015lr`
+(the R5 and Scenic; its Rafale is a plug-in hybrid),
+and `nm70462_hyundai_ver__b__klingur___g` (every Hyundai EV but the STARIA
+Electric; the IONIQ 9 rows carry no grant column, being over the ceiling). The
+MG one holds only the MG4 EV Urban, though its cover shows an MGS6; the MGS5,
+MGS6 and Cyberster are not in it. `nissan_ver__listi_febr__ar_2016lr` holds
+only the Leaf; the Ariya's trim prices are on its model page on nissan.is,
+readable with curl, unlabelled and before the grant.
+
 ## Per make
 
 | Make          | Entry point                                              | How to read it                                                                                                                                                                                                                                                                                           |
@@ -56,7 +67,7 @@ Askja documents read so far, as slugs under `issuu.com/askja/docs/`:
 | Polestar      | https://brimborg.polestarimporter.com/is/verdlistar      | **Read.** Direct PDFs at `…/static/files/Polestar<N>/`, the filename ending in the list's date (`…_20260910.pdf`); `pdf text` reads the price rows; the first figure is the price, the second "Verð með 500.000 kr. styrk". Polestar 2 Performance is an option package on the base car, not a row.      |
 | Porsche       | https://dealer.porsche.com/is/island/is-IS/nyir-bilar    | Listing only. Starting prices are printed on the page ("frá"), so a PDF may be unnecessary. The "Sækja verðlista" buttons expose no URL to WebFetch; the browser may.                                                                                                                                    |
 | Škoda         | https://www.skoda.is/nyr-skoda/verdlistar                | Listing only. PDFs on `www.hekla.is/static/files/efni/verdlistar/skoda/` (`peaq`, `epiq`, `elroq`, `enyaq`); same route as Audi.                                                                                                                                                                         |
-| Subaru        | https://www.subaru.is/verdlisti/                         | Listing only. WebFetch returns the page without the price-list link; use the built-in browser. Also listed in BL's issuu.                                                                                                                                                                                |
+| Subaru        | https://www.subaru.is/verdlisti/                         | **Read.** One combined list on BL's issuu, `hallih/docs/subaru_ver__listi_sept2015lr` (the slug's date is not the list's), run through `scripts/issuu-pages.sh`: ten pages, two per model, the electric three first. "Verð kr." is the price; "M. styrk Orkusjóðs" has the grant off.                    |
 | Tesla         | https://www.tesla.com/is_is                              | **Partly.** 403 to WebFetch. The built-in browser shows "Verð frá" for Model Y and Model 3, the entry trims only. `/modely/design` gave financing and upgrade amounts rather than trim prices, and needs clicking through. Other trims are unsettled.                                                    |
 | Toyota        | https://www.toyota.is/new-cars/kynningarefni             | **Read.** The list is an iPaper flipbook at `kynningarefni.toyota.is/verdlisti`; run `scripts/ipaper-text.py` on it and search for `RAFMAGN`. One unlabelled "VERÐ": the pre-grant price. It also holds the vans and the Hilux, which are not in the car list. The built-in browser refuses this domain. |
 | Volkswagen    | https://www.volkswagen.is/is/kaup-tilbod/verdlistar.html | Listing only. PDFs on `www.hekla.is/static/files/efni/verdlistar/vw/` (`id3`, `id4`, `id7`, `idcross`, `idbuzz-people`, `id-polo`); same route as Audi.                                                                                                                                                  |
