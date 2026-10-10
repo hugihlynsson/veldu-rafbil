@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import dynamic from 'next/dynamic'
 import ChatInput from './ChatInput'
 import type { Car } from '@/modules/data/cars'
@@ -76,17 +76,23 @@ export default function ChatContainer({
     <>
       {conversation.engine}
       {isChatOpen ? (
-        <ChatModal
-          session={session}
-          composer={chatInput}
-          composerRef={composer.ref}
-          onDone={(pickedCar) => {
-            setWantsChatOpen(false)
-            // A car picked from the answer takes the focus instead
-            if (pickedCar) onShowCar(pickedCar)
-            else composer.focusOnArrival()
-          }}
-        />
+        // Its own boundary: the modal suspends on its first render even with
+        // its chunk in, and the one above would hide the engine with it.
+        // Strict Mode remounts what reappears, and the engine stops the
+        // question just sent as it unmounts.
+        <Suspense fallback={chatInput}>
+          <ChatModal
+            session={session}
+            composer={chatInput}
+            composerRef={composer.ref}
+            onDone={(pickedCar) => {
+              setWantsChatOpen(false)
+              // A car picked from the answer takes the focus instead
+              if (pickedCar) onShowCar(pickedCar)
+              else composer.focusOnArrival()
+            }}
+          />
+        </Suspense>
       ) : (
         chatInput
       )}
