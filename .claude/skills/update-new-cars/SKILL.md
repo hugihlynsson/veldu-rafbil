@@ -252,7 +252,10 @@ estimate is worked out the same way every time:
    rises (Hyundai in 2026: INSTER 182, IONIQ 9 153, IONIQ 5 140), so the nearest
    car alone is biased. Take the cars whose German price is just below and just
    above the new one, and weight their ratios by how close it is to each. With
-   nothing close on one side, use the nearest car alone.
+   nothing close on one side, use the nearest car alone. Compare like with
+   like when a make prices a line apart: Mercedes' people carriers (EQV,
+   eVito Tourer) sell at about 210 kr/€ where its cars sit near 175, so the
+   VLE was estimated from the vans.
 4. **No car of the make in the list?** Use the same importer's other makes,
    which tend to price alike. Another importer is the last resort.
 5. **Round to the nearest 100.000 kr. and add 500.000 kr.** An estimate that
