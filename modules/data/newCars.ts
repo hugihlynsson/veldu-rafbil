@@ -2511,7 +2511,9 @@ const newCars: Array<NewCar> = [
     sellerUrl: 'https://www.subaru.is/solterra/',
     acceleration: 4.9,
     capacity: 73.1,
-    range: 517,
+    range: 509,
+    evDatabaseUrl:
+      'https://ev-database.org/car/3434/Subaru-Solterra-AWD-731-kWh',
     drive: 'AWD',
     seats: 5,
     power: 252,
@@ -2525,7 +2527,7 @@ const newCars: Array<NewCar> = [
     sellerUrl: 'https://www.subaru.is/uncharted/',
     acceleration: 4.9,
     capacity: 77,
-    range: 495,
+    range: 490,
     evDatabaseUrl:
       'https://ev-database.org/car/3437/Subaru-Uncharted-77-kWh-AWD',
     drive: 'AWD',
