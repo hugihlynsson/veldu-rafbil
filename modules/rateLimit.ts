@@ -5,13 +5,13 @@ export interface RateLimitResult {
   retryAfterSeconds: number
 }
 
+export type RateLimit = (key: string) => RateLimitResult
+
 /**
  * A limiter with windows of its own, so one public endpoint spending its
  * allowance does not spend another's. In memory, so a caller spread across
  * warm instances gets a multiple of this.
  */
-export type RateLimit = (key: string) => RateLimitResult
-
 export const createRateLimit = (
   maxRequests: number,
   windowMs = 60_000,
