@@ -1,10 +1,12 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { type ReactNode, useRef, useState } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
+import { trackEvent } from 'fathom-client'
 
 import Car from './NewCar'
+import { GridIcon, ListIcon } from './ViewIcons'
 import Title from '@/components/Title'
 import Intro from './Intro'
 import Toggles from '@/components/Toggles'
@@ -18,9 +20,10 @@ import {
   sortingDefinitions,
   type Sorting,
 } from '@/modules/list/sorting'
+import type { View } from '@/modules/list/view'
 import { agree } from '@/modules/copy/plural'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
-import { useFilters, useSorting } from '@/utils/useListState'
+import { useFilters, useSorting, useView } from '@/utils/useListState'
 import useRevealCar from '@/utils/useRevealCar'
 
 // Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
@@ -43,9 +46,21 @@ const toggleSortings: Sorting[] = [
   'value',
 ]
 
+const viewItems: Array<[string, View, ReactNode]> = [
+  ['Listi', 'list', <ListIcon key="list" />],
+  ['Yfirlit', 'grid', <GridIcon key="grid" />],
+]
+
 export default function CarList() {
   const { sorting, direction, toggleSorting } = useSorting()
   const { filters, setFilters, removeFilter } = useFilters()
+  const { view, setView } = useView()
+
+  const changeView = (next: View) => {
+    if (next === view) return
+    setView(next)
+    trackEvent(next === 'grid' ? 'Switched to grid' : 'Switched to list')
+  }
 
   const [editingFilters, setEditingFilters] = useState<boolean>(false)
   const controlsRef = useRef<HTMLDivElement>(null)
@@ -88,29 +103,42 @@ export default function CarList() {
           Raða eftir:
         </div>
 
-        <Toggles<Sorting>
-          currentValue={sorting}
-          items={toggleSortings.map((value): [string, Sorting] => [
-            sortingDefinitions[value].label,
-            value,
-          ])}
-          onClick={toggleSorting}
-          labelledBy="sorting-label"
-          indicatorLabel={
-            direction === 'desc' ? 'lækkandi röð' : 'hækkandi röð'
-          }
-          indicator={
-            <span
-              aria-hidden
-              className={clsx(
-                'leading-none ease-in-out transition-transform duration-150 -mr-1',
-                direction === 'desc' && 'rotate-180',
-              )}
-            >
-              ↑
-            </span>
-          }
-        />
+        {/* Ends where the cards do, mr-8 to the header's pr-6 */}
+        <div className="flex items-start justify-between gap-4 md:mr-2">
+          <Toggles<Sorting>
+            currentValue={sorting}
+            items={toggleSortings.map((value): [string, Sorting] => [
+              sortingDefinitions[value].label,
+              value,
+            ])}
+            onClick={toggleSorting}
+            labelledBy="sorting-label"
+            indicatorLabel={
+              direction === 'desc' ? 'lækkandi röð' : 'hækkandi röð'
+            }
+            indicator={
+              <span
+                aria-hidden
+                className={clsx(
+                  'leading-none ease-in-out transition-transform duration-150 -mr-1',
+                  direction === 'desc' && 'rotate-180',
+                )}
+              >
+                ↑
+              </span>
+            }
+          />
+
+          {/* Below md the grid would be one column, the list again */}
+          <div className="hidden md:block">
+            <Toggles<View>
+              currentValue={view}
+              items={viewItems}
+              onClick={changeView}
+              label="Útlit"
+            />
+          </div>
+        </div>
 
         <ActiveFilters
           filters={filters}
@@ -128,15 +156,23 @@ export default function CarList() {
         </div>
       </header>
 
-      {sortCars(filteredCars, sorting, direction).map((car, index) => (
-        <Car
-          preload={index <= 1}
-          car={car}
-          key={car.id}
-          showValue={sorting === 'value' || Boolean(filters.value)}
-          showSeats={Boolean(filters.seats)}
-        />
-      ))}
+      <div
+        className={clsx(
+          view === 'grid' &&
+            'md:grid md:grid-cols-2 md:gap-x-6 md:ml-10 md:mr-8 lg:grid-cols-3',
+        )}
+      >
+        {sortCars(filteredCars, sorting, direction).map((car, index) => (
+          <Car
+            preload={index <= 1}
+            car={car}
+            key={car.id}
+            view={view}
+            showValue={sorting === 'value' || Boolean(filters.value)}
+            showSeats={Boolean(filters.seats)}
+          />
+        ))}
+      </div>
 
       {hasFilter && filteredCarCount > 0 && (
         <div

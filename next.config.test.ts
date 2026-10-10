@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest'
 import nextConfig from './next.config'
 import { serializeFilters, type Filters } from './modules/list/filters'
 import { serializeSorting } from './modules/list/sorting'
+import { serializeView } from './modules/list/view'
 
 type Rule = { source: string; has?: { type: string; key?: string }[] }
 
@@ -58,6 +59,7 @@ const listQueries: [string, string][] = [
     'a flipped sorting',
     serializeSorting({ sorting: 'name', direction: 'desc' }),
   ],
+  ['the grid', serializeView('grid')],
   ...Object.entries(everyFilter).map(([key, value]): [string, string] => [
     `the ${key} filter`,
     serializeFilters({ [key]: value } as Filters),
@@ -69,7 +71,7 @@ const otherQueries: [string, string][] = [
   ['a parameter the list does not read', '?utm_source=facebook'],
 ]
 
-// The / built at deploy is all cars in name order, so a URL asking for
+// The / built at deploy is all cars in name order, as a list, so a URL asking for
 // anything else would arrive that way and reorder once it hydrated
 describe('the list a URL is served', () => {
   it.each(listQueries)('is rendered per request for %s', async (_, query) => {

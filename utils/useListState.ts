@@ -2,6 +2,8 @@ import { useQueryStates } from 'nuqs'
 
 import type { Filters } from '@/modules/list/filters'
 import type { Sorting } from '@/modules/list/sorting'
+import type { View } from '@/modules/list/view'
+import { viewParsers, viewUrlKeys } from '@/modules/list/view'
 import {
   FilterValues,
   filterParsers,
@@ -47,4 +49,12 @@ export const useSorting = () => {
     )
 
   return { sorting, direction, toggleSorting }
+}
+
+export const useView = () => {
+  const [{ view }, setValues] = useQueryStates(viewParsers, {
+    urlKeys: viewUrlKeys,
+  })
+
+  return { view, setView: (view: View) => void setValues({ view }) }
 }

@@ -81,6 +81,7 @@
   --breakpoint-xs: 375px;
   --breakpoint-sm: 500px;
   --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px; /* the page at its widest: a third column fits */
 
   /* The column a car's text sits in on a phone, the widest it gets beside the
      photo from md, and the page at its widest */

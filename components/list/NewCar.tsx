@@ -8,17 +8,20 @@ import { Car } from '@/modules/data/cars'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { formatKmPerMinute } from '@/modules/data/getKmPerMinutesCharged'
 import LinkPill from '@/components/LinkPill'
+import type { View } from '@/modules/list/view'
 
 interface Props {
   car: Car
   showValue?: boolean
   showSeats?: boolean
   preload?: boolean
+  view?: View
 }
 
 const statLabel =
   'uppercase text-eyebrow font-semibold tracking-wider mb-0.75 text-stone'
 const statValue = 'text-2xl font-normal'
+const statValueInGrid = 'md:text-xl'
 const statDetail = 'mt-0.5 text-xs text-stone font-medium'
 
 // Out of view a card skips layout and stands in at this height, so the scroll
@@ -28,7 +31,21 @@ const statDetail = 'mt-0.5 text-xs text-stone font-medium'
 // card's margins and gap (ml-10, mr-8, ml-8: 26 steps) and the text column,
 // unless the text beside it, 243px on average, is taller.
 const skipLayoutOutOfView =
-  '[content-visibility:auto] [contain-intrinsic-size:auto_calc(100vw*2/3+280px)] md:[contain-intrinsic-size:auto_max(243px,(min(100vw,var(--container-page))-var(--container-card-text)-var(--spacing)*26)*2/3)]'
+  '[content-visibility:auto] [contain-intrinsic-size:auto_calc(100vw*2/3+280px)]'
+const skipLayoutOutOfViewInList =
+  'md:[contain-intrinsic-size:auto_max(243px,(min(100vw,var(--container-page))-var(--container-card-text)-var(--spacing)*26)*2/3)]'
+// A grid card lays its parts out on rows its whole row of cards shares, so the
+// prices and the figures line up across it. Containment would cut it off from
+// them, and a card a third as tall has less to skip.
+const sharedRowsInGrid =
+  'md:grid md:grid-rows-subgrid md:row-span-5 md:[content-visibility:visible]'
+
+// What CarList's grid resolves to: from md two columns of the page less its
+// margins (ml-10, mr-8) and the gap (gap-x-6), from lg three of 1024px
+const sizes = {
+  list: '(max-width: 767px) 100vw, (max-width: 1023px) 40vw, 540px',
+  grid: '(max-width: 767px) 100vw, (max-width: 1023px) calc(50vw - 48px), 302px',
+}
 
 const getDriveLabel = (drive: Drive) => {
   switch (drive) {
@@ -46,7 +63,9 @@ const NewCar: FunctionComponent<Props> = ({
   showValue,
   showSeats,
   preload,
+  view = 'list',
 }) => {
+  const grid = view === 'grid'
   const { id: carId, priceWithGrant, hasGrant } = car
 
   // Not agree(): sæti is neuter and reads the same at every count. A car
@@ -61,39 +80,75 @@ const NewCar: FunctionComponent<Props> = ({
       // MiniCar scrolls here from the chat, and moves focus with it
       tabIndex={-1}
       className={clsx(
-        'mb-8 md:flex md:m-0 md:mx-8 md:mb-10 md:ml-10 md:items-center',
+        'mb-8',
         skipLayoutOutOfView,
+        grid
+          ? ['md:mb-10', sharedRowsInGrid]
+          : [
+              'md:flex md:m-0 md:mx-8 md:mb-10 md:ml-10 md:items-center',
+              skipLayoutOutOfViewInList,
+            ],
       )}
     >
-      <div className="md:w-[40%] md:grow md:self-center">
+      <div className={clsx(!grid && 'md:w-[40%] md:grow md:self-center')}>
         <Image
           preload={preload}
           alt=""
-          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 40vw, 540px"
+          sizes={sizes[view]}
           src={`/images/${car.heroImageName}.jpg`}
           width={1920}
           height={1280}
-          className="w-full h-auto md:rounded-sm"
+          className={clsx(
+            'w-full h-auto',
+            grid ? 'md:rounded-lg' : 'md:rounded-sm',
+          )}
         />
       </div>
 
-      <div className="py-2.5 px-(--gutter) mx-auto max-w-column xs:py-4.5 md:m-0 md:ml-8 md:p-0 md:w-[330px] md:max-w-card-text md:shrink-0 md:grow">
-        {car.expectedDelivery && (
-          <div className="mb-0.5 text-base font-medium text-stone">
-            Væntanlegur {car.expectedDelivery.toLowerCase()}
-          </div>
+      <div
+        className={clsx(
+          'py-2.5 px-(--gutter) mx-auto max-w-column xs:py-4.5',
+          grid
+            ? 'md:contents'
+            : 'md:m-0 md:ml-8 md:p-0 md:w-[330px] md:max-w-card-text md:shrink-0 md:grow',
         )}
+      >
+        <div className={clsx(grid && 'md:pt-3')}>
+          {car.expectedDelivery && (
+            <div
+              className={clsx(
+                'mb-0.5 text-base font-medium text-stone',
+                grid && 'md:text-sm',
+              )}
+            >
+              Væntanlegur {car.expectedDelivery.toLowerCase()}
+            </div>
+          )}
 
-        <h2 className="m-0 font-semibold text-display">
-          <span>{car.make}</span>{' '}
-          <span className="font-normal">{car.model}</span>
-          <span className="block font-medium text-base text-stone -mt-px mb-2">
-            {subTitle}
-          </span>
-        </h2>
+          <h2
+            className={clsx(
+              'm-0 font-semibold text-display',
+              grid && 'md:text-xl',
+            )}
+          >
+            <span>{car.make}</span>{' '}
+            <span className="font-normal">{car.model}</span>
+            <span
+              className={clsx(
+                'block font-medium text-base text-stone -mt-px mb-2',
+                grid && 'md:mt-0 md:text-sm',
+              )}
+            >
+              {subTitle}
+            </span>
+          </h2>
+        </div>
 
         <LinkPill
-          className="mt-2 -ml-0.5"
+          className={clsx(
+            'mt-2 -ml-0.5',
+            grid && 'md:mt-0 md:justify-self-start',
+          )}
           href={car.sellerUrl}
           external
           extra={
@@ -117,10 +172,17 @@ const NewCar: FunctionComponent<Props> = ({
           {!car.expectedDelivery && ' ↗'}
         </LinkPill>
 
-        <div className="flex mb-4 mt-6 max-w-[320px] justify-between xs:max-w-[360px]">
+        <div
+          className={clsx(
+            'flex mb-4 mt-6 max-w-[320px] justify-between xs:max-w-[360px]',
+            grid && 'md:mt-4 md:mb-3 md:max-w-none',
+          )}
+        >
           <div className="mr-2 xs:mr-4 basis-1/3">
             <div className={statLabel}>0-100 km/klst</div>
-            <div className={statValue}>{car.acceleration.toFixed(1)}s</div>
+            <div className={clsx(statValue, grid && statValueInGrid)}>
+              {car.acceleration.toFixed(1)}s
+            </div>
             <div
               className={statDetail}
               title={`Afl (${Math.round(car.power * 1.34102)} hö)`}
@@ -131,7 +193,9 @@ const NewCar: FunctionComponent<Props> = ({
 
           <div className="mr-2 xs:mr-4 basis-1/3 shrink-0">
             <div className={statLabel}>Rafhlaða</div>
-            <div className={statValue}>{car.capacity} kWh</div>
+            <div className={clsx(statValue, grid && statValueInGrid)}>
+              {car.capacity} kWh
+            </div>
             <div
               className={statDetail}
               title={`Meðaldrægniaukning á milli 10%-80% á hröðustu hleðslu (${car.timeToCharge10To80} min)`}
@@ -146,7 +210,7 @@ const NewCar: FunctionComponent<Props> = ({
 
           <div className="mr-0 basis-1/3" title="Samkvæmt WLTP prófunum">
             <div className={statLabel}>Drægni</div>
-            <div className={statValue}>
+            <div className={clsx(statValue, grid && statValueInGrid)}>
               {car.range} km<span className="sr-only"> samkvæmt WLTP</span>
             </div>
             <div className={statDetail} title={getDriveLabel(car.drive)}>
@@ -158,7 +222,10 @@ const NewCar: FunctionComponent<Props> = ({
 
         {car.evDatabaseUrl && (
           <a
-            className="inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-tint"
+            className={clsx(
+              'inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-tint',
+              grid && 'md:justify-self-start md:self-start md:text-xs',
+            )}
             target="_blank"
             href={car.evDatabaseUrl}
             rel="noopener"

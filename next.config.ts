@@ -2,13 +2,15 @@ import type { NextConfig } from 'next'
 
 import { filterUrlKeys } from './modules/list/filters'
 import { sortingUrlKeys } from './modules/list/sorting'
+import { viewUrlKeys } from './modules/list/view'
 
-// Every parameter that changes what the list shows, read from the tables nuqs
-// reads, so a new filter is rendered per request and cached at the CDN without
-// being listed here
+// Every parameter that changes what the list shows, or how, read from the
+// tables nuqs reads, so a new filter is rendered per request and cached at the
+// CDN without being listed here
 const listQueryKeys = [
   ...Object.values(sortingUrlKeys),
   ...Object.values(filterUrlKeys),
+  ...Object.values(viewUrlKeys),
 ]
 
 // One rule per key, as the conditions within a rule must all hold
