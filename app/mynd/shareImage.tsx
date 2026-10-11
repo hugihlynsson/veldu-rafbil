@@ -107,80 +107,89 @@ export const shareImage = async (car: Car) => {
     ?.cells[0].detail
 
   return new ImageResponse(
-    <div style={{ ...frame, alignItems: 'center', padding: margin, gap: 48 }}>
-      {/* An image drawn to a PNG, which next/image has no part in */}
-      {/* oxlint-disable-next-line nextjs/no-img-element */}
-      <img
-        alt=""
-        src={src}
-        width={510}
-        height={340}
-        style={{ borderRadius: 16, objectFit: 'cover' }}
-      />
-      <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <div style={{ display: 'flex', marginBottom: 36 }}>
-          <Logo width={190} />
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            columnGap: 14,
-            fontSize: 52,
-            lineHeight: 1.1,
-          }}
-        >
-          <span style={{ fontWeight: 600 }}>{car.make}</span>
-          <span>{car.model}</span>
-        </div>
-        {subTitle && (
-          <div style={{ fontSize: 28, color: stone, marginTop: 6 }}>
-            {subTitle}
+    <div
+      style={{
+        ...frame,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: margin,
+      }}
+    >
+      <div style={{ display: 'flex', marginBottom: 28 }}>
+        <Logo width={190} />
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 48 }}>
+        {/* An image drawn to a PNG, which next/image has no part in */}
+        {/* oxlint-disable-next-line nextjs/no-img-element */}
+        <img
+          alt=""
+          src={src}
+          width={540}
+          height={360}
+          style={{ borderRadius: 16, objectFit: 'cover' }}
+        />
+        <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              columnGap: 14,
+              fontSize: 52,
+              lineHeight: 1.1,
+            }}
+          >
+            <span style={{ fontWeight: 600 }}>{car.make}</span>
+            <span>{car.model}</span>
           </div>
-        )}
-        <div
-          style={{
-            display: 'flex',
-            alignSelf: 'flex-start',
-            alignItems: 'center',
-            gap: 12,
-            marginTop: 24,
-            padding: '8px 10px 8px 22px',
-            borderRadius: 999,
-            background: '#eee',
-            fontSize: 28,
-            fontWeight: 600,
-          }}
-        >
-          {`${addDecimalSeparators(car.priceWithGrant)} kr.`}
-          {priceBadge && (
-            <span
-              style={{
-                padding: '4px 12px',
-                borderRadius: 999,
-                background: '#fff',
-                color: stone,
-                fontSize: 15,
-                letterSpacing: 0.5,
-                textTransform: 'uppercase',
-              }}
-            >
-              {priceBadge}
-            </span>
+          {subTitle && (
+            <div style={{ fontSize: 28, color: stone, marginTop: 6 }}>
+              {subTitle}
+            </div>
           )}
-        </div>
-        <div style={{ display: 'flex', gap: 36, marginTop: 36 }}>
-          <Stat
-            label="0-100 km/klst"
-            value={`${car.acceleration.toFixed(1)}s`}
-            detail={`${car.power} kW`}
-          />
-          <Stat
-            label="Rafhlaða"
-            value={`${car.capacity} kWh`}
-            detail={`${formatKmPerMinute(car.kmPerMinuteCharged)} km/min`}
-          />
-          <Stat label="Drægni" value={`${car.range} km`} detail={car.drive} />
+          <div
+            style={{
+              display: 'flex',
+              alignSelf: 'flex-start',
+              alignItems: 'center',
+              gap: 12,
+              marginTop: 24,
+              padding: '8px 10px 8px 22px',
+              borderRadius: 999,
+              background: '#eee',
+              fontSize: 28,
+              fontWeight: 600,
+            }}
+          >
+            {`${addDecimalSeparators(car.priceWithGrant)} kr.`}
+            {priceBadge && (
+              <span
+                style={{
+                  padding: '4px 12px',
+                  borderRadius: 999,
+                  background: '#fff',
+                  color: stone,
+                  fontSize: 15,
+                  letterSpacing: 0.5,
+                  textTransform: 'uppercase',
+                }}
+              >
+                {priceBadge}
+              </span>
+            )}
+          </div>
+          <div style={{ display: 'flex', gap: 36, marginTop: 36 }}>
+            <Stat
+              label="0-100 km/klst"
+              value={`${car.acceleration.toFixed(1)}s`}
+              detail={`${car.power} kW`}
+            />
+            <Stat
+              label="Rafhlaða"
+              value={`${car.capacity} kWh`}
+              detail={`${formatKmPerMinute(car.kmPerMinuteCharged)} km/min`}
+            />
+            <Stat label="Drægni" value={`${car.range} km`} detail={car.drive} />
+          </div>
         </div>
       </div>
     </div>,
