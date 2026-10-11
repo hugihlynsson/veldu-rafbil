@@ -142,10 +142,10 @@ describe('describeStanding', () => {
   it('says in words where a car stands on each figure', () => {
     // 2 of the other 5 have less range, and 3 cost more
     const standing = describeStanding(middle, field)
-    expect(standing).toContain('Drægni — af öllum: drífur styttra en flestir')
-    expect(standing).toContain('Verð — af öllum: ódýrari en flestir')
+    expect(standing).toContain('Drægni — af öllum: drífur fremur stutt')
+    expect(standing).toContain('Verð — af öllum: fremur ódýr')
     expect(describeStanding(field[0], field)).toContain(
-      'Verð — af öllum: ódýrastur',
+      'Verð — af öllum: ódýrastur allra',
     )
   })
 
@@ -156,7 +156,7 @@ describe('describeStanding', () => {
 
   it('weighs it against cars at a similar price too, when there are enough', () => {
     expect(describeStanding(middle, field)).toContain(
-      'á svipuðu verði: drífur styttra en flestir',
+      'miðað við aðra á svipuðu verði: drífur styttra en flestir',
     )
     expect(describeStanding(middle, field.slice(0, 4))).not.toContain(
       'svipuðu verði',

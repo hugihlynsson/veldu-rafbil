@@ -14,7 +14,7 @@ const writingRules = `Þegar þú skrifar:
 - Reiknaðu aldrei sjálf(ur). Munurinn á tölunum er reiknaður fyrir þig: taktu hann orðréttan. Til að bera saman tölur úr fetchCarDetails, nefndu tölurnar sjálfar frekar en muninn á þeim.
 - Verðin eru eftir ${grantAmountText} ríkisstyrk þar sem hann á við.
 - Drægnin er samkvæmt WLTP. Í íslenskum vetri er hún nær ${Math.round(realRangeLowFactor * 100)}–${Math.round(realRangeHighFactor * 100)}% af því.
-- Tölur taktu aðeins úr gögnunum hér að neðan og því sem fetchCarDetails skilar, aldrei úr minni. Almenna þekkingu á bílunum og framleiðendum þeirra, til dæmis hvar merki stendur í gæðum og verði eða hvernig drifið hagar sér í snjó, máttu nota í hófi þar sem hún hjálpar kaupandanum.
+- Tölur taktu aðeins úr gögnunum hér að neðan og því sem fetchCarDetails skilar, aldrei úr minni. Notaðu óhikað almenna þekkingu á bílnum og framleiðandanum, til dæmis hvar merkið stendur í gæðum og verði, fyrir hvað það er þekkt, hvernig bíllinn er í akstri eða hvernig drifið hagar sér í snjó: það er oft það sem kaupandi vill helst vita og tölurnar sýna ekki.
 - Skrifaðu tölur að íslenskum sið: komma í tugabrotum (7,7 s) og punktur í þúsundum (100.000 kr.).
 - Nefndu hleðsluhraða aldrei í tölum, hvorki í km/mín, kW né mínútum: fáir tengja við þær. Segðu frekar að hann hlaði hraðar eða hægar en aðrir, eða hve miklu styttri eða lengri hleðslustoppin eru, eins og það er gefið.
 - Gættu að beygingum og samræmi („hann er góð kaup“, ekki „hann eru“), og notaðu orð um bíla en ekki fólk: lágur eða hár, ekki lágvaxinn eða hávaxinn.
@@ -32,7 +32,7 @@ const carSystemPrompt = `${intro} Einhver hefur opnað síðu bílsins hér að 
 Áður en þú skrifar:
 - Sæktu nánari upplýsingar um bílinn og svipuðu bílana með fetchCarDetails, með ev-database slóðinni sem fylgir hverjum þeirra hér að neðan, til að vita stærð þeirra, veghæð, farangursrými, framskott og dráttargetu. Bíll sem hefur enga slóð hefur engar slíkar upplýsingar.
 - Gefðu stærð, veghæð, rými og dráttargetu aðeins meira vægi þar sem bíllinn sker sig úr frá svipuðu bílunum: það sýna tölurnar á síðunni ekki.
-- Lestu hvar bíllinn stendur á listanum: meðal allra rafbílanna sem eru seldir á Íslandi og meðal þeirra sem kosta svipað. Þar sést hvað er í raun sérstakt við hann og hvað er bara venjulegt. Það sem er í meðallagi er ekki styrkleiki. Staðan er sögð í orðum, til dæmis „meðal þeirra ódýrustu“ eða „dýrari en flestir“: segðu hana þannig líka, aldrei með prósentum, sæti í röð eða fjölda bíla. Orðaðu hana eðlilega og segðu við hvað er miðað eins og fólk talar, til dæmis „af rafbílum hér á landi“ eða „í sínum verðflokki“.
+- Lestu hvar bíllinn stendur á listanum: meðal allra rafbílanna sem eru seldir á Íslandi og meðal þeirra sem kosta svipað. Þar sést hvað er í raun sérstakt við hann og hvað er bara venjulegt. Það sem er í meðallagi er ekki styrkleiki. Staðan er sögð í orðum, aldrei með prósentum, sæti í röð eða fjölda bíla, og þú segir hana þannig líka. Stöðuna af öllum bílunum segirðu sem lýsingu á bílnum sjálfum, til dæmis „hann hleður fremur hægt“, ekki sem samanburð við alla hina. Samanburð við aðra gerirðu við bíla á svipuðu verði, til dæmis „miðað við aðra í sínum verðflokki“.
 
 Það sem skiptir íslenska kaupendur mestu, eftir því sem á við þennan bíl:
 - Hvort drægnin dugar í vetrarkulda, á milli landshluta og ekki bara innanbæjar.
@@ -52,7 +52,9 @@ Endaðu á stuttri niðurstöðu um þennan bíl, sem má vera lokasetning þri�
 
 Lesandinn er að velja á milli bíla, svo skrifaðu um það sem greinir þennan bíl frá hinum frekar en það sem á við um flesta rafbíla. Hver setning á helst að segja eitthvað sem ætti ekki jafn vel við um svipuðu bílana.
 
-Vertu heiðarleg(ur). Það sem bíllinn gerir í meðallagi gerirðu ekki að kosti: segðu það eða slepptu því. Notaðu ekki orð eins og "einstakur", "framúrskarandi" eða "frábær" nema staða hans á listanum sýni að hann skari fram úr. Um innréttingu, hljóðvist, hugbúnað og áreiðanleika eru engin gögn hér: segðu aðeins það sem almennt er vitað um merkið, og ekki sem staðreynd um þennan tiltekna bíl. Nefndu bíla með tegund og gerð, til dæmis Kia EV3.`
+Vertu heiðarleg(ur). Það sem bíllinn gerir í meðallagi gerirðu ekki að kosti: segðu það eða slepptu því. Notaðu ekki orð eins og "einstakur", "framúrskarandi" eða "frábær" nema staða hans á listanum sýni að hann skari fram úr. Um innréttingu, hljóðvist, hugbúnað og áreiðanleika eru engin gögn hér, en það sem almennt er vitað um merkið og bílinn máttu segja. Nefndu bíla með tegund og gerð, til dæmis Kia EV3.`
+
+type Standing = 'first' | 'top' | 'above' | 'below' | 'bottom'
 
 interface Metric {
   label: string
@@ -70,8 +72,13 @@ interface Metric {
       }
     // A difference with a reading of its own rather than a gap
     | ((other: Car, car: Car) => string | undefined)
-  /** Where a car stands among others on it, from first of all to among the worst */
-  standing: Record<'first' | 'top' | 'above' | 'below' | 'bottom', string>
+  /** Where a car stands among those at its price, against them */
+  standing: Record<Standing, string>
+  /**
+   * Where it stands among all of them, said of the car alone: "hleður fremur
+   * hægt" reads as advice, "hleður hægar en flestir" as a league table
+   */
+  plain: Record<Standing, string>
 }
 
 // With a decimal comma, as the model would otherwise copy the point into
@@ -121,6 +128,13 @@ const metrics: Metric[] = [
       below: 'dýrari en flestir',
       bottom: 'meðal þeirra dýrustu',
     },
+    plain: {
+      first: 'ódýrastur allra',
+      top: 'mjög ódýr',
+      above: 'fremur ódýr',
+      below: 'fremur dýr',
+      bottom: 'mjög dýr',
+    },
   },
   {
     label: 'Drægni',
@@ -137,6 +151,13 @@ const metrics: Metric[] = [
       above: 'drífur lengra en flestir',
       below: 'drífur styttra en flestir',
       bottom: 'meðal þeirra sem drífa styst',
+    },
+    plain: {
+      first: 'drífur lengst allra',
+      top: 'drífur mjög langt',
+      above: 'drífur fremur langt',
+      below: 'drífur fremur stutt',
+      bottom: 'drífur mjög stutt',
     },
   },
   {
@@ -155,6 +176,13 @@ const metrics: Metric[] = [
       below: 'dýrari á hvern km drægni en flestir',
       bottom: 'meðal þeirra dýrustu á hvern km drægni',
     },
+    plain: {
+      first: 'ódýrastur allra á hvern km drægni',
+      top: 'mjög ódýr á hvern km drægni',
+      above: 'fremur ódýr á hvern km drægni',
+      below: 'fremur dýr á hvern km drægni',
+      bottom: 'mjög dýr á hvern km drægni',
+    },
   },
   {
     label: 'Hraðhleðsla',
@@ -167,6 +195,13 @@ const metrics: Metric[] = [
       above: 'hleður hraðar en flestir',
       below: 'hleður hægar en flestir',
       bottom: 'meðal þeirra sem hlaða hægast',
+    },
+    plain: {
+      first: 'hleður hraðast allra',
+      top: 'hleður mjög hratt',
+      above: 'hleður fremur hratt',
+      below: 'hleður fremur hægt',
+      bottom: 'hleður mjög hægt',
     },
   },
   {
@@ -185,6 +220,13 @@ const metrics: Metric[] = [
       below: 'með minni rafhlöðu en flestir',
       bottom: 'með einni af minnstu rafhlöðunum',
     },
+    plain: {
+      first: 'með stærstu rafhlöðuna af öllum',
+      top: 'með mjög stóra rafhlöðu',
+      above: 'með fremur stóra rafhlöðu',
+      below: 'með fremur litla rafhlöðu',
+      bottom: 'með mjög litla rafhlöðu',
+    },
   },
   {
     label: 'Hröðun 0-100 km/klst',
@@ -202,6 +244,13 @@ const metrics: Metric[] = [
       below: 'hægari en flestir',
       bottom: 'meðal þeirra hægustu',
     },
+    plain: {
+      first: 'sneggstur allra',
+      top: 'mjög snöggur',
+      above: 'fremur snöggur',
+      below: 'fremur hægur',
+      bottom: 'mjög hægur',
+    },
   },
   {
     label: 'Afl',
@@ -218,6 +267,13 @@ const metrics: Metric[] = [
       above: 'aflmeiri en flestir',
       below: 'aflminni en flestir',
       bottom: 'meðal þeirra aflminnstu',
+    },
+    plain: {
+      first: 'aflmestur allra',
+      top: 'mjög aflmikill',
+      above: 'fremur aflmikill',
+      below: 'fremur aflítill',
+      bottom: 'mjög aflítill',
     },
   },
 ]
@@ -264,6 +320,7 @@ const MIN_BAND = 5
 // In words rather than as a share, since a share is what the model would
 // quote, and "ahead of 98% of them" reads as a spec sheet, not as advice
 const standingAmong = (
+  words: Record<Standing, string>,
   metric: Metric,
   car: Car,
   others: ReadonlyArray<Car>,
@@ -275,12 +332,12 @@ const standingAmong = (
         : metric.value(car) > metric.value(other),
     ).length / others.length
 
-  if (beaten === 1) return metric.standing.first
-  if (beaten >= 0.85) return metric.standing.top
-  if (beaten >= 0.6) return metric.standing.above
+  if (beaten === 1) return words.first
+  if (beaten >= 0.85) return words.top
+  if (beaten >= 0.6) return words.above
   if (beaten > 0.4) return 'í meðallagi'
-  if (beaten > 0.15) return metric.standing.below
-  return metric.standing.bottom
+  if (beaten > 0.15) return words.below
+  return words.bottom
 }
 
 /**
@@ -302,11 +359,11 @@ export const describeStanding = (
 
   return metrics
     .map((metric) => {
-      const overall = `af öllum: ${standingAmong(metric, car, others)}`
+      const overall = `af öllum: ${standingAmong(metric.plain, metric, car, others)}`
       // Price is what the band is cut by, so it says nothing within it
       const nearby =
         withBand && metric.label !== 'Verð'
-          ? `; á svipuðu verði: ${standingAmong(metric, car, band)}`
+          ? `; miðað við aðra á svipuðu verði: ${standingAmong(metric.standing, metric, car, band)}`
           : ''
       return `- ${metric.label} — ${overall}${nearby}`
     })
