@@ -19,6 +19,10 @@ class NotWritten extends Error {}
 const ordered = (cars: ReadonlyArray<Car>) =>
   cars.toSorted((a, b) => carSlug(a).localeCompare(carSlug(b)))
 
+// Written once per car and kept, so it can afford to think far longer than
+// the chat, whose every answer waits on its thinking
+const thinkingLevel = 'high'
+
 /**
  * Everything the model is given, hashed: a verdict lasts as long as the
  * figures, rivals, prompt and model it was written from, through any number
@@ -27,7 +31,7 @@ const ordered = (cars: ReadonlyArray<Car>) =>
 const keyOf = (cars: ReadonlyArray<Car>): string => {
   const { system, prompt } = verdictPrompt(ordered(cars))
   return createHash('sha256')
-    .update(`${advisorModel}\n${system}\n${prompt}`)
+    .update(`${advisorModel} ${thinkingLevel}\n${system}\n${prompt}`)
     .digest('hex')
 }
 
@@ -92,8 +96,7 @@ const write = async (
     },
     stopWhen: stepCountIs(compared.length + 2),
     providerOptions: {
-      // Written once and kept, so it can afford to think longer than the chat
-      google: { thinkingConfig: { thinkingLevel: 'medium' } },
+      google: { thinkingConfig: { thinkingLevel } },
     },
     maxOutputTokens: 16_384,
     abortSignal: AbortSignal.timeout(TIMEOUT_MS),
