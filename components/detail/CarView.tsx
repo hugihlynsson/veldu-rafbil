@@ -29,8 +29,8 @@ const figureOrder: SpecKey[] = [
   'range',
   'acceleration',
   'capacity',
-  'power',
   'seats',
+  'power',
   'charging',
 ]
 
