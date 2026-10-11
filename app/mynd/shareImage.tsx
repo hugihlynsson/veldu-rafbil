@@ -3,6 +3,7 @@ import path from 'node:path'
 import { ImageResponse } from 'next/og'
 
 import type { Car } from '@/modules/data/cars'
+import { carName } from '@/modules/data/getCarId'
 import { shareImageSize as size } from '@/modules/detail/paths'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { formatKmPerMinute } from '@/modules/data/getKmPerMinutesCharged'
@@ -24,6 +25,7 @@ const photo = async (name: string) =>
     await readFile(path.join(process.cwd(), `public/images/${name}.jpg`))
   ).toString('base64')}`
 
+const gap = 32
 const margin = 56
 
 const options = async () => {
@@ -99,7 +101,7 @@ const Stat = ({
  * list shows it on a wide screen, so the preview reads as the site, drawn
  * larger for the size a chat shows it at
  */
-export const shareImage = async (car: Car) => {
+const carImage = async (car: Car) => {
   const src = await photo(car.heroImageName)
   const subTitle = [
     car.subModel,
@@ -207,3 +209,84 @@ export const shareImage = async (car: Car) => {
     await options(),
   )
 }
+
+/** The picture a shared comparison link unfurls into: the cars side by side */
+const comparisonImage = async (cars: ReadonlyArray<Car>) => {
+  const photos = await Promise.all(cars.map((car) => photo(car.heroImageName)))
+  const width =
+    (size.width - margin * 2 - gap * Math.max(cars.length - 1, 0)) /
+    Math.max(cars.length, 1)
+  const crowded = cars.length > 2
+  // Cropped to fill the frame: two at their own 3:2 crowd the heading, and
+  // four leave half the picture empty
+  const height = crowded ? 260 : 310
+
+  return new ImageResponse(
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: `48px ${margin}px`,
+        background: '#fff',
+        color: '#111',
+        fontFamily: 'Inter',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          fontSize: 28,
+        }}
+      >
+        <Logo width={190} />
+        <span style={{ color: stone }}>Samanburður</span>
+      </div>
+
+      <div style={{ display: 'flex', gap }}>
+        {cars.map((car, index) => (
+          <div
+            key={car.id}
+            style={{ display: 'flex', flexDirection: 'column', width }}
+          >
+            {/* An image drawn to a PNG, which next/image has no part in */}
+            {/* oxlint-disable-next-line nextjs/no-img-element */}
+            <img
+              alt=""
+              src={photos[index]}
+              width={width}
+              height={height}
+              style={{ borderRadius: 16, objectFit: 'cover' }}
+            />
+            {/* The name as the cards set it, the make in bold */}
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                columnGap: crowded ? 9 : 12,
+                marginTop: 20,
+                fontSize: crowded ? 32 : 44,
+                lineHeight: 1.1,
+              }}
+            >
+              <span style={{ fontWeight: 600 }}>{car.make}</span>
+              <span>{carName(car, cars).replace(`${car.make} `, '')}</span>
+            </div>
+            <div style={{ marginTop: 10, fontSize: crowded ? 24 : 30 }}>
+              {`${addDecimalSeparators(car.priceWithGrant)} kr.`}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>,
+    await options(),
+  )
+}
+
+/** The picture the page about these cars unfurls into */
+export const shareImage = (cars: ReadonlyArray<Car>) =>
+  cars.length === 1 ? carImage(cars[0]) : comparisonImage(cars)

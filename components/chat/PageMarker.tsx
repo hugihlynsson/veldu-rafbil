@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import Link from 'next/link'
 
 import { carName } from '@/modules/data/getCarId'
-import { carPath } from '@/modules/detail/paths'
+import { pagePath } from '@/modules/detail/paths'
 import { resolveSlugs } from '@/modules/detail/slugs'
 
 interface Props {
@@ -18,10 +18,10 @@ interface Props {
 }
 
 /**
- * Where a car's page came into the conversation, under the question that
- * brought it, so one that reads as being about "him" names the car it means.
- * On a page not yet asked about, it waits at the foot of the chat for the
- * question that will bring it.
+ * Where a car's page or a comparison came into the conversation, under the
+ * question that brought it, so one that reads as being about "him" or "them"
+ * names the cars it means. On a page not yet asked about, it waits at the foot
+ * of the chat for the question that will bring it.
  */
 const PageMarker: React.FunctionComponent<Props> = ({
   slugs,
@@ -38,7 +38,9 @@ const PageMarker: React.FunctionComponent<Props> = ({
     'max-w-full py-1 px-3 rounded-2xl bg-cloud text-xs leading-snug font-medium text-stone no-underline text-balance'
   const label = (
     <>
-      <span className="font-semibold">Bíll:</span>{' '}
+      <span className="font-semibold">
+        {cars.length === 1 ? 'Bíll:' : 'Samanburður:'}
+      </span>{' '}
       {cars.map((car) => carName(car, cars)).join(', ')}
     </>
   )
@@ -57,7 +59,7 @@ const PageMarker: React.FunctionComponent<Props> = ({
         <span className={chip}>{label}</span>
       ) : (
         <Link
-          href={carPath(resolved.slugs[0])}
+          href={pagePath(resolved.slugs)}
           className={clsx(
             chip,
             'transition-colors duration-100 hover:text-tint hover:bg-smoke',

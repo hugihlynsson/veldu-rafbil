@@ -8,5 +8,5 @@ export async function GET(
 ) {
   const { cars } = resolveSlugs([decodeURIComponent((await params).slug)])
   if (cars.length === 0) return new Response(null, { status: 404 })
-  return shareImage(cars[0])
+  return shareImage(cars)
 }

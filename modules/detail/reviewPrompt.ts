@@ -8,16 +8,17 @@ import { grantAmountText } from '@/modules/copy/grantCopy'
 import { driveLabels } from '@/modules/data/drives'
 import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 
-const writingRules = `Þegar þú skrifar:
+/** How the model writes about cars, with where its reader finds the figures */
+export const writingRules = (figuresAre: string) => `Þegar þú skrifar:
 - Skrifaðu á eðlilegri, lipurri íslensku, í samtalstón, eins og fróður vinur en ekki sölumaður.
-- Ekki endursegja tölurnar: þær eru í töflu beint fyrir ofan textann þinn. Segðu frekar hvað þær þýða í daglegu lífi.
+- Ekki endursegja tölurnar: þær eru í töflu ${figuresAre}. Segðu frekar hvað þær þýða í daglegu lífi.
 - Reiknaðu aldrei sjálf(ur). Munurinn á tölunum er reiknaður fyrir þig: taktu hann orðréttan. Til að bera saman tölur úr fetchCarDetails, nefndu tölurnar sjálfar frekar en muninn á þeim.
 - Verðin eru eftir ${grantAmountText} ríkisstyrk þar sem hann á við.
 - Drægnin er samkvæmt WLTP. Í íslenskum vetri er hún nær ${Math.round(realRangeLowFactor * 100)}–${Math.round(realRangeHighFactor * 100)}% af því.
 - Byggðu aðeins á gögnunum hér að neðan og því sem fetchCarDetails skilar, ekki á því sem þú heldur að þú vitir um bílana.
 - Ekkert markdown, engin feitletrun, engir listar, engar fyrirsagnir.`
 
-const intro = `Þú ert ráðgjafi Veldu Rafbíl, íslensks vefs sem ber saman alla 100% rafdrifna bíla sem eru seldir nýir á Íslandi.`
+export const intro = `Þú ert ráðgjafi Veldu Rafbíl, íslensks vefs sem ber saman alla 100% rafdrifna bíla sem eru seldir nýir á Íslandi.`
 
 // The first thing anyone reads about a car on its page, under its figures,
 // so it is written to orient: what the car is, what it is good at, and what
@@ -37,7 +38,7 @@ const carSystemPrompt = `${intro} Einhver hefur opnað síðu bílsins hér að 
 - Verðið eftir styrk og hvað maður fær fyrir það, til dæmis verð á hvern km drægni.
 Veldu það sem segir mest um þennan bíl. Ekki fara yfir allt.
 
-${writingRules}
+${writingRules('beint fyrir ofan textann þinn')}
 
 Svaraðu með um 190 orðum í fjórum stuttum efnisgreinum og engu öðru:
 1. Hvers konar bíll þetta er og hverjum hann hentar best, í einni eða tveimur setningum.
@@ -204,10 +205,10 @@ const describeMetric = (metric: Metric, compared: ReadonlyArray<Car>) => {
   return `${metric.label}: ${entries.join(', ')}`
 }
 
-const listCars = (cars: ReadonlyArray<Car>) =>
+export const listCars = (cars: ReadonlyArray<Car>) =>
   cars.map((car) => `- ${describeCar(car)}`).join('\n')
 
-const listGaps = (cars: ReadonlyArray<Car>) =>
+export const listGaps = (cars: ReadonlyArray<Car>) =>
   metrics.map((metric) => `- ${describeMetric(metric, cars)}`).join('\n')
 
 // Within this much of the car's price either way, a car is one a buyer
