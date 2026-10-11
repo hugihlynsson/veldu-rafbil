@@ -51,9 +51,9 @@ describe('carFacts', () => {
 
   // The model copies a gap; left to subtract, it gets one wrong now and then
   it('works out every gap for the model', () => {
-    expect(facts).toContain('Tesla Model Y 6.029.990 kr. (239.213 kr. dýrari)')
+    expect(facts).toContain('Tesla Model Y 6.029.990 kr. (240.000 kr. dýrari)')
     expect(facts).toContain('Tesla Model Y 505 km (100 km minni drægni)')
-    expect(facts).toContain('Kia EV3 Long Range 7.7 s (0.5 s hægari)')
+    expect(facts).toContain('Kia EV3 Long Range 7,7 s (0,5 s hægari)')
   })
 
   it('gives the model each page it may look a car up on', () => {
@@ -120,10 +120,10 @@ describe('describeStanding', () => {
   it('says in words where a car stands on each figure', () => {
     // 2 of the other 5 have less range, and 3 cost more
     const standing = describeStanding(middle, field)
-    expect(standing).toContain('Drægni: drífur styttra en flestir á listanum')
-    expect(standing).toContain('Verð: ódýrari en flestir á listanum')
+    expect(standing).toContain('Drægni — af öllum: drífur styttra en flestir')
+    expect(standing).toContain('Verð — af öllum: ódýrari en flestir')
     expect(describeStanding(field[0], field)).toContain(
-      'Verð: ódýrastur á listanum',
+      'Verð — af öllum: ódýrastur',
     )
   })
 
@@ -134,7 +134,7 @@ describe('describeStanding', () => {
 
   it('weighs it against cars at a similar price too, when there are enough', () => {
     expect(describeStanding(middle, field)).toContain(
-      'drífur styttra en flestir meðal bíla á svipuðu verði',
+      'á svipuðu verði: drífur styttra en flestir',
     )
     expect(describeStanding(middle, field.slice(0, 4))).not.toContain(
       'svipuðu verði',
@@ -143,7 +143,7 @@ describe('describeStanding', () => {
 
   it('leaves price out of the comparison at a similar price', () => {
     expect(describeStanding(middle, field)).toMatch(
-      /Verð: [^\n;]*listanum öllum\n/,
+      /Verð — af öllum: [^\n;]*\n/,
     )
   })
 })

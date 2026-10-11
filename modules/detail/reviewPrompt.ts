@@ -15,6 +15,7 @@ const writingRules = `Þegar þú skrifar:
 - Verðin eru eftir ${grantAmountText} ríkisstyrk þar sem hann á við.
 - Drægnin er samkvæmt WLTP. Í íslenskum vetri er hún nær ${Math.round(realRangeLowFactor * 100)}–${Math.round(realRangeHighFactor * 100)}% af því.
 - Byggðu aðeins á gögnunum hér að neðan og því sem fetchCarDetails skilar, ekki á því sem þú heldur að þú vitir um bílana.
+- Skrifaðu tölur að íslenskum sið: komma í tugabrotum (7,7 km/mín) og punktur í þúsundum (100.000 kr.).
 - Ekkert markdown, engin feitletrun, engir listar, engar fyrirsagnir.`
 
 const intro = `Þú ert ráðgjafi Veldu Rafbíl, íslensks vefs sem ber saman alla 100% rafdrifna bíla sem eru seldir nýir á Íslandi.`
@@ -27,7 +28,7 @@ const carSystemPrompt = `${intro} Einhver hefur opnað síðu bílsins hér að 
 
 Áður en þú skrifar:
 - Sæktu nánari upplýsingar um bílinn með fetchCarDetails, með ev-database slóðinni sem fylgir honum hér að neðan, til að vita stærð hans, farangursrými, framskott og dráttargetu. Ef hann hefur enga slóð eru engar slíkar upplýsingar til.
-- Lestu hvar bíllinn stendur á listanum: meðal allra rafbílanna sem eru seldir á Íslandi og meðal þeirra sem kosta svipað. Þar sést hvað er í raun sérstakt við hann og hvað er bara venjulegt. Það sem er í meðallagi er ekki styrkleiki. Staðan er sögð í orðum, til dæmis „meðal þeirra ódýrustu“ eða „dýrari en flestir“: segðu hana þannig líka, aldrei með prósentum, sæti í röð eða fjölda bíla.
+- Lestu hvar bíllinn stendur á listanum: meðal allra rafbílanna sem eru seldir á Íslandi og meðal þeirra sem kosta svipað. Þar sést hvað er í raun sérstakt við hann og hvað er bara venjulegt. Það sem er í meðallagi er ekki styrkleiki. Staðan er sögð í orðum, til dæmis „meðal þeirra ódýrustu“ eða „dýrari en flestir“: segðu hana þannig líka, aldrei með prósentum, sæti í röð eða fjölda bíla. Orðaðu hana eðlilega og segðu við hvað er miðað eins og fólk talar, til dæmis „af rafbílum hér á landi“ eða „í sínum verðflokki“.
 
 Það sem skiptir íslenska kaupendur mestu, eftir því sem á við þennan bíl:
 - Hvort drægnin dugar í vetrarkulda, á milli landshluta og ekki bara innanbæjar.
@@ -54,11 +55,16 @@ interface Metric {
   format: (value: number) => string
   /** The gap behind the leader, as the trailing car is described by it */
   behind: (gap: string) => string
+  /** The gap as precise as it is worth saying, when that is less than exact */
+  round?: (gap: number) => number
   /** Where a car stands among others on it, from first of all to among the worst */
   standing: Record<'first' | 'top' | 'above' | 'below' | 'bottom', string>
 }
 
-const oneDecimal = (value: number) => String(Number(value.toFixed(1)))
+// With a decimal comma, as the model would otherwise copy the point into
+// Icelandic text
+const decimal = (value: number) => String(value).replace('.', ',')
+const oneDecimal = (value: number) => decimal(Number(value.toFixed(1)))
 
 const metrics: Metric[] = [
   {
@@ -67,6 +73,8 @@ const metrics: Metric[] = [
     value: (car) => car.priceWithGrant,
     format: (value) => `${addDecimalSeparators(value)} kr.`,
     behind: (gap) => `${gap} dýrari`,
+    // 160.000 kr., not the 160.010 kr. two list prices happen to differ by
+    round: (gap) => Number(gap.toPrecision(2)),
     standing: {
       first: 'ódýrastur',
       top: 'meðal þeirra ódýrustu',
@@ -108,7 +116,7 @@ const metrics: Metric[] = [
     better: 'higher',
     value: (car) => car.kmPerMinuteCharged,
     // Three figures, as the list quotes it, without the zeros a gap would trail
-    format: (value) => `${Number(value.toPrecision(3))} km/mín`,
+    format: (value) => `${decimal(Number(value.toPrecision(3)))} km/mín`,
     behind: (gap) => `${gap} hægari`,
     standing: {
       first: 'hleður hraðast',
@@ -194,11 +202,13 @@ const describeMetric = (metric: Metric, compared: ReadonlyArray<Car>) => {
   const entries = ranked.map((car) => {
     const value = metric.value(car)
     const gap = Math.abs(value - leader)
-    const standing =
-      gap === 0
-        ? 'fremstur'
-        : metric.behind(metric.format(Number(gap.toPrecision(6))))
-    return `${car.label} ${metric.format(value)} (${standing})`
+    // The leaders go unmarked: a word for it ends up in the text, as if
+    // leading these few cars meant leading them all
+    if (gap === 0) return `${car.label} ${metric.format(value)}`
+    const behind = metric.behind(
+      metric.format(metric.round?.(gap) ?? Number(gap.toPrecision(6))),
+    )
+    return `${car.label} ${metric.format(value)} (${behind})`
   })
 
   return `${metric.label}: ${entries.join(', ')}`
@@ -257,13 +267,13 @@ export const describeStanding = (
 
   return metrics
     .map((metric) => {
-      const overall = `${standingAmong(metric, car, others)} á listanum öllum`
+      const overall = `af öllum: ${standingAmong(metric, car, others)}`
       // Price is what the band is cut by, so it says nothing within it
       const nearby =
         withBand && metric.label !== 'Verð'
-          ? `; ${standingAmong(metric, car, band)} meðal bíla á svipuðu verði`
+          ? `; á svipuðu verði: ${standingAmong(metric, car, band)}`
           : ''
-      return `- ${metric.label}: ${overall}${nearby}`
+      return `- ${metric.label} — ${overall}${nearby}`
     })
     .join('\n')
 }
