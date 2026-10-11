@@ -37,6 +37,8 @@ const figureOrder = [
 
 const eyebrow =
   'm-0 uppercase text-eyebrow font-semibold tracking-wider text-stone'
+// As the list labels its sorting
+const sectionLabel = 'm-0 text-sm font-semibold'
 
 /** One car's own page: its photo and figures, a review, and the cars like it */
 const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
@@ -126,7 +128,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
       {review && <Review review={review} />}
 
       <section aria-labelledby="similar" className={clsx(gutter, 'mt-12')}>
-        <h2 id="similar" className={eyebrow}>
+        <h2 id="similar" className={sectionLabel}>
           Þú gætir líka haft áhuga á:
         </h2>
         <ul className="mt-3 mb-0 p-0 list-none grid gap-3 sm:grid-cols-3">
