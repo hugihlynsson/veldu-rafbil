@@ -23,17 +23,15 @@ interface Props {
 }
 
 const gutter = 'px-(--gutter) md:px-10'
-// The most telling first, and those with a line under them side by side, so
-// the rows line up
 const figureOrder: SpecKey[] = [
   'range',
-  'charging',
-  'power',
   'acceleration',
+  'capacity',
+  'power',
   'drive',
   'seats',
+  'charging',
   'value',
-  'capacity',
 ]
 
 const eyebrow =
