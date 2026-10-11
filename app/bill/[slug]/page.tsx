@@ -72,7 +72,7 @@ export default async function Page(props: Props) {
   if (goneCount > 0) {
     return (
       <>
-        <main className="max-w-page mx-auto px-(--gutter) pt-6 pb-16 md:px-10 md:pt-10">
+        <main className="max-w-page mx-auto px-(--gutter) pb-16 md:px-10">
           <PageTop />
           <h1 className="m-0 text-2xl font-semibold">
             Þessi bíll er ekki lengur seldur nýr

@@ -20,6 +20,19 @@ interface Props {
 }
 
 const gutter = 'px-(--gutter) md:px-10'
+// The most telling first, and those with a line under them side by side, so
+// the rows line up
+const figureOrder = [
+  'range',
+  'charging',
+  'power',
+  'acceleration',
+  'drive',
+  'seats',
+  'value',
+  'capacity',
+]
+
 const eyebrow =
   'm-0 uppercase text-eyebrow font-semibold tracking-wider text-stone'
 
@@ -32,19 +45,14 @@ const CarView: FunctionComponent<Props> = ({ car, similar, verdict }) => {
     .filter(Boolean)
     .join(' · ')
   // The price is the pill under the name
-  const figures = specRows([car]).filter(({ key }) => key !== 'price')
+  const figures = specRows([car])
+    .filter(({ key }) => figureOrder.includes(key))
+    .toSorted((a, b) => figureOrder.indexOf(a.key) - figureOrder.indexOf(b.key))
 
   return (
     <main className="max-w-page mx-auto pb-14">
-      <header className={clsx(gutter, 'pt-6 md:pt-10')}>
-        <PageTop>
-          <ShareButton
-            title={car.label}
-            label="Deila"
-            event="Car shared"
-            variant="quiet"
-          />
-        </PageTop>
+      <header className={gutter}>
+        <PageTop />
       </header>
 
       <div className="md:grid md:grid-cols-[3fr_2fr] md:items-center md:gap-10 md:px-10">
@@ -62,15 +70,26 @@ const CarView: FunctionComponent<Props> = ({ car, similar, verdict }) => {
         </div>
 
         <div className={clsx(gutter, 'pt-4 md:p-0')}>
-          <h1 className="m-0 font-semibold text-display leading-tight">
-            <span>{car.make}</span>{' '}
-            <span className="font-normal">{car.model}</span>
-          </h1>
-          {subTitle && (
-            <p className="mt-1 mb-0 text-base font-medium text-stone">
-              {subTitle}
-            </p>
-          )}
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0">
+              <h1 className="m-0 font-semibold text-display leading-tight">
+                <span>{car.make}</span>{' '}
+                <span className="font-normal">{car.model}</span>
+              </h1>
+              {subTitle && (
+                <p className="mt-1 mb-0 text-base font-medium text-stone">
+                  {subTitle}
+                </p>
+              )}
+            </div>
+            <ShareButton
+              title={car.label}
+              label="Deila"
+              event="Car shared"
+              variant="quiet"
+              className="shrink-0 mt-1"
+            />
+          </div>
           <PricePill car={car} className="mt-3 -ml-0.5" />
         </div>
       </div>
