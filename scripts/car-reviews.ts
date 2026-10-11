@@ -18,6 +18,7 @@ import { google } from '@ai-sdk/google'
 import { generateText, stepCountIs } from 'ai'
 
 import cars, { type Car } from '@/modules/data/cars'
+import { similarTo } from '@/modules/detail/similar'
 import { carSlug } from '@/modules/data/getCarId'
 import carReviews, { type CarReview } from '@/modules/data/carReviews'
 import {
@@ -101,13 +102,18 @@ const write = async (car: Car): Promise<CarReview> => {
     model: google(advisorModel),
     system,
     prompt,
-    // Only its own page: the model picks the URL it fetches
+    // Only its own page and its similar cars', for how they differ in size,
+    // space and towing: the model picks the URL it fetches
     tools: {
       fetchCarDetails: createFetchCarDetailsTool(
-        new Set(car.evDatabaseUrl ? [car.evDatabaseUrl] : []),
+        new Set(
+          [car, ...similarTo(car)].flatMap((one) => one.evDatabaseUrl ?? []),
+        ),
       ),
     },
-    stopWhen: stepCountIs(3),
+    // A step for each car looked up, should it look them up one at a time,
+    // and one to write
+    stopWhen: stepCountIs(6),
     providerOptions: {
       google: { thinkingConfig: { thinkingLevel } },
     },

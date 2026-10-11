@@ -49,11 +49,25 @@ describe('carFacts', () => {
     expect(facts).toContain('- Tesla Model Y, ')
   })
 
-  // The model copies a gap; left to subtract, it gets one wrong now and then
-  it('works out every gap for the model', () => {
-    expect(facts).toContain('Tesla Model Y 6.029.990 kr. (240.000 kr. dýrari)')
-    expect(facts).toContain('Tesla Model Y 505 km (100 km minni drægni)')
-    expect(facts).toContain('Kia EV3 Long Range 7,7 s (0,5 s hægari)')
+  // The model copies a gap; left to subtract, it gets one wrong now and then,
+  // and given against the best of several, it quotes it as against this one
+  it('works out each similar car against this one', () => {
+    expect(facts).toContain(
+      '- Tesla Model Y: 240.000 kr. dýrari, 100 km minni drægni',
+    )
+    expect(facts).toContain('0,5 s sneggri í 0-100 km/klst')
+  })
+
+  it('says charging as the stops it makes, never as a speed', () => {
+    const quicker = deriveCar({
+      ...base,
+      make: 'Hraður',
+      timeToCharge10To80: 20,
+    })
+    expect(carFacts(kia, [quicker], [kia, quicker])).toContain(
+      '- Hraður EV3 Long Range: um 35% styttri hleðslustopp',
+    )
+    expect(facts).not.toMatch(/km\/mín|mín\b/)
   })
 
   it('gives the model each page it may look a car up on', () => {

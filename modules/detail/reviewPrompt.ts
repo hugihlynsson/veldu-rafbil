@@ -15,7 +15,8 @@ const writingRules = `Þegar þú skrifar:
 - Verðin eru eftir ${grantAmountText} ríkisstyrk þar sem hann á við.
 - Drægnin er samkvæmt WLTP. Í íslenskum vetri er hún nær ${Math.round(realRangeLowFactor * 100)}–${Math.round(realRangeHighFactor * 100)}% af því.
 - Byggðu aðeins á gögnunum hér að neðan og því sem fetchCarDetails skilar, ekki á því sem þú heldur að þú vitir um bílana.
-- Skrifaðu tölur að íslenskum sið: komma í tugabrotum (7,7 km/mín) og punktur í þúsundum (100.000 kr.).
+- Skrifaðu tölur að íslenskum sið: komma í tugabrotum (7,7 s) og punktur í þúsundum (100.000 kr.).
+- Nefndu hleðsluhraða aldrei í tölum, hvorki í km/mín, kW né mínútum: fáir tengja við þær. Segðu frekar að hann hlaði hraðar eða hægar en aðrir, eða hve miklu styttri eða lengri hleðslustoppin eru, eins og það er gefið.
 - Ekkert markdown, engin feitletrun, engir listar, engar fyrirsagnir.`
 
 const intro = `Þú ert ráðgjafi Veldu Rafbíl, íslensks vefs sem ber saman alla 100% rafdrifna bíla sem eru seldir nýir á Íslandi.`
@@ -27,7 +28,8 @@ const intro = `Þú ert ráðgjafi Veldu Rafbíl, íslensks vefs sem ber saman a
 const carSystemPrompt = `${intro} Einhver hefur opnað síðu bílsins hér að neðan til að kynnast honum. Umsögnin þín er það fyrsta sem viðkomandi les um hann, á eftir tölunum. Hún á að gefa heiðarlega og upplýsandi mynd af því hvers konar bíll þetta er, hvar hann skarar fram úr og hvar hann gefur eftir, svo lesandinn viti hvort hann sé þess virði að skoða betur.
 
 Áður en þú skrifar:
-- Sæktu nánari upplýsingar um bílinn með fetchCarDetails, með ev-database slóðinni sem fylgir honum hér að neðan, til að vita stærð hans, farangursrými, framskott og dráttargetu. Ef hann hefur enga slóð eru engar slíkar upplýsingar til.
+- Sæktu nánari upplýsingar um bílinn og svipuðu bílana með fetchCarDetails, með ev-database slóðinni sem fylgir hverjum þeirra hér að neðan, til að vita stærð þeirra, veghæð, farangursrými, framskott og dráttargetu. Bíll sem hefur enga slóð hefur engar slíkar upplýsingar.
+- Gefðu stærð, veghæð, rými og dráttargetu aðeins meira vægi þar sem bíllinn sker sig úr frá svipuðu bílunum: það sýna tölurnar á síðunni ekki.
 - Lestu hvar bíllinn stendur á listanum: meðal allra rafbílanna sem eru seldir á Íslandi og meðal þeirra sem kosta svipað. Þar sést hvað er í raun sérstakt við hann og hvað er bara venjulegt. Það sem er í meðallagi er ekki styrkleiki. Staðan er sögð í orðum, til dæmis „meðal þeirra ódýrustu“ eða „dýrari en flestir“: segðu hana þannig líka, aldrei með prósentum, sæti í röð eða fjölda bíla. Orðaðu hana eðlilega og segðu við hvað er miðað eins og fólk talar, til dæmis „af rafbílum hér á landi“ eða „í sínum verðflokki“.
 
 Það sem skiptir íslenska kaupendur mestu, eftir því sem á við þennan bíl:
@@ -41,10 +43,12 @@ Veldu það sem segir mest um þennan bíl. Ekki fara yfir allt.
 ${writingRules}
 
 Svaraðu með um 150 orðum í fjórum stuttum efnisgreinum og engu öðru:
-1. Hvers konar bíll þetta er og hverjum hann hentar best, í einni eða tveimur setningum.
+1. Það sem helst greinir hann frá svipuðu bílunum og hverjum það hentar, í einni eða tveimur setningum.
 2. Tveir eða þrír helstu styrkleikar hans og hvað þeir þýða í daglegu lífi.
-3. Hvað maður gefur eftir, og hvenær einn af svipuðu bílunum væri betri kostur, með muninum úr gögnunum.
-4. Niðurstaða í einni eða tveimur setningum sem dregur hitt saman: fyrir hvern hann eru góð kaup og fyrir hvern ekki. Ekki endurtaka fyrstu efnisgreinina.
+3. Hvað maður gefur eftir, og hvenær einn af svipuðu bílunum væri betri kostur. Nefndu einn eða tvo mun sem skipta mestu máli, ekki upptalningu á tölum.
+4. Niðurstaða í einni eða tveimur setningum: fyrir hvern hann eru góð kaup og fyrir hvern ekki. Ekki endurtaka fyrstu efnisgreinina.
+
+Lesandinn er að velja á milli bíla, svo skrifaðu um það sem greinir þennan bíl frá hinum frekar en það sem á við um flesta rafbíla. Hver setning á helst að segja eitthvað sem ætti ekki jafn vel við um svipuðu bílana.
 
 Vertu heiðarleg(ur). Það sem bíllinn gerir í meðallagi gerirðu ekki að kosti: segðu það eða slepptu því. Notaðu ekki orð eins og "einstakur", "framúrskarandi" eða "frábær" nema staða hans á listanum sýni að hann skari fram úr. Fjallaðu ekki um innréttingu, efnisval, þægindi, hljóðvist, hugbúnað eða áreiðanleika: um það eru engin gögn hér. Nefndu bíla með tegund og gerð, til dæmis Kia EV3.`
 
@@ -52,11 +56,18 @@ interface Metric {
   label: string
   better: 'higher' | 'lower'
   value: (car: Car) => number
-  format: (value: number) => string
-  /** The gap behind the leader, as the trailing car is described by it */
-  behind: (gap: string) => string
-  /** The gap as precise as it is worth saying, when that is less than exact */
-  round?: (gap: number) => number
+  /**
+   * How another car differs from this one on it, said of the other car: the
+   * gap as worth saying, and the words for more and for less
+   */
+  difference:
+    | {
+        format: (gap: number) => string
+        more: (gap: string) => string
+        less: (gap: string) => string
+      }
+    // A difference with a reading of its own rather than a gap
+    | ((other: Car, car: Car) => string | undefined)
   /** Where a car stands among others on it, from first of all to among the worst */
   standing: Record<'first' | 'top' | 'above' | 'below' | 'bottom', string>
 }
@@ -66,15 +77,41 @@ interface Metric {
 const decimal = (value: number) => String(value).replace('.', ',')
 const oneDecimal = (value: number) => decimal(Number(value.toFixed(1)))
 
+/** How another car differs from this one on a figure, or nothing if not */
+const compare = (metric: Metric, other: Car, car: Car): string | undefined => {
+  if (typeof metric.difference === 'function') {
+    return metric.difference(other, car)
+  }
+  const { format, more, less } = metric.difference
+  const gap = metric.value(other) - metric.value(car)
+  if (gap === 0) return undefined
+  const said = format(Math.abs(gap))
+  return gap > 0 ? more(said) : less(said)
+}
+
+// A charging speed in km/min means little to most buyers, so it is given as
+// how much shorter or longer a stop for the same range is, to the nearest 5%
+const compareCharging = (other: Car, car: Car): string | undefined => {
+  const stop = car.kmPerMinuteCharged / other.kmPerMinuteCharged
+  const percent = Math.round(Math.abs(1 - stop) * 20) * 5
+  if (percent === 0) return 'álíka löng hleðslustopp'
+  return stop < 1
+    ? `um ${percent}% styttri hleðslustopp`
+    : `um ${percent}% lengri hleðslustopp`
+}
+
 const metrics: Metric[] = [
   {
     label: 'Verð',
     better: 'lower',
     value: (car) => car.priceWithGrant,
-    format: (value) => `${addDecimalSeparators(value)} kr.`,
-    behind: (gap) => `${gap} dýrari`,
-    // 160.000 kr., not the 160.010 kr. two list prices happen to differ by
-    round: (gap) => Number(gap.toPrecision(2)),
+    difference: {
+      // 160.000 kr., not the 160.010 kr. two list prices happen to differ by
+      format: (gap) =>
+        `${addDecimalSeparators(Number(gap.toPrecision(2)))} kr.`,
+      more: (gap) => `${gap} dýrari`,
+      less: (gap) => `${gap} ódýrari`,
+    },
     standing: {
       first: 'ódýrastur',
       top: 'meðal þeirra ódýrustu',
@@ -87,8 +124,11 @@ const metrics: Metric[] = [
     label: 'Drægni',
     better: 'higher',
     value: (car) => car.range,
-    format: (value) => `${value} km`,
-    behind: (gap) => `${gap} minni drægni`,
+    difference: {
+      format: (gap) => `${gap} km`,
+      more: (gap) => `${gap} meiri drægni`,
+      less: (gap) => `${gap} minni drægni`,
+    },
     standing: {
       first: 'drífur lengst',
       top: 'meðal þeirra langdrægustu',
@@ -101,8 +141,11 @@ const metrics: Metric[] = [
     label: 'Verð á hvern km drægni',
     better: 'lower',
     value: (car) => Math.round(car.pricePerKm),
-    format: (value) => `${addDecimalSeparators(value)} kr.`,
-    behind: (gap) => `${gap} dýrari á km`,
+    difference: {
+      format: (gap) => `${addDecimalSeparators(gap)} kr.`,
+      more: (gap) => `${gap} dýrari á hvern km drægni`,
+      less: (gap) => `${gap} ódýrari á hvern km drægni`,
+    },
     standing: {
       first: 'ódýrastur á hvern km drægni',
       top: 'meðal þeirra ódýrustu á hvern km drægni',
@@ -112,12 +155,10 @@ const metrics: Metric[] = [
     },
   },
   {
-    label: 'Hraðhleðsla, drægni bætt við á mínútu',
+    label: 'Hraðhleðsla',
     better: 'higher',
     value: (car) => car.kmPerMinuteCharged,
-    // Three figures, as the list quotes it, without the zeros a gap would trail
-    format: (value) => `${decimal(Number(value.toPrecision(3)))} km/mín`,
-    behind: (gap) => `${gap} hægari`,
+    difference: compareCharging,
     standing: {
       first: 'hleður hraðast',
       top: 'meðal þeirra sem hlaða hraðast',
@@ -130,8 +171,11 @@ const metrics: Metric[] = [
     label: 'Rafhlaða',
     better: 'higher',
     value: (car) => car.capacity,
-    format: (value) => `${oneDecimal(value)} kWh`,
-    behind: (gap) => `${gap} minni`,
+    difference: {
+      format: (gap) => `${oneDecimal(gap)} kWh`,
+      more: (gap) => `${gap} stærri rafhlaða`,
+      less: (gap) => `${gap} minni rafhlaða`,
+    },
     standing: {
       first: 'með stærstu rafhlöðuna',
       top: 'með einni af stærstu rafhlöðunum',
@@ -144,8 +188,11 @@ const metrics: Metric[] = [
     label: 'Hröðun 0-100 km/klst',
     better: 'lower',
     value: (car) => car.acceleration,
-    format: (value) => `${oneDecimal(value)} s`,
-    behind: (gap) => `${gap} hægari`,
+    difference: {
+      format: (gap) => `${oneDecimal(gap)} s`,
+      more: (gap) => `${gap} hægari í 0-100 km/klst`,
+      less: (gap) => `${gap} sneggri í 0-100 km/klst`,
+    },
     standing: {
       first: 'sneggstur',
       top: 'meðal þeirra sneggstu',
@@ -158,8 +205,11 @@ const metrics: Metric[] = [
     label: 'Afl',
     better: 'higher',
     value: (car) => car.power,
-    format: (value) => `${value} kW`,
-    behind: (gap) => `${gap} minna afl`,
+    difference: {
+      format: (gap) => `${gap} kW`,
+      more: (gap) => `${gap} meira afl`,
+      less: (gap) => `${gap} minna afl`,
+    },
     standing: {
       first: 'aflmestur',
       top: 'meðal þeirra aflmestu',
@@ -170,6 +220,8 @@ const metrics: Metric[] = [
   },
 ]
 
+// Its charging is left to its standing and the comparisons, which say it
+// without a figure
 const describeCar = (car: Car): string =>
   [
     car.label,
@@ -179,7 +231,6 @@ const describeCar = (car: Car): string =>
     `${addDecimalSeparators(car.priceWithGrant)} kr.${car.hasGrant ? ' eftir styrk' : ', fær ekki styrk'}`,
     `${car.range} km drægni (WLTP)`,
     `${decimal(car.capacity)} kWh rafhlaða`,
-    `hraðhleðsla 10-80% á ${car.timeToCharge10To80} mín`,
     `0-100 km/klst á ${decimal(car.acceleration)} s`,
     `${car.power} kW`,
     driveLabels[car.drive].toLowerCase(),
@@ -189,36 +240,20 @@ const describeCar = (car: Car): string =>
       : 'fáanlegur núna',
   ].join(', ')
 
-// The model is given every gap worked out, so a figure in its text is one it
-// copied rather than one it subtracted
-const describeMetric = (metric: Metric, compared: ReadonlyArray<Car>) => {
-  const ranked = compared.toSorted((a, b) =>
-    metric.better === 'lower'
-      ? metric.value(a) - metric.value(b)
-      : metric.value(b) - metric.value(a),
-  )
-  const leader = metric.value(ranked[0])
-
-  const entries = ranked.map((car) => {
-    const value = metric.value(car)
-    const gap = Math.abs(value - leader)
-    // The leaders go unmarked: a word for it ends up in the text, as if
-    // leading these few cars meant leading them all
-    if (gap === 0) return `${car.label} ${metric.format(value)}`
-    const behind = metric.behind(
-      metric.format(metric.round?.(gap) ?? Number(gap.toPrecision(6))),
-    )
-    return `${car.label} ${metric.format(value)} (${behind})`
-  })
-
-  return `${metric.label}: ${entries.join(', ')}`
-}
-
 const listCars = (cars: ReadonlyArray<Car>) =>
   cars.map((car) => `- ${describeCar(car)}`).join('\n')
 
-const listGaps = (cars: ReadonlyArray<Car>) =>
-  metrics.map((metric) => `- ${describeMetric(metric, cars)}`).join('\n')
+// Each similar car said against this one rather than against the best of
+// them, so a difference the model quotes is one between the two cars it names
+const listDifferences = (car: Car, similar: ReadonlyArray<Car>) =>
+  similar
+    .map((other) => {
+      const differences = metrics.flatMap(
+        (metric) => compare(metric, other, car) ?? [],
+      )
+      return `- ${other.label}: ${differences.join(', ')}`
+    })
+    .join('\n')
 
 // Within this much of the car's price either way, a car is one a buyer
 // would weigh it against
@@ -284,13 +319,29 @@ export const carFacts = (
   similar: ReadonlyArray<Car>,
   all: ReadonlyArray<Car> = cars,
 ): string =>
-  `Bíllinn:\n${listCars([car])}\n\nStaða hans á listanum:\n${describeStanding(car, all)}\n\nSvipaðir bílar, næstir honum að verði og drægni:\n${listCars(similar)}\n\nMunurinn á honum og þeim, sá besti fyrst:\n${listGaps([car, ...similar])}`
+  `Bíllinn:\n${listCars([car])}\n\nStaða hans á listanum:\n${describeStanding(car, all)}\n\nSvipaðir bílar, næstir honum að verði og drægni:\n${listCars(similar)}\n\nHvernig þeir eru miðað við ${car.label}:\n${listDifferences(car, similar)}`
 
 /** Everything the model is given for a car's review */
 export const reviewPrompt = (car: Car): { system: string; prompt: string } => ({
   system: carSystemPrompt,
   prompt: carFacts(car, similarTo(car)),
 })
+
+// The figures a review is written from, as the data has them rather than as
+// the prompt words them, so rewording the prompt dates no review
+const quoted = (car: Car) => [
+  car.label,
+  car.priceWithGrant,
+  car.range,
+  car.capacity,
+  car.acceleration,
+  car.power,
+  car.drive,
+  car.seats,
+  car.timeToCharge10To80,
+  car.expectedDelivery ?? null,
+  car.evDatabaseUrl ?? null,
+]
 
 /**
  * The figures a review quotes, its car's and its similar cars', hashed: a
@@ -300,7 +351,7 @@ export const reviewPrompt = (car: Car): { system: string; prompt: string } => ({
  */
 export const reviewFactsKey = (car: Car): string =>
   createHash('sha256')
-    .update(listCars([car, ...similarTo(car)]))
+    .update(JSON.stringify([car, ...similarTo(car)].map(quoted)))
     .digest('hex')
     .slice(0, 12)
 
