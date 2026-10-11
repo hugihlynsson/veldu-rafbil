@@ -2,6 +2,7 @@ import { safeValidateUIMessages, type UIMessage } from 'ai'
 import { z } from 'zod'
 
 import { splitMarkers } from './answerMarkers'
+import { MAX_COMPARED } from '@/modules/detail/comparison'
 
 // The most cars an answer tags. The route sends no more than this, as a
 // stored answer over any bound here would have the next request refused.
@@ -23,9 +24,13 @@ const chatMetadataSchema = z
       .min(1)
       .max(MAX_TAGGED_CARS)
       .optional(),
-    // On a question asked on a car's page: the slugs of the cars the page is
-    // about, which the route looks up rather than trusts
-    about: z.array(z.string().min(1).max(100)).length(1).optional(),
+    // On a question asked on a car's page or a comparison: the slugs of the
+    // cars it is about, which the route looks up rather than trusts
+    about: z
+      .array(z.string().min(1).max(100))
+      .min(1)
+      .max(MAX_COMPARED)
+      .optional(),
   })
   .optional()
 
@@ -120,9 +125,10 @@ const sameCars = (a: string[] | undefined, b: string[] | undefined) =>
   (a ?? []).join('/') === (b ?? []).join('/')
 
 /**
- * The questions that bring a car's page into the conversation, by id, with
- * the cars it is about: the first asked on the page, and the first after the
- * page changes. Asked again on the same page, it is the same one.
+ * The questions that bring a car's page or a comparison into the
+ * conversation, by id, with the cars it is about: the first asked on the
+ * page, and the first after the page changes. Asked again on the same page,
+ * it is the same one.
  */
 export const pagesStarted = (
   messages: ChatMessage[],
@@ -159,8 +165,8 @@ export const isNewPage = (
 
 /**
  * Whether the conversation's last question was asked somewhere else than
- * here: on the list, on another car's page, or on none when this is one. Its
- * follow-ups are about there, and read wrong here.
+ * here: on the list, on another car's page or comparison, or on none when
+ * this is one. Its follow-ups are about there, and read wrong here.
  */
 export const askedElsewhere = (
   messages: ChatMessage[],
@@ -169,3 +175,9 @@ export const askedElsewhere = (
   const last = messages.findLast(({ role }) => role === 'user')
   return last !== undefined && !sameCars(last.metadata?.about, about)
 }
+
+/** The same cars, in whatever order */
+export const sameCarSet = (
+  a: ReadonlyArray<string>,
+  b: ReadonlyArray<string>,
+) => a.toSorted().join('/') === b.toSorted().join('/')

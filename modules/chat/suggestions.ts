@@ -16,6 +16,22 @@ export const CHAT_SUGGESTIONS = [
   'Skiptir forhitun miklu máli á veturna?',
 ]
 
+/**
+ * Questions to start on with a comparison in view. "Hvor" asks between two
+ * and "hver" among more, and either agrees with bíll, as do the adjectives.
+ */
+export const comparisonSuggestions = (carCount: number): string[] => {
+  const which = carCount === 2 ? 'Hvor' : 'Hver'
+  return [
+    `${which} þeirra hentar best fyrir fjölskyldu?`,
+    `${which} þeirra er bestur í vetrarfærð?`,
+    `${which} þeirra kemst lengst á hleðslunni í frosti?`,
+    `${which} þeirra er með stærsta skottið?`,
+    `${which} þeirra er ódýrastur í rekstri?`,
+    `${which} þeirra hentar best fyrir langferðir?`,
+  ]
+}
+
 /** Questions to start on with one car's page in view; hann agrees with bíll */
 export const carSuggestions = [
   'Hentar hann fjölskyldu?',
@@ -25,6 +41,10 @@ export const carSuggestions = [
   'Getur hann dregið hjólhýsi?',
   'Hvernig er hann á langferðum?',
 ]
+
+/** Questions to start on with the page about these cars in view */
+export const pageSuggestions = (carCount: number): string[] =>
+  carCount === 1 ? carSuggestions : comparisonSuggestions(carCount)
 
 // Fisher-Yates — sort() with a random comparator is not a shuffle
 export const getRandomSuggestions = (

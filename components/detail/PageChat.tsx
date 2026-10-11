@@ -5,7 +5,8 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 
 import type { Car } from '@/modules/data/cars'
-import { carPathOf } from '@/modules/detail/paths'
+import { carPathOf, comparisonPathOf } from '@/modules/detail/paths'
+import { MAX_COMPARED } from '@/modules/detail/comparison'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 
 // The bar arrives after the figures, as on the list, and the AI SDK after it
@@ -18,9 +19,10 @@ interface Props {
 }
 
 /**
- * The advisor's bar on a car's page, carrying the car with each question. A
- * car picked from an answer is scrolled up to when it is this one, and opens
- * its own page when it is another.
+ * The advisor's bar on a car's page or a comparison, carrying the cars it is
+ * about with each question. A car picked from an answer that is one of them is
+ * scrolled up to. Another opens its own page from a car's page, and on a
+ * comparison joins the cars when there is room.
  */
 const PageChat: FunctionComponent<Props> = ({ cars }) => {
   const router = useRouter()
@@ -31,8 +33,10 @@ const PageChat: FunctionComponent<Props> = ({ cars }) => {
         top: 0,
         behavior: prefersReducedMotion() ? 'auto' : 'smooth',
       })
-    } else {
+    } else if (cars.length === 1 || cars.length >= MAX_COMPARED) {
       router.push(carPathOf(car))
+    } else {
+      router.push(comparisonPathOf([...cars, car]))
     }
   }
 

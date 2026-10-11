@@ -4,6 +4,7 @@ import {
   askedElsewhere,
   pagesStarted,
   isNewPage,
+  sameCarSet,
   getFollowUps,
   getMessageText,
   groupIntoTurns,
@@ -266,9 +267,19 @@ describe('pagesStarted', () => {
     ]).toEqual(['first', 'back'])
   })
 
-  it('takes a question about one car at most', async () => {
+  it('marks a comparison, and again once its cars change', () => {
+    expect([
+      ...pagesStarted([
+        question('first', ['kia', 'tesla']),
+        question('again', ['kia', 'tesla']),
+        question('more', ['kia', 'tesla', 'skoda']),
+      ]).keys(),
+    ]).toEqual(['first', 'more'])
+  })
+
+  it('takes no more cars than a comparison holds', async () => {
     expect(
-      await validateChatMessages([question('q', ['kia', 'tesla'])]),
+      await validateChatMessages([question('q', ['a', 'b', 'c', 'd', 'e'])]),
     ).toBeNull()
   })
 })
@@ -319,5 +330,12 @@ describe('askedElsewhere', () => {
 
   it('is nowhere before anything is asked', () => {
     expect(askedElsewhere([], ['a'])).toBe(false)
+  })
+})
+
+describe('sameCarSet', () => {
+  it('reads the cars in any order', () => {
+    expect(sameCarSet(['a', 'b'], ['b', 'a'])).toBe(true)
+    expect(sameCarSet(['a', 'b'], ['a', 'c'])).toBe(false)
   })
 })

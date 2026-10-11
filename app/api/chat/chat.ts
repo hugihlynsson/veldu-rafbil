@@ -112,7 +112,7 @@ export const streamChat = async ({
     model,
     system: systemPrompt,
     messages: await convertToModelMessages(
-      withPageContext(trimHistory(messages)),
+      await withPageContext(trimHistory(messages)),
       {
         tools: answerTools,
       },
