@@ -7,6 +7,7 @@ import {
   getRandomSuggestions,
 } from '@/modules/chat/suggestions'
 import { MAX_QUESTION_LENGTH } from '@/modules/chat/questionLength'
+import { CHAT_INPUT_ID } from '@/modules/chat/inputId'
 import useInputModality, { getInputModality } from '@/utils/inputModality'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
@@ -36,6 +37,8 @@ interface Props {
   onIntent?: () => void
   /** Fades the pill in as it mounts */
   animateIn?: boolean
+  /** The questions offered to start on; the general ones when left out */
+  starters?: string[]
   /** Left out where the list is not what is in view, as inside the chat */
   filterSuggestions?: {
     filters: Filters
@@ -56,6 +59,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
   onFocusRingChange,
   onIntent,
   animateIn = false,
+  starters = CHAT_SUGGESTIONS,
   filterSuggestions,
 }) => {
   const [isFocused, setIsFocused] = useState(false)
@@ -95,7 +99,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
     onIntent?.()
     if (filterSuggestions) void importFilterSuggestions()
     if (!hasMessages) {
-      setSelectedSuggestions(getRandomSuggestions(CHAT_SUGGESTIONS, 3))
+      setSelectedSuggestions(getRandomSuggestions(starters, 3))
     }
   }
 
@@ -142,6 +146,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
         )}
       >
         <input
+          id={CHAT_INPUT_ID}
           ref={inputRef}
           type="text"
           maxLength={MAX_QUESTION_LENGTH}

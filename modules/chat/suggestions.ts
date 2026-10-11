@@ -16,6 +16,16 @@ export const CHAT_SUGGESTIONS = [
   'Skiptir forhitun miklu máli á veturna?',
 ]
 
+/** Questions to start on with one car's page in view; hann agrees with bíll */
+export const carSuggestions = [
+  'Hentar hann fjölskyldu?',
+  'Hvað kemst hann langt í frosti?',
+  'Hverjir eru helstu keppinautar hans?',
+  'Hvað kostar að hlaða hann heima?',
+  'Getur hann dregið hjólhýsi?',
+  'Hvernig er hann á langferðum?',
+]
+
 // Fisher-Yates — sort() with a random comparator is not a shuffle
 export const getRandomSuggestions = (
   suggestions: string[],

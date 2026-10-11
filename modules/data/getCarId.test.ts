@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
-import getCarId from './getCarId'
+import cars from './cars'
+import getCarId, { carName } from './getCarId'
 import type { NewCar } from './newCarSchema'
 
 const car = (over: Partial<NewCar>): NewCar => ({
@@ -61,5 +62,20 @@ describe('getCarId', () => {
     expect(getCarId(car({ subModel: 'Long Range' }))).not.toBe(
       getCarId(car({ subModel: 'Performance' })),
     )
+  })
+})
+
+describe('carName', () => {
+  const kia = cars.find((car) => car.make === 'Kia' && car.subModel)!
+  const sibling = cars.find(
+    (car) => car !== kia && car.make === kia.make && car.model === kia.model,
+  )!
+
+  it('is the make and model on its own', () => {
+    expect(carName(kia)).toBe(`Kia ${kia.model}`)
+  })
+
+  it('is the whole label beside another of the same model', () => {
+    expect(carName(kia, [kia, sibling])).toBe(kia.label)
   })
 })
