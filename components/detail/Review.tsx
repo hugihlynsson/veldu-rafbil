@@ -12,7 +12,7 @@ const Review: FunctionComponent<{ review: CarReview }> = ({ review }) => (
     {/* 65ch of the wrapper's 16px, not the 18px text, keeps lines near 70 */}
     <div className="max-w-prose">
       <h2 id="review" className="m-0 text-sm font-semibold">
-        Í stuttu máli:
+        Í hnotskurn:
       </h2>
       {review.paragraphs.map((paragraph) => (
         <p

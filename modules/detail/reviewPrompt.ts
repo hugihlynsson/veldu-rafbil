@@ -39,7 +39,7 @@ Veldu það sem segir mest um þennan bíl. Ekki fara yfir allt.
 
 ${writingRules}
 
-Svaraðu með um 190 orðum í fjórum stuttum efnisgreinum og engu öðru:
+Svaraðu með um 150 orðum í fjórum stuttum efnisgreinum og engu öðru:
 1. Hvers konar bíll þetta er og hverjum hann hentar best, í einni eða tveimur setningum.
 2. Tveir eða þrír helstu styrkleikar hans og hvað þeir þýða í daglegu lífi.
 3. Hvað maður gefur eftir, og hvenær einn af svipuðu bílunum væri betri kostur, með muninum úr gögnunum.

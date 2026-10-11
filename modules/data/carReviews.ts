@@ -734,9 +734,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'polestar-4-long-range-dual-motor': {
     paragraphs: [
-      'Polestar 4 Long Range Dual Motor er meðal sneggstu og aflmestu bílanna á listanum og drífur lengra en flestir. Hann er dýrari en flestir og í meðallagi í hleðslu.',
+      'Polestar 4 Long Range Dual Motor er kraftmikill fimm sæta sportjepplingur með fjórhjóladrifi. Hann hentar vel þeim sem vilja mikið afl, stöðugleika í vetrarfærð og ríflega drægni í langferðir.',
+      'Stærsti styrkur bílsins er rafhlaðan, sem er með þeim stærstu meðal bíla á svipuðu verði, og drægnin sem drífur lengra en flestir. Það veitir mikið öryggi milli landshluta í íslenskum vetri. Bíllinn er jafnframt meðal þeirra aflmestu og sneggstu á listanum, ásamt því að bjóða upp á 2.000 kg dráttargetu og 526 lítra skott.',
+      'Hraðhleðslan er hins vegar aðeins í meðallagi, þar sem Polestar er 7,7 km/mín hægari en Smart #5 Brabus sem nær 21 km/mín, þótt Smart hafi 50 km minni drægni. Einnig er Tesla Model Y Performance 160.010 kr. ódýrari og 0,3 sekúndum sneggri í hundraðið.',
+      'Þetta eru góð kaup ef þú vilt langan akstur á stórri rafhlöðu, mikið afl og mikla dráttargetu, en síður ef þú vilt sem hraðvirkasta hleðslu eða leitar að lægsta verðinu í þessum flokki.',
     ],
     facts: '369d9faa24a7',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'polestar-4-suv-long-range-dual-motor': {
     paragraphs: [
@@ -1124,10 +1128,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'volkswagen-id-4-pro-4motion': {
     paragraphs: [
-      'Volkswagen ID.4 Pro 4MOTION er fimm sæta rafjepplingur með fjórhjóladrifi sem hentar vel fjölskyldum sem leita að traustum bíl fyrir íslenskar aðstæður.',
-      'Helstu styrkleikar bílsins eru að hann er ódýrari á hvern kílómetra drægni en flestir á listanum öllum og drífur lengra en flestir meðal bíla á svipuðu verði. Hann er einnig með stærri rafhlöðu en flestir í þessum verðflokki, sem dregur úr áhyggjum í vetrarkulda og dugar vel á milli landshluta. Fjórhjóladrifið tryggir stöðugleika í snjó og hálku, auk þess sem 543 lítra farangursrýmið tekur auðveldlega við búslóð og barnakerrum.',
-      'Á móti kemur að hann gefur eftir í afli og snerpu. Hann er 100.000 kr. dýrari en XPENG G6 AWD Performance en hefur 140 kW minna afl, 14 km minni drægni og er 2.5 s hægari í hundraðið. Á ferðalögum hleður hann jafnframt hægar en bestu bílarnir, en hann er 9.1 km/mín hægari en Hyundai IONIQ 5 Long Range AWD. Að auki er ekkert framskott og dráttargetan er 1.200 kg.',
-      'Þetta eru góð kaup fyrir þá sem vilja rúmgott skott og öruggt fjórhjóladrif á hagkvæmu kílómetraverði, en síður fyrir þá sem setja eldsnögg hleðslustopp á þjóðveginum eða mikið afl í forgang.',
+      'Volkswagen ID.4 Pro 4MOTION er fjórhjóladrifinn fjölskyldubíll sem hentar vel þeim sem þurfa traustan ferðabíl fyrir íslenskar aðstæður allan ársins hring.',
+      'Stærsti kosturinn er hve mikið fæst fyrir peningana, enda er hann ódýrari á hvern kílómetra drægni en flestir á listanum öllum. Meðal bíla á svipuðu verði drífur hann lengra en flestir og hefur stærri rafhlöðu, sem veitir aukið öryggi í vetrarkulda. Fjórhjóladrifið tryggir gott grip í snjó og hálku, 543 lítra skottið tekur vel við farangri og 1200 kílóa dráttargeta nýtist fyrir létta kerru eða vagna.',
+      'Á móti kemur að hann gefur eftir í afli og snerpu. Hann hefur 14 km minni drægni og 140 kW minna afl en XPENG G6 AWD Performance, sem er 100.000 kr. ódýrari. Þá er hann 9.1 km/mín hægari í hraðhleðslu en Hyundai IONIQ 5 Long Range AWD, auk þess sem ekkert framskott er til staðar.',
+      'Bíllinn er heppilegur kostur fyrir þá sem leita að hagkvæmum og rúmgóðum fjórhjóladrifsbíl til daglegra nota og hefðbundinna ferðalaga. Hann er síður fyrir þá sem vilja mikla hröðun eða sem allra hraðast hleðslustopp á langkeyrslu.',
     ],
     facts: 'e20b5cb95094',
     model: 'gemini-3.8-flash, thinking high',
@@ -1188,9 +1192,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'volvo-ex60-p10': {
     paragraphs: [
-      'Volvo EX60 P10 er meðal þeirra langdrægustu, með 660 km, og meðal þeirra sem hlaða hraðast. Hann er fjórhjóladrifinn, sneggri og aflmeiri en flestir og dýrari en flestir.',
+      'Volvo EX60 P10 er stór og kraftmikill rafjepplingur með fjórhjóladrifi sem hentar vel þeim sem ferðast mikið milli landshluta og þurfa örugga framgöngu við krefjandi íslenskar aðstæður.',
+      'Hann er meðal þeirra langdrægustu á listanum öllum og hleður hraðar en flestir á svipuðu verði, sem þýðir að drægnin dugar vel í vetrarkulda og stopp á hraðhleðslustöðvum verða stutt á ferðalögum. Hann er jafnframt aflmeiri en flestir bílar í þessum verðflokki, með 2400 kg dráttargetu sem ræður greiðlega við tjaldvagn eða hestakerru, auk 523 lítra farangursrýmis og 52 lítra framskotts.',
+      'Á móti er bíllinn dýrari en flestir á listanum og fær ekki ríkisstyrk. Ef markmiðið er sem mest drægni nær Mercedes-Benz CLA Shooting Brake 350 4MATIC 83 km meiri drægni, og Audi A6 e-tron Avant quattro býður upp á 69 km meiri drægni á meðan hann er 100.000 kr. ódýrari.',
+      'Þetta eru góð kaup fyrir þá sem leita að öflugum jepplingi með mikla dráttargetu og hraða hleðslu fyrir langferðir, en síður fyrir þá sem horfa fyrst og fremst í verðmiðann eða vilja hámarka drægnina í lægri fólksbíl.',
     ],
     facts: '858ca6a6214e',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'volvo-ex60-p12': {
     paragraphs: [

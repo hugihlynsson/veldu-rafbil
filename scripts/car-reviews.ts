@@ -34,8 +34,8 @@ const file = path.join(__dirname, '../modules/data/carReviews.ts')
 // the chat, whose every answer waits on its thinking
 const thinkingLevel = 'high'
 const CONCURRENCY = 4
-// The prompt asks for some 190 words: far fewer is an answer that stopped
-const MIN_WORDS = 80
+// The prompt asks for some 150 words: far fewer is an answer that stopped
+const MIN_WORDS = 70
 
 const args = process.argv.slice(2)
 const all = args.includes('--all')
