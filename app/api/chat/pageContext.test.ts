@@ -26,6 +26,12 @@ describe('pageNote', () => {
     expect(note).toContain('"Góður bíll. Fer langt."')
   })
 
+  it('says a car is no longer sold, as the advisor has no other word of it', () => {
+    expect(pageNote({ ...a, deprecated: '2026-10-11' }, undefined)).toContain(
+      'ekki lengur seldur nýr',
+    )
+  })
+
   it('says nothing of a review not written yet', () => {
     expect(pageNote(a, undefined)).not.toContain('umsögn')
   })

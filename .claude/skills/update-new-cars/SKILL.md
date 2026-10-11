@@ -202,9 +202,14 @@ make, then model. The fields that are easy to get wrong:
 - **A car's slug is in shared links to its page, which have to keep working.**
   Every car's slug (its id less `car-`) is listed in
   `modules/data/publishedSlugs.ts`, and a test fails until a new one is added
-  there. Renaming a car, or dropping one, changes or loses its slug: leave the
-  old one in the list and point it in `movedSlugs` at the slug that replaced
-  it, or at `null` for a car that is no longer sold.
+  there. Renaming a car changes its slug: leave the old one in the list and
+  point it in `movedSlugs` at the slug that replaced it.
+- **A car no longer sold new is marked, not taken out.** Set `deprecated` to
+  the day it stopped being sold (`'2026-10-11'`). It leaves the list, the
+  advisor and `/api/cars`, but keeps its page, which says it is no longer
+  sold and offers the similar cars that are. Then run the similar-cars and
+  review scripts below: its review is dropped, and other cars that offered it
+  as similar get another.
 - **Each car's page offers similar cars from `modules/data/similarCars.ts`.**
   After adding, renaming or dropping a car, run `npx tsx scripts/similar-cars.ts`:
   it adds an entry for each new car and works out again any entry naming a

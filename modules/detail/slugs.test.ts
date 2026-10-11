@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import cars from '@/modules/data/cars'
+import cars, { allCars } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf } from './paths'
 import { resolveSlugs } from './slugs'
@@ -50,14 +50,9 @@ describe('resolveSlugs', () => {
     expect(resolved.slugs).toEqual([a, b].map(carSlug))
   })
 
-  it('keeps a gone car in the path and counts it', () => {
-    const resolved = resolveSlugs([carSlug(a), 'gone', carSlug(b)], Infinity, {
-      gone: null,
-    })
-    expect(resolved).toEqual({
-      cars: [a, b],
-      slugs: [carSlug(a), 'gone', carSlug(b)],
-      goneCount: 1,
-    })
+  it('reads a car no longer sold, whose page stays', () => {
+    const deprecated = allCars.find((car) => car.deprecated)
+    if (!deprecated) return
+    expect(resolveSlugs([carSlug(deprecated)]).cars).toEqual([deprecated])
   })
 })

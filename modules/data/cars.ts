@@ -40,6 +40,10 @@ export const deriveCar = (car: NewCar): Car => {
   }
 }
 
-const cars: ReadonlyArray<Car> = newCars.map(deriveCar)
+/** Every car with a page, those no longer sold new included */
+export const allCars: ReadonlyArray<Car> = newCars.map(deriveCar)
+
+/** The cars sold new now: the list, the advisor and the published data */
+const cars: ReadonlyArray<Car> = allCars.filter((car) => !car.deprecated)
 
 export default cars

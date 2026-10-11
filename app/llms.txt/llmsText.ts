@@ -1,4 +1,4 @@
-import newCars from '@/modules/data/newCars'
+import cars from '@/modules/data/cars'
 import { filterUrlKeys } from '@/modules/list/filters'
 import {
   grantAmount,
@@ -19,13 +19,13 @@ const param = (key: string) => `\`${key}\``
 
 const buildLlmsText = (): string => `# Veldu Rafbíl
 
-> Veldu Rafbíl ("choose an electric car") lists every 100% electric car sold new in Iceland — currently ${newCars.length} — with price, range, charging and drivetrain figures, a link to the seller, and an AI advisor that answers questions about them in Icelandic. It is run as a non-profit community service by Hugi Hlynsson.
+> Veldu Rafbíl ("choose an electric car") lists every 100% electric car sold new in Iceland — currently ${cars.length} — with price, range, charging and drivetrain figures, a link to the seller, and an AI advisor that answers questions about them in Icelandic. It is run as a non-profit community service by Hugi Hlynsson.
 
 The site itself is a single page in Icelandic, at \`/\`. Sorting and filtering travel in the query string, and those parameter names are Icelandic too: ${param(sortingUrlKeys.sorting)} sorts, and ${param(filterUrlKeys.price)} and ${param(filterUrlKeys.range)} are two of the filters. To read the cars, use the JSON below rather than scraping the page.
 
 ## Data
 
-- [Car list (JSON)](/api/cars): All ${newCars.length} cars as one document, with the grant already worked out and every figure named for what it is. Static and cacheable; no key, no rate limit.
+- [Car list (JSON)](/api/cars): All ${cars.length} cars as one document, with the grant already worked out and every figure named for what it is. Static and cacheable; no key, no rate limit.
 
 ## Reading the figures
 

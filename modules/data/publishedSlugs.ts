@@ -1,8 +1,9 @@
 // A page's URL names its cars by slug, and a link someone shared has to
 // keep working after the car it names is renamed or stops being sold. So a
 // slug is only ever added to this list, never taken off it, and one no car
-// has any more goes in movedSlugs: to the slug that replaced it, or to null
-// for a car that is gone. publishedSlugs.test.ts fails until both hold.
+// has any more goes in movedSlugs, to the slug that replaced it. A car no
+// longer sold keeps its slug: it is marked deprecated rather than taken out.
+// publishedSlugs.test.ts fails until both hold.
 
 export const publishedSlugs: ReadonlyArray<string> = [
   'audi-a6-e-tron-avant-quattro',
@@ -211,4 +212,4 @@ export const publishedSlugs: ReadonlyArray<string> = [
   'xpeng-x9-awd-performance',
 ]
 
-export const movedSlugs: Readonly<Record<string, string | null>> = {}
+export const movedSlugs: Readonly<Record<string, string>> = {}

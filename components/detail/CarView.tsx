@@ -7,7 +7,7 @@ import type { Car } from '@/modules/data/cars'
 import type { CarReview } from '@/modules/data/carReviews'
 import { carPathOf } from '@/modules/detail/paths'
 import { specRows, type SpecKey } from '@/modules/detail/specs'
-import { carSubtitle } from '@/modules/detail/subtitle'
+import { carSubtitle, deprecatedNotice } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import PricePill from '@/components/PricePill'
 import EvDatabaseLink from '@/components/EvDatabaseLink'
@@ -44,6 +44,7 @@ const sectionLabel = 'm-0 text-sm font-semibold'
 /** One car's own page: its photo and figures, a review, and the cars like it */
 const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
   const subTitle = carSubtitle(car)
+  const notice = deprecatedNotice(car)
   // The price is the pill under the name
   const figures = specRows([car])
     .filter(({ key }) => figureOrder.includes(key))
@@ -90,7 +91,20 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
               className="shrink-0 mt-1"
             />
           </div>
-          <PricePill car={car} className="mt-3 -ml-0.5" />
+          {notice ? (
+            // In place of the price, which links to a seller no longer
+            // selling it
+            <div className="mt-3 py-2.5 px-3.5 rounded-card bg-cloud text-sm">
+              <div className="font-semibold">{notice}</div>
+              <div className="mt-0.5 font-medium text-stone">
+                Síðasta verð {addDecimalSeparators(car.priceWithGrant)} kr.
+                {car.hasGrant && ' með styrk'}. Svipaðir bílar sem eru í sölu
+                eru hér fyrir neðan.
+              </div>
+            </div>
+          ) : (
+            <PricePill car={car} className="mt-3 -ml-0.5" />
+          )}
         </div>
       </div>
 

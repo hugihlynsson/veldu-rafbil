@@ -20,7 +20,11 @@ const specs = {
     text: (car) => `${addDecimalSeparators(car.priceWithGrant)} kr.`,
     // What the list's price pill says in its badge, which a column has no room for
     detail: (car) =>
-      [car.expectedDelivery && 'áætlað verð', car.hasGrant && 'með styrk']
+      [
+        car.expectedDelivery && 'áætlað verð',
+        car.deprecated && 'síðasta verð',
+        car.hasGrant && 'með styrk',
+      ]
         .filter(Boolean)
         .join(' ') || undefined,
   },

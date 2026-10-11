@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import cars from '@/modules/data/cars'
-import { carSubtitle } from './subtitle'
+import { carSubtitle, deprecatedNotice } from './subtitle'
 
 describe('carSubtitle', () => {
   const [car] = cars
@@ -16,5 +16,19 @@ describe('carSubtitle', () => {
     expect(
       carSubtitle({ ...car, subModel: undefined, expectedDelivery: undefined }),
     ).toBe('')
+  })
+})
+
+describe('deprecatedNotice', () => {
+  const [car] = cars
+
+  it('says since when a car is no longer sold new', () => {
+    expect(deprecatedNotice({ ...car, deprecated: '2026-10-11' })).toBe(
+      'Ekki seldur nýr síðan í október 2026',
+    )
+  })
+
+  it('says nothing of a car still sold', () => {
+    expect(deprecatedNotice({ ...car, deprecated: undefined })).toBeUndefined()
   })
 })

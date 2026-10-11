@@ -1,16 +1,15 @@
 import { Metadata } from 'next'
 import { notFound, permanentRedirect } from 'next/navigation'
-import Link from 'next/link'
 
 import { carPath, shareImagePath, shareImageSize } from '@/modules/detail/paths'
 import { resolveSlugs } from '@/modules/detail/slugs'
 import { similarTo } from '@/modules/detail/similar'
+import { deprecatedNotice } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
-import cars from '@/modules/data/cars'
+import { allCars } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import carReviews from '@/modules/data/carReviews'
 import CarView from '@/components/detail/CarView'
-import PageTop from '@/components/detail/PageTop'
 import PageChat from '@/components/detail/PageChat'
 import Footer from '@/components/Footer'
 
@@ -18,30 +17,27 @@ interface Props {
   params: Promise<{ slug: string }>
 }
 
-// The slug read as any page reads its slugs, so a renamed car is followed and a
-// gone one is known for what it was
+// The slug read as any page reads its slugs, so a renamed car is followed
 const read = async ({ params }: Props) =>
   resolveSlugs([decodeURIComponent((await params).slug)])
 
-// Built ahead from the car data, which only a deploy changes; a renamed or
-// gone car's old slug is still rendered on demand
+// Built ahead from the car data, which only a deploy changes, those no longer
+// sold included; a renamed car's old slug is rendered on demand to redirect
 export const generateStaticParams = () =>
-  cars.map((car) => ({ slug: carSlug(car) }))
+  allCars.map((car) => ({ slug: carSlug(car) }))
 
 export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const {
     cars: [car],
     slugs,
-    goneCount,
   } = await read(props)
-  // A page can only answer 200, so a gone car's says so to search engines
-  if (goneCount > 0) {
-    return { title: 'Veldu Rafbíl', robots: { index: false } }
-  }
   if (!car) return { title: 'Veldu Rafbíl' }
 
   const title = `${car.label} – Veldu Rafbíl`
-  const description = `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr.${car.hasGrant ? ' með styrk' : ''}, ${car.range} km drægni, ${car.capacity} kWh rafhlaða. Umsögn og svipaðir bílar.`
+  const notice = deprecatedNotice(car)
+  const description = notice
+    ? `${car.label}: ${notice}. ${car.range} km drægni, ${car.capacity} kWh rafhlaða. Svipaðir bílar sem eru í sölu.`
+    : `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr.${car.hasGrant ? ' með styrk' : ''}, ${car.range} km drægni, ${car.capacity} kWh rafhlaða. Umsögn og svipaðir bílar.`
 
   return {
     title,
@@ -65,30 +61,8 @@ export default async function Page(props: Props) {
   const {
     cars: [car],
     slugs,
-    goneCount,
   } = await read(props)
 
-  if (goneCount > 0) {
-    return (
-      <>
-        <main className="max-w-page mx-auto px-(--gutter) pb-16 md:px-10">
-          <PageTop />
-          <h1 className="m-0 text-2xl font-semibold">
-            Þessi bíll er ekki lengur seldur nýr
-          </h1>
-          <p className="mt-3 text-stone">
-            <Link
-              href="/"
-              className="text-tint font-semibold no-underline hover:underline"
-            >
-              Sjá alla rafbílana sem eru í sölu →
-            </Link>
-          </p>
-        </main>
-        <Footer />
-      </>
-    )
-  }
   if (!car) notFound()
   // A renamed car, or a slug in the wrong case: the one address the page has
   if (slugs[0] !== segment) permanentRedirect(carPath(slugs[0]))
@@ -98,7 +72,8 @@ export default async function Page(props: Props) {
       <CarView
         car={car}
         similar={similarTo(car)}
-        review={carReviews[carSlug(car)]}
+        // Buying advice, which a car no longer sold new is past
+        review={car.deprecated ? undefined : carReviews[carSlug(car)]}
       />
       <Footer />
       <PageChat cars={[car]} />

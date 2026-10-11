@@ -1,14 +1,15 @@
 import { describe, expect, it } from 'vitest'
 
-import cars from './cars'
+import { allCars } from './cars'
 import { carSlug } from './getCarId'
 import { movedSlugs, publishedSlugs } from './publishedSlugs'
 
-const current = new Set(cars.map(carSlug))
+// A car no longer sold still has its page, and its slug
+const current = new Set(allCars.map(carSlug))
 const published = new Set(publishedSlugs)
 
 // A link is shared and kept, so every slug it can name has to keep naming a
-// car, or say plainly that the car is gone
+// car
 describe('the slugs URLs name cars by', () => {
   it('include every car on the list', () => {
     const unpublished = [...current].filter((slug) => !published.has(slug))
@@ -17,17 +18,18 @@ describe('the slugs URLs name cars by', () => {
     expect(unpublished).toEqual([])
   })
 
-  it('still lead somewhere once their car is renamed or gone', () => {
+  it('still lead somewhere once their car is renamed', () => {
     const lost = publishedSlugs.filter(
       (slug) => !current.has(slug) && !(slug in movedSlugs),
     )
-    // Point each at the slug that replaced it in movedSlugs, or at null
+    // Point each at the slug that replaced it in movedSlugs. A car no longer
+    // sold stays in newCars.ts, marked deprecated
     expect(lost).toEqual([])
   })
 
   it('move only to a car on the list', () => {
     const broken = Object.entries(movedSlugs).filter(
-      ([, to]) => to !== null && !current.has(to),
+      ([, to]) => !current.has(to),
     )
     expect(broken).toEqual([])
   })

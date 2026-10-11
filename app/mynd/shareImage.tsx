@@ -6,7 +6,7 @@ import type { Car } from '@/modules/data/cars'
 import { shareImageSize as size } from '@/modules/detail/paths'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { specRows, type SpecKey } from '@/modules/detail/specs'
-import { carSubtitle } from '@/modules/detail/subtitle'
+import { carSubtitle, deprecatedNotice } from '@/modules/detail/subtitle'
 import Logo from '@/components/Logo'
 
 // Static cuts of the site's Inter at the two weights drawn here: the image
@@ -102,6 +102,7 @@ const Stat = ({
 export const shareImage = async (car: Car) => {
   const src = await photo(car.heroImageName)
   const subTitle = carSubtitle(car)
+  const notice = deprecatedNotice(car)
   const figures = new Map(
     specRows([car]).map(({ key, cells: [cell] }) => [key, cell]),
   )
@@ -146,6 +147,11 @@ export const shareImage = async (car: Car) => {
           {subTitle && (
             <div style={{ fontSize: 24, color: stone, marginTop: 6 }}>
               {subTitle}
+            </div>
+          )}
+          {notice && (
+            <div style={{ fontSize: 22, fontWeight: 600, marginTop: 14 }}>
+              {notice}
             </div>
           )}
           <div

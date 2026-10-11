@@ -1,11 +1,13 @@
 import { describe, expect, it } from 'vitest'
 
-import cars from './cars'
+import cars, { allCars } from './cars'
 import { carSlug } from './getCarId'
 import similarCars from './similarCars'
 import { SIMILAR_COUNT } from '@/modules/detail/similar'
 
-const bySlug = new Map(cars.map((car) => [carSlug(car), car]))
+// Every car with a page has an entry, and every entry offers cars still sold
+const bySlug = new Map(allCars.map((car) => [carSlug(car), car]))
+const sold = new Set(cars.map(carSlug))
 
 // Each car's page offers these, and its review is written against them
 describe('the similar-cars list', () => {
@@ -15,12 +17,13 @@ describe('the similar-cars list', () => {
     expect(missing).toEqual([])
   })
 
-  it('names only cars on the list', () => {
-    const stale = Object.entries(similarCars).flatMap(([slug, similar]) =>
-      [slug, ...similar].filter((named) => !bySlug.has(named)),
-    )
-    // A car gone or renamed: run `npx tsx scripts/similar-cars.ts`, which
-    // works out again every entry naming one
+  it('offers only cars still sold, for cars with a page', () => {
+    const stale = Object.entries(similarCars).flatMap(([slug, similar]) => [
+      ...(bySlug.has(slug) ? [] : [slug]),
+      ...similar.filter((named) => !sold.has(named)),
+    ])
+    // A car renamed or no longer sold: run `npx tsx scripts/similar-cars.ts`,
+    // which works out again every entry naming one
     expect(stale).toEqual([])
   })
 

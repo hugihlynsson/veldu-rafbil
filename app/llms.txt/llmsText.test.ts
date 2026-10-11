@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import buildLlmsText from './llmsText'
-import newCars from '@/modules/data/newCars'
+import cars from '@/modules/data/cars'
 import { filterUrlKeys } from '@/modules/list/filters'
 import { grantAmount, grantPriceCeiling } from '@/modules/data/globals'
 import { sortingUrlKeys } from '@/modules/list/sorting'
@@ -11,7 +11,7 @@ const text = buildLlmsText()
 // Generated rather than written into public/ so the numbers cannot go stale
 describe('llms.txt', () => {
   it('counts the cars from the list', () => {
-    expect(text).toContain(String(newCars.length))
+    expect(text).toContain(String(cars.length))
   })
 
   it('names the grant figures the prices actually use', () => {

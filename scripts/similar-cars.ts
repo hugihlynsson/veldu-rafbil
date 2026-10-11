@@ -6,12 +6,13 @@
  *   npx tsx scripts/similar-cars.ts --all   works every entry out afresh
  *
  * An entry already there is kept, so one set by hand survives a run that only
- * adds a new car's. One naming a car no longer on the list is worked out again.
+ * adds a new car's. One naming a car no longer sold is worked out again. A car
+ * no longer sold keeps an entry, of cars still sold, for its page.
  */
 import { writeFileSync } from 'node:fs'
 import path from 'node:path'
 
-import cars from '@/modules/data/cars'
+import cars, { allCars } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { closestCars } from '@/modules/detail/similar'
 import similarCars from '@/modules/data/similarCars'
@@ -24,7 +25,7 @@ const existing: Readonly<Record<string, ReadonlyArray<string>>> = all
   ? {}
   : similarCars
 
-const entries = cars.map((car) => {
+const entries = allCars.map((car) => {
   const slug = carSlug(car)
   const kept = existing[slug]
   const similar =

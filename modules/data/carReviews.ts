@@ -14,39 +14,63 @@ export interface CarReview {
 const carReviews: Readonly<Record<string, CarReview>> = {
   'audi-a6-e-tron-sportback-quattro': {
     paragraphs: [
-      'Audi A6 e-tron Sportback quattro er dýrari en flestir rafbílar hér en meðal þeirra langdrægustu, með 712 km samkvæmt WLTP, og meðal þeirra sem hlaða hraðast. Fjórhjóladrif, snörp hröðun og hagstætt verð á hvern km miðað við bíla á svipuðu verði gera hann að sterkum kosti fyrir þá sem aka mikið á milli landshluta.',
+      'Audi A6 e-tron Sportback quattro er stór og aflmikill fólksbíll með fjórhjóladrifi sem hentar þeim sem ferðast mikið milli landshluta við allar íslenskar aðstæður.',
+      'Drægnin er meðal þeirra mestu af rafbílum hér á landi og dugar léttilega á lengstu leiðum, jafnvel í vetrarkulda. Hann er jafnframt meðal þeirra sem hlaða hraðast og bætir fljótt við drægni á ferðalögum, auk þess að bjóða upp á fjórhjóladrif í snjó og hálku, 2.100 kg dráttargetu og 502 lítra farangursrými.',
+      'Á móti er hann dýrari en flestir bílar hérlendis og fær ekki styrk. Mercedes-Benz CLA 350 4MATIC kemur sterklega til greina fyrir þá sem vilja meiri drægni, en Audi er 200.000 kr. dýrari og með 58 km minni drægni. Ef hærri setstaða heillar meira kemur Audi Q6 e-tron til greina, en hann er 700.000 kr. dýrari og með 145 km minni drægni.',
+      'Þetta er einkar heppilegur kostur fyrir þá sem vilja öflugan og langdrægan bíl sem ræður vel við krefjandi vetrarfærð á langferðum. Hann borgar sig hins vegar síður ef þú ekur aðallega innanbæjar eða vilt frekar jeppa.',
     ],
     facts: 'cf5a35dc9543',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'audi-a6-e-tron-avant-quattro': {
     paragraphs: [
-      'Audi A6 e-tron Avant quattro er dýrari en flestir en meðal þeirra langdrægustu og meðal þeirra sem hlaða hraðast. Með fjórhjóladrifi og meira afli en flestir hentar hann þeim sem vilja langferðabíl og eru tilbúnir að borga fyrir hann.',
+      'Audi A6 e-tron Avant quattro er stór og aflmikill rafknúinn langbakur með fjórhjóladrifi. Hann hentar einkum þeim sem aka mikið milli landshluta og þurfa mikið rými í krefjandi vetraraðstæðum án þess að velja hefðbundinn jeppling.',
+      'Drægnin er meðal þeirra allra mestu hér á landi, sem veitir mikið öryggi í vetrarkulda og langkeyrslu. Hraðhleðslan er einnig meðal þeirra hröðustu af öllum rafbílum, sem styttir stopp á ferðalögum til muna. Þá er bíllinn sneggri en flestir í sínum verðflokki og býður upp á 2.100 kg dráttargetu og 502 lítra farangursrými.',
+      'Hann er þó dýrari en flestir af rafbílum á markaðnum. Ef hámarksdrægni og hleðsla skipta öllu máli hefur Audi A6 e-tron Avant quattro 69 km minni drægni en Mercedes-Benz CLA Shooting Brake 350 4MATIC og er 6,4 km/mín hægari, þótt sá síðarnefndi sé 200.000 kr. dýrari. Þá hefur hann 35 kW minna afl en Volvo EX60 P10, sem er 100.000 kr. dýrari.',
+      'Þetta eru góð kaup fyrir þá sem vilja öflugan langferðabíl með mikla dráttargetu og hraða hleðslu á ferðalögum. Fyrir þá sem vilja háa sætisstöðu eða leita að hagkvæmari kosti er skynsamlegra að líta annað.',
     ],
     facts: '16768dc51e04',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'audi-e-tron-gt-quattro': {
     paragraphs: [
-      'Audi e-tron GT quattro er meðal dýrustu bílanna á listanum og meðal þeirra sneggstu og aflmestu. Drægnin er hins vegar styttri en hjá flestum bílum á svipuðu verði, svo hann er fyrir þá sem setja aksturinn sjálfan ofar langferðum og verði.',
+      'Audi e-tron GT quattro er lágvaxinn og hraðskreiður lúxussportbíll með fjórhjóladrifi, sem hentar einkum þeim sem setja akstursánægju og kraft í fyrsta sæti.',
+      'Stærstu kostir bílsins felast í hröðun og afli, enda er hann bæði sneggri og aflmeiri en flestir bílar í sínum verðflokki. Fjórhjóladrifið veitir traust grip í snjó og hálku, og í langferðum hleður hann hraðar en flestir rafbílar hér á landi.',
+      'Hins vegar er fórnað töluverðu notagildi; bíllinn hefur enga dráttargetu og farangursrýmið er 405 lítrar auk 85 lítra framskotts. Drægnin er jafnframt meðal þeirra sem drífa styst á svipuðu verði, en bíllinn er með 155 km minni drægni og er 8 km/mín hægari í hraðhleðslu en Porsche Cayenne.',
+      'Þetta eru góð kaup fyrir ökumanninn sem leitar að sportlegum bíl með miklum afköstum. Fyrir þá sem þurfa meira pláss fyrir fjölskylduna, vilja geta dregið kerru eða þurfa hámarksdrægni yfir vetrarmánuðina er hins vegar betra að horfa annað.',
     ],
     facts: '31ddac76bef0',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'audi-q4-e-tron-45-quattro': {
     paragraphs: [
-      'Audi Q4 e-tron 45 quattro er fjórhjóladrifinn og dýrari en flestir, en drífur styttra og hleður hægar en flestir bílar á svipuðu verði. Hann er í meðallagi í flestu öðru, svo hann borgar sig helst fyrir þá sem vilja Audi umfram allt.',
+      'Audi Q4 e-tron 45 quattro er fimm sæta jepplingur sem hentar vel þeim sem leita að traustum bíl til daglegra nota í þéttbýli og styttri ferðir.',
+      'Fjórhjóladrifið er hans helsti styrkur og veitir nauðsynlegt veggrip í snjó og hálku á íslenskum vetrardögum. Farangursrýmið er 520 lítrar, sem rúmar auðveldlega allan hefðbundinn fjölskyldufarangur, og hann má draga allt að 1.200 kg kerru.',
+      'Á móti kemur að hann er dýrari en flestir og drífur styttra en flestir á svipuðu verði, auk þess sem hann hleður hægar en flestir og er dýrari á hvern km drægni en flestir í sínum verðflokki. Ef horft er til langferða væri Smart #5 Brabus hagstæðari kostur, en Audi er með 52 km minni drægni og er 8,8 km/mín hægari í hraðhleðslu. Einnig er Audi 500.000 kr. dýrari en Nissan Ariya e-4ORCE.',
+      'Þetta eru heppileg kaup fyrir þá sem setja öruggt fjórhjóladrif og gott skottpláss í forgang í hefðbundnu amstri. Fyrir þá sem gera miklar kröfur um drægni á langferðum eða hraðhleðslu fyrir peningana er hann hins vegar síður vænlegur kostur.',
     ],
     facts: '991962ef6422',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'audi-q6-e-tron-base': {
     paragraphs: [
-      'Audi Q6 e-tron er meðal þeirra langdrægustu á listanum, með 625 km, og hleður hraðar en flestir. Hann er fjórhjóladrifinn og dýrari en flestir, og í meðallagi miðað við bíla á svipuðu verði, svo valið stendur helst um merkið og þægindin.',
+      'Audi Q6 e-tron er stór, fjórhjóladrifinn lúxusjeppi sem hentar vel þeim sem vilja rúmgóðan bíl sem ræður léttilega við krefjandi íslenskar vetraraðstæður.',
+      'Drægnin er meðal þeirra allra bestu á landinu og dugar vel milli landshluta í frosti, auk þess sem hann hleður hraðar en flestir rafbílar. Skottið tekur 526 lítra, framskottið 64 lítra og 2.400 kg dráttargeta gerir hann mjög liðtækan fyrir tjaldvagna eða hestakerrur.',
+      'Á móti kemur að hann er dýrari en flestir og snerpan er hægari en hjá flestum í þessum verðflokki. Til dæmis er Audi Q6 e-tron 200.000 kr. dýrari og 1,4 s hægari en Audi A6 e-tron Avant quattro, auk þess að vera með 118 km minni drægni en Mercedes-Benz CLA Shooting Brake 350 4MATIC.',
+      'Þetta eru heppileg kaup fyrir þá sem vilja hábyggðan dráttarbíl með fjórhjóladrifi og öruggri vetrardrægni. Hafi fólk aftur á móti meiri áhuga á sem mestri drægni eða snarpari hröðun henta lægri fólksbílar betur.',
     ],
     facts: '63c57c17d103',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'audi-q6-e-tron-sportback': {
     paragraphs: [
-      'Audi Q6 e-tron Sportback er meðal þeirra langdrægustu og meðal þeirra sem hlaða hraðast, með fjórhjóladrif og meira afl en flestir. Hann er dýrari en flestir og í meðallagi miðað við bíla á svipuðu verði.',
+      'Audi Q6 e-tron Sportback er stór og sportlegur lúxusjepplingur með fjórhjóladrifi sem hentar vel fjölskyldum og ferðafólki sem þarf mikið pláss og örugga drægni við allar íslenskar aðstæður.',
+      'Drægnin er meðal þeirra langdrægustu af rafbílum hér á landi og dugar vel í vetrarkulda milli landshluta, auk þess sem hann er meðal þeirra sem hlaða hraðast. Hann nýtist sérlega vel í langferðir með 2.400 kg dráttargetu, 511 lítra skotti og 64 lítra framskotti.',
+      'Á móti kemur að bíllinn er dýrari en flestir rafbílar og hröðunin er hægari en flestir bjóða upp á í svipuðum verðflokki. Sá sem leitar að meiri snerpu og lægra verði ætti frekar að skoða Audi A6 e-tron Avant quattro, en Q6 er 800.000 kr. dýrari, með 37 km minni drægni og 1,4 s hægari upp í hundraðið.',
+      'Hann eru góð kaup fyrir þá sem vilja hábyggðan ferðabíl sem ræður léttilega við þungan eftirvagn í vetrarfærð, en síður fyrir þá sem horfa í verðmiðann og vilja sem mesta hröðun fyrir peningana.',
     ],
     facts: 'f7e367c58b0b',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'audi-sq6-e-tron-base': {
     paragraphs: [
@@ -56,9 +80,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'bmw-i4-40-xdrive': {
     paragraphs: [
-      'BMW i4 40 xDrive er fjórhjóladrifinn og sneggri en flestir, og hleður hraðar en flestir á listanum. Miðað við bíla á svipuðu verði drífur hann þó styttra og rafhlaðan er með þeim minnstu.',
+      'BMW i4 40 xDrive er sportlegur fólksbíll með fjórhjóladrifi sem höfðar til þeirra sem vilja hefðbundinn, lágvaxinn bíl frekar en stóran jeppling.',
+      'Fjórhjóladrifið veitir mikið öryggi í íslenskri vetrarfærð og bíllinn má draga allt að 1.600 kg, sem nýtist vel fyrir ferðavagna eða vinnukerrur. Hann er jafnframt aflmeiri og sneggri en flestir rafbílar hér á landi, og 470 lítra farangursrýmið tekur vel við hefðbundnum farangri þótt ekkert sé framskottið.',
+      'Í sínum verðflokki drífur hann hins vegar styttra en flestir og tekur hægar við hleðslu á langferðum. Sem dæmi er BMW i4 40 xDrive 400.000 kr. dýrari en Audi Q6 e-tron Sportback, með 91 km minni drægni og 7 km/mín hægari í hraðhleðslu.',
+      'Þetta eru góð kaup fyrir ökumenn sem setja krafta og lipran vetrarakstur í öndvegi, en síður fyrir þá sem vilja hámarka drægni eða pláss fyrir fjármunina.',
     ],
     facts: 'df5d4ebe059b',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'bmw-i4-m60-xdrive': {
     paragraphs: [

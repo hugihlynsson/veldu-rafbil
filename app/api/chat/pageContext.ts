@@ -12,6 +12,9 @@ import { resolveSlugs } from '@/modules/detail/slugs'
 export const pageNote = (car: Car, review: CarReview | undefined): string =>
   [
     `[Spurt á síðu bílsins ${car.label} á Veldu Rafbíl.`,
+    // It is not in the list the advisor is given, so this is all it knows
+    car.deprecated &&
+      `Hann er ekki lengur seldur nýr á Íslandi, síðan ${car.deprecated}, og er því ekki á listanum þínum.`,
     review &&
       `Á síðunni er umsögn Veldu Rafbíl um hann, sem lesandinn sér: "${review.paragraphs.join(' ')}"`,
     ']',
