@@ -17,7 +17,7 @@ const Review: FunctionComponent<{ review: CarReview }> = ({ review }) => (
       {review.paragraphs.map((paragraph) => (
         <p
           key={paragraph}
-          className="mt-2 mb-0 text-base leading-normal md:text-lg [&+&]:mt-3"
+          className="mt-2 mb-0 text-base leading-normal text-pretty md:text-lg [&+&]:mt-3"
         >
           {paragraph}
         </p>
