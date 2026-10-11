@@ -153,10 +153,10 @@ export const shareImage = async (car: Car) => {
               alignItems: 'center',
               gap: 12,
               marginTop: 22,
-              padding: '7px 9px 7px 19px',
+              padding: '6px 8px 6px 16px',
               borderRadius: 999,
               background: '#eee',
-              fontSize: 24,
+              fontSize: 20,
               fontWeight: 600,
             }}
           >
@@ -164,11 +164,11 @@ export const shareImage = async (car: Car) => {
             {priceBadge && (
               <span
                 style={{
-                  padding: '3px 10px',
+                  padding: '3px 9px',
                   borderRadius: 999,
                   background: '#fff',
                   color: stone,
-                  fontSize: 13,
+                  fontSize: 12,
                   letterSpacing: 0.5,
                   textTransform: 'uppercase',
                 }}
