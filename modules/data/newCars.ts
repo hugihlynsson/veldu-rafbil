@@ -492,6 +492,8 @@ const newCars: Array<NewCar> = [
     acceleration: 3.9,
     capacity: 111,
     range: 540,
+    evDatabaseUrl:
+      'https://ev-database.org/car/3265/Hongqi-E-HS7-111-kWh-AWD-Pro',
     drive: 'AWD',
     seats: 5,
     power: 455,
@@ -544,7 +546,7 @@ const newCars: Array<NewCar> = [
     seats: 5,
     power: 108,
     timeToCharge10To80: 30,
-    expectedDelivery: '2026',
+    expectedDelivery: 'lok 2026',
   },
   {
     make: 'Hyundai',
@@ -561,7 +563,7 @@ const newCars: Array<NewCar> = [
     seats: 5,
     power: 100,
     timeToCharge10To80: 30,
-    expectedDelivery: '2026',
+    expectedDelivery: 'lok 2026',
   },
   {
     make: 'Hyundai',
@@ -646,7 +648,7 @@ const newCars: Array<NewCar> = [
     seats: 9,
     power: 160,
     timeToCharge10To80: 21,
-    expectedDelivery: '2026',
+    expectedDelivery: 'lok 2026',
   },
   {
     make: 'Jeep',
@@ -945,7 +947,7 @@ const newCars: Array<NewCar> = [
     seats: 5,
     power: 130,
     timeToCharge10To80: 21,
-    expectedDelivery: '2026',
+    expectedDelivery: 'lok 2026',
   },
   {
     make: 'Leapmotor',
@@ -962,7 +964,7 @@ const newCars: Array<NewCar> = [
     seats: 5,
     power: 145,
     timeToCharge10To80: 21,
-    expectedDelivery: '2026',
+    expectedDelivery: 'lok 2026',
   },
   {
     make: 'Leapmotor',
@@ -979,7 +981,7 @@ const newCars: Array<NewCar> = [
     seats: 5,
     power: 160,
     timeToCharge10To80: 23,
-    expectedDelivery: '2026',
+    expectedDelivery: 'lok 2026',
   },
   {
     make: 'Leapmotor',
@@ -996,7 +998,7 @@ const newCars: Array<NewCar> = [
     seats: 5,
     power: 160,
     timeToCharge10To80: 26,
-    expectedDelivery: '2026',
+    expectedDelivery: 'lok 2026',
   },
   {
     make: 'Leapmotor',
@@ -2229,6 +2231,8 @@ const newCars: Array<NewCar> = [
     acceleration: 5.6,
     capacity: 118,
     range: 600,
+    evDatabaseUrl:
+      'https://ev-database.org/car/3716/Land-Rover-Range-Rover-EV450',
     drive: 'AWD',
     seats: 5,
     power: 331,
@@ -2244,6 +2248,8 @@ const newCars: Array<NewCar> = [
     acceleration: 4.5,
     capacity: 118,
     range: 600,
+    evDatabaseUrl:
+      'https://ev-database.org/car/3717/Land-Rover-Range-Rover-EV550',
     drive: 'AWD',
     seats: 5,
     power: 404,
@@ -2962,7 +2968,7 @@ const newCars: Array<NewCar> = [
     seats: 5,
     power: 155,
     timeToCharge10To80: 24,
-    expectedDelivery: '2026',
+    expectedDelivery: 'lok 2026',
   },
   {
     make: 'Volkswagen',
@@ -3335,6 +3341,7 @@ const newCars: Array<NewCar> = [
     acceleration: 5.9,
     capacity: 110,
     range: 570,
+    evDatabaseUrl: 'https://ev-database.org/car/3613/XPENG-X9-AWD-Performance',
     drive: 'AWD',
     seats: 7,
     power: 370,
