@@ -15,7 +15,7 @@ import { execFileSync } from 'node:child_process'
 import { writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { google } from '@ai-sdk/google'
-import { generateText, stepCountIs } from 'ai'
+import { generateText, stepCountIs, type LanguageModelUsage } from 'ai'
 
 import cars, { type Car } from '@/modules/data/cars'
 import { similarTo } from '@/modules/detail/similar'
@@ -96,7 +96,9 @@ export default carReviews
   if (format) execFileSync('npx', ['oxfmt', file], { stdio: 'ignore' })
 }
 
-const write = async (car: Car): Promise<CarReview> => {
+const write = async (
+  car: Car,
+): Promise<{ review: CarReview; usage: LanguageModelUsage }> => {
   const { system, prompt } = reviewPrompt(car)
   const result = await generateText({
     model: google(advisorModel),
@@ -130,9 +132,12 @@ const write = async (car: Car): Promise<CarReview> => {
     throw new Error(`it is too short: ${result.text}`)
   }
   return {
-    paragraphs,
-    facts: reviewFactsKey(car),
-    model: `${advisorModel}, thinking ${thinkingLevel}`,
+    review: {
+      paragraphs,
+      facts: reviewFactsKey(car),
+      model: `${advisorModel}, thinking ${thinkingLevel}`,
+    },
+    usage: result.totalUsage,
   }
 }
 
@@ -145,11 +150,13 @@ const worker = async () => {
     const slug = carSlug(car)
     const started = Date.now()
     try {
-      reviews.set(slug, await write(car))
+      const { review, usage } = await write(car)
+      reviews.set(slug, review)
       save()
       done++
+      // What it was billed for, every step and lookup included
       console.log(
-        `${done}/${due.length} ${slug} (${Math.round((Date.now() - started) / 1000)} s)`,
+        `${done}/${due.length} ${slug} (${Math.round((Date.now() - started) / 1000)} s, ${usage.inputTokens} tokens in, ${usage.outputTokens} out of which ${usage.outputTokenDetails.reasoningTokens ?? 0} thinking)`,
       )
     } catch (error) {
       failed.push(slug)

@@ -138,15 +138,22 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'bmw-ix3-50-xdrive': {
     paragraphs: [
-      'BMW iX3 50 xDrive er meðal þeirra langdrægustu á listanum, með 805 km, og meðal þeirra sem hlaða hraðast. Hann er fjórhjóladrifinn og dýrari en flestir, en meðal þeirra ódýrustu á hvern km drægni miðað við bíla á svipuðu verði.',
+      'BMW iX3 50 xDrive er kraftmikill lúxusjepplingur með fjórhjóladrifi sem er sniðinn fyrir fólk sem gerir miklar kröfur um þægindi og aksturseiginleika. Hann hentar sérstaklega vel fyrir þá sem ferðast reglulega milli landshluta og vilja geta treyst á bílinn í hvers kyns vetraraðstæðum.',
+      'Helsti styrkur hans felst í gríðarlegri drægni og einni stærstu rafhlöðu sem völ er á hér á landi. Jafnvel í nístingskulda á veturna dugar hún léttilega í langferðir án hleðslukvíða. Hann er líka meðal þeirra bíla sem hlaða hvað hraðast, sem þýðir sérstaklega stutt stopp á ferðalögum, og í sínum verðflokki er hann meðal þeirra ódýrustu á hvern kílómetra drægni.',
+      'Hann er þó dýrari en flestir rafbílar og hröðunin er aðeins í meðallagi miðað við verðið. Sem dæmi er Volvo EX60 P12 100.000 kr. ódýrari, 1 s sneggri í hundraðið og með um 5% styttri hleðslustopp. Fyrir þá sem leggja áherslu á hefðbundin gæði BMW, framúrskarandi langdrægni og öruggt ferðafrelsi allan ársins hring er iX3 engu að síður mjög traustur kostur.',
     ],
     facts: 'fb86aa548d6e',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'byd-dolphin-base': {
     paragraphs: [
-      'BYD Dolphin er meðal ódýrustu bílanna á listanum og meðal þeirra ódýrustu á hvern km drægni. Hann hleður þó með þeim hægustu, svo hann hentar best í innanbæjarakstur og styttri ferðir.',
+      'BYD Dolphin er lipur og nettur fimm sæta hlaðbakur sem hentar sérstaklega vel í innanbæjarakstur og daglegan skutl. Hann er lipur í þröngum götum og auðveldur í stæði, en lág bygging og framhjóladrif gera hann fyrst og fremst að malbiks- og borgarbíl sem hentar síður í mikinn snjó eða á grófa vegi.',
+      'Bíllinn er meðal þeirra ódýrustu af rafbílum hér á landi og gefur mikið fyrir peninginn. Í sínum verðflokki er hann ódýrari á hvern kílómetra drægni en flestir og skartar stærri rafhlöðu en gengur og gerist. Hann er jafnframt meðal þeirra sneggstu á svipuðu verði, sem gerir hann óvænt kvikan í daglegri umferð.',
+      'Helsti gallinn er hraðhleðslan, en bíllinn er meðal þeirra sem hlaða hægast, bæði í sínum verðflokki og af öllum rafbílum. Á langferðum krefst hann því meiri þolinmæði en keppinautar á borð við Skoda Epiq 55, sem býður upp á um 45% styttri hleðslustopp. Ef fólk þarf meira pláss fyrir fjölskylduna er Leapmotor C10 Pro auk þess mun stærri kostur á sama verði.',
+      'Sem lipur og snarpur hversdagsbíll á lágu verði kemur Dolphin engu að síður mjög vel út.',
     ],
     facts: 'a075d76dc9ac',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'byd-seal-base': {
     paragraphs: [
@@ -198,9 +205,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'ford-explorer-er-awd': {
     paragraphs: [
-      'Ford Explorer ER AWD er fjórhjóladrifinn, drífur lengra og hleður hraðar en flestir, á verði í meðallagi. Hann er ódýrari á hvern km drægni en flestir og traustur kostur fyrir íslenskar aðstæður.',
+      'Ford Explorer ER AWD er kantaður og traustvekjandi fjölskyldujepplingur með háa setustöðu og gott útsýni. Hann hentar vel fólki sem vill hefðbundið jeppalegt form, öruggt fjórhjóladrif í vetrarfærðinni og bíl sem ræður léttilega við daglega skutlið jafnt sem langferðir um landið.',
+      'Með 566 km drægni samkvæmt WLTP kemst hann auðveldlega á milli landshluta, jafnvel að vetrarlagi þegar kuldinn bítur af drægninni. Hann er sneggri og aflmeiri en flestir bílar í sínum verðflokki, með 250 kW afl sem nýtist vel við framúrakstur og í snjó. Hann hleður hraðar en flestir rafbílar hér á landi og er ódýrari á hvern kílómetra drægni en gerist og gengur.',
+      'Hins vegar nýta sumir keppinautar á sama verði tímann við hraðhleðslustöðvar enn betur. Ef hraði á langferðum skiptir öllu máli býður Hyundai IONIQ 5 Long Range AWD upp á um 35% styttri hleðslustopp. Fyrir þá sem vilja kreista sem flesta kílómetra út úr rafhlöðunni býður systurbíllinn Ford Capri upp á 26 km meiri drægni.',
+      'Ford Explorer ER AWD stendur engu að síður upp úr sem vel heppnaður og öflugur jepplingur sem hentar íslenskum aðstæðum afar vel.',
     ],
     facts: '9eb36bb10329',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'ford-mustang-mach-e-lr-awd': {
     paragraphs: [
@@ -228,9 +239,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'hyundai-inster-base': {
     paragraphs: [
-      'Hyundai INSTER er meðal ódýrustu bílanna á listanum og meðal þeirra ódýrustu á hvern km drægni. Hann drífur þó með þeim stystu, hleður hægt og er aflminni en flestir, svo hann hentar best innanbæjar.',
+      'Hyundai INSTER er lipur og kassalaga smábíll sem fellur vel að þéttbýlinu. Hann er auðveldur í þröng bílastæði og býður upp á upprétta setstöðu með sætum fyrir allt að fimm. Hann hentar sérlega vel sem sparneytinn skutlubíll fyrir þá sem aka langmest innanbæjar og vilja einfaldan, nýjan rafbíl.',
+      'Stærsti kosturinn er verðið, enda er hann meðal þeirra ódýrustu af rafbílum hér á landi og sömuleiðis meðal þeirra ódýrustu á hvern kílómetra drægni. Í daglegu lífi dugar rafhlaðan prýðilega í hefðbundin innanbæjarerindi ef hlaðið er heima yfir nótt, án þess að binda mikið fjármagn í bílakaupum.',
+      'Hins vegar gefur maður eftir í afli og langferðagetu. Hann er meðal þeirra aflminnstu og hægustu bíla á landinu, drífur styttra en flestir í sínum verðflokki og hleður hægar en flestir þeirra. Ef stefnan er sett á reglulegan þjóðvegaakstur gætu Leapmotor B10 eða Leapmotor B03X ProMax hentað betur, en þeir bjóða báðir meiri drægni, miklu sneggri hröðun og talsvert styttri hleðslustopp.',
+      'Hyundai INSTER er því fyrst og fremst raunsær og lipur borgarbíll, sniðinn fyrir þá sem meta lágt kaupverð og þægindi í þéttbýli fram yfir ferðalög milli landshluta.',
     ],
     facts: '6832195fd771',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'hyundai-inster-long-range': {
     paragraphs: [
@@ -252,9 +267,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'hyundai-ioniq-5-long-range-awd': {
     paragraphs: [
-      'Hyundai IONIQ 5 Long Range AWD er fjórhjóladrifinn og meðal þeirra sem hlaða hraðast á listanum, sá hraðasti miðað við bíla á svipuðu verði. Hann drífur lengra en flestir á sama verði og er ódýrari á hvern km drægni en flestir.',
+      'Hyundai IONIQ 5 Long Range AWD er rúmgóður fjölskyldubíll með fjórhjóladrifi sem hentar sérlega vel í íslenskri vetrarfærð. Helsta sérkenni hans er hleðslugetan, en í sínum verðflokki hleður hann hraðast allra og er jafnframt meðal þeirra sem hlaða hraðast af rafbílum hér á landi.',
+      'Í sínum verðflokki drífur bíllinn lengra en flestir og er með stærri rafhlöðu en flestir, auk þess að vera ódýrari á hvern kílómetra drægni en flestir á markaðnum. Í daglegu lífi þýðir þetta meira öryggi í ferðum milli landshluta í vetrarkulda. Hann er einnig sneggri í hundraðið en flestir bílar á svipuðu verði, sem auðveldar framúrakstur á þjóðveginum.',
+      'Þeir sem vilja hámarka vegalengdina á einni hleðslu gætu frekar litið til Ford Explorer ER AWD, sem býður upp á 20 km meiri drægni. Í þeim bíl eru hleðslustoppin hins vegar um 60% lengri.',
+      'Fyrir fólk sem ferðast mikið milli landshluta og vill eyða sem minnstum tíma við hleðslustöðvar er IONIQ 5 afar heppilegur kostur.',
     ],
     facts: 'ec32ba1494cf',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'hyundai-ioniq-9-long-range-awd': {
     paragraphs: [
@@ -270,9 +289,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'hyundai-kona-electric-65-kwh': {
     paragraphs: [
-      'Hyundai Kona Electric 65 kWh er ódýrari en flestir og meðal þeirra ódýrustu á hvern km drægni. Hann drífur lengra en flestir bílar á svipuðu verði en hleður hægar en flestir.',
+      'Hyundai Kona Electric er lipur og hagnýtur bíll sem hentar sérlega vel þeim sem vilja mikla drægni á viðráðanlegu verði. Hann er ódýrari en flestir rafbílar á Íslandi og drífur lengra en flestir í sínum verðflokki. Uppgefin 514 km drægni dugar vel milli landshluta, jafnvel í íslenskum vetrarkulda.',
+      'Stærsti styrkleikinn er hvað maður fær mikið fyrir peningana, en hann er meðal þeirra ódýrustu á hvern kílómetra drægni af öllum rafbílum hér á landi. Hann er framhjóladrifinn og dugar vel í daglegan akstur, þótt hann sé aflminni og hægari en flestir.',
+      'Helsti ókosturinn er hraðhleðslan, en bíllinn hleður hægar en flestir í sínum verðflokki og stopp á langferðum verða því lengri. Fyrir þá sem aka mikið langkeyrslu er Tesla Model Y Standard Range 280.000 kr. dýrari en býður upp á um 30% styttri hleðslustopp. Leapmotor C10 ProMax er líka 60.000 kr. ódýrari með um 25% styttri hleðslustopp.',
+      'Hlaði maður hins vegar mest heima og vilji hámarksdrægni fyrir hverja krónu er Kona afar skynsamlegur kostur.',
     ],
     facts: 'd2efebe3c86d',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'hyundai-staria-electric-base': {
     paragraphs: [
@@ -344,9 +367,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'kia-ev4-base': {
     paragraphs: [
-      'Kia EV4 er meðal þeirra langdrægustu, með 625 km, og meðal þeirra ódýrustu á hvern km drægni. Hann hleður hraðar en flestir en er hægari og aflminni en flestir.',
+      'Kia EV4 er fimm sæta hlaðbakur með framhjóladrif sem sker sig úr fyrir mikla drægni miðað við verðlag. Hann er ódýrari en flestir rafbílar á Íslandi en býður samt upp á drægni sem er meðal þeirra allra lengstu. Hann hentar einkum þeim sem ferðast reglulega milli landshluta og vilja geta reitt sig á góða drægni í vetrarkulda án mikils tilkostnaðar.',
+      'Stærsti styrkleiki bílsins er hve mikið fæst fyrir peninginn, en hann er meðal þeirra ódýrustu á hvern kílómetra drægni. Rafhlaðan er stærri en á flestum bílum í svipuðum verðflokki og hann hleður hraðar en flestir, sem styttir viðkomur við hleðslustöðvar í langferðum.',
+      'Hins vegar er bíllinn aflminni og hægari en flestir rafbílar hér á landi. Hann dregur aðeins á framhjólunum, svo fyrir þá sem vilja meira grip í snjó og hálku gæti Tesla Model 3 Long Range Fjórhjóladrif hentað betur, enda fjórhjóladrifin og með um 20% styttri hleðslustopp, þótt hún sé 300.000 kr. dýrari.',
+      'Fyrir þá sem horfa fyrst og fremst í mikla drægni og lágan kaupverðskostnað er Kia EV4 afar hagkvæmur kostur í daglegum akstri.',
     ],
     facts: '7a4f0374acac',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'kia-ev4-fastback': {
     paragraphs: [
@@ -374,9 +401,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'kia-ev9-base': {
     paragraphs: [
-      'Kia EV9 er sjö sæta og fjórhjóladrifinn, með stærri rafhlöðu en flestir og hleður hraðar en flestir. Hann er dýrari en flestir og drífur styttra en flestir bílar á svipuðu verði.',
+      'Kia EV9 er stór og kassalaga jeppi með sæti fyrir allt að sjö manns, sem sker sig úr með grófu jeppalagi fremur en útliti fjölnotabíls. Hann hentar stórum fjölskyldum sem leita að rúmgóðum ferðabíl með alvöru fjórhjóladrifi, sem veitir gott veggrip og öryggi í snjó, hálku og á krefjandi malarvegum.',
+      'Rafhlaðan er stærri en á flestum rafbílum hér á landi og bíllinn hleður hraðar en flestir þeirra. Það kemur sér vel á íslenskum þjóðvegum, þar sem hleðslustopp verða styttri og drægnin dugar vel á milli landshluta þótt vetrarkuldinn éti hluta af henni.',
+      'Á móti er hann dýrari en flestir rafbílar og drífur styttra en flestir í sínum verðflokki. XPENG X9 AWD Performance er til dæmis 400.000 kr. ódýrari, býður upp á 58 km meiri drægni og um 50% styttri hleðslustopp, sem gerir hann að vænlegri kosti fyrir þá sem leggja mesta áherslu á langferðir.',
+      'Fyrir þá sem vilja fullburða sjö sæta jeppa sem lætur íslenska vetrarfærð ekki stöðva sig er Kia EV9 engu að síður mjög álitlegur kostur.',
     ],
     facts: '17a8cbfdb49d',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'kia-ev9-gt': {
     paragraphs: [
@@ -516,9 +547,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'mercedes-benz-cla-350-4matic': {
     paragraphs: [
-      'Mercedes-Benz CLA 350 4MATIC er meðal þeirra langdrægustu á listanum, með 770 km, og meðal þeirra sem hlaða hraðast. Hann er ódýrastur bíla á svipuðu verði á hvern km drægni, sem gerir hann að einum besta langferðabílnum í sínum verðflokki.',
+      'Mercedes-Benz CLA 350 4MATIC er lágur og rennilegur fólksbíll með fjórhjóladrifi sem höfðar sérstaklega til þeirra sem leita að fágaðri akstursupplifun og miklu langferðaþoli. Fjórhjóladrifið tryggir öruggt veggrip í snjó og hálku á íslenskum vegum.',
+      'Stærsti styrkleiki bílsins er drægnin, en hann er meðal allra langdrægustu rafbíla hér á landi og ódýrastur á hvern kílómetra drægni í sínum verðflokki. Í vetrarkulda þýðir þetta að auðvelt er að aka milli landshluta án þess að hafa áhyggjur af hleðslu, auk þess sem hann er meðal þeirra bíla sem hlaða hraðast svo stopp á ferðalögum verða stutt.',
+      'Í sínum verðflokki er hann hins vegar aflminni en flestir keppinautarnir, jafnvel þótt hröðunin sé í meðallagi. Ef meira afl skiptir miklu máli kemur Audi A6 e-tron Sportback quattro til greina með 80 kW meira afl, eða Volvo EX60 P10 sem býður upp á 115 kW meira afl.',
+      'Fyrir kaupendur sem vilja lágmarka hleðslustopp og komast sem lengst á hverri hleðslu í vönduðum bíl er CLA 350 4MATIC afar skynsamlegt val í þessum verðflokki.',
     ],
     facts: '4cb076da8aba',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'mercedes-benz-cla-shooting-brake-350-4matic': {
     paragraphs: [
@@ -682,9 +717,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'nissan-leaf-extended-range': {
     paragraphs: [
-      'Nissan Leaf Extended Range er ódýrari en flestir en drífur lengra en flestir, með 622 km, og er meðal þeirra ódýrustu á hvern km drægni. Hann hleður hraðar en flestir og er sterkur langferðabíll fyrir verðið.',
+      'Nissan Leaf Extended Range er hagnýtur fólksbíll sem hentar vel þeim sem vilja rúmgóðan og traustan bíl í daglegan akstur og langferðir. Hann sker sig úr með mikilli drægni miðað við verð, sem gerir hann að kjörnum kosti fyrir fólk sem vill kveðja drægnikvíða án þess að kaupa dýran lúxusbíl.',
+      'Stærsti styrkur bílsins er drægnin, en hann drífur lengra en flestir rafbílar og er meðal þeirra langdrægustu í sínum verðflokki. Jafnvel í íslenskum vetrarkulda ætti hún að duga léttilega á milli landshluta. Hann hleður jafnframt hraðar en flestir og er meðal þeirra ódýrustu á hvern kílómetra drægni af rafbílum hér á landi, svo hleðslustopp í langferðum verða bæði fá og stutt.',
+      'Á móti kemur að bíllinn er framhjóladrifinn og aflið er í meðallagi í sínum verðflokki, sem gæti skipt máli í mikilli snjófærð. Ef afturhjóladrif og meira afl skipta sköpum er Mazda 6e Long Range á sama verði, en þar eru hleðslustoppin um 70% lengri og drægnin 70 km minni. Þá er Kia EV3 Long Range örlítið ódýrari kostur, eða um 99.000 kr. ódýrari.',
+      'Fyrir þá sem forgangsraða langdrægni og góðum hleðsluhraða á hagstæðu verði er Leaf Extended Range eitt allra skynsamlegasta valið á markaðnum.',
     ],
     facts: 'd634205f4f90',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'opel-frontera-base': {
     paragraphs: [
@@ -730,9 +769,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'peugeot-e-5008-base': {
     paragraphs: [
-      'Peugeot e-5008 er sjö sæta og ódýrari en flestir, með drægni í meðallagi. Hann er meðal þeirra hægustu og hleður hægar en flestir.',
+      'Peugeot e-5008 er rúmgóður sjö sæta fjölskyldubíll sem höfðar sérstaklega til stærri fjölskyldna sem vantar mörg sæti á viðráðanlegu verði. Hann er ódýrari en flestir rafbílar hér á landi og gerir sjö sæta rafbíl að raunhæfum kosti fyrir venjuleg heimili.',
+      'Drægnin er í meðallagi og dugar vel í daglegan akstur og ferðalög milli landshluta, þótt reikna verði með að hún minnki í vetrarkulda. Verð á hvern kílómetra drægni er hagstæðara en hjá flestum rafbílum, svo maður fær mikið notagildi fyrir aurinn.',
+      'Á móti kemur að bíllinn er aflminni en flestir, meðal þeirra hægustu og hleður hægar en flestir, sem þýðir lengri bið við hleðslustöðvar á hringferðum. Hann er einnig eingöngu framhjóladrifinn. Þeir sem vilja sjö sæti fá mun meiri drægni hér en í Kia PV5 eða Toyota Proace City Verso. Ef fjórhjóladrif og styttri hleðslustopp skipta hins vegar miklu máli í vetrarfærð er dýrari bíll eins og Skoda Peaq 90x betri kostur.',
+      'Peugeot e-5008 er skynsamlegur kostur fyrir fjölskyldur sem þurfa mörg sæti á hagstæðu verði og geta sætt sig við rólegri hröðun og lengri hleðslustopp á langferðum.',
     ],
     facts: 'b47a6957b868',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'peugeot-e-5008-dual-motor': {
     paragraphs: [
@@ -806,9 +849,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'porsche-taycan-plus': {
     paragraphs: [
-      'Porsche Taycan Plus er meðal þeirra langdrægustu, með 678 km, og meðal þeirra sem hlaða hraðast. Hann er afturhjóladrifinn og meðal dýrustu bílanna á listanum.',
+      'Porsche Taycan Plus er lágur og rennilegur lúxussportbíll sem leggur alla áherslu á akstursánægju, mikil þægindi og langferðir. Hann hentar þeim sem leita að fágaðri akstursupplifun og vilja komast áreynslulaust á milli landshluta á malbikuðum vegum.',
+      'Hann er meðal allra langdrægustu rafbíla á Íslandi og drífur lengra en flestir í sínum verðflokki, sem þýðir að vetrarkuldi veldur sjaldan áhyggjum. Bíllinn er jafnframt meðal þeirra sem hlaða hraðast á landinu, þannig að hleðsluhlé á langferðum verða óvenju stutt og tefja för sáralítið.',
+      'Stærsti gallinn við íslenskar aðstæður er að bíllinn er afturhjóladrifinn. Í snjó og hálku væru fjórhjóladrifnir bílar eins og Porsche Macan 4s Electric eða jeppinn BMW iX xDrive 45 Sport mun hentugri kostur, þótt hleðslustoppin séu um 45% lengri hjá Macan og um 140% lengri hjá iX. Mercedes-Benz CLA AMG 45 4MATIC+ býður einnig upp á fjórhjóladrif á lægra verði, en rúmar aðeins fjóra.',
+      'Porsche Taycan Plus er heillandi langferðabíll sem hleður eldsnöggt, en krefst þess að eigandinn sætti sig við afturhjóladrif yfir erfiðustu vetrarmánuðina.',
     ],
     facts: 'a72a8541bd98',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'porsche-taycan-4-plus': {
     paragraphs: [
@@ -884,9 +931,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'renault-r5-e-tech-base': {
     paragraphs: [
-      'Renault R5 E-Tech er meðal ódýrustu bílanna á listanum en meðal þeirra sem drífa styst og hlaða hægast. Hann hentar best innanbæjar.',
+      'Renault R5 E-Tech er lipur smábíll með skemmtilegu retro-útliti sem sker sig úr í umferðinni. Hann er sniðinn að þeim sem aka langmest innanbæjar, vilja bíl sem auðvelt er að leggja í þröng stæði og hentar vel sem annar bíll heimilisins eða fyrir minni heimili.',
+      'Stærsti kosturinn er kaupverðið, en hann er meðal þeirra ódýrustu af rafbílum hér á landi. Lítil rafhlaða gerir það að verkum að einfalt og ódýrt er að fullhlaða bílinn heima yfir nótt fyrir hefðbundið daglegt skutl.',
+      'Á móti kemur að drægnin er meðal þeirra stystu og bíllinn hleður hægar en flestir í sínum verðflokki, sem kemur niður á honum á langferðum og í vetrarkulda. Ef ætlunin er að aka reglulega milli landshluta býður Hyundai INSTER Long Range til dæmis upp á 70 km meiri drægni og um 15% styttri hleðslustopp á sama verði. Þá er Kia EV2 Standard Range 500.000 kr. ódýrari.',
+      'Renault R5 E-Tech er heillandi og lipur kostur í bæinn, en krefst málamiðlana ef ætlunin er að leggja oft í lengri ferðalög.',
     ],
     facts: 'd6b5c1746164',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'renault-r5-e-tech-52-kwh': {
     paragraphs: [
@@ -914,9 +965,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'skoda-elroq-85': {
     paragraphs: [
-      'Skoda Elroq 85 er ódýrari en flestir en drífur lengra en flestir, með 579 km, og er meðal þeirra ódýrustu á hvern km drægni. Hann hleður hraðar en flestir og er í meðallagi að afli, sem gerir hann að jöfnum og hagkvæmum langferðabíl.',
+      'Skoda Elroq 85 er hagnýtur og þægilegur fjölskyldubíll sem hentar þeim sem vilja mikla drægni án þess að sprengja kostnaðinn. Hann sker sig úr með því að vera ódýrari en flestir rafbílar á Íslandi og meðal þeirra allra ódýrustu á hvern kílómetra drægni.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu. Drægnin dugar auðveldlega á milli landshluta, jafnvel í vetrarkulda þar sem raunveruleg drægni dregst nokkuð saman. Hann hleður hraðar en flestir bílar á svipuðu verði, sem þýðir styttri hleðslustopp á langferðum, auk þess að vera aflmeiri en flestir þeirra í daglegum akstri.',
+      'Helsti fyrirvarinn er að hann er afturhjóladrifinn. Fyrir þá sem vilja meira grip í vetrarfærð býður Hongqi EHS5 upp á fjórhjóladrif og um 25% styttri hleðslustopp fyrir 200.000 kr. meira, en gefur eftir í drægni.',
+      'Fyrir þá sem leita að rúmgóðum og langdrægum jepplingi er Elroq 85 sérlega skynsamlegt val sem gefur mikið fyrir peningana.',
     ],
     facts: '854fd4da41e0',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'skoda-elroq-85x': {
     paragraphs: [
@@ -1028,9 +1083,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'tesla-model-3-long-range-afturhjoladrif': {
     paragraphs: [
-      'Tesla Model 3 Long Range Afturhjóladrif er ódýrasti bíllinn á listanum á hvern km drægni og meðal þeirra langdrægustu, með 750 km. Hann hleður hraðar og er sneggri en flestir, svo fáir bílar gefa meira fyrir peninginn á langferðum.',
+      'Tesla Model 3 Long Range með afturhjóladrifi er lágur og rennilegur fólksbíll sem sker sig fyrst og fremst úr fyrir mikla drægni. Með 750 km uppgefna drægni kemst hann lengst allra bíla í sínum verðflokki og er meðal þeirra allra langdrægustu á landinu. Hann hentar sérstaklega vel þeim sem aka mikið milli landshluta og vilja geta treyst á mikla drægni í vetrarkulda án þess að hugsa stöðugt um hleðslu.',
+      'Bíllinn er ódýrari en flestir rafbílar og er ódýrastur allra á hvern kílómetra drægni. Hann er einnig sneggri og aflmeiri en flestir bílar á svipuðu verði. Þá er hann meðal þeirra sem hlaða hraðast í sínum flokki, svo hleðslustopp á langferðum tefja lítið.',
+      'Á móti kemur að lág bygging og afturhjóladrif henta síður þegar færð spillist í miklum snjó eða á grófum slóðum. Ef meiri veghæð skiptir máli væri jepplingur eins og Skoda Elroq 85 fýsilegri kostur, þótt hann bjóði upp á 171 km minni drægni og um 30% lengri hleðslustopp. Ef kaupverðið ræður mestu er Nissan Leaf Extended Range auk þess 300.000 kr. ódýrari.',
+      'Fyrir þá sem vilja hámarksdrægni og lipran akstur fyrir peninginn er þessi Model 3 engu að síður eitt allra hagkvæmasta valið á markaðnum í dag.',
     ],
     facts: '2fb3560a683e',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'tesla-model-3-long-range-fjorhjoladrif': {
     paragraphs: [
@@ -1074,9 +1133,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'toyota-bz4x-base': {
     paragraphs: [
-      'Toyota bZ4X drífur lengra og hleður hraðar en flestir, á verði í meðallagi. Hann er framhjóladrifinn og hægari og aflminni en flestir.',
+      'Toyota bZ4X er hár og þægilegur fjölskyldujepplingur sem hentar vel í daglega rútínu og ferðalög innanlands. Hann einkennist af traustri nálgun Toyota á notagildi og rólegum akstri, þar sem hversdagsleg þægindi sitja í fyrirrúmi fremur en mikill kraftur.',
+      'Helsti styrkur bílsins er hversu vel hann nýtir orkuna. Hann drífur lengra en flestir bílar í sínum verðflokki, sem kemur sér vel í íslenskum vetrarkulda og á löngum ferðalögum milli landshluta. Að auki hleður hann hraðar en flestir á svipuðu verði, svo áningar á hraðhleðslustöðvum verða styttri. Þetta gerir hann ódýrari á hvern kílómetra drægni en flesta aðra rafbíla hér á landi.',
+      'Helsti gallinn er að þessi gerð er framhjóladrifin, aflminni og hægari í hröðun en flestir sambærilegir bílar. Ef þú ekur mikið í ófærð eða vilt meiri snerpu eru bæði Skoda Elroq RS og Polestar 2 fjórhjóladrifnir og mun sneggri af stað fyrir svipað verð.',
+      'Fyrir þá sem vilja rúmgóðan ferðabíl með mikla drægni og lipra hleðslu á skynsömu verði er bZ4X engu að síður traustur kostur.',
     ],
     facts: '0aad5d8e50a4',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'toyota-bz4x-awd': {
     paragraphs: [
@@ -1215,9 +1278,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'volvo-ex30-single-motor': {
     paragraphs: [
-      'Volvo EX30 Single Motor er ódýrari en flestir en meðal þeirra sem drífa styst, og meðal þeirra dýrustu á hvern km drægni miðað við bíla á svipuðu verði. Hann hentar helst innanbæjar.',
+      'Volvo EX30 Single Motor er nettur og lipur bíll sem hentar sérstaklega vel í daglegan innanbæjarakstur og styttri ferðir. Hann er afturhjóladrifinn og ódýrari en flestir rafbílar á landinu, sem gerir hann að tiltölulega aðgengilegum kosti inn í rafbílaúrval Volvo.',
+      'Helsti styrkleiki hans er vélaraflið, því í sínum verðflokki er hann bæði sneggri og aflmeiri en flestir. Þetta skilar sér í mikilli lipurð í borgarumferð og snöggri svörun við framúrakstur.',
+      'Á móti kemur að rafhlaðan og drægnin eru með því minnsta sem gerist í þessum verðflokki, sem reynir á í íslenskum vetrarkulda, auk þess sem hann hleður hægar en flestir. Fyrir þá sem vilja fjórhjóladrif í snjó og hálku býður Smart #1 Pulse upp á fjórhjóladrif, 56 km meiri drægni og um 15% styttri hleðslustopp fyrir aðeins 100.000 kr. meira, eða Suzuki e Vitara 4x4 AllGrip sem er einnig fjórhjóladrifinn og kemst 51 km lengra.',
+      'EX30 er því lipur og skemmtilegur borgarbíll, en síður sniðinn fyrir þá sem aka reglulega langferðir milli landshluta yfir vetrarmánuðina.',
     ],
     facts: '1dbcafd62fbd',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'volvo-ex30-single-motor-extended-range': {
     paragraphs: [
@@ -1273,9 +1340,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'xpeng-g6-rwd-long-range': {
     paragraphs: [
-      'XPENG G6 RWD Long Range er ódýrari en flestir, drífur lengra en flestir og er meðal þeirra ódýrustu á hvern km drægni. Hann hleður hraðar en flestir og er með stærri rafhlöðu en flestir.',
+      'XPENG G6 Long Range er rúmgóður jepplingur sem einkennist af mikilli orkugetu og snarpri hleðslutækni. Hann hentar sérlega vel þeim sem aka reglulega langar vegalengdir milli landshluta og vilja lágmarka biðtíma við hraðhleðslustöðvar.',
+      'Bíllinn drífur lengra en flestir rafbílar hér á landi og er meðal þeirra ódýrustu á hvern kílómetra drægni. Í sínum verðflokki er hann með eina stærstu rafhlöðuna, sem veitir aukið öryggi í vetrarkulda þegar drægnin dregst saman. Á langferðum er hann jafnframt meðal þeirra sem hlaða hraðast, sem gerir hleðslustoppin óvenju stutt.',
+      'Helsta fórnin er að bíllinn er eingöngu afturhjóladrifinn. Ef veggrip í snjó og vetrarfærð skiptir meira máli gæti Skoda Elroq 85x verið betri kostur með fjórhjóladrifi á svipuðu verði, þótt hleðslustoppin verði á móti um 35% lengri.',
+      'Fyrir ökumenn sem treysta afturhjóladrifinu er þetta sérlega hagkvæmur langferðabíll sem kemst langt og tefur lítið.',
     ],
     facts: 'e1aec00acaa1',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'xpeng-g6-awd-performance': {
     paragraphs: [
