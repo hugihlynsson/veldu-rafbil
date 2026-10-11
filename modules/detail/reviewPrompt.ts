@@ -18,6 +18,7 @@ const writingRules = `Þegar þú skrifar:
 - Skrifaðu tölur að íslenskum sið: komma í tugabrotum (7,7 s) og punktur í þúsundum (100.000 kr.).
 - Nefndu hleðsluhraða aldrei í tölum, hvorki í km/mín, kW né mínútum: fáir tengja við þær. Segðu frekar að hann hlaði hraðar eða hægar en aðrir, eða hve miklu styttri eða lengri hleðslustoppin eru, eins og það er gefið.
 - Gættu að beygingum og samræmi („hann er góð kaup“, ekki „hann eru“), og notaðu orð um bíla en ekki fólk: lágur eða hár, ekki lágvaxinn eða hávaxinn.
+- Skrifaðu eins og allir bílarnir séu fáanlegir núna: segðu ekkert um hvenær bíll kemur eða hvort hann er kominn.
 - Ekkert markdown, engin feitletrun, engir listar, engar fyrirsagnir.`
 
 const intro = `Þú ert ráðgjafi Veldu Rafbíl, íslensks vefs sem ber saman alla 100% rafdrifna bíla sem eru seldir nýir á Íslandi.`
@@ -44,7 +45,7 @@ Veldu það sem segir mest um þennan bíl. Ekki fara yfir allt.
 ${writingRules}
 
 Svaraðu með um 150 orðum í þremur eða fjórum stuttum efnisgreinum og engu öðru:
-1. Opnaðu á því sem greinir hann frá svipuðu bílunum, sjálfu, og hvað það þýðir fyrir þann sem hann hentar. Segðu beint hvað það er, ekki að hann skeri sig úr eða greinist frá hinum.
+1. Lýstu bílnum sjálfum: hvers konar bíll hann er, hvað einkennir hann helst og hverjum hann hentar. Nefndu enga aðra bíla hér: samanburðurinn kemur síðar. Lýstu honum með því sem helst greinir hann frá svipuðu bílunum, ekki orðum sem gætu átt við hvaða bíl sem er.
 2. Aðrir helstu styrkleikar hans og hvað þeir þýða í daglegu lífi.
 3. Hvað maður gefur eftir, og hvenær einn af svipuðu bílunum væri betri kostur. Nefndu einn eða tvo mun sem skipta mestu máli, ekki upptalningu á tölum.
 Endaðu á stuttri niðurstöðu um þennan bíl, sem má vera lokasetning þriðju efnisgreinar eða efnisgrein ein og sér, orðuð út frá honum frekar en eftir föstu sniði. Ekki endurtaka það sem áður er sagt.
@@ -222,7 +223,8 @@ const metrics: Metric[] = [
 ]
 
 // Its charging is left to its standing and the comparisons, which say it
-// without a figure
+// without a figure. When it arrives is left out too: a review kept for years
+// would read as dated by it
 const describeCar = (car: Car): string =>
   [
     car.label,
@@ -236,9 +238,6 @@ const describeCar = (car: Car): string =>
     `${car.power} kW`,
     driveLabels[car.drive].toLowerCase(),
     `allt að ${car.seats} sæti`,
-    car.expectedDelivery
-      ? `ekki kominn, væntanlegur ${car.expectedDelivery.toLowerCase()}`
-      : 'fáanlegur núna',
   ].join(', ')
 
 const listCars = (cars: ReadonlyArray<Car>) =>
@@ -340,7 +339,6 @@ const quoted = (car: Car) => [
   car.drive,
   car.seats,
   car.timeToCharge10To80,
-  car.expectedDelivery ?? null,
   car.evDatabaseUrl ?? null,
 ]
 

@@ -70,6 +70,14 @@ describe('carFacts', () => {
     expect(facts).not.toMatch(/km\/mín|mín\b/)
   })
 
+  // A review is kept for years, and when a car arrives soon reads as dated
+  it('says nothing of when a car arrives', () => {
+    const expected = deriveCar({ ...base, expectedDelivery: 'Sumar 2026' })
+    expect(carFacts(expected, [tesla], [expected, tesla])).not.toMatch(
+      /sumar 2026|væntanleg|fáanleg/i,
+    )
+  })
+
   it('gives the model each page it may look a car up on', () => {
     expect(facts).toContain(`ev-database: ${kia.evDatabaseUrl}`)
   })
