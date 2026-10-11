@@ -68,12 +68,16 @@ const Stat = ({
   label,
   value,
   detail,
+  gapBefore = 0,
 }: {
   label: string
   value: string
   detail: string
+  gapBefore?: number
 }) => (
-  <div style={{ display: 'flex', flexDirection: 'column' }}>
+  <div
+    style={{ display: 'flex', flexDirection: 'column', marginLeft: gapBefore }}
+  >
     <div
       style={{
         fontSize: 15,
@@ -188,7 +192,14 @@ export const shareImage = async (car: Car) => {
               value={`${car.capacity} kWh`}
               detail={`${formatKmPerMinute(car.kmPerMinuteCharged)} km/min`}
             />
-            <Stat label="Drægni" value={`${car.range} km`} detail={car.drive} />
+            {/* The first column is as wide as its label, and the battery's as
+                its value, so the range needs more room to look as apart */}
+            <Stat
+              label="Drægni"
+              value={`${car.range} km`}
+              detail={car.drive}
+              gapBefore={16}
+            />
           </div>
         </div>
       </div>
