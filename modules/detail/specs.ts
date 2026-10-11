@@ -55,22 +55,20 @@ const specs = {
     detail: (car) => `10–80% á ${car.timeToCharge10To80} mín`,
   },
   acceleration: {
-    label: '0-100 km/klst',
+    label: 'Hröðun',
     better: 'lower',
     value: (car) => car.acceleration,
     text: (car) => `${car.acceleration.toFixed(1)}s`,
+    detail: () => '0-100 km/klst',
   },
+  // The drive under the power, as the list's card has it under the range:
+  // which wheels the power goes to
   power: {
     label: 'Afl',
     better: 'higher',
     value: (car) => car.power,
     text: (car) => `${car.power} kW`,
-    detail: (car) => `${Math.round(car.power * 1.34102)} hö`,
-  },
-  drive: {
-    label: 'Drif',
-    // A soft hyphen, as four columns on a phone are narrower than the word
-    text: (car) => driveLabels[car.drive].replace('hjóla', 'hjóla\u00AD'),
+    detail: (car) => driveLabels[car.drive],
   },
   // Not ranked: a seventh seat is no use to most, and costs extra. The most
   // the car can be ordered with, as everywhere on the site.

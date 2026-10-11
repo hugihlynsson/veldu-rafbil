@@ -23,15 +23,15 @@ interface Props {
 }
 
 const gutter = 'px-(--gutter) md:px-10'
+// Price per km of range is left to the list's sorting: a ratio few buyers
+// weigh a car by, beside a price shown under the name
 const figureOrder: SpecKey[] = [
   'range',
   'acceleration',
   'capacity',
   'power',
-  'drive',
   'seats',
   'charging',
-  'value',
 ]
 
 const eyebrow =
@@ -109,7 +109,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
       <dl
         className={clsx(
           gutter,
-          'm-0 mt-8 grid grid-cols-2 gap-x-6 gap-y-5 md:mt-10 md:grid-cols-4',
+          'm-0 mt-8 grid grid-cols-2 gap-x-6 gap-y-5 md:mt-10 md:grid-cols-3',
         )}
       >
         {figures.map((row) => (

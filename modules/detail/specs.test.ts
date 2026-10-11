@@ -63,12 +63,17 @@ describe('specRows', () => {
     expect(cells?.map((cell) => cell.best)).toEqual([true, true, false])
   })
 
-  it('ranks neither drive nor seats', () => {
-    const compared = [car({ seats: 7, drive: 'AWD' }), car({})]
-    for (const key of ['drive', 'seats']) {
-      const cells = row(key, ...compared)?.cells
-      expect(cells?.every((cell) => !cell.best)).toBe(true)
-    }
+  it('does not rank seats', () => {
+    const compared = [car({ seats: 7 }), car({})]
+    expect(row('seats', ...compared)?.cells.every((cell) => !cell.best)).toBe(
+      true,
+    )
+  })
+
+  it('names the drive under the power', () => {
+    expect(row('power', car({ drive: 'AWD' }))?.cells[0].detail).toBe(
+      'Fjórhjóladrif',
+    )
   })
 
   it('writes prices with the list grouping', () => {
