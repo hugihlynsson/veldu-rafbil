@@ -31,9 +31,11 @@ import { createFetchCarDetailsTool } from '@/app/api/chat/tools/fetchCarDetails'
 
 const file = path.join(__dirname, '../modules/data/carReviews.ts')
 
-// Written once per car and kept, so it can afford to think far longer than
-// the chat, whose every answer waits on its thinking
-const thinkingLevel = 'high'
+// Written once per car and kept, so it can think longer than the chat, whose
+// every answer waits on its thinking. Medium rather than high: the gaps and
+// standings are worked out in code, and high spent about twice the tokens
+// and time on thinking for reviews no better to read
+const thinkingLevel = 'medium'
 const CONCURRENCY = 4
 // The prompt asks for some 150 words: far fewer is an answer that stopped
 const MIN_WORDS = 70
