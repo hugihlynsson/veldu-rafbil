@@ -199,7 +199,8 @@ make, then model. The fields that are easy to get wrong:
 - **Make, model and `subModel` are a car's identity.** `getCarId()` builds the
   card's anchor, the target the chat scrolls to and the React key out of them,
   so two entries differing only in price collide and a test fails.
-- **A car's slug is in shared links to its page, which have to keep working.**
+- **A car's slug is in shared links to its page and to comparisons, which
+  have to keep working.**
   The slug is its id less `car-`, so renaming a car (its make, model or
   `subModel`) changes it, and nothing else notices. When you rename one, point
   the old slug at the new one in `modules/data/movedSlugs.ts`, which redirects

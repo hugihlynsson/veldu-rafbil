@@ -37,7 +37,8 @@ const nextConfig: NextConfig = {
       1920, // A car page's 960px photo @2x, and the photos' own width
     ],
     // The two widths either side of MiniCar's 120px box, which is all that
-    // reads this list but the similar cars' thumbnails on a car's page
+    // reads this list but the smaller thumbnails on a car's page and in the
+    // comparison tray
     imageSizes: [128, 256],
     // No query string, so a photo already cached cannot be asked for again
     // under a fresh URL

@@ -3,7 +3,10 @@ import { describe, expect, it } from 'vitest'
 import type { ChatFinish } from './chat'
 import { carPage, chatLogEvent, questionSource, type ChatTurn } from './log'
 import type { ChatMessage } from '@/modules/chat/message'
-import { CHAT_SUGGESTIONS } from '@/modules/chat/suggestions'
+import {
+  CHAT_SUGGESTIONS,
+  comparisonSuggestions,
+} from '@/modules/chat/suggestions'
 
 const turn: ChatTurn = {
   timestamp: '2026-10-09T12:00:00.000Z',
@@ -131,6 +134,24 @@ describe('questionSource', () => {
       expect(carPage([askOnPage('x', 'KIA-EV3-LONG-RANGE')])).toBe(slug)
       expect(carPage([askOnPage('x', 'no-such-car')])).toBeUndefined()
       expect(carPage([ask('x')])).toBeUndefined()
+    })
+  })
+
+  describe('on a comparison', () => {
+    const slugs = ['kia-ev3-long-range', 'tesla-model-3-afturhjoladrif']
+    const askOnComparison = (text: string): ChatMessage => ({
+      ...ask(text),
+      metadata: { about: slugs },
+    })
+
+    it("reads the comparison's starter", () => {
+      expect(
+        questionSource([askOnComparison(comparisonSuggestions(2)[0]!)]),
+      ).toBe('starter')
+    })
+
+    it("logs no car page, as it is no one car's", () => {
+      expect(carPage([askOnComparison('x')])).toBeUndefined()
     })
   })
 

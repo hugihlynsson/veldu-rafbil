@@ -3,7 +3,8 @@ import { describe, expect, it } from 'vitest'
 import cars, { allCars, type Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf } from './paths'
-import { readSegment, resolveSlugs } from './slugs'
+import { MAX_COMPARED } from './comparison'
+import { readSegment, resolveCompared, resolveSlugs } from './slugs'
 
 const [a, b, c] = cars as readonly [Car, Car, Car, ...Car[]]
 const slugsOf = (path: string) => path.split('/').slice(2)
@@ -64,5 +65,17 @@ describe('readSegment', () => {
   it('names no car, rather than throwing, when the escape is broken', () => {
     expect(readSegment('%E0')).toBe('%E0')
     expect(resolveSlugs([readSegment('%E0')]).cars).toEqual([])
+  })
+})
+
+describe('resolveCompared', () => {
+  it('reads no more cars than fit side by side', () => {
+    const { cars: read, slugs } = resolveCompared(cars.map(carSlug))
+    expect(read).toEqual(cars.slice(0, MAX_COMPARED))
+    expect(slugs).toEqual(cars.slice(0, MAX_COMPARED).map(carSlug))
+  })
+
+  it('drops a malformed segment rather than throwing on it', () => {
+    expect(resolveCompared(['%25E0', carSlug(a)]).cars).toEqual([a])
   })
 })

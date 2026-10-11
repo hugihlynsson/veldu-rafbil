@@ -26,7 +26,7 @@ interface Props {
   /** The list's filters, which the bar suggests changes to as it is typed in */
   filters?: Filters
   onApplyFilters?: (filters: Filters) => void
-  /** The car whose page it is on, which each question carries */
+  /** The cars the page it is on is about, which each question carries */
   about?: ReadonlyArray<Car>
   /** The questions offered to start on; the general ones when left out */
   starters?: ReadonlyArray<string>

@@ -53,8 +53,12 @@ export const filterSuggestionsRateLimit = createRateLimit(60)
 // A tap or a send each, so far fewer than the requests behind them
 export const suggestionOutcomeRateLimit = createRateLimit(30)
 
+// Only a verdict no one has asked for before reaches the model; the rest are
+// read from the cache and never count
+export const verdictRateLimit = createRateLimit(10)
+
 // x-forwarded-for is spoofable, so this buys politeness, not identity
-export const clientKey = (request: Request): string =>
+export const clientKey = (request: Pick<Request, 'headers'>): string =>
   request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
   request.headers.get('x-real-ip') ||
   'unknown'

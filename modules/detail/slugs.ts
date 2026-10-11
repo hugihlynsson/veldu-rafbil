@@ -1,5 +1,6 @@
 import { carWithSlug, type Car } from '@/modules/data/cars'
 import { movedSlugs } from '@/modules/data/movedSlugs'
+import { MAX_COMPARED } from './comparison'
 
 export interface ResolvedSlugs {
   /** In the order the URL names them */
@@ -41,4 +42,18 @@ export const resolveSlugs = (
   }
 
   return { cars: resolved, slugs }
+}
+
+/**
+ * The cars a comparison's path names, read as resolveSlugs reads them, and no
+ * more than fit side by side
+ */
+export const resolveCompared = (
+  segments: ReadonlyArray<string>,
+): ResolvedSlugs => {
+  const { cars, slugs } = resolveSlugs(segments.map(readSegment))
+  return {
+    cars: cars.slice(0, MAX_COMPARED),
+    slugs: slugs.slice(0, MAX_COMPARED),
+  }
 }

@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react'
 import clsx from 'clsx'
+import { trackEvent } from 'fathom-client'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -8,6 +9,7 @@ import { Car } from '@/modules/data/cars'
 import { formatKmPerMinute } from '@/modules/data/getKmPerMinutesCharged'
 import PricePill from '@/components/PricePill'
 import type { View } from '@/modules/list/view'
+import CompareToggle from '@/components/detail/CompareToggle'
 import ShareButton from '@/components/ShareButton'
 import { carPathOf } from '@/modules/detail/paths'
 import { rememberListSearch } from '@/utils/listReturn'
@@ -18,6 +20,9 @@ interface Props {
   showSeats?: boolean
   preload?: boolean
   view?: View
+  compared: boolean
+  compareFull: boolean
+  onToggleCompare: () => void
 }
 
 const statLabel =
@@ -58,6 +63,9 @@ const NewCar: FunctionComponent<Props> = ({
   showSeats,
   preload,
   view = 'list',
+  compared,
+  compareFull,
+  onToggleCompare,
 }) => {
   const grid = view === 'grid'
   const { id: carId } = car
@@ -171,14 +179,23 @@ const NewCar: FunctionComponent<Props> = ({
         </div>
         {delivery && <p className="sr-only">{delivery}</p>}
 
-        <PricePill
-          car={car}
-          showValue={showValue}
+        <div
           className={clsx(
-            'mt-2 -ml-0.5',
+            'flex flex-wrap items-center gap-2 mt-2 -ml-0.5',
             grid && 'md:mt-1 md:justify-self-start',
           )}
-        />
+        >
+          <PricePill car={car} showValue={showValue} />
+
+          <CompareToggle
+            selected={compared}
+            full={compareFull}
+            onToggle={() => {
+              if (!compared) trackEvent('Compare added')
+              onToggleCompare()
+            }}
+          />
+        </div>
 
         <div
           className={clsx(

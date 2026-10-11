@@ -5,7 +5,8 @@ import Link from 'next/link'
 
 import type { Car } from '@/modules/data/cars'
 import type { CarReview } from '@/modules/data/carReviews'
-import { carPathOf } from '@/modules/detail/paths'
+import { carName } from '@/modules/data/getCarId'
+import { carPathOf, comparisonPathOf } from '@/modules/detail/paths'
 import { specRows, type SpecKey } from '@/modules/detail/specs'
 import { carSubtitle, deprecatedNotice } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
@@ -162,12 +163,20 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
           </div>
 
           <section aria-labelledby="similar" className="mt-12 md:mt-16">
-            <h2 id="similar" className={sectionLabel}>
-              Þú gætir líka haft áhuga á:
-            </h2>
+            <div className="flex items-baseline justify-between gap-4">
+              <h2 id="similar" className={sectionLabel}>
+                Þú gætir líka haft áhuga á:
+              </h2>
+              <Link
+                href={comparisonPathOf([car, ...similar])}
+                className="text-sm font-semibold text-tint no-underline hover:underline"
+              >
+                Bera alla saman <span aria-hidden>→</span>
+              </Link>
+            </div>
             <ul className="mt-3 mb-0 p-0 list-none grid gap-3 md:grid-cols-3">
               {similar.map((other) => (
-                // The whole card opens the car's page
+                // The whole card opens the car's page; the button over it compares
                 <li
                   key={other.id}
                   className="relative flex items-center gap-3 rounded-card overflow-hidden transition-colors duration-200 hover:bg-shade md:flex-col md:items-stretch md:overflow-visible md:hover:bg-transparent md:isolate md:before:absolute md:before:-inset-1 md:before:-bottom-3 md:before:-z-10 md:before:rounded-xl md:before:bg-shade md:before:opacity-0 md:before:transition-opacity md:before:duration-200 md:hover:before:opacity-100"
@@ -203,6 +212,13 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
                       </span>
                     </div>
                   </div>
+                  <Link
+                    href={comparisonPathOf([car, other])}
+                    aria-label={`Bera ${carName(car, [car])} saman við ${carName(other, [other])}`}
+                    className="relative z-1 shrink-0 self-center mr-3 inline-flex items-center py-1 px-3 text-sm font-semibold rounded-full border border-line-chip bg-lab text-tint no-underline transition duration-100 hover:bg-cloud active:scale-[0.98] md:self-start md:mx-1"
+                  >
+                    Bera saman
+                  </Link>
                 </li>
               ))}
             </ul>
