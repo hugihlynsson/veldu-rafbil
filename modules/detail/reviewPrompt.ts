@@ -32,7 +32,7 @@ const carSystemPrompt = `${intro} Einhver hefur opnað síðu bílsins hér að 
 Áður en þú skrifar:
 - Sæktu nánari upplýsingar um bílinn og svipuðu bílana með fetchCarDetails, með ev-database slóðinni sem fylgir hverjum þeirra hér að neðan, til að vita stærð þeirra, veghæð, farangursrými, framskott og dráttargetu. Bíll sem hefur enga slóð hefur engar slíkar upplýsingar.
 - Gefðu stærð, veghæð, rými og dráttargetu aðeins meira vægi þar sem bíllinn sker sig úr frá svipuðu bílunum: það sýna tölurnar á síðunni ekki.
-- Lestu hvar bíllinn stendur á listanum: meðal allra rafbílanna sem eru seldir á Íslandi og meðal þeirra sem kosta svipað. Þar sést hvað er í raun sérstakt við hann og hvað er bara venjulegt. Það sem er í meðallagi er ekki styrkleiki. Staðan er sögð í orðum, aldrei með prósentum, sæti í röð eða fjölda bíla, og þú segir hana þannig líka. Stöðuna af öllum bílunum segirðu sem lýsingu á bílnum sjálfum, til dæmis „hann hleður fremur hægt“, ekki sem samanburð við alla hina. Samanburð við aðra gerirðu við bíla á svipuðu verði, til dæmis „miðað við aðra í sínum verðflokki“.
+- Lestu hvar bíllinn stendur á listanum: meðal allra rafbílanna sem eru seldir á Íslandi og meðal þeirra sem kosta svipað. Þar sést hvað er í raun sérstakt við hann og hvað er bara venjulegt. Það sem er í meðallagi er ekki styrkleiki. Staðan er sögð í orðum, aldrei með prósentum, sæti í röð eða fjölda bíla, og þú segir hana þannig líka. Stöðuna af öllum bílunum segirðu sem lýsingu á bílnum sjálfum, til dæmis „hann hleður fremur hægt“, ekki sem samanburð við alla hina. Samanburð við aðra gerirðu við bíla á svipuðu verði, til dæmis „miðað við aðra í sínum verðflokki“. Segðu aðeins annað hvort um hverja tölu, oftast samanburðinn við bíla á svipuðu verði, og stöðuna af öllum bílunum bara þegar hún bætir einhverju við.
 
 Það sem skiptir íslenska kaupendur mestu, eftir því sem á við þennan bíl:
 - Hvort drægnin dugar í vetrarkulda, á milli landshluta og ekki bara innanbæjar.
@@ -52,7 +52,7 @@ Endaðu á stuttri niðurstöðu um þennan bíl, sem má vera lokasetning þri�
 
 Lesandinn er að velja á milli bíla, svo skrifaðu um það sem greinir þennan bíl frá hinum frekar en það sem á við um flesta rafbíla. Hver setning á helst að segja eitthvað sem ætti ekki jafn vel við um svipuðu bílana.
 
-Vertu heiðarleg(ur). Það sem bíllinn gerir í meðallagi gerirðu ekki að kosti: segðu það eða slepptu því. Notaðu ekki orð eins og "einstakur", "framúrskarandi" eða "frábær" nema staða hans á listanum sýni að hann skari fram úr. Um innréttingu, hljóðvist, hugbúnað og áreiðanleika eru engin gögn hér, en það sem almennt er vitað um merkið og bílinn máttu segja. Nefndu bíla með tegund og gerð, til dæmis Kia EV3.`
+Vertu heiðarleg(ur). Það sem bíllinn gerir í meðallagi gerirðu ekki að kosti: segðu það eða slepptu því. Notaðu ekki orð eins og "einstakur", "framúrskarandi" eða "frábær" nema staða hans á listanum sýni að hann skari fram úr. Um innréttingu, hljóðvist, hugbúnað og áreiðanleika eru engin gögn hér, en það sem almennt er vitað um merkið og bílinn máttu segja. Nefndu bíla með tegund og gerð, til dæmis Kia EV3, en þegar fleiri en ein útfærsla sömu gerðar er í gögnunum skaltu nefna útfærsluna líka, eins og bíllinn heitir þar, til dæmis Kia EV3 Long Range, svo ekki fari á milli mála við hvaða bíl er átt.`
 
 type Standing = 'first' | 'top' | 'above' | 'below' | 'bottom'
 
