@@ -76,7 +76,7 @@ const Stat = ({
   <div style={{ display: 'flex', flexDirection: 'column' }}>
     <div
       style={{
-        fontSize: 17,
+        fontSize: 15,
         fontWeight: 600,
         letterSpacing: 1,
         textTransform: 'uppercase',
@@ -85,8 +85,8 @@ const Stat = ({
     >
       {label}
     </div>
-    <div style={{ fontSize: 40, marginTop: 4 }}>{value}</div>
-    <div style={{ fontSize: 22, color: stone, marginTop: 2 }}>{detail}</div>
+    <div style={{ fontSize: 34, marginTop: 4 }}>{value}</div>
+    <div style={{ fontSize: 19, color: stone, marginTop: 2 }}>{detail}</div>
   </div>
 )
 
@@ -133,8 +133,8 @@ export const shareImage = async (car: Car) => {
             style={{
               display: 'flex',
               flexWrap: 'wrap',
-              columnGap: 14,
-              fontSize: 52,
+              columnGap: 12,
+              fontSize: 44,
               lineHeight: 1.1,
             }}
           >
@@ -142,7 +142,7 @@ export const shareImage = async (car: Car) => {
             <span>{car.model}</span>
           </div>
           {subTitle && (
-            <div style={{ fontSize: 28, color: stone, marginTop: 6 }}>
+            <div style={{ fontSize: 24, color: stone, marginTop: 6 }}>
               {subTitle}
             </div>
           )}
@@ -152,11 +152,11 @@ export const shareImage = async (car: Car) => {
               alignSelf: 'flex-start',
               alignItems: 'center',
               gap: 12,
-              marginTop: 24,
-              padding: '8px 10px 8px 22px',
+              marginTop: 22,
+              padding: '7px 9px 7px 19px',
               borderRadius: 999,
               background: '#eee',
-              fontSize: 28,
+              fontSize: 24,
               fontWeight: 600,
             }}
           >
@@ -164,11 +164,11 @@ export const shareImage = async (car: Car) => {
             {priceBadge && (
               <span
                 style={{
-                  padding: '4px 12px',
+                  padding: '3px 10px',
                   borderRadius: 999,
                   background: '#fff',
                   color: stone,
-                  fontSize: 15,
+                  fontSize: 13,
                   letterSpacing: 0.5,
                   textTransform: 'uppercase',
                 }}
@@ -177,7 +177,7 @@ export const shareImage = async (car: Car) => {
               </span>
             )}
           </div>
-          <div style={{ display: 'flex', gap: 36, marginTop: 36 }}>
+          <div style={{ display: 'flex', gap: 32, marginTop: 32 }}>
             <Stat
               label="0-100 km/klst"
               value={`${car.acceleration.toFixed(1)}s`}
