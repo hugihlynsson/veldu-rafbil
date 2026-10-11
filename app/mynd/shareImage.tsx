@@ -115,8 +115,8 @@ export const shareImage = async (car: Car) => {
         padding: margin,
       }}
     >
-      <div style={{ display: 'flex', marginBottom: 28 }}>
-        <Logo width={190} />
+      <div style={{ display: 'flex', marginBottom: 32 }}>
+        <Logo width={250} />
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 48 }}>
         {/* An image drawn to a PNG, which next/image has no part in */}
