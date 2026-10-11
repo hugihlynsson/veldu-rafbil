@@ -1787,7 +1787,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Toyota Urban Cruiser Active AWD er lipur, hækkaður bíll sem höfðar til þeirra sem vilja öryggi fjórhjóladrifs í íslenskri færð ásamt traustu orðspori Toyota. Hann er látlaus og þægilegur hversdagsbíll, einkum sniðinn fyrir fólk sem ekur mest innanbæjar og í nærsveitum.',
       'Fjórhjóladrifið er helsti kosturinn og veitir aukið veggrip og hugarró í snjó, krapi og hálku. Hann er fremur ódýr miðað við að vera með drif á öllum fjórum, en aflið er mjög hóflegt og dugar fyrst og fremst til rólegs og afslappaðs aksturs.',
-      'Helsti γάllinn er að bíllinn hleður mjög hægt og drægnin er með því stysta sem gerist í þessum verðflokki, sem kallar á þolinmæði á ferðalögum milli landshluta í vetrarkulda. Ef fjórhjóladrifið er ekki nauðsynlegt býður Toyota C-HR+ á sama verði upp á 61 km meiri drægni og um 45% styttri hleðslustopp. Fyrir þá sem vilja fjórhjóladrif og mun snarpari hleðslu er Smart #3 Pulse 100.000 kr. ódýrari og með um 40% styttri hleðslustopp.',
+      'Helsti gallinn er að bíllinn hleður mjög hægt og drægnin er með því stysta sem gerist í þessum verðflokki, sem kallar á þolinmæði á ferðalögum milli landshluta í vetrarkulda. Ef fjórhjóladrifið er ekki nauðsynlegt býður Toyota C-HR+ á sama verði upp á 61 km meiri drægni og um 45% styttri hleðslustopp. Fyrir þá sem vilja fjórhjóladrif og mun snarpari hleðslu er Smart #3 Pulse 100.000 kr. ódýrari og með um 40% styttri hleðslustopp.',
       'Niðurstaðan er sú að Urban Cruiser hentar einkum þeim sem setja fjórhjóladrif og þekkt vörumerki í forgang fyrir daglega rútínu, en þurfa sjaldan að reiða sig á hraðhleðslustopp á langferðum.',
     ],
     facts: 'd9aeb0b9edaa',
