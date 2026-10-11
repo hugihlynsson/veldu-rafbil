@@ -14,10 +14,10 @@ export interface CarReview {
 const carReviews: Readonly<Record<string, CarReview>> = {
   'audi-a6-e-tron-sportback-quattro': {
     paragraphs: [
-      'Audi A6 e-tron Sportback quattro er stór og rennilegur fólksbíll sem hentar þeim sem ferðast mikið á milli landshluta og kjósa mikla drægni og lipurð fram yfir hefðbundinn jeppling.',
-      'Drægnin er meðal þeirra allra mestu hér á landi og dugar auðveldlega á löngum leiðum, jafnvel í vetrarkulda. Bíllinn hleður hraðar en flestir í sínum verðflokki sem þýðir sérlega stutt hleðslustopp, auk þess sem fjórhjóladrifið veitir mikið öryggi og ríflegt afl í hálku og snjó.',
-      'Á móti kemur að veghæðin er mun minni en í jepplingum eins og Audi Q6 e-tron eða Volvo EX60, sem geta báðir dregið 2.400 kg á meðan A6 dregur 2.100 kg. Framskottið er einnig lítið, aðeins 27 lítrar, og þeir sem vilja hámarksdrægni gætu frekar horft til Mercedes-Benz CLA 350 4MATIC, þótt sá bíll hafi mun minna farangursrými.',
-      'Hann er góð kaup fyrir þá sem vilja öflugan langferðabíl með lágmarks töfum á hraðhleðslustöðvum, en síður fyrir þá sem þurfa háa sætisstöðu eða aukna veghæð í snjóruðninga.',
+      'Audi A6 e-tron Sportback quattro sameinar mikla drægni og fjórhjóladrif við sneggri hröðun og meira afl en gengur og gerist í þessum verðflokki. Fyrir þá sem aka reglulega milli landshluta á öllum árstímum þýðir þetta ríflegt öryggi í vetrarkulda án þess að fórna afli eða veggripi.',
+      'Hann er meðal þeirra allra langdrægustu af rafbílum hér á landi og hleður hraðar en flestir í sínum verðflokki, sem heldur hleðslustoppum á langferðum í lágmarki. Þótt hann sé dýrari en flestir rafbílar er hann meðal þeirra ódýrustu á hvern kílómetra drægni miðað við verð, svo kaupandinn fær mikið fyrir peninginn.',
+      'Á móti er þetta lágur fólksbíll frekar en hár jepplingur. Mercedes-Benz CLA 350 4MATIC er til að mynda 200.000 kr. ódýrari og hefur 58 km meiri drægni, ásamt um 5% styttri hleðslustoppum, en er talsvert aflminni. Ef hærri sætisstaða skiptir meira máli gæti Audi Q6 e-tron hentað betur, þótt sá sé 500.000 kr. dýrari og hafi 87 km minni drægni.',
+      'Bíllinn hentar sérstaklega vel þeim sem vilja rennilegan og kraftmikinn ferðabíl með traustu fjórhjóladrifi sem ræður léttilega við krefjandi íslenskan vetrarakstur.',
     ],
     facts: 'c29b4a896da0',
     model: 'gemini-3.8-flash, thinking high',
@@ -34,30 +34,30 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'audi-e-tron-gt-quattro': {
     paragraphs: [
-      'Audi e-tron GT quattro er lágur og aflmikill lúxussportbíll fyrir þá sem setja hraða og akstursgleði ofar hagnýtu jepplingaplássi.',
-      'Hann er sneggri og aflmeiri en flestir bílar á svipuðu verði, sem skilar sér í miklu afli og öruggum framúrakstri. Fjórhjóladrifið tryggir öruggt veggrip í vetrarfærð og snjó, auk þess sem 85 lítra framskottið kemur að góðum notum undir hleðslusnúrur eða smádót.',
-      'Á móti kemur að drægnin er meðal þeirra sem drífa styst í þessum verðflokki, sem þýðir fleiri stopp á lengri leiðum að vetrarlagi, og hann má engan vagn draga. Fyrir þá sem þurfa meira pláss og meiri sveigjanleika býður Audi SQ6 e-tron upp á 111 km meiri drægni og 2.400 kg dráttargetu á sama verði.',
-      'Hann er góð kaup fyrir ökumanninn sem leitar að glæsilegum sportbíl með miklum afköstum, en síður ef bíllinn á að þjóna sem hefðbundinn ferðabíll fyrir fjölskyldu og mikinn farangur.',
+      'Á meðan keppinautarnir í þessum verðflokki eru háir jeppar er Audi e-tron GT quattro lágur og rennilegur sportbíll sem leggur allt upp úr hraða, stöðugleika og akstursánægju. Hann hentar þeim sem leita að kraftmiklum lúxusbíl og setja akstursupplifun ofar hefðbundnu notagildi.',
+      'Hann er sneggri og aflmeiri en flestir bílar á svipuðu verði, og fjórhjóladrifið tryggir að aflið skilar sér örugglega í snjó og hálku. Af rafbílum hér á landi hleður hann hraðar en flestir, sem kemur sér vel á langferðum milli landshluta.',
+      'Á móti kemur að hann er lágur undir kviðinn og drægnin er meðal þeirra stystu í sínum verðflokki. Fyrir þá sem þurfa meira pláss og vilja komast lengra á hleðslunni er Audi SQ6 e-tron mun hagnýtari kostur á sama verði með 111 km meiri drægni, eða Porsche Cayenne sem býður upp á 155 km meiri drægni og um 30% styttri hleðslustopp.',
+      'Þetta er bíll sem fólk velur með hjartanu vegna útlits og krafta, en sem ferða- og vetrarbíll á Íslandi gefur hann eftir gagnvart jeppunum.',
     ],
     facts: '3b8461221327',
     model: 'gemini-3.8-flash, thinking high',
   },
   'audi-q4-e-tron-45-quattro': {
     paragraphs: [
-      'Audi Q4 e-tron 45 quattro er fimm sæta, fjórhjóladrifinn jepplingur sem hentar fólki í leit að liprum bíl fyrir hversdagslegan akstur og krefjandi vetrarfærð, með rúmgóðu 520 lítra skotti í nettri yfirbyggingu.',
-      'Fjórhjóladrifið tryggir gott grip í snjó og bleytu á íslenskum vegum. Farangursrýmið er 520 lítrar og hámarksburðargetan er 590 kg, sem þýðir að bíllinn tekur vel við farangri og farþegum samtímis.',
-      'Á móti kemur að bíllinn er dýrari en flestir af rafbílum hér á landi, hleður hægar en flestir í sínum verðflokki og drífur styttra en flestir, auk þess sem dráttargetan er 1200 kg. Fyrir þá sem ferðast mikið milli landshluta er Smart #5 Brabus til að mynda 100.000 kr. dýrari en býður upp á 52 km meiri drægni og um 40% styttri hleðslustopp.',
-      'Bíllinn er góð kaup fyrir þá sem vilja fjórhjóladrifinn jeppling í hversdagslegan akstur með miklu burðarþoli. Hann hentar síður þeim sem leita að mikilli dráttargetu, miklu afli eða snarpri hleðslu á langferðum fyrir peningana.',
+      'Audi Q4 e-tron 45 quattro býður upp á klassíska lúxustilfinningu og þrautreynt quattro-fjórhjóladrif, sem hentar þeim sem setja vandaðan frágang og öruggt grip í snjó og hálku í fyrsta sæti.',
+      'Í daglegum akstri er hann þægilegur og hljóðlátur ferðafélagi sem skilar sínu vel í vetrarfærð. Hann hefur líka forskot í hleðslu á Nissan Ariya e-4ORCE sem þarf um 40% lengri hleðslustopp, auk þess sem Toyota bZ4X Touring AWD er 200.000 kr. dýrari og með 7,3 kWh minni rafhlöðu.',
+      'Á móti kemur að bíllinn er dýrari á hvern kílómetra drægni en flestir, drífur styttra og hleður hægar en flestir í sínum verðflokki. Smart #5 Brabus er til dæmis 100.000 kr. dýrari en býður upp á 52 km meiri drægni og um 40% styttri hleðslustopp, á meðan Nissan Ariya e-4ORCE er 500.000 kr. ódýrari kostur.',
+      'Þetta er traustur og vandaður bíll fyrir þá sem meta Audi-gæði og fjórhjóladrif meira en tölur á blaði.',
     ],
     facts: '1f82a21f16b4',
     model: 'gemini-3.8-flash, thinking high',
   },
   'audi-q6-e-tron-base': {
     paragraphs: [
-      'Audi Q6 e-tron er rúmgóður og hár fjórhjóladrifinn jepplingur sem hentar vel þeim sem vilja mikla yfirsýn, gott farangursrými og mikla dráttargetu í íslenskum aðstæðum.',
-      'Hann er meðal langdrægustu bíla hér á landi og drífur lengra en flestir í sínum verðflokki, sem kemur sér vel í langferðum í vetrarkulda. Jafnframt hleður hann hraðar en flestir rafbílar og ræður við 2.400 kg á króknum, auk þess sem 526 lítra skottið og 64 lítra framskottið rúma mikinn farangur.',
-      'Á móti er hann hægari í hröðun en flestir bílar á svipuðu verði. Bæði Volvo EX60 P10 og Audi A6 e-tron Avant quattro eru ódýrari og sneggri af stað, og ef stystu hleðslustoppin skipta mestu máli býður Mercedes-Benz CLA Shooting Brake 350 4MATIC upp á um 30% styttri hleðslustopp og mun meiri drægni.',
-      'Hann er góð kaup fyrir þá sem vilja hábyggðan ferðabíl sem dregur þunga vagna áhyggjulaust á veturna, en síður fyrir þá sem leita að sem snarpastri hröðun eða stystu hleðslustoppunum fyrir peninginn.',
+      'Audi Q6 e-tron býður upp á háa setustöðu og hefðbundið jepplingalag á meðan keppinautar á svipuðu verði eru flestir lágir skutbílar. Þetta hentar vel þeim sem vilja gott útsýni yfir umferðina og auðvelt aðgengi inn og út úr bílnum í daglegu lífi.',
+      'Drægnin er meðal þeirra allra lengstu af rafbílum hér á landi og í sínum verðflokki drífur hann lengra en flestir. Stór rafhlaðan og fjórhjóladrifið veita mikið öryggi í vetrarfærð milli landshluta, og á ferðalögum hleður hann hraðar en flestir rafbílar á markaðnum.',
+      'Á móti kemur að bíllinn er dýrari en flestir rafbílar og í sínum verðflokki er hröðunin hægari en hjá flestum. Ef meiri snerpa og enn hraðari hleðsla skipta höfuðmáli er Volvo EX60 P10 til dæmis 1,3 s sneggri í 0-100 km/klst með um 15% styttri hleðslustopp, auk þess að vera 100.000 kr. ódýrari. Eins býður Audi A6 e-tron Avant quattro upp á 49 km meiri drægni fyrir þá sem kjósa frekar lágan skutbíl.',
+      'Fyrir ökumenn sem leita að rúmgóðum lúxusjepplingi sem ræður léttilega við íslenskar vetraraðstæður er Q6 e-tron engu að síður traustur kostur.',
     ],
     facts: 'c79944bef426',
     model: 'gemini-3.8-flash, thinking high',
@@ -276,10 +276,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'hyundai-staria-electric-base': {
     paragraphs: [
-      'Hyundai STARIA Electric er stór níu sæta fjölnotabíll sem hentar stórum fjölskyldum og hópferðum sem þurfa mikið flutningsrými og dráttargetu á hagstæðu verði.',
-      'Hann má draga allt að 2.000 kg, á meðan Peugeot e-Traveller dregur 1.000 kg, og farangursrýmið er 831 lítrar jafnvel með öll sætin í notkun. Hleðslustoppin á ferðalögum eru líka mun styttri en hjá keppinautunum, en hleðslustopp Peugeot e-Traveller eru um 80% lengri og Toyota Proace Verso um 95% lengri.',
-      'Á móti kemur að drægnin er meðal þeirra stystu af rafbílum hér á landi og bíllinn er aðeins framhjóladrifinn. Þá kemur hann ekki á markað fyrr en seint á árinu 2026, á meðan keppinautar eins og Peugeot e-Traveller og Toyota Proace Verso eru fáanlegir núna.',
-      'STARIA verður mjög hagkvæmur kostur fyrir þá sem geta beðið eftir rúmgóðum níu sæta ferðabíl sem ræður við þungan vagn. Hann hentar síður þeim sem þurfa bíl strax eða vilja fjórhjóladrif og mikla vetrardrægni milli landshluta.',
+      'Hyundai STARIA Electric býður upp á allt að níu sæti á mun lægra verði en keppinautarnir Peugeot e-Traveller og Toyota Proace Verso. Þetta gerir hann sérlega álitlegan fyrir mjög stórar fjölskyldur eða ferðaþjónustu sem þurfa mörg sæti á hagstæðu verði.',
+      'Hann hleður einnig hraðar en keppinautarnir, en hleðslustoppin hjá Peugeot og Toyota eru til dæmis um 80% til 95% lengri á ferðalögum. Þótt hröðunin sé meðal þeirra hægustu af rafbílum á Íslandi er hann samt mun liprari og aflmeiri en aðrir níu sæta bílar á listanum.',
+      'Drægnin er aftur á móti meðal þeirra stystu af rafbílum hér á landi og skerðist enn frekar í íslenskum vetrarkulda, auk þess sem hann er aðeins framhjóladrifinn. Stærsti gallinn er þó sá að bíllinn kemur ekki á markað fyrr en undir lok árs 2026. Ef þörfin er brýn í dag og sjö sæti duga er Kia PV5 þegar fáanlegur á svipuðu verði.',
+      'Þetta lofar góðu sem rúmgóður og hagkvæmur hópferðabíll, en kaupendur þurfa að sýna mikla þolinmæði á meðan beðið er eftir frumsýningu.',
     ],
     facts: '4f50768d94a3',
     model: 'gemini-3.8-flash, thinking high',
@@ -328,10 +328,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'kia-ev3-long-range': {
     paragraphs: [
-      'Kia EV3 Long Range er hagnýtur og nettur fjölskyldujepplingur með 460 lítra farangursrými, 25 lítra framskott og 1.000 kg dráttargetu. Hann hentar vel þeim sem þurfa lipran hversdagsbíl sem ræður jafnframt auðveldlega við ferðalög um landið.',
-      'Stærstu kostirnir eru drægnin og hagstætt verð, en hann er meðal þeirra langdrægustu í sínum verðflokki og meðal þeirra ódýrustu á hvern kílómetra drægni af öllum rafbílum hér á landi. Hann er með stærri rafhlöðu og hleður hraðar en flestir bílar á svipuðu verði, sem þýðir stutt hleðsluhlé á ferðalögum og nægt öryggi á milli landshluta jafnvel í vetrarkulda.',
-      'Á móti kemur að hann er framhjóladrifinn og aflminni en flestir í sínum verðflokki. Fyrir þá sem þurfa að draga þyngri vagna gæti Mazda 6e Long Range hentað betur með 1.500 kg dráttargetu og afturhjóladrif, þótt hleðslustoppin í honum séu um 60% lengri.',
-      'Hann er góð kaup fyrir þá sem vilja mikla drægni og stutt hleðsluhlé fyrir peninginn. Hann hentar síður þeim sem telja fjórhjóladrif eða meira afl ómissandi í fannfergi og vetrarfærð.',
+      'Kia EV3 Long Range býður upp á mun stærri rafhlöðu og meiri drægni en gengur og gerist á þessu verði. Fyrir þá sem aka reglulega langar leiðir þýðir þetta að ferðir milli landshluta eru vel raunhæfar á einni hleðslu, líka í íslenskum vetrarkulda þar sem drægnin reynist oft 70 til 85% af uppgefnum tölum. Bíllinn er jafnframt meðal þeirra allra ódýrustu á hvern kílómetra drægni af rafbílum hér á landi.',
+      'Hraðhleðslan er annar mikill kostur, en hann hleður hraðar en flestir bílar í sínum verðflokki. Á ferðalögum um landið skilar það sér í liprum stoppum, á meðan hleðslustopp eru til að mynda um 55% lengri hjá Hyundai Kona Electric og um 60% lengri hjá Mazda 6e Long Range.',
+      'Á móti kemur að bíllinn er aðeins framhjóladrifinn og aflminni en flestir. Ef meiri kraftur skiptir miklu máli býður afturhjóladrifinn Mazda 6e Long Range upp á meira afl, en þá fórnar maður drægni og hraðhleðslu. Nissan Leaf Extended Range gefur einnig 17 km meiri drægni og um 5% styttri hleðslustopp, en er 99.000 kr. dýrari.',
+      'Fyrir þá sem vilja mikla drægni á hagstæðu verði og forðast langar biðraðir við hraðhleðslur er Kia EV3 Long Range sérlega heilsteyptur kostur.',
     ],
     facts: '10d2aef3c37b',
     model: 'gemini-3.8-flash, thinking high',
@@ -614,10 +614,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'mg-mg4-urban-standard-range': {
     paragraphs: [
-      'MG MG4 Urban Standard Range er hagnýtur fimm sæta hlaðbakur með 577 lítra farangursrými sem er fáanlegur strax á lægsta verðlagi. Hann hentar þeim sem vilja rúmgóðan bíl í daglegan snúning án mikils tilkostnaðar.',
-      'Verðið er með því lægsta af rafbílum hér á landi og bíllinn er meðal þeirra ódýrustu á hvern kílómetra drægni. Í daglegu lífi færðu því fullgildan bíl með óvenju miklu skottrými og 500 kg dráttargetu á verði sem jafnast á við smæstu borgarbíla.',
-      'Á móti kemur að drægnin er meðal þeirra sem drífa styst og bíllinn er meðal þeirra sem hlaða hægast, sem gerir vetrarakstur og langferðir tafsamar. Fyrir þá sem aka reglulega á milli landshluta væri Leapmotor B05 Pro betri kostur með 76 km meiri drægni og um 35% styttri hleðslustopp, þótt hann sé dýrari og fáist ekki fyrr en seint á árinu 2026.',
-      'Hann er góð kaup fyrir þá sem leita að ódýrum og rúmgóðum bíl í hversdagsakstur innanbæjar. Hann hentar aftur á móti síður þeim sem ferðast mikið um sveitir landsins eða vilja fjórhjóladrif í snjó og hálku.',
+      'MG MG4 Urban Standard Range er fáanlegur strax á lægsta verðinu sem býðst og er meðal þeirra ódýrustu á hvern kílómetra drægni af rafbílum hér á landi. Á meðan svipaðir bílar frá Leapmotor koma ekki á markað fyrr en seint á árinu 2026, er Hyundai INSTER 800.000 kr. dýrari fyrir nánast sömu drægni og talsvert aflminni.',
+      'Fyrir daglegan akstur innanbæjar dugar drægnin vel meirihluta ársins, þó reikna megi með að hún dragist saman í vetrarkulda. Bíllinn tekur allt að fimm í sæti og leysir hefðbundin verkefni áreynslulaust á lágum kaup- og rekstrarkostnaði.',
+      'Á móti kemur að rafhlaðan er með þeim minnstu og bíllinn er meðal þeirra sem drífa styst af rafbílum hér á landi, auk þess sem hann er meðal þeirra sem hlaða hægast. Ferðalög um landið krefjast því meiri þolinmæði. Ef farið er oft út á land og hægt er að bíða býður Leapmotor B05 Pro upp á 76 km meiri drægni og um 35% styttri hleðslustopp, þótt hann sé 500.000 kr. dýrari. Fyrir þá sem vilja komast á ódýran rafbíl hér og nú er MG4 engu að síður vel heppnaður kostur.',
     ],
     facts: 'c0601cc9a5ed',
     model: 'gemini-3.8-flash, thinking high',
@@ -1042,10 +1041,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'tesla-model-y-standard-range': {
     paragraphs: [
-      'Tesla Model Y Standard Range er afturdrifinn bíll fyrir þá sem leita að aflmiklum kosti sem fæst afhentur strax. Hann drífur lengra en flestir bílar á svipuðu verði og hentar vel í ferðalög milli landshluta.',
-      'Hann er ódýrari en flestir rafbílar hér á landi og ódýrari á hvern kílómetra drægni en flestir í sínum verðflokki. Í sínum verðflokki hleður hann hraðar en flestir, sem styttir stopp á ferðalögum miðað við bíla eins og Hyundai Kona Electric þar sem hleðslustopp eru um 40% lengri, auk þess sem hann er aflmeiri en flestir á svipuðu verði.',
-      'Á móti er rafhlaðan minni en í flestum bílum á svipuðu verði, sem getur þýtt að vetrarkuldi bíti hraðar á drægnina, auk þess sem bíllinn er ekki fjórhjóladrifinn. Þeir sem vilja mun stærri rafhlöðu ættu frekar að skoða Leapmotor C10 ProMax, eða Hyundai Kona Electric ef framhjóladrif hentar betur í snjó og hálku.',
-      'Hann er góð kaup fyrir þá sem vilja hagkvæman ferðabíl með snarpri hleðslu milli landshluta. Hann hentar síður þeim sem krefjast fjórhjóladrifs eða vilja stærri rafhlöðu fyrir íslenskan vetur.',
+      'Tesla Model Y Standard Range býður upp á mikið pláss og aflmikinn akstur á verði þar sem helstu keppinautarnir eru ýmist smærri eða hlaða mun hægar. Fyrir vikið færðu rúmgóðan bíl sem drífur lengra en flestir í sínum verðflokki og er ódýrari á hvern kílómetra drægni en flestir rafbílar á landinu.',
+      'Afl hans er meira en hjá flestum bílum á svipuðu verði og hann hleður hraðar en flestir í verðflokknum. Til dæmis eru hleðslustoppin í Hyundai Kona Electric um 40% lengri, sem munar verulega um á ferðalögum milli landshluta þar sem stöðvar eru strjálar.',
+      'Á móti kemur að bíllinn er með minni rafhlöðu en flestir og er aðeins afturhjóladrifinn, sem krefst meiri aðgátar í snjó og hálku. Ef stór rafhlaða vegna vetrarkulda vegur þyngra gæti Leapmotor C10 ProMax hentað betur, en hann er 340.000 kr. ódýrari og með mun stærri rafhlöðu.',
+      'Fyrir þá sem leita að hagkvæmum og rúmgóðum fjölskyldubíl sem tefur mann lítið við hraðhleðslustöðvar er þessi útgáfa af Model Y ákjósanlegur kostur.',
     ],
     facts: 'bac55a7da91b',
     model: 'gemini-3.8-flash, thinking high',
