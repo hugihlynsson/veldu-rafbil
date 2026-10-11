@@ -1,9 +1,10 @@
-import { FunctionComponent, ReactNode } from 'react'
+import { FunctionComponent } from 'react'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import type { Car } from '@/modules/data/cars'
+import type { CarReview } from '@/modules/data/carReviews'
 import { carPathOf } from '@/modules/detail/paths'
 import { specRows } from '@/modules/detail/specs'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
@@ -11,12 +12,13 @@ import PricePill from '@/components/PricePill'
 import EvDatabaseLink from '@/components/EvDatabaseLink'
 import ShareButton from '@/components/ShareButton'
 import PageTop from './PageTop'
+import Review from './Review'
 
 interface Props {
   car: Car
   similar: ReadonlyArray<Car>
-  /** The model's review, in a boundary of its own so the figures never wait on it */
-  verdict: ReactNode
+  /** None for a car whose review is yet to be written */
+  review?: CarReview
 }
 
 const gutter = 'px-(--gutter) md:px-10'
@@ -37,7 +39,7 @@ const eyebrow =
   'm-0 uppercase text-eyebrow font-semibold tracking-wider text-stone'
 
 /** One car's own page: its photo and figures, a review, and the cars like it */
-const CarView: FunctionComponent<Props> = ({ car, similar, verdict }) => {
+const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
   const subTitle = [
     car.subModel,
     car.expectedDelivery && `Væntanlegur ${car.expectedDelivery.toLowerCase()}`,
@@ -121,7 +123,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, verdict }) => {
         </div>
       )}
 
-      {verdict}
+      {review && <Review review={review} />}
 
       <section aria-labelledby="similar" className={clsx(gutter, 'mt-12')}>
         <h2 id="similar" className={eyebrow}>

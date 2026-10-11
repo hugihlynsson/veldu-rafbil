@@ -1,20 +1,17 @@
-import { Suspense } from 'react'
 import { Metadata } from 'next'
 import { notFound, permanentRedirect } from 'next/navigation'
 import Link from 'next/link'
 
-import type { Car } from '@/modules/data/cars'
 import { carPath, shareImagePath, shareImageSize } from '@/modules/detail/paths'
 import { resolveSlugs } from '@/modules/detail/slugs'
 import { similarTo } from '@/modules/detail/similar'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { carSlug } from '@/modules/data/getCarId'
+import carReviews from '@/modules/data/carReviews'
 import CarView from '@/components/detail/CarView'
 import PageTop from '@/components/detail/PageTop'
-import Verdict, { VerdictPlaceholder } from '@/components/detail/Verdict'
 import PageChat from '@/components/detail/PageChat'
 import Footer from '@/components/Footer'
-import { peekVerdict } from '@/app/api/verdict/[...slugs]/verdict'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -51,15 +48,6 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
     twitter: { card: 'summary_large_image' },
   }
 }
-
-// Its own boundary, so the figures never wait on the cache
-const WrittenVerdict = async ({ car }: { car: Car }) => (
-  <Verdict
-    cars={[car]}
-    written={await peekVerdict([car])}
-    endpoint={`/api/verdict/${carSlug(car)}`}
-  />
-)
 
 export default async function Page(props: Props) {
   const segment = decodeURIComponent((await props.params).slug)
@@ -99,11 +87,7 @@ export default async function Page(props: Props) {
       <CarView
         car={car}
         similar={similarTo(car)}
-        verdict={
-          <Suspense fallback={<VerdictPlaceholder />}>
-            <WrittenVerdict car={car} />
-          </Suspense>
-        }
+        review={carReviews[carSlug(car)]}
       />
       <Footer />
       <PageChat cars={[car]} />

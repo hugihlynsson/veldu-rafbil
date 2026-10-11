@@ -1,19 +1,19 @@
 import type { Car } from '@/modules/data/cars'
+import carReviews, { type CarReview } from '@/modules/data/carReviews'
+import { carSlug } from '@/modules/data/getCarId'
 import type { ChatMessage } from '@/modules/chat/message'
 import { resolveSlugs } from '@/modules/detail/slugs'
-import type { Verdict } from '@/modules/detail/verdictEvents'
-import { peekVerdict } from '@/app/api/verdict/[...slugs]/verdict'
 
 /**
  * What the model is told about the car's page a question was asked on. With
  * the review on it, as the reader takes it for the advisor's own and may ask
  * about it.
  */
-export const pageNote = (car: Car, verdict: Verdict | null): string =>
+export const pageNote = (car: Car, review: CarReview | undefined): string =>
   [
     `[Spurt á síðu bílsins ${car.label} á Veldu Rafbíl.`,
-    verdict &&
-      `Á síðunni er umsögn sem þú skrifaðir um hann: "${verdict.paragraphs.join(' ')}"`,
+    review &&
+      `Á síðunni er umsögn sem þú skrifaðir um hann: "${review.paragraphs.join(' ')}"`,
     ']',
   ]
     .filter(Boolean)
@@ -25,30 +25,28 @@ export const pageNote = (car: Car, verdict: Verdict | null): string =>
  * has to stay the same for the provider's prompt cache. The review goes with
  * the newest only, as it is the one the reader is looking at.
  */
-export const withPageContext = async (
+export const withPageContext = (
   messages: ChatMessage[],
-  readVerdict: (
-    cars: ReadonlyArray<Car>,
-  ) => Promise<Verdict | null> = peekVerdict,
-): Promise<ChatMessage[]> => {
+  reviews: Readonly<Record<string, CarReview>> = carReviews,
+): ChatMessage[] => {
   const lastQuestion = messages.findLastIndex(({ role }) => role === 'user')
 
-  return Promise.all(
-    messages.map(async (message, index) => {
-      const about = message.metadata?.about
-      if (message.role !== 'user' || !about) return message
+  return messages.map((message, index) => {
+    const about = message.metadata?.about
+    if (message.role !== 'user' || !about) return message
 
-      const { cars } = resolveSlugs(about)
-      if (cars.length === 0) return message
+    const {
+      cars: [car],
+    } = resolveSlugs(about)
+    if (!car) return message
 
-      const verdict = index === lastQuestion ? await readVerdict(cars) : null
-      return {
-        ...message,
-        parts: [
-          { type: 'text' as const, text: pageNote(cars[0], verdict) },
-          ...message.parts,
-        ],
-      }
-    }),
-  )
+    const review = index === lastQuestion ? reviews[carSlug(car)] : undefined
+    return {
+      ...message,
+      parts: [
+        { type: 'text' as const, text: pageNote(car, review) },
+        ...message.parts,
+      ],
+    }
+  })
 }

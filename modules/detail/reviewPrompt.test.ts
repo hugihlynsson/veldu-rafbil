@@ -7,9 +7,10 @@ import { similarTo } from '@/modules/detail/similar'
 import {
   carFacts,
   describeStanding,
-  readVerdict,
-  verdictPrompt,
-} from './prompt'
+  readReview,
+  reviewFactsKey,
+  reviewPrompt,
+} from './reviewPrompt'
 
 const base: NewCar = {
   make: 'Kia',
@@ -64,33 +65,44 @@ describe('carFacts', () => {
   })
 })
 
-describe('readVerdict', () => {
+describe('readReview', () => {
   it('reads the answer a paragraph at a time', () => {
     expect(
-      readVerdict('Ólíkir bílar.\nHvor á sitt.\n\n  Kia fer lengra. \n'),
-    ).toEqual({ paragraphs: ['Ólíkir bílar. Hvor á sitt.', 'Kia fer lengra.'] })
+      readReview('Ólíkir bílar.\nHvor á sitt.\n\n  Kia fer lengra. \n'),
+    ).toEqual(['Ólíkir bílar. Hvor á sitt.', 'Kia fer lengra.'])
   })
 
   it('takes out the markdown it was asked not to write', () => {
-    expect(readVerdict('## Samanburður\n\n**Kia** fer - lengra')).toEqual({
-      paragraphs: ['Samanburður', 'Kia fer - lengra'],
-    })
+    expect(readReview('## Kia EV3\n\n**Kia** fer - lengra')).toEqual([
+      'Kia EV3',
+      'Kia fer - lengra',
+    ])
   })
 
   it('has nothing to show for an empty answer', () => {
-    expect(readVerdict(' \n\n ')).toBeNull()
+    expect(readReview(' \n\n ')).toBeNull()
   })
 })
 
-describe('verdictPrompt', () => {
+describe('reviewPrompt', () => {
   const [a] = cars
 
   it('reviews one car against its rivals', () => {
-    const { system, prompt } = verdictPrompt([a])
+    const { system, prompt } = reviewPrompt(a)
     expect(system).toContain('síðu bílsins')
     expect(prompt).toContain('Svipaðir bílar')
     expect(prompt).toContain('Staða hans á listanum:')
     for (const rival of similarTo(a)) expect(prompt).toContain(rival.label)
+  })
+})
+
+describe('reviewFactsKey', () => {
+  const [a] = cars
+
+  it('changes with a figure the review quotes', () => {
+    expect(reviewFactsKey({ ...a, range: a.range + 1 })).not.toBe(
+      reviewFactsKey(a),
+    )
   })
 })
 

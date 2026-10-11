@@ -1,6 +1,8 @@
+import { createHash } from 'node:crypto'
+
 import cars, { type Car } from '@/modules/data/cars'
+import type { CarReview } from '@/modules/data/carReviews'
 import { similarTo } from '@/modules/detail/similar'
-import type { Verdict } from '@/modules/detail/verdictEvents'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { grantAmountText } from '@/modules/copy/grantCopy'
 import { driveLabels } from '@/modules/data/drives'
@@ -274,17 +276,23 @@ export const carFacts = (
 ): string =>
   `Bíllinn:\n${listCars([car])}\n\nStaða hans á listanum:\n${describeStanding(car, all)}\n\nSvipaðir bílar, næstir honum að verði og drægni:\n${listCars(similar)}\n\nMunurinn á honum og þeim, sá besti fyrst:\n${listGaps([car, ...similar])}`
 
-/**
- * Everything the model is given for a car's review. The review's cache keys
- * on it, so a car whose figures or similar cars change is written about
- * afresh.
- */
-export const verdictPrompt = (
-  cars: ReadonlyArray<Car>,
-): { system: string; prompt: string } => ({
+/** Everything the model is given for a car's review */
+export const reviewPrompt = (car: Car): { system: string; prompt: string } => ({
   system: carSystemPrompt,
-  prompt: carFacts(cars[0], similarTo(cars[0])),
+  prompt: carFacts(car, similarTo(car)),
 })
+
+/**
+ * The figures a review quotes, its car's and its similar cars', hashed: a
+ * review is out of date once they change. Where the car stands on the list
+ * is left out, as one car added moves dozens of others a little and the
+ * words for it change slowly.
+ */
+export const reviewFactsKey = (car: Car): string =>
+  createHash('sha256')
+    .update(listCars([car, ...similarTo(car)]))
+    .digest('hex')
+    .slice(0, 12)
 
 // A bound that only stops a runaway; the prompt asks for a fraction of it
 const MAX_LENGTH = 3000
@@ -293,7 +301,7 @@ const MAX_LENGTH = 3000
  * The answer as the page shows it: its paragraphs, with the markdown the
  * prompt asks it not to write taken out anyway
  */
-export const readVerdict = (text: string): Verdict | null => {
+export const readReview = (text: string): CarReview['paragraphs'] | null => {
   const paragraphs = text
     .slice(0, MAX_LENGTH)
     .split(/\n\s*\n/)
@@ -305,5 +313,5 @@ export const readVerdict = (text: string): Verdict | null => {
     )
     .filter(Boolean)
 
-  return paragraphs.length > 0 ? { paragraphs } : null
+  return paragraphs.length > 0 ? paragraphs : null
 }

@@ -210,6 +210,14 @@ make, then model. The fields that are easy to get wrong:
   it adds an entry for each new car and works out again any entry naming a
   car that is gone, and keeps the rest, some of which may have been set by
   hand. A test fails until it has been run.
+- **Each car's page has a review in `modules/data/carReviews.ts`, written by
+  the advisor's model.** After any change to a car's figures, and after the
+  similar-cars run above, run
+  `npx tsx --env-file=.env.local scripts/car-reviews.ts`: it writes a review
+  for each new car and again for each whose figures, or whose similar cars'
+  figures, changed, and keeps the rest. A test fails until it has been run.
+  Each review takes a minute or more and costs a little, and is part of the
+  change: read the new ones in the diff as you would the figures.
 
 And, for a car that is genuinely new to the list:
 
