@@ -12,7 +12,7 @@ interface Spec {
   detail?: (car: Car) => string | undefined
 }
 
-const specs: Record<string, Spec> = {
+const specs = {
   price: {
     label: 'Verð',
     better: 'lower',
@@ -74,7 +74,7 @@ const specs: Record<string, Spec> = {
     label: 'Sæti',
     text: (car) => String(car.seats),
   },
-}
+} satisfies Record<string, Spec>
 
 export interface SpecCell {
   text: string
@@ -83,15 +83,17 @@ export interface SpecCell {
   best: boolean
 }
 
+export type SpecKey = keyof typeof specs
+
 export interface SpecRow {
-  key: string
+  key: SpecKey
   label: string
   cells: SpecCell[]
 }
 
 /** The rows of figures for these cars, with a cell for each in their order */
 export const specRows = (compared: ReadonlyArray<Car>): SpecRow[] =>
-  Object.entries(specs).map(([key, spec]) => {
+  (Object.entries(specs) as Array<[SpecKey, Spec]>).map(([key, spec]) => {
     const values = spec.value ? compared.map(spec.value) : undefined
     const largest = values ? Math.max(...values) : 0
     const winning =

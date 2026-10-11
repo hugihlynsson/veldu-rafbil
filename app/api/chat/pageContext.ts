@@ -6,14 +6,14 @@ import { resolveSlugs } from '@/modules/detail/slugs'
 
 /**
  * What the model is told about the car's page a question was asked on. With
- * the review on it, as the reader takes it for the advisor's own and may ask
- * about it.
+ * the review on it, which the reader takes for the advisor's own and may ask
+ * about, though most were written by hand rather than by the model.
  */
 export const pageNote = (car: Car, review: CarReview | undefined): string =>
   [
     `[Spurt á síðu bílsins ${car.label} á Veldu Rafbíl.`,
     review &&
-      `Á síðunni er umsögn sem þú skrifaðir um hann: "${review.paragraphs.join(' ')}"`,
+      `Á síðunni er umsögn Veldu Rafbíl um hann, sem lesandinn sér: "${review.paragraphs.join(' ')}"`,
     ']',
   ]
     .filter(Boolean)

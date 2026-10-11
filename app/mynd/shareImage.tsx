@@ -5,8 +5,8 @@ import { ImageResponse } from 'next/og'
 import type { Car } from '@/modules/data/cars'
 import { shareImageSize as size } from '@/modules/detail/paths'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
-import { formatKmPerMinute } from '@/modules/data/getKmPerMinutesCharged'
-import { specRows } from '@/modules/detail/specs'
+import { specRows, type SpecKey } from '@/modules/detail/specs'
+import { carSubtitle } from '@/modules/detail/subtitle'
 import Logo from '@/components/Logo'
 
 // Static cuts of the site's Inter at the two weights drawn here: the image
@@ -101,14 +101,12 @@ const Stat = ({
  */
 export const shareImage = async (car: Car) => {
   const src = await photo(car.heroImageName)
-  const subTitle = [
-    car.subModel,
-    car.expectedDelivery && `Væntanlegur ${car.expectedDelivery.toLowerCase()}`,
-  ]
-    .filter(Boolean)
-    .join(' · ')
-  const priceBadge = specRows([car]).find(({ key }) => key === 'price')
-    ?.cells[0].detail
+  const subTitle = carSubtitle(car)
+  const figures = new Map(
+    specRows([car]).map(({ key, cells: [cell] }) => [key, cell]),
+  )
+  const text = (key: SpecKey) => figures.get(key)?.text ?? ''
+  const priceBadge = figures.get('price')?.detail
 
   return new ImageResponse(
     <div
@@ -184,19 +182,19 @@ export const shareImage = async (car: Car) => {
           <div style={{ display: 'flex', gap: 32, marginTop: 32 }}>
             <Stat
               label="0-100 km/klst"
-              value={`${car.acceleration.toFixed(1)}s`}
-              detail={`${car.power} kW`}
+              value={text('acceleration')}
+              detail={text('power')}
             />
             <Stat
               label="Rafhlaða"
-              value={`${car.capacity} kWh`}
-              detail={`${formatKmPerMinute(car.kmPerMinuteCharged)} km/min`}
+              value={text('capacity')}
+              detail={text('charging')}
             />
             {/* The first column is as wide as its label, and the battery's as
                 its value, so the range needs more room to look as apart */}
             <Stat
               label="Drægni"
-              value={`${car.range} km`}
+              value={text('range')}
               detail={car.drive}
               gapBefore={16}
             />

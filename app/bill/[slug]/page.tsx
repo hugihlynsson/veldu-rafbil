@@ -6,6 +6,7 @@ import { carPath, shareImagePath, shareImageSize } from '@/modules/detail/paths'
 import { resolveSlugs } from '@/modules/detail/slugs'
 import { similarTo } from '@/modules/detail/similar'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
+import cars from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import carReviews from '@/modules/data/carReviews'
 import CarView from '@/components/detail/CarView'
@@ -22,11 +23,21 @@ interface Props {
 const read = async ({ params }: Props) =>
   resolveSlugs([decodeURIComponent((await params).slug)])
 
+// Built ahead from the car data, which only a deploy changes; a renamed or
+// gone car's old slug is still rendered on demand
+export const generateStaticParams = () =>
+  cars.map((car) => ({ slug: carSlug(car) }))
+
 export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const {
     cars: [car],
     slugs,
+    goneCount,
   } = await read(props)
+  // A page can only answer 200, so a gone car's says so to search engines
+  if (goneCount > 0) {
+    return { title: 'Veldu Rafbíl', robots: { index: false } }
+  }
   if (!car) return { title: 'Veldu Rafbíl' }
 
   const title = `${car.label} – Veldu Rafbíl`

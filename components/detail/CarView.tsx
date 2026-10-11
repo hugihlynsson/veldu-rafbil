@@ -6,7 +6,8 @@ import Link from 'next/link'
 import type { Car } from '@/modules/data/cars'
 import type { CarReview } from '@/modules/data/carReviews'
 import { carPathOf } from '@/modules/detail/paths'
-import { specRows } from '@/modules/detail/specs'
+import { specRows, type SpecKey } from '@/modules/detail/specs'
+import { carSubtitle } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import PricePill from '@/components/PricePill'
 import EvDatabaseLink from '@/components/EvDatabaseLink'
@@ -24,7 +25,7 @@ interface Props {
 const gutter = 'px-(--gutter) md:px-10'
 // The most telling first, and those with a line under them side by side, so
 // the rows line up
-const figureOrder = [
+const figureOrder: SpecKey[] = [
   'range',
   'charging',
   'power',
@@ -42,12 +43,7 @@ const sectionLabel = 'm-0 text-sm font-semibold'
 
 /** One car's own page: its photo and figures, a review, and the cars like it */
 const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
-  const subTitle = [
-    car.subModel,
-    car.expectedDelivery && `Væntanlegur ${car.expectedDelivery.toLowerCase()}`,
-  ]
-    .filter(Boolean)
-    .join(' · ')
+  const subTitle = carSubtitle(car)
   // The price is the pill under the name
   const figures = specRows([car])
     .filter(({ key }) => figureOrder.includes(key))

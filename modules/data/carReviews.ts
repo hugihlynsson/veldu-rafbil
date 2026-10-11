@@ -16,721 +16,721 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Audi A6 e-tron Sportback quattro er dýrari en flestir rafbílar hér en meðal þeirra langdrægustu, með 712 km samkvæmt WLTP, og meðal þeirra sem hlaða hraðast. Fjórhjóladrif, snörp hröðun og hagstætt verð á hvern km miðað við bíla á svipuðu verði gera hann að sterkum kosti fyrir þá sem aka mikið á milli landshluta.',
     ],
-    facts: 'bac88b383353',
+    facts: 'cf5a35dc9543',
   },
   'audi-a6-e-tron-avant-quattro': {
     paragraphs: [
       'Audi A6 e-tron Avant quattro er dýrari en flestir en meðal þeirra langdrægustu og meðal þeirra sem hlaða hraðast. Með fjórhjóladrifi og meira afli en flestir hentar hann þeim sem vilja langferðabíl og eru tilbúnir að borga fyrir hann.',
     ],
-    facts: 'e34864c1bbf6',
+    facts: '16768dc51e04',
   },
   'audi-e-tron-gt-quattro': {
     paragraphs: [
       'Audi e-tron GT quattro er meðal dýrustu bílanna á listanum og meðal þeirra sneggstu og aflmestu. Drægnin er hins vegar styttri en hjá flestum bílum á svipuðu verði, svo hann er fyrir þá sem setja aksturinn sjálfan ofar langferðum og verði.',
     ],
-    facts: '8b76a6e071d1',
+    facts: '31ddac76bef0',
   },
   'audi-q4-e-tron-45-quattro': {
     paragraphs: [
       'Audi Q4 e-tron 45 quattro er fjórhjóladrifinn og dýrari en flestir, en drífur styttra og hleður hægar en flestir bílar á svipuðu verði. Hann er í meðallagi í flestu öðru, svo hann borgar sig helst fyrir þá sem vilja Audi umfram allt.',
     ],
-    facts: '310a20f7f852',
+    facts: '991962ef6422',
   },
   'audi-q6-e-tron-base': {
     paragraphs: [
       'Audi Q6 e-tron er meðal þeirra langdrægustu á listanum, með 625 km, og hleður hraðar en flestir. Hann er fjórhjóladrifinn og dýrari en flestir, og í meðallagi miðað við bíla á svipuðu verði, svo valið stendur helst um merkið og þægindin.',
     ],
-    facts: '112a76ba82d3',
+    facts: '63c57c17d103',
   },
   'audi-q6-e-tron-sportback': {
     paragraphs: [
       'Audi Q6 e-tron Sportback er meðal þeirra langdrægustu og meðal þeirra sem hlaða hraðast, með fjórhjóladrif og meira afl en flestir. Hann er dýrari en flestir og í meðallagi miðað við bíla á svipuðu verði.',
     ],
-    facts: '8e95eba3fccb',
+    facts: 'f7e367c58b0b',
   },
   'audi-sq6-e-tron-base': {
     paragraphs: [
       'Audi SQ6 e-tron er meðal dýrustu bílanna á listanum, sneggri og aflmeiri en flestir og drífur lengra en flestir. Verð á hvern km drægni er þó meðal þess hæsta, svo hann er fyrir þá sem vilja afl og eru ekki að spara.',
     ],
-    facts: '471f7f24c048',
+    facts: '3e95e03d3063',
   },
   'bmw-i4-40-xdrive': {
     paragraphs: [
       'BMW i4 40 xDrive er fjórhjóladrifinn og sneggri en flestir, og hleður hraðar en flestir á listanum. Miðað við bíla á svipuðu verði drífur hann þó styttra og rafhlaðan er með þeim minnstu.',
     ],
-    facts: '974fc7fccd12',
+    facts: 'df5d4ebe059b',
   },
   'bmw-i4-m60-xdrive': {
     paragraphs: [
       'BMW i4 M60 xDrive er meðal sneggstu og aflmestu bílanna á listanum, líka miðað við bíla á svipuðu verði. Hann er dýr og drífur styttra en flestir á sama verði, svo hann er fyrst og fremst fyrir þá sem vilja akstursánægju.',
     ],
-    facts: '1ecce778f46d',
+    facts: '6f08397fe73e',
   },
   'bmw-i5-edrive40': {
     paragraphs: [
       'BMW i5 eDrive40 er afturhjóladrifinn og drífur lengra en flestir, en er dýrari en flestir og hleður hægar en flestir bílar á svipuðu verði. Hann er í meðallagi að afli og hröðun.',
     ],
-    facts: '7cd232e53ef8',
+    facts: '21c91d749061',
   },
   'bmw-i5-m60-xdrive': {
     paragraphs: [
       'BMW i5 M60 xDrive er meðal dýrustu, sneggstu og aflmestu bílanna á listanum. Miðað við bíla á svipuðu verði drífur hann þó með þeim stystu og hleður með þeim hægustu.',
     ],
-    facts: 'b7b473c10aa9',
+    facts: '9adfec4ae4bb',
   },
   'bmw-ix-xdrive-45-sport': {
     paragraphs: [
       'BMW iX xDrive 45 Sport er meðal dýrustu bílanna á listanum, fjórhjóladrifinn og drífur lengra en flestir. Miðað við bíla á svipuðu verði er hann þó aflminni og hleður hægar en flestir.',
     ],
-    facts: '640ced4a5489',
+    facts: '3a1ada60c06e',
   },
   'bmw-ix-xdrive-60-sport': {
     paragraphs: [
       'BMW iX xDrive 60 Sport er meðal þeirra langdrægustu, með 701 km, og með einni af stærstu rafhlöðunum á listanum. Hann er dýr, en meðal þeirra ódýrustu á hvern km drægni miðað við bíla á svipuðu verði.',
     ],
-    facts: '2e406d25ce74',
+    facts: '853d5e37c57e',
   },
   'bmw-ix1-edrive-20': {
     paragraphs: [
       'BMW iX1 eDrive 20 er ódýrari en flestir og ódýrari á hvern km drægni en flestir, með drægni í meðallagi. Hann er hægari og aflminni en flestir og framhjóladrifinn, svo hann hentar best í rólegan daglegan akstur.',
     ],
-    facts: '198cceb137fc',
+    facts: '7a357637d052',
   },
   'bmw-ix1-xdrive-30': {
     paragraphs: [
       'BMW iX1 xDrive 30 er fjórhjóladrifinn og í meðallagi að verði, en drífur styttra og hleður hægar en flestir. Rafhlaðan er með þeim minnstu miðað við bíla á svipuðu verði, sem kemur niður á langferðum.',
     ],
-    facts: '8231c7efc24c',
+    facts: 'c2f2c6dfa29f',
   },
   'bmw-ix3-40': {
     paragraphs: [
       'BMW iX3 40 er meðal þeirra langdrægustu, með 637 km, og meðal þeirra sem hlaða hraðast. Hann er afturhjóladrifinn og dýrari en flestir, en ódýrari á hvern km drægni en flestir bílar á svipuðu verði.',
     ],
-    facts: '5886e5cd60c6',
+    facts: 'c9a516b4b0c4',
   },
   'bmw-ix3-50-xdrive': {
     paragraphs: [
       'BMW iX3 50 xDrive er meðal þeirra langdrægustu á listanum, með 805 km, og meðal þeirra sem hlaða hraðast. Hann er fjórhjóladrifinn og dýrari en flestir, en meðal þeirra ódýrustu á hvern km drægni miðað við bíla á svipuðu verði.',
     ],
-    facts: '59ad065b2922',
+    facts: '61331f005690',
   },
   'byd-dolphin-base': {
     paragraphs: [
       'BYD Dolphin er meðal ódýrustu bílanna á listanum og meðal þeirra ódýrustu á hvern km drægni. Hann hleður þó með þeim hægustu, svo hann hentar best í innanbæjarakstur og styttri ferðir.',
     ],
-    facts: 'f88411a480ec',
+    facts: 'f28dea4386f3',
   },
   'byd-seal-base': {
     paragraphs: [
       'BYD Seal er fjórhjóladrifinn og meðal þeirra sneggstu og aflmestu á listanum, á verði í meðallagi. Drægnin er í meðallagi og hann hleður hægar en flestir, sem skiptir máli á langferðum.',
     ],
-    facts: 'ab40c226107c',
+    facts: 'a6eee18c6c11',
   },
   'byd-seal-u-base': {
     paragraphs: [
       'BYD Seal U er ódýrari en flestir og með stærri rafhlöðu en flestir, en hleður með þeim hægustu og er meðal þeirra hægustu í hröðun. Hann hentar þeim sem vilja mikið fyrir peninginn og aka rólega.',
     ],
-    facts: 'ba899643f2b0',
+    facts: '835eec18e3ad',
   },
   'byd-sealion-7-base': {
     paragraphs: [
       'BYD Sealion 7 er fjórhjóladrifinn, meðal þeirra aflmestu og hleður hraðar en flestir. Drægnin er þó í meðallagi og hann er dýrari á hvern km drægni en flestir.',
     ],
-    facts: '019c6db6c59c',
+    facts: 'a12f806b8b0f',
   },
   'byd-tang-flagship': {
     paragraphs: [
       'BYD Tang Flagship er sjö sæta og fjórhjóladrifinn, með einni af stærstu rafhlöðunum á listanum. Hann er dýrari en flestir og hleður með þeim hægustu, sem er galli á langferðum.',
     ],
-    facts: '0c340b013e84',
+    facts: 'da25920fd165',
   },
   'citroen-e-c4-base': {
     paragraphs: [
       'Citroën ë-C4 er ódýrari en flestir og ódýrari á hvern km drægni en flestir. Hann er hins vegar meðal þeirra hægustu og aflminnstu, drífur styttra og hleður hægar en flestir, svo hann hentar helst í daglegan akstur.',
     ],
-    facts: '155df9ecf460',
+    facts: '01c8baf25e60',
   },
   'fiat-500e-base': {
     paragraphs: [
       'Fiat 500e er meðal ódýrustu bílanna á listanum en meðal þeirra sem drífa styst, með 305 km, og hleður með þeim hægustu. Hann er fjögurra sæta og hentar best sem innanbæjarbíll.',
     ],
-    facts: 'c42fb69990fd',
+    facts: '6c43f8b948a7',
   },
   'fiat-600e-base': {
     paragraphs: [
       'Fiat 600e er ódýrari en flestir en meðal þeirra sem drífa styst og meðal þeirra hægustu og aflminnstu. Hann hentar best í daglegan akstur innanbæjar.',
     ],
-    facts: '4f3eb0246974',
+    facts: '676ea7303621',
   },
   'ford-capri-base': {
     paragraphs: [
       'Ford Capri er fjórhjóladrifinn og drífur lengra en flestir, á verði í meðallagi. Miðað við bíla á svipuðu verði er hann meðal þeirra langdrægustu og meðal þeirra sem hlaða hraðast, sem gerir hann að sterkum kosti á langferðum.',
     ],
-    facts: '494be38819a8',
+    facts: 'b725c404f80f',
   },
   'ford-explorer-er-awd': {
     paragraphs: [
       'Ford Explorer ER AWD er fjórhjóladrifinn, drífur lengra og hleður hraðar en flestir, á verði í meðallagi. Hann er ódýrari á hvern km drægni en flestir og traustur kostur fyrir íslenskar aðstæður.',
     ],
-    facts: 'd006eb9f898a',
+    facts: 'c717d592ebce',
   },
   'ford-mustang-mach-e-lr-awd': {
     paragraphs: [
       'Ford Mustang Mach-E LR AWD er fjórhjóladrifinn og drífur lengra en flestir, með einni af stærstu rafhlöðunum miðað við bíla á svipuðu verði. Hann hleður þó hægar en flestir, sem lengir hleðslustoppin á langferðum.',
     ],
-    facts: '97b58e997fe5',
+    facts: '62ca61e8af92',
   },
   'ford-puma-base': {
     paragraphs: [
       'Ford Puma er meðal ódýrustu bílanna á listanum en meðal þeirra sem drífa styst og aflminnstu. Miðað við bíla á svipuðu verði hleður hann þó hraðar en flestir.',
     ],
-    facts: '51eb4afe222f',
+    facts: '2c1f4ca20aa6',
   },
   'hongqi-ehs5-base': {
     paragraphs: [
       'Hongqi EHS5 er ódýrari en flestir en fjórhjóladrifinn og meðal þeirra sneggstu og aflmestu. Miðað við bíla á svipuðu verði drífur hann lengra og hleður með þeim hröðustu, sem gerir hann að miklum bíl fyrir peninginn.',
     ],
-    facts: '91bc38132fd5',
+    facts: 'ba6a822803ec',
   },
   'hongqi-ehs7-premium': {
     paragraphs: [
       'Hongqi EHS7 Premium er fjórhjóladrifinn, meðal þeirra aflmestu og sneggstu, og með stærstu rafhlöðuna miðað við bíla á svipuðu verði. Drægnin er þó í meðallagi og hann er dýrari á hvern km drægni en flestir á sama verði.',
     ],
-    facts: 'fa8143757f2a',
+    facts: '3a3333498e46',
   },
   'hyundai-inster-base': {
     paragraphs: [
       'Hyundai INSTER er meðal ódýrustu bílanna á listanum og meðal þeirra ódýrustu á hvern km drægni. Hann drífur þó með þeim stystu, hleður hægt og er aflminni en flestir, svo hann hentar best innanbæjar.',
     ],
-    facts: 'c91c2679efa9',
+    facts: 'ed92d40d7850',
   },
   'hyundai-inster-long-range': {
     paragraphs: [
       'Hyundai INSTER Long Range er meðal ódýrustu bílanna á listanum og ódýrari á hvern km drægni en flestir. Drægnin er samt með þeirri stystu og hann hleður hægt, svo hann er helst borgarbíll.',
     ],
-    facts: 'e9e22c68ae4b',
+    facts: '93c6f4fa6857',
   },
   'hyundai-ioniq-3-standard-range': {
     paragraphs: [
       'Hyundai IONIQ 3 Standard Range er meðal ódýrustu bílanna en meðal þeirra sem drífa styst og hleður með þeim hægustu. Hann er væntanlegur í lok árs 2026 og hentar helst í innanbæjarakstur.',
     ],
-    facts: 'eb72f9008119',
+    facts: '9c26521cb3d3',
   },
   'hyundai-ioniq-3-long-range': {
     paragraphs: [
       'Hyundai IONIQ 3 Long Range er meðal ódýrustu bílanna og meðal þeirra ódýrustu á hvern km drægni, með 496 km. Hann er þó meðal þeirra hægustu og aflminnstu, og væntanlegur í lok árs 2026.',
     ],
-    facts: '80d730f7f5b7',
+    facts: '60ddcc68748d',
   },
   'hyundai-ioniq-5-long-range-awd': {
     paragraphs: [
       'Hyundai IONIQ 5 Long Range AWD er fjórhjóladrifinn og meðal þeirra sem hlaða hraðast á listanum, sá hraðasti miðað við bíla á svipuðu verði. Hann drífur lengra en flestir á sama verði og er ódýrari á hvern km drægni en flestir.',
     ],
-    facts: 'fbf0acb72d06',
+    facts: '547c5f26c39c',
   },
   'hyundai-ioniq-9-long-range-awd': {
     paragraphs: [
       'Hyundai IONIQ 9 Long Range AWD er sjö sæta og fjórhjóladrifinn, með einni af stærstu rafhlöðunum og drífur lengra en flestir. Hann er dýrari en flestir og hægari en flestir í hröðun.',
     ],
-    facts: '6835bf66f695',
+    facts: '631700586184',
   },
   'hyundai-ioniq-9-long-range-performance-awd': {
     paragraphs: [
       'Hyundai IONIQ 9 Long Range Performance AWD er sjö sæta og fjórhjóladrifinn, með einni af stærstu rafhlöðunum og meira afl en flestir. Hann er dýrari en flestir og í meðallagi miðað við bíla á svipuðu verði.',
     ],
-    facts: 'ebfffbbaac0c',
+    facts: '24f9e703ad54',
   },
   'hyundai-kona-electric-65-kwh': {
     paragraphs: [
       'Hyundai Kona Electric 65 kWh er ódýrari en flestir og meðal þeirra ódýrustu á hvern km drægni. Hann drífur lengra en flestir bílar á svipuðu verði en hleður hægar en flestir.',
     ],
-    facts: '42b0f2752808',
+    facts: '6cc9ddb01dd8',
   },
   'hyundai-staria-electric-base': {
     paragraphs: [
       'Hyundai STARIA Electric tekur níu manns, á verði í meðallagi. Hann er þó meðal þeirra sem drífa styst og meðal þeirra hægustu, og væntanlegur í lok árs 2026.',
     ],
-    facts: '7c2557b1c2f5',
+    facts: '96a34256ea87',
   },
   'jeep-avenger-base': {
     paragraphs: [
       'Jeep Avenger er ódýrari en flestir en meðal þeirra sem drífa styst, hlaða hægast og eru aflminnstir. Hann hentar helst sem bíll í daglegan akstur innanbæjar.',
     ],
-    facts: '5bab78708f5c',
+    facts: 'aedfb70cc973',
   },
   'kgm-musso-ev-base': {
     paragraphs: [
       'KGM Musso EV er ódýrari en flestir og með stærri rafhlöðu en flestir. Hann hleður þó með þeim hægustu og er meðal þeirra hægustu í hröðun.',
     ],
-    facts: 'a7e2c8ebd888',
+    facts: '38827a0d9c9c',
   },
   'kgm-musso-ev-4wd': {
     paragraphs: [
       'KGM Musso EV 4WD er fjórhjóladrifinn en meðal þeirra sem drífa styst og hlaða hægast. Hann er meðal þeirra dýrustu á hvern km drægni miðað við bíla á svipuðu verði.',
     ],
-    facts: '47bac64a85af',
+    facts: 'fad1ab92a693',
   },
   'kgm-torres-evx': {
     paragraphs: [
       'KGM Torres EVX er ódýrari en flestir og ódýrari á hvern km drægni en flestir. Hann er þó hægari, aflminni og hleður hægar en flestir.',
     ],
-    facts: 'd8bd756a5bf0',
+    facts: 'dde274931991',
   },
   'kia-ev2-standard-range': {
     paragraphs: [
       'Kia EV2 Standard Range er meðal ódýrustu bílanna á listanum en meðal þeirra sem drífa styst og hlaða hægast. Hann hentar best sem innanbæjarbíll.',
     ],
-    facts: '6abb9071fc07',
+    facts: '2ab8f29d8533',
   },
   'kia-ev2-long-range': {
     paragraphs: [
       'Kia EV2 Long Range er meðal ódýrustu bílanna og meðal þeirra ódýrustu á hvern km drægni. Hann drífur lengra en flestir bílar á svipuðu verði en er meðal þeirra hægustu og aflminnstu.',
     ],
-    facts: '4daa1ff9ad7a',
+    facts: 'acfd4896a650',
   },
   'kia-ev3-standard-range': {
     paragraphs: [
       'Kia EV3 Standard Range er meðal ódýrustu bílanna á listanum og ódýrari á hvern km drægni en flestir. Hann drífur styttra og hleður hægar en flestir, en er í meðallagi miðað við bíla á svipuðu verði.',
     ],
-    facts: '6cbd7cacf976',
+    facts: 'a5ac8fa23612',
   },
   'kia-ev3-long-range': {
     paragraphs: [
       'Kia EV3 Long Range er ódýrari en flestir en drífur lengra en flestir, með 605 km, og er meðal þeirra ódýrustu á hvern km drægni. Hann hleður hraðar en flestir og er aflminni en flestir, svo hann er hagkvæmur langferðabíll fyrir þá sem þurfa ekki fjórhjóladrif.',
     ],
-    facts: '74609f0dbd55',
+    facts: 'ea684c9bf92b',
   },
   'kia-ev3-long-range-awd': {
     paragraphs: [
       'Kia EV3 Long Range AWD er fjórhjóladrifinn, ódýrari en flestir og drífur lengra en flestir. Hann er ódýrari á hvern km drægni en flestir og hleður hraðar en flestir bílar á svipuðu verði.',
     ],
-    facts: 'ea5c9ca67957',
+    facts: '4ff8f49db637',
   },
   'kia-ev4-base': {
     paragraphs: [
       'Kia EV4 er meðal þeirra langdrægustu, með 625 km, og meðal þeirra ódýrustu á hvern km drægni. Hann hleður hraðar en flestir en er hægari og aflminni en flestir.',
     ],
-    facts: 'a5030843ee82',
+    facts: 'e22a3fafe8e4',
   },
   'kia-ev4-fastback': {
     paragraphs: [
       'Kia EV4 Fastback er ódýrari en flestir, drífur lengra en flestir og er meðal þeirra ódýrustu á hvern km drægni. Hann hleður hraðar en flestir en er hægari og aflminni en flestir.',
     ],
-    facts: '20227d21fb30',
+    facts: '06b5bcfe6713',
   },
   'kia-ev5-base': {
     paragraphs: [
       'Kia EV5 er í meðallagi að verði, drægni og hleðslu. Hann er hægari og aflminni en flestir og framhjóladrifinn, svo hann er fyrir þá sem aka rólega.',
     ],
-    facts: 'e6eb4cdc0791',
+    facts: '2ad9e5e3ce04',
   },
   'kia-ev5-awd': {
     paragraphs: [
       'Kia EV5 AWD er fjórhjóladrifinn og í meðallagi að verði, en drífur styttra og hleður hægar en flestir. Hann er líka hægari og aflminni en flestir.',
     ],
-    facts: 'e515c3c2ff76',
+    facts: 'fb820999e660',
   },
   'kia-ev6-2025-long-range-awd': {
     paragraphs: [
       'Kia EV6 2025 Long Range AWD er fjórhjóladrifinn og meðal þeirra sem hlaða hraðast, á verði í meðallagi. Hann er sneggri en flestir og ódýrari á hvern km drægni en flestir.',
     ],
-    facts: '7240d71d4cec',
+    facts: '46354ee3c65d',
   },
   'kia-ev9-base': {
     paragraphs: [
       'Kia EV9 er sjö sæta og fjórhjóladrifinn, með stærri rafhlöðu en flestir og hleður hraðar en flestir. Hann er dýrari en flestir og drífur styttra en flestir bílar á svipuðu verði.',
     ],
-    facts: 'a2e85e4c702d',
+    facts: '825d2ff3657a',
   },
   'kia-ev9-gt': {
     paragraphs: [
       'Kia EV9 GT er sjö sæta, fjórhjóladrifinn og sneggri og aflmeiri en flestir. Hann er meðal dýrustu bílanna og drífur með þeim stystu miðað við bíla á svipuðu verði.',
     ],
-    facts: 'f3b7dd248332',
+    facts: 'a96882e9d387',
   },
   'kia-pv5-base': {
     paragraphs: [
       'Kia PV5 er sjö sæta og afturhjóladrifinn, á verði í meðallagi. Hann er meðal þeirra hægustu og aflminnstu og drífur styttra en flestir.',
     ],
-    facts: '1f5e9d2192d8',
+    facts: '906afb81bc90',
   },
   'leapmotor-t03-base': {
     paragraphs: [
       'Leapmotor T03 er ódýrasti bíllinn á listanum og meðal þeirra ódýrustu á hvern km drægni. Hann er fjögurra sæta, drífur með þeim stystu og hleður hægt, svo hann er eingöngu borgarbíll.',
     ],
-    facts: '3ac3cdf8fd4b',
+    facts: 'adedab20d34e',
   },
   'leapmotor-b03x-pro': {
     paragraphs: [
       'Leapmotor B03X Pro er meðal ódýrustu bílanna á listanum en meðal þeirra sem drífa styst. Hann er væntanlegur í lok árs 2026 og hentar helst innanbæjar.',
     ],
-    facts: '3e78783dee18',
+    facts: '9c6765f8331d',
   },
   'leapmotor-b03x-promax': {
     paragraphs: [
       'Leapmotor B03X ProMax er meðal ódýrustu bílanna og drífur lengra en flestir bílar á svipuðu verði. Miðað við þá hleður hann líka með þeim hröðustu; hann er væntanlegur í lok árs 2026.',
     ],
-    facts: '56cd5dff39c5',
+    facts: '04c19c4923bc',
   },
   'leapmotor-b05-pro': {
     paragraphs: [
       'Leapmotor B05 Pro er meðal ódýrustu bílanna og meðal þeirra ódýrustu á hvern km drægni. Miðað við bíla á svipuðu verði drífur hann lengra og er meðal þeirra sneggstu; hann er væntanlegur í lok árs 2026.',
     ],
-    facts: '35abbd6181b7',
+    facts: '75038d53ed85',
   },
   'leapmotor-b05-promax': {
     paragraphs: [
       'Leapmotor B05 ProMax er meðal ódýrustu bílanna og drífur lengst, hleður hraðast og er sneggstur bíla á svipuðu verði. Hann er væntanlegur í lok árs 2026.',
     ],
-    facts: '8cba272746f9',
+    facts: 'dc1638ace155',
   },
   'leapmotor-b10-base': {
     paragraphs: [
       'Leapmotor B10 er meðal ódýrustu bílanna og meðal þeirra ódýrustu á hvern km drægni. Hann drífur með þeim stystu á listanum en hleður hraðar en flestir bílar á svipuðu verði.',
     ],
-    facts: '10ba95b5fec0',
+    facts: '34515459fffb',
   },
   'leapmotor-b10-67-1-kwh': {
     paragraphs: [
       'Leapmotor B10 67.1 kWh er meðal ódýrustu bílanna og meðal þeirra ódýrustu á hvern km drægni. Miðað við bíla á svipuðu verði drífur hann lengra og hleður með þeim hröðustu.',
     ],
-    facts: '60bb3d4f6c3f',
+    facts: '345a56bc4686',
   },
   'leapmotor-c10-pro': {
     paragraphs: [
       'Leapmotor C10 Pro er meðal ódýrustu bílanna og meðal þeirra ódýrustu á hvern km drægni. Hann drífur styttra og hleður hægar en flestir.',
     ],
-    facts: 'c4b064ef1347',
+    facts: '2389369c210b',
   },
   'leapmotor-c10-promax': {
     paragraphs: [
       'Leapmotor C10 ProMax er ódýrari en flestir og meðal þeirra ódýrustu á hvern km drægni. Miðað við bíla á svipuðu verði drífur hann lengra og er meðal þeirra aflmestu.',
     ],
-    facts: 'd3a65aee3c92',
+    facts: '90d9b9ab19ce',
   },
   'leapmotor-c10-promax-awd': {
     paragraphs: [
       'Leapmotor C10 ProMax AWD er fjórhjóladrifinn, ódýrari en flestir og meðal þeirra sneggstu og aflmestu. Hann drífur þó styttra og hleður hægar en flestir.',
     ],
-    facts: '905e481ae04a',
+    facts: '34564344ef37',
   },
   'lexus-es-350e': {
     paragraphs: [
       'Lexus ES 350e er framhjóladrifinn og drífur lengra en flestir, en er dýrari en flestir. Miðað við bíla á svipuðu verði er hann meðal þeirra hægustu og aflminnstu.',
     ],
-    facts: 'df1eb1df334c',
+    facts: 'dc17d6d74adc',
   },
   'lexus-es-500e': {
     paragraphs: [
       'Lexus ES 500e er fjórhjóladrifinn og meðal dýrustu bílanna á listanum. Miðað við bíla á svipuðu verði drífur hann styttra og hleður með þeim hægustu.',
     ],
-    facts: '67adbc0b50a6',
+    facts: '46fa0992d8cd',
   },
   'lexus-rz-350e': {
     paragraphs: [
       'Lexus RZ 350e er framhjóladrifinn og drífur lengra en flestir, en er dýrari en flestir. Miðað við bíla á svipuðu verði drífur hann styttra og er meðal þeirra hægustu og aflminnstu.',
     ],
-    facts: 'a78028e18d18',
+    facts: '8d0c6c3d0d4f',
   },
   'lexus-rz-500e': {
     paragraphs: [
       'Lexus RZ 500e er fjórhjóladrifinn og sneggri en flestir, en dýrari en flestir og meðal þeirra dýrustu á hvern km drægni. Miðað við bíla á svipuðu verði drífur hann með þeim stystu og hleður með þeim hægustu.',
     ],
-    facts: '258433e29e04',
+    facts: '8ed986c78204',
   },
   'lexus-rz-550e-f-sport': {
     paragraphs: [
       'Lexus RZ 550e F SPORT er meðal dýrustu bílanna á listanum, fjórhjóladrifinn og sneggri en flestir. Miðað við bíla á svipuðu verði drífur hann þó með þeim stystu og hleður með þeim hægustu.',
     ],
-    facts: '76efeff4d0e0',
+    facts: '5c8c62bff359',
   },
   'lexus-ux-300e': {
     paragraphs: [
       'Lexus UX 300e er dýrari en flestir en drífur styttra, hleður með þeim hægustu og er hægari og aflminni en flestir. Miðað við bíla á svipuðu verði gefur hann eftir í flestu sem tölurnar mæla.',
     ],
-    facts: 'a7eccce1df84',
+    facts: 'dce48bde196b',
   },
   'mazda-6e-long-range': {
     paragraphs: [
       'Mazda 6e Long Range er ódýrari en flestir en drífur lengra en flestir, með 552 km, og er meðal þeirra ódýrustu á hvern km drægni. Hann hleður þó með þeim hægustu á listanum, sem lengir stoppin á langferðum.',
     ],
-    facts: 'ef9f3ae56312',
+    facts: '487c9dd3ac11',
   },
   'mazda-cx-6e-78-kwh': {
     paragraphs: [
       'Mazda CX-6e 78 kWh er ódýrari en flestir og ódýrari á hvern km drægni en flestir. Miðað við bíla á svipuðu verði hleður hann hraðar en flestir, en er hægari en flestir; hann er væntanlegur haustið 2026.',
     ],
-    facts: 'db53eaadfcc5',
+    facts: '624f0a26218b',
   },
   'mercedes-benz-c-400-4matic': {
     paragraphs: [
       'Mercedes-Benz C 400 4MATIC er meðal þeirra langdrægustu á listanum, með 762 km, meðal þeirra sem hlaða hraðast og meðal þeirra sneggstu. Hann er dýrari en flestir, en ódýrari á hvern km drægni en flestir bílar á svipuðu verði.',
     ],
-    facts: '30edea4d1883',
+    facts: 'bb99530b3f5d',
   },
   'mercedes-benz-cla-200': {
     paragraphs: [
       'Mercedes-Benz CLA 200 er á verði í meðallagi og hleður hraðar en flestir, með þeim hröðustu miðað við bíla á svipuðu verði. Hann er þó hægari og aflminni en flestir og með minni rafhlöðu.',
     ],
-    facts: '9cde7716deaa',
+    facts: '0c8c54cadb8a',
   },
   'mercedes-benz-cla-350-4matic': {
     paragraphs: [
       'Mercedes-Benz CLA 350 4MATIC er meðal þeirra langdrægustu á listanum, með 770 km, og meðal þeirra sem hlaða hraðast. Hann er ódýrastur bíla á svipuðu verði á hvern km drægni, sem gerir hann að einum besta langferðabílnum í sínum verðflokki.',
     ],
-    facts: '27514912609c',
+    facts: '32bf4d70d539',
   },
   'mercedes-benz-cla-shooting-brake-350-4matic': {
     paragraphs: [
       'Mercedes-Benz CLA Shooting Brake 350 4MATIC er meðal þeirra langdrægustu, með 743 km, og meðal þeirra sem hlaða hraðast. Hann er dýrari en flestir en meðal þeirra ódýrustu á hvern km drægni miðað við bíla á svipuðu verði.',
     ],
-    facts: '41b6c877e07f',
+    facts: '3e88a13e7c47',
   },
   'mercedes-benz-cla-amg-45-4matic': {
     paragraphs: [
       'Mercedes-Benz CLA AMG 45 4MATIC+ er sneggstur bíla á svipuðu verði og meðal þeirra aflmestu, en líka meðal þeirra langdrægustu og meðal þeirra sem hlaða hraðast. Hann er fjögurra sæta og dýrari en flestir.',
     ],
-    facts: '74b2430318c1',
+    facts: '6fb7275afd9d',
   },
   'mercedes-benz-eqa-suv-300-4matic': {
     paragraphs: [
       'Mercedes-Benz EQA SUV 300 4MATIC er fjórhjóladrifinn og á verði í meðallagi, en drífur styttra, hleður hægar og er hægari og aflminni en flestir. Miðað við bíla á svipuðu verði hleður hann með þeim hægustu.',
     ],
-    facts: 'db2813bb8f18',
+    facts: '83d304c4d548',
   },
   'mercedes-benz-glb-350-4matic-eq': {
     paragraphs: [
       'Mercedes-Benz GLB 350 4MATIC EQ er sjö sæta og fjórhjóladrifinn, meðal þeirra sem hlaða hraðast og drífur lengra en flestir. Hann er dýrari en flestir en meðal þeirra langdrægustu miðað við bíla á svipuðu verði.',
     ],
-    facts: 'e67db6e1a63b',
+    facts: '45ed5ebf6eaa',
   },
   'mercedes-benz-glc-300-4matic': {
     paragraphs: [
       'Mercedes-Benz GLC 300 4MATIC er fjórhjóladrifinn, drífur lengra en flestir og hleður hraðar en flestir. Hann er dýrari en flestir og í meðallagi miðað við bíla á svipuðu verði.',
     ],
-    facts: 'ca734c7abe96',
+    facts: '69044176090c',
   },
   'mercedes-benz-glc-400-4matic': {
     paragraphs: [
       'Mercedes-Benz GLC 400 4MATIC er meðal þeirra langdrægustu, með 715 km, og meðal þeirra sem hlaða hraðast. Hann er fjórhjóladrifinn, sneggri og aflmeiri en flestir og dýrari en flestir.',
     ],
-    facts: '4fb9818faa2c',
+    facts: '273e1d28f57b',
   },
   'mercedes-benz-eqe-suv-350-4matic': {
     paragraphs: [
       'Mercedes-Benz EQE SUV 350 4MATIC er meðal dýrustu bílanna á listanum. Miðað við bíla á svipuðu verði drífur hann styttra, hleður með þeim hægustu og er meðal þeirra hægustu og aflminnstu.',
     ],
-    facts: '5900fd1b9f9c',
+    facts: 'e5031300ff9d',
   },
   'mercedes-benz-eqs-580-4matic': {
     paragraphs: [
       'Mercedes-Benz EQS 580 4MATIC drífur lengst allra bíla á listanum, 869 km, og hefur stærstu rafhlöðuna. Hann er meðal dýrustu bílanna en ódýrastur á hvern km drægni miðað við bíla á svipuðu verði.',
     ],
-    facts: 'e1e440baa759',
+    facts: 'a7b159ecef57',
   },
   'mercedes-benz-eqs-suv-580-4matic': {
     paragraphs: [
       'Mercedes-Benz EQS SUV 580 4MATIC er sjö sæta, meðal þeirra langdrægustu og meðal þeirra aflmestu á listanum. Miðað við bíla á svipuðu verði hleður hann þó með þeim hægustu.',
     ],
-    facts: '7ccd7690a52f',
+    facts: '39182ca8f9fd',
   },
   'mercedes-benz-eqt-200': {
     paragraphs: [
       'Mercedes-Benz EQT 200 er sjö sæta á verði í meðallagi, en meðal þeirra sem drífa styst, hlaða hægast og eru hægastir. Hann hentar helst sem rúmgóður bíll í styttri ferðir.',
     ],
-    facts: '816ec6e77906',
+    facts: '6088eef7e4fc',
   },
   'mercedes-benz-eqv-300': {
     paragraphs: [
       'Mercedes-Benz EQV 300 tekur átta manns en er meðal dýrustu bílanna á listanum og meðal þeirra sem drífa styst og hlaða hægast. Hann er fyrir þá sem þurfa sætin umfram allt.',
     ],
-    facts: 'cfad53aa00bd',
+    facts: '177f9b3dca02',
   },
   'mercedes-benz-vle-300': {
     paragraphs: [
       'Mercedes-Benz VLE 300 er átta sæta og meðal þeirra langdrægustu, með 713 km, og með einni af stærstu rafhlöðunum. Hann er meðal dýrustu bílanna og meðal þeirra hægustu, og væntanlegur árið 2027.',
     ],
-    facts: 'a6669ffac6ed',
+    facts: 'a48af364b80f',
   },
   'mercedes-benz-vle-400-4matic': {
     paragraphs: [
       'Mercedes-Benz VLE 400 4MATIC er átta sæta og fjórhjóladrifinn, meðal þeirra langdrægustu og með einni af stærstu rafhlöðunum. Hann er meðal dýrustu bílanna á listanum og væntanlegur árið 2027.',
     ],
-    facts: 'ad4cd7f9d7d4',
+    facts: '63683fa1dde9',
   },
   'mercedes-benz-g-class-580-eq': {
     paragraphs: [
       'Mercedes-Benz G-class 580 EQ er meðal dýrustu og aflmestu bílanna á listanum. Miðað við bíla á svipuðu verði drífur hann með þeim stystu og hleður með þeim hægustu.',
     ],
-    facts: 'ff6645f346c8',
+    facts: 'a7c8e47c1f18',
   },
   'mercedes-benz-evito-tourer': {
     paragraphs: [
       'Mercedes-Benz eVito Tourer tekur níu manns en er dýrari en flestir og meðal þeirra sem drífa styst og hlaða hægast. Hann er fyrir þá sem þurfa sætin.',
     ],
-    facts: 'b26a86b4d23a',
+    facts: 'b529fc0d63a6',
   },
   'mg-cyberster-gt': {
     paragraphs: [
       'MG Cyberster GT er tveggja sæta, fjórhjóladrifinn og meðal þeirra sneggstu á listanum. Hann drífur styttra og hleður með þeim hægustu, svo hann er bíll fyrir aksturinn fremur en langferðir.',
     ],
-    facts: '4803a40676c9',
+    facts: 'cd0f7330bf39',
   },
   'mg-mg4-urban-standard-range': {
     paragraphs: [
       'MG MG4 Urban Standard Range er meðal ódýrustu bílanna á listanum og meðal þeirra ódýrustu á hvern km drægni. Hann drífur þó með þeim stystu og hleður hægt, svo hann hentar best innanbæjar.',
     ],
-    facts: 'fa00102fdf41',
+    facts: 'd2cb042819a0',
   },
   'mg-mg4-urban-long-range': {
     paragraphs: [
       'MG MG4 Urban Long Range er meðal ódýrustu bílanna og meðal þeirra langdrægustu miðað við bíla á svipuðu verði. Hann er þó meðal þeirra hægustu og aflminnstu á listanum.',
     ],
-    facts: 'c26eff8a8a32',
+    facts: 'd561aa89b78e',
   },
   'mg-mgs5-lux': {
     paragraphs: [
       'MG MGS5 LUX er ódýrari en flestir og ódýrari á hvern km drægni en flestir. Miðað við bíla á svipuðu verði drífur hann lengra, hleður hraðar og er sneggri en flestir.',
     ],
-    facts: 'be4634ebed07',
+    facts: '8831f93e169f',
   },
   'mg-mgs6-dual-motor': {
     paragraphs: [
       'MG MGS6 Dual Motor er fjórhjóladrifinn, ódýrari en flestir og sneggri og aflmeiri en flestir. Hann drífur þó styttra og hleður hægar en flestir.',
     ],
-    facts: '1dbdc5d6315b',
+    facts: 'c4a974a1b565',
   },
   'mini-aceman-e': {
     paragraphs: [
       'Mini Aceman E er ódýrari en flestir en meðal þeirra sem drífa styst og hlaða hægast, og meðal þeirra dýrustu á hvern km drægni miðað við bíla á svipuðu verði. Hann hentar helst innanbæjar.',
     ],
-    facts: '9236b5f0861a',
+    facts: 'c58dee5fff30',
   },
   'mini-countryman-e': {
     paragraphs: [
       'Mini Countryman E er á verði í meðallagi en drífur styttra, hleður hægar og er meðal þeirra hægustu. Miðað við bíla á svipuðu verði er hann með einni af minnstu rafhlöðunum.',
     ],
-    facts: '1df5d9a06454',
+    facts: '5cbce46a3bb6',
   },
   'mini-countryman-se-4x4': {
     paragraphs: [
       'Mini Countryman SE 4x4 er fjórhjóladrifinn og á verði í meðallagi, en drífur styttra og hleður hægar en flestir. Hann er meðal þeirra dýrustu á hvern km drægni miðað við bíla á svipuðu verði.',
     ],
-    facts: '0b8779b7f2b9',
+    facts: '77a1c2edd4fd',
   },
   'nissan-ariya-base': {
     paragraphs: [
       'Nissan Ariya er á verði í meðallagi, með stærri rafhlöðu en flestir og ódýrari á hvern km drægni en flestir. Hann hleður þó hægar og er hægari og aflminni en flestir.',
     ],
-    facts: '6c91849b667e',
+    facts: '7b4d55c3845e',
   },
   'nissan-ariya-e-4orce': {
     paragraphs: [
       'Nissan Ariya e-4ORCE er fjórhjóladrifinn og með stærri rafhlöðu en flestir, en hleður með þeim hægustu og drífur styttra en flestir. Hann er dýrari á hvern km drægni en flestir bílar á svipuðu verði.',
     ],
-    facts: '2b893c5c4d9e',
+    facts: 'e2425bbf002e',
   },
   'nissan-leaf-standard-range': {
     paragraphs: [
       'Nissan Leaf Standard Range er meðal ódýrustu bílanna og meðal þeirra ódýrustu á hvern km drægni. Hann drífur lengra en flestir bílar á svipuðu verði en er hægari en flestir.',
     ],
-    facts: '9dba101dd6fb',
+    facts: 'f0210f255f35',
   },
   'nissan-leaf-extended-range': {
     paragraphs: [
       'Nissan Leaf Extended Range er ódýrari en flestir en drífur lengra en flestir, með 622 km, og er meðal þeirra ódýrustu á hvern km drægni. Hann hleður hraðar en flestir og er sterkur langferðabíll fyrir verðið.',
     ],
-    facts: '81e6a06ebd13',
+    facts: 'd403fd929dd3',
   },
   'opel-frontera-base': {
     paragraphs: [
       'Opel Frontera er sjö sæta og meðal ódýrustu bílanna á listanum. Hann er þó meðal þeirra sem drífa styst, hlaða hægast og eru aflminnstir.',
     ],
-    facts: '639ac8818402',
+    facts: '1bf0988f13bd',
   },
   'opel-grandland-base': {
     paragraphs: [
       'Opel Grandland er ódýrari en flestir og ódýrari á hvern km drægni en flestir, með drægni í meðallagi. Hann er meðal þeirra hægustu og hleður hægar en flestir.',
     ],
-    facts: '4719c53154a1',
+    facts: '20948be61fd4',
   },
   'opel-grandland-awd': {
     paragraphs: [
       'Opel Grandland AWD er fjórhjóladrifinn og á verði í meðallagi. Hann drífur styttra og hleður hægar en flestir, en er í meðallagi að afli og hröðun.',
     ],
-    facts: '2132b5d2c51f',
+    facts: '954a05305509',
   },
   'gwm-ora-3-48-kwh': {
     paragraphs: [
       'GWM Ora 3 48 kWh er meðal ódýrustu bílanna á listanum en meðal þeirra sem drífa styst og hlaða hægast. Hann hentar best innanbæjar.',
     ],
-    facts: '7ec25be68017',
+    facts: '7b68705ac074',
   },
   'peugeot-e-2008-54-kwh': {
     paragraphs: [
       'Peugeot e-2008 54 kWh er meðal ódýrustu bílanna en drífur styttra og er meðal þeirra hægustu og aflminnstu. Miðað við bíla á svipuðu verði hleður hann þó hraðar en flestir.',
     ],
-    facts: '871aa0cd9f85',
+    facts: 'bed6b68cd2bf',
   },
   'peugeot-e-3008-base': {
     paragraphs: [
       'Peugeot e-3008 er ódýrari en flestir og ódýrari á hvern km drægni en flestir, og drífur lengra en flestir bílar á svipuðu verði. Hann hleður hægar og er aflminni en flestir.',
     ],
-    facts: '128c7948092b',
+    facts: '198e614b0c8f',
   },
   'peugeot-e-3008-dual-motor': {
     paragraphs: [
       'Peugeot e-3008 Dual Motor er fjórhjóladrifinn, ódýrari en flestir og drífur lengra en flestir bílar á svipuðu verði. Hann hleður þó hægar en flestir.',
     ],
-    facts: '46224bde9c9c',
+    facts: 'f2f30039cf77',
   },
   'peugeot-e-5008-base': {
     paragraphs: [
       'Peugeot e-5008 er sjö sæta og ódýrari en flestir, með drægni í meðallagi. Hann er meðal þeirra hægustu og hleður hægar en flestir.',
     ],
-    facts: 'c9d2a316e9d3',
+    facts: '74063c967e5f',
   },
   'peugeot-e-5008-dual-motor': {
     paragraphs: [
       'Peugeot e-5008 Dual Motor er sjö sæta og fjórhjóladrifinn, á verði í meðallagi. Hann drífur styttra en flestir og hleður með þeim hægustu miðað við bíla á svipuðu verði.',
     ],
-    facts: '8da9ed4f4634',
+    facts: '3c5f83371c3b',
   },
   'peugeot-e-rifter-base': {
     paragraphs: [
       'Peugeot e-Rifter er sjö sæta og ódýrari en flestir, en meðal þeirra sem drífa styst, hlaða hægast og eru aflminnstir. Hann hentar helst sem rúmgóður bíll í styttri ferðir.',
     ],
-    facts: '0c1f5e10383f',
+    facts: '405a281f7f21',
   },
   'peugeot-e-traveller-base': {
     paragraphs: [
       'Peugeot e-Traveller tekur níu manns en er dýrari en flestir og meðal þeirra sem drífa styst og hlaða hægast. Hann er fyrir þá sem þurfa sætin umfram allt.',
     ],
-    facts: 'd075d4f5d7b5',
+    facts: '6c0983d6e534',
   },
   'polestar-2-long-range-dual-motor': {
     paragraphs: [
       'Polestar 2 Long Range Dual Motor er fjórhjóladrifinn, drífur lengra en flestir og hleður hraðar en flestir, á verði í meðallagi. Miðað við bíla á svipuðu verði er hann meðal þeirra langdrægustu og sneggri en flestir.',
     ],
-    facts: '79813a59a48c',
+    facts: 'cd7df46bac4c',
   },
   'polestar-2-long-range-performance': {
     paragraphs: [
       'Polestar 2 Long Range Performance er fjórhjóladrifinn, sneggri og aflmeiri en flestir, og drífur lengra og hleður hraðar en flestir. Hann er á verði í meðallagi.',
     ],
-    facts: '654cac336bfb',
+    facts: '94faf5a9383a',
   },
   'polestar-3-base': {
     paragraphs: [
       'Polestar 3 er meðal þeirra langdrægustu og með einni af stærstu rafhlöðunum. Hann er fjórhjóladrifinn og dýrari en flestir, og hleður hægar en flestir bílar á svipuðu verði.',
     ],
-    facts: 'f19b9eb85119',
+    facts: '0e29c1e42cc2',
   },
   'polestar-3-performance': {
     paragraphs: [
       'Polestar 3 Performance er fjórhjóladrifinn, sneggri og aflmeiri en flestir og með einni af stærstu rafhlöðunum. Miðað við bíla á svipuðu verði drífur hann þó styttra og hleður hægar.',
     ],
-    facts: 'df306117bbea',
+    facts: '529301e2a258',
   },
   'polestar-4-long-range-dual-motor': {
     paragraphs: [
@@ -739,392 +739,392 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hraðhleðslan er hins vegar aðeins í meðallagi og bíllinn er dýrari en flestir. Polestar 4 er 7,7 km/mín hægari að hlaða en Smart #5 Brabus, þótt Smart sé með 50 km minni drægni. Einnig er Polestar 4 160.000 kr. dýrari en Tesla Model Y Performance og 0,3 s hægari í hundraðið.',
       'Þetta eru góð kaup fyrir þá sem vilja öflugan fjórhjóladrifinn bíl með mikla vetrardrægni og ríflega dráttargetu. Hann hentar síður þeim sem vilja hraðari hleðslu á langferðum eða lægra verð.',
     ],
-    facts: '369d9faa24a7',
+    facts: '9400f9c5e9f3',
     model: 'gemini-3.8-flash, thinking high',
   },
   'polestar-4-suv-long-range-dual-motor': {
     paragraphs: [
       'Polestar 4 SUV Long Range Dual Motor er meðal sneggstu og aflmestu bílanna, drífur lengra en flestir og hleður hraðar en flestir. Hann er dýrari en flestir.',
     ],
-    facts: 'b7bf2a083851',
+    facts: '40d5cca7678b',
   },
   'porsche-macan-4-electric': {
     paragraphs: [
       'Porsche Macan 4 Electric er fjórhjóladrifinn, drífur lengra og hleður hraðar en flestir. Hann er dýrari en flestir og í meðallagi miðað við bíla á svipuðu verði.',
     ],
-    facts: '00b6862445fc',
+    facts: 'e167938f4f3b',
   },
   'porsche-macan-4s-electric': {
     paragraphs: [
       'Porsche Macan 4s Electric er meðal sneggstu bílanna á listanum og hleður hraðar en flestir. Hann er meðal þeirra dýrustu.',
     ],
-    facts: 'bcf40cc6e7e9',
+    facts: 'b39e2737f681',
   },
   'porsche-taycan-plus': {
     paragraphs: [
       'Porsche Taycan Plus er meðal þeirra langdrægustu, með 678 km, og meðal þeirra sem hlaða hraðast. Hann er afturhjóladrifinn og meðal dýrustu bílanna á listanum.',
     ],
-    facts: '5cc285600c81',
+    facts: 'bea812314e71',
   },
   'porsche-taycan-4-plus': {
     paragraphs: [
       'Porsche Taycan 4 Plus er fjórhjóladrifinn, meðal þeirra langdrægustu og meðal þeirra sem hlaða hraðast. Hann er meðal dýrustu bílanna á listanum.',
     ],
-    facts: '1a4f645d5b7f',
+    facts: '5e022bace7c8',
   },
   'porsche-taycan-4s-plus': {
     paragraphs: [
       'Porsche Taycan 4S Plus er sneggstur bíla á svipuðu verði og meðal þeirra aflmestu á listanum. Hann hleður með þeim hröðustu, en drífur styttra en flestir á sama verði.',
     ],
-    facts: '4c90dda0d9e9',
+    facts: 'c7fa6e1af7cb',
   },
   'porsche-taycan-4-cross-turismo': {
     paragraphs: [
       'Porsche Taycan 4 Cross Turismo er fjórhjóladrifinn, drífur lengra en flestir og er meðal þeirra sem hlaða hraðast. Hann er meðal dýrustu bílanna á listanum.',
     ],
-    facts: '9647ceac3d22',
+    facts: '9f546a2b1508',
   },
   'porsche-taycan-4s-cross-turismo': {
     paragraphs: [
       'Porsche Taycan 4s Cross Turismo er meðal sneggstu og aflmestu bílanna á listanum og meðal þeirra sem hlaða hraðast. Hann er meðal þeirra dýrustu.',
     ],
-    facts: '8d8a87d4aa2a',
+    facts: '1fb4116c9928',
   },
   'porsche-cayenne-base': {
     paragraphs: [
       'Porsche Cayenne er meðal þeirra langdrægustu, með 642 km, meðal þeirra sem hlaða hraðast og með einni af stærstu rafhlöðunum. Hann er meðal dýrustu bílanna á listanum.',
     ],
-    facts: '2c056288ef51',
+    facts: 'cf6cf63f49ff',
   },
   'porsche-cayenne-coupe': {
     paragraphs: [
       'Porsche Cayenne Coupé er meðal þeirra langdrægustu og meðal þeirra sem hlaða hraðast, með einni af stærstu rafhlöðunum. Hann er meðal dýrustu bílanna á listanum.',
     ],
-    facts: 'abfb7acddfc1',
+    facts: '0cb0768ad03b',
   },
   'porsche-cayenne-s': {
     paragraphs: [
       'Porsche Cayenne S er meðal þeirra langdrægustu, sneggstu og aflmestu á listanum, og meðal þeirra sem hlaða hraðast. Hann er meðal dýrustu bílanna.',
     ],
-    facts: '15e113b31050',
+    facts: 'f7fef8adf379',
   },
   'porsche-cayenne-s-coupe': {
     paragraphs: [
       'Porsche Cayenne S Coupé er meðal þeirra langdrægustu, sneggstu og aflmestu, og hleður hraðast bíla á svipuðu verði. Hann er meðal dýrustu bílanna á listanum.',
     ],
-    facts: 'be0c0f9a57df',
+    facts: '3bc29faea023',
   },
   'porsche-cayenne-turbo': {
     paragraphs: [
       'Porsche Cayenne Turbo er meðal sneggstu og aflmestu bílanna á listanum og meðal þeirra sem hlaða hraðast. Hann er meðal þeirra dýrustu.',
     ],
-    facts: 'd3cbcd246034',
+    facts: '2b4796e50c2d',
   },
   'porsche-cayenne-turbo-coupe': {
     paragraphs: [
       'Porsche Cayenne Turbo Coupé er meðal þeirra langdrægustu, sneggstu og aflmestu, og hleður hraðast bíla á svipuðu verði. Hann er meðal dýrustu bílanna á listanum.',
     ],
-    facts: '69ed014b5aec',
+    facts: '9014f462f973',
   },
   'range-rover-electric-ev450': {
     paragraphs: [
       'Range Rover Electric EV450 er meðal dýrustu bílanna á listanum, með einni af stærstu rafhlöðunum. Miðað við bíla á svipuðu verði drífur hann styttra, hleður hægar og er meðal þeirra hægustu.',
     ],
-    facts: 'faa914ec8948',
+    facts: '63eea6de20a1',
   },
   'range-rover-electric-ev550': {
     paragraphs: [
       'Range Rover Electric EV550 er meðal dýrustu og aflmestu bílanna á listanum, með einni af stærstu rafhlöðunum. Miðað við bíla á svipuðu verði drífur hann þó styttra og hleður hægar.',
     ],
-    facts: '2dbd2faae2cc',
+    facts: '13532ee77e2d',
   },
   'renault-r5-e-tech-base': {
     paragraphs: [
       'Renault R5 E-Tech er meðal ódýrustu bílanna á listanum en meðal þeirra sem drífa styst og hlaða hægast. Hann hentar best innanbæjar.',
     ],
-    facts: 'f24c787a35e4',
+    facts: 'b06357c2faa7',
   },
   'renault-r5-e-tech-52-kwh': {
     paragraphs: [
       'Renault R5 E-Tech 52 kWh er meðal ódýrustu bílanna á listanum og ódýrari á hvern km drægni en flestir. Hann drífur styttra og hleður hægar en flestir, svo hann hentar best í daglegan akstur.',
     ],
-    facts: 'b098ddea3322',
+    facts: 'f4c28284f1ad',
   },
   'renault-scenic-e-tech-ev60': {
     paragraphs: [
       'Renault Scenic E-Tech EV60 er ódýrari en flestir en drífur styttra og hleður hægar en flestir, og er meðal þeirra hægustu og aflminnstu. Hann hentar þeim sem aka mest innanbæjar.',
     ],
-    facts: '4a1a13953249',
+    facts: 'ab64d748ee41',
   },
   'renault-scenic-e-tech-ev87': {
     paragraphs: [
       'Renault Scenic E-Tech EV87 er ódýrari en flestir en drífur lengra en flestir, með 623 km, og er meðal þeirra ódýrustu á hvern km drægni. Hann hleður þó hægar og er hægari og aflminni en flestir.',
     ],
-    facts: 'acd09fabb5d1',
+    facts: '9f7930fde450',
   },
   'skoda-epiq-55': {
     paragraphs: [
       'Skoda Epiq 55 er meðal ódýrustu bílanna og meðal þeirra ódýrustu á hvern km drægni. Miðað við bíla á svipuðu verði hleður hann hraðar og er sneggri en flestir; hann er væntanlegur í lok árs 2026.',
     ],
-    facts: '72a90190fad6',
+    facts: '342d030ac555',
   },
   'skoda-elroq-85': {
     paragraphs: [
       'Skoda Elroq 85 er ódýrari en flestir en drífur lengra en flestir, með 579 km, og er meðal þeirra ódýrustu á hvern km drægni. Hann hleður hraðar en flestir og er í meðallagi að afli, sem gerir hann að jöfnum og hagkvæmum langferðabíl.',
     ],
-    facts: 'f238cd645681',
+    facts: 'cdb8705a8006',
   },
   'skoda-elroq-85x': {
     paragraphs: [
       'Skoda Elroq 85x er fjórhjóladrifinn, ódýrari en flestir og drífur lengra en flestir. Hann er meðal þeirra ódýrustu á hvern km drægni og hleður hraðar en flestir.',
     ],
-    facts: '046a7c819ffe',
+    facts: 'c719f6deb32c',
   },
   'skoda-elroq-rs': {
     paragraphs: [
       'Skoda Elroq RS er fjórhjóladrifinn og drífur lengra en flestir, á verði í meðallagi. Í flestu öðru er hann í meðallagi, bæði á listanum og miðað við bíla á svipuðu verði.',
     ],
-    facts: 'f791863250c6',
+    facts: '3a2216243ce5',
   },
   'skoda-enyaq-85x': {
     paragraphs: [
       'Skoda Enyaq 85X er fjórhjóladrifinn og ódýrari á hvern km drægni en flestir, á verði í meðallagi. Hann er hægari en flestir og í meðallagi í hleðslu.',
     ],
-    facts: '0dafdd84fbcb',
+    facts: 'b73614a0fcfa',
   },
   'skoda-enyaq-rs': {
     paragraphs: [
       'Skoda Enyaq RS er fjórhjóladrifinn og dýrari en flestir, en í meðallagi í nánast öllu sem tölurnar mæla. Hann er dýrari á hvern km drægni en flestir bílar á svipuðu verði.',
     ],
-    facts: '3bfa282d2c5f',
+    facts: '61fe07293d7e',
   },
   'skoda-peaq-90x': {
     paragraphs: [
       'Skoda Peaq 90x er sjö sæta og fjórhjóladrifinn, drífur lengra og hleður hraðar en flestir. Hann er dýrari en flestir en meðal þeirra langdrægustu miðað við bíla á svipuðu verði.',
     ],
-    facts: '68fed3ddb748',
+    facts: '21afaa17e1c0',
   },
   'smart-1-pro': {
     paragraphs: [
       'Smart #1 Pro+ er meðal ódýrustu bílanna og ódýrari á hvern km drægni en flestir. Miðað við bíla á svipuðu verði hleður hann hraðar og er sneggri og aflmeiri en flestir.',
     ],
-    facts: 'c16440ae1109',
+    facts: '016d49710e84',
   },
   'smart-1-pulse': {
     paragraphs: [
       'Smart #1 Pulse er fjórhjóladrifinn, ódýrari en flestir og meðal þeirra sneggstu miðað við bíla á svipuðu verði. Hann drífur þó með þeim stystu og hleður hægar en flestir.',
     ],
-    facts: '89b5d2fc00da',
+    facts: 'e5fc8bd2bca4',
   },
   'smart-1-brabus': {
     paragraphs: [
       'Smart #1 Brabus er fjórhjóladrifinn og meðal þeirra sneggstu á listanum. Hann drífur þó með þeim stystu og hleður hægar en flestir.',
     ],
-    facts: '126070c12281',
+    facts: '8d172e94c45b',
   },
   'smart-3-pulse': {
     paragraphs: [
       'Smart #3 Pulse er fjórhjóladrifinn, ódýrari en flestir og sneggri og aflmeiri en flestir. Hann drífur styttra og hleður hægar en flestir.',
     ],
-    facts: 'de6f09965685',
+    facts: '46e9bd7690d3',
   },
   'smart-3-brabus': {
     paragraphs: [
       'Smart #3 Brabus er fjórhjóladrifinn og meðal þeirra sneggstu á listanum. Hann drífur styttra og hleður hægar en flestir, og er meðal þeirra dýrustu á hvern km drægni miðað við bíla á svipuðu verði.',
     ],
-    facts: '13b8e459e544',
+    facts: '3488a9842ef7',
   },
   'smart-5-pro': {
     paragraphs: [
       'Smart #5 Pro er ódýrari en flestir og ódýrari á hvern km drægni en flestir. Miðað við bíla á svipuðu verði er hann sneggri og aflmeiri en flestir.',
     ],
-    facts: 'fb28e895fd17',
+    facts: '1936fc2f66b4',
   },
   'smart-5-pulse': {
     paragraphs: [
       'Smart #5 Pulse er fjórhjóladrifinn, meðal þeirra aflmestu og hleður hraðar en flestir, á verði í meðallagi. Miðað við bíla á svipuðu verði drífur hann lengra og hleður með þeim hröðustu.',
     ],
-    facts: 'f5b666792eb4',
+    facts: '5b9493c3fb82',
   },
   'smart-5-brabus': {
     paragraphs: [
       'Smart #5 Brabus er aflmestur bíla á svipuðu verði og meðal þeirra sneggstu á listanum. Hann er dýrari en flestir og í meðallagi að drægni.',
     ],
-    facts: '7f0c7ce1b875',
+    facts: '109f28eb6e6d',
   },
   'subaru-e-outback-base': {
     paragraphs: [
       'Subaru e-Outback er fjórhjóladrifinn, sneggri og aflmeiri en flestir, á verði í meðallagi. Drægni og hleðsla eru í meðallagi.',
     ],
-    facts: '351009f2a131',
+    facts: 'bcbd199cf5d3',
   },
   'subaru-solterra-base': {
     paragraphs: [
       'Subaru Solterra er fjórhjóladrifinn og sneggri en flestir, á verði í meðallagi. Í drægni og hleðslu er hann í meðallagi.',
     ],
-    facts: '4bdcaff470e0',
+    facts: '6d5842d043cf',
   },
   'subaru-uncharted-base': {
     paragraphs: [
       'Subaru Uncharted er fjórhjóladrifinn, ódýrari en flestir og sneggri en flestir. Hann drífur styttra en flestir en er ódýrari á hvern km drægni en flestir.',
     ],
-    facts: '600be7f80558',
+    facts: '1eaaf2ede3dd',
   },
   'suzuki-e-vitara-4x4-allgrip': {
     paragraphs: [
       'Suzuki e Vitara 4x4 AllGrip er fjórhjóladrifinn og ódýrari en flestir, en meðal þeirra sem drífa styst og hlaða hægast. Hann hentar helst þeim sem þurfa fjórhjóladrif í styttri ferðir.',
     ],
-    facts: '9e1f45f4381d',
+    facts: 'bea361d053c6',
   },
   'tesla-model-3-afturhjoladrif': {
     paragraphs: [
       'Tesla Model 3 Afturhjóladrif er meðal ódýrustu bílanna og meðal þeirra ódýrustu á hvern km drægni. Miðað við bíla á svipuðu verði er hann meðal þeirra langdrægustu, sneggstu og þeirra sem hlaða hraðast.',
     ],
-    facts: '6e4b042f5f8e',
+    facts: '2c3162badba0',
   },
   'tesla-model-3-long-range-afturhjoladrif': {
     paragraphs: [
       'Tesla Model 3 Long Range Afturhjóladrif er ódýrasti bíllinn á listanum á hvern km drægni og meðal þeirra langdrægustu, með 750 km. Hann hleður hraðar og er sneggri en flestir, svo fáir bílar gefa meira fyrir peninginn á langferðum.',
     ],
-    facts: '9236d52b3e46',
+    facts: 'c5468e327177',
   },
   'tesla-model-3-long-range-fjorhjoladrif': {
     paragraphs: [
       'Tesla Model 3 Long Range Fjórhjóladrif er fjórhjóladrifinn, meðal þeirra langdrægustu og meðal þeirra ódýrustu á hvern km drægni. Hann hleður hraðar en flestir og er meðal þeirra sneggstu miðað við bíla á svipuðu verði.',
     ],
-    facts: '0373111d1d2f',
+    facts: 'be21609500db',
   },
   'tesla-model-3-performance': {
     paragraphs: [
       'Tesla Model 3 Performance er sneggstur bíla á svipuðu verði og meðal þeirra aflmestu á listanum. Hann er fjórhjóladrifinn, drífur lengra og hleður hraðar en flestir.',
     ],
-    facts: 'a819b88caa71',
+    facts: 'e44eb5acdb1f',
   },
   'tesla-model-y-standard-range': {
     paragraphs: [
       'Tesla Model Y Standard Range er ódýrari en flestir og ódýrari á hvern km drægni en flestir. Miðað við bíla á svipuðu verði drífur hann lengra og hleður hraðar en flestir.',
     ],
-    facts: '854aea2b938e',
+    facts: '06e706747800',
   },
   'tesla-model-y-premium-long-range': {
     paragraphs: [
       'Tesla Model Y Premium Long Range drífur lengra og hleður hraðar en flestir, á verði í meðallagi. Hann er meðal þeirra langdrægustu og ódýrustu á hvern km drægni miðað við bíla á svipuðu verði.',
     ],
-    facts: '813241da310c',
+    facts: '1289d1cfe509',
   },
   'tesla-model-y-long-range-dual-motor': {
     paragraphs: [
       'Tesla Model Y Long Range Dual Motor er fjórhjóladrifinn, drífur lengra og hleður hraðar en flestir, á verði í meðallagi. Hann er meðal þeirra langdrægustu og aflmestu miðað við bíla á svipuðu verði.',
     ],
-    facts: '104f6f637e46',
+    facts: '896155cb97ac',
   },
   'tesla-model-y-performance': {
     paragraphs: [
       'Tesla Model Y Performance er meðal sneggstu og aflmestu bílanna á listanum, drífur lengra og hleður hraðar en flestir. Hann er dýrari en flestir.',
     ],
-    facts: 'd5ab64b5fdd7',
+    facts: 'e1daa97e0890',
   },
   'toyota-bz4x-base': {
     paragraphs: [
       'Toyota bZ4X drífur lengra og hleður hraðar en flestir, á verði í meðallagi. Hann er framhjóladrifinn og hægari og aflminni en flestir.',
     ],
-    facts: '5daad0653610',
+    facts: '7cd9ca563881',
   },
   'toyota-bz4x-awd': {
     paragraphs: [
       'Toyota bZ4X AWD er fjórhjóladrifinn og sneggri en flestir, en dýrari en flestir og í meðallagi að drægni og hleðslu.',
     ],
-    facts: 'bebd36fdafb1',
+    facts: '02b79222e8e2',
   },
   'toyota-bz4x-touring-base': {
     paragraphs: [
       'Toyota bZ4X Touring drífur lengra en flestir og hleður hraðar en flestir bílar á svipuðu verði. Hann er dýrari en flestir og hægari og aflminni en flestir.',
     ],
-    facts: 'a9a3b6645aa7',
+    facts: '8bb7ebe6919e',
   },
   'toyota-bz4x-touring-awd': {
     paragraphs: [
       'Toyota bZ4X Touring AWD er fjórhjóladrifinn, sneggri og aflmeiri en flestir, en dýrari en flestir. Hann hleður hægar en flestir og er dýrari á hvern km drægni en flestir bílar á svipuðu verði.',
     ],
-    facts: '4917c609e76a',
+    facts: 'a8c51202d28b',
   },
   'toyota-c-hr-base': {
     paragraphs: [
       'Toyota C-HR+ er ódýrari en flestir en drífur styttra en flestir, með einni af minnstu rafhlöðunum, og er meðal þeirra aflminnstu.',
     ],
-    facts: 'aa17f0d1bc36',
+    facts: '5531228c8df7',
   },
   'toyota-c-hr-77-kwh': {
     paragraphs: [
       'Toyota C-HR+ 77 kWh drífur lengra og hleður hraðar en flestir, á verði í meðallagi. Hann er meðal þeirra langdrægustu miðað við bíla á svipuðu verði, en hægari og aflminni en flestir.',
     ],
-    facts: 'a6d4f8722282',
+    facts: 'bd8a692d9f91',
   },
   'toyota-c-hr-awd': {
     paragraphs: [
       'Toyota C-HR+ AWD er fjórhjóladrifinn og sneggri en flestir, en dýrari en flestir og hleður hægar en flestir. Hann er dýrari á hvern km drægni en flestir bílar á svipuðu verði.',
     ],
-    facts: 'a5f5e54b6b26',
+    facts: '2238e45ba3be',
   },
   'toyota-proace-city-verso-base': {
     paragraphs: [
       'Toyota Proace City Verso er sjö sæta á verði í meðallagi, en meðal þeirra sem drífa styst, hlaða hægast og eru aflminnstir. Hann hentar helst sem rúmgóður bíll í styttri ferðir.',
     ],
-    facts: '36719519a815',
+    facts: '3f1e8ab027c9',
   },
   'toyota-proace-verso-base': {
     paragraphs: [
       'Toyota Proace Verso tekur níu manns en er dýrari en flestir og meðal þeirra sem drífa styst og hlaða hægast. Hann er fyrir þá sem þurfa sætin umfram allt.',
     ],
-    facts: '629c94f65613',
+    facts: 'c29571193d89',
   },
   'toyota-urban-cruiser-active-fwd': {
     paragraphs: [
       'Toyota Urban Cruiser Active FWD er ódýrari en flestir en drífur styttra en flestir, hleður með þeim hægustu og er meðal þeirra aflminnstu. Hann hentar helst innanbæjar.',
     ],
-    facts: 'd99deb64672c',
+    facts: '2ab0ce5c78d3',
   },
   'toyota-urban-cruiser-active-awd': {
     paragraphs: [
       'Toyota Urban Cruiser Active AWD er fjórhjóladrifinn og ódýrari en flestir, en meðal þeirra sem drífa styst og hlaða hægast. Hann hentar þeim sem þurfa fjórhjóladrif í styttri ferðir.',
     ],
-    facts: '1857fd3af07a',
+    facts: '8d86903dcae0',
   },
   'volkswagen-id-buzz-gtx': {
     paragraphs: [
       'Volkswagen ID. Buzz GTX er sjö sæta og fjórhjóladrifinn, með stærri rafhlöðu en flestir. Miðað við bíla á svipuðu verði drífur hann þó með þeim stystu og hleður hægar en flestir.',
     ],
-    facts: '28e752c130b8',
+    facts: 'e04c30bf06b7',
   },
   'volkswagen-id-polo-base': {
     paragraphs: [
       'Volkswagen ID. Polo er meðal ódýrustu bílanna og meðal þeirra ódýrustu á hvern km drægni. Miðað við bíla á svipuðu verði drífur hann lengra og hleður með þeim hröðustu; hann er væntanlegur í lok árs 2026.',
     ],
-    facts: '920460fd359c',
+    facts: '03a763b03e90',
   },
   'volkswagen-id-cross-base': {
     paragraphs: [
       'Volkswagen ID. Cross er ódýrari en flestir og ódýrari á hvern km drægni en flestir. Hann drífur styttra en flestir, en hleður hraðar en flestir bílar á svipuðu verði.',
     ],
-    facts: '35672ab6484e',
+    facts: '2d5514eb86b4',
   },
   'volkswagen-id-3-pro': {
     paragraphs: [
       'Volkswagen ID.3 Pro er meðal ódýrustu bílanna og ódýrari á hvern km drægni en flestir. Hann drífur styttra og hleður hægar en flestir.',
     ],
-    facts: '179cfdb79e93',
+    facts: 'c8a50e11cedd',
   },
   'volkswagen-id-3-neo-58-kwh': {
     paragraphs: [
       'Volkswagen ID.3 Neo 58 kWh er ódýrari en flestir og ódýrari á hvern km drægni en flestir. Miðað við bíla á svipuðu verði drífur hann lengra og hleður hraðar; hann er væntanlegur í lok árs 2026.',
     ],
-    facts: 'b699319c4a40',
+    facts: '2c09d590ea1b',
   },
   'volkswagen-id-4-gtx': {
     paragraphs: [
       'Volkswagen ID.4 GTX er fjórhjóladrifinn og í meðallagi í öllu sem tölurnar mæla, bæði á listanum og miðað við bíla á svipuðu verði. Hann er jafn bíll án sérstakra styrkleika eða veikleika.',
     ],
-    facts: '5d3262df0b27',
+    facts: 'f8ef07312565',
   },
   'volkswagen-id-4-pro-4motion': {
     paragraphs: [
@@ -1133,62 +1133,62 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Aftur á móti hefur bíllinn ekkert framskott og má draga 1.200 kg. Hann er einnig aflminni en helstu keppinautar, með 140 kW minna afl en XPENG G6 AWD Performance sem er 100.000 kr. ódýrari. Þá er ID.4 9,1 km/mín hægari í hraðhleðslu en Hyundai IONIQ 5 Long Range AWD, sem bíður styttra við hleðslustöðvar á langferðum.',
       'Bíllinn er skynsamleg kaup fyrir þá sem leita að rúmgóðum og hagkvæmum rafbíl í daglegan akstur og vetrarferðir. Hann hentar síður þeim sem leggja mikla áherslu á hraðari hleðslutíma eða mikið afl.',
     ],
-    facts: 'e20b5cb95094',
+    facts: '36797869876d',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volkswagen-id-7-gtx': {
     paragraphs: [
       'Volkswagen ID.7 GTX er fjórhjóladrifinn, drífur lengra og hleður hraðar en flestir, og er með stærri rafhlöðu en flestir. Hann er dýrari en flestir.',
     ],
-    facts: '7b3020e1467d',
+    facts: 'd474f0c3c7b0',
   },
   'volvo-ec40-recharge-twin': {
     paragraphs: [
       'Volvo EC40 Recharge Twin er fjórhjóladrifinn, drífur lengra og hleður hraðar en flestir, og er sneggri og aflmeiri en flestir. Hann er dýrari en flestir.',
     ],
-    facts: 'b0894cdd0b84',
+    facts: 'b841eafc303c',
   },
   'volvo-es90-twin-motor': {
     paragraphs: [
       'Volvo ES90 Twin Motor er meðal þeirra langdrægustu, með 679 km, og meðal þeirra sem hlaða hraðast. Hann er dýrari en flestir og væntanlegur í október 2026.',
     ],
-    facts: '14ec449c4f32',
+    facts: 'e8d5bfbfc534',
   },
   'volvo-es90-twin-motor-performance': {
     paragraphs: [
       'Volvo ES90 Twin Motor Performance er meðal þeirra langdrægustu, sneggstu og aflmestu, og meðal þeirra sem hlaða hraðast. Hann er dýrari en flestir og væntanlegur í október 2026.',
     ],
-    facts: '6d11ee7aa2db',
+    facts: 'a9ffdb239aff',
   },
   'volvo-ex40-recharge-twin': {
     paragraphs: [
       'Volvo EX40 Recharge Twin er fjórhjóladrifinn, sneggri og aflmeiri en flestir. Hann er dýrari en flestir og í meðallagi að drægni og hleðslu.',
     ],
-    facts: 'fa39131e65e3',
+    facts: 'd1ffd71a9079',
   },
   'volvo-ex30-single-motor': {
     paragraphs: [
       'Volvo EX30 Single Motor er ódýrari en flestir en meðal þeirra sem drífa styst, og meðal þeirra dýrustu á hvern km drægni miðað við bíla á svipuðu verði. Hann hentar helst innanbæjar.',
     ],
-    facts: 'f3714398c2db',
+    facts: 'ec1af72432c1',
   },
   'volvo-ex30-single-motor-extended-range': {
     paragraphs: [
       'Volvo EX30 Single Motor Extended Range er ódýrari en flestir og ódýrari á hvern km drægni en flestir. Miðað við bíla á svipuðu verði hleður hann hraðar og er sneggri en flestir.',
     ],
-    facts: '8dc827a3fbf9',
+    facts: '6e2b10982515',
   },
   'volvo-ex30-twin-motor-performance': {
     paragraphs: [
       'Volvo EX30 Twin Motor Performance er fjórhjóladrifinn og meðal þeirra sneggstu á listanum, ódýrari en flestir. Hann drífur þó styttra en flestir.',
     ],
-    facts: '50af540dc87e',
+    facts: '97bc940b349f',
   },
   'volvo-ex30-cross-country-twin-motor-performance': {
     paragraphs: [
       'Volvo EX30 Cross Country Twin Motor Performance er fjórhjóladrifinn og meðal þeirra sneggstu á listanum. Hann drífur styttra og hleður hægar en flestir, og er meðal þeirra dýrustu á hvern km drægni miðað við bíla á svipuðu verði.',
     ],
-    facts: '489b33a54290',
+    facts: '6cd2c213a721',
   },
   'volvo-ex60-p10': {
     paragraphs: [
@@ -1197,56 +1197,56 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti er bíllinn dýrari en flestir rafbílar og fær ekki styrk. Ef hámarksdrægni ræður öllu kemst Mercedes-Benz CLA Shooting Brake 350 4MATIC lengra, en miðað við hann er Volvo með 83 km minni drægni og er 4,6 km/mín hægari í hraðhleðslu. Ef kaupverðið vegur þyngra kemur Audi A6 e-tron Avant quattro til greina, en Volvo er 100.000 kr. dýrari en hann.',
       'Þetta eru góð kaup fyrir þá sem vilja mikinn dráttarkraft, gott skott og áreiðanlegan ferðabíl fyrir erfiðari aðstæður, en síður fyrir þá sem horfa stíft í verðið eða vilja fremur lægri langbak.',
     ],
-    facts: '858ca6a6214e',
+    facts: '1b9f59dc3cc3',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volvo-ex60-p12': {
     paragraphs: [
       'Volvo EX60 P12 drífur lengst bíla á svipuðu verði, 810 km, og hefur stærstu rafhlöðuna í þeim hópi. Hann er líka meðal þeirra sneggstu, aflmestu og þeirra sem hlaða hraðast.',
     ],
-    facts: '2bbdc3c9cdd6',
+    facts: 'fac3ee690a38',
   },
   'volvo-ex90-twin-motor': {
     paragraphs: [
       'Volvo EX90 Twin Motor er sjö sæta og fjórhjóladrifinn, með einni af stærstu rafhlöðunum og drífur lengra en flestir. Hann er meðal dýrustu bílanna á listanum.',
     ],
-    facts: '8c4703eadf9c',
+    facts: '2319bd70711d',
   },
   'volvo-ex90-twin-motor-performance': {
     paragraphs: [
       'Volvo EX90 Twin Motor Performance er sjö sæta, fjórhjóladrifinn og sneggri og aflmeiri en flestir, með einni af stærstu rafhlöðunum. Hann er meðal dýrustu bílanna á listanum.',
     ],
-    facts: '15f349b0317b',
+    facts: '95fd09c57aad',
   },
   'xpeng-g6-rwd-standard-range': {
     paragraphs: [
       'XPENG G6 RWD Standard Range er ódýrari en flestir og hleður hraðar en flestir, með þeim hröðustu miðað við bíla á svipuðu verði. Hann drífur þó styttra en flestir.',
     ],
-    facts: 'd4a5f3a90a38',
+    facts: '0271068dee0c',
   },
   'xpeng-g6-rwd-long-range': {
     paragraphs: [
       'XPENG G6 RWD Long Range er ódýrari en flestir, drífur lengra en flestir og er meðal þeirra ódýrustu á hvern km drægni. Hann hleður hraðar en flestir og er með stærri rafhlöðu en flestir.',
     ],
-    facts: '71aec058a48b',
+    facts: '09dc60519783',
   },
   'xpeng-g6-awd-performance': {
     paragraphs: [
       'XPENG G6 AWD Performance er fjórhjóladrifinn, ódýrari en flestir og meðal þeirra sneggstu á listanum. Hann drífur lengra og hleður hraðar en flestir, sem gerir hann að miklum bíl fyrir peninginn.',
     ],
-    facts: '65b1ab835a62',
+    facts: '020d14ba8ec7',
   },
   'xpeng-g9-awd-performance': {
     paragraphs: [
       'XPENG G9 AWD Performance er fjórhjóladrifinn, meðal þeirra sem hlaða hraðast og sneggri og aflmeiri en flestir. Hann er dýrari en flestir og drífur styttra en flestir bílar á svipuðu verði.',
     ],
-    facts: 'a56f90bdba44',
+    facts: 'd87ad9f4eccd',
   },
   'xpeng-x9-awd-performance': {
     paragraphs: [
       'XPENG X9 AWD Performance er sjö sæta og hleður hraðast allra bíla á listanum, með einni af stærstu rafhlöðunum. Hann er dýrari en flestir og drífur styttra en flestir bílar á svipuðu verði.',
     ],
-    facts: '1ba4553184a7',
+    facts: 'c0b306738cce',
   },
 }
 

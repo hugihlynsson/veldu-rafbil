@@ -64,7 +64,7 @@ const reviews = new Map(
   }),
 )
 
-const save = () => {
+const save = ({ format = false } = {}) => {
   const entries = cars.flatMap((car) => {
     const review = reviews.get(carSlug(car))
     return review ? [`  '${carSlug(car)}': ${JSON.stringify(review)},`] : []
@@ -91,7 +91,8 @@ ${entries.join('\n')}
 export default carReviews
 `,
   )
-  execFileSync('npx', ['oxfmt', file], { stdio: 'ignore' })
+  // Once at the end rather than after each review, as it starts npx
+  if (format) execFileSync('npx', ['oxfmt', file], { stdio: 'ignore' })
 }
 
 const write = async (car: Car): Promise<CarReview> => {
@@ -156,10 +157,15 @@ const main = async () => {
   console.log(`Writing ${due.length} reviews, ${CONCURRENCY} at a time`)
   await Promise.all(Array.from({ length: CONCURRENCY }, worker))
   // Saved even with nothing written, to drop the cars no longer on the list
-  save()
+  save({ format: true })
   console.log(
     `Wrote ${done} to ${path.relative(process.cwd(), file)}${failed.length ? `; failed: ${failed.join(' ')}` : ''}`,
   )
+  // So whoever runs it, a person or the update-new-cars skill, sees a partial run
+  if (failed.length > 0) process.exitCode = 1
 }
 
-void main()
+main().catch((error: unknown) => {
+  console.error(error)
+  process.exitCode = 1
+})

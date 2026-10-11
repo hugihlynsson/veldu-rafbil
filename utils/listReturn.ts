@@ -3,9 +3,9 @@ import { useSyncExternalStore } from 'react'
 const STORAGE_KEY = 'veldu-rafbil-list-search'
 
 /**
- * Keeps the list's sort, filters and view as someone leaves it for a
- * comparison, so the way back is to the list they left. In this tab only: a
- * comparison opened from a link someone sent goes back to the plain list.
+ * Keeps the list's sort, filters and view as someone leaves it for a car's
+ * page, so the way back is to the list they left. In this tab only: a page
+ * opened from a link someone sent goes back to the plain list.
  */
 export const rememberListSearch = (search: string) => {
   try {
