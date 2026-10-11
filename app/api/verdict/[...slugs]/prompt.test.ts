@@ -105,23 +105,33 @@ describe('describeStanding', () => {
   )
   const middle = field[2]
 
-  it('says how many of the others a car leads on each figure', () => {
+  it('says in words where a car stands on each figure', () => {
     // 2 of the other 5 have less range, and 3 cost more
     const standing = describeStanding(middle, field)
-    expect(standing).toContain('Drægni: lengri drægni en 40% hinna 5 bílanna')
-    expect(standing).toContain('Verð: ódýrari en 60% hinna 5 bílanna')
+    expect(standing).toContain('Drægni: drífur styttra en flestir á listanum')
+    expect(standing).toContain('Verð: ódýrari en flestir á listanum')
+    expect(describeStanding(field[0], field)).toContain(
+      'Verð: ódýrastur á listanum',
+    )
+  })
+
+  // A share is what the model would quote, and nobody reads it as advice
+  it('never as a share of them', () => {
+    expect(describeStanding(middle, field)).not.toContain('%')
   })
 
   it('weighs it against cars at a similar price too, when there are enough', () => {
     expect(describeStanding(middle, field)).toContain(
-      'og 40% þeirra 5 sem kosta svipað',
+      'drífur styttra en flestir meðal bíla á svipuðu verði',
     )
     expect(describeStanding(middle, field.slice(0, 4))).not.toContain(
-      'kosta svipað',
+      'svipuðu verði',
     )
   })
 
   it('leaves price out of the comparison at a similar price', () => {
-    expect(describeStanding(middle, field)).toMatch(/Verð: [^\n]*listanum\n/)
+    expect(describeStanding(middle, field)).toMatch(
+      /Verð: [^\n;]*listanum öllum\n/,
+    )
   })
 })

@@ -106,7 +106,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, verdict }) => {
 
       <section aria-labelledby="similar" className={clsx(gutter, 'mt-12')}>
         <h2 id="similar" className={eyebrow}>
-          Svipaðir bílar
+          Þú gætir líka haft áhuga á:
         </h2>
         <ul className="mt-3 mb-0 p-0 list-none grid gap-3 sm:grid-cols-3">
           {similar.map((other) => (

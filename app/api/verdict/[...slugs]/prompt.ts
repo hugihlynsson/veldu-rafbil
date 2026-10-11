@@ -9,7 +9,7 @@ import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 const writingRules = `Þegar þú skrifar:
 - Skrifaðu á eðlilegri, lipurri íslensku, í samtalstón, eins og fróður vinur en ekki sölumaður.
 - Ekki endursegja tölurnar: þær eru í töflu beint fyrir ofan textann þinn. Segðu frekar hvað þær þýða í daglegu lífi.
-- Reiknaðu aldrei sjálf(ur). Munurinn á tölunum og staða bílsins á listanum er reiknað fyrir þig: taktu það orðrétt. Til að bera saman tölur úr fetchCarDetails, nefndu tölurnar sjálfar frekar en muninn á þeim.
+- Reiknaðu aldrei sjálf(ur). Munurinn á tölunum er reiknaður fyrir þig: taktu hann orðréttan. Til að bera saman tölur úr fetchCarDetails, nefndu tölurnar sjálfar frekar en muninn á þeim.
 - Verðin eru eftir ${grantAmountText} ríkisstyrk þar sem hann á við.
 - Drægnin er samkvæmt WLTP. Í íslenskum vetri er hún nær ${Math.round(realRangeLowFactor * 100)}–${Math.round(realRangeHighFactor * 100)}% af því.
 - Byggðu aðeins á gögnunum hér að neðan og því sem fetchCarDetails skilar, ekki á því sem þú heldur að þú vitir um bílana.
@@ -25,7 +25,7 @@ const carSystemPrompt = `${intro} Einhver hefur opnað síðu bílsins hér að 
 
 Áður en þú skrifar:
 - Sæktu nánari upplýsingar um bílinn með fetchCarDetails, með ev-database slóðinni sem fylgir honum hér að neðan, til að vita stærð hans, farangursrými, framskott og dráttargetu. Ef hann hefur enga slóð eru engar slíkar upplýsingar til.
-- Lestu hvar bíllinn stendur á listanum: meðal allra rafbílanna sem eru seldir á Íslandi og meðal þeirra sem kosta svipað. Þar sést hvað er í raun sérstakt við hann og hvað er bara venjulegt. Það sem er í meðallagi er ekki styrkleiki.
+- Lestu hvar bíllinn stendur á listanum: meðal allra rafbílanna sem eru seldir á Íslandi og meðal þeirra sem kosta svipað. Þar sést hvað er í raun sérstakt við hann og hvað er bara venjulegt. Það sem er í meðallagi er ekki styrkleiki. Staðan er sögð í orðum, til dæmis „meðal þeirra ódýrustu“ eða „dýrari en flestir“: segðu hana þannig líka, aldrei með prósentum, sæti í röð eða fjölda bíla.
 
 Það sem skiptir íslenska kaupendur mestu, eftir því sem á við þennan bíl:
 - Hvort drægnin dugar í vetrarkulda, á milli landshluta og ekki bara innanbæjar.
@@ -37,10 +37,11 @@ Veldu það sem segir mest um þennan bíl. Ekki fara yfir allt.
 
 ${writingRules}
 
-Svaraðu með um 170 orðum í þremur stuttum efnisgreinum og engu öðru:
+Svaraðu með um 190 orðum í fjórum stuttum efnisgreinum og engu öðru:
 1. Hvers konar bíll þetta er og hverjum hann hentar best, í einni eða tveimur setningum.
 2. Tveir eða þrír helstu styrkleikar hans og hvað þeir þýða í daglegu lífi.
 3. Hvað maður gefur eftir, og hvenær einn af svipuðu bílunum væri betri kostur, með muninum úr gögnunum.
+4. Niðurstaða í einni eða tveimur setningum sem dregur hitt saman: fyrir hvern hann eru góð kaup og fyrir hvern ekki. Ekki endurtaka fyrstu efnisgreinina.
 
 Vertu heiðarleg(ur). Það sem bíllinn gerir í meðallagi gerirðu ekki að kosti: segðu það eða slepptu því. Notaðu ekki orð eins og "einstakur", "framúrskarandi" eða "frábær" nema staða hans á listanum sýni að hann skari fram úr. Fjallaðu ekki um innréttingu, efnisval, þægindi, hljóðvist, hugbúnað eða áreiðanleika: um það eru engin gögn hér. Nefndu bíla með tegund og gerð, til dæmis Kia EV3.`
 
@@ -51,8 +52,8 @@ interface Metric {
   format: (value: number) => string
   /** The gap behind the leader, as the trailing car is described by it */
   behind: (gap: string) => string
-  /** A lead over other cars, before "X% hinna bílanna" */
-  ahead: string
+  /** Where a car stands among others on it, from first of all to among the worst */
+  standing: Record<'first' | 'top' | 'above' | 'below' | 'bottom', string>
 }
 
 const oneDecimal = (value: number) => String(Number(value.toFixed(1)))
@@ -64,7 +65,13 @@ const metrics: Metric[] = [
     value: (car) => car.priceWithGrant,
     format: (value) => `${addDecimalSeparators(value)} kr.`,
     behind: (gap) => `${gap} dýrari`,
-    ahead: 'ódýrari en',
+    standing: {
+      first: 'ódýrastur',
+      top: 'meðal þeirra ódýrustu',
+      above: 'ódýrari en flestir',
+      below: 'dýrari en flestir',
+      bottom: 'meðal þeirra dýrustu',
+    },
   },
   {
     label: 'Drægni',
@@ -72,7 +79,13 @@ const metrics: Metric[] = [
     value: (car) => car.range,
     format: (value) => `${value} km`,
     behind: (gap) => `${gap} minni drægni`,
-    ahead: 'lengri drægni en',
+    standing: {
+      first: 'drífur lengst',
+      top: 'meðal þeirra langdrægustu',
+      above: 'drífur lengra en flestir',
+      below: 'drífur styttra en flestir',
+      bottom: 'meðal þeirra sem drífa styst',
+    },
   },
   {
     label: 'Verð á hvern km drægni',
@@ -80,7 +93,13 @@ const metrics: Metric[] = [
     value: (car) => Math.round(car.pricePerKm),
     format: (value) => `${addDecimalSeparators(value)} kr.`,
     behind: (gap) => `${gap} dýrari á km`,
-    ahead: 'ódýrari á hvern km drægni en',
+    standing: {
+      first: 'ódýrastur á hvern km drægni',
+      top: 'meðal þeirra ódýrustu á hvern km drægni',
+      above: 'ódýrari á hvern km drægni en flestir',
+      below: 'dýrari á hvern km drægni en flestir',
+      bottom: 'meðal þeirra dýrustu á hvern km drægni',
+    },
   },
   {
     label: 'Hraðhleðsla, drægni bætt við á mínútu',
@@ -89,7 +108,13 @@ const metrics: Metric[] = [
     // Three figures, as the list quotes it, without the zeros a gap would trail
     format: (value) => `${Number(value.toPrecision(3))} km/mín`,
     behind: (gap) => `${gap} hægari`,
-    ahead: 'bætir hraðar við drægnina í hraðhleðslu en',
+    standing: {
+      first: 'hleður hraðast',
+      top: 'meðal þeirra sem hlaða hraðast',
+      above: 'hleður hraðar en flestir',
+      below: 'hleður hægar en flestir',
+      bottom: 'meðal þeirra sem hlaða hægast',
+    },
   },
   {
     label: 'Rafhlaða',
@@ -97,7 +122,13 @@ const metrics: Metric[] = [
     value: (car) => car.capacity,
     format: (value) => `${oneDecimal(value)} kWh`,
     behind: (gap) => `${gap} minni`,
-    ahead: 'stærri rafhlöðu en',
+    standing: {
+      first: 'með stærstu rafhlöðuna',
+      top: 'með einni af stærstu rafhlöðunum',
+      above: 'með stærri rafhlöðu en flestir',
+      below: 'með minni rafhlöðu en flestir',
+      bottom: 'með einni af minnstu rafhlöðunum',
+    },
   },
   {
     label: 'Hröðun 0-100 km/klst',
@@ -105,7 +136,13 @@ const metrics: Metric[] = [
     value: (car) => car.acceleration,
     format: (value) => `${oneDecimal(value)} s`,
     behind: (gap) => `${gap} hægari`,
-    ahead: 'sneggri en',
+    standing: {
+      first: 'sneggstur',
+      top: 'meðal þeirra sneggstu',
+      above: 'sneggri en flestir',
+      below: 'hægari en flestir',
+      bottom: 'meðal þeirra hægustu',
+    },
   },
   {
     label: 'Afl',
@@ -113,7 +150,13 @@ const metrics: Metric[] = [
     value: (car) => car.power,
     format: (value) => `${value} kW`,
     behind: (gap) => `${gap} minna afl`,
-    ahead: 'aflmeiri en',
+    standing: {
+      first: 'aflmestur',
+      top: 'meðal þeirra aflmestu',
+      above: 'aflmeiri en flestir',
+      below: 'aflminni en flestir',
+      bottom: 'meðal þeirra aflminnstu',
+    },
   },
 ]
 
@@ -168,19 +211,30 @@ const listGaps = (cars: ReadonlyArray<Car>) =>
 // Within this much of the car's price either way, a car is one a buyer
 // would weigh it against
 const PRICE_BAND = 0.2
-// Fewer than this at a similar price, and a share of them says little
+// Fewer than this at a similar price, and where it stands among them says little
 const MIN_BAND = 5
 
-const percentBeaten = (metric: Metric, car: Car, others: ReadonlyArray<Car>) =>
-  Math.round(
-    (100 *
-      others.filter((other) =>
-        metric.better === 'lower'
-          ? metric.value(car) < metric.value(other)
-          : metric.value(car) > metric.value(other),
-      ).length) /
-      others.length,
-  )
+// In words rather than as a share, since a share is what the model would
+// quote, and "ahead of 98% of them" reads as a spec sheet, not as advice
+const standingAmong = (
+  metric: Metric,
+  car: Car,
+  others: ReadonlyArray<Car>,
+): string => {
+  const beaten =
+    others.filter((other) =>
+      metric.better === 'lower'
+        ? metric.value(car) < metric.value(other)
+        : metric.value(car) > metric.value(other),
+    ).length / others.length
+
+  if (beaten === 1) return metric.standing.first
+  if (beaten >= 0.85) return metric.standing.top
+  if (beaten >= 0.6) return metric.standing.above
+  if (beaten > 0.4) return 'í meðallagi'
+  if (beaten > 0.15) return metric.standing.below
+  return metric.standing.bottom
+}
 
 /**
  * Where the car stands among every other car on the list, and among those at
@@ -201,11 +255,11 @@ export const describeStanding = (
 
   return metrics
     .map((metric) => {
-      const overall = `${metric.ahead} ${percentBeaten(metric, car, others)}% hinna ${others.length} bílanna á listanum`
+      const overall = `${standingAmong(metric, car, others)} á listanum öllum`
       // Price is what the band is cut by, so it says nothing within it
       const nearby =
         withBand && metric.label !== 'Verð'
-          ? ` og ${percentBeaten(metric, car, band)}% þeirra ${band.length} sem kosta svipað`
+          ? `; ${standingAmong(metric, car, band)} meðal bíla á svipuðu verði`
           : ''
       return `- ${metric.label}: ${overall}${nearby}`
     })
