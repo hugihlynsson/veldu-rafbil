@@ -77,7 +77,7 @@ const NewCar: FunctionComponent<Props> = ({
       // MiniCar scrolls here from the chat, and moves focus with it
       tabIndex={-1}
       className={clsx(
-        'mb-8',
+        'group/car mb-8',
         skipLayoutOutOfView,
         grid
           ? ['md:mb-10', sharedRowsInGrid]
@@ -114,55 +114,64 @@ const NewCar: FunctionComponent<Props> = ({
             : 'md:m-0 md:ml-8 md:p-0 md:w-[330px] md:max-w-card-text md:shrink-0 md:grow',
         )}
       >
-        <h2
-          className={clsx(
-            'm-0 font-semibold text-display',
-            grid && 'md:pt-3 md:text-2xl',
-          )}
-        >
-          <Link
-            href={carPathOf(car)}
-            onClick={() => rememberListSearch(window.location.search)}
-            className="text-inherit no-underline decoration-2 underline-offset-4 hover:underline"
-          >
-            <span>{car.make}</span>{' '}
-            <span className="font-normal">{car.model}</span>
-          </Link>
-          <span
-            className={clsx(
-              'block font-medium text-base text-stone -mt-px mb-2',
-              grid && 'md:mt-0 md:text-sm',
-            )}
-          >
-            {subTitle}
-            {/* Shown on the subtitle's line, but read after the heading
-                rather than as part of the car's name */}
-            {delivery && (
-              <span aria-hidden>
-                {subTitle && ' · '}
-                {delivery}
-              </span>
-            )}
-          </span>
-        </h2>
-        {delivery && <p className="sr-only">{delivery}</p>}
-
         <div
           className={clsx(
-            'flex flex-wrap items-center gap-2 mt-2 -ml-0.5',
-            grid && 'md:mt-1 md:justify-self-start',
+            'flex items-start justify-between gap-3',
+            grid && 'md:pt-3',
           )}
         >
-          <PricePill car={car} showValue={showValue} />
-
+          <h2
+            className={clsx(
+              'm-0 min-w-0 font-semibold text-display',
+              grid && 'md:text-2xl',
+            )}
+          >
+            <Link
+              href={carPathOf(car)}
+              onClick={() => rememberListSearch(window.location.search)}
+              className="text-inherit no-underline decoration-2 underline-offset-4 hover:underline"
+            >
+              <span>{car.make}</span>{' '}
+              <span className="font-normal">{car.model}</span>
+            </Link>
+            <span
+              className={clsx(
+                'block font-medium text-base text-stone -mt-px mb-2',
+                grid && 'md:mt-0 md:text-sm',
+              )}
+            >
+              {subTitle}
+              {/* Shown on the subtitle's line, but read after the heading
+                rather than as part of the car's name */}
+              {delivery && (
+                <span aria-hidden>
+                  {subTitle && ' · '}
+                  {delivery}
+                </span>
+              )}
+            </span>
+          </h2>
           <ShareButton
             title={car.label}
             path={carPathOf(car)}
             label={`Deila ${car.label}`}
             event="Car shared from list"
             variant="icon"
+            // A mouse finds it on the card it points at, so a list of them
+            // is not a column of icons; a finger has no hover to find it by
+            className="mt-2 pointer-fine:opacity-0 pointer-fine:group-hover/car:opacity-100 pointer-fine:focus-visible:opacity-100"
           />
         </div>
+        {delivery && <p className="sr-only">{delivery}</p>}
+
+        <PricePill
+          car={car}
+          showValue={showValue}
+          className={clsx(
+            'mt-2 -ml-0.5',
+            grid && 'md:mt-1 md:justify-self-start',
+          )}
+        />
 
         <div
           className={clsx(
