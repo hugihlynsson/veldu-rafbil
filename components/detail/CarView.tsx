@@ -30,8 +30,8 @@ const figureOrder: SpecKey[] = [
   'acceleration',
   'capacity',
   'seats',
-  'power',
   'charging',
+  'power',
 ]
 
 const eyebrow =
