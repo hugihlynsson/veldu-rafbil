@@ -4,6 +4,6 @@ import { configDefaults, defineConfig } from 'vitest/config'
 export default defineConfig({
   resolve: { tsconfigPaths: true },
   // Agents check other branches out under .claude/worktrees, and their tests
-  // are not this checkout's
-  test: { exclude: [...configDefaults.exclude, '.claude/**'] },
+  // are not this checkout's. e2e/ is Playwright's.
+  test: { exclude: [...configDefaults.exclude, '.claude/**', 'e2e/**'] },
 })
