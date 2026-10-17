@@ -1,33 +1,34 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import {
+  CAR_DETAILS_PART,
   createFetchCarDetailsTool,
   MAX_CALLS_PER_ANSWER,
+  upgradeCarDetailsCalls,
 } from './fetchCarDetails'
-import newCars from '@/modules/data/newCars'
+import cars from '@/modules/data/cars'
+import { carRef } from '@/modules/chat/cars'
 
 type Tool = ReturnType<typeof createFetchCarDetailsTool>
 
-// The allowlist is all that stands between a prompt and an arbitrary fetch
 const run = async (
-  url: string,
+  car: string,
   tool: Tool = createFetchCarDetailsTool(),
-): Promise<{ specifications: string }> => {
+): Promise<{ specifications: string; source?: string }> => {
   // The options are only along for the ride; this tool reads none of them
-  const result = await tool.execute!({ url, carName: 'Test' }, {
+  const result = await tool.execute!({ car }, {
     toolCallId: 'test',
     messages: [],
   } as never)
   // execute is typed as possibly streaming; ours always resolves to an object
-  return result as { specifications: string }
+  return result as { specifications: string; source?: string }
 }
 
+const withPage = cars.filter((car) => car.evDatabaseUrl)
+
 // The cache outlives each test, so every test asks for cars of its own
-const allowedUrls = newCars
-  .map((car) => car.evDatabaseUrl)
-  .filter((url): url is string => Boolean(url))
 let carsTaken = 0
-const aCar = (): string => allowedUrls[carsTaken++]!
+const aCar = (): string => carRef(withPage[carsTaken++]!)
 
 const page = (html: string, status = 200) => new Response(html, { status })
 const redirectTo = (location: string) =>
@@ -41,39 +42,35 @@ afterEach(() => {
 // 2 MB of 64 KB chunks is 32; the margin is for the stream reading ahead
 const MAX_CHUNKS = 64
 
+// The car data's own pages are all that stand between a prompt and an
+// arbitrary fetch
 describe('fetchCarDetails', () => {
   it.each([
     'http://169.254.169.254/latest/meta-data/',
-    'http://localhost:3000/api/chat',
     'file:///etc/passwd',
-    'https://ev-database.org.evil.example/car/1/',
-    'https://ev-database.org/car/9999/Not-In-Our-List',
-  ])('refuses %s without fetching it', async (url) => {
+    withPage[0]!.evDatabaseUrl!,
+    'not-a-car',
+    'toString',
+    ...cars.filter((car) => !car.evDatabaseUrl).map(carRef),
+  ])('refuses %s without fetching it', async (car) => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch')
 
-    const result = await run(url)
+    const result = await run(car)
 
     expect(fetchSpy).not.toHaveBeenCalled()
-    expect(result.specifications).toMatch(/not one of the ev-database entries/)
+    expect(result.specifications).toMatch(/no EV Database page/)
   })
 
-  it('refuses a car outside the ones it was narrowed to', async () => {
-    const fetchSpy = vi.spyOn(globalThis, 'fetch')
-    const [mine, other] = [aCar(), aCar()]
+  it('fetches the page the car data points the car at', async () => {
+    const fetchSpy = vi
+      .spyOn(globalThis, 'fetch')
+      .mockResolvedValue(page('<tr><td>Seats</td><td>5</td></tr>'))
+    const car = withPage[carsTaken++]!
 
-    const result = await run(other, createFetchCarDetailsTool(new Set([mine])))
+    const result = await run(carRef(car).toUpperCase())
 
-    expect(fetchSpy).not.toHaveBeenCalled()
-    expect(result.specifications).toMatch(/not one of the ev-database entries/)
-  })
-
-  it('cannot be narrowed to a page off the list', async () => {
-    const fetchSpy = vi.spyOn(globalThis, 'fetch')
-    const url = 'http://169.254.169.254/latest/meta-data/'
-
-    await run(url, createFetchCarDetailsTool(new Set([url])))
-
-    expect(fetchSpy).not.toHaveBeenCalled()
+    expect(fetchSpy.mock.calls[0]?.[0]).toBe(car.evDatabaseUrl)
+    expect(result.source).toBe(car.evDatabaseUrl)
   })
 
   // Against an uncapped read this hangs rather than fails
@@ -160,7 +157,7 @@ describe('fetchCarDetails', () => {
     expect((await run(urls.at(-1)!)).specifications).toContain('seats: 5')
   })
 
-  it('fetches a URL that a car in the list actually points at', async () => {
+  it('fetches a car that the list has a page for', async () => {
     const fetchSpy = vi
       .spyOn(globalThis, 'fetch')
       .mockResolvedValue(page('<tr><td>Seats</td><td>5</td></tr>'))
@@ -213,8 +210,8 @@ describe('fetchCarDetails, asked for a car again', () => {
   })
 })
 
-// The allowlist vouches for the URL the model named, not for wherever a
-// redirect from it points
+// The car data vouches for the page it names, not for wherever a redirect
+// from it points
 describe('fetchCarDetails, redirected', () => {
   it('follows a redirect that stays on ev-database', async () => {
     const url = aCar()
@@ -255,5 +252,43 @@ describe('fetchCarDetails, redirected', () => {
 
     expect(fetchSpy.mock.calls.length).toBeLessThan(10)
     expect(result.specifications).toMatch(/does not follow/)
+  })
+})
+
+describe('upgradeCarDetailsCalls', () => {
+  const call = (input: unknown) => ({
+    type: CAR_DETAILS_PART,
+    toolCallId: 'c',
+    state: 'output-available',
+    input,
+  })
+
+  it('reads a call by URL, stored before the tool took a car, as one by car', () => {
+    const car = withPage[0]!
+
+    expect(
+      upgradeCarDetailsCalls([call({ url: car.evDatabaseUrl, carName: 'x' })]),
+    ).toEqual([call({ car: carRef(car) })])
+  })
+
+  it('drops a call by URL for a page no car on the list points at', () => {
+    const text = { type: 'text', text: 'Svar.' }
+
+    expect(
+      upgradeCarDetailsCalls([
+        call({ url: 'https://ev-database.org/car/1/Gone', carName: 'x' }),
+        text,
+      ]),
+    ).toEqual([text])
+  })
+
+  it('leaves every other part as it is', () => {
+    const parts = [
+      call({ car: 'x' }),
+      call({ url: 42 }),
+      { type: 'text', text: 'Svar.' },
+    ]
+
+    expect(upgradeCarDetailsCalls(parts)).toEqual(parts)
   })
 })

@@ -241,7 +241,7 @@ describe('a trimmed conversation', () => {
         type: 'tool-fetchCarDetails' as const,
         toolCallId: `c${i}`,
         state: 'output-available' as const,
-        input: { url: 'https://ev-database.org/car/1/x', carName: 'x' },
+        input: { car: 'x' },
         output: { carName: 'x', specifications: 'seats: 5', source: 'x' },
       })),
       { type: 'text', text: 'Svar.' },
@@ -424,5 +424,33 @@ describe('parseChatRequest', () => {
     ],
   ])('refuses %s', async (_label, body) => {
     expect(await parseChatRequest(body)).toBeNull()
+  })
+})
+
+describe('a conversation stored before the car-details tool took a car', () => {
+  it('is still answered, its calls read as calls by car', async () => {
+    const car = cars.find((car) => car.evDatabaseUrl)!
+    const stored = {
+      id: 'a0',
+      role: 'assistant',
+      parts: [
+        {
+          type: 'tool-fetchCarDetails',
+          toolCallId: 'c',
+          state: 'output-available',
+          input: { url: car.evDatabaseUrl, carName: car.label },
+          output: { carName: car.label, specifications: 'seats: 5' },
+        },
+        { type: 'text', text: 'Svar.' },
+      ],
+    }
+
+    const messages = await parseChatRequest({
+      messages: [{ ...question, id: 'q0' }, stored, question],
+    })
+
+    expect(messages?.[1]?.parts[0]).toMatchObject({
+      input: { car: carRef(car) },
+    })
   })
 })

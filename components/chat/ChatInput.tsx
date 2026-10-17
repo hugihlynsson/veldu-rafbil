@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Suspense, useState } from 'react'
+import React, { Suspense, useRef, useState } from 'react'
 import { trackEvent } from 'fathom-client'
 import {
   CHAT_SUGGESTIONS,
@@ -12,6 +12,8 @@ import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import type { Filters } from '@/modules/list/filters'
 import SuggestionPills from '@/components/SuggestionPills'
+import type { ShownSuggestions } from '@/modules/list/suggestionOutcome'
+import reportSuggestionOutcome from '@/utils/reportSuggestionOutcome'
 
 // The parser and its patterns are fetched once someone focuses the input,
 // rather than with the chat. One import for both, as in ChatContainer.
@@ -66,11 +68,15 @@ const ChatInput: React.FunctionComponent<Props> = ({
   // The filter pills are fetched on the first keystroke, then kept mounted so
   // they can play their exit when the text is cleared or the input left
   const [hasTyped, setHasTyped] = useState(value !== '')
+  const filterPills = useRef<ShownSuggestions | null>(null)
   useInputModality()
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (value.trim()) {
+      if (filterPills.current) {
+        reportSuggestionOutcome('sent', filterPills.current)
+      }
       sendMessage(value)
       trackEvent('Sent message')
       onValueChange('')
@@ -192,6 +198,9 @@ const ChatInput: React.FunctionComponent<Props> = ({
             text={value}
             filters={filterSuggestions.filters}
             onApply={filterSuggestions.onApply}
+            onShownChange={(shown) => {
+              filterPills.current = shown
+            }}
           />
         </Suspense>
       )}

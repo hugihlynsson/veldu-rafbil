@@ -2,7 +2,6 @@ import {
   createLoader,
   createMultiParser,
   createParser,
-  createSerializer,
   type MultiParserBuilder,
   type SingleParserBuilder,
 } from 'nuqs/server'
@@ -11,12 +10,6 @@ import type { Car, Availability } from '@/modules/data/cars'
 import type { Drive } from '@/modules/data/newCarSchema'
 // Relative: next.config.ts loads this file, and its loader cannot resolve @/
 import { drives } from '../data/drives'
-
-/**
- * What Next hands a page as `searchParams`. A parameter given more than once
- * arrives as an array rather than a string, so every reader copes with both.
- */
-export type SearchParams = Record<string, string | Array<string> | undefined>
 
 export type Filters = {
   acceleration?: number
@@ -230,19 +223,6 @@ export const valuesFromFilters = (filters: Filters): FilterValues =>
  */
 export const normalizeFilters = (filters: Filters): Filters =>
   filtersFromValues(valuesFromFilters(filters))
-
-const loadFilterValues = createLoader(filterParsers, { urlKeys: filterUrlKeys })
-
-export const getFiltersFromQuery = (query: SearchParams): Filters =>
-  filtersFromValues(loadFilterValues(query) as FilterValues)
-
-const serializeFilterValues = createSerializer(filterParsers, {
-  urlKeys: filterUrlKeys,
-})
-
-/** The query string for a set of filters, `?` and all, or '' for none */
-export const serializeFilters = (filters: Filters): string =>
-  serializeFilterValues(valuesFromFilters(filters))
 
 /**
  * The filter modal's fields, as typed. Each is read by its filter's own URL

@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest'
 
-import cars, { allCars, deriveCar } from './cars'
+import cars, {
+  allCars,
+  carWithSlug,
+  currentCarWithSlug,
+  deriveCar,
+} from './cars'
+import { carSlug } from './getCarId'
 import { grantPriceCeiling } from './globals'
 import newCars from './newCars'
 
@@ -29,5 +35,24 @@ describe('the cars sold', () => {
   it('leave out the ones no longer sold, which keep their pages', () => {
     expect(cars.some((car) => car.deprecated)).toBe(false)
     expect(allCars).toHaveLength(newCars.length)
+  })
+})
+
+describe('carWithSlug', () => {
+  it('finds every car with a page by its slug', () => {
+    expect(allCars.map((car) => carWithSlug(carSlug(car)))).toEqual(allCars)
+  })
+
+  it('finds no car for a slug none has', () => {
+    expect(carWithSlug('no-such-car')).toBeUndefined()
+    expect(carWithSlug('toString')).toBeUndefined()
+  })
+})
+
+describe('currentCarWithSlug', () => {
+  it('finds the cars sold new now, and only them', () => {
+    expect(allCars.filter((car) => currentCarWithSlug(carSlug(car)))).toEqual(
+      cars,
+    )
   })
 })
