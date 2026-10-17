@@ -95,6 +95,15 @@ describe('carFacts', () => {
     expect(facts).toContain('engar nánari upplýsingar af ev-database')
   })
 
+  // "It comes with all-wheel drive too" answers a drawback the review names
+  it('lists the other versions of the same model', () => {
+    const awd = deriveCar({ ...base, subModel: 'Long Range AWD', drive: 'AWD' })
+    expect(carFacts(kia, [tesla], [kia, tesla, awd])).toContain(
+      'Aðrar útfærslur hans á listanum:\n- Kia EV3 Long Range AWD',
+    )
+    expect(facts).not.toContain('Aðrar útfærslur')
+  })
+
   it('quotes the price after the grant', () => {
     expect(facts).toContain('5.790.777 kr. eftir styrk')
   })
@@ -231,9 +240,21 @@ describe('readDetails', () => {
   it('drops a boot figure that can only be the seats folded', () => {
     expect(readDetails({ cargoVolume: '2386 L' }).cargo).toBeUndefined()
     expect(
-      readDetails({ cargoVolume: '2386 L', cargoVolumeMax: '2600 L' }).cargo,
+      readDetails({ cargoVolume: '2386 L', cargoVolumeMax: '4800 L' }).cargo,
     ).toBe(2386)
     expect(readDetails({ cargoVolume: '633 L' }).cargo).toBe(633)
+  })
+
+  it('reads no boot out of a pickup, whose figure is its bed', () => {
+    expect(
+      readDetails({ carBody: 'Pickup Truck', cargoVolume: '907 L' }).cargo,
+    ).toBeUndefined()
+  })
+
+  it('drops a folded figure the seats could not fold to', () => {
+    expect(
+      readDetails({ cargoVolume: '421 L', cargoVolumeMax: '452 L' }),
+    ).toMatchObject({ cargo: 421, cargoMax: undefined })
   })
 
   it('takes a car that takes no hitch to tow nothing', () => {

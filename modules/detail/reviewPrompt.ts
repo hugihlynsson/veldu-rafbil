@@ -54,6 +54,10 @@ Lesandinn er að velja á milli bíla, svo skrifaðu um það sem greinir þenna
 
 Vertu heiðarleg(ur). Það sem bíllinn gerir í meðallagi gerirðu ekki að kosti: segðu það eða slepptu því. Notaðu ekki orð eins og "einstakur", "framúrskarandi" eða "frábær" nema staða hans á listanum sýni að hann skari fram úr. Segðu ekkert um hann sem staða hans segir annað um: kallaðu hann ekki rúmgóðan ef skottið er minna en hjá flestum á svipuðu verði. Framhjóla- eða afturhjóladrif er aldrei kostur í snjó og hálku. Stærð rafhlöðunnar skiptir kaupanda aðeins máli gegnum drægnina, svo nefndu hana ekki sem kost eða galla ein og sér.
 
+Ef aðrar útfærslur sama bíls eru á listanum, nefndu eina aðeins þar sem hún bætir úr helsta galla hans, til dæmis með fjórhjóladrifi eða meiri drægni.
+
+Hafi bíllinn fáa styrkleika í tölunum, segðu hvað merkið eða hönnunin færir kaupandanum og stattu við að þeir séu fáir: ekki fylla upp í með almennu hrósi.
+
 Veldu það sem skiptir þá máli sem kaupa svona bíl: í stórum fjölskyldubíl, fjölnotabíl eða jeppa vega skott, sæti og dráttargeta þyngra en hröðun og afl, en í sportbíl er því öfugt farið. Um innréttingu, hljóðvist, hugbúnað og áreiðanleika eru engin gögn hér, en það sem almennt er vitað um merkið og bílinn máttu segja. Nefndu bíla með tegund og gerð, til dæmis Kia EV3, en þegar fleiri en ein útfærsla sömu gerðar er í gögnunum skaltu nefna útfærsluna líka, eins og bíllinn heitir þar, til dæmis Kia EV3 Long Range, svo ekki fari á milli mála við hvaða bíl er átt.`
 
 type Standing = 'first' | 'top' | 'above' | 'below' | 'bottom'
@@ -114,22 +118,30 @@ const numberIn = (text?: string): number | undefined => {
 // folded one given in its place, as the site does for a car or two: no car
 // on the list carries half of it with every seat up
 const MAX_SEATS_UP_CARGO = 2000
+// Folding the seats at least doubles a boot; a "folded" figure barely above
+// the one behind them is a slip on the page, as the Solterra's 452 l over 421
+const MIN_FOLDED_GAIN = 1.5
 
 /** A car's page, as fetchCarSpecs reads it, in numbers */
 export const readDetails = (
   specs: Readonly<Record<string, string | undefined>>,
 ): CarDetails => {
-  const cargo = numberIn(specs.cargoVolume)
-  const cargoMax = numberIn(specs.cargoVolumeMax)
+  const read = numberIn(specs.cargoVolume)
+  const folded = numberIn(specs.cargoVolumeMax)
+  const cargoMax =
+    folded && read && folded < read * MIN_FOLDED_GAIN ? undefined : folded
+  // A pickup's figure is its bed, which no boot is measured against
+  const cargo =
+    specs.carBody === 'Pickup Truck' ||
+    (read !== undefined && !cargoMax && read > MAX_SEATS_UP_CARGO)
+      ? undefined
+      : read
   return {
     body: specs.carBody,
     segment: specs.segment,
     length: numberIn(specs.length),
-    cargo:
-      cargo !== undefined && !cargoMax && cargo > MAX_SEATS_UP_CARGO
-        ? undefined
-        : cargo,
-    cargoMax,
+    cargo,
+    cargoMax: cargo === undefined ? undefined : cargoMax,
     frunk: numberIn(specs.frunk),
     // A car that takes no hitch tows nothing, whatever weight the page leaves
     towing:
@@ -594,6 +606,21 @@ export const describeStanding = (
     })
     .join('\n')
 
+// The model's other versions on the list, by what tells them apart, so a
+// review can say the drawback it names is one a version without it fixes
+const listVariants = (car: Car, all: ReadonlyArray<Car>): string => {
+  const variants = all.filter(
+    (other) =>
+      other !== car && other.make === car.make && other.model === car.model,
+  )
+  if (variants.length === 0) return ''
+  const lines = variants.map(
+    (other) =>
+      `- ${other.label}, ${addDecimalSeparators(other.priceWithGrant)} kr., ${other.range} km drægni, ${decimal(other.capacity)} kWh, ${driveLabels[other.drive].toLowerCase()}`,
+  )
+  return `\n\nAðrar útfærslur hans á listanum:\n${lines.join('\n')}`
+}
+
 /** The same for one car, with the cars like it and where it stands among all */
 export const carFacts = (
   car: Car,
@@ -601,7 +628,7 @@ export const carFacts = (
   all: ReadonlyArray<Car> = cars,
   details: DetailsOf = noDetails,
 ): string =>
-  `Bíllinn:\n${listCars([car], details)}\n\nStaða hans á listanum:\n${describeStanding(car, all, details)}\n\nSvipaðir bílar, næstir honum að verði og drægni:\n${listCars(similar, details)}\n\nHvernig þeir eru miðað við ${car.label}:\n${listDifferences(car, similar, details)}`
+  `Bíllinn:\n${listCars([car], details)}\n\nStaða hans á listanum:\n${describeStanding(car, all, details)}${listVariants(car, all)}\n\nSvipaðir bílar, næstir honum að verði og drægni:\n${listCars(similar, details)}\n\nHvernig þeir eru miðað við ${car.label}:\n${listDifferences(car, similar, details)}`
 
 /**
  * Everything the model is given for a car's review, with what ev-database
