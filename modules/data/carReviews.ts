@@ -215,8 +215,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'byd-sealion-7-base': {
     paragraphs: [
       'BYD Sealion 7 er stór og rennilegur jepplingur með fjórhjóladrifi, 4,83 m á lengd, sem einkennist öðru fremur af miklu afli og snöggri hröðun. Hann hentar þeim sem vilja kraftmikinn fjölskyldubíl á hóflegu verði.',
-      'Hann er meðal aflmestu bíla á sínu verði, sneggri en flestir þeirra og hleður hraðar en flestir, svo hleðslustopp á langferðum verða stutt. Auk skottsins er 58 l framskott undir vélarhlífinni, og hann má draga 1.500 kg.',
-      'Á móti kemur að hann drífur styttra en flestir á svipuðu verði. Subaru e-Outback kostar 100.000 kr. meira, drífur 21 km lengra og er með 113 l stærra skott, þótt hleðslustoppin séu um 15% lengri.',
+      'Í sínum verðflokki er hann meðal þeirra aflmestu og hleður hraðar og er sneggri en flestir, svo hleðslustopp á langferðum verða stutt. Auk skottsins er 58 l framskott undir vélarhlífinni, og hann má draga 1.500 kg.',
+      'Helsti ókosturinn er að hann drífur styttra en flestir keppinautar hans. Subaru e-Outback kostar 100.000 kr. meira, drífur 21 km lengra og er með 113 l stærra skott, þótt hleðslustoppin séu um 15% lengri.',
       'Sealion 7 er fyrir þá sem vilja mikið afl og hraða hleðslu fyrir peninginn, frekar en hámarksdrægni.',
     ],
     facts: 'e5798dfbadee',
@@ -225,8 +225,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'byd-tang-flagship': {
     paragraphs: [
       'BYD Tang Flagship er stór sjö sæta jeppi með fjórhjóladrifi, ætlaður stórum fjölskyldum sem vilja hefðbundið jeppalag og ríflegt innanrými.',
-      'Hann er með mjög stóra rafhlöðu og meðal þeirra aflmestu á svipuðu verði, og hröðunin er snörp fyrir jafn stóran bíl. Farangursrýmið er með því stærsta í sínum verðflokki þegar aftasta sætaröðin er felld niður.',
-      'Stærsti veikleikinn kemur fram á langferðum: hann drífur styttra en flestir á svipuðu verði og er meðal þeirra sem hlaða hægast. Hyundai IONIQ 9 Long Range AWD kostar 290.000 kr. meira en drífur 75 km lengra, hleður með um 55% styttri stoppum og má draga 1.000 kg meira.',
+      'Hann er meðal þeirra aflmestu á svipuðu verði og hröðunin er snörp fyrir jafn stóran bíl. Farangursrýmið er með því stærsta í hans verðflokki þegar aftasta sætaröðin er felld niður.',
+      'Stærsti veikleikinn kemur fram á langferðum: hann drífur styttra en flestir keppinautar hans og er meðal þeirra sem hlaða hægast. Hyundai IONIQ 9 Long Range AWD kostar 290.000 kr. meira en drífur 75 km lengra, hleður með um 55% styttri stoppum og má draga 1.000 kg meira.',
       'Tang hentar best þeim sem hlaða heima og meta pláss og afl ofar langferðum.',
     ],
     facts: 'e3108495b06c',
@@ -236,7 +236,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Citroën ë-C4 er hlaðbakur með jepplingsyfirbragði sem leggur áherslu á mýkt frekar en afköst. Hann er þekktur fyrir mjúka fjöðrun og þægileg sæti sem deyfa ójöfnur vel, og hentar þeim sem vilja lágværan og þægilegan hversdagsbíl.',
       'Hann er fremur ódýr og akstursþægindin eru það sem greinir hann frá keppinautunum. Í tölunum hefur hann fáa styrkleika.',
-      'Á móti kemur að hann drífur styttra, hleður hægar og er hægari en flestir á svipuðu verði, skottið er minna en hjá flestum þeirra og hann má ekki draga kerru. Volkswagen ID. Cross er 100.000 kr. ódýrari, drífur 11 km lengra, hleður með um 20% styttri stoppum, er með 95 l stærra skott og má draga 1.200 kg.',
+      'Hann drífur styttra, hleður hægar og er hægari en flestir á svipuðu verði, skottið er minna og hann má ekki draga kerru. Volkswagen ID. Cross er 100.000 kr. ódýrari, drífur 11 km lengra, hleður með um 20% styttri stoppum, er með 95 l stærra skott og má draga 1.200 kg.',
       'ë-C4 er ljúfur kostur fyrir þá sem setja mjúkan akstur ofar öllu, en fyrir sama verð fæst meira annars staðar.',
     ],
     facts: '0f203bba0964',
@@ -245,8 +245,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'fiat-500e-base': {
     paragraphs: [
       'Fiat 500e er lítill fjögurra sæta borgarbíll með ítölsku retro-útliti, aðeins 3,6 m á lengd, sniðinn að þröngum götum og stuttum ferðum. Hann hentar þeim sem vilja sjarmerandi innanbæjarbíl sem kemst í stæði sem stærri bílar ráða ekki við.',
-      'Hann er mjög ódýr og mjög nettur, sem gerir hann að fýsilegum öðrum bíl á heimilið, og rafhlaðan fyllist auðveldlega heima yfir nótt.',
-      'Á móti kemur að hann drífur mjög stutt, hleður hægar en flestir á svipuðu verði, skottið er eitt það minnsta og hann má ekki draga kerru. Hyundai IONIQ 3 Standard Range er 290.000 kr. ódýrari, drífur 39 km lengra, rúmar fimm, er með 256 l stærra skott og má draga 750 kg.',
+      'Hann er mjög ódýr og nettur, sem gerir hann að fýsilegum öðrum bíl á heimilið, og rafhlaðan fyllist auðveldlega heima yfir nótt.',
+      'Gallarnir eru að hann drífur mjög stutt, hleður hægar en flestir keppinautar hans, skottið er eitt það minnsta og hann má ekki draga kerru. Hyundai IONIQ 3 Standard Range er 290.000 kr. ódýrari, drífur 39 km lengra, rúmar fimm, er með 256 l stærra skott og má draga 750 kg.',
       '500e er laglegur borgarbíll fyrir þá sem kaupa með hjartanu, en gefur mikið eftir í drægni og plássi.',
     ],
     facts: 'ed1eed510bce',
@@ -256,7 +256,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Fiat 600e er lítill jepplingur með ítölsku retro-útliti, systurbíll Jeep Avenger, ætlaður þeim sem vilja stílhreinan bíl í dagleg erindi og styttri ferðir.',
       'Hann er fremur ódýr, lipur í þröngum götum og auðveldur í stæðum, og hraðhleðslan er í meðallagi á þessu verði.',
-      'Á móti kemur að hann drífur styttra en flestir á svipuðu verði og er meðal þeirra hægustu, skottið er minna en hjá flestum þeirra og hann má ekki draga kerru. Volkswagen ID. Cross er 100.000 kr. ódýrari, drífur 27 km lengra, er með 115 l stærra skott og má draga 1.200 kg.',
+      'Á móti kemur að hann drífur styttra en flestir keppinautar hans og er meðal þeirra hægustu, skottið er minna og hann má ekki draga kerru. Volkswagen ID. Cross er 100.000 kr. ódýrari, drífur 27 km lengra, er með 115 l stærra skott og má draga 1.200 kg.',
       '600e höfðar til þeirra sem heillast af ítalska sjarmanum, en fyrir sama verð fæst hagnýtari bíll.',
     ],
     facts: '5cb3f7454b4f',
@@ -265,8 +265,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'ford-capri-base': {
     paragraphs: [
       'Ford Capri er rennilegur jepplingur með aflíðandi þaklínu og fjórhjóladrifi, byggður á sama grunni og Volkswagen ID.5, fyrir þá sem vilja rúmgóðan bíl með meiri karakter en hefðbundnir kassalaga fjölskyldubílar.',
-      'Hann er meðal þeirra langdrægustu og þeirra sem hlaða hraðast á svipuðu verði og sneggri en flestir þeirra, og skottið er stærra en hjá flestum í hans verðflokki þrátt fyrir þaklínuna.',
-      'Á móti kemur að hann má aðeins draga 1.200 kg, minna en flestir á svipuðu verði. Tesla Model Y Premium Long Range kostar 40.000 kr. meira, er með 282 l stærra skott og má draga 400 kg meira, en hann er aðeins afturhjóladrifinn.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu og þeirra sem hlaða hraðast, sneggri en flestir og með stærra skott en flestir þrátt fyrir þaklínuna.',
+      'Helsti ókosturinn er að hann má aðeins draga 1.200 kg, minna en flestir keppinautar hans. Tesla Model Y Premium Long Range kostar 40.000 kr. meira, er með 282 l stærra skott og má draga 400 kg meira, en hann er aðeins afturhjóladrifinn.',
       'Capri er einn sterkasti fjórhjóladrifni ferðabíllinn á sínu verði, ef ekki þarf að draga mikið.',
     ],
     facts: 'f3e474e1f35f',
@@ -276,8 +276,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Ford Explorer ER AWD er kassalaga meðalstór jepplingur með fjórhjóladrifi, byggður á sama grunni og Volkswagen ID.4, sem hentar fólki sem vill jeppalag, þægilega sætishæð og gott útsýni.',
       'Hann drífur lengra, hleður hraðar og er sneggri en flestir á svipuðu verði, svo hann hentar vel í ferðalög milli landshluta.',
-      'Á móti kemur að hann má aðeins draga 1.200 kg, minna en flestir á svipuðu verði. Hyundai IONIQ 5 Long Range AWD kostar það sama en hleður með um 35% styttri stoppum og má draga 400 kg meira.',
-      'Explorer er vel heppnaður og jarðbundinn fjölskyldubíll sem fer vel með íslenskan vetur, ef ekki þarf að draga mikið.',
+      'Helsti ókosturinn er að hann má aðeins draga 1.200 kg, minna en flestir keppinautar hans. Hyundai IONIQ 5 Long Range AWD kostar það sama en hleður með um 35% styttri stoppum og má draga 400 kg meira.',
+      'Explorer er vel heppnaður og jarðbundinn fjölskyldubíll sem fer vel með íslenskan vetur, svo lengi sem ekki þarf að draga þungt.',
     ],
     facts: '9eb36bb10329',
     model: 'gemini-3.8-flash, thinking high',
@@ -285,8 +285,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'ford-mustang-mach-e-lr-awd': {
     paragraphs: [
       'Ford Mustang Mach-E LR AWD er rennilegur jepplingur með fjórhjóladrifi og sportlegum svip, sem sameinar rými fjölskyldubíls og líflega aksturseiginleika.',
-      'Hann drífur lengra en flestir á svipuðu verði og er aflmeiri en flestir þeirra, og auk skottsins er 100 l framskott undir vélarhlífinni, með því stærsta sem gerist. Hann má draga 1.500 kg.',
-      'Á móti kemur að hann hleður hægar en flestir á svipuðu verði. Smart #5 Pulse er 100.000 kr. ódýrari, hleður með um 50% styttri stoppum, er með 111 l stærra skott og mun aflmeiri, en drífur 10 km styttra.',
+      'Hann drífur lengra og er aflmeiri en flestir á svipuðu verði, og auk skottsins er 100 l framskott undir vélarhlífinni, með því stærsta sem gerist. Hann má draga 1.500 kg.',
+      'Gallinn er að hann hleður hægar en flestir keppinautar hans. Smart #5 Pulse er 100.000 kr. ódýrari, hleður með um 50% styttri stoppum, er með 111 l stærra skott og mun aflmeiri, en drífur 10 km styttra.',
       'Mach-E hentar þeim sem vilja langdrægan og líflegan fjölskyldubíl, ef hægari hleðsla á ferðalögum er ekki fyrirstaða.',
     ],
     facts: '01e9d7fa4b33',
@@ -295,9 +295,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'ford-puma-base': {
     paragraphs: [
       'Ford Puma er lítill og nettur jepplingur, ætlaður sem hagkvæmur bæjarbíll með hærri setstöðu og lipra aksturseiginleika.',
-      'Skottið er eitt það stærsta á svipuðu verði og 43 l framskott bætist við, og hann hleður hraðar en flestir í sínum verðflokki. Hann er líka mjög ódýr.',
-      'Á móti kemur að hann drífur styttra en flestir á svipuðu verði. Leapmotor B10 67.1 kWh kostar 100.000 kr. meira en drífur 58 km lengra og hleður með um 10% styttri stoppum, þótt skottið sé 93 l minna.',
-      'Puma er laglegur og hagnýtur hversdagsbíll á hagstæðu verði fyrir þá sem aka mest innanbæjar.',
+      'Hann er mjög ódýr, en skottið er samt eitt það stærsta á svipuðu verði og 43 l framskott bætist við. Hann hleður líka hraðar en flestir keppinautar hans.',
+      'Á móti kemur að hann drífur styttra en flestir þeirra. Leapmotor B10 67.1 kWh kostar 100.000 kr. meira en drífur 58 km lengra og hleður með um 10% styttri stoppum, þótt skottið sé 93 l minna.',
+      'Puma er laglegur og hagnýtur hversdagsbíll fyrir þá sem aka mest innanbæjar.',
     ],
     facts: '13dd726fc66c',
     model: 'gemini-3.8-flash, thinking medium',
@@ -305,8 +305,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'hongqi-ehs5-base': {
     paragraphs: [
       'Hongqi EHS5 er jepplingur með fjórhjóladrifi frá kínverska lúxusmerkinu Hongqi, sem einkennist af miklu afli og snarpri hröðun á hóflegu verði.',
-      'Hann er meðal sneggstu og aflmestu bíla á sínu verði, drífur lengra en flestir þeirra og er meðal þeirra sem hlaða hraðast í sínum verðflokki.',
-      'Á móti kemur að Hongqi er nýtt merki hér á landi og meiri óvissa er um endursöluverð og þjónustunet en hjá rótgrónum merkjum. Peugeot e-3008 kostar 180.000 kr. meira frá þekktara merki og drífur álíka langt, en er framhjóladrifinn og hleður með um 80% lengri stoppum.',
+      'Hann er meðal sneggstu og aflmestu bíla á sínu verði, drífur lengra en flestir keppinautar hans og er meðal þeirra sem hlaða hraðast.',
+      'Hongqi er hins vegar nýtt merki hér á landi og meiri óvissa er um endursöluverð og þjónustunet en hjá rótgrónum merkjum. Peugeot e-3008 kostar 180.000 kr. meira frá þekktara merki og drífur álíka langt, en er framhjóladrifinn og hleður með um 80% lengri stoppum.',
       'EHS5 gefur mikið fyrir peninginn, fyrir þá sem eru tilbúnir að veðja á nýtt merki.',
     ],
     facts: 'c1ddd31fa032',
@@ -315,7 +315,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'hongqi-ehs7-premium': {
     paragraphs: [
       'Hongqi EHS7 Premium er stór lúxusjepplingur með fjórhjóladrifi, tæpir fimm metrar á lengd, frá kínverska lúxusmerkinu Hongqi, og býður mikið afl og rými fyrir verð sem fáir ná.',
-      'Hann er meðal sneggstu og aflmestu bíla á sínu verði, skottið er eitt það stærsta í sínum verðflokki og 62 l framskott bætist við. Hann drífur líka lengra en flestir á svipuðu verði og er meðal þeirra sem hlaða hraðast.',
+      'Í sínum verðflokki er hann meðal sneggstu og aflmestu bílanna, skottið er eitt það stærsta og 62 l framskott bætist við. Hann drífur líka lengra en flestir keppinautar hans og er meðal þeirra sem hlaða hraðast.',
       'Á móti kemur að merkið er nýtt hér á landi og óvissa um endursöluverð og þjónustu meiri en hjá rótgrónum merkjum. Subaru e-Outback kostar 100.000 kr. meira frá traustu merki með álíka stórt skott, en hleður með um 50% lengri stoppum og er mun aflminni.',
       'EHS7 gefur gríðarlega mikið fyrir peninginn, fyrir þá sem treysta nýju merki.',
     ],
@@ -326,7 +326,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Hyundai INSTER er lítill og kassalaga jepplingur, aðeins 3,8 m á lengd, sniðinn að þéttbýli og þröngum stæðum, og hentar vel sem annar bíll heimilisins.',
       'Stærsti kosturinn er verðið, enda er hann einn ódýrasti rafbíllinn á markaðnum, og hann kemur frá merki með rótgróið þjónustunet. Sætin má fella og færa á ýmsa vegu, svo innanrýmið nýtist vel miðað við stærð.',
-      'Á móti kemur að hann drífur styttra, hleður hægar og er hægari en flestir á svipuðu verði, og skottið er eitt það minnsta. Leapmotor B03X ProMax er 200.000 kr. ódýrari, drífur 55 km lengra, hleður með um 40% styttri stoppum og er með 127 l stærra skott.',
+      'Hann drífur hins vegar styttra, hleður hægar og er hægari en flestir á svipuðu verði, og skottið er eitt það minnsta. Leapmotor B03X ProMax er 200.000 kr. ódýrari, drífur 55 km lengra, hleður með um 40% styttri stoppum og er með 127 l stærra skott.',
       'INSTER er lipur og hagkvæmur bæjarbíll frá þekktu merki, en síður til ferðalaga.',
     ],
     facts: '6832195fd771',
@@ -336,7 +336,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Hyundai INSTER Long Range er lítill og kassalaga jepplingur, aðeins 3,8 m á lengd, með hárri setstöðu og góðu útsýni, sniðinn að þéttbýli og þröngum stæðum.',
       'Hann er mjög ódýr og drífur 43 km lengra en grunnútfærslan, sem dugar í daglegan akstur og styttri ferðir milli bæja. Sætin má fella og færa á ýmsa vegu, svo innanrýmið nýtist vel miðað við stærð.',
-      'Á móti kemur að hann drífur styttra, hleður hægar og er hægari en flestir á svipuðu verði, og skottið er minna en hjá flestum þeirra. Ford Puma kostar 200.000 kr. meira en hleður með um 25% styttri stoppum, er mun sneggri og með 172 l stærra skott.',
+      'Miðað við keppinautana drífur hann samt styttra, hleður hægar og er hægari, og skottið er minna en hjá flestum. Ford Puma kostar 200.000 kr. meira en hleður með um 25% styttri stoppum, er mun sneggri og með 172 l stærra skott.',
       'INSTER Long Range er hreinræktaður borgarbíll sem hittir í mark í þéttbýli.',
     ],
     facts: '383ab1ec50e1',
@@ -345,8 +345,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'hyundai-ioniq-3-standard-range': {
     paragraphs: [
       'Hyundai IONIQ 3 Standard Range er lítill fimm sæta hlaðbakur, ætlaður sem hagkvæmur bæjarbíll í vinnuna, búðina og daglegt amstur.',
-      'Helsti kostur hans er verðið, enda er hann mjög ódýr, og skottið er stærra en hjá flestum á svipuðu verði þó bíllinn sé nettur. Hann má líka draga 750 kg, sem sumir bílar í þessum verðflokki mega ekki.',
-      'Á móti kemur að hann er með mjög litla rafhlöðu og drífur mjög stutt, sérstaklega í vetrarkulda, og hann hleður hægar en flestir á svipuðu verði. Renault R5 E-Tech 52 kWh er 110.000 kr. ódýrari en drífur 65 km lengra og hleður með um 15% styttri stoppum, þótt skottið sé 115 l minna.',
+      'Helsti kostur hans er verðið, enda er hann mjög ódýr, og skottið er stærra en hjá flestum á svipuðu verði þó bíllinn sé nettur. Hann má líka draga 750 kg, sem sumir keppinautar hans mega ekki.',
+      'Á móti kemur að hann drífur mjög stutt, sérstaklega í vetrarkulda, og hleður hægar en flestir í þessum verðflokki. Renault R5 E-Tech 52 kWh er 110.000 kr. ódýrari en drífur 65 km lengra og hleður með um 15% styttri stoppum, þótt skottið sé 115 l minna.',
       'IONIQ 3 hentar best sem annar bíll heimilisins eða hreinn bæjarbíll, frekar en til reglulegra ferða milli landshluta.',
     ],
     facts: '2796cf363a0d',
@@ -355,8 +355,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'hyundai-ioniq-3-long-range': {
     paragraphs: [
       'Hyundai IONIQ 3 Long Range er lítill fimm sæta hlaðbakur sem leggur áherslu á drægni og hagkvæmni frekar en afl.',
-      'Hann er mjög ódýr, drífur lengra og hleður hraðar en flestir á svipuðu verði, og skottið er stærra en hjá flestum þeirra, svo hann dugar vel í ferðalög milli landshluta.',
-      'Á móti kemur að hann er meðal þeirra hægustu og aflminnstu á svipuðu verði og má aðeins draga 750 kg. Leapmotor C10 ProMax kostar 190.000 kr. meira, er stærri bíll, mun sneggri og má draga 750 kg meira.',
+      'Hann er mjög ódýr, en drífur samt lengra, hleður hraðar og er með stærra skott en flestir á svipuðu verði, svo hann dugar vel í ferðalög milli landshluta.',
+      'Hann er hins vegar meðal þeirra hægustu og aflminnstu í þessum verðflokki og má aðeins draga 750 kg. Leapmotor C10 ProMax kostar 190.000 kr. meira, er stærri bíll, mun sneggri og má draga 750 kg meira.',
       'IONIQ 3 Long Range er skynsamlegt val fyrir þá sem vilja komast langt fyrir lítið og láta afl mæta afgangi.',
     ],
     facts: 'cc6347a9b495',
@@ -365,7 +365,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'hyundai-ioniq-5-long-range-awd': {
     paragraphs: [
       'Hyundai IONIQ 5 Long Range AWD er jepplingur með fjórhjóladrifi, framúrstefnulegu útliti og óvenju opnu innanrými: langt hjólhaf skilar flötu gólfi og ríkulegu fótaplássi. Hann hentar fjölskyldum sem vilja þægilegan og rúmgóðan ferðabíl.',
-      'Hann hleður hraðast allra bíla á svipuðu verði, drífur lengra en flestir þeirra og er sneggri en flestir í sínum verðflokki. Hann má draga 1.600 kg, meira en flestir á þessu verði.',
+      'Hann hleður hraðast allra bíla á svipuðu verði, drífur lengra og er sneggri en flestir keppinautar hans, og má draga 1.600 kg, meira en flestir þeirra.',
       'Veikleikarnir eru fáir: skottið og drægnin eru aðeins í meðallagi miðað við rafbíla almennt, og framskottið er lítið. Systurbíllinn Kia EV6 2025 Long Range AWD kostar það sama og má draga 200 kg meira, fyrir þá sem vilja sportlegri bíl.',
       'IONIQ 5 er einn sterkasti fjölskyldubíllinn á sínu verði, sérstaklega fyrir þá sem ferðast mikið um landið.',
     ],
@@ -375,8 +375,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'hyundai-ioniq-9-long-range-awd': {
     paragraphs: [
       'Hyundai IONIQ 9 Long Range AWD er stór sjö sæta jeppi, rúmlega fimm metrar á lengd, með fullgildri þriðju sætaröð. Hann leggur áherslu á þægindi og rými fyrir stórar fjölskyldur frekar en sportlega takta.',
-      'Skottið er eitt það stærsta í sínum verðflokki og hann má draga 2.500 kg, meira en flestir á svipuðu verði, svo hjólhýsi eða hestakerra er ekkert mál. Hann drífur fremur langt og hraðhleðslan er í meðallagi í sínum verðflokki.',
-      'Á móti kemur að hann er aflminni og hægari en flestir á svipuðu verði, þótt það skipti minna máli í bíl af þessari gerð. XPENG X9 AWD Performance er 400.000 kr. dýrari en hleður með um 45% styttri stoppum og er aflmeiri, en drífur 35 km styttra.',
+      'Skottið er eitt það stærsta í hans verðflokki og hann má draga 2.500 kg, meira en flestir keppinautar hans, svo hjólhýsi eða hestakerra er ekkert mál. Hann drífur fremur langt og hraðhleðslan er í meðallagi.',
+      'Hann er aflminni og hægari en flestir á svipuðu verði, þótt það skipti minna máli í bíl af þessari gerð. XPENG X9 AWD Performance er 400.000 kr. dýrari en hleður með um 45% styttri stoppum og er aflmeiri, en drífur 35 km styttra.',
       'IONIQ 9 er einn sterkasti kosturinn fyrir stórar fjölskyldur sem ferðast um landið með fullan bíl eða kerru aftan í.',
     ],
     facts: '61ec7ef63fe4',
@@ -385,7 +385,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'hyundai-ioniq-9-long-range-performance-awd': {
     paragraphs: [
       'Hyundai IONIQ 9 Long Range Performance AWD er stór sjö sæta jeppi, rúmlega fimm metrar á lengd, með fullgildri þriðju sætaröð og öflugri útfærslu drifbúnaðarins. Hann hentar stórum fjölskyldum sem vilja mikið rými og þægilegan, hljóðlátan akstur.',
-      'Skottið er eitt það stærsta á svipuðu verði og hann má draga 2.500 kg, meira en flestir í sínum verðflokki, svo hjólhýsi eða hestakerra er ekkert mál. Hann drífur fremur langt og hleður fremur hratt.',
+      'Skottið er eitt það stærsta á svipuðu verði og hann má draga 2.500 kg, meira en flestir keppinautar hans, svo hjólhýsi eða hestakerra er ekkert mál. Hann drífur fremur langt og hleður fremur hratt.',
       'Á móti kemur að hann er fremur dýr og drægni, hleðsla og snerpa eru aðeins í meðallagi miðað við verðið. Hyundai IONIQ 9 Long Range AWD er 1.500.000 kr. ódýrari með sama rými og álíka drægni, og munar þar aðeins um snerpuna.',
       'IONIQ 9 Performance er fyrir þá sem vilja stærsta Hyundai-jeppann með aukinni snerpu, en flestum dugar ódýrari útfærslan.',
     ],
@@ -395,9 +395,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'hyundai-kona-electric-65-kwh': {
     paragraphs: [
       'Hyundai Kona Electric er lipur og hagnýtur framhjóladrifinn jepplingur sem hentar vel sem sparneytinn fjölskyldubíll eða í daglegar ferðir til og frá vinnu. Hann fer létt með þröng bílastæði en veitir samt ágæta yfirsýn og þægilegt aðgengi.',
-      'Hann drífur lengra en flestir á svipuðu verði og skottið er stærra en hjá flestum þeirra, með lítið framskott að auki. Í daglegu lífi þýðir það færri hleðslur í vikunni og nóg pláss fyrir innkaupin, jafnvel þegar vetrarkuldinn dregur úr drægninni.',
-      'Á móti kemur að hann hleður hægar en flestir á svipuðu verði, er hægari en flestir þeirra og má aðeins draga 750 kg. Leapmotor C10 ProMax er 60.000 kr. ódýrari, hleður með um 25% styttri stoppum og má draga 750 kg meira, en hann er stærri bíll og ekki jafn lipur í þröngum stæðum.',
-      'Ef markmiðið er að fá mikla drægni og pláss fyrir hverja krónu í þægilegum bíl, og lengri hleðslustopp á ferðalögum skipta ekki öllu, er Kona Electric einn hagkvæmasti kosturinn.',
+      'Hann drífur lengra og er með stærra skott en flestir á svipuðu verði, með lítið framskott að auki. Í daglegu lífi þýðir það færri hleðslur í vikunni og nóg pláss fyrir innkaupin, jafnvel þegar vetrarkuldinn dregur úr drægninni.',
+      'Hann hleður hins vegar hægar og er hægari en flestir keppinautar hans, og má aðeins draga 750 kg. Leapmotor C10 ProMax er 60.000 kr. ódýrari, hleður með um 25% styttri stoppum og má draga 750 kg meira, en hann er stærri bíll og ekki jafn lipur í þröngum stæðum.',
+      'Fyrir þá sem vilja mikla drægni og pláss fyrir hverja krónu í þægilegum bíl, og geta sætt sig við lengri hleðslustopp, er Kona Electric einn hagkvæmasti kosturinn.',
     ],
     facts: '20908792bb67',
     model: 'gemini-3.8-flash, thinking high',
@@ -405,8 +405,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'hyundai-staria-electric-base': {
     paragraphs: [
       'Hyundai STARIA Electric er stór fjölnotabíll með sætum fyrir allt að níu manns og framúrstefnulegu útliti. Hann hentar stórum fjölskyldum, ferðaþjónustu og hópum þar sem sætafjöldi og rými skipta öllu.',
-      'Hann er lengstur bíla á svipuðu verði og með einu af stærstu skottunum, og hann má draga 2.000 kg, meira en flestir í sínum verðflokki. Rafhlaðan er stærri en hjá flestum á svipuðu verði, og hann hleður mun hraðar en aðrir stórir fjölnotabílar.',
-      'Á móti kemur að hann drífur mjög stutt, og í vetrarkulda styttist drægnin enn frekar, svo langferðir kalla á fleiri hleðslustopp. Hann er líka aflminni en flestir á svipuðu verði.',
+      'Hann er lengstur bíla á svipuðu verði og með einu af stærstu skottunum, og hann má draga 2.000 kg, meira en flestir keppinautar hans. Hann hleður líka mun hraðar en aðrir stórir fjölnotabílar.',
+      'Gallinn er að hann drífur mjög stutt, og í vetrarkulda styttist drægnin enn frekar, svo langferðir kalla á fleiri hleðslustopp. Hann er líka aflminni en flestir í þessum verðflokki.',
       'Fyrir þá sem þurfa níu sæti er STARIA hagstæður kostur: Peugeot e-Traveller er 1.300.000 kr. dýrari og Toyota Proace Verso 2.400.000 kr. dýrari, og báðir drífa styttra, hlaða hægar og mega draga minna.',
     ],
     facts: '55454b8ff503',
