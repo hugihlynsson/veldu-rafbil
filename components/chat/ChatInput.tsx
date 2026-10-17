@@ -1,6 +1,12 @@
 'use client'
 
-import React, { Suspense, useRef, useState } from 'react'
+import React, {
+  Suspense,
+  useEffect,
+  useEffectEvent,
+  useRef,
+  useState,
+} from 'react'
 import { trackEvent } from 'fathom-client'
 import {
   CHAT_SUGGESTIONS,
@@ -11,7 +17,11 @@ import useInputModality, { getInputModality } from '@/utils/inputModality'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import type { Filters } from '@/modules/list/filters'
+import { agree } from '@/modules/copy/plural'
 import SuggestionPills from '@/components/SuggestionPills'
+import SearchIcon from '@/components/SearchIcon'
+import SendIcon from '@/components/SendIcon'
+import type { BarAction } from '@/components/filters/FilterSuggestions'
 import type { ShownSuggestions } from '@/modules/list/suggestionOutcome'
 import reportSuggestionOutcome from '@/utils/reportSuggestionOutcome'
 
@@ -20,6 +30,12 @@ import reportSuggestionOutcome from '@/utils/reportSuggestionOutcome'
 const importFilterSuggestions = () =>
   import('@/components/filters/FilterSuggestions')
 const FilterSuggestions = dynamic(importFilterSuggestions)
+
+const noAction: BarAction = { text: '', filter: null }
+
+// The longest a send waits on the suggestions before it goes to the chat:
+// past the route's own timeout, for a chunk that never arrives
+const READ_WAIT = 2_000
 
 interface Props {
   onOpenChat: () => void
@@ -68,19 +84,68 @@ const ChatInput: React.FunctionComponent<Props> = ({
   // The filter pills are fetched on the first keystroke, then kept mounted so
   // they can play their exit when the text is cleared or the input left
   const [hasTyped, setHasTyped] = useState(value !== '')
+  const [action, setAction] = useState<BarAction>(noAction)
+  // Sent before the suggestions had read it, so it goes once they have
+  const [sendWhenRead, setSendWhenRead] = useState<string | null>(null)
+  const formRef = useRef<HTMLFormElement>(null)
   const filterPills = useRef<ShownSuggestions | null>(null)
   useInputModality()
 
+  const filter = filterSuggestions && value.trim() ? action.filter : null
+  const carsLeft =
+    filter && `${filter.count} ${agree(filter.count, 'bíll', 'bílar')}`
+
+  const ask = () => {
+    // A busy chat takes no message, however it was sent
+    if (disabled) return
+    if (filterPills.current) {
+      reportSuggestionOutcome('sent', filterPills.current)
+    }
+    sendMessage(value)
+    trackEvent('Sent message')
+    onValueChange('')
+    onOpenChat()
+  }
+
+  const send = (next: BarAction) => {
+    if (filterSuggestions && next.filter) {
+      trackEvent('Filtered from bar')
+      if (filterPills.current) {
+        reportSuggestionOutcome('appliedAll', filterPills.current)
+      }
+      filterSuggestions.onApply(next.filter.filters)
+      onValueChange('')
+      // Off the bar, so the list it narrowed is in view, keyboard and all
+      formRef.current?.querySelector('input')?.blur()
+    } else {
+      ask()
+    }
+  }
+
+  const handleAction = (next: BarAction) => {
+    setAction(next)
+    if (sendWhenRead !== null && next.text === sendWhenRead) {
+      setSendWhenRead(null)
+      send(next)
+    }
+  }
+
+  const askUnread = useEffectEvent(() => {
+    setSendWhenRead(null)
+    ask()
+  })
+  useEffect(() => {
+    if (sendWhenRead === null) return
+    const timer = setTimeout(askUnread, READ_WAIT)
+    return () => clearTimeout(timer)
+  }, [sendWhenRead])
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (value.trim()) {
-      if (filterPills.current) {
-        reportSuggestionOutcome('sent', filterPills.current)
-      }
-      sendMessage(value)
-      trackEvent('Sent message')
-      onValueChange('')
-      onOpenChat()
+    const text = value.trim()
+    if (text) {
+      if (filterSuggestions && action.text !== text) setSendWhenRead(text)
+      else send(action)
     } else if (hasMessages) {
       // Without this there is no keyboard route back into an open chat
       onOpenChat()
@@ -89,6 +154,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onValueChange(e.target.value)
+    setSendWhenRead(null)
     if (e.target.value) setHasTyped(true)
   }
 
@@ -142,6 +208,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
       }}
     >
       <form
+        ref={formRef}
         onSubmit={onSubmit}
         className={clsx(
           'pointer-events-auto flex items-center gap-2 p-2 pl-5 bg-veil/70 backdrop-blur-xl rounded-full shadow-(--shadow-pill) w-80 max-w-[90vw] transition-[width,scale] duration-300 ease-in-out border border-edge',
@@ -164,28 +231,26 @@ const ChatInput: React.FunctionComponent<Props> = ({
         />
         <button
           onFocus={handleFocusRing}
-          aria-label="Senda skilaboð"
+          aria-label={carsLeft ? `Sía listann: ${carsLeft}` : 'Senda skilaboð'}
           type="submit"
-          disabled={disabled || !value.trim()}
-          className="appearance-none w-9 h-9 flex items-center justify-center bg-sky border-0 rounded-full text-on-sky cursor-pointer transition duration-200 shrink-0 hover:enabled:bg-sky-hover hover:enabled:scale-105 disabled:opacity-40 disabled:cursor-not-allowed"
+          // A busy chat takes no message, but the list still takes a filter
+          disabled={(disabled && !filter) || !value.trim()}
+          // Keeps the input's blur from clearing the suggestions before the
+          // click lands; Safari does not focus buttons on click
+          onMouseDown={(event) => event.preventDefault()}
+          className={clsx(
+            'appearance-none h-9 flex items-center justify-center gap-1.5 bg-sky border-0 rounded-full text-on-sky cursor-pointer transition duration-200 shrink-0 hover:enabled:bg-sky-hover disabled:opacity-40 disabled:cursor-not-allowed',
+            filter ? 'px-3.5 text-sm font-semibold whitespace-nowrap' : 'w-9',
+          )}
         >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <path
-              d="M2 10L18 2L10 18L8.5 11.5L2 10Z"
-              fill="currentColor"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          {carsLeft ? (
+            <>
+              <SearchIcon size={15} />
+              {carsLeft}
+            </>
+          ) : (
+            <SendIcon size={20} />
+          )}
         </button>
       </form>
 
@@ -194,13 +259,16 @@ const ChatInput: React.FunctionComponent<Props> = ({
         // the input mid-word, and the keystrokes typed meanwhile with it
         <Suspense fallback={null}>
           <FilterSuggestions
-            active={isFocused && value.trim() !== ''}
+            // Kept reading while a send waits on it, should the input be left
+            active={(isFocused || sendWhenRead !== null) && value.trim() !== ''}
             text={value}
             filters={filterSuggestions.filters}
             onApply={filterSuggestions.onApply}
             onShownChange={(shown) => {
               filterPills.current = shown
             }}
+            onAction={handleAction}
+            onAsk={ask}
           />
         </Suspense>
       )}

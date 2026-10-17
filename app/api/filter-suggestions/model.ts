@@ -4,6 +4,7 @@ import type { FilterKey } from '@/modules/list/filters'
 import {
   needsModel,
   parseFilterIntent,
+  readsAsQuestion,
   within,
 } from '@/modules/list/filterIntent'
 import {
@@ -77,6 +78,9 @@ const readNoul = (answer: unknown): number | null => {
   return typeof noul === 'number' && within(noul, 0, 1) ? noul : null
 }
 
+const readsAsAdvisor = (answers: Record<string, unknown>) =>
+  (readNoul(answers[ADVISOR_KEY]) ?? 0) >= ADVISOR_THRESHOLD
+
 /**
  * The model's answers as suggestions. It can only ever pick one of the
  * options it was given, so the worst it can do is a wrong filter from our own
@@ -92,6 +96,7 @@ export const suggestionsFromAnswers = (
       options,
       ordered,
       stated = [],
+      threshold = APPLY_THRESHOLD,
     } = question as IntentQuestion<FilterKey>
     if (!Object.hasOwn(answers, key)) return []
     const all = [...options, ...stated]
@@ -121,7 +126,7 @@ export const suggestionsFromAnswers = (
 
     if (ordered) {
       const applies = 1 - none
-      if (applies < APPLY_THRESHOLD) return []
+      if (applies < threshold) return []
       const brackets = rest.slice(0, options.length)
       const numbers = rest.slice(options.length)
       const onBrackets = brackets.reduce((sum, share) => sum + share, 0)
@@ -148,7 +153,7 @@ export const suggestionsFromAnswers = (
     const best = byValue.indexOf(Math.max(...byValue))
     const likeliest = all[best]
     const share = byValue[best]
-    if (!likeliest || share === undefined || share < APPLY_THRESHOLD) return []
+    if (!likeliest || share === undefined || share < threshold) return []
     const option =
       stated.find(({ value }) => value === likeliest.value) ?? likeliest
     return pick(option, share)
@@ -156,7 +161,7 @@ export const suggestionsFromAnswers = (
 
   // A question states no wish, so what the model reads into one is no filter;
   // a number the person typed in it still is
-  const asksAdvisor = (readNoul(answers[ADVISOR_KEY]) ?? 0) >= ADVISOR_THRESHOLD
+  const asksAdvisor = readsAsAdvisor(answers)
 
   // A number says one thing, so it goes to the filter surest it is about it
   return picks
@@ -180,6 +185,12 @@ export type AskModel = (
 export interface SuggestionResult {
   suggestions: FilterSuggestion[]
   model: ModelStatus
+  /**
+   * The request reads as a question for the advisor, by the model when it
+   * answered or by the text either way, so the bar's send goes to the chat
+   * rather than to the list
+   */
+  asksAdvisor: boolean
 }
 
 /**
@@ -193,7 +204,13 @@ export const suggestFilters = async (
 ): Promise<SuggestionResult> => {
   const parsed = parseFilterIntent(text)
   const fromText = suggestionsFromFilters(parsed.filters, 'text')
-  if (!needsModel(parsed)) return { suggestions: fromText, model: 'not-needed' }
+  const question = readsAsQuestion(text)
+  const fromTextAlone = (model: ModelStatus): SuggestionResult => ({
+    suggestions: fromText,
+    model,
+    asksAdvisor: question,
+  })
+  if (!needsModel(parsed)) return fromTextAlone('not-needed')
 
   const questions = withNumbers(parsed.numbers)
   const request = intentRequest(
@@ -202,8 +219,8 @@ export const suggestFilters = async (
     questions,
   )
   if (Object.keys(request.questions).length === 0)
-    return { suggestions: fromText, model: 'not-needed' }
-  if (!ask) return { suggestions: fromText, model: 'unavailable' }
+    return fromTextAlone('not-needed')
+  if (!ask) return fromTextAlone('unavailable')
 
   try {
     const { answers } = await ask(request)
@@ -213,8 +230,9 @@ export const suggestFilters = async (
     return {
       suggestions: [...fromText, ...suggestionsFromAnswers(asked, questions)],
       model: 'answered',
+      asksAdvisor: question || readsAsAdvisor(asked),
     }
   } catch {
-    return { suggestions: fromText, model: 'failed' }
+    return fromTextAlone('failed')
   }
 }

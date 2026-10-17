@@ -30,7 +30,16 @@ export interface IntentQuestion<Key extends FilterKey> {
   fromNumber?: (text: string) => Option<Key> | undefined
   /** Those options, for the request at hand */
   stated?: Option<Key>[]
+  /** The share off "none" it takes, where APPLY_THRESHOLD is too low */
+  threshold?: number
 }
+
+// Read into talk of running costs or a modest price, a price per km quietly
+// narrows the list well past what was asked. Sampled in October 2026, "besta
+// drægni miðað við verð" came to 0.98 and "mikið fyrir peninginn" to 0.92,
+// while "ódýr í rekstri" came to 0.63–0.70 and "mest fyrir peninginn" to 0.75.
+// Rare and right over common and doubtful.
+export const VALUE_THRESHOLD = 0.8
 
 // Nearest rank, so every bracket is a value a car in the list really has
 const quantile = (values: number[], share: number): number => {
@@ -284,6 +293,7 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
     value: {
       key: 'value',
       ordered: true,
+      threshold: VALUE_THRESHOLD,
       instructions:
         'Does the person in `request` want the most range for the money?',
       none: 'Value for money is not mentioned: nothing about range for the price. A low price alone is not value for money',
