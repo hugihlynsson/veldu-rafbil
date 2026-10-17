@@ -1,7 +1,8 @@
 // The cars each car's page offers as similar, and its review is written
-// against, by slug. Written by scripts/similar-cars.ts, closest in price and
-// range first; an entry can be set by hand, and a run that adds new cars
-// keeps it. similarCars.test.ts fails while a car has none.
+// against, by slug. Picked by hand, from cars of the same kind and seats near
+// it in price and range, so that every car is offered somewhere and none on
+// too many pages. scripts/similar-cars.ts fills in a new car's entry from
+// price and range alone: look it over, and offer the new car on a page or two.
 
 const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'audi-a6-e-tron-sportback-quattro': [

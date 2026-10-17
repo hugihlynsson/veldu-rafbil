@@ -210,11 +210,15 @@ make, then model. The fields that are easy to get wrong:
   sold and offers the similar cars that are. Then run the similar-cars and
   review scripts below: its review is dropped, and other cars that offered it
   as similar get another.
-- **Each car's page offers similar cars from `modules/data/similarCars.ts`.**
-  After adding, renaming or dropping a car, run `npx tsx scripts/similar-cars.ts`:
-  it adds an entry for each new car and works out again any entry naming a
-  car that is gone, and keeps the rest, some of which may have been set by
-  hand. A test fails until it has been run.
+- **Each car's page offers similar cars from `modules/data/similarCars.ts`,
+  picked by hand.** After adding, renaming or dropping a car, run
+  `npx tsx scripts/similar-cars.ts`: it fills in an entry for each new car from
+  price and range alone, works out again any entry naming a car that is gone,
+  and keeps the rest. Then look the new entry over, so it offers cars of the
+  same kind and seats, and offer the new car in the entry of a car or two near
+  it, in place of one offered often. Never run it with `--all`, which drops
+  every hand-picked entry. A test fails until every car has an entry and is
+  offered on another car's page.
 - **Each car's page has a review in `modules/data/carReviews.ts`, written by
   the advisor's model.** After any change to a car's figures, and after the
   similar-cars run above, run
