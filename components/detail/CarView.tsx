@@ -156,6 +156,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
               title={car.label}
               label="Deila bílnum"
               event="Car shared"
+              className="-ml-0.5"
             />
             {car.evDatabaseUrl && <EvDatabaseLink href={car.evDatabaseUrl} />}
           </div>
