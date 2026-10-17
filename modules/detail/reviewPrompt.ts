@@ -18,6 +18,7 @@ const writingRules = `Þegar þú skrifar:
 - Skrifaðu tölur að íslenskum sið: komma í tugabrotum (7,7 s) og punktur í þúsundum (100.000 kr.).
 - Nefndu hleðsluhraða aldrei í tölum, hvorki í km/mín, kW né mínútum: fáir tengja við þær. Segðu frekar að hann hlaði hraðar eða hægar en aðrir, eða hve miklu styttri eða lengri hleðslustoppin eru, eins og það er gefið.
 - Gættu að beygingum og samræmi („hann er góð kaup“, ekki „hann eru“), og notaðu orð um bíla en ekki fólk: lágur eða hár, ekki lágvaxinn eða hávaxinn.
+- Endurtaktu ekki sama orðalagið: segðu „á svipuðu verði“ eða „í sínum verðflokki“ í mesta lagi einu sinni, og þegar lesandinn veit við hvaða bíla er miðað dugar „flestir keppinautar hans“ eða að sleppa því. Byrjaðu ekki alltaf á sama hátt þegar þú snýrð þér að göllunum.
 - Skrifaðu eins og allir bílarnir séu fáanlegir núna: segðu ekkert um hvenær bíll kemur eða hvort hann er kominn.
 - Ekkert markdown, engin feitletrun, engir listar, engar fyrirsagnir.`
 
