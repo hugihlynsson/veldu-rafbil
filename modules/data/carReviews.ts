@@ -399,7 +399,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann hleður hægar en flestir á svipuðu verði, er hægari en flestir þeirra og má aðeins draga 750 kg. Leapmotor C10 ProMax er 60.000 kr. ódýrari, hleður með um 25% styttri stoppum og má draga 750 kg meira, en hann er stærri bíll og ekki jafn lipur í þröngum stæðum.',
       'Ef markmiðið er að fá mikla drægni og pláss fyrir hverja krónu í þægilegum bíl, og lengri hleðslustopp á ferðalögum skipta ekki öllu, er Kona Electric einn hagkvæmasti kosturinn.',
     ],
-    facts: 'd2efebe3c86d',
+    facts: '20908792bb67',
     model: 'gemini-3.8-flash, thinking high',
   },
   'hyundai-staria-electric-base': {
@@ -449,7 +449,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann hleður hægar og er hægari en flestir á svipuðu verði, og drægnin er aðeins í meðallagi. Leapmotor C10 ProMax AWD kostar 100.000 kr. meira, er fjórhjóladrifinn, mun aflmeiri og hleður með um 15% styttri stoppum, en skottið er 404 l minna.',
       'Torres EVX er prýðilegur kostur fyrir fjölskyldur sem þurfa mikið pláss og vilja langa ábyrgð, og gera ekki kröfu um hraða hleðslu.',
     ],
-    facts: '0f8f89fb8ee1',
+    facts: 'afa5bc47ed1b',
     model: 'gemini-3.8-flash, thinking high',
   },
   'kia-ev2-standard-range': {
@@ -579,7 +579,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er meðal þeirra sem drífa styst og þeirra hægustu á svipuðu verði, hleður hægar en flestir þeirra og er aðeins afturhjóladrifinn. Peugeot e-5008 Dual Motor er 300.000 kr. ódýrari, fjórhjóladrifinn og drífur 61 km lengra, en skottið er 468 l minna.',
       'PV5 hentar þeim sem setja rými og sætafjölda ofar öllu og aka mest í nærumhverfinu.',
     ],
-    facts: 'afce84cfe36c',
+    facts: '6f35c55d5785',
     model: 'gemini-3.8-flash, thinking high',
   },
   'leapmotor-t03-base': {
@@ -669,7 +669,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er aðeins afturhjóladrifinn, skottið er aðeins í meðallagi á svipuðu verði og merkið er nýlegt í Evrópu. Leapmotor C10 ProMax AWD fæst með fjórhjóladrifi fyrir 300.000 kr. meira, en drífur 75 km styttra.',
       'C10 ProMax gefur mikinn bíl fyrir peninginn, fyrir þá sem þurfa ekki fjórhjóladrif.',
     ],
-    facts: 'b7ee9166431c',
+    facts: '530b13547a1f',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-c10-promax-awd': {
@@ -749,7 +749,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann hleður hægar en flestir á svipuðu verði og skottið er minna en hjá flestum þeirra. Nissan Leaf Extended Range kostar það sama, drífur 70 km lengra, hleður með um 40% styttri stoppum og er með 100 l stærra skott, þótt hann sé mun minni bíll.',
       '6e Long Range hentar þeim sem hlaða mest heima og vilja stóran og þægilegan fólksbíl á hagstæðu verði.',
     ],
-    facts: '7cc08e00859c',
+    facts: '826ddf856106',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mazda-cx-6e-78-kwh': {
@@ -889,7 +889,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur mjög stutt, sérstaklega í vetrarkulda, hleður mjög hægt og er meðal þeirra aflminnstu á svipuðu verði. Peugeot e-Rifter er 1.100.000 kr. ódýrari, drífur 61 km lengra og hleður með um 40% styttri stoppum, og Kia PV5 drífur 130 km lengra fyrir 700.000 kr. meira.',
       'EQT 200 er laglegur og hagnýtur fjölskyldubíll innanbæjar, en stutt drægni og hæg hleðsla gera hann erfiðan sem eina bíl heimilisins.',
     ],
-    facts: '5a3138924309',
+    facts: '289224a0b57d',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mercedes-benz-eqv-300': {
@@ -1139,7 +1139,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er meðal þeirra hægustu á svipuðu verði, hleður hægar og dregur minna en flestir þeirra. Skoda Peaq 90x kostar 1.400.000 kr. meira en er fjórhjóladrifinn, drífur 111 km lengra, hleður með um 35% styttri stoppum og má draga 1.000 kg meira.',
       'e-5008 er skynsamlegur kostur fyrir barnmargar fjölskyldur sem vilja sjö sæti og mikið pláss fyrir hóflegt verð.',
     ],
-    facts: 'b47a6957b868',
+    facts: 'a5a25913aff2',
     model: 'gemini-3.8-flash, thinking high',
   },
   'peugeot-e-5008-dual-motor': {
@@ -1149,7 +1149,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur styttra, er meðal þeirra sem hlaða hægast og dregur minna en flestir á svipuðu verði. Skoda Peaq 90x kostar 900.000 kr. meira en drífur 140 km lengra, hleður með um 40% styttri stoppum og má draga 1.000 kg meira. Framhjóladrifni Peugeot e-5008 er 520.000 kr. ódýrari og drífur 29 km lengra.',
       'e-5008 Dual Motor hentar fjölskyldum sem þurfa sjö sæti og fjórhjóladrif, en síður sem langferðabíll.',
     ],
-    facts: '63f008fe944a',
+    facts: '6b04476cfe4e',
     model: 'gemini-3.8-flash, thinking high',
   },
   'peugeot-e-rifter-base': {
@@ -1159,7 +1159,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur mjög stutt, hleður mjög hægt og er mjög aflítill, svo hann hentar illa til langferða. Peugeot e-5008 er 980.000 kr. dýrari en drífur 159 km lengra, með 141 l stærra skott, og má draga 250 kg meira.',
       'Fyrir þá sem þurfa ódýran og rúmgóðan bíl fyrir marga í nærumhverfinu vinnur e-Rifter verkið vel.',
     ],
-    facts: '1f5530953756',
+    facts: 'cfb65a98ef52',
     model: 'gemini-3.8-flash, thinking high',
   },
   'peugeot-e-traveller-base': {
@@ -1659,7 +1659,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er aðeins afturhjóladrifinn og einfaldari búinn en dýrari útfærslurnar. Tesla Model Y Premium Long Range kostar 1.500.000 kr. meira og drífur 104 km lengra, og Tesla Model Y Long Range Dual Motor fæst með fjórhjóladrifi fyrir 1.900.000 kr. meira.',
       'Model Y Standard Range er sterkt val fyrir þá sem vilja mikið pláss og hleðslunet Tesla á hagstæðu verði.',
     ],
-    facts: 'cfe67b562377',
+    facts: '47b1a9ade507',
     model: 'gemini-3.8-flash, thinking high',
   },
   'tesla-model-y-premium-long-range': {
@@ -1769,7 +1769,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er meðal þeirra sem drífa styst, hlaða hægast og eru aflminnstir á svipuðu verði. Systurbíllinn Peugeot e-Rifter er nánast sami bíll en 1.300.000 kr. ódýrari.',
       'Proace City Verso er þægilegur fjölskyldubíll innanbæjar, en e-Rifter gefur það sama fyrir mun minna.',
     ],
-    facts: 'f0d18eae8555',
+    facts: 'ab8da93d30b2',
     model: 'gemini-3.8-flash, thinking high',
   },
   'toyota-proace-verso-base': {
@@ -1849,7 +1849,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er aflminni og hægari en flestir á svipuðu verði. Ef pláss og kraftur skipta meira máli býður Tesla Model Y Standard Range upp á mun meira rými og afl fyrir 140.000 krónum meira, þótt hleðslustoppin séu þar um 10% lengri.',
       'Fyrir kaupendur sem leita að sparneytnum og liprum bíl með góða drægni á sanngjörnu verði er ID.3 mjög heppilegur kostur.',
     ],
-    facts: '12a0c6f371ef',
+    facts: '3ba989fdff90',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volkswagen-id-4-gtx': {
