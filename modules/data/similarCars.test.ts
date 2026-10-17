@@ -46,4 +46,12 @@ describe('the similar-cars list', () => {
     })
     expect(siblings).toEqual([])
   })
+
+  // A car no other page offers can only be found from the list
+  it("offers every car sold on another car's page", () => {
+    const offered = new Set(Object.values(similarCars).flat())
+    const unseen = [...sold].filter((slug) => !offered.has(slug))
+    // Set it by hand in a near car's entry, in place of one offered often
+    expect(unseen).toEqual([])
+  })
 })

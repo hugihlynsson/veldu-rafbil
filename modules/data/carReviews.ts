@@ -16,10 +16,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Audi A6 e-tron Sportback quattro er stór og rennilegur fólksbíll með afturhlera og fjórhjóladrifi, nærri fimm metrar á lengd, smíðaður fyrir þá sem aka mikið milli landshluta og vilja fágaðan og hljóðlátan langferðabíl frekar en jeppa.',
       'Í sínum verðflokki drífur hann lengra, hleður hraðar og er sneggri en flestir, svo langferðir kalla á fá og stutt stopp, jafnvel í vetrarkulda. Hann má líka draga 2.100 kg, meira en flestir keppinautar hans.',
-      'Skottið er hins vegar minna en hjá flestum þeirra og lág byggingin býður ekki upp á sömu veghæð og jepplingur. Audi Q6 e-tron er hærri jepplingur með sama drifbúnaði, má draga 300 kg meira og kostar 500.000 kr. meira, en drífur 87 km styttra.',
+      'Skottið er hins vegar minna en hjá flestum þeirra og lág byggingin býður ekki upp á sömu veghæð og jepplingur. Mercedes-Benz CLA 350 4MATIC er 200.000 kr. ódýrari og drífur 58 km lengra, en skottið er 97 l minna og hann má draga 300 kg minna.',
       'A6 e-tron Sportback er einn sterkasti langferðabíllinn á sínu verði, og ódýrari en skutbílsútfærslan þótt hann drífi lengra.',
     ],
-    facts: '528cb113b364',
+    facts: '687b557b7a28',
     model: 'gemini-3.8-flash, thinking high',
   },
   'audi-a6-e-tron-avant-quattro': {
@@ -29,7 +29,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Skottið er þó minna en hjá flestum þeirra, þótt skutbílslagið rúmi meira þegar sætin eru felld niður. Audi A6 e-tron Sportback quattro er 300.000 kr. ódýrari og drífur 38 km lengra, fyrir þá sem þurfa ekki skutbílslagið.',
       'A6 e-tron Avant er fyrir þá sem vilja langdrægan og snarpan skutbíl sem dregur hjólhýsi, í stað jeppa.',
     ],
-    facts: '5124bada378e',
+    facts: '4163b98c9add',
     model: 'gemini-3.8-flash, thinking high',
   },
   'audi-e-tron-gt-quattro': {
@@ -39,17 +39,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst í þessum verðflokki, skottið er eitt það minnsta og hann má ekki draga kerru. Porsche Taycan 4 Plus kostar nánast það sama en drífur mun lengra, fyrir þá sem vilja sams konar sportbíl sem hentar betur í langferðir.',
       'e-tron GT er draumabíll fyrir þá sem leita að hreinni akstursánægju og sætta sig við takmarkaða drægni og lítið pláss.',
     ],
-    facts: '1a0ffdfe8771',
+    facts: '22bd14ebf3fe',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'audi-q4-e-tron-45-quattro': {
     paragraphs: [
       'Audi Q4 e-tron 45 quattro er meðalstór jepplingur með fjórhjóladrifi, ætlaður þeim sem kunna að meta vandaða innréttingu, lágværan akstur og rótgróið úrvalsmerki í hversdagsbíl.',
       'Það sem hann býður umfram keppinautana er fyrst og fremst merkið, frágangurinn og akstursþægindin: góð hljóðvist og mjúk fjöðrun gera langferðir áreynslulausar. Í tölunum hefur hann fáa styrkleika.',
-      'Hann drífur styttra, hleður hægar og er hægari en flestir á svipuðu verði, og má aðeins draga 1.200 kg. Smart #5 Brabus kostar 100.000 kr. meira en drífur 52 km lengra, hleður með um 40% styttri stoppum, er með 110 l stærra skott og má draga 400 kg meira.',
+      'Hann drífur styttra, hleður hægar og er hægari en flestir á svipuðu verði, og má aðeins draga 1.200 kg. Skoda Enyaq RS kostar 300.000 kr. meira, drífur 55 km lengra, er mun sneggri, með 65 l stærra skott og má draga 1.000 kg meira, og Volvo EX40 Recharge Twin er 300.000 kr. ódýrari og drífur 49 km lengra.',
       'Q4 e-tron er fyrir þá sem setja fágun og Audi-merkið í öndvegi, en fyrir peninginn fæst meiri bíll annars staðar.',
     ],
-    facts: '306c55238898',
+    facts: 'be20a3ab880b',
     model: 'gemini-3.8-flash, thinking high',
   },
   'audi-q6-e-tron-base': {
@@ -59,17 +59,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti ókosturinn er að hann er hægari en flestir keppinautar hans. Volvo EX60 P10 kostar 100.000 kr. minna, drífur 35 km lengra, hleður með um 15% styttri stoppum og er mun sneggri.',
       'Q6 e-tron er traustur kostur fyrir fjölskyldur sem ferðast um landið, með kerru eða hjólhýsi ef svo ber undir.',
     ],
-    facts: 'c719fcff91c1',
+    facts: '7479b9645f79',
     model: 'gemini-3.8-flash, thinking high',
   },
   'audi-q6-e-tron-sportback': {
     paragraphs: [
       'Audi Q6 e-tron Sportback er stór lúxusjepplingur með fjórhjóladrifi og aflíðandi þaklínu, sem sameinar háa setstöðu og rennilegri baksvip en í hefðbundnum Q6 e-tron.',
       'Í sínum verðflokki drífur hann lengra en flestir og hleður mjög hratt, svo hleðslustopp á þjóðveginum verða stutt. Hann má draga 2.400 kg, meira en flestir keppinautar hans, og auk skottsins er 64 l framskott.',
-      'Hann er hins vegar hægari en flestir þeirra og skottið er minna. Audi Q6 e-tron er 600.000 kr. ódýrari með nánast sömu drægni og 15 l stærra skott, og Volvo EX60 P10 er 700.000 kr. ódýrari, drífur 23 km lengra og er mun sneggri.',
+      'Hann er hins vegar hægari en flestir þeirra og skottið er minna. Audi Q6 e-tron er 600.000 kr. ódýrari með nánast sömu drægni og 15 l stærra skott, og BMW iX3 50 xDrive kostar 400.000 kr. meira en drífur 168 km lengra og hleður með um 20% styttri stoppum.',
       'Q6 Sportback er fyrir þá sem vilja sportlegra útlit og eru tilbúnir að borga talsvert fyrir formið.',
     ],
-    facts: 'a587638043c0',
+    facts: 'adb0b88615a2',
     model: 'gemini-3.8-flash, thinking high',
   },
   'audi-sq6-e-tron-base': {
@@ -79,17 +79,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er mjög dýr og drægnin og hraðhleðslan eru aðeins í meðallagi miðað við verðið. Porsche Cayenne kostar nánast það sama en drífur 44 km lengra, hleður með um 30% styttri stoppum, er með 267 l stærra skott og má draga 600 kg meira.',
       'SQ6 e-tron er fyrir þá sem vilja snarpan Audi-jeppling, en á þessu verði fæst meira í flestu öðru.',
     ],
-    facts: '6be7cb5413e8',
+    facts: 'ddc304055bb1',
     model: 'gemini-3.8-flash, thinking high',
   },
   'bmw-i4-40-xdrive': {
     paragraphs: [
       'BMW i4 40 xDrive er lágur og rennilegur fólksbíll með afturhlera og fjórhjóladrifi, ætlaður þeim sem meta hefðbundna akstursánægju BMW og vilja sitja neðar en í jepplingi. Afturhlerinn gerir farangursrýmið aðgengilegt og innréttingin ber vott um vandaðan frágang.',
       'Hann liggur vel á vegi, er stöðugur í beygjum og má draga 1.600 kg. Drægnin og hleðslan eru í meðallagi miðað við rafbíla almennt.',
-      'Í sínum verðflokki drífur hann þó styttra og hleður hægar en flestir, og skottið er minna en hjá flestum keppinautunum. Mercedes-Benz GLC 300 4MATIC kostar það sama en drífur 67 km lengra, hleður með um 25% styttri stoppum, er með 100 l stærra skott og má draga 800 kg meira.',
+      'Í sínum verðflokki drífur hann þó styttra og hleður hægar en flestir, og skottið er minna en hjá flestum keppinautunum. Mercedes-Benz CLA 350 4MATIC er 1.700.000 kr. ódýrari, drífur 224 km lengra og hleður með um 40% styttri stoppum, og Audi A6 e-tron Sportback quattro er 1.500.000 kr. ódýrari, drífur 166 km lengra og er með 32 l stærra skott.',
       'i4 40 xDrive er fyrir þá sem kjósa akstursánægju og fólksbílalag fram yfir drægni og pláss.',
     ],
-    facts: 'c8b9a2c3cd23',
+    facts: '2f6ab5387944',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'bmw-i4-m60-xdrive': {
@@ -99,17 +99,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Miðað við keppinautana drífur hann þó styttra og skottið er minna. BMW i4 40 xDrive er 2.000.000 kr. ódýrari með sömu drægni og sama rými, og gefur aðeins eftir í snerpu.',
       'i4 M60 er fyrir þá sem setja afl og hraða ofar öllu, en flestum dugar ódýrari útfærslan.',
     ],
-    facts: '8890a1c90b99',
+    facts: '8bd8bb1dd882',
     model: 'gemini-3.8-flash, thinking high',
   },
   'bmw-i5-edrive40': {
     paragraphs: [
       'BMW i5 eDrive40 er stór lúxusfólksbíll með skottloki og afturhjóladrifi, rúmlega fimm metrar á lengd, þar sem lögð er áhersla á fágaðan akstur, hljóðlátt innanrými og þægindi á langferðum.',
       'Hann drífur fremur langt og kemst á milli landshluta án fyrirhafnar, og góð hljóðeinangrun og afturhjóladrifið gefa honum yfirvegaða og skemmtilega aksturseiginleika á greiðfærum vegum.',
-      'Í sínum verðflokki hleður hann hins vegar hægar, er aflminni og dregur minna en flestir, skottið er minna og afturhjóladrifið krefst meiri aðgæslu í snjó og hálku. Polestar 3 Performance kostar 490.000 kr. meira en er fjórhjóladrifinn, mun sneggri og má draga 700 kg meira.',
+      'Í sínum verðflokki hleður hann hins vegar hægar, er aflminni og dregur minna en flestir, skottið er minna og afturhjóladrifið krefst meiri aðgæslu í snjó og hálku. Volvo ES90 Twin Motor er 510.000 kr. ódýrari, fjórhjóladrifinn, drífur 97 km lengra, hleður með um 35% styttri stoppum og má draga 500 kg meira.',
       'i5 eDrive40 er fyrir þá sem vilja hljóðlátan og fágaðan langferðabíl í klassísku fólksbílasniði.',
     ],
-    facts: '1c309ab62c34',
+    facts: '14e5487f8e2f',
     model: 'gemini-3.8-flash, thinking high',
   },
   'bmw-i5-m60-xdrive': {
@@ -119,27 +119,27 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst og hlaða hægast í þessum verðflokki, og skottið er minna en hjá flestum. Porsche Taycan 4S Plus er 940.000 kr. ódýrari, álíka snöggur og hleður með um 50% styttri stoppum, en má ekki draga kerru. BMW i5 eDrive40 er 6.400.000 kr. ódýrari og drífur 42 km lengra, fyrir þá sem geta verið án aflsins.',
       'i5 M60 er fyrir þá sem vilja kraftmikinn BMW-fólksbíl og eru tilbúnir að borga mikið fyrir aflið umfram drægni og hleðslu.',
     ],
-    facts: 'eff3ad7deb4c',
+    facts: '9785c0800f9d',
     model: 'gemini-3.8-flash, thinking high',
   },
   'bmw-ix-xdrive-45-sport': {
     paragraphs: [
       'BMW iX xDrive 45 Sport er stór lúxusjeppi með fjórhjóladrifi sem leggur áherslu á hljóðlát þægindi og mjúkan akstur, með rúmgóðu farþegarými og sérstæðri, nútímalegri innréttingu. Hann hentar þeim sem vilja fágaðan ferðabíl frekar en sportlegan.',
       'Hann má draga 2.500 kg, meira en flestir á svipuðu verði, og drífur fremur langt, svo hann kemst vel milli landshluta og ræður við hjólhýsi. Aksturinn er yfirvegaður og traustur, sem gerir langkeyrslur afslappaðar.',
-      'Á móti kemur að hann hleður hægar og er aflminni en flestir keppinautar hans, og skottið er minna. Porsche Macan 4s Electric kostar 460.000 kr. meira en hleður með um 40% styttri stoppum og er sneggri, þótt hann sé minni bíll, og BMW iX xDrive 60 Sport drífur 99 km lengra fyrir 2.300.000 kr. meira.',
+      'Á móti kemur að hann hleður hægar og er aflminni en flestir keppinautar hans, og skottið er minna. Porsche Macan 4 Electric er 1.000.000 kr. ódýrari, drífur álíka langt og hleður með um 40% styttri stoppum, þótt hann sé minni bíll, og BMW iX xDrive 60 Sport drífur 99 km lengra fyrir 2.300.000 kr. meira.',
       'iX xDrive 45 er fyrir þá sem meta ró, þægindi og dráttargetu ofar snerpu og hraðri hleðslu.',
     ],
-    facts: '882067b3bf42',
+    facts: '22311f04a45c',
     model: 'gemini-3.8-flash, thinking high',
   },
   'bmw-ix-xdrive-60-sport': {
     paragraphs: [
       'BMW iX xDrive 60 Sport er stór lúxusjeppi með fjórhjóladrifi sem leggur áherslu á hljóðlát þægindi, rúmgott farþegarými og sérstæða, nútímalega innréttingu. Hann hentar þeim sem vilja fágaðan ferðabíl sem kemst langt á hverri hleðslu.',
       'Drægnin er hans sterkasta hlið: hann er meðal þeirra langdrægustu í sínum verðflokki, svo langferðir milli landshluta kalla á fá stopp, jafnvel í vetrarkulda. Hann er líka aflmeiri en flestir keppinautar hans og má draga 2.500 kg.',
-      'Hraðhleðslan er hins vegar aðeins í meðallagi miðað við verðið og skottið er minna en hjá flestum. Porsche Cayenne Coupé kostar 160.000 kr. meira en hleður með um 50% styttri stoppum og má draga 1.000 kg meira, þótt hann drífi 58 km styttra.',
+      'Hraðhleðslan er hins vegar aðeins í meðallagi miðað við verðið og skottið er minna en hjá flestum. Porsche Cayenne er 340.000 kr. ódýrari, hleður með um 50% styttri stoppum, er með 281 l stærra skott og má draga 500 kg meira, þótt hann drífi 59 km styttra.',
       'iX xDrive 60 er fyrir þá sem setja drægni og þægindi í öndvegi og vilja sem fæst hleðslustopp á leiðinni.',
     ],
-    facts: 'd79d0f40d4d1',
+    facts: '5a2f2dd66ad7',
     model: 'gemini-3.8-flash, thinking high',
   },
   'bmw-ix1-edrive-20': {
@@ -149,17 +149,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er aflminni og hægari en flestir keppinautar hans og meðal þeirra sem draga minnst, aðeins 750 kg. Opel Grandland kostar 100.000 kr. meira, drífur álíka langt, er með 60 l stærra skott og má draga 450 kg meira. Fjórhjóladrifni BMW iX1 xDrive 30 fæst fyrir 1.000.000 kr. meira.',
       'iX1 eDrive 20 er fyrir þá sem vilja BMW á hagstæðu verði og þurfa hvorki fjórhjóladrif né mikla dráttargetu.',
     ],
-    facts: '5170bc1d9003',
+    facts: '10c33b7ea48f',
     model: 'gemini-3.8-flash, thinking high',
   },
   'bmw-ix1-xdrive-30': {
     paragraphs: [
       'BMW iX1 xDrive 30 er lítill og vandaður lúxusjepplingur með fjórhjóladrifi, ætlaður þeim sem vilja gæði BMW, góða hljóðvist og lipra stýringu í nettum bíl.',
       'Hann er snöggur og lipur í akstri, með vönduðu innanrými eins og merkið er þekkt fyrir. Í tölunum hefur hann þó fáa styrkleika umfram keppinautana.',
-      'Hann drífur styttra, hleður hægar og má draga minna en flestir á svipuðu verði. Kia EV5 AWD kostar nánast það sama en drífur 16 km lengra, er með 76 l stærra skott og má draga 600 kg meira, og BMW iX1 eDrive 20 er 1.000.000 kr. ódýrari og drífur 46 km lengra, fyrir þá sem þurfa ekki fjórhjóladrif.',
+      'Hann drífur styttra, hleður hægar og má draga minna en flestir á svipuðu verði. Volvo EX40 Recharge Twin kostar 700.000 kr. meira, drífur 69 km lengra, er sneggri og má draga 600 kg meira, og BMW iX1 eDrive 20 er 1.000.000 kr. ódýrari og drífur 46 km lengra, fyrir þá sem þurfa ekki fjórhjóladrif.',
       'iX1 xDrive 30 er fyrir þá sem setja BMW-merkið og akstursánægju í öndvegi, en fyrir peninginn fæst meiri bíll annars staðar.',
     ],
-    facts: '7b462734f436',
+    facts: 'af0231a87721',
     model: 'gemini-3.8-flash, thinking high',
   },
   'bmw-ix3-40': {
@@ -169,7 +169,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar aflminni og hægari en flestir keppinautar hans og aðeins afturhjóladrifinn, sem kallar á meiri varkárni í snjó og hálku. BMW iX3 50 xDrive fæst með fjórhjóladrifi og 168 km meiri drægni fyrir 2.500.000 kr. meira.',
       'iX3 40 er einn sterkasti langferðabíllinn á sínu verði, fyrir þá sem þurfa ekki fjórhjóladrif.',
     ],
-    facts: '16731bcab88f',
+    facts: 'b00755f4d0d9',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'bmw-ix3-50-xdrive': {
@@ -179,27 +179,27 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti ókosturinn er verðið. Volvo EX60 P12 kostar 100.000 kr. minna, drífur álíka langt, er sneggri og má draga 400 kg meira. BMW iX3 40 er 2.500.000 kr. ódýrari og drífur samt langt, fyrir þá sem þurfa ekki fjórhjóladrif.',
       'iX3 50 xDrive er fyrir þá sem vilja vandaðan ferðabíl með sem minnstu hleðslustússi.',
     ],
-    facts: 'fb86aa548d6e',
+    facts: 'ce7e797d1d4f',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'byd-dolphin-base': {
     paragraphs: [
       'BYD Dolphin er nettur fimm sæta hlaðbakur sem hentar vel í innanbæjarakstur og sem hagkvæmur heimilisbíll. Hann er lipur í þröngum stæðum og þéttbýli, og innanrýmið nýtist vel miðað við stærðina.',
       'Stærsti styrkur hans er verðið: í sínum verðflokki er hann ódýrari á hvern kílómetra drægni en flestir og meðal þeirra sneggstu, með stærri rafhlöðu en gengur og gerist.',
-      'Á móti kemur að hann hleður mjög hægt, skottið er minna en hjá flestum keppinautunum og hann má ekki draga kerru. Skoda Epiq 55 kostar það sama en hefur 130 l stærra skott, um 45% styttri hleðslustopp og má draga 1.200 kg.',
+      'Á móti kemur að hann hleður mjög hægt, skottið er minna en hjá flestum keppinautunum og hann má ekki draga kerru. Nissan Leaf Standard Range kostar það sama, drífur 18 km lengra, hleður með um 30% styttri stoppum, er með 92 l stærra skott og má draga allt að 975 kg.',
       'Fyrir þá sem hlaða heima, aka mest innanbæjar og þurfa hvorki kerru né mikið farangursrými er Dolphin hagkvæmur og skemmtilegur kostur.',
     ],
-    facts: 'a075d76dc9ac',
+    facts: '0eb51c6bd957',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'byd-seal-base': {
     paragraphs: [
       'BYD Seal er lágur og rennilegur fólksbíll með skottloki og fjórhjóladrifi, sem höfðar til þeirra sem vilja sportlegan akstur frekar en hefðbundinn jeppling. Hann er meðal sneggstu og aflmestu bíla á sínu verði.',
       'Afl og snerpa eru hans sterkasta hlið, og lágur þyngdarpunktur gerir hann stöðugan og skemmtilegan á malbiki. Auk skottsins er 53 l framskott undir vélarhlífinni, og hann má draga 1.500 kg.',
-      'Hann hleður hins vegar hægar en flestir keppinautar hans og skottið er eitt það minnsta í þessum verðflokki. Kia EV6 2025 Long Range AWD er 200.000 kr. ódýrari, hleður með um 55% styttri stoppum og er með 90 l stærra skott, en hann er mun aflminni.',
+      'Hann hleður hins vegar hægar en flestir keppinautar hans og skottið er eitt það minnsta í þessum verðflokki. Tesla Model 3 Performance kostar nánast það sama, drífur 51 km lengra, hleður með um 35% styttri stoppum, er sneggri og með 194 l stærra skott, en má ekki draga kerru.',
       'Seal á best við þá sem setja kraft og akstursánægju ofar hraðhleðslu og fjölskylduplássi.',
     ],
-    facts: 'f4502aed1fcd',
+    facts: 'a6413b1fb65f',
     model: 'gemini-3.8-flash, thinking high',
   },
   'byd-seal-u-base': {
@@ -209,17 +209,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra hægustu og þeirra sem hlaða hægast í þessum verðflokki. MG MGS6 Dual Motor er 100.000 kr. ódýrari, fjórhjóladrifinn, mun sneggri og hleður með um 15% styttri stoppum, en skottið er 59 l minna.',
       'Seal U hentar þeim sem vilja rúmgóðan og þægilegan fjölskyldubíl og hlaða mest heima.',
     ],
-    facts: 'ee6e6b50363e',
+    facts: 'a3ff5b5c96fe',
     model: 'gemini-3.8-flash, thinking high',
   },
   'byd-sealion-7-base': {
     paragraphs: [
       'BYD Sealion 7 er stór og rennilegur jepplingur með fjórhjóladrifi, 4,83 m á lengd, sem einkennist öðru fremur af miklu afli og snöggri hröðun. Hann hentar þeim sem vilja kraftmikinn fjölskyldubíl á hóflegu verði.',
       'Í sínum verðflokki er hann meðal þeirra aflmestu og hleður hraðar og er sneggri en flestir, svo hleðslustopp á langferðum verða stutt. Auk skottsins er 58 l framskott undir vélarhlífinni, og hann má draga 1.500 kg.',
-      'Helsti ókosturinn er að hann drífur styttra en flestir keppinautar hans. Subaru e-Outback kostar 100.000 kr. meira, drífur 21 km lengra og er með 113 l stærra skott, þótt hleðslustoppin séu um 15% lengri.',
-      'Sealion 7 er fyrir þá sem vilja mikið afl og hraða hleðslu fyrir peninginn, frekar en hámarksdrægni.',
+      'Helsti ókosturinn er að hann drífur styttra en flestir keppinautar hans. Hongqi EHS7 Premium kostar það sama, drífur 38 km lengra, hleður með um 25% styttri stoppum og er með 123 l stærra skott, og Tesla Model Y Long Range Dual Motor er 460.000 kr. ódýrari og drífur 98 km lengra.',
+      'Sealion 7 er fyrir þá sem vilja mikið afl fyrir peninginn, frekar en hámarksdrægni.',
     ],
-    facts: 'e5798dfbadee',
+    facts: 'bb6216a712ba',
     model: 'gemini-3.8-flash, thinking high',
   },
   'byd-tang-flagship': {
@@ -229,7 +229,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Stærsti veikleikinn kemur fram á langferðum: hann drífur styttra en flestir keppinautar hans og er meðal þeirra sem hlaða hægast. Hyundai IONIQ 9 Long Range AWD kostar 290.000 kr. meira en drífur 75 km lengra, hleður með um 55% styttri stoppum og má draga 1.000 kg meira.',
       'Tang hentar best þeim sem hlaða heima og meta pláss og afl ofar langferðum.',
     ],
-    facts: 'e3108495b06c',
+    facts: '8595ff0ef13c',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'citroen-e-c4-base': {
@@ -249,7 +249,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann drífur mjög stutt, hleður hægar en flestir keppinautar hans, skottið er eitt það minnsta og hann má ekki draga kerru. Hyundai IONIQ 3 Standard Range er 290.000 kr. ódýrari, drífur 39 km lengra, rúmar fimm, er með 256 l stærra skott og má draga 750 kg.',
       '500e er laglegur borgarbíll fyrir þá sem kaupa með hjartanu, en gefur mikið eftir í drægni og plássi.',
     ],
-    facts: 'ed1eed510bce',
+    facts: 'd2495ef0ff26',
     model: 'gemini-3.8-flash, thinking high',
   },
   'fiat-600e-base': {
@@ -266,10 +266,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Ford Capri er rennilegur jepplingur með aflíðandi þaklínu og fjórhjóladrifi, byggður á sama grunni og Volkswagen ID.5, fyrir þá sem vilja rúmgóðan bíl með meiri karakter en hefðbundnir kassalaga fjölskyldubílar.',
       'Í sínum verðflokki er hann meðal þeirra langdrægustu og þeirra sem hlaða hraðast, sneggri en flestir og með stærra skott en flestir þrátt fyrir þaklínuna.',
-      'Helsti ókosturinn er að hann má aðeins draga 1.200 kg, minna en flestir keppinautar hans. Tesla Model Y Premium Long Range kostar 40.000 kr. meira, er með 282 l stærra skott og má draga 400 kg meira, en hann er aðeins afturhjóladrifinn.',
+      'Helsti ókosturinn er að hann má aðeins draga 1.200 kg, minna en flestir keppinautar hans. Polestar 2 Long Range Dual Motor kostar það sama, drífur álíka langt, er sneggri og má draga 300 kg meira, en skottið er 165 l minna.',
       'Capri er einn sterkasti fjórhjóladrifni ferðabíllinn á sínu verði, ef ekki þarf að draga mikið.',
     ],
-    facts: 'f3e474e1f35f',
+    facts: '492b38fcf28b',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'ford-explorer-er-awd': {
@@ -279,17 +279,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti ókosturinn er að hann má aðeins draga 1.200 kg, minna en flestir keppinautar hans. Hyundai IONIQ 5 Long Range AWD kostar það sama en hleður með um 35% styttri stoppum og má draga 400 kg meira.',
       'Explorer er vel heppnaður og jarðbundinn fjölskyldubíll sem fer vel með íslenskan vetur, svo lengi sem ekki þarf að draga þungt.',
     ],
-    facts: '9eb36bb10329',
+    facts: '74696b2a95b2',
     model: 'gemini-3.8-flash, thinking high',
   },
   'ford-mustang-mach-e-lr-awd': {
     paragraphs: [
       'Ford Mustang Mach-E LR AWD er rennilegur jepplingur með fjórhjóladrifi og sportlegum svip, sem sameinar rými fjölskyldubíls og líflega aksturseiginleika.',
       'Hann drífur lengra og er aflmeiri en flestir á svipuðu verði, og auk skottsins er 100 l framskott undir vélarhlífinni, með því stærsta sem gerist. Hann má draga 1.500 kg.',
-      'Gallinn er að hann hleður hægar en flestir keppinautar hans. Smart #5 Pulse er 100.000 kr. ódýrari, hleður með um 50% styttri stoppum, er með 111 l stærra skott og mun aflmeiri, en drífur 10 km styttra.',
+      'Gallinn er að hann hleður hægar en flestir keppinautar hans. Kia EV6 2025 Long Range AWD er 400.000 kr. ódýrari og hleður með um 50% styttri stoppum, en drífur 28 km styttra, og Tesla Model Y Long Range Dual Motor kostar nánast það sama, drífur 50 km lengra og hleður með um 25% styttri stoppum.',
       'Mach-E hentar þeim sem vilja langdrægan og líflegan fjölskyldubíl, ef hægari hleðsla á ferðalögum er ekki fyrirstaða.',
     ],
-    facts: '01e9d7fa4b33',
+    facts: '04cfe46d8fa1',
     model: 'gemini-3.8-flash, thinking high',
   },
   'ford-puma-base': {
@@ -299,7 +299,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur styttra en flestir þeirra. Leapmotor B10 67.1 kWh kostar 100.000 kr. meira en drífur 58 km lengra og hleður með um 10% styttri stoppum, þótt skottið sé 93 l minna.',
       'Puma er laglegur og hagnýtur hversdagsbíll fyrir þá sem aka mest innanbæjar.',
     ],
-    facts: '13dd726fc66c',
+    facts: '173fff25fff9',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hongqi-ehs5-base': {
@@ -309,7 +309,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hongqi er hins vegar nýtt merki hér á landi og meiri óvissa er um endursöluverð og þjónustunet en hjá rótgrónum merkjum. Peugeot e-3008 kostar 180.000 kr. meira frá þekktara merki og drífur álíka langt, en er framhjóladrifinn og hleður með um 80% lengri stoppum.',
       'EHS5 gefur mikið fyrir peninginn, fyrir þá sem eru tilbúnir að veðja á nýtt merki.',
     ],
-    facts: 'c1ddd31fa032',
+    facts: 'e0b3b07fee3c',
     model: 'gemini-3.8-flash, thinking high',
   },
   'hongqi-ehs7-premium': {
@@ -319,7 +319,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að merkið er nýtt hér á landi og óvissa um endursöluverð og þjónustu meiri en hjá rótgrónum merkjum. Subaru e-Outback kostar 100.000 kr. meira frá traustu merki með álíka stórt skott, en hleður með um 50% lengri stoppum og er mun aflminni.',
       'EHS7 gefur gríðarlega mikið fyrir peninginn, fyrir þá sem treysta nýju merki.',
     ],
-    facts: 'b1727237dbbf',
+    facts: '69e15e5759f2',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hyundai-inster-base': {
@@ -349,17 +349,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur mjög stutt, sérstaklega í vetrarkulda, og hleður hægar en flestir í þessum verðflokki. Renault R5 E-Tech 52 kWh er 110.000 kr. ódýrari en drífur 65 km lengra og hleður með um 15% styttri stoppum, þótt skottið sé 115 l minna.',
       'IONIQ 3 hentar best sem annar bíll heimilisins eða hreinn bæjarbíll, frekar en til reglulegra ferða milli landshluta.',
     ],
-    facts: '2796cf363a0d',
+    facts: 'e4a1c88920d9',
     model: 'gemini-3.8-flash, thinking high',
   },
   'hyundai-ioniq-3-long-range': {
     paragraphs: [
       'Hyundai IONIQ 3 Long Range er lítill fimm sæta hlaðbakur sem leggur áherslu á drægni og hagkvæmni frekar en afl.',
       'Hann er mjög ódýr, en drífur samt lengra, hleður hraðar og er með stærra skott en flestir á svipuðu verði, svo hann dugar vel í ferðalög milli landshluta.',
-      'Hann er hins vegar meðal þeirra hægustu og aflminnstu í þessum verðflokki og má aðeins draga 750 kg. Leapmotor C10 ProMax kostar 190.000 kr. meira, er stærri bíll, mun sneggri og má draga 750 kg meira.',
+      'Hann er hins vegar meðal þeirra hægustu og aflminnstu í þessum verðflokki og má aðeins draga 750 kg. MG MGS5 LUX kostar 90.000 kr. meira, er stærri jepplingur og mun sneggri, þótt hann drífi 31 km styttra.',
       'IONIQ 3 Long Range er skynsamlegt val fyrir þá sem vilja komast langt fyrir lítið og láta afl mæta afgangi.',
     ],
-    facts: 'cc6347a9b495',
+    facts: '3129c7f631c6',
     model: 'gemini-3.8-flash, thinking high',
   },
   'hyundai-ioniq-5-long-range-awd': {
@@ -369,7 +369,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Veikleikarnir eru fáir: skottið og drægnin eru aðeins í meðallagi miðað við rafbíla almennt, og framskottið er lítið. Systurbíllinn Kia EV6 2025 Long Range AWD kostar það sama og má draga 200 kg meira, fyrir þá sem vilja sportlegri bíl.',
       'IONIQ 5 er einn sterkasti fjölskyldubíllinn á sínu verði, sérstaklega fyrir þá sem ferðast mikið um landið.',
     ],
-    facts: 'ec32ba1494cf',
+    facts: '22dfa8785c75',
     model: 'gemini-3.8-flash, thinking high',
   },
   'hyundai-ioniq-9-long-range-awd': {
@@ -379,7 +379,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er aflminni og hægari en flestir á svipuðu verði, þótt það skipti minna máli í bíl af þessari gerð. XPENG X9 AWD Performance er 400.000 kr. dýrari en hleður með um 45% styttri stoppum og er aflmeiri, en drífur 35 km styttra.',
       'IONIQ 9 er einn sterkasti kosturinn fyrir stórar fjölskyldur sem ferðast um landið með fullan bíl eða kerru aftan í.',
     ],
-    facts: '61ec7ef63fe4',
+    facts: '34d26216dba6',
     model: 'gemini-3.8-flash, thinking high',
   },
   'hyundai-ioniq-9-long-range-performance-awd': {
@@ -389,7 +389,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er fremur dýr og drægni, hleðsla og snerpa eru aðeins í meðallagi miðað við verðið. Hyundai IONIQ 9 Long Range AWD er 1.500.000 kr. ódýrari með sama rými og álíka drægni, og munar þar aðeins um snerpuna.',
       'IONIQ 9 Performance er fyrir þá sem vilja stærsta Hyundai-jeppann með aukinni snerpu, en flestum dugar ódýrari útfærslan.',
     ],
-    facts: '3f4af478402e',
+    facts: '17fdf58f42b6',
     model: 'gemini-3.8-flash, thinking high',
   },
   'hyundai-kona-electric-65-kwh': {
@@ -416,10 +416,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Jeep Avenger er lítill og kantaður jepplingur með svipmiklu Jeep-útliti, systurbíll Fiat 600e, þótt hann sé aðeins framhjóladrifinn. Hann hentar þeim sem vilja hærri setstöðu og vaskan svip í meðfærilegum bæjarbíl.',
       'Hann er fremur ódýr, lipur í þröngum götum og auðveldur í stæðum. Í tölunum hefur hann þó fáa styrkleika umfram keppinautana.',
-      'Í sínum verðflokki er hann meðal þeirra sem drífa styst, hlaða hægast og eru hægastir, skottið er minna en hjá flestum og hann má ekki draga kerru. XPENG G6 RWD Standard Range kostar það sama en drífur 35 km lengra, hleður með um 55% styttri stoppum, er með 216 l stærra skott og má draga 1.500 kg.',
+      'Í sínum verðflokki er hann meðal þeirra sem drífa styst, hlaða hægast og eru hægastir, skottið er minna en hjá flestum og hann má ekki draga kerru. Systurbíllinn Fiat 600e er 300.000 kr. ódýrari, drífur jafn langt og hleður með um 40% styttri stoppum, og Suzuki e Vitara 4x4 AllGrip kostar 50.000 kr. meira, er fjórhjóladrifinn og má draga 750 kg.',
       'Avenger er laglegur borgarbíll fyrir þá sem heillast af Jeep-svipnum, en gefur mikið eftir í drægni, hleðslu og plássi.',
     ],
-    facts: '44e951bb483e',
+    facts: 'e7eb69417fec',
     model: 'gemini-3.8-flash, thinking high',
   },
   'kgm-musso-ev-base': {
@@ -429,7 +429,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann hleður mjög hægt, drífur styttra en flestir keppinautar hans og er hægur í akstri. Þessi útfærsla er aðeins framhjóladrifin, en KGM Musso EV 4WD fæst með fjórhjóladrifi fyrir 1.300.000 kr. meira, þótt hann drífi 41 km styttra.',
       'Musso EV er eini rafdrifni pallbíllinn sem seldur er hér og hentar þeim sem þurfa vinnuþjark, ef þeir sætta sig við löng hleðslustopp.',
     ],
-    facts: 'efc224526415',
+    facts: 'c3275d912f2c',
     model: 'gemini-3.8-flash, thinking high',
   },
   'kgm-musso-ev-4wd': {
@@ -439,17 +439,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst og hlaða hægast í þessum verðflokki, svo langferðir kalla á þolinmæði. Framhjóladrifni KGM Musso EV er 1.300.000 kr. ódýrari og drífur 41 km lengra, fyrir þá sem þurfa pallinn en ekki fjórhjóladrifið.',
       'Musso EV 4WD er eini rafdrifni fjórhjóladrifni pallbíllinn sem seldur er hér, sniðinn að vinnu frekar en langferðum.',
     ],
-    facts: 'd66452b944fb',
+    facts: 'd32fa0226239',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kgm-torres-evx': {
     paragraphs: [
       'KGM Torres EVX er stór og kantaður jepplingur, 4,7 m á lengd, með grófu útliti og framhjóladrifi, sem höfðar til þeirra sem vilja háa setstöðu og mikið pláss fyrir fjölskylduna á viðráðanlegu verði.',
       'Skottið er það stærsta á svipuðu verði og hann má draga 1.500 kg, meira en flestir keppinautar hans. KGM ábyrgist auk þess rafhlöðuna í allt að 10 ár eða 1.000.000 km, mun lengur en flestir aðrir framleiðendur.',
-      'Hann hleður hins vegar hægar og er hægari en flestir þeirra, og drægnin er aðeins í meðallagi. Leapmotor C10 ProMax AWD kostar 100.000 kr. meira, er fjórhjóladrifinn, mun aflmeiri og hleður með um 15% styttri stoppum, en skottið er 404 l minna.',
+      'Hann hleður hins vegar hægar og er hægari en flestir þeirra, og drægnin er aðeins í meðallagi. Leapmotor C10 ProMax er 200.000 kr. ódýrari, drífur 48 km lengra, hleður með um 25% styttri stoppum og er mun sneggri, en skottið er 404 l minna.',
       'Torres EVX er prýðilegur kostur fyrir fjölskyldur sem þurfa mikið pláss og vilja langa ábyrgð, og gera ekki kröfu um hraða hleðslu.',
     ],
-    facts: 'afa5bc47ed1b',
+    facts: '1e305fc68f17',
     model: 'gemini-3.8-flash, thinking high',
   },
   'kia-ev2-standard-range': {
@@ -459,17 +459,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur mjög stutt og hleður hægar en flestir á svipuðu verði, svo hann hentar illa til ferða milli landshluta. Leapmotor B10 kostar nánast það sama en er stærri bíll, drífur 44 km lengra, hleður með um 30% styttri stoppum og er með 68 l stærra skott.',
       'EV2 hentar best sem ódýr bæjarbíll eða annar bíll heimilisins, ekki sem eini bíllinn í langferðir.',
     ],
-    facts: 'bc2e14d9b951',
+    facts: '139d82bde8c2',
     model: 'gemini-3.8-flash, thinking high',
   },
   'kia-ev2-long-range': {
     paragraphs: [
       'Kia EV2 Long Range er lítill og laglegur jepplingur, ætlaður sem hagkvæmur hversdagsbíll fyrir þá sem vilja komast á nýjan rafbíl frá merki með gott orðspor án þess að teygja budduna.',
       'Hann er mjög ódýr en drífur samt lengra en flestir á svipuðu verði, 136 km lengra en grunnútfærslan, svo hann dugar á milli landshluta þótt hann sé lítill.',
-      'Hann er hins vegar meðal þeirra hægustu og aflminnstu í þessum verðflokki og skottið er minna en hjá flestum. Skoda Epiq 55 kostar 99.000 kr. meira en er mun sneggri, hleður með um 20% styttri stoppum, er með 113 l stærra skott og má draga 450 kg meira.',
+      'Hann er hins vegar meðal þeirra hægustu og aflminnstu í þessum verðflokki og skottið er minna en hjá flestum. Volkswagen ID. Polo kostar 99.000 kr. meira en er mun sneggri, hleður með um 20% styttri stoppum, er með 79 l stærra skott og má draga 450 kg meira.',
       'EV2 Long Range er skynsamlegt val fyrir þá sem vilja mikla drægni fyrir lítið og sætta sig við rólegan takt.',
     ],
-    facts: '2fdd5bf67da3',
+    facts: '8b6eed9175bc',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev3-standard-range': {
@@ -479,7 +479,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann má aðeins draga 500 kg og ábyrgðin á rafhlöðunni er með þeim stystu. Kia EV3 Long Range kostar 600.000 kr. meira en drífur 175 km lengra, hleður með um 25% styttri stoppum og má draga 1.000 kg.',
       'EV3 Standard Range er lipur og ódýr bæjarbíll, en flestum sem aka út á land borgar sig að fara í stærri rafhlöðuna.',
     ],
-    facts: '42dcd1988f27',
+    facts: 'd988a2a3fcc3',
     model: 'gemini-3.8-flash, thinking high',
   },
   'kia-ev3-long-range': {
@@ -499,7 +499,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti ókosturinn er að skottið er minna en hjá flestum þeirra. Skoda Elroq 85x er 200.000 kr. ódýrari, líka fjórhjóladrifinn og drífur álíka langt, en er með 57 l stærra skott og má draga 300 kg meira. Framhjóladrifni Kia EV3 Long Range sparar 1.100.000 kr. og drífur 33 km lengra.',
       'EV3 Long Range AWD er hagkvæmur kostur fyrir þá sem vilja nettan og langdrægan bíl með öruggu gripi allt árið.',
     ],
-    facts: '52d51b19b573',
+    facts: '433a17ab73b8',
     model: 'gemini-3.8-flash, thinking high',
   },
   'kia-ev4-base': {
@@ -509,37 +509,37 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar hægari og aflminni en flestir keppinautar hans, skottið er minna og hann má aðeins draga 1.000 kg. Kia EV4 Fastback er 200.000 kr. ódýrari með nánast sömu drægni og 55 l stærra skott, fyrir þá sem sætta sig við lengri bíl.',
       'EV4 er skynsamlegur ferðabíll fyrir þá sem setja drægni í öndvegi.',
     ],
-    facts: '7a4f0374acac',
+    facts: '2f50a7d4476f',
     model: 'gemini-3.8-flash, thinking high',
   },
   'kia-ev4-fastback': {
     paragraphs: [
       'Kia EV4 Fastback er lágur og straumlínulagaður fólksbíll með skottloki, 4,7 m á lengd, sem leggur áherslu á drægni og sparneytni. Hann hentar þeim sem aka mikið milli landshluta og vilja fólksbíl frekar en jeppling.',
       'Í sínum verðflokki er hann meðal þeirra langdrægustu, hleður hraðar en flestir og er með stærra skott en flestir. Hann er líka 200.000 kr. ódýrari en hlaðbakurinn Kia EV4.',
-      'Gallarnir eru að hann er hægari og aflminni en flestir keppinautar hans og má aðeins draga 1.000 kg. Skoda Elroq 85 kostar það sama, er mun sneggri og jepplingur með hærri setstöðu, en drífur 33 km styttra.',
-      'EV4 Fastback er hagkvæmur langferðabíll fyrir þá sem vilja komast langt fyrir peninginn.',
+      'Gallarnir eru að hann er hægari og aflminni en flestir keppinautar hans og má aðeins draga 1.000 kg. Tesla Model 3 Long Range Afturhjóladrif er 100.000 kr. ódýrari, drífur 138 km lengra, hleður með um 25% styttri stoppum og er mun sneggri.',
+      'EV4 Fastback er sparneytinn langferðabíll, en keppinauturinn frá Tesla gefur meira fyrir sama verð.',
     ],
-    facts: '1cdc5f54dd29',
+    facts: '25a0cea5a73a',
     model: 'gemini-3.8-flash, thinking high',
   },
   'kia-ev5-base': {
     paragraphs: [
       'Kia EV5 er kassalaga og hagnýtur fjölskyldujepplingur með framhjóladrifi, sem leggur áherslu á gott útsýni, ríflegt innanrými og afslöppuð þægindi frekar en snerpu.',
       'Skottið er stærra en hjá flestum á svipuðu verði og 44 l framskott bætist við, og drægnin og hraðhleðslan eru í meðallagi.',
-      'Hann er hins vegar meðal þeirra hægustu í þessum verðflokki og má aðeins draga 1.200 kg, minna en flestir keppinautar hans. Kia EV5 AWD fæst með fjórhjóladrifi fyrir 300.000 kr. meira og má draga 1.800 kg, og Smart #5 Pulse kostar 99.000 kr. meira, er fjórhjóladrifinn og hleður með um 40% styttri stoppum.',
+      'Hann er hins vegar meðal þeirra hægustu í þessum verðflokki og má aðeins draga 1.200 kg, minna en flestir keppinautar hans. Kia EV5 AWD fæst með fjórhjóladrifi fyrir 300.000 kr. meira og má draga 1.800 kg, og Tesla Model Y Premium Long Range er 160.000 kr. ódýrari, drífur 79 km lengra og má draga 400 kg meira.',
       'EV5 er rúmgóður og þægilegur fjölskyldubíll fyrir þá sem þurfa hvorki snerpu né mikla dráttargetu.',
     ],
-    facts: '3df0d9f65455',
+    facts: '1a5ecc706dbc',
     model: 'gemini-3.8-flash, thinking high',
   },
   'kia-ev5-awd': {
     paragraphs: [
       'Kia EV5 AWD er kassalaga og hagnýtur fjölskyldujepplingur með fjórhjóladrifi, sem sækir svip sinn í stærri jeppa merkisins og leggur áherslu á rými, háa setstöðu og þægindi.',
       'Skottið er stærra en hjá flestum á svipuðu verði og 44 l framskott bætist við, og hann má draga 1.800 kg, meira en flestir keppinautar hans.',
-      'Á móti kemur að hann drífur styttra, hleður hægar og er hægari en flestir þeirra. Volkswagen ID.4 GTX kostar það sama, er fjórhjóladrifinn og drífur 45 km lengra, hleður með um 15% styttri stoppum og er mun sneggri. Framhjóladrifni Kia EV5 er 300.000 kr. ódýrari og drífur 46 km lengra.',
+      'Á móti kemur að hann drífur styttra, hleður hægar og er hægari en flestir þeirra. Skoda Enyaq 85X er 200.000 kr. ódýrari, fjórhjóladrifinn, drífur 55 km lengra og hleður með um 15% styttri stoppum, en má draga 600 kg minna. Framhjóladrifni Kia EV5 er 300.000 kr. ódýrari og drífur 46 km lengra.',
       'EV5 AWD hentar fjölskyldum sem vilja rými og dráttargetu ofar drægni og snerpu.',
     ],
-    facts: '97e875731646',
+    facts: '5fbe9826a73d',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev6-2025-long-range-awd': {
@@ -549,7 +549,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að ábyrgðin á rafhlöðunni er með þeim stystu og lágreistara lagið gefur ekki sömu setstöðu og hefðbundinn jepplingur. Hyundai IONIQ 5 Long Range AWD kostar það sama, drífur 24 km lengra, er með 30 l stærra skott og árinu lengri ábyrgð.',
       'EV6 er snöggur og vel búinn fjórhjóladrifsbíll fyrir þá sem vilja stutt hleðslustopp og geta dregið kerru.',
     ],
-    facts: 'f4b80134c57d',
+    facts: '93b9273da24f',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev9-base': {
@@ -559,7 +559,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er fremur dýr, drífur styttra en flestir þeirra og ábyrgðin á rafhlöðunni er með þeim stystu. XPENG X9 AWD Performance er 400.000 kr. ódýrari, drífur 58 km lengra og hleður með um 50% styttri stoppum.',
       'EV9 er sterkur kostur fyrir stórar fjölskyldur sem draga hjólhýsi, en maður borgar fyrir stærðina.',
     ],
-    facts: '17a8cbfdb49d',
+    facts: 'b9a50e4bdd6f',
     model: 'gemini-3.8-flash, thinking high',
   },
   'kia-ev9-gt': {
@@ -569,7 +569,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er mjög dýr, meðal þeirra sem drífa styst og ábyrgðin á rafhlöðunni er með þeim stystu. Kia EV9 er 2.200.000 kr. ódýrari með sama rými og drægni, og munar aðeins um snerpuna.',
       'EV9 GT er fyrir þá sem vilja sjö sæti og mikla snerpu, en flestum dugar ódýrari útfærslan.',
     ],
-    facts: '7db76de8dd00',
+    facts: '3295de53bf2f',
     model: 'gemini-3.8-flash, thinking high',
   },
   'kia-pv5-base': {
@@ -579,7 +579,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst, hlaða hægast og eru hægastir í þessum verðflokki, og hann er aðeins afturhjóladrifinn. Peugeot e-5008 Dual Motor er 300.000 kr. ódýrari, fjórhjóladrifinn og drífur 61 km lengra, en skottið er 468 l minna.',
       'PV5 hentar þeim sem setja rými og sætafjölda ofar öllu og aka mest í nærumhverfinu.',
     ],
-    facts: '6f35c55d5785',
+    facts: 'b0350acd96f2',
     model: 'gemini-3.8-flash, thinking high',
   },
   'leapmotor-t03-base': {
@@ -639,7 +639,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur mjög stutt miðað við rafbíla almennt, svo langferðir í vetrarkulda kalla á vel skipulögð stopp, og merkið er nýlegt í Evrópu. Leapmotor B10 67.1 kWh kostar 800.000 kr. meira og drífur 73 km lengra, og MG MG4 Urban Long Range er 100.000 kr. ódýrari og drífur 55 km lengra.',
       'B10 gefur mikið pláss og snerpu fyrir lítið, fyrir þá sem aka mest í nærumhverfinu.',
     ],
-    facts: '8cce705ff9bf',
+    facts: 'ae1a2560ab96',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-b10-67-1-kwh': {
@@ -649,7 +649,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Skottið og dráttargetan eru hins vegar aðeins í meðallagi, afturhjóladrifið kallar á góð vetrardekk og merkið er nýlegt í Evrópu. Skoda Epiq 55 kostar 200.000 kr. meira, drífur álíka langt, er með 45 l stærra skott og má draga 450 kg meira.',
       'B10 67.1 kWh er hagkvæmur og sprækur jepplingur fyrir þá sem vilja komast um landið fyrir lítið.',
     ],
-    facts: '820b4bbc7942',
+    facts: 'ee6247a0dbe8',
     model: 'gemini-3.8-flash, thinking high',
   },
   'leapmotor-c10-pro': {
@@ -659,7 +659,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann drífur styttra en flestir keppinautar hans, afturhjóladrifið kallar á meiri aðgát í hálku og merkið er nýlegt í Evrópu. Leapmotor C10 ProMax kostar 700.000 kr. meira og drífur 90 km lengra.',
       'C10 Pro er stór og þægilegur fjölskyldubíll fyrir lítið, ef drægnin hentar ferðalögunum.',
     ],
-    facts: '77d2c83a4f96',
+    facts: '098fdb9e3a81',
     model: 'gemini-3.8-flash, thinking high',
   },
   'leapmotor-c10-promax': {
@@ -669,7 +669,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er aðeins afturhjóladrifinn, skottið er aðeins í meðallagi og merkið er nýlegt í Evrópu. Leapmotor C10 ProMax AWD fæst með fjórhjóladrifi fyrir 300.000 kr. meira, en drífur 75 km styttra.',
       'C10 ProMax gefur mikinn bíl fyrir peninginn, fyrir þá sem þurfa ekki fjórhjóladrif.',
     ],
-    facts: '530b13547a1f',
+    facts: '2c958242c8c7',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-c10-promax-awd': {
@@ -679,7 +679,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann drífur hins vegar styttra og hleður hægar en flestir þeirra, og merkið er nýlegt í Evrópu. Afturhjóladrifni Leapmotor C10 ProMax er 300.000 kr. ódýrari og drífur 75 km lengra, fyrir þá sem þurfa ekki fjórhjóladrifið.',
       'C10 ProMax AWD er fyrir þá sem vilja fjórhjóladrif og mikið afl fyrir lítið, frekar en hámarksdrægni.',
     ],
-    facts: 'de92b93809ad',
+    facts: '6169d5f7d138',
     model: 'gemini-3.8-flash, thinking high',
   },
   'lexus-es-350e': {
@@ -689,7 +689,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er meðal þeirra aflminnstu og hægustu á svipuðu verði, hleður hægar en flestir keppinautar hans og má ekki draga kerru. BMW i5 eDrive40 er 90.000 kr. ódýrari, drífur álíka langt, er mun sneggri og má draga 1.500 kg.',
       'ES 350e er fyrir þá sem setja ró, þægindi og langa ábyrgð í öndvegi.',
     ],
-    facts: '88df29fca349',
+    facts: 'a0a3432aa141',
     model: 'gemini-3.8-flash, thinking high',
   },
   'lexus-es-500e': {
@@ -699,17 +699,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Í sínum verðflokki drífur hann þó styttra, hleður hægar og er aflminni en flestir, skottið er minna og hann má ekki draga kerru. Framhjóladrifni Lexus ES 350e er 1.000.000 kr. ódýrari og drífur 51 km lengra.',
       'ES 500e er fyrir þá sem vilja fjórhjóladrif með þægindum Lexus, en ES 350e gefur meira fyrir peninginn.',
     ],
-    facts: 'ec0d08614bb9',
+    facts: 'e103556bd79b',
     model: 'gemini-3.8-flash, thinking high',
   },
   'lexus-rz-350e': {
     paragraphs: [
       'Lexus RZ 350e er lúxusjepplingur með framhjóladrifi sem setur þægindi, fágað yfirbragð og hljóðlátan akstur í fyrirrúm. Hann hentar þeim sem vilja vandaðan og afslappaðan hversdagsbíl.',
       'Hann drífur fremur langt, og há setstaða og vandaður frágangur Lexus gera hann notalegan í daglegum akstri.',
-      'Í sínum verðflokki drífur hann hins vegar styttra, hleður hægar og er meðal þeirra aflminnstu, og hann má aðeins draga 750 kg. BMW i5 eDrive40 kostar 310.000 kr. meira en drífur 23 km lengra, er mun sneggri og má draga 1.500 kg.',
+      'Í sínum verðflokki drífur hann hins vegar styttra, hleður hægar og er meðal þeirra aflminnstu, og hann má aðeins draga 750 kg. Polestar 3 er 200.000 kr. ódýrari, fjórhjóladrifinn, drífur 69 km lengra, er mun sneggri og má draga 1.450 kg meira.',
       'RZ 350e heillar með hljóðlátum munaði, en fyrir verðið fæst meira afl og drægni annars staðar.',
     ],
-    facts: '0a87c0c60e7f',
+    facts: 'ec012d7291f7',
     model: 'gemini-3.8-flash, thinking high',
   },
   'lexus-rz-500e': {
@@ -719,7 +719,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst og hlaða hægast í þessum verðflokki. Framhjóladrifni Lexus RZ 350e er 1.300.000 kr. ódýrari og drífur 102 km lengra, og Mercedes-Benz EQE SUV 350 4MATIC kostar 500.000 kr. meira, er fjórhjóladrifinn og drífur 94 km lengra.',
       'RZ 500e er ljúfur bíll fyrir innanbæjarakstur, en dýr kostur fyrir þá sem aka mikið um landið.',
     ],
-    facts: 'f94441e54214',
+    facts: '364b2eeba150',
     model: 'gemini-3.8-flash, thinking high',
   },
   'lexus-rz-550e-f-sport': {
@@ -729,17 +729,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er mjög dýr og meðal þeirra sem drífa styst og hlaða hægast í sínum verðflokki. Lexus RZ 500e er 1.900.000 kr. ódýrari og nánast jafn snöggur, og Audi SQ6 e-tron kostar 600.000 kr. meira en drífur 136 km lengra og hleður með um 45% styttri stoppum.',
       'RZ 550e F SPORT er fyrir þá sem vilja sportlegasta Lexus-inn, en flestum dugar RZ 500e.',
     ],
-    facts: '4dd4a5df1719',
+    facts: '9c3b0cb5f7c8',
     model: 'gemini-3.8-flash, thinking high',
   },
   'lexus-ux-300e': {
     paragraphs: [
       'Lexus UX 300e er nettur lúxusjepplingur með framhjóladrifi, ætlaður þeim sem leita eftir fáguðum vinnubrögðum, góðri hljóðvist og liprum bíl í borgarumferðina. Hér fást þekkt gæði og áreiðanleiki Lexus í stærð sem er þægileg í daglegu amstri og þröngum stæðum.',
       'Innanrýmið einkennist af vönduðum efnum og mýkt, og Lexus ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir aðrir framleiðendur.',
-      'Helsti gallinn er hve mikið maður gefur eftir miðað við verðið: hann er meðal þeirra sem drífa styst, hlaða hægast og eru hægastir í sínum verðflokki, skottið er eitt það minnsta og hann má ekki draga kerru. Audi Q6 e-tron kostar 100.000 kr. meira en er stór fjórhjóladrifinn jepplingur sem drífur 175 km lengra, hleður með um 80% styttri stoppum og má draga 2.400 kg.',
+      'Helsti gallinn er hve mikið maður gefur eftir miðað við verðið: hann er meðal þeirra sem drífa styst, hlaða hægast og eru hægastir í sínum verðflokki, skottið er eitt það minnsta og hann má ekki draga kerru. Volvo EX40 Recharge Twin er 2.200.000 kr. ódýrari, fjórhjóladrifinn, drífur 87 km lengra, hleður með um 70% styttri stoppum og má draga 1.800 kg.',
       'UX 300e er ljúfur lúxusbíll fyrir borgina, en fyrir sama verð fær maður mun meiri bíl annars staðar.',
     ],
-    facts: '758669913f52',
+    facts: '155a507964c6',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mazda-6e-long-range': {
@@ -749,27 +749,27 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann hleður hins vegar hægar en flestir þeirra og skottið er minna. Nissan Leaf Extended Range kostar það sama, drífur 70 km lengra, hleður með um 40% styttri stoppum og er með 100 l stærra skott, þótt hann sé mun minni bíll.',
       '6e Long Range hentar þeim sem hlaða mest heima og vilja stóran og þægilegan fólksbíl á hagstæðu verði.',
     ],
-    facts: '826ddf856106',
+    facts: '9c032b37ea4b',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mazda-cx-6e-78-kwh': {
     paragraphs: [
       'Mazda CX-6e er stór og stílhreinn jepplingur með afturhjóladrifi, 4,85 m á lengd, sem leggur áherslu á þægindi og yfirvegaðan akstur frekar en snerpu. Hann hentar fjölskyldum sem vilja stóran og vandaðan bíl á hóflegu verði.',
       'Hann hleður hraðar en flestir á svipuðu verði, auk skottsins er 80 l framskott undir vélarhlífinni og hann má draga 1.500 kg, meira en flestir keppinautar hans. Fyrir verðið fær maður óvenju stóran bíl.',
-      'Gallarnir eru að hann er hægari en flestir þeirra og aðeins afturhjóladrifinn, sem kallar á meiri varkárni í snjó og hálku. Hongqi EHS5 kostar 100.000 kr. meira en drífur 38 km lengra, hleður með um 25% styttri stoppum og er mun sneggri.',
+      'Gallarnir eru að hann er hægari en flestir þeirra og aðeins afturhjóladrifinn, sem kallar á meiri varkárni í snjó og hálku. XPENG G6 RWD Long Range kostar 400.000 kr. meira en drífur 86 km lengra, hleður með um 30% styttri stoppum og er með 103 l stærra skott.',
       'CX-6e er heilsteyptur og fremur ódýr kostur fyrir þá sem vilja stóran og þægilegan fjölskyldubíl og þurfa ekki fjórhjóladrif.',
     ],
-    facts: '4b812db57179',
+    facts: 'a2648efa81af',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mercedes-benz-c-400-4matic': {
     paragraphs: [
       'Mercedes-Benz C 400 4MATIC er rennilegur fólksbíll með skottloki og fjórhjóladrifi, þar sem áherslan er á fágaðan lúxus, akstursánægju og þægindi. Hann hentar þeim sem vilja hefðbundinn lúxusfólksbíl frekar en jeppling.',
       'Í sínum verðflokki er hann meðal þeirra langdrægustu og sneggstu og hleður hraðar en flestir, svo langferðir um landið verða áhyggjulausar, jafnvel í vetrarkulda. Auk skottsins er 101 l framskott undir vélarhlífinni.',
-      'Helsti ókosturinn er að skottið er minna en hjá flestum keppinautum hans. Volvo EX60 P12 er 100.000 kr. ódýrari, drífur 48 km lengra, hleður með um 15% styttri stoppum, er með 53 l stærra skott og má draga 600 kg meira, fyrir þá sem sætta sig við jeppalag.',
+      'Helsti ókosturinn er að skottið er minna en hjá flestum keppinautum hans. Audi A6 e-tron Sportback quattro er 1.500.000 kr. ódýrari, með 32 l stærra skott og má draga 300 kg meira, þótt hann drífi 50 km styttra.',
       'C 400 er sterkur kostur fyrir þá sem vilja snöggan og langdrægan lúxusfólksbíl.',
     ],
-    facts: '0def61a05830',
+    facts: '096b3d2801da',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mercedes-benz-cla-200': {
@@ -779,7 +779,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar hægari og aflminni en flestir keppinautar hans og skottið er eitt það minnsta. Mercedes-Benz CLA 350 4MATIC fæst með fjórhjóladrifi og 229 km meiri drægni fyrir 1.900.000 kr. meira.',
       'CLA 200 er glæsilegur og sparneytinn ferðabíll fyrir þá sem þurfa hvorki fjórhjóladrif né mikið pláss.',
     ],
-    facts: '710ed58430b1',
+    facts: '3908360a97bf',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mercedes-benz-cla-350-4matic': {
@@ -789,7 +789,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti ókosturinn er að skottið er eitt það minnsta á þessu verði. Audi A6 e-tron Sportback quattro kostar 200.000 kr. meira, er með 97 l stærra skott og meira afl og má draga 300 kg meira, en drífur 58 km styttra.',
       'CLA 350 4MATIC er einn sterkasti langferðabíllinn á sínu verði.',
     ],
-    facts: '4cb076da8aba',
+    facts: '288564fc0bbb',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-cla-shooting-brake-350-4matic': {
@@ -799,7 +799,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Skottið er þó samt eitt það minnsta á þessu verði, og hann er aflminni og má draga minna en flestir keppinautar hans. Audi A6 e-tron Avant quattro er 200.000 kr. ódýrari, með 47 l stærra skott og meira afl og má draga 300 kg meira, en drífur 69 km styttra og hleður hægar.',
       'CLA Shooting Brake er fyrir þá sem vilja glæsilegan og langdrægan skutbíl sem lágmarkar tímann við hleðslustöðvar.',
     ],
-    facts: 'ef0370bc5c2d',
+    facts: 'a0f45a1b74d7',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mercedes-benz-cla-amg-45-4matic': {
@@ -809,7 +809,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann tekur aðeins fjóra, skottið er eitt það minnsta og hann má ekki draga kerru. Mercedes-Benz CLA 350 4MATIC er 3.700.000 kr. ódýrari, rúmar fimm, drífur 91 km lengra og má draga 1.800 kg, og gefur aðeins eftir í snerpu.',
       'CLA AMG 45 er fyrir þá sem vilja mikið afl og langa drægni, svo lengi sem fjögur sæti duga.',
     ],
-    facts: 'fe5b7900b14e',
+    facts: 'd31d39307eae',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mercedes-benz-eqa-suv-300-4matic': {
@@ -819,7 +819,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur styttra en flestir keppinautar hans, er meðal þeirra sem hlaða hægast og skottið er eitt það minnsta. BMW iX1 xDrive 30 kostar 200.000 kr. meira en hleður með um 20% styttri stoppum, er mun sneggri og með 150 l stærra skott.',
       'EQA höfðar til þeirra sem setja þægindi og merkið í forgang og þurfa að draga kerru, frekar en hraða eða pláss.',
     ],
-    facts: 'b69d33295c87',
+    facts: '5d27f6edeb39',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mercedes-benz-glb-350-4matic-eq': {
@@ -839,7 +839,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að drægnin og hraðhleðslan eru aðeins í meðallagi miðað við verðið. Mercedes-Benz GLC 400 4MATIC kostar 400.000 kr. meira en drífur 102 km lengra og hleður með um 20% styttri stoppum.',
       'GLC 300 er fyrir þá sem vilja rúmgóðan og vandaðan jeppling sem dregur hjólhýsi, en GLC 400 er peninganna virði fyrir þá sem aka mikið um landið.',
     ],
-    facts: 'bb72ff6499e0',
+    facts: 'e74f62b4889d',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mercedes-benz-glc-400-4matic': {
@@ -849,7 +849,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Veikleikarnir eru fáir, helst að hann er fremur dýr. BMW iX3 50 xDrive er 400.000 kr. ódýrari, drífur 90 km lengra og hleður með um 15% styttri stoppum, en er með minna skott og má draga 400 kg minna.',
       'GLC 400 er einn heildstæðasti lúxusjepplingurinn á sínu verði, jafnvígur á langferðir, pláss og drátt.',
     ],
-    facts: '14347312b37b',
+    facts: '2aa20d41f49b',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-eqe-suv-350-4matic': {
@@ -859,17 +859,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er mjög dýr, og í sínum verðflokki er hann meðal þeirra sem hlaða hægast og þeirra aflminnstu og drífur styttra en flestir. BMW iX xDrive 45 Sport kostar það sama en drífur 51 km lengra, er mun sneggri og má draga 700 kg meira.',
       'EQE SUV höfðar til þeirra sem vilja ró og lúxus Mercedes, en fyrir sama verð fæst meira annars staðar.',
     ],
-    facts: '44caa0b259c8',
+    facts: '5279db0b6ed3',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-eqs-580-4matic': {
     paragraphs: [
       'Mercedes-Benz EQS 580 4MATIC er stór og rennilegur lúxusfólksbíll með fjórhjóladrifi, rúmlega fimm metrar á lengd, smíðaður fyrir afslappaðar langferðir í hámarksþægindum.',
       'Hann drífur lengst allra rafbíla á listanum, svo hringvegurinn kallar á fá stopp, jafnvel í vetrarkulda. Hann hleður líka hraðar en flestir á svipuðu verði og Mercedes ábyrgist rafhlöðuna í 10 ár, lengur en flestir aðrir framleiðendur.',
-      'Á móti kemur að hann er mjög dýr, skottið og dráttargetan eru minni en hjá flestum keppinautum hans, og lágur fólksbíll býður ekki veghæð jeppa. Porsche Cayenne Turbo kostar 460.000 kr. meira, er mun sneggri og má draga 1.300 kg meira, en drífur 246 km styttra.',
+      'Á móti kemur að hann er mjög dýr, skottið og dráttargetan eru minni en hjá flestum keppinautum hans, og lágur fólksbíll býður ekki veghæð jeppa. Range Rover Electric EV450 er 400.000 kr. ódýrari, með 123 l stærra skott og má draga 800 kg meira, en drífur 269 km styttra.',
       'EQS er fyrir þá sem vilja hágæða ferðabíl sem kemst lengra á einni hleðslu en nokkur annar.',
     ],
-    facts: 'ff4f09dbd41a',
+    facts: '0ab14f1ef800',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mercedes-benz-eqs-suv-580-4matic': {
@@ -879,7 +879,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er mjög dýr, meðal þeirra sem hlaða hægast og þeirra aflminnstu í sínum verðflokki, og dregur minna en flestir keppinautar hans. Volvo EX90 Twin Motor Performance er 8.200.000 kr. ódýrari, tekur líka sjö, er sneggri og má draga 400 kg meira, þótt hann drífi 55 km styttra.',
       'EQS SUV er fyrir þá sem vilja fáguðustu ferðaþægindin og eru tilbúnir að greiða vel fyrir þau.',
     ],
-    facts: '380eceea0163',
+    facts: '6fa45d9d51c9',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mercedes-benz-eqt-200': {
@@ -896,10 +896,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Mercedes-Benz EQV 300 er stór lúxusfjölnotabíll byggður á sendibíl, sem rúmar allt að átta manns með fullgildum sætum í öllum röðum. Hann hentar stórum fjölskyldum og fyrirtækjum í fólksflutningum sem vilja fágað yfirbragð.',
       'Skottið er það stærsta á svipuðu verði, svo jafnvel fullskipaður bíll rúmar farangur, og hver farþegi fær gott höfuð- og fótarými.',
-      'Gallarnir eru að hann er meðal þeirra sem drífa styst, hlaða hægast og eru hægastir í sínum verðflokki, og hann má ekki draga kerru. Mercedes-Benz eVito Tourer er sami bíll með einfaldari innréttingu og 900.000 kr. ódýrari, og Kia EV9 GT kostar 100.000 kr. meira, tekur sjö, er fjórhjóladrifinn og drífur 147 km lengra.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst, hlaða hægast og eru hægastir í sínum verðflokki, og hann má ekki draga kerru. Mercedes-Benz eVito Tourer er sami bíll með einfaldari innréttingu og 900.000 kr. ódýrari, og nýrri Mercedes-Benz VLE 300 kostar 410.000 kr. meira en drífur 350 km lengra og hleður með um 70% styttri stoppum.',
       'EQV 300 er rúmgóður ferðavagn fyrir stóra hópa í styttri ferðum, en krefst þolinmæði á langkeyrslu.',
     ],
-    facts: '7e1d59a12e8f',
+    facts: 'bf7bbdd9d4bc',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mercedes-benz-vle-300': {
@@ -909,7 +909,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar meðal þeirra hægustu og aflminnstu og aðeins framhjóladrifinn. Mercedes-Benz VLE 400 4MATIC fæst með fjórhjóladrifi og 2.500 kg dráttargetu fyrir 1.500.000 kr. meira.',
       'VLE 300 er fyrir þá sem þurfa átta sæti og mikla drægni, og geta verið án fjórhjóladrifs.',
     ],
-    facts: '2ef409b18730',
+    facts: 'f54c1d0ac09e',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mercedes-benz-vle-400-4matic': {
@@ -919,7 +919,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er mjög dýr og hægari en flestir þeirra. Framhjóladrifni Mercedes-Benz VLE 300 er 1.500.000 kr. ódýrari og drífur 59 km lengra, fyrir þá sem þurfa hvorki fjórhjóladrif né mikla dráttargetu.',
       'VLE 400 er fágætur en dýr kostur fyrir þá sem þurfa átta sæti, fjórhjóladrif og dráttargetu.',
     ],
-    facts: '8a6751d961e1',
+    facts: 'e67947d4bcf3',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mercedes-benz-g-class-580-eq': {
@@ -929,7 +929,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kantað formið kostar hins vegar orku: hann er meðal þeirra sem drífa styst og hlaða hægast í sínum verðflokki, og skottið er minna en hjá flestum keppinautum hans. Range Rover Electric EV450 er 400.000 kr. ódýrari, líka torfærufær lúxusjeppi, en drífur 127 km lengra og hleður með um 50% styttri stoppum.',
       'G-class er lífsstílstæki sem enginn velur út frá tölunum, heldur sögunni og getunni utan vega.',
     ],
-    facts: '8335d9035eab',
+    facts: '11f40d8ac546',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-evito-tourer': {
@@ -946,10 +946,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'MG Cyberster GT er tveggja sæta blæjusportbíll sem sker sig rækilega úr á rafbílamarkaðnum. Hann einkennist af lágri byggingu og vængjahurðum sem lyftast upp, og er smíðaður fyrir fólk sem leitar að hreinni skemmtun og akstursupplifun frekar en hversdagslegu flutningstæki.',
       'Hann er aflmeiri en flestir á svipuðu verði og meðal þeirra allra sneggstu úr kyrrstöðu. Fjórhjóladrifið kemur aflinu niður í malbikið og lágur þyngdarpunktur gerir hann stöðugan og kvikan í beygjum.',
-      'Á móti kemur að hann drífur fremur stutt, er meðal þeirra sem hlaða hægast í sínum verðflokki og skottið er eitt það minnsta. Ef fjölskyldan þarf að komast fyrir og langferðir eru á dagskrá er Skoda Enyaq RS 200.000 kr. ódýrari, með fimm sæti, 99 km meiri drægni og um 40% styttri hleðslustopp.',
+      'Á móti kemur að hann drífur fremur stutt, er meðal þeirra sem hlaða hægast í sínum verðflokki og skottið er eitt það minnsta. Ef fjölskyldan þarf að komast fyrir og langferðir eru á dagskrá er Polestar 4 Long Range Dual Motor 400.000 kr. ódýrari, með fimm sæti, 146 km meiri drægni og um 40% styttri hleðslustopp.',
       'Þetta er leikfang sem maður kaupir með hjartanu fremur en skynseminni.',
     ],
-    facts: '5aed9ed82d06',
+    facts: '97bec2340a82',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mg-mg4-urban-standard-range': {
@@ -979,7 +979,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann má aðeins draga 750 kg og ábyrgðin á rafhlöðunni er með þeim stystu. Volkswagen ID. Cross kostar 100.000 kr. meira, má draga 450 kg meira og hefur árinu lengri ábyrgð, en drífur 38 km styttra.',
       'MGS5 er sprækur og hagkvæmur fjölskyldubíll fyrir þá sem þurfa ekki að draga mikið.',
     ],
-    facts: 'de0a607d37b7',
+    facts: '37d277f1a30d',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mg-mgs6-dual-motor': {
@@ -989,7 +989,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann hleður hægar en flestir þeirra og ábyrgðin á rafhlöðunni er með þeim stystu. Subaru Uncharted býður um 25% styttri hleðslustopp og ári lengri ábyrgð fyrir 100.000 kr. meira, en hann er með 90 l minna skott og minna afl.',
       'Fyrir þá sem vilja mikið af bíl, afli og plássi fyrir peninginn og hlaða mest heima er MGS6 Dual Motor sterkur kostur.',
     ],
-    facts: 'f116badf00c6',
+    facts: 'cf06f5148565',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mini-aceman-e': {
@@ -1009,17 +1009,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann drífur styttra, hleður hægar og er hægari en flestir keppinautar hans, skottið er minna og hann má aðeins draga 750 kg. Fjórhjóladrifna útfærslan, Mini Countryman SE 4x4, kostar 700.000 kr. meira, en Mercedes-Benz EQA SUV 300 4MATIC fæst með fjórhjóladrifi fyrir 100.000 kr. meira og má draga 1.050 kg meira.',
       'Countryman E höfðar til þeirra sem kaupa með hjartanu og vilja Mini-stílinn, en fyrir peninginn fæst meira annars staðar.',
     ],
-    facts: '007a7b244e00',
+    facts: '2c4dd6d40a9e',
     model: 'gemini-3.8-flash, thinking high',
   },
   'mini-countryman-se-4x4': {
     paragraphs: [
       'Mini Countryman SE 4x4 er meðalstór jepplingur með fjórhjóladrifi og líflegri hönnun Mini, stærsti bíll merkisins og sá sem hentar fjölskyldum best, fyrir þá sem vilja skera sig úr.',
       'Hann er snöggur og skemmtilegur í akstri, og vandaður frágangur og hringlaga skjárinn gera innréttinguna eftirminnilegri en í flestum bílum á sama verði. Í tölunum hefur hann þó fáa styrkleika.',
-      'Í sínum verðflokki er hann meðal þeirra sem drífa styst, hleður hægar og dregur minna en flestir, og skottið er minna en hjá flestum. BYD Sealion 7 kostar það sama en drífur 70 km lengra, hleður með um 30% styttri stoppum, er með 60 l stærra skott og má draga 300 kg meira.',
+      'Í sínum verðflokki er hann meðal þeirra sem drífa styst, hleður hægar og dregur minna en flestir, og skottið er minna en hjá flestum. BMW iX1 xDrive 30, systurbíll á sama grunni, er 400.000 kr. ódýrari, drífur 36 km lengra, hleður með um 10% styttri stoppum og er með 30 l stærra skott.',
       'Countryman SE er fyrir þá sem kaupa með hjartanu og vilja Mini-stílinn með fjórhjóladrifi, en tölurnar vinna ekki með honum.',
     ],
-    facts: '81432d844745',
+    facts: 'f13bab3d4a8f',
     model: 'gemini-3.8-flash, thinking high',
   },
   'nissan-ariya-base': {
@@ -1029,17 +1029,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann hleður hægar og er hægari en flestir keppinautar hans, og hann er meðal þeirra sem draga minnst, aðeins 750 kg. Hyundai IONIQ 5 Long Range AWD kostar það sama, er fjórhjóladrifinn, drífur 21 km lengra, hleður með um 60% styttri stoppum og má draga 850 kg meira.',
       'Ariya er ljúfur ferðabíll, en fyrir sama verð fæst mun meira hjá keppinautunum.',
     ],
-    facts: 'ebf917d159a6',
+    facts: 'd001964f77b2',
     model: 'gemini-3.8-flash, thinking high',
   },
   'nissan-ariya-e-4orce': {
     paragraphs: [
       'Nissan Ariya e-4ORCE er meðalstór jepplingur með fjórhjóladrifi, mýkt og góðri hljóðvist, ætlaður þeim sem vilja þægilegan og vandaðan fjölskyldubíl.',
       'Fjöðrunin tekur vel á ójöfnum og innanrýmið er notalegt, og hann má draga 1.500 kg.',
-      'Gallarnir eru að hann drífur styttra en flestir á svipuðu verði, er meðal þeirra sem hlaða hægast og skottið er minna en hjá flestum keppinautum hans. BYD Sealion 7 er 100.000 kr. ódýrari, drífur álíka langt, hleður með um 40% styttri stoppum og er með 105 l stærra skott.',
+      'Gallarnir eru að hann drífur styttra en flestir á svipuðu verði, er meðal þeirra sem hlaða hægast og skottið er minna en hjá flestum keppinautum hans. Kia EV6 2025 Long Range AWD er 1.000.000 kr. ódýrari, drífur 29 km lengra, hleður með um 60% styttri stoppum og er með 75 l stærra skott.',
       'Ariya e-4ORCE er fyrir þá sem setja þægindi ofar hleðsluhraða, en keppinautarnir gefa meira fyrir peninginn.',
     ],
-    facts: '703df216d4ab',
+    facts: '25e134ef5af0',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'nissan-leaf-standard-range': {
@@ -1069,27 +1069,27 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að í sínum verðflokki er hann meðal þeirra sem drífa styst, hlaða hægast, eru hægastir og draga minnst, svo hann hentar illa til ferða milli landshluta. Peugeot e-Rifter tekur líka sjö, drífur 38 km lengra og er með 315 l stærra skott, en kostar 2.100.000 kr. meira.',
       'Frontera er ódýrasta leiðin að sjö sætum, sniðin að nærumhverfinu frekar en langferðum.',
     ],
-    facts: '6966a929a05b',
+    facts: '8b86df925c35',
     model: 'gemini-3.8-flash, thinking high',
   },
   'opel-grandland-base': {
     paragraphs: [
       'Opel Grandland er meðalstór jepplingur með framhjóladrifi, 4,65 m á lengd, sem leggur áherslu á þægindi og notagildi frekar en snerpu.',
       'Skottið er stærra en hjá flestum á svipuðu verði, og drægnin og hleðslan eru í meðallagi, sem dugar fyrir ferðir milli landshluta.',
-      'Á móti kemur að hann er meðal þeirra hægustu í sínum verðflokki og dregur minna en flestir keppinautar hans. Peugeot e-3008 Dual Motor, sem er byggður á sama grunni, kostar 100.000 kr. meira en er fjórhjóladrifinn, mun sneggri og með 38 l stærra skott.',
-      'Grandland er jarðbundinn og rúmgóður fjölskyldubíll, en systurbíllinn frá Peugeot gefur meira fyrir litlu meira.',
+      'Á móti kemur að hann er meðal þeirra hægustu í sínum verðflokki og dregur minna en flestir keppinautar hans. Systurbíllinn Peugeot e-3008 er 420.000 kr. ódýrari, drífur álíka langt, er mun sneggri og með 38 l stærra skott.',
+      'Grandland er jarðbundinn og rúmgóður fjölskyldubíll, en systurbíllinn frá Peugeot gefur meira fyrir minna.',
     ],
-    facts: '10b4052276f8',
+    facts: '584097b9598a',
     model: 'gemini-3.8-flash, thinking high',
   },
   'opel-grandland-awd': {
     paragraphs: [
       'Opel Grandland AWD er meðalstór jepplingur með fjórhjóladrifi, 4,65 m á lengd, sem leggur áherslu á notagildi og þægindi.',
       'Hann er snöggur, skottið er í meðallagi á þessu verði og hann má draga 1.350 kg.',
-      'Gallinn er að hann drífur styttra en flestir keppinautar hans og hleður aðeins í meðallagi. Kia EV6 2025 Long Range AWD kostar það sama en drífur 30 km lengra, hleður með um 45% styttri stoppum og má draga 450 kg meira. Framhjóladrifni Opel Grandland er 400.000 kr. ódýrari og drífur 29 km lengra.',
-      'Grandland AWD er prýðilegur fyrir fjölskylduakstur í vetrarfærð, en keppinautarnir hlaða mun hraðar.',
+      'Gallinn er að hann drífur styttra en flestir keppinautar hans og hleður aðeins í meðallagi. Systurbíllinn Peugeot e-3008 Dual Motor er 300.000 kr. ódýrari, drífur 33 km lengra og er með 103 l stærra skott, og Subaru Solterra kostar það sama, drífur 17 km lengra og er mun sneggri. Framhjóladrifni Opel Grandland er 400.000 kr. ódýrari og drífur 29 km lengra.',
+      'Grandland AWD er prýðilegur fyrir fjölskylduakstur í vetrarfærð, en systurbíllinn frá Peugeot gefur meira fyrir minna.',
     ],
-    facts: '52c63660f039',
+    facts: 'ebd3b65719d8',
     model: 'gemini-3.8-flash, thinking high',
   },
   'gwm-ora-3-48-kwh': {
@@ -1109,27 +1109,27 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann drífur hins vegar styttra og er meðal þeirra hægustu í sínum verðflokki, og hann má ekki draga kerru. Kia EV3 Standard Range kostar 51.000 kr. meira, drífur 24 km lengra, er mun sneggri og má draga 500 kg.',
       'e-2008 er lipur bæjarbíll fyrir þá sem þurfa hvorki kerru né mikla drægni.',
     ],
-    facts: 'ba54c05cafa1',
+    facts: '2670a0b8adfe',
     model: 'gemini-3.8-flash, thinking high',
   },
   'peugeot-e-3008-base': {
     paragraphs: [
       'Peugeot e-3008 er meðalstór jepplingur með framhjóladrifi og djörfu útliti, með sérstæðu ökumannsrými, litlu stýri og bogadregnum skjá, fyrir þá sem vilja stílhreinan og þægilegan fjölskyldubíl.',
       'Hann drífur lengra og er með stærra skott en flestir á svipuðu verði, svo hann dugar vel í ferðir milli landshluta með fulla fjölskyldu.',
-      'Á móti kemur að hann hleður hægar og er aflminni en flestir keppinautar hans. Skoda Elroq 85x kostar 20.000 kr. meira, er fjórhjóladrifinn, drífur 45 km lengra og hleður með um 30% styttri stoppum, en skottið er 118 l minna.',
+      'Á móti kemur að hann hleður hægar og er aflminni en flestir keppinautar hans. Skoda Elroq 85 er 380.000 kr. ódýrari, drífur 54 km lengra og hleður með um 25% styttri stoppum, en skottið er 118 l minna, og Hongqi EHS5 er 180.000 kr. ódýrari, fjórhjóladrifinn og hleður með um 45% styttri stoppum.',
       'e-3008 er fýsilegur kostur fyrir þá sem meta hönnun, drægni og pláss ofar hraðri hleðslu.',
     ],
-    facts: 'ce16f004dc74',
+    facts: '196dbbb36048',
     model: 'gemini-3.8-flash, thinking high',
   },
   'peugeot-e-3008-dual-motor': {
     paragraphs: [
       'Peugeot e-3008 Dual Motor er meðalstór jepplingur með fjórhjóladrifi og djörfu útliti, með sérstæðu ökumannsrými, litlu stýri og bogadregnum skjá. Hann höfðar til þeirra sem vilja þægilegan og hljóðlátan fjölskyldubíl sem sker sig úr.',
       'Í sínum verðflokki drífur hann lengra og er aflmeiri en flestir, og skottið er stærra en hjá flestum.',
-      'Gallinn er að hann hleður hægar en flestir keppinautar hans. XPENG G6 AWD Performance kostar það sama en hleður með um 45% styttri stoppum og er mun sneggri. Þurfi ekki fjórhjóladrif fæst framhjóladrifinn Peugeot e-3008 fyrir 520.000 kr. minna, með sömu drægni.',
+      'Gallinn er að hann hleður hægar en flestir keppinautar hans. Skoda Elroq 85x er 500.000 kr. ódýrari, drífur 45 km lengra, hleður með um 30% styttri stoppum og má draga 450 kg meira, en skottið er 118 l minna. Þurfi ekki fjórhjóladrif fæst framhjóladrifinn Peugeot e-3008 fyrir 520.000 kr. minna, með sömu drægni.',
       'e-3008 Dual Motor er álitlegur kostur fyrir þá sem meta drægni, rými og franska hönnun ofar hraðri hleðslu.',
     ],
-    facts: '692bae7c8a08',
+    facts: '29c0957dcb9f',
     model: 'gemini-3.8-flash, thinking high',
   },
   'peugeot-e-5008-base': {
@@ -1139,7 +1139,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er meðal þeirra hægustu í sínum verðflokki, hleður hægar og dregur minna en flestir keppinautar hans. Skoda Peaq 90x kostar 1.400.000 kr. meira en er fjórhjóladrifinn, drífur 111 km lengra, hleður með um 35% styttri stoppum og má draga 1.000 kg meira.',
       'e-5008 er skynsamlegur kostur fyrir barnmargar fjölskyldur sem vilja sjö sæti og mikið pláss fyrir hóflegt verð.',
     ],
-    facts: 'a5a25913aff2',
+    facts: '294780238e34',
     model: 'gemini-3.8-flash, thinking high',
   },
   'peugeot-e-5008-dual-motor': {
@@ -1149,7 +1149,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann drífur styttra, er meðal þeirra sem hlaða hægast og dregur minna en flestir keppinautar hans. Skoda Peaq 90x kostar 900.000 kr. meira en drífur 140 km lengra, hleður með um 40% styttri stoppum og má draga 1.000 kg meira. Framhjóladrifni Peugeot e-5008 er 520.000 kr. ódýrari og drífur 29 km lengra.',
       'e-5008 Dual Motor hentar fjölskyldum sem þurfa sjö sæti og fjórhjóladrif, en síður sem langferðabíll.',
     ],
-    facts: '6b04476cfe4e',
+    facts: '1d3378174ce5',
     model: 'gemini-3.8-flash, thinking high',
   },
   'peugeot-e-rifter-base': {
@@ -1159,7 +1159,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur mjög stutt, hleður mjög hægt og er mjög aflítill, svo hann hentar illa til langferða. Peugeot e-5008 er 980.000 kr. dýrari en drífur 159 km lengra, er með 141 l stærra skott og má draga 250 kg meira.',
       'Fyrir þá sem þurfa ódýran og rúmgóðan bíl fyrir marga í nærumhverfinu vinnur e-Rifter verkið vel.',
     ],
-    facts: 'cfb65a98ef52',
+    facts: 'e8d1736a6182',
     model: 'gemini-3.8-flash, thinking high',
   },
   'peugeot-e-traveller-base': {
@@ -1179,7 +1179,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að skottið er minna en hjá flestum keppinautum hans og aftursætin eru fremur þröng. Ford Capri kostar það sama, drífur álíka langt og hleður jafn hratt, en er með 165 l stærra skott.',
       'Polestar 2 er fyrir þá sem setja akstursánægju og drægni ofar plássi.',
     ],
-    facts: 'ea9b46c810bb',
+    facts: 'fc4ef3c13da2',
     model: 'gemini-3.8-flash, thinking high',
   },
   'polestar-2-long-range-performance': {
@@ -1189,17 +1189,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að skottið er minna en hjá flestum keppinautum hans og aftursætin eru fremur þröng. Polestar 2 Long Range Dual Motor er 900.000 kr. ódýrari, drífur 28 km lengra og munar aðeins sjónarmun í snerpu.',
       'Performance-útfærslan er fyrir þá sem vilja allra sportlegasta Polestar 2, en flestum dugar Dual Motor.',
     ],
-    facts: '5d18326da1a8',
+    facts: '6e3e17e09abd',
     model: 'gemini-3.8-flash, thinking high',
   },
   'polestar-3-base': {
     paragraphs: [
       'Polestar 3 er stór lúxusjepplingur með fjórhjóladrifi, 4,9 m á lengd, með áberandi skandinavískri hönnun, fyrir þá sem vilja kraftmikinn og stöðugan bíl með fágað yfirbragð.',
       'Í sínum verðflokki drífur hann lengra og er aflmeiri en flestir, og hann má draga 2.200 kg, meira en flestir keppinautar hans.',
-      'Hann hleður hins vegar hægar en flestir þeirra og skottið er minna. Volvo ES90 Twin Motor, byggður á sama grunni, kostar það sama, drífur 51 km lengra og hleður með um 35% styttri stoppum, fyrir þá sem sætta sig við fólksbíl.',
+      'Hann hleður hins vegar hægar en flestir þeirra og skottið er minna. Volvo EX60 P12, frá systurmerki Polestar, er 1.100.000 kr. ódýrari, drífur 182 km lengra og hleður með um 50% styttri stoppum.',
       'Polestar 3 er fyrir þá sem vilja langdrægan og kraftmikinn jeppling með sterkan svip.',
     ],
-    facts: '607b219a4925',
+    facts: '00f289332ef9',
     model: 'gemini-3.8-flash, thinking high',
   },
   'polestar-3-performance': {
@@ -1209,7 +1209,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann drífur styttra og hleður hægar en flestir þeirra, og skottið er minna. Porsche Macan 4 Electric er 40.000 kr. ódýrari, drífur 51 km lengra, hleður með um 40% styttri stoppum og má draga 300 kg meira. Polestar 3 er 1.000.000 kr. ódýrari og drífur 68 km lengra.',
       'Polestar 3 Performance er fyrir þá sem vilja sportlegasta Polestar 3, en grunnútfærslan gefur meira fyrir peninginn.',
     ],
-    facts: '60945870f6fe',
+    facts: 'c3bc14b9c088',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'polestar-4-long-range-dual-motor': {
@@ -1239,7 +1239,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er fremur dýr og snerpan aðeins í meðallagi miðað við keppinautana. Porsche Macan 4s Electric fæst fyrir 1.500.000 kr. meira með mun meira afli og sömu drægni.',
       'Macan 4 er einn heildstæðasti lúxusjepplingurinn á sínu verði, jafnvígur á akstur, pláss og ferðalög.',
     ],
-    facts: 'b4b49ee67080',
+    facts: 'ad23d44478a8',
     model: 'gemini-3.8-flash, thinking high',
   },
   'porsche-macan-4s-electric': {
@@ -1249,7 +1249,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er mjög dýr og drægnin aðeins í meðallagi miðað við verðið. Porsche Macan 4 Electric er 1.500.000 kr. ódýrari með sömu drægni, rými og dráttargetu, og gefur aðeins eftir í snerpu.',
       'Macan 4S er fyrir þá sem vilja sportlegasta Macan-inn, en Macan 4 gefur meira fyrir peninginn.',
     ],
-    facts: '64e6a92aa4e6',
+    facts: 'c84d03b0d43f',
     model: 'gemini-3.8-flash, thinking high',
   },
   'porsche-taycan-plus': {
@@ -1259,7 +1259,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að skottið er eitt það minnsta í hans verðflokki, hann má ekki draga kerru og afturhjóladrifið kallar á aðgát í snjó og hálku. Porsche Taycan 4 Plus fæst með fjórhjóladrifi fyrir 1.500.000 kr. meira og drífur samt langt.',
       'Taycan Plus er sportlegur langferðabíll fyrir þá sem geta verið án fjórhjóladrifs.',
     ],
-    facts: 'a72a8541bd98',
+    facts: '5915eef4165d',
     model: 'gemini-3.8-flash, thinking high',
   },
   'porsche-taycan-4-plus': {
@@ -1269,7 +1269,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hins vegar er skottið eitt það minnsta á þessu verði og hann má ekki draga kerru. Porsche Cayenne kostar það sama, drífur álíka langt og hleður jafn hratt, en er með 374 l stærra skott og má draga allt að 3.000 kg.',
       'Taycan 4 Plus er fyrir þá sem vilja sportbíl sem fer vel með langferðir, frekar en jepparými.',
     ],
-    facts: 'dda528e0d78f',
+    facts: '5cd46d08351e',
     model: 'gemini-3.8-flash, thinking high',
   },
   'porsche-taycan-4s-plus': {
@@ -1279,7 +1279,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann drífur styttra en flestir þeirra, skottið er eitt það minnsta og hann má ekki draga kerru. Porsche Taycan 4 Plus er 2.000.000 kr. ódýrari, drífur 86 km lengra og gefur aðeins eftir í snerpu, og Porsche Cayenne S kostar 1.000.000 kr. meira, er álíka snöggur, drífur 96 km lengra og má draga 3.000 kg.',
       'Taycan 4S Plus er fyrir þá sem setja hraða og akstursupplifun í fyrsta sæti.',
     ],
-    facts: '3f13c5d34759',
+    facts: '6a16ac30fd97',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-taycan-4-cross-turismo': {
@@ -1289,7 +1289,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er mjög dýr, skottið er minna en hjá flestum keppinautum hans og hann má ekki draga kerru. Porsche Cayenne Coupé er 500.000 kr. ódýrari, drífur 30 km lengra, er með 88 l stærra skott og má draga 3.500 kg.',
       'Taycan 4 Cross Turismo er fyrir þá sem vilja sportbílaakstur með meira rými en í fólksbílnum, frekar en jeppa.',
     ],
-    facts: '2c42b54ca231',
+    facts: '12e653c73815',
     model: 'gemini-3.8-flash, thinking high',
   },
   'porsche-taycan-4s-cross-turismo': {
@@ -1299,7 +1299,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann drífur styttra en flestir keppinautar hans, skottið er minna og hann má ekki draga kerru. Porsche Cayenne S kostar það sama en drífur 43 km lengra, er með 335 l stærra skott og má draga allt að 3.000 kg.',
       'Taycan 4S Cross Turismo er fyrir þá sem setja akstursupplifunina ofar plássi og dráttargetu.',
     ],
-    facts: '088728deac3c',
+    facts: 'c2f9b218b0d8',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-cayenne-base': {
@@ -1309,7 +1309,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er mjög dýr og hægari en flestir keppinautar hans, þótt hann sé langt frá því að vera seinn. Sú snerpa fæst í Porsche Cayenne S fyrir 3.000.000 kr. meira, með sama skottinu og álíka drægni.',
       'Grunngerð Cayenne er sú hagnýtasta í línunni og fyrir flesta sú skynsamlegasta: hún gefur lítið eftir nema í snerpu.',
     ],
-    facts: 'f692ce51b5b3',
+    facts: '8c3a2a6d53ca',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-cayenne-coupe': {
@@ -1319,7 +1319,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er mjög dýr og hægari en flestir þeirra. Porsche Cayenne er 500.000 kr. ódýrari, með 247 l stærra skott, en má draga 500 kg minna.',
       'Cayenne Coupé er fyrir þá sem vilja Cayenne með sportlegra lagi, og fá mestu dráttargetuna á listanum í kaupbæti.',
     ],
-    facts: '89d7d6d210cb',
+    facts: '076d35ccad02',
     model: 'gemini-3.8-flash, thinking high',
   },
   'porsche-cayenne-s': {
@@ -1329,7 +1329,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti ókosturinn er verðið. Porsche Cayenne er 3.000.000 kr. ódýrari með sama rými, dráttargetu og drægni, og gefur aðeins eftir í snerpu.',
       'Cayenne S er fyrir þá sem vilja jeppa sem gefur ekkert eftir, en grunngerð Cayenne gefur meira fyrir peninginn.',
     ],
-    facts: '4eac3f04344a',
+    facts: '1c931d3d155a',
     model: 'gemini-3.8-flash, thinking high',
   },
   'porsche-cayenne-s-coupe': {
@@ -1339,17 +1339,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti ókosturinn er verðið. Porsche Cayenne S er 500.000 kr. ódýrari með 247 l stærra skott og nánast sömu drægni, fyrir þá sem geta verið án coupé-lagsins.',
       'Cayenne S Coupé er fyrir kröfuharða ökumenn sem vilja kraft, stutt hleðslustopp og sportlegt lag.',
     ],
-    facts: '7d546273af52',
+    facts: 'c612fe11234b',
     model: 'gemini-3.8-flash, thinking high',
   },
   'porsche-cayenne-turbo': {
     paragraphs: [
       'Porsche Cayenne Turbo er stór og geysilega aflmikill lúxusjeppi, meðal sneggstu bíla á listanum, sem sameinar sportbílaakstur og notagildi stórs fimm sæta jeppa.',
       'Hann er ekki bara snöggur: skottið er það stærsta á svipuðu verði, 90 l framskott bætist við og hann má draga 3.000 kg, meira en flestir keppinautar hans. Hann hleður líka hraðar en flestir þeirra, svo hleðslustoppin á langferðum eru stutt.',
-      'Á móti kemur verðið, enda er hann mjög dýr, og drægnin er aðeins í meðallagi í hans verðflokki. Ef langdrægni skiptir meira máli en afl drífur Mercedes-Benz EQS 580 4MATIC 246 km lengra og er 460.000 kr. ódýrari, en hann er fólksbíll og má draga 1.300 kg minna.',
+      'Á móti kemur verðið, enda er hann mjög dýr, og drægnin er aðeins í meðallagi í hans verðflokki. Mercedes-Benz EQS SUV 580 4MATIC er 1.500.000 kr. ódýrari, tekur sjö og drífur 40 km lengra, en hann er mun hægari og má draga 1.200 kg minna.',
       'Cayenne Turbo er fyrir þá sem vilja jeppa sem gerir allt vel, og eru tilbúnir að borga fyrir það.',
     ],
-    facts: '809a7020da23',
+    facts: 'e7d891185df5',
     model: 'gemini-3.8-flash, thinking high',
   },
   'porsche-cayenne-turbo-coupe': {
@@ -1369,7 +1369,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur styttra og er meðal þeirra hægustu og aflminnstu í sínum verðflokki. Porsche Cayenne Turbo kostar 860.000 kr. meira, drífur 23 km lengra, hleður með um 30% styttri stoppum og má draga 500 kg meira.',
       'Range Rover EV450 er fyrir þá sem vilja jeppalúxus og ró frekar en að eltast við tölurnar.',
     ],
-    facts: '216b5c4c82e0',
+    facts: '09ed0f81a3cf',
     model: 'gemini-3.8-flash, thinking high',
   },
   'range-rover-electric-ev550': {
@@ -1396,10 +1396,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Renault R5 E-Tech 52 kWh er lítill fimm sæta hlaðbakur, aðeins 3,9 m á lengd, með retro-hönnun í anda klassíska forverans, lipur í þröngum götum og auðveldur í stæðum.',
       'Hann er mjög ódýr og drífur 109 km lengra en grunnútfærslan, sem dugar í dagleg erindi og styttri ferðir milli landshluta, og útlitið gerir hann eftirtektarverðan.',
-      'Gallarnir eru að hann drífur styttra, hleður hægar og er aflminni en flestir á svipuðu verði, skottið er eitt það minnsta og hann má aðeins draga 500 kg. Leapmotor C10 Pro kostar það sama en er mun stærri bíll, drífur álíka langt, er með 109 l stærra skott og má draga 1.000 kg meira.',
+      'Gallarnir eru að hann drífur styttra, hleður hægar og er aflminni en flestir á svipuðu verði, skottið er eitt það minnsta og hann má aðeins draga 500 kg. Volkswagen ID. Polo kostar það sama en drífur 45 km lengra, hleður með um 30% styttri stoppum, er með 115 l stærra skott og má draga 700 kg meira.',
       'R5 er skemmtilegur bæjarbíll með mikinn karakter, en síður heppilegur sem aðalbíll fjölskyldu.',
     ],
-    facts: 'd6f71b54b2fb',
+    facts: '64cc0bf30d11',
     model: 'gemini-3.8-flash, thinking high',
   },
   'renault-scenic-e-tech-ev60': {
@@ -1409,17 +1409,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur styttra, hleður hægar og er aflminni en flestir keppinautar hans. Renault Scenic E-Tech EV87 kostar 900.000 kr. meira og drífur 193 km lengra, og XPENG G6 RWD Standard Range kostar 100.000 kr. meira, hleður með um 35% styttri stoppum og má draga 400 kg meira.',
       'Scenic EV60 er þægilegur fjölskyldubíll, en flestum borgar sig stærri rafhlaðan.',
     ],
-    facts: 'f4f8925cd6d8',
+    facts: '764a7dbec4ad',
     model: 'gemini-3.8-flash, thinking high',
   },
   'renault-scenic-e-tech-ev87': {
     paragraphs: [
       'Renault Scenic E-Tech EV87 er meðalstór jepplingur með framhjóladrifi og stórri rafhlöðu, með vel nýttu innanrými og þægilegum akstri, fyrir fjölskyldur sem ferðast mikið um landið.',
       'Hann er meðal þeirra langdrægustu í sínum verðflokki og skottið er stærra en hjá flestum keppinautum hans, svo hann dugar vel í ferðir milli landshluta með fulla fjölskyldu, jafnvel í vetrarkulda.',
-      'Hann er hins vegar hægari og aflminni en flestir þeirra og má draga minna. Tesla Model 3 Long Range Fjórhjóladrif er 100.000 kr. ódýrari, drífur 37 km lengra og hleður með um 35% styttri stoppum, en er lægri fólksbíll.',
+      'Hann er hins vegar hægari og aflminni en flestir þeirra og má draga minna. XPENG G6 RWD Long Range er 100.000 kr. ódýrari, hleður með um 45% styttri stoppum og má draga 400 kg meira, en drífur 53 km styttra.',
       'Scenic EV87 er hagkvæmur ferðafélagi fyrir þá sem setja pláss og drægni fyrir peninginn í fyrsta sæti.',
     ],
-    facts: 'c6e8a1afda6a',
+    facts: '9a6e7c164373',
     model: 'gemini-3.8-flash, thinking high',
   },
   'skoda-epiq-55': {
@@ -1429,7 +1429,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Veikleikarnir eru fáir, helst að drægnin er aðeins í meðallagi. Volkswagen ID. Polo, systurbíll á sama grunni, kostar það sama og drífur 13 km lengra, en skottið er 34 l minna.',
       'Epiq 55 er einn heildstæðasti ódýri rafbíllinn, fyrir þá sem vilja pláss og snerpu fyrir lítið.',
     ],
-    facts: 'a0c4aa967a45',
+    facts: 'e4d0fc19194a',
     model: 'gemini-3.8-flash, thinking high',
   },
   'skoda-elroq-85': {
@@ -1439,17 +1439,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann má aðeins draga 1.000 kg, minna en flestir þeirra, og er aðeins afturhjóladrifinn. Skoda Elroq 85x fæst með fjórhjóladrifi og 1.800 kg dráttargetu fyrir 400.000 kr. meira, með nánast sömu drægni.',
       'Elroq 85 er skynsamlegt val fyrir þá sem vilja langdrægan jeppling á góðu verði og þurfa ekki að draga mikið.',
     ],
-    facts: '854fd4da41e0',
+    facts: 'd164793c20f7',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'skoda-elroq-85x': {
     paragraphs: [
       'Skoda Elroq 85x er meðalstór jepplingur með fjórhjóladrifi, hagnýtu innanrými og hárri setstöðu, fyrir fjölskyldur sem vilja traustan bíl í vetrarfærð og á ferðalögum.',
       'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og má draga 1.800 kg, meira en flestir þeirra.',
-      'Veikleikarnir eru fáir: afl og snerpa eru aðeins í meðallagi, og skottið líka. XPENG G6 RWD Long Range kostar 100.000 kr. meira, hleður með um 25% styttri stoppum og er með 101 l stærra skott, en er aðeins afturhjóladrifinn.',
+      'Veikleikarnir eru fáir: afl og snerpa eru aðeins í meðallagi, og skottið líka. Peugeot e-3008 Dual Motor kostar 500.000 kr. meira og er með 118 l stærra skott, en drífur 45 km styttra og hleður með um 40% lengri stoppum.',
       'Elroq 85x er einn heildstæðasti fjórhjóladrifni bíllinn á sínu verði.',
     ],
-    facts: 'b96e9d7e8c9a',
+    facts: 'fad90a1a325d',
     model: 'gemini-3.8-flash, thinking high',
   },
   'skoda-elroq-rs': {
@@ -1459,7 +1459,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Skottið er hins vegar minna en hjá flestum keppinautum hans, og hleðsla og snerpa eru aðeins í meðallagi. Skoda Elroq 85x er 1.300.000 kr. ódýrari, drífur 20 km lengra og má draga jafn mikið, og gefur aðeins eftir í snerpu.',
       'Elroq RS er fyrir þá sem vilja sportlegasta Elroq-inn, en 85x gefur meira fyrir peninginn.',
     ],
-    facts: '7b62f0e932ac',
+    facts: '94583d902227',
     model: 'gemini-3.8-flash, thinking high',
   },
   'skoda-enyaq-85x': {
@@ -1469,7 +1469,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er hægari en flestir keppinautar hans og má aðeins draga 1.200 kg. Smart #5 Pulse kostar það sama, drífur álíka langt, hleður með um 40% styttri stoppum, er með 45 l stærra skott og má draga 400 kg meira.',
       'Enyaq 85X er traust og skynsamlegt val fyrir þá sem setja pláss og hagnýti í fyrsta sæti.',
     ],
-    facts: '736aa237e05e',
+    facts: '03450611baf1',
     model: 'gemini-3.8-flash, thinking high',
   },
   'skoda-enyaq-rs': {
@@ -1479,7 +1479,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er fremur dýr og drægni og hleðsla eru aðeins í meðallagi. Smart #5 Brabus er 200.000 kr. ódýrari, drífur álíka langt, hleður með um 40% styttri stoppum og er mun sneggri, en má draga 600 kg minna.',
       'Enyaq RS er fyrir þá sem vilja rúmgóðan jeppling sem dregur hjólhýsi, með sportlegum blæ.',
     ],
-    facts: '134c04397a83',
+    facts: '3beba24377c0',
     model: 'gemini-3.8-flash, thinking high',
   },
   'skoda-peaq-90x': {
@@ -1489,7 +1489,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er fremur dýr og hægari en flestir þeirra. Peugeot e-5008 Dual Motor er 900.000 kr. ódýrari og tekur líka sjö, en drífur 140 km styttra, hleður hægar og má draga 1.000 kg minna.',
       'Peaq 90x er einn sterkasti sjö sæta kosturinn fyrir stórar fjölskyldur sem ferðast um landið.',
     ],
-    facts: '26b32d8a9473',
+    facts: '073a50ccd45c',
     model: 'gemini-3.8-flash, thinking high',
   },
   'smart-1-pro': {
@@ -1499,7 +1499,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Skottið er hins vegar minna en hjá flestum keppinautum hans og drægnin aðeins í meðallagi. Kia EV3 Standard Range er 200.000 kr. ódýrari, drífur álíka langt og er með 137 l stærra skott, en má draga 1.100 kg minna.',
       'Smart #1 Pro+ er sprækur og vel búinn smájepplingur sem getur dregið kerru, á hagstæðu verði.',
     ],
-    facts: '30c342608c6d',
+    facts: '6fc8ab4fdddb',
     model: 'gemini-3.8-flash, thinking high',
   },
   'smart-1-pulse': {
@@ -1509,7 +1509,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst, hleður hægar en flestir þeirra og skottið er eitt það minnsta. Afturhjóladrifni Smart #1 Pro+ er 900.000 kr. ódýrari og drífur 40 km lengra, fyrir þá sem þurfa ekki fjórhjóladrifið.',
       'Smart #1 Pulse er fyrir þá sem setja kraft og fjórhjóladrif ofar drægni og plássi.',
     ],
-    facts: 'b81624188033',
+    facts: 'bc81e7c3460c',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'smart-1-brabus': {
@@ -1519,17 +1519,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar meðal þeirra sem drífa styst, hleður hægar en flestir keppinautar hans og skottið er eitt það minnsta. Volvo EX30 Twin Motor Performance er 100.000 kr. ódýrari, álíka snöggur, drífur 50 km lengra og hleður hraðar, og Smart #1 Pulse er 700.000 kr. ódýrari og nánast jafn snöggur.',
       'Smart #1 Brabus er leikfang fyrir þá sem vilja hámarks akstursgleði, en flestum dugar #1 Pulse.',
     ],
-    facts: '37b67d47d275',
+    facts: '02b27aa68b5f',
     model: 'gemini-3.8-flash, thinking high',
   },
   'smart-3-pulse': {
     paragraphs: [
       'Smart #3 Pulse er rennilegur jepplingur með fjórhjóladrifi og miklu afli, hannaður í samstarfi Mercedes-Benz og Geely, með sportlegra og lægra lagi en #1.',
       'Hann er meðal sneggstu og aflmestu bíla í sínum verðflokki, og fjórhjóladrifið kemur aflinu örugglega niður.',
-      'Á móti kemur að hann drífur styttra og hleður hægar en flestir keppinautar hans. Toyota C-HR+ kostar 100.000 kr. meira og drífur 41 km lengra, þótt hann sé aðeins framhjóladrifinn og mun hægari.',
+      'Á móti kemur að hann drífur styttra og hleður hægar en flestir keppinautar hans. MG MGS6 Dual Motor kostar 200.000 kr. meira, er líka fjórhjóladrifinn og drífur 70 km lengra, þótt hann sé ögn hægari.',
       'Smart #3 Pulse er fyrir þá sem setja akstursánægju og fjórhjóladrif ofar drægni.',
     ],
-    facts: '83bd9755cea2',
+    facts: '3e3e9c73e1a9',
     model: 'gemini-3.8-flash, thinking high',
   },
   'smart-3-brabus': {
@@ -1539,7 +1539,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann drífur styttra, hleður hægar og er með minna skott en flestir þeirra. Volvo EX30 Twin Motor Performance er 300.000 kr. ódýrari, álíka snöggur, drífur 35 km lengra og hleður með um 10% styttri stoppum. Smart #3 Pulse er 500.000 kr. ódýrari og aðeins sjónarmun hægari.',
       'Smart #3 Brabus er fyrir þá sem vilja mikinn kraft og sportlegan svip, en #3 Pulse gefur meira fyrir peninginn.',
     ],
-    facts: 'b1fb76b375a2',
+    facts: '9a15eb271a14',
     model: 'gemini-3.8-flash, thinking high',
   },
   'smart-5-pro': {
@@ -1549,7 +1549,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann hleður fremur hægt á langferðum og er afturhjóladrifinn, sem krefst meiri varkárni í snjó og hálku. XPENG G6 RWD Standard Range er 100.000 kr. ódýrari með um 25% styttri hleðslustopp, en drífur 30 km styttra og skottið er 59 l minna.',
       'Fyrir þá sem leita að rúmgóðum og sprækum fjölskyldubíl sem getur dregið hjólhýsi er #5 Pro fýsilegur kostur, svo lengi sem hraðhleðslan er ekki í forgangi.',
     ],
-    facts: 'cf21101e07be',
+    facts: '47df4bf2f77a',
     model: 'gemini-3.8-flash, thinking high',
   },
   'smart-5-pulse': {
@@ -1569,17 +1569,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er fremur dýr og drægnin aðeins í meðallagi. Smart #5 Pulse er 1.300.000 kr. ódýrari með sömu drægni, rými og hleðslu, og gefur aðeins eftir í snerpu.',
       'Smart #5 Brabus er fyrir þá sem vilja allra mest afl, en #5 Pulse gefur meira fyrir peninginn.',
     ],
-    facts: '5c7dc93cc2ea',
+    facts: '56b1e95e9367',
     model: 'gemini-3.8-flash, thinking high',
   },
   'subaru-e-outback-base': {
     paragraphs: [
       'Subaru e-Outback er stór jepplingur með fjórhjóladrifi, 4,84 m á lengd, byggður á hefð Subaru fyrir vetrarhæfni og hagnýtri hönnun, fyrir þá sem ferðast í hvaða veðri sem er.',
       'Hann er sneggri og aflmeiri en flestir á svipuðu verði, og skottið er stærra en hjá flestum þeirra.',
-      'Drægni og hraðhleðsla eru hins vegar aðeins í meðallagi. Hongqi EHS7 Premium er 100.000 kr. ódýrari, drífur 17 km lengra, hleður með um 35% styttri stoppum og er mun aflmeiri, þótt merkið sé nýtt hér á landi.',
+      'Drægni og hraðhleðsla eru hins vegar aðeins í meðallagi. BYD Sealion 7 er 100.000 kr. ódýrari, hleður með um 15% styttri stoppum og er mun aflmeiri, en skottið er 113 l minna.',
       'e-Outback er traustur kostur fyrir þá sem setja grip, pláss og Subaru-merkið í forgang.',
     ],
-    facts: 'edde5f48d3ad',
+    facts: '8cd9b6b98c4c',
     model: 'gemini-3.8-flash, thinking high',
   },
   'subaru-solterra-base': {
@@ -1589,7 +1589,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti ókosturinn er skottið, sem er minna en hjá flestum keppinautum hans. Kia EV6 2025 Long Range AWD kostar nánast það sama en hleður með um 40% styttri stoppum, er með 69 l stærra skott og má draga 300 kg meira.',
       'Solterra er traustur kostur fyrir þá sem setja fjórhjóladrif og veghæð í forgang, en keppinautarnir hlaða hraðar og rúma meira.',
     ],
-    facts: '4ecb88ec078d',
+    facts: '2020f0f2b617',
     model: 'gemini-3.8-flash, thinking high',
   },
   'subaru-uncharted-base': {
@@ -1599,7 +1599,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að skottið er minna en hjá flestum keppinautum hans og drægnin aðeins í meðallagi. MG MGS6 Dual Motor er 100.000 kr. ódýrari, líka fjórhjóladrifinn og drífur álíka langt, með 90 l stærra skott, þótt hleðslustoppin séu um 30% lengri.',
       'Uncharted er heilsteyptur og snöggur fjórhjóladrifsbíll á góðu verði.',
     ],
-    facts: '83685783dc51',
+    facts: 'c0acef46c9d1',
     model: 'gemini-3.8-flash, thinking high',
   },
   'suzuki-e-vitara-4x4-allgrip': {
@@ -1619,7 +1619,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er lágur, með litla veghæð og aðeins afturhjóladrifinn, sem hentar síður í djúpum snjó og á malarvegum. Tesla Model 3 Long Range Afturhjóladrif kostar 900.000 kr. meira og drífur 216 km lengra.',
       'Model 3 er einn álitlegasti kosturinn á sínu verði fyrir þá sem aka mest á bundnu slitlagi.',
     ],
-    facts: 'a9b5c98f3078',
+    facts: '4667d96be78b',
     model: 'gemini-3.8-flash, thinking high',
   },
   'tesla-model-3-long-range-afturhjoladrif': {
@@ -1629,17 +1629,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar lágur, með litla veghæð og aðeins afturhjóladrifinn, sem hentar síður í snjó og á malarvegum. Tesla Model 3 Long Range Fjórhjóladrif fæst fyrir 600.000 kr. meira, en drífur 90 km styttra.',
       'Fyrir þá sem horfa fyrst og fremst í drægni á langferðum er þetta einn álitlegasti kosturinn.',
     ],
-    facts: '2fb3560a683e',
+    facts: '9dfa69bf6c7f',
     model: 'gemini-3.8-flash, thinking high',
   },
   'tesla-model-3-long-range-fjorhjoladrif': {
     paragraphs: [
       'Tesla Model 3 Long Range er lágur og rennilegur fólksbíll með fjórhjóladrifi, einn sá langdrægasti og sneggsti í sínum verðflokki. Hann hentar þeim sem aka mikið milli landshluta og vilja bíl sem er bæði sparneytinn og snarpur.',
       'Hann hleður hratt, og á langferðum hefur hann aðgang að hraðhleðslustöðvum Tesla við hringveginn. Þótt hann sé fólksbíll með skottloki frekar en hlaðbakur er farangursrýmið stærra en hjá flestum keppinautum hans, og 88 l framskott bætist við.',
-      'Á móti kemur að hann er lágur og með litla veghæð, sem hentar síður á malarvegum og í djúpum snjó, og hann má aðeins draga 1.000 kg, minna en flestir þeirra. Þeir sem vilja hærri setstöðu og meiri dráttargetu gætu frekar litið á XPENG G6 RWD Long Range, sem má draga 500 kg meira, en hann drífur 90 km styttra og er aðeins afturhjóladrifinn.',
+      'Á móti kemur að hann er lágur og með litla veghæð, sem hentar síður á malarvegum og í djúpum snjó, og hann má aðeins draga 1.000 kg, minna en flestir þeirra. Þeir sem þurfa meiri dráttargetu gætu frekar litið á Polestar 2 Long Range Dual Motor, sem má draga 500 kg meira, en hann kostar 700.000 kr. meira og drífur 64 km styttra.',
       'Fyrir langferðir á góðum vegum er Model 3 Long Range einn sterkasti kosturinn.',
     ],
-    facts: '2e5f5056f3d9',
+    facts: '53992529e7d2',
     model: 'gemini-3.8-flash, thinking high',
   },
   'tesla-model-3-performance': {
@@ -1649,7 +1649,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann má ekki draga kerru, fjöðrunin er stíf og lág bygging hentar síður á malarvegum. Tesla Model 3 Long Range Fjórhjóladrif er 880.000 kr. ódýrari, drífur 89 km lengra og má draga 1.000 kg, og gefur aðeins eftir í snerpu.',
       'Model 3 Performance er fyrir þá sem vilja mikinn kraft, en Long Range Fjórhjóladrif er skynsamlegri fyrir flesta.',
     ],
-    facts: 'e4eeae096e55',
+    facts: '6d59ed8570d5',
     model: 'gemini-3.8-flash, thinking high',
   },
   'tesla-model-y-standard-range': {
@@ -1659,7 +1659,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar aðeins afturhjóladrifinn og einfaldar búinn en dýrari útfærslurnar. Tesla Model Y Premium Long Range kostar 1.500.000 kr. meira og drífur 104 km lengra, og Tesla Model Y Long Range Dual Motor fæst með fjórhjóladrifi fyrir 1.900.000 kr. meira.',
       'Model Y Standard Range er sterkt val fyrir þá sem vilja mikið pláss og hleðslunet Tesla á hagstæðu verði.',
     ],
-    facts: '47b1a9ade507',
+    facts: 'f97722e86c87',
     model: 'gemini-3.8-flash, thinking high',
   },
   'tesla-model-y-premium-long-range': {
@@ -1669,7 +1669,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti ókosturinn er að hann er aðeins afturhjóladrifinn, og fjöðrunin er stíf. Tesla Model Y Long Range Dual Motor fæst með fjórhjóladrifi fyrir 400.000 kr. meira, með nánast sömu drægni og rými.',
       'Model Y Premium Long Range gefur vart meiri drægni og pláss fyrir peninginn, ef fjórhjóladrif er ekki skilyrði.',
     ],
-    facts: '20b24ee73012',
+    facts: 'dcdb21b45b41',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'tesla-model-y-long-range-dual-motor': {
@@ -1679,7 +1679,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Veikleikarnir eru fáir: flestu er stýrt í gegnum einn snertiskjá og fjöðrunin er fremur stíf. Ford Mustang Mach-E LR AWD kostar nánast það sama og er mýkri í akstri, en drífur 50 km styttra og hleður hægar.',
       'Model Y Long Range Dual Motor er einn heilsteyptasti fjölskyldubíllinn á sínu verði.',
     ],
-    facts: 'a556e4e8d671',
+    facts: 'b8a09b9d3031',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'tesla-model-y-performance': {
@@ -1689,7 +1689,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Stíf fjöðrun og stórar felgur gera hann hins vegar óþýðari á malarvegum og holóttu malbiki. Tesla Model Y Long Range Dual Motor er 1.000.000 kr. ódýrari, drífur 20 km lengra og gefur aðeins eftir í snerpu.',
       'Model Y Performance er aflmikill fjölskyldubíll sem fórnar engu af notagildinu, en Long Range Dual Motor dugar flestum.',
     ],
-    facts: '36f58db16db2',
+    facts: '20f5dfa72f95',
     model: 'gemini-3.8-flash, thinking high',
   },
   'toyota-bz4x-base': {
@@ -1699,17 +1699,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er aflminni og hægari en flestir keppinautar hans, skottið er minna og hann er meðal þeirra sem draga minnst, aðeins 750 kg. Toyota bZ4X AWD fæst með fjórhjóladrifi og 1.500 kg dráttargetu fyrir 400.000 kr. meira.',
       'bZ4X er skynsamlegur kostur fyrir þá sem vilja mikla drægni og þurfa hvorki fjórhjóladrif né kerru.',
     ],
-    facts: '0aad5d8e50a4',
+    facts: '448ea51ae00c',
     model: 'gemini-3.8-flash, thinking high',
   },
   'toyota-bz4x-awd': {
     paragraphs: [
       'Toyota bZ4X AWD er meðalstór jepplingur með fjórhjóladrifi frá merki sem er þekkt fyrir áreiðanleika, ætlaður fjölskyldum sem vilja traustan bíl í hvaða færð sem er frekar en sérstakt pláss eða lúxus.',
       'Hann er sneggri og aflmeiri en flestir á svipuðu verði og má draga 1.500 kg. Drægnin og hraðhleðslan eru í meðallagi, sem dugar fyrir flestar ferðir milli landshluta.',
-      'Gallarnir eru að skottið er minna en hjá flestum keppinautum hans og hann er dýrari á hvern kílómetra drægni en flestir þeirra. Subaru e-Outback, sem er byggður á sama grunni, er 100.000 kr. ódýrari, sneggri og með 181 l stærra skott, og systurbíllinn Toyota C-HR+ AWD kostar það sama en hefur tveimur árum lengri ábyrgð á rafhlöðunni.',
-      'bZ4X AWD er traustur kostur fyrir þá sem vilja Toyota með fjórhjóladrifi, en keppinautarnir bjóða ýmist meira pláss eða lengri ábyrgð.',
+      'Gallarnir eru að skottið er minna en hjá flestum keppinautum hans og hann er dýrari á hvern kílómetra drægni en flestir þeirra. Systurbíllinn Subaru Solterra er 1.100.000 kr. ódýrari með nánast sömu drægni, og Kia EV6 2025 Long Range AWD er líka 1.100.000 kr. ódýrari, hleður með um 40% styttri stoppum og má draga 300 kg meira.',
+      'bZ4X AWD er traustur kostur fyrir þá sem vilja Toyota með fjórhjóladrifi, en systurbíllinn frá Subaru er sami bíll fyrir mun minna.',
     ],
-    facts: '5d04bdbb296a',
+    facts: '723600bc1d6e',
     model: 'gemini-3.8-flash, thinking high',
   },
   'toyota-bz4x-touring-base': {
@@ -1719,7 +1719,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar aflminni og hægari en flestir þeirra og meðal þeirra sem draga minnst, aðeins 750 kg. Toyota bZ4X Touring AWD fæst með fjórhjóladrifi og 1.500 kg dráttargetu fyrir 500.000 kr. meira.',
       'bZ4X Touring er traustur fjölskyldubíll fyrir þá sem þurfa pláss fyrir farangur frekar en kerru.',
     ],
-    facts: '4430e8e0ec93',
+    facts: '5c868e00aff8',
     model: 'gemini-3.8-flash, thinking high',
   },
   'toyota-bz4x-touring-awd': {
@@ -1729,17 +1729,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann drífur styttra og hleður hægar en flestir þeirra. Smart #5 Brabus er 100.000 kr. ódýrari, drífur 35 km lengra og hleður með um 40% styttri stoppum, með álíka stórt skott.',
       'bZ4X Touring AWD er snöggur og rúmgóður fjölskyldubíll, ef tíðari hleðslustopp á hringveginum henta.',
     ],
-    facts: '18930aad052a',
+    facts: 'f3c713581763',
     model: 'gemini-3.8-flash, thinking high',
   },
   'toyota-c-hr-base': {
     paragraphs: [
       'Toyota C-HR+ er meðalstór jepplingur með sérstæðu og hvössu útliti, ætlaður þeim sem vilja þægilegan bíl frá merki sem er þekkt fyrir áreiðanleika. Hann leggur áherslu á rólegan og hagkvæman akstur frekar en afl.',
       'Það sem sker hann helst úr er ábyrgðin: Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir aðrir framleiðendur. Það skiptir máli fyrir þá sem ætla að eiga bílinn lengi. Hann er líka fremur ódýr og hraðhleðslan er í meðallagi.',
-      'Gallarnir eru að hann má ekki draga kerru, er með einni af minnstu rafhlöðunum og meðal þeirra aflminnstu á svipuðu verði, og hann er aðeins framhjóladrifinn. MG MGS6 Dual Motor kostar 100.000 kr. meira, er fjórhjóladrifinn, með 77 l stærra skott og má draga 1.500 kg, en ábyrgðin á rafhlöðunni er þremur árum styttri.',
+      'Gallarnir eru að hann má ekki draga kerru, er með einni af minnstu rafhlöðunum og meðal þeirra aflminnstu á svipuðu verði, og hann er aðeins framhjóladrifinn. Peugeot e-3008 er 120.000 kr. ódýrari, drífur 69 km lengra, er með 172 l stærra skott og má draga 1.250 kg, en ábyrgðin á rafhlöðunni er tveimur árum styttri.',
       'C-HR+ hentar þeim sem meta langa ábyrgð og traust merki ofar afli og plássi, og þurfa aldrei að draga neitt.',
     ],
-    facts: '78eee388eeb9',
+    facts: '7bb0670e5b93',
     model: 'gemini-3.8-flash, thinking high',
   },
   'toyota-c-hr-77-kwh': {
@@ -1749,7 +1749,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er hægari og aflminni en flestir keppinautar hans, skottið er minna og hann er meðal þeirra sem draga minnst, aðeins 750 kg. Tesla Model Y Premium Long Range er 60.000 kr. ódýrari, drífur jafn langt, er með 438 l stærra skott og má draga 850 kg meira.',
       'C-HR+ 77 kWh er fyrir þá sem setja drægni, langa ábyrgð og traust merki ofar plássi og dráttargetu.',
     ],
-    facts: 'd421ea0aac8c',
+    facts: 'fc164e8ad667',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'toyota-c-hr-awd': {
@@ -1759,7 +1759,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann drífur hins vegar styttra og hleður hægar en flestir keppinautar hans, og skottið er minna. BYD Sealion 7 er 200.000 kr. ódýrari, sneggri, hleður með um 15% styttri stoppum og er með 104 l stærra skott.',
       'C-HR+ AWD er fyrir þá sem vilja Toyota með fjórhjóladrifi og langa ábyrgð, en gefur eftir í plássi og hleðslu.',
     ],
-    facts: '83cb018c4f63',
+    facts: 'd6443c720dd9',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'toyota-proace-city-verso-base': {
@@ -1786,10 +1786,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Toyota Urban Cruiser Active FWD er lítill jepplingur með framhjóladrifi og hárri setstöðu, systurbíll Suzuki e Vitara, fyrir þá sem vilja einfaldan hversdagsbíl frá Toyota.',
       'Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 300.000 km, mun lengur en flestir aðrir framleiðendur, og hann nýtur þjónustunets Toyota hér á landi.',
-      'Á móti kemur að hann drífur styttra, hleður hægar og er hægari en flestir á svipuðu verði, skottið er eitt það minnsta og hann má aðeins draga 750 kg. XPENG G6 RWD Standard Range er 100.000 kr. ódýrari, drífur álíka langt, hleður með um 55% styttri stoppum, er með 333 l stærra skott og má draga 750 kg meira.',
+      'Á móti kemur að hann drífur styttra, hleður hægar og er hægari en flestir á svipuðu verði, skottið er eitt það minnsta og hann má aðeins draga 750 kg. Kia EV3 Long Range er 400.000 kr. ódýrari, drífur 179 km lengra, hleður með um 50% styttri stoppum, er með 222 l stærra skott og má draga 250 kg meira.',
       'Urban Cruiser er látlaus bæjarbíll með langa ábyrgð, en fyrir sama verð fæst mun meira annars staðar.',
     ],
-    facts: '64536f9dc71c',
+    facts: '124fd97a3b9d',
     model: 'gemini-3.8-flash, thinking high',
   },
   'toyota-urban-cruiser-active-awd': {
@@ -1799,7 +1799,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst, hlaða hægast og draga minnst á svipuðu verði, og skottið er eitt það minnsta. Smart #3 Pulse er 100.000 kr. ódýrari, líka fjórhjóladrifinn, en drífur 20 km lengra og hleður með um 40% styttri stoppum.',
       'Urban Cruiser AWD hentar þeim sem setja fjórhjóladrif og langa ábyrgð í forgang og aka mest í nærumhverfinu.',
     ],
-    facts: 'd9aeb0b9edaa',
+    facts: '7b9713086845',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volkswagen-id-buzz-gtx': {
@@ -1809,7 +1809,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst á svipuðu verði og hleður hægar en flestir þeirra. Hyundai IONIQ 9 Long Range AWD kostar 200.000 kr. meira, tekur líka sjö, drífur 132 km lengra, hleður með um 30% styttri stoppum og má draga 900 kg meira.',
       'ID. Buzz GTX er heillandi og hagnýtur fjölskyldubíll fyrir þá sem þurfa mest pláss og ferðast mest í styttri ferðum.',
     ],
-    facts: '5385fed6e084',
+    facts: 'a2515fb6f11b',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-polo-base': {
@@ -1819,7 +1819,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Veikleikarnir eru fáir, helst að drægnin er samt fremur stutt miðað við rafbíla almennt. Skoda Epiq 55, systurbíll á sama grunni, kostar það sama með 34 l stærra skott og hærri setstöðu, en drífur 13 km styttra.',
       'ID. Polo er einn heildstæðasti ódýri rafbíllinn, kvikur í bænum og liðtækur milli landshluta.',
     ],
-    facts: '34da995b7888',
+    facts: '0cab0abc0f59',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volkswagen-id-cross-base': {
@@ -1839,17 +1839,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann hleður hægar en flestir á svipuðu verði, skottið er minna en hjá flestum þeirra og hann má ekki draga kerru. Kia EV3 Standard Range er 99.000 kr. ódýrari, drífur jafn langt, hleður með um 10% styttri stoppum, er með 75 l stærra skott og má draga 500 kg.',
       'ID.3 Pro er raunhæfur hversdagsbíll, en keppinautarnir gefa meira fyrir sama verð.',
     ],
-    facts: 'de4703c863af',
+    facts: '3e3f96f5d813',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volkswagen-id-3-neo-58-kwh': {
     paragraphs: [
       'Volkswagen ID.3 Neo er þægilegur og nettur hlaðbakur sem hentar vel í daglegan akstur jafnt í þéttbýli sem milli landshluta. Hann býður upp á hefðbundin akstursgæði Volkswagen í lipurri útfærslu, þar sem afturhjóladrifið gefur honum lítinn beygjuradíus og liðlega hegðun í þröngum götum og bílastæðahúsum.',
       'Hann drífur lengra en flestir á svipuðu verði og er ódýrari á hvern kílómetra drægni. Þótt rafhlaðan sé fremur lítil nýtir hann orkuna vel og hleður hraðar en flestir keppinautar hans, sem þýðir styttri hlé við hraðhleðslustöðvar á ferðalögum um landið.',
-      'Hann er hins vegar aflminni og hægari en flestir þeirra. Ef pláss og kraftur skipta meira máli býður Tesla Model Y Standard Range upp á mun meira rými og afl fyrir 140.000 kr. meira, þótt hleðslustoppin séu þar um 10% lengri.',
-      'Fyrir kaupendur sem leita að sparneytnum og liprum bíl með góða drægni á sanngjörnu verði er ID.3 mjög heppilegur kostur.',
+      'Hann er hins vegar aflminni og hægari en flestir þeirra. Nissan Leaf Extended Range kostar það sama en drífur 128 km lengra og hleður með um 10% styttri stoppum.',
+      'ID.3 Neo er sparneytinn og lipur bíll á sanngjörnu verði, þótt keppinautarnir drífi lengra fyrir sama verð.',
     ],
-    facts: '3ba989fdff90',
+    facts: '258d37d26a6f',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volkswagen-id-4-gtx': {
@@ -1869,37 +1869,37 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann má aðeins draga 1.200 kg, minna en flestir keppinautar hans, og snerpan er í meðallagi. XPENG G6 AWD Performance er 100.000 kr. ódýrari, drífur álíka langt, hleður með um 25% styttri stoppum, er mun sneggri og má draga 300 kg meira.',
       'ID.4 Pro 4MOTION er öruggt val fyrir þá sem vilja hefðbundinn og hagnýtan fjölskyldubíl með fjórhjóladrifi.',
     ],
-    facts: 'c4a184d802f3',
+    facts: '0a0250c59d03',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volkswagen-id-7-gtx': {
     paragraphs: [
       'Volkswagen ID.7 GTX er stór skutbíll með fjórhjóladrifi, tæpir fimm metrar á lengd, hljóðlátur og rúmgóður, fyrir þá sem ferðast mikið og vilja ekki jeppling.',
       'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, skottið er stærra en hjá flestum þeirra og hann má draga 1.800 kg, sem fáir keppinautar hans jafna.',
-      'Hann er hins vegar fremur dýr og afl og snerpa eru aðeins í meðallagi miðað við verðið. Polestar 4 SUV Long Range Dual Motor er 200.000 kr. ódýrari og mun sneggri, en skottið er 75 l minna.',
+      'Hann er hins vegar fremur dýr og afl og snerpa eru aðeins í meðallagi miðað við verðið. Polestar 4 Long Range Dual Motor er 400.000 kr. ódýrari og mun sneggri, en skottið er 79 l minna.',
       'ID.7 GTX er heilsteyptur langferðabíll fyrir fjölskyldur sem vilja pláss, drægni og dráttargetu.',
     ],
-    facts: '52858135416f',
+    facts: '9ebb7bd9b71a',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volvo-ec40-recharge-twin': {
     paragraphs: [
       'Volvo EC40 Recharge Twin er meðalstór sportjepplingur með aflíðandi þaklínu, systurbíll EX40 með sama drifbúnaði undir rennilegri yfirbyggingu. Hann hentar þeim sem vilja fágaðan og snarpan fjórhjóladrifsbíl og setja útlitið ofar plássinu.',
       'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og með fjórhjóladrifi og miklu afli er hann líka sneggri en flestir þeirra. Hann má draga 1.800 kg, sem fáir keppinautar hans jafna, svo hjólhýsi eða þung kerra er ekkert mál.',
-      'Á móti kemur að hann er nettur og með einu af minnstu skottunum, og aftursætin gjalda fyrir lága þaklínuna. Volvo EX40 Recharge Twin kostar það sama með sama drifi og gefur meira höfuðrými aftur í, en þurfi meira pláss frekar en afl býður Toyota bZ4X Touring 265 l stærra skott, þótt hann sé mun hægari og megi aðeins draga 750 kg.',
+      'Á móti kemur að hann er nettur og með einu af minnstu skottunum, og aftursætin gjalda fyrir lága þaklínuna. Systurbíllinn Volvo EX40 Recharge Twin kostar það sama með sama drifi og gefur meira höfuðrými aftur í, og Audi Q4 e-tron 45 quattro kostar 300.000 kr. meira og er með 116 l stærra skott, þótt hann sé mun hægari og megi draga 600 kg minna.',
       'EC40 er fyrir þá sem vilja Volvo með sportlegri svip og nóg af afli, og sætta sig við minna rými en í hefðbundnari jepplingi.',
     ],
-    facts: '51b9529f9a54',
+    facts: 'dcf5cf6da2de',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volvo-es90-twin-motor': {
     paragraphs: [
       'Volvo ES90 Twin Motor er stór og fágaður fólksbíll með afturhlera, fimm metrar á lengd, þar sem skandinavískur lúxus, hljóðlátur akstur og þægindi eru í fyrirrúmi. Hann hentar þeim sem vilja vandaðan langferðabíl með klassísku fólksbílasniði frekar en jeppa.',
       'Stærsti kosturinn er hve vel hann hentar í langferðir: hann drífur lengra og hleður hraðar en flestir á svipuðu verði, sem kemur sér vel í vetrarakstri milli landshluta. Hann má líka draga 2.000 kg.',
-      'Gallarnir eru að skottið er eitt það minnsta og hann er hægari en flestir keppinautar hans. Mercedes-Benz GLC 400 4MATIC er 600.000 kr. ódýrari, drífur 36 km lengra og er með 124 l stærra skott og 128 l framskott, fyrir þá sem sætta sig við jeppalag.',
+      'Gallarnir eru að skottið er eitt það minnsta og hann er hægari en flestir keppinautar hans. Mercedes-Benz C 400 4MATIC er 1.000.000 kr. ódýrari, drífur 83 km lengra og er sneggri, og Audi A6 e-tron Sportback quattro er 2.500.000 kr. ódýrari, drífur 33 km lengra og er með 56 l stærra skott.',
       'ES90 er sterkur kostur fyrir þá sem meta drægni, hraða hleðslu og fágun ofar plássi.',
     ],
-    facts: '0e40ddb119b7',
+    facts: 'e5c03adf2eda',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volvo-es90-twin-motor-performance': {
@@ -1909,17 +1909,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti ókosturinn er að skottið er eitt það minnsta. Volvo ES90 Twin Motor er 800.000 kr. ódýrari með sömu drægni og hleðslu, og gefur aðeins eftir í snerpu.',
       'ES90 Twin Motor Performance er fyrir þá sem vilja langdrægan lúxusfólksbíl með miklu afli, en flestum dugar ódýrari útfærslan.',
     ],
-    facts: 'b3e42392fb8e',
+    facts: '123ea68e52a8',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volvo-ex40-recharge-twin': {
     paragraphs: [
       'Volvo EX40 Recharge Twin er nettur og kassalaga jepplingur með fjórhjóladrifi og miklu afli, fyrir þá sem vilja vandaðan Volvo með háa setstöðu og gott útsýni.',
       'Hann er sneggri og aflmeiri en flestir á svipuðu verði, hleður hraðar en flestir þeirra og má draga 1.800 kg, sem fáir keppinautar hans jafna. Auk skottsins er lítið framskott.',
-      'Á móti kemur að hann er fremur dýr og skottið er í minna lagi. Toyota bZ4X Touring kostar það sama, drífur 23 km lengra og er með 259 l stærra skott, en er framhjóladrifinn, mun aflminni og má aðeins draga 750 kg.',
+      'Á móti kemur að hann er fremur dýr og skottið er í minna lagi. Audi Q4 e-tron 45 quattro kostar 300.000 kr. meira og er með 110 l stærra skott, en drífur 49 km styttra og er mun hægari, og BMW iX1 xDrive 30 er 700.000 kr. ódýrari með 80 l stærra skott.',
       'EX40 er traustur og sprækur jepplingur fyrir þá sem draga kerru og þurfa ekki mest pláss.',
     ],
-    facts: '5c9dd30ae76d',
+    facts: 'd184df664cd4',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volvo-ex30-single-motor': {
@@ -1929,27 +1929,27 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst, hleður hægar en flestir keppinautar hans og skottið er eitt það minnsta. Volvo EX30 Single Motor Extended Range kostar 400.000 kr. meira, drífur 136 km lengra, hleður hraðar og má draga 600 kg meira.',
       'EX30 Single Motor er skemmtilegur borgarbíll, en flestum borgar sig stærri rafhlaðan.',
     ],
-    facts: '1dbcafd62fbd',
+    facts: '90d31c05e908',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-ex30-single-motor-extended-range': {
     paragraphs: [
       'Volvo EX30 Single Motor Extended Range er lítill og nettur jepplingur með vandaðri skandinavískri hönnun, ætlaður þeim sem vilja gæðatilfinningu í lipurri stærð frekar en stóran fjölskyldubíl.',
       'Hann er sneggri og hleður hraðar en flestir á svipuðu verði, og þrátt fyrir smæðina má hann draga 1.600 kg, meira en flestir þeirra.',
-      'Hins vegar er skottið eitt það minnsta, aftursætin eru þröng og hann er aðeins afturhjóladrifinn. Mazda CX-6e 78 kWh er 200.000 kr. ódýrari, 62 cm lengri og með 150 l stærra skott og 80 l framskott, en mun hægari.',
+      'Hins vegar er skottið eitt það minnsta, aftursætin eru þröng og hann er aðeins afturhjóladrifinn. Toyota C-HR+ kostar 200.000 kr. meira og er 29 cm lengri með 98 l stærra skott, en mun hægari og má ekki draga kerru.',
       'EX30 hentar þeim sem vilja snarpan og vandaðan smábíl sem getur dregið kerru, en síður fjölskyldum sem þurfa pláss.',
     ],
-    facts: 'a2ede041531a',
+    facts: '2d97954e541d',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-ex30-twin-motor-performance': {
     paragraphs: [
       'Volvo EX30 Twin Motor Performance er lítill jepplingur með fjórhjóladrifi og gríðarlegu afli, meðal sneggstu bíla á sínu verði, sem sameinar skandinavíska fágun og leiftursnögg viðbrögð.',
       'Hann er líka meðal þeirra aflmestu og má draga 1.600 kg, meira en flestir keppinautar hans.',
-      'Gallarnir eru að hann drífur styttra en flestir þeirra og skottið er eitt það minnsta. Subaru Uncharted kostar 100.000 kr. meira, er líka fjórhjóladrifinn, drífur 40 km lengra og er með 85 l stærra skott.',
+      'Gallarnir eru að hann drífur styttra en flestir þeirra og skottið er eitt það minnsta. MG MGS6 Dual Motor kostar það sama, er líka fjórhjóladrifinn, drífur 35 km lengra og er með 175 l stærra skott, þótt hann sé hægari.',
       'EX30 Twin Motor Performance er fyrir þá sem vilja kraftmikinn og vandaðan smábíl með fjórhjóladrifi.',
     ],
-    facts: 'd369d9b20156',
+    facts: '7ab20897a774',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volvo-ex30-cross-country-twin-motor-performance': {
@@ -1959,7 +1959,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann drífur hins vegar styttra og hleður hægar en flestir keppinautar hans, og skottið er eitt það minnsta. Volvo EX30 Twin Motor Performance er sami bíll án Cross Country-útlitsins, 830.000 kr. ódýrari og drífur 23 km lengra.',
       'EX30 Cross Country er fyrir þá sem vilja grófara útlit og mikinn kraft í nettum bíl.',
     ],
-    facts: '846a79cfbc8a',
+    facts: 'bf36f5eef90c',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-ex60-p10': {
@@ -1969,7 +1969,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er fremur dýr og skottið er aðeins í meðallagi. Þurfi enn meiri drægni fæst Volvo EX60 P12 fyrir 1.000.000 kr. meira, með 810 km drægni.',
       'EX60 P10 er heildstæður kostur fyrir þá sem vilja vandaðan fjölskyldujeppa til ferðalaga um landið, með kerru aftan í ef svo ber undir.',
     ],
-    facts: 'a5909cfd01ce',
+    facts: '20f765418ea4',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-ex60-p12': {
@@ -1979,7 +1979,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Veikleikarnir eru fáir, helst að hann er fremur dýr og skottið aðeins í meðallagi. Volvo EX60 P10 er 1.000.000 kr. ódýrari og drífur samt mjög langt, fyrir þá sem þurfa ekki allra mestu drægnina.',
       'EX60 P12 er einn öflugasti ferðabíllinn á sínu verði, fyrir þá sem vilja komast sem lengst á hverri hleðslu.',
     ],
-    facts: 'dfac4e58fd9b',
+    facts: '29cd5537f7c3',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-ex90-twin-motor': {
@@ -1989,17 +1989,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er mjög dýr, hleður hægar og er hægari en flestir þeirra. Hyundai IONIQ 9 Long Range Performance AWD er 2.500.000 kr. ódýrari, tekur líka sjö, drífur álíka langt, hleður með um 25% styttri stoppum og er með 239 l stærra skott.',
       'EX90 er heildstæður lúxusjeppi fyrir þá sem vilja sjö sæti og skandinavísk gæði.',
     ],
-    facts: '198f43cf5f7f',
+    facts: '23ad26988df0',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-ex90-twin-motor-performance': {
     paragraphs: [
       'Volvo EX90 Twin Motor Performance er stór sjö sæta lúxusjeppi með fjórhjóladrifi, rúmlega fimm metrar á lengd, sem sameinar skandinavíska fágun, mikið öryggi og mikið afl. Hann hentar stórum fjölskyldum sem vilja rými og þægindi án þess að gefa eftir í snerpu.',
       'Hann er sneggri og aflmeiri en flestir á svipuðu verði, skottið er stærra en hjá flestum þeirra og hann má draga 2.200 kg, sem fáir keppinautar hans jafna. Drægnin er í meðallagi en dugar vel milli landshluta.',
-      'Helsti ókosturinn er að hann hleður fremur hægt. Volvo EX90 Twin Motor er 800.000 kr. ódýrari með álíka drægni, og munar þar aðeins um snerpuna, en Hyundai IONIQ 9 Long Range Performance AWD er 3.300.000 kr. ódýrari, hleður með um 25% styttri stoppum og er með 239 l stærra skott.',
+      'Helsti ókosturinn er að hann hleður fremur hægt. Volvo EX90 Twin Motor er 800.000 kr. ódýrari með álíka drægni, og munar þar aðeins um snerpuna, en Kia EV9 GT er 1.800.000 kr. ódýrari, hleður með um 20% styttri stoppum, er með 159 l stærra skott og má draga 300 kg meira.',
       'EX90 Twin Motor Performance er fyrir þá sem vilja sjö sæta Volvo með aukinni snerpu, en flestum dugar ódýrari útfærslan.',
     ],
-    facts: 'a23ee4a76bae',
+    facts: 'a5346a981fdd',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'xpeng-g6-rwd-standard-range': {
@@ -2009,7 +2009,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur styttra en flestir þeirra og er aðeins afturhjóladrifinn. XPENG G6 RWD Long Range kostar 700.000 kr. meira og drífur 135 km lengra, og XPENG G6 AWD Performance fæst með fjórhjóladrifi fyrir 1.100.000 kr. meira.',
       'G6 Standard Range er rúmgóður og hraðhlaðandi bíll fyrir þá sem aka mest í nærumhverfinu og meta pláss.',
     ],
-    facts: 'd19809f0083d',
+    facts: '9c7e43c9c4d2',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'xpeng-g6-rwd-long-range': {
@@ -2019,7 +2019,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er aðeins afturhjóladrifinn og merkið er nýlegt hér á landi. XPENG G6 AWD Performance fæst með fjórhjóladrifi og mun meira afli fyrir 400.000 kr. meira, með nánast sömu drægni.',
       'G6 Long Range gefur mikið fyrir peninginn, fyrir þá sem setja drægni, hraða hleðslu og pláss í forgang.',
     ],
-    facts: 'e1aec00acaa1',
+    facts: '84fe33dd4236',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'xpeng-g6-awd-performance': {
@@ -2029,7 +2029,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Veikleikarnir eru fáir: merkið er nýlegt hér á landi og flestu er stýrt í gegnum snertiskjá. Volkswagen ID.4 Pro 4MOTION kostar 100.000 kr. meira frá rótgrónara merki, en hleður með um 35% lengri stoppum og er mun aflminni.',
       'G6 AWD Performance er einn sterkasti fjórhjóladrifni kosturinn á sínu verði, fyrir þá sem treysta nýju merki.',
     ],
-    facts: 'edf5bd30c2ba',
+    facts: '32edd0a5200f',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'xpeng-g9-awd-performance': {
@@ -2039,7 +2039,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann drífur hins vegar styttra og má draga minna en flestir þeirra, og merkið er nýlegt hér á landi. Volvo EX60 P10 kostar 200.000 kr. meira, drífur 120 km lengra og má draga 900 kg meira, þótt hleðslustoppin séu um 30% lengri.',
       'G9 er fyrir þá sem vilja rúmgóðan og tæknivæddan jeppling sem hleður á mettíma.',
     ],
-    facts: '21ec7198ea17',
+    facts: 'c4dead11d843',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'xpeng-x9-awd-performance': {
@@ -2049,7 +2049,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er dýr, drífur styttra og er hægari en flestir keppinautar hans, og merkið er nýlegt hér á landi. Hyundai IONIQ 9 Long Range AWD er 400.000 kr. ódýrari, tekur líka sjö og drífur 35 km lengra, þótt hleðslustoppin séu um 90% lengri.',
       'X9 er fyrir stórar fjölskyldur sem ferðast um landið og vilja eyða sem minnstum tíma við hleðslustöðvar.',
     ],
-    facts: 'ac75f896cbc6',
+    facts: '3a4dbdd8b686',
     model: 'gemini-3.8-flash, thinking medium',
   },
 }
