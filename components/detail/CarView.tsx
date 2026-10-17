@@ -130,22 +130,17 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
                 </div>
               ))}
             </dl>
-
-            {car.evDatabaseUrl && (
-              <div className="mt-6">
-                <EvDatabaseLink href={car.evDatabaseUrl} />
-              </div>
-            )}
           </div>
 
           {review && <Review review={review} />}
 
-          <div className="mt-10 flex justify-center">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
             <ShareButton
               title={car.label}
               label="Deila bílnum"
               event="Car shared"
             />
+            {car.evDatabaseUrl && <EvDatabaseLink href={car.evDatabaseUrl} />}
           </div>
 
           <section aria-labelledby="similar" className="mt-12">
