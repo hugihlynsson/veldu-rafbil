@@ -50,6 +50,9 @@ export const chatRateLimit = createRateLimit(12)
 // Typing asks more often than chatting does, debounced as it is
 export const filterSuggestionsRateLimit = createRateLimit(60)
 
+// A tap or a send each, so far fewer than the requests behind them
+export const suggestionOutcomeRateLimit = createRateLimit(30)
+
 // x-forwarded-for is spoofable, so this buys politeness, not identity
 export const clientKey = (request: Request): string =>
   request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||

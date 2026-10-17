@@ -47,9 +47,20 @@ describe('POST /api/filter-suggestions', () => {
       { text: tooLong },
       { text: 7 },
       { text: 'ódýr', questions: {} },
+      { text: 'ódýr', id: 'not-a-uuid' },
     ]) {
       expect((await post(body)).status).toBe(400)
     }
+  })
+
+  it('takes the ids that join a request to the one it superseded', async () => {
+    const post = await loadPost('')
+    const response = await post({
+      text: 'ódýr',
+      id: '6f1c8a52-3e0b-4d5e-9a57-0f2b6c1d9e44',
+      supersedes: '0b8d2f6e-71a4-4c3b-8e5d-2a9f4c6b1d07',
+    })
+    expect(response.status).toBe(200)
   })
 
   it('refuses a caller past sixty a minute', async () => {
