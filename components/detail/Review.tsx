@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react'
 
 import type { CarReview } from '@/modules/data/carReviews'
-import { CHAT_INPUT_ID } from '@/modules/chat/inputId'
 
-/** The car's review, under its figures, with the way into the chat about it */
+/** The car's review, under its figures */
 const Review: FunctionComponent<{ review: CarReview }> = ({ review }) => (
   <section aria-labelledby="review" className="mt-8 mb-6">
     {/* 65ch of the wrapper's 16px, not the 18px text, keeps lines near 70 */}
@@ -19,14 +18,6 @@ const Review: FunctionComponent<{ review: CarReview }> = ({ review }) => (
           {paragraph}
         </p>
       ))}
-      {/* A label, so it focuses the chat bar wherever it is loaded, and is
-          plainly nothing until then */}
-      <label
-        htmlFor={CHAT_INPUT_ID}
-        className="block w-fit ml-auto mt-3 text-sm font-semibold text-tint cursor-pointer hover:underline"
-      >
-        Spyrja nánar <span aria-hidden>→</span>
-      </label>
     </div>
   </section>
 )
