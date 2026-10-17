@@ -52,7 +52,9 @@ Endaðu á stuttri niðurstöðu um þennan bíl, sem má vera lokasetning þri�
 
 Lesandinn er að velja á milli bíla, svo skrifaðu um það sem greinir þennan bíl frá hinum frekar en það sem á við um flesta rafbíla. Hver setning á helst að segja eitthvað sem ætti ekki jafn vel við um svipuðu bílana. Að fjórhjóladrif gefi grip í snjó og hálku segirðu til dæmis aðeins þar sem drifið greinir hann frá þeim.
 
-Vertu heiðarleg(ur). Það sem bíllinn gerir í meðallagi gerirðu ekki að kosti: segðu það eða slepptu því. Notaðu ekki orð eins og "einstakur", "framúrskarandi" eða "frábær" nema staða hans á listanum sýni að hann skari fram úr. Um innréttingu, hljóðvist, hugbúnað og áreiðanleika eru engin gögn hér, en það sem almennt er vitað um merkið og bílinn máttu segja. Nefndu bíla með tegund og gerð, til dæmis Kia EV3, en þegar fleiri en ein útfærsla sömu gerðar er í gögnunum skaltu nefna útfærsluna líka, eins og bíllinn heitir þar, til dæmis Kia EV3 Long Range, svo ekki fari á milli mála við hvaða bíl er átt.`
+Vertu heiðarleg(ur). Það sem bíllinn gerir í meðallagi gerirðu ekki að kosti: segðu það eða slepptu því. Notaðu ekki orð eins og "einstakur", "framúrskarandi" eða "frábær" nema staða hans á listanum sýni að hann skari fram úr. Segðu ekkert um hann sem staða hans segir annað um: kallaðu hann ekki rúmgóðan ef skottið er minna en hjá flestum á svipuðu verði. Framhjóla- eða afturhjóladrif er aldrei kostur í snjó og hálku. Stærð rafhlöðunnar skiptir kaupanda aðeins máli gegnum drægnina, svo nefndu hana ekki sem kost eða galla ein og sér.
+
+Veldu það sem skiptir þá máli sem kaupa svona bíl: í stórum fjölskyldubíl, fjölnotabíl eða jeppa vega skott, sæti og dráttargeta þyngra en hröðun og afl, en í sportbíl er því öfugt farið. Um innréttingu, hljóðvist, hugbúnað og áreiðanleika eru engin gögn hér, en það sem almennt er vitað um merkið og bílinn máttu segja. Nefndu bíla með tegund og gerð, til dæmis Kia EV3, en þegar fleiri en ein útfærsla sömu gerðar er í gögnunum skaltu nefna útfærsluna líka, eins og bíllinn heitir þar, til dæmis Kia EV3 Long Range, svo ekki fari á milli mála við hvaða bíl er átt.`
 
 type Standing = 'first' | 'top' | 'above' | 'below' | 'bottom'
 
@@ -108,22 +110,34 @@ const numberIn = (text?: string): number | undefined => {
   return text && Number.isFinite(value) ? value : undefined
 }
 
+// More than this behind the seats, with no figure for them folded, is the
+// folded one given in its place, as the site does for a car or two: no car
+// on the list carries half of it with every seat up
+const MAX_SEATS_UP_CARGO = 2000
+
 /** A car's page, as fetchCarSpecs reads it, in numbers */
 export const readDetails = (
   specs: Readonly<Record<string, string | undefined>>,
-): CarDetails => ({
-  body: specs.carBody,
-  segment: specs.segment,
-  length: numberIn(specs.length),
-  cargo: numberIn(specs.cargoVolume),
-  cargoMax: numberIn(specs.cargoVolumeMax),
-  frunk: numberIn(specs.frunk),
-  // A car that takes no hitch tows nothing, whatever weight the page leaves
-  towing:
-    specs.towHitch?.toLowerCase() === 'no' ? 0 : numberIn(specs.towingBraked),
-  warrantyYears: numberIn(specs.batteryWarrantyPeriod),
-  warrantyKm: numberIn(specs.batteryWarrantyMileage),
-})
+): CarDetails => {
+  const cargo = numberIn(specs.cargoVolume)
+  const cargoMax = numberIn(specs.cargoVolumeMax)
+  return {
+    body: specs.carBody,
+    segment: specs.segment,
+    length: numberIn(specs.length),
+    cargo:
+      cargo !== undefined && !cargoMax && cargo > MAX_SEATS_UP_CARGO
+        ? undefined
+        : cargo,
+    cargoMax,
+    frunk: numberIn(specs.frunk),
+    // A car that takes no hitch tows nothing, whatever weight the page leaves
+    towing:
+      specs.towHitch?.toLowerCase() === 'no' ? 0 : numberIn(specs.towingBraked),
+    warrantyYears: numberIn(specs.batteryWarrantyPeriod),
+    warrantyKm: numberIn(specs.batteryWarrantyMileage),
+  }
+}
 
 // With a decimal comma, as the model would otherwise copy the point into
 // Icelandic text
@@ -442,13 +456,27 @@ const metrics: Metric[] = [
   },
 ]
 
+// The site's body types in the words an Icelandic buyer uses for them. An
+// SUV is a jepplingur or a jeppi by its size, which the model is left to say
+const bodyNames: Record<string, string> = {
+  SUV: 'jepplingur eða jeppi, eftir stærð',
+  Sedan: 'fólksbíll með skottloki (stallbakur)',
+  'Liftback Sedan': 'fólksbíll með afturhlera (hlaðbakur)',
+  Hatchback: 'hlaðbakur',
+  'Station/Estate': 'skutbíll',
+  MPV: 'fjölnotabíll',
+  'Small Passenger Van': 'fjölnotabíll byggður á sendibíl',
+  'Pickup Truck': 'pallbíll',
+  Cabriolet: 'blæjubíll',
+}
+
 // What ev-database adds to the list's figures, where it has a page for it
 const describeDetails = (details: CarDetails | undefined): string[] => {
   if (!details) return ['engar nánari upplýsingar af ev-database']
   const { body, segment, length, cargo, cargoMax, frunk, towing } = details
   const { warrantyYears, warrantyKm } = details
   return [
-    body && `yfirbygging: ${body}`,
+    body && `yfirbygging: ${bodyNames[body] ?? body}`,
     segment && `stærðarflokkur: ${segment}`,
     length && `${decimal(Number((length / 1000).toFixed(2)))} m á lengd`,
     cargo &&

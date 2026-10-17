@@ -87,7 +87,7 @@ describe('carFacts', () => {
         : { body: 'SUV', cargo: 854, towing: 1600, warrantyYears: 8 }
     const withDetails = carFacts(kia, [tesla], [kia, tesla], details)
     expect(withDetails).toContain(
-      'yfirbygging: SUV, 460 l farangursrými, 25 l framskott, má ekki draga kerru',
+      'yfirbygging: jepplingur eða jeppi, eftir stærð, 460 l farangursrými, 25 l framskott, má ekki draga kerru',
     )
     expect(withDetails).toContain('394 l stærra skott')
     expect(withDetails).toContain('má draga allt að 1.600 kg')
@@ -225,6 +225,15 @@ describe('readDetails', () => {
       warrantyYears: 10,
       warrantyKm: 1_000_000,
     })
+  })
+
+  // The XPENG X9's page gives 2,386 l, which is with the seats folded
+  it('drops a boot figure that can only be the seats folded', () => {
+    expect(readDetails({ cargoVolume: '2386 L' }).cargo).toBeUndefined()
+    expect(
+      readDetails({ cargoVolume: '2386 L', cargoVolumeMax: '2600 L' }).cargo,
+    ).toBe(2386)
+    expect(readDetails({ cargoVolume: '633 L' }).cargo).toBe(633)
   })
 
   it('takes a car that takes no hitch to tow nothing', () => {
