@@ -26,7 +26,9 @@ const PageChat: FunctionComponent<Props> = ({ cars }) => {
   const router = useRouter()
 
   const showCar = (car: Car) => {
-    if (cars.includes(car)) {
+    // By id: the page's cars came from the server, a picked one from the
+    // client's own list, so they are never the same object
+    if (cars.some(({ id }) => id === car.id)) {
       window.scrollTo({
         top: 0,
         behavior: prefersReducedMotion() ? 'auto' : 'smooth',

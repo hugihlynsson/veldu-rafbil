@@ -32,6 +32,12 @@ describe('pageNote', () => {
     )
   })
 
+  it('keeps back the review of a car no longer sold, as its page does', () => {
+    expect(pageNote({ ...a, deprecated: '2026-10-11' }, review)).not.toContain(
+      'umsögn',
+    )
+  })
+
   it('says nothing of a review not written yet', () => {
     expect(pageNote(a, undefined)).not.toContain('umsögn')
   })

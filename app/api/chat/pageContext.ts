@@ -15,7 +15,9 @@ export const pageNote = (car: Car, review: CarReview | undefined): string =>
     // It is not in the list the advisor is given, so this is all it knows
     car.deprecated &&
       `Hann er ekki lengur seldur nýr á Íslandi, síðan ${car.deprecated}, og er því ekki á listanum þínum.`,
+    // Not shown on the page of a car no longer sold, so not the reader's either
     review &&
+      !car.deprecated &&
       `Á síðunni er umsögn Veldu Rafbíl um hann, sem lesandinn sér: "${review.paragraphs.join(' ')}"`,
     ']',
   ]
