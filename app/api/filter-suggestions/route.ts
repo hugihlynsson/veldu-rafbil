@@ -38,6 +38,8 @@ const client = process.env.TYPESAFE_API_KEY
 
 const requestSchema = z.strictObject({
   text: z.string().trim().min(1).max(MAX_INTENT_LENGTH),
+  id: z.uuid().optional(),
+  supersedes: z.uuid().optional(),
 })
 
 export async function POST(req: Request) {
@@ -67,18 +69,16 @@ export async function POST(req: Request) {
 
   const result = await suggestFilters(parsed.data.text, ask)
   const millis = Math.round(performance.now() - started)
-  // Read now: the client aborts a request it has typed past, and once the
-  // response is sent there is no telling that apart from a closed connection
-  const superseded = req.signal.aborted
 
   logAfterResponse(() =>
     suggestionsLogEvent({
       timestamp: new Date().toISOString(),
       text: parsed.data.text,
+      id: parsed.data.id,
+      supersedes: parsed.data.supersedes,
       result,
       answers: answered?.answers,
       inputTokens: answered?.usage.input_tokens,
-      superseded,
       millis,
       model: modelName,
       ...deployment(),

@@ -7,7 +7,7 @@ import {
   MAX_STARTER_LENGTH,
   QUESTION_COUNT,
   reviewFactsKey,
-} from '@/modules/detail/reviewPrompt'
+} from '@/scripts/reviewPrompt'
 
 const bySlug = new Map(cars.map((car) => [carSlug(car), car]))
 

@@ -1,9 +1,5 @@
-import { allCars, type Car } from '@/modules/data/cars'
-import { carSlug } from '@/modules/data/getCarId'
+import { carWithSlug, type Car } from '@/modules/data/cars'
 import { movedSlugs } from '@/modules/data/movedSlugs'
-
-// A car no longer sold keeps its page, so its slug still reads as it
-const carsBySlug = new Map(allCars.map((car) => [carSlug(car), car]))
 
 export interface ResolvedSlugs {
   /** In the order the URL names them */
@@ -38,7 +34,7 @@ export const resolveSlugs = (
   for (const segment of segments) {
     const asked = segment.toLowerCase()
     const slug = moved[asked] ?? asked
-    const car = carsBySlug.get(slug)
+    const car = carWithSlug(slug)
     if (!car || slugs.includes(slug)) continue
     slugs.push(slug)
     resolved.push(car)

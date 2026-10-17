@@ -9,7 +9,7 @@ import {
 } from '../publicEndpoint'
 import { parseChatRequest, parseConversationId, streamChat } from './chat'
 import { carPage, chatLogEvent, questionSource, type ChatOutcome } from './log'
-import { advisorModel as modelName } from './model'
+import { advisorModel as modelName } from '@/modules/chat/model'
 
 export async function POST(req: Request) {
   const startedAt = performance.now()

@@ -1,15 +1,7 @@
-import { createLoader, createParser, createSerializer } from 'nuqs/server'
+import { createParser } from 'nuqs/server'
 
-import { parseAsWord, type SearchParams } from './filters'
+import { parseAsWord } from './filters'
 import type { Car } from '@/modules/data/cars'
-
-export type Sorting =
-  | 'name'
-  | 'price'
-  | 'range'
-  | 'acceleration'
-  | 'value'
-  | 'fastcharge'
 
 export type SortingDirection = 'asc' | 'desc'
 
@@ -30,7 +22,7 @@ const padPrice = (car: Car): string =>
   car.priceWithGrant.toString().padStart(9, '0')
 
 // A new sorting is offered only once it has a place in CarList's toggles
-export const sortingDefinitions: Record<Sorting, SortingDefinition> = {
+export const sortingDefinitions = {
   name: {
     label: 'Nafni',
     urlWord: 'nafni',
@@ -67,7 +59,9 @@ export const sortingDefinitions: Record<Sorting, SortingDefinition> = {
     defaultDirection: 'desc',
     rank: (car) => car.kmPerMinuteCharged,
   },
-}
+} satisfies Record<string, SortingDefinition>
+
+export type Sorting = keyof typeof sortingDefinitions
 
 export const sortings = Object.keys(sortingDefinitions) as Array<Sorting>
 
@@ -148,26 +142,3 @@ export const stateFromSortingValues = ({
     ? flipDirection(defaultDirection(sorting))
     : defaultDirection(sorting),
 })
-
-export const sortingValuesFromState = ({
-  sorting,
-  direction,
-}: SortingState) => ({
-  sorting,
-  flipped: !isDefaultDirection(sorting, direction),
-})
-
-const loadSortingValues = createLoader(sortingParsers, {
-  urlKeys: sortingUrlKeys,
-})
-
-export const getSortingFromQuery = (query: SearchParams): SortingState =>
-  stateFromSortingValues(loadSortingValues(query))
-
-const serializeSortingValues = createSerializer(sortingParsers, {
-  urlKeys: sortingUrlKeys,
-})
-
-/** The query string for a sorting, `?` and all, or '' for the default */
-export const serializeSorting = (state: SortingState): string =>
-  serializeSortingValues(sortingValuesFromState(state))

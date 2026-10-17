@@ -2,7 +2,6 @@ import {
   createLoader,
   createMultiParser,
   createParser,
-  createSerializer,
   type MultiParserBuilder,
   type SingleParserBuilder,
 } from 'nuqs/server'
@@ -12,35 +11,17 @@ import type { Drive } from '@/modules/data/newCarSchema'
 // Relative: next.config.ts loads this file, and its loader cannot resolve @/
 import { drives } from '../data/drives'
 
-/**
- * What Next hands a page as `searchParams`. A parameter given more than once
- * arrives as an array rather than a string, so every reader copes with both.
- */
-export type SearchParams = Record<string, string | Array<string> | undefined>
-
-export type Filters = {
-  acceleration?: number
-  drive?: Drive[]
-  fastcharge?: number
-  name?: string[]
-  price?: number
-  range?: number
-  seats?: number
-  value?: number
-  availability?: Availability
-}
-
-export type FilterValue<Key extends keyof Filters> = NonNullable<Filters[Key]>
-
-interface FilterDefinition<Key extends keyof Filters> {
+interface FilterDefinition<Value> {
   // Icelandic, and part of every link to the list that has been shared
   urlKey: string
-  parser:
-    | SingleParserBuilder<FilterValue<Key>>
-    | MultiParserBuilder<FilterValue<Key>>
+  parser: SingleParserBuilder<Value> | MultiParserBuilder<Value>
   // Built from the value once, so the per-car work is a comparison
-  test: (value: FilterValue<Key>) => (car: Car) => boolean
+  test: (value: Value) => (car: Car) => boolean
 }
+
+// Ties a filter's test to the value its parser reads, which a type on the
+// whole table cannot do one entry at a time
+const filter = <Value>(definition: FilterDefinition<Value>) => definition
 
 // Number() of an unreadable parameter is NaN, and every comparison against NaN
 // is false, so it would empty the list rather than filter it.
@@ -101,8 +82,8 @@ export const parseAsWord = <T extends string>(words: Record<string, T>) =>
 
 /**
  * Every filter, whole: where it lives in the URL, how it reads from there and
- * what it asks of a car. Mapped over `Filters`, so a new filter does not
- * compile until it has all three. In the order the chips stand in, which the
+ * what it asks of a car. `Filters` is read off it, so a filter is added here
+ * and nowhere else is it declared. In the order the chips stand in, which the
  * filter suggestions keep as well.
  *
  * A new filter also needs its chip in filterChips.ts and its field in
@@ -111,10 +92,8 @@ export const parseAsWord = <T extends string>(words: Record<string, T>) =>
  * round-trips through the URL: a list that comes back as one value matches
  * nothing, and fails quietly.
  */
-export const filterDefinitions: {
-  [Key in keyof Filters]-?: FilterDefinition<Key>
-} = {
-  name: {
+export const filterDefinitions = {
+  name: filter({
     urlKey: 'nafn',
     parser: parseAsList((entry): entry is string => entry !== ''),
     test: (names) => {
@@ -124,65 +103,79 @@ export const filterDefinitions: {
         return lowered.some((name) => label.includes(name))
       }
     },
-  },
-  price: {
+  }),
+  price: filter({
     urlKey: 'verd',
     parser: parseAsKronur,
     test: (max) => (car) => car.priceWithGrant <= max,
-  },
-  range: {
+  }),
+  range: filter({
     urlKey: 'draegni',
     parser: parseAsPositive,
     test: (min) => (car) => car.range >= min,
-  },
-  seats: {
+  }),
+  seats: filter({
     urlKey: 'saeti',
     parser: parseAsSeats,
     test: (min) => (car) => car.seats >= min,
-  },
-  drive: {
+  }),
+  drive: filter({
     urlKey: 'drif',
     parser: parseAsList((entry): entry is Drive =>
       (drives as ReadonlyArray<string>).includes(entry),
     ),
     test: (drives) => (car) => drives.includes(car.drive),
-  },
-  acceleration: {
+  }),
+  acceleration: filter({
     urlKey: 'hrodun',
     parser: parseAsPositive,
     test: (max) => (car) => car.acceleration <= max,
-  },
-  value: {
+  }),
+  value: filter({
     urlKey: 'virdi',
     parser: parseAsKronur,
     test: (max) => (car) => car.pricePerKm <= max,
-  },
-  fastcharge: {
+  }),
+  fastcharge: filter({
     urlKey: 'hradhledsla',
     parser: parseAsPositive,
     test: (min) => (car) => car.kmPerMinuteCharged >= min,
-  },
-  availability: {
+  }),
+  availability: filter({
     urlKey: 'frambod',
     parser: parseAsWord<Availability>({
       faanlegir: 'available',
       vaentanlegir: 'expected',
     }),
     test: (availability) => (car) => car.availability === availability,
-  },
+  }),
 }
 
-export type FilterKey = keyof Filters
+export type FilterKey = keyof typeof filterDefinitions
+
+type ValueRead<Definition> =
+  Definition extends FilterDefinition<infer Value> ? Value : never
+
+/** The filters set, each as its parser reads it from the URL */
+export type Filters = {
+  [Key in FilterKey]?: ValueRead<(typeof filterDefinitions)[Key]>
+}
+
+export type FilterValue<Key extends FilterKey> = NonNullable<Filters[Key]>
+
+// One filter's definition with which one forgotten, for the code that goes
+// over all of them
+type SomeFilterDefinition = FilterDefinition<FilterValue<FilterKey>>
 
 export const filterKeys = Object.keys(filterDefinitions) as Array<FilterKey>
 
 const mapDefinitions = <T>(
-  pick: (definition: FilterDefinition<FilterKey>) => T,
+  pick: (definition: SomeFilterDefinition) => T,
 ): Record<FilterKey, T> =>
   Object.fromEntries(
     filterKeys.map((key) => [
       key,
-      pick(filterDefinitions[key] as FilterDefinition<FilterKey>),
+      pick(filterDefinitions[key] as SomeFilterDefinition),
     ]),
   ) as Record<FilterKey, T>
 
@@ -217,7 +210,7 @@ export const valuesFromFilters = (filters: Filters): FilterValues =>
       const value = filters[key]
       if (value === undefined) return [key, null]
 
-      const { parser } = filterDefinitions[key] as FilterDefinition<FilterKey>
+      const { parser } = filterDefinitions[key] as SomeFilterDefinition
       const written = parser.serialize(value as never)
       return [key, parser.parse(written as never)]
     }),
@@ -229,19 +222,6 @@ export const valuesFromFilters = (filters: Filters): FilterValues =>
  */
 export const normalizeFilters = (filters: Filters): Filters =>
   filtersFromValues(valuesFromFilters(filters))
-
-const loadFilterValues = createLoader(filterParsers, { urlKeys: filterUrlKeys })
-
-export const getFiltersFromQuery = (query: SearchParams): Filters =>
-  filtersFromValues(loadFilterValues(query) as FilterValues)
-
-const serializeFilterValues = createSerializer(filterParsers, {
-  urlKeys: filterUrlKeys,
-})
-
-/** The query string for a set of filters, `?` and all, or '' for none */
-export const serializeFilters = (filters: Filters): string =>
-  serializeFilterValues(valuesFromFilters(filters))
 
 /**
  * The filter modal's fields, as typed. Each is read by its filter's own URL
@@ -257,7 +237,7 @@ export const fieldFromFilter = <Key extends FilterKey>(
 ): string => {
   // As people type a list, where the URL leaves out the space
   if (Array.isArray(value)) return value.join(', ')
-  const { parser } = filterDefinitions[key] as FilterDefinition<FilterKey>
+  const { parser } = filterDefinitions[key] as SomeFilterDefinition
   return parser.serialize(value as never) as string
 }
 

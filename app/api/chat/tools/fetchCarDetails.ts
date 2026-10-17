@@ -1,124 +1,50 @@
 import { tool } from 'ai'
 import { z } from 'zod'
-import newCars from '@/modules/data/newCars'
+import cars from '@/modules/data/cars'
+import {
+  fetchOnSite,
+  readCapped,
+  readCarSpecs,
+} from '@/modules/data/evDatabase'
+import { carRef } from '@/modules/chat/cars'
 
-// Without this the model can be talked into fetching any URL at all
-const allowedURLs = new Set(
-  newCars
-    .map((car) => car.evDatabaseUrl)
-    .filter((url): url is string => Boolean(url)),
+// The model names a car, never a URL: the page fetched is the one the car data
+// points it at, so no prompt can steer the fetch anywhere else
+const carPages = new Map(
+  cars.flatMap((car) =>
+    car.evDatabaseUrl
+      ? [[carRef(car), { url: car.evDatabaseUrl, label: car.label }] as const]
+      : [],
+  ),
 )
 
-// ev-database pages are ~200 KB; anything far past that is not a car page
-const MAX_BYTES = 2_000_000
-const TIMEOUT_MS = 8_000
-const MAX_REDIRECTS = 3
+const refsByPage = new Map(
+  [...carPages].map(([ref, { url }]) => [url, ref] as const),
+)
 
-// fetch would follow a redirect before anything here saw it, and the allowlist
-// vouches only for the URL it was asked for: a hop is followed while it stays
-// on that URL's site, and any other is not requested at all
-const fetchOnSite = async (url: string): Promise<Response | null> => {
-  const { origin } = new URL(url)
-  const signal = AbortSignal.timeout(TIMEOUT_MS)
-  let next = url
+export const CAR_DETAILS_PART = 'tool-fetchCarDetails'
 
-  for (let hop = 0; hop <= MAX_REDIRECTS; hop++) {
-    const response = await fetch(next, { redirect: 'manual', signal })
-    const location = response.headers.get('location')
-    const isRedirect = response.status >= 300 && response.status < 400
-    if (!isRedirect || !location) return response
+const hasUrlInput = (part: object): part is { input: { url: string } } =>
+  'input' in part &&
+  typeof part.input === 'object' &&
+  part.input !== null &&
+  'url' in part.input &&
+  typeof part.input.url === 'string'
 
-    await response.body?.cancel()
-    const target = new URL(location, next)
-    if (target.origin !== origin) return null
-    next = target.href
-  }
-
-  return null
-}
-
-// response.text() would read the whole body before any cap could apply
-const readCapped = async (response: Response): Promise<string> => {
-  const reader = response.body?.getReader()
-  if (!reader) return ''
-
-  const decoder = new TextDecoder()
-  let html = ''
-  let bytes = 0
-
-  try {
-    while (bytes < MAX_BYTES) {
-      const { done, value } = await reader.read()
-      if (done) break
-      bytes += value.byteLength
-      html += decoder.decode(value, { stream: true })
-    }
-    // Flushes whatever the last chunk left mid-character
-    html += decoder.decode()
-  } finally {
-    // Nothing else reads this, whether we stopped at the cap or the body ended
-    await reader.cancel().catch(() => {})
-  }
-
-  return html
-}
-
-// The site's spec tables are rows of <td>Label</td><td>Value</td>. One pass
-// over the page rather than a fresh regex across all of it per field, and the
-// page is up to MAX_BYTES of it.
-const specRow =
-  /<tr[^>]*>\s*<td[^>]*>\s*([^<]+?)\s*<\/td>\s*<td[^>]*>\s*([^<]+?)\s*<\/td>/gi
-
-const readSpecTable = (html: string): Map<string, string> => {
-  const table = new Map<string, string>()
-
-  for (const [, label, value] of html.matchAll(specRow)) {
-    const key = label.toLowerCase()
-    if (!table.has(key)) table.set(key, value === 'No Data' ? '' : value)
-  }
-
-  return table
-}
-
-// The fields the list does not carry, each under the labels the site has
-// used for it: the first that answers wins, as it has renamed a field or two
-const specLabels = {
-  carBody: ['Car Body'],
-  segment: ['Segment'],
-  length: ['Length'],
-  width: ['Width'],
-  height: ['Height'],
-  wheelbase: ['Wheelbase'],
-  weightUnladen: ['Weight Unladen', 'Curb Weight'],
-  grossWeight: ['Gross Vehicle Weight', 'GVWR'],
-  maxPayload: ['Max. Payload', 'Payload'],
-  cargoVolume: ['Cargo Volume'],
-  cargoVolumeMax: ['Cargo Volume Max', 'Cargo Max'],
-  frunk: ['Cargo Volume Frunk', 'Frunk'],
-  towingUnbraked: ['Towing Weight Unbraked'],
-  towingBraked: ['Towing Weight Braked'],
-  towHitch: ['Tow Hitch', 'Towbar'],
-  seats: ['Seats'],
-  batteryWarrantyPeriod: ['Warranty Period'],
-  batteryWarrantyMileage: ['Warranty Mileage'],
-} satisfies Record<string, ReadonlyArray<string>>
-
-/** What a car's page says of it, as the site writes it: "4440 mm" */
-export type CarSpecs = Partial<Record<keyof typeof specLabels, string>>
-
-// Only what the page said, not the tool's own carName and source: a page
-// with no table must read as having no specifications
-const readCarSpecs = (html: string): CarSpecs => {
-  const specTable = readSpecTable(html)
-  return Object.fromEntries(
-    Object.entries(specLabels).flatMap(([key, labels]) => {
-      const value = labels
-        .map((label) => specTable.get(label.toLowerCase()))
-        .find(Boolean)
-      return value ? [[key, value]] : []
-    }),
-  )
-}
+/**
+ * A stored conversation from before the tool took a car still asks by URL,
+ * and comes back with every question. Each such call is read as a call by
+ * car, or dropped for a page no car on the list points at, so the history
+ * validates rather than the question being refused with it.
+ */
+export const upgradeCarDetailsCalls = <Part extends { type: string }>(
+  parts: Part[],
+): Part[] =>
+  parts.flatMap((part) => {
+    if (part.type !== CAR_DETAILS_PART || !hasUrlInput(part)) return [part]
+    const car = refsByPage.get(part.input.url)
+    return car ? [{ ...part, input: { car } }] : []
+  })
 
 /** The fields the list does not carry, as the model is handed them */
 const readSpecs = (html: string): string => {
@@ -127,17 +53,6 @@ const readSpecs = (html: string): string => {
     .join('\n')
 
   return formatted || 'No specifications found'
-}
-
-/**
- * A car's page read for a script, which has no model to tell why it failed:
- * nothing for a page off the list, or one that could not be read
- */
-export const fetchCarSpecs = async (url: string): Promise<CarSpecs | null> => {
-  if (!allowedURLs.has(url)) return null
-  const response = await fetchOnSite(url)
-  if (!response?.ok) return null
-  return readCarSpecs(await readCapped(response))
 }
 
 // A car's dimensions do not change within a day, and without this every answer
@@ -155,28 +70,29 @@ export const MAX_CALLS_PER_ANSWER = 10
 /**
  * The car-details tool for one answer. Built per answer because it counts its
  * calls; reading a conversation asks only for its schemas, which every one of
- * them shares. An answer about a few cars can narrow it to their pages.
+ * them shares.
  */
-export const createFetchCarDetailsTool = (
-  allowed: ReadonlySet<string> = allowedURLs,
-) => {
+export const createFetchCarDetailsTool = () => {
   let calls = 0
 
   return tool({
-    description: `Fetch detailed information about a specific car from its EV Database URL. Use this to get more information about the car, for example dimensions, cargo space, interior details, or other specifications not in the basic car list. The tool will not answer the users question: You must use this info to write a helpful answer. Fetch at most ${MAX_CALLS_PER_ANSWER} cars for one answer, the ones the question is about.`,
+    description: `Fetch detailed specifications of a car from EV Database, for example dimensions, cargo space, towing capacity or battery warranty: what the basic car list does not have. The tool will not answer the users question: You must use this info to write a helpful answer. Fetch at most ${MAX_CALLS_PER_ANSWER} cars for one answer, the ones the question is about.`,
     inputSchema: z.object({
-      url: z.string().describe('The evDatabaseUrl from the car list'),
-      carName: z.string().describe('The make and model of the car'),
+      car: z
+        .string()
+        .max(100)
+        .describe("The car's auðkenni, exactly as the car list gives it"),
     }),
-    execute: async ({ url, carName }) => {
-      if (!allowedURLs.has(url) || !allowed.has(url)) {
+    execute: async ({ car }) => {
+      const page = carPages.get(car.toLowerCase())
+      if (!page) {
         return {
-          carName,
+          carName: car,
           specifications:
-            'That URL is not one of the ev-database entries in the car list, so it was not fetched. Use the evDatabaseUrl given for the car, or answer from the list alone.',
-          source: url,
+            'There is no EV Database page for that auðkenni, so nothing was fetched. Check the auðkenni against the car list, or answer from the list alone.',
         }
       }
+      const { url, label: carName } = page
 
       calls += 1
       if (calls > MAX_CALLS_PER_ANSWER) {
