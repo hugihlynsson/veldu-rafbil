@@ -8,6 +8,8 @@ import { carSlug } from '@/modules/data/getCarId'
 import { comparisonPath } from '@/modules/detail/paths'
 import { comparisonTitle, MIN_COMPARED } from '@/modules/detail/comparison'
 import { specRows } from '@/modules/detail/specs'
+import { deprecatedNotice } from '@/modules/detail/subtitle'
+import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { agree } from '@/modules/copy/plural'
 import PricePill from '@/components/PricePill'
 import EvDatabaseLink from '@/components/EvDatabaseLink'
@@ -188,36 +190,51 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
           <div key={row.key} className="py-3.5 border-b border-line/50">
             <dt className={eyebrow}>{row.label}</dt>
             <dd className={clsx(grid, 'm-0 mt-1.5')}>
-              {row.cells.map((cell, index) => (
-                <div key={cars[index]?.id ?? index} className="min-w-0">
-                  {row.key === 'price' && cars[index] ? (
-                    <PricePill
-                      car={cars[index]}
-                      light={!cell.best}
-                      compact={crowded}
-                      bare
-                      className="max-w-full -ml-0.5"
-                    />
-                  ) : (
-                    <div
-                      className={clsx(
-                        crowded
-                          ? 'text-sm md:text-2xl'
-                          : 'text-base md:text-2xl',
-                        cell.best ? 'font-semibold' : 'font-normal',
-                      )}
-                    >
-                      {cell.text}
-                    </div>
-                  )}
-                  {cell.best && <span className="sr-only">, fremstur</span>}
-                  {cell.detail && (
-                    <div className="mt-0.5 text-xs font-medium text-stone">
-                      {cell.detail}
-                    </div>
-                  )}
-                </div>
-              ))}
+              {row.cells.map((cell, index) => {
+                const car = cars[index]
+                const notice = car && deprecatedNotice(car)
+                return (
+                  <div key={car?.id ?? index} className="min-w-0">
+                    {notice && car && row.key === 'price' ? (
+                      // In place of the price, which links to a seller no
+                      // longer selling it, as on the car's own page
+                      <div className="text-sm">
+                        <div className="font-semibold">{notice}</div>
+                        <div className="mt-0.5 text-xs font-medium text-stone">
+                          Síðasta verð{' '}
+                          {addDecimalSeparators(car.priceWithGrant)} kr.
+                          {car.hasGrant && ' með styrk'}
+                        </div>
+                      </div>
+                    ) : row.key === 'price' && car ? (
+                      <PricePill
+                        car={car}
+                        light={!cell.best}
+                        compact={crowded}
+                        bare
+                        className="max-w-full -ml-0.5"
+                      />
+                    ) : (
+                      <div
+                        className={clsx(
+                          crowded
+                            ? 'text-sm md:text-2xl'
+                            : 'text-base md:text-2xl',
+                          cell.best ? 'font-semibold' : 'font-normal',
+                        )}
+                      >
+                        {cell.text}
+                      </div>
+                    )}
+                    {cell.best && <span className="sr-only">, fremstur</span>}
+                    {cell.detail && !(notice && row.key === 'price') && (
+                      <div className="mt-0.5 text-xs font-medium text-stone">
+                        {cell.detail}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
             </dd>
           </div>
         ))}
