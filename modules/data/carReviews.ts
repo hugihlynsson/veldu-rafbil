@@ -183,9 +183,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'byd-dolphin-base': {
     paragraphs: [
-      'BYD Dolphin er nettur og lipur fimm sæta hlaðbakur sem hentar sérstaklega vel í daglegan innanbæjarakstur eða sem hagkvæmur fjölskyldubíll. Hann er einstaklega auðveldur í þröngum bílastæðum og þéttbýli, en býður jafnframt upp á góða nýtingu á innanrýminu.',
-      'Stærsti styrkur hans liggur í miklu gildi fyrir peninginn, enda er hann ódýrari á hvern kílómetra drægni en flestir í sínum verðflokki. Hann kemur með stærri rafhlöðu en gengur og gerist á þessu verði, auk þess að vera meðal þeirra sneggstu af bílum sem kosta svipað, sem gerir hann óvænt skemmtilegan og snöggan þegar tekið er af stað.',
-      'Stærsti gallinn er hraðhleðslan, en hann hleður mjög hægt og krefst því lengri biðtíma á hraðhleðslustöðvum á langferðum. Ef ekið er mikið milli landshluta býður Skoda Epiq 55 til dæmis upp á um 45% styttri hleðslustopp, og Leapmotor C10 Pro er mun stærri bíll fyrir sömu krónu. Fyrir þá sem hlaða heima og vilja snöggan, ódýran og lipran bíl í hversdagsamstrið er Dolphin samt sem áður afar fýsilegur kostur.',
+      'BYD Dolphin er nettur fimm sæta hlaðbakur sem hentar vel í innanbæjarakstur og sem hagkvæmur heimilisbíll. Hann er lipur í þröngum stæðum og þéttbýli, og innanrýmið nýtist vel miðað við stærðina.',
+      'Stærsti styrkur hans er verðið: hann er ódýrari á hvern kílómetra drægni en flestir í sínum verðflokki, með stærri rafhlöðu en gengur og gerist á þessu verði og meðal þeirra sneggstu af bílum sem kosta svipað.',
+      'Á móti kemur að hann hleður mjög hægt, er með minna skott en flestir á svipuðu verði og má ekki draga kerru. Skoda Epiq 55 kostar það sama en hefur 130 l stærra skott, um 45% styttri hleðslustopp og má draga 1.200 kg.',
+      'Fyrir þá sem hlaða heima, aka mest innanbæjar og þurfa hvorki kerru né mikið farangursrými er Dolphin hagkvæmur og skemmtilegur kostur.',
     ],
     facts: 'a075d76dc9ac',
     model: 'gemini-3.8-flash, thinking medium',
@@ -222,10 +223,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'byd-tang-flagship': {
     paragraphs: [
-      'BYD Tang Flagship er stór og þægilegur sjö sæta jeppi með fjórhjóladrifi sem hæfir vel stórum fjölskyldum. Hann höfðar til þeirra sem vilja hefðbundið jeppalag, ríflegt innanrými og traust grip á íslenskum vetrarvegum án þess að fórna afli.',
-      'Bíllinn er með mjög stóra rafhlöðu og er meðal þeirra aflmestu miðað við aðra á svipuðu verði. Samspil fjórhjóladrifsins og mikils afls veitir mikið öryggi í hálku, snjó og á krefjandi vegum, og hröðunin er sérlega lipur fyrir jafn stóran bíl.',
-      'Stærsti veikleikinn kemur fram á langferðum, því bíllinn drífur styttra en flestir á svipuðu verði og er meðal þeirra sem hlaða hægast. Hyundai IONIQ 9 Long Range AWD býður til dæmis upp á 75 km meiri drægni og um 55% styttri hleðslustopp, og hleðslustoppin eru sömuleiðis um 75% styttri á XPENG X9 AWD Performance.',
-      'Fyrir þá sem hlaða daglega heima og meta mikið rými, öflugt fjórhjóladrif og ríflegan kraft gæti Tang engu að síður hentað prýðilega.',
+      'BYD Tang Flagship er stór sjö sæta jeppi með fjórhjóladrifi, ætlaður stórum fjölskyldum sem vilja hefðbundið jeppalag og ríflegt innanrými.',
+      'Hann er með mjög stóra rafhlöðu og meðal þeirra aflmestu á svipuðu verði, og hröðunin er snörp fyrir jafn stóran bíl. Farangursrýmið er með því stærsta í sínum verðflokki þegar aftasta sætaröðin er felld niður.',
+      'Stærsti veikleikinn kemur fram á langferðum: hann drífur styttra en flestir á svipuðu verði og er meðal þeirra sem hlaða hægast. Hyundai IONIQ 9 Long Range AWD kostar 290.000 kr. meira en drífur 75 km lengra, hleður með um 55% styttri stoppum og má draga 1.000 kg meira.',
+      'Tang hentar best þeim sem hlaða heima og meta pláss og afl ofar langferðum.',
     ],
     facts: 'e3108495b06c',
     model: 'gemini-3.8-flash, thinking medium',
@@ -342,10 +343,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'hyundai-ioniq-3-standard-range': {
     paragraphs: [
-      'Hyundai IONIQ 3 Standard Range er lipur og nettur fimm sæta borgarbíll sem hentar einkum til styttri ferða dags daglega. Hann miðar að því að bjóða upp á rafbílaeign á viðráðanlegu verði og hentar fólki sem þarf fyrst og fremst áreiðanlegan ferðamáta í vinnuna, búðina og hefðbundið innanbæjaramstur.',
-      'Helsti kostur bílsins er kaupverðið sjálft, en hann er mjög ódýr. Í daglegu lífi fær maður fullgildan fimm sæta bíl sem er auðveldur í umgengni og ræður lipurlega við alla daglega bæjarkeyrslu, án þess að kosta mikið.',
-      'Á móti gefur maður mikið eftir í langferðagetu. Bíllinn hefur mjög litla rafhlöðu og drífur mjög stutt, sérstaklega í vetrarkulda, og miðað við aðra á svipuðu verði hleður hann hægar en flestir. Renault R5 E-Tech 52 kWh er til dæmis 110.000 kr. ódýrari en býður upp á 65 km meiri drægni og um 15% styttri hleðslustopp. Ef leitað er eftir meiri drægni er Peugeot e-2008 aðeins 40.000 kr. dýrari en hefur 62 km meiri drægni.',
-      'Fyrir vikið virkar IONIQ 3 best sem sparneytinn annar bíll á heimilinu eða hreinræktaður bæjarbíll, en reynist síður heppilegur í regluleg ferðalög milli landshluta.',
+      'Hyundai IONIQ 3 Standard Range er lítill fimm sæta hlaðbakur, ætlaður sem hagkvæmur bæjarbíll í vinnuna, búðina og daglegt amstur.',
+      'Helsti kostur hans er verðið, enda er hann mjög ódýr, og skottið er stærra en hjá flestum á svipuðu verði þó bíllinn sé nettur. Hann má líka draga 750 kg, sem sumir bílar í þessum verðflokki mega ekki.',
+      'Á móti kemur að hann er með mjög litla rafhlöðu og drífur mjög stutt, sérstaklega í vetrarkulda, og hann hleður hægar en flestir á svipuðu verði. Renault R5 E-Tech 52 kWh er 110.000 kr. ódýrari en drífur 65 km lengra og hleður með um 15% styttri stoppum, þótt skottið sé 115 l minna.',
+      'IONIQ 3 hentar best sem annar bíll heimilisins eða hreinn bæjarbíll, frekar en til reglulegra ferða milli landshluta.',
     ],
     facts: '2796cf363a0d',
     model: 'gemini-3.8-flash, thinking high',
@@ -401,10 +402,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'hyundai-staria-electric-base': {
     paragraphs: [
-      'Hyundai STARIA Electric er sérlega rúmgóður fjölnotabíll sem tekur allt að níu manns í sæti. Hann vekur athygli fyrir framúrstefnulegt útlit og hentar vel stórum fjölskyldum eða hópferðum þar sem hámarksfarþegafjöldi og rými skipta öllu máli.',
-      'Hann er með stærri rafhlöðu en flestir í sínum verðflokki og hraðhleðslan er í meðallagi, sem gerir ferðalög milli landshluta þægilegri en á eldri gerðum af sambærilegri stærð. Þótt hann sé aflminni en flestir á svipuðu verði dugar aflið prýðilega í daglegan akstur.',
-      'Hins vegar drífur hann mjög stutt og er meðal þeirra sem drífa styst í sínum verðflokki. Í íslenskum vetrarkulda dregur enn frekar úr drægninni, og framhjóladrifið veitir ekki sama grip í mikilli ófærð og fjórhjóladrif. Ef sjö sæti duga gæti Kia PV5 hentað betur með 13 km meiri drægni, þótt hleðslustoppin séu um 40% lengri á honum.',
-      'Fyrir þá sem þurfa níu sæti er STARIA hagstæður kostur, sérstaklega í samanburði við Peugeot e-Traveller sem er 1.300.000 kr. dýrari og Toyota Proace Verso sem er 2.400.000 kr. dýrari.',
+      'Hyundai STARIA Electric er stór fjölnotabíll með sætum fyrir allt að níu manns og framúrstefnulegu útliti. Hann hentar stórum fjölskyldum, ferðaþjónustu og hópum þar sem sætafjöldi og rými skipta öllu.',
+      'Hann er lengstur bíla á svipuðu verði og með einu af stærstu skottunum, og hann má draga 2.000 kg, meira en flestir í sínum verðflokki. Rafhlaðan er stærri en hjá flestum á svipuðu verði, og hann hleður mun hraðar en aðrir stórir fjölnotabílar.',
+      'Á móti kemur að hann drífur mjög stutt, og í vetrarkulda styttist drægnin enn frekar, svo langferðir kalla á fleiri hleðslustopp. Hann er líka aflminni en flestir á svipuðu verði.',
+      'Fyrir þá sem þurfa níu sæti er STARIA hagstæður kostur: Peugeot e-Traveller er 1.300.000 kr. dýrari og Toyota Proace Verso 2.400.000 kr. dýrari, og báðir drífa styttra, hlaða hægar og mega draga minna.',
     ],
     facts: '55454b8ff503',
     model: 'gemini-3.8-flash, thinking high',
@@ -975,10 +976,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'mg-mgs6-dual-motor': {
     paragraphs: [
-      'MG MGS6 Dual Motor er kraftmikill og hagnýtur rafbíll sem býður upp á fjórhjóladrif á mjög hagstæðu verði. Hann hentar ökumönnum og fjölskyldum sem leita að traustum hversdagsbíl í íslenska vetrarfærð án þess að kosta miklu til.',
-      'Stærsti styrkur bílsins er hversu mikið afl fæst fyrir peninginn, en hann er bæði aflmeiri og sneggri en flestir bílar á svipuðu verði. Fjórhjóladrifið tryggir öruggt grip í snjó og hálku. Drægnin er í meðallagi miðað við verðflokkinn og dugar vel í daglega notkun sem og hefðbundinn akstur á milli landshluta.',
-      'Helsti ókosturinn er að bíllinn hleður fremur hægt og talsvert hægar en flestir á svipuðu verði. Fyrir þá sem leggja áherslu á styttri hlé á langferðum gæti Subaru Uncharted hentað betur, en hann býður upp á um 25% styttri hleðslustopp. Ef fólk vill hámarks viðbragð í nettri stærð er Volvo EX30 Twin Motor Performance sneggri, en fórnar á móti drægni.',
-      'Fyrir þá sem vilja öflugan fjórhjóladrifsbíl á góðu verði og gera ekki strangar kröfur um hraða á hleðslustöðvum er MG MGS6 Dual Motor heilsteyptur kostur.',
+      'MG MGS6 Dual Motor er meðalstór jepplingur, 4,7 m á lengd, sem býður fjórhjóladrif og mikið afl á verði sem fáir keppinautar ná. Hann hentar fjölskyldum sem vilja rúmgóðan og kraftmikinn bíl án þess að borga fyrir þekktara merki.',
+      'Hann er aflmeiri og sneggri en flestir á svipuðu verði, og auk 493 l skotts er 102 l framskott undir vélarhlífinni. Hann má draga 1.500 kg, meira en flestir í sínum verðflokki, svo hann ræður vel við kerru eða lítið hjólhýsi.',
+      'Á móti kemur að hann hleður hægar en flestir á svipuðu verði, og ábyrgðin á rafhlöðunni er með þeim stystu. Subaru Uncharted býður um 25% styttri hleðslustopp og ári lengri ábyrgð fyrir 100.000 kr. meira, en hann er með 90 l minna skott og minna afl.',
+      'Fyrir þá sem vilja mikið af bíl, afli og plássi fyrir peninginn og hlaða mest heima er MGS6 Dual Motor sterkur kostur.',
     ],
     facts: 'f116badf00c6',
     model: 'gemini-3.8-flash, thinking high',
@@ -1144,10 +1145,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'peugeot-e-rifter-base': {
     paragraphs: [
-      'Peugeot e-Rifter er kantaður og hagnýtur fjölnotabíll sem leggur áherslu á rými og einfaldleika fremur en fágaðan lúxus. Með hárri yfirbyggingu og plássi fyrir allt að sjö manns hentar hann einkar vel stærri fjölskyldum sem leita að rúmgóðu farartæki í daglegt amstur innanbæjar.',
-      'Stærsti kostur hans er verðið, enda er hann fremur ódýr bíll og býður upp á sjö sæti á mun lægra verði en gengur og gerist. Hann kostar til að mynda 1.300.000 kr. minna en hinn tæknilega skyldi Toyota Proace City Verso, þótt þeir deili sama grunni og bjóði nánast sömu drægni.',
-      'Á móti kemur að hann drífur mjög stutt og hleður mjög hægt á lengri leiðum, auk þess sem hann er mjög aflítill og eingöngu með framhjóladrif. Ef ætlunin er að ferðast mikið milli landshluta væri Peugeot e-5008 mun heppilegri kostur; hann er 980.000 kr. dýrari en veitir 159 km meiri drægni og um 10% styttri hleðslustopp.',
-      'Fyrir þá sem þurfa fyrst og fremst ódýran sjö sæta vinnuhest í nærumhverfinu vinnur e-Rifter samt verkið sitt vel.',
+      'Peugeot e-Rifter er hár og kassalaga fjölnotabíll, byggður á sendibíl, með rennihurðum og plássi fyrir allt að sjö manns. Hann leggur áherslu á rými og notagildi frekar en þægindi og hentar stórum fjölskyldum í daglegu amstri.',
+      'Farangursrýmið er með því stærsta í sínum verðflokki og hann er fremur ódýr. Hann kostar 1.300.000 kr. minna en hinn nánast eins Toyota Proace City Verso, sem er byggður á sama grunni og drífur álíka langt.',
+      'Á móti kemur að hann drífur mjög stutt, hleður mjög hægt og er mjög aflítill, svo hann hentar illa til langferða. Peugeot e-5008 er 980.000 kr. dýrari en drífur 159 km lengra, með 141 l stærra skott, og má draga 250 kg meira.',
+      'Fyrir þá sem þurfa ódýran og rúmgóðan bíl fyrir marga í nærumhverfinu vinnur e-Rifter verkið vel.',
     ],
     facts: '1f5530953756',
     model: 'gemini-3.8-flash, thinking high',
@@ -1532,10 +1533,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'smart-5-pro': {
     paragraphs: [
-      'Smart #5 Pro er stór og kassalaga jepplingur sem markar nýja stefnu hjá framleiðandanum, fjarri smábílunum sem merkið er þekkt fyrir. Hann býður upp á rúmgóða og sérstæða hönnun sem höfðar vel til fjölskyldna sem vilja ríflegt pláss og áberandi útlit.',
-      'Í daglegum akstri er bíllinn sneggri og aflmeiri en flestir aðrir í sínum verðflokki, sem gerir hann lipran og öruggan við framúrakstur. Rafhlaðan er jafnframt stærri en gengur og gerist miðað við verðið, sem gefur trausta drægni í hversdagslegu amstri þótt reikna megi með að hún dragist saman í íslenskum vetrarkulda.',
-      'Á langferðum hleður hann hins vegar fremur hægt og þar geta keppinautar eins og XPENG G6 RWD Standard Range hentað betur með um 25% styttri hleðslustoppum. Þá krefst afturhjóladrifið meiri varkárni í snjó og hálku en bílar með drif á öllum hjólum.',
-      'Fyrir þá sem leita að rúmgóðum og sérlega sprækum fjölskyldubíl á hagstæðu verði er Smart #5 Pro fýsilegur kostur, svo lengi sem hraðhleðsla á þjóðveginum er ekki í fyrsta forgangi.',
+      'Smart #5 Pro er stór og kassalaga jepplingur, ný stefna hjá merki sem var þekkt fyrir smábíla. Hann hentar fjölskyldum sem vilja mikið pláss og áberandi útlit.',
+      'Skottið er með þeim stærstu í sínum verðflokki og 72 l framskott bætist við, og hann má draga 1.600 kg, meira en flestir á svipuðu verði. Hann er líka sneggri og aflmeiri en flestir í sínum verðflokki, með stærri rafhlöðu en gengur og gerist.',
+      'Á móti kemur að hann hleður fremur hægt á langferðum og er afturhjóladrifinn, sem krefst meiri varkárni í snjó og hálku. XPENG G6 RWD Standard Range er 100.000 kr. ódýrari með um 25% styttri hleðslustopp, en drífur 30 km styttra og skottið er 59 l minna.',
+      'Fyrir þá sem leita að rúmgóðum og sprækum fjölskyldubíl sem getur dregið hjólhýsi er #5 Pro fýsilegur kostur, svo lengi sem hraðhleðslan er ekki í forgangi.',
     ],
     facts: 'cf21101e07be',
     model: 'gemini-3.8-flash, thinking high',
@@ -1622,10 +1623,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'tesla-model-3-long-range-fjorhjoladrif': {
     paragraphs: [
-      'Tesla Model 3 Long Range er lágur og rennilegur fólksbíll með fjórhjóladrifi sem sameinar mikla drægni og mikil afköst. Hann hentar sérstaklega vel fyrir þá sem aka reglulega langar vegalengdir milli landshluta og vilja gott veggrip í snjó og vetrarfærð.',
-      'Hann drífur mjög langt og er meðal þeirra ódýrustu á hvern kílómetra drægni miðað við aðra á svipuðu verði. Hann hleður jafnframt fremur hratt á langferðum og er meðal þeirra sneggstu og aflmestu í sínum verðflokki, sem veitir mikið öryggi við framúrakstur og skemmtilega aksturseiginleika.',
-      'Helsti ókosturinn er að bíllinn er lágur stallbakur með fremur litla veghæð og hefðbundið skottlok frekar en stóra hlaðbaksopnun. Hafi fólk frekar áhuga á hærri setustöðu og rúmbetra fjölskyldusniði er Renault Scenic E-Tech EV87 þægilegri kostur, eða XPENG G6 RWD Long Range sem býður upp á um 10% styttri hleðslustopp en hefur minni drægni og aðeins afturhjóladrif.',
-      'Fyrir þá sem leita að mikilli drægni og snörpum fjórhjóladrifsbíl stendur Model 3 engu að síður afar sterkt í sínum verðflokki.',
+      'Tesla Model 3 Long Range er lágur og rennilegur fólksbíll með fjórhjóladrifi, einn sá langdrægasti og sneggsti í sínum verðflokki. Hann hentar þeim sem aka mikið milli landshluta og vilja bíl sem er bæði sparneytinn og snarpur.',
+      'Hann drífur mjög langt og hleður hratt, og á langferðum hefur hann aðgang að hraðhleðslustöðvum Tesla við hringveginn. Þó hann sé fólksbíll með skottloki frekar en hlaðbakur er farangursrýmið stærra en hjá flestum á svipuðu verði, og 88 l framskott bætist við.',
+      'Á móti kemur að hann er lágur og með litla veghæð, sem hentar síður á malarvegum og í djúpum snjó, og hann má aðeins draga 1.000 kg, minna en flestir á svipuðu verði. Þeir sem vilja hærri setustöðu og meiri dráttargetu gætu frekar litið á XPENG G6 RWD Long Range, sem má draga 500 kg meira, en hann drífur 90 km styttra og er aðeins afturhjóladrifinn.',
+      'Fyrir langferðir á góðum vegum er Model 3 einn sterkasti kosturinn í sínum verðflokki.',
     ],
     facts: '2e5f5056f3d9',
     model: 'gemini-3.8-flash, thinking high',
@@ -1722,10 +1723,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'toyota-c-hr-base': {
     paragraphs: [
-      'Toyota C-HR+ er sportlegur borgarjepplingur með sérstætt útlit sem höfðar til þeirra sem vilja lipran og þægilegan bíl í daglegan akstur. Hann er lágstemmdur fólksbíll með áherslu á einfaldleika og þekktan áreiðanleika merkisins frekar en mikil afköst.',
-      'Hann er fremur ódýr og drægnin dugar prýðilega í daglegan snattakstur innanbæjar. Hraðhleðslan er í meðallagi miðað við aðra á svipuðu verði, svo hún dugar ágætlega á stöku ferðalögum milli landshluta. Fyrir þá sem meta rólegan akstur og vilja öruggt þjónustunet er hann aðgengilegur kostur.',
-      'Á móti kemur að bíllinn er aðeins framhjóladrifinn, mjög aflítill og með einni af minnstu rafhlöðunum miðað við aðra á svipuðu verði. Fyrir 100.000 kr. meira fást til dæmis Volvo EX30 Twin Motor Performance eða MG MGS6 Dual Motor, sem bjóða báðir upp á fjórhjóladrif, mun stærri rafhlöðu og talsvert meira afl, sem munar miklu um í snjó og hálku.',
-      'Toyota C-HR+ höfðar til þeirra sem leita að hefðbundnum og traustum borgarbíl, en keppinautarnir í kringum hann bjóða almennt mun meira fyrir peningana.',
+      'Toyota C-HR+ er meðalstór jepplingur með sérstæðu og hvössu útliti, ætlaður þeim sem vilja þægilegan bíl frá merki sem er þekkt fyrir áreiðanleika. Hann leggur áherslu á rólegan og hagkvæman akstur frekar en afl.',
+      'Það sem sker hann helst úr er ábyrgðin: Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir á svipuðu verði. Það skiptir máli fyrir þá sem ætla að eiga bílinn lengi. Hann er fremur ódýr og hraðhleðslan er í meðallagi í sínum verðflokki.',
+      'Á móti kemur að hann má ekki draga kerru, er með einni af minnstu rafhlöðunum og meðal þeirra aflminnstu á svipuðu verði, og hann er aðeins framhjóladrifinn. Fyrir 100.000 kr. meira býður MG MGS6 Dual Motor fjórhjóladrif, 77 l stærra skott og má draga 1.500 kg, en ábyrgðin á rafhlöðunni er þremur árum styttri.',
+      'C-HR+ hentar þeim sem meta langa ábyrgð og traust merki ofar afli og plássi, og þurfa aldrei að draga neitt.',
     ],
     facts: '78eee388eeb9',
     model: 'gemini-3.8-flash, thinking high',
@@ -1871,10 +1872,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'volvo-ec40-recharge-twin': {
     paragraphs: [
-      'Volvo EC40 Recharge Twin er rennilegur sportjepplingur með skásettu baki sem sameinar fágaða hönnun og mikið afl. Hann hentar vel þeim sem vilja háreistan bíl með öflugu fjórhjóladrifi fyrir íslenskar aðstæður, en kunna að meta sneggri svörun og sportlegra yfirbragð en gengur og gerist.',
-      'Bíllinn drífur fremur langt og hleður fremur hratt, sem veitir mikið öryggi á ferðalögum milli landshluta. Fjórhjóladrifið sér til þess að snjór og hálka vefjast lítið fyrir honum, og miðað við aðra á svipuðu verði er hann bæði sneggri, aflmeiri og með stærri rafhlöðu en flestir.',
-      'Aftursætin og skottið gjalda hins vegar örlítið fyrir bogadregna þaklínuna. Hinn skyldi Volvo EX40 Recharge Twin býður upp á meira höfuðpláss og hagnýtara rými fyrir vikið á sama verði. Ef hleðslutími á langferðum vegur þyngra býður Mercedes-Benz CLA 200 upp á um 25% styttri hleðslustopp og er 300.000 kr. ódýrari, en sá er afturhjóladrifinn og talsvert aflminni.',
-      'Fyrir þá sem vilja öruggan og snaggaralegan fjórhjóladrifsbíl sem sker sig úr í vetrarfærðinni er EC40 mjög álitlegur kostur.',
+      'Volvo EC40 Recharge Twin er meðalstór sportjepplingur með aflíðandi þaklínu, systurbíll EX40 með sama drifbúnaði undir rennilegri yfirbyggingu. Hann hentar þeim sem vilja fágaðan og snarpan fjórhjóladrifsbíl og setja útlitið ofar plássinu.',
+      'Bíllinn drífur lengra og hleður hraðar en flestir á svipuðu verði, og með fjórhjóladrifi og miklu afli er hann sneggri en flestir í sínum verðflokki. Hann má líka draga 1.800 kg, meira en flestir á þessu verði, svo hjólhýsi eða þung kerra er ekkert mál.',
+      'Á móti kemur að hann er nettur og með einu af minnstu skottunum í sínum verðflokki, og aftursætin gjalda fyrir lága þaklínuna. Volvo EX40 Recharge Twin kostar það sama með sama drifi og gefur meira höfuðrými aftur í, en þurfi meira pláss frekar en afl býður Toyota bZ4X Touring 265 l stærra skott, þótt hann sé mun hægari og megi aðeins draga 750 kg.',
+      'EC40 er fyrir þá sem vilja Volvo með sportlegri svip og nóg af afli, og sætta sig við minna rými en í hefðbundnari jepplingi.',
     ],
     facts: '51b9529f9a54',
     model: 'gemini-3.8-flash, thinking high',
