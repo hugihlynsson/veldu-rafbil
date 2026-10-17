@@ -134,7 +134,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
 
           {review && <Review review={review} />}
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
+          <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
             <ShareButton
               title={car.label}
               label="Deila bílnum"
@@ -143,7 +143,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
             {car.evDatabaseUrl && <EvDatabaseLink href={car.evDatabaseUrl} />}
           </div>
 
-          <section aria-labelledby="similar" className="mt-12 md:mt-20">
+          <section aria-labelledby="similar" className="mt-12 md:mt-16">
             <h2 id="similar" className={sectionLabel}>
               Þú gætir líka haft áhuga á:
             </h2>
