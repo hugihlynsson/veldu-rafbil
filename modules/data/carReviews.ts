@@ -1065,7 +1065,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'opel-frontera-base': {
     paragraphs: [
       'Opel Frontera er kassalaga jepplingur sem býður allt að sjö sæti á verði sem er með því lægsta á listanum. Hann hentar stærri fjölskyldum sem vilja hagnýtan bíl í dagleg verkefni fyrir lítið.',
-      'Fá önnur sjö sæta bíll kemst nálægt verðinu, og skottið er stærra en hjá flestum á svipuðu verði. Kassalaga lagið gefur gott höfuðrými og útsýni.',
+      'Fáir aðrir sjö sæta bílar komast nálægt verðinu, og skottið er stærra en hjá flestum á svipuðu verði. Kassalaga lagið gefur gott höfuðrými og útsýni.',
       'Á móti kemur að hann er meðal þeirra sem drífa styst, hlaða hægast, eru hægastir og draga minnst á svipuðu verði, svo hann hentar illa til ferða milli landshluta. Peugeot e-Rifter tekur líka sjö, drífur 38 km lengra og er með 315 l stærra skott, en kostar 2.100.000 kr. meira.',
       'Frontera er ódýrasta leiðin að sjö sætum, sniðin að nærumhverfinu frekar en langferðum.',
     ],
