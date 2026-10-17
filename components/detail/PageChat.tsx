@@ -15,6 +15,8 @@ const ChatContainer = dynamic(() => import('@/components/chat/ChatContainer'), {
 
 interface Props {
   cars: ReadonlyArray<Car>
+  /** Written with the car's review; the general ones without it */
+  starters?: ReadonlyArray<string>
 }
 
 /**
@@ -22,7 +24,7 @@ interface Props {
  * car picked from an answer is scrolled up to when it is this one, and opens
  * its own page when it is another.
  */
-const PageChat: FunctionComponent<Props> = ({ cars }) => {
+const PageChat: FunctionComponent<Props> = ({ cars, starters }) => {
   const router = useRouter()
 
   const showCar = (car: Car) => {
@@ -38,7 +40,14 @@ const PageChat: FunctionComponent<Props> = ({ cars }) => {
     }
   }
 
-  return <ChatContainer hide={false} onShowCar={showCar} about={cars} />
+  return (
+    <ChatContainer
+      hide={false}
+      onShowCar={showCar}
+      about={cars}
+      starters={starters}
+    />
+  )
 }
 
 export default PageChat

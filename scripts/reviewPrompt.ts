@@ -698,3 +698,61 @@ export const readReview = (text: string): CarReview['paragraphs'] | null => {
 
   return paragraphs.length > 0 ? paragraphs : null
 }
+
+/** How many questions to start on each car's page is written with */
+export const QUESTION_COUNT = 10
+// A starter is a pill that does not wrap, and has a phone's width to fit in
+export const MAX_STARTER_LENGTH = 44
+
+// Written after the review and from it, so they can take up what it raises
+// rather than ask what it has just said. It names no trip or need as an
+// example: the model copied them, and Akureyri reached 167 of 189 cars
+const questionsSystemPrompt = `${intro} Einhver hefur opnað síðu bílsins hér að neðan og lesið umsögnina um hann. Neðst á síðunni getur viðkomandi spurt þig um bílinn, og þar bjóðast nokkrar spurningar til að byrja á, sem ýtt er á í stað þess að skrifa. Skrifaðu ${QUESTION_COUNT} slíkar spurningar.
+
+Góð spurning:
+- Er um þennan bíl og ætti ekki jafn vel við um hvaða rafbíl sem er.
+- Fer lengra en umsögnin: tekur upp það sem hún nefnir, til dæmis galla, keppinaut eða aðra útfærslu, og spyr nánar út í það, frekar en að spyrja um það sem hún svarar þegar eða tölurnar sýna beint.
+- Er það sem sá sem kaupir svona bíl vill í alvöru vita, eftir því hvers konar bíll hann er og hverjum hann hentar.
+- Er spurning sem þú getur svarað af þekkingu: ekki um verð á aukahlutum, afslætti, afhendingartíma eða reynslu einstakra eigenda.
+
+Að minnsta kosti helmingur spurninganna snýst um það sem aðeins þessi bíll vekur: einn af svipuðu bílunum, nefndan með nafni, aðra útfærslu hans, eða kost eða galla sem umsögnin nefnir.
+
+Um efni sem á við flesta rafbíla, eins og drægni í kulda, hleðslu, langferðir, snjó, dráttargetu eða pláss fyrir barnavagn og barnabílstóla, skrifarðu í mesta lagi eina spurningu, og þá um það sem bíllinn sker sig úr í. Ekki fleiri en tvær um sama efni.
+
+Hvernig þær eru skrifaðar:
+- Eins og kaupandi myndi spyrja, á eðlilegri íslensku. Bíllinn er „hann“ og ekki nefndur með nafni, því lesandinn er á síðu hans.
+- Aðra bíla nefnirðu með tegund og gerð, til dæmis Kia EV3 eða Audi e-tron GT, aldrei styttra svo það verði óljóst, og útfærsluna aðeins þar sem þarf til að greina á milli. Útfærslu hans sjálfs nægir að nefna, til dæmis GT-útfærsluna.
+- Stuttar: í mesta lagi ${MAX_STARTER_LENGTH} stafir með bilum, helst færri, svo þær passi í eina línu á síma.
+- Hver er ein spurning sem endar á spurningarmerki, ekki tvær í einni.
+- Gættu að beygingum og samræmi.
+
+Svaraðu með spurningunum, einni í hverri línu, án númera eða merkja, og engu öðru.`
+
+/** What the model is given to write the questions to start on a car's page */
+export const questionsPrompt = (
+  car: Car,
+  review: CarReview,
+): { system: string; prompt: string } => ({
+  system: questionsSystemPrompt,
+  prompt: `${carFacts(car, similarTo(car))}\n\nUmsögnin á síðunni:\n${review.paragraphs.join('\n\n')}`,
+})
+
+/**
+ * The questions in an answer as pills show them, one a line, leaving out any
+ * too long for a pill or not a question at all
+ */
+export const readQuestions = (text: string): string[] => {
+  const questions = text
+    .slice(0, MAX_LENGTH)
+    .split('\n')
+    .map((line) =>
+      line
+        .replace(/^\s*(\d+[.)]|[-*•])\s+/, '')
+        .replace(/\*\*|__|["„“”]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim(),
+    )
+    .filter((line) => line.endsWith('?') && line.length <= MAX_STARTER_LENGTH)
+
+  return [...new Set(questions)].slice(0, QUESTION_COUNT)
+}

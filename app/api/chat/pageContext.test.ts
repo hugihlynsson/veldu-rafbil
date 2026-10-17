@@ -6,7 +6,11 @@ import type { ChatMessage } from '@/modules/chat/message'
 import { pageNote, withPageContext } from './pageContext'
 
 const [a] = cars as readonly [Car, Car, Car, ...Car[]]
-const review = { paragraphs: ['Góður bíll.', 'Fer langt.'], facts: '' }
+const review = {
+  paragraphs: ['Góður bíll.', 'Fer langt.'],
+  questions: [],
+  facts: '',
+}
 const reviews = { [carSlug(a)]: review }
 
 const question = (id: string, about?: string[]): ChatMessage => ({

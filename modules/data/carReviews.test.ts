@@ -3,7 +3,11 @@ import { describe, expect, it } from 'vitest'
 import cars from './cars'
 import { carSlug } from './getCarId'
 import carReviews from './carReviews'
-import { reviewFactsKey } from '@/scripts/reviewPrompt'
+import {
+  MAX_STARTER_LENGTH,
+  QUESTION_COUNT,
+  reviewFactsKey,
+} from '@/scripts/reviewPrompt'
 
 const bySlug = new Map(cars.map((car) => [carSlug(car), car]))
 
@@ -36,6 +40,20 @@ describe('the car reviews', () => {
       for (const paragraph of paragraphs) {
         expect(paragraph.trim()).toBe(paragraph)
         expect(paragraph).not.toMatch(/\*\*|^#|\n/)
+      }
+    }
+  })
+
+  // The chat offers three at a time, drawn afresh each time it is focused
+  it('has questions to start on with each, as pills can show them', () => {
+    for (const { questions } of Object.values(carReviews)) {
+      expect(questions.length).toBeGreaterThanOrEqual(3)
+      expect(questions.length).toBeLessThanOrEqual(QUESTION_COUNT)
+      expect(new Set(questions).size).toBe(questions.length)
+      for (const question of questions) {
+        expect(question.trim()).toBe(question)
+        expect(question).toMatch(/\?$/)
+        expect(question.length).toBeLessThanOrEqual(MAX_STARTER_LENGTH)
       }
     }
   })

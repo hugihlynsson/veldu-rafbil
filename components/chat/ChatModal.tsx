@@ -12,10 +12,7 @@ import {
   groupIntoTurns,
 } from '@/modules/chat/message'
 import { isAwaitingText, unansweredReason } from '@/modules/chat/progress'
-import {
-  carSuggestions,
-  getRandomSuggestions,
-} from '@/modules/chat/suggestions'
+import { getRandomSuggestions } from '@/modules/chat/suggestions'
 import Modal, { panelMotion } from '@/components/Modal'
 import type { ChatSession } from './ChatEngine'
 import ChatHeader from './ChatHeader'
@@ -62,6 +59,8 @@ interface Props {
   composerRef: React.RefObject<HTMLInputElement | null>
   /** The slugs of the cars the page is about, on a car's page */
   about?: string[]
+  /** The questions to start on there */
+  starters: ReadonlyArray<string>
 }
 
 const ChatModal: React.FunctionComponent<Props> = ({
@@ -70,6 +69,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
   composer,
   composerRef,
   about,
+  starters,
 }) => {
   // Held until the dialog has closed: the page behind it is inert until then,
   // and the car's card could not take the focus
@@ -92,7 +92,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
   // page may not be: they wait for a question here
   const followUps = askedElsewhere(messages, about) ? [] : lastMessageFollowUps
   const [pageStarters] = useState(() =>
-    about ? getRandomSuggestions(carSuggestions, 3) : [],
+    about ? getRandomSuggestions(starters, 3) : [],
   )
 
   const lastUserMessageId = messages.findLast((m) => m.role === 'user')?.id

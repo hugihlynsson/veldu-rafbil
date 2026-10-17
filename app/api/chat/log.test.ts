@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import type { ChatFinish } from './chat'
-import { chatLogEvent, questionSource, type ChatTurn } from './log'
+import { carPage, chatLogEvent, questionSource, type ChatTurn } from './log'
 import type { ChatMessage } from '@/modules/chat/message'
 import { CHAT_SUGGESTIONS } from '@/modules/chat/suggestions'
 
@@ -10,6 +10,7 @@ const turn: ChatTurn = {
   conversationId: '4f8a2c3e-9b1d-4e6f-8a7b-2c3d4e5f6a7b',
   userMessage: 'Hver er ódýrasti bíllinn?',
   source: 'typed',
+  carPage: undefined,
   messageCount: 3,
   model: 'gemini-3.8-flash',
   environment: 'production',
@@ -95,6 +96,42 @@ describe('questionSource', () => {
 
   it('reads a starter pill', () => {
     expect(questionSource([ask(CHAT_SUGGESTIONS[0]!)])).toBe('starter')
+  })
+
+  describe('on a car page', () => {
+    const slug = 'kia-ev3-long-range'
+    const askOnPage = (text: string, about = slug): ChatMessage => ({
+      ...ask(text),
+      metadata: { about: [about] },
+    })
+    const reviews = {
+      [slug]: { paragraphs: [], facts: '', questions: ['Dugar hann?'] },
+    }
+
+    it("reads the car's own starter", () => {
+      expect(questionSource([askOnPage('Dugar hann?')], reviews)).toBe(
+        'starter',
+      )
+    })
+
+    // Not offered there, so typed to match
+    it("reads the list's starters, or another car's, as typed", () => {
+      expect(questionSource([askOnPage(CHAT_SUGGESTIONS[0]!)], reviews)).toBe(
+        'typed',
+      )
+      expect(
+        questionSource(
+          [askOnPage('Dugar hann?', 'tesla-model-3-afturhjoladrif')],
+          reviews,
+        ),
+      ).toBe('typed')
+    })
+
+    it('logs the page by its slug, and no page for one no car has', () => {
+      expect(carPage([askOnPage('x', 'KIA-EV3-LONG-RANGE')])).toBe(slug)
+      expect(carPage([askOnPage('x', 'no-such-car')])).toBeUndefined()
+      expect(carPage([ask('x')])).toBeUndefined()
+    })
   })
 
   it('reads anything else as typed', () => {

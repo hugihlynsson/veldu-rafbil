@@ -1,10 +1,16 @@
 /**
- * Writes modules/data/carReviews.ts: the review on each car's page, written
- * by the advisor's model from the prompt in scripts/reviewPrompt.ts.
+ * Writes modules/data/carReviews.ts: the review on each car's page, and the
+ * questions its chat offers to start on, written by the advisor's model from
+ * the prompts in scripts/reviewPrompt.ts.
  *
  *   npx tsx --env-file=.env.local scripts/car-reviews.ts           the missing and out-of-date ones
  *   npx tsx --env-file=.env.local scripts/car-reviews.ts <slug>…   these, afresh
  *   npx tsx --env-file=.env.local scripts/car-reviews.ts --all     every one, afresh
+ *   npx tsx --env-file=.env.local scripts/car-reviews.ts --questions [<slug>…]
+ *                                                                  only the questions, keeping the reviews
+ *
+ * The questions are written from the review, so a review written afresh gets
+ * new ones, and a review kept without any gets them on the next run.
  *
  * A review kept is kept as it is, so one edited by hand survives a run until
  * its car's figures change. Each one written is a billed request that thinks
@@ -24,7 +30,10 @@ import cars, { type Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import carReviews, { type CarReview } from '@/modules/data/carReviews'
 import {
+  questionsPrompt,
+  QUESTION_COUNT,
   readDetails,
+  readQuestions,
   readReview,
   reviewFactsKey,
   reviewPrompt,
@@ -46,9 +55,16 @@ const CONCURRENCY = 4
 const PAGE_CONCURRENCY = 6
 // The prompt asks for some 150 words: far fewer is an answer that stopped
 const MIN_WORDS = 70
+// Asked for QUESTION_COUNT: a few too long for a pill are left out, more is
+// a prompt the model is not following
+const MIN_QUESTIONS = QUESTION_COUNT - 2
+// Low left an ungrammatical question in about one car in five, and a
+// question costs a fraction of its review either way
+const questionsThinkingLevel = 'medium'
 
 const args = process.argv.slice(2)
 const all = args.includes('--all')
+const onlyQuestions = args.includes('--questions')
 const named = new Set(args.filter((arg) => !arg.startsWith('--')))
 
 const unknown = [...named].filter(
@@ -58,12 +74,25 @@ if (unknown.length > 0) {
   throw new Error(`No car on the list has the slug ${unknown.join(', ')}`)
 }
 
-const due = cars.filter((car) => {
+const due = onlyQuestions
+  ? []
+  : cars.filter((car) => {
+      const slug = carSlug(car)
+      if (named.size > 0) return named.has(slug)
+      return (
+        all ||
+        !carReviews[slug] ||
+        carReviews[slug].facts !== reviewFactsKey(car)
+      )
+    })
+
+// Kept reviews whose questions are written on their own
+const questionsDue = cars.filter((car) => {
   const slug = carSlug(car)
-  if (named.size > 0) return named.has(slug)
-  return (
-    all || !carReviews[slug] || carReviews[slug].facts !== reviewFactsKey(car)
-  )
+  const review = carReviews[slug]
+  if (!review || due.includes(car)) return false
+  if (onlyQuestions) return named.size === 0 || named.has(slug)
+  return !review.questions?.length
 })
 
 // Every car on the list, in its order; a car no longer on it drops out
@@ -88,6 +117,8 @@ const save = ({ format = false } = {}) => {
 
 export interface CarReview {
   paragraphs: ReadonlyArray<string>
+  /** Questions to start the page's chat on, written from the review */
+  questions: ReadonlyArray<string>
   /** The figures it was written from, as reviewFactsKey hashes them */
   facts: string
   /** The model that wrote it, and how hard it thought; none for one written by hand */
@@ -147,17 +178,62 @@ const write = async (
   if (!paragraphs || paragraphs.join(' ').split(/\s+/).length < MIN_WORDS) {
     throw new Error(`it is too short: ${result.text}`)
   }
+  const review = {
+    paragraphs,
+    questions: [],
+    facts: reviewFactsKey(car),
+    model: `${advisorModel}, thinking ${thinkingLevel}`,
+  }
+  const questions = await writeQuestions(car, review)
   return {
-    review: {
-      paragraphs,
-      facts: reviewFactsKey(car),
-      model: `${advisorModel}, thinking ${thinkingLevel}`,
-    },
-    usage: result.totalUsage,
+    review: { ...review, questions: questions.questions },
+    usage: addUsage(result.totalUsage, questions.usage),
   }
 }
 
-const queue = [...due]
+const writeQuestions = async (
+  car: Car,
+  review: CarReview,
+): Promise<{ questions: string[]; usage: LanguageModelUsage }> => {
+  const { system, prompt } = questionsPrompt(car, review)
+  const result = await generateText({
+    model: google(advisorModel),
+    system,
+    prompt,
+    providerOptions: {
+      google: { thinkingConfig: { thinkingLevel: questionsThinkingLevel } },
+    },
+    // The thinking counts toward it, and once took all of 8.192
+    maxOutputTokens: 16_384,
+    abortSignal: AbortSignal.timeout(120_000),
+  })
+
+  if (result.finishReason !== 'stop') {
+    throw new Error(`its questions ended with ${result.finishReason}`)
+  }
+  const questions = readQuestions(result.text)
+  if (questions.length < MIN_QUESTIONS) {
+    throw new Error(`it has too few questions: ${result.text}`)
+  }
+  return { questions, usage: result.totalUsage }
+}
+
+const addUsage = (
+  a: LanguageModelUsage,
+  b: LanguageModelUsage,
+): LanguageModelUsage => ({
+  ...a,
+  inputTokens: (a.inputTokens ?? 0) + (b.inputTokens ?? 0),
+  outputTokens: (a.outputTokens ?? 0) + (b.outputTokens ?? 0),
+  outputTokenDetails: {
+    ...a.outputTokenDetails,
+    reasoningTokens:
+      (a.outputTokenDetails.reasoningTokens ?? 0) +
+      (b.outputTokenDetails.reasoningTokens ?? 0),
+  },
+})
+
+const queue = [...due, ...questionsDue]
 const failed: string[] = []
 let done = 0
 
@@ -166,13 +242,19 @@ const worker = async (details: DetailsOf) => {
     const slug = carSlug(car)
     const started = Date.now()
     try {
-      const { review, usage } = await write(car, details)
+      const kept = reviews.get(slug)
+      const { review, usage } = due.includes(car)
+        ? await write(car, details)
+        : await writeQuestions(car, kept!).then(({ questions, usage }) => ({
+            review: { ...kept!, questions },
+            usage,
+          }))
       reviews.set(slug, review)
       save()
       done++
       // What it was billed for, thinking included
       console.log(
-        `${done}/${due.length} ${slug} (${Math.round((Date.now() - started) / 1000)} s, ${usage.inputTokens} tokens in, ${usage.outputTokens} out of which ${usage.outputTokenDetails.reasoningTokens ?? 0} thinking)`,
+        `${done}/${due.length + questionsDue.length} ${slug} (${Math.round((Date.now() - started) / 1000)} s, ${usage.inputTokens} tokens in, ${usage.outputTokens} out of which ${usage.outputTokenDetails.reasoningTokens ?? 0} thinking)`,
       )
     } catch (error) {
       failed.push(slug)
@@ -184,7 +266,9 @@ const worker = async (details: DetailsOf) => {
 // Not a top-level await, which tsx runs this module without
 const main = async () => {
   const details = due.length > 0 ? await readAllDetails() : () => undefined
-  console.log(`Writing ${due.length} reviews, ${CONCURRENCY} at a time`)
+  console.log(
+    `Writing ${due.length} reviews and questions for ${questionsDue.length} more, ${CONCURRENCY} at a time`,
+  )
   await Promise.all(Array.from({ length: CONCURRENCY }, () => worker(details)))
   // Saved even with nothing written, to drop the cars no longer on the list
   save({ format: true })

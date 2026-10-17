@@ -67,16 +67,14 @@ export default async function Page(props: Props) {
   // A renamed car, or a slug in the wrong case: the one address the page has
   if (slug !== segment) permanentRedirect(carPath(slug))
 
+  // Buying advice, which a car no longer sold new is past
+  const review = car.deprecated ? undefined : carReviews[carSlug(car)]
+
   return (
     <>
-      <CarView
-        car={car}
-        similar={similarTo(car)}
-        // Buying advice, which a car no longer sold new is past
-        review={car.deprecated ? undefined : carReviews[carSlug(car)]}
-      />
+      <CarView car={car} similar={similarTo(car)} review={review} />
       <Footer />
-      <PageChat cars={[car]} />
+      <PageChat cars={[car]} starters={review?.questions} />
     </>
   )
 }
