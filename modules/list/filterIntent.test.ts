@@ -5,6 +5,7 @@ import {
   MAX_INTENT_LENGTH,
   needsModel,
   parseFilterIntent,
+  readsAsQuestion,
 } from './filterIntent'
 
 const read = (text: string) => parseFilterIntent(text).filters
@@ -149,5 +150,24 @@ describe('needsModel', () => {
 
   it('is true when a number is left that no rule could place', () => {
     expect(needsModel(parseFilterIntent('undir 600'))).toBe(true)
+  })
+})
+
+describe('readsAsQuestion', () => {
+  it('reads a question by its first word or its question mark', () => {
+    expect(readsAsQuestion('Hvaða bíl mælir þú með')).toBe(true)
+    expect(readsAsQuestion('hvernig virkar rafbilastyrkurinn')).toBe(true)
+    expect(readsAsQuestion('Er rafbíll góður á Íslandi')).toBe(true)
+    expect(readsAsQuestion('7 sæta undir 9 milljónum?')).toBe(true)
+  })
+
+  it('reads a wish as no question, however it is put', () => {
+    expect(
+      readsAsQuestion(
+        'Ég vil bíl sem kemst yfir 600km, er awd og kostar ekki of mikið',
+      ),
+    ).toBe(false)
+    expect(readsAsQuestion('fjórhjóladrif, 600')).toBe(false)
+    expect(readsAsQuestion('Erum fimm í fjölskyldunni')).toBe(false)
   })
 })

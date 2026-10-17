@@ -33,6 +33,7 @@ describe('POST /api/filter-suggestions', () => {
     expect(await response.json()).toEqual({
       suggestions: [{ key: 'seats', value: 7, source: 'text', probability: 1 }],
       model: 'unavailable',
+      asksAdvisor: false,
     })
   })
 
@@ -105,6 +106,7 @@ describe('POST /api/filter-suggestions with a key', () => {
         { key: 'drive', value: ['AWD'], source: 'model', probability: 0.9 },
       ],
       model: 'answered',
+      asksAdvisor: false,
     })
   })
 
@@ -120,6 +122,7 @@ describe('POST /api/filter-suggestions with a key', () => {
     expect(await response.json()).toEqual({
       suggestions: [{ key: 'seats', value: 7, source: 'text', probability: 1 }],
       model: 'failed',
+      asksAdvisor: false,
     })
   })
 

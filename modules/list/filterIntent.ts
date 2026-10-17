@@ -436,3 +436,24 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
 /** Whether anything is left that only a model could read */
 export const needsModel = (parsed: ParsedIntent): boolean =>
   parsed.unread.length > 0 || parsed.numbers.length > 0
+
+// Folded, as foldText leaves them. "Er" and "eru" open a question here even
+// though the parser reads them as filler inside one.
+const questionOpeners = new Set(
+  `hvad hvada hver hverjir hvernig hversu hvort hvar hvenaer hvers hvi
+  er eru get getur geta ma maeli maelir maelid borgar aetti aettu skiptir`
+    .trim()
+    .split(/\s+/),
+)
+
+/**
+ * Whether the text reads as a question for the advisor rather than a wish for
+ * the list, judged on its first word and a closing question mark. Both are
+ * free, so this stands where no model was asked, and alongside one that was.
+ */
+export const readsAsQuestion = (text: string): boolean => {
+  const trimmed = text.trim()
+  if (trimmed.endsWith('?')) return true
+  const first = foldText(trimmed).split(/[^\p{L}]+/u)[0]
+  return questionOpeners.has(first)
+}

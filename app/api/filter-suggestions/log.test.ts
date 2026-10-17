@@ -5,7 +5,7 @@ import { suggestionsLogEvent, type SuggestionsTurn } from './log'
 const turn = (over: Partial<SuggestionsTurn>): SuggestionsTurn => ({
   timestamp: '2026-10-09T12:00:00.000Z',
   text: 'fjórhjóladrif, 600',
-  result: { suggestions: [], model: 'answered' },
+  result: { suggestions: [], model: 'answered', asksAdvisor: false },
   answers: undefined,
   inputTokens: undefined,
   superseded: false,
@@ -53,7 +53,9 @@ describe('suggestionsLogEvent', () => {
 
   it('has no answers when the model was not asked', () => {
     const event = suggestionsLogEvent(
-      turn({ result: { suggestions: [], model: 'not-needed' } }),
+      turn({
+        result: { suggestions: [], model: 'not-needed', asksAdvisor: false },
+      }),
     )
     expect(event.answers).toBeUndefined()
     expect(event.asksAdvisor).toBeUndefined()

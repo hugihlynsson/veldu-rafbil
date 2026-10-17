@@ -209,6 +209,7 @@ describe('suggestFilters', () => {
         { key: 'seats', value: 7, source: 'text', probability: 1 },
       ],
       model: 'not-needed',
+      asksAdvisor: false,
     })
     expect(ask).not.toHaveBeenCalled()
   })
@@ -217,6 +218,7 @@ describe('suggestFilters', () => {
     expect(await suggestFilters('ódýr með 7 sætum', undefined)).toEqual({
       suggestions: [{ key: 'seats', value: 7, source: 'text', probability: 1 }],
       model: 'unavailable',
+      asksAdvisor: false,
     })
   })
 
@@ -257,5 +259,29 @@ describe('suggestFilters', () => {
       ['seats', 'text'],
       ['price', 'model'],
     ])
+  })
+
+  it('says a request is a question when the model reads it as one', async () => {
+    const ask = vi.fn().mockResolvedValue({
+      answers: { [ADVISOR_KEY]: { type: 'noul', noul: 0.9 } },
+    })
+    expect(
+      (await suggestFilters('bestur fyrir fjölskyldu með 600 km', ask))
+        .asksAdvisor,
+    ).toBe(true)
+  })
+
+  it('says a request is a question by its words when no model answered', async () => {
+    const failing = vi.fn().mockRejectedValue(new Error('timeout'))
+    expect(
+      (await suggestFilters('hvaða bíll kemst 600 km?', failing)).asksAdvisor,
+    ).toBe(true)
+    expect(
+      (await suggestFilters('er til 7 sæta undir 9 milljónum', undefined))
+        .asksAdvisor,
+    ).toBe(true)
+    expect(
+      (await suggestFilters('fjórhjóladrif og 600 km', undefined)).asksAdvisor,
+    ).toBe(false)
   })
 })

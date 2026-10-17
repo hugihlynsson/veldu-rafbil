@@ -74,6 +74,11 @@ export const readSuggestions = (json: unknown): FilterSuggestion[] => {
   })
 }
 
+/** Whether the route read the request as a question for the advisor */
+export const readAsksAdvisor = (json: unknown): boolean =>
+  z.object({ asksAdvisor: z.boolean() }).safeParse(json).data?.asksAdvisor ??
+  false
+
 export type RankedSuggestion = FilterSuggestion & {
   /** Cars the list would show with this added to the current filters */
   count: number
