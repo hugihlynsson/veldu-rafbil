@@ -76,7 +76,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
           {/* The name and the figures read as one block, narrower than the
               text under them */}
           <div className="md:max-w-column">
-            <div className="pt-8 md:pt-10">
+            <div className="pt-8 md:pt-14">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <h1 className="m-0 font-semibold text-display leading-tight">
@@ -113,7 +113,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
               )}
             </div>
 
-            <dl className="m-0 mt-10 grid grid-cols-2 gap-x-6 gap-y-5 md:grid-cols-3">
+            <dl className="m-0 mt-10 md:mt-14 grid grid-cols-2 gap-x-6 gap-y-5 md:grid-cols-3">
               {figures.map((row) => (
                 <div key={row.key}>
                   <dt className={eyebrow}>{row.label}</dt>
