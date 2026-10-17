@@ -72,7 +72,7 @@ describe('the assistant system prompt', () => {
   // An example naming a car no longer on the list teaches a ref that is dropped
   it('asks for car markers by an example of a real one', () => {
     const examples = [...systemPrompt.matchAll(/\[car:([^\]<]+)\]/g)].map(
-      (match) => match[1],
+      (match) => match[1] ?? '',
     )
     expect(examples.length).toBeGreaterThan(0)
     expect(resolveCarRefs(examples)).toHaveLength(examples.length)

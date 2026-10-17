@@ -52,12 +52,12 @@ describe('intentRequest', () => {
   it('gives every filter question a way to say it does not apply', () => {
     const { questions } = intentRequest('ódýr', [])
     const { [ADVISOR_KEY]: advisor, ...filters } = questions
-    expect(advisor.type).toBe('noul')
+    expect(advisor?.type).toBe('noul')
     for (const question of Object.values(filters)) {
       expect(question.type).toBe('choice')
       expect(Object.keys(question.criteria ?? {})[0]).toBe('none')
     }
-    expect(filters.drive.instructions).toContain('drive')
+    expect(filters.drive?.instructions).toContain('drive')
   })
 
   it('asks nothing when the text set every filter', () => {
@@ -92,7 +92,8 @@ describe('withNumbers', () => {
     expect(stated(['fimm']).price).toEqual([5_000_000])
     const { questions } = intentRequest('atta', [], withNumbers(['atta']))
     expect(
-      (questions.seats.criteria as Record<string, string>).seats_8,
+      (questions.seats?.criteria as Record<string, string> | undefined)
+        ?.seats_8,
     ).toContain('"atta" (8)')
   })
 
@@ -108,11 +109,12 @@ describe('withNumbers', () => {
 
   it('names the number in the request it stands for', () => {
     const { questions } = intentRequest('kemst 600', [], withNumbers(['600']))
-    expect(questions.range.criteria).toHaveProperty('at_least_600_km')
+    expect(questions.range?.criteria).toHaveProperty('at_least_600_km')
     expect(
-      (questions.range.criteria as Record<string, string>).at_least_600_km,
+      (questions.range?.criteria as Record<string, string> | undefined)
+        ?.at_least_600_km,
     ).toContain('The 600 in')
-    expect(questions.range.instructions).toContain('number')
-    expect(questions.drive.instructions).not.toContain('number')
+    expect(questions.range?.instructions).toContain('number')
+    expect(questions.drive?.instructions).not.toContain('number')
   })
 })

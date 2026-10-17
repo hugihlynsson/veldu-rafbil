@@ -11,11 +11,9 @@ import Logo from '@/components/Logo'
 
 // Static cuts of the site's Inter at the two weights drawn here: the image
 // renderer reads neither WOFF2 nor a variable font
-const fonts = Promise.all(
-  (['Regular', 'SemiBold'] as const).map((name) =>
-    readFile(path.join(process.cwd(), `app/fonts/Inter${name}-og.woff`)),
-  ),
-)
+const font = (name: string) =>
+  readFile(path.join(process.cwd(), `app/fonts/Inter${name}-og.woff`))
+const fonts = Promise.all([font('Regular'), font('SemiBold')])
 
 // The photos are read from disk, which next.config.ts traces into this
 // function, as public/ is otherwise served by the CDN and not bundled

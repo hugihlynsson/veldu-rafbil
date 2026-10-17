@@ -4,7 +4,7 @@ import cars, { allCars, deriveCar } from './cars'
 import { grantPriceCeiling } from './globals'
 import newCars from './newCars'
 
-const priced = (price: number) => deriveCar({ ...newCars[0], price })
+const priced = (price: number) => deriveCar({ ...newCars[0]!, price })
 
 describe('hasGrant', () => {
   it('is true for a car listed under the ceiling', () => {

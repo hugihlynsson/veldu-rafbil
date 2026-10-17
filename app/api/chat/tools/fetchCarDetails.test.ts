@@ -27,7 +27,7 @@ const allowedUrls = newCars
   .map((car) => car.evDatabaseUrl)
   .filter((url): url is string => Boolean(url))
 let carsTaken = 0
-const aCar = (): string => allowedUrls[carsTaken++]
+const aCar = (): string => allowedUrls[carsTaken++]!
 
 const page = (html: string, status = 200) => new Response(html, { status })
 const redirectTo = (location: string) =>
@@ -225,7 +225,7 @@ describe('fetchCarDetails, redirected', () => {
 
     const result = await run(url)
 
-    expect(fetchSpy.mock.calls[1][0]).toBe(
+    expect(fetchSpy.mock.calls[1]?.[0]).toBe(
       'https://ev-database.org/car/1/Renamed',
     )
     expect(result.specifications).toContain('seats: 5')

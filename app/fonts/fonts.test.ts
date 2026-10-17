@@ -8,8 +8,8 @@ const root = path.join(__dirname, '../..')
 const readBase128 = (bytes: Buffer, at: number): [number, number] => {
   let value = 0
   for (let i = 0; i < 5; i++) {
-    value = value * 128 + (bytes[at + i] & 0x7f)
-    if (!(bytes[at + i] & 0x80)) return [value, at + i + 1]
+    value = value * 128 + (bytes.readUInt8(at + i) & 0x7f)
+    if (!(bytes.readUInt8(at + i) & 0x80)) return [value, at + i + 1]
   }
   throw new Error('Bad UIntBase128')
 }
@@ -27,7 +27,7 @@ const woff2Table = (woff2: Buffer, tag: number): Buffer => {
   let at = 48
 
   for (let i = 0; i < numTables; i++) {
-    const flags = woff2[at++]
+    const flags = woff2.readUInt8(at++)
     const known = flags & 0x3f
     if (known === tag) tableIndex = i
     if (known === 0x3f) at += 4
@@ -41,7 +41,9 @@ const woff2Table = (woff2: Buffer, tag: number): Buffer => {
 
   const data = brotliDecompressSync(woff2.subarray(at, at + compressedLength))
   const offset = lengths.slice(0, tableIndex).reduce((sum, l) => sum + l, 0)
-  return data.subarray(offset, offset + lengths[tableIndex])
+  const length = lengths[tableIndex]
+  if (length === undefined) throw new Error(`No table ${tag} in the font`)
+  return data.subarray(offset, offset + length)
 }
 
 /** Every code point the Windows BMP subtable (format 4) maps to a glyph */
@@ -178,7 +180,7 @@ describe('the font layout.tsx loads', () => {
         ]
           .map(
             ([, name, css, arbitrary]) =>
-              named[name] ?? Number(css ?? arbitrary),
+              (name ? named[name] : undefined) ?? Number(css ?? arbitrary),
           )
           .filter((weight) => weight < lightest || weight > heaviest)
           .map((weight) => `${weight} in ${file}`),

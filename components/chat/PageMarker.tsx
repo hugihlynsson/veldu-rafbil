@@ -30,9 +30,11 @@ const PageMarker: React.FunctionComponent<Props> = ({
   pending,
 }) => {
   // A stored conversation can name a car that has since left the list
-  const resolved = resolveSlugs(slugs)
-  const { cars } = resolved
-  if (cars.length === 0) return null
+  const {
+    cars,
+    slugs: [first],
+  } = resolveSlugs(slugs)
+  if (!first) return null
 
   const chip =
     'max-w-full py-1 px-3 rounded-2xl bg-cloud text-xs leading-snug font-medium text-stone no-underline text-balance'
@@ -57,7 +59,7 @@ const PageMarker: React.FunctionComponent<Props> = ({
         <span className={chip}>{label}</span>
       ) : (
         <Link
-          href={carPath(resolved.slugs[0])}
+          href={carPath(first)}
           className={clsx(
             chip,
             'transition-colors duration-100 hover:text-tint hover:bg-smoke',

@@ -40,7 +40,7 @@ const unguardedDynamics = (source: string): string[] =>
       const call = balanced(source, index + match.length)
       return !/\bssr:\s*false\b|\bloading:/.test(call)
     })
-    .map(([, name]) => name)
+    .map(([, name = '']) => name)
     .filter(
       (name) =>
         !suspenseBlocks(source).some((block) =>

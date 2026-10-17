@@ -29,6 +29,10 @@ const months = [
 /** What a car no longer sold new says about it, with the month it stopped */
 export const deprecatedNotice = (car: Car): string | undefined => {
   if (!car.deprecated) return undefined
-  const [year, month] = car.deprecated.split('-').map(Number)
+  // An ISO date, as the schema holds it to
+  const [year, month] = car.deprecated.split('-').map(Number) as [
+    number,
+    number,
+  ]
   return `Ekki seldur nýr síðan í ${months[month - 1]} ${year}`
 }
