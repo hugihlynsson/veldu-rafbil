@@ -203,7 +203,8 @@ const writeQuestions = async (
     providerOptions: {
       google: { thinkingConfig: { thinkingLevel: questionsThinkingLevel } },
     },
-    maxOutputTokens: 8_192,
+    // The thinking counts toward it, and once took all of 8.192
+    maxOutputTokens: 16_384,
     abortSignal: AbortSignal.timeout(120_000),
   })
 
