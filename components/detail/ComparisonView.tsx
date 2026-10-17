@@ -68,7 +68,9 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
       {/* The list's gap from the logo to its intro, as a car's page has it */}
       <header className={clsx(pageColumn, 'pt-4 pb-6 xs:pt-6 md:pb-8')}>
         <PageTop />
-        <div className="flex items-start justify-between gap-4">
+        {/* Further from the logo than a car's name, which the photo parts
+            from it. Padding, as a margin would collapse into the logo's */}
+        <div className="pt-4 md:pt-6 flex items-start justify-between gap-4">
           <div className="min-w-0">
             <p className={eyebrow}>Samanburður</p>
             <h1 className="mt-1 mb-0 text-2xl font-semibold leading-tight md:text-display">
@@ -179,10 +181,8 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
 
       {/* None for a car no longer sold, as its own page has no review */}
       {cars.length >= MIN_COMPARED && goneCount === 0 && (
-        // At the measure of a car's review, centred as it is there
-        <div className={body}>
-          <div className="md:max-w-prose md:mx-auto">{verdict}</div>
-        </div>
+        // From the table's edge, at the measure of a car's review
+        <div className={body}>{verdict}</div>
       )}
 
       <dl className={clsx(body, 'mt-2 mb-0')}>
