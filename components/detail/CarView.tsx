@@ -76,7 +76,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
           {/* The name and the figures read as one block, narrower than the
               text under them */}
           <div className="md:max-w-column">
-            <div className="pt-4 md:pt-6">
+            <div className="pt-6 md:pt-8">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <h1 className="m-0 font-semibold text-display leading-tight">
