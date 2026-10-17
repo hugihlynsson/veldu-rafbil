@@ -1415,8 +1415,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'renault-scenic-e-tech-ev87': {
     paragraphs: [
       'Renault Scenic E-Tech EV87 er meðalstór jepplingur með framhjóladrifi og stórri rafhlöðu, með vel nýttu innanrými og þægilegum akstri, fyrir fjölskyldur sem ferðast mikið um landið.',
-      'Hann er meðal þeirra langdrægustu á svipuðu verði og skottið er stærra en hjá flestum þeirra, svo hann dugar vel í ferðir milli landshluta með fulla fjölskyldu, jafnvel í vetrarkulda.',
-      'Á móti kemur að hann er hægari og aflminni en flestir á svipuðu verði og dregur minna en flestir þeirra. Tesla Model 3 Long Range Fjórhjóladrif er 100.000 kr. ódýrari, drífur 37 km lengra og hleður með um 35% styttri stoppum, en er lægri fólksbíll.',
+      'Hann er meðal þeirra langdrægustu í sínum verðflokki og skottið er stærra en hjá flestum keppinautum hans, svo hann dugar vel í ferðir milli landshluta með fulla fjölskyldu, jafnvel í vetrarkulda.',
+      'Hann er hins vegar hægari og aflminni en flestir þeirra og má draga minna. Tesla Model 3 Long Range Fjórhjóladrif er 100.000 kr. ódýrari, drífur 37 km lengra og hleður með um 35% styttri stoppum, en er lægri fólksbíll.',
       'Scenic EV87 er hagkvæmur ferðafélagi fyrir þá sem setja pláss og drægni fyrir peninginn í fyrsta sæti.',
     ],
     facts: 'c6e8a1afda6a',
@@ -1425,8 +1425,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'skoda-epiq-55': {
     paragraphs: [
       'Skoda Epiq 55 er lítill jepplingur með framhjóladrifi og hærri setstöðu, með vel nýttu innanrými eins og Skoda er þekkt fyrir, ætlaður sem hagkvæmur fyrsti rafbíll eða fyrir minni fjölskyldur.',
-      'Hann er mjög ódýr, skottið er eitt það stærsta á svipuðu verði og lítið framskott bætist við. Hann er líka sneggri og hleður hraðar en flestir á þessu verði, og má draga 1.200 kg, meira en flestir þeirra.',
-      'Veikleikarnir eru fáir, helst að drægnin er aðeins í meðallagi á þessu verði. Volkswagen ID. Polo, systurbíll á sama grunni, kostar það sama og drífur 13 km lengra, en skottið er 34 l minna.',
+      'Hann er mjög ódýr, skottið er eitt það stærsta á svipuðu verði og lítið framskott bætist við. Hann er líka sneggri og hleður hraðar en flestir keppinautar hans, og má draga 1.200 kg, meira en flestir þeirra.',
+      'Veikleikarnir eru fáir, helst að drægnin er aðeins í meðallagi. Volkswagen ID. Polo, systurbíll á sama grunni, kostar það sama og drífur 13 km lengra, en skottið er 34 l minna.',
       'Epiq 55 er einn heildstæðasti ódýri rafbíllinn, fyrir þá sem vilja pláss og snerpu fyrir lítið.',
     ],
     facts: 'a0c4aa967a45',
@@ -1435,8 +1435,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'skoda-elroq-85': {
     paragraphs: [
       'Skoda Elroq 85 er meðalstór jepplingur með afturhjóladrifi, með hagnýtu innanrými og hárri setstöðu Skoda, fyrir þá sem vilja traustan bíl fyrir daglegt líf og ferðalög.',
-      'Hann er meðal þeirra langdrægustu á svipuðu verði, hleður hraðar og er sneggri en flestir þeirra, svo hann dugar léttilega milli landshluta.',
-      'Á móti kemur að hann má aðeins draga 1.000 kg, minna en flestir á svipuðu verði, og er aðeins afturhjóladrifinn. Skoda Elroq 85x fæst með fjórhjóladrifi og 1.800 kg dráttargetu fyrir 400.000 kr. meira, með nánast sömu drægni.',
+      'Hann er meðal þeirra langdrægustu í sínum verðflokki, hleður hraðar og er sneggri en flestir keppinautar hans, svo hann dugar léttilega milli landshluta.',
+      'Gallarnir eru að hann má aðeins draga 1.000 kg, minna en flestir þeirra, og er aðeins afturhjóladrifinn. Skoda Elroq 85x fæst með fjórhjóladrifi og 1.800 kg dráttargetu fyrir 400.000 kr. meira, með nánast sömu drægni.',
       'Elroq 85 er skynsamlegt val fyrir þá sem vilja langdrægan jeppling á góðu verði og þurfa ekki að draga mikið.',
     ],
     facts: '854fd4da41e0',
@@ -1445,7 +1445,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'skoda-elroq-85x': {
     paragraphs: [
       'Skoda Elroq 85x er meðalstór jepplingur með fjórhjóladrifi, hagnýtu innanrými og hárri setstöðu, fyrir fjölskyldur sem vilja traustan bíl í vetrarfærð og á ferðalögum.',
-      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og má draga 1.800 kg, með því mesta á þessu verði.',
+      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og má draga 1.800 kg, meira en flestir þeirra.',
       'Veikleikarnir eru fáir: afl og snerpa eru aðeins í meðallagi, og skottið líka. XPENG G6 RWD Long Range kostar 100.000 kr. meira, hleður með um 25% styttri stoppum og er með 101 l stærra skott, en er aðeins afturhjóladrifinn.',
       'Elroq 85x er einn heildstæðasti fjórhjóladrifni bíllinn á sínu verði.',
     ],
@@ -1456,7 +1456,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Skoda Elroq RS er sportlegasta útfærsla Elroq, meðalstór jepplingur með fjórhjóladrifi og sneggri svip, sem sameinar hagnýtt innanrými Skoda og meira afl.',
       'Hann drífur lengra en flestir á svipuðu verði og má draga 1.800 kg, meira en flestir þeirra. Auk skottsins er lítið framskott.',
-      'Á móti kemur að skottið er minna en hjá flestum á svipuðu verði og hleðsla og snerpa eru aðeins í meðallagi á þessu verði. Skoda Elroq 85x er 1.300.000 kr. ódýrari, drífur 20 km lengra og má draga jafn mikið, og gefur aðeins eftir í snerpu.',
+      'Skottið er hins vegar minna en hjá flestum keppinautum hans, og hleðsla og snerpa eru aðeins í meðallagi. Skoda Elroq 85x er 1.300.000 kr. ódýrari, drífur 20 km lengra og má draga jafn mikið, og gefur aðeins eftir í snerpu.',
       'Elroq RS er fyrir þá sem vilja sportlegasta Elroq-inn, en 85x gefur meira fyrir peninginn.',
     ],
     facts: '7b62f0e932ac',
@@ -1465,8 +1465,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'skoda-enyaq-85x': {
     paragraphs: [
       'Skoda Enyaq 85X er rúmgóður jepplingur með fjórhjóladrifi, 4,66 m á lengd, sem leggur áherslu á pláss og yfirvegaðan akstur, fyrir fjölskyldur sem vilja traustan ferðabíl allt árið.',
-      'Hann drífur lengra en flestir á svipuðu verði og skottið er stærra en hjá flestum þeirra, og hann nýtir orkuna vel.',
-      'Á móti kemur að hann er hægari en flestir á svipuðu verði og má aðeins draga 1.200 kg, minna en flestir þeirra. Smart #5 Pulse kostar það sama, drífur álíka langt, hleður með um 40% styttri stoppum, er með 45 l stærra skott og má draga 400 kg meira.',
+      'Hann drífur lengra en flestir á svipuðu verði, skottið er stærra en hjá flestum þeirra og hann nýtir orkuna vel.',
+      'Gallarnir eru að hann er hægari en flestir keppinautar hans og má aðeins draga 1.200 kg. Smart #5 Pulse kostar það sama, drífur álíka langt, hleður með um 40% styttri stoppum, er með 45 l stærra skott og má draga 400 kg meira.',
       'Enyaq 85X er traust og skynsamlegt val fyrir þá sem setja pláss og hagnýti í fyrsta sæti.',
     ],
     facts: '736aa237e05e',
@@ -1475,8 +1475,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'skoda-enyaq-rs': {
     paragraphs: [
       'Skoda Enyaq RS er sportlegasta útfærsla Enyaq, rúmgóður jepplingur með fjórhjóladrifi og stífari akstri, sem sameinar hagnýtt innanrými og kraftmeira yfirbragð.',
-      'Skottið er stærra en hjá flestum á svipuðu verði og hann má draga 2.200 kg, með því mesta á þessu verði, 1.000 kg meira en Enyaq 85X.',
-      'Á móti kemur að hann er fremur dýr og drægni og hleðsla eru aðeins í meðallagi á þessu verði. Smart #5 Brabus er 200.000 kr. ódýrari, drífur álíka langt, hleður með um 40% styttri stoppum og er mun sneggri, en má draga 600 kg minna.',
+      'Skottið er stærra en hjá flestum á svipuðu verði og hann má draga 2.200 kg, 1.000 kg meira en Enyaq 85X og með því mesta í hans verðflokki.',
+      'Á móti kemur að hann er fremur dýr og drægni og hleðsla eru aðeins í meðallagi. Smart #5 Brabus er 200.000 kr. ódýrari, drífur álíka langt, hleður með um 40% styttri stoppum og er mun sneggri, en má draga 600 kg minna.',
       'Enyaq RS er fyrir þá sem vilja rúmgóðan jeppling sem dregur hjólhýsi, með sportlegum blæ.',
     ],
     facts: '134c04397a83',
@@ -1485,8 +1485,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'skoda-peaq-90x': {
     paragraphs: [
       'Skoda Peaq 90x er stór sjö sæta jeppi með fjórhjóladrifi, 4,87 m á lengd, sem leggur áherslu á hagnýtt pláss og ferðagetu fyrir stórar fjölskyldur.',
-      'Hann er meðal þeirra langdrægustu á svipuðu verði og hleður hraðar en flestir þeirra, skottið er eitt það stærsta í sínum verðflokki og hann má draga 2.000 kg, meira en flestir á svipuðu verði.',
-      'Á móti kemur að hann er fremur dýr og hægari en flestir á svipuðu verði. Peugeot e-5008 Dual Motor er 900.000 kr. ódýrari og tekur líka sjö, en drífur 140 km styttra, hleður hægar og má draga 1.000 kg minna.',
+      'Hann er meðal þeirra langdrægustu í sínum verðflokki og hleður hraðar en flestir keppinautar hans. Skottið er eitt það stærsta og hann má draga 2.000 kg, meira en flestir þeirra.',
+      'Gallarnir eru að hann er fremur dýr og hægari en flestir þeirra. Peugeot e-5008 Dual Motor er 900.000 kr. ódýrari og tekur líka sjö, en drífur 140 km styttra, hleður hægar og má draga 1.000 kg minna.',
       'Peaq 90x er einn sterkasti sjö sæta kosturinn fyrir stórar fjölskyldur sem ferðast um landið.',
     ],
     facts: '26b32d8a9473',
@@ -1495,8 +1495,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'smart-1-pro': {
     paragraphs: [
       'Smart #1 Pro+ er lítill og hár jepplingur með afturhjóladrifi, hannaður í samstarfi Mercedes-Benz og Geely, með sérstæðu útliti og miklu afli miðað við stærð.',
-      'Hann er sneggri, aflmeiri og hleður hraðar en flestir á svipuðu verði, og þrátt fyrir smæðina má hann draga 1.600 kg, með því mesta á þessu verði.',
-      'Á móti kemur að skottið er minna en hjá flestum á svipuðu verði og drægnin aðeins í meðallagi. Kia EV3 Standard Range er 200.000 kr. ódýrari, drífur álíka langt og er með 137 l stærra skott, en má draga 1.100 kg minna.',
+      'Hann er sneggri, aflmeiri og hleður hraðar en flestir á svipuðu verði, og þrátt fyrir smæðina má hann draga 1.600 kg, meira en flestir þeirra.',
+      'Skottið er hins vegar minna en hjá flestum keppinautum hans og drægnin aðeins í meðallagi. Kia EV3 Standard Range er 200.000 kr. ódýrari, drífur álíka langt og er með 137 l stærra skott, en má draga 1.100 kg minna.',
       'Smart #1 Pro+ er sprækur og vel búinn smájepplingur sem getur dregið kerru, á hagstæðu verði.',
     ],
     facts: '30c342608c6d',
@@ -1505,8 +1505,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'smart-1-pulse': {
     paragraphs: [
       'Smart #1 Pulse er lítill jepplingur með fjórhjóladrifi og miklu afli, hannaður í samstarfi Mercedes-Benz og Geely, fyrir þá sem vilja snöggan og nettan bíl með gott grip.',
-      'Hann er meðal sneggstu og aflmestu bíla á svipuðu verði og má draga 1.600 kg, með því mesta á þessu verði.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst á svipuðu verði, hleður hægar en flestir þeirra og skottið er eitt það minnsta. Afturhjóladrifni Smart #1 Pro+ er 900.000 kr. ódýrari og drífur 40 km lengra, fyrir þá sem þurfa ekki fjórhjóladrifið.',
+      'Hann er meðal sneggstu og aflmestu bíla í sínum verðflokki og má draga 1.600 kg, meira en flestir keppinautar hans.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst, hleður hægar en flestir þeirra og skottið er eitt það minnsta. Afturhjóladrifni Smart #1 Pro+ er 900.000 kr. ódýrari og drífur 40 km lengra, fyrir þá sem þurfa ekki fjórhjóladrifið.',
       'Smart #1 Pulse er fyrir þá sem setja kraft og fjórhjóladrif ofar drægni og plássi.',
     ],
     facts: 'b81624188033',
@@ -1516,7 +1516,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Smart #1 Brabus er öflugasta útfærsla #1, lítill jepplingur með fjórhjóladrifi og óhemju afli, fyrir þá sem vilja mikla snerpu í nettum bíl.',
       'Hann er meðal sneggstu bíla á svipuðu verði og má draga 1.600 kg, meira en flestir þeirra.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst á svipuðu verði, hleður hægar en flestir þeirra og skottið er eitt það minnsta. Volvo EX30 Twin Motor Performance er 100.000 kr. ódýrari, álíka snöggur, drífur 50 km lengra og hleður hraðar, og Smart #1 Pulse er 700.000 kr. ódýrari og nánast jafn snöggur.',
+      'Hann er hins vegar meðal þeirra sem drífa styst, hleður hægar en flestir keppinautar hans og skottið er eitt það minnsta. Volvo EX30 Twin Motor Performance er 100.000 kr. ódýrari, álíka snöggur, drífur 50 km lengra og hleður hraðar, og Smart #1 Pulse er 700.000 kr. ódýrari og nánast jafn snöggur.',
       'Smart #1 Brabus er leikfang fyrir þá sem vilja hámarks akstursgleði, en flestum dugar #1 Pulse.',
     ],
     facts: '37b67d47d275',
@@ -1525,8 +1525,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'smart-3-pulse': {
     paragraphs: [
       'Smart #3 Pulse er rennilegur jepplingur með fjórhjóladrifi og miklu afli, hannaður í samstarfi Mercedes-Benz og Geely, með sportlegra og lægra lagi en #1.',
-      'Hann er meðal sneggstu og aflmestu bíla á svipuðu verði, og fjórhjóladrifið kemur aflinu örugglega niður.',
-      'Á móti kemur að hann drífur styttra og hleður hægar en flestir á svipuðu verði. Toyota C-HR+ kostar 100.000 kr. meira og drífur 41 km lengra, þótt hann sé aðeins framhjóladrifinn og mun hægari.',
+      'Hann er meðal sneggstu og aflmestu bíla í sínum verðflokki, og fjórhjóladrifið kemur aflinu örugglega niður.',
+      'Á móti kemur að hann drífur styttra og hleður hægar en flestir keppinautar hans. Toyota C-HR+ kostar 100.000 kr. meira og drífur 41 km lengra, þótt hann sé aðeins framhjóladrifinn og mun hægari.',
       'Smart #3 Pulse er fyrir þá sem setja akstursánægju og fjórhjóladrif ofar drægni.',
     ],
     facts: '83bd9755cea2',
@@ -1535,8 +1535,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'smart-3-brabus': {
     paragraphs: [
       'Smart #3 Brabus er öflugasta útfærsla #3, rennilegur jepplingur með fjórhjóladrifi og gríðarlegu afli, meðal sneggstu bíla á sínu verði.',
-      'Hann er aflmeiri en flestir á svipuðu verði og má draga 1.600 kg, meira en flestir þeirra.',
-      'Á móti kemur að hann drífur styttra og hleður hægar en flestir á svipuðu verði, og skottið er minna en hjá flestum þeirra. Volvo EX30 Twin Motor Performance er 300.000 kr. ódýrari, álíka snöggur, drífur 35 km lengra og hleður með um 10% styttri stoppum. Smart #3 Pulse er 500.000 kr. ódýrari og munar sjónarmun í snerpu.',
+      'Hann er aflmeiri en flestir keppinautar hans og má draga 1.600 kg.',
+      'Gallarnir eru að hann drífur styttra, hleður hægar og er með minna skott en flestir þeirra. Volvo EX30 Twin Motor Performance er 300.000 kr. ódýrari, álíka snöggur, drífur 35 km lengra og hleður með um 10% styttri stoppum. Smart #3 Pulse er 500.000 kr. ódýrari og aðeins sjónarmun hægari.',
       'Smart #3 Brabus er fyrir þá sem vilja mikinn kraft og sportlegan svip, en #3 Pulse gefur meira fyrir peninginn.',
     ],
     facts: 'b1fb76b375a2',
@@ -1545,7 +1545,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'smart-5-pro': {
     paragraphs: [
       'Smart #5 Pro er stór og kassalaga jepplingur, ný stefna hjá merki sem var þekkt fyrir smábíla. Hann hentar fjölskyldum sem vilja mikið pláss og áberandi útlit.',
-      'Skottið er með þeim stærstu í sínum verðflokki og 72 l framskott bætist við, og hann má draga 1.600 kg, meira en flestir á svipuðu verði. Hann er líka sneggri og aflmeiri en flestir í sínum verðflokki, með stærri rafhlöðu en gengur og gerist.',
+      'Skottið er með þeim stærstu í sínum verðflokki, 72 l framskott bætist við og hann má draga 1.600 kg, meira en flestir keppinautar hans. Hann er líka sneggri og aflmeiri en flestir þeirra, með stærri rafhlöðu en gengur og gerist.',
       'Á móti kemur að hann hleður fremur hægt á langferðum og er afturhjóladrifinn, sem krefst meiri varkárni í snjó og hálku. XPENG G6 RWD Standard Range er 100.000 kr. ódýrari með um 25% styttri hleðslustopp, en drífur 30 km styttra og skottið er 59 l minna.',
       'Fyrir þá sem leita að rúmgóðum og sprækum fjölskyldubíl sem getur dregið hjólhýsi er #5 Pro fýsilegur kostur, svo lengi sem hraðhleðslan er ekki í forgangi.',
     ],
@@ -1555,8 +1555,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'smart-5-pulse': {
     paragraphs: [
       'Smart #5 Pulse er stór og kassalaga jepplingur með fjórhjóladrifi, 4,7 m á lengd, ný stefna hjá merki sem var þekkt fyrir smábíla, með miklu rými og afli.',
-      'Hann er meðal þeirra sem hlaða hraðast og þeirra aflmestu á svipuðu verði, drífur lengra en flestir þeirra og skottið er stærra en hjá flestum, með 47 l framskott að auki. Hann má draga 1.600 kg.',
-      'Veikleikarnir eru fáir, helst að merkið er nýtt í stærri jepplingum og á sér styttri sögu en rótgrónari framleiðendur. Skoda Enyaq 85X kostar það sama frá þekktara merki, en hleður með um 60% lengri stoppum og er með minna skott.',
+      'Hann er meðal þeirra sem hlaða hraðast og þeirra aflmestu á svipuðu verði, drífur lengra en flestir keppinautar hans og skottið er stærra en hjá flestum, með 47 l framskott að auki. Hann má draga 1.600 kg.',
+      'Veikleikarnir eru fáir, helst að merkið á sér styttri sögu í stærri jepplingum en rótgrónari framleiðendur. Skoda Enyaq 85X kostar það sama frá þekktara merki, en hleður með um 60% lengri stoppum og er með minna skott.',
       'Smart #5 Pulse gefur mikið fyrir peninginn, fyrir þá sem vilja pláss, afl og hraða hleðslu.',
     ],
     facts: '83e04f571366',
@@ -1565,7 +1565,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'smart-5-brabus': {
     paragraphs: [
       'Smart #5 Brabus er öflugasta útfærsla #5, stór og kassalaga jepplingur með fjórhjóladrifi, aflmestur bíla á sínu verði.',
-      'Hann er meðal þeirra sneggstu og hleður hraðar en flestir á svipuðu verði, og skottið er stærra en hjá flestum þeirra, með 47 l framskott að auki.',
+      'Hann er meðal þeirra sneggstu og hleður hraðar en flestir keppinautar hans, og skottið er stærra en hjá flestum þeirra, með 47 l framskott að auki.',
       'Á móti kemur að hann er fremur dýr og drægnin aðeins í meðallagi. Smart #5 Pulse er 1.300.000 kr. ódýrari með sömu drægni, rými og hleðslu, og gefur aðeins eftir í snerpu.',
       'Smart #5 Brabus er fyrir þá sem vilja allra mest afl, en #5 Pulse gefur meira fyrir peninginn.',
     ],
@@ -1576,7 +1576,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Subaru e-Outback er stór jepplingur með fjórhjóladrifi, 4,84 m á lengd, byggður á hefð Subaru fyrir vetrarhæfni og hagnýtri hönnun, fyrir þá sem ferðast í hvaða veðri sem er.',
       'Hann er sneggri og aflmeiri en flestir á svipuðu verði, og skottið er stærra en hjá flestum þeirra.',
-      'Á móti kemur að drægni og hraðhleðsla eru aðeins í meðallagi á þessu verði. Hongqi EHS7 Premium er 100.000 kr. ódýrari, drífur 17 km lengra, hleður með um 35% styttri stoppum og er mun aflmeiri, þótt merkið sé nýtt hér á landi.',
+      'Drægni og hraðhleðsla eru hins vegar aðeins í meðallagi. Hongqi EHS7 Premium er 100.000 kr. ódýrari, drífur 17 km lengra, hleður með um 35% styttri stoppum og er mun aflmeiri, þótt merkið sé nýtt hér á landi.',
       'e-Outback er traustur kostur fyrir þá sem setja grip, pláss og Subaru-merkið í forgang.',
     ],
     facts: 'edde5f48d3ad',
@@ -1585,9 +1585,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'subaru-solterra-base': {
     paragraphs: [
       'Subaru Solterra er meðalstór jepplingur með fjórhjóladrifi, systurbíll Toyota bZ4X, sem höfðar til þeirra sem treysta á gott grip og veghæð í vetrarfærð og á malarvegum, eins og Subaru er þekkt fyrir.',
-      'Hann er sneggri og aflmeiri en flestir á svipuðu verði og má draga 1.500 kg. Drægnin og hraðhleðslan eru í meðallagi í sínum verðflokki.',
-      'Á móti kemur að skottið er minna en hjá flestum á svipuðu verði. Kia EV6 2025 Long Range AWD kostar nánast það sama en hleður með um 40% styttri stoppum, er með 69 l stærra skott og má draga 300 kg meira.',
-      'Solterra er traustur kostur fyrir þá sem setja fjórhjóladrif og veghæð í forgang, en keppinautarnir á sama verði hlaða hraðar og rúma meira.',
+      'Hann er sneggri og aflmeiri en flestir á svipuðu verði og má draga 1.500 kg, en drægnin og hraðhleðslan eru aðeins í meðallagi.',
+      'Helsti ókosturinn er skottið, sem er minna en hjá flestum keppinautum hans. Kia EV6 2025 Long Range AWD kostar nánast það sama en hleður með um 40% styttri stoppum, er með 69 l stærra skott og má draga 300 kg meira.',
+      'Solterra er traustur kostur fyrir þá sem setja fjórhjóladrif og veghæð í forgang, en keppinautarnir hlaða hraðar og rúma meira.',
     ],
     facts: '4ecb88ec078d',
     model: 'gemini-3.8-flash, thinking high',
@@ -1596,7 +1596,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Subaru Uncharted er meðalstór jepplingur með fjórhjóladrifi, systurbíll Toyota C-HR+ AWD, sem byggir á arfleifð Subaru í vetrarakstri.',
       'Hann er sneggri og aflmeiri en flestir á svipuðu verði og má draga 1.500 kg, meira en flestir þeirra.',
-      'Á móti kemur að skottið er minna en hjá flestum á svipuðu verði og drægnin aðeins í meðallagi. MG MGS6 Dual Motor er 100.000 kr. ódýrari, líka fjórhjóladrifinn og drífur álíka langt, með 90 l stærra skott, þótt hleðslustoppin séu um 30% lengri.',
+      'Gallarnir eru að skottið er minna en hjá flestum keppinautum hans og drægnin aðeins í meðallagi. MG MGS6 Dual Motor er 100.000 kr. ódýrari, líka fjórhjóladrifinn og drífur álíka langt, með 90 l stærra skott, þótt hleðslustoppin séu um 30% lengri.',
       'Uncharted er heilsteyptur og snöggur fjórhjóladrifsbíll á góðu verði.',
     ],
     facts: '83685783dc51',
@@ -1605,7 +1605,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'suzuki-e-vitara-4x4-allgrip': {
     paragraphs: [
       'Suzuki e Vitara 4x4 AllGrip er lítill jepplingur með fjórhjóladrifi, frá merki sem er þekkt fyrir trausta og einfalda vetrarbíla, fyrir þá sem vilja fjórhjóladrif á viðráðanlegu verði.',
-      'Suzuki ábyrgist rafhlöðuna í allt að 10 ár, lengur en flestir á svipuðu verði, og hann er lipur í þéttbýli.',
+      'Suzuki ábyrgist rafhlöðuna í allt að 10 ár, lengur en flestir aðrir framleiðendur, og hann er lipur í þéttbýli.',
       'Á móti kemur að hann er meðal þeirra sem drífa styst og hlaða hægast á svipuðu verði, skottið er eitt það minnsta og hann má aðeins draga 750 kg. Smart #1 Pulse kostar 150.000 kr. meira, líka fjórhjóladrifinn, en hleður með um 40% styttri stoppum, er með 75 l stærra skott og má draga 850 kg meira.',
       'e Vitara er hagkvæmur fjórhjóladrifsbíll með langa ábyrgð, fyrir þá sem aka mest í nærumhverfinu.',
     ],
