@@ -1,6 +1,7 @@
 'use client'
 
 import { FunctionComponent } from 'react'
+import Logo from './Logo'
 import TextLink from './TextLink'
 
 const paragraph =
@@ -8,6 +9,9 @@ const paragraph =
 
 const Footer: FunctionComponent<{}> = () => (
   <footer className="bg-haze pt-8 pb-25 xs:pt-14">
+    <div className={paragraph}>
+      <Logo className="block w-40 h-auto mb-4 text-tint" />
+    </div>
     <p className={paragraph}>
       Veldu Rafbíl er smíðuð af{' '}
       <TextLink href="https://hugihlynsson.com">Huga Hlynssyni</TextLink> og er
