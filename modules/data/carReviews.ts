@@ -15,9 +15,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'audi-a6-e-tron-sportback-quattro': {
     paragraphs: [
       'Audi A6 e-tron Sportback quattro er stór og rennilegur fólksbíll með afturhlera og fjórhjóladrifi, nærri fimm metrar á lengd, smíðaður fyrir þá sem aka mikið milli landshluta og vilja fágaðan og hljóðlátan langferðabíl frekar en jeppa.',
-      'Hann drífur mjög langt og lengra en flestir á svipuðu verði, og hleður hraðar en flestir þeirra, svo langferðir kalla á fá og stutt stopp, jafnvel í vetrarkulda. Hann er líka sneggri en flestir í sínum verðflokki og má draga 2.100 kg, meira en flestir á svipuðu verði.',
-      'Á móti kemur að skottið er minna en hjá flestum á svipuðu verði og lág byggingin býður ekki upp á sömu veghæð og jepplingur. Audi Q6 e-tron er hærri jepplingur með sama drifbúnaði, má draga 300 kg meira og kostar 500.000 kr. meira, en drífur 87 km styttra.',
-      'A6 e-tron Sportback er einn sterkasti langferðabíllinn í sínum verðflokki, og ódýrari en skutbílsútfærslan en drífur samt lengra.',
+      'Í sínum verðflokki drífur hann lengra, hleður hraðar og er sneggri en flestir, svo langferðir kalla á fá og stutt stopp, jafnvel í vetrarkulda. Hann má líka draga 2.100 kg, meira en flestir keppinautar hans.',
+      'Skottið er hins vegar minna en hjá flestum þeirra og lág byggingin býður ekki upp á sömu veghæð og jepplingur. Audi Q6 e-tron er hærri jepplingur með sama drifbúnaði, má draga 300 kg meira og kostar 500.000 kr. meira, en drífur 87 km styttra.',
+      'A6 e-tron Sportback er einn sterkasti langferðabíllinn á sínu verði, og ódýrari en skutbílsútfærslan þótt hann drífi lengra.',
     ],
     facts: '528cb113b364',
     model: 'gemini-3.8-flash, thinking high',
@@ -25,8 +25,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'audi-a6-e-tron-avant-quattro': {
     paragraphs: [
       'Audi A6 e-tron Avant quattro er stór skutbíll með fjórhjóladrifi, nærri fimm metrar á lengd, ætlaður fjölskyldum sem aka mikið um landið og vilja fágaðan langferðabíl með hagnýtu farangursrými frekar en jeppa.',
-      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, svo hleðslustopp á langferðum verða fá og stutt. Hann er líka sneggri en flestir í sínum verðflokki og má draga 2.100 kg, meira en flestir á svipuðu verði.',
-      'Á móti kemur að skottið er minna en hjá flestum á svipuðu verði, þótt skutbílslagið rúmi meira þegar sætin eru felld niður. Audi A6 e-tron Sportback quattro er 300.000 kr. ódýrari og drífur 38 km lengra, fyrir þá sem þurfa ekki skutbílslagið.',
+      'Í sínum verðflokki drífur hann lengra, hleður hraðar og er sneggri en flestir, svo hleðslustopp á langferðum verða fá og stutt. Hann má líka draga 2.100 kg, meira en flestir keppinautar hans.',
+      'Skottið er þó minna en hjá flestum þeirra, þótt skutbílslagið rúmi meira þegar sætin eru felld niður. Audi A6 e-tron Sportback quattro er 300.000 kr. ódýrari og drífur 38 km lengra, fyrir þá sem þurfa ekki skutbílslagið.',
       'A6 e-tron Avant er fyrir þá sem vilja langdrægan og snarpan skutbíl sem dregur hjólhýsi, í stað jeppa.',
     ],
     facts: '5124bada378e',
@@ -36,8 +36,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Audi e-tron GT quattro er lágur og straumlínulagaður lúxussportbíll með fjórhjóladrifi, náskyldur Porsche Taycan, hannaður fyrir þá sem setja akstur, afl og áberandi hönnun ofar notagildi.',
       'Hann er aflmeiri og sneggri en flestir á svipuðu verði, hleður fremur hratt og lágur þyngdarpunktur gerir hann stöðugan og skemmtilegan í akstri. Auk skottsins er 85 l framskott undir vélarhlífinni.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst á svipuðu verði, skottið er eitt það minnsta í sínum verðflokki og hann má ekki draga kerru. Porsche Taycan 4 Plus kostar nánast það sama en drífur mun lengra, fyrir þá sem vilja sams konar sportbíl sem hentar betur í langferðir.',
-      'e-tron GT er draumabíll fyrir þá sem leita að hreinni akstursánægju, svo lengi sem þeir sætta sig við takmarkaða drægni og lítið pláss.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst í þessum verðflokki, skottið er eitt það minnsta og hann má ekki draga kerru. Porsche Taycan 4 Plus kostar nánast það sama en drífur mun lengra, fyrir þá sem vilja sams konar sportbíl sem hentar betur í langferðir.',
+      'e-tron GT er draumabíll fyrir þá sem leita að hreinni akstursánægju og sætta sig við takmarkaða drægni og lítið pláss.',
     ],
     facts: '1a0ffdfe8771',
     model: 'gemini-3.8-flash, thinking medium',
@@ -46,7 +46,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Audi Q4 e-tron 45 quattro er meðalstór jepplingur með fjórhjóladrifi, ætlaður þeim sem kunna að meta vandaða innréttingu, lágværan akstur og rótgróið úrvalsmerki í hversdagsbíl.',
       'Það sem hann býður umfram keppinautana er fyrst og fremst merkið, frágangurinn og akstursþægindin: góð hljóðvist og mjúk fjöðrun gera langferðir áreynslulausar. Í tölunum hefur hann fáa styrkleika.',
-      'Á móti kemur að hann drífur styttra, hleður hægar og er hægari en flestir á svipuðu verði, og hann má aðeins draga 1.200 kg. Smart #5 Brabus kostar 100.000 kr. meira en drífur 52 km lengra, hleður með um 40% styttri stoppum, er með 110 l stærra skott og má draga 400 kg meira.',
+      'Hann drífur styttra, hleður hægar og er hægari en flestir á svipuðu verði, og má aðeins draga 1.200 kg. Smart #5 Brabus kostar 100.000 kr. meira en drífur 52 km lengra, hleður með um 40% styttri stoppum, er með 110 l stærra skott og má draga 400 kg meira.',
       'Q4 e-tron er fyrir þá sem setja fágun og Audi-merkið í öndvegi, en fyrir peninginn fæst meiri bíll annars staðar.',
     ],
     facts: '306c55238898',
@@ -55,8 +55,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'audi-q6-e-tron-base': {
     paragraphs: [
       'Audi Q6 e-tron er stór og vandaður lúxusjepplingur með fjórhjóladrifi, ætlaður fjölskyldum sem vilja þægilegan og öruggan ferðabíl með hárri setstöðu og góðu útsýni.',
-      'Hann drífur lengra en flestir á svipuðu verði og hleður fremur hratt, svo langferðir milli landshluta verða áhyggjulausar, jafnvel í vetrarkulda. Hann má draga 2.400 kg, með því mesta á þessu verði, og auk skottsins er 64 l framskott.',
-      'Á móti kemur að hann er hægari en flestir á svipuðu verði. Volvo EX60 P10 kostar 100.000 kr. minna, drífur 35 km lengra, hleður með um 15% styttri stoppum og er mun sneggri.',
+      'Hann drífur lengra en flestir á svipuðu verði og hleður fremur hratt, svo langferðir milli landshluta verða áhyggjulausar, jafnvel í vetrarkulda. Hann má draga 2.400 kg, með því mesta í hans verðflokki, og auk skottsins er 64 l framskott.',
+      'Helsti ókosturinn er að hann er hægari en flestir keppinautar hans. Volvo EX60 P10 kostar 100.000 kr. minna, drífur 35 km lengra, hleður með um 15% styttri stoppum og er mun sneggri.',
       'Q6 e-tron er traustur kostur fyrir fjölskyldur sem ferðast um landið, með kerru eða hjólhýsi ef svo ber undir.',
     ],
     facts: 'c719fcff91c1',
@@ -65,8 +65,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'audi-q6-e-tron-sportback': {
     paragraphs: [
       'Audi Q6 e-tron Sportback er stór lúxusjepplingur með fjórhjóladrifi og aflíðandi þaklínu, sem sameinar háa setstöðu og rennilegri baksvip en í hefðbundnum Q6 e-tron.',
-      'Hann drífur lengra en flestir á svipuðu verði og hleður mjög hratt, svo hleðslustopp á þjóðveginum verða stutt. Hann má draga 2.400 kg, meira en flestir í sínum verðflokki, og auk skottsins er 64 l framskott.',
-      'Á móti kemur að hann er hægari en flestir á svipuðu verði og skottið er minna en hjá flestum þeirra. Audi Q6 e-tron er 600.000 kr. ódýrari með nánast sömu drægni og 15 l stærra skott, og Volvo EX60 P10 er 700.000 kr. ódýrari, drífur 23 km lengra og er mun sneggri.',
+      'Í sínum verðflokki drífur hann lengra en flestir og hleður mjög hratt, svo hleðslustopp á þjóðveginum verða stutt. Hann má draga 2.400 kg, meira en flestir keppinautar hans, og auk skottsins er 64 l framskott.',
+      'Hann er hins vegar hægari en flestir þeirra og skottið er minna. Audi Q6 e-tron er 600.000 kr. ódýrari með nánast sömu drægni og 15 l stærra skott, og Volvo EX60 P10 er 700.000 kr. ódýrari, drífur 23 km lengra og er mun sneggri.',
       'Q6 Sportback er fyrir þá sem vilja sportlegra útlit og eru tilbúnir að borga talsvert fyrir formið.',
     ],
     facts: 'a587638043c0',
@@ -75,9 +75,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'audi-sq6-e-tron-base': {
     paragraphs: [
       'Audi SQ6 e-tron er aflmesta útgáfan af Q6 e-tron, stór lúxusjepplingur með fjórhjóladrifi sem leggur áherslu á snerpu og sportlegan akstur án þess að fórna notagildinu.',
-      'Hann er aflmeiri og sneggri en flestir á svipuðu verði, og má draga 2.400 kg, meira en flestir í sínum verðflokki. Auk skottsins er 64 l framskott undir vélarhlífinni.',
+      'Hann er aflmeiri og sneggri en flestir á svipuðu verði og má draga 2.400 kg, meira en flestir keppinautar hans. Auk skottsins er 64 l framskott undir vélarhlífinni.',
       'Á móti kemur að hann er mjög dýr og drægnin og hraðhleðslan eru aðeins í meðallagi miðað við verðið. Porsche Cayenne kostar nánast það sama en drífur 44 km lengra, hleður með um 30% styttri stoppum, er með 267 l stærra skott og má draga 600 kg meira.',
-      'SQ6 e-tron er fyrir þá sem vilja snarpan Audi-jeppling, en á þessu verði fæst meira í hverjum öðrum efnum.',
+      'SQ6 e-tron er fyrir þá sem vilja snarpan Audi-jeppling, en á þessu verði fæst meira í flestu öðru.',
     ],
     facts: '6be7cb5413e8',
     model: 'gemini-3.8-flash, thinking high',
@@ -85,8 +85,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'bmw-i4-40-xdrive': {
     paragraphs: [
       'BMW i4 40 xDrive er lágur og rennilegur fólksbíll með afturhlera og fjórhjóladrifi, ætlaður þeim sem meta hefðbundna akstursánægju BMW og vilja sitja neðar en í jepplingi. Afturhlerinn gerir farangursrýmið aðgengilegt og innréttingin ber vott um vandaðan frágang.',
-      'Hann liggur vel á vegi, er stöðugur í beygjum og má draga 1.600 kg. Hann drífur og hleður í meðallagi miðað við rafbíla almennt.',
-      'Á móti kemur að hann drífur styttra og hleður hægar en flestir á svipuðu verði, og skottið er minna en hjá flestum þeirra. Mercedes-Benz GLC 300 4MATIC kostar það sama en drífur 67 km lengra, hleður með um 25% styttri stoppum, er með 100 l stærra skott og má draga 800 kg meira.',
+      'Hann liggur vel á vegi, er stöðugur í beygjum og má draga 1.600 kg. Drægnin og hleðslan eru í meðallagi miðað við rafbíla almennt.',
+      'Í sínum verðflokki drífur hann þó styttra og hleður hægar en flestir, og skottið er minna en hjá flestum keppinautunum. Mercedes-Benz GLC 300 4MATIC kostar það sama en drífur 67 km lengra, hleður með um 25% styttri stoppum, er með 100 l stærra skott og má draga 800 kg meira.',
       'i4 40 xDrive er fyrir þá sem kjósa akstursánægju og fólksbílalag fram yfir drægni og pláss.',
     ],
     facts: 'c8b9a2c3cd23',
@@ -95,8 +95,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'bmw-i4-m60-xdrive': {
     paragraphs: [
       'BMW i4 M60 xDrive er lágur og sportlegur fólksbíll með afturhlera og fjórhjóladrifi, sniðinn að þeim sem hafa unun af akstri. Hann er meðal sneggstu og aflmestu bíla á sínu verði.',
-      'Afl og snerpa eru hans sterkasta hlið, og hann drífur fremur langt og hleður fremur hratt, svo hann ræður vel við ferðalög milli landshluta. Hann má líka draga 1.600 kg.',
-      'Á móti kemur að hann drífur styttra en flestir á svipuðu verði og skottið er minna en hjá flestum þeirra. BMW i4 40 xDrive er 2.000.000 kr. ódýrari með sömu drægni og sama rými, og gefur aðeins eftir í snerpu.',
+      'Afl og snerpa eru hans sterkasta hlið, en hann drífur líka fremur langt og hleður fremur hratt, svo hann ræður vel við ferðalög milli landshluta. Hann má draga 1.600 kg.',
+      'Miðað við keppinautana drífur hann þó styttra og skottið er minna. BMW i4 40 xDrive er 2.000.000 kr. ódýrari með sömu drægni og sama rými, og gefur aðeins eftir í snerpu.',
       'i4 M60 er fyrir þá sem setja afl og hraða ofar öllu, en flestum dugar ódýrari útfærslan.',
     ],
     facts: '8890a1c90b99',
@@ -106,7 +106,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'BMW i5 eDrive40 er stór lúxusfólksbíll með skottloki og afturhjóladrifi, rúmlega fimm metrar á lengd, þar sem lögð er áhersla á fágaðan akstur, hljóðlátt innanrými og þægindi á langferðum.',
       'Hann drífur fremur langt og kemst á milli landshluta án fyrirhafnar, og góð hljóðeinangrun og afturhjóladrifið gefa honum yfirvegaða og skemmtilega aksturseiginleika á greiðfærum vegum.',
-      'Á móti kemur að hann hleður hægar, er aflminni og dregur minna en flestir á svipuðu verði, skottið er minna en hjá flestum þeirra og afturhjóladrifið krefst meiri aðgæslu í snjó og hálku. Polestar 3 Performance kostar 490.000 kr. meira en er fjórhjóladrifinn, mun sneggri og má draga 700 kg meira.',
+      'Í sínum verðflokki hleður hann hins vegar hægar, er aflminni og dregur minna en flestir, skottið er minna og afturhjóladrifið krefst meiri aðgæslu í snjó og hálku. Polestar 3 Performance kostar 490.000 kr. meira en er fjórhjóladrifinn, mun sneggri og má draga 700 kg meira.',
       'i5 eDrive40 er fyrir þá sem vilja hljóðlátan og fágaðan langferðabíl í klassísku fólksbílasniði.',
     ],
     facts: '1c309ab62c34',
@@ -115,8 +115,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'bmw-i5-m60-xdrive': {
     paragraphs: [
       'BMW i5 M60 xDrive er stór lúxusfólksbíll með skottloki og fjórhjóladrifi, rúmlega fimm metrar á lengd, sem sameinar þægindi fimmu-línunnar og mikið afl M-deildarinnar. Hann hentar þeim sem vilja fágaðan og kraftmikinn fólksbíl frekar en jeppa.',
-      'Hann er meðal aflmestu bíla á sínu verði og sneggri en flestir þeirra, og vönduð hljóðeinangrun gerir hann að notalegum langferðabíl á greiðfærum vegum. Hann má draga 2.000 kg.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst og hlaða hægast á svipuðu verði, og skottið er minna en hjá flestum þeirra. Porsche Taycan 4S Plus er 940.000 kr. ódýrari, álíka snöggur og hleður með um 50% styttri stoppum, en má ekki draga kerru. BMW i5 eDrive40 er 6.400.000 kr. ódýrari og drífur 42 km lengra, fyrir þá sem geta verið án aflsins.',
+      'Hann er meðal aflmestu bíla á sínu verði og sneggri en flestir keppinautar hans, og vönduð hljóðeinangrun gerir hann að notalegum langferðabíl á greiðfærum vegum. Hann má draga 2.000 kg.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst og hlaða hægast í þessum verðflokki, og skottið er minna en hjá flestum. Porsche Taycan 4S Plus er 940.000 kr. ódýrari, álíka snöggur og hleður með um 50% styttri stoppum, en má ekki draga kerru. BMW i5 eDrive40 er 6.400.000 kr. ódýrari og drífur 42 km lengra, fyrir þá sem geta verið án aflsins.',
       'i5 M60 er fyrir þá sem vilja kraftmikinn BMW-fólksbíl og eru tilbúnir að borga mikið fyrir aflið umfram drægni og hleðslu.',
     ],
     facts: 'eff3ad7deb4c',
@@ -126,7 +126,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'BMW iX xDrive 45 Sport er stór lúxusjeppi með fjórhjóladrifi sem leggur áherslu á hljóðlát þægindi og mjúkan akstur, með rúmgóðu farþegarými og sérstæðri, nútímalegri innréttingu. Hann hentar þeim sem vilja fágaðan ferðabíl frekar en sportlegan.',
       'Hann má draga 2.500 kg, meira en flestir á svipuðu verði, og drífur fremur langt, svo hann kemst vel milli landshluta og ræður við hjólhýsi. Aksturinn er yfirvegaður og traustur, sem gerir langkeyrslur afslappaðar.',
-      'Á móti kemur að hann hleður hægar en flestir á svipuðu verði, er aflminni en flestir þeirra og skottið er minna en hjá flestum í hans verðflokki. Porsche Macan 4s Electric kostar 460.000 kr. meira en hleður með um 40% styttri stoppum og er sneggri, þótt hann sé minni bíll, og BMW iX xDrive 60 Sport drífur 99 km lengra fyrir 2.300.000 kr. meira.',
+      'Á móti kemur að hann hleður hægar og er aflminni en flestir keppinautar hans, og skottið er minna. Porsche Macan 4s Electric kostar 460.000 kr. meira en hleður með um 40% styttri stoppum og er sneggri, þótt hann sé minni bíll, og BMW iX xDrive 60 Sport drífur 99 km lengra fyrir 2.300.000 kr. meira.',
       'iX xDrive 45 er fyrir þá sem meta ró, þægindi og dráttargetu ofar snerpu og hraðri hleðslu.',
     ],
     facts: '882067b3bf42',
@@ -135,8 +135,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'bmw-ix-xdrive-60-sport': {
     paragraphs: [
       'BMW iX xDrive 60 Sport er stór lúxusjeppi með fjórhjóladrifi sem leggur áherslu á hljóðlát þægindi, rúmgott farþegarými og sérstæða, nútímalega innréttingu. Hann hentar þeim sem vilja fágaðan ferðabíl sem kemst langt á hverri hleðslu.',
-      'Drægnin er hans sterkasta hlið: hann er meðal þeirra langdrægustu á svipuðu verði, svo langferðir milli landshluta kalla á fá stopp, jafnvel í vetrarkulda. Hann er aflmeiri en flestir í sínum verðflokki og má draga 2.500 kg, meira en flestir á svipuðu verði.',
-      'Á móti kemur að hraðhleðslan er aðeins í meðallagi miðað við verðið og skottið er minna en hjá flestum á svipuðu verði. Porsche Cayenne Coupé kostar 160.000 kr. meira en hleður með um 50% styttri stoppum og má draga 1.000 kg meira, þótt hann drífi 58 km styttra.',
+      'Drægnin er hans sterkasta hlið: hann er meðal þeirra langdrægustu í sínum verðflokki, svo langferðir milli landshluta kalla á fá stopp, jafnvel í vetrarkulda. Hann er líka aflmeiri en flestir keppinautar hans og má draga 2.500 kg.',
+      'Hraðhleðslan er hins vegar aðeins í meðallagi miðað við verðið og skottið er minna en hjá flestum. Porsche Cayenne Coupé kostar 160.000 kr. meira en hleður með um 50% styttri stoppum og má draga 1.000 kg meira, þótt hann drífi 58 km styttra.',
       'iX xDrive 60 er fyrir þá sem setja drægni og þægindi í öndvegi og vilja sem fæst hleðslustopp á leiðinni.',
     ],
     facts: 'd79d0f40d4d1',
@@ -145,8 +145,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'bmw-ix1-edrive-20': {
     paragraphs: [
       'BMW iX1 eDrive 20 er minnsti rafjepplingur BMW, framhjóladrifinn og vandaður, ætlaður þeim sem vilja úrvalsmerki og góða hljóðvist í hversdagsbíl án þess að borga fyrir stærri gerðir.',
-      'Hann nýtir orkuna vel og drægnin og hraðhleðslan eru í meðallagi á þessu verði, og frágangur og innrétting bera merki merkisins.',
-      'Á móti kemur að hann er aflminni og hægari en flestir á svipuðu verði og meðal þeirra sem draga minnst, aðeins 750 kg. Opel Grandland kostar 100.000 kr. meira, drífur álíka langt, er með 60 l stærra skott og má draga 450 kg meira. Fjórhjóladrifni BMW iX1 xDrive 30 fæst fyrir 1.000.000 kr. meira.',
+      'Hann nýtir orkuna vel, drægnin og hraðhleðslan eru í meðallagi á þessu verði, og frágangur og innrétting standast það sem búast má við af BMW.',
+      'Á móti kemur að hann er aflminni og hægari en flestir keppinautar hans og meðal þeirra sem draga minnst, aðeins 750 kg. Opel Grandland kostar 100.000 kr. meira, drífur álíka langt, er með 60 l stærra skott og má draga 450 kg meira. Fjórhjóladrifni BMW iX1 xDrive 30 fæst fyrir 1.000.000 kr. meira.',
       'iX1 eDrive 20 er fyrir þá sem vilja BMW á hagstæðu verði og þurfa hvorki fjórhjóladrif né mikla dráttargetu.',
     ],
     facts: '5170bc1d9003',
@@ -154,9 +154,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'bmw-ix1-xdrive-30': {
     paragraphs: [
-      'BMW iX1 xDrive 30 er lítill og vandaður lúxusjepplingur með fjórhjóladrifi, ætlaður þeim sem vilja BMW-gæði, góða hljóðvist og lipra stýringu í nettum bíl.',
-      'Hann er snöggur og lipur í akstri, með góðri hljóðvist og vönduðu innanrými eins og merkið er þekkt fyrir. Í tölunum hefur hann fáa styrkleika umfram keppinautana á svipuðu verði.',
-      'Á móti kemur að hann drífur styttra, hleður hægar og má draga minna en flestir á svipuðu verði. Kia EV5 AWD kostar nánast það sama en drífur 16 km lengra, er með 76 l stærra skott og má draga 600 kg meira, og BMW iX1 eDrive 20 er 1.000.000 kr. ódýrari og drífur 46 km lengra, fyrir þá sem þurfa ekki fjórhjóladrif.',
+      'BMW iX1 xDrive 30 er lítill og vandaður lúxusjepplingur með fjórhjóladrifi, ætlaður þeim sem vilja gæði BMW, góða hljóðvist og lipra stýringu í nettum bíl.',
+      'Hann er snöggur og lipur í akstri, með vönduðu innanrými eins og merkið er þekkt fyrir. Í tölunum hefur hann þó fáa styrkleika umfram keppinautana.',
+      'Hann drífur styttra, hleður hægar og má draga minna en flestir á svipuðu verði. Kia EV5 AWD kostar nánast það sama en drífur 16 km lengra, er með 76 l stærra skott og má draga 600 kg meira, og BMW iX1 eDrive 20 er 1.000.000 kr. ódýrari og drífur 46 km lengra, fyrir þá sem þurfa ekki fjórhjóladrif.',
       'iX1 xDrive 30 er fyrir þá sem setja BMW-merkið og akstursánægju í öndvegi, en fyrir peninginn fæst meiri bíll annars staðar.',
     ],
     facts: '7b462734f436',
@@ -165,9 +165,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'bmw-ix3-40': {
     paragraphs: [
       'BMW iX3 40 er stór og vandaður jepplingur með afturhjóladrifi, af nýrri kynslóð rafbíla BMW, sem leggur áherslu á langferðir, fágaðan akstur og þægindi.',
-      'Hann er meðal þeirra langdrægustu og þeirra sem hlaða hraðast á svipuðu verði, svo langferðir um landið kalla á fá og stutt stopp. Hann má draga 2.000 kg, með því mesta á þessu verði, og auk skottsins er 58 l framskott.',
-      'Á móti kemur að hann er aflminni og hægari en flestir á svipuðu verði og aðeins afturhjóladrifinn, sem kallar á meiri varkárni í snjó og hálku. BMW iX3 50 xDrive fæst með fjórhjóladrifi og 168 km meiri drægni fyrir 2.500.000 kr. meira.',
-      'iX3 40 er einn sterkasti langferðabíllinn í sínum verðflokki, fyrir þá sem þurfa ekki fjórhjóladrif.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu og þeirra sem hlaða hraðast, svo langferðir um landið kalla á fá og stutt stopp. Hann má draga 2.000 kg, með því mesta á þessu verði, og auk skottsins er 58 l framskott.',
+      'Hann er hins vegar aflminni og hægari en flestir keppinautar hans og aðeins afturhjóladrifinn, sem kallar á meiri varkárni í snjó og hálku. BMW iX3 50 xDrive fæst með fjórhjóladrifi og 168 km meiri drægni fyrir 2.500.000 kr. meira.',
+      'iX3 40 er einn sterkasti langferðabíllinn á sínu verði, fyrir þá sem þurfa ekki fjórhjóladrif.',
     ],
     facts: '16731bcab88f',
     model: 'gemini-3.8-flash, thinking medium',
@@ -175,8 +175,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'bmw-ix3-50-xdrive': {
     paragraphs: [
       'BMW iX3 50 xDrive er stór og vandaður jepplingur með fjórhjóladrifi, af nýrri kynslóð rafbíla BMW, smíðaður fyrir þá sem vilja leggja af stað í langferðir án þess að hugsa mikið um hleðslur.',
-      'Hann er meðal þeirra langdrægustu á svipuðu verði og meðal þeirra sem hlaða hraðast, svo hringvegurinn kallar á fá og stutt stopp, jafnvel í vetrarkulda. Hann er aflmeiri en flestir í sínum verðflokki og auk skottsins er 58 l framskott.',
-      'Á móti kemur að hann er fremur dýr. Volvo EX60 P12 kostar 100.000 kr. minna, drífur álíka langt, er sneggri og má draga 400 kg meira. BMW iX3 40 er 2.500.000 kr. ódýrari og drífur samt langt, fyrir þá sem þurfa ekki fjórhjóladrif.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu og þeirra sem hlaða hraðast, svo hringvegurinn kallar á fá og stutt stopp, jafnvel í vetrarkulda. Hann er líka aflmeiri en flestir keppinautar hans og auk skottsins er 58 l framskott.',
+      'Helsti ókosturinn er verðið. Volvo EX60 P12 kostar 100.000 kr. minna, drífur álíka langt, er sneggri og má draga 400 kg meira. BMW iX3 40 er 2.500.000 kr. ódýrari og drífur samt langt, fyrir þá sem þurfa ekki fjórhjóladrif.',
       'iX3 50 xDrive er fyrir þá sem vilja vandaðan ferðabíl með sem minnstu hleðslustússi.',
     ],
     facts: 'fb86aa548d6e',
@@ -185,8 +185,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'byd-dolphin-base': {
     paragraphs: [
       'BYD Dolphin er nettur fimm sæta hlaðbakur sem hentar vel í innanbæjarakstur og sem hagkvæmur heimilisbíll. Hann er lipur í þröngum stæðum og þéttbýli, og innanrýmið nýtist vel miðað við stærðina.',
-      'Stærsti styrkur hans er verðið: hann er ódýrari á hvern kílómetra drægni en flestir í sínum verðflokki, með stærri rafhlöðu en gengur og gerist á þessu verði og meðal þeirra sneggstu af bílum sem kosta svipað.',
-      'Á móti kemur að hann hleður mjög hægt, er með minna skott en flestir á svipuðu verði og má ekki draga kerru. Skoda Epiq 55 kostar það sama en hefur 130 l stærra skott, um 45% styttri hleðslustopp og má draga 1.200 kg.',
+      'Stærsti styrkur hans er verðið: í sínum verðflokki er hann ódýrari á hvern kílómetra drægni en flestir og meðal þeirra sneggstu, með stærri rafhlöðu en gengur og gerist.',
+      'Á móti kemur að hann hleður mjög hægt, skottið er minna en hjá flestum keppinautunum og hann má ekki draga kerru. Skoda Epiq 55 kostar það sama en hefur 130 l stærra skott, um 45% styttri hleðslustopp og má draga 1.200 kg.',
       'Fyrir þá sem hlaða heima, aka mest innanbæjar og þurfa hvorki kerru né mikið farangursrými er Dolphin hagkvæmur og skemmtilegur kostur.',
     ],
     facts: 'a075d76dc9ac',
@@ -196,7 +196,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'BYD Seal er lágur og rennilegur fólksbíll með skottloki og fjórhjóladrifi, sem höfðar til þeirra sem vilja sportlegan akstur frekar en hefðbundinn jeppling. Hann er meðal sneggstu og aflmestu bíla á sínu verði.',
       'Afl og snerpa eru hans sterkasta hlið, og lágur þyngdarpunktur gerir hann stöðugan og skemmtilegan á malbiki. Auk skottsins er 53 l framskott undir vélarhlífinni, og hann má draga 1.500 kg.',
-      'Á móti kemur að hann hleður hægar en flestir á svipuðu verði og skottið er eitt það minnsta í sínum verðflokki. Kia EV6 2025 Long Range AWD er 200.000 kr. ódýrari, hleður með um 55% styttri stoppum og er með 90 l stærra skott, en hann er mun aflminni.',
+      'Hann hleður hins vegar hægar en flestir keppinautar hans og skottið er eitt það minnsta í þessum verðflokki. Kia EV6 2025 Long Range AWD er 200.000 kr. ódýrari, hleður með um 55% styttri stoppum og er með 90 l stærra skott, en hann er mun aflminni.',
       'Seal á best við þá sem setja kraft og akstursánægju ofar hraðhleðslu og fjölskylduplássi.',
     ],
     facts: 'f4502aed1fcd',
@@ -206,7 +206,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'BYD Seal U er stór framhjóladrifinn jepplingur, tæpir 4,8 m á lengd, sem leggur áherslu á rými og rólegan akstur frekar en afköst. Hann hentar fjölskyldum sem vilja mikið pláss fyrir hóflegt verð.',
       'Skottið er stærra en hjá flestum á svipuðu verði og drægnin í meðallagi, sem dugar vel milli landshluta. Hann má draga 1.300 kg.',
-      'Á móti kemur að hann er meðal þeirra hægustu og þeirra sem hlaða hægast á svipuðu verði. MG MGS6 Dual Motor er 100.000 kr. ódýrari, fjórhjóladrifinn, mun sneggri og hleður með um 15% styttri stoppum, en skottið er 59 l minna.',
+      'Gallarnir eru að hann er meðal þeirra hægustu og þeirra sem hlaða hægast í þessum verðflokki. MG MGS6 Dual Motor er 100.000 kr. ódýrari, fjórhjóladrifinn, mun sneggri og hleður með um 15% styttri stoppum, en skottið er 59 l minna.',
       'Seal U hentar þeim sem vilja rúmgóðan og þægilegan fjölskyldubíl og hlaða mest heima.',
     ],
     facts: 'ee6e6b50363e',
