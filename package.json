@@ -23,7 +23,7 @@
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
     "tailwindcss": "^4.3.3",
-    "zod": "^4.6.5"
+    "zod": "^4.6.7"
   },
   "scripts": {
     "build": "next build",
@@ -35,14 +35,14 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@types/node": "^24.19.0",
+    "@types/node": "^24.19.2",
     "@types/react": "^19.3.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
-    "oxfmt": "^0.72.0",
-    "oxlint": "^1.86.0",
+    "oxfmt": "^0.73.0",
+    "oxlint": "^1.88.0",
     "typescript": "^7.0.2",
-    "vitest": "^5.0.2"
+    "vitest": "^5.0.4"
   },
   "lint-staged": {
     "*": "oxfmt --no-error-on-unmatched-pattern"
