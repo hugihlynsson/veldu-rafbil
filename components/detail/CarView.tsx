@@ -170,14 +170,19 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
                   <div className="flex-1 min-w-0 py-2 pr-3 md:p-0 md:px-1">
                     <Link
                       href={carPathOf(other)}
-                      className="text-sm font-semibold leading-tight text-tint md:text-base no-underline after:absolute after:inset-0 after:rounded-card after:border after:border-line md:after:border-0"
+                      className="text-base font-semibold leading-tight text-tint no-underline after:absolute after:inset-0 after:rounded-card after:border after:border-line md:after:border-0"
                     >
                       {other.make}{' '}
                       <span className="font-normal">{other.model}</span>
                     </Link>
-                    <div className="mt-1 text-xs font-medium text-stone md:text-sm">
-                      {addDecimalSeparators(other.priceWithGrant)} kr. ·{' '}
-                      {other.range} km
+                    <div className="mt-1 text-sm font-medium text-stone">
+                      {/* On the narrowest phones it breaks between the two */}
+                      <span className="whitespace-nowrap">
+                        {addDecimalSeparators(other.priceWithGrant)} kr. ·
+                      </span>{' '}
+                      <span className="whitespace-nowrap">
+                        {other.range} km
+                      </span>
                     </div>
                   </div>
                 </li>
