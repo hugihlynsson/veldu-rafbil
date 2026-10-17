@@ -57,7 +57,8 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
         </header>
       </div>
 
-      {/* Edge to edge on a phone, as on the list */}
+      {/* Edge to edge until the window outgrows max-w-hero, rounded once it
+          stands clear of the edges */}
       <Image
         alt=""
         sizes="(max-width: 959px) 100vw, 960px"
@@ -65,7 +66,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
         width={1920}
         height={1280}
         preload
-        className="w-full h-auto block md:rounded-lg"
+        className="w-full h-auto block min-[961px]:rounded-lg"
       />
 
       <div className={gutter}>
