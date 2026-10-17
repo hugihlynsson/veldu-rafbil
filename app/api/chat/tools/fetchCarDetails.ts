@@ -1,13 +1,53 @@
 import { tool } from 'ai'
 import { z } from 'zod'
+import cars from '@/modules/data/cars'
 import newCars from '@/modules/data/newCars'
+import { carRef } from '@/modules/chat/cars'
 
-// Without this the model can be talked into fetching any URL at all
+// The pages a script may read, those of cars no longer sold included
 const allowedURLs = new Set(
   newCars
     .map((car) => car.evDatabaseUrl)
     .filter((url): url is string => Boolean(url)),
 )
+
+// The model names a car, never a URL: the page fetched is the one the car data
+// points it at, so no prompt can steer the fetch anywhere else
+const carPages = new Map(
+  cars.flatMap((car) =>
+    car.evDatabaseUrl
+      ? [[carRef(car), { url: car.evDatabaseUrl, label: car.label }] as const]
+      : [],
+  ),
+)
+
+const refsByPage = new Map(
+  [...carPages].map(([ref, { url }]) => [url, ref] as const),
+)
+
+export const CAR_DETAILS_PART = 'tool-fetchCarDetails'
+
+const hasUrlInput = (part: object): part is { input: { url: string } } =>
+  'input' in part &&
+  typeof part.input === 'object' &&
+  part.input !== null &&
+  'url' in part.input &&
+  typeof part.input.url === 'string'
+
+/**
+ * A stored conversation from before the tool took a car still asks by URL,
+ * and comes back with every question. Each such call is read as a call by
+ * car, or dropped for a page no car on the list points at, so the history
+ * validates rather than the question being refused with it.
+ */
+export const upgradeCarDetailsCalls = <Part extends { type: string }>(
+  parts: Part[],
+): Part[] =>
+  parts.flatMap((part) => {
+    if (part.type !== CAR_DETAILS_PART || !hasUrlInput(part)) return [part]
+    const car = refsByPage.get(part.input.url)
+    return car ? [{ ...part, input: { car } }] : []
+  })
 
 // ev-database pages are ~200 KB; anything far past that is not a car page
 const MAX_BYTES = 2_000_000
@@ -155,28 +195,29 @@ export const MAX_CALLS_PER_ANSWER = 10
 /**
  * The car-details tool for one answer. Built per answer because it counts its
  * calls; reading a conversation asks only for its schemas, which every one of
- * them shares. An answer about a few cars can narrow it to their pages.
+ * them shares.
  */
-export const createFetchCarDetailsTool = (
-  allowed: ReadonlySet<string> = allowedURLs,
-) => {
+export const createFetchCarDetailsTool = () => {
   let calls = 0
 
   return tool({
-    description: `Fetch detailed information about a specific car from its EV Database URL. Use this to get more information about the car, for example dimensions, cargo space, interior details, or other specifications not in the basic car list. The tool will not answer the users question: You must use this info to write a helpful answer. Fetch at most ${MAX_CALLS_PER_ANSWER} cars for one answer, the ones the question is about.`,
+    description: `Fetch detailed specifications of a car from EV Database, for example dimensions, cargo space, towing capacity or battery warranty: what the basic car list does not have. The tool will not answer the users question: You must use this info to write a helpful answer. Fetch at most ${MAX_CALLS_PER_ANSWER} cars for one answer, the ones the question is about.`,
     inputSchema: z.object({
-      url: z.string().describe('The evDatabaseUrl from the car list'),
-      carName: z.string().describe('The make and model of the car'),
+      car: z
+        .string()
+        .max(100)
+        .describe("The car's auðkenni, exactly as the car list gives it"),
     }),
-    execute: async ({ url, carName }) => {
-      if (!allowedURLs.has(url) || !allowed.has(url)) {
+    execute: async ({ car }) => {
+      const page = carPages.get(car.toLowerCase())
+      if (!page) {
         return {
-          carName,
+          carName: car,
           specifications:
-            'That URL is not one of the ev-database entries in the car list, so it was not fetched. Use the evDatabaseUrl given for the car, or answer from the list alone.',
-          source: url,
+            'There is no EV Database page for that auðkenni, so nothing was fetched. Check the auðkenni against the car list, or answer from the list alone.',
         }
       }
+      const { url, label: carName } = page
 
       calls += 1
       if (calls > MAX_CALLS_PER_ANSWER) {
