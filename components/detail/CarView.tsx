@@ -71,15 +71,26 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
       <div className={gutter}>
         <div className={column}>
           <div className="pt-4 md:pt-6">
-            <h1 className="m-0 font-semibold text-display leading-tight">
-              <span>{car.make}</span>{' '}
-              <span className="font-normal">{car.model}</span>
-            </h1>
-            {subTitle && (
-              <p className="mt-1 mb-0 text-base font-medium text-stone">
-                {subTitle}
-              </p>
-            )}
+            <div className="flex items-start justify-between gap-4">
+              <div className="min-w-0">
+                <h1 className="m-0 font-semibold text-display leading-tight">
+                  <span>{car.make}</span>{' '}
+                  <span className="font-normal">{car.model}</span>
+                </h1>
+                {subTitle && (
+                  <p className="mt-1 mb-0 text-base font-medium text-stone">
+                    {subTitle}
+                  </p>
+                )}
+              </div>
+              <ShareButton
+                title={car.label}
+                label="Deila"
+                event="Car shared"
+                variant="quiet"
+                className="shrink-0 mt-1"
+              />
+            </div>
             {notice ? (
               // In place of the price, which links to a seller no longer
               // selling it
@@ -114,16 +125,21 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
             ))}
           </dl>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+          {car.evDatabaseUrl && (
+            <div className="mt-6">
+              <EvDatabaseLink href={car.evDatabaseUrl} />
+            </div>
+          )}
+
+          {review && <Review review={review} />}
+
+          <div className="mt-10 flex justify-center">
             <ShareButton
               title={car.label}
               label="Deila bílnum"
               event="Car shared"
             />
-            {car.evDatabaseUrl && <EvDatabaseLink href={car.evDatabaseUrl} />}
           </div>
-
-          {review && <Review review={review} />}
 
           <section aria-labelledby="similar" className="mt-12">
             <h2 id="similar" className={sectionLabel}>
