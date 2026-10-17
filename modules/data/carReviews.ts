@@ -816,7 +816,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Mercedes-Benz EQA SUV 300 4MATIC er nettur lúxusjepplingur með fjórhjóladrifi sem leggur áherslu á fágaðan, hljóðlátan og mjúkan akstur, fyrir þá sem vilja þægindi þýska merkisins í lipurri stærð.',
       'Hann má draga 1.800 kg, með því mesta á svipuðu verði, og vandaður frágangur og góð hljóðeinangrun skapa rólegt andrúmsloft.',
-      'Á móti kemur að hann drífur styttra en flestir á svipuðu verði, er meðal þeirra sem hlaða hægast og skottið er eitt það minnsta í sínum verðflokki. BMW iX1 xDrive 30 kostar 200.000 kr. meira en hleður með um 20% styttri stoppum, er mun sneggri og með 150 l stærra skott.',
+      'Á móti kemur að hann drífur styttra en flestir keppinautar hans, er meðal þeirra sem hlaða hægast og skottið er eitt það minnsta. BMW iX1 xDrive 30 kostar 200.000 kr. meira en hleður með um 20% styttri stoppum, er mun sneggri og með 150 l stærra skott.',
       'EQA höfðar til þeirra sem setja þægindi og merkið í forgang og þurfa að draga kerru, frekar en hraða eða pláss.',
     ],
     facts: 'b69d33295c87',
@@ -825,8 +825,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-glb-350-4matic-eq': {
     paragraphs: [
       'Mercedes-Benz GLB 350 4MATIC EQ er kassalaga jepplingur með fjórhjóladrifi og allt að sjö sætum, sem sameinar meðfærilega stærð, sveigjanlegt sætarými og fágað yfirbragð merkisins.',
-      'Hann er meðal þeirra langdrægustu og þeirra sem hlaða hraðast á svipuðu verði, og má draga 2.000 kg, með því mesta á þessu verði. Auk skottsins er 127 l framskott undir vélarhlífinni, eitt það stærsta sem fæst.',
-      'Á móti kemur að hann er fremur dýr og þriðja sætaröðin hentar helst börnum. Skoda Peaq 90x er 800.000 kr. ódýrari, drífur nánast jafn langt og er með 395 l stærra skott, þótt hleðslustoppin séu um 55% lengri.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu og þeirra sem hlaða hraðast, og má draga 2.000 kg, með því mesta á þessu verði. Auk skottsins er 127 l framskott undir vélarhlífinni, eitt það stærsta sem fæst.',
+      'Gallarnir eru að hann er fremur dýr og þriðja sætaröðin hentar helst börnum. Skoda Peaq 90x er 800.000 kr. ódýrari, drífur nánast jafn langt og er með 395 l stærra skott, þótt hleðslustoppin séu um 55% lengri.',
       'GLB 350 er traustur ferðabíll fyrir þá sem vilja sjö sæti, mikla drægni og stutt hleðslustopp í meðfærilegri stærð.',
     ],
     facts: 'd49336def5c3',
@@ -835,7 +835,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-glc-300-4matic': {
     paragraphs: [
       'Mercedes-Benz GLC 300 4MATIC er stór lúxusjepplingur með fjórhjóladrifi, 4,84 m á lengd, sem býður snerpu, þægindi og vandaðan frágang merkisins.',
-      'Skottið er stærra en hjá flestum á svipuðu verði og 128 l framskott bætist við, eitt það stærsta sem fæst. Hann má draga 2.400 kg, meira en flestir í sínum verðflokki, og er sneggri en flestir þeirra.',
+      'Skottið er stærra en hjá flestum á svipuðu verði og 128 l framskott bætist við, eitt það stærsta sem fæst. Hann má draga 2.400 kg, meira en flestir keppinautar hans, og er sneggri en flestir þeirra.',
       'Á móti kemur að drægnin og hraðhleðslan eru aðeins í meðallagi miðað við verðið. Mercedes-Benz GLC 400 4MATIC kostar 400.000 kr. meira en drífur 102 km lengra og hleður með um 20% styttri stoppum.',
       'GLC 300 er fyrir þá sem vilja rúmgóðan og vandaðan jeppling sem dregur hjólhýsi, en GLC 400 er peninganna virði fyrir þá sem aka mikið um landið.',
     ],
@@ -845,7 +845,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-glc-400-4matic': {
     paragraphs: [
       'Mercedes-Benz GLC 400 4MATIC er stór lúxusjepplingur með fjórhjóladrifi, 4,84 m á lengd, sem býður mikið afl, mikla drægni og vandaðan frágang merkisins.',
-      'Hann er meðal þeirra langdrægustu á svipuðu verði, hleður hraðar og er sneggri en flestir þeirra, svo langferðir um landið kalla á fá og stutt stopp. Skottið er stærra en hjá flestum í hans verðflokki, 128 l framskott bætist við og hann má draga 2.400 kg.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu, hleður hraðar og er sneggri en flestir, svo langferðir um landið kalla á fá og stutt stopp. Skottið er líka stærra en hjá flestum, 128 l framskott bætist við og hann má draga 2.400 kg.',
       'Veikleikarnir eru fáir, helst að hann er fremur dýr. BMW iX3 50 xDrive er 400.000 kr. ódýrari, drífur 90 km lengra og hleður með um 15% styttri stoppum, en er með minna skott og má draga 400 kg minna.',
       'GLC 400 er einn heildstæðasti lúxusjepplingurinn á sínu verði, jafnvígur á langferðir, pláss og drátt.',
     ],
@@ -855,9 +855,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-eqe-suv-350-4matic': {
     paragraphs: [
       'Mercedes-Benz EQE SUV 350 4MATIC er stór lúxusjeppi með fjórhjóladrifi sem leggur áherslu á hljóðlátan og mjúkan akstur og vandað innanrými, fyrir þá sem setja þægindi ofar snerpu.',
-      'Hann drífur fremur langt miðað við rafbíla almennt, má draga 1.800 kg og góð hljóðvist og fjöðrun gera langferðir afslappaðar.',
-      'Á móti kemur að hann er mjög dýr, meðal þeirra sem hlaða hægast og þeirra aflminnstu á svipuðu verði, og drífur styttra en flestir þeirra. BMW iX xDrive 45 Sport kostar það sama en drífur 51 km lengra, er mun sneggri og má draga 700 kg meira.',
-      'EQE SUV höfðar til þeirra sem vilja ró og lúxus Mercedes, en á þessu verði fæst meira annars staðar.',
+      'Hann drífur fremur langt miðað við rafbíla almennt, má draga 1.800 kg, og góð hljóðvist og fjöðrun gera langferðir afslappaðar.',
+      'Gallarnir eru að hann er mjög dýr, og í sínum verðflokki er hann meðal þeirra sem hlaða hægast og þeirra aflminnstu og drífur styttra en flestir. BMW iX xDrive 45 Sport kostar það sama en drífur 51 km lengra, er mun sneggri og má draga 700 kg meira.',
+      'EQE SUV höfðar til þeirra sem vilja ró og lúxus Mercedes, en fyrir sama verð fæst meira annars staðar.',
     ],
     facts: '44caa0b259c8',
     model: 'gemini-3.8-flash, thinking medium',
@@ -865,8 +865,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-eqs-580-4matic': {
     paragraphs: [
       'Mercedes-Benz EQS 580 4MATIC er stór og rennilegur lúxusfólksbíll með fjórhjóladrifi, rúmlega fimm metrar á lengd, smíðaður fyrir afslappaðar langferðir í hámarksþægindum.',
-      'Hann drífur lengst allra rafbíla á listanum, svo hringvegurinn kallar á fá stopp, jafnvel í vetrarkulda. Hann hleður líka hraðar en flestir á svipuðu verði og Mercedes ábyrgist rafhlöðuna í 10 ár, lengur en flestir í hans verðflokki.',
-      'Á móti kemur að hann er mjög dýr, skottið er minna og dráttargetan minni en hjá flestum á svipuðu verði, og lágur fólksbíll býður ekki veghæð jeppa. Porsche Cayenne Turbo kostar 460.000 kr. meira, er mun sneggri og má draga 1.300 kg meira, en drífur 246 km styttra.',
+      'Hann drífur lengst allra rafbíla á listanum, svo hringvegurinn kallar á fá stopp, jafnvel í vetrarkulda. Hann hleður líka hraðar en flestir á svipuðu verði og Mercedes ábyrgist rafhlöðuna í 10 ár, lengur en flestir aðrir framleiðendur.',
+      'Á móti kemur að hann er mjög dýr, skottið og dráttargetan eru minni en hjá flestum keppinautum hans, og lágur fólksbíll býður ekki veghæð jeppa. Porsche Cayenne Turbo kostar 460.000 kr. meira, er mun sneggri og má draga 1.300 kg meira, en drífur 246 km styttra.',
       'EQS er fyrir þá sem vilja hágæða ferðabíl sem kemst lengra á einni hleðslu en nokkur annar.',
     ],
     facts: 'ff4f09dbd41a',
@@ -875,8 +875,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-eqs-suv-580-4matic': {
     paragraphs: [
       'Mercedes-Benz EQS SUV 580 4MATIC er risavaxinn lúxusjeppi með fjórhjóladrifi og allt að sjö sætum, rúmlega fimm metrar á lengd, hannaður eins og fyrsta farrými á hjólum.',
-      'Hann drífur lengra en flestir á svipuðu verði og Mercedes ábyrgist rafhlöðuna í 10 ár, lengur en flestir í hans verðflokki, og hljóðvist og fágun eru í algjörum forgangi.',
-      'Á móti kemur að hann er mjög dýr, meðal þeirra sem hlaða hægast og þeirra aflminnstu á svipuðu verði, og dregur minna en flestir þeirra. Volvo EX90 Twin Motor Performance er 8.200.000 kr. ódýrari, tekur líka sjö, er sneggri og má draga 400 kg meira, þótt hann drífi 55 km styttra.',
+      'Hann drífur lengra en flestir á svipuðu verði og Mercedes ábyrgist rafhlöðuna í 10 ár, lengur en flestir aðrir framleiðendur, og hljóðvist og fágun eru í algjörum forgangi.',
+      'Gallarnir eru að hann er mjög dýr, meðal þeirra sem hlaða hægast og þeirra aflminnstu í sínum verðflokki, og dregur minna en flestir keppinautar hans. Volvo EX90 Twin Motor Performance er 8.200.000 kr. ódýrari, tekur líka sjö, er sneggri og má draga 400 kg meira, þótt hann drífi 55 km styttra.',
       'EQS SUV er fyrir þá sem vilja fáguðustu ferðaþægindin og eru tilbúnir að greiða vel fyrir þau.',
     ],
     facts: '380eceea0163',
@@ -886,7 +886,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Mercedes-Benz EQT 200 er fjölnotabíll byggður á sendibíl, með rennihurðum, sætum fyrir allt að sjö manns og vandaðri innréttingu en vanalega fylgir bílum af þessari gerð. Hann hentar stórum fjölskyldum í daglegt amstur og skólaakstur í þéttbýli.',
       'Skottið er stærra en hjá flestum á svipuðu verði og hann má draga 1.500 kg, tvöfalt á við Peugeot e-Rifter. Sveigjanlegt sætaskipulag og rennihurðir gera umgengni við aftursætin sérlega þægilega.',
-      'Á móti kemur að hann drífur mjög stutt, sérstaklega í vetrarkulda, hleður mjög hægt og er meðal þeirra aflminnstu á svipuðu verði. Peugeot e-Rifter er 1.100.000 kr. ódýrari, drífur 61 km lengra og hleður með um 40% styttri stoppum, og Kia PV5 drífur 130 km lengra fyrir 700.000 kr. meira.',
+      'Á móti kemur að hann drífur mjög stutt, sérstaklega í vetrarkulda, hleður mjög hægt og er meðal þeirra aflminnstu í sínum verðflokki. Peugeot e-Rifter er 1.100.000 kr. ódýrari, drífur 61 km lengra og hleður með um 40% styttri stoppum, og Kia PV5 drífur 130 km lengra fyrir 700.000 kr. meira.',
       'EQT 200 er laglegur og hagnýtur fjölskyldubíll innanbæjar, en stutt drægni og hæg hleðsla gera hann erfiðan sem eina bíl heimilisins.',
     ],
     facts: '289224a0b57d',
@@ -896,7 +896,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Mercedes-Benz EQV 300 er stór lúxusfjölnotabíll byggður á sendibíl, sem rúmar allt að átta manns með fullgildum sætum í öllum röðum. Hann hentar stórum fjölskyldum og fyrirtækjum í fólksflutningum sem vilja fágað yfirbragð.',
       'Skottið er það stærsta á svipuðu verði, svo jafnvel fullskipaður bíll rúmar farangur, og hver farþegi fær gott höfuð- og fótarými.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst, hlaða hægast og eru hægastir á svipuðu verði, og hann má ekki draga kerru. Mercedes-Benz eVito Tourer er sami bíll með einfaldari innréttingu og 900.000 kr. ódýrari, og Kia EV9 GT kostar 100.000 kr. meira, tekur sjö, er fjórhjóladrifinn og drífur 147 km lengra.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst, hlaða hægast og eru hægastir í sínum verðflokki, og hann má ekki draga kerru. Mercedes-Benz eVito Tourer er sami bíll með einfaldari innréttingu og 900.000 kr. ódýrari, og Kia EV9 GT kostar 100.000 kr. meira, tekur sjö, er fjórhjóladrifinn og drífur 147 km lengra.',
       'EQV 300 er rúmgóður ferðavagn fyrir stóra hópa í styttri ferðum, en krefst þolinmæði á langkeyrslu.',
     ],
     facts: '7e1d59a12e8f',
@@ -905,8 +905,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-vle-300': {
     paragraphs: [
       'Mercedes-Benz VLE 300 er stór og lúxusbúinn fjölnotabíll með framhjóladrifi og allt að átta sætum, af nýrri kynslóð rafdrifinna fjölnotabíla Mercedes.',
-      'Hann er meðal þeirra langdrægustu á svipuðu verði, svo hann dugar vel á milli landshluta, jafnvel í vetrarkulda, og skottið er stærra en hjá flestum í hans verðflokki. Hann má draga 1.750 kg.',
-      'Á móti kemur að hann er meðal þeirra hægustu og aflminnstu á svipuðu verði og aðeins framhjóladrifinn. Mercedes-Benz VLE 400 4MATIC fæst með fjórhjóladrifi og 2.500 kg dráttargetu fyrir 1.500.000 kr. meira.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu, svo hann dugar vel á milli landshluta, jafnvel í vetrarkulda, og skottið er stærra en hjá flestum. Hann má draga 1.750 kg.',
+      'Hann er hins vegar meðal þeirra hægustu og aflminnstu og aðeins framhjóladrifinn. Mercedes-Benz VLE 400 4MATIC fæst með fjórhjóladrifi og 2.500 kg dráttargetu fyrir 1.500.000 kr. meira.',
       'VLE 300 er fyrir þá sem þurfa átta sæti og mikla drægni, og geta verið án fjórhjóladrifs.',
     ],
     facts: '2ef409b18730',
@@ -915,8 +915,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-vle-400-4matic': {
     paragraphs: [
       'Mercedes-Benz VLE 400 4MATIC er stór lúxusfjölnotabíll með fjórhjóladrifi og allt að átta sætum, sniðinn að stórum fjölskyldum og hópferðum þar sem þægindi og rými skipta öllu.',
-      'Hann drífur lengra en flestir á svipuðu verði, skottið er eitt það stærsta í sínum verðflokki og hann má draga 2.500 kg, meira en flestir á svipuðu verði.',
-      'Á móti kemur að hann er mjög dýr og hægari en flestir á svipuðu verði. Framhjóladrifni Mercedes-Benz VLE 300 er 1.500.000 kr. ódýrari og drífur 59 km lengra, fyrir þá sem þurfa hvorki fjórhjóladrif né mikla dráttargetu.',
+      'Í sínum verðflokki drífur hann lengra en flestir, skottið er eitt það stærsta og hann má draga 2.500 kg, meira en flestir keppinautar hans.',
+      'Á móti kemur að hann er mjög dýr og hægari en flestir þeirra. Framhjóladrifni Mercedes-Benz VLE 300 er 1.500.000 kr. ódýrari og drífur 59 km lengra, fyrir þá sem þurfa hvorki fjórhjóladrif né mikla dráttargetu.',
       'VLE 400 er fágætur en dýr kostur fyrir þá sem þurfa átta sæti, fjórhjóladrif og dráttargetu.',
     ],
     facts: '8a6751d961e1',
@@ -925,8 +925,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-g-class-580-eq': {
     paragraphs: [
       'Mercedes-Benz G-class 580 EQ er goðsagnakenndur torfærujeppi í rafdrifinni útgáfu, kassalaga og grófur, með fjórum rafmótorum, einum við hvert hjól, sem gefa honum fágæta færni í snjó og á ótroðnum slóðum.',
-      'Hann er aflmeiri en flestir á svipuðu verði, og há setstaða og sérstæð nærvera gera hann að einstökum bíl, sem fáir aðrir rafbílar keppa við í torfærum.',
-      'Á móti kemur að kantað formið kostar orku: hann er meðal þeirra sem drífa styst og hlaða hægast á svipuðu verði, og skottið er minna en hjá flestum þeirra. Range Rover Electric EV450 er 400.000 kr. ódýrari, líka torfærufær lúxusjeppi, en drífur 127 km lengra og hleður með um 50% styttri stoppum.',
+      'Hann er aflmeiri en flestir á svipuðu verði, og há setstaða og sérstæð nærvera gera hann einstakan; fáir aðrir rafbílar keppa við hann í torfærum.',
+      'Kantað formið kostar hins vegar orku: hann er meðal þeirra sem drífa styst og hlaða hægast í sínum verðflokki, og skottið er minna en hjá flestum keppinautum hans. Range Rover Electric EV450 er 400.000 kr. ódýrari, líka torfærufær lúxusjeppi, en drífur 127 km lengra og hleður með um 50% styttri stoppum.',
       'G-class er lífsstílstæki sem enginn velur út frá tölunum, heldur sögunni og getunni utan vega.',
     ],
     facts: '8335d9035eab',
@@ -936,7 +936,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Mercedes-Benz eVito Tourer er rafdrifin smárúta byggð á sendibíl, með sætum fyrir allt að níu manns, ætluð þeim sem þurfa fyrst og fremst að flytja marga í senn.',
       'Skottið er eitt það stærsta á svipuðu verði og sætaskipanin sveigjanleg, og bíllinn er hljóðlátur og lipur miðað við stærð.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst, hlaða hægast og eru hægastir á svipuðu verði, og hann má ekki draga kerru. Toyota Proace Verso er 3.600.000 kr. ódýrari, drífur álíka langt, hleður með um 20% styttri stoppum og má draga 1.000 kg.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst, hlaða hægast og eru hægastir í sínum verðflokki, og hann má ekki draga kerru. Toyota Proace Verso er 3.600.000 kr. ódýrari, drífur álíka langt, hleður með um 20% styttri stoppum og má draga 1.000 kg.',
       'eVito Tourer hentar sem vinnuþjarkur í fólksflutningum innanbæjar, en fyrir verðið fæst meira hjá keppinautunum.',
     ],
     facts: '28e3aa2ba305',
@@ -945,8 +945,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mg-cyberster-gt': {
     paragraphs: [
       'MG Cyberster GT er tveggja sæta blæjusportbíll sem sker sig rækilega úr á rafbílamarkaðnum. Hann einkennist af lágri byggingu og vængjahurðum sem lyftast upp, og er smíðaður fyrir fólk sem leitar að hreinni skemmtun og akstursupplifun frekar en hversdagslegu flutningstæki.',
-      'Hann er mjög snöggur og aflmeiri en flestir bílar á svipuðu verði, enda meðal þeirra allra sneggstu úr kyrrstöðu. Fjórhjóladrifið kemur aflinu niður í malbikið og lágur þyngdarpunktur gerir hann stöðugan og kvikan í beygjum.',
-      'Á móti kemur að hann drífur fremur stutt og er meðal þeirra sem hlaða hægast á svipuðu verði, og skottið er eitt það minnsta í sínum verðflokki. Ef fjölskyldan þarf að komast fyrir og langferðir eru á dagskrá er Skoda Enyaq RS 200.000 kr. ódýrari, með fimm sæti, 99 km meiri drægni og um 40% styttri hleðslustopp.',
+      'Hann er aflmeiri en flestir á svipuðu verði og meðal þeirra allra sneggstu úr kyrrstöðu. Fjórhjóladrifið kemur aflinu niður í malbikið og lágur þyngdarpunktur gerir hann stöðugan og kvikan í beygjum.',
+      'Á móti kemur að hann drífur fremur stutt, er meðal þeirra sem hlaða hægast í sínum verðflokki og skottið er eitt það minnsta. Ef fjölskyldan þarf að komast fyrir og langferðir eru á dagskrá er Skoda Enyaq RS 200.000 kr. ódýrari, með fimm sæti, 99 km meiri drægni og um 40% styttri hleðslustopp.',
       'Þetta er leikfang sem maður kaupir með hjartanu fremur en skynseminni.',
     ],
     facts: '5aed9ed82d06',
@@ -957,7 +957,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'MG MG4 Urban Standard Range er fimm sæta hlaðbakur í fullri stærð sem kostar svipað og mun smærri borgarbílar. Hann er hannaður sem lipur og hagkvæmur vinnuhestur til daglegra nota í þéttbýli og nærsveitum, og hentar sérstaklega vel sem ódýr fyrsti rafbíll eða annar bíll heimilisins.',
       'Helsti styrkur bílsins er kaupverðið, enda er hann mjög ódýr, og skottið er óvenju stórt fyrir svo ódýran bíl. Krafturinn dugar ágætlega í hefðbundinni umferð og drægnin í daglegu skutli, jafnvel þótt hún minnki í vetrarkulda.',
       'Á móti kemur að hann drífur mjög stutt, hleður mjög hægt og má aðeins draga 500 kg, svo langferðir milli landshluta krefjast þolinmæði. MG MG4 Urban Long Range drífur 91 km lengra fyrir 900.000 kr. meira, með sama stóra skottinu.',
-      'Fyrir hefðbundinn innanbæjarakstur fæst hins vegar varla meiri bíll fyrir peninginn.',
+      'Fyrir hefðbundinn innanbæjarakstur fæst varla meiri bíll fyrir peninginn.',
     ],
     facts: 'af97992b2a74',
     model: 'gemini-3.8-flash, thinking high',
@@ -965,8 +965,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mg-mg4-urban-long-range': {
     paragraphs: [
       'MG MG4 Urban Long Range er framhjóladrifinn fimm sæta hlaðbakur, sniðinn að hagkvæmum daglegum akstri fyrir þá sem vilja komast á nýjan rafbíl fyrir sem minnst.',
-      'Hann fær mikið fyrir peninginn: skottið er það stærsta á svipuðu verði, hann er meðal þeirra langdrægustu í sínum verðflokki og ódýrari á hvern kílómetra drægni en flestir. Hann hleður líka hraðar en flestir á svipuðu verði, sem gerir stöku ferðir út á land raunhæfari en á mörgum öðrum ódýrum bílum.',
-      'Á móti kemur að hann er hægari en flestir á svipuðu verði og má aðeins draga 500 kg. Leapmotor B05 ProMax kostar 100.000 kr. meira en drífur 66 km lengra og er mun sneggri, þótt skottið sé 232 l minna.',
+      'Kaupandinn fær mikið fyrir peninginn: skottið er það stærsta á svipuðu verði, hann er meðal þeirra langdrægustu og ódýrari á hvern kílómetra drægni en flestir keppinautar hans. Hann hleður líka hraðar en flestir þeirra, sem gerir stöku ferðir út á land raunhæfari en á mörgum öðrum ódýrum bílum.',
+      'Gallarnir eru að hann er hægari en flestir þeirra og má aðeins draga 500 kg. Leapmotor B05 ProMax kostar 100.000 kr. meira en drífur 66 km lengra og er mun sneggri, þótt skottið sé 232 l minna.',
       'Fyrir þá sem vilja sem mest pláss og drægni fyrir sem minnst er MG4 Urban Long Range skynsamleg kaup.',
     ],
     facts: 'b9c1781d3300',
@@ -975,8 +975,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mg-mgs5-lux': {
     paragraphs: [
       'MG MGS5 LUX er meðalstór jepplingur með afturhjóladrifi, ætlaður þeim sem vilja hagkvæman fjölskyldubíl sem er líka sprækur í akstri.',
-      'Hann drífur lengra, hleður hraðar og er sneggri en flestir á svipuðu verði, og skottið er stærra en hjá flestum þeirra.',
-      'Á móti kemur að hann má aðeins draga 750 kg og ábyrgðin á rafhlöðunni er með þeim stystu á svipuðu verði. Volkswagen ID. Cross kostar 100.000 kr. meira, má draga 450 kg meira og hefur árinu lengri ábyrgð, en drífur 38 km styttra.',
+      'Hann drífur lengra, hleður hraðar og er sneggri en flestir á svipuðu verði, og skottið er stærra en hjá flestum keppinautum hans.',
+      'Á móti kemur að hann má aðeins draga 750 kg og ábyrgðin á rafhlöðunni er með þeim stystu. Volkswagen ID. Cross kostar 100.000 kr. meira, má draga 450 kg meira og hefur árinu lengri ábyrgð, en drífur 38 km styttra.',
       'MGS5 er sprækur og hagkvæmur fjölskyldubíll fyrir þá sem þurfa ekki að draga mikið.',
     ],
     facts: 'de0a607d37b7',
@@ -985,8 +985,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mg-mgs6-dual-motor': {
     paragraphs: [
       'MG MGS6 Dual Motor er meðalstór jepplingur, 4,7 m á lengd, sem býður fjórhjóladrif og mikið afl á verði sem fáir keppinautar ná. Hann hentar fjölskyldum sem vilja rúmgóðan og kraftmikinn bíl án þess að borga fyrir þekktara merki.',
-      'Hann er aflmeiri og sneggri en flestir á svipuðu verði, og auk 493 l skotts er 102 l framskott undir vélarhlífinni. Hann má draga 1.500 kg, meira en flestir í sínum verðflokki, svo hann ræður vel við kerru eða lítið hjólhýsi.',
-      'Á móti kemur að hann hleður hægar en flestir á svipuðu verði, og ábyrgðin á rafhlöðunni er með þeim stystu. Subaru Uncharted býður um 25% styttri hleðslustopp og ári lengri ábyrgð fyrir 100.000 kr. meira, en hann er með 90 l minna skott og minna afl.',
+      'Hann er aflmeiri og sneggri en flestir á svipuðu verði, og auk 493 l skotts er 102 l framskott undir vélarhlífinni. Hann má draga 1.500 kg, meira en flestir keppinautar hans, svo hann ræður vel við kerru eða lítið hjólhýsi.',
+      'Gallarnir eru að hann hleður hægar en flestir þeirra og ábyrgðin á rafhlöðunni er með þeim stystu. Subaru Uncharted býður um 25% styttri hleðslustopp og ári lengri ábyrgð fyrir 100.000 kr. meira, en hann er með 90 l minna skott og minna afl.',
       'Fyrir þá sem vilja mikið af bíl, afli og plássi fyrir peninginn og hlaða mest heima er MGS6 Dual Motor sterkur kostur.',
     ],
     facts: 'f116badf00c6',
@@ -995,7 +995,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mini-aceman-e': {
     paragraphs: [
       'Mini Aceman E er lítill og nettur jepplingur með líflegri hönnun Mini, ætlaður þeim sem vilja persónulegan og lipran bæjarbíl með fimm sætum.',
-      'Hann er auðveldur í þröngum stæðum og fremur ódýr, og vandaður frágangur og sérstæð innrétting gera hann eftirminnilegri en flesta smábíla. Hann má líka draga 750 kg, sem Fiat 500e og Fiat 600e á svipuðu verði mega ekki.',
+      'Hann er auðveldur í þröngum stæðum og fremur ódýr, og vandaður frágangur og sérstæð innrétting gera hann eftirminnilegri en flesta smábíla. Hann má líka draga 750 kg, sem Fiat 500e og Fiat 600e mega ekki.',
       'Á móti kemur að hann drífur mjög stutt, sérstaklega í vetrarkulda, er meðal þeirra sem hlaða hægast í sínum verðflokki og skottið er eitt það minnsta. Fiat 600e er 100.000 kr. ódýrari, drífur 90 km lengra og hleður með um 30% styttri stoppum.',
       'Aceman E er heillandi bæjarbíll, en síður heppilegur ef ferðast er reglulega milli landshluta.',
     ],
@@ -1005,8 +1005,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mini-countryman-e': {
     paragraphs: [
       'Mini Countryman E er meðalstór jepplingur með framhjóladrifi, stærsti bíll Mini og sá sem hentar fjölskyldum best. Hann sker sig úr fyrir sjarma og vandaða, líflega hönnun merkisins, bæði að utan og innan.',
-      'Það sem hann býður umfram keppinautana er fyrst og fremst stíllinn og frágangurinn: hringlaga skjárinn og vönduð efni gera innréttinguna eftirminnilegri en í flestum bílum á svipuðu verði. Í tölunum hefur hann fáa styrkleika.',
-      'Á móti kemur að hann drífur styttra, hleður hægar og er hægari en flestir á svipuðu verði, skottið er minna en hjá flestum þeirra og hann má aðeins draga 750 kg. Fjórhjóladrifna útfærslan, Mini Countryman SE 4x4, kostar 700.000 kr. meira, en Mercedes-Benz EQA SUV 300 4MATIC fæst með fjórhjóladrifi fyrir 100.000 kr. meira og má draga 1.050 kg meira.',
+      'Það sem hann býður umfram keppinautana er fyrst og fremst stíllinn og frágangurinn: hringlaga skjárinn og vönduð efni gera innréttinguna eftirminnilegri en í flestum bílum á sama verði. Í tölunum hefur hann fáa styrkleika.',
+      'Hann drífur styttra, hleður hægar og er hægari en flestir keppinautar hans, skottið er minna og hann má aðeins draga 750 kg. Fjórhjóladrifna útfærslan, Mini Countryman SE 4x4, kostar 700.000 kr. meira, en Mercedes-Benz EQA SUV 300 4MATIC fæst með fjórhjóladrifi fyrir 100.000 kr. meira og má draga 1.050 kg meira.',
       'Countryman E höfðar til þeirra sem kaupa með hjartanu og vilja Mini-stílinn, en fyrir peninginn fæst meira annars staðar.',
     ],
     facts: '007a7b244e00',
