@@ -5,7 +5,7 @@ import Logo from './Logo'
 import TextLink from './TextLink'
 
 const paragraph =
-  'mx-auto max-w-column text-sm leading-6 px-(--gutter) text-stone md:max-w-page md:px-10'
+  'mx-auto max-w-column text-sm leading-6 text-pretty px-(--gutter) text-stone md:max-w-page md:px-10'
 
 const Footer: FunctionComponent<{}> = () => (
   <footer className="bg-haze pt-8 pb-25 xs:pt-14">
