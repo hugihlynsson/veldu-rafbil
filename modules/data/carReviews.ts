@@ -124,10 +124,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'bmw-ix-xdrive-45-sport': {
     paragraphs: [
-      'BMW iX xDrive 45 Sport er stór lúxusjeppi sem leggur mikla áherslu á hljóðlát þægindi og mjúkan akstur. Hann einkennist af rúmgóðu innanrými og hárri setustöðu, og hentar fólki sem leitar að fágaðri vellíðan og öruggu fjórhjóladrifi sem ræður vel við íslenskar vetraraðstæður.',
-      'Bíllinn drífur fremur langt og kemst vel á milli landshluta, jafnvel í vetrarkulda þegar drægnin minnkar nokkuð. Fjórhjóladrifið veitir mikið öryggi á snævi þöktum vegum og aksturinn er yfirvegaður og traustur, sem gerir langkeyrslur afslappaðar í öllum veðrum.',
-      'Miðað við aðra bíla á svipuðu verði hleður hann hægar en flestir og er aflminni. Ef styttri hleðslustopp og snerpa skipta mestu máli býður Porsche Macan 4s Electric upp á um 40% styttri hleðslustopp og meiri kraft, þótt hann sé minni bíll. Á móti hefur iX meira afl og meiri drægni en Mercedes-Benz EQE SUV 350 4MATIC á sama verði.',
-      'Fyrir þá sem meta ríflegt rými og ljúfa akstursupplifun meira en mikinn kraft er BMW iX mjög notalegur ferðafélagi.',
+      'BMW iX xDrive 45 Sport er stór lúxusjeppi með fjórhjóladrifi sem leggur áherslu á hljóðlát þægindi og mjúkan akstur, með rúmgóðu farþegarými og sérstæðri, nútímalegri innréttingu. Hann hentar þeim sem vilja fágaðan ferðabíl frekar en sportlegan.',
+      'Hann má draga 2.500 kg, meira en flestir á svipuðu verði, og drífur fremur langt, svo hann kemst vel milli landshluta og ræður við hjólhýsi. Aksturinn er yfirvegaður og traustur, sem gerir langkeyrslur afslappaðar.',
+      'Á móti kemur að hann hleður hægar en flestir á svipuðu verði, er aflminni en flestir þeirra og skottið er minna en hjá flestum í hans verðflokki. Porsche Macan 4s Electric kostar 460.000 kr. meira en hleður með um 40% styttri stoppum og er sneggri, þótt hann sé minni bíll, og BMW iX xDrive 60 Sport drífur 99 km lengra fyrir 2.300.000 kr. meira.',
+      'iX xDrive 45 er fyrir þá sem meta ró, þægindi og dráttargetu ofar snerpu og hraðri hleðslu.',
     ],
     facts: '882067b3bf42',
     model: 'gemini-3.8-flash, thinking high',
@@ -273,10 +273,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'ford-explorer-er-awd': {
     paragraphs: [
-      'Ford Explorer er kassalaga og traustvekjandi jepplingur með fjórhjóladrifi sem hentar fólki sem vill hefðbundið jeppalag, þægilega sætishæð og gott útsýni. Hann er lipur í þéttbýli en nógu traustur til að takast á við ófærð og hversdagslíf fjölskyldunnar.',
-      'Bíllinn drífur fremur langt og hleður fremur hratt. Miðað við aðra á svipuðu verði drífur hann lengra en flestir, er ódýrari á hvern km drægni og aflmeiri en flestir. Fjórhjóladrifið kemur sér sérstaklega vel í snjó og hálku, og drægnin dugar vel í ferðalög milli landshluta.',
-      'Á hraðhleðslustöðvum gefur hann þó eftir á móti Hyundai IONIQ 5, sem býður upp á um 35% styttri hleðslustopp. Systurbíllinn Ford Capri býður sömuleiðis upp á 26 km meiri drægni á sama verði vegna rennilegra forms, og Polestar 2 er sneggri og aflmeiri fólksbíll.',
-      'Ford Explorer er vel heppnaður og jarðbundinn kostur sem smellur sérlega vel inn í íslenskan vetur.',
+      'Ford Explorer ER AWD er kassalaga meðalstór jepplingur með fjórhjóladrifi, byggður á sama grunni og Volkswagen ID.4, sem hentar fólki sem vill jeppalag, þægilega sætishæð og gott útsýni.',
+      'Hann drífur lengra, hleður hraðar og er sneggri en flestir á svipuðu verði, svo hann hentar vel í ferðalög milli landshluta.',
+      'Á móti kemur að hann má aðeins draga 1.200 kg, minna en flestir á svipuðu verði. Hyundai IONIQ 5 Long Range AWD kostar það sama en hleður með um 35% styttri stoppum og má draga 400 kg meira.',
+      'Explorer er vel heppnaður og jarðbundinn fjölskyldubíll sem fer vel með íslenskan vetur, ef ekki þarf að draga mikið.',
     ],
     facts: '9eb36bb10329',
     model: 'gemini-3.8-flash, thinking high',
@@ -392,10 +392,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'hyundai-kona-electric-65-kwh': {
     paragraphs: [
-      'Hyundai Kona Electric er lipur og hagnýtur framhjóladrifinn jepplingur sem hentar vel sem sparneytinn fjölskyldubíll eða í daglegan pendil. Hann fer létt með þröng bílastæði en veitir samt ágæta yfirsýn og þægilegt aðgengi.',
-      'Stærsti styrkur hans er hversu mikið fæst fyrir peninginn, en hann er mjög ódýr á hvern kílómetra drægni og drífur lengra en flestir í sínum verðflokki. Í daglegu lífi þýðir þetta færri hleðslustopp í vikunni og aukið öryggi í ferðum milli landshluta, jafnvel þegar íslenskur vetrarkuldi dregur úr rafhlöðunni.',
-      'Á móti kemur að hann hleður fremur hægt, og hægar en flestir á svipuðu verði. Hleðslustoppin á ferðalögum verða því lengri en hjá bílum eins og Tesla Model Y eða Leapmotor C10 ProMax, sem bjóða jafnframt upp á meira pláss og sneggra viðbragð. Hann er líka aðeins framhjóladrifinn, sem getur reynt á í erfiðri vetrarfærð.',
-      'Ef markmiðið er einfaldlega að fá mikla drægni fyrir hverja krónu í þægilegum og traustum bíl, og lengri hleðslutími á ferðalögum skiptir ekki öllu máli, er Kona Electric einn allra hagkvæmasti kosturinn.',
+      'Hyundai Kona Electric er lipur og hagnýtur framhjóladrifinn jepplingur sem hentar vel sem sparneytinn fjölskyldubíll eða í daglegar ferðir til og frá vinnu. Hann fer létt með þröng bílastæði en veitir samt ágæta yfirsýn og þægilegt aðgengi.',
+      'Hann drífur lengra en flestir á svipuðu verði og skottið er stærra en hjá flestum þeirra, með lítið framskott að auki. Í daglegu lífi þýðir það færri hleðslur í vikunni og nóg pláss fyrir innkaupin, jafnvel þegar vetrarkuldinn dregur úr drægninni.',
+      'Á móti kemur að hann hleður hægar en flestir á svipuðu verði, er hægari en flestir þeirra og má aðeins draga 750 kg. Leapmotor C10 ProMax er 60.000 kr. ódýrari, hleður með um 25% styttri stoppum og má draga 750 kg meira, en hann er stærri bíll og ekki jafn lipur í þröngum stæðum.',
+      'Ef markmiðið er að fá mikla drægni og pláss fyrir hverja krónu í þægilegum bíl, og lengri hleðslustopp á ferðalögum skipta ekki öllu, er Kona Electric einn hagkvæmasti kosturinn.',
     ],
     facts: 'd2efebe3c86d',
     model: 'gemini-3.8-flash, thinking high',
@@ -600,10 +600,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'leapmotor-b03x-promax': {
     paragraphs: [
-      'Leapmotor B03X ProMax er nett og mjög ódýr fimm sæta fólksbíll með framhjóladrifi. Hann einkennist af miklu afli miðað við smæð sína, sem gerir hann lipran og snaran í umferðinni. Hann hentar vel sem hagkvæmur borgarbíll fyrir þá sem vilja öruggt afl í daglegu stússi án þess að borga mikið fyrir bílinn.',
-      'Í sínum verðflokki stendur hann vel að vígi, þar sem hann drífur lengra og er aflmeiri en flestir bílar á svipuðu verði. Hann er einnig meðal þeirra sem hlaða hraðast miðað við aðra í sama verðflokki. Í daglegu lífi veitir þetta áreynslulausari framúrakstur og þýðir að hleðslustopp á ferðalögum milli landshluta dragast síður á langinn.',
-      'Á móti kemur að hann drífur mjög stutt og rafhlaðan er mjög lítil, svo í íslenskum vetrarkulda þarf að gera ráð fyrir tíðari hleðslum. Systurbíllinn Leapmotor B05 Pro er 100.000 kr. ódýrari og með 19 km meiri drægni, en tekur um 5% lengri hleðslustopp. Ef meiri drægni skiptir höfuðmáli býður MG MG4 Urban Long Range upp á 34 km meiri drægni, þótt hleðslustoppin séu um 30% lengri.',
-      'Fyrir þá sem vilja snöggan og ódýran hversdagsbíl sem eyðir stuttum tíma við hraðhleðslustöðvar er B03X ProMax einkar heppilegur kostur.',
+      'Leapmotor B03X ProMax er lítill og mjög ódýr jepplingur með framhjóladrifi, ætlaður sem hagkvæmur bæjarbíll fyrir þá sem vilja nýjan rafbíl án þess að borga mikið.',
+      'Hann drífur stutt miðað við rafbíla almennt en lengra en flestir á svipuðu verði, og hann er meðal þeirra sem hlaða hraðast í sínum verðflokki, svo hleðslustopp á ferðalögum dragast síður á langinn. Hann er líka aflmeiri en flestir bílar á þessu verði.',
+      'Á móti kemur að merkið er nýlegt í Evrópu, þar sem það er selt í samstarfi við Stellantis, og skottið er aðeins í meðallagi. MG MG4 Urban Long Range kostar 300.000 kr. meira en drífur 34 km lengra og er með 170 l stærra skott, þótt hleðslustoppin séu um 30% lengri, og ódýrari útfærslan, Leapmotor B03X Pro, sparar 600.000 kr. en drífur 90 km styttra.',
+      'Fyrir þá sem vilja ódýran og sprækan hversdagsbíl sem hleður hratt er B03X ProMax hagkvæmur kostur.',
     ],
     facts: 'e6210d4da47e',
     model: 'gemini-3.8-flash, thinking high',
@@ -749,10 +749,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'mazda-cx-6e-78-kwh': {
     paragraphs: [
-      'Mazda CX-6e er stílhreinn fjölskyldujepplingur sem leggur áherslu á þægindi og yfirvegaðan akstur. Hann er afturhjóladrifinn og hentar þeim sem leita að vönduðum ferðabíl fyrir daglegt líf án þess að borga um of.',
-      'Stærsti kostur hans er rafkerfið. Miðað við aðra á svipuðu verði er hann með stærri rafhlöðu en flestir og hleður hraðar en flestir. Stærri rafhlaða veitir aukið öryggi í íslenskum vetrarkulda og lipur hraðhleðsla kemur sér vel þegar ekið er milli landshluta.',
-      'Aftur á móti er bíllinn fremur aflítill og hægari en flestir í sínum verðflokki. Vanti þér fjórhjóladrif fyrir vetrarfærðina er Hongqi EHS5 aðeins 100.000 kr. dýrari, 3,9 s sneggri í 0-100 km/klst og með um 25% styttri hleðslustopp. Ef snerpa og viðbragð skipta mestu máli er Volvo EX30 Single Motor Extended Range einnig 2,6 s sneggri.',
-      'Mazda CX-6e er heilsteyptur og fremur ódýr kostur sem skilar hraðari hleðslu og stórri rafhlöðu, svo fremi sem eldsnögg hröðun og fjórhjóladrif séu ekki efst á kröfulistanum.',
+      'Mazda CX-6e er stór og stílhreinn jepplingur með afturhjóladrifi, 4,85 m á lengd, sem leggur áherslu á þægindi og yfirvegaðan akstur frekar en snerpu. Hann hentar fjölskyldum sem vilja stóran og vandaðan bíl á hóflegu verði.',
+      'Hann hleður hraðar en flestir á svipuðu verði, auk skottsins er 80 l framskott undir vélarhlífinni og hann má draga 1.500 kg, meira en flestir í sínum verðflokki. Fyrir verðið fær maður óvenju stóran bíl.',
+      'Á móti kemur að hann er hægari en flestir á svipuðu verði og aðeins afturhjóladrifinn, sem kallar á meiri varkárni í snjó og hálku. Hongqi EHS5 kostar 100.000 kr. meira en drífur 38 km lengra, hleður með um 25% styttri stoppum og er mun sneggri.',
+      'CX-6e er heilsteyptur og fremur ódýr kostur fyrir þá sem vilja stóran og þægilegan fjölskyldubíl og þurfa ekki fjórhjóladrif.',
     ],
     facts: '4b812db57179',
     model: 'gemini-3.8-flash, thinking high',
@@ -948,8 +948,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mg-mg4-urban-standard-range': {
     paragraphs: [
       'MG MG4 Urban Standard Range er fimm sæta hlaðbakur í fullri stærð sem kostar svipað og mun smærri borgarbílar. Hann er hannaður sem lipur og hagkvæmur vinnuhestur til daglegra nota í þéttbýli og nærsveitum, og hentar sérstaklega vel sem ódýr fyrsti rafbíll eða annar bíll heimilisins.',
-      'Helsti styrkur bílsins er kaupverðið, enda er hann mjög ódýr og kostar lítið á hvern kílómetra drægni. Þótt hann sé aflítill og með mjög litla rafhlöðu duga kraftarnir ágætlega í hefðbundinni umferð, og drægnin dugar flestum vel í daglegu skutli, jafnvel þótt hún minnki í íslenskum vetrarkulda.',
-      'Á móti kemur að bíllinn drífur mjög stutt og hleður mjög hægt, svo langferðir milli landshluta krefjast mikillar þolinmæði. Fyrir þá sem aka reglulega út á þjóðvegina væri Leapmotor B05 Pro mun betri kostur, með 76 km meiri drægni og um 35% styttri hleðslustopp fyrir 500.000 kr. meira.',
+      'Helsti styrkur bílsins er kaupverðið, enda er hann mjög ódýr, og skottið er óvenju stórt fyrir svo ódýran bíl. Krafturinn dugar ágætlega í hefðbundinni umferð og drægnin í daglegu skutli, jafnvel þótt hún minnki í vetrarkulda.',
+      'Á móti kemur að hann drífur mjög stutt, hleður mjög hægt og má aðeins draga 500 kg, svo langferðir milli landshluta krefjast þolinmæði. MG MG4 Urban Long Range drífur 91 km lengra fyrir 900.000 kr. meira, með sama stóra skottinu.',
       'Fyrir hefðbundinn innanbæjarakstur fæst hins vegar varla meiri bíll fyrir peninginn.',
     ],
     facts: 'af97992b2a74',
@@ -1115,10 +1115,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'peugeot-e-3008-dual-motor': {
     paragraphs: [
-      'Peugeot e-3008 Dual Motor er rennilegur jepplingur sem vekur athygli fyrir djarft útlit og sérstakt ökumannssæti með litlu stýri og bogadregnum skjá. Hann höfðar einkum til þeirra sem vilja þægilegan og hljóðlátan fjölskyldubíl með öflugu fjórhjóladrifi sem grípur vel í snjó og hálku.',
-      'Stærsti styrkur hans liggur í því hvað hann býður upp á miðað við verð. Hann drífur lengra en flestir í sínum verðflokki og er aflmeiri en gerist og gengur, sem kemur sér sérstaklega vel í framúrakstri og á ferðalögum milli landshluta.',
-      'Á móti kemur að bíllinn hleður hægar en flestir á svipuðu verði. Fyrir þá sem ferðast mikið um landið og vilja sem styst stopp við hraðhleðslustöðvar er XPENG G6 AWD Performance til dæmis með um 45% styttri hleðslustopp á sama verði, auk þess sem Volkswagen ID.4 Pro 4MOTION býður upp á um 25% styttri hleðslustopp.',
-      'Peugeot e-3008 Dual Motor er engu að síður mjög álitlegur kostur fyrir þá sem meta mikla drægni, franska hönnun og gott fjórhjóladrif meira en hraðar hleðslur á þjóðveginum.',
+      'Peugeot e-3008 Dual Motor er meðalstór jepplingur með fjórhjóladrifi og djörfu útliti, með sérstæðu ökumannsrými, litlu stýri og bogadregnum skjá. Hann höfðar til þeirra sem vilja þægilegan og hljóðlátan fjölskyldubíl sem sker sig úr.',
+      'Hann drífur lengra en flestir á svipuðu verði, er aflmeiri en flestir þeirra og skottið er stærra en hjá flestum í hans verðflokki.',
+      'Á móti kemur að hann hleður hægar en flestir á svipuðu verði. XPENG G6 AWD Performance kostar það sama en hleður með um 45% styttri stoppum og er mun sneggri. Þurfi ekki fjórhjóladrif fæst framhjóladrifinn Peugeot e-3008 fyrir 520.000 kr. minna, með sömu drægni.',
+      'e-3008 Dual Motor er álitlegur kostur fyrir þá sem meta drægni, rými og franska hönnun ofar hraðri hleðslu.',
     ],
     facts: '692bae7c8a08',
     model: 'gemini-3.8-flash, thinking high',
@@ -1295,20 +1295,20 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'porsche-cayenne-base': {
     paragraphs: [
-      'Porsche Cayenne er stór og veglegur lúxusjeppi sem sameinar hagnýtt rými hás fjölskyldubíls og rómaða aksturseiginleika þýska sportbílaframleiðandans. Hann hentar þeim sem leita að fjórhjóladrifnum ferðabíl í allra hæsta gæðaflokki sem lætur ekki á sjá í krefjandi vetrarfærð.',
-      'Stærstu styrkleikar hans eru mikil drægni og hraðhleðslan. Hann drífur lengra en flestir bílar í sínum verðflokki og er þar meðal þeirra sem hlaða hraðast. Á löngum ferðalögum þýðir þetta að hleðslustoppin verða fátíð og óvenju stutt, og drægnin dugar hnökralaust milli landshluta á köldum dögum.',
-      'Á móti kemur að hröðunin er hægari en hjá flestum á svipuðu verði. Ef hámarks afköst ráða för er Audi SQ6 e-tron sneggri upp á hundraðið, en þar gefur maður eftir drægni og hleðslustoppin verða um 40% lengri. Cayenne er aftur á móti miklu hagnýtari kostur en lágur stallbróðir hans, Porsche Taycan 4 Plus, fyrir þá sem vilja sitja hærra og njóta meira rýmis.',
-      'Fyrir efnaða kaupendur sem vilja ósvikinn lúxusjeppa með mikla drægni og stutt hleðslustopp er Cayenne einkar sannfærandi kostur.',
+      'Porsche Cayenne er stór lúxusjeppi með fjórhjóladrifi sem sameinar rými og notagildi fjölskyldujeppa og rómaða aksturseiginleika Porsche. Hann hentar þeim sem vilja ferðabíl í hæsta gæðaflokki sem ræður jafnt við langferðir og þungan drátt.',
+      'Hann drífur lengra en flestir á svipuðu verði og er meðal þeirra sem hlaða hraðast, svo hleðslustopp á langferðum verða fá og stutt. Skottið er stærra en hjá flestum í hans verðflokki, 90 l framskott bætist við og hann má draga 3.000 kg, meira en flestir á svipuðu verði.',
+      'Á móti kemur að hann er mjög dýr og hægari en flestir á svipuðu verði, þótt hann sé langt frá því að vera seinn. Sú snerpa fæst í Porsche Cayenne S fyrir 3.000.000 kr. meira, með sama skottinu og álíka drægni.',
+      'Grunngerð Cayenne er sú hagnýtasta í línunni og fyrir flesta sú skynsamlegasta: hún gefur lítið eftir nema í snerpu.',
     ],
     facts: 'f692ce51b5b3',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-cayenne-coupe': {
     paragraphs: [
-      'Porsche Cayenne Coupé er hábyggður og rúmgóður lúxusjeppi sem blandar saman virðulegu útliti og sportlegum aksturseiginleikum Porsche. Hann hentar þeim sem leita að hárri sætisstöðu, miklum þægindum og öflugu fjórhjóladrifi til að takast á við íslenskar aðstæður, en vilja um leið halda í rennilegt coupé-lag.',
-      'Bíllinn drífur mjög langt og er með mjög stóra rafhlöðu, sem veitir mikið öryggi í vetrarkulda. Annar mikill styrkleiki er hversu hratt hann hleður. Miðað við aðra á svipuðu verði hleður hann hraðar en flestir, sem þýðir óvenju stutt hleðslustopp á ferðalögum milli landshluta.',
-      'Á móti kemur að hann er mjög dýr og miðað við aðra í sínum verðflokki er hann hægari en flestir í hröðun. BMW iX xDrive 60 Sport býður 58 km meiri drægni og er 160.000 kr. ódýrari, en hleðslustoppin eru um 100% lengri. Ef meiri snerpa skiptir höfuðmáli er Audi SQ6 e-tron 460.000 kr. ódýrari og 0,5 s sneggri í 0-100 km/klst.',
-      'Cayenne Coupé er heillandi valkostur fyrir þá sem vilja háreistan lúxusjeppa með akstursánægju Porsche og hraðhleðslu sem sparar tíma á ferðalögum, svo lengi sem verðmiðinn er innan seilingar.',
+      'Porsche Cayenne Coupé er stór lúxusjeppi með rennilegri, aflíðandi þaklínu og sportlegum aksturseiginleikum Porsche. Hann hentar þeim sem vilja notagildi jeppa en sportlegra útlit en í hefðbundnum Cayenne.',
+      'Hann má draga 3.500 kg, mest allra bíla á listanum, og drífur lengra og hleður hraðar en flestir á svipuðu verði, svo hleðslustoppin á langferðum eru fá og stutt. Skottið er stærra en hjá flestum í hans verðflokki og 90 l framskott bætist við.',
+      'Á móti kemur að hann er mjög dýr og hægari en flestir á svipuðu verði. Porsche Cayenne er 500.000 kr. ódýrari, með 247 l stærra skott, en má draga 500 kg minna.',
+      'Cayenne Coupé er fyrir þá sem vilja Cayenne með sportlegra lagi, og fá mestu dráttargetuna á listanum í kaupbæti.',
     ],
     facts: '89d7d6d210cb',
     model: 'gemini-3.8-flash, thinking high',
@@ -1982,10 +1982,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'volvo-ex90-twin-motor-performance': {
     paragraphs: [
-      'Volvo EX90 Twin Motor Performance er veglegur sjö sæta lúxusjeppi sem sameinar fágaða hönnun og mikið afl. Hann er sneggri og aflmeiri en flestir bílar í sínum verðflokki, sem gerir hann óvenju kvikan miðað við stærð. Hann hentar vel stórum fjölskyldum sem vilja mikið rými, mikil þægindi og kraft í öllum aðstæðum.',
-      'Rafhlaðan er með þeim allra stærstu og bíllinn drífur fremur langt, sem gerir langferðir milli landshluta þægilegar jafnvel í íslenskum vetrarkulda. Fjórhjóladrifið tryggir svo gott veggrip og mikið öryggi í snjó og hálku.',
-      'Á móti kemur að hann hleður hægar en flestir bílar á svipuðu verði. Ef styttri hleðslustopp og lægra verð skipta mestu máli er Hyundai IONIQ 9 Long Range Performance AWD verulega ódýrari kostur með svipaða drægni og um 25% styttri hleðslustopp. Þá býður Mercedes-Benz VLE 400 4MATIC upp á meiri drægni og allt að átta sæti fyrir svipað verð.',
-      'Fyrir kaupendur sem leita að miklu afli, þægindum og öryggi í sjö sæta rafbíl er EX90 afar heillandi valkostur, þótt hann kosti sitt.',
+      'Volvo EX90 Twin Motor Performance er stór sjö sæta lúxusjeppi með fjórhjóladrifi, rúmlega fimm metrar á lengd, sem sameinar skandinavíska fágun, mikið öryggi og mikið afl. Hann hentar stórum fjölskyldum sem vilja rými og þægindi án þess að gefa eftir í snerpu.',
+      'Hann er sneggri og aflmeiri en flestir á svipuðu verði, skottið er stærra en hjá flestum þeirra og hann má draga 2.200 kg, meira en flestir í sínum verðflokki. Drægnin er í meðallagi miðað við verðið en dugar vel milli landshluta.',
+      'Á móti kemur að hann hleður hægar en flestir á svipuðu verði. Volvo EX90 Twin Motor er 800.000 kr. ódýrari með álíka drægni, og munar þar aðeins um snerpuna, en Hyundai IONIQ 9 Long Range Performance AWD er 3.300.000 kr. ódýrari, hleður með um 25% styttri stoppum og er með 239 l stærra skott.',
+      'EX90 Twin Motor Performance er fyrir þá sem vilja sjö sæta Volvo með aukinni snerpu, en flestum dugar ódýrari útfærslan.',
     ],
     facts: 'a23ee4a76bae',
     model: 'gemini-3.8-flash, thinking medium',
