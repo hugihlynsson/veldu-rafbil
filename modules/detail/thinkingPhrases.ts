@@ -24,7 +24,7 @@ const aboutCar: Array<(car: string) => string> = [
   (car) => `Ímyndar sér ${car} á leið norður á Akureyri…`,
   (car) => `Skoðar hve fljótt ${car} hleðst í Staðarskála…`,
   (car) => `Sest í aftursætið á ${car}…`,
-  (car) => `Reiknar með ${car} á nagladekkjum…`,
+  (car) => `Reiknar með ${car} á vetrardekkjum…`,
   (car) => `Skoðar hvort barnavagninn komist í ${car}…`,
 ]
 
