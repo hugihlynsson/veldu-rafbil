@@ -115,11 +115,18 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
                 className="absolute top-1 right-1 p-1 no-underline group"
                 replace
               >
+                {/* A drawn cross rather than ×, which sits off the glyph's
+                    centre */}
                 <span
                   aria-hidden
-                  className="flex w-6 h-6 items-center justify-center rounded-full bg-lab/80 backdrop-blur-sm text-tint text-sm font-bold leading-none transition-transform duration-100 group-hover:scale-110"
+                  className="flex w-6 h-6 items-center justify-center rounded-full bg-glass/50 backdrop-blur-md text-tint transition-colors duration-100 group-hover:bg-glass/70"
                 >
-                  ×
+                  <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
+                    <path
+                      d="m2.07 13.12 4.78-4.78 4.93 4.93 1.29-1.29-4.93-4.93 4.78-4.78L11.64.98 6.85 5.77 1.91.83.63 2.1l4.94 4.94-4.79 4.79 1.29 1.28Z"
+                      fill="currentColor"
+                    />
+                  </svg>
                 </span>
               </Link>
             )}
