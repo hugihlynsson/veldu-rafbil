@@ -1,4 +1,4 @@
-import { useEffect, useEffectEvent, useState } from 'react'
+import { useEffect, useEffectEvent, useRef, useState } from 'react'
 import { trackEvent } from 'fathom-client'
 
 import type { Filters } from '@/modules/list/filters'
@@ -17,6 +17,8 @@ import {
   type FilterSuggestion,
 } from '@/modules/list/filterSuggestions'
 import { filterChipText } from '@/modules/list/filterChips'
+import type { ShownSuggestions } from '@/modules/list/suggestionOutcome'
+import reportSuggestionOutcome from '@/utils/reportSuggestionOutcome'
 import { agree } from '@/modules/copy/plural'
 import SearchIcon from '@/components/SearchIcon'
 import SendIcon from '@/components/SendIcon'
@@ -44,14 +46,14 @@ export interface BarAction {
  * around a try/catch holding a conditional.
  */
 const askRoute = async (
-  text: string,
+  body: { text: string; id: string; supersedes?: string },
   signal: AbortSignal,
 ): Promise<Reading | null> => {
   try {
     const response = await fetch('/api/filter-suggestions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify(body),
       signal,
     })
     if (!response.ok) return null
@@ -71,13 +73,18 @@ interface Props {
   text: string
   filters: Filters
   onApply: (filters: Filters) => void
-  /** Told whenever what sending the text would do changes */
+  /** The pills on screen, or null, for the input to report a send past them */
+  onShownChange?: (shown: ShownSuggestions | null) => void
+  /**
+   * Told whenever what sending the text would do changes. Told after
+   * onShownChange, so the pills it reports are those this action reads.
+   */
   onAction: (action: BarAction) => void
   /** Sends the text to the advisor, when sending it would filter instead */
   onAsk: () => void
 }
 
-const unread = { text: '', suggestions: [], asksAdvisor: false }
+const unread = { text: '', suggestions: [], asksAdvisor: false, at: 0 }
 
 /**
  * Pills for the filters the text asks for, each to be tapped rather than
@@ -92,10 +99,15 @@ export default function FilterSuggestions({
   text,
   filters,
   onApply,
+  onShownChange,
   onAction,
   onAsk,
 }: Props) {
-  const [shown, setShown] = useState<Reading & { text: string }>(unread)
+  const [shown, setShown] = useState<
+    Reading & { text: string; requestId?: string; at: number }
+  >(unread)
+  // A request typed past before it was answered, for the next one to name
+  const unanswered = useRef<string | undefined>(undefined)
 
   // The route refuses a longer one, and the parser reads no further
   const request = active ? text.trim().slice(0, MAX_INTENT_LENGTH) : ''
@@ -111,25 +123,37 @@ export default function FilterSuggestions({
     const parsed = parseFilterIntent(request)
     const read = suggestionsFromFilters(parsed.filters, 'text')
     const controller = new AbortController()
+    let inFlight: string | undefined
 
     const timer = setTimeout(async () => {
-      const asked = needsModel(parsed)
-        ? await askRoute(request, controller.signal)
-        : null
+      let asked: Reading | null = null
+      if (needsModel(parsed)) {
+        inFlight = crypto.randomUUID()
+        const supersedes = unanswered.current
+        unanswered.current = undefined
+        asked = await askRoute(
+          { text: request, id: inFlight, supersedes },
+          controller.signal,
+        )
+      }
       // A later keystroke has its own request coming
       if (controller.signal.aborted) return
       setShown({
         text: request,
+        requestId: inFlight,
         ...(asked ?? {
           suggestions: read,
           asksAdvisor: readsAsQuestion(request),
         }),
+        at: performance.now(),
       })
+      inFlight = undefined
     }, 100)
 
     return () => {
       clearTimeout(timer)
       controller.abort()
+      if (inFlight) unanswered.current = inFlight
     }
   }, [request])
 
@@ -139,23 +163,34 @@ export default function FilterSuggestions({
   )
   const hasSuggestions = suggestions.length > 0
 
+  // Once each time the pills appear, as what the taps are counted against
+  useEffect(() => {
+    if (hasSuggestions) trackEvent('Shown filter suggestions')
+  }, [hasSuggestions])
+
+  const onScreen = (): ShownSuggestions => ({
+    text: shown.text,
+    requestId: shown.requestId,
+    suggestions,
+    shownAt: shown.at,
+  })
+
+  useEffect(() => {
+    onShownChange?.(hasSuggestions ? onScreen() : null)
+  })
+
   // A question goes to the advisor even when it names a filter, and a wish
   // that would leave no car is no answer to send
   const filter =
     !shown.asksAdvisor && hasSuggestions && count > 0
       ? { filters: combined, count }
       : null
-  const read = request === '' || shown.text === request ? text.trim() : null
-  const report = useEffectEvent(() => onAction({ text: read, filter }))
-  const actionKey = JSON.stringify({ read, filter })
+  const readText = request === '' || shown.text === request ? text.trim() : null
+  const report = useEffectEvent(() => onAction({ text: readText, filter }))
+  const actionKey = JSON.stringify({ readText, filter })
   useEffect(() => {
     report()
   }, [actionKey])
-
-  // Once each time the pills appear, as what the taps are counted against
-  useEffect(() => {
-    if (hasSuggestions) trackEvent('Shown filter suggestions')
-  }, [hasSuggestions])
 
   const pills: Pill[] = suggestions.map((suggestion) => {
     const { label, value } = filterChipText(suggestion.key, suggestion.value)
@@ -176,6 +211,7 @@ export default function FilterSuggestions({
       ariaLabel: `Bæta við síu: ${label} ${value}, ${carCount(suggestion.count)}`,
       onClick: () => {
         trackEvent('Applied filter suggestion')
+        reportSuggestionOutcome('applied', onScreen(), suggestion.key)
         onApply(withSuggestion(filters, suggestion))
       },
     }
@@ -212,6 +248,7 @@ export default function FilterSuggestions({
       ariaLabel: `${addAll}, ${carCount(count)}`,
       onClick: () => {
         trackEvent('Applied all filter suggestions')
+        reportSuggestionOutcome('appliedAll', onScreen())
         onApply(combined)
       },
     })

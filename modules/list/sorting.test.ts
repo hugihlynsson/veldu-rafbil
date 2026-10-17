@@ -2,9 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import {
   flipDirection,
-  getSortingFromQuery,
   isDefaultDirection,
-  serializeSorting,
   sortCars,
   sortingDefinitions,
   sortings,
@@ -12,7 +10,11 @@ import {
 } from './sorting'
 import { deriveCar, Car } from '@/modules/data/cars'
 import type { NewCar } from '@/modules/data/newCarSchema'
-import type { SearchParams } from './filters'
+import {
+  getSortingFromQuery,
+  serializeSorting,
+  type SearchParams,
+} from './query'
 import type { Sorting, SortingDirection } from './sorting'
 
 const readSorting = (query: SearchParams) => getSortingFromQuery(query).sorting

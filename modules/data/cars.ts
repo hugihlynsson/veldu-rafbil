@@ -1,6 +1,6 @@
 import type { NewCar } from './newCarSchema'
 import newCars from './newCars'
-import getCarId, { carLabel } from './getCarId'
+import getCarId, { carLabel, carSlug } from './getCarId'
 import getPriceWithGrant from './getPriceWithGrant'
 import getKmPerMinutesCharged from './getKmPerMinutesCharged'
 
@@ -47,3 +47,17 @@ export const allCars: ReadonlyArray<Car> = newCars.map(deriveCar)
 const cars: ReadonlyArray<Car> = allCars.filter((car) => !car.deprecated)
 
 export default cars
+
+const bySlug = (list: ReadonlyArray<Car>) =>
+  new Map(list.map((car) => [carSlug(car), car]))
+
+const allCarsBySlug = bySlug(allCars)
+const carsBySlug = bySlug(cars)
+
+/** The car a slug names, one no longer sold new included: what a page reads */
+export const carWithSlug = (slug: string): Car | undefined =>
+  allCarsBySlug.get(slug)
+
+/** The car a slug names if it is sold new now: what the list and advisor read */
+export const currentCarWithSlug = (slug: string): Car | undefined =>
+  carsBySlug.get(slug)

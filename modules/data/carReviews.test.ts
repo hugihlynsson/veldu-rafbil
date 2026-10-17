@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import cars from './cars'
 import { carSlug } from './getCarId'
 import carReviews from './carReviews'
-import { reviewFactsKey } from '@/modules/detail/reviewPrompt'
+import { reviewFactsKey } from '@/scripts/reviewPrompt'
 
 const bySlug = new Map(cars.map((car) => [carSlug(car), car]))
 

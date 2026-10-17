@@ -22,6 +22,8 @@ import SuggestionPills from '@/components/SuggestionPills'
 import SearchIcon from '@/components/SearchIcon'
 import SendIcon from '@/components/SendIcon'
 import type { BarAction } from '@/components/filters/FilterSuggestions'
+import type { ShownSuggestions } from '@/modules/list/suggestionOutcome'
+import reportSuggestionOutcome from '@/utils/reportSuggestionOutcome'
 
 // The parser and its patterns are fetched once someone focuses the input,
 // rather than with the chat. One import for both, as in ChatContainer.
@@ -86,11 +88,15 @@ const ChatInput: React.FunctionComponent<Props> = ({
   // Sent before the suggestions had read it, so it goes once they have
   const [sendWhenRead, setSendWhenRead] = useState<string | null>(null)
   const formRef = useRef<HTMLFormElement>(null)
+  const filterPills = useRef<ShownSuggestions | null>(null)
   useInputModality()
 
   const filter = filterSuggestions && value.trim() ? action.filter : null
 
   const ask = () => {
+    if (filterPills.current) {
+      reportSuggestionOutcome('sent', filterPills.current)
+    }
     sendMessage(value)
     trackEvent('Sent message')
     onValueChange('')
@@ -100,6 +106,9 @@ const ChatInput: React.FunctionComponent<Props> = ({
   const send = (next: BarAction) => {
     if (filterSuggestions && next.filter) {
       trackEvent('Filtered from bar')
+      if (filterPills.current) {
+        reportSuggestionOutcome('appliedAll', filterPills.current)
+      }
       filterSuggestions.onApply(next.filter.filters)
       onValueChange('')
       // Off the bar, so the list it narrowed is in view, keyboard and all
@@ -254,6 +263,9 @@ const ChatInput: React.FunctionComponent<Props> = ({
             text={value}
             filters={filterSuggestions.filters}
             onApply={filterSuggestions.onApply}
+            onShownChange={(shown) => {
+              filterPills.current = shown
+            }}
             onAction={handleAction}
             onAsk={ask}
           />

@@ -8,11 +8,10 @@ import {
   filterKeys,
   filterUrlKeys,
   filtersFromFields,
-  getFiltersFromQuery,
   normalizeFilters,
-  serializeFilters,
 } from './filters'
 import type { Filters } from './filters'
+import { getFiltersFromQuery, serializeFilters } from './query'
 
 const matches = (filters: Filters) => cars.filter(carFilter(filters)).length
 

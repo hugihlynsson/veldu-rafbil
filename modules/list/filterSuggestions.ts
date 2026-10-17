@@ -53,9 +53,20 @@ const suggestionSchema = z.object({
 })
 
 /**
- * Suggestions as they arrive from the route, each put through the filter's own
- * parser: anything that would not survive the URL is no suggestion.
+ * One suggestion off the wire, put through the filter's own parser: anything
+ * that would not survive the URL is no suggestion.
  */
+export const readSuggestion = (item: unknown): FilterSuggestion | undefined => {
+  const read = suggestionSchema.safeParse(item)
+  if (!read.success) return undefined
+  const { key, value, source, probability } = read.data
+  const parsed = normalizeFilters({ [key]: value })[key]
+  return parsed === undefined
+    ? undefined
+    : ({ key, value: parsed, source, probability } as FilterSuggestion)
+}
+
+/** Suggestions as they arrive from the route */
 export const readSuggestions = (json: unknown): FilterSuggestion[] => {
   const response = z
     .object({ suggestions: z.array(z.unknown()) })
@@ -64,13 +75,8 @@ export const readSuggestions = (json: unknown): FilterSuggestion[] => {
 
   // One at a time, so a suggestion that fails costs only itself
   return response.data.suggestions.flatMap((item) => {
-    const read = suggestionSchema.safeParse(item)
-    if (!read.success) return []
-    const { key, value, source, probability } = read.data
-    const parsed = normalizeFilters({ [key]: value })[key]
-    return parsed === undefined
-      ? []
-      : [{ key, value: parsed, source, probability } as FilterSuggestion]
+    const suggestion = readSuggestion(item)
+    return suggestion ? [suggestion] : []
   })
 }
 

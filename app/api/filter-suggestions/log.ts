@@ -7,12 +7,17 @@ import type { Deployment } from '../publicEndpoint'
 export interface SuggestionsTurn extends Deployment {
   timestamp: string
   text: string
+  /** The client's, so its outcome events can be joined to this one */
+  id: string | undefined
+  /**
+   * The request before it that the client typed past unanswered, so never
+   * shown. Told by the client, as Vercel does not pass on the abort.
+   */
+  supersedes: string | undefined
   result: SuggestionResult
   /** The model's answers, when it was asked and answered */
   answers: Record<string, unknown> | undefined
   inputTokens: number | undefined
-  /** The visitor typed on before the answer came, so it was never shown */
-  superseded: boolean
   millis: number
   model: string
 }
@@ -58,12 +63,13 @@ export const suggestionsLogEvent = (turn: SuggestionsTurn) => {
     type: 'filter_suggestions',
     timestamp: turn.timestamp,
     text: turn.text,
+    id: turn.id,
+    supersedes: turn.supersedes,
     parsed: { filters, unread, numbers },
     modelStatus: turn.result.model,
     answers: turn.answers && answerRows(turn.answers),
     asksAdvisor: typeof advisor === 'number' ? round(advisor) : undefined,
     suggestions: turn.result.suggestions,
-    superseded: turn.superseded,
     millis: turn.millis,
     inputTokens: turn.inputTokens,
     model: turn.model,
