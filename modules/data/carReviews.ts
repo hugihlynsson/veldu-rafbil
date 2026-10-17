@@ -1015,8 +1015,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mini-countryman-se-4x4': {
     paragraphs: [
       'Mini Countryman SE 4x4 er meðalstór jepplingur með fjórhjóladrifi og líflegri hönnun Mini, stærsti bíll merkisins og sá sem hentar fjölskyldum best, fyrir þá sem vilja skera sig úr.',
-      'Hann er snöggur og skemmtilegur í akstri, og vandaður frágangur og hringlaga skjárinn gera innréttinguna eftirminnilegri en í flestum bílum á svipuðu verði. Í tölunum hefur hann fáa styrkleika.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst á svipuðu verði, hleður hægar og dregur minna en flestir þeirra, og skottið er minna en hjá flestum. BYD Sealion 7 kostar það sama en drífur 70 km lengra, hleður með um 30% styttri stoppum, er með 60 l stærra skott og má draga 300 kg meira.',
+      'Hann er snöggur og skemmtilegur í akstri, og vandaður frágangur og hringlaga skjárinn gera innréttinguna eftirminnilegri en í flestum bílum á sama verði. Í tölunum hefur hann þó fáa styrkleika.',
+      'Í sínum verðflokki er hann meðal þeirra sem drífa styst, hleður hægar og dregur minna en flestir, og skottið er minna en hjá flestum. BYD Sealion 7 kostar það sama en drífur 70 km lengra, hleður með um 30% styttri stoppum, er með 60 l stærra skott og má draga 300 kg meira.',
       'Countryman SE er fyrir þá sem kaupa með hjartanu og vilja Mini-stílinn með fjórhjóladrifi, en tölurnar vinna ekki með honum.',
     ],
     facts: '81432d844745',
@@ -1025,9 +1025,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'nissan-ariya-base': {
     paragraphs: [
       'Nissan Ariya er meðalstór jepplingur með framhjóladrifi, þar sem mýkt, hljóðlátur gangur og vandað innanrými eru í fyrirrúmi frekar en snerpa.',
-      'Hann drífur í meðallagi á svipuðu verði, sem dugar á milli landshluta, og innréttingin er notaleg og vel frágengin.',
-      'Á móti kemur að hann hleður hægar og er hægari en flestir á svipuðu verði, og hann er meðal þeirra sem draga minnst, aðeins 750 kg. Hyundai IONIQ 5 Long Range AWD kostar það sama, er fjórhjóladrifinn, drífur 21 km lengra, hleður með um 60% styttri stoppum og má draga 850 kg meira.',
-      'Ariya er ljúfur ferðabíll, en á sama verði fæst mun meira hjá keppinautunum.',
+      'Drægnin er í meðallagi á þessu verði og dugar á milli landshluta, og innréttingin er notaleg og vel frágengin.',
+      'Á móti kemur að hann hleður hægar og er hægari en flestir keppinautar hans, og hann er meðal þeirra sem draga minnst, aðeins 750 kg. Hyundai IONIQ 5 Long Range AWD kostar það sama, er fjórhjóladrifinn, drífur 21 km lengra, hleður með um 60% styttri stoppum og má draga 850 kg meira.',
+      'Ariya er ljúfur ferðabíll, en fyrir sama verð fæst mun meira hjá keppinautunum.',
     ],
     facts: 'ebf917d159a6',
     model: 'gemini-3.8-flash, thinking high',
@@ -1036,8 +1036,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Nissan Ariya e-4ORCE er meðalstór jepplingur með fjórhjóladrifi, mýkt og góðri hljóðvist, ætlaður þeim sem vilja þægilegan og vandaðan fjölskyldubíl.',
       'Fjöðrunin tekur vel á ójöfnum og innanrýmið er notalegt, og hann má draga 1.500 kg.',
-      'Á móti kemur að hann drífur styttra en flestir á svipuðu verði, er meðal þeirra sem hlaða hægast og skottið er minna en hjá flestum þeirra. BYD Sealion 7 er 100.000 kr. ódýrari, drífur álíka langt, hleður með um 40% styttri stoppum og er með 105 l stærra skott.',
-      'Ariya e-4ORCE er fyrir þá sem setja þægindi ofar hleðsluhraða, en keppinautarnir á sama verði gefa meira.',
+      'Gallarnir eru að hann drífur styttra en flestir á svipuðu verði, er meðal þeirra sem hlaða hægast og skottið er minna en hjá flestum keppinautum hans. BYD Sealion 7 er 100.000 kr. ódýrari, drífur álíka langt, hleður með um 40% styttri stoppum og er með 105 l stærra skott.',
+      'Ariya e-4ORCE er fyrir þá sem setja þægindi ofar hleðsluhraða, en keppinautarnir gefa meira fyrir peninginn.',
     ],
     facts: '703df216d4ab',
     model: 'gemini-3.8-flash, thinking medium',
@@ -1045,8 +1045,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'nissan-leaf-standard-range': {
     paragraphs: [
       'Nissan Leaf Standard Range er fimm sæta hlaðbakur, ný kynslóð þrautreynds rafbíls, ætlaður þeim sem vilja einfaldan og hagkvæman hversdagsbíl.',
-      'Hann er mjög ódýr og drífur lengra en flestir á svipuðu verði, og hann má draga 975 kg, meira en flestir á þessu verði.',
-      'Á móti kemur að hann er hægari en flestir á svipuðu verði og hleðslan er í meðallagi. Volkswagen ID. Polo kostar það sama, drífur álíka langt, hleður með um 20% styttri stoppum, er sneggri og má draga 225 kg meira.',
+      'Hann er mjög ódýr en drífur samt lengra en flestir á svipuðu verði, og má draga 975 kg, meira en flestir keppinautar hans.',
+      'Hann er hins vegar hægari en flestir þeirra og hleðslan er í meðallagi. Volkswagen ID. Polo kostar það sama, drífur álíka langt, hleður með um 20% styttri stoppum, er sneggri og má draga 225 kg meira.',
       'Leaf er skynsamlegur kostur fyrir þá sem setja lágt verð og góða drægni ofar snerpu.',
     ],
     facts: '0876a4925283',
@@ -1055,8 +1055,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'nissan-leaf-extended-range': {
     paragraphs: [
       'Nissan Leaf Extended Range er fimm sæta hlaðbakur með stórri rafhlöðu, ný kynslóð þrautreynds rafbíls, ætlaður þeim sem vilja einfaldan bíl sem kemst langt.',
-      'Hann er meðal þeirra langdrægustu og þeirra sem hlaða hraðast á svipuðu verði, svo hann dugar léttilega á milli landshluta, jafnvel í vetrarkulda.',
-      'Á móti kemur að hann dregur minna en flestir á svipuðu verði og skottið er aðeins í meðallagi. Kia EV3 Long Range er 99.000 kr. ódýrari og drífur álíka langt, sem jepplingur með hærri setstöðu.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu og þeirra sem hlaða hraðast, svo hann dugar léttilega á milli landshluta, jafnvel í vetrarkulda.',
+      'Helsti ókosturinn er að hann dregur minna en flestir keppinautar hans og skottið er aðeins í meðallagi. Kia EV3 Long Range er 99.000 kr. ódýrari og drífur álíka langt, sem jepplingur með hærri setstöðu.',
       'Leaf Extended Range er eitt skynsamlegasta valið fyrir þá sem vilja mikla drægni á hagstæðu verði.',
     ],
     facts: 'd634205f4f90',
@@ -1066,7 +1066,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Opel Frontera er kassalaga jepplingur sem býður allt að sjö sæti á verði sem er með því lægsta á listanum. Hann hentar stærri fjölskyldum sem vilja hagnýtan bíl í dagleg verkefni fyrir lítið.',
       'Fáir aðrir sjö sæta bílar komast nálægt verðinu, og skottið er stærra en hjá flestum á svipuðu verði. Kassalaga lagið gefur gott höfuðrými og útsýni.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst, hlaða hægast, eru hægastir og draga minnst á svipuðu verði, svo hann hentar illa til ferða milli landshluta. Peugeot e-Rifter tekur líka sjö, drífur 38 km lengra og er með 315 l stærra skott, en kostar 2.100.000 kr. meira.',
+      'Gallarnir eru að í sínum verðflokki er hann meðal þeirra sem drífa styst, hlaða hægast, eru hægastir og draga minnst, svo hann hentar illa til ferða milli landshluta. Peugeot e-Rifter tekur líka sjö, drífur 38 km lengra og er með 315 l stærra skott, en kostar 2.100.000 kr. meira.',
       'Frontera er ódýrasta leiðin að sjö sætum, sniðin að nærumhverfinu frekar en langferðum.',
     ],
     facts: '6966a929a05b',
@@ -1076,7 +1076,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Opel Grandland er meðalstór jepplingur með framhjóladrifi, 4,65 m á lengd, sem leggur áherslu á þægindi og notagildi frekar en snerpu.',
       'Skottið er stærra en hjá flestum á svipuðu verði, og drægnin og hleðslan eru í meðallagi, sem dugar fyrir ferðir milli landshluta.',
-      'Á móti kemur að hann er meðal þeirra hægustu á svipuðu verði og dregur minna en flestir þeirra. Peugeot e-3008 Dual Motor, sem er byggður á sama grunni, kostar 100.000 kr. meira en er fjórhjóladrifinn, mun sneggri og með 38 l stærra skott.',
+      'Á móti kemur að hann er meðal þeirra hægustu í sínum verðflokki og dregur minna en flestir keppinautar hans. Peugeot e-3008 Dual Motor, sem er byggður á sama grunni, kostar 100.000 kr. meira en er fjórhjóladrifinn, mun sneggri og með 38 l stærra skott.',
       'Grandland er jarðbundinn og rúmgóður fjölskyldubíll, en systurbíllinn frá Peugeot gefur meira fyrir litlu meira.',
     ],
     facts: '10b4052276f8',
@@ -1085,19 +1085,19 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'opel-grandland-awd': {
     paragraphs: [
       'Opel Grandland AWD er meðalstór jepplingur með fjórhjóladrifi, 4,65 m á lengd, sem leggur áherslu á notagildi og þægindi.',
-      'Hann er snöggur og skottið er í meðallagi á svipuðu verði, og hann má draga 1.350 kg.',
-      'Á móti kemur að hann drífur styttra en flestir á svipuðu verði og hleður aðeins í meðallagi. Kia EV6 2025 Long Range AWD kostar það sama en drífur 30 km lengra, hleður með um 45% styttri stoppum og má draga 450 kg meira. Framhjóladrifni Opel Grandland er 400.000 kr. ódýrari og drífur 29 km lengra.',
-      'Grandland AWD er prýðilegur fyrir fjölskylduakstur í vetrarfærð, en keppinautarnir á sama verði hlaða mun hraðar.',
+      'Hann er snöggur, skottið er í meðallagi á þessu verði og hann má draga 1.350 kg.',
+      'Gallinn er að hann drífur styttra en flestir keppinautar hans og hleður aðeins í meðallagi. Kia EV6 2025 Long Range AWD kostar það sama en drífur 30 km lengra, hleður með um 45% styttri stoppum og má draga 450 kg meira. Framhjóladrifni Opel Grandland er 400.000 kr. ódýrari og drífur 29 km lengra.',
+      'Grandland AWD er prýðilegur fyrir fjölskylduakstur í vetrarfærð, en keppinautarnir hlaða mun hraðar.',
     ],
     facts: '52c63660f039',
     model: 'gemini-3.8-flash, thinking high',
   },
   'gwm-ora-3-48-kwh': {
     paragraphs: [
-      'GWM Ora 3 er sérstæður smábíll með skemmtilegt retro-útlit sem sker sig vel úr í umferðinni. Hann er fyrst og fremst hannaður sem borgarbíll eða laglegur annar bíll á heimili, lipur í þröngum bílastæðum og þægilegur í allan daglegan skutl innanbæjar.',
-      'Helsti styrkur hans er lágt kaupverð og sérstætt útlit, og í hröðun og afli er hann í meðallagi miðað við bíla á svipuðu verði.',
+      'GWM Ora 3 er sérstæður smábíll með skemmtilegt retro-útlit sem sker sig vel úr í umferðinni. Hann er fyrst og fremst hannaður sem borgarbíll eða laglegur annar bíll heimilisins, lipur í þröngum bílastæðum og þægilegur í allt daglegt skutl innanbæjar.',
+      'Helsti styrkur hans er lágt kaupverð og sérstætt útlit, og í hröðun og afli er hann í meðallagi á þessu verði.',
       'Á móti kemur að hann er meðal þeirra sem drífa styst og hlaða hægast í sínum verðflokki, skottið er eitt það minnsta og hann má ekki draga kerru. Kia EV2 Standard Range er 500.000 kr. ódýrari, hleður með um 35% styttri stoppum, er með 134 l stærra skott og má draga 750 kg.',
-      'Ora 3 er því skemmtilegur kostur fyrir þá sem leita að ódýrum og sérviskulegum bíl í bæjarakstur og hlaða heima, en síður sniðinn fyrir miklar langferðir.',
+      'Ora 3 er skemmtilegur kostur fyrir þá sem leita að ódýrum og sérviskulegum bíl í bæjarakstur og hlaða heima, en síður sniðinn fyrir miklar langferðir.',
     ],
     facts: 'a6c48a654251',
     model: 'gemini-3.8-flash, thinking medium',
@@ -1105,8 +1105,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'peugeot-e-2008-54-kwh': {
     paragraphs: [
       'Peugeot e-2008 er lítill jepplingur með sérstökum frönskum svip og hærri setstöðu, ætlaður þeim sem vilja lipran og þægilegan bíl í daglegt skutl.',
-      'Hann er mjög ódýr og hleður hraðar en flestir á svipuðu verði, svo hleðslustoppin eru styttri en hjá helstu keppinautum.',
-      'Á móti kemur að hann drífur styttra og er meðal þeirra hægustu á svipuðu verði, og hann má ekki draga kerru. Kia EV3 Standard Range kostar 51.000 kr. meira, drífur 24 km lengra, er mun sneggri og má draga 500 kg.',
+      'Hann er mjög ódýr og hleður hraðar en flestir á svipuðu verði, svo hleðslustoppin eru styttri en hjá helstu keppinautum hans.',
+      'Hann drífur hins vegar styttra og er meðal þeirra hægustu í sínum verðflokki, og hann má ekki draga kerru. Kia EV3 Standard Range kostar 51.000 kr. meira, drífur 24 km lengra, er mun sneggri og má draga 500 kg.',
       'e-2008 er lipur bæjarbíll fyrir þá sem þurfa hvorki kerru né mikla drægni.',
     ],
     facts: 'ba54c05cafa1',
@@ -1115,8 +1115,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'peugeot-e-3008-base': {
     paragraphs: [
       'Peugeot e-3008 er meðalstór jepplingur með framhjóladrifi og djörfu útliti, með sérstæðu ökumannsrými, litlu stýri og bogadregnum skjá, fyrir þá sem vilja stílhreinan og þægilegan fjölskyldubíl.',
-      'Hann drífur lengra en flestir á svipuðu verði og skottið er stærra en hjá flestum þeirra, svo hann dugar vel í ferðir milli landshluta með fulla fjölskyldu.',
-      'Á móti kemur að hann hleður hægar og er aflminni en flestir á svipuðu verði. Skoda Elroq 85x kostar 20.000 kr. meira, er fjórhjóladrifinn, drífur 45 km lengra og hleður með um 30% styttri stoppum, en skottið er 118 l minna.',
+      'Hann drífur lengra og er með stærra skott en flestir á svipuðu verði, svo hann dugar vel í ferðir milli landshluta með fulla fjölskyldu.',
+      'Á móti kemur að hann hleður hægar og er aflminni en flestir keppinautar hans. Skoda Elroq 85x kostar 20.000 kr. meira, er fjórhjóladrifinn, drífur 45 km lengra og hleður með um 30% styttri stoppum, en skottið er 118 l minna.',
       'e-3008 er fýsilegur kostur fyrir þá sem meta hönnun, drægni og pláss ofar hraðri hleðslu.',
     ],
     facts: 'ce16f004dc74',
@@ -1125,8 +1125,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'peugeot-e-3008-dual-motor': {
     paragraphs: [
       'Peugeot e-3008 Dual Motor er meðalstór jepplingur með fjórhjóladrifi og djörfu útliti, með sérstæðu ökumannsrými, litlu stýri og bogadregnum skjá. Hann höfðar til þeirra sem vilja þægilegan og hljóðlátan fjölskyldubíl sem sker sig úr.',
-      'Hann drífur lengra en flestir á svipuðu verði, er aflmeiri en flestir þeirra og skottið er stærra en hjá flestum í hans verðflokki.',
-      'Á móti kemur að hann hleður hægar en flestir á svipuðu verði. XPENG G6 AWD Performance kostar það sama en hleður með um 45% styttri stoppum og er mun sneggri. Þurfi ekki fjórhjóladrif fæst framhjóladrifinn Peugeot e-3008 fyrir 520.000 kr. minna, með sömu drægni.',
+      'Í sínum verðflokki drífur hann lengra og er aflmeiri en flestir, og skottið er stærra en hjá flestum.',
+      'Gallinn er að hann hleður hægar en flestir keppinautar hans. XPENG G6 AWD Performance kostar það sama en hleður með um 45% styttri stoppum og er mun sneggri. Þurfi ekki fjórhjóladrif fæst framhjóladrifinn Peugeot e-3008 fyrir 520.000 kr. minna, með sömu drægni.',
       'e-3008 Dual Motor er álitlegur kostur fyrir þá sem meta drægni, rými og franska hönnun ofar hraðri hleðslu.',
     ],
     facts: '692bae7c8a08',
@@ -1135,8 +1135,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'peugeot-e-5008-base': {
     paragraphs: [
       'Peugeot e-5008 er stór sjö sæta jepplingur með framhjóladrifi, 4,8 m á lengd, sem býður jepplingalag frekar en sendibílalag fyrir stærri fjölskyldur á viðráðanlegu verði.',
-      'Skottið er eitt það stærsta á svipuðu verði, og hann er einn ódýrasti rafbíllinn sem rúmar sjö. Drægnin er í meðallagi, sem dugar fyrir ferðir milli landshluta.',
-      'Á móti kemur að hann er meðal þeirra hægustu á svipuðu verði, hleður hægar og dregur minna en flestir þeirra. Skoda Peaq 90x kostar 1.400.000 kr. meira en er fjórhjóladrifinn, drífur 111 km lengra, hleður með um 35% styttri stoppum og má draga 1.000 kg meira.',
+      'Hann er einn ódýrasti rafbíllinn sem rúmar sjö, og skottið er eitt það stærsta á svipuðu verði. Drægnin er í meðallagi, sem dugar fyrir ferðir milli landshluta.',
+      'Á móti kemur að hann er meðal þeirra hægustu í sínum verðflokki, hleður hægar og dregur minna en flestir keppinautar hans. Skoda Peaq 90x kostar 1.400.000 kr. meira en er fjórhjóladrifinn, drífur 111 km lengra, hleður með um 35% styttri stoppum og má draga 1.000 kg meira.',
       'e-5008 er skynsamlegur kostur fyrir barnmargar fjölskyldur sem vilja sjö sæti og mikið pláss fyrir hóflegt verð.',
     ],
     facts: 'a5a25913aff2',
@@ -1146,7 +1146,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Peugeot e-5008 Dual Motor er stór sjö sæta jepplingur með fjórhjóladrifi, 4,8 m á lengd, fyrir stærri fjölskyldur sem vilja jepplingalag og grip í vetrarfærð.',
       'Skottið er eitt það stærsta á svipuðu verði og hann er mun sneggri en framhjóladrifna útfærslan.',
-      'Á móti kemur að hann drífur styttra, er meðal þeirra sem hlaða hægast og dregur minna en flestir á svipuðu verði. Skoda Peaq 90x kostar 900.000 kr. meira en drífur 140 km lengra, hleður með um 40% styttri stoppum og má draga 1.000 kg meira. Framhjóladrifni Peugeot e-5008 er 520.000 kr. ódýrari og drífur 29 km lengra.',
+      'Gallarnir eru að hann drífur styttra, er meðal þeirra sem hlaða hægast og dregur minna en flestir keppinautar hans. Skoda Peaq 90x kostar 900.000 kr. meira en drífur 140 km lengra, hleður með um 40% styttri stoppum og má draga 1.000 kg meira. Framhjóladrifni Peugeot e-5008 er 520.000 kr. ódýrari og drífur 29 km lengra.',
       'e-5008 Dual Motor hentar fjölskyldum sem þurfa sjö sæti og fjórhjóladrif, en síður sem langferðabíll.',
     ],
     facts: '6b04476cfe4e',
@@ -1156,7 +1156,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Peugeot e-Rifter er hár og kassalaga fjölnotabíll, byggður á sendibíl, með rennihurðum og plássi fyrir allt að sjö manns. Hann leggur áherslu á rými og notagildi frekar en þægindi og hentar stórum fjölskyldum í daglegu amstri.',
       'Farangursrýmið er með því stærsta í sínum verðflokki og hann er fremur ódýr. Hann kostar 1.300.000 kr. minna en hinn nánast eins Toyota Proace City Verso, sem er byggður á sama grunni og drífur álíka langt.',
-      'Á móti kemur að hann drífur mjög stutt, hleður mjög hægt og er mjög aflítill, svo hann hentar illa til langferða. Peugeot e-5008 er 980.000 kr. dýrari en drífur 159 km lengra, með 141 l stærra skott, og má draga 250 kg meira.',
+      'Á móti kemur að hann drífur mjög stutt, hleður mjög hægt og er mjög aflítill, svo hann hentar illa til langferða. Peugeot e-5008 er 980.000 kr. dýrari en drífur 159 km lengra, er með 141 l stærra skott og má draga 250 kg meira.',
       'Fyrir þá sem þurfa ódýran og rúmgóðan bíl fyrir marga í nærumhverfinu vinnur e-Rifter verkið vel.',
     ],
     facts: 'cfb65a98ef52',
@@ -1165,8 +1165,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'peugeot-e-traveller-base': {
     paragraphs: [
       'Peugeot e-Traveller er stór fjölnotabíll byggður á sendibíl, með sætum fyrir allt að níu manns, sniðinn að stórum fjölskyldum, hópferðum og fólksflutningum í þéttbýli.',
-      'Skottið er stærra en hjá flestum á svipuðu verði og hann tekur fleiri en flestir aðrir rafbílar, og hann rennur hljóðlega um göturnar.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst, hlaða hægast, eru hægastir og draga minnst á svipuðu verði. Hyundai STARIA Electric tekur líka níu, er 1.300.000 kr. ódýrari, drífur 49 km lengra, hleður með um 45% styttri stoppum og má draga 1.000 kg meira.',
+      'Skottið er stærra en hjá flestum á svipuðu verði, hann tekur fleiri en flestir aðrir rafbílar og rennur hljóðlega um göturnar.',
+      'Gallarnir eru að í sínum verðflokki er hann meðal þeirra sem drífa styst, hlaða hægast, eru hægastir og draga minnst. Hyundai STARIA Electric tekur líka níu, er 1.300.000 kr. ódýrari, drífur 49 km lengra, hleður með um 45% styttri stoppum og má draga 1.000 kg meira.',
       'e-Traveller leysir fólksflutninga í þéttbýli, en STARIA gefur meira fyrir minna.',
     ],
     facts: '579ac6ea3486',
@@ -1175,8 +1175,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'polestar-2-long-range-dual-motor': {
     paragraphs: [
       'Polestar 2 Long Range Dual Motor er lágur og sportlegur fólksbíll með afturhlera og fjórhjóladrifi, með skandinavískum gæðablæ, fyrir þá sem vilja snerpu og góða aksturseiginleika frekar en jeppling.',
-      'Hann er meðal þeirra langdrægustu og þeirra sem hlaða hraðast á svipuðu verði, sneggri og aflmeiri en flestir þeirra, og hann má draga 1.500 kg. Auk skottsins er lítið framskott.',
-      'Á móti kemur að skottið er minna en hjá flestum á svipuðu verði og aftursætin eru fremur þröng. Ford Capri kostar það sama, drífur álíka langt og hleður jafn hratt, en er með 165 l stærra skott.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu og þeirra sem hlaða hraðast, og sneggri og aflmeiri en flestir. Hann má draga 1.500 kg og auk skottsins er lítið framskott.',
+      'Á móti kemur að skottið er minna en hjá flestum keppinautum hans og aftursætin eru fremur þröng. Ford Capri kostar það sama, drífur álíka langt og hleður jafn hratt, en er með 165 l stærra skott.',
       'Polestar 2 er fyrir þá sem setja akstursánægju og drægni ofar plássi.',
     ],
     facts: 'ea9b46c810bb',
@@ -1186,7 +1186,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Polestar 2 Long Range Performance er lágur og sportlegur fólksbíll með afturhlera og fjórhjóladrifi, með stinnri fjöðrun og áherslu á aksturseiginleika, fyrir þá sem vilja góða tilfinningu fyrir veginum.',
       'Hann drífur lengra, hleður hraðar og er sneggri en flestir á svipuðu verði, og hann má draga 1.500 kg.',
-      'Á móti kemur að skottið er minna en hjá flestum á svipuðu verði og aftursætin eru fremur þröng. Polestar 2 Long Range Dual Motor er 900.000 kr. ódýrari, drífur 28 km lengra og munar aðeins sjónarmun í snerpu.',
+      'Gallarnir eru að skottið er minna en hjá flestum keppinautum hans og aftursætin eru fremur þröng. Polestar 2 Long Range Dual Motor er 900.000 kr. ódýrari, drífur 28 km lengra og munar aðeins sjónarmun í snerpu.',
       'Performance-útfærslan er fyrir þá sem vilja allra sportlegasta Polestar 2, en flestum dugar Dual Motor.',
     ],
     facts: '5d18326da1a8',
@@ -1195,8 +1195,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'polestar-3-base': {
     paragraphs: [
       'Polestar 3 er stór lúxusjepplingur með fjórhjóladrifi, 4,9 m á lengd, með áberandi skandinavískri hönnun, fyrir þá sem vilja kraftmikinn og stöðugan bíl með fágað yfirbragð.',
-      'Hann drífur lengra og er aflmeiri en flestir á svipuðu verði, og hann má draga 2.200 kg, meira en flestir í sínum verðflokki.',
-      'Á móti kemur að hann hleður hægar en flestir á svipuðu verði og skottið er minna en hjá flestum þeirra. Volvo ES90 Twin Motor, byggður á sama grunni, kostar það sama, drífur 51 km lengra og hleður með um 35% styttri stoppum, fyrir þá sem sætta sig við fólksbíl.',
+      'Í sínum verðflokki drífur hann lengra og er aflmeiri en flestir, og hann má draga 2.200 kg, meira en flestir keppinautar hans.',
+      'Hann hleður hins vegar hægar en flestir þeirra og skottið er minna. Volvo ES90 Twin Motor, byggður á sama grunni, kostar það sama, drífur 51 km lengra og hleður með um 35% styttri stoppum, fyrir þá sem sætta sig við fólksbíl.',
       'Polestar 3 er fyrir þá sem vilja langdrægan og kraftmikinn jeppling með sterkan svip.',
     ],
     facts: '607b219a4925',
@@ -1205,8 +1205,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'polestar-3-performance': {
     paragraphs: [
       'Polestar 3 Performance er stór lúxusjepplingur með fjórhjóladrifi, 4,9 m á lengd, sem sameinar norræna fágun og sportlega aksturseiginleika.',
-      'Hann er meðal þeirra aflmestu og sneggri en flestir á svipuðu verði, og hann má draga 2.200 kg, meira en flestir í sínum verðflokki.',
-      'Á móti kemur að hann drífur styttra og hleður hægar en flestir á svipuðu verði, og skottið er minna en hjá flestum þeirra. Porsche Macan 4 Electric er 40.000 kr. ódýrari, drífur 51 km lengra, hleður með um 40% styttri stoppum og má draga 300 kg meira. Polestar 3 er 1.000.000 kr. ódýrari og drífur 68 km lengra.',
+      'Í sínum verðflokki er hann meðal þeirra aflmestu og sneggri en flestir, og hann má draga 2.200 kg, meira en flestir keppinautar hans.',
+      'Gallarnir eru að hann drífur styttra og hleður hægar en flestir þeirra, og skottið er minna. Porsche Macan 4 Electric er 40.000 kr. ódýrari, drífur 51 km lengra, hleður með um 40% styttri stoppum og má draga 300 kg meira. Polestar 3 er 1.000.000 kr. ódýrari og drífur 68 km lengra.',
       'Polestar 3 Performance er fyrir þá sem vilja sportlegasta Polestar 3, en grunnútfærslan gefur meira fyrir peninginn.',
     ],
     facts: '60945870f6fe',
