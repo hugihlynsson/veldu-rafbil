@@ -322,7 +322,11 @@
     --corner: 1.6;
   }
   @layer base {
-    * {
+    /* The pseudo-elements too, which `*` misses: drawn round at a radius
+       grown for a squircle, a hover card bulges in over what it frames */
+    *,
+    ::before,
+    ::after {
       corner-shape: squircle;
     }
     .rounded-full {
