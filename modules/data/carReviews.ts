@@ -415,8 +415,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'jeep-avenger-base': {
     paragraphs: [
       'Jeep Avenger er lítill og kantaður jepplingur með svipmiklu Jeep-útliti, systurbíll Fiat 600e, þótt hann sé aðeins framhjóladrifinn. Hann hentar þeim sem vilja hærri setstöðu og vaskan svip í meðfærilegum bæjarbíl.',
-      'Hann er fremur ódýr, lipur í þröngum götum og auðveldur í stæðum. Í tölunum hefur hann fáa styrkleika umfram keppinautana.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst, hlaða hægast og eru hægastir á svipuðu verði, skottið er minna en hjá flestum þeirra og hann má ekki draga kerru. XPENG G6 RWD Standard Range kostar það sama en drífur 35 km lengra, hleður með um 55% styttri stoppum, er með 216 l stærra skott og má draga 1.500 kg.',
+      'Hann er fremur ódýr, lipur í þröngum götum og auðveldur í stæðum. Í tölunum hefur hann þó fáa styrkleika umfram keppinautana.',
+      'Í sínum verðflokki er hann meðal þeirra sem drífa styst, hlaða hægast og eru hægastir, skottið er minna en hjá flestum og hann má ekki draga kerru. XPENG G6 RWD Standard Range kostar það sama en drífur 35 km lengra, hleður með um 55% styttri stoppum, er með 216 l stærra skott og má draga 1.500 kg.',
       'Avenger er laglegur borgarbíll fyrir þá sem heillast af Jeep-svipnum, en gefur mikið eftir í drægni, hleðslu og plássi.',
     ],
     facts: '44e951bb483e',
@@ -425,8 +425,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kgm-musso-ev-base': {
     paragraphs: [
       'KGM Musso EV er stór rafdrifinn pallbíll, rúmlega fimm metrar á lengd, frá kóreska framleiðandanum sem áður hét SsangYong. Hann leggur áherslu á notagildi fremur en fágun og hentar þeim sem þurfa pall og dráttargetu í vinnu eða frístundum.',
-      'Hann má draga 1.800 kg, meira en flestir á svipuðu verði, og pallurinn tekur það sem kemst ekki í skott. KGM ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km, mun lengur en flestir í sínum verðflokki.',
-      'Á móti kemur að hann hleður mjög hægt, drífur styttra en flestir á svipuðu verði og er hægur í akstri. Þessi útfærsla er aðeins framhjóladrifin, en KGM Musso EV 4WD fæst með fjórhjóladrifi fyrir 1.300.000 kr. meira, þótt hann drífi 41 km styttra.',
+      'Hann má draga 1.800 kg, meira en flestir á svipuðu verði, og pallurinn tekur það sem kemst ekki í skott. KGM ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km, mun lengur en flestir aðrir framleiðendur.',
+      'Á móti kemur að hann hleður mjög hægt, drífur styttra en flestir keppinautar hans og er hægur í akstri. Þessi útfærsla er aðeins framhjóladrifin, en KGM Musso EV 4WD fæst með fjórhjóladrifi fyrir 1.300.000 kr. meira, þótt hann drífi 41 km styttra.',
       'Musso EV er eini rafdrifni pallbíllinn sem seldur er hér og hentar þeim sem þurfa vinnuþjark, ef þeir sætta sig við löng hleðslustopp.',
     ],
     facts: 'efc224526415',
@@ -435,8 +435,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kgm-musso-ev-4wd': {
     paragraphs: [
       'KGM Musso EV 4WD er stór rafdrifinn pallbíll með fjórhjóladrifi, rúmlega fimm metrar á lengd, frá kóreska framleiðandanum sem áður hét SsangYong. Hann hentar þeim sem þurfa pall, dráttargetu og grip í vinnu, á malarvegum og utan malbiks.',
-      'Hann má draga 1.800 kg, meira en flestir á svipuðu verði, og fjórhjóladrifið nýtist vel í snjó og drullu. KGM ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km, mun lengur en flestir í sínum verðflokki.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst og hlaða hægast á svipuðu verði, svo langferðir kalla á þolinmæði. Framhjóladrifni KGM Musso EV er 1.300.000 kr. ódýrari og drífur 41 km lengra, fyrir þá sem þurfa pallinn en ekki fjórhjóladrifið.',
+      'Hann má draga 1.800 kg, meira en flestir á svipuðu verði, og fjórhjóladrifið nýtist vel í snjó og drullu. KGM ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km, mun lengur en flestir aðrir framleiðendur.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst og hlaða hægast í þessum verðflokki, svo langferðir kalla á þolinmæði. Framhjóladrifni KGM Musso EV er 1.300.000 kr. ódýrari og drífur 41 km lengra, fyrir þá sem þurfa pallinn en ekki fjórhjóladrifið.',
       'Musso EV 4WD er eini rafdrifni fjórhjóladrifni pallbíllinn sem seldur er hér, sniðinn að vinnu frekar en langferðum.',
     ],
     facts: 'd66452b944fb',
@@ -445,8 +445,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kgm-torres-evx': {
     paragraphs: [
       'KGM Torres EVX er stór og kantaður jepplingur, 4,7 m á lengd, með grófu útliti og framhjóladrifi, sem höfðar til þeirra sem vilja háa setstöðu og mikið pláss fyrir fjölskylduna á viðráðanlegu verði.',
-      'Skottið er það stærsta á svipuðu verði, og KGM ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km, mun lengur en flestir í sínum verðflokki. Hann má líka draga 1.500 kg, meira en flestir á svipuðu verði.',
-      'Á móti kemur að hann hleður hægar og er hægari en flestir á svipuðu verði, og drægnin er aðeins í meðallagi. Leapmotor C10 ProMax AWD kostar 100.000 kr. meira, er fjórhjóladrifinn, mun aflmeiri og hleður með um 15% styttri stoppum, en skottið er 404 l minna.',
+      'Skottið er það stærsta á svipuðu verði og hann má draga 1.500 kg, meira en flestir keppinautar hans. KGM ábyrgist auk þess rafhlöðuna í allt að 10 ár eða 1.000.000 km, mun lengur en flestir aðrir framleiðendur.',
+      'Hann hleður hins vegar hægar og er hægari en flestir þeirra, og drægnin er aðeins í meðallagi. Leapmotor C10 ProMax AWD kostar 100.000 kr. meira, er fjórhjóladrifinn, mun aflmeiri og hleður með um 15% styttri stoppum, en skottið er 404 l minna.',
       'Torres EVX er prýðilegur kostur fyrir fjölskyldur sem þurfa mikið pláss og vilja langa ábyrgð, og gera ekki kröfu um hraða hleðslu.',
     ],
     facts: 'afa5bc47ed1b',
@@ -455,7 +455,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kia-ev2-standard-range': {
     paragraphs: [
       'Kia EV2 Standard Range er lítill og nettur jepplingur, ætlaður sem hagkvæmur bæjarbíll fyrir þá sem aka mest innanbæjar og vilja bíl frá merki með gott orðspor.',
-      'Stærsti kostur hans er verðið, enda er hann mjög ódýr, og hann má draga 750 kg, sem margir bílar á svipuðu verði mega ekki. Hann er lipur í þröngum stæðum og með lítið framskott fyrir hleðslusnúrurnar.',
+      'Stærsti kostur hans er verðið, enda er hann mjög ódýr, og hann má draga 750 kg, sem margir keppinautar hans mega ekki. Hann er lipur í þröngum stæðum og með lítið framskott fyrir hleðslusnúrurnar.',
       'Á móti kemur að hann drífur mjög stutt og hleður hægar en flestir á svipuðu verði, svo hann hentar illa til ferða milli landshluta. Leapmotor B10 kostar nánast það sama en er stærri bíll, drífur 44 km lengra, hleður með um 30% styttri stoppum og er með 68 l stærra skott.',
       'EV2 hentar best sem ódýr bæjarbíll eða annar bíll heimilisins, ekki sem eini bíllinn í langferðir.',
     ],
@@ -465,8 +465,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kia-ev2-long-range': {
     paragraphs: [
       'Kia EV2 Long Range er lítill og laglegur jepplingur, ætlaður sem hagkvæmur hversdagsbíll fyrir þá sem vilja komast á nýjan rafbíl frá merki með gott orðspor án þess að teygja budduna.',
-      'Hann er mjög ódýr og drífur lengra en flestir á svipuðu verði, 136 km lengra en grunnútfærslan, svo hann dugar á milli landshluta þótt hann sé lítill.',
-      'Á móti kemur að hann er meðal þeirra hægustu og aflminnstu á svipuðu verði og skottið er minna en hjá flestum þeirra. Skoda Epiq 55 kostar 99.000 kr. meira en er mun sneggri, hleður með um 20% styttri stoppum, er með 113 l stærra skott og má draga 450 kg meira.',
+      'Hann er mjög ódýr en drífur samt lengra en flestir á svipuðu verði, 136 km lengra en grunnútfærslan, svo hann dugar á milli landshluta þótt hann sé lítill.',
+      'Hann er hins vegar meðal þeirra hægustu og aflminnstu í þessum verðflokki og skottið er minna en hjá flestum. Skoda Epiq 55 kostar 99.000 kr. meira en er mun sneggri, hleður með um 20% styttri stoppum, er með 113 l stærra skott og má draga 450 kg meira.',
       'EV2 Long Range er skynsamlegt val fyrir þá sem vilja mikla drægni fyrir lítið og sætta sig við rólegan takt.',
     ],
     facts: '2fdd5bf67da3',
@@ -475,8 +475,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kia-ev3-standard-range': {
     paragraphs: [
       'Kia EV3 Standard Range er lítill og nútímalegur jepplingur, ætlaður sem hagkvæmur hversdagsbíll fyrir fjölskylduna eða í daglegan innanbæjarakstur.',
-      'Hann er mjög ódýr, sneggri en flestir á svipuðu verði og skottið er stærra en hjá flestum þeirra, með lítið framskott að auki.',
-      'Á móti kemur að hann má aðeins draga 500 kg og ábyrgðin á rafhlöðunni er með þeim stystu á svipuðu verði. Kia EV3 Long Range kostar 600.000 kr. meira en drífur 175 km lengra, hleður með um 25% styttri stoppum og má draga 1.000 kg.',
+      'Hann er mjög ódýr en samt sneggri en flestir á svipuðu verði, og skottið er stærra en hjá flestum keppinautum hans, með lítið framskott að auki.',
+      'Gallarnir eru að hann má aðeins draga 500 kg og ábyrgðin á rafhlöðunni er með þeim stystu. Kia EV3 Long Range kostar 600.000 kr. meira en drífur 175 km lengra, hleður með um 25% styttri stoppum og má draga 1.000 kg.',
       'EV3 Standard Range er lipur og ódýr bæjarbíll, en flestum sem aka út á land borgar sig að fara í stærri rafhlöðuna.',
     ],
     facts: '42dcd1988f27',
@@ -485,8 +485,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kia-ev3-long-range': {
     paragraphs: [
       'Kia EV3 Long Range er lítill og nútímalegur jepplingur sem drífur óvenju langt miðað við stærð og verð. Hann hentar þeim sem vilja hagkvæman og lipran bíl sem ræður líka við langferðir.',
-      'Hann er meðal þeirra langdrægustu á svipuðu verði og hleður hraðar en flestir þeirra, svo hann dugar léttilega á milli landshluta, jafnvel í vetrarkulda. Skottið er stærra en hjá flestum á þessu verði.',
-      'Á móti kemur að hann er aflminni en flestir á svipuðu verði, aðeins framhjóladrifinn og ábyrgðin á rafhlöðunni er með þeim stystu í sínum verðflokki. Kia EV3 Long Range AWD fæst með fjórhjóladrifi fyrir 1.100.000 kr. meira og má draga 500 kg meira.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu og hleður hraðar en flestir, svo hann dugar léttilega á milli landshluta, jafnvel í vetrarkulda. Skottið er líka stærra en hjá flestum keppinautum hans.',
+      'Hann er hins vegar aflminni en flestir þeirra, aðeins framhjóladrifinn og ábyrgðin á rafhlöðunni er með þeim stystu. Kia EV3 Long Range AWD fæst með fjórhjóladrifi fyrir 1.100.000 kr. meira og má draga 500 kg meira.',
       'EV3 Long Range er eitt skynsamlegasta valið fyrir þá sem vilja mikla drægni og hraða hleðslu á hagstæðu verði.',
     ],
     facts: '837adf7be9b3',
@@ -495,8 +495,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kia-ev3-long-range-awd': {
     paragraphs: [
       'Kia EV3 Long Range AWD er lítill jepplingur með fjórhjóladrifi, ætlaður þeim sem vilja lipran bíl í þéttbýli sem ræður líka við vetrarfærð og langferðir.',
-      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og má draga 1.500 kg, meira en flestir í sínum verðflokki.',
-      'Á móti kemur að skottið er minna en hjá flestum á svipuðu verði. Skoda Elroq 85x er 200.000 kr. ódýrari, líka fjórhjóladrifinn og drífur álíka langt, en er með 57 l stærra skott og má draga 300 kg meira. Framhjóladrifni Kia EV3 Long Range sparar 1.100.000 kr. og drífur 33 km lengra.',
+      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og má draga 1.500 kg, meira en flestir keppinautar hans.',
+      'Helsti ókosturinn er að skottið er minna en hjá flestum þeirra. Skoda Elroq 85x er 200.000 kr. ódýrari, líka fjórhjóladrifinn og drífur álíka langt, en er með 57 l stærra skott og má draga 300 kg meira. Framhjóladrifni Kia EV3 Long Range sparar 1.100.000 kr. og drífur 33 km lengra.',
       'EV3 Long Range AWD er hagkvæmur kostur fyrir þá sem vilja nettan og langdrægan bíl með öruggu gripi allt árið.',
     ],
     facts: '52d51b19b573',
@@ -505,8 +505,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kia-ev4-base': {
     paragraphs: [
       'Kia EV4 er fimm sæta hlaðbakur sem leggur áherslu á drægni og sparneytni frekar en jeppalag. Hann hentar þeim sem fara oft í langferðir og vilja hagkvæman bíl sem kemst langt á hverri hleðslu.',
-      'Hann er meðal þeirra langdrægustu á svipuðu verði og hleður hraðar en flestir þeirra, svo hann dugar prýðilega milli landshluta, jafnvel í vetrarkulda.',
-      'Á móti kemur að hann er hægari og aflminni en flestir á svipuðu verði, skottið er minna en hjá flestum þeirra og hann má aðeins draga 1.000 kg. Kia EV4 Fastback er 200.000 kr. ódýrari með nánast sömu drægni og 55 l stærra skott, fyrir þá sem sætta sig við lengri bíl.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu og hleður hraðar en flestir, svo hann dugar prýðilega milli landshluta, jafnvel í vetrarkulda.',
+      'Hann er hins vegar hægari og aflminni en flestir keppinautar hans, skottið er minna og hann má aðeins draga 1.000 kg. Kia EV4 Fastback er 200.000 kr. ódýrari með nánast sömu drægni og 55 l stærra skott, fyrir þá sem sætta sig við lengri bíl.',
       'EV4 er skynsamlegur ferðabíll fyrir þá sem setja drægni í öndvegi.',
     ],
     facts: '7a4f0374acac',
@@ -515,8 +515,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kia-ev4-fastback': {
     paragraphs: [
       'Kia EV4 Fastback er lágur og straumlínulagaður fólksbíll með skottloki, 4,7 m á lengd, sem leggur áherslu á drægni og sparneytni. Hann hentar þeim sem aka mikið milli landshluta og vilja fólksbíl frekar en jeppling.',
-      'Hann er meðal þeirra langdrægustu á svipuðu verði og hleður hraðar en flestir þeirra, og skottið er stærra en hjá flestum í hans verðflokki. Hann er líka 200.000 kr. ódýrari en hlaðbakurinn Kia EV4.',
-      'Á móti kemur að hann er hægari og aflminni en flestir á svipuðu verði og má aðeins draga 1.000 kg. Skoda Elroq 85 kostar það sama, er mun sneggri og jepplingur með hærri setstöðu, en drífur 33 km styttra.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu, hleður hraðar en flestir og er með stærra skott en flestir. Hann er líka 200.000 kr. ódýrari en hlaðbakurinn Kia EV4.',
+      'Gallarnir eru að hann er hægari og aflminni en flestir keppinautar hans og má aðeins draga 1.000 kg. Skoda Elroq 85 kostar það sama, er mun sneggri og jepplingur með hærri setstöðu, en drífur 33 km styttra.',
       'EV4 Fastback er hagkvæmur langferðabíll fyrir þá sem vilja komast langt fyrir peninginn.',
     ],
     facts: '1cdc5f54dd29',
@@ -525,8 +525,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kia-ev5-base': {
     paragraphs: [
       'Kia EV5 er kassalaga og hagnýtur fjölskyldujepplingur með framhjóladrifi, sem leggur áherslu á gott útsýni, ríflegt innanrými og afslöppuð þægindi frekar en snerpu.',
-      'Skottið er stærra en hjá flestum á svipuðu verði og 44 l framskott bætist við, og drægnin og hraðhleðslan eru í meðallagi í sínum verðflokki.',
-      'Á móti kemur að hann er meðal þeirra hægustu á svipuðu verði og má aðeins draga 1.200 kg, minna en flestir þeirra. Kia EV5 AWD fæst með fjórhjóladrifi fyrir 300.000 kr. meira og má draga 1.800 kg, og Smart #5 Pulse kostar 99.000 kr. meira, er fjórhjóladrifinn og hleður með um 40% styttri stoppum.',
+      'Skottið er stærra en hjá flestum á svipuðu verði og 44 l framskott bætist við, og drægnin og hraðhleðslan eru í meðallagi.',
+      'Hann er hins vegar meðal þeirra hægustu í þessum verðflokki og má aðeins draga 1.200 kg, minna en flestir keppinautar hans. Kia EV5 AWD fæst með fjórhjóladrifi fyrir 300.000 kr. meira og má draga 1.800 kg, og Smart #5 Pulse kostar 99.000 kr. meira, er fjórhjóladrifinn og hleður með um 40% styttri stoppum.',
       'EV5 er rúmgóður og þægilegur fjölskyldubíll fyrir þá sem þurfa hvorki snerpu né mikla dráttargetu.',
     ],
     facts: '3df0d9f65455',
@@ -535,8 +535,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kia-ev5-awd': {
     paragraphs: [
       'Kia EV5 AWD er kassalaga og hagnýtur fjölskyldujepplingur með fjórhjóladrifi, sem sækir svip sinn í stærri jeppa merkisins og leggur áherslu á rými, háa setstöðu og þægindi.',
-      'Skottið er stærra en hjá flestum á svipuðu verði og 44 l framskott bætist við, og hann má draga 1.800 kg, meira en flestir í sínum verðflokki.',
-      'Á móti kemur að hann drífur styttra, hleður hægar og er hægari en flestir á svipuðu verði. Volkswagen ID.4 GTX kostar það sama, er fjórhjóladrifinn og drífur 45 km lengra, hleður með um 15% styttri stoppum og er mun sneggri. Framhjóladrifni Kia EV5 er 300.000 kr. ódýrari og drífur 46 km lengra.',
+      'Skottið er stærra en hjá flestum á svipuðu verði og 44 l framskott bætist við, og hann má draga 1.800 kg, meira en flestir keppinautar hans.',
+      'Á móti kemur að hann drífur styttra, hleður hægar og er hægari en flestir þeirra. Volkswagen ID.4 GTX kostar það sama, er fjórhjóladrifinn og drífur 45 km lengra, hleður með um 15% styttri stoppum og er mun sneggri. Framhjóladrifni Kia EV5 er 300.000 kr. ódýrari og drífur 46 km lengra.',
       'EV5 AWD hentar fjölskyldum sem vilja rými og dráttargetu ofar drægni og snerpu.',
     ],
     facts: '97e875731646',
@@ -545,8 +545,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kia-ev6-2025-long-range-awd': {
     paragraphs: [
       'Kia EV6 Long Range AWD er rennilegur jepplingur með fjórhjóladrifi og sportlegum svip, systurbíll Hyundai IONIQ 5, ætlaður þeim sem vilja líflegan akstur og hraða hleðslu á langferðum.',
-      'Hann er meðal þeirra sem hlaða hraðast á svipuðu verði og sneggri en flestir í sínum verðflokki, og hann má draga 1.800 kg, með því mesta á þessu verði.',
-      'Á móti kemur að ábyrgðin á rafhlöðunni er með þeim stystu í sínum verðflokki og lágreistara lagið gefur ekki sömu setstöðu og hefðbundinn jepplingur. Hyundai IONIQ 5 Long Range AWD kostar það sama, drífur 24 km lengra, er með 30 l stærra skott og árinu lengri ábyrgð.',
+      'Í sínum verðflokki er hann meðal þeirra sem hlaða hraðast og sneggri en flestir, og hann má draga 1.800 kg, með því mesta á þessu verði.',
+      'Á móti kemur að ábyrgðin á rafhlöðunni er með þeim stystu og lágreistara lagið gefur ekki sömu setstöðu og hefðbundinn jepplingur. Hyundai IONIQ 5 Long Range AWD kostar það sama, drífur 24 km lengra, er með 30 l stærra skott og árinu lengri ábyrgð.',
       'EV6 er snöggur og vel búinn fjórhjóladrifsbíll fyrir þá sem vilja stutt hleðslustopp og geta dregið kerru.',
     ],
     facts: 'f4b80134c57d',
@@ -555,8 +555,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kia-ev9-base': {
     paragraphs: [
       'Kia EV9 er stór og kassalaga sjö sæta jeppi með fjórhjóladrifi, rúmlega fimm metrar á lengd, með fullgildri þriðju sætaröð. Hann hentar stórum fjölskyldum sem þurfa mörg sæti og mikið pláss.',
-      'Skottið er stærra en hjá flestum á svipuðu verði og hann má draga 2.500 kg, meira en flestir í sínum verðflokki, og 52 l framskott bætist við. Hann hleður fremur hratt.',
-      'Á móti kemur að hann er fremur dýr, drífur styttra en flestir á svipuðu verði og ábyrgðin á rafhlöðunni er með þeim stystu. XPENG X9 AWD Performance er 400.000 kr. ódýrari, drífur 58 km lengra og hleður með um 50% styttri stoppum.',
+      'Skottið er stærra en hjá flestum á svipuðu verði, 52 l framskott bætist við og hann má draga 2.500 kg, meira en flestir keppinautar hans. Hann hleður líka fremur hratt.',
+      'Gallarnir eru að hann er fremur dýr, drífur styttra en flestir þeirra og ábyrgðin á rafhlöðunni er með þeim stystu. XPENG X9 AWD Performance er 400.000 kr. ódýrari, drífur 58 km lengra og hleður með um 50% styttri stoppum.',
       'EV9 er sterkur kostur fyrir stórar fjölskyldur sem draga hjólhýsi, en maður borgar fyrir stærðina.',
     ],
     facts: '17a8cbfdb49d',
@@ -565,8 +565,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kia-ev9-gt': {
     paragraphs: [
       'Kia EV9 GT er stór sjö sæta jeppi með fjórhjóladrifi, rúmlega fimm metrar á lengd, sem sameinar mikið pláss og óvenju mikið afl fyrir svo stóran bíl.',
-      'Hann er sneggri og aflmeiri en flestir á svipuðu verði, skottið er eitt það stærsta í sínum verðflokki og hann má draga 2.500 kg.',
-      'Á móti kemur að hann er mjög dýr, meðal þeirra sem drífa styst á svipuðu verði og ábyrgðin á rafhlöðunni er með þeim stystu. Kia EV9 er 2.200.000 kr. ódýrari með sama rými og drægni, og munar aðeins um snerpuna.',
+      'Í sínum verðflokki er hann sneggri og aflmeiri en flestir, skottið er eitt það stærsta og hann má draga 2.500 kg.',
+      'Á móti kemur að hann er mjög dýr, meðal þeirra sem drífa styst og ábyrgðin á rafhlöðunni er með þeim stystu. Kia EV9 er 2.200.000 kr. ódýrari með sama rými og drægni, og munar aðeins um snerpuna.',
       'EV9 GT er fyrir þá sem vilja sjö sæti og mikla snerpu, en flestum dugar ódýrari útfærslan.',
     ],
     facts: '7db76de8dd00',
@@ -576,7 +576,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Kia PV5 er kassalaga fjölnotabíll byggður á sendibíl, með háu þaki, opnu innanrými og sætum fyrir allt að sjö. Hann hentar þeim sem þurfa að ferja marga farþega eða mikinn farangur daglega.',
       'Skottið er það stærsta á svipuðu verði og mikil lofthæð og einföld umgengni gera hann þægilegan fyrir stórar fjölskyldur. Hann má draga 1.500 kg.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst og þeirra hægustu á svipuðu verði, hleður hægar en flestir þeirra og er aðeins afturhjóladrifinn. Peugeot e-5008 Dual Motor er 300.000 kr. ódýrari, fjórhjóladrifinn og drífur 61 km lengra, en skottið er 468 l minna.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst, hlaða hægast og eru hægastir í þessum verðflokki, og hann er aðeins afturhjóladrifinn. Peugeot e-5008 Dual Motor er 300.000 kr. ódýrari, fjórhjóladrifinn og drífur 61 km lengra, en skottið er 468 l minna.',
       'PV5 hentar þeim sem setja rými og sætafjölda ofar öllu og aka mest í nærumhverfinu.',
     ],
     facts: '6f35c55d5785',
@@ -595,7 +595,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'leapmotor-b03x-pro': {
     paragraphs: [
       'Leapmotor B03X Pro er lítill og mjög ódýr jepplingur með framhjóladrifi, ætlaður sem einfaldur bæjarbíll fyrir þá sem vilja nýjan rafbíl fyrir sem minnst.',
-      'Hann er mjög ódýr, og í innanbæjarakstri dugar drægnin og snerpan vel.',
+      'Verðið er helsti kostur hans, og í innanbæjarakstri duga drægnin og snerpan vel.',
       'Á móti kemur að hann drífur mjög stutt og hleður fremur hægt, svo hann hentar illa til ferða milli landshluta, og merkið er nýlegt í Evrópu. Leapmotor B03X ProMax kostar 600.000 kr. meira en drífur 90 km lengra og hleður með um 25% styttri stoppum, og MG MG4 Urban Standard Range kostar það sama með 170 l stærra skott.',
       'B03X Pro er ódýr og handhægur bæjarbíll, en flestum borgar sig að fara í stærri rafhlöðuna.',
     ],
@@ -605,8 +605,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'leapmotor-b03x-promax': {
     paragraphs: [
       'Leapmotor B03X ProMax er lítill og mjög ódýr jepplingur með framhjóladrifi, ætlaður sem hagkvæmur bæjarbíll fyrir þá sem vilja nýjan rafbíl án þess að borga mikið.',
-      'Hann drífur stutt miðað við rafbíla almennt en lengra en flestir á svipuðu verði, og hann er meðal þeirra sem hlaða hraðast í sínum verðflokki, svo hleðslustopp á ferðalögum dragast síður á langinn. Hann er líka aflmeiri en flestir bílar á þessu verði.',
-      'Á móti kemur að merkið er nýlegt í Evrópu, þar sem það er selt í samstarfi við Stellantis, og skottið er aðeins í meðallagi. MG MG4 Urban Long Range kostar 300.000 kr. meira en drífur 34 km lengra og er með 170 l stærra skott, þótt hleðslustoppin séu um 30% lengri, og ódýrari útfærslan, Leapmotor B03X Pro, sparar 600.000 kr. en drífur 90 km styttra.',
+      'Hann drífur stutt miðað við rafbíla almennt en lengra en flestir á svipuðu verði, og er meðal þeirra sem hlaða hraðast, svo hleðslustopp á ferðalögum dragast síður á langinn. Hann er líka aflmeiri en flestir keppinautar hans.',
+      'Gallarnir eru að merkið er nýlegt í Evrópu, þar sem það er selt í samstarfi við Stellantis, og skottið er aðeins í meðallagi. MG MG4 Urban Long Range kostar 300.000 kr. meira en drífur 34 km lengra og er með 170 l stærra skott, þótt hleðslustoppin séu um 30% lengri, og ódýrari útfærslan, Leapmotor B03X Pro, sparar 600.000 kr. en drífur 90 km styttra.',
       'Fyrir þá sem vilja ódýran og sprækan hversdagsbíl sem hleður hratt er B03X ProMax hagkvæmur kostur.',
     ],
     facts: 'e6210d4da47e',
