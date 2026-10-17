@@ -14,7 +14,6 @@ import EvDatabaseLink from '@/components/EvDatabaseLink'
 import ShareButton from '@/components/ShareButton'
 import { pageColumn } from '@/components/pageColumn'
 import PageTop from './PageTop'
-import Review from './Review'
 
 interface Props {
   car: Car
@@ -132,7 +131,25 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
             </dl>
           </div>
 
-          {review && <Review review={review} />}
+          {review && (
+            <section aria-labelledby="review" className="mt-8 mb-6">
+              {/* 65ch of the wrapper's 16px, not the 18px text, keeps lines
+                  near 70 */}
+              <div className="max-w-prose">
+                <h2 id="review" className="m-0 text-sm font-semibold">
+                  Í hnotskurn:
+                </h2>
+                {review.paragraphs.map((paragraph) => (
+                  <p
+                    key={paragraph}
+                    className="mt-2 mb-0 text-base leading-normal text-pretty md:text-lg [&+&]:mt-3"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </section>
+          )}
 
           <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
             <ShareButton

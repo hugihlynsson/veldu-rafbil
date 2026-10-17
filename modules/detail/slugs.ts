@@ -1,6 +1,6 @@
 import { allCars, type Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
-import { movedSlugs } from '@/modules/data/publishedSlugs'
+import { movedSlugs } from '@/modules/data/movedSlugs'
 
 // A car no longer sold keeps its page, so its slug still reads as it
 const carsBySlug = new Map(allCars.map((car) => [carSlug(car), car]))
@@ -26,20 +26,16 @@ export const readSegment = (segment: string): string => {
 
 /**
  * The cars a URL names by slug. A renamed car is followed to its new slug. A
- * repeat, or a slug no car ever had, is dropped, and so is any past the most
- * the page shows.
+ * repeat, or a slug no car ever had, is dropped.
  */
 export const resolveSlugs = (
   segments: ReadonlyArray<string>,
-  max: number = Infinity,
   moved: Readonly<Record<string, string>> = movedSlugs,
 ): ResolvedSlugs => {
   const slugs: string[] = []
   const resolved: Car[] = []
 
   for (const segment of segments) {
-    if (slugs.length === max) break
-
     const asked = segment.toLowerCase()
     const slug = moved[asked] ?? asked
     const car = carsBySlug.get(slug)

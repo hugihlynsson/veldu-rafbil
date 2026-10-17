@@ -200,10 +200,10 @@ make, then model. The fields that are easy to get wrong:
   card's anchor, the target the chat scrolls to and the React key out of them,
   so two entries differing only in price collide and a test fails.
 - **A car's slug is in shared links to its page, which have to keep working.**
-  Every car's slug (its id less `car-`) is listed in
-  `modules/data/publishedSlugs.ts`, and a test fails until a new one is added
-  there. Renaming a car changes its slug: leave the old one in the list and
-  point it in `movedSlugs` at the slug that replaced it.
+  The slug is its id less `car-`, so renaming a car (its make, model or
+  `subModel`) changes it, and nothing else notices. When you rename one, point
+  the old slug at the new one in `modules/data/movedSlugs.ts`, which redirects
+  it.
 - **A car no longer sold new is marked, not taken out.** Set `deprecated` to
   the day it stopped being sold (`'2026-10-11'`). It leaves the list, the
   advisor and `/api/cars`, but keeps its page, which says it is no longer

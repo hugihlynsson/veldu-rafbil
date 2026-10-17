@@ -32,10 +32,6 @@ describe('resolveSlugs', () => {
     expect(resolveSlugs([carSlug(a).toUpperCase()]).slugs).toEqual([carSlug(a)])
   })
 
-  it('stops at the most the page shows', () => {
-    expect(resolveSlugs([a, b, c].map(carSlug), 2).cars).toEqual([a, b])
-  })
-
   it('drops a slug no car has ever had', () => {
     expect(resolveSlugs(['no-such-car', carSlug(a)]).slugs).toEqual([
       carSlug(a),
@@ -43,17 +39,18 @@ describe('resolveSlugs', () => {
   })
 
   it('follows a renamed car to its new slug', () => {
-    const resolved = resolveSlugs(['old-name', carSlug(b)], Infinity, {
+    const resolved = resolveSlugs(['old-name', carSlug(b)], {
       'old-name': carSlug(a),
     })
     expect(resolved.cars).toEqual([a, b])
     expect(resolved.slugs).toEqual([a, b].map(carSlug))
   })
 
-  it('reads a car no longer sold, whose page stays', () => {
-    const deprecated = allCars.find((car) => car.deprecated)
-    if (!deprecated) return
-    expect(resolveSlugs([carSlug(deprecated)]).cars).toEqual([deprecated])
+  // Those no longer sold too, whose pages stay
+  it('reads every car with a page', () => {
+    for (const car of allCars) {
+      expect(resolveSlugs([carSlug(car)]).cars).toEqual([car])
+    }
   })
 })
 
