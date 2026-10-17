@@ -7,7 +7,6 @@ import { driveLabels } from '@/modules/data/drives'
 import { Car } from '@/modules/data/cars'
 import { formatKmPerMinute } from '@/modules/data/getKmPerMinutesCharged'
 import PricePill from '@/components/PricePill'
-import EvDatabaseLink from '@/components/EvDatabaseLink'
 import type { View } from '@/modules/list/view'
 import ShareButton from '@/components/ShareButton'
 import { carPathOf } from '@/modules/detail/paths'
@@ -68,6 +67,7 @@ const NewCar: FunctionComponent<Props> = ({
   const subTitle = [car.subModel, showSeats && `${car.seats} sæti`]
     .filter(Boolean)
     .join(' · ')
+  const rememberList = () => rememberListSearch(window.location.search)
   const delivery =
     car.expectedDelivery && `Væntanlegur ${car.expectedDelivery.toLowerCase()}`
 
@@ -87,8 +87,15 @@ const NewCar: FunctionComponent<Props> = ({
             ],
       )}
     >
-      <div
+      {/* The biggest thing to tap, so it opens the car too; one stop for the
+          keyboard and screen readers is the name */}
+      <Link
+        href={carPathOf(car)}
+        onClick={rememberList}
+        tabIndex={-1}
+        aria-hidden
         className={clsx(
+          'block',
           grid ? 'md:-mx-1' : 'md:w-[40%] md:grow md:self-center',
         )}
       >
@@ -104,7 +111,7 @@ const NewCar: FunctionComponent<Props> = ({
             grid ? 'md:rounded-lg' : 'md:rounded-sm',
           )}
         />
-      </div>
+      </Link>
 
       <div
         className={clsx(
@@ -128,7 +135,7 @@ const NewCar: FunctionComponent<Props> = ({
           >
             <Link
               href={carPathOf(car)}
-              onClick={() => rememberListSearch(window.location.search)}
+              onClick={rememberList}
               className="text-inherit no-underline decoration-2 underline-offset-4 hover:underline"
             >
               <span>{car.make}</span>{' '}
@@ -221,14 +228,16 @@ const NewCar: FunctionComponent<Props> = ({
           </div>
         </div>
 
-        {car.evDatabaseUrl && (
-          <EvDatabaseLink
-            href={car.evDatabaseUrl}
-            className={clsx(
-              grid && 'md:justify-self-start md:self-start md:text-xs',
-            )}
-          />
-        )}
+        <Link
+          href={carPathOf(car)}
+          onClick={rememberList}
+          className={clsx(
+            'inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-tint',
+            grid && 'md:justify-self-start md:self-start md:text-xs',
+          )}
+        >
+          Nánar um bílinn →
+        </Link>
       </div>
     </article>
   )
