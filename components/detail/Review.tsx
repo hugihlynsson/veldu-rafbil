@@ -5,10 +5,7 @@ import { CHAT_INPUT_ID } from '@/modules/chat/inputId'
 
 /** The car's review, under its figures, with the way into the chat about it */
 const Review: FunctionComponent<{ review: CarReview }> = ({ review }) => (
-  <section
-    aria-labelledby="review"
-    className="px-(--gutter) md:px-10 mt-8 mb-6"
-  >
+  <section aria-labelledby="review" className="mt-8 mb-6">
     {/* 65ch of the wrapper's 16px, not the 18px text, keeps lines near 70 */}
     <div className="max-w-prose">
       <h2 id="review" className="m-0 text-sm font-semibold">
