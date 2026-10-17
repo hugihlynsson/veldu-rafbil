@@ -70,8 +70,9 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
       </div>
 
       <div className={pageColumn}>
-        {/* The review's measure, which the rest of the page keeps */}
-        <div className="md:max-w-prose">
+        {/* The review's measure, which the rest of the page keeps, centred
+            under the photo as it is on a phone */}
+        <div className="md:max-w-prose md:mx-auto">
           {/* The name and the figures read as one block, narrower than the
               text under them */}
           <div className="md:max-w-column">
