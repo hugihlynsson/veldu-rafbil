@@ -29,10 +29,7 @@ const ReviewSection: FunctionComponent<{
   className?: string
   title?: string
 }> = ({ children, className, title = 'Í hnotskurn:' }) => (
-  <section
-    aria-labelledby="review"
-    className="px-(--gutter) md:px-10 mt-8 mb-6"
-  >
+  <section aria-labelledby="review" className="mt-8 mb-6">
     {/* 65ch of the wrapper's 16px, not the 18px text, keeps lines near 70 */}
     <div className={clsx('max-w-prose', className)}>
       <h2 id="review" className="m-0 text-sm font-semibold">

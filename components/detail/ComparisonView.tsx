@@ -14,6 +14,7 @@ import EvDatabaseLink from '@/components/EvDatabaseLink'
 import CompareMoreLink from './CompareMoreLink'
 import PageTop from './PageTop'
 import ShareButton from '@/components/ShareButton'
+import { pageColumn } from '@/components/pageColumn'
 
 interface Props {
   cars: ReadonlyArray<Car>
@@ -23,7 +24,12 @@ interface Props {
   verdict: ReactNode
 }
 
-const gutter = 'px-(--gutter) md:px-10'
+// The car page's photo and the list's cards keep these edges from md
+const gutter = 'px-(--gutter) md:pl-10 md:pr-6'
+// Three or four cars outgrow the page from lg, centred on it as the list's
+// grid is, while the header stays where the list has it
+const wideGutter =
+  'lg:px-0 lg:mx-[calc((100%_-_min(100vw_-_5rem,_var(--container-grid)))_/_2)]'
 const eyebrow =
   'm-0 uppercase text-eyebrow font-semibold tracking-wider text-stone'
 const secondaryButton =
@@ -50,13 +56,15 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
     columns[cars.length],
   )
   const canRemove = cars.length > MIN_COMPARED
-  // Three or four outgrow the page from lg, as the list's grid does
   const wide = cars.length > 2
-  const pageWidth = wide ? 1200 : 1024
+  const body = clsx(gutter, wide && wideGutter)
+  // The width the columns share: the page less its edges, or the grid's
+  const pageWidth = wide ? 1200 : 960
 
   return (
-    <main className={clsx('max-w-page mx-auto pb-14', wide && 'lg:max-w-grid')}>
-      <header className={clsx(gutter, 'pb-5 md:pb-8')}>
+    <main className="max-w-page mx-auto pb-14 md:pb-24">
+      {/* The list's gap from the logo to its intro, as a car's page has it */}
+      <header className={clsx(pageColumn, 'pt-4 pb-6 xs:pt-6 md:pb-8')}>
         <PageTop />
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
@@ -70,7 +78,7 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
             label="Deila"
             event="Comparison shared"
             variant="quiet"
-            className="shrink-0"
+            className="shrink-0 mt-1"
           />
         </div>
       </header>
@@ -82,7 +90,7 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
           'grid md:gap-x-8',
           crowded ? 'gap-x-4' : 'gap-x-5',
           columns[cars.length],
-          gutter,
+          body,
         )}
       >
         {cars.map((car) => (
@@ -119,7 +127,7 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
       <div
         className={clsx(
           grid,
-          gutter,
+          body,
           'sticky top-0 z-10 py-2.5 md:py-4 bg-lab/90 backdrop-blur-md border-b border-line/50',
         )}
       >
@@ -159,7 +167,7 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
       </div>
 
       {goneCount > 0 && (
-        <p className={clsx(gutter, 'mt-4 mb-0 text-sm font-medium text-stone')}>
+        <p className={clsx(body, 'mt-4 mb-0 text-sm font-medium text-stone')}>
           {goneCount === 1 ? 'Einn' : goneCount}{' '}
           {agree(goneCount, 'bíll', 'bílar')} úr þessum samanburði{' '}
           {agree(goneCount, 'er', 'eru')} ekki lengur{' '}
@@ -168,9 +176,14 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
       )}
 
       {/* None for a car no longer sold, as its own page has no review */}
-      {cars.length >= MIN_COMPARED && goneCount === 0 && verdict}
+      {cars.length >= MIN_COMPARED && goneCount === 0 && (
+        // At the measure of a car's review, centred as it is there
+        <div className={body}>
+          <div className="md:max-w-prose md:mx-auto">{verdict}</div>
+        </div>
+      )}
 
-      <dl className={clsx(gutter, 'mt-2 mb-0')}>
+      <dl className={clsx(body, 'mt-2 mb-0')}>
         {specRows(cars).map((row) => (
           <div key={row.key} className="py-3.5 border-b border-line/50">
             <dt className={eyebrow}>{row.label}</dt>
@@ -211,7 +224,7 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
       </dl>
 
       {cars.some((car) => car.evDatabaseUrl) && (
-        <div className={clsx(grid, gutter, 'mt-4')}>
+        <div className={clsx(grid, body, 'mt-4')}>
           {cars.map((car) => (
             <div key={car.id} className="min-w-0">
               {car.evDatabaseUrl && <EvDatabaseLink href={car.evDatabaseUrl} />}
@@ -222,14 +235,15 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
 
       <div
         className={clsx(
-          gutter,
-          'mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center',
+          body,
+          'mt-10 flex flex-wrap items-center gap-x-3 gap-y-3',
         )}
       >
         <ShareButton
           title={title}
           label="Deila samanburði"
           event="Comparison shared"
+          className="-ml-0.5"
         />
         <CompareMoreLink
           cars={cars}
