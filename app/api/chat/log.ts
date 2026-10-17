@@ -5,7 +5,9 @@ import {
   getMessageText,
   type ChatMessage,
 } from '@/modules/chat/message'
-import { CHAT_SUGGESTIONS, carSuggestions } from '@/modules/chat/suggestions'
+import { CHAT_SUGGESTIONS } from '@/modules/chat/suggestions'
+import carReviews, { type CarReview } from '@/modules/data/carReviews'
+import { resolveSlugs } from '@/modules/detail/slugs'
 
 /** How an answer ended, if the route saw it end */
 export type ChatOutcome = { finish: ChatFinish } | { error: unknown }
@@ -18,6 +20,8 @@ export interface ChatTurn extends Deployment {
   conversationId: string | undefined
   userMessage: string
   source: QuestionSource
+  /** The slug of the car whose page it was asked on */
+  carPage: string | undefined
   messageCount: number
   model: string
 }
@@ -28,16 +32,27 @@ export interface ChatTiming {
   durationMs: number
 }
 
+/** Looked up as the page's own URL is, so only a car's slug is logged */
+export const carPage = (messages: ChatMessage[]): string | undefined => {
+  const about = messages.at(-1)?.metadata?.about
+  return about && resolveSlugs(about).slugs[0]
+}
+
 /**
  * Read off the text rather than told by the browser, so there is nothing to
- * trust: a pill sends its text as it is, and the follow-ups offered are on the
- * answer before the question. A question typed to match a pill counts as one.
+ * trust: a pill sends its text as it is, the follow-ups offered are on the
+ * answer before the question, and a car page's starters are in its review.
+ * A question typed to match a pill counts as one.
  */
-export const questionSource = (messages: ChatMessage[]): QuestionSource => {
+export const questionSource = (
+  messages: ChatMessage[],
+  reviews: Readonly<Record<string, CarReview>> = carReviews,
+): QuestionSource => {
   const question = getMessageText(messages.at(-1))
   if (getFollowUps(messages.at(-2)).includes(question)) return 'followUp'
-  if ([...CHAT_SUGGESTIONS, ...carSuggestions].includes(question))
-    return 'starter'
+  const page = carPage(messages)
+  const starters = page ? reviews[page]?.questions : CHAT_SUGGESTIONS
+  if (starters?.includes(question)) return 'starter'
   return 'typed'
 }
 

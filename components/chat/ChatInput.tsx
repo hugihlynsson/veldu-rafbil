@@ -37,7 +37,7 @@ interface Props {
   /** Fades the pill in as it mounts */
   animateIn?: boolean
   /** The questions offered to start on; the general ones when left out */
-  starters?: string[]
+  starters?: ReadonlyArray<string>
   /** Left out where the list is not what is in view, as inside the chat */
   filterSuggestions?: {
     filters: Filters

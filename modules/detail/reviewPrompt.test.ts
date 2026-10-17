@@ -7,7 +7,11 @@ import { similarTo } from '@/modules/detail/similar'
 import {
   carFacts,
   describeStanding,
+  MAX_STARTER_LENGTH,
+  QUESTION_COUNT,
+  questionsPrompt,
   readDetails,
+  readQuestions,
   readReview,
   type DetailsOf,
   reviewFactsKey,
@@ -128,6 +132,53 @@ describe('readReview', () => {
 
   it('has nothing to show for an empty answer', () => {
     expect(readReview(' \n\n ')).toBeNull()
+  })
+})
+
+describe('readQuestions', () => {
+  it('reads one question a line, numbered or not', () => {
+    expect(
+      readQuestions('1. Dugar hann á veturna?\n\n- Er hann hljóðlátur?\n'),
+    ).toEqual(['Dugar hann á veturna?', 'Er hann hljóðlátur?'])
+  })
+
+  it('takes out the markdown and quotes', () => {
+    expect(readQuestions('**„Er hann hljóðlátur?“**')).toEqual([
+      'Er hann hljóðlátur?',
+    ])
+  })
+
+  // A pill does not wrap, and a line that is no question is talk around them
+  it('leaves out a line too long for a pill or not a question', () => {
+    const long = `Hvernig ${'mjög '.repeat(10)}langt kemst hann?`
+    expect(long.length).toBeGreaterThan(MAX_STARTER_LENGTH)
+    expect(
+      readQuestions(`Hér eru spurningar:\n${long}\nEr hann hljóðlátur?`),
+    ).toEqual(['Er hann hljóðlátur?'])
+  })
+
+  it('keeps each once, and no more than asked for', () => {
+    const lines = Array.from(
+      { length: QUESTION_COUNT + 2 },
+      (_, index) => `Spurning ${index}?`,
+    )
+    expect(readQuestions([lines[0], ...lines].join('\n'))).toEqual(
+      lines.slice(0, QUESTION_COUNT),
+    )
+  })
+})
+
+describe('questionsPrompt', () => {
+  const [a] = cars
+
+  it('gives the review it follows and the cars it can name', () => {
+    const { prompt } = questionsPrompt(a, {
+      paragraphs: ['Fyrsta efnisgrein.', 'Önnur.'],
+      facts: '',
+      questions: [],
+    })
+    expect(prompt).toContain('Umsögnin á síðunni:\nFyrsta efnisgrein.')
+    for (const rival of similarTo(a)) expect(prompt).toContain(rival.label)
   })
 })
 

@@ -8,7 +8,7 @@ import {
   readGuardedBody,
 } from '../publicEndpoint'
 import { parseChatRequest, parseConversationId, streamChat } from './chat'
-import { chatLogEvent, questionSource, type ChatOutcome } from './log'
+import { carPage, chatLogEvent, questionSource, type ChatOutcome } from './log'
 import { advisorModel as modelName } from './model'
 
 export async function POST(req: Request) {
@@ -26,6 +26,7 @@ export async function POST(req: Request) {
     conversationId: parseConversationId(read.body),
     userMessage: getMessageText(messages.at(-1)),
     source: questionSource(messages),
+    carPage: carPage(messages),
     messageCount: messages.length,
     model: modelName,
     ...deployment(),

@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import ChatInput from './ChatInput'
 import type { Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
-import { carSuggestions } from '@/modules/chat/suggestions'
+import { CHAT_SUGGESTIONS } from '@/modules/chat/suggestions'
 import type { Filters } from '@/modules/list/filters'
 import useChunk from '@/utils/useChunk'
 import useComposer from '@/utils/useComposer'
@@ -28,6 +28,8 @@ interface Props {
   onApplyFilters?: (filters: Filters) => void
   /** The car whose page it is on, which each question carries */
   about?: ReadonlyArray<Car>
+  /** The questions offered to start on; the general ones when left out */
+  starters?: ReadonlyArray<string>
 }
 
 export default function ChatContainer({
@@ -36,6 +38,7 @@ export default function ChatContainer({
   filters,
   onApplyFilters,
   about,
+  starters = CHAT_SUGGESTIONS,
 }: Props) {
   const conversation = useConversation(about && { about: about.map(carSlug) })
   const composer = useComposer()
@@ -72,7 +75,7 @@ export default function ChatContainer({
       disabled={conversation.isBusy}
       hasMessages={conversation.hasMessages}
       sendMessage={conversation.send}
-      starters={about && carSuggestions}
+      starters={starters}
       filterSuggestions={
         !isChatOpen && filters && onApplyFilters
           ? { filters, onApply: onApplyFilters }
@@ -95,6 +98,7 @@ export default function ChatContainer({
             composer={chatInput}
             composerRef={composer.ref}
             about={about?.map(carSlug)}
+            starters={starters}
             onDone={(pickedCar) => {
               setWantsChatOpen(false)
               // A car picked from the answer takes the focus instead
