@@ -169,7 +169,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
                 // The whole card opens the car's page
                 <li
                   key={other.id}
-                  className="relative flex items-center gap-3 rounded-card overflow-hidden transition-colors duration-200 hover:bg-cloud md:flex-col md:items-stretch md:overflow-visible md:hover:bg-transparent md:isolate md:before:absolute md:before:-inset-1 md:before:-bottom-3 md:before:-z-10 md:before:rounded-xl md:before:bg-cloud md:before:opacity-0 md:before:transition-opacity md:before:duration-200 md:hover:before:opacity-100"
+                  className="relative flex items-center gap-3 rounded-card overflow-hidden transition-colors duration-200 hover:bg-shade md:flex-col md:items-stretch md:overflow-visible md:hover:bg-transparent md:isolate md:before:absolute md:before:-inset-1 md:before:-bottom-3 md:before:-z-10 md:before:rounded-xl md:before:bg-shade md:before:opacity-0 md:before:transition-opacity md:before:duration-200 md:hover:before:opacity-100"
                 >
                   {/* Beside the name, flush to the card with its border drawn
                       over it. Above the name it needs no border, and on hover

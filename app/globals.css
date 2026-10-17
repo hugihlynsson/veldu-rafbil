@@ -36,6 +36,7 @@
   --color-veil: #dcdcdc; /* the chat bar, likewise */
   --color-cloud: #eee; /* a fill on the page: pills, chat bubbles */
   --color-smoke: #ddd; /* the same fill, hovered */
+  --color-shade: #eee; /* a card on the page, hovered */
   --color-raised: #fff; /* a control lifted off a tinted track */
   --color-track: rgb(0 0 0 / 0.04); /* that track: the sorting tabs */
 
@@ -233,6 +234,7 @@
     --color-veil: #343434;
     --color-cloud: #262626;
     --color-smoke: #303030;
+    --color-shade: #1a1a1a;
     --color-raised: #383838;
     --color-track: rgb(255 255 255 / 0.09);
 
