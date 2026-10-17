@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import cars, { allCars } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf } from './paths'
-import { resolveSlugs } from './slugs'
+import { readSegment, resolveSlugs } from './slugs'
 
 const [a, b, c] = cars
 const slugsOf = (path: string) => path.split('/').slice(2)
@@ -54,5 +54,18 @@ describe('resolveSlugs', () => {
     const deprecated = allCars.find((car) => car.deprecated)
     if (!deprecated) return
     expect(resolveSlugs([carSlug(deprecated)]).cars).toEqual([deprecated])
+  })
+})
+
+// The page and its share image both read their segment through it, and a
+// throw there is a 500 where the address should be a 404
+describe('readSegment', () => {
+  it('decodes an escaped segment', () => {
+    expect(readSegment('kia-ev3%2Dlong')).toBe('kia-ev3-long')
+  })
+
+  it('names no car, rather than throwing, when the escape is broken', () => {
+    expect(readSegment('%E0')).toBe('%E0')
+    expect(resolveSlugs([readSegment('%E0')]).cars).toEqual([])
   })
 })

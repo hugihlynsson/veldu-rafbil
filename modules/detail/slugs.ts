@@ -13,6 +13,18 @@ export interface ResolvedSlugs {
 }
 
 /**
+ * A path segment as a slug. A stray % names no car, so it is left as it came
+ * to be dropped as one, rather than thrown on as a server error.
+ */
+export const readSegment = (segment: string): string => {
+  try {
+    return decodeURIComponent(segment)
+  } catch {
+    return segment
+  }
+}
+
+/**
  * The cars a URL names by slug. A renamed car is followed to its new slug. A
  * repeat, or a slug no car ever had, is dropped, and so is any past the most
  * the page shows.

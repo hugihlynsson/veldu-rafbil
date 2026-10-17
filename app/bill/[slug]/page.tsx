@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { notFound, permanentRedirect } from 'next/navigation'
 
 import { carPath, shareImagePath, shareImageSize } from '@/modules/detail/paths'
-import { resolveSlugs } from '@/modules/detail/slugs'
+import { readSegment, resolveSlugs } from '@/modules/detail/slugs'
 import { similarTo } from '@/modules/detail/similar'
 import { deprecatedNotice } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
@@ -19,7 +19,7 @@ interface Props {
 
 // The slug read as any page reads its slugs, so a renamed car is followed
 const read = async ({ params }: Props) =>
-  resolveSlugs([decodeURIComponent((await params).slug)])
+  resolveSlugs([readSegment((await params).slug)])
 
 // Built ahead from the car data, which only a deploy changes, those no longer
 // sold included; a renamed car's old slug is rendered on demand to redirect
@@ -57,7 +57,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
 }
 
 export default async function Page(props: Props) {
-  const segment = decodeURIComponent((await props.params).slug)
+  const segment = readSegment((await props.params).slug)
   const {
     cars: [car],
     slugs,
