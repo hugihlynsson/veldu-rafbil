@@ -3,7 +3,6 @@ import path from 'node:path'
 import { ImageResponse } from 'next/og'
 
 import type { Car } from '@/modules/data/cars'
-import { carName } from '@/modules/data/getCarId'
 import { shareImageSize as size } from '@/modules/detail/paths'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { specRows, type SpecKey } from '@/modules/detail/specs'
@@ -94,6 +93,55 @@ const Stat = ({
   </div>
 )
 
+/** The price as the cards set it, in a pill with what it is after */
+const PriceTag = ({
+  car,
+  badge,
+  small = false,
+}: {
+  car: Car
+  badge?: string
+  small?: boolean
+}) => (
+  <div
+    style={{
+      display: 'flex',
+      alignSelf: 'flex-start',
+      alignItems: 'center',
+      gap: small ? 8 : 12,
+      marginTop: small ? 14 : 22,
+      padding: badge
+        ? small
+          ? '5px 6px 5px 12px'
+          : '6px 8px 6px 16px'
+        : small
+          ? '5px 12px'
+          : '6px 16px',
+      borderRadius: 999,
+      background: '#eee',
+      fontSize: small ? 17 : 20,
+      fontWeight: 600,
+    }}
+  >
+    {`${addDecimalSeparators(car.priceWithGrant)} kr.`}
+    {badge && (
+      <span
+        style={{
+          padding: small ? '2px 7px' : '3px 9px',
+          borderRadius: 999,
+          background: '#fff',
+          color: stone,
+          fontSize: small ? 11 : 12,
+          letterSpacing: 0.5,
+          textTransform: 'uppercase',
+        }}
+      >
+        {badge}
+      </span>
+    )}
+  </div>
+)
+
 /**
  * The picture a link to a car's page unfurls into: the car as its card on the
  * list shows it on a wide screen, so the preview reads as the site, drawn
@@ -154,37 +202,7 @@ const carImage = async (car: Car) => {
               {notice}
             </div>
           )}
-          <div
-            style={{
-              display: 'flex',
-              alignSelf: 'flex-start',
-              alignItems: 'center',
-              gap: 12,
-              marginTop: 22,
-              padding: '6px 8px 6px 16px',
-              borderRadius: 999,
-              background: '#eee',
-              fontSize: 20,
-              fontWeight: 600,
-            }}
-          >
-            {`${addDecimalSeparators(car.priceWithGrant)} kr.`}
-            {priceBadge && (
-              <span
-                style={{
-                  padding: '3px 9px',
-                  borderRadius: 999,
-                  background: '#fff',
-                  color: stone,
-                  fontSize: 12,
-                  letterSpacing: 0.5,
-                  textTransform: 'uppercase',
-                }}
-              >
-                {priceBadge}
-              </span>
-            )}
-          </div>
+          <PriceTag car={car} badge={priceBadge} />
           <div style={{ display: 'flex', gap: 32, marginTop: 32 }}>
             <Stat
               label="0-100 km/klst"
@@ -212,77 +230,92 @@ const carImage = async (car: Car) => {
   )
 }
 
-/** The picture a shared comparison link unfurls into: the cars side by side */
+/**
+ * The picture a shared comparison link unfurls into: the cars side by side,
+ * each as the car's own picture sets it, under the same logo
+ */
 const comparisonImage = async (cars: ReadonlyArray<Car>) => {
   const photos = await Promise.all(cars.map((car) => photo(car.heroImageName)))
-  const width =
-    (size.width - margin * 2 - gap * Math.max(cars.length - 1, 0)) /
-    Math.max(cars.length, 1)
+  const count = Math.max(cars.length, 1)
+  const width = (size.width - margin * 2 - gap * (count - 1)) / count
   const crowded = cars.length > 2
-  // Cropped to fill the frame: two at their own 3:2 crowd the heading, and
-  // four leave half the picture empty
-  const height = crowded ? 260 : 310
+  // At their own 3:2 two would push the prices off the bottom, so they are
+  // cropped shorter; three and four fit as they are
+  const height = Math.min(270, Math.round((width * 2) / 3))
+  const nameSize = { 2: 38, 3: 30 }[cars.length] ?? 26
 
   return new ImageResponse(
     <div
       style={{
-        width: '100%',
-        height: '100%',
-        display: 'flex',
+        ...frame,
         flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: `48px ${margin}px`,
-        background: '#fff',
-        color: '#111',
-        fontFamily: 'Inter',
+        justifyContent: 'center',
+        padding: margin,
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          fontSize: 28,
-        }}
-      >
-        <Logo width={190} />
-        <span style={{ color: stone }}>Samanburður</span>
+      <div style={{ display: 'flex', marginBottom: 32 }}>
+        <Logo width={250} />
       </div>
-
       <div style={{ display: 'flex', gap }}>
-        {cars.map((car, index) => (
-          <div
-            key={car.id}
-            style={{ display: 'flex', flexDirection: 'column', width }}
-          >
-            {/* An image drawn to a PNG, which next/image has no part in */}
-            {/* oxlint-disable-next-line nextjs/no-img-element */}
-            <img
-              alt=""
-              src={photos[index]}
-              width={width}
-              height={height}
-              style={{ borderRadius: 16, objectFit: 'cover' }}
-            />
-            {/* The name as the cards set it, the make in bold */}
+        {cars.map((car, index) => {
+          const subTitle = carSubtitle(car)
+          const notice = deprecatedNotice(car)
+          return (
             <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                columnGap: crowded ? 9 : 12,
-                marginTop: 20,
-                fontSize: crowded ? 32 : 44,
-                lineHeight: 1.1,
-              }}
+              key={car.id}
+              style={{ display: 'flex', flexDirection: 'column', width }}
             >
-              <span style={{ fontWeight: 600 }}>{car.make}</span>
-              <span>{carName(car, cars).replace(`${car.make} `, '')}</span>
+              {/* An image drawn to a PNG, which next/image has no part in */}
+              {/* oxlint-disable-next-line nextjs/no-img-element */}
+              <img
+                alt=""
+                src={photos[index]}
+                width={width}
+                height={height}
+                style={{ borderRadius: 16, objectFit: 'cover' }}
+              />
+              <div
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  columnGap: crowded ? 8 : 12,
+                  marginTop: 20,
+                  fontSize: nameSize,
+                  lineHeight: 1.1,
+                }}
+              >
+                <span style={{ fontWeight: 600 }}>{car.make}</span>
+                <span>{car.model}</span>
+              </div>
+              {(notice ?? subTitle) && (
+                <div
+                  style={{
+                    fontSize: crowded ? 19 : 22,
+                    fontWeight: notice ? 600 : 400,
+                    color: notice ? '#111' : stone,
+                    marginTop: 6,
+                  }}
+                >
+                  {notice ?? subTitle}
+                </div>
+              )}
+              {/* A car no longer sold has no price to go and pay */}
+              {!notice && (
+                <PriceTag
+                  car={car}
+                  small={crowded}
+                  // Four leave no room for it beside the price
+                  badge={
+                    cars.length < 4
+                      ? specRows([car]).find(({ key }) => key === 'price')
+                          ?.cells[0]?.detail
+                      : undefined
+                  }
+                />
+              )}
             </div>
-            <div style={{ marginTop: 10, fontSize: crowded ? 24 : 30 }}>
-              {`${addDecimalSeparators(car.priceWithGrant)} kr.`}
-            </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </div>,
     await options(),
