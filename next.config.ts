@@ -33,7 +33,8 @@ const nextConfig: NextConfig = {
       828, // DPR2 phones and tablets, which otherwise round up to 1080
       1080, // Screen wider than 1024px @2x
       1180, // 390pt iPhones (12-14, 16e) and 393pt ones (14 Pro, 15, 16)
-      1320, // iPhone 16 Pro Max, and the widest anything here asks for
+      1320, // iPhone 16 Pro Max
+      1920, // A car page's 960px photo @2x, and the photos' own width
     ],
     // The two widths either side of MiniCar's 120px box, which is all that
     // reads this list but the similar cars' thumbnails on a car's page
