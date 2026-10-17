@@ -17,7 +17,7 @@ const carsSummary = cars
   .toSorted((a, b) => a.priceWithGrant - b.priceWithGrant)
   .map(
     (car) =>
-      `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr, ${car.range} km drægni, ${car.capacity} kWh rafhlaða, hraðhleðsla 10-80% á ${car.timeToCharge10To80} mín (${car.kmPerMinuteCharged} km/mín), ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''}${car.evDatabaseUrl ? ` (more info: ${car.evDatabaseUrl})` : ''} (auðkenni: ${carRef(car)})`,
+      `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr, ${car.range} km drægni, ${car.capacity} kWh rafhlaða, hraðhleðsla 10-80% á ${car.timeToCharge10To80} mín (${car.kmPerMinuteCharged} km/mín), ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''} (auðkenni: ${carRef(car)})`,
   )
   .join('\n')
 
