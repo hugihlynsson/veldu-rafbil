@@ -34,6 +34,14 @@ const aboutPair: Array<(a: string, b: string) => string> = [
   (a, b) => `Vegur verðmuninn á ${a} og ${b}…`,
   (a, b) => `Spyr sig hvort ${a} eða ${b} henti fjölskyldunni betur…`,
   (a, b) => `Leggur ${a} og ${b} í sama stæðið, í huganum…`,
+  (a, b) => `Keyrir ${a} og ${b} yfir Hellisheiði í skafrenningi…`,
+  (a, b) => `Spyr tengdamömmu hvort hún kjósi ${a} eða ${b}…`,
+  (a, b) => `Sér hvor kemst lengra til Egilsstaða, ${a} eða ${b}…`,
+  (a, b) => `Raðar ferðatöskunum í ${a} og ${b}…`,
+  (a, b) => `Lætur ${a} og ${b} keppa um síðasta stæðið í Kringlunni…`,
+  (a, b) => `Stingur ${a} og ${b} í samband og sér hvor er fyrr klár…`,
+  (a, b) => `Prófar ${a} og ${b} á holóttum malarvegi…`,
+  (a, b) => `Sér hvor er flottari við Hallgrímskirkju, ${a} eða ${b}…`,
 ]
 
 const closing = [
