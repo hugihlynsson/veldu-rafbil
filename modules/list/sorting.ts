@@ -1,6 +1,6 @@
-import { createLoader, createParser, createSerializer } from 'nuqs/server'
+import { createParser } from 'nuqs/server'
 
-import { parseAsWord, type SearchParams } from './filters'
+import { parseAsWord } from './filters'
 import type { Car } from '@/modules/data/cars'
 
 export type SortingDirection = 'asc' | 'desc'
@@ -142,26 +142,3 @@ export const stateFromSortingValues = ({
     ? flipDirection(defaultDirection(sorting))
     : defaultDirection(sorting),
 })
-
-export const sortingValuesFromState = ({
-  sorting,
-  direction,
-}: SortingState) => ({
-  sorting,
-  flipped: !isDefaultDirection(sorting, direction),
-})
-
-const loadSortingValues = createLoader(sortingParsers, {
-  urlKeys: sortingUrlKeys,
-})
-
-export const getSortingFromQuery = (query: SearchParams): SortingState =>
-  stateFromSortingValues(loadSortingValues(query))
-
-const serializeSortingValues = createSerializer(sortingParsers, {
-  urlKeys: sortingUrlKeys,
-})
-
-/** The query string for a sorting, `?` and all, or '' for the default */
-export const serializeSorting = (state: SortingState): string =>
-  serializeSortingValues(sortingValuesFromState(state))

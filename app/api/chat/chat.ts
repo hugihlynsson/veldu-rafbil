@@ -19,7 +19,10 @@ import {
   type AnswerMarkers,
 } from '@/modules/chat/answerMarkers'
 import { resolveCarRefs } from '@/modules/chat/cars'
-import { createFetchCarDetailsTool } from './tools/fetchCarDetails'
+import {
+  createFetchCarDetailsTool,
+  upgradeCarDetailsCalls,
+} from './tools/fetchCarDetails'
 import { withPageContext } from './pageContext'
 
 const createTools = () => ({ fetchCarDetails: createFetchCarDetailsTool() })
@@ -46,7 +49,14 @@ export const parseChatRequest = async (
   const bounded = requestSchema.safeParse(body)
   if (!bounded.success) return null
 
-  return validateChatMessages(bounded.data.messages, tools)
+  return validateChatMessages(
+    bounded.data.messages.map((message) =>
+      message.role === 'assistant'
+        ? { ...message, parts: upgradeCarDetailsCalls(message.parts) }
+        : message,
+    ),
+    tools,
+  )
 }
 
 // Ours to log, not to trust: anything but a UUID is dropped rather than written

@@ -1,4 +1,4 @@
-import cars, { type Car } from '@/modules/data/cars'
+import cars, { currentCarWithSlug, type Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { findMentionedCars } from './mentionedCars'
 import { getMessageText, MAX_TAGGED_CARS, type ChatMessage } from './message'
@@ -11,12 +11,13 @@ import { getMessageText, MAX_TAGGED_CARS, type ChatMessage } from './message'
  */
 export const carRef = (car: Car): string => carSlug(car)
 
-const carsByRef = new Map(cars.map((car) => [carRef(car), car]))
 const carsById = new Map(cars.map((car) => [car.id, car]))
 
 /** The ids of the cars an answer tagged, in its order, each real and once */
 export const resolveCarRefs = (refs: string[]): string[] => {
-  const ids = refs.flatMap((ref) => carsByRef.get(ref.toLowerCase())?.id ?? [])
+  const ids = refs.flatMap(
+    (ref) => currentCarWithSlug(ref.toLowerCase())?.id ?? [],
+  )
   return [...new Set(ids)].slice(0, MAX_TAGGED_CARS)
 }
 
