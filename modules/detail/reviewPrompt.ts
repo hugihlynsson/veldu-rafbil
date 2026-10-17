@@ -32,7 +32,7 @@ const carSystemPrompt = `${intro} Einhver hefur opnað síðu bílsins hér að 
 Áður en þú skrifar:
 - Gefðu stærð, farangursrými og dráttargetu aðeins meira vægi þar sem bíllinn sker sig úr, eins og staða hans og munurinn á honum og svipuðu bílunum sýna: það sýna tölurnar á síðunni ekki. Bíll sem má ekki draga kerru nefnirðu alltaf sem galla, enda draga margir Íslendingar kerru eða hjólhýsi.
 - Sama á við um ábyrgðina á rafhlöðunni: nefndu hana þar sem hún er lengri eða styttri en hjá flestum.
-- Lestu hvar bíllinn stendur á listanum: meðal allra rafbílanna sem eru seldir á Íslandi og meðal þeirra sem kosta svipað. Þar sést hvað er í raun sérstakt við hann og hvað er bara venjulegt. Það sem er í meðallagi er ekki styrkleiki. Staðan er sögð í orðum, aldrei með prósentum, sæti í röð eða fjölda bíla, og þú segir hana þannig líka. Stöðuna af öllum bílunum segirðu sem lýsingu á bílnum sjálfum, til dæmis „hann hleður fremur hægt“, ekki sem samanburð við alla hina. Samanburð við aðra gerirðu við bíla á svipuðu verði, til dæmis „miðað við aðra í sínum verðflokki“. Segðu aðeins annað hvort um hverja tölu, oftast samanburðinn við bíla á svipuðu verði, og stöðuna af öllum bílunum bara þegar hún bætir einhverju við.
+- Lestu hvar bíllinn stendur á listanum: meðal allra rafbílanna sem eru seldir á Íslandi og meðal þeirra sem kosta svipað. Þar sést hvað er í raun sérstakt við hann og hvað er bara venjulegt. Það sem er í meðallagi er ekki styrkleiki. Staðan er sögð í orðum, aldrei með prósentum, sæti í röð eða fjölda bíla, og þú segir hana þannig líka. Stöðuna af öllum bílunum segirðu sem lýsingu á bílnum sjálfum, til dæmis „hann hleður fremur hægt“, ekki sem samanburð við alla hina. Samanburð við aðra gerirðu við bíla á svipuðu verði, til dæmis „miðað við aðra í sínum verðflokki“. Segðu aðeins annað hvort um hverja tölu, oftast samanburðinn við bíla á svipuðu verði, og stöðuna af öllum bílunum bara þegar hún bætir einhverju við. Segi þær ólíkt, til dæmis að hann drífi mjög stutt en lengra en flestir á svipuðu verði, segðu hvort tveggja í sömu setningu svo það lesist ekki sem mótsögn.
 
 Það sem skiptir íslenska kaupendur mestu, eftir því sem á við þennan bíl:
 - Hvort drægnin dugar í vetrarkulda, á milli landshluta og ekki bara innanbæjar.
@@ -47,14 +47,14 @@ ${writingRules}
 Svaraðu með um 150 orðum í þremur eða fjórum stuttum efnisgreinum og engu öðru:
 1. Lýstu bílnum sjálfum: byrjaðu á hvers konar bíll hann er, yfirbyggingu og stærð eins og gögnin segja hana, á íslensku (til dæmis smábíll, hlaðbakur, fólksbíll, jepplingur, jeppi eða fjölnotabíll), og svo hvað einkennir hann helst og hverjum hann hentar. Nefndu enga aðra bíla hér: samanburðurinn kemur síðar. Lýstu honum með því sem helst greinir hann frá svipuðu bílunum, ekki orðum sem gætu átt við hvaða bíl sem er.
 2. Aðrir helstu styrkleikar hans og hvað þeir þýða í daglegu lífi.
-3. Hvað maður gefur eftir, og hvenær einn af svipuðu bílunum væri betri kostur. Nefndu einn eða tvo mun sem skipta mestu máli, ekki upptalningu á tölum. Nefndu aðeins bíl sem er sams konar bíll og þar sem munurinn skiptir kaupanda máli, ekki fáeinir km eða smávægilegur verðmunur, og aldrei tvo bíla sem segja það sama. Eigi enginn þeirra við, nefndu engan.
+3. Hvað maður gefur eftir, og hvenær einn af svipuðu bílunum væri betri kostur. Nefndu einn eða tvo mun sem skipta mestu máli, ekki upptalningu á tölum. Nefndu aðeins bíl sem er sams konar bíll og þar sem munurinn skiptir kaupanda máli, ekki fáeinir km eða smávægilegur verðmunur, aldrei fleiri en tvo og aldrei tvo sem segja það sama. Eigi enginn þeirra við, nefndu engan. Hér segirðu hvar hann gefur eftir, ekki hvar hann stendur betur en hinir.
 Endaðu á stuttri niðurstöðu um þennan bíl, sem má vera lokasetning þriðju efnisgreinar eða efnisgrein ein og sér, orðuð út frá honum frekar en eftir föstu sniði. Ekki endurtaka það sem áður er sagt.
 
 Lesandinn er að velja á milli bíla, svo skrifaðu um það sem greinir þennan bíl frá hinum frekar en það sem á við um flesta rafbíla. Hver setning á helst að segja eitthvað sem ætti ekki jafn vel við um svipuðu bílana. Að fjórhjóladrif gefi grip í snjó og hálku segirðu til dæmis aðeins þar sem drifið greinir hann frá þeim.
 
 Vertu heiðarleg(ur). Það sem bíllinn gerir í meðallagi gerirðu ekki að kosti: segðu það eða slepptu því. Notaðu ekki orð eins og "einstakur", "framúrskarandi" eða "frábær" nema staða hans á listanum sýni að hann skari fram úr. Segðu ekkert um hann sem staða hans segir annað um: kallaðu hann ekki rúmgóðan ef skottið er minna en hjá flestum á svipuðu verði. Framhjóla- eða afturhjóladrif er aldrei kostur í snjó og hálku. Stærð rafhlöðunnar skiptir kaupanda aðeins máli gegnum drægnina, svo nefndu hana ekki sem kost eða galla ein og sér.
 
-Ef aðrar útfærslur sama bíls eru á listanum, nefndu eina aðeins þar sem hún bætir úr helsta galla hans, til dæmis með fjórhjóladrifi eða meiri drægni.
+Ef aðrar útfærslur sama bíls eru á listanum, nefndu eina aðeins þar sem hún bætir úr helsta galla hans, til dæmis með fjórhjóladrifi eða meiri drægni, eða sparar mikið án þess að gefa mikið eftir.
 
 Hafi bíllinn fáa styrkleika í tölunum, segðu hvað merkið eða hönnunin færir kaupandanum og stattu við að þeir séu fáir: ekki fylla upp í með almennu hrósi.
 
@@ -530,9 +530,14 @@ const listDifferences = (
 ) =>
   similar
     .map((other) => {
-      const differences = metrics.flatMap(
-        (metric) => compare(metric, other, car, details) ?? [],
-      )
+      const differences = [
+        ...(other.drive === car.drive
+          ? []
+          : [driveLabels[other.drive].toLowerCase()]),
+        ...metrics.flatMap(
+          (metric) => compare(metric, other, car, details) ?? [],
+        ),
+      ]
       return `- ${other.label}: ${differences.join(', ')}`
     })
     .join('\n')
@@ -606,19 +611,20 @@ export const describeStanding = (
     })
     .join('\n')
 
-// The model's other versions on the list, by what tells them apart, so a
-// review can say the drawback it names is one a version without it fixes
-const listVariants = (car: Car, all: ReadonlyArray<Car>): string => {
+// The model's other versions on the list, worked out against it as the
+// similar cars are, so a review can say the drawback it names is one a
+// version without it fixes, and by how much
+const listVariants = (
+  car: Car,
+  all: ReadonlyArray<Car>,
+  details: DetailsOf,
+): string => {
   const variants = all.filter(
     (other) =>
       other !== car && other.make === car.make && other.model === car.model,
   )
   if (variants.length === 0) return ''
-  const lines = variants.map(
-    (other) =>
-      `- ${other.label}, ${addDecimalSeparators(other.priceWithGrant)} kr., ${other.range} km drægni, ${decimal(other.capacity)} kWh, ${driveLabels[other.drive].toLowerCase()}`,
-  )
-  return `\n\nAðrar útfærslur hans á listanum:\n${lines.join('\n')}`
+  return `\n\nAðrar útfærslur hans á listanum:\n${listCars(variants, details)}\n\nHvernig þær eru miðað við hann:\n${listDifferences(car, variants, details)}`
 }
 
 /** The same for one car, with the cars like it and where it stands among all */
@@ -628,7 +634,7 @@ export const carFacts = (
   all: ReadonlyArray<Car> = cars,
   details: DetailsOf = noDetails,
 ): string =>
-  `Bíllinn:\n${listCars([car], details)}\n\nStaða hans á listanum:\n${describeStanding(car, all, details)}${listVariants(car, all)}\n\nSvipaðir bílar, næstir honum að verði og drægni:\n${listCars(similar, details)}\n\nHvernig þeir eru miðað við ${car.label}:\n${listDifferences(car, similar, details)}`
+  `Bíllinn:\n${listCars([car], details)}\n\nStaða hans á listanum:\n${describeStanding(car, all, details)}${listVariants(car, all, details)}\n\nSvipaðir bílar, næstir honum að verði og drægni:\n${listCars(similar, details)}\n\nHvernig þeir eru miðað við ${car.label}:\n${listDifferences(car, similar, details)}`
 
 /**
  * Everything the model is given for a car's review, with what ev-database

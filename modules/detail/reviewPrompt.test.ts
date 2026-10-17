@@ -55,7 +55,7 @@ describe('carFacts', () => {
   // and given against the best of several, it quotes it as against this one
   it('works out each similar car against this one', () => {
     expect(facts).toContain(
-      '- Tesla Model Y: 240.000 kr. dýrari, 100 km minni drægni',
+      '- Tesla Model Y: afturhjóladrif, 240.000 kr. dýrari, 100 km minni drægni',
     )
     expect(facts).toContain('0,5 s sneggri í 0-100 km/klst')
   })
@@ -100,6 +100,9 @@ describe('carFacts', () => {
     const awd = deriveCar({ ...base, subModel: 'Long Range AWD', drive: 'AWD' })
     expect(carFacts(kia, [tesla], [kia, tesla, awd])).toContain(
       'Aðrar útfærslur hans á listanum:\n- Kia EV3 Long Range AWD',
+    )
+    expect(carFacts(kia, [tesla], [kia, tesla, awd])).toContain(
+      'Hvernig þær eru miðað við hann:\n- Kia EV3 Long Range AWD: fjórhjóladrif',
     )
     expect(facts).not.toContain('Aðrar útfærslur')
   })
