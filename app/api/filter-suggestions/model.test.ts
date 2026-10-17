@@ -6,7 +6,12 @@ import {
   suggestFilters,
   suggestionsFromAnswers,
 } from './model'
-import { ADVISOR_KEY, buildIntentQuestions, withNumbers } from './questions'
+import {
+  ADVISOR_KEY,
+  buildIntentQuestions,
+  VALUE_THRESHOLD,
+  withNumbers,
+} from './questions'
 
 const choice = (probabilities: Record<string, number>) => ({
   type: 'choice',
@@ -29,7 +34,8 @@ describe('conservativeIndex', () => {
 
 describe('suggestionsFromAnswers', () => {
   const price = buildIntentQuestions().price!
-  const [notThePriciest, midPriced] = price.options
+  const notThePriciest = price.options[0]!
+  const midPriced = price.options[1]!
 
   it('suggests an ordered filter once enough is off "none"', () => {
     expect(
@@ -60,7 +66,22 @@ describe('suggestionsFromAnswers', () => {
         cheap: 0.4,
       }),
     })
-    expect(suggestion.value).toBe(notThePriciest.value)
+    expect(suggestion?.value).toBe(notThePriciest.value)
+  })
+
+  it('asks more of a price per km than of the other filters', () => {
+    const doubtful = 1 - VALUE_THRESHOLD + 0.05
+    expect(
+      suggestionsFromAnswers({
+        value: choice({ none: doubtful, good_value: 1 - doubtful }),
+        range: choice({ none: doubtful, long_trips: 1 - doubtful }),
+      }).map(({ key }) => key),
+    ).toEqual(['range'])
+    expect(
+      suggestionsFromAnswers({
+        value: choice({ none: 0.1, good_value: 0.9 }),
+      }).map(({ key }) => key),
+    ).toEqual(['value'])
   })
 
   it('suggests nothing below the threshold', () => {
@@ -111,7 +132,7 @@ describe('suggestionsFromAnswers', () => {
   })
 
   it('falls back to the brackets when they outweigh the number', () => {
-    const [decent] = buildIntentQuestions().range!.options
+    const decent = buildIntentQuestions().range!.options[0]!
     expect(
       suggestionsFromAnswers(
         {
@@ -209,6 +230,7 @@ describe('suggestFilters', () => {
         { key: 'seats', value: 7, source: 'text', probability: 1 },
       ],
       model: 'not-needed',
+      asksAdvisor: false,
     })
     expect(ask).not.toHaveBeenCalled()
   })
@@ -217,6 +239,7 @@ describe('suggestFilters', () => {
     expect(await suggestFilters('ódýr með 7 sætum', undefined)).toEqual({
       suggestions: [{ key: 'seats', value: 7, source: 'text', probability: 1 }],
       model: 'unavailable',
+      asksAdvisor: false,
     })
   })
 
@@ -233,7 +256,7 @@ describe('suggestFilters', () => {
     })
     const result = await suggestFilters('fjórhjóladrif, 600', ask)
 
-    expect(ask.mock.calls[0][0].questions.range.criteria).toHaveProperty(
+    expect(ask.mock.calls[0]?.[0].questions.range.criteria).toHaveProperty(
       'at_least_600_km',
     )
     expect(result.suggestions).toEqual([
@@ -251,11 +274,39 @@ describe('suggestFilters', () => {
     })
     const result = await suggestFilters('ódýr með 7 sætum', ask)
 
-    expect(Object.keys(ask.mock.calls[0][0].questions)).not.toContain('seats')
+    expect(Object.keys(ask.mock.calls[0]?.[0].questions)).not.toContain('seats')
     expect(result.model).toBe('answered')
     expect(result.suggestions.map(({ key, source }) => [key, source])).toEqual([
       ['seats', 'text'],
       ['price', 'model'],
     ])
+  })
+
+  it('says a request is a question when the model reads it as one', async () => {
+    const ask = vi.fn().mockResolvedValue({
+      answers: { [ADVISOR_KEY]: { type: 'noul', noul: 0.9 } },
+    })
+    expect(
+      (await suggestFilters('bestur fyrir fjölskyldu með 600 km', ask))
+        .asksAdvisor,
+    ).toBe(true)
+  })
+
+  it('says a request is a question by its words when no model answered', async () => {
+    const failing = vi.fn().mockRejectedValue(new Error('timeout'))
+    expect(
+      (await suggestFilters('hvaða bíll kemst 600 km?', failing)).asksAdvisor,
+    ).toBe(true)
+    expect(
+      (await suggestFilters('hver er með 7 sæti undir 9 milljónum', undefined))
+        .asksAdvisor,
+    ).toBe(true)
+    expect(
+      (await suggestFilters('má ekki kosta meira en 6.000.000', undefined))
+        .asksAdvisor,
+    ).toBe(false)
+    expect(
+      (await suggestFilters('fjórhjóladrif og 600 km', undefined)).asksAdvisor,
+    ).toBe(false)
   })
 })

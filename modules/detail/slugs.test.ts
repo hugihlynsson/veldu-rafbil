@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
-import cars, { allCars } from '@/modules/data/cars'
+import cars, { allCars, type Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf } from './paths'
 import { readSegment, resolveSlugs } from './slugs'
 
-const [a, b, c] = cars
+const [a, b, c] = cars as readonly [Car, Car, Car, ...Car[]]
 const slugsOf = (path: string) => path.split('/').slice(2)
 
 describe('resolveSlugs', () => {

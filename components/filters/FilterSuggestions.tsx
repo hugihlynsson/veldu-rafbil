@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useEffectEvent, useRef, useState } from 'react'
 import { trackEvent } from 'fathom-client'
 
 import type { Filters } from '@/modules/list/filters'
@@ -6,9 +6,11 @@ import {
   MAX_INTENT_LENGTH,
   needsModel,
   parseFilterIntent,
+  readsAsQuestion,
 } from '@/modules/list/filterIntent'
 import {
   rankSuggestions,
+  readAsksAdvisor,
   readSuggestions,
   suggestionsFromFilters,
   withSuggestion,
@@ -19,9 +21,23 @@ import type { ShownSuggestions } from '@/modules/list/suggestionOutcome'
 import reportSuggestionOutcome from '@/utils/reportSuggestionOutcome'
 import { agree } from '@/modules/copy/plural'
 import SearchIcon from '@/components/SearchIcon'
+import SendIcon from '@/components/SendIcon'
 import SuggestionPills, { type Pill } from '@/components/SuggestionPills'
 
 const carCount = (count: number) => `${count} ${agree(count, 'bíll', 'bílar')}`
+
+interface Reading {
+  suggestions: FilterSuggestion[]
+  asksAdvisor: boolean
+}
+
+/** What sending the text in the bar does, as the suggestions read it */
+export interface BarAction {
+  /** The text this was read from, trimmed, or null while a reading is coming */
+  text: string | null
+  /** The suggestions together, when the text reads as a wish they answer */
+  filter: { filters: Filters; count: number } | null
+}
 
 /**
  * What the route reads in the text, along with what the text says outright,
@@ -32,7 +48,7 @@ const carCount = (count: number) => `${count} ${agree(count, 'bíll', 'bílar')}
 const askRoute = async (
   body: { text: string; id: string; supersedes?: string },
   signal: AbortSignal,
-): Promise<FilterSuggestion[] | null> => {
+): Promise<Reading | null> => {
   try {
     const response = await fetch('/api/filter-suggestions', {
       method: 'POST',
@@ -40,7 +56,12 @@ const askRoute = async (
       body: JSON.stringify(body),
       signal,
     })
-    return response.ok ? readSuggestions(await response.json()) : null
+    if (!response.ok) return null
+    const json: unknown = await response.json()
+    return {
+      suggestions: readSuggestions(json),
+      asksAdvisor: readAsksAdvisor(json),
+    }
   } catch {
     return null
   }
@@ -54,13 +75,24 @@ interface Props {
   onApply: (filters: Filters) => void
   /** The pills on screen, or null, for the input to report a send past them */
   onShownChange?: (shown: ShownSuggestions | null) => void
+  /**
+   * Told whenever what sending the text would do changes. Told after
+   * onShownChange, so the pills it reports are those this action reads.
+   */
+  onAction: (action: BarAction) => void
+  /** Sends the text to the advisor, when sending it would filter instead */
+  onAsk: () => void
 }
+
+const unread = { text: '', suggestions: [], asksAdvisor: false, at: 0 }
 
 /**
  * Pills for the filters the text asks for, each to be tapped rather than
- * applied, as a wrong one quietly empties the list. They change once per
- * pause in typing: what the text says outright, and the model's reading of
- * the rest when there is any, arrive together rather than one after the other.
+ * applied, as a wrong one quietly empties the list. When the text reads as a
+ * wish, the bar's own button takes them all, saying how many cars that leaves,
+ * and a pill asks the advisor instead. They change once per pause in typing:
+ * what the text says outright, and the model's reading of the rest when there
+ * is any, arrive together rather than one after the other.
  */
 export default function FilterSuggestions({
   active,
@@ -68,13 +100,12 @@ export default function FilterSuggestions({
   filters,
   onApply,
   onShownChange,
+  onAction,
+  onAsk,
 }: Props) {
-  const [shown, setShown] = useState<{
-    text: string
-    requestId?: string
-    suggestions: FilterSuggestion[]
-    at: number
-  }>({ text: '', suggestions: [], at: 0 })
+  const [shown, setShown] = useState<
+    Reading & { text: string; requestId?: string; at: number }
+  >(unread)
   // A request typed past before it was answered, for the next one to name
   const unanswered = useRef<string | undefined>(undefined)
 
@@ -83,7 +114,7 @@ export default function FilterSuggestions({
 
   // Cleared or left, the pills go at once rather than after the pause
   if (request === '' && shown.text !== '') {
-    setShown({ text: '', suggestions: [], at: 0 })
+    setShown(unread)
   }
 
   useEffect(() => {
@@ -95,7 +126,7 @@ export default function FilterSuggestions({
     let inFlight: string | undefined
 
     const timer = setTimeout(async () => {
-      let asked: FilterSuggestion[] | null = null
+      let asked: Reading | null = null
       if (needsModel(parsed)) {
         inFlight = crypto.randomUUID()
         const supersedes = unanswered.current
@@ -110,7 +141,10 @@ export default function FilterSuggestions({
       setShown({
         text: request,
         requestId: inFlight,
-        suggestions: asked ?? read,
+        ...(asked ?? {
+          suggestions: read,
+          asksAdvisor: readsAsQuestion(request),
+        }),
         at: performance.now(),
       })
       inFlight = undefined
@@ -145,6 +179,24 @@ export default function FilterSuggestions({
     onShownChange?.(hasSuggestions ? onScreen() : null)
   })
 
+  // A question goes to the advisor even when it names a filter, and a wish
+  // that would leave no car is no answer to send
+  const filter =
+    !shown.asksAdvisor && hasSuggestions && count > 0
+      ? { filters: combined, count }
+      : null
+  // Text in a bar that is not reading it has not been read, rather than read
+  // as asking for nothing
+  const readText =
+    shown.text === request && (request !== '' || text.trim() === '')
+      ? text.trim()
+      : null
+  const report = useEffectEvent(() => onAction({ text: readText, filter }))
+  const actionKey = JSON.stringify({ readText, filter })
+  useEffect(() => {
+    report()
+  }, [actionKey])
+
   const pills: Pill[] = suggestions.map((suggestion) => {
     const { label, value } = filterChipText(suggestion.key, suggestion.value)
     return {
@@ -170,7 +222,21 @@ export default function FilterSuggestions({
     }
   })
 
-  if (pills.length > 1) {
+  if (filter) {
+    pills.unshift({
+      key: 'ask',
+      content: (
+        <>
+          <SendIcon
+            size={12}
+            className="inline-block align-[-1px] mr-2 text-stone"
+          />
+          Spyrja Veldu Rafbíl
+        </>
+      ),
+      onClick: onAsk,
+    })
+  } else if (pills.length > 1) {
     const addAll = `Bæta ${pills.length === 2 ? 'báðum' : 'öllum'} síum við`
     pills.push({
       key: 'all',

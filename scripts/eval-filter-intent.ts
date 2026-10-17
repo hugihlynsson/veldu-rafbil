@@ -58,7 +58,7 @@ const report = (run: Run) => {
   ]
   for (const kind of kinds) {
     const picked = run.scores.filter(
-      (_, i) => kind === 'all' || intentCases[i].kind === kind,
+      (_, i) => kind === 'all' || intentCases[i]?.kind === kind,
     )
     const { cases, exact, precision, recall } = summarize(picked)
     console.log(
@@ -106,9 +106,11 @@ const showMisses = (run: Run, got: Filters[]) => {
   run.scores.forEach((score, i) => {
     if (score.wrong.length + score.missed.length + score.extra.length === 0)
       return
+    const testCase = intentCases[i]
+    if (!testCase) return
     console.log(
-      `  ${JSON.stringify(intentCases[i].text)}\n` +
-        `    expected ${describe(intentCases[i].expect as Filters)}, got ${describe(got[i])}`,
+      `  ${JSON.stringify(testCase.text)}\n` +
+        `    expected ${describe(testCase.expect as Filters)}, got ${describe(got[i] ?? {})}`,
     )
   })
 }
@@ -119,7 +121,7 @@ const parserOnly = (): Run => {
   )
   const run: Run = {
     name: 'Parser alone',
-    scores: intentCases.map((testCase, i) => scoreCase(testCase, got[i])),
+    scores: intentCases.map((testCase, i) => scoreCase(testCase, got[i] ?? {})),
     millis: [],
     inputTokens: 0,
     statuses: {},

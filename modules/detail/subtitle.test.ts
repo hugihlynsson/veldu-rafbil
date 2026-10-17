@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
-import cars from '@/modules/data/cars'
+import cars, { type Car } from '@/modules/data/cars'
 import { carSubtitle, deprecatedNotice } from './subtitle'
 
 describe('carSubtitle', () => {
-  const [car] = cars
+  const [car] = cars as readonly [Car, Car, Car, ...Car[]]
 
   it('names the variant and when it arrives', () => {
     expect(
@@ -20,7 +20,7 @@ describe('carSubtitle', () => {
 })
 
 describe('deprecatedNotice', () => {
-  const [car] = cars
+  const [car] = cars as readonly [Car, Car, Car, ...Car[]]
 
   it('says since when a car is no longer sold new', () => {
     expect(deprecatedNotice({ ...car, deprecated: '2026-10-11' })).toBe(

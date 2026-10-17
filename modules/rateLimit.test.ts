@@ -69,7 +69,7 @@ describe('filterSuggestionsRateLimit', () => {
       filterSuggestionsRateLimit('10.0.1.1'),
     )
     expect(results.slice(0, 60).every((result) => result.ok)).toBe(true)
-    expect(results[60].ok).toBe(false)
+    expect(results[60]?.ok).toBe(false)
   })
 })
 

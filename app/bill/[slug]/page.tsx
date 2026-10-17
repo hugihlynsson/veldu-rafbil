@@ -29,9 +29,9 @@ export const generateStaticParams = () =>
 export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const {
     cars: [car],
-    slugs,
+    slugs: [slug],
   } = await read(props)
-  if (!car) return { title: 'Veldu Rafbíl' }
+  if (!car || !slug) return { title: 'Veldu Rafbíl' }
 
   const title = `${car.label} – Veldu Rafbíl`
   const notice = deprecatedNotice(car)
@@ -42,14 +42,14 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
   return {
     title,
     description,
-    alternates: { canonical: carPath(slugs[0]) },
+    alternates: { canonical: carPath(slug) },
     openGraph: {
       title,
       description,
       siteName: 'Veldu Rafbíl',
       locale: 'is_IS',
       images: [
-        { url: shareImagePath(slugs[0]), ...shareImageSize, alt: car.label },
+        { url: shareImagePath(slug), ...shareImageSize, alt: car.label },
       ],
     },
     twitter: { card: 'summary_large_image' },
@@ -60,12 +60,12 @@ export default async function Page(props: Props) {
   const segment = readSegment((await props.params).slug)
   const {
     cars: [car],
-    slugs,
+    slugs: [slug],
   } = await read(props)
 
-  if (!car) notFound()
+  if (!car || !slug) notFound()
   // A renamed car, or a slug in the wrong case: the one address the page has
-  if (slugs[0] !== segment) permanentRedirect(carPath(slugs[0]))
+  if (slug !== segment) permanentRedirect(carPath(slug))
 
   // Buying advice, which a car no longer sold new is past
   const review = car.deprecated ? undefined : carReviews[carSlug(car)]

@@ -95,7 +95,7 @@ describe('questionSource', () => {
   })
 
   it('reads a starter pill', () => {
-    expect(questionSource([ask(CHAT_SUGGESTIONS[0])])).toBe('starter')
+    expect(questionSource([ask(CHAT_SUGGESTIONS[0]!)])).toBe('starter')
   })
 
   describe('on a car page', () => {
@@ -116,7 +116,7 @@ describe('questionSource', () => {
 
     // Not offered there, so typed to match
     it("reads the list's starters, or another car's, as typed", () => {
-      expect(questionSource([askOnPage(CHAT_SUGGESTIONS[0])], reviews)).toBe(
+      expect(questionSource([askOnPage(CHAT_SUGGESTIONS[0]!)], reviews)).toBe(
         'typed',
       )
       expect(

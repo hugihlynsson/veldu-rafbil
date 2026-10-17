@@ -53,6 +53,9 @@ const KRONUR = String.raw`(?:kr\.?|kronur\w*|isk)`
 
 const pattern = (source: string) => new RegExp(source, 'gu')
 
+// A rule that reads a number from its match captures that number first
+type RuleMatch = RegExpExecArray & { 1: string }
+
 /**
  * A dot is the thousands separator in Icelandic and a comma the decimal one,
  * but plenty write 8.5 too. One dot before three digits is thousands, unless
@@ -66,7 +69,7 @@ const parseNumber = (raw: string, preferDecimal = false): number => {
       ? Number(groups.join(''))
       : NaN
   }
-  const [whole, fraction] = groups
+  const [whole = '', fraction = ''] = groups
   const thousands = raw.includes('.') && fraction.length === 3 && !preferDecimal
   return thousands ? Number(whole + fraction) : Number(`${whole}.${fraction}`)
 }
@@ -252,11 +255,11 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
 
   const take = (
     source: string,
-    read: (match: RegExpExecArray, before: string) => boolean | void,
+    read: (match: RuleMatch, before: string) => boolean | void,
   ) => {
     for (const match of rest.matchAll(pattern(source))) {
       const before = rest.slice(0, match.index)
-      if (read(match, before) === false) continue
+      if (read(match as RuleMatch, before) === false) continue
       rest =
         before +
         READ.repeat(match[0].length) +
@@ -436,3 +439,27 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
 /** Whether anything is left that only a model could read */
 export const needsModel = (parsed: ParsedIntent): boolean =>
   parsed.unread.length > 0 || parsed.numbers.length > 0
+
+// Folded, as foldText leaves them. Only words that open nothing but a
+// question: "má", "er" or "get" open as many wishes ("má ekki kosta meira
+// en…"), and a model is asked about those whenever it is asked at all.
+const questionOpeners = new Set(
+  `hvad hvada hver hverjir hverja hvernig hversu hvort hvar hvenaer hvers hvi
+  maeli maelir maelid maeliru`
+    .trim()
+    .split(/\s+/),
+)
+
+/**
+ * Whether the text reads as a question for the advisor rather than a wish for
+ * the list, judged on its first word and a closing question mark. Both are
+ * free, so this stands where no model was asked, and alongside one that was.
+ */
+export const readsAsQuestion = (text: string): boolean => {
+  const trimmed = text.trim()
+  if (trimmed.endsWith('?')) return true
+  const first = foldText(trimmed)
+    .split(/[^\p{L}]+/u)
+    .find((word) => word !== '')
+  return first !== undefined && questionOpeners.has(first)
+}

@@ -6,6 +6,7 @@ import { parseFilterIntent } from './filterIntent'
 import {
   MAX_SUGGESTIONS,
   rankSuggestions,
+  readAsksAdvisor,
   readSuggestions,
   suggestionsFromFilters,
   type FilterSuggestion,
@@ -164,5 +165,14 @@ describe('readSuggestions', () => {
   it('reads anything else as no suggestions', () => {
     expect(readSuggestions({ error: 'Too many requests' })).toEqual([])
     expect(readSuggestions(null)).toEqual([])
+  })
+})
+
+describe('readAsksAdvisor', () => {
+  it('reads the flag, and takes anything else for a wish', () => {
+    expect(readAsksAdvisor({ suggestions: [], asksAdvisor: true })).toBe(true)
+    expect(readAsksAdvisor({ suggestions: [], asksAdvisor: false })).toBe(false)
+    expect(readAsksAdvisor({ suggestions: [], asksAdvisor: 'yes' })).toBe(false)
+    expect(readAsksAdvisor(null)).toBe(false)
   })
 })

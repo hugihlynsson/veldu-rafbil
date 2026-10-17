@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
-import cars from '@/modules/data/cars'
+import cars, { type Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import type { ChatMessage } from '@/modules/chat/message'
 import { pageNote, withPageContext } from './pageContext'
 
-const [a] = cars
+const [a] = cars as readonly [Car, Car, Car, ...Car[]]
 const review = {
   paragraphs: ['Góður bíll.', 'Fer langt.'],
   questions: [],
@@ -20,8 +20,10 @@ const question = (id: string, about?: string[]): ChatMessage => ({
   ...(about && { metadata: { about } }),
 })
 
-const textOf = (message: ChatMessage) =>
-  message.parts.map((part) => (part.type === 'text' ? part.text : '')).join('|')
+const textOf = (message: ChatMessage | undefined) =>
+  (message?.parts ?? [])
+    .map((part) => (part.type === 'text' ? part.text : ''))
+    .join('|')
 
 describe('pageNote', () => {
   it('names the car whose page it was asked on, and its review', () => {

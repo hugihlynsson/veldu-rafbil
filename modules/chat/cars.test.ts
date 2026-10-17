@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import cars from '@/modules/data/cars'
+import cars, { type Car } from '@/modules/data/cars'
 import { carRef, getAnswerCars, resolveCarRefs } from './cars'
 import {
   MAX_TAGGED_CARS,
@@ -8,7 +8,7 @@ import {
   type ChatMessage,
 } from './message'
 
-const [first, second, third] = cars
+const [first, second, third] = cars as readonly [Car, Car, Car, ...Car[]]
 
 const answer = (text: string, carIds?: string[]): ChatMessage => ({
   id: 'a',
