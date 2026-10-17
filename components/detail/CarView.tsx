@@ -147,29 +147,30 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
             <h2 id="similar" className={sectionLabel}>
               Þú gætir líka haft áhuga á:
             </h2>
-            <ul className="mt-3 mb-0 p-0 list-none grid gap-3 sm:grid-cols-3">
+            <ul className="mt-3 mb-0 p-0 list-none grid gap-3 md:grid-cols-3">
               {similar.map((other) => (
                 // The whole card opens the car's page
                 <li
                   key={other.id}
-                  className="relative flex items-center gap-3 p-2 rounded-card border border-line transition-colors duration-200 hover:bg-cloud sm:flex-col sm:items-stretch sm:p-0 sm:border-0 sm:hover:bg-transparent sm:isolate sm:before:absolute sm:before:-inset-1 sm:before:-bottom-3 sm:before:-z-10 sm:before:rounded-xl sm:before:bg-cloud sm:before:opacity-0 sm:before:transition-opacity sm:before:duration-200 sm:hover:before:opacity-100"
+                  className="relative flex items-center gap-3 rounded-card overflow-hidden transition-colors duration-200 hover:bg-cloud md:flex-col md:items-stretch md:overflow-visible md:hover:bg-transparent md:isolate md:before:absolute md:before:-inset-1 md:before:-bottom-3 md:before:-z-10 md:before:rounded-xl md:before:bg-cloud md:before:opacity-0 md:before:transition-opacity md:before:duration-200 md:hover:before:opacity-100"
                 >
-                  {/* The size the box renders at on a phone, and near enough beside.
-                      Above the name it needs no border, and on hover the card
-                      shows 4px past the photo: rounded-xl is the photo's rounded-lg
-                      grown by those 4px, at whatever --corner scales them by */}
+                  {/* Beside the name, flush to the card with its border drawn
+                      over it. Above the name it needs no border, and on hover
+                      the card shows 4px past the photo: rounded-xl is the
+                      photo's rounded-lg grown by those 4px, at whatever
+                      --corner scales them by */}
                   <Image
                     alt=""
-                    sizes="(max-width: 499px) 96px, 30vw"
+                    sizes="(max-width: 767px) 128px, 210px"
                     src={`/images/${other.heroImageName}.jpg`}
-                    width={96}
-                    height={64}
-                    className="w-24 h-16 shrink-0 rounded-lg object-cover sm:w-full sm:h-auto sm:aspect-[3/2]"
+                    width={128}
+                    height={85}
+                    className="w-32 h-auto aspect-[3/2] shrink-0 object-cover md:w-full md:rounded-lg"
                   />
-                  <div className="flex-1 min-w-0 sm:px-1">
+                  <div className="flex-1 min-w-0 py-2 pr-3 md:p-0 md:px-1">
                     <Link
                       href={carPathOf(other)}
-                      className="text-sm font-semibold leading-tight text-tint no-underline after:absolute after:inset-0 after:rounded-card"
+                      className="text-sm font-semibold leading-tight text-tint no-underline after:absolute after:inset-0 after:rounded-card after:border after:border-line md:after:border-0"
                     >
                       {other.make}{' '}
                       <span className="font-normal">{other.model}</span>
