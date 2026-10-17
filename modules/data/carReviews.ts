@@ -1815,7 +1815,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volkswagen-id-polo-base': {
     paragraphs: [
       'Volkswagen ID. Polo er lítill fimm sæta hlaðbakur, rafdrifinn arftaki hins klassíska Polo, fyrir þá sem vilja lipran og vandaðan smábíl frá þekktu merki.',
-      'Hann er mjög ódýr, drífur lengra og er sneggri en flestir á svipuðu verði og meðal þeirra sem hlaða hraðast. Skottið er stærra en hjá flestum á þessu verði og hann má draga 1.200 kg, meira en flestir þeirra.',
+      'Hann er mjög ódýr, drífur lengra og er sneggri en flestir á svipuðu verði og meðal þeirra sem hlaða hraðast. Skottið er stærra en hjá flestum keppinautum hans og hann má draga 1.200 kg, meira en flestir þeirra.',
       'Veikleikarnir eru fáir, helst að drægnin er samt fremur stutt miðað við rafbíla almennt. Skoda Epiq 55, systurbíll á sama grunni, kostar það sama með 34 l stærra skott og hærri setstöðu, en drífur 13 km styttra.',
       'ID. Polo er einn heildstæðasti ódýri rafbíllinn, kvikur í bænum og liðtækur milli landshluta.',
     ],
@@ -1825,8 +1825,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volkswagen-id-cross-base': {
     paragraphs: [
       'Volkswagen ID. Cross er lítill jepplingur með framhjóladrifi, aðeins hærri en hefðbundinn smábíll, sem auðveldar umgengni og útsýni en heldur þægilegri stærð í þröngum stæðum og götum.',
-      'Miðað við aðra á svipuðu verði er hann sneggri og hleður hraðar en flestir, og skottið er stærra en hjá flestum þeirra, með lítið framskott að auki. Hann má líka draga 1.200 kg, sem Citroën ë-C4 og Fiat 600e á svipuðu verði mega ekki.',
-      'Helsti gallinn er að hann drífur styttra en flestir á svipuðu verði, sem finnst fljótt í vetrarkulda. Renault Scenic E-Tech EV60 er stærri bíll með 70 l stærra skott fyrir 300.000 kr. meira, en drífur álíka langt og hleður hægar.',
+      'Hann er sneggri og hleður hraðar en flestir á svipuðu verði, og skottið er stærra en hjá flestum þeirra, með lítið framskott að auki. Hann má líka draga 1.200 kg, sem Citroën ë-C4 og Fiat 600e mega ekki.',
+      'Helsti gallinn er að hann drífur styttra en flestir keppinautar hans, sem finnst fljótt í vetrarkulda. Renault Scenic E-Tech EV60 er stærri bíll með 70 l stærra skott fyrir 300.000 kr. meira, en drífur álíka langt og hleður hægar.',
       'ID. Cross hentar þeim sem vilja snarpan og hagnýtan smájeppling í daglegt amstur og meta hraða hleðslu ofar mikilli drægni.',
     ],
     facts: '45f187817b79',
@@ -1835,18 +1835,18 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volkswagen-id-3-pro': {
     paragraphs: [
       'Volkswagen ID.3 Pro er fimm sæta hlaðbakur með afturhjóladrifi og litlum beygjuradíus, liðlegur í þröngum götum og stæðum, fyrir þá sem vilja einfaldan hversdagsbíl.',
-      'Hann er mjög ódýr og drægnin og snerpan eru í meðallagi á þessu verði, sem dugar fyrir daglegan akstur og styttri ferðir.',
+      'Hann er mjög ódýr og drægnin og snerpan eru í meðallagi, sem dugar fyrir daglegan akstur og styttri ferðir.',
       'Á móti kemur að hann hleður hægar en flestir á svipuðu verði, skottið er minna en hjá flestum þeirra og hann má ekki draga kerru. Kia EV3 Standard Range er 99.000 kr. ódýrari, drífur jafn langt, hleður með um 10% styttri stoppum, er með 75 l stærra skott og má draga 500 kg.',
-      'ID.3 Pro er raunhæfur hversdagsbíll, en keppinautarnir á sama verði gefa meira.',
+      'ID.3 Pro er raunhæfur hversdagsbíll, en keppinautarnir gefa meira fyrir sama verð.',
     ],
     facts: 'de4703c863af',
     model: 'gemini-3.8-flash, thinking high',
   },
   'volkswagen-id-3-neo-58-kwh': {
     paragraphs: [
-      'Volkswagen ID.3 Neo er þægilegur og nettur hlaðbakur sem hentar vel í daglegan akstur jafnt í þéttbýli sem milli landshluta. Hann býður upp á hefðbundin akstursgæði Volkswagen í lipurri fólksbílaútfærslu, þar sem afturhjóladrifið veitir honum lítinn beygjuradíus og liðlega hegðun í þröngum götum og bílastæðahúsum.',
-      'Miðað við aðra bíla á svipuðu verði drífur hann lengra en flestir og reynist ódýrari á hvern kílómetra drægni. Þótt rafhlaðan sé fremur lítil nýtir hann orkuna vel og hleður hraðar en flestir í sínum verðflokki, sem þýðir styttri hlé við hraðhleðslustöðvar á ferðalögum um landið.',
-      'Á móti kemur að hann er aflminni og hægari en flestir á svipuðu verði. Ef pláss og kraftur skipta meira máli býður Tesla Model Y Standard Range upp á mun meira rými og afl fyrir 140.000 krónum meira, þótt hleðslustoppin séu þar um 10% lengri.',
+      'Volkswagen ID.3 Neo er þægilegur og nettur hlaðbakur sem hentar vel í daglegan akstur jafnt í þéttbýli sem milli landshluta. Hann býður upp á hefðbundin akstursgæði Volkswagen í lipurri útfærslu, þar sem afturhjóladrifið gefur honum lítinn beygjuradíus og liðlega hegðun í þröngum götum og bílastæðahúsum.',
+      'Hann drífur lengra en flestir á svipuðu verði og er ódýrari á hvern kílómetra drægni. Þótt rafhlaðan sé fremur lítil nýtir hann orkuna vel og hleður hraðar en flestir keppinautar hans, sem þýðir styttri hlé við hraðhleðslustöðvar á ferðalögum um landið.',
+      'Hann er hins vegar aflminni og hægari en flestir þeirra. Ef pláss og kraftur skipta meira máli býður Tesla Model Y Standard Range upp á mun meira rými og afl fyrir 140.000 kr. meira, þótt hleðslustoppin séu þar um 10% lengri.',
       'Fyrir kaupendur sem leita að sparneytnum og liprum bíl með góða drægni á sanngjörnu verði er ID.3 mjög heppilegur kostur.',
     ],
     facts: '3ba989fdff90',
@@ -1855,8 +1855,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volkswagen-id-4-gtx': {
     paragraphs: [
       'Volkswagen ID.4 GTX er sportlegasta útgáfa hins þekkta fjölskyldujepplings, með fjórhjóladrifi og meira afli, fyrir þá sem vilja rúmgóðan bíl með auknu viðbragði.',
-      'Hann má draga 1.800 kg, meira en flestir á svipuðu verði, og drægnin og hleðslan eru í meðallagi á þessu verði.',
-      'Á móti kemur að hann sker sig lítið úr miðað við aðra á svipuðu verði. Volkswagen ID.4 Pro 4MOTION er 700.000 kr. ódýrari, líka fjórhjóladrifinn og drífur álíka langt, en má draga 600 kg minna.',
+      'Hann má draga 1.800 kg, meira en flestir á svipuðu verði, og drægnin og hleðslan eru í meðallagi.',
+      'Að öðru leyti sker hann sig lítið úr meðal keppinautanna. Volkswagen ID.4 Pro 4MOTION er 700.000 kr. ódýrari, líka fjórhjóladrifinn og drífur álíka langt, en má draga 600 kg minna.',
       'ID.4 GTX er traustur fjölskyldubíll sem gerir flest vel, en ID.4 Pro 4MOTION gefur meira fyrir peninginn nema dráttargetan skipti máli.',
     ],
     facts: '65b5193b7488',
@@ -1866,7 +1866,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Volkswagen ID.4 Pro 4MOTION er meðalstór jepplingur með fjórhjóladrifi, þrautreyndur og hagnýtur fjölskyldubíll með þægilegum og fyrirsjáanlegum akstri.',
       'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og skottið er stærra en hjá flestum þeirra, svo hann hentar jafnt í daglegt skutl og ferðir milli landshluta.',
-      'Á móti kemur að hann má aðeins draga 1.200 kg, minna en flestir á svipuðu verði, og snerpan er í meðallagi. XPENG G6 AWD Performance er 100.000 kr. ódýrari, drífur álíka langt, hleður með um 25% styttri stoppum, er mun sneggri og má draga 300 kg meira.',
+      'Gallarnir eru að hann má aðeins draga 1.200 kg, minna en flestir keppinautar hans, og snerpan er í meðallagi. XPENG G6 AWD Performance er 100.000 kr. ódýrari, drífur álíka langt, hleður með um 25% styttri stoppum, er mun sneggri og má draga 300 kg meira.',
       'ID.4 Pro 4MOTION er öruggt val fyrir þá sem vilja hefðbundinn og hagnýtan fjölskyldubíl með fjórhjóladrifi.',
     ],
     facts: 'c4a184d802f3',
@@ -1875,8 +1875,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volkswagen-id-7-gtx': {
     paragraphs: [
       'Volkswagen ID.7 GTX er stór skutbíll með fjórhjóladrifi, tæpir fimm metrar á lengd, hljóðlátur og rúmgóður, fyrir þá sem ferðast mikið og vilja ekki jeppling.',
-      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, skottið er stærra en hjá flestum þeirra og hann má draga 1.800 kg, meira en flestir á þessu verði.',
-      'Á móti kemur að hann er fremur dýr og afl og snerpa eru aðeins í meðallagi miðað við verðið. Polestar 4 SUV Long Range Dual Motor er 200.000 kr. ódýrari og mun sneggri, en skottið er 75 l minna.',
+      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, skottið er stærra en hjá flestum þeirra og hann má draga 1.800 kg, sem fáir keppinautar hans jafna.',
+      'Hann er hins vegar fremur dýr og afl og snerpa eru aðeins í meðallagi miðað við verðið. Polestar 4 SUV Long Range Dual Motor er 200.000 kr. ódýrari og mun sneggri, en skottið er 75 l minna.',
       'ID.7 GTX er heilsteyptur langferðabíll fyrir fjölskyldur sem vilja pláss, drægni og dráttargetu.',
     ],
     facts: '52858135416f',
@@ -1885,8 +1885,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volvo-ec40-recharge-twin': {
     paragraphs: [
       'Volvo EC40 Recharge Twin er meðalstór sportjepplingur með aflíðandi þaklínu, systurbíll EX40 með sama drifbúnaði undir rennilegri yfirbyggingu. Hann hentar þeim sem vilja fágaðan og snarpan fjórhjóladrifsbíl og setja útlitið ofar plássinu.',
-      'Bíllinn drífur lengra og hleður hraðar en flestir á svipuðu verði, og með fjórhjóladrifi og miklu afli er hann sneggri en flestir í sínum verðflokki. Hann má líka draga 1.800 kg, meira en flestir á þessu verði, svo hjólhýsi eða þung kerra er ekkert mál.',
-      'Á móti kemur að hann er nettur og með einu af minnstu skottunum í sínum verðflokki, og aftursætin gjalda fyrir lága þaklínuna. Volvo EX40 Recharge Twin kostar það sama með sama drifi og gefur meira höfuðrými aftur í, en þurfi meira pláss frekar en afl býður Toyota bZ4X Touring 265 l stærra skott, þótt hann sé mun hægari og megi aðeins draga 750 kg.',
+      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og með fjórhjóladrifi og miklu afli er hann líka sneggri en flestir þeirra. Hann má draga 1.800 kg, sem fáir keppinautar hans jafna, svo hjólhýsi eða þung kerra er ekkert mál.',
+      'Á móti kemur að hann er nettur og með einu af minnstu skottunum, og aftursætin gjalda fyrir lága þaklínuna. Volvo EX40 Recharge Twin kostar það sama með sama drifi og gefur meira höfuðrými aftur í, en þurfi meira pláss frekar en afl býður Toyota bZ4X Touring 265 l stærra skott, þótt hann sé mun hægari og megi aðeins draga 750 kg.',
       'EC40 er fyrir þá sem vilja Volvo með sportlegri svip og nóg af afli, og sætta sig við minna rými en í hefðbundnari jepplingi.',
     ],
     facts: '51b9529f9a54',
@@ -1896,7 +1896,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Volvo ES90 Twin Motor er stór og fágaður fólksbíll með afturhlera, fimm metrar á lengd, þar sem skandinavískur lúxus, hljóðlátur akstur og þægindi eru í fyrirrúmi. Hann hentar þeim sem vilja vandaðan langferðabíl með klassísku fólksbílasniði frekar en jeppa.',
       'Stærsti kosturinn er hve vel hann hentar í langferðir: hann drífur lengra og hleður hraðar en flestir á svipuðu verði, sem kemur sér vel í vetrarakstri milli landshluta. Hann má líka draga 2.000 kg.',
-      'Á móti kemur að skottið er eitt það minnsta í sínum verðflokki og hann er hægari en flestir á svipuðu verði. Mercedes-Benz GLC 400 4MATIC er 600.000 kr. ódýrari, drífur 36 km lengra og er með 124 l stærra skott og 128 l framskott, fyrir þá sem sætta sig við jeppalag.',
+      'Gallarnir eru að skottið er eitt það minnsta og hann er hægari en flestir keppinautar hans. Mercedes-Benz GLC 400 4MATIC er 600.000 kr. ódýrari, drífur 36 km lengra og er með 124 l stærra skott og 128 l framskott, fyrir þá sem sætta sig við jeppalag.',
       'ES90 er sterkur kostur fyrir þá sem meta drægni, hraða hleðslu og fágun ofar plássi.',
     ],
     facts: '0e40ddb119b7',
@@ -1906,7 +1906,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Volvo ES90 Twin Motor Performance er stór lúxusfólksbíll með afturhlera og fjórhjóladrifi, fimm metrar á lengd, aflmeiri útgáfa ES90, sem sameinar langferðaþægindi og mikla snerpu.',
       'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði og er meðal þeirra sneggstu og aflmestu. Hann má draga 2.000 kg.',
-      'Á móti kemur að skottið er eitt það minnsta á svipuðu verði. Volvo ES90 Twin Motor er 800.000 kr. ódýrari með sömu drægni og hleðslu, og gefur aðeins eftir í snerpu.',
+      'Helsti ókosturinn er að skottið er eitt það minnsta. Volvo ES90 Twin Motor er 800.000 kr. ódýrari með sömu drægni og hleðslu, og gefur aðeins eftir í snerpu.',
       'ES90 Twin Motor Performance er fyrir þá sem vilja langdrægan lúxusfólksbíl með miklu afli, en flestum dugar ódýrari útfærslan.',
     ],
     facts: 'b3e42392fb8e',
@@ -1915,8 +1915,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volvo-ex40-recharge-twin': {
     paragraphs: [
       'Volvo EX40 Recharge Twin er nettur og kassalaga jepplingur með fjórhjóladrifi og miklu afli, fyrir þá sem vilja vandaðan Volvo með háa setstöðu og gott útsýni.',
-      'Hann er sneggri og aflmeiri en flestir á svipuðu verði, hleður hraðar en flestir þeirra og má draga 1.800 kg, meira en flestir á þessu verði. Auk skottsins er lítið framskott.',
-      'Á móti kemur að hann er fremur dýr og skottið er minna en hjá flestum á svipuðu verði. Toyota bZ4X Touring kostar það sama, drífur 23 km lengra og er með 259 l stærra skott, en er framhjóladrifinn, mun aflminni og má aðeins draga 750 kg.',
+      'Hann er sneggri og aflmeiri en flestir á svipuðu verði, hleður hraðar en flestir þeirra og má draga 1.800 kg, sem fáir keppinautar hans jafna. Auk skottsins er lítið framskott.',
+      'Á móti kemur að hann er fremur dýr og skottið er í minna lagi. Toyota bZ4X Touring kostar það sama, drífur 23 km lengra og er með 259 l stærra skott, en er framhjóladrifinn, mun aflminni og má aðeins draga 750 kg.',
       'EX40 er traustur og sprækur jepplingur fyrir þá sem draga kerru og þurfa ekki mest pláss.',
     ],
     facts: '5c9dd30ae76d',
@@ -1926,7 +1926,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Volvo EX30 Single Motor er lítill og nettur jepplingur með afturhjóladrifi og skandinavísku yfirbragði, ódýrasta útfærsla EX30, fyrir þá sem vilja vandaðan bæjarbíl.',
       'Hann er sneggri og aflmeiri en flestir á svipuðu verði, léttur og kvikur í daglegum akstri.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst á svipuðu verði, hleður hægar en flestir þeirra og skottið er eitt það minnsta. Volvo EX30 Single Motor Extended Range kostar 400.000 kr. meira en drífur 136 km lengra, hleður hraðar og má draga 600 kg meira.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst, hleður hægar en flestir keppinautar hans og skottið er eitt það minnsta. Volvo EX30 Single Motor Extended Range kostar 400.000 kr. meira, drífur 136 km lengra, hleður hraðar og má draga 600 kg meira.',
       'EX30 Single Motor er skemmtilegur borgarbíll, en flestum borgar sig stærri rafhlaðan.',
     ],
     facts: '1dbcafd62fbd',
@@ -1935,8 +1935,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volvo-ex30-single-motor-extended-range': {
     paragraphs: [
       'Volvo EX30 Single Motor Extended Range er lítill og nettur jepplingur með vandaðri skandinavískri hönnun, ætlaður þeim sem vilja gæðatilfinningu í lipurri stærð frekar en stóran fjölskyldubíl.',
-      'Hann er sneggri en flestir á svipuðu verði og hleður hraðar en flestir í sínum verðflokki. Þrátt fyrir smæðina má hann draga 1.600 kg, sem er með því mesta á þessu verði.',
-      'Á móti kemur að skottið er eitt það minnsta í sínum verðflokki og aftursætin eru þröng, og hann er aðeins afturhjóladrifinn. Mazda CX-6e 78 kWh er 200.000 kr. ódýrari, 62 cm lengri og með 150 l stærra skott og 80 l framskott, en mun hægari.',
+      'Hann er sneggri og hleður hraðar en flestir á svipuðu verði, og þrátt fyrir smæðina má hann draga 1.600 kg, meira en flestir þeirra.',
+      'Hins vegar er skottið eitt það minnsta, aftursætin eru þröng og hann er aðeins afturhjóladrifinn. Mazda CX-6e 78 kWh er 200.000 kr. ódýrari, 62 cm lengri og með 150 l stærra skott og 80 l framskott, en mun hægari.',
       'EX30 hentar þeim sem vilja snarpan og vandaðan smábíl sem getur dregið kerru, en síður fjölskyldum sem þurfa pláss.',
     ],
     facts: 'a2ede041531a',
@@ -1945,8 +1945,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volvo-ex30-twin-motor-performance': {
     paragraphs: [
       'Volvo EX30 Twin Motor Performance er lítill jepplingur með fjórhjóladrifi og gríðarlegu afli, meðal sneggstu bíla á sínu verði, sem sameinar skandinavíska fágun og leiftursnögg viðbrögð.',
-      'Hann er meðal þeirra sneggstu og aflmestu á svipuðu verði og má draga 1.600 kg, meira en flestir á þessu verði.',
-      'Á móti kemur að hann drífur styttra en flestir á svipuðu verði og skottið er eitt það minnsta. Subaru Uncharted kostar 100.000 kr. meira, er líka fjórhjóladrifinn, drífur 40 km lengra og er með 85 l stærra skott.',
+      'Hann er líka meðal þeirra aflmestu og má draga 1.600 kg, meira en flestir keppinautar hans.',
+      'Gallarnir eru að hann drífur styttra en flestir þeirra og skottið er eitt það minnsta. Subaru Uncharted kostar 100.000 kr. meira, er líka fjórhjóladrifinn, drífur 40 km lengra og er með 85 l stærra skott.',
       'EX30 Twin Motor Performance er fyrir þá sem vilja kraftmikinn og vandaðan smábíl með fjórhjóladrifi.',
     ],
     facts: 'd369d9b20156',
@@ -1955,8 +1955,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volvo-ex30-cross-country-twin-motor-performance': {
     paragraphs: [
       'Volvo EX30 Cross Country Twin Motor Performance er lítill jepplingur með fjórhjóladrifi, ögn hærri og grófari útgáfa EX30, sem sameinar smábílastærð og gríðarlegan kraft.',
-      'Hann er meðal sneggstu bíla á svipuðu verði og má draga 1.600 kg, meira en flestir þeirra, og hann er lipur í þröngum stæðum.',
-      'Á móti kemur að hann drífur styttra og hleður hægar en flestir á svipuðu verði, og skottið er eitt það minnsta. Volvo EX30 Twin Motor Performance er sami bíll án Cross Country-útlitsins, 830.000 kr. ódýrari og drífur 23 km lengra.',
+      'Hann er meðal sneggstu bíla á svipuðu verði, má draga 1.600 kg, meira en flestir þeirra, og er lipur í þröngum stæðum.',
+      'Hann drífur hins vegar styttra og hleður hægar en flestir keppinautar hans, og skottið er eitt það minnsta. Volvo EX30 Twin Motor Performance er sami bíll án Cross Country-útlitsins, 830.000 kr. ódýrari og drífur 23 km lengra.',
       'EX30 Cross Country er fyrir þá sem vilja grófara útlit og mikinn kraft í nettum bíl.',
     ],
     facts: '846a79cfbc8a',
@@ -1965,8 +1965,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volvo-ex60-p10': {
     paragraphs: [
       'Volvo EX60 P10 er stór og aflmikill lúxusjeppi með fjórhjóladrifi, sem sameinar látlausa skandinavíska hönnun, mikið öryggi og þægindi. Hann hentar fjölskyldum sem vilja vandaðan jeppa sem gefur lítið eftir á langferðum.',
-      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, svo langferðir um landið kalla á fá og stutt stopp, jafnvel í vetrarkulda. Hann má draga 2.400 kg, meira en flestir í sínum verðflokki, og er sneggri en flestir þeirra.',
-      'Á móti kemur að hann er fremur dýr og skottið er aðeins í meðallagi miðað við aðra á sama verði. Þurfi enn meiri drægni fæst Volvo EX60 P12 fyrir 1.000.000 kr. meira, með 810 km drægni.',
+      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, svo langferðir um landið kalla á fá og stutt stopp, jafnvel í vetrarkulda. Hann er líka sneggri en flestir þeirra og má draga 2.400 kg, sem fáir keppinautar hans jafna.',
+      'Á móti kemur að hann er fremur dýr og skottið er aðeins í meðallagi. Þurfi enn meiri drægni fæst Volvo EX60 P12 fyrir 1.000.000 kr. meira, með 810 km drægni.',
       'EX60 P10 er heildstæður kostur fyrir þá sem vilja vandaðan fjölskyldujeppa til ferðalaga um landið, með kerru aftan í ef svo ber undir.',
     ],
     facts: 'a5909cfd01ce',
@@ -1975,8 +1975,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volvo-ex60-p12': {
     paragraphs: [
       'Volvo EX60 P12 er stór lúxusjeppi með fjórhjóladrifi, aflmesta og langdrægasta útgáfa EX60, sem byggir á orðspori Volvo fyrir öryggi og vandaðan frágang.',
-      'Hann drífur lengst bíla á svipuðu verði, er meðal þeirra sem hlaða hraðast og meðal þeirra sneggstu, og hann má draga 2.400 kg, meira en flestir í sínum verðflokki. Auk skottsins er 52 l framskott.',
-      'Veikleikarnir eru fáir, helst að hann er fremur dýr og skottið aðeins í meðallagi á þessu verði. Volvo EX60 P10 er 1.000.000 kr. ódýrari og drífur samt mjög langt, fyrir þá sem þurfa ekki allra mestu drægnina.',
+      'Hann drífur lengst bíla á svipuðu verði, er meðal þeirra sem hlaða hraðast og þeirra sneggstu, og má draga 2.400 kg, meira en flestir keppinautar hans. Auk skottsins er 52 l framskott.',
+      'Veikleikarnir eru fáir, helst að hann er fremur dýr og skottið aðeins í meðallagi. Volvo EX60 P10 er 1.000.000 kr. ódýrari og drífur samt mjög langt, fyrir þá sem þurfa ekki allra mestu drægnina.',
       'EX60 P12 er einn öflugasti ferðabíllinn á sínu verði, fyrir þá sem vilja komast sem lengst á hverri hleðslu.',
     ],
     facts: 'dfac4e58fd9b',
@@ -1985,8 +1985,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volvo-ex90-twin-motor': {
     paragraphs: [
       'Volvo EX90 Twin Motor er stór sjö sæta lúxusjeppi með fjórhjóladrifi, rúmlega fimm metrar á lengd, með ríka áherslu á öryggi og fágaðan akstur eins og merkið er þekkt fyrir.',
-      'Hann drífur lengra en flestir á svipuðu verði, skottið er stærra en hjá flestum þeirra og 34 l framskott bætist við. Hann má draga 2.200 kg, meira en flestir í sínum verðflokki.',
-      'Á móti kemur að hann er mjög dýr, hleður hægar og er hægari en flestir á svipuðu verði. Hyundai IONIQ 9 Long Range Performance AWD er 2.500.000 kr. ódýrari, tekur líka sjö, drífur álíka langt, hleður með um 25% styttri stoppum og er með 239 l stærra skott.',
+      'Hann drífur lengra en flestir á svipuðu verði, skottið er stærra en hjá flestum þeirra og 34 l framskott bætist við. Hann má draga 2.200 kg, sem fáir keppinautar hans jafna.',
+      'Gallarnir eru að hann er mjög dýr, hleður hægar og er hægari en flestir þeirra. Hyundai IONIQ 9 Long Range Performance AWD er 2.500.000 kr. ódýrari, tekur líka sjö, drífur álíka langt, hleður með um 25% styttri stoppum og er með 239 l stærra skott.',
       'EX90 er heildstæður lúxusjeppi fyrir þá sem vilja sjö sæti og skandinavísk gæði.',
     ],
     facts: '198f43cf5f7f',
@@ -1995,8 +1995,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volvo-ex90-twin-motor-performance': {
     paragraphs: [
       'Volvo EX90 Twin Motor Performance er stór sjö sæta lúxusjeppi með fjórhjóladrifi, rúmlega fimm metrar á lengd, sem sameinar skandinavíska fágun, mikið öryggi og mikið afl. Hann hentar stórum fjölskyldum sem vilja rými og þægindi án þess að gefa eftir í snerpu.',
-      'Hann er sneggri og aflmeiri en flestir á svipuðu verði, skottið er stærra en hjá flestum þeirra og hann má draga 2.200 kg, meira en flestir í sínum verðflokki. Drægnin er í meðallagi miðað við verðið en dugar vel milli landshluta.',
-      'Á móti kemur að hann hleður hægar en flestir á svipuðu verði. Volvo EX90 Twin Motor er 800.000 kr. ódýrari með álíka drægni, og munar þar aðeins um snerpuna, en Hyundai IONIQ 9 Long Range Performance AWD er 3.300.000 kr. ódýrari, hleður með um 25% styttri stoppum og er með 239 l stærra skott.',
+      'Hann er sneggri og aflmeiri en flestir á svipuðu verði, skottið er stærra en hjá flestum þeirra og hann má draga 2.200 kg, sem fáir keppinautar hans jafna. Drægnin er í meðallagi en dugar vel milli landshluta.',
+      'Helsti ókosturinn er að hann hleður fremur hægt. Volvo EX90 Twin Motor er 800.000 kr. ódýrari með álíka drægni, og munar þar aðeins um snerpuna, en Hyundai IONIQ 9 Long Range Performance AWD er 3.300.000 kr. ódýrari, hleður með um 25% styttri stoppum og er með 239 l stærra skott.',
       'EX90 Twin Motor Performance er fyrir þá sem vilja sjö sæta Volvo með aukinni snerpu, en flestum dugar ódýrari útfærslan.',
     ],
     facts: 'a23ee4a76bae',
@@ -2005,8 +2005,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'xpeng-g6-rwd-standard-range': {
     paragraphs: [
       'XPENG G6 RWD Standard Range er stór jepplingur með afturhjóladrifi og rennilegri línu, 4,75 m á lengd, frá kínverska merkinu XPENG, með tæknivæddu innanrými og miklu plássi.',
-      'Hann er meðal þeirra sem hlaða hraðast á svipuðu verði, sneggri en flestir þeirra og skottið er stærra en hjá flestum. Hann má draga 1.500 kg, meira en flestir á þessu verði.',
-      'Á móti kemur að hann drífur styttra en flestir á svipuðu verði og er aðeins afturhjóladrifinn. XPENG G6 RWD Long Range kostar 700.000 kr. meira og drífur 135 km lengra, og XPENG G6 AWD Performance fæst með fjórhjóladrifi fyrir 1.100.000 kr. meira.',
+      'Hann er meðal þeirra sem hlaða hraðast á svipuðu verði, sneggri en flestir þeirra og skottið er stærra en hjá flestum. Hann má draga 1.500 kg, meira en flestir keppinautar hans.',
+      'Á móti kemur að hann drífur styttra en flestir þeirra og er aðeins afturhjóladrifinn. XPENG G6 RWD Long Range kostar 700.000 kr. meira og drífur 135 km lengra, og XPENG G6 AWD Performance fæst með fjórhjóladrifi fyrir 1.100.000 kr. meira.',
       'G6 Standard Range er rúmgóður og hraðhlaðandi bíll fyrir þá sem aka mest í nærumhverfinu og meta pláss.',
     ],
     facts: 'd19809f0083d',
