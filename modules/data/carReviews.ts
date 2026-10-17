@@ -2015,8 +2015,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'xpeng-g6-rwd-long-range': {
     paragraphs: [
       'XPENG G6 RWD Long Range er stór jepplingur með afturhjóladrifi, rennilegri línu og stórri rafhlöðu, frá kínverska merkinu XPENG, fyrir þá sem aka mikið milli landshluta og vilja mikið pláss.',
-      'Hann drífur lengra en flestir á svipuðu verði og er meðal þeirra sem hlaða hraðast, svo langferðir kalla á fá og stutt stopp. Skottið er stærra en hjá flestum á þessu verði og hann má draga 1.500 kg, meira en flestir þeirra.',
-      'Á móti kemur að hann er aðeins afturhjóladrifinn og merkið er nýlegt hér á landi. XPENG G6 AWD Performance fæst með fjórhjóladrifi og mun meira afli fyrir 400.000 kr. meira, með nánast sömu drægni.',
+      'Hann drífur lengra en flestir á svipuðu verði og er meðal þeirra sem hlaða hraðast, svo langferðir kalla á fá og stutt stopp. Skottið er stærra en hjá flestum keppinautum hans og hann má draga 1.500 kg, meira en flestir þeirra.',
+      'Gallarnir eru að hann er aðeins afturhjóladrifinn og merkið er nýlegt hér á landi. XPENG G6 AWD Performance fæst með fjórhjóladrifi og mun meira afli fyrir 400.000 kr. meira, með nánast sömu drægni.',
       'G6 Long Range gefur mikið fyrir peninginn, fyrir þá sem setja drægni, hraða hleðslu og pláss í forgang.',
     ],
     facts: 'e1aec00acaa1',
@@ -2025,7 +2025,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'xpeng-g6-awd-performance': {
     paragraphs: [
       'XPENG G6 AWD Performance er stór jepplingur með fjórhjóladrifi og rennilegu coupé-lagi, frá kínverska merkinu XPENG, sem sameinar mikið pláss, mikla drægni og mikið afl.',
-      'Hann er meðal sneggstu og aflmestu bíla á svipuðu verði, drífur lengra en flestir þeirra og er meðal þeirra sem hlaða hraðast. Skottið er stærra en hjá flestum á þessu verði og hann má draga 1.500 kg.',
+      'Hann er meðal sneggstu og aflmestu bíla á svipuðu verði, drífur lengra en flestir þeirra og er meðal þeirra sem hlaða hraðast. Skottið er stærra en hjá flestum keppinautum hans og hann má draga 1.500 kg.',
       'Veikleikarnir eru fáir: merkið er nýlegt hér á landi og flestu er stýrt í gegnum snertiskjá. Volkswagen ID.4 Pro 4MOTION kostar 100.000 kr. meira frá rótgrónara merki, en hleður með um 35% lengri stoppum og er mun aflminni.',
       'G6 AWD Performance er einn sterkasti fjórhjóladrifni kosturinn á sínu verði, fyrir þá sem treysta nýju merki.',
     ],
@@ -2035,8 +2035,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'xpeng-g9-awd-performance': {
     paragraphs: [
       'XPENG G9 AWD Performance er stór lúxusjepplingur með fjórhjóladrifi, 4,9 m á lengd, frá kínverska merkinu XPENG, með áherslu á þægindi, tækni og afl.',
-      'Hann hleður mjög hratt, meðal þeirra hröðustu á svipuðu verði, og er sneggri og aflmeiri en flestir þeirra. Skottið er stærra en hjá flestum í hans verðflokki og 71 l framskott bætist við.',
-      'Á móti kemur að hann drífur styttra og dregur minna en flestir á svipuðu verði, og merkið er nýlegt hér á landi. Volvo EX60 P10 kostar 200.000 kr. meira, drífur 120 km lengra og má draga 900 kg meira, þótt hleðslustoppin séu um 30% lengri.',
+      'Hann hleður mjög hratt, meðal þeirra hröðustu á svipuðu verði, og er sneggri og aflmeiri en flestir keppinautar hans. Skottið er stærra en hjá flestum þeirra og 71 l framskott bætist við.',
+      'Hann drífur hins vegar styttra og má draga minna en flestir þeirra, og merkið er nýlegt hér á landi. Volvo EX60 P10 kostar 200.000 kr. meira, drífur 120 km lengra og má draga 900 kg meira, þótt hleðslustoppin séu um 30% lengri.',
       'G9 er fyrir þá sem vilja rúmgóðan og tæknivæddan jeppling sem hleður á mettíma.',
     ],
     facts: '21ec7198ea17',
@@ -2046,7 +2046,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'XPENG X9 AWD Performance er stór sjö sæta fjölnotabíll með fjórhjóladrifi, 5,3 m á lengd, með framúrstefnulegu útliti og fullgildu rými í öllum sætaröðum, fyrir stórar fjölskyldur.',
       'Hann hleður hraðast allra rafbíla á listanum, þrátt fyrir stóra rafhlöðu, svo hleðslustopp á langferðum verða óvenju stutt. Hann er líka aflmeiri en flestir á svipuðu verði.',
-      'Á móti kemur að hann er dýr, drífur styttra og er hægari en flestir á svipuðu verði, og merkið er nýlegt hér á landi. Hyundai IONIQ 9 Long Range AWD er 400.000 kr. ódýrari, tekur líka sjö og drífur 35 km lengra, þótt hleðslustoppin séu um 90% lengri.',
+      'Gallarnir eru að hann er dýr, drífur styttra og er hægari en flestir keppinautar hans, og merkið er nýlegt hér á landi. Hyundai IONIQ 9 Long Range AWD er 400.000 kr. ódýrari, tekur líka sjö og drífur 35 km lengra, þótt hleðslustoppin séu um 90% lengri.',
       'X9 er fyrir stórar fjölskyldur sem ferðast um landið og vilja eyða sem minnstum tíma við hleðslustöðvar.',
     ],
     facts: 'ac75f896cbc6',
