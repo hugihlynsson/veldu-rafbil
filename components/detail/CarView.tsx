@@ -72,66 +72,70 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
       <div className={pageColumn}>
         {/* The review's measure, which the rest of the page keeps */}
         <div className="md:max-w-prose">
-          <div className="pt-4 md:pt-6">
-            <div className="flex items-start justify-between gap-4">
-              <div className="min-w-0">
-                <h1 className="m-0 font-semibold text-display leading-tight">
-                  <span>{car.make}</span>{' '}
-                  <span className="font-normal">{car.model}</span>
-                </h1>
-                {subTitle && (
-                  <p className="mt-1 mb-0 text-base font-medium text-stone">
-                    {subTitle}
-                  </p>
-                )}
-              </div>
-              <ShareButton
-                title={car.label}
-                label="Deila"
-                event="Car shared"
-                variant="quiet"
-                className="shrink-0 mt-1"
-              />
-            </div>
-            {notice ? (
-              // In place of the price, which links to a seller no longer
-              // selling it
-              <div className="mt-3 py-2.5 px-3.5 rounded-card bg-cloud text-sm">
-                <div className="font-semibold">{notice}</div>
-                <div className="mt-0.5 font-medium text-stone">
-                  Síðasta verð {addDecimalSeparators(car.priceWithGrant)} kr.
-                  {car.hasGrant && ' með styrk'}. Svipaðir bílar sem eru í sölu
-                  eru hér fyrir neðan.
+          {/* The name and the figures read as one block, narrower than the
+              text under them */}
+          <div className="md:max-w-column">
+            <div className="pt-4 md:pt-6">
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <h1 className="m-0 font-semibold text-display leading-tight">
+                    <span>{car.make}</span>{' '}
+                    <span className="font-normal">{car.model}</span>
+                  </h1>
+                  {subTitle && (
+                    <p className="mt-1 mb-0 text-base font-medium text-stone">
+                      {subTitle}
+                    </p>
+                  )}
                 </div>
+                <ShareButton
+                  title={car.label}
+                  label="Deila"
+                  event="Car shared"
+                  variant="quiet"
+                  className="shrink-0 mt-1"
+                />
               </div>
-            ) : (
-              <PricePill car={car} className="mt-3 -ml-0.5" />
+              {notice ? (
+                // In place of the price, which links to a seller no longer
+                // selling it
+                <div className="mt-3 py-2.5 px-3.5 rounded-card bg-cloud text-sm">
+                  <div className="font-semibold">{notice}</div>
+                  <div className="mt-0.5 font-medium text-stone">
+                    Síðasta verð {addDecimalSeparators(car.priceWithGrant)} kr.
+                    {car.hasGrant && ' með styrk'}. Svipaðir bílar sem eru í
+                    sölu eru hér fyrir neðan.
+                  </div>
+                </div>
+              ) : (
+                <PricePill car={car} className="mt-3 -ml-0.5" />
+              )}
+            </div>
+
+            <dl className="m-0 mt-8 grid grid-cols-2 gap-x-6 gap-y-5 md:grid-cols-3">
+              {figures.map((row) => (
+                <div key={row.key}>
+                  <dt className={eyebrow}>{row.label}</dt>
+                  <dd className="m-0 mt-1">
+                    <div className="text-2xl font-normal">
+                      {row.cells[0].text}
+                    </div>
+                    {row.cells[0].detail && (
+                      <div className="mt-0.5 text-xs font-medium text-stone">
+                        {row.cells[0].detail}
+                      </div>
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            {car.evDatabaseUrl && (
+              <div className="mt-6">
+                <EvDatabaseLink href={car.evDatabaseUrl} />
+              </div>
             )}
           </div>
-
-          <dl className="m-0 mt-8 grid grid-cols-2 gap-x-6 gap-y-5 md:grid-cols-3">
-            {figures.map((row) => (
-              <div key={row.key}>
-                <dt className={eyebrow}>{row.label}</dt>
-                <dd className="m-0 mt-1">
-                  <div className="text-2xl font-normal">
-                    {row.cells[0].text}
-                  </div>
-                  {row.cells[0].detail && (
-                    <div className="mt-0.5 text-xs font-medium text-stone">
-                      {row.cells[0].detail}
-                    </div>
-                  )}
-                </dd>
-              </div>
-            ))}
-          </dl>
-
-          {car.evDatabaseUrl && (
-            <div className="mt-6">
-              <EvDatabaseLink href={car.evDatabaseUrl} />
-            </div>
-          )}
 
           {review && <Review review={review} />}
 
