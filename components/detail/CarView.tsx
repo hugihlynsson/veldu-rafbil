@@ -50,7 +50,8 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
 
   return (
     <main className="max-w-page mx-auto pb-14">
-      <header className={clsx(pageColumn, 'pt-4 xs:pt-6')}>
+      {/* The list's gap from the logo to its intro, which pads its top */}
+      <header className={clsx(pageColumn, 'pt-4 pb-6 xs:pt-6')}>
         <PageTop />
       </header>
 
