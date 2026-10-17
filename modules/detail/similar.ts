@@ -1,4 +1,4 @@
-import cars, { type Car } from '@/modules/data/cars'
+import cars, { currentCarWithSlug, type Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import similarCars from '@/modules/data/similarCars'
 
@@ -45,8 +45,6 @@ export const closestCars = (
     )
     .slice(0, count)
 
-const carsBySlug = new Map(cars.map((car) => [carSlug(car), car]))
-
 /**
  * The cars someone looking at this one would weigh it against, as the
  * similar-cars list has them: worked out once and kept, so they hold still
@@ -54,5 +52,5 @@ const carsBySlug = new Map(cars.map((car) => [carSlug(car), car]))
  */
 export const similarTo = (car: Car): Car[] =>
   (similarCars[carSlug(car)] ?? []).flatMap(
-    (slug) => carsBySlug.get(slug) ?? [],
+    (slug) => currentCarWithSlug(slug) ?? [],
   )
