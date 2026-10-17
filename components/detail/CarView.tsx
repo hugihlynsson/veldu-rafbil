@@ -151,17 +151,18 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
                 // The whole card opens the car's page
                 <li
                   key={other.id}
-                  className="group relative flex items-center gap-3 p-2 rounded-card border border-line transition-colors duration-200 hover:bg-cloud sm:flex-col sm:items-stretch sm:p-0 sm:border-0 sm:hover:bg-transparent"
+                  className="relative flex items-center gap-3 p-2 rounded-card border border-line transition-colors duration-200 hover:bg-cloud sm:flex-col sm:items-stretch sm:p-0 sm:border-0 sm:hover:bg-transparent sm:isolate sm:before:absolute sm:before:-inset-1 sm:before:-z-10 sm:before:rounded-[calc(var(--radius-lg)+4px)] sm:before:bg-cloud sm:before:opacity-0 sm:before:transition-opacity sm:before:duration-200 sm:hover:before:opacity-100"
                 >
                   {/* The size the box renders at on a phone, and near enough beside.
-                      Above the name it needs no border and fades on hover */}
+                      Above the name it needs no border, and on hover the card
+                      shows 4px past the photo, the radius growing to match */}
                   <Image
                     alt=""
                     sizes="(max-width: 499px) 96px, 30vw"
                     src={`/images/${other.heroImageName}.jpg`}
                     width={96}
                     height={64}
-                    className="w-24 h-16 shrink-0 rounded-lg object-cover transition-opacity duration-200 sm:w-full sm:h-auto sm:aspect-[3/2] sm:group-hover:opacity-85"
+                    className="w-24 h-16 shrink-0 rounded-lg object-cover sm:w-full sm:h-auto sm:aspect-[3/2]"
                   />
                   <div className="flex-1 min-w-0">
                     <Link
