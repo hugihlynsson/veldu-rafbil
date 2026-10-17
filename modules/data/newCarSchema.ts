@@ -36,6 +36,10 @@ export const newCarSchema = z.strictObject({
   power: z.number().positive().lt(1500),
   // In Icelandic, for example: "sumar 2026"
   expectedDelivery: z.string().trim().min(1).optional(),
+  // The day it stopped being sold new here, as 2026-10-11. The car keeps its
+  // page, so links to it keep working, but leaves the list, the advisor and
+  // the published data. Set this rather than taking the car out.
+  deprecated: z.iso.date().optional(),
 })
 
 export type Drive = z.infer<typeof driveSchema>

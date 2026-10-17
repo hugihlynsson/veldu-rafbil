@@ -1,4 +1,5 @@
 import cars, { type Car } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
 import { findMentionedCars } from './mentionedCars'
 import { getMessageText, MAX_TAGGED_CARS, type ChatMessage } from './message'
 
@@ -8,7 +9,7 @@ import { getMessageText, MAX_TAGGED_CARS, type ChatMessage } from './message'
  * misremembered names no car and is dropped, where a wrong number would show
  * the wrong one.
  */
-export const carRef = (car: Car): string => car.id.replace(/^car-/, '')
+export const carRef = (car: Car): string => carSlug(car)
 
 const carsByRef = new Map(cars.map((car) => [carRef(car), car]))
 const carsById = new Map(cars.map((car) => [car.id, car]))

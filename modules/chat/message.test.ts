@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  askedElsewhere,
+  pagesStarted,
+  isNewPage,
   getFollowUps,
   getMessageText,
   groupIntoTurns,
@@ -216,5 +219,105 @@ describe('groupIntoTurns', () => {
 
   it('has no turns without messages', () => {
     expect(groupIntoTurns([])).toEqual([])
+  })
+})
+
+describe('pagesStarted', () => {
+  const question = (id: string, about?: string[]): ChatMessage => ({
+    id,
+    role: 'user',
+    parts: [{ type: 'text', text: id }],
+    ...(about && { metadata: { about } }),
+  })
+  const reply = (id: string): ChatMessage => ({
+    id,
+    role: 'assistant',
+    parts: [{ type: 'text', text: id }],
+  })
+
+  it("marks the first question asked on a car's page", () => {
+    expect(
+      pagesStarted([
+        question('list'),
+        reply('a'),
+        question('first', ['kia']),
+        reply('b'),
+        question('again', ['kia']),
+      ]),
+    ).toEqual(new Map([['first', ['kia']]]))
+  })
+
+  it('marks it again on another page', () => {
+    expect([
+      ...pagesStarted([
+        question('first', ['kia']),
+        question('next', ['tesla']),
+      ]).keys(),
+    ]).toEqual(['first', 'next'])
+  })
+
+  it('marks a page come back to after a question on the list', () => {
+    expect([
+      ...pagesStarted([
+        question('first', ['kia']),
+        question('list'),
+        question('back', ['kia']),
+      ]).keys(),
+    ]).toEqual(['first', 'back'])
+  })
+
+  it('takes a question about one car at most', async () => {
+    expect(
+      await validateChatMessages([question('q', ['kia', 'tesla'])]),
+    ).toBeNull()
+  })
+})
+
+describe('isNewPage', () => {
+  const question = (about?: string[]): ChatMessage => ({
+    id: 'q',
+    role: 'user',
+    parts: [{ type: 'text', text: 'q' }],
+    ...(about && { metadata: { about } }),
+  })
+
+  it('is new on a page the last question was not asked on', () => {
+    expect(isNewPage([question()], ['kia'])).toBe(true)
+    expect(isNewPage([], ['kia'])).toBe(true)
+    expect(isNewPage([question(['tesla'])], ['kia'])).toBe(true)
+  })
+
+  it('is not on the page the last question was asked on', () => {
+    expect(isNewPage([question(['kia'])], ['kia'])).toBe(false)
+  })
+
+  it("is never off a car's page", () => {
+    expect(isNewPage([question(['kia'])], undefined)).toBe(false)
+  })
+})
+
+describe('askedElsewhere', () => {
+  const asked = (about?: string[]): ChatMessage[] => [
+    {
+      id: 'q',
+      role: 'user',
+      parts: [{ type: 'text', text: 'q' }],
+      ...(about && { metadata: { about } }),
+    },
+  ]
+
+  it('is not where the last question was asked', () => {
+    expect(askedElsewhere(asked(), undefined)).toBe(false)
+    expect(askedElsewhere(asked(['a']), ['a'])).toBe(false)
+  })
+
+  it('is on another page than the last question', () => {
+    expect(askedElsewhere(asked(), ['a'])).toBe(true)
+    expect(askedElsewhere(asked(['a']), undefined)).toBe(true)
+    expect(askedElsewhere(asked(['a']), ['b'])).toBe(true)
+  })
+
+  it('is nowhere before anything is asked', () => {
+    expect(askedElsewhere([], ['a'])).toBe(false)
   })
 })

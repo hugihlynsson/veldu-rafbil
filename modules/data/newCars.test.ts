@@ -54,6 +54,14 @@ describe('the car data', () => {
     expect(unsafe).toEqual([])
   })
 
+  // A car no longer sold has arrived, and been taken off sale since
+  it('marks no car both expected and no longer sold', () => {
+    const both = newCars
+      .filter((car) => car.expectedDelivery && car.deprecated)
+      .map(carLabel)
+    expect(both).toEqual([])
+  })
+
   // A strict object, so a misspelt optional field is caught rather than dropped
   it.each(newCars.map((car) => [carLabel(car), car] as const))(
     'matches the schema: %s',

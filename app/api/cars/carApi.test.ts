@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest'
 import { buildCarsPayload, toApiCar } from './carApi'
 import newCars from '@/modules/data/newCars'
 import cars, { deriveCar } from '@/modules/data/cars'
-import getCarId from '@/modules/data/getCarId'
 import getPriceWithGrant from '@/modules/data/getPriceWithGrant'
 import { grantAmount, grantPriceCeiling } from '@/modules/data/globals'
 import type { NewCar } from '@/modules/data/newCarSchema'
@@ -16,8 +15,8 @@ const payload = buildCarsPayload(new Date('2026-01-01T00:00:00.000Z'), 'abc123')
 // A field that quietly changes name or meaning breaks a consumer silently
 describe('the published car payload', () => {
   it('publishes every car', () => {
-    expect(payload.cars).toHaveLength(newCars.length)
-    expect(payload.count).toBe(newCars.length)
+    expect(payload.cars).toHaveLength(cars.length)
+    expect(payload.count).toBe(cars.length)
   })
 
   it('reports the date it was built rather than the date it is read', () => {
@@ -80,7 +79,7 @@ describe('the published car payload', () => {
     for (const car of payload.cars) {
       expect(car.pagePath, car.id).toBe(`/#${car.id}`)
     }
-    expect(payload.cars.map((car) => car.id)).toEqual(newCars.map(getCarId))
+    expect(payload.cars.map((car) => car.id)).toEqual(cars.map((car) => car.id))
   })
 
   // Same name inside and out, because it already says what it is

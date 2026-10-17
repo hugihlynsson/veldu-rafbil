@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import cars, { deriveCar } from './cars'
+import cars, { allCars, deriveCar } from './cars'
 import { grantPriceCeiling } from './globals'
 import newCars from './newCars'
 
@@ -21,5 +21,13 @@ describe('hasGrant', () => {
     for (const car of cars) {
       expect(car.hasGrant).toBe(car.priceWithGrant < car.price)
     }
+  })
+})
+
+// The list, the advisor and the published data read the default export
+describe('the cars sold', () => {
+  it('leave out the ones no longer sold, which keep their pages', () => {
+    expect(cars.some((car) => car.deprecated)).toBe(false)
+    expect(allCars).toHaveLength(newCars.length)
   })
 })

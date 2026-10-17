@@ -2703,8 +2703,7 @@ const newCars: Array<NewCar> = [
     acceleration: 7.2,
     capacity: 60,
     range: 505,
-    evDatabaseUrl:
-      'https://ev-database.org/car/3362/Tesla-Model-Y-Standard-RWD',
+    evDatabaseUrl: 'https://ev-database.org/car/3362/Tesla-Model-Y-RWD',
     drive: 'RWD',
     seats: 5,
     power: 220,
@@ -2880,7 +2879,7 @@ const newCars: Array<NewCar> = [
     capacity: 50,
     range: 345,
     evDatabaseUrl:
-      'https://ev-database.org/car/2165/Toyota-Proace-City-Verso-Electric-L1-50-kWh',
+      'https://ev-database.org/car/2165/Toyota-Proace-City-Verso-L1-50-kWh',
     drive: 'FWD',
     seats: 7,
     power: 100,
@@ -3012,7 +3011,8 @@ const newCars: Array<NewCar> = [
     acceleration: 8.0,
     capacity: 58,
     range: 494,
-    evDatabaseUrl: 'https://ev-database.org/car/3521/Volkswagen-ID3-Neo-58-kWh',
+    evDatabaseUrl:
+      'https://ev-database.org/car/3521/Volkswagen-ID3-Neo-140-kW---58-kWh',
     drive: 'RWD',
     seats: 5,
     power: 140,
