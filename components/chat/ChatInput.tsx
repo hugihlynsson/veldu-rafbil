@@ -239,7 +239,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
           // click lands; Safari does not focus buttons on click
           onMouseDown={(event) => event.preventDefault()}
           className={clsx(
-            'appearance-none h-9 flex items-center justify-center gap-1.5 bg-sky border-0 rounded-full text-on-sky cursor-pointer transition duration-200 shrink-0 hover:enabled:bg-sky-hover hover:enabled:scale-105 disabled:opacity-40 disabled:cursor-not-allowed',
+            'appearance-none h-9 flex items-center justify-center gap-1.5 bg-sky border-0 rounded-full text-on-sky cursor-pointer transition duration-200 shrink-0 hover:enabled:bg-sky-hover disabled:opacity-40 disabled:cursor-not-allowed',
             filter ? 'px-3.5 text-sm font-semibold whitespace-nowrap' : 'w-9',
           )}
         >
