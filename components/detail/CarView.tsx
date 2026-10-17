@@ -49,7 +49,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
     .toSorted((a, b) => figureOrder.indexOf(a.key) - figureOrder.indexOf(b.key))
 
   return (
-    <main className="max-w-page mx-auto pb-14">
+    <main className="max-w-page mx-auto pb-14 md:pb-24">
       {/* The list's gap from the logo to its intro, which pads its top */}
       <header className={clsx(pageColumn, 'pt-4 pb-6 xs:pt-6')}>
         <PageTop />
@@ -143,7 +143,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
             {car.evDatabaseUrl && <EvDatabaseLink href={car.evDatabaseUrl} />}
           </div>
 
-          <section aria-labelledby="similar" className="mt-12">
+          <section aria-labelledby="similar" className="mt-12 md:mt-20">
             <h2 id="similar" className={sectionLabel}>
               Þú gætir líka haft áhuga á:
             </h2>
