@@ -1215,8 +1215,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'polestar-4-long-range-dual-motor': {
     paragraphs: [
       'Polestar 4 Long Range Dual Motor er lágur og sportlegur fólksbíll með afturhlera og fjórhjóladrifi, með sérstæðri hönnun þar sem afturrúðunni er sleppt fyrir stafrænan bakspegil.',
-      'Hann er meðal sneggstu og aflmestu bíla á svipuðu verði, drífur lengra en flestir þeirra og má draga 2.000 kg, með því mesta á þessu verði.',
-      'Á móti kemur að hraðhleðslan er aðeins í meðallagi og skottið líka. Tesla Model Y Performance er 160.000 kr. ódýrari, álíka snöggur og með 328 l stærra skott, en má draga 400 kg minna.',
+      'Í sínum verðflokki er hann meðal sneggstu og aflmestu bílanna og drífur lengra en flestir, og hann má draga 2.000 kg, með því mesta á þessu verði.',
+      'Hraðhleðslan og skottið eru hins vegar aðeins í meðallagi. Tesla Model Y Performance er 160.000 kr. ódýrari, álíka snöggur og með 328 l stærra skott, en má draga 400 kg minna.',
       'Polestar 4 er fyrir þá sem vilja mikla drægni, afl og sérkenni.',
     ],
     facts: '4b106d0d549a',
@@ -1225,8 +1225,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'polestar-4-suv-long-range-dual-motor': {
     paragraphs: [
       'Polestar 4 SUV Long Range Dual Motor er rennilegur jepplingur með fjórhjóladrifi og sérstæðri hönnun, án hefðbundinnar afturrúðu, fyrir þá sem vilja mikið afl og skandinavískan stíl.',
-      'Hann er meðal sneggstu og aflmestu bíla á svipuðu verði, drífur lengra en flestir þeirra og má draga 2.000 kg, með því mesta á þessu verði.',
-      'Á móti kemur að hraðhleðslan og skottið eru aðeins í meðallagi. BMW iX3 40 kostar 200.000 kr. meira, drífur 37 km lengra og hleður með um 35% styttri stoppum, en er aðeins afturhjóladrifinn og mun hægari.',
+      'Í sínum verðflokki er hann meðal sneggstu og aflmestu bílanna og drífur lengra en flestir, og hann má draga 2.000 kg, með því mesta á þessu verði.',
+      'Hraðhleðslan og skottið eru hins vegar aðeins í meðallagi. BMW iX3 40 kostar 200.000 kr. meira, drífur 37 km lengra og hleður með um 35% styttri stoppum, en er aðeins afturhjóladrifinn og mun hægari.',
       'Polestar 4 SUV er fyrir þá sem setja akstursánægju, kraft og áberandi hönnun í fyrsta sæti.',
     ],
     facts: '625d0a4115d4',
@@ -1235,8 +1235,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'porsche-macan-4-electric': {
     paragraphs: [
       'Porsche Macan 4 Electric er lúxussportjepplingur með fjórhjóladrifi og rótgrónum aksturseiginleikum Porsche, fyrir þá sem vilja vandaðan og þægilegan bíl án þess að fórna akstursánægjunni.',
-      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og skottið er stærra en hjá flestum þeirra, með 84 l framskott að auki. Hann má draga 2.500 kg, með því mesta á þessu verði.',
-      'Á móti kemur að hann er fremur dýr og snerpan aðeins í meðallagi á þessu verði. Porsche Macan 4s Electric fæst fyrir 1.500.000 kr. meira með mun meira afli og sömu drægni.',
+      'Í sínum verðflokki drífur hann lengra, hleður hraðar og er með stærra skott en flestir, og 84 l framskott bætist við. Hann má draga 2.500 kg, með því mesta á þessu verði.',
+      'Gallarnir eru að hann er fremur dýr og snerpan aðeins í meðallagi miðað við keppinautana. Porsche Macan 4s Electric fæst fyrir 1.500.000 kr. meira með mun meira afli og sömu drægni.',
       'Macan 4 er einn heildstæðasti lúxusjepplingurinn á sínu verði, jafnvígur á akstur, pláss og ferðalög.',
     ],
     facts: 'b4b49ee67080',
@@ -1245,7 +1245,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'porsche-macan-4s-electric': {
     paragraphs: [
       'Porsche Macan 4S Electric er sportjepplingur með fjórhjóladrifi sem færir skarpa aksturseiginleika Porsche yfir í rafmagnið, fyrir þá sem vilja nákvæma stýringu og mikið afl í hagnýtum jepplingi.',
-      'Hann er meðal þeirra sneggstu á svipuðu verði og hleður hraðar en flestir þeirra, skottið er stærra en hjá flestum og 84 l framskott bætist við. Hann má draga 2.500 kg, meira en flestir í sínum verðflokki.',
+      'Í sínum verðflokki er hann meðal þeirra sneggstu, hleður hraðar og er með stærra skott en flestir, og 84 l framskott bætist við. Hann má draga 2.500 kg, meira en flestir keppinautar hans.',
       'Á móti kemur að hann er mjög dýr og drægnin aðeins í meðallagi miðað við verðið. Porsche Macan 4 Electric er 1.500.000 kr. ódýrari með sömu drægni, rými og dráttargetu, og gefur aðeins eftir í snerpu.',
       'Macan 4S er fyrir þá sem vilja sportlegasta Macan-inn, en Macan 4 gefur meira fyrir peninginn.',
     ],
@@ -1255,8 +1255,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'porsche-taycan-plus': {
     paragraphs: [
       'Porsche Taycan Plus er lágur lúxussportbíll með skottloki og afturhjóladrifi, ódýrasta útfærsla Taycan, fyrir þá sem vilja lifandi akstur Porsche og mikla drægni.',
-      'Hann drífur lengra en allar aðrar útfærslur Taycan og flestir á svipuðu verði, og er meðal þeirra sem hlaða hraðast, svo langferðir kalla á fá og stutt stopp. Auk skottsins er 84 l framskott.',
-      'Á móti kemur að skottið er eitt það minnsta á svipuðu verði, hann má ekki draga kerru og afturhjóladrifið kallar á aðgát í snjó og hálku. Porsche Taycan 4 Plus fæst með fjórhjóladrifi fyrir 1.500.000 kr. meira, og drífur samt langt.',
+      'Hann drífur lengra en allar aðrar útfærslur Taycan og flestir keppinautar hans, og er meðal þeirra sem hlaða hraðast, svo langferðir kalla á fá og stutt stopp. Auk skottsins er 84 l framskott.',
+      'Gallarnir eru að skottið er eitt það minnsta í hans verðflokki, hann má ekki draga kerru og afturhjóladrifið kallar á aðgát í snjó og hálku. Porsche Taycan 4 Plus fæst með fjórhjóladrifi fyrir 1.500.000 kr. meira og drífur samt langt.',
       'Taycan Plus er sportlegur langferðabíll fyrir þá sem geta verið án fjórhjóladrifs.',
     ],
     facts: 'a72a8541bd98',
@@ -1265,8 +1265,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'porsche-taycan-4-plus': {
     paragraphs: [
       'Porsche Taycan 4 Plus er lágur og rennilegur lúxusfólksbíll með fjórhjóladrifi, sem leggur áherslu á nákvæma stýringu og akstursánægju á malbiki. Hann hentar þeim sem vilja ekta Porsche í daglegum akstri og á langferðum.',
-      'Hann drífur lengra en flestir á svipuðu verði og er meðal þeirra sem hlaða hraðast, svo hleðslustopp utan bæjarins verða sérlega stutt. Auk skottsins er 84 l framskott undir vélarhlífinni.',
-      'Á móti kemur að skottið er eitt það minnsta í sínum verðflokki og hann má ekki draga kerru. Porsche Cayenne kostar það sama, drífur álíka langt og hleður jafn hratt, en er með 374 l stærra skott og má draga allt að 3.000 kg.',
+      'Í sínum verðflokki drífur hann lengra en flestir og er meðal þeirra sem hlaða hraðast, svo hleðslustopp utan bæjarins verða sérlega stutt. Auk skottsins er 84 l framskott undir vélarhlífinni.',
+      'Hins vegar er skottið eitt það minnsta á þessu verði og hann má ekki draga kerru. Porsche Cayenne kostar það sama, drífur álíka langt og hleður jafn hratt, en er með 374 l stærra skott og má draga allt að 3.000 kg.',
       'Taycan 4 Plus er fyrir þá sem vilja sportbíl sem fer vel með langferðir, frekar en jepparými.',
     ],
     facts: 'dda528e0d78f',
@@ -1275,8 +1275,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'porsche-taycan-4s-plus': {
     paragraphs: [
       'Porsche Taycan 4S Plus er lágur sportlegur fólksbíll með skottloki og fjórhjóladrifi, sneggstur bíla á sínu verði, fyrir þá sem vilja ósvikinn sportbíl í daglegri notkun.',
-      'Hann hleður mjög hratt og er aflmeiri en flestir á svipuðu verði, og auk skottsins er 84 l framskott undir vélarhlífinni.',
-      'Á móti kemur að hann drífur styttra en flestir á svipuðu verði, skottið er eitt það minnsta og hann má ekki draga kerru. Porsche Taycan 4 Plus er 2.000.000 kr. ódýrari, drífur 86 km lengra og gefur aðeins eftir í snerpu, og Porsche Cayenne S kostar 1.000.000 kr. meira, er álíka snöggur, drífur 96 km lengra og má draga 3.000 kg.',
+      'Hann hleður mjög hratt og er aflmeiri en flestir keppinautar hans, og auk skottsins er 84 l framskott undir vélarhlífinni.',
+      'Gallarnir eru að hann drífur styttra en flestir þeirra, skottið er eitt það minnsta og hann má ekki draga kerru. Porsche Taycan 4 Plus er 2.000.000 kr. ódýrari, drífur 86 km lengra og gefur aðeins eftir í snerpu, og Porsche Cayenne S kostar 1.000.000 kr. meira, er álíka snöggur, drífur 96 km lengra og má draga 3.000 kg.',
       'Taycan 4S Plus er fyrir þá sem setja hraða og akstursupplifun í fyrsta sæti.',
     ],
     facts: '3f13c5d34759',
@@ -1286,7 +1286,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Porsche Taycan 4 Cross Turismo er lúxusskutbíll með fjórhjóladrifi og ögn hækkaðri loftfjöðrun, sem sameinar aksturseiginleika sportbíls og hagnýtara rými skutbíls.',
       'Hann hleður hraðar en flestir á svipuðu verði og drífur fremur langt, og auk skottsins er 84 l framskott.',
-      'Á móti kemur að hann er mjög dýr, skottið er minna en hjá flestum á svipuðu verði og hann má ekki draga kerru. Porsche Cayenne Coupé er 500.000 kr. ódýrari, drífur 30 km lengra, er með 88 l stærra skott og má draga 3.500 kg.',
+      'Á móti kemur að hann er mjög dýr, skottið er minna en hjá flestum keppinautum hans og hann má ekki draga kerru. Porsche Cayenne Coupé er 500.000 kr. ódýrari, drífur 30 km lengra, er með 88 l stærra skott og má draga 3.500 kg.',
       'Taycan 4 Cross Turismo er fyrir þá sem vilja sportbílaakstur með meira rými en í fólksbílnum, frekar en jeppa.',
     ],
     facts: '2c42b54ca231',
@@ -1295,8 +1295,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'porsche-taycan-4s-cross-turismo': {
     paragraphs: [
       'Porsche Taycan 4S Cross Turismo er lúxusskutbíll með ögn hækkaðri fjöðrun og fjórhjóladrifi, sem sameinar aksturseiginleika sportbíls og rými skutbíls. Hann hentar þeim sem vilja mikla akstursánægju allt árið án þess að fara yfir í jeppa.',
-      'Hann er aflmeiri og sneggri en flestir á svipuðu verði og hleður hraðar en flestir í sínum verðflokki, svo hleðslustoppin á langferðum eru stutt. Auk skottsins er 84 l framskott undir vélarhlífinni.',
-      'Á móti kemur að hann drífur styttra en flestir á svipuðu verði, skottið er minna en hjá flestum þeirra og hann má ekki draga kerru. Porsche Cayenne S kostar það sama en drífur 43 km lengra, er með 335 l stærra skott og má draga allt að 3.000 kg.',
+      'Í sínum verðflokki er hann aflmeiri, sneggri og hleður hraðar en flestir, svo hleðslustoppin á langferðum eru stutt. Auk skottsins er 84 l framskott undir vélarhlífinni.',
+      'Gallarnir eru að hann drífur styttra en flestir keppinautar hans, skottið er minna og hann má ekki draga kerru. Porsche Cayenne S kostar það sama en drífur 43 km lengra, er með 335 l stærra skott og má draga allt að 3.000 kg.',
       'Taycan 4S Cross Turismo er fyrir þá sem setja akstursupplifunina ofar plássi og dráttargetu.',
     ],
     facts: '088728deac3c',
@@ -1305,8 +1305,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'porsche-cayenne-base': {
     paragraphs: [
       'Porsche Cayenne er stór lúxusjeppi með fjórhjóladrifi sem sameinar rými og notagildi fjölskyldujeppa og rómaða aksturseiginleika Porsche. Hann hentar þeim sem vilja ferðabíl í hæsta gæðaflokki sem ræður jafnt við langferðir og þungan drátt.',
-      'Hann drífur lengra en flestir á svipuðu verði og er meðal þeirra sem hlaða hraðast, svo hleðslustopp á langferðum verða fá og stutt. Skottið er stærra en hjá flestum í hans verðflokki, 90 l framskott bætist við og hann má draga 3.000 kg, meira en flestir á svipuðu verði.',
-      'Á móti kemur að hann er mjög dýr og hægari en flestir á svipuðu verði, þótt hann sé langt frá því að vera seinn. Sú snerpa fæst í Porsche Cayenne S fyrir 3.000.000 kr. meira, með sama skottinu og álíka drægni.',
+      'Í sínum verðflokki drífur hann lengra en flestir og er meðal þeirra sem hlaða hraðast, svo hleðslustopp á langferðum verða fá og stutt. Skottið er líka stærra en hjá flestum, 90 l framskott bætist við og hann má draga 3.000 kg.',
+      'Á móti kemur að hann er mjög dýr og hægari en flestir keppinautar hans, þótt hann sé langt frá því að vera seinn. Sú snerpa fæst í Porsche Cayenne S fyrir 3.000.000 kr. meira, með sama skottinu og álíka drægni.',
       'Grunngerð Cayenne er sú hagnýtasta í línunni og fyrir flesta sú skynsamlegasta: hún gefur lítið eftir nema í snerpu.',
     ],
     facts: 'f692ce51b5b3',
@@ -1315,8 +1315,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'porsche-cayenne-coupe': {
     paragraphs: [
       'Porsche Cayenne Coupé er stór lúxusjeppi með rennilegri, aflíðandi þaklínu og sportlegum aksturseiginleikum Porsche. Hann hentar þeim sem vilja notagildi jeppa en sportlegra útlit en í hefðbundnum Cayenne.',
-      'Hann má draga 3.500 kg, mest allra bíla á listanum, og drífur lengra og hleður hraðar en flestir á svipuðu verði, svo hleðslustoppin á langferðum eru fá og stutt. Skottið er stærra en hjá flestum í hans verðflokki og 90 l framskott bætist við.',
-      'Á móti kemur að hann er mjög dýr og hægari en flestir á svipuðu verði. Porsche Cayenne er 500.000 kr. ódýrari, með 247 l stærra skott, en má draga 500 kg minna.',
+      'Hann má draga 3.500 kg, mest allra bíla á listanum, og drífur lengra og hleður hraðar en flestir á svipuðu verði, svo hleðslustoppin á langferðum eru fá og stutt. Skottið er stærra en hjá flestum keppinautum hans og 90 l framskott bætist við.',
+      'Gallarnir eru að hann er mjög dýr og hægari en flestir þeirra. Porsche Cayenne er 500.000 kr. ódýrari, með 247 l stærra skott, en má draga 500 kg minna.',
       'Cayenne Coupé er fyrir þá sem vilja Cayenne með sportlegra lagi, og fá mestu dráttargetuna á listanum í kaupbæti.',
     ],
     facts: '89d7d6d210cb',
@@ -1325,8 +1325,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'porsche-cayenne-s': {
     paragraphs: [
       'Porsche Cayenne S er stór og kraftmikill lúxusjeppi með fjórhjóladrifi sem sameinar sportbílaeiginleika Porsche og notagildi stórs jeppa.',
-      'Hann drífur lengra en flestir á svipuðu verði, er meðal þeirra sem hlaða hraðast og meðal þeirra aflmestu. Skottið er eitt það stærsta í sínum verðflokki, 90 l framskott bætist við og hann má draga 3.000 kg.',
-      'Á móti kemur að hann er mjög dýr. Porsche Cayenne er 3.000.000 kr. ódýrari með sama rými, dráttargetu og drægni, og gefur aðeins eftir í snerpu.',
+      'Í sínum verðflokki drífur hann lengra en flestir og er meðal þeirra sem hlaða hraðast og aflmestu. Skottið er eitt það stærsta, 90 l framskott bætist við og hann má draga 3.000 kg.',
+      'Helsti ókosturinn er verðið. Porsche Cayenne er 3.000.000 kr. ódýrari með sama rými, dráttargetu og drægni, og gefur aðeins eftir í snerpu.',
       'Cayenne S er fyrir þá sem vilja jeppa sem gefur ekkert eftir, en grunngerð Cayenne gefur meira fyrir peninginn.',
     ],
     facts: '4eac3f04344a',
@@ -1335,8 +1335,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'porsche-cayenne-s-coupe': {
     paragraphs: [
       'Porsche Cayenne S Coupé er stór og kraftmikill lúxusjeppi með fjórhjóladrifi og aflíðandi þaklínu, fyrir þá sem vilja sportlegasta lagið á Cayenne.',
-      'Hann hleður hraðast bíla á svipuðu verði, er meðal þeirra langdrægustu og aflmestu, og skottið er stærra en hjá flestum í hans verðflokki, með 90 l framskott að auki. Hann má draga 3.000 kg.',
-      'Á móti kemur að hann er mjög dýr. Porsche Cayenne S er 500.000 kr. ódýrari með 247 l stærra skott og nánast sömu drægni, fyrir þá sem geta verið án coupé-lagsins.',
+      'Hann hleður hraðast bíla á svipuðu verði, er meðal þeirra langdrægustu og aflmestu, og skottið er stærra en hjá flestum keppinautum hans, með 90 l framskott að auki. Hann má draga 3.000 kg.',
+      'Helsti ókosturinn er verðið. Porsche Cayenne S er 500.000 kr. ódýrari með 247 l stærra skott og nánast sömu drægni, fyrir þá sem geta verið án coupé-lagsins.',
       'Cayenne S Coupé er fyrir kröfuharða ökumenn sem vilja kraft, stutt hleðslustopp og sportlegt lag.',
     ],
     facts: '7d546273af52',
@@ -1345,8 +1345,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'porsche-cayenne-turbo': {
     paragraphs: [
       'Porsche Cayenne Turbo er stór og geysilega aflmikill lúxusjeppi, meðal sneggstu bíla á listanum, sem sameinar sportbílaakstur og notagildi stórs fimm sæta jeppa.',
-      'Hann er ekki bara snöggur: skottið er það stærsta á svipuðu verði, 90 l framskott bætist við og hann má draga 3.000 kg, meira en flestir í sínum verðflokki. Hann hleður líka hraðar en flestir á svipuðu verði, svo hleðslustoppin á langferðum eru stutt.',
-      'Á móti kemur verðið, enda er hann mjög dýr, og drægnin er aðeins í meðallagi miðað við aðra á svipuðu verði. Ef langdrægni skiptir meira máli en afl drífur Mercedes-Benz EQS 580 4MATIC 246 km lengra og er 460.000 kr. ódýrari, en hann er fólksbíll og má draga 1.300 kg minna.',
+      'Hann er ekki bara snöggur: skottið er það stærsta á svipuðu verði, 90 l framskott bætist við og hann má draga 3.000 kg, meira en flestir keppinautar hans. Hann hleður líka hraðar en flestir þeirra, svo hleðslustoppin á langferðum eru stutt.',
+      'Á móti kemur verðið, enda er hann mjög dýr, og drægnin er aðeins í meðallagi í hans verðflokki. Ef langdrægni skiptir meira máli en afl drífur Mercedes-Benz EQS 580 4MATIC 246 km lengra og er 460.000 kr. ódýrari, en hann er fólksbíll og má draga 1.300 kg minna.',
       'Cayenne Turbo er fyrir þá sem vilja jeppa sem gerir allt vel, og eru tilbúnir að borga fyrir það.',
     ],
     facts: '809a7020da23',
@@ -1355,8 +1355,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'porsche-cayenne-turbo-coupe': {
     paragraphs: [
       'Porsche Cayenne Turbo Coupé er hreinræktaður afkastajeppi með fjórhjóladrifi og aflíðandi þaklínu, meðal sneggstu bíla á listanum, fyrir þá sem vilja ofursportbíl með notagildi jeppa.',
-      'Hann hleður hraðast bíla á svipuðu verði og drífur lengra en flestir þeirra, og hann má draga 3.000 kg. Auk skottsins er 90 l framskott undir vélarhlífinni.',
-      'Á móti kemur að hann er mjög dýr og skottið er eitt það minnsta á svipuðu verði. Porsche Cayenne Turbo er 500.000 kr. ódýrari, jafn snöggur og með 213 l stærra skott, fyrir þá sem geta verið án coupé-lagsins.',
+      'Hann hleður hraðast bíla á svipuðu verði og drífur lengra en flestir keppinautar hans, og hann má draga 3.000 kg. Auk skottsins er 90 l framskott undir vélarhlífinni.',
+      'Gallarnir eru að hann er mjög dýr og skottið er eitt það minnsta í hans verðflokki. Porsche Cayenne Turbo er 500.000 kr. ódýrari, jafn snöggur og með 213 l stærra skott, fyrir þá sem geta verið án coupé-lagsins.',
       'Cayenne Turbo Coupé er sjaldséð blanda af ofursportbíl og vetrarhæfum lúxusjeppa.',
     ],
     facts: '709a5fdc0857',
@@ -1365,8 +1365,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'range-rover-electric-ev450': {
     paragraphs: [
       'Range Rover Electric EV450 er stór lúxusjeppi með fjórhjóladrifi, rúmlega fimm metrar á lengd, sem leggur áherslu á hljóðláta mýkt, tignarlega nærveru og getu utan vega sem merkið er þekkt fyrir.',
-      'Skottið er stærra en hjá flestum á svipuðu verði og hann má draga 2.500 kg, og loftfjöðrunin gerir hann þægilegan á hvaða vegi sem er.',
-      'Á móti kemur að hann drífur styttra og er meðal þeirra hægustu og aflminnstu á svipuðu verði. Porsche Cayenne Turbo kostar 860.000 kr. meira, drífur 23 km lengra, hleður með um 30% styttri stoppum og má draga 500 kg meira.',
+      'Skottið er stærra en hjá flestum á svipuðu verði, hann má draga 2.500 kg og loftfjöðrunin gerir hann þægilegan á hvaða vegi sem er.',
+      'Á móti kemur að hann drífur styttra og er meðal þeirra hægustu og aflminnstu í sínum verðflokki. Porsche Cayenne Turbo kostar 860.000 kr. meira, drífur 23 km lengra, hleður með um 30% styttri stoppum og má draga 500 kg meira.',
       'Range Rover EV450 er fyrir þá sem vilja jeppalúxus og ró frekar en að eltast við tölurnar.',
     ],
     facts: '216b5c4c82e0',
@@ -1375,8 +1375,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'range-rover-electric-ev550': {
     paragraphs: [
       'Range Rover Electric EV550 er stór og virðulegur lúxusjeppi með fjórhjóladrifi, rúmlega fimm metrar á lengd, aflmeiri útfærsla rafdrifna Range Rover, með fyrsta flokks innréttingu og getu utan vega.',
-      'Skottið er stærra en hjá flestum á svipuðu verði og hann má draga 2.500 kg, og loftfjöðrunin gerir hann þægilegan í hvaða færð sem er.',
-      'Á móti kemur að hann er mjög dýr og drífur styttra en flestir á svipuðu verði. Range Rover Electric EV450 er 2.700.000 kr. ódýrari með sömu drægni, rými og dráttargetu, og gefur aðeins eftir í snerpu.',
+      'Skottið er stærra en hjá flestum á svipuðu verði, hann má draga 2.500 kg og loftfjöðrunin gerir hann þægilegan í hvaða færð sem er.',
+      'Gallarnir eru að hann er mjög dýr og drífur styttra en flestir keppinautar hans. Range Rover Electric EV450 er 2.700.000 kr. ódýrari með sömu drægni, rými og dráttargetu, og gefur aðeins eftir í snerpu.',
       'Range Rover EV550 er fyrir þá sem vilja þann aflmesta, en EV450 gefur sama lúxus fyrir minna.',
     ],
     facts: '7d553bed6445',
@@ -1396,7 +1396,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Renault R5 E-Tech 52 kWh er lítill fimm sæta hlaðbakur, aðeins 3,9 m á lengd, með retro-hönnun í anda klassíska forverans, lipur í þröngum götum og auðveldur í stæðum.',
       'Hann er mjög ódýr og drífur 109 km lengra en grunnútfærslan, sem dugar í dagleg erindi og styttri ferðir milli landshluta, og útlitið gerir hann eftirtektarverðan.',
-      'Á móti kemur að hann drífur styttra, hleður hægar og er aflminni en flestir á svipuðu verði, skottið er eitt það minnsta og hann má aðeins draga 500 kg. Leapmotor C10 Pro kostar það sama en er mun stærri bíll, drífur álíka langt, er með 109 l stærra skott og má draga 1.000 kg meira.',
+      'Gallarnir eru að hann drífur styttra, hleður hægar og er aflminni en flestir á svipuðu verði, skottið er eitt það minnsta og hann má aðeins draga 500 kg. Leapmotor C10 Pro kostar það sama en er mun stærri bíll, drífur álíka langt, er með 109 l stærra skott og má draga 1.000 kg meira.',
       'R5 er skemmtilegur bæjarbíll með mikinn karakter, en síður heppilegur sem aðalbíll fjölskyldu.',
     ],
     facts: 'd6f71b54b2fb',
@@ -1406,7 +1406,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Renault Scenic E-Tech EV60 er meðalstór jepplingur með framhjóladrifi og vel nýttu innanrými, með innbyggðu Google-kerfi og góðri hljóðvist, fyrir fjölskyldur sem vilja þægilegan hversdagsbíl.',
       'Hann er fremur ódýr og skottið er stærra en hjá flestum á svipuðu verði.',
-      'Á móti kemur að hann drífur styttra, hleður hægar og er aflminni en flestir á svipuðu verði. Renault Scenic E-Tech EV87 kostar 900.000 kr. meira og drífur 193 km lengra, og XPENG G6 RWD Standard Range kostar 100.000 kr. meira, hleður með um 35% styttri stoppum og má draga 400 kg meira.',
+      'Á móti kemur að hann drífur styttra, hleður hægar og er aflminni en flestir keppinautar hans. Renault Scenic E-Tech EV87 kostar 900.000 kr. meira og drífur 193 km lengra, og XPENG G6 RWD Standard Range kostar 100.000 kr. meira, hleður með um 35% styttri stoppum og má draga 400 kg meira.',
       'Scenic EV60 er þægilegur fjölskyldubíll, en flestum borgar sig stærri rafhlaðan.',
     ],
     facts: 'f4f8925cd6d8',
