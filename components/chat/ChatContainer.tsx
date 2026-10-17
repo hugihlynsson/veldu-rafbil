@@ -4,6 +4,8 @@ import { Suspense, useState } from 'react'
 import dynamic from 'next/dynamic'
 import ChatInput from './ChatInput'
 import type { Car } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
+import { carSuggestions } from '@/modules/chat/suggestions'
 import type { Filters } from '@/modules/list/filters'
 import useChunk from '@/utils/useChunk'
 import useComposer from '@/utils/useComposer'
@@ -21,8 +23,11 @@ interface Props {
   hide: boolean
   /** Called once the chat has closed, so the car's card can take the focus */
   onShowCar: (car: Car) => void
-  filters: Filters
-  onApplyFilters: (filters: Filters) => void
+  /** The list's filters, which the bar suggests changes to as it is typed in */
+  filters?: Filters
+  onApplyFilters?: (filters: Filters) => void
+  /** The car whose page it is on, which each question carries */
+  about?: ReadonlyArray<Car>
 }
 
 export default function ChatContainer({
@@ -30,8 +35,9 @@ export default function ChatContainer({
   onShowCar,
   filters,
   onApplyFilters,
+  about,
 }: Props) {
-  const conversation = useConversation()
+  const conversation = useConversation(about && { about: about.map(carSlug) })
   const composer = useComposer()
   const chatModal = useChunk(importChatModal)
   const [wantsChatOpen, setWantsChatOpen] = useState<boolean>(false)
@@ -66,8 +72,11 @@ export default function ChatContainer({
       disabled={conversation.isBusy}
       hasMessages={conversation.hasMessages}
       sendMessage={conversation.send}
+      starters={about && carSuggestions}
       filterSuggestions={
-        isChatOpen ? undefined : { filters, onApply: onApplyFilters }
+        !isChatOpen && filters && onApplyFilters
+          ? { filters, onApply: onApplyFilters }
+          : undefined
       }
     />
   )
@@ -85,6 +94,7 @@ export default function ChatContainer({
             session={session}
             composer={chatInput}
             composerRef={composer.ref}
+            about={about?.map(carSlug)}
             onDone={(pickedCar) => {
               setWantsChatOpen(false)
               // A car picked from the answer takes the focus instead

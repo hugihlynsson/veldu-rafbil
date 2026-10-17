@@ -1,14 +1,16 @@
 import { FunctionComponent } from 'react'
 import clsx from 'clsx'
-import { trackEvent } from 'fathom-client'
 import Image from 'next/image'
+import Link from 'next/link'
 
-import type { Drive } from '@/modules/data/newCarSchema'
+import { driveLabels } from '@/modules/data/drives'
 import { Car } from '@/modules/data/cars'
-import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { formatKmPerMinute } from '@/modules/data/getKmPerMinutesCharged'
-import LinkPill from '@/components/LinkPill'
+import PricePill from '@/components/PricePill'
 import type { View } from '@/modules/list/view'
+import ShareButton from '@/components/ShareButton'
+import { carPathOf } from '@/modules/detail/paths'
+import { rememberListSearch } from '@/utils/listReturn'
 
 interface Props {
   car: Car
@@ -50,17 +52,6 @@ const sizes = {
   grid: '(max-width: 767px) 100vw, (max-width: 1023px) calc(50vw - 40px), (max-width: 1279px) calc(33.3vw - 34px), 392px',
 }
 
-const getDriveLabel = (drive: Drive) => {
-  switch (drive) {
-    case 'AWD':
-      return 'Fjórhjóladrif'
-    case 'RWD':
-      return 'Afturhjóladrif'
-    case 'FWD':
-      return 'Framhjóladrif'
-  }
-}
-
 const NewCar: FunctionComponent<Props> = ({
   car,
   showValue,
@@ -69,13 +60,14 @@ const NewCar: FunctionComponent<Props> = ({
   view = 'list',
 }) => {
   const grid = view === 'grid'
-  const { id: carId, priceWithGrant, hasGrant } = car
+  const { id: carId } = car
 
   // Not agree(): sæti is neuter and reads the same at every count. A car
   // without a subModel gets the seat count on its own rather than a lone dot.
   const subTitle = [car.subModel, showSeats && `${car.seats} sæti`]
     .filter(Boolean)
     .join(' · ')
+  const rememberList = () => rememberListSearch(window.location.search)
   const delivery =
     car.expectedDelivery && `Væntanlegur ${car.expectedDelivery.toLowerCase()}`
 
@@ -85,7 +77,7 @@ const NewCar: FunctionComponent<Props> = ({
       // MiniCar scrolls here from the chat, and moves focus with it
       tabIndex={-1}
       className={clsx(
-        'mb-8',
+        'group/car mb-8',
         skipLayoutOutOfView,
         grid
           ? ['md:mb-10', sharedRowsInGrid]
@@ -95,8 +87,15 @@ const NewCar: FunctionComponent<Props> = ({
             ],
       )}
     >
-      <div
+      {/* The biggest thing to tap, so it opens the car too; one stop for the
+          keyboard and screen readers is the name */}
+      <Link
+        href={carPathOf(car)}
+        onClick={rememberList}
+        tabIndex={-1}
+        aria-hidden
         className={clsx(
+          'block',
           grid ? 'md:-mx-1' : 'md:w-[40%] md:grow md:self-center',
         )}
       >
@@ -112,7 +111,7 @@ const NewCar: FunctionComponent<Props> = ({
             grid ? 'md:rounded-lg' : 'md:rounded-sm',
           )}
         />
-      </div>
+      </Link>
 
       <div
         className={clsx(
@@ -122,60 +121,64 @@ const NewCar: FunctionComponent<Props> = ({
             : 'md:m-0 md:ml-8 md:p-0 md:w-[330px] md:max-w-card-text md:shrink-0 md:grow',
         )}
       >
-        <h2
+        <div
           className={clsx(
-            'm-0 font-semibold text-display',
-            grid && 'md:pt-3 md:text-2xl',
+            'flex items-start justify-between gap-3',
+            grid && 'md:pt-3',
           )}
         >
-          <span>{car.make}</span>{' '}
-          <span className="font-normal">{car.model}</span>
-          <span
+          <h2
             className={clsx(
-              'block font-medium text-base text-stone -mt-px mb-2',
-              grid && 'md:mt-0 md:text-sm',
+              'm-0 min-w-0 font-semibold text-display',
+              grid && 'md:text-2xl',
             )}
           >
-            {subTitle}
-            {/* Shown on the subtitle's line, but read after the heading
+            <Link
+              href={carPathOf(car)}
+              onClick={rememberList}
+              className="text-inherit no-underline decoration-2 underline-offset-4 hover:underline"
+            >
+              <span>{car.make}</span>{' '}
+              <span className="font-normal">{car.model}</span>
+            </Link>
+            <span
+              className={clsx(
+                'block font-medium text-base text-stone -mt-px mb-2',
+                grid && 'md:mt-0 md:text-sm',
+              )}
+            >
+              {subTitle}
+              {/* Shown on the subtitle's line, but read after the heading
                 rather than as part of the car's name */}
-            {delivery && (
-              <span aria-hidden>
-                {subTitle && ' · '}
-                {delivery}
-              </span>
-            )}
-          </span>
-        </h2>
+              {delivery && (
+                <span aria-hidden>
+                  {subTitle && ' · '}
+                  {delivery}
+                </span>
+              )}
+            </span>
+          </h2>
+          <ShareButton
+            title={car.label}
+            path={carPathOf(car)}
+            label={`Deila ${car.label}`}
+            event="Car shared from list"
+            variant="icon"
+            // A mouse finds it on the card it points at, so a list of them
+            // is not a column of icons; a finger has no hover to find it by
+            className="mt-2 pointer-fine:opacity-0 pointer-fine:group-hover/car:opacity-100 pointer-fine:focus-visible:opacity-100"
+          />
+        </div>
         {delivery && <p className="sr-only">{delivery}</p>}
 
-        <LinkPill
+        <PricePill
+          car={car}
+          showValue={showValue}
           className={clsx(
             'mt-2 -ml-0.5',
             grid && 'md:mt-1 md:justify-self-start',
           )}
-          href={car.sellerUrl}
-          external
-          extra={
-            (car.expectedDelivery && hasGrant && 'áætlað verð með styrk ↗') ||
-            (car.expectedDelivery && 'áætlað verð ↗') ||
-            (showValue &&
-              `${hasGrant ? 'með styrk ' : ''}${addDecimalSeparators(
-                Math.round(car.pricePerKm),
-              )} kr. á km.`) ||
-            (hasGrant && 'með styrk') ||
-            undefined
-          }
-          title={
-            hasGrant
-              ? `Fullt verð án styrks: ${addDecimalSeparators(car.price)} kr.`
-              : undefined
-          }
-          onClick={() => trackEvent('Seller clicked')}
-        >
-          {addDecimalSeparators(priceWithGrant)} kr.
-          {!car.expectedDelivery && ' ↗'}
-        </LinkPill>
+        />
 
         <div
           className={clsx(
@@ -218,27 +221,23 @@ const NewCar: FunctionComponent<Props> = ({
             <div className={clsx(statValue, grid && statValueInGrid)}>
               {car.range} km<span className="sr-only"> samkvæmt WLTP</span>
             </div>
-            <div className={statDetail} title={getDriveLabel(car.drive)}>
+            <div className={statDetail} title={driveLabels[car.drive]}>
               {car.drive}
-              <span className="sr-only">, {getDriveLabel(car.drive)}</span>
+              <span className="sr-only">, {driveLabels[car.drive]}</span>
             </div>
           </div>
         </div>
 
-        {car.evDatabaseUrl && (
-          <a
-            className={clsx(
-              'inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-tint',
-              grid && 'md:justify-self-start md:self-start md:text-xs',
-            )}
-            target="_blank"
-            href={car.evDatabaseUrl}
-            rel="noopener"
-            onClick={() => trackEvent('Ev Database Link Clicked')}
-          >
-            Nánar á ev-database.org ↗
-          </a>
-        )}
+        <Link
+          href={carPathOf(car)}
+          onClick={rememberList}
+          className={clsx(
+            'inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-tint',
+            grid && 'md:justify-self-start md:self-start md:text-xs',
+          )}
+        >
+          Nánar um bílinn →
+        </Link>
       </div>
     </article>
   )

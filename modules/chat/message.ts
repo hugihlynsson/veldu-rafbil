@@ -23,6 +23,9 @@ const chatMetadataSchema = z
       .min(1)
       .max(MAX_TAGGED_CARS)
       .optional(),
+    // On a question asked on a car's page: the slugs of the cars the page is
+    // about, which the route looks up rather than trusts
+    about: z.array(z.string().min(1).max(100)).length(1).optional(),
   })
   .optional()
 
@@ -112,3 +115,57 @@ export const groupIntoTurns = (messages: ChatMessage[]): ChatMessage[][] =>
     else current.push(message)
     return turns
   }, [])
+
+const sameCars = (a: string[] | undefined, b: string[] | undefined) =>
+  (a ?? []).join('/') === (b ?? []).join('/')
+
+/**
+ * The questions that bring a car's page into the conversation, by id, with
+ * the cars it is about: the first asked on the page, and the first after the
+ * page changes. Asked again on the same page, it is the same one.
+ */
+export const pagesStarted = (
+  messages: ChatMessage[],
+): Map<string, string[]> => {
+  const started = new Map<string, string[]>()
+  let before: string[] | undefined
+
+  for (const message of messages) {
+    if (message.role !== 'user') continue
+    const about = message.metadata?.about
+    if (about && !sameCars(about, before)) {
+      started.set(message.id, about)
+    }
+    before = about
+  }
+
+  return started
+}
+
+/**
+ * Whether a question asked now, on a page about these cars, brings in a page
+ * the conversation is not already on: the marker for it shows before it is
+ * asked, so the reader knows the advisor can see it
+ */
+export const isNewPage = (
+  messages: ChatMessage[],
+  about: string[] | undefined,
+): boolean =>
+  about !== undefined &&
+  !sameCars(
+    messages.findLast(({ role }) => role === 'user')?.metadata?.about,
+    about,
+  )
+
+/**
+ * Whether the conversation's last question was asked somewhere else than
+ * here: on the list, on another car's page, or on none when this is one. Its
+ * follow-ups are about there, and read wrong here.
+ */
+export const askedElsewhere = (
+  messages: ChatMessage[],
+  about: string[] | undefined,
+): boolean => {
+  const last = messages.findLast(({ role }) => role === 'user')
+  return last !== undefined && !sameCars(last.metadata?.about, about)
+}

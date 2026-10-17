@@ -8,6 +8,7 @@ import { trackEvent } from 'fathom-client'
 import Car from './NewCar'
 import { GridIcon, ListIcon } from './ViewIcons'
 import Title from '@/components/Title'
+import { pageColumn } from '@/components/pageColumn'
 import Intro from './Intro'
 import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/filters/FilterModal'
@@ -33,8 +34,7 @@ const ChatContainer = dynamic(() => import('@/components/chat/ChatContainer'), {
 })
 
 // The header and the line under the list share the text column of a card
-const column =
-  'mx-auto max-w-column py-4 px-(--gutter) xs:py-6 md:pl-10 md:pr-6 md:max-w-none'
+const column = `${pageColumn} py-4 xs:py-6`
 
 const carWord = (count: number) => agree(count, 'bíll', 'bílar')
 
