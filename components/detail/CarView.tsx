@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react'
+import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -11,6 +12,7 @@ import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import PricePill from '@/components/PricePill'
 import EvDatabaseLink from '@/components/EvDatabaseLink'
 import ShareButton from '@/components/ShareButton'
+import { pageColumn } from '@/components/pageColumn'
 import PageTop from './PageTop'
 import Review from './Review'
 
@@ -21,9 +23,6 @@ interface Props {
   review?: CarReview
 }
 
-const gutter = 'px-(--gutter) md:px-10'
-// The review's measure, which the rest of the page below the photo keeps
-const column = 'max-w-prose mx-auto'
 // Price per km of range is left to the list's sorting: a ratio few buyers
 // weigh a car by, beside a price shown under the name
 const figureOrder: SpecKey[] = [
@@ -50,27 +49,28 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
     .toSorted((a, b) => figureOrder.indexOf(a.key) - figureOrder.indexOf(b.key))
 
   return (
-    <main className="max-w-hero mx-auto pb-14">
-      <div className={gutter}>
-        <header className={column}>
-          <PageTop />
-        </header>
+    <main className="max-w-page mx-auto pb-14">
+      <header className={clsx(pageColumn, 'pt-4 xs:pt-6')}>
+        <PageTop />
+      </header>
+
+      {/* Edge to edge on a phone, and from md as wide as the column, as the
+          list has its photos */}
+      <div className="md:pl-10 md:pr-6">
+        <Image
+          alt=""
+          sizes="(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 64px), 960px"
+          src={`/images/${car.heroImageName}.jpg`}
+          width={1920}
+          height={1280}
+          preload
+          className="w-full h-auto block md:rounded-lg"
+        />
       </div>
 
-      {/* Edge to edge until the window outgrows max-w-hero, rounded once it
-          stands clear of the edges */}
-      <Image
-        alt=""
-        sizes="(max-width: 959px) 100vw, 960px"
-        src={`/images/${car.heroImageName}.jpg`}
-        width={1920}
-        height={1280}
-        preload
-        className="w-full h-auto block min-[961px]:rounded-lg"
-      />
-
-      <div className={gutter}>
-        <div className={column}>
+      <div className={pageColumn}>
+        {/* The review's measure, which the rest of the page keeps */}
+        <div className="md:max-w-prose">
           <div className="pt-4 md:pt-6">
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0">
