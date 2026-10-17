@@ -1615,8 +1615,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'tesla-model-3-afturhjoladrif': {
     paragraphs: [
       'Tesla Model 3 Afturhjóladrif er lágur og rennilegur fólksbíll með skottloki, sparneytinn og lipur, fyrir þá sem vilja mikið fyrir peninginn í fólksbíl frekar en jeppling.',
-      'Hann er meðal þeirra langdrægustu, sneggstu og þeirra sem hlaða hraðast á svipuðu verði, og hefur aðgang að hraðhleðslustöðvum Tesla við hringveginn. Skottið er eitt það stærsta á þessu verði, 88 l framskott bætist við og hann má draga 1.000 kg, meira en flestir á svipuðu verði.',
-      'Á móti kemur að hann er lágur, með litla veghæð og aðeins afturhjóladrifinn, sem hentar síður í djúpum snjó og á malarvegum. Tesla Model 3 Long Range Afturhjóladrif kostar 900.000 kr. meira og drífur 216 km lengra.',
+      'Hann er meðal þeirra langdrægustu, sneggstu og þeirra sem hlaða hraðast á svipuðu verði, og hefur aðgang að hraðhleðslustöðvum Tesla við hringveginn. Skottið er líka eitt það stærsta, 88 l framskott bætist við og hann má draga 1.000 kg, meira en flestir keppinautar hans.',
+      'Gallarnir eru að hann er lágur, með litla veghæð og aðeins afturhjóladrifinn, sem hentar síður í djúpum snjó og á malarvegum. Tesla Model 3 Long Range Afturhjóladrif kostar 900.000 kr. meira og drífur 216 km lengra.',
       'Model 3 er einn álitlegasti kosturinn á sínu verði fyrir þá sem aka mest á bundnu slitlagi.',
     ],
     facts: 'a9b5c98f3078',
@@ -1625,8 +1625,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'tesla-model-3-long-range-afturhjoladrif': {
     paragraphs: [
       'Tesla Model 3 Long Range Afturhjóladrif er lágur og rennilegur fólksbíll með skottloki, sá langdrægasti á sínu verði, fyrir þá sem aka reglulega milli landshluta.',
-      'Hann drífur lengst bíla á svipuðu verði, hleður hratt og hefur aðgang að hraðhleðslustöðvum Tesla við hringveginn. Skottið er eitt það stærsta í hans verðflokki og 88 l framskott bætist við.',
-      'Á móti kemur að hann er lágur, með litla veghæð og aðeins afturhjóladrifinn, sem hentar síður í snjó og á malarvegum. Tesla Model 3 Long Range Fjórhjóladrif fæst fyrir 600.000 kr. meira, en drífur 90 km styttra.',
+      'Hann hleður hratt og hefur aðgang að hraðhleðslustöðvum Tesla við hringveginn, svo langferðir kalla á fá stopp. Skottið er líka eitt það stærsta og 88 l framskott bætist við.',
+      'Hann er hins vegar lágur, með litla veghæð og aðeins afturhjóladrifinn, sem hentar síður í snjó og á malarvegum. Tesla Model 3 Long Range Fjórhjóladrif fæst fyrir 600.000 kr. meira, en drífur 90 km styttra.',
       'Fyrir þá sem horfa fyrst og fremst í drægni á langferðum er þetta einn álitlegasti kosturinn.',
     ],
     facts: '2fb3560a683e',
@@ -1635,9 +1635,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'tesla-model-3-long-range-fjorhjoladrif': {
     paragraphs: [
       'Tesla Model 3 Long Range er lágur og rennilegur fólksbíll með fjórhjóladrifi, einn sá langdrægasti og sneggsti í sínum verðflokki. Hann hentar þeim sem aka mikið milli landshluta og vilja bíl sem er bæði sparneytinn og snarpur.',
-      'Hann drífur mjög langt og hleður hratt, og á langferðum hefur hann aðgang að hraðhleðslustöðvum Tesla við hringveginn. Þó hann sé fólksbíll með skottloki frekar en hlaðbakur er farangursrýmið stærra en hjá flestum á svipuðu verði, og 88 l framskott bætist við.',
-      'Á móti kemur að hann er lágur og með litla veghæð, sem hentar síður á malarvegum og í djúpum snjó, og hann má aðeins draga 1.000 kg, minna en flestir á svipuðu verði. Þeir sem vilja hærri setustöðu og meiri dráttargetu gætu frekar litið á XPENG G6 RWD Long Range, sem má draga 500 kg meira, en hann drífur 90 km styttra og er aðeins afturhjóladrifinn.',
-      'Fyrir langferðir á góðum vegum er Model 3 einn sterkasti kosturinn í sínum verðflokki.',
+      'Hann hleður hratt, og á langferðum hefur hann aðgang að hraðhleðslustöðvum Tesla við hringveginn. Þótt hann sé fólksbíll með skottloki frekar en hlaðbakur er farangursrýmið stærra en hjá flestum keppinautum hans, og 88 l framskott bætist við.',
+      'Á móti kemur að hann er lágur og með litla veghæð, sem hentar síður á malarvegum og í djúpum snjó, og hann má aðeins draga 1.000 kg, minna en flestir þeirra. Þeir sem vilja hærri setstöðu og meiri dráttargetu gætu frekar litið á XPENG G6 RWD Long Range, sem má draga 500 kg meira, en hann drífur 90 km styttra og er aðeins afturhjóladrifinn.',
+      'Fyrir langferðir á góðum vegum er Model 3 Long Range einn sterkasti kosturinn.',
     ],
     facts: '2e5f5056f3d9',
     model: 'gemini-3.8-flash, thinking high',
@@ -1645,8 +1645,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'tesla-model-3-performance': {
     paragraphs: [
       'Tesla Model 3 Performance er lágur fólksbíll með skottloki og fjórhjóladrifi, sneggstur bíla á sínu verði, fyrir þá sem vilja sportbíl í fólksbílsgerð.',
-      'Hann er meðal aflmestu bíla á svipuðu verði, drífur lengra og hleður hraðar en flestir þeirra, og skottið er stærra en hjá flestum, með 88 l framskott að auki.',
-      'Á móti kemur að hann má ekki draga kerru, fjöðrunin er stíf og lág bygging hentar síður á malarvegum. Tesla Model 3 Long Range Fjórhjóladrif er 880.000 kr. ódýrari, drífur 89 km lengra og má draga 1.000 kg, og gefur aðeins eftir í snerpu.',
+      'Hann er meðal þeirra aflmestu, drífur lengra og hleður hraðar en flestir keppinautar hans, og skottið er stærra en hjá flestum, með 88 l framskott að auki.',
+      'Gallarnir eru að hann má ekki draga kerru, fjöðrunin er stíf og lág bygging hentar síður á malarvegum. Tesla Model 3 Long Range Fjórhjóladrif er 880.000 kr. ódýrari, drífur 89 km lengra og má draga 1.000 kg, og gefur aðeins eftir í snerpu.',
       'Model 3 Performance er fyrir þá sem vilja mikinn kraft, en Long Range Fjórhjóladrif er skynsamlegri fyrir flesta.',
     ],
     facts: 'e4eeae096e55',
@@ -1656,7 +1656,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Tesla Model Y Standard Range er ódýrasta útfærsla Model Y, rúmgóður jepplingur með afturhjóladrifi, með stóru skotti og framskotti, snjöllum hugbúnaði og aðgangi að hleðsluneti Tesla.',
       'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og hleðslustöðvar Tesla við hringveginn gera ferðalög um landið einföld.',
-      'Á móti kemur að hann er aðeins afturhjóladrifinn og einfaldari búinn en dýrari útfærslurnar. Tesla Model Y Premium Long Range kostar 1.500.000 kr. meira og drífur 104 km lengra, og Tesla Model Y Long Range Dual Motor fæst með fjórhjóladrifi fyrir 1.900.000 kr. meira.',
+      'Hann er hins vegar aðeins afturhjóladrifinn og einfaldar búinn en dýrari útfærslurnar. Tesla Model Y Premium Long Range kostar 1.500.000 kr. meira og drífur 104 km lengra, og Tesla Model Y Long Range Dual Motor fæst með fjórhjóladrifi fyrir 1.900.000 kr. meira.',
       'Model Y Standard Range er sterkt val fyrir þá sem vilja mikið pláss og hleðslunet Tesla á hagstæðu verði.',
     ],
     facts: '47b1a9ade507',
@@ -1665,8 +1665,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'tesla-model-y-premium-long-range': {
     paragraphs: [
       'Tesla Model Y Premium Long Range er stór og rúmgóður jepplingur með afturhjóladrifi, 4,8 m á lengd, með snjöllum hugbúnaði og aðgangi að hleðsluneti Tesla.',
-      'Hann er meðal þeirra langdrægustu á svipuðu verði og hleður hraðar en flestir þeirra, skottið er eitt það stærsta í hans verðflokki og 117 l framskott bætist við. Hann má draga 1.600 kg, meira en flestir á svipuðu verði.',
-      'Á móti kemur að hann er aðeins afturhjóladrifinn og hefur stífa fjöðrun. Tesla Model Y Long Range Dual Motor fæst með fjórhjóladrifi fyrir 400.000 kr. meira, með nánast sömu drægni og rými.',
+      'Hann er meðal þeirra langdrægustu í sínum verðflokki og hleður hraðar en flestir keppinautar hans. Skottið er eitt það stærsta, 117 l framskott bætist við og hann má draga 1.600 kg, meira en flestir þeirra.',
+      'Helsti ókosturinn er að hann er aðeins afturhjóladrifinn, og fjöðrunin er stíf. Tesla Model Y Long Range Dual Motor fæst með fjórhjóladrifi fyrir 400.000 kr. meira, með nánast sömu drægni og rými.',
       'Model Y Premium Long Range gefur vart meiri drægni og pláss fyrir peninginn, ef fjórhjóladrif er ekki skilyrði.',
     ],
     facts: '20b24ee73012',
@@ -1675,7 +1675,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'tesla-model-y-long-range-dual-motor': {
     paragraphs: [
       'Tesla Model Y Long Range Dual Motor er stór og rúmgóður jepplingur með fjórhjóladrifi, 4,8 m á lengd, sem sameinar mikið pláss, mikla drægni og aðgang að hleðsluneti Tesla.',
-      'Hann er meðal þeirra langdrægustu og aflmestu á svipuðu verði og hleður hraðar en flestir þeirra, skottið er eitt það stærsta í hans verðflokki og 116 l framskott bætist við. Hann má draga 1.600 kg.',
+      'Hann er meðal þeirra langdrægustu og aflmestu á svipuðu verði og hleður hraðar en flestir þeirra. Skottið er eitt það stærsta, 116 l framskott bætist við og hann má draga 1.600 kg.',
       'Veikleikarnir eru fáir: flestu er stýrt í gegnum einn snertiskjá og fjöðrunin er fremur stíf. Ford Mustang Mach-E LR AWD kostar nánast það sama og er mýkri í akstri, en drífur 50 km styttra og hleður hægar.',
       'Model Y Long Range Dual Motor er einn heilsteyptasti fjölskyldubíllinn á sínu verði.',
     ],
@@ -1685,8 +1685,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'tesla-model-y-performance': {
     paragraphs: [
       'Tesla Model Y Performance er stór og rúmgóður jepplingur með fjórhjóladrifi og afli sem hæfir sportbíl, 4,8 m á lengd, fyrir þá sem vilja fjölskyldubíl og akstursánægju í einum.',
-      'Hann er meðal sneggstu og aflmestu bíla á svipuðu verði, drífur lengra og hleður hraðar en flestir þeirra, og skottið er eitt það stærsta, með 117 l framskott að auki. Hann má draga 1.600 kg.',
-      'Á móti kemur að stíf fjöðrun og stórar felgur gera hann óþýðari á malarvegum og holóttu malbiki. Tesla Model Y Long Range Dual Motor er 1.000.000 kr. ódýrari, drífur 20 km lengra og gefur aðeins eftir í snerpu.',
+      'Hann er meðal sneggstu og aflmestu bíla í sínum verðflokki, drífur lengra og hleður hraðar en flestir keppinautar hans, og skottið er eitt það stærsta, með 117 l framskott að auki. Hann má draga 1.600 kg.',
+      'Stíf fjöðrun og stórar felgur gera hann hins vegar óþýðari á malarvegum og holóttu malbiki. Tesla Model Y Long Range Dual Motor er 1.000.000 kr. ódýrari, drífur 20 km lengra og gefur aðeins eftir í snerpu.',
       'Model Y Performance er aflmikill fjölskyldubíll sem fórnar engu af notagildinu, en Long Range Dual Motor dugar flestum.',
     ],
     facts: '36f58db16db2',
@@ -1696,7 +1696,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Toyota bZ4X er meðalstór jepplingur með framhjóladrifi, ætlaður þeim sem vilja þægilegan fjölskyldubíl frá merki sem er þekkt fyrir áreiðanleika.',
       'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, svo hann dugar vel í ferðir milli landshluta.',
-      'Á móti kemur að hann er aflminni og hægari en flestir á svipuðu verði, skottið er minna en hjá flestum þeirra og hann er meðal þeirra sem draga minnst, aðeins 750 kg. Toyota bZ4X AWD fæst með fjórhjóladrifi og 1.500 kg dráttargetu fyrir 400.000 kr. meira.',
+      'Á móti kemur að hann er aflminni og hægari en flestir keppinautar hans, skottið er minna og hann er meðal þeirra sem draga minnst, aðeins 750 kg. Toyota bZ4X AWD fæst með fjórhjóladrifi og 1.500 kg dráttargetu fyrir 400.000 kr. meira.',
       'bZ4X er skynsamlegur kostur fyrir þá sem vilja mikla drægni og þurfa hvorki fjórhjóladrif né kerru.',
     ],
     facts: '0aad5d8e50a4',
@@ -1705,9 +1705,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'toyota-bz4x-awd': {
     paragraphs: [
       'Toyota bZ4X AWD er meðalstór jepplingur með fjórhjóladrifi frá merki sem er þekkt fyrir áreiðanleika, ætlaður fjölskyldum sem vilja traustan bíl í hvaða færð sem er frekar en sérstakt pláss eða lúxus.',
-      'Hann er sneggri og aflmeiri en flestir á svipuðu verði og má draga 1.500 kg. Drægnin og hraðhleðslan eru í meðallagi í sínum verðflokki, sem dugar fyrir flestar ferðir milli landshluta.',
-      'Á móti kemur að skottið er minna en hjá flestum á svipuðu verði og hann er dýrari á hvern kílómetra drægni en flestir þeirra. Subaru e-Outback, sem er byggður á sama grunni, er 100.000 kr. ódýrari, sneggri og með 181 l stærra skott, og systurbíllinn Toyota C-HR+ AWD kostar það sama en hefur tveimur árum lengri ábyrgð á rafhlöðunni.',
-      'bZ4X AWD er traustur kostur fyrir þá sem vilja Toyota með fjórhjóladrifi, en keppinautarnir á sama verði bjóða ýmist meira pláss eða lengri ábyrgð.',
+      'Hann er sneggri og aflmeiri en flestir á svipuðu verði og má draga 1.500 kg. Drægnin og hraðhleðslan eru í meðallagi, sem dugar fyrir flestar ferðir milli landshluta.',
+      'Gallarnir eru að skottið er minna en hjá flestum keppinautum hans og hann er dýrari á hvern kílómetra drægni en flestir þeirra. Subaru e-Outback, sem er byggður á sama grunni, er 100.000 kr. ódýrari, sneggri og með 181 l stærra skott, og systurbíllinn Toyota C-HR+ AWD kostar það sama en hefur tveimur árum lengri ábyrgð á rafhlöðunni.',
+      'bZ4X AWD er traustur kostur fyrir þá sem vilja Toyota með fjórhjóladrifi, en keppinautarnir bjóða ýmist meira pláss eða lengri ábyrgð.',
     ],
     facts: '5d04bdbb296a',
     model: 'gemini-3.8-flash, thinking high',
@@ -1715,8 +1715,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'toyota-bz4x-touring-base': {
     paragraphs: [
       'Toyota bZ4X Touring er stór jepplingur með framhjóladrifi, 4,83 m á lengd, skutbílslegri og rúmbetri útgáfa bZ4X, ætlaður fjölskyldum sem vilja mikið pláss frá áreiðanlegu merki.',
-      'Skottið er eitt það stærsta á svipuðu verði, og hann drífur lengra og hleður hraðar en flestir þeirra.',
-      'Á móti kemur að hann er aflminni og hægari en flestir á svipuðu verði og meðal þeirra sem draga minnst, aðeins 750 kg. Toyota bZ4X Touring AWD fæst með fjórhjóladrifi og 1.500 kg dráttargetu fyrir 500.000 kr. meira.',
+      'Skottið er eitt það stærsta á svipuðu verði, og hann drífur lengra og hleður hraðar en flestir keppinautar hans.',
+      'Hann er hins vegar aflminni og hægari en flestir þeirra og meðal þeirra sem draga minnst, aðeins 750 kg. Toyota bZ4X Touring AWD fæst með fjórhjóladrifi og 1.500 kg dráttargetu fyrir 500.000 kr. meira.',
       'bZ4X Touring er traustur fjölskyldubíll fyrir þá sem þurfa pláss fyrir farangur frekar en kerru.',
     ],
     facts: '4430e8e0ec93',
@@ -1725,8 +1725,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'toyota-bz4x-touring-awd': {
     paragraphs: [
       'Toyota bZ4X Touring AWD er stór jepplingur með fjórhjóladrifi, 4,83 m á lengd, sem sameinar mikið pláss og óvænt mikinn kraft frá áreiðanlegu merki.',
-      'Skottið er eitt það stærsta á svipuðu verði, og hann er sneggri og aflmeiri en flestir þeirra. Hann má draga 1.500 kg.',
-      'Á móti kemur að hann drífur styttra og hleður hægar en flestir á svipuðu verði. Smart #5 Brabus er 100.000 kr. ódýrari, drífur 35 km lengra og hleður með um 40% styttri stoppum, með álíka stórt skott.',
+      'Skottið er eitt það stærsta á svipuðu verði, hann er sneggri og aflmeiri en flestir keppinautar hans og má draga 1.500 kg.',
+      'Gallarnir eru að hann drífur styttra og hleður hægar en flestir þeirra. Smart #5 Brabus er 100.000 kr. ódýrari, drífur 35 km lengra og hleður með um 40% styttri stoppum, með álíka stórt skott.',
       'bZ4X Touring AWD er snöggur og rúmgóður fjölskyldubíll, ef tíðari hleðslustopp á hringveginum henta.',
     ],
     facts: '18930aad052a',
@@ -1735,8 +1735,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'toyota-c-hr-base': {
     paragraphs: [
       'Toyota C-HR+ er meðalstór jepplingur með sérstæðu og hvössu útliti, ætlaður þeim sem vilja þægilegan bíl frá merki sem er þekkt fyrir áreiðanleika. Hann leggur áherslu á rólegan og hagkvæman akstur frekar en afl.',
-      'Það sem sker hann helst úr er ábyrgðin: Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir á svipuðu verði. Það skiptir máli fyrir þá sem ætla að eiga bílinn lengi. Hann er fremur ódýr og hraðhleðslan er í meðallagi í sínum verðflokki.',
-      'Á móti kemur að hann má ekki draga kerru, er með einni af minnstu rafhlöðunum og meðal þeirra aflminnstu á svipuðu verði, og hann er aðeins framhjóladrifinn. Fyrir 100.000 kr. meira býður MG MGS6 Dual Motor fjórhjóladrif, 77 l stærra skott og má draga 1.500 kg, en ábyrgðin á rafhlöðunni er þremur árum styttri.',
+      'Það sem sker hann helst úr er ábyrgðin: Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir aðrir framleiðendur. Það skiptir máli fyrir þá sem ætla að eiga bílinn lengi. Hann er líka fremur ódýr og hraðhleðslan er í meðallagi.',
+      'Gallarnir eru að hann má ekki draga kerru, er með einni af minnstu rafhlöðunum og meðal þeirra aflminnstu á svipuðu verði, og hann er aðeins framhjóladrifinn. MG MGS6 Dual Motor kostar 100.000 kr. meira, er fjórhjóladrifinn, með 77 l stærra skott og má draga 1.500 kg, en ábyrgðin á rafhlöðunni er þremur árum styttri.',
       'C-HR+ hentar þeim sem meta langa ábyrgð og traust merki ofar afli og plássi, og þurfa aldrei að draga neitt.',
     ],
     facts: '78eee388eeb9',
@@ -1745,8 +1745,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'toyota-c-hr-77-kwh': {
     paragraphs: [
       'Toyota C-HR+ 77 kWh er meðalstór jepplingur með framhjóladrifi, sérstæðu og hvössu útliti og stærri rafhlöðu, fyrir þá sem vilja áreiðanleika Toyota í djarfari búningi.',
-      'Hann er meðal þeirra langdrægustu á svipuðu verði og hleður hraðar en flestir þeirra, og Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir á þessu verði.',
-      'Á móti kemur að hann er hægari og aflminni en flestir á svipuðu verði, skottið er minna en hjá flestum þeirra og hann er meðal þeirra sem draga minnst, aðeins 750 kg. Tesla Model Y Premium Long Range er 60.000 kr. ódýrari, drífur jafn langt, er með 438 l stærra skott og má draga 850 kg meira.',
+      'Hann er meðal þeirra langdrægustu á svipuðu verði og hleður hraðar en flestir þeirra, og Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir aðrir framleiðendur.',
+      'Á móti kemur að hann er hægari og aflminni en flestir keppinautar hans, skottið er minna og hann er meðal þeirra sem draga minnst, aðeins 750 kg. Tesla Model Y Premium Long Range er 60.000 kr. ódýrari, drífur jafn langt, er með 438 l stærra skott og má draga 850 kg meira.',
       'C-HR+ 77 kWh er fyrir þá sem setja drægni, langa ábyrgð og traust merki ofar plássi og dráttargetu.',
     ],
     facts: 'd421ea0aac8c',
@@ -1755,8 +1755,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'toyota-c-hr-awd': {
     paragraphs: [
       'Toyota C-HR+ AWD er meðalstór jepplingur með fjórhjóladrifi og sérstæðu útliti, systurbíll Subaru Uncharted, fyrir þá sem vilja lipran bíl með gott grip og snerpu.',
-      'Hann er sneggri og aflmeiri en flestir á svipuðu verði, má draga 1.500 kg, og Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir á þessu verði.',
-      'Á móti kemur að hann drífur styttra og hleður hægar en flestir á svipuðu verði, og skottið er minna en hjá flestum þeirra. BYD Sealion 7 er 200.000 kr. ódýrari, sneggri, hleður með um 15% styttri stoppum og er með 104 l stærra skott.',
+      'Hann er sneggri og aflmeiri en flestir á svipuðu verði, má draga 1.500 kg, og Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir aðrir framleiðendur.',
+      'Hann drífur hins vegar styttra og hleður hægar en flestir keppinautar hans, og skottið er minna. BYD Sealion 7 er 200.000 kr. ódýrari, sneggri, hleður með um 15% styttri stoppum og er með 104 l stærra skott.',
       'C-HR+ AWD er fyrir þá sem vilja Toyota með fjórhjóladrifi og langa ábyrgð, en gefur eftir í plássi og hleðslu.',
     ],
     facts: '83cb018c4f63',
@@ -1766,7 +1766,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Toyota Proace City Verso er kassalaga fjölnotabíll byggður á sendibíl, með rennihurðum og allt að sjö sætum, fyrir barnafjölskyldur sem þurfa gott aðgengi og mikið pláss.',
       'Rennihurðirnar gera umgengni auðvelda í þröngum stæðum, há setstaðan gefur gott útsýni og hann nýtur þjónustunets Toyota hér á landi.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst, hlaða hægast og eru aflminnstir á svipuðu verði. Systurbíllinn Peugeot e-Rifter er nánast sami bíll en 1.300.000 kr. ódýrari.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst, hlaða hægast og eru aflminnstir á svipuðu verði. Systurbíllinn Peugeot e-Rifter er nánast sami bíll en 1.300.000 kr. ódýrari.',
       'Proace City Verso er þægilegur fjölskyldubíll innanbæjar, en e-Rifter gefur það sama fyrir mun minna.',
     ],
     facts: 'ab8da93d30b2',
@@ -1775,8 +1775,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'toyota-proace-verso-base': {
     paragraphs: [
       'Toyota Proace Verso er stór fjölnotabíll byggður á sendibíl, með sætum fyrir allt að níu manns, fyrir stórar fjölskyldur eða fyrirtæki í fólksflutningum.',
-      'Skottið er stærra en hjá flestum á svipuðu verði og Toyota ábyrgist rafhlöðuna í 10 ár, lengur en flestir á þessu verði, og hann nýtur þjónustunets Toyota hér á landi.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst, hlaða hægast, eru hægastir og draga minnst á svipuðu verði. Hyundai STARIA Electric tekur líka níu, er 2.400.000 kr. ódýrari, drífur 48 km lengra, hleður með um 50% styttri stoppum og má draga 1.000 kg meira.',
+      'Skottið er stærra en hjá flestum á svipuðu verði, Toyota ábyrgist rafhlöðuna í 10 ár, lengur en flestir aðrir framleiðendur, og hann nýtur þjónustunets Toyota hér á landi.',
+      'Á móti kemur að hann er meðal þeirra sem drífa styst, hlaða hægast, eru hægastir og draga minnst. Hyundai STARIA Electric tekur líka níu, er 2.400.000 kr. ódýrari, drífur 48 km lengra, hleður með um 50% styttri stoppum og má draga 1.000 kg meira.',
       'Proace Verso hentar í fólksflutninga innanbæjar, en STARIA gefur mun meira fyrir minna.',
     ],
     facts: '59379ced9043',
@@ -1785,7 +1785,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'toyota-urban-cruiser-active-fwd': {
     paragraphs: [
       'Toyota Urban Cruiser Active FWD er lítill jepplingur með framhjóladrifi og hárri setstöðu, systurbíll Suzuki e Vitara, fyrir þá sem vilja einfaldan hversdagsbíl frá Toyota.',
-      'Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 300.000 km, mun lengur en flestir á svipuðu verði, og hann nýtur þjónustunets Toyota hér á landi.',
+      'Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 300.000 km, mun lengur en flestir aðrir framleiðendur, og hann nýtur þjónustunets Toyota hér á landi.',
       'Á móti kemur að hann drífur styttra, hleður hægar og er hægari en flestir á svipuðu verði, skottið er eitt það minnsta og hann má aðeins draga 750 kg. XPENG G6 RWD Standard Range er 100.000 kr. ódýrari, drífur álíka langt, hleður með um 55% styttri stoppum, er með 333 l stærra skott og má draga 750 kg meira.',
       'Urban Cruiser er látlaus bæjarbíll með langa ábyrgð, en fyrir sama verð fæst mun meira annars staðar.',
     ],
@@ -1795,8 +1795,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'toyota-urban-cruiser-active-awd': {
     paragraphs: [
       'Toyota Urban Cruiser Active AWD er lítill jepplingur með fjórhjóladrifi, systurbíll Suzuki e Vitara 4x4, fyrir þá sem vilja fjórhjóladrif og traust Toyota-merki í nettum bíl.',
-      'Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 300.000 km, mun lengur en flestir á svipuðu verði, og fjórhjóladrifið gefur grip í snjó og hálku.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst, hlaða hægast og draga minnst á svipuðu verði, og skottið er eitt það minnsta. Smart #3 Pulse er 100.000 kr. ódýrari, líka fjórhjóladrifinn, en drífur 20 km lengra og hleður með um 40% styttri stoppum.',
+      'Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 300.000 km, mun lengur en flestir aðrir framleiðendur, og fjórhjóladrifið gefur grip í snjó og hálku.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst, hlaða hægast og draga minnst á svipuðu verði, og skottið er eitt það minnsta. Smart #3 Pulse er 100.000 kr. ódýrari, líka fjórhjóladrifinn, en drífur 20 km lengra og hleður með um 40% styttri stoppum.',
       'Urban Cruiser AWD hentar þeim sem setja fjórhjóladrif og langa ábyrgð í forgang og aka mest í nærumhverfinu.',
     ],
     facts: 'd9aeb0b9edaa',
@@ -1806,7 +1806,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Volkswagen ID. Buzz GTX er stór fjölnotabíll byggður á sendibíl, með nostalgísku útliti í anda gamla rúgbrauðsins, fjórhjóladrifi og allt að sjö sætum, fyrir stórar fjölskyldur.',
       'Skottið er það stærsta af öllum bílum á listanum, og rennihurðir og kassalaga lag gefa þægilegt aðgengi að barnastólum og farangri. Hann má draga 1.600 kg.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst á svipuðu verði og hleður hægar en flestir þeirra. Hyundai IONIQ 9 Long Range AWD kostar 200.000 kr. meira, tekur líka sjö, drífur 132 km lengra, hleður með um 30% styttri stoppum og má draga 900 kg meira.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst á svipuðu verði og hleður hægar en flestir þeirra. Hyundai IONIQ 9 Long Range AWD kostar 200.000 kr. meira, tekur líka sjö, drífur 132 km lengra, hleður með um 30% styttri stoppum og má draga 900 kg meira.',
       'ID. Buzz GTX er heillandi og hagnýtur fjölskyldubíll fyrir þá sem þurfa mest pláss og ferðast mest í styttri ferðum.',
     ],
     facts: '5385fed6e084',
