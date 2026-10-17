@@ -615,8 +615,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'leapmotor-b05-pro': {
     paragraphs: [
       'Leapmotor B05 Pro er fimm sæta hlaðbakur með afturhjóladrifi, ódýr en óvenju sprækur, ætlaður þeim sem vilja hagkvæman og skemmtilegan hversdagsbíl.',
-      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði og er meðal þeirra sneggstu og aflmestu á þessu verði.',
-      'Á móti kemur að hann drífur samt fremur stutt miðað við rafbíla almennt, skottið er minna en hjá flestum á svipuðu verði og afturhjóladrifið kallar á meiri aðgát í hálku. Leapmotor B05 ProMax kostar 500.000 kr. meira og drífur 81 km lengra, og MG MG4 Urban Long Range er með 232 l stærra skott fyrir 400.000 kr. meira.',
+      'Í sínum verðflokki drífur hann lengra og hleður hraðar en flestir, og er meðal þeirra sneggstu og aflmestu.',
+      'Hann drífur samt fremur stutt miðað við rafbíla almennt, skottið er minna en hjá flestum keppinautum hans og afturhjóladrifið kallar á meiri aðgát í hálku. Leapmotor B05 ProMax kostar 500.000 kr. meira og drífur 81 km lengra, og MG MG4 Urban Long Range er með 232 l stærra skott fyrir 400.000 kr. meira.',
       'B05 Pro er sprækur og hagkvæmur bíll fyrir þá sem aka mest innanbæjar.',
     ],
     facts: 'db289d44bbc9',
@@ -625,8 +625,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'leapmotor-b05-promax': {
     paragraphs: [
       'Leapmotor B05 ProMax er fimm sæta hlaðbakur með afturhjóladrifi, ódýr en snarpur, sem drífur lengst, hleður hraðast og er sneggstur bíla á sínu verði.',
-      'Hann dugar vel á milli landshluta, jafnvel í vetrarkulda, og hleðslustoppin á langferðum eru styttri en hjá öllum bílum á svipuðu verði.',
-      'Á móti kemur að skottið er minna en hjá flestum á svipuðu verði, afturhjóladrifið kallar á meiri aðgát í snjó og hálku og merkið er nýlegt í Evrópu. MG MG4 Urban Long Range er 100.000 kr. ódýrari með 232 l stærra skott, en drífur 66 km styttra og hleður hægar.',
+      'Hann dugar vel á milli landshluta, jafnvel í vetrarkulda, og hleðslustoppin á langferðum eru styttri en hjá öllum keppinautum hans.',
+      'Gallarnir eru að skottið er minna en hjá flestum þeirra, afturhjóladrifið kallar á meiri aðgát í snjó og hálku og merkið er nýlegt í Evrópu. MG MG4 Urban Long Range er 100.000 kr. ódýrari með 232 l stærra skott, en drífur 66 km styttra og hleður hægar.',
       'B05 ProMax er eitt hagkvæmasta valið fyrir þá sem vilja mikla drægni og hraða hleðslu á lágu verði.',
     ],
     facts: '42f28bf1bbf3',
@@ -635,7 +635,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'leapmotor-b10-base': {
     paragraphs: [
       'Leapmotor B10 er meðalstór jepplingur með afturhjóladrifi á sérlega lágu verði, ætlaður þeim sem vilja hærri setstöðu og meira rými en í smábíl án þess að borga mikið.',
-      'Hann er meðal þeirra aflmestu á svipuðu verði, sneggri en flestir þeirra og hleður hraðar, og skottið er stærra en hjá flestum í hans verðflokki. Hann má líka draga 750 kg, meira en flestir á þessu verði.',
+      'Í sínum verðflokki er hann meðal þeirra aflmestu, sneggri en flestir og hleður hraðar, og skottið er stærra en hjá flestum. Hann má líka draga 750 kg, meira en flestir keppinautar hans.',
       'Á móti kemur að hann drífur mjög stutt miðað við rafbíla almennt, svo langferðir í vetrarkulda kalla á vel skipulögð stopp, og merkið er nýlegt í Evrópu. Leapmotor B10 67.1 kWh kostar 800.000 kr. meira og drífur 73 km lengra, og MG MG4 Urban Long Range er 100.000 kr. ódýrari og drífur 55 km lengra.',
       'B10 gefur mikið pláss og snerpu fyrir lítið, fyrir þá sem aka mest í nærumhverfinu.',
     ],
@@ -645,8 +645,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'leapmotor-b10-67-1-kwh': {
     paragraphs: [
       'Leapmotor B10 67.1 kWh er meðalstór jepplingur með afturhjóladrifi og stærri rafhlöðu, ætlaður þeim sem vilja rúmgóðan og sprækan bíl á lágu verði sem ræður líka við ferðalög.',
-      'Hann drífur lengra en flestir á svipuðu verði og er meðal þeirra sem hlaða hraðast í sínum verðflokki, og hann er aflmeiri en flestir á þessu verði.',
-      'Á móti kemur að skottið og dráttargetan eru aðeins í meðallagi á svipuðu verði, afturhjóladrifið kallar á góð vetrardekk og merkið er nýlegt í Evrópu. Skoda Epiq 55 kostar 200.000 kr. meira, drífur álíka langt, er með 45 l stærra skott og má draga 450 kg meira.',
+      'Í sínum verðflokki drífur hann lengra en flestir, er meðal þeirra sem hlaða hraðast og aflmeiri en flestir.',
+      'Skottið og dráttargetan eru hins vegar aðeins í meðallagi, afturhjóladrifið kallar á góð vetrardekk og merkið er nýlegt í Evrópu. Skoda Epiq 55 kostar 200.000 kr. meira, drífur álíka langt, er með 45 l stærra skott og má draga 450 kg meira.',
       'B10 67.1 kWh er hagkvæmur og sprækur jepplingur fyrir þá sem vilja komast um landið fyrir lítið.',
     ],
     facts: '820b4bbc7942',
@@ -655,8 +655,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'leapmotor-c10-pro': {
     paragraphs: [
       'Leapmotor C10 Pro er stór jepplingur með afturhjóladrifi, 4,7 m á lengd, sem býður stærð fjölskyldubíls á verði sem venjulega fylgir smábílum.',
-      'Hann er sneggri og aflmeiri en flestir á svipuðu verði og má draga 1.500 kg, með því mesta á þessu verði. Auk skottsins er 32 l framskott.',
-      'Á móti kemur að hann drífur styttra en flestir á svipuðu verði, afturhjóladrifið kallar á meiri aðgát í hálku og merkið er nýlegt í Evrópu. Leapmotor C10 ProMax kostar 700.000 kr. meira og drífur 90 km lengra.',
+      'Hann er sneggri og aflmeiri en flestir á svipuðu verði og má draga 1.500 kg, með því mesta í hans verðflokki. Auk skottsins er 32 l framskott.',
+      'Gallarnir eru að hann drífur styttra en flestir keppinautar hans, afturhjóladrifið kallar á meiri aðgát í hálku og merkið er nýlegt í Evrópu. Leapmotor C10 ProMax kostar 700.000 kr. meira og drífur 90 km lengra.',
       'C10 Pro er stór og þægilegur fjölskyldubíll fyrir lítið, ef drægnin hentar ferðalögunum.',
     ],
     facts: '77d2c83a4f96',
@@ -665,8 +665,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'leapmotor-c10-promax': {
     paragraphs: [
       'Leapmotor C10 ProMax er stór jepplingur með afturhjóladrifi, 4,7 m á lengd, sem býður mikið rými og stóra rafhlöðu á hóflegu verði.',
-      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, er meðal þeirra aflmestu í sínum verðflokki og má draga 1.500 kg, meira en flestir á þessu verði. Auk skottsins er 32 l framskott.',
-      'Á móti kemur að hann er aðeins afturhjóladrifinn, skottið er aðeins í meðallagi á svipuðu verði og merkið er nýlegt í Evrópu. Leapmotor C10 ProMax AWD fæst með fjórhjóladrifi fyrir 300.000 kr. meira, en drífur 75 km styttra.',
+      'Í sínum verðflokki drífur hann lengra og hleður hraðar en flestir, er meðal þeirra aflmestu og má draga 1.500 kg, meira en flestir keppinautar hans. Auk skottsins er 32 l framskott.',
+      'Á móti kemur að hann er aðeins afturhjóladrifinn, skottið er aðeins í meðallagi og merkið er nýlegt í Evrópu. Leapmotor C10 ProMax AWD fæst með fjórhjóladrifi fyrir 300.000 kr. meira, en drífur 75 km styttra.',
       'C10 ProMax gefur mikinn bíl fyrir peninginn, fyrir þá sem þurfa ekki fjórhjóladrif.',
     ],
     facts: '530b13547a1f',
@@ -674,9 +674,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'leapmotor-c10-promax-awd': {
     paragraphs: [
-      'Leapmotor C10 ProMax AWD er stór jepplingur með fjórhjóladrifi og gríðarlegu afli, meðal sneggstu bíla á sínu verði, sem býður bæði rými og snerpu fyrir hóflegt verð.',
-      'Hann er meðal sneggstu og aflmestu bíla á svipuðu verði og má draga 1.500 kg, meira en flestir þeirra. Auk skottsins er 32 l framskott.',
-      'Á móti kemur að hann drífur styttra og hleður hægar en flestir á svipuðu verði, og merkið er nýlegt í Evrópu. Afturhjóladrifni Leapmotor C10 ProMax er 300.000 kr. ódýrari og drífur 75 km lengra, fyrir þá sem þurfa ekki fjórhjóladrifið.',
+      'Leapmotor C10 ProMax AWD er stór jepplingur með fjórhjóladrifi og gríðarlegu afli, sem býður bæði rými og snerpu fyrir hóflegt verð.',
+      'Hann er meðal sneggstu og aflmestu bíla á svipuðu verði og má draga 1.500 kg, meira en flestir keppinautar hans. Auk skottsins er 32 l framskott.',
+      'Hann drífur hins vegar styttra og hleður hægar en flestir þeirra, og merkið er nýlegt í Evrópu. Afturhjóladrifni Leapmotor C10 ProMax er 300.000 kr. ódýrari og drífur 75 km lengra, fyrir þá sem þurfa ekki fjórhjóladrifið.',
       'C10 ProMax AWD er fyrir þá sem vilja fjórhjóladrif og mikið afl fyrir lítið, frekar en hámarksdrægni.',
     ],
     facts: 'de92b93809ad',
@@ -685,8 +685,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'lexus-es-350e': {
     paragraphs: [
       'Lexus ES 350e er stór og fágaður lúxusfólksbíll með skottloki og framhjóladrifi, rúmlega fimm metrar á lengd, sem setur þægindi, mýkt og hljóðláta ferð ofar afli. Hann hentar þeim sem kunna að meta rótgróinn áreiðanleika Lexus og vilja afslappaðan langferðabíl.',
-      'Lexus ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir á svipuðu verði, og vönduð fjöðrun og lágvær gangur gera ferðirnar ljúfar. Hann drífur fremur langt.',
-      'Á móti kemur að hann er meðal þeirra aflminnstu og hægustu á svipuðu verði, hleður hægar en flestir þeirra og má ekki draga kerru. BMW i5 eDrive40 er 90.000 kr. ódýrari, drífur álíka langt, er mun sneggri og má draga 1.500 kg.',
+      'Lexus ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir aðrir framleiðendur, og vönduð fjöðrun og lágvær gangur gera ferðirnar ljúfar. Hann drífur líka fremur langt.',
+      'Á móti kemur að hann er meðal þeirra aflminnstu og hægustu á svipuðu verði, hleður hægar en flestir keppinautar hans og má ekki draga kerru. BMW i5 eDrive40 er 90.000 kr. ódýrari, drífur álíka langt, er mun sneggri og má draga 1.500 kg.',
       'ES 350e er fyrir þá sem setja ró, þægindi og langa ábyrgð í öndvegi.',
     ],
     facts: '88df29fca349',
@@ -695,8 +695,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'lexus-es-500e': {
     paragraphs: [
       'Lexus ES 500e er stór og fágaður lúxusfólksbíll með skottloki og fjórhjóladrifi, rúmlega fimm metrar á lengd, sem leggur áherslu á hljóðlátan akstur og vandaða smíði frekar en sportlega takta.',
-      'Lexus ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir á svipuðu verði, og góð hljóðeinangrun og mjúk fjöðrun gera bæði innanbæjarakstur og langferðir afslappandi.',
-      'Á móti kemur að hann drífur styttra, hleður hægar og er aflminni en flestir á svipuðu verði, skottið er minna en hjá flestum þeirra og hann má ekki draga kerru. Framhjóladrifni Lexus ES 350e er 1.000.000 kr. ódýrari og drífur 51 km lengra.',
+      'Lexus ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir aðrir framleiðendur, og góð hljóðeinangrun og mjúk fjöðrun gera bæði innanbæjarakstur og langferðir afslappandi.',
+      'Í sínum verðflokki drífur hann þó styttra, hleður hægar og er aflminni en flestir, skottið er minna og hann má ekki draga kerru. Framhjóladrifni Lexus ES 350e er 1.000.000 kr. ódýrari og drífur 51 km lengra.',
       'ES 500e er fyrir þá sem vilja fjórhjóladrif með þægindum Lexus, en ES 350e gefur meira fyrir peninginn.',
     ],
     facts: 'ec0d08614bb9',
@@ -706,8 +706,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Lexus RZ 350e er lúxusjepplingur með framhjóladrifi sem setur þægindi, fágað yfirbragð og hljóðlátan akstur í fyrirrúm. Hann hentar þeim sem vilja vandaðan og afslappaðan hversdagsbíl.',
       'Hann drífur fremur langt, og há setstaða og vandaður frágangur Lexus gera hann notalegan í daglegum akstri.',
-      'Á móti kemur að hann drífur styttra, hleður hægar og er meðal þeirra aflminnstu á svipuðu verði, og hann má aðeins draga 750 kg. BMW i5 eDrive40 kostar 310.000 kr. meira en drífur 23 km lengra, er mun sneggri og má draga 1.500 kg.',
-      'RZ 350e heillar með hljóðlátum munaði, en í þessum verðflokki fæst meira afl og drægni annars staðar.',
+      'Í sínum verðflokki drífur hann hins vegar styttra, hleður hægar og er meðal þeirra aflminnstu, og hann má aðeins draga 750 kg. BMW i5 eDrive40 kostar 310.000 kr. meira en drífur 23 km lengra, er mun sneggri og má draga 1.500 kg.',
+      'RZ 350e heillar með hljóðlátum munaði, en fyrir verðið fæst meira afl og drægni annars staðar.',
     ],
     facts: '0a87c0c60e7f',
     model: 'gemini-3.8-flash, thinking high',
@@ -715,8 +715,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'lexus-rz-500e': {
     paragraphs: [
       'Lexus RZ 500e er lúxusjepplingur með fjórhjóladrifi sem leggur áherslu á vönduð þægindi og hljóðlátan akstur, fyrir þá sem meta byggingargæði merkisins.',
-      'Hann er sneggri en flestir á svipuðu verði og fjórhjóladrifið gefur honum traust grip, og vandaður frágangur gerir hann notalegan í akstri.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst og hlaða hægast á svipuðu verði. Framhjóladrifni Lexus RZ 350e er 1.300.000 kr. ódýrari og drífur 102 km lengra, og Mercedes-Benz EQE SUV 350 4MATIC kostar 500.000 kr. meira, er fjórhjóladrifinn og drífur 94 km lengra.',
+      'Hann er sneggri en flestir á svipuðu verði, fjórhjóladrifið gefur honum traust grip og vandaður frágangur gerir hann notalegan í akstri.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst og hlaða hægast í þessum verðflokki. Framhjóladrifni Lexus RZ 350e er 1.300.000 kr. ódýrari og drífur 102 km lengra, og Mercedes-Benz EQE SUV 350 4MATIC kostar 500.000 kr. meira, er fjórhjóladrifinn og drífur 94 km lengra.',
       'RZ 500e er ljúfur bíll fyrir innanbæjarakstur, en dýr kostur fyrir þá sem aka mikið um landið.',
     ],
     facts: 'f94441e54214',
@@ -726,7 +726,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Lexus RZ 550e F SPORT er öflugasta útfærsla RZ, lúxusjepplingur með fjórhjóladrifi og sportlegu yfirbragði, sem sameinar fágun og hljóðlátan akstur Lexus og aukna snerpu.',
       'Hann er sneggri en flestir á svipuðu verði, og fjöðrun og vönduð hljóðvist gera ferðina afslappaða.',
-      'Á móti kemur að hann er mjög dýr og meðal þeirra sem drífa styst og hlaða hægast á svipuðu verði. Lexus RZ 500e er 1.900.000 kr. ódýrari og nánast jafn snöggur, og Audi SQ6 e-tron kostar 600.000 kr. meira en drífur 136 km lengra og hleður með um 45% styttri stoppum.',
+      'Á móti kemur að hann er mjög dýr og meðal þeirra sem drífa styst og hlaða hægast í sínum verðflokki. Lexus RZ 500e er 1.900.000 kr. ódýrari og nánast jafn snöggur, og Audi SQ6 e-tron kostar 600.000 kr. meira en drífur 136 km lengra og hleður með um 45% styttri stoppum.',
       'RZ 550e F SPORT er fyrir þá sem vilja sportlegasta Lexus-inn, en flestum dugar RZ 500e.',
     ],
     facts: '4dd4a5df1719',
@@ -735,9 +735,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'lexus-ux-300e': {
     paragraphs: [
       'Lexus UX 300e er nettur lúxusjepplingur með framhjóladrifi, ætlaður þeim sem leita eftir fáguðum vinnubrögðum, góðri hljóðvist og liprum bíl í borgarumferðina. Hér fást þekkt gæði og áreiðanleiki Lexus í stærð sem er þægileg í daglegu amstri og þröngum stæðum.',
-      'Innanrýmið einkennist af vönduðum efnum og mýkt, og Lexus ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir á svipuðu verði.',
-      'Helsti gallinn er hve mikið maður gefur eftir miðað við verðið: hann er meðal þeirra sem drífa styst, hlaða hægast og eru hægastir á svipuðu verði, skottið er eitt það minnsta og hann má ekki draga kerru. Audi Q6 e-tron kostar 100.000 kr. meira en er stór fjórhjóladrifinn jepplingur sem drífur 175 km lengra, hleður með um 80% styttri stoppum og má draga 2.400 kg.',
-      'UX 300e er ljúfur lúxusbíll fyrir borgina, en í þessum verðflokki fær maður mun meiri bíl annars staðar.',
+      'Innanrýmið einkennist af vönduðum efnum og mýkt, og Lexus ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir aðrir framleiðendur.',
+      'Helsti gallinn er hve mikið maður gefur eftir miðað við verðið: hann er meðal þeirra sem drífa styst, hlaða hægast og eru hægastir í sínum verðflokki, skottið er eitt það minnsta og hann má ekki draga kerru. Audi Q6 e-tron kostar 100.000 kr. meira en er stór fjórhjóladrifinn jepplingur sem drífur 175 km lengra, hleður með um 80% styttri stoppum og má draga 2.400 kg.',
+      'UX 300e er ljúfur lúxusbíll fyrir borgina, en fyrir sama verð fær maður mun meiri bíl annars staðar.',
     ],
     facts: '758669913f52',
     model: 'gemini-3.8-flash, thinking high',
@@ -745,8 +745,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mazda-6e-long-range': {
     paragraphs: [
       'Mazda 6e Long Range er lágur og rennilegur fólksbíll með afturhlera og afturhjóladrifi, nærri fimm metrar á lengd, ætlaður þeim sem vilja þægilegan og stílhreinan ferðabíl frekar en jeppling.',
-      'Hann drífur lengra en flestir á svipuðu verði, auk skottsins er 70 l framskott og hann má draga 1.500 kg, meira en flestir á þessu verði.',
-      'Á móti kemur að hann hleður hægar en flestir á svipuðu verði og skottið er minna en hjá flestum þeirra. Nissan Leaf Extended Range kostar það sama, drífur 70 km lengra, hleður með um 40% styttri stoppum og er með 100 l stærra skott, þótt hann sé mun minni bíll.',
+      'Hann drífur lengra en flestir á svipuðu verði, auk skottsins er 70 l framskott og hann má draga 1.500 kg, meira en flestir keppinautar hans.',
+      'Hann hleður hins vegar hægar en flestir þeirra og skottið er minna. Nissan Leaf Extended Range kostar það sama, drífur 70 km lengra, hleður með um 40% styttri stoppum og er með 100 l stærra skott, þótt hann sé mun minni bíll.',
       '6e Long Range hentar þeim sem hlaða mest heima og vilja stóran og þægilegan fólksbíl á hagstæðu verði.',
     ],
     facts: '826ddf856106',
@@ -755,8 +755,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mazda-cx-6e-78-kwh': {
     paragraphs: [
       'Mazda CX-6e er stór og stílhreinn jepplingur með afturhjóladrifi, 4,85 m á lengd, sem leggur áherslu á þægindi og yfirvegaðan akstur frekar en snerpu. Hann hentar fjölskyldum sem vilja stóran og vandaðan bíl á hóflegu verði.',
-      'Hann hleður hraðar en flestir á svipuðu verði, auk skottsins er 80 l framskott undir vélarhlífinni og hann má draga 1.500 kg, meira en flestir í sínum verðflokki. Fyrir verðið fær maður óvenju stóran bíl.',
-      'Á móti kemur að hann er hægari en flestir á svipuðu verði og aðeins afturhjóladrifinn, sem kallar á meiri varkárni í snjó og hálku. Hongqi EHS5 kostar 100.000 kr. meira en drífur 38 km lengra, hleður með um 25% styttri stoppum og er mun sneggri.',
+      'Hann hleður hraðar en flestir á svipuðu verði, auk skottsins er 80 l framskott undir vélarhlífinni og hann má draga 1.500 kg, meira en flestir keppinautar hans. Fyrir verðið fær maður óvenju stóran bíl.',
+      'Gallarnir eru að hann er hægari en flestir þeirra og aðeins afturhjóladrifinn, sem kallar á meiri varkárni í snjó og hálku. Hongqi EHS5 kostar 100.000 kr. meira en drífur 38 km lengra, hleður með um 25% styttri stoppum og er mun sneggri.',
       'CX-6e er heilsteyptur og fremur ódýr kostur fyrir þá sem vilja stóran og þægilegan fjölskyldubíl og þurfa ekki fjórhjóladrif.',
     ],
     facts: '4b812db57179',
@@ -765,8 +765,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-c-400-4matic': {
     paragraphs: [
       'Mercedes-Benz C 400 4MATIC er rennilegur fólksbíll með skottloki og fjórhjóladrifi, þar sem áherslan er á fágaðan lúxus, akstursánægju og þægindi. Hann hentar þeim sem vilja hefðbundinn lúxusfólksbíl frekar en jeppling.',
-      'Hann er meðal þeirra langdrægustu og þeirra sneggstu á svipuðu verði og hleður hraðar en flestir þeirra, svo langferðir um landið verða áhyggjulausar, jafnvel í vetrarkulda. Auk skottsins er 101 l framskott undir vélarhlífinni.',
-      'Á móti kemur að skottið er minna en hjá flestum á svipuðu verði. Volvo EX60 P12 er 100.000 kr. ódýrari, drífur 48 km lengra, hleður með um 15% styttri stoppum, er með 53 l stærra skott og má draga 600 kg meira, fyrir þá sem sætta sig við jeppalag.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu og sneggstu og hleður hraðar en flestir, svo langferðir um landið verða áhyggjulausar, jafnvel í vetrarkulda. Auk skottsins er 101 l framskott undir vélarhlífinni.',
+      'Helsti ókosturinn er að skottið er minna en hjá flestum keppinautum hans. Volvo EX60 P12 er 100.000 kr. ódýrari, drífur 48 km lengra, hleður með um 15% styttri stoppum, er með 53 l stærra skott og má draga 600 kg meira, fyrir þá sem sætta sig við jeppalag.',
       'C 400 er sterkur kostur fyrir þá sem vilja snöggan og langdrægan lúxusfólksbíl.',
     ],
     facts: '0def61a05830',
@@ -775,8 +775,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-cla-200': {
     paragraphs: [
       'Mercedes-Benz CLA 200 er rennilegur fólksbíll með skottloki og afturhjóladrifi, ætlaður þeim sem vilja vandaðan þýskan fólksbíl sem fer sparlega með orkuna.',
-      'Hann drífur lengra en flestir á svipuðu verði og er meðal þeirra sem hlaða hraðast, svo hleðslustopp á langferðum verða stutt. Auk skottsins er 101 l framskott undir vélarhlífinni.',
-      'Á móti kemur að hann er hægari og aflminni en flestir á svipuðu verði og skottið er eitt það minnsta í sínum verðflokki. Mercedes-Benz CLA 350 4MATIC fæst með fjórhjóladrifi og 229 km meiri drægni fyrir 1.900.000 kr. meira.',
+      'Í sínum verðflokki drífur hann lengra en flestir og er meðal þeirra sem hlaða hraðast, svo hleðslustopp á langferðum verða stutt. Auk skottsins er 101 l framskott undir vélarhlífinni.',
+      'Hann er hins vegar hægari og aflminni en flestir keppinautar hans og skottið er eitt það minnsta. Mercedes-Benz CLA 350 4MATIC fæst með fjórhjóladrifi og 229 km meiri drægni fyrir 1.900.000 kr. meira.',
       'CLA 200 er glæsilegur og sparneytinn ferðabíll fyrir þá sem þurfa hvorki fjórhjóladrif né mikið pláss.',
     ],
     facts: '710ed58430b1',
@@ -785,8 +785,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-cla-350-4matic': {
     paragraphs: [
       'Mercedes-Benz CLA 350 4MATIC er rennilegur fólksbíll með skottloki og fjórhjóladrifi, ætlaður þeim sem leggja oft í langferðir og vilja vandaðan lúxusbíl frekar en jeppling.',
-      'Hann er meðal þeirra langdrægustu og þeirra sem hlaða hraðast á svipuðu verði, svo langferðir um landið kalla á fá og stutt stopp, jafnvel í vetrarkulda. Auk skottsins er 101 l framskott, og hann má draga 1.800 kg.',
-      'Á móti kemur að skottið er eitt það minnsta í sínum verðflokki. Audi A6 e-tron Sportback quattro kostar 200.000 kr. meira, er með 97 l stærra skott og meira afl og má draga 300 kg meira, en drífur 58 km styttra.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu og þeirra sem hlaða hraðast, svo langferðir um landið kalla á fá og stutt stopp, jafnvel í vetrarkulda. Auk skottsins er 101 l framskott, og hann má draga 1.800 kg.',
+      'Helsti ókosturinn er að skottið er eitt það minnsta á þessu verði. Audi A6 e-tron Sportback quattro kostar 200.000 kr. meira, er með 97 l stærra skott og meira afl og má draga 300 kg meira, en drífur 58 km styttra.',
       'CLA 350 4MATIC er einn sterkasti langferðabíllinn á sínu verði.',
     ],
     facts: '4cb076da8aba',
@@ -795,8 +795,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-cla-shooting-brake-350-4matic': {
     paragraphs: [
       'Mercedes-Benz CLA Shooting Brake 350 4MATIC er rennilegur skutbíll með fjórhjóladrifi, ætlaður þeim sem vilja fágaðan ferðabíl með hagnýtara skotti en fólksbíllinn án þess að fara í jeppa.',
-      'Hann er meðal þeirra langdrægustu og þeirra sem hlaða hraðast á svipuðu verði, og auk skottsins er 101 l framskott undir vélarhlífinni.',
-      'Á móti kemur að skottið er samt eitt það minnsta í sínum verðflokki, hann er aflminni og má draga minna en flestir á svipuðu verði. Audi A6 e-tron Avant quattro er 200.000 kr. ódýrari, með 47 l stærra skott og meira afl og má draga 300 kg meira, en drífur 69 km styttra og hleður hægar.',
+      'Í sínum verðflokki er hann meðal þeirra langdrægustu og þeirra sem hlaða hraðast, og auk skottsins er 101 l framskott undir vélarhlífinni.',
+      'Skottið er þó samt eitt það minnsta á þessu verði, og hann er aflminni og má draga minna en flestir keppinautar hans. Audi A6 e-tron Avant quattro er 200.000 kr. ódýrari, með 47 l stærra skott og meira afl og má draga 300 kg meira, en drífur 69 km styttra og hleður hægar.',
       'CLA Shooting Brake er fyrir þá sem vilja glæsilegan og langdrægan skutbíl sem lágmarkar tímann við hleðslustöðvar.',
     ],
     facts: 'ef0370bc5c2d',
@@ -805,8 +805,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-cla-amg-45-4matic': {
     paragraphs: [
       'Mercedes-Benz CLA AMG 45 4MATIC+ er lágur og rennilegur sportfólksbíll með fjórhjóladrifi og aðeins fjórum sætum, hreinræktaður afkastabíll fyrir þá sem leita að akstursánægju og miklu afli.',
-      'Hann er sneggstur bíla á svipuðu verði og meðal þeirra aflmestu, drífur samt lengra og hleður hraðar en flestir þeirra. Auk skottsins er 101 l framskott undir vélarhlífinni.',
-      'Á móti kemur að hann tekur aðeins fjóra, skottið er eitt það minnsta í sínum verðflokki og hann má ekki draga kerru. Mercedes-Benz CLA 350 4MATIC er 3.700.000 kr. ódýrari, rúmar fimm, drífur 91 km lengra og má draga 1.800 kg, og gefur aðeins eftir í snerpu.',
+      'Hann er sneggstur bíla á svipuðu verði og meðal þeirra aflmestu, en drífur samt lengra og hleður hraðar en flestir keppinautar hans. Auk skottsins er 101 l framskott undir vélarhlífinni.',
+      'Gallarnir eru að hann tekur aðeins fjóra, skottið er eitt það minnsta og hann má ekki draga kerru. Mercedes-Benz CLA 350 4MATIC er 3.700.000 kr. ódýrari, rúmar fimm, drífur 91 km lengra og má draga 1.800 kg, og gefur aðeins eftir í snerpu.',
       'CLA AMG 45 er fyrir þá sem vilja mikið afl og langa drægni, svo lengi sem fjögur sæti duga.',
     ],
     facts: 'fe5b7900b14e',
