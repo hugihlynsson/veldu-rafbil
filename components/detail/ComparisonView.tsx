@@ -125,47 +125,47 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
         ))}
       </div>
 
-      {/* Stays in view through the figures, so a column is never anonymous */}
+      {/* Stays in view through the figures, so a column is never anonymous.
+          The backdrop reaches the page's edges, and the line under the names
+          only the columns, as the lines between the figures do */}
       <div
-        className={clsx(
-          grid,
-          body,
-          'sticky top-0 z-10 py-2.5 md:py-4 bg-lab/90 backdrop-blur-md border-b border-line/50',
-        )}
+        className={clsx(body, 'sticky top-0 z-10 bg-lab/90 backdrop-blur-md')}
       >
-        {cars.map((car) => (
-          <h2
-            key={car.id}
-            className={clsx(
-              'm-0 min-w-0 font-semibold leading-tight',
-              crowded ? 'text-sm md:text-2xl' : 'text-base md:text-2xl',
-            )}
-          >
-            <span>{car.make}</span>{' '}
-            <span className="font-normal">{car.model}</span>
-            {(car.subModel || car.expectedDelivery) && (
-              <span className="block mt-0.5 text-xs font-medium text-stone md:mt-1 md:text-base">
-                {car.subModel}
-                {/* Beside the variant as on the list's cards, but read after
+        <div className={clsx(grid, 'py-2.5 md:py-4 border-b border-line/50')}>
+          {cars.map((car) => (
+            <h2
+              key={car.id}
+              className={clsx(
+                'm-0 min-w-0 font-semibold leading-tight',
+                crowded ? 'text-sm md:text-2xl' : 'text-base md:text-2xl',
+              )}
+            >
+              <span>{car.make}</span>{' '}
+              <span className="font-normal">{car.model}</span>
+              {(car.subModel || car.expectedDelivery) && (
+                <span className="block mt-0.5 text-xs font-medium text-stone md:mt-1 md:text-base">
+                  {car.subModel}
+                  {/* Beside the variant as on the list's cards, but read after
                     the heading rather than as part of the car's name */}
-                {car.expectedDelivery && (
-                  <span aria-hidden>
-                    {car.subModel && ' · '}
-                    {deliveryText(car.expectedDelivery)}
-                  </span>
-                )}
-              </span>
-            )}
-          </h2>
-        ))}
-        {cars.map(
-          (car) =>
-            car.expectedDelivery && (
-              <p key={car.id} className="sr-only">
-                {car.label}: {deliveryText(car.expectedDelivery)}
-              </p>
-            ),
-        )}
+                  {car.expectedDelivery && (
+                    <span aria-hidden>
+                      {car.subModel && ' · '}
+                      {deliveryText(car.expectedDelivery)}
+                    </span>
+                  )}
+                </span>
+              )}
+            </h2>
+          ))}
+          {cars.map(
+            (car) =>
+              car.expectedDelivery && (
+                <p key={car.id} className="sr-only">
+                  {car.label}: {deliveryText(car.expectedDelivery)}
+                </p>
+              ),
+          )}
+        </div>
       </div>
 
       {goneCount > 0 && (
@@ -253,7 +253,7 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
       <div
         className={clsx(
           body,
-          'mt-10 flex flex-wrap items-center gap-x-3 gap-y-3',
+          'mt-14 md:mt-16 flex flex-wrap items-center gap-x-3 gap-y-3',
         )}
       >
         <ShareButton
