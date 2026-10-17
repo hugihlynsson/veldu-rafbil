@@ -1,10 +1,13 @@
 import { describe, expect, it } from 'vitest'
 
-import { getViewFromQuery, serializeView, views, viewUrlKeys } from './view'
+import { viewUrlKeys, type View } from './view'
+import { getViewFromQuery, serializeView } from './query'
 import { filterUrlKeys } from './filters'
 import { sortingUrlKeys } from './sorting'
 
-const getQueryFromView = (view: (typeof views)[number]) =>
+const views: View[] = ['list', 'grid']
+
+const getQueryFromView = (view: View) =>
   Object.fromEntries(new URLSearchParams(serializeView(view)))
 
 describe('reading the view out of the query', () => {
