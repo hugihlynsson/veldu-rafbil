@@ -2,9 +2,12 @@ import { existsSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 
 import nextConfig from './next.config'
-import { serializeFilters, type Filters } from './modules/list/filters'
-import { serializeSorting } from './modules/list/sorting'
-import { serializeView } from './modules/list/view'
+import type { Filters } from './modules/list/filters'
+import {
+  serializeFilters,
+  serializeSorting,
+  serializeView,
+} from './modules/list/query'
 
 type Rule = { source: string; has?: { type: string; key?: string }[] }
 

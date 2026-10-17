@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { trackEvent } from 'fathom-client'
 
 import type { Filters } from '@/modules/list/filters'
@@ -15,6 +15,8 @@ import {
   type FilterSuggestion,
 } from '@/modules/list/filterSuggestions'
 import { filterChipText } from '@/modules/list/filterChips'
+import type { ShownSuggestions } from '@/modules/list/suggestionOutcome'
+import reportSuggestionOutcome from '@/utils/reportSuggestionOutcome'
 import { agree } from '@/modules/copy/plural'
 import SearchIcon from '@/components/SearchIcon'
 import SuggestionPills, { type Pill } from '@/components/SuggestionPills'
@@ -28,14 +30,14 @@ const carCount = (count: number) => `${count} ${agree(count, 'bíll', 'bílar')}
  * around a try/catch holding a conditional.
  */
 const askRoute = async (
-  text: string,
+  body: { text: string; id: string; supersedes?: string },
   signal: AbortSignal,
 ): Promise<FilterSuggestion[] | null> => {
   try {
     const response = await fetch('/api/filter-suggestions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify(body),
       signal,
     })
     return response.ok ? readSuggestions(await response.json()) : null
@@ -50,6 +52,8 @@ interface Props {
   text: string
   filters: Filters
   onApply: (filters: Filters) => void
+  /** The pills on screen, or null, for the input to report a send past them */
+  onShownChange?: (shown: ShownSuggestions | null) => void
 }
 
 /**
@@ -63,18 +67,23 @@ export default function FilterSuggestions({
   text,
   filters,
   onApply,
+  onShownChange,
 }: Props) {
   const [shown, setShown] = useState<{
     text: string
+    requestId?: string
     suggestions: FilterSuggestion[]
-  }>({ text: '', suggestions: [] })
+    at: number
+  }>({ text: '', suggestions: [], at: 0 })
+  // A request typed past before it was answered, for the next one to name
+  const unanswered = useRef<string | undefined>(undefined)
 
   // The route refuses a longer one, and the parser reads no further
   const request = active ? text.trim().slice(0, MAX_INTENT_LENGTH) : ''
 
   // Cleared or left, the pills go at once rather than after the pause
   if (request === '' && shown.text !== '') {
-    setShown({ text: '', suggestions: [] })
+    setShown({ text: '', suggestions: [], at: 0 })
   }
 
   useEffect(() => {
@@ -83,19 +92,34 @@ export default function FilterSuggestions({
     const parsed = parseFilterIntent(request)
     const read = suggestionsFromFilters(parsed.filters, 'text')
     const controller = new AbortController()
+    let inFlight: string | undefined
 
     const timer = setTimeout(async () => {
-      const asked = needsModel(parsed)
-        ? await askRoute(request, controller.signal)
-        : null
+      let asked: FilterSuggestion[] | null = null
+      if (needsModel(parsed)) {
+        inFlight = crypto.randomUUID()
+        const supersedes = unanswered.current
+        unanswered.current = undefined
+        asked = await askRoute(
+          { text: request, id: inFlight, supersedes },
+          controller.signal,
+        )
+      }
       // A later keystroke has its own request coming
       if (controller.signal.aborted) return
-      setShown({ text: request, suggestions: asked ?? read })
+      setShown({
+        text: request,
+        requestId: inFlight,
+        suggestions: asked ?? read,
+        at: performance.now(),
+      })
+      inFlight = undefined
     }, 100)
 
     return () => {
       clearTimeout(timer)
       controller.abort()
+      if (inFlight) unanswered.current = inFlight
     }
   }, [request])
 
@@ -109,6 +133,17 @@ export default function FilterSuggestions({
   useEffect(() => {
     if (hasSuggestions) trackEvent('Shown filter suggestions')
   }, [hasSuggestions])
+
+  const onScreen = (): ShownSuggestions => ({
+    text: shown.text,
+    requestId: shown.requestId,
+    suggestions,
+    shownAt: shown.at,
+  })
+
+  useEffect(() => {
+    onShownChange?.(hasSuggestions ? onScreen() : null)
+  })
 
   const pills: Pill[] = suggestions.map((suggestion) => {
     const { label, value } = filterChipText(suggestion.key, suggestion.value)
@@ -129,6 +164,7 @@ export default function FilterSuggestions({
       ariaLabel: `Bæta við síu: ${label} ${value}, ${carCount(suggestion.count)}`,
       onClick: () => {
         trackEvent('Applied filter suggestion')
+        reportSuggestionOutcome('applied', onScreen(), suggestion.key)
         onApply(withSuggestion(filters, suggestion))
       },
     }
@@ -151,6 +187,7 @@ export default function FilterSuggestions({
       ariaLabel: `${addAll}, ${carCount(count)}`,
       onClick: () => {
         trackEvent('Applied all filter suggestions')
+        reportSuggestionOutcome('appliedAll', onScreen())
         onApply(combined)
       },
     })

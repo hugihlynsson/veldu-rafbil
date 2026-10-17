@@ -1,7 +1,7 @@
 // A car's ev-database page, read for the advisor's tool and the review script
 import newCars from './newCars'
 
-// Without this the model can be talked into fetching any URL at all
+// The pages a script may read, those of cars no longer sold included
 export const allowedURLs = new Set(
   newCars
     .map((car) => car.evDatabaseUrl)
