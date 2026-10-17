@@ -3,14 +3,6 @@ import { createParser } from 'nuqs/server'
 import { parseAsWord } from './filters'
 import type { Car } from '@/modules/data/cars'
 
-export type Sorting =
-  | 'name'
-  | 'price'
-  | 'range'
-  | 'acceleration'
-  | 'value'
-  | 'fastcharge'
-
 export type SortingDirection = 'asc' | 'desc'
 
 interface SortingDefinition {
@@ -30,7 +22,7 @@ const padPrice = (car: Car): string =>
   car.priceWithGrant.toString().padStart(9, '0')
 
 // A new sorting is offered only once it has a place in CarList's toggles
-export const sortingDefinitions: Record<Sorting, SortingDefinition> = {
+export const sortingDefinitions = {
   name: {
     label: 'Nafni',
     urlWord: 'nafni',
@@ -67,7 +59,9 @@ export const sortingDefinitions: Record<Sorting, SortingDefinition> = {
     defaultDirection: 'desc',
     rank: (car) => car.kmPerMinuteCharged,
   },
-}
+} satisfies Record<string, SortingDefinition>
+
+export type Sorting = keyof typeof sortingDefinitions
 
 export const sortings = Object.keys(sortingDefinitions) as Array<Sorting>
 
