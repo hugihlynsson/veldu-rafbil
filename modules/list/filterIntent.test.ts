@@ -157,7 +157,8 @@ describe('readsAsQuestion', () => {
   it('reads a question by its first word or its question mark', () => {
     expect(readsAsQuestion('Hvaða bíl mælir þú með')).toBe(true)
     expect(readsAsQuestion('hvernig virkar rafbilastyrkurinn')).toBe(true)
-    expect(readsAsQuestion('Er rafbíll góður á Íslandi')).toBe(true)
+    expect(readsAsQuestion('mæliru með Tesla eða Kia')).toBe(true)
+    expect(readsAsQuestion('„Hvaða bíll dregur kerru“')).toBe(true)
     expect(readsAsQuestion('7 sæta undir 9 milljónum?')).toBe(true)
   })
 
@@ -169,5 +170,7 @@ describe('readsAsQuestion', () => {
     ).toBe(false)
     expect(readsAsQuestion('fjórhjóladrif, 600')).toBe(false)
     expect(readsAsQuestion('Erum fimm í fjölskyldunni')).toBe(false)
+    expect(readsAsQuestion('Má ekki kosta meira en 6.000.000')).toBe(false)
+    expect(readsAsQuestion('Er að leita að jeppa sem dregur kerru')).toBe(false)
   })
 })

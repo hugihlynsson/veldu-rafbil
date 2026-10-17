@@ -437,11 +437,12 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
 export const needsModel = (parsed: ParsedIntent): boolean =>
   parsed.unread.length > 0 || parsed.numbers.length > 0
 
-// Folded, as foldText leaves them. "Er" and "eru" open a question here even
-// though the parser reads them as filler inside one.
+// Folded, as foldText leaves them. Only words that open nothing but a
+// question: "má", "er" or "get" open as many wishes ("má ekki kosta meira
+// en…"), and a model is asked about those whenever it is asked at all.
 const questionOpeners = new Set(
-  `hvad hvada hver hverjir hvernig hversu hvort hvar hvenaer hvers hvi
-  er eru get getur geta ma maeli maelir maelid borgar aetti aettu skiptir`
+  `hvad hvada hver hverjir hverja hvernig hversu hvort hvar hvenaer hvers hvi
+  maeli maelir maelid maeliru`
     .trim()
     .split(/\s+/),
 )
@@ -454,6 +455,8 @@ const questionOpeners = new Set(
 export const readsAsQuestion = (text: string): boolean => {
   const trimmed = text.trim()
   if (trimmed.endsWith('?')) return true
-  const first = foldText(trimmed).split(/[^\p{L}]+/u)[0]
-  return questionOpeners.has(first)
+  const first = foldText(trimmed)
+    .split(/[^\p{L}]+/u)
+    .find((word) => word !== '')
+  return first !== undefined && questionOpeners.has(first)
 }

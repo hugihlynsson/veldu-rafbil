@@ -92,8 +92,12 @@ const ChatInput: React.FunctionComponent<Props> = ({
   useInputModality()
 
   const filter = filterSuggestions && value.trim() ? action.filter : null
+  const carsLeft =
+    filter && `${filter.count} ${agree(filter.count, 'bíll', 'bílar')}`
 
   const ask = () => {
+    // A busy chat takes no message, however it was sent
+    if (disabled) return
     if (filterPills.current) {
       reportSuggestionOutcome('sent', filterPills.current)
     }
@@ -227,11 +231,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
         />
         <button
           onFocus={handleFocusRing}
-          aria-label={
-            filter
-              ? `Sía listann: ${filter.count} ${agree(filter.count, 'bíll', 'bílar')}`
-              : 'Senda skilaboð'
-          }
+          aria-label={carsLeft ? `Sía listann: ${carsLeft}` : 'Senda skilaboð'}
           type="submit"
           // A busy chat takes no message, but the list still takes a filter
           disabled={(disabled && !filter) || !value.trim()}
@@ -243,10 +243,10 @@ const ChatInput: React.FunctionComponent<Props> = ({
             filter ? 'px-3.5 text-sm font-semibold whitespace-nowrap' : 'w-9',
           )}
         >
-          {filter ? (
+          {carsLeft ? (
             <>
               <SearchIcon size={15} />
-              {filter.count} {agree(filter.count, 'bíll', 'bílar')}
+              {carsLeft}
             </>
           ) : (
             <SendIcon size={20} />
@@ -259,7 +259,8 @@ const ChatInput: React.FunctionComponent<Props> = ({
         // the input mid-word, and the keystrokes typed meanwhile with it
         <Suspense fallback={null}>
           <FilterSuggestions
-            active={isFocused && value.trim() !== ''}
+            // Kept reading while a send waits on it, should the input be left
+            active={(isFocused || sendWhenRead !== null) && value.trim() !== ''}
             text={value}
             filters={filterSuggestions.filters}
             onApply={filterSuggestions.onApply}

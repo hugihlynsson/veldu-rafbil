@@ -297,9 +297,13 @@ describe('suggestFilters', () => {
       (await suggestFilters('hvaða bíll kemst 600 km?', failing)).asksAdvisor,
     ).toBe(true)
     expect(
-      (await suggestFilters('er til 7 sæta undir 9 milljónum', undefined))
+      (await suggestFilters('hver er með 7 sæti undir 9 milljónum', undefined))
         .asksAdvisor,
     ).toBe(true)
+    expect(
+      (await suggestFilters('má ekki kosta meira en 6.000.000', undefined))
+        .asksAdvisor,
+    ).toBe(false)
     expect(
       (await suggestFilters('fjórhjóladrif og 600 km', undefined)).asksAdvisor,
     ).toBe(false)

@@ -185,7 +185,12 @@ export default function FilterSuggestions({
     !shown.asksAdvisor && hasSuggestions && count > 0
       ? { filters: combined, count }
       : null
-  const readText = request === '' || shown.text === request ? text.trim() : null
+  // Text in a bar that is not reading it has not been read, rather than read
+  // as asking for nothing
+  const readText =
+    shown.text === request && (request !== '' || text.trim() === '')
+      ? text.trim()
+      : null
   const report = useEffectEvent(() => onAction({ text: readText, filter }))
   const actionKey = JSON.stringify({ readText, filter })
   useEffect(() => {
