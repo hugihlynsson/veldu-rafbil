@@ -30,7 +30,7 @@ const packagesImportedBy = (entry: string): Set<string> => {
     if (seen.has(file)) continue
     seen.add(file)
 
-    for (const [, specifier] of readFileSync(file, 'utf8').matchAll(
+    for (const [, specifier = ''] of readFileSync(file, 'utf8').matchAll(
       staticImport,
     )) {
       if (specifier.startsWith('.') || specifier.startsWith('@/')) {

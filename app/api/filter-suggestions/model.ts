@@ -41,7 +41,7 @@ export const conservativeIndex = (
   let looser = 0
   let index = 0
   while (index < distribution.length - 1) {
-    looser += distribution[index]
+    looser += distribution[index] ?? 0
     if (looser > risk) break
     index += 1
   }
@@ -106,7 +106,7 @@ export const suggestionsFromAnswers = (
     ])
     if (!probabilities) return []
 
-    const [none, ...rest] = probabilities
+    const [none = 0, ...rest] = probabilities
     const pick = (
       option: Option<FilterKey>,
       probability: number,
@@ -133,27 +133,30 @@ export const suggestionsFromAnswers = (
       // What the person typed is taken as it stands, rather than leaned loose
       // like a bracket: there is no reading of it to be too tight about
       const likeliest = numbers.indexOf(Math.max(...numbers))
-      if (numbers.length && numbers[likeliest] >= onBrackets)
-        return pick(stated[likeliest], applies, numbers[likeliest])
-      const index = conservativeIndex(
-        brackets.map((share) => share / onBrackets),
-      )
-      return pick(options[index], applies)
+      const typed = stated[likeliest]
+      const typedShare = numbers[likeliest]
+      if (typed && typedShare !== undefined && typedShare >= onBrackets)
+        return pick(typed, applies, typedShare)
+      const bracket =
+        options[conservativeIndex(brackets.map((share) => share / onBrackets))]
+      return bracket ? pick(bracket, applies) : []
     }
 
     // "seven" and the 7 in the request are one answer, and count as one
     const byValue = all.map((option) =>
       all.reduce(
         (sum, other, index) =>
-          other.value === option.value ? sum + rest[index] : sum,
+          other.value === option.value ? sum + (rest[index] ?? 0) : sum,
         0,
       ),
     )
     const best = byValue.indexOf(Math.max(...byValue))
-    if (byValue[best] < threshold) return []
+    const likeliest = all[best]
+    const share = byValue[best]
+    if (!likeliest || share === undefined || share < threshold) return []
     const option =
-      stated.find(({ value }) => value === all[best].value) ?? all[best]
-    return pick(option, byValue[best])
+      stated.find(({ value }) => value === likeliest.value) ?? likeliest
+    return pick(option, share)
   })
 
   // A question states no wish, so what the model reads into one is no filter;

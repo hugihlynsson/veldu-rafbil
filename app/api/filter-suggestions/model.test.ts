@@ -34,7 +34,8 @@ describe('conservativeIndex', () => {
 
 describe('suggestionsFromAnswers', () => {
   const price = buildIntentQuestions().price!
-  const [notThePriciest, midPriced] = price.options
+  const notThePriciest = price.options[0]!
+  const midPriced = price.options[1]!
 
   it('suggests an ordered filter once enough is off "none"', () => {
     expect(
@@ -65,7 +66,7 @@ describe('suggestionsFromAnswers', () => {
         cheap: 0.4,
       }),
     })
-    expect(suggestion.value).toBe(notThePriciest.value)
+    expect(suggestion?.value).toBe(notThePriciest.value)
   })
 
   it('asks more of a price per km than of the other filters', () => {
@@ -131,7 +132,7 @@ describe('suggestionsFromAnswers', () => {
   })
 
   it('falls back to the brackets when they outweigh the number', () => {
-    const [decent] = buildIntentQuestions().range!.options
+    const decent = buildIntentQuestions().range!.options[0]!
     expect(
       suggestionsFromAnswers(
         {
@@ -255,7 +256,7 @@ describe('suggestFilters', () => {
     })
     const result = await suggestFilters('fjórhjóladrif, 600', ask)
 
-    expect(ask.mock.calls[0][0].questions.range.criteria).toHaveProperty(
+    expect(ask.mock.calls[0]?.[0].questions.range.criteria).toHaveProperty(
       'at_least_600_km',
     )
     expect(result.suggestions).toEqual([
@@ -273,7 +274,7 @@ describe('suggestFilters', () => {
     })
     const result = await suggestFilters('ódýr með 7 sætum', ask)
 
-    expect(Object.keys(ask.mock.calls[0][0].questions)).not.toContain('seats')
+    expect(Object.keys(ask.mock.calls[0]?.[0].questions)).not.toContain('seats')
     expect(result.model).toBe('answered')
     expect(result.suggestions.map(({ key, source }) => [key, source])).toEqual([
       ['seats', 'text'],

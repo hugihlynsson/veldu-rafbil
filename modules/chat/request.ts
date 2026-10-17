@@ -66,7 +66,7 @@ export const trimHistory = (messages: ChatMessage[]): ChatMessage[] => {
   }
 
   // Dropping from the front can leave an answer to a question no longer there
-  while (start < messages.length - 1 && messages[start].role !== 'user') {
+  while (start < messages.length - 1 && messages[start]?.role !== 'user') {
     start += 1
   }
 

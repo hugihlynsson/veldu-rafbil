@@ -94,7 +94,7 @@ describe('questionSource', () => {
   })
 
   it('reads a starter pill', () => {
-    expect(questionSource([ask(CHAT_SUGGESTIONS[0])])).toBe('starter')
+    expect(questionSource([ask(CHAT_SUGGESTIONS[0]!)])).toBe('starter')
   })
 
   it('reads anything else as typed', () => {

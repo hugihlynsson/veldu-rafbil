@@ -28,7 +28,7 @@ const withPage = cars.filter((car) => car.evDatabaseUrl)
 
 // The cache outlives each test, so every test asks for cars of its own
 let carsTaken = 0
-const aCar = (): string => carRef(withPage[carsTaken++])
+const aCar = (): string => carRef(withPage[carsTaken++]!)
 
 const page = (html: string, status = 200) => new Response(html, { status })
 const redirectTo = (location: string) =>
@@ -48,7 +48,7 @@ describe('fetchCarDetails', () => {
   it.each([
     'http://169.254.169.254/latest/meta-data/',
     'file:///etc/passwd',
-    withPage[0].evDatabaseUrl!,
+    withPage[0]!.evDatabaseUrl!,
     'not-a-car',
     'toString',
     ...cars.filter((car) => !car.evDatabaseUrl).map(carRef),
@@ -65,11 +65,11 @@ describe('fetchCarDetails', () => {
     const fetchSpy = vi
       .spyOn(globalThis, 'fetch')
       .mockResolvedValue(page('<tr><td>Seats</td><td>5</td></tr>'))
-    const [car] = withPage.slice(carsTaken++)
+    const car = withPage[carsTaken++]!
 
     const result = await run(carRef(car).toUpperCase())
 
-    expect(fetchSpy.mock.calls[0][0]).toBe(car.evDatabaseUrl)
+    expect(fetchSpy.mock.calls[0]?.[0]).toBe(car.evDatabaseUrl)
     expect(result.source).toBe(car.evDatabaseUrl)
   })
 
@@ -222,7 +222,7 @@ describe('fetchCarDetails, redirected', () => {
 
     const result = await run(url)
 
-    expect(fetchSpy.mock.calls[1][0]).toBe(
+    expect(fetchSpy.mock.calls[1]?.[0]).toBe(
       'https://ev-database.org/car/1/Renamed',
     )
     expect(result.specifications).toContain('seats: 5')
@@ -264,7 +264,7 @@ describe('upgradeCarDetailsCalls', () => {
   })
 
   it('reads a call by URL, stored before the tool took a car, as one by car', () => {
-    const [car] = withPage
+    const car = withPage[0]!
 
     expect(
       upgradeCarDetailsCalls([call({ url: car.evDatabaseUrl, carName: 'x' })]),

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { deriveCar } from '@/modules/data/cars'
 import type { NewCar } from '@/modules/data/newCarSchema'
-import cars from '@/modules/data/cars'
+import cars, { type Car } from '@/modules/data/cars'
 import { similarTo } from '@/modules/detail/similar'
 import {
   carFacts,
@@ -132,7 +132,7 @@ describe('readReview', () => {
 })
 
 describe('reviewPrompt', () => {
-  const [a] = cars
+  const [a] = cars as readonly [Car, Car, Car, ...Car[]]
 
   it('reviews one car against its rivals', () => {
     const { system, prompt } = reviewPrompt(a)
@@ -144,7 +144,7 @@ describe('reviewPrompt', () => {
 })
 
 describe('reviewFactsKey', () => {
-  const [a] = cars
+  const [a] = cars as readonly [Car, Car, Car, ...Car[]]
 
   it('changes with a figure the review quotes', () => {
     expect(reviewFactsKey({ ...a, range: a.range + 1 })).not.toBe(
@@ -162,14 +162,14 @@ describe('describeStanding', () => {
       range: 400 + step * 20,
     }),
   )
-  const middle = field[2]
+  const middle = field[2]!
 
   it('says in words where a car stands on each figure', () => {
     // 2 of the other 5 have less range, and 3 cost more
     const standing = describeStanding(middle, field)
     expect(standing).toContain('Drægni — af öllum: drífur fremur stutt')
     expect(standing).toContain('Verð — af öllum: fremur ódýr')
-    expect(describeStanding(field[0], field)).toContain(
+    expect(describeStanding(field[0]!, field)).toContain(
       'Verð — af öllum: ódýrastur allra',
     )
   })
@@ -196,7 +196,7 @@ describe('describeStanding', () => {
     expect(describeStanding(middle, field, details)).toContain(
       'Ábyrgð á rafhlöðu — af öllum: í meðallagi',
     )
-    expect(describeStanding(field[5], field, details)).toContain(
+    expect(describeStanding(field[5]!, field, details)).toContain(
       'með lengstu ábyrgð allra á rafhlöðunni',
     )
   })

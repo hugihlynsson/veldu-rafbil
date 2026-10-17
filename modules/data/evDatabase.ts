@@ -71,7 +71,7 @@ const specRow =
 const readSpecTable = (html: string): Map<string, string> => {
   const table = new Map<string, string>()
 
-  for (const [, label, value] of html.matchAll(specRow)) {
+  for (const [, label = '', value = ''] of html.matchAll(specRow)) {
     const key = label.toLowerCase()
     if (!table.has(key)) table.set(key, value === 'No Data' ? '' : value)
   }

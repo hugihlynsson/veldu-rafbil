@@ -36,7 +36,7 @@ describe('llms.txt', () => {
   it('names only query parameters the list reads', () => {
     const line = text.split('\n').find((line) => line.includes('query string'))
     const named = [...(line ?? '').matchAll(/`([a-z]+)`/g)].map(
-      ([, name]) => name,
+      ([, name = '']) => name,
     )
     const keys: string[] = [
       ...Object.values(sortingUrlKeys),

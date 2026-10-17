@@ -6,7 +6,9 @@ export async function GET(
   _request: Request,
   { params }: { params: Promise<{ slug: string }> },
 ) {
-  const { cars } = resolveSlugs([readSegment((await params).slug)])
-  if (cars.length === 0) return new Response(null, { status: 404 })
-  return shareImage(cars[0])
+  const {
+    cars: [car],
+  } = resolveSlugs([readSegment((await params).slug)])
+  if (!car) return new Response(null, { status: 404 })
+  return shareImage(car)
 }

@@ -53,6 +53,9 @@ const KRONUR = String.raw`(?:kr\.?|kronur\w*|isk)`
 
 const pattern = (source: string) => new RegExp(source, 'gu')
 
+// A rule that reads a number from its match captures that number first
+type RuleMatch = RegExpExecArray & { 1: string }
+
 /**
  * A dot is the thousands separator in Icelandic and a comma the decimal one,
  * but plenty write 8.5 too. One dot before three digits is thousands, unless
@@ -66,7 +69,7 @@ const parseNumber = (raw: string, preferDecimal = false): number => {
       ? Number(groups.join(''))
       : NaN
   }
-  const [whole, fraction] = groups
+  const [whole = '', fraction = ''] = groups
   const thousands = raw.includes('.') && fraction.length === 3 && !preferDecimal
   return thousands ? Number(whole + fraction) : Number(`${whole}.${fraction}`)
 }
@@ -252,11 +255,11 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
 
   const take = (
     source: string,
-    read: (match: RegExpExecArray, before: string) => boolean | void,
+    read: (match: RuleMatch, before: string) => boolean | void,
   ) => {
     for (const match of rest.matchAll(pattern(source))) {
       const before = rest.slice(0, match.index)
-      if (read(match, before) === false) continue
+      if (read(match as RuleMatch, before) === false) continue
       rest =
         before +
         READ.repeat(match[0].length) +

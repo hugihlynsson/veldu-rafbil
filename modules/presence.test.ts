@@ -52,12 +52,12 @@ describe('arrive', () => {
 
   it('carries the current item rather than the one it was shown with', () => {
     const before = arrive([], [{ key: 'a', count: 1 }])
-    expect(arrive(before, [{ key: 'a', count: 2 }])[0].item.count).toBe(2)
+    expect(arrive(before, [{ key: 'a', count: 2 }])[0]?.item.count).toBe(2)
   })
 
   it('keeps the item a leaving one was last shown with', () => {
     const before = arrive([], [{ key: 'a', count: 1 }])
-    expect(arrive(before, [])[0].item.count).toBe(1)
+    expect(arrive(before, [])[0]?.item.count).toBe(1)
   })
 })
 
