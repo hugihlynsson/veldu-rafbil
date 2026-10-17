@@ -16,7 +16,7 @@ import {
   streamChat,
   type ChatFinish,
 } from './chat'
-import cars from '@/modules/data/cars'
+import cars, { type Car } from '@/modules/data/cars'
 import { carRef } from '@/modules/chat/cars'
 import { MAX_TAGGED_CARS, type ChatMessage } from '@/modules/chat/message'
 import { MAX_QUESTION_LENGTH } from '@/modules/chat/questionLength'
@@ -79,7 +79,7 @@ const read = async (response: Response) => {
 }
 
 describe('streamChat', () => {
-  const [first, second] = cars
+  const [first, second] = cars as readonly [Car, Car, Car, ...Car[]]
   const chunks = [
     'Já, hann er fjórhjóladrifinn.\n\n[car:',
     `${carRef(second)}]\n[car:tesla-model-z]\n[ca`,
@@ -194,7 +194,7 @@ describe('streamChat', () => {
     const model = modelSaying(['Svar.'])
     await read(await streamChat({ model, messages: [question] }))
 
-    expect(model.doStreamCalls[0].maxOutputTokens).toBeGreaterThan(0)
+    expect(model.doStreamCalls[0]?.maxOutputTokens).toBeGreaterThan(0)
   })
 
   it('sends no metadata for an answer without follow-ups or cars', async () => {
@@ -274,7 +274,7 @@ describe('a trimmed conversation', () => {
       }),
     )
 
-    const prompt = JSON.stringify(model.doStreamCalls[0].prompt)
+    const prompt = JSON.stringify(model.doStreamCalls[0]?.prompt)
     expect(prompt.length).toBeLessThan(200_000)
   })
 })
@@ -449,7 +449,7 @@ describe('a conversation stored before the car-details tool took a car', () => {
       messages: [{ ...question, id: 'q0' }, stored, question],
     })
 
-    expect(messages?.[1].parts[0]).toMatchObject({
+    expect(messages?.[1]?.parts[0]).toMatchObject({
       input: { car: carRef(car) },
     })
   })

@@ -71,7 +71,7 @@ describe('specRows', () => {
   })
 
   it('names the drive under the power', () => {
-    expect(row('power', car({ drive: 'AWD' }))?.cells[0].detail).toBe(
+    expect(row('power', car({ drive: 'AWD' }))?.cells[0]?.detail).toBe(
       'Fjórhjóladrif',
     )
   })

@@ -19,7 +19,7 @@ const layoutPosition = (node: HTMLElement): Point | null => {
 
 // What is left of a move still playing, so the next starts where the box is
 const playingOffset = (node: HTMLElement): Point => {
-  const [x, y] = getComputedStyle(node).translate.split(' ')
+  const [x = '', y = ''] = getComputedStyle(node).translate.split(' ')
   return { x: parseFloat(x) || 0, y: parseFloat(y) || 0 }
 }
 

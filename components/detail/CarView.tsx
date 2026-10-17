@@ -118,11 +118,11 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
                   <dt className={eyebrow}>{row.label}</dt>
                   <dd className="m-0 mt-1">
                     <div className="text-2xl font-normal">
-                      {row.cells[0].text}
+                      {row.cells[0]?.text}
                     </div>
-                    {row.cells[0].detail && (
+                    {row.cells[0]?.detail && (
                       <div className="mt-0.5 text-xs font-medium text-stone">
-                        {row.cells[0].detail}
+                        {row.cells[0]?.detail}
                       </div>
                     )}
                   </dd>

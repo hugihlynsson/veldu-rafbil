@@ -75,7 +75,8 @@ const parseAsList = <T extends string>(accept: (entry: string) => entry is T) =>
  */
 export const parseAsWord = <T extends string>(words: Record<string, T>) =>
   createParser<T>({
-    parse: (value) => (Object.hasOwn(words, value) ? words[value] : null),
+    parse: (value) =>
+      Object.hasOwn(words, value) ? (words[value] ?? null) : null,
     serialize: (value) =>
       Object.keys(words).find((word) => words[word] === value) ?? '',
   })

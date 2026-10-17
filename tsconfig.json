@@ -10,6 +10,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitAny": true,
+    "noUncheckedIndexedAccess": true,
     "preserveConstEnums": true,
     "removeComments": false,
     "skipLibCheck": true,

@@ -35,7 +35,9 @@ export interface IntentQuestion<Key extends FilterKey> {
 // Nearest rank, so every bracket is a value a car in the list really has
 const quantile = (values: number[], share: number): number => {
   const sorted = [...values].sort((a, b) => a - b)
-  return sorted[Math.round(share * (sorted.length - 1))]
+  const value = sorted[Math.round(share * (sorted.length - 1))]
+  if (value === undefined) throw new Error('A quantile of no values')
+  return value
 }
 
 const millions = (kronur: number) => (kronur / 1_000_000).toFixed(1)

@@ -57,7 +57,7 @@ describe('trimHistory', () => {
     const kept = trimHistory(messages)
 
     expect(kept.length).toBeLessThanOrEqual(MAX_MESSAGES)
-    expect(kept[0].role).toBe('user')
+    expect(kept[0]?.role).toBe('user')
     expect(kept.at(-1)?.id).toBe('last')
   })
 

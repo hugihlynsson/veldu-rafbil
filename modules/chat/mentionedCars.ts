@@ -48,9 +48,11 @@ const standsAlone = (car: Car): boolean => {
 
 const names = new Map<string, Name>()
 for (const model of models.values()) {
-  const [{ make, model: modelName }] = model.variants
+  const [first] = model.variants
+  if (!first) continue
+  const { make, model: modelName } = first
   const prefixes = [`${make} `]
-  if (standsAlone(model.variants[0])) prefixes.push('')
+  if (standsAlone(first)) prefixes.push('')
 
   for (const prefix of prefixes) {
     names.set(nameKey(`${prefix}${modelName}`), { model })
@@ -75,7 +77,7 @@ const mentionPattern = new RegExp(
 /** In the order the answer names them, for the row of MiniCars under it */
 export const findMentionedCars = (text: string): Car[] => {
   const mentions = [...text.toLowerCase().matchAll(mentionPattern)].map(
-    (match) => names.get(nameKey(match[2]))!,
+    (match) => names.get(nameKey(match[2] ?? ''))!,
   )
   const namedVariantOf = new Set(
     mentions.filter((name) => name.variant).map((name) => name.model),
