@@ -6,7 +6,12 @@ import {
   suggestFilters,
   suggestionsFromAnswers,
 } from './model'
-import { ADVISOR_KEY, buildIntentQuestions, withNumbers } from './questions'
+import {
+  ADVISOR_KEY,
+  buildIntentQuestions,
+  VALUE_THRESHOLD,
+  withNumbers,
+} from './questions'
 
 const choice = (probabilities: Record<string, number>) => ({
   type: 'choice',
@@ -61,6 +66,21 @@ describe('suggestionsFromAnswers', () => {
       }),
     })
     expect(suggestion.value).toBe(notThePriciest.value)
+  })
+
+  it('asks more of a price per km than of the other filters', () => {
+    const doubtful = 1 - VALUE_THRESHOLD + 0.05
+    expect(
+      suggestionsFromAnswers({
+        value: choice({ none: doubtful, good_value: 1 - doubtful }),
+        range: choice({ none: doubtful, long_trips: 1 - doubtful }),
+      }).map(({ key }) => key),
+    ).toEqual(['range'])
+    expect(
+      suggestionsFromAnswers({
+        value: choice({ none: 0.1, good_value: 0.9 }),
+      }).map(({ key }) => key),
+    ).toEqual(['value'])
   })
 
   it('suggests nothing below the threshold', () => {

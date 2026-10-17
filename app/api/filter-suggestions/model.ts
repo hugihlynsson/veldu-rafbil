@@ -96,6 +96,7 @@ export const suggestionsFromAnswers = (
       options,
       ordered,
       stated = [],
+      threshold = APPLY_THRESHOLD,
     } = question as IntentQuestion<FilterKey>
     if (!Object.hasOwn(answers, key)) return []
     const all = [...options, ...stated]
@@ -125,7 +126,7 @@ export const suggestionsFromAnswers = (
 
     if (ordered) {
       const applies = 1 - none
-      if (applies < APPLY_THRESHOLD) return []
+      if (applies < threshold) return []
       const brackets = rest.slice(0, options.length)
       const numbers = rest.slice(options.length)
       const onBrackets = brackets.reduce((sum, share) => sum + share, 0)
@@ -149,7 +150,7 @@ export const suggestionsFromAnswers = (
       ),
     )
     const best = byValue.indexOf(Math.max(...byValue))
-    if (byValue[best] < APPLY_THRESHOLD) return []
+    if (byValue[best] < threshold) return []
     const option =
       stated.find(({ value }) => value === all[best].value) ?? all[best]
     return pick(option, byValue[best])
