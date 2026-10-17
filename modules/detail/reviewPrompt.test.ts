@@ -7,7 +7,9 @@ import { similarTo } from '@/modules/detail/similar'
 import {
   carFacts,
   describeStanding,
+  readDetails,
   readReview,
+  type DetailsOf,
   reviewFactsKey,
   reviewPrompt,
 } from './reviewPrompt'
@@ -78,8 +80,19 @@ describe('carFacts', () => {
     )
   })
 
-  it('gives the model each page it may look a car up on', () => {
-    expect(facts).toContain(`ev-database: ${kia.evDatabaseUrl}`)
+  it('says what ev-database adds, where it has it', () => {
+    const details: DetailsOf = (car) =>
+      car === kia
+        ? { body: 'SUV', cargo: 460, frunk: 25, towing: 0, warrantyYears: 7 }
+        : { body: 'SUV', cargo: 854, towing: 1600, warrantyYears: 8 }
+    const withDetails = carFacts(kia, [tesla], [kia, tesla], details)
+    expect(withDetails).toContain(
+      'yfirbygging: SUV, 460 l farangursrými, 25 l framskott, má ekki draga kerru',
+    )
+    expect(withDetails).toContain('394 l stærra skott')
+    expect(withDetails).toContain('má draga allt að 1.600 kg')
+    expect(withDetails).toContain('ábyrgð á rafhlöðu 1 ári lengri')
+    expect(facts).toContain('engar nánari upplýsingar af ev-database')
   })
 
   it('quotes the price after the grant', () => {
@@ -163,9 +176,59 @@ describe('describeStanding', () => {
     )
   })
 
+  // Most cars have the same battery warranty, and one with it is ordinary
+  it('puts a car tied with most of them in the middle', () => {
+    const details: DetailsOf = (car) => ({
+      warrantyYears: car === field[5] ? 10 : 8,
+    })
+    expect(describeStanding(middle, field, details)).toContain(
+      'Ábyrgð á rafhlöðu — af öllum: í meðallagi',
+    )
+    expect(describeStanding(field[5], field, details)).toContain(
+      'með lengstu ábyrgð allra á rafhlöðunni',
+    )
+  })
+
+  // A buyer with a trailer rules it out on that alone
+  it('says outright that a car cannot tow', () => {
+    const details: DetailsOf = (car) => ({ towing: car === middle ? 0 : 750 })
+    expect(describeStanding(middle, field, details)).toContain(
+      'Dráttargeta — af öllum: má ekki draga kerru',
+    )
+  })
+
+  it('leaves out what ev-database has nothing on', () => {
+    expect(describeStanding(middle, field)).not.toContain('Farangursrými')
+  })
+
   it('leaves price out of the comparison at a similar price', () => {
     expect(describeStanding(middle, field)).toMatch(
       /Verð — af öllum: [^\n;]*\n/,
     )
+  })
+})
+
+describe('readDetails', () => {
+  it('reads the numbers out of the page as the site writes them', () => {
+    expect(
+      readDetails({
+        length: '4440 mm',
+        cargoVolume: '404 L',
+        towingBraked: '1800 kg',
+        batteryWarrantyPeriod: '10 years',
+        batteryWarrantyMileage: '1,000,000 km',
+      }),
+    ).toMatchObject({
+      length: 4440,
+      cargo: 404,
+      towing: 1800,
+      warrantyYears: 10,
+      warrantyKm: 1_000_000,
+    })
+  })
+
+  it('takes a car that takes no hitch to tow nothing', () => {
+    expect(readDetails({ towHitch: 'No' }).towing).toBe(0)
+    expect(readDetails({}).towing).toBeUndefined()
   })
 })

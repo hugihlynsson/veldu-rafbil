@@ -80,45 +80,64 @@ const readSpecTable = (html: string): Map<string, string> => {
   return table
 }
 
+// The fields the list does not carry, each under the labels the site has
+// used for it: the first that answers wins, as it has renamed a field or two
+const specLabels = {
+  carBody: ['Car Body'],
+  segment: ['Segment'],
+  length: ['Length'],
+  width: ['Width'],
+  height: ['Height'],
+  wheelbase: ['Wheelbase'],
+  weightUnladen: ['Weight Unladen', 'Curb Weight'],
+  grossWeight: ['Gross Vehicle Weight', 'GVWR'],
+  maxPayload: ['Max. Payload', 'Payload'],
+  cargoVolume: ['Cargo Volume'],
+  cargoVolumeMax: ['Cargo Volume Max', 'Cargo Max'],
+  frunk: ['Cargo Volume Frunk', 'Frunk'],
+  towingUnbraked: ['Towing Weight Unbraked'],
+  towingBraked: ['Towing Weight Braked'],
+  towHitch: ['Tow Hitch', 'Towbar'],
+  seats: ['Seats'],
+  batteryWarrantyPeriod: ['Warranty Period'],
+  batteryWarrantyMileage: ['Warranty Mileage'],
+} satisfies Record<string, ReadonlyArray<string>>
+
+/** What a car's page says of it, as the site writes it: "4440 mm" */
+export type CarSpecs = Partial<Record<keyof typeof specLabels, string>>
+
+// Only what the page said, not the tool's own carName and source: a page
+// with no table must read as having no specifications
+const readCarSpecs = (html: string): CarSpecs => {
+  const specTable = readSpecTable(html)
+  return Object.fromEntries(
+    Object.entries(specLabels).flatMap(([key, labels]) => {
+      const value = labels
+        .map((label) => specTable.get(label.toLowerCase()))
+        .find(Boolean)
+      return value ? [[key, value]] : []
+    }),
+  )
+}
+
 /** The fields the list does not carry, as the model is handed them */
 const readSpecs = (html: string): string => {
-  const specTable = readSpecTable(html)
-
-  // The label has to match the site's own field name; the first spelling that
-  // answers wins, as the site has renamed a field or two over time
-  const spec = (...labels: Array<string>): string => {
-    for (const label of labels) {
-      const value = specTable.get(label.toLowerCase())
-      if (value) return value
-    }
-    return ''
-  }
-
-  // Only what the page said, not the tool's own carName and source: a page
-  // with no table must read as having no specifications
-  const specs = {
-    length: spec('Length'),
-    width: spec('Width'),
-    height: spec('Height'),
-    wheelbase: spec('Wheelbase'),
-    weightUnladen: spec('Weight Unladen', 'Curb Weight'),
-    grossWeight: spec('Gross Vehicle Weight', 'GVWR'),
-    maxPayload: spec('Max. Payload', 'Payload'),
-    cargoVolume: spec('Cargo Volume'),
-    cargoVolumeMax: spec('Cargo Volume Max', 'Cargo Max'),
-    frunk: spec('Cargo Volume Frunk', 'Frunk'),
-    towingUnbraked: spec('Towing Weight Unbraked'),
-    towingBraked: spec('Towing Weight Braked'),
-    towHitch: spec('Tow Hitch', 'Towbar'),
-    seats: spec('Seats'),
-  }
-
-  const formatted = Object.entries(specs)
-    .filter(([, value]) => value)
+  const formatted = Object.entries(readCarSpecs(html))
     .map(([key, value]) => `${key}: ${value}`)
     .join('\n')
 
   return formatted || 'No specifications found'
+}
+
+/**
+ * A car's page read for a script, which has no model to tell why it failed:
+ * nothing for a page off the list, or one that could not be read
+ */
+export const fetchCarSpecs = async (url: string): Promise<CarSpecs | null> => {
+  if (!allowedURLs.has(url)) return null
+  const response = await fetchOnSite(url)
+  if (!response?.ok) return null
+  return readCarSpecs(await readCapped(response))
 }
 
 // A car's dimensions do not change within a day, and without this every answer

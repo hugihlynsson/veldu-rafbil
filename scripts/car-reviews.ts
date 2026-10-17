@@ -10,24 +10,29 @@
  * its car's figures change. Each one written is a billed request that thinks
  * for a minute or more, so a few are written at once, and the file is saved
  * after each, so a run cut short keeps what it finished.
+ *
+ * Every car's ev-database page is read first, whichever are written: where a
+ * car stands on boot space or towing is among all of them.
  */
 import { execFileSync } from 'node:child_process'
 import { writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { google } from '@ai-sdk/google'
-import { generateText, stepCountIs, type LanguageModelUsage } from 'ai'
+import { generateText, type LanguageModelUsage } from 'ai'
 
 import cars, { type Car } from '@/modules/data/cars'
-import { similarTo } from '@/modules/detail/similar'
 import { carSlug } from '@/modules/data/getCarId'
 import carReviews, { type CarReview } from '@/modules/data/carReviews'
 import {
+  readDetails,
   readReview,
   reviewFactsKey,
   reviewPrompt,
+  type CarDetails,
+  type DetailsOf,
 } from '@/modules/detail/reviewPrompt'
 import { advisorModel } from '@/app/api/chat/model'
-import { createFetchCarDetailsTool } from '@/app/api/chat/tools/fetchCarDetails'
+import { fetchCarSpecs } from '@/app/api/chat/tools/fetchCarDetails'
 
 const file = path.join(__dirname, '../modules/data/carReviews.ts')
 
@@ -37,6 +42,8 @@ const file = path.join(__dirname, '../modules/data/carReviews.ts')
 // and time on thinking for reviews no better to read
 const thinkingLevel = 'medium'
 const CONCURRENCY = 4
+// Pages from ev-database at once, which is no one's to hammer
+const PAGE_CONCURRENCY = 6
 // The prompt asks for some 150 words: far fewer is an answer that stopped
 const MIN_WORDS = 70
 
@@ -98,26 +105,33 @@ export default carReviews
   if (format) execFileSync('npx', ['oxfmt', file], { stdio: 'ignore' })
 }
 
+// Read here rather than looked up by the model, which skipped them often
+// enough that a car's boot or towing went unsaid where it stood out
+const readAllDetails = async (): Promise<DetailsOf> => {
+  const urls = [...new Set(cars.flatMap((car) => car.evDatabaseUrl ?? []))]
+  const read = new Map<string, CarDetails>()
+  const pending = [...urls]
+  const reader = async () => {
+    for (let url = pending.shift(); url; url = pending.shift()) {
+      const specs = await fetchCarSpecs(url).catch(() => null)
+      if (specs) read.set(url, readDetails(specs))
+      else console.error(`Could not read ${url}`)
+    }
+  }
+  await Promise.all(Array.from({ length: PAGE_CONCURRENCY }, reader))
+  console.log(`Read ${read.size} of ${urls.length} ev-database pages`)
+  return (car) => (car.evDatabaseUrl ? read.get(car.evDatabaseUrl) : undefined)
+}
+
 const write = async (
   car: Car,
+  details: DetailsOf,
 ): Promise<{ review: CarReview; usage: LanguageModelUsage }> => {
-  const { system, prompt } = reviewPrompt(car)
+  const { system, prompt } = reviewPrompt(car, details)
   const result = await generateText({
     model: google(advisorModel),
     system,
     prompt,
-    // Only its own page and its similar cars', for how they differ in size,
-    // space and towing: the model picks the URL it fetches
-    tools: {
-      fetchCarDetails: createFetchCarDetailsTool(
-        new Set(
-          [car, ...similarTo(car)].flatMap((one) => one.evDatabaseUrl ?? []),
-        ),
-      ),
-    },
-    // A step for each car looked up, should it look them up one at a time,
-    // and one to write
-    stopWhen: stepCountIs(6),
     providerOptions: {
       google: { thinkingConfig: { thinkingLevel } },
     },
@@ -147,16 +161,16 @@ const queue = [...due]
 const failed: string[] = []
 let done = 0
 
-const worker = async () => {
+const worker = async (details: DetailsOf) => {
   for (let car = queue.shift(); car; car = queue.shift()) {
     const slug = carSlug(car)
     const started = Date.now()
     try {
-      const { review, usage } = await write(car)
+      const { review, usage } = await write(car, details)
       reviews.set(slug, review)
       save()
       done++
-      // What it was billed for, every step and lookup included
+      // What it was billed for, thinking included
       console.log(
         `${done}/${due.length} ${slug} (${Math.round((Date.now() - started) / 1000)} s, ${usage.inputTokens} tokens in, ${usage.outputTokens} out of which ${usage.outputTokenDetails.reasoningTokens ?? 0} thinking)`,
       )
@@ -169,8 +183,9 @@ const worker = async () => {
 
 // Not a top-level await, which tsx runs this module without
 const main = async () => {
+  const details = due.length > 0 ? await readAllDetails() : () => undefined
   console.log(`Writing ${due.length} reviews, ${CONCURRENCY} at a time`)
-  await Promise.all(Array.from({ length: CONCURRENCY }, worker))
+  await Promise.all(Array.from({ length: CONCURRENCY }, () => worker(details)))
   // Saved even with nothing written, to drop the cars no longer on the list
   save({ format: true })
   console.log(
