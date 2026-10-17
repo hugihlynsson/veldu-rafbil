@@ -1,6 +1,6 @@
 /**
  * Writes modules/data/carReviews.ts: the review on each car's page, written
- * by the advisor's model from the prompt in modules/detail/reviewPrompt.ts.
+ * by the advisor's model from the prompt in scripts/reviewPrompt.ts.
  *
  *   npx tsx --env-file=.env.local scripts/car-reviews.ts           the missing and out-of-date ones
  *   npx tsx --env-file=.env.local scripts/car-reviews.ts <slug>…   these, afresh
@@ -30,9 +30,9 @@ import {
   reviewPrompt,
   type CarDetails,
   type DetailsOf,
-} from '@/modules/detail/reviewPrompt'
-import { advisorModel } from '@/app/api/chat/model'
-import { fetchCarSpecs } from '@/app/api/chat/tools/fetchCarDetails'
+} from './reviewPrompt'
+import { advisorModel } from '@/modules/chat/model'
+import { fetchCarSpecs } from '@/modules/data/evDatabase'
 
 const file = path.join(__dirname, '../modules/data/carReviews.ts')
 
