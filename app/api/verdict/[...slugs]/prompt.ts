@@ -1,5 +1,4 @@
 import type { Car } from '@/modules/data/cars'
-import { carRef } from '@/modules/chat/cars'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { driveLabels } from '@/modules/data/drives'
 import { advisorIntro, writingRules } from '@/modules/detail/writingRules'
@@ -9,16 +8,15 @@ import type { Verdict } from '@/modules/detail/verdictEvents'
 // correction there reaches both; the rest are only a comparison's
 const comparisonSystemPrompt = `${advisorIntro} Einhver er að bera saman bílana hér að neðan og þú átt að hjálpa viðkomandi að velja á milli þeirra.
 
-Áður en þú skrifar:
-- Sæktu nánari upplýsingar um hvern bíl með fetchCarDetails, með auðkenninu sem fylgir honum hér að neðan, til að vita stærð hans, farangursrými og dráttargetu. Bíll sem hefur enga ev-database síðu hefur engar slíkar upplýsingar.
+Á eftir tölunum fylgir það sem ev-database segir um hvern bíl, til dæmis stærð hans, farangursrými og dráttargetu. Bíll sem hefur enga ev-database síðu hefur engar slíkar upplýsingar.
 
 Þegar þú skrifar:
 ${writingRules.voice}
 - Ekki endursegja tölurnar: þær eru í töflu beint fyrir neðan textann þinn. Segðu frekar hvað þær þýða í daglegu lífi.
-${writingRules.noArithmetic} Til að bera saman tölur úr fetchCarDetails, nefndu tölurnar sjálfar frekar en muninn á þeim.
+${writingRules.noArithmetic} Til að bera saman tölur af ev-database, nefndu tölurnar sjálfar frekar en muninn á þeim.
 ${writingRules.grant}
 ${writingRules.winterRange}
-- Tölur taktu aðeins úr gögnunum hér að neðan og því sem fetchCarDetails skilar, aldrei úr minni. Notaðu óhikað almenna þekkingu á bílunum og framleiðendunum, til dæmis hvar merkið stendur í gæðum og verði eða hvernig bíllinn er í akstri.
+- Tölur taktu aðeins úr gögnunum hér að neðan, aldrei úr minni. Notaðu óhikað almenna þekkingu á bílunum og framleiðendunum, til dæmis hvar merkið stendur í gæðum og verði eða hvernig bíllinn er í akstri.
 ${writingRules.numberStyle}
 - Nefndu hleðsluhraða aldrei í tölum, hvorki í km/mín, kW né mínútum: fáir tengja við þær. Segðu frekar hver hleður hraðar, eða hve miklu styttri eða lengri hleðslustoppin eru, eins og það er gefið.
 ${writingRules.agreement}
@@ -26,7 +24,7 @@ ${writingRules.agreement}
 ${writingRules.allAvailable}
 ${writingRules.plainText}
 
-Svaraðu með hnitmiðuðum samanburði á bílunum, um 160 orðum í tveimur eða þremur stuttum efnisgreinum og engu öðru. Byrjaðu á því sem helst skilur þá að, segðu svo hverjum hver þeirra hentar og hvers vegna, gjarnan með því sem þú last um stærð þeirra og pláss. Nefndu bílana með tegund og gerð, til dæmis Kia EV3, en séu tvær útfærslur sömu gerðar bornar saman, nefndu útfærsluna líka, eins og bíllinn heitir í gögnunum.
+Svaraðu með hnitmiðuðum samanburði á bílunum, um 120 orðum í tveimur eða þremur stuttum efnisgreinum og engu öðru. Byrjaðu á því sem helst skilur þá að, segðu svo hverjum hver þeirra hentar og hvers vegna, gjarnan með því sem ev-database segir um stærð þeirra og pláss. Nefndu bílana með tegund og gerð, til dæmis Kia EV3, en séu tvær útfærslur sömu gerðar bornar saman, nefndu útfærsluna líka, eins og bíllinn heitir í gögnunum.
 
 Vertu heiðarleg(ur). Það sem bíll gerir í meðallagi gerirðu ekki að kosti: segðu það eða slepptu því. Notaðu ekki orð eins og „einstakur“, „framúrskarandi“ eða „frábær“ nema munurinn sýni að hann skari greinilega fram úr. Framhjóla- eða afturhjóladrif er aldrei kostur í snjó og hálku: þar hefur aðeins fjórhjóladrif forskot, og það nefnirðu aðeins þar sem það greinir bílana að. Stærð rafhlöðunnar skiptir kaupanda aðeins máli gegnum drægnina, svo nefndu hana ekki sem kost eða galla ein og sér. Bíl sem má ekki draga kerru nefnirðu alltaf sem galla, enda draga margir Íslendingar kerru eða hjólhýsi. Smávægilegur munur, fáeinir km eða lítill verðmunur, skiptir kaupanda ekki máli: nefndu hann ekki sem kost.
 
@@ -135,7 +133,7 @@ const metrics: Metric[] = [
 const describeCar = (car: Car): string =>
   [
     car.label,
-    car.evDatabaseUrl ? `auðkenni: ${carRef(car)}` : 'engin ev-database síða',
+    ...(car.evDatabaseUrl ? [] : ['engin ev-database síða']),
     `${addDecimalSeparators(car.priceWithGrant)} kr.${car.hasGrant ? ' eftir styrk' : ', fær ekki styrk'}`,
     `${car.range} km drægni (WLTP)`,
     `${oneDecimal(car.capacity)} kWh rafhlaða`,
@@ -178,8 +176,9 @@ export const verdictFacts = (compared: ReadonlyArray<Car>): string =>
   ].join('\n')
 
 /**
- * Everything the model is given for a comparison. The verdict's cache keys on
- * it, so cars whose figures change are compared afresh.
+ * Everything the model is given for a comparison but what ev-database says.
+ * The verdict's cache keys on it, so cars whose figures change are compared
+ * afresh.
  */
 export const verdictPrompt = (
   cars: ReadonlyArray<Car>,
@@ -188,7 +187,22 @@ export const verdictPrompt = (
   prompt: verdictFacts(cars),
 })
 
-// Far past the some 160 words asked for, as a car's review is cut
+/**
+ * What each car's ev-database page said as the verdict was written, in the
+ * site's English, or why it said nothing. Left out of the cache's key, or
+ * every look for a verdict already written would read every page first.
+ */
+export const verdictDetails = (
+  pages: ReadonlyArray<{ car: Car; specifications?: string }>,
+): string =>
+  [
+    'Af ev-database:',
+    ...pages.flatMap(({ car, specifications }) =>
+      specifications ? ['', `${car.label}:`, specifications] : [],
+    ),
+  ].join('\n')
+
+// Far past the some 120 words asked for, as a car's review is cut
 const MAX_LENGTH = 3000
 
 /** The answer as the page shows it, in paragraphs and without markdown */

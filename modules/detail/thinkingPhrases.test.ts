@@ -1,11 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import {
-  firstPhrase,
-  lookupPhrase,
-  phraseDuration,
-  thinkingPhrases,
-} from './thinkingPhrases'
+import { firstPhrase, phraseDuration, thinkingPhrases } from './thinkingPhrases'
 
 const two = ['Kia EV3', 'Tesla Model Y']
 const four = ['Kia EV3', 'Tesla Model Y', 'Skoda Elroq', 'Volkswagen ID.4']
@@ -53,13 +48,5 @@ describe('phraseDuration', () => {
       expect(phraseDuration('Velur réttu orðin…', random)).toBeGreaterThan(1700)
       expect(phraseDuration('x'.repeat(200), random)).toBeLessThanOrEqual(5400)
     }
-  })
-})
-
-describe('lookupPhrase', () => {
-  it('names the car being looked up', () => {
-    expect(lookupPhrase('Kia EV3')).toBe(
-      'Flettir upp Kia EV3 á ev-database.org…',
-    )
   })
 })
