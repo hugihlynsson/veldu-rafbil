@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { ImageResponse } from 'next/og'
+import type { ReactNode } from 'react'
 
 import type { Car } from '@/modules/data/cars'
 import { shareImageSize as size } from '@/modules/detail/paths'
@@ -34,6 +35,12 @@ const photo = async (origin: string, name: string) => {
 
 const gap = 32
 const margin = 56
+// Where a car's own picture, centred, had its logo; a comparison's starts there
+// too, so the two read as one
+const logoTop = 100
+
+// The car's own picture's type, which two cars side by side have room for
+const type = { name: 44, subtitle: 24, notice: 22 }
 
 const options = async () => {
   const [regular, semiBold] = await fonts
@@ -72,6 +79,22 @@ const frame = {
 } as const
 
 const stone = '#555'
+
+/**
+ * The logo at logoTop over what is drawn under it. Content too tall for that,
+ * like two names that wrap, shrinks the space above instead of the margin below.
+ */
+const Page = ({ children }: { children: ReactNode }) => (
+  <div style={{ ...frame, flexDirection: 'column', padding: margin }}>
+    <div style={{ height: logoTop - margin, flexShrink: 1 }} />
+    <div style={{ display: 'flex', flexShrink: 0, marginBottom: 32 }}>
+      <Logo width={250} />
+    </div>
+    <div style={{ display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
+      {children}
+    </div>
+  </div>
+)
 
 const Stat = ({
   label,
@@ -168,17 +191,7 @@ const carImage = async (origin: string, car: Car) => {
   const priceBadge = figures.get('price')?.detail
 
   return new ImageResponse(
-    <div
-      style={{
-        ...frame,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        padding: margin,
-      }}
-    >
-      <div style={{ display: 'flex', marginBottom: 32 }}>
-        <Logo width={250} />
-      </div>
+    <Page>
       <div style={{ display: 'flex', alignItems: 'center', gap: 48 }}>
         {/* An image drawn to a PNG, which next/image has no part in */}
         {/* oxlint-disable-next-line nextjs/no-img-element */}
@@ -195,7 +208,7 @@ const carImage = async (origin: string, car: Car) => {
               display: 'flex',
               flexWrap: 'wrap',
               columnGap: 12,
-              fontSize: 44,
+              fontSize: type.name,
               lineHeight: 1.1,
             }}
           >
@@ -203,12 +216,16 @@ const carImage = async (origin: string, car: Car) => {
             <span>{car.model}</span>
           </div>
           {subTitle && (
-            <div style={{ fontSize: 24, color: stone, marginTop: 6 }}>
+            <div
+              style={{ fontSize: type.subtitle, color: stone, marginTop: 6 }}
+            >
               {subTitle}
             </div>
           )}
           {notice && (
-            <div style={{ fontSize: 22, fontWeight: 600, marginTop: 14 }}>
+            <div
+              style={{ fontSize: type.notice, fontWeight: 600, marginTop: 14 }}
+            >
               {notice}
             </div>
           )}
@@ -235,7 +252,7 @@ const carImage = async (origin: string, car: Car) => {
           </div>
         </div>
       </div>
-    </div>,
+    </Page>,
     await options(),
   )
 }
@@ -253,21 +270,11 @@ const comparisonImage = async (origin: string, cars: ReadonlyArray<Car>) => {
   const crowded = cars.length > 2
   // At their own 3:2 two would push the prices off the bottom, so they are
   // cropped shorter; three and four fit as they are
-  const height = Math.min(270, Math.round((width * 2) / 3))
-  const nameSize = { 2: 38, 3: 30 }[cars.length] ?? 26
+  const height = Math.min(240, Math.round((width * 2) / 3))
+  const nameSize = { 2: type.name, 3: 30 }[cars.length] ?? 26
 
   return new ImageResponse(
-    <div
-      style={{
-        ...frame,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        padding: margin,
-      }}
-    >
-      <div style={{ display: 'flex', marginBottom: 32 }}>
-        <Logo width={250} />
-      </div>
+    <Page>
       <div style={{ display: 'flex', gap }}>
         {cars.map((car, index) => {
           const subTitle = carSubtitle(car)
@@ -302,7 +309,11 @@ const comparisonImage = async (origin: string, cars: ReadonlyArray<Car>) => {
               {(notice ?? subTitle) && (
                 <div
                   style={{
-                    fontSize: crowded ? 19 : 22,
+                    fontSize: crowded
+                      ? 19
+                      : notice
+                        ? type.notice
+                        : type.subtitle,
                     fontWeight: notice ? 600 : 400,
                     color: notice ? '#111' : stone,
                     marginTop: 6,
@@ -329,7 +340,7 @@ const comparisonImage = async (origin: string, cars: ReadonlyArray<Car>) => {
           )
         })}
       </div>
-    </div>,
+    </Page>,
     await options(),
   )
 }
