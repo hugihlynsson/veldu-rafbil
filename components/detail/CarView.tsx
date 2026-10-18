@@ -12,6 +12,7 @@ import { carSubtitle, deprecatedNotice } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import PricePill from '@/components/PricePill'
 import EvDatabaseLink from '@/components/EvDatabaseLink'
+import CompareIcon from '@/components/CompareIcon'
 import ShareButton from '@/components/ShareButton'
 import { pageColumn } from '@/components/pageColumn'
 import PageTop from './PageTop'
@@ -194,9 +195,9 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
                     src={`/images/${other.heroImageName}.jpg`}
                     width={128}
                     height={85}
-                    className="w-32 h-auto aspect-[3/2] shrink-0 object-cover md:w-full md:rounded-lg"
+                    className="w-32 h-auto aspect-[3/2] shrink-0 self-stretch object-cover md:w-full md:rounded-lg"
                   />
-                  <div className="flex-1 min-w-0 py-2 pr-3 md:p-0 md:px-1">
+                  <div className="flex-1 min-w-0 py-2 text-balance md:p-0 md:px-1">
                     <Link
                       href={carPathOf(other)}
                       className="text-base font-semibold leading-tight text-tint no-underline after:absolute after:inset-0 after:rounded-card after:border after:border-line md:after:border-0"
@@ -214,12 +215,17 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
                       </span>
                     </div>
                   </div>
+                  {/* An icon beside the name on phones, where the words would
+                      squeeze it, and the words under it from md up */}
                   <Link
                     href={comparisonPathOf([car, other])}
                     aria-label={`Bera ${carName(car, [car])} saman við ${carName(other, [other])}`}
-                    className="relative z-1 shrink-0 self-center mr-3 inline-flex items-center py-1 px-3 text-sm font-semibold rounded-full border border-line-chip bg-lab text-tint no-underline transition duration-100 hover:bg-cloud active:scale-[0.98] md:self-start md:mx-1"
+                    className="relative z-1 shrink-0 self-center mr-3 inline-flex items-center justify-center w-8 h-8 text-sm font-semibold rounded-full border border-line-chip bg-lab text-tint no-underline transition duration-100 hover:bg-cloud active:scale-[0.95] md:self-start md:w-auto md:h-auto md:mx-1 md:py-1 md:px-3"
                   >
-                    Bera saman
+                    <span className="flex md:hidden">
+                      <CompareIcon size={14} />
+                    </span>
+                    <span className="hidden md:inline">Bera saman</span>
                   </Link>
                 </li>
               ))}
