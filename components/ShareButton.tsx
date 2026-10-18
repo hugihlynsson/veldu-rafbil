@@ -4,6 +4,9 @@ import { FunctionComponent, useState } from 'react'
 import clsx from 'clsx'
 import { trackEvent } from 'fathom-client'
 
+import { pageOf } from '@/modules/analytics/visit'
+import { track } from '@/utils/track'
+
 interface Props {
   title: string
   /** The page to share, when it is not the one this is on */
@@ -51,6 +54,11 @@ const ShareButton: FunctionComponent<Props> = ({
       ? new URL(path, window.location.origin).href
       : window.location.href
     trackEvent(event)
+    track({
+      name: 'shared',
+      target: pageOf(new URL(url).pathname).kind,
+      method: typeof navigator.share === 'function' ? 'sheet' : 'copy',
+    })
     if (navigator.share) {
       try {
         await navigator.share({ title, url })

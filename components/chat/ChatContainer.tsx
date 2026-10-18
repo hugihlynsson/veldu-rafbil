@@ -11,6 +11,7 @@ import useChunk from '@/utils/useChunk'
 import useComposer from '@/utils/useComposer'
 import useConversation from '@/utils/useConversation'
 import useKeyboardInset from '@/utils/useKeyboardInset'
+import { track } from '@/utils/track'
 
 // react-markdown is fetched the first time the chat opens, warmed on focus.
 // One import for both: written twice, each is built as a copy of its own and
@@ -64,9 +65,11 @@ export default function ChatContainer({
       onIntent={() => {
         chatModal.load()
         conversation.load()
+        track({ name: 'chat_bar_focused' })
       }}
       onOpenChat={() => {
         chatModal.load()
+        if (!wantsChatOpen) track({ name: 'chat_opened' })
         setWantsChatOpen(true)
         setHasOpenedChat(true)
       }}

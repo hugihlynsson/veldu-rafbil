@@ -22,6 +22,7 @@ import {
   type ThinkingPhrases,
 } from '@/modules/detail/thinkingPhrases'
 import { verdictProgress } from '@/modules/detail/verdictProgress'
+import { track } from '@/utils/track'
 
 /** Where the model's words about the cars go, as a car's page has its review */
 const ReviewSection: FunctionComponent<{
@@ -202,8 +203,13 @@ const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
   const [progress, setProgress] = useState<Progress>({ filled: false })
 
   useEffect(() => {
-    if (written) return
+    if (written) {
+      track({ name: 'verdict_shown', written: true, waitMs: 0 })
+      return
+    }
     const controller = new AbortController()
+    const startedAt = performance.now()
+    const waitMs = () => Math.round(performance.now() - startedAt)
 
     const read = async () => {
       const response = await fetch(endpoint, { signal: controller.signal })
@@ -226,6 +232,7 @@ const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
             setProgress((before) => ({ ...before, filled: true }))
             await new Promise((resolve) => setTimeout(resolve, FILL_MS))
             setVerdict(event.verdict)
+            track({ name: 'verdict_shown', written: false, waitMs: waitMs() })
             return
           } else if (event.type === 'error') {
             throw new Error('No verdict')
@@ -236,7 +243,9 @@ const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
     }
 
     read().catch(() => {
-      if (!controller.signal.aborted) setFailed(true)
+      if (controller.signal.aborted) return
+      setFailed(true)
+      track({ name: 'verdict_failed', waitMs: waitMs() })
     })
     return () => controller.abort()
   }, [written, endpoint])

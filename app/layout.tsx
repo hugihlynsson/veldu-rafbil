@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 import Fathom from '@/components/Fathom'
+import PageTracking from '@/components/PageTracking'
 
 // rsms's InterVariable 4.1 rather than Google's cut, which drops glyphs the
 // list uses, ↗ among them. Served from here, so the first paint waits on no
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: Props) {
       </head>
       <body>
         <Fathom />
+        <PageTracking />
         <NuqsAdapter>{children}</NuqsAdapter>
       </body>
     </html>

@@ -19,6 +19,7 @@ import {
 import { filterChipText } from '@/modules/list/filterChips'
 import type { ShownSuggestions } from '@/modules/list/suggestionOutcome'
 import reportSuggestionOutcome from '@/utils/reportSuggestionOutcome'
+import { track } from '@/utils/track'
 import { agree } from '@/modules/copy/plural'
 import SearchIcon from '@/components/SearchIcon'
 import SendIcon from '@/components/SendIcon'
@@ -164,8 +165,16 @@ export default function FilterSuggestions({
   const hasSuggestions = suggestions.length > 0
 
   // Once each time the pills appear, as what the taps are counted against
+  const reportShown = useEffectEvent(() => {
+    trackEvent('Shown filter suggestions')
+    track({
+      name: 'suggestions_shown',
+      requestId: shown.requestId,
+      count: suggestions.length,
+    })
+  })
   useEffect(() => {
-    if (hasSuggestions) trackEvent('Shown filter suggestions')
+    if (hasSuggestions) reportShown()
   }, [hasSuggestions])
 
   const onScreen = (): ShownSuggestions => ({

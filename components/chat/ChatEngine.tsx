@@ -11,6 +11,7 @@ import {
   readStoredMessages,
   writeStoredMessages,
 } from '@/utils/chatStorage'
+import { track } from '@/utils/track'
 
 // The stored conversation grows without end, and the route refuses one past
 // its bounds whole, so what is sent is cut to fit the way the route cuts it
@@ -77,6 +78,10 @@ export default function ChatEngine({ onChange, questionMetadata }: Props) {
 
     const send = (text: string) => {
       void sendMessage(asQuestion(text, questionMetadata))
+      track({
+        name: 'chat_question_sent',
+        conversationId: getConversationId(),
+      })
     }
 
     onChange({

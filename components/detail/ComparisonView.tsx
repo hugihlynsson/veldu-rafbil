@@ -296,7 +296,7 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
               {cars.map((car) => (
                 <div key={car.id} className="min-w-0 snap-start">
                   {car.evDatabaseUrl && (
-                    <EvDatabaseLink href={car.evDatabaseUrl} />
+                    <EvDatabaseLink car={car} href={car.evDatabaseUrl} />
                   )}
                 </div>
               ))}

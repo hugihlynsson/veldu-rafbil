@@ -15,9 +15,15 @@ import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/filters/FilterModal'
 import ActiveFilters from '@/components/filters/ActiveFilters'
 import cars, { type Car as CarData } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf } from '@/modules/detail/paths'
 import carFilter from '@/modules/list/carFilter'
-import type { Filters } from '@/modules/list/filters'
+import {
+  fieldsFromFilters,
+  normalizeFilters,
+  type FilterKey,
+  type Filters,
+} from '@/modules/list/filters'
 import {
   sortCars,
   sortingDefinitions,
@@ -30,6 +36,7 @@ import { useFilters, useSorting, useView } from '@/utils/useListState'
 import { rememberListSearch } from '@/utils/listReturn'
 import useComparison from '@/utils/useComparison'
 import CompareTray from '@/components/detail/CompareTray'
+import { track } from '@/utils/track'
 
 // Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
 // so arriving a moment later shifts nothing.
@@ -63,13 +70,55 @@ const viewItems: Array<[string, View, ReactNode]> = [
 
 export default function CarList() {
   const { sorting, direction, toggleSorting } = useSorting()
-  const { filters, setFilters, removeFilter } = useFilters()
+  const { filters, setFilters } = useFilters()
   const { view, setView } = useView()
+
+  const changeSorting = (next: Sorting) => {
+    toggleSorting(next)
+    track({
+      name: 'sorting_changed',
+      sorting: next,
+      // As useSorting turns it: the sorting in use flips, another starts in
+      // its own direction
+      direction:
+        next !== sorting
+          ? sortingDefinitions[next].defaultDirection
+          : direction === 'asc'
+            ? 'desc'
+            : 'asc',
+    })
+  }
 
   const changeView = (next: View) => {
     if (next === view) return
     setView(next)
     trackEvent(next === 'grid' ? 'Switched to grid' : 'Switched to list')
+    track({ name: 'view_changed', view: next })
+  }
+
+  // The filters as the URL will hold them, so a modal closed with nothing
+  // changed is not counted as a change
+  const changeFilters = (
+    next: Filters,
+    source: 'modal' | 'chip' | 'cleared' | 'suggestion',
+  ) => {
+    const fields = fieldsFromFilters(normalizeFilters(next))
+    if (JSON.stringify(fields) === JSON.stringify(fieldsFromFilters(filters))) {
+      return
+    }
+    setFilters(next)
+    track({
+      name: 'filters_changed',
+      source,
+      filters: fields,
+      count: cars.filter(carFilter(next)).length,
+    })
+  }
+
+  const removeFilterChip = (key: FilterKey) => {
+    const rest = { ...filters }
+    delete rest[key]
+    changeFilters(rest, 'chip')
   }
 
   const [editingFilters, setEditingFilters] = useState<boolean>(false)
@@ -80,7 +129,7 @@ export default function CarList() {
   // and the start of the new list, when they have been scrolled past. Focus
   // stays in the chat input.
   const applySuggestedFilters = (next: Filters) => {
-    setFilters(next)
+    changeFilters(next, 'suggestion')
     const controls = controlsRef.current
     if (controls && controls.getBoundingClientRect().top < 0) {
       controls.scrollIntoView({
@@ -100,6 +149,29 @@ export default function CarList() {
 
   const comparison = useComparison()
   const isComparing = comparison.selected.length > 0
+
+  const toggleCompared = (car: CarData) => {
+    const added = !comparison.isSelected(car)
+    // A full tray takes no more, and the toggle says so
+    if (added && comparison.isFull) return
+    comparison.toggle(car)
+    track({
+      name: 'compare_toggled',
+      car: carSlug(car),
+      added,
+      count: comparison.selected.length + (added ? 1 : -1),
+    })
+  }
+
+  const removeCompared = (car: CarData) => {
+    comparison.remove(car)
+    track({
+      name: 'compare_toggled',
+      car: carSlug(car),
+      added: false,
+      count: comparison.selected.length - 1,
+    })
+  }
 
   const filteredCars = cars.filter(carFilter(filters))
 
@@ -129,7 +201,7 @@ export default function CarList() {
               sortingDefinitions[value].label,
               value,
             ])}
-            onClick={toggleSorting}
+            onClick={changeSorting}
             labelledBy="sorting-label"
             indicatorLabel={
               direction === 'desc' ? 'lækkandi röð' : 'hækkandi röð'
@@ -160,7 +232,7 @@ export default function CarList() {
 
         <ActiveFilters
           filters={filters}
-          onRemoveFilter={removeFilter}
+          onRemoveFilter={removeFilterChip}
           onOpenFilterModal={() => setEditingFilters(true)}
           filteredCarsCount={filteredCars.length}
         />
@@ -178,6 +250,7 @@ export default function CarList() {
         {sortCars(filteredCars, sorting, direction).map((car, index) => (
           <Car
             preload={index <= 1}
+            position={index}
             car={car}
             key={car.id}
             view={view}
@@ -185,7 +258,7 @@ export default function CarList() {
             showSeats={Boolean(filters.seats)}
             compared={comparison.isSelected(car)}
             compareFull={comparison.isFull}
-            onToggleCompare={() => comparison.toggle(car)}
+            onToggleCompare={() => toggleCompared(car)}
           />
         ))}
       </div>
@@ -202,7 +275,7 @@ export default function CarList() {
           <button
             className="border-0 shrink-0 m-0 mr-2 text-xs font-semibold py-1.25 px-3 rounded-full cursor-pointer text-center flex justify-center items-center bg-cloud transition-colors duration-200 text-tint hover:bg-smoke"
             onClick={(_event) => {
-              setFilters({})
+              changeFilters({}, 'cleared')
               window.scrollTo({ top: 0 })
             }}
           >
@@ -214,7 +287,7 @@ export default function CarList() {
       {editingFilters && (
         <FilterModal
           initialFilters={filters}
-          onSubmit={setFilters}
+          onSubmit={(next) => changeFilters(next, 'modal')}
           onDone={() => setEditingFilters(() => false)}
           getCountPreview={(filters: Filters) =>
             cars.filter(carFilter(filters)).length
@@ -223,7 +296,7 @@ export default function CarList() {
       )}
 
       {isComparing && (
-        <CompareTray cars={comparison.selected} onRemove={comparison.remove} />
+        <CompareTray cars={comparison.selected} onRemove={removeCompared} />
       )}
 
       {/* The tray takes the bar's place while there is a car in it */}
