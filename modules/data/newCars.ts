@@ -1868,6 +1868,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Peugeot',
     model: 'e-Rifter',
+    deprecated: '2026-10-18',
     heroImageName: 'peugeot-e-rifter',
     price: 6_790_000,
     sellerUrl: 'https://www.peugeotisland.is/tegundir/E-Rifter.html',

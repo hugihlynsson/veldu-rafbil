@@ -213,7 +213,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'kgm-musso-ev-base': [
     'kgm-torres-evx',
     'leapmotor-c10-promax-awd',
-    'peugeot-e-rifter-base',
+    'hongqi-ehs5-base',
   ],
   'kgm-musso-ev-4wd': [
     'subaru-e-outback-base',
@@ -438,7 +438,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'mercedes-benz-eqt-200': [
     'toyota-proace-city-verso-base',
-    'peugeot-e-rifter-base',
+    'hyundai-staria-electric-base',
     'kia-pv5-base',
   ],
   'mercedes-benz-eqv-300': [
@@ -529,7 +529,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'opel-frontera-base': [
     'leapmotor-b10-base',
     'kia-ev2-standard-range',
-    'peugeot-e-rifter-base',
+    'peugeot-e-5008-base',
   ],
   'opel-grandland-base': [
     'byd-seal-u-base',
@@ -564,7 +564,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'peugeot-e-5008-base': [
     'kia-pv5-base',
     'skoda-peaq-90x',
-    'peugeot-e-rifter-base',
+    'mercedes-benz-glb-350-4matic-eq',
   ],
   'peugeot-e-5008-dual-motor': [
     'skoda-peaq-90x',
@@ -879,7 +879,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'toyota-proace-city-verso-base': [
     'mercedes-benz-eqt-200',
     'kia-pv5-base',
-    'peugeot-e-rifter-base',
+    'hyundai-staria-electric-base',
   ],
   'toyota-proace-verso-base': [
     'peugeot-e-traveller-base',
