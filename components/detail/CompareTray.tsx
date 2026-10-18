@@ -8,6 +8,7 @@ import type { Car } from '@/modules/data/cars'
 import { comparisonPathOf } from '@/modules/detail/paths'
 import { MAX_COMPARED, MIN_COMPARED } from '@/modules/detail/comparison'
 import { rememberListSearch } from '@/utils/listReturn'
+import CrossIcon from '@/components/CrossIcon'
 
 interface Props {
   cars: ReadonlyArray<Car>
@@ -80,9 +81,9 @@ const CompareTray: FunctionComponent<Props> = ({ cars, onRemove }) => {
               >
                 <span
                   aria-hidden
-                  className="flex w-5 h-5 items-center justify-center rounded-full bg-tint text-lab text-xs font-bold leading-none transition-transform duration-100 group-hover:scale-110"
+                  className="flex w-5 h-5 items-center justify-center rounded-full bg-tint text-lab transition-colors duration-100 group-hover:bg-tint/80"
                 >
-                  ×
+                  <CrossIcon size={8} />
                 </span>
               </button>
             </li>
