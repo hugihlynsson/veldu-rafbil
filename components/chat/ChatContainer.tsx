@@ -101,7 +101,7 @@ export default function ChatContainer({
             starters={starters}
             onDone={(pickedCar) => {
               setWantsChatOpen(false)
-              // A car picked from the answer takes the focus instead
+              // A car picked from the answer opens instead
               if (pickedCar) onShowCar(pickedCar)
               else composer.focusOnArrival()
             }}

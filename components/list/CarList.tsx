@@ -3,6 +3,7 @@
 import { type ReactNode, useRef, useState } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/navigation'
 import { trackEvent } from 'fathom-client'
 
 import Car from './NewCar'
@@ -13,7 +14,8 @@ import Intro from './Intro'
 import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/filters/FilterModal'
 import ActiveFilters from '@/components/filters/ActiveFilters'
-import cars from '@/modules/data/cars'
+import cars, { type Car as CarData } from '@/modules/data/cars'
+import { carPathOf } from '@/modules/detail/paths'
 import carFilter from '@/modules/list/carFilter'
 import type { Filters } from '@/modules/list/filters'
 import {
@@ -25,7 +27,7 @@ import type { View } from '@/modules/list/view'
 import { agree } from '@/modules/copy/plural'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import { useFilters, useSorting, useView } from '@/utils/useListState'
-import useRevealCar from '@/utils/useRevealCar'
+import { rememberListSearch } from '@/utils/listReturn'
 import useComparison from '@/utils/useComparison'
 import CompareTray from '@/components/detail/CompareTray'
 
@@ -88,7 +90,13 @@ export default function CarList() {
     }
   }
 
-  const showCar = useRevealCar(filters, setFilters)
+  const router = useRouter()
+  // A car picked in the chat opens its page, which leads back to the list as
+  // it was left, as a card does
+  const showCar = (car: CarData) => {
+    rememberListSearch(window.location.search)
+    router.push(carPathOf(car))
+  }
 
   const comparison = useComparison()
   const isComparing = comparison.selected.length > 0
