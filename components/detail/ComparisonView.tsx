@@ -277,7 +277,7 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
                               crowded
                                 ? 'text-sm md:text-2xl'
                                 : 'text-base md:text-2xl',
-                              cell.best ? 'font-semibold' : 'font-normal',
+                              cell.best ? 'font-bold' : 'font-normal',
                             )}
                           >
                             {cell.text}
