@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import type { Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
-import { comparisonPath } from '@/modules/detail/paths'
+import { carPathOf, comparisonPath } from '@/modules/detail/paths'
 import { comparisonTitle, MIN_COMPARED } from '@/modules/detail/comparison'
 import { specRows } from '@/modules/detail/specs'
 import { deprecatedNotice } from '@/modules/detail/subtitle'
@@ -174,8 +174,13 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
                     crowded ? 'text-sm md:text-2xl' : 'text-base md:text-2xl',
                   )}
                 >
-                  <span>{car.make}</span>{' '}
-                  <span className="font-normal">{car.model}</span>
+                  <Link
+                    href={carPathOf(car)}
+                    className="text-inherit no-underline decoration-2 underline-offset-4 hover:underline"
+                  >
+                    <span>{car.make}</span>{' '}
+                    <span className="font-normal">{car.model}</span>
+                  </Link>
                   {(car.subModel || car.expectedDelivery) && (
                     <span className="block mt-0.5 text-xs font-medium text-stone md:mt-1 md:text-base">
                       {car.subModel}
