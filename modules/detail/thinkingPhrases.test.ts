@@ -45,7 +45,7 @@ describe('thinkingPhrases', () => {
 describe('phraseDuration', () => {
   it('holds a line for two to five and a half seconds or so', () => {
     for (const random of [() => 0, () => 0.999]) {
-      expect(phraseDuration('Velur réttu orðin…', random)).toBeGreaterThan(1700)
+      expect(phraseDuration('Vel réttu orðin…', random)).toBeGreaterThan(1700)
       expect(phraseDuration('x'.repeat(200), random)).toBeLessThanOrEqual(5400)
     }
   })
