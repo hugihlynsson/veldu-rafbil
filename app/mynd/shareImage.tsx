@@ -1,14 +1,16 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { ImageResponse } from 'next/og'
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 
-import type { Car } from '@/modules/data/cars'
+import cars, { type Car } from '@/modules/data/cars'
 import { shareImageSize as size } from '@/modules/detail/paths'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { specRows, type SpecKey } from '@/modules/detail/specs'
 import { carSubtitle, deprecatedNotice } from '@/modules/detail/subtitle'
+import { listHeadline } from '@/modules/copy/listHeadline'
 import Logo from '@/components/Logo'
+import { showcaseCars } from './showcase'
 
 // Static cuts of the site's Inter at the two weights drawn here: the image
 // renderer reads neither WOFF2 nor a variable font
@@ -84,12 +86,22 @@ const stone = '#555'
  * The logo at logoTop over what is drawn under it. Content too tall for that,
  * like two names that wrap, shrinks the space above instead of the margin below.
  */
-const Page = ({ children }: { children: ReactNode }) => (
+const Page = ({
+  children,
+  logoWidth = 250,
+  toBottom = false,
+}: {
+  children: ReactNode
+  logoWidth?: number
+  // Sets what is under the logo on the bottom margin rather than below it
+  toBottom?: boolean
+}) => (
   <div style={{ ...frame, flexDirection: 'column', padding: margin }}>
     <div style={{ height: logoTop - margin, flexShrink: 1 }} />
     <div style={{ display: 'flex', flexShrink: 0, marginBottom: 32 }}>
-      <Logo width={250} />
+      <Logo width={logoWidth} />
     </div>
+    {toBottom && <div style={{ flexGrow: 1 }} />}
     <div style={{ display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
       {children}
     </div>
@@ -131,10 +143,12 @@ const PriceTag = ({
   car,
   badge,
   small = false,
+  style,
 }: {
   car: Car
   badge?: string
   small?: boolean
+  style?: CSSProperties
 }) => (
   <div
     style={{
@@ -154,6 +168,7 @@ const PriceTag = ({
       background: '#eee',
       fontSize: small ? 17 : 20,
       fontWeight: 600,
+      ...style,
     }}
   >
     {`${addDecimalSeparators(car.priceWithGrant)} kr.`}
@@ -296,49 +311,110 @@ const comparisonImage = async (origin: string, cars: ReadonlyArray<Car>) => {
               <div
                 style={{
                   display: 'flex',
-                  flexWrap: 'wrap',
-                  columnGap: crowded ? 8 : 12,
+                  flexDirection: 'column',
+                  padding: '0 4px',
                   marginTop: 20,
-                  fontSize: nameSize,
-                  lineHeight: 1.1,
                 }}
               >
-                <span style={{ fontWeight: 600 }}>{car.make}</span>
-                <span>{car.model}</span>
-              </div>
-              {(notice ?? subTitle) && (
                 <div
                   style={{
-                    fontSize: crowded
-                      ? 19
-                      : notice
-                        ? type.notice
-                        : type.subtitle,
-                    fontWeight: notice ? 600 : 400,
-                    color: notice ? '#111' : stone,
-                    marginTop: 6,
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    columnGap: crowded ? 8 : 12,
+                    fontSize: nameSize,
+                    lineHeight: 1.1,
                   }}
                 >
-                  {notice ?? subTitle}
+                  <span style={{ fontWeight: 600 }}>{car.make}</span>
+                  <span>{car.model}</span>
                 </div>
-              )}
-              {/* A car no longer sold has no price to go and pay */}
-              {!notice && (
-                <PriceTag
-                  car={car}
-                  small={crowded}
-                  // Four leave no room for it beside the price
-                  badge={
-                    cars.length < 4
-                      ? specRows([car]).find(({ key }) => key === 'price')
-                          ?.cells[0]?.detail
-                      : undefined
-                  }
-                />
-              )}
+                {(notice ?? subTitle) && (
+                  <div
+                    style={{
+                      fontSize: crowded
+                        ? 19
+                        : notice
+                          ? type.notice
+                          : type.subtitle,
+                      fontWeight: notice ? 600 : 400,
+                      color: notice ? '#111' : stone,
+                      marginTop: 6,
+                    }}
+                  >
+                    {notice ?? subTitle}
+                  </div>
+                )}
+                {/* A car no longer sold has no price to go and pay */}
+                {!notice && (
+                  <PriceTag
+                    car={car}
+                    small={crowded}
+                    // Four leave no room for it beside the price
+                    badge={
+                      cars.length < 4
+                        ? specRows([car]).find(({ key }) => key === 'price')
+                            ?.cells[0]?.detail
+                        : undefined
+                    }
+                    // The pill's round end reads as further in than the text
+                    // above it, so it sits a little out to line up by eye
+                    style={{ marginTop: crowded ? 11 : 18, marginLeft: -2 }}
+                  />
+                )}
+              </div>
             </div>
           )
         })}
+      </div>
+    </Page>,
+    await options(),
+  )
+}
+
+/**
+ * The picture a link to the list unfurls into: what it holds, and a run of
+ * photos from the cheapest to the dearest, the last cut by the edge as the
+ * list goes on past it
+ */
+const listImage = async (origin: string) => {
+  const shown = showcaseCars()
+  const photos = await Promise.all(
+    shown.map((car) => photo(origin, car.heroImageName)),
+  )
+  const cheapest = Math.min(...cars.map((car) => car.priceWithGrant))
+
+  return new ImageResponse(
+    <Page logoWidth={480} toBottom>
+      <div style={{ fontSize: type.name, lineHeight: 1.1 }}>
+        {listHeadline(cars.length)}
+      </div>
+      <div style={{ fontSize: type.subtitle, color: stone, marginTop: 6 }}>
+        {`Frá ${addDecimalSeparators(cheapest)} kr.`}
+      </div>
+      {/* A photo's hard edge reads as further in than the text above it, so
+          the strip sits a little out to line up by eye */}
+      <div
+        style={{
+          display: 'flex',
+          gap: 20,
+          marginTop: 32,
+          position: 'relative',
+          left: -4,
+          top: 4,
+        }}
+      >
+        {photos.map((src, index) => (
+          // An image drawn to a PNG, which next/image has no part in
+          // oxlint-disable-next-line nextjs/no-img-element
+          <img
+            key={shown[index]?.id}
+            alt=""
+            src={src}
+            width={300}
+            height={200}
+            style={{ flexShrink: 0, borderRadius: 16, objectFit: 'cover' }}
+          />
+        ))}
       </div>
     </Page>,
     await options(),
@@ -353,3 +429,7 @@ export const shareImage = (request: Request, cars: ReadonlyArray<Car>) => {
     ? carImage(origin, only)
     : comparisonImage(origin, cars)
 }
+
+/** The picture the list unfurls into */
+export const listShareImage = (request: Request) =>
+  listImage(photoOrigin(request))
