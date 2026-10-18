@@ -15,6 +15,7 @@ import PricePill from '@/components/PricePill'
 import EvDatabaseLink from '@/components/EvDatabaseLink'
 import CompareMoreLink from './CompareMoreLink'
 import PageTop from './PageTop'
+import { Lane, ScrollLanes } from './ScrollLanes'
 import ShareButton from '@/components/ShareButton'
 import { pageColumn } from '@/components/pageColumn'
 
@@ -30,8 +31,16 @@ interface Props {
 const gutter = 'px-(--gutter) md:pl-10 md:pr-6'
 // Three or four cars outgrow the page from lg, centred on it as the list's
 // grid is, while the header stays where the list has it
-const wideGutter =
-  'lg:px-0 lg:mx-[calc((100%_-_min(100vw_-_5rem,_var(--container-grid)))_/_2)]'
+const breakout =
+  'lg:mx-[calc((100%_-_min(100vw_-_5rem,_var(--container-grid)))_/_2)]'
+const wideGutter = `lg:px-0 ${breakout}`
+// On a phone, three or four columns are kept at least this wide, 9.5rem, and
+// scroll sideways: two and a bit in view, the bit saying there is more. The
+// gaps are the names' and figures' at that count.
+const scrollingWidth: Record<number, string> = {
+  3: 'max-md:w-[max(100%,calc(3*9.5rem+1.5rem+2*var(--gutter)))]',
+  4: 'max-md:w-[max(100%,calc(4*9.5rem+1.5rem+2*var(--gutter)))]',
+}
 const eyebrow =
   'm-0 uppercase text-eyebrow font-semibold tracking-wider text-stone'
 const secondaryButton =
@@ -60,6 +69,15 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
   const canRemove = cars.length > MIN_COMPARED
   const wide = cars.length > 2
   const body = clsx(gutter, wide && wideGutter)
+  // A strip of the columns, which scrolls sideways on a phone with three or
+  // four; the gutter is inside it, so the first column starts where the
+  // page's text does and the last can scroll clear of the edge
+  const lane = clsx(wide && breakout)
+  const laneContent = clsx(
+    gutter,
+    wide && 'lg:px-0',
+    scrollingWidth[cars.length],
+  )
   // The width the columns share: the page less its edges, or the grid's
   const pageWidth = wide ? 1200 : 960
 
@@ -87,175 +105,216 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
         </div>
       </header>
 
-      {/* Each photo reaches 4px past its column on either side, and the gaps
+      <ScrollLanes>
+        {/* Each photo reaches 4px past its column on either side, and the gaps
           are 8px wider to leave the same space between them */}
-      <div
-        className={clsx(
-          'grid md:gap-x-8',
-          crowded ? 'gap-x-4' : 'gap-x-5',
-          columns[cars.length],
-          body,
-        )}
-      >
-        {cars.map((car) => (
-          <div key={car.id} className="relative -mx-1">
-            <Image
-              alt=""
-              sizes={`(max-width: ${pageWidth - 1}px) ${Math.ceil(100 / cars.length)}vw, ${Math.ceil(pageWidth / cars.length)}px`}
-              src={`/images/${car.heroImageName}.jpg`}
-              width={1920}
-              height={1280}
-              preload
-              className="w-full h-auto rounded-lg block"
-            />
-            {canRemove && (
-              <Link
-                href={comparisonPath(slugs.filter((s) => s !== carSlug(car)))}
-                aria-label={`Taka ${car.label} úr samanburðinum`}
-                className="absolute top-1 right-1 p-1 no-underline group"
-                replace
-              >
-                {/* A drawn cross rather than ×, which sits off the glyph's
-                    centre */}
-                <span
-                  aria-hidden
-                  className="flex w-6 h-6 items-center justify-center rounded-full bg-glass/50 backdrop-blur-md text-tint transition-colors duration-100 group-hover:bg-glass/70"
-                >
-                  <svg width="10" height="10" viewBox="0 0 14 14" fill="none">
-                    <path
-                      d="m2.07 13.12 4.78-4.78 4.93 4.93 1.29-1.29-4.93-4.93 4.78-4.78L11.64.98 6.85 5.77 1.91.83.63 2.1l4.94 4.94-4.79 4.79 1.29 1.28Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </span>
-              </Link>
+        <Lane scrolls={wide} className={lane}>
+          <div
+            className={clsx(
+              'grid md:gap-x-8',
+              crowded ? 'gap-x-4' : 'gap-x-5',
+              columns[cars.length],
+              laneContent,
             )}
+          >
+            {cars.map((car) => (
+              <div key={car.id} className="relative -mx-1 snap-start">
+                <Image
+                  alt=""
+                  sizes={
+                    wide
+                      ? `(max-width: 767px) 45vw, (max-width: ${pageWidth - 1}px) ${Math.ceil(100 / cars.length)}vw, ${Math.ceil(pageWidth / cars.length)}px`
+                      : `(max-width: ${pageWidth - 1}px) ${Math.ceil(100 / cars.length)}vw, ${Math.ceil(pageWidth / cars.length)}px`
+                  }
+                  src={`/images/${car.heroImageName}.jpg`}
+                  width={1920}
+                  height={1280}
+                  preload
+                  className="w-full h-auto rounded-lg block"
+                />
+                {canRemove && (
+                  <Link
+                    href={comparisonPath(
+                      slugs.filter((s) => s !== carSlug(car)),
+                    )}
+                    aria-label={`Taka ${car.label} úr samanburðinum`}
+                    className="absolute top-1 right-1 p-1 no-underline group"
+                    replace
+                  >
+                    {/* A drawn cross rather than ×, which sits off the glyph's
+                    centre */}
+                    <span
+                      aria-hidden
+                      className="flex w-6 h-6 items-center justify-center rounded-full bg-glass/50 backdrop-blur-md text-tint transition-colors duration-100 group-hover:bg-glass/70"
+                    >
+                      <svg
+                        width="10"
+                        height="10"
+                        viewBox="0 0 14 14"
+                        fill="none"
+                      >
+                        <path
+                          d="m2.07 13.12 4.78-4.78 4.93 4.93 1.29-1.29-4.93-4.93 4.78-4.78L11.64.98 6.85 5.77 1.91.83.63 2.1l4.94 4.94-4.79 4.79 1.29 1.28Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </span>
+                  </Link>
+                )}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </Lane>
 
-      {/* Stays in view through the figures, so a column is never anonymous.
+        {/* Stays in view through the figures, so a column is never anonymous.
           The backdrop reaches the page's edges, and the line under the names
           only the columns, as the lines between the figures do */}
-      <div
-        className={clsx(body, 'sticky top-0 z-10 bg-lab/90 backdrop-blur-md')}
-      >
-        <div className={clsx(grid, 'py-2.5 md:py-4 border-b border-line/50')}>
-          {cars.map((car) => (
-            <h2
-              key={car.id}
-              className={clsx(
-                'm-0 min-w-0 font-semibold leading-tight',
-                crowded ? 'text-sm md:text-2xl' : 'text-base md:text-2xl',
-              )}
+        <Lane
+          scrolls={wide}
+          className={clsx(lane, 'sticky top-0 z-10 bg-lab/90 backdrop-blur-md')}
+        >
+          <div className={laneContent}>
+            <div
+              className={clsx(grid, 'py-2.5 md:py-4 border-b border-line/50')}
             >
-              <span>{car.make}</span>{' '}
-              <span className="font-normal">{car.model}</span>
-              {(car.subModel || car.expectedDelivery) && (
-                <span className="block mt-0.5 text-xs font-medium text-stone md:mt-1 md:text-base">
-                  {car.subModel}
-                  {/* Beside the variant as on the list's cards, but read after
+              {cars.map((car) => (
+                <h2
+                  key={car.id}
+                  className={clsx(
+                    'm-0 min-w-0 snap-start font-semibold leading-tight',
+                    crowded ? 'text-sm md:text-2xl' : 'text-base md:text-2xl',
+                  )}
+                >
+                  <span>{car.make}</span>{' '}
+                  <span className="font-normal">{car.model}</span>
+                  {(car.subModel || car.expectedDelivery) && (
+                    <span className="block mt-0.5 text-xs font-medium text-stone md:mt-1 md:text-base">
+                      {car.subModel}
+                      {/* Beside the variant as on the list's cards, but read after
                     the heading rather than as part of the car's name */}
-                  {car.expectedDelivery && (
-                    <span aria-hidden>
-                      {car.subModel && ' · '}
-                      {deliveryText(car.expectedDelivery)}
+                      {car.expectedDelivery && (
+                        <span aria-hidden>
+                          {car.subModel && ' · '}
+                          {deliveryText(car.expectedDelivery)}
+                        </span>
+                      )}
                     </span>
                   )}
-                </span>
+                </h2>
+              ))}
+              {cars.map(
+                (car) =>
+                  car.expectedDelivery && (
+                    <p key={car.id} className="sr-only">
+                      {car.label}: {deliveryText(car.expectedDelivery)}
+                    </p>
+                  ),
               )}
-            </h2>
-          ))}
-          {cars.map(
-            (car) =>
-              car.expectedDelivery && (
-                <p key={car.id} className="sr-only">
-                  {car.label}: {deliveryText(car.expectedDelivery)}
-                </p>
-              ),
-          )}
-        </div>
-      </div>
-
-      {goneCount > 0 && (
-        <p className={clsx(body, 'mt-4 mb-0 text-sm font-medium text-stone')}>
-          {goneCount === 1 ? 'Einn' : goneCount}{' '}
-          {agree(goneCount, 'bíll', 'bílar')} úr þessum samanburði{' '}
-          {agree(goneCount, 'er', 'eru')} ekki lengur{' '}
-          {agree(goneCount, 'seldur nýr', 'seldir nýir')}.
-        </p>
-      )}
-
-      {/* None for a car no longer sold, as its own page has no review */}
-      {cars.length >= MIN_COMPARED && goneCount === 0 && (
-        // From the table's edge, at the measure of a car's review
-        <div className={body}>{verdict}</div>
-      )}
-
-      <dl className={clsx(body, 'mt-2 mb-0')}>
-        {specRows(cars).map((row) => (
-          <div key={row.key} className="py-3.5 border-b border-line/50">
-            <dt className={eyebrow}>{row.label}</dt>
-            <dd className={clsx(grid, 'm-0 mt-1.5')}>
-              {row.cells.map((cell, index) => {
-                const car = cars[index]
-                const notice = car && deprecatedNotice(car)
-                return (
-                  <div key={car?.id ?? index} className="min-w-0">
-                    {notice && car && row.key === 'price' ? (
-                      // In place of the price, which links to a seller no
-                      // longer selling it, as on the car's own page
-                      <div className="text-sm">
-                        <div className="font-semibold">{notice}</div>
-                        <div className="mt-0.5 text-xs font-medium text-stone">
-                          Síðasta verð{' '}
-                          {addDecimalSeparators(car.priceWithGrant)} kr.
-                          {car.hasGrant && ' með styrk'}
-                        </div>
-                      </div>
-                    ) : row.key === 'price' && car ? (
-                      <PricePill
-                        car={car}
-                        light={!cell.best}
-                        compact={crowded}
-                        bare
-                        className="max-w-full -ml-0.5"
-                      />
-                    ) : (
-                      <div
-                        className={clsx(
-                          crowded
-                            ? 'text-sm md:text-2xl'
-                            : 'text-base md:text-2xl',
-                          cell.best ? 'font-semibold' : 'font-normal',
-                        )}
-                      >
-                        {cell.text}
-                      </div>
-                    )}
-                    {cell.best && <span className="sr-only">, fremstur</span>}
-                    {cell.detail && !(notice && row.key === 'price') && (
-                      <div className="mt-0.5 text-xs font-medium text-stone">
-                        {cell.detail}
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
-            </dd>
-          </div>
-        ))}
-      </dl>
-
-      {cars.some((car) => car.evDatabaseUrl) && (
-        <div className={clsx(grid, body, 'mt-4')}>
-          {cars.map((car) => (
-            <div key={car.id} className="min-w-0">
-              {car.evDatabaseUrl && <EvDatabaseLink href={car.evDatabaseUrl} />}
             </div>
-          ))}
-        </div>
-      )}
+          </div>
+        </Lane>
+
+        {goneCount > 0 && (
+          <p className={clsx(body, 'mt-4 mb-0 text-sm font-medium text-stone')}>
+            {goneCount === 1 ? 'Einn' : goneCount}{' '}
+            {agree(goneCount, 'bíll', 'bílar')} úr þessum samanburði{' '}
+            {agree(goneCount, 'er', 'eru')} ekki lengur{' '}
+            {agree(goneCount, 'seldur nýr', 'seldir nýir')}.
+          </p>
+        )}
+
+        {/* None for a car no longer sold, as its own page has no review */}
+        {cars.length >= MIN_COMPARED && goneCount === 0 && (
+          // From the table's edge, at the measure of a car's review
+          <div className={body}>{verdict}</div>
+        )}
+
+        <Lane scrolls={wide} className={clsx(lane, 'mt-2')}>
+          <dl className={clsx(laneContent, 'm-0')}>
+            {specRows(cars).map((row) => (
+              <div key={row.key} className="py-3.5 border-b border-line/50">
+                {/* Kept in view as the figures scroll under it */}
+                <dt
+                  className={clsx(
+                    eyebrow,
+                    'w-fit max-md:sticky max-md:left-(--gutter)',
+                  )}
+                >
+                  {row.label}
+                </dt>
+                <dd className={clsx(grid, 'm-0 mt-1.5')}>
+                  {row.cells.map((cell, index) => {
+                    const car = cars[index]
+                    const notice = car && deprecatedNotice(car)
+                    // Relative, so the sr-only label is held by the strip
+                    // that scrolls it rather than widening the page
+                    return (
+                      <div
+                        key={car?.id ?? index}
+                        className="relative min-w-0 snap-start"
+                      >
+                        {notice && car && row.key === 'price' ? (
+                          // In place of the price, which links to a seller no
+                          // longer selling it, as on the car's own page
+                          <div className="text-sm">
+                            <div className="font-semibold">{notice}</div>
+                            <div className="mt-0.5 text-xs font-medium text-stone">
+                              Síðasta verð{' '}
+                              {addDecimalSeparators(car.priceWithGrant)} kr.
+                              {car.hasGrant && ' með styrk'}
+                            </div>
+                          </div>
+                        ) : row.key === 'price' && car ? (
+                          <PricePill
+                            car={car}
+                            light={!cell.best}
+                            compact={crowded}
+                            bare
+                            className="max-w-full -ml-0.5"
+                          />
+                        ) : (
+                          <div
+                            className={clsx(
+                              crowded
+                                ? 'text-sm md:text-2xl'
+                                : 'text-base md:text-2xl',
+                              cell.best ? 'font-semibold' : 'font-normal',
+                            )}
+                          >
+                            {cell.text}
+                          </div>
+                        )}
+                        {cell.best && (
+                          <span className="sr-only">, fremstur</span>
+                        )}
+                        {cell.detail && !(notice && row.key === 'price') && (
+                          <div className="mt-0.5 text-xs font-medium text-stone">
+                            {cell.detail}
+                          </div>
+                        )}
+                      </div>
+                    )
+                  })}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Lane>
+
+        {cars.some((car) => car.evDatabaseUrl) && (
+          <Lane scrolls={wide} className={clsx(lane, 'mt-4')}>
+            <div className={clsx(grid, laneContent)}>
+              {cars.map((car) => (
+                <div key={car.id} className="min-w-0 snap-start">
+                  {car.evDatabaseUrl && (
+                    <EvDatabaseLink href={car.evDatabaseUrl} />
+                  )}
+                </div>
+              ))}
+            </div>
+          </Lane>
+        )}
+      </ScrollLanes>
 
       <div
         className={clsx(
