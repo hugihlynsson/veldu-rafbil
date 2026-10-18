@@ -9,17 +9,13 @@ import Link from 'next/link'
 import type { Car } from '@/modules/data/cars'
 import { carName } from '@/modules/data/getCarId'
 import { comparisonPathOf } from '@/modules/detail/paths'
+import { listNames } from '@/modules/copy/listNames'
 import { rememberListSearch } from '@/utils/listReturn'
 
 interface Props {
   cars: ReadonlyArray<Car>
   animate: boolean
 }
-
-const listNames = (names: ReadonlyArray<string>) =>
-  names.length < 2
-    ? names.join('')
-    : `${names.slice(0, -1).join(', ')} og ${names.at(-1)}`
 
 /** A link from an answer to the comparison of the cars it recommends */
 const CompareAnswerCars: React.FunctionComponent<Props> = ({
@@ -30,7 +26,11 @@ const CompareAnswerCars: React.FunctionComponent<Props> = ({
     <Link
       href={comparisonPathOf(cars)}
       onClick={() => {
-        rememberListSearch(window.location.search)
+        // The chat is on a car's page and a comparison too, whose own query
+        // is not the list's to go back to
+        if (window.location.pathname === '/') {
+          rememberListSearch(window.location.search)
+        }
         trackEvent('Comparison opened from chat')
       }}
       className={clsx(

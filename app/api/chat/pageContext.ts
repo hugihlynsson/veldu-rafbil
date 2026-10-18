@@ -3,16 +3,12 @@ import carReviews from '@/modules/data/carReviews'
 import { carSlug } from '@/modules/data/getCarId'
 import type { ChatMessage } from '@/modules/chat/message'
 import { resolveSlugs } from '@/modules/detail/slugs'
+import { listNames } from '@/modules/copy/listNames'
 import { peekVerdict } from '@/app/api/verdict/[...slugs]/verdict'
 
 interface Written {
   paragraphs: ReadonlyArray<string>
 }
-
-const listNames = (names: ReadonlyArray<string>) =>
-  names.length < 2
-    ? names.join('')
-    : `${names.slice(0, -1).join(', ')} og ${names.at(-1)}`
 
 /**
  * What the model is told about the page a question was asked on: a car's, or
@@ -24,16 +20,18 @@ export const pageNote = (
   cars: ReadonlyArray<Car>,
   written: Written | null,
 ): string => {
-  const text = written && `"${written.paragraphs.join(' ')}"`
-  // Not shown on the page of a car no longer sold, so not the reader's either
-  const shown = !cars.some((car) => car.deprecated)
+  // Neither a review nor a summary is shown on a page with a car no longer
+  // sold, so it is not the reader's either
+  const text =
+    written &&
+    !cars.some((car) => car.deprecated) &&
+    `"${written.paragraphs.join(' ')}"`
   const [only] = cars
   const [page, said] =
     only && cars.length === 1
       ? [
           `[Spurt á síðu bílsins ${only.label} á Veldu Rafbíl.`,
           text &&
-            shown &&
             `Á síðunni er umsögn Veldu Rafbíl um hann, sem lesandinn sér: ${text}`,
         ]
       : [

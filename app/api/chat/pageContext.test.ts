@@ -58,6 +58,12 @@ describe('pageNote on a comparison', () => {
     expect(note).toContain('"Ólíkir bílar. Hvor á sitt."')
   })
 
+  it('keeps back the summary of cars one of which is no longer sold', () => {
+    expect(
+      pageNote([a, { ...b, deprecated: '2026-10-11' }], verdict),
+    ).not.toContain('samantekt')
+  })
+
   it('names a car compared that is no longer sold', () => {
     expect(pageNote([a, { ...b, deprecated: '2026-10-11' }], null)).toContain(
       `${b.label} er ekki lengur seldur nýr`,

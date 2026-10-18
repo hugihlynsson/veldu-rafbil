@@ -123,8 +123,15 @@ export const groupIntoTurns = (
     return turns
   }, [])
 
+/** The same cars, in whatever order */
+export const sameCarSet = (
+  a: ReadonlyArray<string>,
+  b: ReadonlyArray<string>,
+) => a.toSorted().join('/') === b.toSorted().join('/')
+
+// A comparison in another order is the same cars, and the same page to the chat
 const sameCars = (a: string[] | undefined, b: string[] | undefined) =>
-  (a ?? []).join('/') === (b ?? []).join('/')
+  sameCarSet(a ?? [], b ?? [])
 
 /**
  * The questions that bring a car's page or a comparison into the
@@ -177,9 +184,3 @@ export const askedElsewhere = (
   const last = messages.findLast(({ role }) => role === 'user')
   return last !== undefined && !sameCars(last.metadata?.about, about)
 }
-
-/** The same cars, in whatever order */
-export const sameCarSet = (
-  a: ReadonlyArray<string>,
-  b: ReadonlyArray<string>,
-) => a.toSorted().join('/') === b.toSorted().join('/')

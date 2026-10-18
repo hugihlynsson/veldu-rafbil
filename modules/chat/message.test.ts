@@ -271,7 +271,7 @@ describe('pagesStarted', () => {
     expect([
       ...pagesStarted([
         question('first', ['kia', 'tesla']),
-        question('again', ['kia', 'tesla']),
+        question('again', ['tesla', 'kia']),
         question('more', ['kia', 'tesla', 'skoda']),
       ]).keys(),
     ]).toEqual(['first', 'more'])
@@ -320,6 +320,7 @@ describe('askedElsewhere', () => {
   it('is not where the last question was asked', () => {
     expect(askedElsewhere(asked(), undefined)).toBe(false)
     expect(askedElsewhere(asked(['a']), ['a'])).toBe(false)
+    expect(askedElsewhere(asked(['a', 'b']), ['b', 'a'])).toBe(false)
   })
 
   it('is on another page than the last question', () => {

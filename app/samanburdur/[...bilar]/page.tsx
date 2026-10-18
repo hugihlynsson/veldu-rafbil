@@ -35,7 +35,9 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
   return {
     title,
     description,
-    alternates: { canonical: comparisonPath(slugs) },
+    // Any order of the same cars is one comparison to a search engine, as it
+    // is to the verdict's cache, though each keeps the order it was opened in
+    alternates: { canonical: comparisonPath(slugs.toSorted()) },
     openGraph: {
       title,
       description,
