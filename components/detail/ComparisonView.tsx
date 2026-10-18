@@ -18,6 +18,7 @@ import PageTop from './PageTop'
 import { Lane, ScrollLanes } from './ScrollLanes'
 import ShareButton from '@/components/ShareButton'
 import CrossIcon from '@/components/CrossIcon'
+import PlusIcon from '@/components/PlusIcon'
 import { pageColumn } from '@/components/pageColumn'
 
 interface Props {
@@ -307,20 +308,23 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
       <div
         className={clsx(
           body,
-          'mt-14 md:mt-16 flex flex-wrap items-center gap-x-3 gap-y-3',
+          'mt-14 md:mt-16 flex flex-wrap items-center gap-2 sm:gap-3',
         )}
       >
         <ShareButton
           title={title}
           label="Deila samanburði"
           event="Comparison shared"
-          className="-ml-0.5"
+          className="-ml-0.5 max-sm:grow max-sm:px-2.5"
         />
         <CompareMoreLink
           cars={cars}
-          className={clsx(secondaryButton, 'py-3 px-5')}
+          className={clsx(
+            secondaryButton,
+            'py-3 px-5 max-sm:grow max-sm:px-2.5',
+          )}
         >
-          <span aria-hidden>+</span> Bera saman fleiri
+          <PlusIcon size={16} /> Bera saman fleiri
         </CompareMoreLink>
       </div>
     </main>
