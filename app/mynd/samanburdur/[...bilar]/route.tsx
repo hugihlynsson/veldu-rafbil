@@ -6,9 +6,9 @@ import { shareImage } from '../../shareImage'
  * an opengraph-image beside the page, which a catch-all segment cannot have.
  */
 export async function GET(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ bilar: string[] }> },
 ) {
   const { cars } = resolveCompared((await params).bilar)
-  return shareImage(cars)
+  return shareImage(request, cars)
 }
