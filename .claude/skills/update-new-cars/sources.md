@@ -50,14 +50,21 @@ Askja documents read so far, as slugs under `issuu.com/askja/docs/`:
 
 BL documents read so far, under `issuu.com/hallih/docs/`:
 `subaru_ver__listi_sept2015lr` (all three Subaru EVs), `mg_ver_listi`,
-`nissan_ver__listi_febr__ar_2016lr` and `renault_ver__listi___g__st_2015lr`
+`nissan_ver__listi_febr__ar_2016lr`, `renault_ver__listi___g__st_2015lr`
 (the R5 and Scenic; its Rafale is a plug-in hybrid),
-and `nm70462_hyundai_ver__b__klingur___g` (every Hyundai EV but the STARIA
-Electric; the IONIQ 9 rows carry no grant column, being over the ceiling). The
-MG one holds only the MG4 EV Urban, though its cover shows an MGS6; the MGS5,
-MGS6 and Cyberster are not in it. `nissan_ver__listi_febr__ar_2016lr` holds
-only the Leaf; the Ariya's trim prices are on its model page on nissan.is,
-readable with curl, unlabelled and before the grant.
+`nm70462_hyundai_ver__b__klingur___g` (every Hyundai EV, the IONIQ 3 and
+STARIA Electric included since October 2026; the IONIQ 9 rows carry no grant
+column, being over the ceiling), `bmw_ver_listi_xdrive_26.02.2019_lr` (iX3,
+iX1, iX and i4; no i5) and `hongqi_-_verdlisti` (EHS5 and EHS7).
+`dacia_ver__listi_16.01_2018_lr` has no EVs. Since October 2026 the MG list
+holds the MGS5, MGS6 and Cyberster as well as the MG4 Urban, and the Nissan list
+holds one Ariya row (Evolve 4WD) beside the Leaf; the Ariya's other trims are
+on its model page on nissan.is, readable with curl, unlabelled and before the
+grant. The iX1 table is headed "Sérverð", which may be an offer.
+
+The listing's HTML embeds each document as JSON with its `documentId` (the
+upload timestamp), `title` and `uri`, so one curl of `?ps=100` maps every
+recent upload to its slug without opening the documents.
 
 ## Per make
 
