@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import cars from '@/modules/data/cars'
+import { writingRules } from '@/modules/detail/writingRules'
 import { readVerdict, verdictFacts, verdictPrompt } from './prompt'
 
 const kia = cars.find((car) => car.label === 'Kia EV3 Long Range')!
@@ -27,6 +28,14 @@ describe('verdictPrompt', () => {
     const { system, prompt } = verdictPrompt([kia, tesla])
     expect(system).toContain('samanburði á bílunum')
     expect(prompt).not.toContain('Staða hans')
+  })
+
+  // So a correction made for the reviews reaches the verdicts too
+  it('keeps every rule the car reviews are written by', () => {
+    const { system } = verdictPrompt([kia, tesla])
+    for (const rule of Object.values(writingRules)) {
+      expect(system).toContain(rule)
+    }
   })
 })
 

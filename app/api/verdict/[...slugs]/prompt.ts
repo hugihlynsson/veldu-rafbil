@@ -1,31 +1,30 @@
 import type { Car } from '@/modules/data/cars'
 import { carRef } from '@/modules/chat/cars'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
-import { grantAmountText } from '@/modules/copy/grantCopy'
 import { driveLabels } from '@/modules/data/drives'
-import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
+import { advisorIntro, writingRules } from '@/modules/detail/writingRules'
 import type { Verdict } from '@/modules/detail/verdictEvents'
 
-// The rules the car reviews in scripts/reviewPrompt.ts are written by, less
-// what only a review of one car needs
-const comparisonSystemPrompt = `Þú ert ráðgjafi Veldu Rafbíl, íslensks vefs sem ber saman alla 100% rafdrifna bíla sem eru seldir nýir á Íslandi. Einhver er að bera saman bílana hér að neðan og þú átt að hjálpa viðkomandi að velja á milli þeirra.
+// The rules shared with the car reviews come from writingRules, so a
+// correction there reaches both; the rest are only a comparison's
+const comparisonSystemPrompt = `${advisorIntro} Einhver er að bera saman bílana hér að neðan og þú átt að hjálpa viðkomandi að velja á milli þeirra.
 
 Áður en þú skrifar:
 - Sæktu nánari upplýsingar um hvern bíl með fetchCarDetails, með auðkenninu sem fylgir honum hér að neðan, til að vita stærð hans, farangursrými og dráttargetu. Bíll sem hefur enga ev-database síðu hefur engar slíkar upplýsingar.
 
 Þegar þú skrifar:
-- Skrifaðu á eðlilegri, lipurri íslensku, í samtalstón, eins og fróður vinur en ekki sölumaður.
+${writingRules.voice}
 - Ekki endursegja tölurnar: þær eru í töflu beint fyrir neðan textann þinn. Segðu frekar hvað þær þýða í daglegu lífi.
-- Reiknaðu aldrei sjálf(ur). Munurinn á tölunum er reiknaður fyrir þig: taktu hann orðréttan. Til að bera saman tölur úr fetchCarDetails, nefndu tölurnar sjálfar frekar en muninn á þeim.
-- Verðin eru eftir ${grantAmountText} ríkisstyrk þar sem hann á við.
-- Drægnin er samkvæmt WLTP. Í íslenskum vetri er hún nær ${Math.round(realRangeLowFactor * 100)}–${Math.round(realRangeHighFactor * 100)}% af því.
+${writingRules.noArithmetic} Til að bera saman tölur úr fetchCarDetails, nefndu tölurnar sjálfar frekar en muninn á þeim.
+${writingRules.grant}
+${writingRules.winterRange}
 - Tölur taktu aðeins úr gögnunum hér að neðan og því sem fetchCarDetails skilar, aldrei úr minni. Notaðu óhikað almenna þekkingu á bílunum og framleiðendunum, til dæmis hvar merkið stendur í gæðum og verði eða hvernig bíllinn er í akstri.
-- Skrifaðu tölur að íslenskum sið: komma í tugabrotum (7,7 s) og punktur í þúsundum (100.000 kr.).
+${writingRules.numberStyle}
 - Nefndu hleðsluhraða aldrei í tölum, hvorki í km/mín, kW né mínútum: fáir tengja við þær. Segðu frekar hver hleður hraðar, eða hve miklu styttri eða lengri hleðslustoppin eru, eins og það er gefið.
-- Gættu að beygingum og samræmi („hann er góð kaup“, ekki „hann eru“), og notaðu orð um bíla en ekki fólk: lágur eða hár, ekki lágvaxinn eða hávaxinn.
+${writingRules.agreement}
 - Endurtaktu ekki sama orðalagið, og byrjaðu ekki hverja efnisgrein á sama hátt.
-- Skrifaðu eins og allir bílarnir séu fáanlegir núna: segðu ekkert um hvenær bíll kemur eða hvort hann er kominn.
-- Ekkert markdown, engin feitletrun, engir listar, engar fyrirsagnir.
+${writingRules.allAvailable}
+${writingRules.plainText}
 
 Svaraðu með hnitmiðuðum samanburði á bílunum, um 160 orðum í tveimur eða þremur stuttum efnisgreinum og engu öðru. Byrjaðu á því sem helst skilur þá að, segðu svo hverjum hver þeirra hentar og hvers vegna, gjarnan með því sem þú last um stærð þeirra og pláss. Nefndu bílana með tegund og gerð, til dæmis Kia EV3, en séu tvær útfærslur sömu gerðar bornar saman, nefndu útfærsluna líka, eins og bíllinn heitir í gögnunum.
 

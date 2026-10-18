@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useState } from 'react'
 
 const DRIVING = 'driving'
 
@@ -7,13 +7,11 @@ const DRIVING = 'driving'
  * follow it. Only that one is marked `data-driving`, for its snapping, as a
  * strip that snaps would jump to its nearest stop each time it is moved here.
  */
-const useSyncedScroll = () => {
-  const lanes = useRef(new Set<HTMLElement>())
+const syncedScroll = () => {
+  const all = new Set<HTMLElement>()
 
-  /** A ref callback for each strip */
   return (lane: HTMLElement | null) => {
     if (!lane) return
-    const all = lanes.current
 
     const drive = () => {
       if (lane.dataset[DRIVING] !== undefined) return
@@ -45,5 +43,12 @@ const useSyncedScroll = () => {
     }
   }
 }
+
+/**
+ * A ref callback for each strip. The same one for the life of the strips, as
+ * a new one would take every strip's listeners off and put them back on each
+ * render, and could drop the touch that marks the strip being swiped.
+ */
+const useSyncedScroll = () => useState(syncedScroll)[0]
 
 export default useSyncedScroll
