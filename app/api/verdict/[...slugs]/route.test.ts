@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import cars, { type Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
-import type { Verdict } from '@/modules/detail/verdictEvents'
+import { decodeEvents, type Verdict } from '@/modules/detail/verdictEvents'
 
 const [a, b, c, d, e] = cars as readonly [Car, Car, Car, Car, Car, ...Car[]]
 const verdict: Verdict = { paragraphs: ['Ólíkir bílar.'] }
@@ -94,6 +94,18 @@ describe('GET /api/verdict', () => {
       expect(response.status).toBe(200)
     }
     expect(writeVerdict).not.toHaveBeenCalled()
+  })
+
+  // The page shows the model at work only once it hears one is
+  it('says a model is working only when one is', async () => {
+    const types = async (response: Response) =>
+      decodeEvents(await response.text()).events.map((event) => event.type)
+
+    const writing = await loadGet()
+    expect(await types(await writing.get(pair))).toEqual(['working', 'verdict'])
+
+    const written = await loadGet({ written: verdict })
+    expect(await types(await written.get(pair))).toEqual(['verdict'])
   })
 
   it('refuses a caller past ten verdicts a minute', async () => {
