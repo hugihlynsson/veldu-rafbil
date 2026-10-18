@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react'
 import clsx from 'clsx'
 
 import { MAX_COMPARED } from '@/modules/detail/comparison'
+import PlusIcon from '@/components/PlusIcon'
 
 interface Props {
   selected: boolean
@@ -11,18 +12,7 @@ interface Props {
   className?: string
 }
 
-// Drawn rather than + and ✓, which sit off their glyphs' centres
-const PlusIcon = () => (
-  <svg aria-hidden width="14" height="14" viewBox="0 0 14 14" fill="none">
-    <path
-      d="M7 2v10M2 7h10"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-    />
-  </svg>
-)
-
+// Drawn rather than ✓, which sits off its glyph's centre
 const CheckIcon = () => (
   <svg aria-hidden width="14" height="14" viewBox="0 0 14 14" fill="none">
     <path
@@ -67,7 +57,7 @@ const CompareToggle: FunctionComponent<Props> = ({
         className,
       )}
     >
-      {selected ? <CheckIcon /> : <PlusIcon />}
+      {selected ? <CheckIcon /> : <PlusIcon size={14} />}
     </button>
   )
 }

@@ -9,6 +9,7 @@ import { comparisonPathOf } from '@/modules/detail/paths'
 import { MAX_COMPARED, MIN_COMPARED } from '@/modules/detail/comparison'
 import { rememberListSearch } from '@/utils/listReturn'
 import CrossIcon from '@/components/CrossIcon'
+import PlusIcon from '@/components/PlusIcon'
 
 interface Props {
   cars: ReadonlyArray<Car>
@@ -97,7 +98,7 @@ const CompareTray: FunctionComponent<Props> = ({ cars, onRemove }) => {
                 !ready && 'grow',
               )}
             >
-              <span aria-hidden>+</span>
+              <PlusIcon size={10} />
               {ready ? (
                 <span className="sr-only">Pláss fyrir annan bíl</span>
               ) : (
