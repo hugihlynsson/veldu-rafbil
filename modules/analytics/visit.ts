@@ -19,6 +19,9 @@ export type Device = (typeof devices)[number]
 /** The most events one request carries, as the route reads them */
 export const MAX_BATCH = 20
 
+/** A day: the longest a duration counts for, though a tab can stay open longer */
+export const MAX_DURATION_MS = 86_400_000
+
 // The slugs as the path has them, unresolved: resolving them would bring the
 // whole car list into every page that tracks anything
 const slugsUnder = (pathname: string, base: string): string[] | undefined => {

@@ -74,21 +74,8 @@ export default function CarList() {
   const { filters, setFilters } = useFilters()
   const { view, setView } = useView()
 
-  const changeSorting = (next: Sorting) => {
-    toggleSorting(next)
-    track({
-      name: 'sorting_changed',
-      sorting: next,
-      // As useSorting turns it: the sorting in use flips, another starts in
-      // its own direction
-      direction:
-        next !== sorting
-          ? sortingDefinitions[next].defaultDirection
-          : direction === 'asc'
-            ? 'desc'
-            : 'asc',
-    })
-  }
+  const changeSorting = (tapped: Sorting) =>
+    track({ name: 'sorting_changed', ...toggleSorting(tapped) })
 
   const changeView = (next: View) => {
     if (next === view) return

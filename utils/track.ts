@@ -38,18 +38,13 @@ const sessionId = (): string | undefined => {
 }
 
 const send = (body: string) => {
-  // A beacon outlives the page, which a hidden tab may be about to be
-  const beaconed = navigator.sendBeacon?.(
-    ENDPOINT,
-    new Blob([body], { type: 'application/json' }),
-  )
-  if (beaconed) return
-  fetch(ENDPOINT, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body,
-    keepalive: true,
-  }).catch(() => {})
+  // A beacon outlives the page, which a hidden tab may be about to be. Sent
+  // as a string, so as text/plain: Chromium throws on a JSON Blob, as a type
+  // a form could not send. The route reads the body as JSON whatever its type.
+  try {
+    if (navigator.sendBeacon?.(ENDPOINT, body)) return
+  } catch {}
+  fetch(ENDPOINT, { method: 'POST', body, keepalive: true }).catch(() => {})
 }
 
 /** Sends whatever is waiting, now */

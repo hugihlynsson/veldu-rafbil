@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 
 import {
+  MAX_DURATION_MS,
   pageOf,
   referrerHost,
   scrollDepth,
@@ -58,9 +59,12 @@ export default function PageTracking() {
     let measuring = false
 
     const engaged = () =>
-      Math.round(
-        engagedMs +
-          (visibleSince === null ? 0 : performance.now() - visibleSince),
+      Math.min(
+        MAX_DURATION_MS,
+        Math.round(
+          engagedMs +
+            (visibleSince === null ? 0 : performance.now() - visibleSince),
+        ),
       )
 
     const report = () =>

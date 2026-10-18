@@ -12,9 +12,12 @@ import {
   valuesFromFilters,
 } from '@/modules/list/filters'
 import {
+  isDefaultDirection,
   sortingParsers,
   sortingUrlKeys,
   stateFromSortingValues,
+  toggledSorting,
+  type SortingState,
 } from '@/modules/list/sorting'
 
 // Shallow, and replacing rather than pushing, both nuqs defaults: a sort or a
@@ -40,13 +43,15 @@ export const useSorting = () => {
 
   const { sorting, direction } = stateFromSortingValues(values)
 
-  // The active sorting flips; another one starts in its default direction
-  const toggleSorting = (value: Sorting) =>
-    void setValues(
-      value === sorting
-        ? { flipped: !values.flipped }
-        : { sorting: value, flipped: false },
-    )
+  /** Applies a tap on a sorting's toggle, and says what it led to */
+  const toggleSorting = (value: Sorting): SortingState => {
+    const next = toggledSorting({ sorting, direction }, value)
+    void setValues({
+      sorting: next.sorting,
+      flipped: !isDefaultDirection(next.sorting, next.direction),
+    })
+    return next
+  }
 
   return { sorting, direction, toggleSorting }
 }

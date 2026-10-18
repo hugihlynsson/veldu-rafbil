@@ -71,6 +71,18 @@ const defaultDirection = (sorting: Sorting): SortingDirection =>
 export const flipDirection = (direction: SortingDirection): SortingDirection =>
   direction === 'asc' ? 'desc' : 'asc'
 
+/**
+ * What a tap on a sorting's toggle leaves: the sorting in use flips, and
+ * another starts in its own default direction
+ */
+export const toggledSorting = (
+  { sorting, direction }: SortingState,
+  tapped: Sorting,
+): SortingState =>
+  tapped === sorting
+    ? { sorting, direction: flipDirection(direction) }
+    : { sorting: tapped, direction: defaultDirection(tapped) }
+
 export const isDefaultDirection = (
   sorting: Sorting,
   direction: SortingDirection,

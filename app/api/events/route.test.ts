@@ -37,6 +37,21 @@ describe('POST /api/events', () => {
     expect((await post(batch)).status).toBe(204)
   })
 
+  it('reads a beacon, which is sent as text', async () => {
+    const { POST } = await import('./route')
+    const response = await POST(
+      new Request('http://localhost/api/events', {
+        method: 'POST',
+        headers: {
+          'x-forwarded-for': '10.3.0.9',
+          'content-type': 'text/plain;charset=UTF-8',
+        },
+        body: JSON.stringify(batch),
+      }),
+    )
+    expect(response.status).toBe(204)
+  })
+
   it('refuses a body that is not a batch', async () => {
     const post = await loadPost()
     for (const body of ['not json', {}, { ...batch, events: [] }]) {

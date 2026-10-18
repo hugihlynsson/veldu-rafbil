@@ -76,8 +76,13 @@ export default function ChatEngine({ onChange, questionMetadata }: Props) {
   useEffect(() => {
     if (!hasRestored) return
 
-    const send = (text: string) => {
+    const ask = (text: string) => {
       void sendMessage(asQuestion(text, questionMetadata))
+    }
+
+    // Counted here rather than in ask, so a retry is not a second question
+    const send = (text: string) => {
+      ask(text)
       track({
         name: 'chat_question_sent',
         conversationId: getConversationId(),
@@ -95,7 +100,7 @@ export default function ChatEngine({ onChange, questionMetadata }: Props) {
         const text = getMessageText(messages[lastUserIndex])
         if (!text) return
         setMessages(messages.slice(0, lastUserIndex))
-        send(text)
+        ask(text)
       },
       clear: () => {
         setMessages([])

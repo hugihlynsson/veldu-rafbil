@@ -7,6 +7,7 @@ import {
   sortingDefinitions,
   sortings,
   sortingUrlKeys,
+  toggledSorting,
 } from './sorting'
 import { deriveCar, Car } from '@/modules/data/cars'
 import type { NewCar } from '@/modules/data/newCarSchema'
@@ -90,6 +91,21 @@ describe('direction', () => {
   it('flips both ways', () => {
     expect(flipDirection('asc')).toBe('desc')
     expect(flipDirection(flipDirection('asc'))).toBe('asc')
+  })
+
+  it('flips the sorting in use, and starts another in its own direction', () => {
+    const byPrice = { sorting: 'price', direction: 'asc' } as const
+    expect(toggledSorting(byPrice, 'price')).toEqual({
+      sorting: 'price',
+      direction: 'desc',
+    })
+    expect(toggledSorting(byPrice, 'range')).toEqual({
+      sorting: 'range',
+      direction: 'desc',
+    })
+    expect(
+      toggledSorting({ sorting: 'range', direction: 'asc' }, 'price'),
+    ).toEqual({ sorting: 'price', direction: 'asc' })
   })
 })
 

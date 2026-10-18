@@ -110,6 +110,7 @@ describe('readBatch', () => {
       ]),
     )
     expect(read?.events.map(({ name }) => name)).toEqual(['seller_clicked'])
+    expect(read?.dropped).toBe(1)
   })
 
   it('refuses a batch with no event it knows', () => {
@@ -155,5 +156,24 @@ describe('eventRows', () => {
         commit: 'bc4a4a3',
       },
     ])
+  })
+
+  it('counts the events it dropped in a row of their own', () => {
+    const read = readBatch(
+      batch([onPage(tracked.chat_opened), { name: 'chat_liked' }]),
+    )!
+    const rows = eventRows(read, {
+      receivedAt: Date.UTC(2026, 9, 18, 12, 0, 0),
+      country: undefined,
+      environment: 'production',
+      commit: undefined,
+    })
+    expect(rows).toHaveLength(2)
+    expect(rows[1]).toMatchObject({
+      _time: '2026-10-18T12:00:00.000Z',
+      name: 'events_dropped',
+      count: 1,
+      sessionId: conversationId,
+    })
   })
 })

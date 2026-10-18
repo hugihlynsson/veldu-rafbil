@@ -2,8 +2,8 @@ import { z } from 'zod'
 
 import { MAX_COMPARED } from '@/modules/detail/comparison'
 import { filterKeys, type FilterKey } from '@/modules/list/filters'
-import { sortingDefinitions, type Sorting } from '@/modules/list/sorting'
-import { devices, MAX_BATCH, pageKinds } from './visit'
+import { sortings, type Sorting } from '@/modules/list/sorting'
+import { devices, MAX_BATCH, MAX_DURATION_MS, pageKinds } from './visit'
 
 // What a page reports of how it is used, read on the server. The browser only
 // imports the types, so zod stays off the list's first load.
@@ -11,8 +11,7 @@ import { devices, MAX_BATCH, pageKinds } from './visit'
 const slug = z.string().min(1).max(100)
 const pageKind = z.enum(pageKinds)
 const conversationId = z.uuid().optional()
-// Up to a day, which a tab left open in the background can reach
-const milliseconds = z.int().min(0).max(86_400_000)
+const milliseconds = z.int().min(0).max(MAX_DURATION_MS)
 
 // Every event says where it happened and how long it waited to be sent, which
 // the server turns into when it happened, as a phone's clock can be anything
@@ -29,7 +28,6 @@ const event = <Name extends string, Shape extends Record<string, z.ZodType>>(
   shape: Shape,
 ) => z.strictObject({ name: z.literal(name), ...envelope, ...shape })
 
-const sortings = Object.keys(sortingDefinitions) as [Sorting, ...Sorting[]]
 const filterKey = z.enum(filterKeys as [FilterKey, ...FilterKey[]])
 
 /**
@@ -54,7 +52,7 @@ export const productEventSchema = z.discriminatedUnion('name', [
     maxScroll: z.int().min(0).max(100),
   }),
   event('sorting_changed', {
-    sorting: z.enum(sortings),
+    sorting: z.enum(sortings as [Sorting, ...Sorting[]]),
     direction: z.enum(['asc', 'desc']),
   }),
   event('view_changed', { view: z.enum(['list', 'grid']) }),
@@ -121,6 +119,8 @@ const batchSchema = z.strictObject({
 
 export type Batch = Omit<z.output<typeof batchSchema>, 'events'> & {
   events: ProductEvent[]
+  /** The events in it this did not know, which only a count of says much */
+  dropped: number
 }
 
 /**
@@ -134,7 +134,8 @@ export const readBatch = (body: unknown): Batch | undefined => {
     const read = productEventSchema.safeParse(candidate)
     return read.success ? [read.data] : []
   })
-  return events.length > 0 ? { ...parsed.data, events } : undefined
+  const dropped = parsed.data.events.length - events.length
+  return events.length > 0 ? { ...parsed.data, events, dropped } : undefined
 }
 
 /** What the route knows of a batch that the browser does not say */
@@ -146,19 +147,30 @@ export interface Receipt {
   commit: string | undefined
 }
 
-/** One row an event, flat, so each field is a column of its own in Axiom */
+/**
+ * One row an event, flat, so each field is a column of its own in Axiom. Any
+ * that were dropped are counted in a row of their own, `events_dropped`, so
+ * a deploy that breaks an event shows up as more than a quiet gap.
+ */
 export const eventRows = (
-  { sessionId, device, events }: Batch,
+  { sessionId, device, events, dropped }: Batch,
   { receivedAt, country, environment, commit }: Receipt,
-) =>
-  events.map(({ ageMs, page, ...rest }) => ({
+) => {
+  const about = { sessionId, device, country, environment, commit }
+  const rows: object[] = events.map(({ ageMs, page, ...rest }) => ({
     _time: new Date(receivedAt - ageMs).toISOString(),
     ...rest,
     page: page.kind,
     pageSlugs: page.slugs,
-    sessionId,
-    device,
-    country,
-    environment,
-    commit,
+    ...about,
   }))
+  if (dropped > 0) {
+    rows.push({
+      _time: new Date(receivedAt).toISOString(),
+      name: 'events_dropped',
+      count: dropped,
+      ...about,
+    })
+  }
+  return rows
+}
