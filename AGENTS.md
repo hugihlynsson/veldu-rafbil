@@ -191,7 +191,7 @@ itself, where a dark override would never reach it.
 - Analytics is loaded by a component that injects the script itself. Use its
   `trackEvent` helper for new events, and don't add a second `<script>` for it.
   Fathom only counts; what was done and to which cars goes through `track` in
-  `utils/track.ts`, to `/api/events` and the `veldu-rafbil-events` dataset in
+  `utils/track.ts`, to `/api/umferd` and the `veldu-rafbil-events` dataset in
   Axiom. An event is declared in `modules/analytics/events.ts` before a page
   can send it, and the browser imports only its type, so zod stays off the
   list's first load.

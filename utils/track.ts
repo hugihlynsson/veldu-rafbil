@@ -6,7 +6,9 @@ import {
   type Page,
 } from '@/modules/analytics/visit'
 
-const ENDPOINT = '/api/events'
+// Icelandic for traffic, and nothing a blocklist matches: lists catch paths
+// like /events, /track and /collect, and a blocked beacon is a silent gap
+const ENDPOINT = '/api/umferd'
 const SESSION_KEY = 'veldu-rafbil-session'
 
 // Long enough that a run of taps goes as one request
@@ -80,7 +82,7 @@ const listen = () => {
 /**
  * Reports something a visitor did, on the page it happened on: the current
  * one unless named, as a page that is being left already has the next path.
- * Sent with the others from the next few seconds, to /api/events.
+ * Sent with the others from the next few seconds, to /api/umferd.
  */
 export const track = (event: TrackedEvent, page?: Page): void => {
   if (typeof window === 'undefined') return

@@ -10,6 +10,7 @@ import {
   comparisonSuggestions,
 } from '@/modules/chat/suggestions'
 import carReviews, { type CarReview } from '@/modules/data/carReviews'
+import { carSlug } from '@/modules/data/getCarId'
 import { resolveSlugs } from '@/modules/detail/slugs'
 
 /** How an answer ended, if the route saw it end */
@@ -116,7 +117,9 @@ export const chatLogEvent = (
     ...timing,
     assistantResponse: finish.text,
     followUps: finish.followUps,
-    cars: finish.cars,
+    // By slug, as the pages' own events name a car, so an answer can be
+    // followed to the cars opened from it
+    cars: finish.cars.map((id) => carSlug({ id })),
     tokenUsage: finish.usage,
     toolCalls: finish.toolCalls,
   }

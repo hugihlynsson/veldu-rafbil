@@ -44,7 +44,7 @@ describe('chatLogEvent', () => {
       ...timing,
       assistantResponse: finish.text,
       followUps: finish.followUps,
-      cars: finish.cars,
+      cars: ['leapmotor-t03'],
       tokenUsage: finish.usage,
       toolCalls: [],
     })
