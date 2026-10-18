@@ -146,7 +146,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'skoda-enyaq-85x',
   ],
   'ford-puma-base': [
-    'hyundai-inster-long-range',
+    'mg-mgs5-comfort',
     'peugeot-e-2008-54-kwh',
     'leapmotor-b10-67-1-kwh',
   ],
@@ -318,7 +318,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'leapmotor-b10-67-1-kwh': [
     'kia-ev2-long-range',
-    'skoda-epiq-55',
+    'mg-mgs5-comfort',
     'leapmotor-c10-pro',
   ],
   'leapmotor-c10-pro': [
@@ -480,6 +480,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'leapmotor-b10-base',
     'leapmotor-b05-promax',
     'leapmotor-b03x-promax',
+  ],
+  'mg-mgs5-comfort': [
+    'leapmotor-b10-67-1-kwh',
+    'ford-puma-base',
+    'kia-ev3-standard-range',
   ],
   'mg-mgs5-lux': [
     'kgm-torres-evx',
