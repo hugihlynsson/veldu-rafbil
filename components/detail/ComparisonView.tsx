@@ -90,19 +90,19 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
         <PageTop />
         {/* Further from the logo than a car's name, which the photo parts
             from it. Padding, as a margin would collapse into the logo's */}
-        <div className="pt-4 md:pt-6 flex items-center justify-between gap-4">
-          <div className="min-w-0">
-            <p className={eyebrow}>Samanburður</p>
-            <h1 className="mt-1 mb-0 text-2xl font-semibold leading-tight md:text-display">
+        <div className="pt-4 md:pt-6">
+          <p className={eyebrow}>Samanburður</p>
+          <div className="mt-1 flex items-center justify-between gap-4">
+            <h1 className="m-0 min-w-0 text-2xl font-semibold leading-tight md:text-display">
               {title}
             </h1>
+            <ShareButton
+              title={title}
+              label="Deila samanburði"
+              event="Comparison shared"
+              variant="icon"
+            />
           </div>
-          <ShareButton
-            title={title}
-            label="Deila samanburði"
-            event="Comparison shared"
-            variant="icon"
-          />
         </div>
       </header>
 
