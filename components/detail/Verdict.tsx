@@ -26,14 +26,12 @@ import {
 /** Where the model's words about the cars go, as a car's page has its review */
 const ReviewSection: FunctionComponent<{
   children: ReactNode
-  className?: string
-  title?: string
-}> = ({ children, className, title = 'Í hnotskurn:' }) => (
+}> = ({ children }) => (
   <section aria-labelledby="review" className="mt-8 mb-6">
     {/* 65ch of the wrapper's 16px, not the 18px text, keeps lines near 70 */}
-    <div className={clsx('max-w-prose', className)}>
+    <div className="max-w-prose">
       <h2 id="review" className="m-0 text-sm font-semibold">
-        {title}
+        Í hnotskurn:
       </h2>
       {children}
     </div>
@@ -142,7 +140,9 @@ const Working: FunctionComponent<{
   names: ReadonlyArray<string>
   lookedUp: ReadonlyArray<string>
 }> = ({ names, lookedUp }) => (
-  <ReviewSection title="Ber saman bílana…">
+  // Headed as the verdict will be, so only what is under it changes when it
+  // arrives, and the line below is the one that says it is being written
+  <ReviewSection>
     {/* Two lines tall whatever the line, so the card holds still as they turn */}
     <output className="mt-3 flex items-start gap-2 min-h-[2lh] text-sm leading-snug">
       <span
@@ -219,15 +219,18 @@ const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
 
   if (verdict)
     return (
-      <ReviewSection className="animate-message-in">
-        {verdict.paragraphs.map((paragraph) => (
-          <p
-            key={paragraph}
-            className="mt-2 mb-0 text-base leading-normal text-pretty md:text-lg [&+&]:mt-3"
-          >
-            {paragraph}
-          </p>
-        ))}
+      <ReviewSection>
+        {/* Only the words arrive; the heading was there all along */}
+        <div className="animate-message-in">
+          {verdict.paragraphs.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="mt-2 mb-0 text-base leading-normal text-pretty md:text-lg [&+&]:mt-3"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
       </ReviewSection>
     )
   if (failed) return null
