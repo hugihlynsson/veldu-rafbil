@@ -7,7 +7,7 @@ interface Props {
   className?: string
   external?: boolean
   extra?: string
-  /** The regular weight, for a pill beside a bold one it should not compete with */
+  /** The regular weight, for a pill among figures set in it */
   light?: boolean
   /** A size down, for a column a quarter of a phone wide */
   compact?: boolean

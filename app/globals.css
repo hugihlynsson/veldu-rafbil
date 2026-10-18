@@ -21,6 +21,9 @@
   --color-sky-hover: #1a15b7;
   --color-on-sky: #fff;
   --color-focus: #201be3;
+  /* The dot beside the best figure in a comparison, lightened in dark for
+     the same reason as `focus`: a small mark of the brand on black is lost */
+  --color-mark: #201be3;
 
   /* Text, strongest first */
   --color-tint: #111;
@@ -241,6 +244,7 @@
     /* `sky` and `on-sky` are absent: the brand does not change theme */
     --color-sky-hover: #4039ef;
     --color-focus: #8f9bff;
+    --color-mark: #8f9bff;
 
     --color-tint: #f4f4f4;
     --color-stone: #b9b9b9;

@@ -14,7 +14,7 @@ interface Props {
   car: Car
   /** Price per km of range in the badge, when that is what the list ranks by */
   showValue?: boolean
-  /** Set in the regular weight, where only the best figure is bold */
+  /** Set in the regular weight, among figures that are */
   light?: boolean
   compact?: boolean
   /** Without the badge, for a column too narrow to hold it beside the price */
