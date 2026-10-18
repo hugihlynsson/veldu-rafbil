@@ -194,6 +194,12 @@ const NewCar: FunctionComponent<Props> = ({
               if (!compared) trackEvent('Compare added')
               onToggleCompare()
             }}
+            // Found on hover by a mouse, as the share button is. A car in the
+            // tray keeps it, so it says so wherever the pointer is
+            className={clsx(
+              !compared &&
+                'pointer-fine:opacity-0 pointer-fine:group-hover/car:opacity-100 pointer-fine:focus-visible:opacity-100',
+            )}
           />
         </div>
 

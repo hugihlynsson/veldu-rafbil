@@ -11,31 +11,65 @@ interface Props {
   className?: string
 }
 
+// Drawn rather than + and ✓, which sit off their glyphs' centres
+const PlusIcon = () => (
+  <svg aria-hidden width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <path
+      d="M7 2v10M2 7h10"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+    />
+  </svg>
+)
+
+const CheckIcon = () => (
+  <svg aria-hidden width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <path
+      d="m2.5 7.5 3 3 6-7"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+)
+
+/**
+ * Adds a car to the comparison tray, or takes it out: an icon the size of the
+ * card's share button, as the tray beneath says what it does once pressed
+ */
 const CompareToggle: FunctionComponent<Props> = ({
   selected,
   full,
   onToggle,
   className,
-}) => (
-  <button
-    type="button"
-    aria-pressed={selected}
-    disabled={full && !selected}
-    title={full && !selected ? `Mest ${MAX_COMPARED} bílar í einu` : undefined}
-    onClick={onToggle}
-    className={clsx(
-      'inline-flex items-center shrink-0 py-1 px-3 text-sm font-semibold rounded-full border cursor-pointer transition duration-100 active:enabled:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed',
-      selected
-        ? 'bg-sky border-sky text-on-sky hover:bg-sky-hover hover:border-sky-hover'
-        : 'bg-transparent border-line-chip text-tint hover:enabled:bg-cloud',
-      className,
-    )}
-  >
-    <span aria-hidden className="mr-1.25 -ml-0.5">
-      {selected ? '✓' : '+'}
-    </span>
-    {selected ? 'Í samanburði' : 'Bera saman'}
-  </button>
-)
+}) => {
+  const said =
+    full && !selected
+      ? `Mest ${MAX_COMPARED} bílar í einu`
+      : selected
+        ? 'Í samanburði'
+        : 'Bera saman'
+  return (
+    <button
+      type="button"
+      aria-label="Bera saman"
+      aria-pressed={selected}
+      disabled={full && !selected}
+      title={said}
+      onClick={onToggle}
+      className={clsx(
+        'inline-flex items-center justify-center shrink-0 w-7.5 h-7.5 rounded-full border cursor-pointer transition duration-100 active:enabled:scale-[0.95] disabled:cursor-not-allowed disabled:text-clay disabled:border-line',
+        selected
+          ? 'bg-sky border-sky text-on-sky hover:bg-sky-hover hover:border-sky-hover'
+          : 'bg-transparent border-line-chip text-tint hover:enabled:bg-cloud',
+        className,
+      )}
+    >
+      {selected ? <CheckIcon /> : <PlusIcon />}
+    </button>
+  )
+}
 
 export default CompareToggle
