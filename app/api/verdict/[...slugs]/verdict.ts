@@ -11,6 +11,7 @@ import { carRef } from '@/modules/chat/cars'
 import { advisorModel } from '@/modules/chat/model'
 import { createFetchCarDetailsTool } from '@/app/api/chat/tools/fetchCarDetails'
 import { deployment, logAfterResponse } from '@/app/api/publicEndpoint'
+import { readEveryPage, verdictKeys } from './keep'
 import { readVerdict, verdictPrompt } from './prompt'
 
 class NotWritten extends Error {}
@@ -37,31 +38,33 @@ const keyOf = (cars: ReadonlyArray<Car>): string => {
 }
 
 /**
- * The cached verdict for a set of cars, written by `write` when there is none.
- * One function for reading and writing, as unstable_cache keys on its source:
- * without `write` a miss throws, and nothing is cached.
+ * The verdict kept under a key, or `written` kept there when there is none.
+ * One function for reading and keeping, as unstable_cache keys on its source:
+ * without `written` a miss throws, and nothing is kept.
  */
-const cachedVerdict = (
-  cars: ReadonlyArray<Car>,
-  write?: () => Promise<Verdict>,
-): Promise<Verdict> =>
+const kept = (key: string, written?: Verdict): Promise<Verdict> =>
   unstable_cache(async () => {
-    if (!write) throw new NotWritten()
-    return write()
-  }, ['verdict', keyOf(cars)])()
+    if (!written) throw new NotWritten()
+    return written
+  }, ['verdict', key])()
 
-/** The verdict if one is written, without writing one */
-export const peekVerdict = async (
-  compared: ReadonlyArray<Car>,
-): Promise<Verdict | null> => {
+const peek = async (key: string): Promise<Verdict | null> => {
   try {
-    return await cachedVerdict(compared)
+    return await kept(key)
   } catch (error) {
     if (!(error instanceof NotWritten)) {
       console.error('Reading a verdict failed:', error)
     }
     return null
   }
+}
+
+/** The verdict if one is written, without writing one */
+export const peekVerdict = async (
+  compared: ReadonlyArray<Car>,
+): Promise<Verdict | null> => {
+  const { whole, partial } = verdictKeys(keyOf(compared))
+  return (await peek(whole)) ?? peek(partial)
 }
 
 // The prompts ask for some 160 words: far fewer is an answer that stopped
@@ -74,14 +77,22 @@ const wordCount = ({ paragraphs }: Verdict) =>
 // shows it doing; short of the function's own limit
 const TIMEOUT_MS = 100_000
 
+interface Usage {
+  total?: LanguageModelUsage
+  lookups: number
+  /** Whether it read every page it was told to, which decides how long it is kept */
+  readEveryPage?: boolean
+}
+
 const write = async (
   unordered: ReadonlyArray<Car>,
   emit: (event: VerdictEvent) => void,
-  usage: { total?: LanguageModelUsage; lookups: number },
+  usage: Usage,
 ): Promise<Verdict> => {
   const compared = ordered(unordered)
   const { system, prompt } = verdictPrompt(compared)
   const byRef = new Map(compared.map((car) => [carRef(car), car] as const))
+  const read = new Set<string>()
 
   const result = streamText({
     model: google(advisorModel),
@@ -106,6 +117,9 @@ const write = async (
         done: false,
       })
     } else if (part.type === 'tool-result' || part.type === 'tool-error') {
+      if (part.type === 'tool-result' && !part.dynamic && part.output.found) {
+        read.add(part.output.carName)
+      }
       emit({ type: 'lookup', id: part.toolCallId, car: '', done: true })
     } else if (part.type === 'error') {
       throw part.error
@@ -123,6 +137,7 @@ const write = async (
   if (!verdict || wordCount(verdict) < MIN_WORDS) {
     throw new Error('The model gave too short a verdict')
   }
+  usage.readEveryPage = readEveryPage(compared, read)
   return verdict
 }
 
@@ -152,10 +167,14 @@ export const writeVerdict = (compared: ReadonlyArray<Car>): Job => {
   jobs.set(id, job)
 
   const startedAt = performance.now()
-  const usage: { total?: LanguageModelUsage; lookups: number } = { lookups: 0 }
+  const usage: Usage = { lookups: 0 }
   let failure: string | undefined
+  const keys = verdictKeys(id)
 
-  const done = cachedVerdict(compared, () => write(compared, emit, usage))
+  const done = write(compared, emit, usage)
+    .then((verdict) =>
+      kept(usage.readEveryPage ? keys.whole : keys.partial, verdict),
+    )
     .then((verdict) => emit({ type: 'verdict', verdict }))
     .catch((error) => {
       console.error('Writing a verdict failed:', error)
@@ -174,6 +193,7 @@ export const writeVerdict = (compared: ReadonlyArray<Car>): Job => {
       error: failure,
       usage: usage.total,
       lookups: usage.lookups,
+      readEveryPage: usage.readEveryPage,
       millis: Math.round(performance.now() - startedAt),
       model: advisorModel,
       ...deployment(),

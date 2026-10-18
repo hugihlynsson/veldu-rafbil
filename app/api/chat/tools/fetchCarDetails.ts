@@ -105,7 +105,12 @@ export const createFetchCarDetailsTool = () => {
 
       const cached = specCache.get(url)
       if (cached && cached.expires > Date.now()) {
-        return { carName, specifications: cached.specifications, source: url }
+        return {
+          carName,
+          specifications: cached.specifications,
+          source: url,
+          found: true,
+        }
       }
 
       try {
@@ -132,7 +137,9 @@ export const createFetchCarDetailsTool = () => {
         const specifications = readSpecs(await readCapped(response))
         specCache.set(url, { specifications, expires: Date.now() + CACHE_MS })
 
-        return { carName, specifications, source: url }
+        // Said outright, so a caller can tell a page read from every way of
+        // not reading one without matching on the words to the model
+        return { carName, specifications, source: url, found: true }
       } catch (error) {
         return {
           carName,
