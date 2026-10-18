@@ -5,8 +5,10 @@ import Link from 'next/link'
 import { trackEvent } from 'fathom-client'
 
 import type { Car } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
 import { useListHref } from '@/utils/listReturn'
 import { setComparedCars } from '@/utils/useComparison'
+import { track } from '@/utils/track'
 
 interface Props {
   cars: ReadonlyArray<Car>
@@ -26,6 +28,7 @@ const CompareMoreLink: FunctionComponent<Props> = ({
     onClick={() => {
       setComparedCars(cars)
       trackEvent('Compare more')
+      track({ name: 'compare_more', cars: cars.map(carSlug) })
     }}
   >
     {children}

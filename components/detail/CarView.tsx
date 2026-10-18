@@ -159,7 +159,9 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
               event="Car shared"
               className="-ml-0.5"
             />
-            {car.evDatabaseUrl && <EvDatabaseLink href={car.evDatabaseUrl} />}
+            {car.evDatabaseUrl && (
+              <EvDatabaseLink car={car} href={car.evDatabaseUrl} />
+            )}
           </div>
 
           <section aria-labelledby="similar" className="mt-12 md:mt-16">

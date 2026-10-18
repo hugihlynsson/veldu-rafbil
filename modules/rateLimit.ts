@@ -53,6 +53,10 @@ export const filterSuggestionsRateLimit = createRateLimit(60)
 // A tap or a send each, so far fewer than the requests behind them
 export const suggestionOutcomeRateLimit = createRateLimit(30)
 
+// Spends nothing but log space: a page sends its events a few seconds' worth
+// at a time, and a visitor clicking through cars sends one most pages
+export const productEventRateLimit = createRateLimit(60)
+
 // Only a verdict no one has asked for before reaches the model; the rest are
 // read from the cache and never count
 export const verdictRateLimit = createRateLimit(10)

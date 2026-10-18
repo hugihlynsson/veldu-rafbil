@@ -7,10 +7,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import type { Car } from '@/modules/data/cars'
-import { carName } from '@/modules/data/getCarId'
+import { carName, carSlug } from '@/modules/data/getCarId'
 import { comparisonPathOf } from '@/modules/detail/paths'
 import { listNames } from '@/modules/copy/listNames'
+import { getConversationId } from '@/utils/chatStorage'
 import { rememberListSearch } from '@/utils/listReturn'
+import { track } from '@/utils/track'
 
 interface Props {
   cars: ReadonlyArray<Car>
@@ -32,6 +34,12 @@ const CompareAnswerCars: React.FunctionComponent<Props> = ({
           rememberListSearch(window.location.search)
         }
         trackEvent('Comparison opened from chat')
+        track({
+          name: 'comparison_opened',
+          cars: cars.map(carSlug),
+          source: 'chat',
+          conversationId: getConversationId(),
+        })
       }}
       className={clsx(
         'group flex items-center gap-3 w-full max-w-[500px] py-2.5 pl-2.5 pr-4 rounded-card border border-line no-underline text-inherit transition-colors duration-200 hover:bg-cloud',

@@ -25,6 +25,8 @@ import FollowUpSuggestions from './FollowUpSuggestions'
 import MentionedCars from './MentionedCars'
 import CompareAnswerCars from './CompareAnswerCars'
 import TypingIndicator from './TypingIndicator'
+import { getConversationId } from '@/utils/chatStorage'
+import { track } from '@/utils/track'
 
 /**
  * The page in view, at the foot of a conversation not yet on it,
@@ -208,6 +210,11 @@ const ChatModal: React.FunctionComponent<Props> = ({
                             lastMessage={lastMessage}
                             animate={animateExtras}
                             onPick={(car) => {
+                              track({
+                                name: 'chat_car_picked',
+                                car: carSlug(car),
+                                conversationId: getConversationId(),
+                              })
                               pickedCar.current = car
                               close()
                             }}

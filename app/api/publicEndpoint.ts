@@ -53,21 +53,35 @@ const axiom = process.env.AXIOM_TOKEN
   ? new Axiom({ token: process.env.AXIOM_TOKEN })
   : undefined
 
+/** What the AI endpoints log: each request, and what came of it */
+const ASSISTANT_DATASET = 'veldu-rafbil-assistant'
+
+/** What the pages report of how they are used */
+export const PRODUCT_EVENTS_DATASET = 'veldu-rafbil-events'
+
 /**
- * Logs once the response has gone, so the Axiom round trip never holds it
- * open. The event is built then, so it can say how the response ended, and
- * can wait on work that outlives the response.
+ * Sends rows to a dataset once the response has gone, so the Axiom round trip
+ * never holds it open. The rows are built then, so they can say how the
+ * response ended, and can wait on work that outlives the response.
  */
-export const logAfterResponse = (
-  event: () => object | Promise<object>,
+export const ingestAfterResponse = (
+  dataset: string,
+  rows: () => object[] | Promise<object[]>,
 ): void => {
   if (!axiom) return
   after(async () => {
     try {
-      axiom.ingest('veldu-rafbil-assistant', [await event()])
+      axiom.ingest(dataset, await rows())
       await axiom.flush()
     } catch (error) {
       console.error('Failed to log to Axiom:', error)
     }
   })
+}
+
+/** One event about an AI request, built once its response has gone */
+export const logAfterResponse = (
+  event: () => object | Promise<object>,
+): void => {
+  ingestAfterResponse(ASSISTANT_DATASET, async () => [await event()])
 }

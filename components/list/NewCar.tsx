@@ -11,14 +11,18 @@ import PricePill from '@/components/PricePill'
 import type { View } from '@/modules/list/view'
 import CompareToggle from '@/components/detail/CompareToggle'
 import ShareButton from '@/components/ShareButton'
+import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf } from '@/modules/detail/paths'
 import { rememberListSearch } from '@/utils/listReturn'
+import { track } from '@/utils/track'
 
 interface Props {
   car: Car
   showValue?: boolean
   showSeats?: boolean
   preload?: boolean
+  /** Its place in the list as sorted and filtered, from 0 */
+  position: number
   view?: View
   compared: boolean
   compareFull: boolean
@@ -62,6 +66,7 @@ const NewCar: FunctionComponent<Props> = ({
   showValue,
   showSeats,
   preload,
+  position,
   view = 'list',
   compared,
   compareFull,
@@ -75,7 +80,10 @@ const NewCar: FunctionComponent<Props> = ({
   const subTitle = [car.subModel, showSeats && `${car.seats} sæti`]
     .filter(Boolean)
     .join(' · ')
-  const rememberList = () => rememberListSearch(window.location.search)
+  const openCar = () => {
+    rememberListSearch(window.location.search)
+    track({ name: 'car_opened', car: carSlug(car), position })
+  }
   const delivery =
     car.expectedDelivery && `Væntanlegur ${car.expectedDelivery.toLowerCase()}`
 
@@ -99,7 +107,7 @@ const NewCar: FunctionComponent<Props> = ({
           keyboard and screen readers is the name */}
       <Link
         href={carPathOf(car)}
-        onClick={rememberList}
+        onClick={openCar}
         tabIndex={-1}
         aria-hidden
         className={clsx(
@@ -143,7 +151,7 @@ const NewCar: FunctionComponent<Props> = ({
           >
             <Link
               href={carPathOf(car)}
-              onClick={rememberList}
+              onClick={openCar}
               className="text-inherit no-underline decoration-2 underline-offset-4 hover:underline"
             >
               <span>{car.make}</span>{' '}
@@ -253,7 +261,7 @@ const NewCar: FunctionComponent<Props> = ({
 
         <Link
           href={carPathOf(car)}
-          onClick={rememberList}
+          onClick={openCar}
           className={clsx(
             'inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-tint',
             grid && 'md:justify-self-start md:self-start md:text-xs',

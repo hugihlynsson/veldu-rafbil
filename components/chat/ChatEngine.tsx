@@ -11,6 +11,7 @@ import {
   readStoredMessages,
   writeStoredMessages,
 } from '@/utils/chatStorage'
+import { track } from '@/utils/track'
 
 // The stored conversation grows without end, and the route refuses one past
 // its bounds whole, so what is sent is cut to fit the way the route cuts it
@@ -75,8 +76,17 @@ export default function ChatEngine({ onChange, questionMetadata }: Props) {
   useEffect(() => {
     if (!hasRestored) return
 
-    const send = (text: string) => {
+    const ask = (text: string) => {
       void sendMessage(asQuestion(text, questionMetadata))
+    }
+
+    // Counted here rather than in ask, so a retry is not a second question
+    const send = (text: string) => {
+      ask(text)
+      track({
+        name: 'chat_question_sent',
+        conversationId: getConversationId(),
+      })
     }
 
     onChange({
@@ -90,7 +100,7 @@ export default function ChatEngine({ onChange, questionMetadata }: Props) {
         const text = getMessageText(messages[lastUserIndex])
         if (!text) return
         setMessages(messages.slice(0, lastUserIndex))
-        send(text)
+        ask(text)
       },
       clear: () => {
         setMessages([])

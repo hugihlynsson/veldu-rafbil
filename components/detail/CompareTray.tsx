@@ -5,11 +5,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import type { Car } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
 import { comparisonPathOf } from '@/modules/detail/paths'
 import { MAX_COMPARED, MIN_COMPARED } from '@/modules/detail/comparison'
 import { rememberListSearch } from '@/utils/listReturn'
 import CrossIcon from '@/components/CrossIcon'
 import PlusIcon from '@/components/PlusIcon'
+import { track } from '@/utils/track'
 
 interface Props {
   cars: ReadonlyArray<Car>
@@ -47,6 +49,11 @@ const CompareTray: FunctionComponent<Props> = ({ cars, onRemove }) => {
               onClick={() => {
                 rememberListSearch(window.location.search)
                 trackEvent('Comparison opened')
+                track({
+                  name: 'comparison_opened',
+                  cars: cars.map(carSlug),
+                  source: 'tray',
+                })
               }}
               className={clsx(
                 button,
