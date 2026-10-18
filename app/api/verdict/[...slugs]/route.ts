@@ -1,7 +1,7 @@
 import { MIN_COMPARED } from '@/modules/detail/comparison'
 import { readSegment, resolveCompared } from '@/modules/detail/slugs'
 import { encodeEvent, type VerdictEvent } from '@/modules/detail/verdictEvents'
-import { clientKey, verdictRateLimit } from '@/modules/rateLimit'
+import { clientKey, verdictBudget, verdictRateLimit } from '@/modules/rateLimit'
 import { rateLimitedText } from '@/modules/chat/progress'
 import { peekVerdict, writeVerdict } from './verdict'
 
@@ -46,7 +46,8 @@ export async function GET(
   }
 
   // Counted only here, where a verdict is about to be bought
-  const limit = verdictRateLimit(clientKey(request))
+  const caller = verdictRateLimit(clientKey(request))
+  const limit = caller.ok ? verdictBudget('all') : caller
   if (!limit.ok) {
     return Response.json(
       { error: rateLimitedText },

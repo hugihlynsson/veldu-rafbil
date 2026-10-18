@@ -57,6 +57,10 @@ export const suggestionOutcomeRateLimit = createRateLimit(30)
 // read from the cache and never count
 export const verdictRateLimit = createRateLimit(10)
 
+// However many callers ask, the verdicts an instance will buy in an hour: the
+// limit above rests on a header a script can vary from one request to the next
+export const verdictBudget = createRateLimit(60, 60 * 60_000)
+
 // x-forwarded-for is spoofable, so this buys politeness, not identity
 export const clientKey = (request: Pick<Request, 'headers'>): string =>
   request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
