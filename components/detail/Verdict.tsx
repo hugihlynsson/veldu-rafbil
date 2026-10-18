@@ -146,7 +146,7 @@ const ProgressBar: FunctionComponent<Progress> = ({ writingAt, filled }) => {
       )
 
   return (
-    <div aria-hidden className="mt-3 h-1 rounded-full bg-cloud overflow-hidden">
+    <div aria-hidden className="mt-2 h-1 rounded-full bg-cloud overflow-hidden">
       <div
         className="h-full rounded-full bg-stone transition-[width] ease-linear"
         style={{
@@ -165,14 +165,17 @@ const Working: FunctionComponent<{
   // Headed as the verdict will be, so only what is under it changes when it
   // arrives, and the line below is the one that says it is being written
   <ReviewSection>
-    {/* Two lines tall whatever the line, so the card holds still as they turn */}
-    <output className="mt-3 flex items-start gap-2 min-h-[2lh] text-sm leading-snug">
-      <span
-        aria-hidden
-        className="w-2 h-2 mt-1.5 shrink-0 rounded-full bg-stone animate-pulse"
-      />
-      <span className="sr-only">Gervigreindin ber bílana saman</span>
-      <ThinkingLine names={names} />
+    {/* Two lines tall whatever the line, so the card holds still as they
+        turn, with a line of one kept down by the bar it goes with */}
+    <output className="mt-3 flex flex-col justify-end min-h-[2lh] text-sm leading-snug">
+      <span className="flex items-start gap-2">
+        <span
+          aria-hidden
+          className="w-2 h-2 mt-1.5 shrink-0 rounded-full bg-stone animate-pulse"
+        />
+        <span className="sr-only">Gervigreindin ber bílana saman</span>
+        <ThinkingLine names={names} />
+      </span>
     </output>
 
     <ProgressBar {...progress} />
