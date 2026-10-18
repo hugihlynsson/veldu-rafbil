@@ -6,6 +6,7 @@ import { trackEvent } from 'fathom-client'
 import type { Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
+import { sellerLink } from '@/modules/sellerLink'
 import { track } from '@/utils/track'
 import LinkPill from './LinkPill'
 
@@ -32,7 +33,7 @@ const PricePill: FunctionComponent<Props> = ({
 }) => (
   <LinkPill
     className={className}
-    href={car.sellerUrl}
+    href={sellerLink(car.sellerUrl)}
     external
     light={light}
     compact={compact}
