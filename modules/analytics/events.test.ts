@@ -36,7 +36,10 @@ const tracked = {
   filters_changed: {
     name: 'filters_changed',
     source: 'modal',
-    filters: { price: '6000000', drive: 'AWD, RWD' },
+    filters: [
+      { key: 'price', value: '6000000' },
+      { key: 'drive', value: 'AWD, RWD' },
+    ],
     count: 31,
   },
   car_opened: { name: 'car_opened', car: 'kia-ev3', position: 4 },
@@ -93,7 +96,7 @@ describe('productEventSchema', () => {
 
   it('refuses a filter the list does not have', () => {
     const event = onPage(tracked.filters_changed)
-    const filters = { ...event, filters: { colour: 'red' } }
+    const filters = { ...event, filters: [{ key: 'colour', value: 'red' }] }
     expect(productEventSchema.safeParse(filters).success).toBe(false)
   })
 })

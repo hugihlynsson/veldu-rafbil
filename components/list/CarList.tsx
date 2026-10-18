@@ -20,6 +20,7 @@ import { carPathOf } from '@/modules/detail/paths'
 import carFilter from '@/modules/list/carFilter'
 import {
   fieldsFromFilters,
+  filterKeys,
   normalizeFilters,
   type FilterKey,
   type Filters,
@@ -110,7 +111,10 @@ export default function CarList() {
     track({
       name: 'filters_changed',
       source,
-      filters: fields,
+      filters: filterKeys.flatMap((key) => {
+        const value = fields[key]
+        return value === undefined ? [] : [{ key, value }]
+      }),
       count: cars.filter(carFilter(next)).length,
     })
   }

@@ -59,10 +59,13 @@ export const productEventSchema = z.discriminatedUnion('name', [
   }),
   event('view_changed', { view: z.enum(['list', 'grid']) }),
   // The filters as the list applies them, each as its field would read, and
-  // the cars they leave
+  // the cars they leave. A list rather than an object, as Axiom makes a
+  // column of every key, and a query naming a filter not yet used fails.
   event('filters_changed', {
     source: z.enum(['modal', 'chip', 'cleared', 'suggestion']),
-    filters: z.partialRecord(filterKey, z.string().max(200)),
+    filters: z
+      .array(z.strictObject({ key: filterKey, value: z.string().max(200) }))
+      .max(filterKeys.length),
     count: z.int().min(0).max(10_000),
   }),
   // Its place in the list as it was sorted and filtered, from 0
