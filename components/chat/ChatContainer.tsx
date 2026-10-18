@@ -26,7 +26,7 @@ interface Props {
   /** The list's filters, which the bar suggests changes to as it is typed in */
   filters?: Filters
   onApplyFilters?: (filters: Filters) => void
-  /** The car whose page it is on, which each question carries */
+  /** The cars the page it is on is about, which each question carries */
   about?: ReadonlyArray<Car>
   /** The questions offered to start on; the general ones when left out */
   starters?: ReadonlyArray<string>
@@ -101,7 +101,7 @@ export default function ChatContainer({
             starters={starters}
             onDone={(pickedCar) => {
               setWantsChatOpen(false)
-              // A car picked from the answer takes the focus instead
+              // A car picked from the answer opens instead
               if (pickedCar) onShowCar(pickedCar)
               else composer.focusOnArrival()
             }}

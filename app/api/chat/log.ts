@@ -5,7 +5,10 @@ import {
   getMessageText,
   type ChatMessage,
 } from '@/modules/chat/message'
-import { CHAT_SUGGESTIONS } from '@/modules/chat/suggestions'
+import {
+  CHAT_SUGGESTIONS,
+  comparisonSuggestions,
+} from '@/modules/chat/suggestions'
 import carReviews, { type CarReview } from '@/modules/data/carReviews'
 import { resolveSlugs } from '@/modules/detail/slugs'
 
@@ -32,10 +35,16 @@ export interface ChatTiming {
   durationMs: number
 }
 
-/** Looked up as the page's own URL is, so only a car's slug is logged */
-export const carPage = (messages: ChatMessage[]): string | undefined => {
+// Looked up as the page's own URL is, so only real slugs are logged
+const pageSlugs = (messages: ChatMessage[]): string[] => {
   const about = messages.at(-1)?.metadata?.about
-  return about && resolveSlugs(about).slugs[0]
+  return about ? resolveSlugs(about).slugs : []
+}
+
+/** The car whose own page it was asked on; nothing on a comparison */
+export const carPage = (messages: ChatMessage[]): string | undefined => {
+  const slugs = pageSlugs(messages)
+  return slugs.length === 1 ? slugs[0] : undefined
 }
 
 /**
@@ -50,8 +59,14 @@ export const questionSource = (
 ): QuestionSource => {
   const question = getMessageText(messages.at(-1))
   if (getFollowUps(messages.at(-2)).includes(question)) return 'followUp'
-  const page = carPage(messages)
-  const starters = page ? reviews[page]?.questions : CHAT_SUGGESTIONS
+  const slugs = pageSlugs(messages)
+  const [page] = slugs
+  const starters =
+    slugs.length > 1
+      ? comparisonSuggestions(slugs.length)
+      : page
+        ? reviews[page]?.questions
+        : CHAT_SUGGESTIONS
   if (starters?.includes(question)) return 'starter'
   return 'typed'
 }

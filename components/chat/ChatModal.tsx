@@ -3,15 +3,18 @@
 import React, { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import type { Car } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
 import {
   askedElsewhere,
   pagesStarted,
   getFollowUps,
   isNewPage,
+  sameCarSet,
   getMessageText,
   groupIntoTurns,
 } from '@/modules/chat/message'
 import { isAwaitingText, unansweredReason } from '@/modules/chat/progress'
+import { getAnswerComparison } from '@/modules/chat/cars'
 import { getRandomSuggestions } from '@/modules/chat/suggestions'
 import Modal, { panelMotion } from '@/components/Modal'
 import type { ChatSession } from './ChatEngine'
@@ -20,6 +23,7 @@ import ChatMessage from './ChatMessage'
 import PageMarker from './PageMarker'
 import FollowUpSuggestions from './FollowUpSuggestions'
 import MentionedCars from './MentionedCars'
+import CompareAnswerCars from './CompareAnswerCars'
 import TypingIndicator from './TypingIndicator'
 
 /**
@@ -57,7 +61,7 @@ interface Props {
   composer: React.ReactNode
   /** Focused after open: showModal() would land on the close button */
   composerRef: React.RefObject<HTMLInputElement | null>
-  /** The slugs of the cars the page is about, on a car's page */
+  /** The slugs of the cars the page is about, on a car's page or a comparison */
   about?: string[]
   /** The questions to start on there */
   starters: ReadonlyArray<string>
@@ -88,9 +92,17 @@ const ChatModal: React.FunctionComponent<Props> = ({
   const lastAssistantText =
     lastMessage?.role === 'assistant' ? getMessageText(lastMessage) : ''
   const lastMessageFollowUps = getFollowUps(lastMessage)
-  // The last answer's follow-ups are about where it was asked, which this
-  // page may not be: they wait for a question here
-  const followUps = askedElsewhere(messages, about) ? [] : lastMessageFollowUps
+  // The last answer's offers are about where it was asked, which this page
+  // may not be: its follow-ups and its comparison wait for a question here
+  const elsewhere = askedElsewhere(messages, about)
+  const followUps = elsewhere ? [] : lastMessageFollowUps
+  const answerCars =
+    lastMessage?.role === 'assistant' && !elsewhere
+      ? getAnswerComparison(lastMessage)
+      : []
+  // Nor is a link to the comparison the page already is any use
+  const answerComparison =
+    about && sameCarSet(answerCars.map(carSlug), about) ? [] : answerCars
   const [pageStarters] = useState(() =>
     about ? getRandomSuggestions(starters, 3) : [],
   )
@@ -98,7 +110,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
   const lastUserMessageId = messages.findLast((m) => m.role === 'user')?.id
   const pages = pagesStarted(messages)
   const isCurrent = (slugs: string[]) =>
-    about !== undefined && slugs.join('/') === about.join('/')
+    about !== undefined && sameCarSet(slugs, about)
   const pendingPage = isNewPage(messages, about) && (
     <PendingPage
       slugs={about!}
@@ -201,6 +213,13 @@ const ChatModal: React.FunctionComponent<Props> = ({
                             }}
                           />
                         )}
+                        {status !== 'streaming' &&
+                          answerComparison.length > 0 && (
+                            <CompareAnswerCars
+                              cars={answerComparison}
+                              animate={animateExtras}
+                            />
+                          )}
                         {status !== 'streaming' && followUps.length > 0 && (
                           <FollowUpSuggestions
                             suggestions={followUps}

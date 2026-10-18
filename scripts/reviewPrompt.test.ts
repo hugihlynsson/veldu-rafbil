@@ -4,6 +4,7 @@ import { deriveCar } from '@/modules/data/cars'
 import type { NewCar } from '@/modules/data/newCarSchema'
 import cars, { type Car } from '@/modules/data/cars'
 import { similarTo } from '@/modules/detail/similar'
+import { writingRules } from '@/modules/detail/writingRules'
 import {
   carFacts,
   describeStanding,
@@ -184,6 +185,13 @@ describe('questionsPrompt', () => {
 
 describe('reviewPrompt', () => {
   const [a] = cars as readonly [Car, Car, Car, ...Car[]]
+
+  it('keeps every rule the verdicts are written by', () => {
+    const { system } = reviewPrompt(a)
+    for (const rule of Object.values(writingRules)) {
+      expect(system).toContain(rule)
+    }
+  })
 
   it('reviews one car against its rivals', () => {
     const { system, prompt } = reviewPrompt(a)

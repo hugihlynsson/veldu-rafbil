@@ -4,25 +4,27 @@ import cars, { type Car } from '@/modules/data/cars'
 import type { CarReview } from '@/modules/data/carReviews'
 import { similarTo } from '@/modules/detail/similar'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
-import { grantAmountText } from '@/modules/copy/grantCopy'
 import { driveLabels } from '@/modules/data/drives'
-import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
+import {
+  advisorIntro as intro,
+  writingRules as shared,
+} from '@/modules/detail/writingRules'
 
-const writingRules = `Þegar þú skrifar:
-- Skrifaðu á eðlilegri, lipurri íslensku, í samtalstón, eins og fróður vinur en ekki sölumaður.
-- Ekki endursegja tölurnar: þær eru í töflu beint fyrir ofan textann þinn. Segðu frekar hvað þær þýða í daglegu lífi.
-- Reiknaðu aldrei sjálf(ur). Munurinn á tölunum er reiknaður fyrir þig: taktu hann orðréttan.
-- Verðin eru eftir ${grantAmountText} ríkisstyrk þar sem hann á við.
-- Drægnin er samkvæmt WLTP. Í íslenskum vetri er hún nær ${Math.round(realRangeLowFactor * 100)}–${Math.round(realRangeHighFactor * 100)}% af því.
-- Tölur taktu aðeins úr gögnunum hér að neðan, aldrei úr minni. Notaðu óhikað almenna þekkingu á bílnum og framleiðandanum, til dæmis hvar merkið stendur í gæðum og verði, fyrir hvað það er þekkt, hvort það rekur eigið hleðslunet eða hvernig bíllinn er í akstri: það er oft það sem kaupandi vill helst vita og tölurnar sýna ekki.
-- Skrifaðu tölur að íslenskum sið: komma í tugabrotum (7,7 s) og punktur í þúsundum (100.000 kr.).
-- Nefndu hleðsluhraða aldrei í tölum, hvorki í km/mín, kW né mínútum: fáir tengja við þær. Segðu frekar að hann hlaði hraðar eða hægar en aðrir, eða hve miklu styttri eða lengri hleðslustoppin eru, eins og það er gefið.
-- Gættu að beygingum og samræmi („hann er góð kaup“, ekki „hann eru“), og notaðu orð um bíla en ekki fólk: lágur eða hár, ekki lágvaxinn eða hávaxinn.
-- Endurtaktu ekki sama orðalagið: segðu „á svipuðu verði“ eða „í sínum verðflokki“ í mesta lagi einu sinni, og þegar lesandinn veit við hvaða bíla er miðað dugar „flestir keppinautar hans“ eða að sleppa því. Byrjaðu ekki alltaf á sama hátt þegar þú snýrð þér að göllunum.
-- Skrifaðu eins og allir bílarnir séu fáanlegir núna: segðu ekkert um hvenær bíll kemur eða hvort hann er kominn.
-- Ekkert markdown, engin feitletrun, engir listar, engar fyrirsagnir.`
-
-const intro = `Þú ert ráðgjafi Veldu Rafbíl, íslensks vefs sem ber saman alla 100% rafdrifna bíla sem eru seldir nýir á Íslandi.`
+const writingRules = [
+  'Þegar þú skrifar:',
+  shared.voice,
+  '- Ekki endursegja tölurnar: þær eru í töflu beint fyrir ofan textann þinn. Segðu frekar hvað þær þýða í daglegu lífi.',
+  shared.noArithmetic,
+  shared.grant,
+  shared.winterRange,
+  '- Tölur taktu aðeins úr gögnunum hér að neðan, aldrei úr minni. Notaðu óhikað almenna þekkingu á bílnum og framleiðandanum, til dæmis hvar merkið stendur í gæðum og verði, fyrir hvað það er þekkt, hvort það rekur eigið hleðslunet eða hvernig bíllinn er í akstri: það er oft það sem kaupandi vill helst vita og tölurnar sýna ekki.',
+  shared.numberStyle,
+  '- Nefndu hleðsluhraða aldrei í tölum, hvorki í km/mín, kW né mínútum: fáir tengja við þær. Segðu frekar að hann hlaði hraðar eða hægar en aðrir, eða hve miklu styttri eða lengri hleðslustoppin eru, eins og það er gefið.',
+  shared.agreement,
+  '- Endurtaktu ekki sama orðalagið: segðu „á svipuðu verði“ eða „í sínum verðflokki“ í mesta lagi einu sinni, og þegar lesandinn veit við hvaða bíla er miðað dugar „flestir keppinautar hans“ eða að sleppa því. Byrjaðu ekki alltaf á sama hátt þegar þú snýrð þér að göllunum.',
+  shared.allAvailable,
+  shared.plainText,
+].join('\n')
 
 // The first thing anyone reads about a car on its page, under its figures,
 // so it is written to orient: what the car is, what it is good at, and what

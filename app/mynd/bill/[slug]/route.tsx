@@ -10,5 +10,5 @@ export async function GET(
     cars: [car],
   } = resolveSlugs([readSegment((await params).slug)])
   if (!car) return new Response(null, { status: 404 })
-  return shareImage(car)
+  return shareImage([car])
 }

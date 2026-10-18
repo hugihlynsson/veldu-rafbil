@@ -14,14 +14,14 @@ type Tool = ReturnType<typeof createFetchCarDetailsTool>
 const run = async (
   car: string,
   tool: Tool = createFetchCarDetailsTool(),
-): Promise<{ specifications: string; source?: string }> => {
+): Promise<{ specifications: string; source?: string; found?: boolean }> => {
   // The options are only along for the ride; this tool reads none of them
   const result = await tool.execute!({ car }, {
     toolCallId: 'test',
     messages: [],
   } as never)
   // execute is typed as possibly streaming; ours always resolves to an object
-  return result as { specifications: string; source?: string }
+  return result as { specifications: string; source?: string; found?: boolean }
 }
 
 const withPage = cars.filter((car) => car.evDatabaseUrl)
@@ -71,6 +71,7 @@ describe('fetchCarDetails', () => {
 
     expect(fetchSpy.mock.calls[0]?.[0]).toBe(car.evDatabaseUrl)
     expect(result.source).toBe(car.evDatabaseUrl)
+    expect(result.found).toBe(true)
   })
 
   // Against an uncapped read this hangs rather than fails
@@ -108,6 +109,7 @@ describe('fetchCarDetails', () => {
 
     expect(result.specifications).not.toContain('seats: 5')
     expect(result.specifications).toContain('503')
+    expect(result.found).toBeUndefined()
   })
 
   it('reads the spec table, whatever case and spelling it is in', async () => {

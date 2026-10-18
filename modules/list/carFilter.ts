@@ -16,18 +16,4 @@ const carFilter = (filters: Filters): Check => {
   return (car) => checks.every((check) => check(car))
 }
 
-/**
- * The filters without the ones the car fails, so the list shows it and keeps
- * the rest. The chat can point at any car, including one the list has hidden.
- */
-export const filtersShowing = (filters: Filters, car: Car): Filters =>
-  Object.fromEntries(
-    (Object.keys(filters) as Array<keyof Filters>)
-      .filter(
-        (name) =>
-          filters[name] !== undefined && checkFor(name, filters[name])(car),
-      )
-      .map((name) => [name, filters[name]]),
-  )
-
 export default carFilter

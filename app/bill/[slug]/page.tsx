@@ -49,7 +49,7 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
       siteName: 'Veldu Rafbíl',
       locale: 'is_IS',
       images: [
-        { url: shareImagePath(slug), ...shareImageSize, alt: car.label },
+        { url: shareImagePath([slug]), ...shareImageSize, alt: car.label },
       ],
     },
     twitter: { card: 'summary_large_image' },

@@ -8,7 +8,7 @@ const paragraph =
   'mx-auto max-w-column text-sm leading-6 text-pretty px-(--gutter) text-stone md:max-w-page md:px-10'
 
 const Footer: FunctionComponent<{}> = () => (
-  <footer className="bg-haze pt-8 pb-25 xs:pt-14">
+  <footer className="bg-haze pt-8 pb-34 xs:pt-14">
     <div className={paragraph}>
       <Logo className="block w-40 h-auto mb-4 text-tint" />
     </div>

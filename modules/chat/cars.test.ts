@@ -1,14 +1,26 @@
 import { describe, expect, it } from 'vitest'
 
 import cars, { type Car } from '@/modules/data/cars'
-import { carRef, getAnswerCars, resolveCarRefs } from './cars'
+import {
+  carRef,
+  COMPARED_FROM_ANSWER,
+  getAnswerCars,
+  getAnswerComparison,
+  resolveCarRefs,
+} from './cars'
 import {
   MAX_TAGGED_CARS,
   validateChatMessages,
   type ChatMessage,
 } from './message'
 
-const [first, second, third] = cars as readonly [Car, Car, Car, ...Car[]]
+const [first, second, third, fourth] = cars as readonly [
+  Car,
+  Car,
+  Car,
+  Car,
+  ...Car[],
+]
 
 const answer = (text: string, carIds?: string[]): ChatMessage => ({
   id: 'a',
@@ -84,5 +96,26 @@ describe('getAnswerCars', () => {
     const text = `${first.make} ${first.model} er góður.`
     expect(getAnswerCars(answer(text))).toContain(first)
     expect(getAnswerCars(answer(text, ['car-farinn']))).toContain(first)
+  })
+})
+
+describe('getAnswerComparison', () => {
+  it(`compares the first ${COMPARED_FROM_ANSWER} an answer recommends, in its order`, () => {
+    expect(
+      getAnswerComparison(
+        answer('…', [third.id, first.id, fourth.id, second.id]),
+      ),
+    ).toEqual([third, first, fourth])
+  })
+
+  it('compares two when an answer tags two', () => {
+    expect(getAnswerComparison(answer('…', [second.id, first.id]))).toEqual([
+      second,
+      first,
+    ])
+  })
+
+  it('has nothing to compare in an answer about one car', () => {
+    expect(getAnswerComparison(answer('…', [first.id]))).toEqual([])
   })
 })

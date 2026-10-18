@@ -857,7 +857,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann hleður hins vegar hægar og er hægari en flestir keppinautar hans, og má aðeins draga 750 kg. Leapmotor C10 ProMax er 60.000 kr. ódýrari, hleður með um 25% styttri stoppum og má draga 750 kg meira, en hann er stærri bíll og ekki jafn lipur í þröngum stæðum.',
       'Fyrir þá sem vilja mikla drægni og pláss fyrir hverja krónu í þægilegum bíl, og geta sætt sig við lengri hleðslustopp, er Kona Electric einn hagkvæmasti kosturinn.',
     ],
-    facts: '20908792bb67',
+    facts: '1940fdff0fff',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er hann betri í bænum en Leapmotor C10?',
@@ -923,7 +923,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann hleður mjög hægt, drífur styttra en flestir keppinautar hans og er hægur í akstri. Þessi útfærsla er aðeins framhjóladrifin, en KGM Musso EV 4WD fæst með fjórhjóladrifi fyrir 1.300.000 kr. meira, þótt hann drífi 41 km styttra.',
       'Musso EV er eini rafdrifni pallbíllinn sem seldur er hér og hentar þeim sem þurfa vinnuþjark, ef þeir sætta sig við löng hleðslustopp.',
     ],
-    facts: 'c3275d912f2c',
+    facts: '4fee743b1774',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Dugar framhjóladrif á palli á veturna?',
@@ -1931,14 +1931,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-eqt-200': {
     paragraphs: [
       'Mercedes-Benz EQT 200 er fjölnotabíll byggður á sendibíl, með rennihurðum, sætum fyrir allt að sjö manns og vandaðri innréttingu en vanalega fylgir bílum af þessari gerð. Hann hentar stórum fjölskyldum í daglegt amstur og skólaakstur í þéttbýli.',
-      'Skottið er stærra en hjá flestum á svipuðu verði og hann má draga 1.500 kg, tvöfalt á við Peugeot e-Rifter. Sveigjanlegt sætaskipulag og rennihurðir gera umgengni við aftursætin sérlega þægilega.',
-      'Á móti kemur að hann drífur mjög stutt, sérstaklega í vetrarkulda, hleður mjög hægt og er meðal þeirra aflminnstu í sínum verðflokki. Peugeot e-Rifter er 1.100.000 kr. ódýrari, drífur 61 km lengra og hleður með um 40% styttri stoppum, og Kia PV5 drífur 130 km lengra fyrir 700.000 kr. meira.',
+      'Skottið er stærra en hjá flestum á svipuðu verði og hann má draga 1.500 kg, eins og Kia PV5. Sveigjanlegt sætaskipulag og rennihurðir gera umgengni við aftursætin sérlega þægilega.',
+      'Á móti kemur að hann drífur mjög stutt, sérstaklega í vetrarkulda, hleður mjög hægt og er meðal þeirra aflminnstu í sínum verðflokki. Hyundai STARIA Electric kostar 610.000 kr. meira en drífur 117 km lengra, hleður með um 65% styttri stoppum og tekur allt að níu, og Kia PV5 drífur 130 km lengra fyrir 700.000 kr. meira.',
       'EQT 200 er laglegur og hagnýtur fjölskyldubíll innanbæjar, en stutt drægni og hæg hleðsla gera hann erfiðan sem eina bíl heimilisins.',
     ],
-    facts: '289224a0b57d',
+    facts: '2e4180b58efd',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
-      'Hví velja hann fram yfir Peugeot e-Rifter?',
+      'Hví velja hann fram yfir Hyundai STARIA?',
       'Er Kia PV5 miklu betri á langferðum?',
       'Rúmast þrír barnastólar í annarri röð?',
       'Hvernig er plássið í öftustu sætunum?',
@@ -2328,10 +2328,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Opel Frontera er kassalaga jepplingur sem býður allt að sjö sæti á verði sem er með því lægsta á listanum. Hann hentar stærri fjölskyldum sem vilja hagnýtan bíl í dagleg verkefni fyrir lítið.',
       'Fáir aðrir sjö sæta bílar komast nálægt verðinu, og skottið er stærra en hjá flestum á svipuðu verði. Kassalaga lagið gefur gott höfuðrými og útsýni.',
-      'Gallarnir eru að í sínum verðflokki er hann meðal þeirra sem drífa styst, hlaða hægast, eru hægastir og draga minnst, svo hann hentar illa til ferða milli landshluta. Peugeot e-Rifter tekur líka sjö, drífur 38 km lengra og er með 315 l stærra skott, en kostar 2.100.000 kr. meira.',
+      'Gallarnir eru að í sínum verðflokki er hann meðal þeirra sem drífa styst, hlaða hægast, eru hægastir og draga minnst, svo hann hentar illa til ferða milli landshluta. Peugeot e-5008 tekur líka sjö, drífur 197 km lengra og er með 456 l stærra skott, en kostar 3.100.000 kr. meira.',
       'Frontera er ódýrasta leiðin að sjö sætum, sniðin að nærumhverfinu frekar en langferðum.',
     ],
-    facts: '8b86df925c35',
+    facts: '2c77e17a1a8d',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Passar fullorðinn í aftasta bekkinn?',
@@ -2341,7 +2341,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað drífur hann raunverulega á veturna?',
       'Kemst hann til Akureyrar á einu stoppi?',
       'Er hraðhleðslan of hæg í langferðum?',
-      'Er Peugeot e-Rifter verðmunarins virði?',
+      'Er Peugeot e-5008 verðmunarins virði?',
       'Af hverju hann frekar en Leapmotor B10?',
       'Má hann draga fellihýsi eða kerru?',
     ],
@@ -2485,7 +2485,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er meðal þeirra hægustu í sínum verðflokki, hleður hægar og dregur minna en flestir keppinautar hans. Skoda Peaq 90x kostar 1.400.000 kr. meira en er fjórhjóladrifinn, drífur 111 km lengra, hleður með um 35% styttri stoppum og má draga 1.000 kg meira.',
       'e-5008 er skynsamlegur kostur fyrir barnmargar fjölskyldur sem vilja sjö sæti og mikið pláss fyrir hóflegt verð.',
     ],
-    facts: '294780238e34',
+    facts: 'bfa151458f0b',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að velja Dual Motor?',
@@ -2520,28 +2520,6 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu miklu tapar drægnin í frosti?',
       'Ræður hann vel við að draga hjólhýsi?',
       'Hvernig er ábyrgðin á rafhlöðunni?',
-    ],
-  },
-  'peugeot-e-rifter-base': {
-    paragraphs: [
-      'Peugeot e-Rifter er hár og kassalaga fjölnotabíll, byggður á sendibíl, með rennihurðum og plássi fyrir allt að sjö manns. Hann leggur áherslu á rými og notagildi frekar en þægindi og hentar stórum fjölskyldum í daglegu amstri.',
-      'Farangursrýmið er með því stærsta í sínum verðflokki og hann er fremur ódýr. Hann kostar 1.300.000 kr. minna en hinn nánast eins Toyota Proace City Verso, sem er byggður á sama grunni og drífur álíka langt.',
-      'Á móti kemur að hann drífur mjög stutt, hleður mjög hægt og er mjög aflítill, svo hann hentar illa til langferða. Peugeot e-5008 er 980.000 kr. dýrari en drífur 159 km lengra, er með 141 l stærra skott og má draga 250 kg meira.',
-      'Fyrir þá sem þurfa ódýran og rúmgóðan bíl fyrir marga í nærumhverfinu vinnur e-Rifter verkið vel.',
-    ],
-    facts: 'e8d1736a6182',
-    model: 'gemini-3.8-flash, thinking high',
-    questions: [
-      'Rúmast þrír barnastólar í annarri röð?',
-      'Kemst farangur fyrir með öll sjö sætin?',
-      'Er hann mjög kraftlaus með fullan bíl?',
-      'Hvað dregur hann í frosti á þjóðvegi?',
-      'Hversu oft þarf að hlaða til Akureyrar?',
-      'Hvernig dugar framhjóladrifið í snjó?',
-      'Hvað má hann draga mikla þyngd?',
-      'Hversu lengi er hann að hraðhlaða?',
-      'Borgar sig að taka Peugeot e-5008 frekar?',
-      'Hvernig er hann miðað við Opel Frontera?',
     ],
   },
   'peugeot-e-traveller-base': {
@@ -3145,7 +3123,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann má aðeins draga 1.000 kg, minna en flestir þeirra, og er aðeins afturhjóladrifinn. Skoda Elroq 85x fæst með fjórhjóladrifi og 1.800 kg dráttargetu fyrir 400.000 kr. meira, með nánast sömu drægni.',
       'Elroq 85 er skynsamlegt val fyrir þá sem vilja langdrægan jeppling á góðu verði og þurfa ekki að draga mikið.',
     ],
-    facts: 'd164793c20f7',
+    facts: 'b301a2fa8a7a',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Borgar sig að taka 85x frekar?',
@@ -3387,7 +3365,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann hleður fremur hægt á langferðum og er afturhjóladrifinn, sem krefst meiri varkárni í snjó og hálku. XPENG G6 RWD Standard Range er 100.000 kr. ódýrari með um 25% styttri hleðslustopp, en drífur 30 km styttra og skottið er 59 l minna.',
       'Fyrir þá sem leita að rúmgóðum og sprækum fjölskyldubíl sem getur dregið hjólhýsi er #5 Pro fýsilegur kostur, svo lengi sem hraðhleðslan er ekki í forgangi.',
     ],
-    facts: '47df4bf2f77a',
+    facts: '26339a36ba29',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að taka Pulse-útfærsluna?',
@@ -3626,10 +3604,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Tesla Model Y Standard Range er ódýrasta útfærsla Model Y, rúmgóður jepplingur með afturhjóladrifi, með stóru skotti og framskotti, snjöllum hugbúnaði og aðgangi að hleðsluneti Tesla.',
       'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og hleðslustöðvar Tesla við hringveginn gera ferðalög um landið einföld.',
-      'Hann er hins vegar aðeins afturhjóladrifinn og einfaldar búinn en dýrari útfærslurnar. Tesla Model Y Premium Long Range kostar 1.500.000 kr. meira og drífur 104 km lengra, og Tesla Model Y Long Range Dual Motor fæst með fjórhjóladrifi fyrir 1.900.000 kr. meira.',
+      'Hann er hins vegar aðeins afturhjóladrifinn og einfaldar búinn en dýrari útfærslurnar. Tesla Model Y Premium Long Range kostar 1.500.000 kr. meira og drífur 84 km lengra, og Tesla Model Y Long Range Dual Motor fæst með fjórhjóladrifi fyrir 1.900.000 kr. meira.',
       'Model Y Standard Range er sterkt val fyrir þá sem vilja mikið pláss og hleðslunet Tesla á hagstæðu verði.',
     ],
-    facts: 'f97722e86c87',
+    facts: 'daf1155817b4',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Dugar afturhjóladrifið í íslenskum vetri?',
@@ -3868,13 +3846,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Toyota Proace City Verso er kassalaga fjölnotabíll byggður á sendibíl, með rennihurðum og allt að sjö sætum, fyrir barnafjölskyldur sem þurfa gott aðgengi og mikið pláss.',
       'Rennihurðirnar gera umgengni auðvelda í þröngum stæðum, há setstaðan gefur gott útsýni og hann nýtur þjónustunets Toyota hér á landi.',
-      'Gallarnir eru að hann er meðal þeirra sem drífa styst, hlaða hægast og eru aflminnstir á svipuðu verði. Systurbíllinn Peugeot e-Rifter er nánast sami bíll en 1.300.000 kr. ódýrari.',
-      'Proace City Verso er þægilegur fjölskyldubíll innanbæjar, en e-Rifter gefur það sama fyrir mun minna.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst, hlaða hægast og eru aflminnstir á svipuðu verði. Hyundai STARIA Electric kostar 450.000 kr. meira en drífur 54 km lengra, hleður með um 40% styttri stoppum og tekur allt að níu.',
+      'Proace City Verso er þægilegur fjölskyldubíll innanbæjar, en fyrir litlu meira fást fleiri sæti og lengri drægni.',
     ],
-    facts: 'ab8da93d30b2',
+    facts: '9293b88164f7',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
-      'Hvað réttlætir verðmun á Peugeot e-Rifter?',
+      'Hví ekki frekar Hyundai STARIA Electric?',
       'Borgar sig frekar að taka Kia PV5?',
       'Rúmast þrír barnastólar í annarri röð?',
       'Hvernig er skottið með öll 7 sætin uppi?',
@@ -4399,7 +4377,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur styttra en flestir þeirra og er aðeins afturhjóladrifinn. XPENG G6 RWD Long Range kostar 700.000 kr. meira og drífur 135 km lengra, og XPENG G6 AWD Performance fæst með fjórhjóladrifi fyrir 1.100.000 kr. meira.',
       'G6 Standard Range er rúmgóður og hraðhlaðandi bíll fyrir þá sem aka mest í nærumhverfinu og meta pláss.',
     ],
-    facts: '9c7e43c9c4d2',
+    facts: '121732df06a6',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Af hverju hann frekar en Tesla Model Y?',

@@ -1868,6 +1868,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Peugeot',
     model: 'e-Rifter',
+    deprecated: '2026-10-18',
     heroImageName: 'peugeot-e-rifter',
     price: 6_790_000,
     sellerUrl: 'https://www.peugeotisland.is/tegundir/E-Rifter.html',
@@ -2702,11 +2703,11 @@ const newCars: Array<NewCar> = [
     sellerUrl: 'https://www.tesla.com/is_is/modely/design',
     acceleration: 7.2,
     capacity: 60,
-    range: 505,
-    evDatabaseUrl: 'https://ev-database.org/car/3362/Tesla-Model-Y-RWD',
+    range: 525,
+    evDatabaseUrl: 'https://ev-database.org/car/3741/Tesla-Model-Y-RWD',
     drive: 'RWD',
     seats: 5,
-    power: 220,
+    power: 227,
     timeToCharge10To80: 29,
   },
   {

@@ -20,9 +20,9 @@ interface Props {
 }
 
 /**
- * The advisor's bar on a car's page, carrying the car with each question. A
- * car picked from an answer is scrolled up to when it is this one, and opens
- * its own page when it is another.
+ * The advisor's bar on a car's page or a comparison, carrying the cars it is
+ * about with each question. A car picked from an answer opens its own page,
+ * unless it is the car whose page this is, which is scrolled up to.
  */
 const PageChat: FunctionComponent<Props> = ({ cars, starters }) => {
   const router = useRouter()
@@ -30,7 +30,7 @@ const PageChat: FunctionComponent<Props> = ({ cars, starters }) => {
   const showCar = (car: Car) => {
     // By id: the page's cars came from the server, a picked one from the
     // client's own list, so they are never the same object
-    if (cars.some(({ id }) => id === car.id)) {
+    if (cars.length === 1 && cars[0]?.id === car.id) {
       window.scrollTo({
         top: 0,
         behavior: prefersReducedMotion() ? 'auto' : 'smooth',

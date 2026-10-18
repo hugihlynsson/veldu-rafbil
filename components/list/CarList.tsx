@@ -3,6 +3,7 @@
 import { type ReactNode, useRef, useState } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/navigation'
 import { trackEvent } from 'fathom-client'
 
 import Car from './NewCar'
@@ -13,7 +14,8 @@ import Intro from './Intro'
 import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/filters/FilterModal'
 import ActiveFilters from '@/components/filters/ActiveFilters'
-import cars from '@/modules/data/cars'
+import cars, { type Car as CarData } from '@/modules/data/cars'
+import { carPathOf } from '@/modules/detail/paths'
 import carFilter from '@/modules/list/carFilter'
 import type { Filters } from '@/modules/list/filters'
 import {
@@ -25,7 +27,9 @@ import type { View } from '@/modules/list/view'
 import { agree } from '@/modules/copy/plural'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import { useFilters, useSorting, useView } from '@/utils/useListState'
-import useRevealCar from '@/utils/useRevealCar'
+import { rememberListSearch } from '@/utils/listReturn'
+import useComparison from '@/utils/useComparison'
+import CompareTray from '@/components/detail/CompareTray'
 
 // Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
 // so arriving a moment later shifts nothing.
@@ -86,7 +90,16 @@ export default function CarList() {
     }
   }
 
-  const showCar = useRevealCar(filters, setFilters)
+  const router = useRouter()
+  // A car picked in the chat opens its page, which leads back to the list as
+  // it was left, as a card does
+  const showCar = (car: CarData) => {
+    rememberListSearch(window.location.search)
+    router.push(carPathOf(car))
+  }
+
+  const comparison = useComparison()
+  const isComparing = comparison.selected.length > 0
 
   const filteredCars = cars.filter(carFilter(filters))
 
@@ -170,6 +183,9 @@ export default function CarList() {
             view={view}
             showValue={sorting === 'value' || Boolean(filters.value)}
             showSeats={Boolean(filters.seats)}
+            compared={comparison.isSelected(car)}
+            compareFull={comparison.isFull}
+            onToggleCompare={() => comparison.toggle(car)}
           />
         ))}
       </div>
@@ -206,8 +222,13 @@ export default function CarList() {
         />
       )}
 
+      {isComparing && (
+        <CompareTray cars={comparison.selected} onRemove={comparison.remove} />
+      )}
+
+      {/* The tray takes the bar's place while there is a car in it */}
       <ChatContainer
-        hide={editingFilters}
+        hide={editingFilters || isComparing}
         onShowCar={showCar}
         filters={filters}
         onApplyFilters={applySuggestedFilters}
