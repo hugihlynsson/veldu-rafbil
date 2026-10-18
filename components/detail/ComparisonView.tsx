@@ -265,7 +265,7 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
                               // beside it, so the columns stay aligned
                               <span
                                 aria-hidden
-                                className="absolute top-1/2 -translate-y-1/2 -left-2.25 size-1.5 rounded-full bg-mark md:-left-3.5 md:size-2"
+                                className="absolute top-1/2 -translate-y-1/2 -left-2 size-1.25 rounded-full bg-sky md:-left-3.25 md:size-1.75"
                               />
                             )}
                             {row.key === 'price' && car ? (
