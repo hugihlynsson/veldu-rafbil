@@ -15,12 +15,22 @@ const font = (name: string) =>
   readFile(path.join(process.cwd(), `app/fonts/Inter${name}-og.woff`))
 const fonts = Promise.all([font('Regular'), font('SemiBold')])
 
-// The photos are read from disk, which next.config.ts traces into this
-// function, as public/ is otherwise served by the CDN and not bundled
-const photo = async (name: string) =>
-  `data:image/jpeg;base64,${(
-    await readFile(path.join(process.cwd(), `public/images/${name}.jpg`))
+// Fetched from the CDN, not traced into the function: bundled, they were
+// stored with every deploy, once per route, and filled the plan's storage. A
+// preview fetches production's, as its own sit behind deployment protection,
+// so a car added in a branch has no share image until it is merged.
+const photoOrigin = (request: Request) =>
+  process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : new URL(request.url).origin
+
+const photo = async (origin: string, name: string) => {
+  const response = await fetch(`${origin}/images/${name}.jpg`)
+  if (!response.ok) throw new Error(`No photo at ${response.url}`)
+  return `data:image/jpeg;base64,${Buffer.from(
+    await response.arrayBuffer(),
   ).toString('base64')}`
+}
 
 const gap = 32
 const margin = 56
@@ -147,8 +157,8 @@ const PriceTag = ({
  * list shows it on a wide screen, so the preview reads as the site, drawn
  * larger for the size a chat shows it at
  */
-const carImage = async (car: Car) => {
-  const src = await photo(car.heroImageName)
+const carImage = async (origin: string, car: Car) => {
+  const src = await photo(origin, car.heroImageName)
   const subTitle = carSubtitle(car)
   const notice = deprecatedNotice(car)
   const figures = new Map(
@@ -234,8 +244,10 @@ const carImage = async (car: Car) => {
  * The picture a shared comparison link unfurls into: the cars side by side,
  * each as the car's own picture sets it, under the same logo
  */
-const comparisonImage = async (cars: ReadonlyArray<Car>) => {
-  const photos = await Promise.all(cars.map((car) => photo(car.heroImageName)))
+const comparisonImage = async (origin: string, cars: ReadonlyArray<Car>) => {
+  const photos = await Promise.all(
+    cars.map((car) => photo(origin, car.heroImageName)),
+  )
   const count = Math.max(cars.length, 1)
   const width = (size.width - margin * 2 - gap * (count - 1)) / count
   const crowded = cars.length > 2
@@ -323,7 +335,10 @@ const comparisonImage = async (cars: ReadonlyArray<Car>) => {
 }
 
 /** The picture the page about these cars unfurls into */
-export const shareImage = (cars: ReadonlyArray<Car>) => {
+export const shareImage = (request: Request, cars: ReadonlyArray<Car>) => {
+  const origin = photoOrigin(request)
   const [only] = cars
-  return only && cars.length === 1 ? carImage(only) : comparisonImage(cars)
+  return only && cars.length === 1
+    ? carImage(origin, only)
+    : comparisonImage(origin, cars)
 }

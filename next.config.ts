@@ -47,10 +47,9 @@ const nextConfig: NextConfig = {
     // 31 days: the point Vercel stops counting the cache write
     minimumCacheTTL: 2678400,
   },
-  // The share images draw the cars' photos, which are otherwise
-  // left to the CDN rather than bundled with a function
+  // The share images' fonts, read from disk; their photos come from the CDN
   outputFileTracingIncludes: {
-    '/mynd/**': ['./public/images/*.jpg', './app/fonts/*-og.woff'],
+    '/mynd/**': ['./app/fonts/*-og.woff'],
   },
   async redirects() {
     return [
