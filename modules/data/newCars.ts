@@ -1207,7 +1207,6 @@ const newCars: Array<NewCar> = [
     seats: 5,
     power: 190,
     timeToCharge10To80: 25,
-    expectedDelivery: 'haustið 2026',
   },
   {
     make: 'Mercedes-Benz',
@@ -3116,7 +3115,7 @@ const newCars: Array<NewCar> = [
     seats: 5,
     power: 335,
     timeToCharge10To80: 22,
-    expectedDelivery: 'október 2026',
+    expectedDelivery: 'snemma 2027',
   },
   {
     make: 'Volvo',
@@ -3134,7 +3133,7 @@ const newCars: Array<NewCar> = [
     seats: 5,
     power: 500,
     timeToCharge10To80: 22,
-    expectedDelivery: 'október 2026',
+    expectedDelivery: 'snemma 2027',
   },
   {
     make: 'Volvo',
