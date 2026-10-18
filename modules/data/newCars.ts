@@ -3072,7 +3072,7 @@ const newCars: Array<NewCar> = [
   {
     make: 'Volvo',
     model: 'EC40',
-    subModel: 'Recharge Twin',
+    subModel: 'Twin Motor',
     heroImageName: 'volvo-c40',
     price: 9_190_000,
     sellerUrl: 'https://www.volvocars.com/is/cars/ec40-electric/',

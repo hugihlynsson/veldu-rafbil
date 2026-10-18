@@ -2573,7 +2573,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að skottið er minna en hjá flestum keppinautum hans og aftursætin eru fremur þröng. Polestar 2 Long Range Dual Motor er 900.000 kr. ódýrari, drífur 28 km lengra og munar aðeins sjónarmun í snerpu.',
       'Performance-útfærslan er fyrir þá sem vilja allra sportlegasta Polestar 2, en flestum dugar Dual Motor.',
     ],
-    facts: '6e3e17e09abd',
+    facts: 'ef36cd89f2b8',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er fjöðrunin of stíf fyrir íslenska vegi?',
@@ -4106,14 +4106,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hratt hleður hann í miklu frosti?',
     ],
   },
-  'volvo-ec40-recharge-twin': {
+  'volvo-ec40-twin-motor': {
     paragraphs: [
-      'Volvo EC40 Recharge Twin er meðalstór sportjepplingur með aflíðandi þaklínu, systurbíll EX40 með sama drifbúnaði undir rennilegri yfirbyggingu. Hann hentar þeim sem vilja fágaðan og snarpan fjórhjóladrifsbíl og setja útlitið ofar plássinu.',
+      'Volvo EC40 Twin Motor er meðalstór sportjepplingur með aflíðandi þaklínu, systurbíll EX40 með sama drifbúnaði undir rennilegri yfirbyggingu. Hann hentar þeim sem vilja fágaðan og snarpan fjórhjóladrifsbíl og setja útlitið ofar plássinu.',
       'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og með fjórhjóladrifi og miklu afli er hann líka sneggri en flestir þeirra. Hann má draga 1.800 kg, sem fáir keppinautar hans jafna, svo hjólhýsi eða þung kerra er ekkert mál.',
       'Á móti kemur að hann er nettur og með einu af minnstu skottunum, og aftursætin gjalda fyrir lága þaklínuna. Systurbíllinn Volvo EX40 Recharge Twin kostar það sama með sama drifi og gefur meira höfuðrými aftur í, og Audi Q4 e-tron 45 quattro kostar 300.000 kr. meira og er með 116 l stærra skott, þótt hann sé mun hægari og megi draga 600 kg minna.',
       'EC40 er fyrir þá sem vilja Volvo með sportlegri svip og nóg af afli, og sætta sig við minna rými en í hefðbundnari jepplingi.',
     ],
-    facts: 'dcf5cf6da2de',
+    facts: '263f2613eec5',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er EX40 miklu praktískari en hann?',

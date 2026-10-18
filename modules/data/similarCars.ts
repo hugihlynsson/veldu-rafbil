@@ -589,7 +589,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'polestar-2-long-range-performance': [
     'mercedes-benz-cla-200',
     'tesla-model-3-performance',
-    'volvo-ec40-recharge-twin',
+    'volvo-ec40-twin-motor',
   ],
   'polestar-3-base': [
     'mercedes-benz-glc-400-4matic',
@@ -936,7 +936,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'bmw-ix3-40',
     'audi-a6-e-tron-avant-quattro',
   ],
-  'volvo-ec40-recharge-twin': [
+  'volvo-ec40-twin-motor': [
     'bmw-ix1-xdrive-30',
     'audi-q4-e-tron-45-quattro',
     'polestar-2-long-range-performance',
