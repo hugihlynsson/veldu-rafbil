@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 
 import cars from '@/modules/data/cars'
+import { listHeadline } from '@/modules/copy/listHeadline'
+import { LIST_SHARE_IMAGE_PATH, shareImageSize } from '@/modules/detail/paths'
 import CarList from '@/components/list/CarList'
 import Footer from '@/components/Footer'
 
@@ -10,9 +12,26 @@ import Footer from '@/components/Footer'
 // out of the build for the browser to render.
 export const dynamic = 'force-static'
 
+const title = 'Veldu Rafbíl'
+const description = `Listi yfir alla ${cars.length} bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar`
+
 export const metadata: Metadata = {
-  title: 'Veldu Rafbíl',
-  description: `Listi yfir alla ${cars.length} bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar`,
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    siteName: 'Veldu Rafbíl',
+    locale: 'is_IS',
+    images: [
+      {
+        url: LIST_SHARE_IMAGE_PATH,
+        ...shareImageSize,
+        alt: listHeadline(cars.length),
+      },
+    ],
+  },
+  twitter: { card: 'summary_large_image' },
 }
 
 export default function Page() {
