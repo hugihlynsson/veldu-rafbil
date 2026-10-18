@@ -1,53 +1,54 @@
 // What a comparison shows while the model writes its verdict on the cars. The model's
 // own thoughts arrive in English whatever it is asked, so these stand in for
-// them: a couple of lines to start, then the cars themselves in no set order,
-// and the closing lines on a loop until the verdict is in. The names are left
+// them, in its own voice: the first person, with the "ég" left off. A couple
+// of lines to start, then the cars themselves in no set order, and the
+// closing lines on a loop until the verdict is in. The names are left
 // uninflected, as a foreign car's name is in Icelandic.
 
 /** The first line, the same on the server as in the browser */
-export const firstPhrase = 'Leggur bílana hlið við hlið…'
+export const firstPhrase = 'Legg bílana hlið við hlið…'
 
 const intro = [
-  'Rennir yfir verðin og drægnina…',
-  'Hellir upp á kaffi og opnar verðlistana…',
-  'Setur sig í spor kaupandans…',
+  'Renni yfir verðin og drægnina…',
+  'Opna verðlistana frá umboðunum…',
+  'Set mig í spor kaupanda…',
   'Les smáa letrið…',
-  'Flettir í gegnum tækniblöðin…',
+  'Fletti í gegnum tækniblöðin…',
 ]
 
 const aboutCar: Array<(car: string) => string> = [
-  (car) => `Mælir skottið í ${car}…`,
-  (car) => `Hugsar um ${car} í febrúarfrosti…`,
-  (car) => `Prófar hvort golfsettið komist í ${car}…`,
-  (car) => `Athugar hvort ${car} ráði við hjólhýsið…`,
-  (car) => `Ímyndar sér ${car} á leið norður á Akureyri…`,
-  (car) => `Skoðar hve fljótt ${car} hleðst í Staðarskála…`,
+  (car) => `Mæli skottið í ${car}…`,
+  (car) => `Hugsa um ${car} í febrúarfrosti…`,
+  (car) => `Prófa hvort golfsett komist í ${car}…`,
+  (car) => `Athuga hvort ${car} ráði við hjólhýsi…`,
+  (car) => `Ímynda mér ${car} á leið norður á Akureyri…`,
+  (car) => `Skoða hve fljótt ${car} hleðst í Staðarskála…`,
   (car) => `Sest í aftursætið á ${car}…`,
-  (car) => `Reiknar með ${car} á vetrardekkjum…`,
-  (car) => `Skoðar hvort barnavagninn komist í ${car}…`,
+  (car) => `Reikna með ${car} á vetrardekkjum…`,
+  (car) => `Skoða hvort barnavagn komist í ${car}…`,
 ]
 
 const aboutPair: Array<(a: string, b: string) => string> = [
   (a, b) => `Ber saman drægni ${a} og ${b}…`,
-  (a, b) => `Lætur ${a} og ${b} spyrna upp Ártúnsbrekkuna…`,
-  (a, b) => `Vegur verðmuninn á ${a} og ${b}…`,
-  (a, b) => `Spyr sig hvort ${a} eða ${b} henti fjölskyldunni betur…`,
-  (a, b) => `Leggur ${a} og ${b} í sama stæðið, í huganum…`,
-  (a, b) => `Keyrir ${a} og ${b} yfir Hellisheiði í skafrenningi…`,
+  (a, b) => `Læt ${a} og ${b} spyrna upp Ártúnsbrekkuna…`,
+  (a, b) => `Veg verðmuninn á ${a} og ${b}…`,
+  (a, b) => `Spyr mig hvort ${a} eða ${b} henti fjölskyldu betur…`,
+  (a, b) => `Legg ${a} og ${b} í sama stæðið, í huganum…`,
+  (a, b) => `Keyri ${a} og ${b} yfir Hellisheiði í skafrenningi…`,
   (a, b) => `Spyr tengdamömmu hvort hún kjósi ${a} eða ${b}…`,
-  (a, b) => `Sér hvor kemst lengra til Egilsstaða, ${a} eða ${b}…`,
-  (a, b) => `Raðar ferðatöskunum í ${a} og ${b}…`,
-  (a, b) => `Lætur ${a} og ${b} keppa um síðasta stæðið í Kringlunni…`,
-  (a, b) => `Stingur ${a} og ${b} í samband og sér hvor er fyrr klár…`,
-  (a, b) => `Prófar ${a} og ${b} á holóttum malarvegi…`,
-  (a, b) => `Sér hvor er flottari við Hallgrímskirkju, ${a} eða ${b}…`,
+  (a, b) => `Sé hvor kemst lengra til Egilsstaða, ${a} eða ${b}…`,
+  (a, b) => `Raða ferðatöskum í ${a} og ${b}…`,
+  (a, b) => `Læt ${a} og ${b} keppa um síðasta stæðið í Kringlunni…`,
+  (a, b) => `Sting ${a} og ${b} í samband og sé hvor er fyrr klár…`,
+  (a, b) => `Prófa ${a} og ${b} á holóttum malarvegi…`,
+  (a, b) => `Sé hvor er flottari við Hallgrímskirkju, ${a} eða ${b}…`,
 ]
 
 const closing = [
-  'Dregur saman það sem skiptir máli…',
-  'Velur réttu orðin…',
-  'Fínpússar ráðleggingarnar…',
-  'Leggur lokahönd á samantektina…',
+  'Dreg saman það sem skiptir máli…',
+  'Vel réttu orðin…',
+  'Fínpússa ráðleggingarnar…',
+  'Legg lokahönd á samantektina…',
   'Les yfir einu sinni enn…',
 ]
 
