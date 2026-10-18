@@ -258,24 +258,35 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
                               {car.hasGrant && ' með styrk'}
                             </div>
                           </div>
-                        ) : row.key === 'price' && car ? (
-                          <PricePill
-                            car={car}
-                            light={!cell.best}
-                            compact={crowded}
-                            bare
-                            className="max-w-full -ml-0.5"
-                          />
                         ) : (
-                          <div
-                            className={clsx(
-                              crowded
-                                ? 'text-sm md:text-2xl'
-                                : 'text-base md:text-2xl',
-                              cell.best ? 'font-bold' : 'font-normal',
+                          <div className="relative">
+                            {cell.best && (
+                              // In the gap before the figure rather than
+                              // beside it, so the columns stay aligned
+                              <span
+                                aria-hidden
+                                className="absolute top-1/2 -translate-y-1/2 -left-2 size-1.25 rounded-full bg-sky md:-left-3.25 md:size-1.75"
+                              />
                             )}
-                          >
-                            {cell.text}
+                            {row.key === 'price' && car ? (
+                              <PricePill
+                                car={car}
+                                light
+                                compact={crowded}
+                                bare
+                                className="max-w-full -ml-0.5"
+                              />
+                            ) : (
+                              <div
+                                className={
+                                  crowded
+                                    ? 'text-sm md:text-2xl'
+                                    : 'text-base md:text-2xl'
+                                }
+                              >
+                                {cell.text}
+                              </div>
+                            )}
                           </div>
                         )}
                         {cell.best && (
