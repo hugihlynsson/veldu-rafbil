@@ -74,6 +74,7 @@ export async function GET(
           controller.close()
         }
       }
+      send({ type: 'working' })
       // Whatever was said before this visitor arrived, then the rest live
       for (const event of job.events) send(event)
       if (open) job.listeners.add(send)

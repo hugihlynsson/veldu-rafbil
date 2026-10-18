@@ -199,6 +199,7 @@ interface Props {
 const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
   const [verdict, setVerdict] = useState(written)
   const [failed, setFailed] = useState(false)
+  const [working, setWorking] = useState(false)
   const [progress, setProgress] = useState<Progress>({ filled: false })
 
   useEffect(() => {
@@ -224,7 +225,9 @@ const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
         const { events, rest } = decodeEvents(buffered + value)
         buffered = rest
         for (const event of events) {
-          if (event.type === 'writing') {
+          if (event.type === 'working') {
+            setWorking(true)
+          } else if (event.type === 'writing') {
             const writingAt = performance.now()
             setProgress((before) => ({ ...before, writingAt }))
           } else if (event.type === 'verdict') {
@@ -266,6 +269,9 @@ const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
       </ReviewSection>
     )
   if (failed) return null
+  // Until the endpoint says a model is at it, the verdict may be one already
+  // written, which arrives too soon for the made-up lines to mean anything
+  if (!working) return <VerdictPlaceholder />
   return (
     <Working
       names={cars.map((car) => carName(car, cars))}
