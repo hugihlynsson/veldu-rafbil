@@ -90,13 +90,16 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
                     </p>
                   )}
                 </div>
-                <ShareButton
-                  title={car.label}
-                  label="Deila"
-                  event="Car shared"
-                  variant="quiet"
-                  className="shrink-0 mt-1"
-                />
+                {/* Nothing to pass on about a car that cannot be bought */}
+                {!notice && (
+                  <ShareButton
+                    title={car.label}
+                    label="Deila"
+                    event="Car shared"
+                    variant="quiet"
+                    className="shrink-0 mt-1"
+                  />
+                )}
               </div>
               {notice ? (
                 // In place of the price, which links to a seller no longer
@@ -153,17 +156,21 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
             </section>
           )}
 
-          <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
-            <ShareButton
-              title={car.label}
-              label="Deila bílnum"
-              event="Car shared"
-              className="-ml-0.5"
-            />
-            {car.evDatabaseUrl && (
-              <EvDatabaseLink car={car} href={car.evDatabaseUrl} />
-            )}
-          </div>
+          {(!notice || car.evDatabaseUrl) && (
+            <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
+              {!notice && (
+                <ShareButton
+                  title={car.label}
+                  label="Deila bílnum"
+                  event="Car shared"
+                  className="-ml-0.5"
+                />
+              )}
+              {car.evDatabaseUrl && (
+                <EvDatabaseLink car={car} href={car.evDatabaseUrl} />
+              )}
+            </div>
+          )}
 
           <section aria-labelledby="similar" className="mt-12 md:mt-16">
             <div className="flex items-baseline justify-between gap-4">
