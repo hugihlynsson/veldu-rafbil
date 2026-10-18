@@ -1,8 +1,7 @@
 // What a comparison shows while the model writes its verdict on the cars. The model's
 // own thoughts arrive in English whatever it is asked, so these stand in for
 // them: a couple of lines to start, then the cars themselves in no set order,
-// and the closing lines on a loop until the verdict is in. Each car it really
-// looks up takes the next turn, as a line of its own. The names are left
+// and the closing lines on a loop until the verdict is in. The names are left
 // uninflected, as a foreign car's name is in Icelandic.
 
 /** The first line, the same on the server as in the browser */
@@ -103,10 +102,6 @@ export const thinkingPhrases = (
     loopFrom: opening.length + middle.length,
   }
 }
-
-/** The line for a car the model is really looking up, shown next in turn */
-export const lookupPhrase = (name: string): string =>
-  `Flettir upp ${name} á ev-database.org…`
 
 /**
  * Long enough to read the line at an easy pace, never so long it seems stuck,

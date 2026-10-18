@@ -5,11 +5,12 @@ export interface Verdict {
 
 /**
  * What the verdict's endpoint sends, one JSON object a line, while the model
- * works: each car it looks up, and then the verdict or the news that there
- * will be none.
+ * works: that it has finished thinking and begun to write, and then the
+ * verdict or the news that there will be none. A reader skips a type it does
+ * not know, so one can be added without breaking a page still open.
  */
 export type VerdictEvent =
-  | { type: 'lookup'; id: string; car: string; done: boolean }
+  | { type: 'writing' }
   | { type: 'verdict'; verdict: Verdict }
   | { type: 'error' }
 

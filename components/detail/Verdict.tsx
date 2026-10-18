@@ -17,11 +17,11 @@ import {
 } from '@/modules/detail/verdictEvents'
 import {
   firstPhrase,
-  lookupPhrase,
   phraseDuration,
   thinkingPhrases,
   type ThinkingPhrases,
 } from '@/modules/detail/thinkingPhrases'
+import { verdictProgress } from '@/modules/detail/verdictProgress'
 
 /** Where the model's words about the cars go, as a car's page has its review */
 const ReviewSection: FunctionComponent<{
@@ -38,15 +38,8 @@ const ReviewSection: FunctionComponent<{
   </section>
 )
 
-// Roughly the lines a verdict of about 160 words fills
-const skeletonWidths = [
-  'w-full',
-  'w-11/12',
-  'w-full',
-  'w-4/5',
-  'w-full',
-  'w-2/3',
-]
+// Roughly the lines a verdict of about 120 words fills
+const skeletonWidths = ['w-full', 'w-11/12', 'w-full', 'w-4/5', 'w-2/3']
 
 /** The verdict's lines before it is written */
 const Skeleton: FunctionComponent = () => (
@@ -68,23 +61,19 @@ interface Line {
   text: string
   /** The next of the made-up lines to show */
   phrase: number
-  /** How many of the lookups have had their line */
-  lookups: number
   /** Changes with every line, so each plays its entrance */
   key: number
 }
 
 const ThinkingLine: FunctionComponent<{
   names: ReadonlyArray<string>
-  lookedUp: ReadonlyArray<string>
-}> = ({ names, lookedUp }) => {
+}> = ({ names }) => {
   // Drawn in the browser on the first turn, as a draw on the server would
   // not be the one it hydrates with
   const sequence = useRef<ThinkingPhrases | null>(null)
   const [line, setLine] = useState<Line>({
     text: firstPhrase,
     phrase: 0,
-    lookups: 0,
     key: 0,
   })
   const [leaving, setLeaving] = useState(false)
@@ -97,24 +86,14 @@ const ThinkingLine: FunctionComponent<{
     return () => clearTimeout(timer)
   }, [line, leaving])
 
-  // A car the model has started looking up goes before the next made-up line
-  const next = ({ phrase, lookups, key }: Line): Line => {
+  const next = ({ phrase, key }: Line): Line => {
     sequence.current ??= thinkingPhrases(names)
     const { phrases, loopFrom } = sequence.current
-    const lookup = lookedUp[lookups]
-    return lookup !== undefined
-      ? {
-          text: lookupPhrase(lookup),
-          phrase,
-          lookups: lookups + 1,
-          key: key + 1,
-        }
-      : {
-          text: phrases[phrase] ?? firstPhrase,
-          phrase: phrase + 1 < phrases.length ? phrase + 1 : loopFrom,
-          lookups,
-          key: key + 1,
-        }
+    return {
+      text: phrases[phrase] ?? firstPhrase,
+      phrase: phrase + 1 < phrases.length ? phrase + 1 : loopFrom,
+      key: key + 1,
+    }
   }
 
   return (
@@ -136,22 +115,70 @@ const ThinkingLine: FunctionComponent<{
   )
 }
 
+interface Progress {
+  /** When the writing began, by performance.now(), if it has */
+  writingAt?: number
+  /** Whether the verdict is in, for the bar to fill before it shows */
+  filled: boolean
+}
+
+// How often the bar moves on, as long as the transition between two places
+const TICK_MS = 200
+// Long enough to see the bar reach its end before the words take its place
+const FILL_MS = 300
+
+const ProgressBar: FunctionComponent<Progress> = ({ writingAt, filled }) => {
+  // Empty on the server and as it hydrates, wherever the clocks stand
+  const [startedAt] = useState(() => performance.now())
+  const [now, setNow] = useState(startedAt)
+
+  useEffect(() => {
+    if (filled) return
+    const timer = setInterval(() => setNow(performance.now()), TICK_MS)
+    return () => clearInterval(timer)
+  }, [filled])
+
+  const progress = filled
+    ? 1
+    : verdictProgress(
+        now - startedAt,
+        writingAt === undefined ? undefined : writingAt - startedAt,
+      )
+
+  return (
+    <div aria-hidden className="mt-2 h-1 rounded-full bg-cloud overflow-hidden">
+      <div
+        className="h-full rounded-full bg-stone transition-[width] ease-linear"
+        style={{
+          width: `${progress * 100}%`,
+          transitionDuration: `${filled ? FILL_MS : TICK_MS}ms`,
+        }}
+      />
+    </div>
+  )
+}
+
 const Working: FunctionComponent<{
   names: ReadonlyArray<string>
-  lookedUp: ReadonlyArray<string>
-}> = ({ names, lookedUp }) => (
+  progress: Progress
+}> = ({ names, progress }) => (
   // Headed as the verdict will be, so only what is under it changes when it
   // arrives, and the line below is the one that says it is being written
   <ReviewSection>
-    {/* Two lines tall whatever the line, so the card holds still as they turn */}
-    <output className="mt-3 flex items-start gap-2 min-h-[2lh] text-sm leading-snug">
-      <span
-        aria-hidden
-        className="w-2 h-2 mt-1.5 shrink-0 rounded-full bg-stone animate-pulse"
-      />
-      <span className="sr-only">Gervigreindin ber bílana saman</span>
-      <ThinkingLine names={names} lookedUp={lookedUp} />
+    {/* Two lines tall whatever the line, so the card holds still as they
+        turn, with a line of one kept down by the bar it goes with */}
+    <output className="mt-3 flex flex-col justify-end min-h-[2lh] text-sm leading-snug">
+      <span className="flex items-start gap-2">
+        <span
+          aria-hidden
+          className="w-2 h-2 mt-1.5 shrink-0 rounded-full bg-stone animate-pulse"
+        />
+        <span className="sr-only">Gervigreindin ber bílana saman</span>
+        <ThinkingLine names={names} />
+      </span>
     </output>
+
+    <ProgressBar {...progress} />
 
     <Skeleton />
   </ReviewSection>
@@ -167,13 +194,12 @@ interface Props {
 
 /**
  * The model's verdict, or the model at work on it: a line about what it might
- * be weighing, or the car it is reading up on, until the verdict arrives
+ * be weighing, and a bar for how far along it is, until the verdict arrives
  */
 const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
   const [verdict, setVerdict] = useState(written)
   const [failed, setFailed] = useState(false)
-  // The cars the model has started looking up, by the name the page uses
-  const [lookedUp, setLookedUp] = useState<string[]>([])
+  const [progress, setProgress] = useState<Progress>({ filled: false })
 
   useEffect(() => {
     if (written) return
@@ -193,17 +219,15 @@ const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
         const { events, rest } = decodeEvents(buffered + value)
         buffered = rest
         for (const event of events) {
-          if (event.type === 'lookup') {
-            const car = cars.find(({ label }) => label === event.car)
-            if (!car || event.done) continue
-            const name = carName(car, cars)
-            setLookedUp((before) =>
-              before.includes(name) ? before : [...before, name],
-            )
+          if (event.type === 'writing') {
+            const writingAt = performance.now()
+            setProgress((before) => ({ ...before, writingAt }))
           } else if (event.type === 'verdict') {
+            setProgress((before) => ({ ...before, filled: true }))
+            await new Promise((resolve) => setTimeout(resolve, FILL_MS))
             setVerdict(event.verdict)
             return
-          } else {
+          } else if (event.type === 'error') {
             throw new Error('No verdict')
           }
         }
@@ -215,7 +239,7 @@ const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
       if (!controller.signal.aborted) setFailed(true)
     })
     return () => controller.abort()
-  }, [written, endpoint, cars])
+  }, [written, endpoint])
 
   if (verdict)
     return (
@@ -237,7 +261,7 @@ const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
   return (
     <Working
       names={cars.map((car) => carName(car, cars))}
-      lookedUp={lookedUp}
+      progress={progress}
     />
   )
 }

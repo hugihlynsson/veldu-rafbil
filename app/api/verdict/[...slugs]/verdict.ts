@@ -1,5 +1,5 @@
 import { google } from '@ai-sdk/google'
-import { stepCountIs, streamText, type LanguageModelUsage } from 'ai'
+import { streamText, type LanguageModelUsage } from 'ai'
 import { createHash } from 'node:crypto'
 import { unstable_cache } from 'next/cache'
 import { after } from 'next/server'
@@ -7,12 +7,11 @@ import { after } from 'next/server'
 import type { Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import type { Verdict, VerdictEvent } from '@/modules/detail/verdictEvents'
-import { carRef } from '@/modules/chat/cars'
 import { advisorModel } from '@/modules/chat/model'
-import { createFetchCarDetailsTool } from '@/app/api/chat/tools/fetchCarDetails'
+import { readCarPage } from '@/app/api/chat/tools/fetchCarDetails'
 import { deployment, logAfterResponse } from '@/app/api/publicEndpoint'
 import { readEveryPage, verdictKeys } from './keep'
-import { readVerdict, verdictPrompt } from './prompt'
+import { readVerdict, verdictDetails, verdictPrompt } from './prompt'
 
 class NotWritten extends Error {}
 
@@ -21,9 +20,10 @@ class NotWritten extends Error {}
 const ordered = (cars: ReadonlyArray<Car>) =>
   cars.toSorted((a, b) => carSlug(a).localeCompare(carSlug(b)))
 
-// Written once per set of cars and kept, so it can afford to think far longer than
-// the chat, whose every answer waits on its thinking
-const thinkingLevel = 'high'
+// Medium, as the reviews are written: whoever first opens a set of cars waits
+// on every token of its thinking. On three sets, high took 16-29 s against
+// medium's 13-17 s, for verdicts no better to read
+const thinkingLevel = 'medium'
 
 /**
  * Everything the model is given, hashed: a verdict lasts as long as the
@@ -67,20 +67,20 @@ export const peekVerdict = async (
   return (await peek(whole)) ?? peek(partial)
 }
 
-// The prompts ask for some 160 words: far fewer is an answer that stopped
-const MIN_WORDS = 60
+// The prompts ask for some 120 words: far fewer is an answer that stopped
+const MIN_WORDS = 45
 
 const wordCount = ({ paragraphs }: Verdict) =>
   paragraphs.join(' ').split(/\s+/).length
 
-// Long enough for the model to think and look up four cars, which the page
-// shows it doing; short of the function's own limit
+// Long enough to read four pages and think, which the page shows it doing;
+// short of the function's own limit
 const TIMEOUT_MS = 100_000
 
 interface Usage {
   total?: LanguageModelUsage
   lookups: number
-  /** Whether it read every page it was told to, which decides how long it is kept */
+  /** Whether every page was read, which decides how long it is kept */
   readEveryPage?: boolean
 }
 
@@ -91,36 +91,41 @@ const write = async (
 ): Promise<Verdict> => {
   const compared = ordered(unordered)
   const { system, prompt } = verdictPrompt(compared)
-  const byRef = new Map(compared.map((car) => [carRef(car), car] as const))
-  const read = new Set<string>()
+  const abortSignal = AbortSignal.timeout(TIMEOUT_MS)
+
+  // Read here rather than left to the model as a tool: every car's page is
+  // wanted, and each call it made was another turn of thinking, one at a time
+  const pages = await Promise.all(
+    compared.map(async (car) =>
+      car.evDatabaseUrl
+        ? { car, ...(await readCarPage(car.evDatabaseUrl)) }
+        : { car },
+    ),
+  )
+  const read = new Set(
+    pages.flatMap((page) =>
+      'found' in page && page.found ? page.car.label : [],
+    ),
+  )
+  usage.lookups = pages.filter((page) => page.car.evDatabaseUrl).length
+  usage.readEveryPage = readEveryPage(compared, read)
 
   const result = streamText({
     model: google(advisorModel),
     system,
-    prompt,
-    tools: { fetchCarDetails: createFetchCarDetailsTool() },
-    stopWhen: stepCountIs(compared.length + 2),
+    prompt: `${prompt}\n\n${verdictDetails(pages)}`,
     providerOptions: {
       google: { thinkingConfig: { thinkingLevel } },
     },
     maxOutputTokens: 16_384,
-    abortSignal: AbortSignal.timeout(TIMEOUT_MS),
+    abortSignal,
   })
 
+  let writing = false
   for await (const part of result.stream) {
-    if (part.type === 'tool-call' && !part.dynamic) {
-      usage.lookups++
-      emit({
-        type: 'lookup',
-        id: part.toolCallId,
-        car: byRef.get(part.input.car.toLowerCase())?.label ?? part.input.car,
-        done: false,
-      })
-    } else if (part.type === 'tool-result' || part.type === 'tool-error') {
-      if (part.type === 'tool-result' && !part.dynamic && part.output.found) {
-        read.add(part.output.carName)
-      }
-      emit({ type: 'lookup', id: part.toolCallId, car: '', done: true })
+    if (part.type === 'text-start' && !writing) {
+      writing = true
+      emit({ type: 'writing' })
     } else if (part.type === 'error') {
       throw part.error
     }
@@ -137,7 +142,6 @@ const write = async (
   if (!verdict || wordCount(verdict) < MIN_WORDS) {
     throw new Error('The model gave too short a verdict')
   }
-  usage.readEveryPage = readEveryPage(compared, read)
   return verdict
 }
 

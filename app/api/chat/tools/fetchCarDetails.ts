@@ -61,6 +61,51 @@ const readSpecs = (url: string, html: string): string => {
 const CACHE_MS = 24 * 60 * 60 * 1000
 const specCache = new Map<string, { specifications: string; expires: number }>()
 
+export interface CarPage {
+  specifications: string
+  /** Set only for a page read, so a caller need not match on the words */
+  found?: true
+  error?: string
+}
+
+/**
+ * A car's ev-database page as the model is handed it: what the page says, or
+ * why there is nothing, worded so the model falls back to the list rather than
+ * retry. Only a URL from the car data may be passed.
+ */
+export const readCarPage = async (url: string): Promise<CarPage> => {
+  const cached = specCache.get(url)
+  if (cached && cached.expires > Date.now()) {
+    return { specifications: cached.specifications, found: true }
+  }
+
+  try {
+    const response = await fetchOnSite(url)
+
+    if (!response) {
+      return {
+        specifications:
+          'The ev-database page redirected somewhere this tool does not follow, so there are no specifications to read. Answer from the car list instead.',
+      }
+    }
+
+    if (!response.ok) {
+      return {
+        specifications: `The ev-database page answered ${response.status}, so there are no specifications to read. Answer from the car list instead.`,
+      }
+    }
+
+    const specifications = readSpecs(url, await readCapped(response))
+    specCache.set(url, { specifications, expires: Date.now() + CACHE_MS })
+    return { specifications, found: true }
+  } catch (error) {
+    return {
+      specifications: `Could not fetch details from ${url}`,
+      error: String(error),
+    }
+  }
+}
+
 // Each call is a page from ev-database, and a part of the answer the browser
 // sends back with every later question. A model fanning out over the whole
 // list would do both once per car, so the description asks for no more than
@@ -103,50 +148,11 @@ export const createFetchCarDetailsTool = () => {
         }
       }
 
-      const cached = specCache.get(url)
-      if (cached && cached.expires > Date.now()) {
-        return {
-          carName,
-          specifications: cached.specifications,
-          source: url,
-          found: true,
-        }
-      }
-
-      try {
-        const response = await fetchOnSite(url)
-
-        if (!response) {
-          return {
-            carName,
-            specifications:
-              'The ev-database page redirected somewhere this tool does not follow, so there are no specifications to read. Answer from the car list instead.',
-            source: url,
-          }
-        }
-
-        // Naming the status tells the model to fall back to the list, not retry
-        if (!response.ok) {
-          return {
-            carName,
-            specifications: `The ev-database page answered ${response.status}, so there are no specifications to read. Answer from the car list instead.`,
-            source: url,
-          }
-        }
-
-        const specifications = readSpecs(url, await readCapped(response))
-        specCache.set(url, { specifications, expires: Date.now() + CACHE_MS })
-
-        // Said outright, so a caller can tell a page read from every way of
-        // not reading one without matching on the words to the model
-        return { carName, specifications, source: url, found: true }
-      } catch (error) {
-        return {
-          carName,
-          specifications: `Could not fetch details from ${url}`,
-          error: String(error),
-        }
-      }
+      const read = await readCarPage(url)
+      // The source is left off a failure to fetch at all, which named it
+      return read.error
+        ? { carName, ...read }
+        : { carName, ...read, source: url }
     },
   })
 }
