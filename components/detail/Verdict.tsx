@@ -107,7 +107,7 @@ const ThinkingLine: FunctionComponent<{
         setLine(next(line))
       }}
       className={clsx(
-        'font-semibold leading-snug',
+        'min-w-0 truncate font-semibold leading-snug',
         leaving ? 'animate-phrase-out' : 'animate-phrase-in',
       )}
     >
@@ -166,9 +166,8 @@ const Working: FunctionComponent<{
   // Headed as the verdict will be, so only what is under it changes when it
   // arrives, and the line below is the one that says it is being written
   <ReviewSection>
-    {/* Two lines tall whatever the line, so the card holds still as they
-        turn, with a line of one kept down by the bar it goes with */}
-    <output className="mt-3 flex flex-col justify-end min-h-[2lh] text-sm leading-snug">
+    {/* One line whatever the phrase, so the card holds still as they turn */}
+    <output className="block mt-2 text-sm leading-snug">
       <span className="flex items-start gap-2">
         <span
           aria-hidden
