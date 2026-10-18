@@ -105,11 +105,21 @@ const specLabels = {
 /** What a car's page says of it, as the site writes it: "4440 mm" */
 export type CarSpecs = Partial<Record<keyof typeof specLabels, string>>
 
+/** Where a car's page is wrong, what its maker says instead, by the page */
+export const specCorrections: Readonly<Record<string, CarSpecs>> = {
+  // The page says it takes no hitch. Askja's price list offers no towbar for
+  // it either, but Mercedes gives it 3,500 kg braked
+  'https://ev-database.org/car/2192/Mercedes-Benz-G-580': {
+    towHitch: 'Yes',
+    towingBraked: '3500 kg',
+  },
+}
+
 // Only what the page said, not the tool's own carName and source: a page
 // with no table must read as having no specifications
-export const readCarSpecs = (html: string): CarSpecs => {
+export const readCarSpecs = (url: string, html: string): CarSpecs => {
   const specTable = readSpecTable(html)
-  return Object.fromEntries(
+  const read = Object.fromEntries(
     Object.entries(specLabels).flatMap(([key, labels]) => {
       const value = labels
         .map((label) => specTable.get(label.toLowerCase()))
@@ -117,6 +127,7 @@ export const readCarSpecs = (html: string): CarSpecs => {
       return value ? [[key, value]] : []
     }),
   )
+  return { ...read, ...specCorrections[url] }
 }
 
 /**
@@ -127,5 +138,5 @@ export const fetchCarSpecs = async (url: string): Promise<CarSpecs | null> => {
   if (!allowedURLs.has(url)) return null
   const response = await fetchOnSite(url)
   if (!response?.ok) return null
-  return readCarSpecs(await readCapped(response))
+  return readCarSpecs(url, await readCapped(response))
 }

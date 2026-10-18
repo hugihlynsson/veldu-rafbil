@@ -47,8 +47,8 @@ export const upgradeCarDetailsCalls = <Part extends { type: string }>(
   })
 
 /** The fields the list does not carry, as the model is handed them */
-const readSpecs = (html: string): string => {
-  const formatted = Object.entries(readCarSpecs(html))
+const readSpecs = (url: string, html: string): string => {
+  const formatted = Object.entries(readCarSpecs(url, html))
     .map(([key, value]) => `${key}: ${value}`)
     .join('\n')
 
@@ -134,7 +134,7 @@ export const createFetchCarDetailsTool = () => {
           }
         }
 
-        const specifications = readSpecs(await readCapped(response))
+        const specifications = readSpecs(url, await readCapped(response))
         specCache.set(url, { specifications, expires: Date.now() + CACHE_MS })
 
         // Said outright, so a caller can tell a page read from every way of
