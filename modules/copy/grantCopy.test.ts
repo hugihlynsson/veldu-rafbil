@@ -5,7 +5,8 @@ import { grantAmount } from '@/modules/data/globals'
 // Both numbers are legislation and have changed before
 const copyWith = async (amount: number, ceiling: number) => {
   vi.resetModules()
-  vi.doMock('@/modules/data/globals', () => ({
+  vi.doMock('@/modules/data/globals', async (importOriginal) => ({
+    ...(await importOriginal<typeof import('@/modules/data/globals')>()),
     grantAmount: amount,
     grantPriceCeiling: ceiling,
   }))
@@ -24,6 +25,12 @@ describe('the grant copy', () => {
     expect(copy.grantAmountText).toBe('500.000 kr.')
     expect(copy.grantCeilingText).toBe('10 milljónir')
     expect(copy.grantCeilingDativeText).toBe('10 milljónum')
+  })
+
+  it('names the grant from 1 November', async () => {
+    const copy = await import('./grantCopy')
+    expect(copy.nextGrantAmountText).toBe('400.000 kr.')
+    expect(copy.nextGrantCeilingText).toBe('8 milljónir')
   })
 
   it('carries a change to the law into the prose', async () => {

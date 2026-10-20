@@ -3,6 +3,7 @@ import { filterUrlKeys } from '@/modules/list/filters'
 import {
   grantAmount,
   grantPriceCeiling,
+  nextGrant,
   realRangeHighFactor,
   realRangeLowFactor,
 } from '@/modules/data/globals'
@@ -29,7 +30,7 @@ The site itself is a single page in Icelandic, at \`/\`. Sorting and filtering t
 
 ## Reading the figures
 
-- **Price.** Each car carries \`price.list\` and \`price.withGrant\`. A new electric car listed under ${grantPriceCeiling.toLocaleString('en-US')} ISK has a ${grantAmount.toLocaleString('en-US')} ISK government grant (*rafbílastyrkur*) taken off. \`price.withGrant\` is what a buyer pays and what the site shows everywhere; \`price.list\` is the number before it. Quoting \`price.list\` as the price of a car that qualifies overstates it by ${grantAmount.toLocaleString('en-US')} ISK. Both figures are set by legislation and have changed before.
+- **Price.** Each car carries \`price.list\` and \`price.withGrant\`. A new electric car listed under ${grantPriceCeiling.toLocaleString('en-US')} ISK has a ${grantAmount.toLocaleString('en-US')} ISK government grant (*rafbílastyrkur*) taken off. \`price.withGrant\` is what a buyer pays and what the site shows everywhere; \`price.list\` is the number before it. Quoting \`price.list\` as the price of a car that qualifies overstates it by ${grantAmount.toLocaleString('en-US')} ISK. Both figures are set by legislation and have changed before: from applications approved on 1 November 2026 the grant is ${nextGrant.amount.toLocaleString('en-US')} ISK under ${nextGrant.priceCeiling.toLocaleString('en-US')} ISK, and a car with \`availability: "expected"\` is priced on that already, since it will be registered after the change.
 - **Range.** \`rangeWltpKm\` is the manufacturer's WLTP figure, measured somewhere warmer and flatter than Iceland. Real range here is lower, usually ${percent(realRangeLowFactor)}–${percent(realRangeHighFactor)} of it, which is what \`estimatedRealRangeKm\` reports. Say so when you quote a range.
 - **Seats.** \`seats\` is the most seats the model can be ordered with in Iceland, a third row that costs extra included. The price beside it is the cheapest trim's, so a car reading \`7\` may need a paid option to seat seven — say so when you quote both. A configuration Iceland does not get is not counted.
 - **Availability.** A car with \`availability: "expected"\` is not on the road here yet; \`expectedDelivery\` says when, in Icelandic.

@@ -3,6 +3,7 @@ import newCars from './newCars'
 import getCarId, { carLabel, carSlug } from './getCarId'
 import getPriceWithGrant from './getPriceWithGrant'
 import getKmPerMinutesCharged from './getKmPerMinutesCharged'
+import { currentGrant, nextGrant } from './globals'
 
 export type Availability = 'available' | 'expected'
 
@@ -23,7 +24,10 @@ export interface Car extends NewCar {
 }
 
 export const deriveCar = (car: NewCar): Car => {
-  const priceWithGrant = getPriceWithGrant(car.price)
+  const priceWithGrant = getPriceWithGrant(
+    car.price,
+    car.expectedDelivery ? nextGrant : currentGrant,
+  )
 
   return {
     ...car,

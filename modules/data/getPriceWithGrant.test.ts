@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import getPriceWithGrant from './getPriceWithGrant'
-import { grantAmount, grantPriceCeiling } from './globals'
+import { grantAmount, grantPriceCeiling, nextGrant } from './globals'
 
 // Every user-facing price goes through this, so the threshold decides the site
 describe('getPriceWithGrant', () => {
@@ -22,5 +22,13 @@ describe('getPriceWithGrant', () => {
     // Over the threshold until the grant is off, which must not let it under
     const justOver = grantPriceCeiling + grantAmount - 100_000
     expect(getPriceWithGrant(justOver)).toBe(justOver)
+  })
+
+  it('applies the grant it is given', () => {
+    const under = nextGrant.priceCeiling - 10_000
+    expect(getPriceWithGrant(under, nextGrant)).toBe(under - nextGrant.amount)
+    expect(getPriceWithGrant(nextGrant.priceCeiling, nextGrant)).toBe(
+      nextGrant.priceCeiling,
+    )
   })
 })
