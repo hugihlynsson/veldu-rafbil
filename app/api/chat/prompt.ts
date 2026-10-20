@@ -4,6 +4,9 @@ import { carRef } from '@/modules/chat/cars'
 import {
   grantAmountText,
   grantCeilingDativeText,
+  nextGrantAmountText,
+  nextGrantCeilingText,
+  nextGrantStartText,
 } from '@/modules/copy/grantCopy'
 import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 
@@ -35,6 +38,7 @@ Gott að hafa í huga:
 - Notaðu upplýsingarnar hér að ofan til að gefa nákvæmar, sértækar upplýsingar
 - Þegar spurt er um tvennt í senn án talna, til dæmis ódýran og hraðan bíl, farðu yfir allan listann og berðu hvern bíl saman við hvort tveggja. Nefndu aldrei bíl ef annar bíll á listanum er bæði ódýrari og betri í hinu atriðinu, nefndu þann frekar
 - Verðin hér að ofan eru EFTIR ${grantAmountText} ríkisstyrk (fyrir bíla undir ${grantCeilingDativeText} kr)
+- Styrkurinn lækkar ${nextGrantStartText}: umsóknir sem eru samþykktar þann dag eða síðar fá ${nextGrantAmountText} og bílar sem kosta meira en ${nextGrantCeilingText} fá engan styrk. Það er dagsetning samþykktrar umsóknar sem gildir og aðeins er hægt að sækja um eftir nýskráningu, svo til að fá ${grantAmountText} þarf bíllinn að vera nýskráður og umsóknin samþykkt fyrir mánaðamót. Verð væntanlegra bíla að ofan miðast þegar við nýja styrkinn
 - Drægni byggir á WLTP mælingum
 - Hraðhleðslan er tíminn frá 10% upp í 80% á hröðustu hleðslu, og km/mín er meðaldrægniaukningin á mínútu á því bili, reiknuð út frá WLTP drægni
 - Þegar spurt er um raunverulega drægni, útskýrðu að hún verði minni vegna þátta eins og aksturs og veðuraðstæðna á Íslandi

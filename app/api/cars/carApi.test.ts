@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest'
 import { buildCarsPayload, toApiCar } from './carApi'
 import newCars from '@/modules/data/newCars'
 import cars, { deriveCar } from '@/modules/data/cars'
-import getPriceWithGrant from '@/modules/data/getPriceWithGrant'
 import { grantAmount, grantPriceCeiling } from '@/modules/data/globals'
 import type { NewCar } from '@/modules/data/newCarSchema'
 
@@ -31,7 +30,7 @@ describe('the published car payload', () => {
   it('applies the grant the same way the site does', () => {
     for (const car of cars) {
       const { price } = toApiCar(car)
-      expect(price.withGrant, label(car)).toBe(getPriceWithGrant(car.price))
+      expect(price.withGrant, label(car)).toBe(car.priceWithGrant)
       expect(price.list - price.withGrant, label(car)).toBe(price.grantApplied)
 
       // ISK has no subunit, and this is where a consumer reads a price

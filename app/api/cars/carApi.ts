@@ -5,6 +5,7 @@ import { chargeWindowShare } from '@/modules/data/getKmPerMinutesCharged'
 import {
   grantAmount,
   grantPriceCeiling,
+  nextGrant,
   realRangeHighFactor,
   realRangeLowFactor,
 } from '@/modules/data/globals'
@@ -135,7 +136,7 @@ export const buildCarsPayload = (
     currency: 'ISK',
     amount: grantAmount,
     priceCeiling: grantPriceCeiling,
-    note: `A new electric car with a list price under ${grantPriceCeiling.toLocaleString('en-US')} ISK has ${grantAmount.toLocaleString('en-US')} ISK taken off. Both numbers are set by Icelandic legislation and have changed before. price.withGrant is what a buyer pays and what the site shows; price.list is the price before it.`,
+    note: `A new electric car with a list price under ${grantPriceCeiling.toLocaleString('en-US')} ISK has ${grantAmount.toLocaleString('en-US')} ISK taken off. Both numbers are set by Icelandic legislation and have changed before: from applications approved on 1 November 2026 it is ${nextGrant.amount.toLocaleString('en-US')} ISK under ${nextGrant.priceCeiling.toLocaleString('en-US')} ISK, and a car with availability "expected" is priced on that already, as it will be registered after the change. price.withGrant is what a buyer pays and what the site shows; price.list is the price before it.`,
   },
   notes: {
     range: `rangeWltpKm is the manufacturer WLTP figure. Real range in Iceland is lower — cold, wind and hills — and usually lands between ${Math.round(realRangeLowFactor * 100)}% and ${Math.round(realRangeHighFactor * 100)}% of it, which is what estimatedRealRangeKm reports. Those are estimates, not measurements.`,
