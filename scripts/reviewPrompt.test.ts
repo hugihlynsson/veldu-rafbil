@@ -113,7 +113,7 @@ describe('carFacts', () => {
   })
 
   it('quotes the price after the grant', () => {
-    expect(facts).toContain('5.790.777 kr. eftir styrk')
+    expect(facts).toContain('5.890.777 kr. eftir styrk')
   })
 })
 

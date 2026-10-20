@@ -1,8 +1,6 @@
-import { currentGrant, type Grant } from './globals'
+import { grantAmount, grantPriceCeiling } from './globals'
 
-const getPriceWithGrant = (
-  price: number,
-  { amount, priceCeiling }: Grant = currentGrant,
-): number => (price < priceCeiling ? price - amount : price)
+const getPriceWithGrant = (price: number): number =>
+  price < grantPriceCeiling ? price - grantAmount : price
 
 export default getPriceWithGrant

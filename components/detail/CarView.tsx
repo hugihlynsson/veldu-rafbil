@@ -9,7 +9,6 @@ import { carName } from '@/modules/data/getCarId'
 import { carPathOf, comparisonPathOf } from '@/modules/detail/paths'
 import { specRows, type SpecKey } from '@/modules/detail/specs'
 import { carSubtitle, deprecatedNotice } from '@/modules/detail/subtitle'
-import { grantChangeNotice } from '@/modules/detail/grantChange'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import PricePill from '@/components/PricePill'
 import EvDatabaseLink from '@/components/EvDatabaseLink'
@@ -45,7 +44,6 @@ const sectionLabel = 'm-0 text-sm font-semibold'
 const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
   const subTitle = carSubtitle(car)
   const notice = deprecatedNotice(car)
-  const grantChange = grantChangeNotice(car)
   // The price is the pill under the name
   const figures = specRows([car])
     .filter(({ key }) => figureOrder.includes(key))
@@ -116,14 +114,6 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
                 </div>
               ) : (
                 <PricePill car={car} className="mt-3 -ml-0.5" />
-              )}
-              {grantChange && (
-                <div className="mt-3 py-2.5 px-3.5 rounded-card bg-cloud text-sm text-pretty">
-                  <div className="font-semibold">{grantChange.title}</div>
-                  <div className="mt-0.5 font-medium text-stone">
-                    {grantChange.text}
-                  </div>
-                </div>
               )}
             </div>
 

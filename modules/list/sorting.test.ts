@@ -10,6 +10,7 @@ import {
   toggledSorting,
 } from './sorting'
 import { deriveCar, Car } from '@/modules/data/cars'
+import { grantPriceCeiling } from '@/modules/data/globals'
 import type { NewCar } from '@/modules/data/newCarSchema'
 import {
   getSortingFromQuery,
@@ -111,9 +112,9 @@ describe('direction', () => {
 
 describe('sortCars', () => {
   it('sorts price by what the buyer pays, after the grant', () => {
-    // 10,100,000 gets no grant; 9,900,000 drops to 9,400,000.
-    const expensive = car({ price: 10_100_000 })
-    const cheap = car({ price: 9_900_000 })
+    // Listed a little more, but over the ceiling, so it gets no grant
+    const expensive = car({ price: grantPriceCeiling + 100_000 })
+    const cheap = car({ price: grantPriceCeiling - 100_000 })
     expect(sortCars([expensive, cheap], 'price')).toEqual([cheap, expensive])
   })
 
