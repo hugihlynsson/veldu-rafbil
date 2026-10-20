@@ -59,6 +59,16 @@ describe('carFilter', () => {
     expect(keep({ name: ['TESLA'] }, car({}))).toBe(true)
   })
 
+  it('ignores spaces and punctuation in a name', () => {
+    expect(
+      keep({ name: ['X peng'] }, car({ make: 'XPENG', model: 'G6' })),
+    ).toBe(true)
+    expect(
+      keep({ name: ['id 4'] }, car({ make: 'Volkswagen', model: 'ID.4' })),
+    ).toBe(true)
+    expect(keep({ name: [' - '] }, car({}))).toBe(false)
+  })
+
   it('keeps a car matching any one of several names', () => {
     expect(keep({ name: ['kia', 'tesla'] }, car({}))).toBe(true)
   })

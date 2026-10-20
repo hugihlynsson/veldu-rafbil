@@ -79,6 +79,14 @@ describe('parseFilterIntent', () => {
     expect(read('án fjórhjóladrifs')).toEqual({})
   })
 
+  it('does not take a negated make as a wish for it', () => {
+    expect(read('ekki Tesla')).toEqual({})
+    expect(
+      read('mig langar í fjórhjóladrifin rafbíl sem er ekki tesla'),
+    ).toEqual({ drive: ['AWD'] })
+    expect(read('Kia en ekki Tesla')).toEqual({ name: ['Kia'] })
+  })
+
   it('keeps every drive asked for', () => {
     expect(read('afturhjóladrif eða fjórhjóladrif')).toEqual({
       drive: ['AWD', 'RWD'],
