@@ -5,11 +5,11 @@ import {
   fieldFromFilter,
   fieldsFromFilters,
   filtersFromFields,
-  splitAtMakes,
   type FilterFields,
   type FilterKey,
   type Filters,
 } from '@/modules/list/filters'
+import { splitAtMakes } from '@/modules/list/carNames'
 import clsx from 'clsx'
 import Modal, { panelMotion } from '@/components/Modal'
 import CloseButton from '@/components/CloseButton'

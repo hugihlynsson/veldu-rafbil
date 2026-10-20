@@ -10,6 +10,7 @@ import type { Car, Availability } from '@/modules/data/cars'
 import type { Drive } from '@/modules/data/newCarSchema'
 // Relative: next.config.ts loads this file, and its loader cannot resolve @/
 import { drives } from '../data/drives'
+import { nameMatcher } from './carNames'
 
 interface FilterDefinition<Value> {
   // Icelandic, and part of every link to the list that has been shared
@@ -52,34 +53,6 @@ const parseAsSeats = createParser({
   },
   serialize: String,
 })
-
-// "X peng" and "ID 4" are how people type XPENG and ID.4
-const squeezeName = (name: string) =>
-  name.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '')
-
-/**
- * A name typed as "Byd kia Tesla" asks for three makes, and as one name it
- * matches no car, so it is cut before each make it names after the first.
- */
-export const splitAtMakes = (
-  names: ReadonlyArray<string>,
-  makes: ReadonlyArray<string>,
-): string[] => {
-  const makeWords = makes.map((make) => make.toLowerCase().split(/\s+/))
-  return names.flatMap((name) => {
-    const words = name.split(/\s+/).filter(Boolean)
-    const groups: string[][] = []
-    for (const [index, word] of words.entries()) {
-      const startsMake = makeWords.some((make) =>
-        make.every((part, i) => words[index + i]?.toLowerCase() === part),
-      )
-      const group = groups.at(-1)
-      if (!group || startsMake) groups.push([word])
-      else group.push(word)
-    }
-    return groups.map((group) => group.join(' '))
-  })
-}
 
 // Written as one comma separated value, read in that form or repeated
 const parseAsList = <T extends string>(accept: (entry: string) => entry is T) =>
@@ -126,11 +99,8 @@ export const filterDefinitions = {
     urlKey: 'nafn',
     parser: parseAsList((entry): entry is string => entry !== ''),
     test: (names) => {
-      const squeezed = names.map(squeezeName).filter(Boolean)
-      return (car) => {
-        const label = squeezeName(car.label)
-        return squeezed.some((name) => label.includes(name))
-      }
+      const matchers = names.map(nameMatcher)
+      return (car) => matchers.some((matches) => matches(car.label))
     },
   }),
   price: filter({
