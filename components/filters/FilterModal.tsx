@@ -1,9 +1,11 @@
 import React, { useRef, useState } from 'react'
 
+import cars from '@/modules/data/cars'
 import {
   fieldFromFilter,
   fieldsFromFilters,
   filtersFromFields,
+  splitAtMakes,
   type FilterFields,
   type FilterKey,
   type Filters,
@@ -120,6 +122,8 @@ interface Props {
   onDone: () => void
 }
 
+const makes = [...new Set(cars.map((car) => car.make))]
+
 const FiltersModal: React.FunctionComponent<Props> = ({
   initialFilters,
   onSubmit,
@@ -131,7 +135,10 @@ const FiltersModal: React.FunctionComponent<Props> = ({
   const [values, setValues] = useState<FilterFields>(() =>
     fieldsFromFilters(initialFilters),
   )
-  const filters = filtersFromFields(values)
+  const read = filtersFromFields(values)
+  const filters: Filters = read.name
+    ? { ...read, name: splitAtMakes(read.name, makes) }
+    : read
 
   const handleFilterChange =
     (name: FilterKey) =>

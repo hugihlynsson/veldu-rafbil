@@ -407,8 +407,9 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
   )
 
   for (const entry of nameEntries) {
-    take(entry.source, (match) => {
-      names.push({ index: match.index, entry })
+    // There is no filter that leaves a make out, so "ekki Tesla" is read as nothing
+    take(entry.source, (match, before) => {
+      if (!negatedBefore(before)) names.push({ index: match.index, entry })
     })
   }
   // "Kia EV9" asks for the EV9, not for every Kia

@@ -9,6 +9,7 @@ import {
   filterUrlKeys,
   filtersFromFields,
   normalizeFilters,
+  splitAtMakes,
 } from './filters'
 import type { Filters } from './filters'
 import { getFiltersFromQuery, serializeFilters } from './query'
@@ -302,6 +303,45 @@ describe('filterKeys', () => {
       'value',
       'fastcharge',
       'availability',
+    ])
+  })
+})
+
+describe('splitAtMakes', () => {
+  const makes = [...new Set(cars.map((car) => car.make))]
+
+  it('cuts a name before each make it names', () => {
+    expect(splitAtMakes(['Byd kia Tesla'], makes)).toEqual([
+      'Byd',
+      'kia',
+      'Tesla',
+    ])
+    expect(splitAtMakes(['Tesla model y range rover'], makes)).toEqual([
+      'Tesla model y',
+      'range rover',
+    ])
+  })
+
+  it('keeps a make and its model together', () => {
+    expect(splitAtMakes(['Kia ev5 awd', 'Byd sealion'], makes)).toEqual([
+      'Kia ev5 awd',
+      'Byd sealion',
+    ])
+  })
+
+  // A model or variant that named a make would be cut into names that each
+  // match more than the car they were typed for
+  it('keeps every car label whole', () => {
+    const cut = cars.filter(
+      (car) => splitAtMakes([car.label], makes).length !== 1,
+    )
+    expect(cut.map((car) => car.label)).toEqual([])
+  })
+
+  it('leaves a list with no makes in it as it is', () => {
+    expect(splitAtMakes(['model y', 'ioniq'], makes)).toEqual([
+      'model y',
+      'ioniq',
     ])
   })
 })
