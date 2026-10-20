@@ -82,6 +82,8 @@ interface Usage {
   lookups: number
   /** Whether every page was read, which decides how long it is kept */
   readEveryPage?: boolean
+  /** A first answer the provider stopped, and what it had cost */
+  blocked?: { reason: string | undefined; usage: LanguageModelUsage }
 }
 
 const write = async (
@@ -110,25 +112,39 @@ const write = async (
   usage.lookups = pages.filter((page) => page.car.evDatabaseUrl).length
   usage.readEveryPage = readEveryPage(compared, read)
 
-  const result = streamText({
-    model: google(advisorModel),
-    system,
-    prompt: `${prompt}\n\n${verdictDetails(pages)}`,
-    providerOptions: {
-      google: { thinkingConfig: { thinkingLevel } },
-    },
-    maxOutputTokens: 16_384,
-    abortSignal,
-  })
+  const answer = async () => {
+    const result = streamText({
+      model: google(advisorModel),
+      system,
+      prompt: `${prompt}\n\n${verdictDetails(pages)}`,
+      providerOptions: {
+        google: { thinkingConfig: { thinkingLevel } },
+      },
+      maxOutputTokens: 16_384,
+      abortSignal,
+    })
 
-  let writing = false
-  for await (const part of result.stream) {
-    if (part.type === 'text-start' && !writing) {
-      writing = true
-      emit({ type: 'writing' })
-    } else if (part.type === 'error') {
-      throw part.error
+    let writing = false
+    for await (const part of result.stream) {
+      if (part.type === 'text-start' && !writing) {
+        writing = true
+        emit({ type: 'writing' })
+      } else if (part.type === 'error') {
+        throw part.error
+      }
     }
+    return result
+  }
+
+  let result = await answer()
+  // Gemini stops an answer as a content filter now and then, for a set of
+  // cars the same request writes a verdict for on the next try
+  if ((await result.finishReason) === 'content-filter') {
+    usage.blocked = {
+      reason: await result.rawFinishReason,
+      usage: await result.totalUsage,
+    }
+    result = await answer()
   }
 
   usage.total = await result.totalUsage
@@ -136,7 +152,8 @@ const write = async (
   // cut off by its token limit or an interruption would be kept half written
   const finishReason = await result.finishReason
   if (finishReason !== 'stop') {
-    throw new Error(`The verdict ended with ${finishReason}`)
+    const raw = await result.rawFinishReason
+    throw new Error(`The verdict ended with ${finishReason} (${raw})`)
   }
   const verdict = readVerdict(await result.text)
   if (!verdict || wordCount(verdict) < MIN_WORDS) {
@@ -196,6 +213,7 @@ export const writeVerdict = (compared: ReadonlyArray<Car>): Job => {
       cars: ordered(compared).map(carSlug),
       error: failure,
       usage: usage.total,
+      blocked: usage.blocked,
       lookups: usage.lookups,
       readEveryPage: usage.readEveryPage,
       millis: Math.round(performance.now() - startedAt),
