@@ -262,10 +262,16 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
                           <div className="relative">
                             {cell.best && (
                               // In the gap before the figure rather than
-                              // beside it, so the columns stay aligned
+                              // beside it, so the columns stay aligned. Clear of
+                              // the price's pill, which starts before them
                               <span
                                 aria-hidden
-                                className="absolute top-1/2 -translate-y-1/2 -left-2 size-1.25 rounded-full bg-sky md:-left-3.25 md:size-1.75"
+                                className={clsx(
+                                  'absolute top-1/2 -translate-y-1/2 size-1.25 rounded-full bg-sky md:-left-3.75 md:size-1.75',
+                                  row.key === 'price'
+                                    ? '-left-3.25'
+                                    : '-left-2.5',
+                                )}
                               />
                             )}
                             {row.key === 'price' && car ? (
