@@ -6,23 +6,10 @@ import {
   type Filters,
   type FilterValue,
 } from './filters'
+import { foldText, makeAliases } from './carNames'
 
 // A sentence or two. Shared by the input and the route, which refuses longer.
 export const MAX_INTENT_LENGTH = 200
-
-/**
- * Lower case without accents, þ, æ or ð, so "sæti", "saeti" and "Sæti" read
- * alike. People type Icelandic on keyboards without the letters, and the
- * patterns below are written against this form only.
- */
-export const foldText = (text: string): string =>
-  text
-    .toLowerCase()
-    .replace(/þ/g, 'th')
-    .replace(/æ/g, 'ae')
-    .replace(/ð/g, 'd')
-    .normalize('NFKD')
-    .replace(/\p{Mark}/gu, '')
 
 const numberWords: Record<string, number> = {
   tveir: 2,
@@ -150,12 +137,6 @@ const makePattern = (name: string) => {
   return folded.endsWith('a')
     ? `${folded.slice(0, -1)}(?:a|u|an|una|unni|unnar)`
     : `${folded}(?:inn|inum|ins|num|nn|n|s|i)?`
-}
-
-const makeAliases: Record<string, string[]> = {
-  'Mercedes-Benz': ['mercedes', 'benz', 'merc'],
-  Volkswagen: ['vw', 'folksvagen'],
-  'Range Rover': ['land rover'],
 }
 
 // A model called "C" or "3" would match every sentence with a letter or a

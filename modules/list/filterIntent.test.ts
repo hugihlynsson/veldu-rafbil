@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
 import {
-  foldText,
   MAX_INTENT_LENGTH,
   needsModel,
   parseFilterIntent,
@@ -9,14 +8,6 @@ import {
 } from './filterIntent'
 
 const read = (text: string) => parseFilterIntent(text).filters
-
-describe('foldText', () => {
-  it('spells the Icelandic letters out the way a keyboard without them does', () => {
-    expect(foldText('Þriggja SÆTA, Ðö fjórhjóladrifinn')).toBe(
-      'thriggja saeta, do fjorhjoladrifinn',
-    )
-  })
-})
 
 describe('parseFilterIntent', () => {
   it('reads a bound word only into the number it stands before', () => {
