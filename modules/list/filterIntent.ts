@@ -168,8 +168,30 @@ const buildNameEntries = (list: ReadonlyArray<Car>): NameEntry[] => {
     makesByModel.set(car.model, makes)
   }
   const makes = [...new Set(list.map((car) => car.make))]
+  const spellingsOf = (make: string) => [make, ...(makeAliases[make] ?? [])]
+
+  // A Polestar 4 or a Smart #5 is a number on its own, which only reads as
+  // that model right after its make
+  const numbered = [
+    ...new Map(
+      list
+        .filter((car) => /^#?\d+$/.test(car.model))
+        .map((car) => [`${car.make} ${car.model}`, car] as const),
+    ),
+  ].map(([name, car]) => {
+    const makes = spellingsOf(car.make).map(makePattern).join('|')
+    const number = car.model.replace('#', '')
+    return {
+      name,
+      makes: new Set([car.make]),
+      isModel: true,
+      source: String.raw`${START}(?:${makes})[\s-]*#?\s*${number}${END}`,
+      length: foldText(name).length,
+    }
+  })
 
   const entries: Array<NameEntry & { length: number }> = [
+    ...numbered,
     ...[...makesByModel].map(([model, makes]) => ({
       name: model,
       makes,
@@ -178,7 +200,7 @@ const buildNameEntries = (list: ReadonlyArray<Car>): NameEntry[] => {
       length: foldText(model).length,
     })),
     ...makes.flatMap((make) =>
-      [make, ...(makeAliases[make] ?? [])].map((spelling) => ({
+      spellingsOf(make).map((spelling) => ({
         name: make,
         makes: new Set([make]),
         isModel: false,

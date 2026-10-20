@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
+import cars from '@/modules/data/cars'
+import carFilter from './carFilter'
 import {
   MAX_INTENT_LENGTH,
   needsModel,
@@ -87,6 +89,28 @@ describe('parseFilterIntent', () => {
   it('reads a make, inflected', () => {
     expect(read('Kia')).toEqual({ name: ['Kia'] })
     expect(read('Polestarinn')).toEqual({ name: ['Polestar'] })
+  })
+
+  it('reads a model that is a number after its make', () => {
+    expect(read('Polestar 4')).toEqual({ name: ['Polestar 4'] })
+    expect(read('smart #5 eða smart 1')).toEqual({
+      name: ['Smart #5', 'Smart #1'],
+    })
+    expect(read('Polestar 4 eða Kia')).toEqual({ name: ['Polestar 4', 'Kia'] })
+    expect(read('4 Polestar')).toEqual({ name: ['Polestar'] })
+  })
+
+  // The name is applied as the list's filter, which reads it as part of a
+  // label: "Polestar 4" there must not find the Polestar 4x of a later year
+  it('reads each numbered model as a name that finds only that model', () => {
+    const numbered = cars.filter((car) => /^#?\d+$/.test(car.model))
+    expect(numbered.length).toBeGreaterThan(0)
+    for (const car of numbered) {
+      const { name } = read(`${car.make} ${car.model}`)
+      expect(name).toEqual([`${car.make} ${car.model}`])
+      const found = cars.filter(carFilter({ name }))
+      expect(found.every((other) => other.model === car.model)).toBe(true)
+    }
   })
 
   it('does not read a bare digit as a model called "3"', () => {
