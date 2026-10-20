@@ -49,7 +49,9 @@ describe('nameMatcher', () => {
 
   it('finds every car by its own label', () => {
     expect(
-      cars.filter((car) => !finds(car.label, car.label)).map((car) => car.label),
+      cars
+        .filter((car) => !finds(car.label, car.label))
+        .map((car) => car.label),
     ).toEqual([])
   })
 })
