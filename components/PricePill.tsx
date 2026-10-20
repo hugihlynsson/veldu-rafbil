@@ -14,8 +14,6 @@ interface Props {
   car: Car
   /** Price per km of range in the badge, when that is what the list ranks by */
   showValue?: boolean
-  /** Set in the regular weight, among figures that are */
-  light?: boolean
   compact?: boolean
   /** Without the badge, for a column too narrow to hold it beside the price */
   bare?: boolean
@@ -26,7 +24,6 @@ interface Props {
 const PricePill: FunctionComponent<Props> = ({
   car,
   showValue,
-  light,
   compact,
   bare,
   className,
@@ -35,7 +32,6 @@ const PricePill: FunctionComponent<Props> = ({
     className={className}
     href={sellerLink(car.sellerUrl)}
     external
-    light={light}
     compact={compact}
     extra={
       bare

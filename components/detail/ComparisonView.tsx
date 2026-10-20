@@ -271,21 +271,12 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
                             {row.key === 'price' && car ? (
                               <PricePill
                                 car={car}
-                                light
                                 compact={crowded}
                                 bare
                                 className="max-w-full -ml-0.5"
                               />
                             ) : (
-                              <div
-                                className={
-                                  crowded
-                                    ? 'text-sm md:text-2xl'
-                                    : 'text-base md:text-2xl'
-                                }
-                              >
-                                {cell.text}
-                              </div>
+                              <div className="text-2xl">{cell.text}</div>
                             )}
                           </div>
                         )}
