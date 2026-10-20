@@ -263,7 +263,9 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
                             {cell.best && (
                               // In the gap before the figure rather than
                               // beside it, so the columns stay aligned. Clear of
-                              // the price's pill, which starts before them
+                              // the price's pill, which starts before them.
+                              // The first column's is pulled in where the
+                              // gutter is too narrow for it, as dark's is
                               <span
                                 aria-hidden
                                 className={clsx(
@@ -271,6 +273,10 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
                                   row.key === 'price'
                                     ? '-left-3.25'
                                     : '-left-2.5',
+                                  index === 0 &&
+                                    (row.key === 'price'
+                                      ? 'max-md:left-[max(-0.8125rem,calc(2px_-_var(--gutter)))]'
+                                      : 'max-md:left-[max(-0.625rem,calc(2px_-_var(--gutter)))]'),
                                 )}
                               />
                             )}
