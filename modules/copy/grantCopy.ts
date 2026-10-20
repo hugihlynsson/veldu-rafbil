@@ -1,9 +1,5 @@
 import addDecimalSeparators from './addDecimalSeparators'
-import {
-  grantAmount,
-  grantPriceCeiling,
-  nextGrant,
-} from '@/modules/data/globals'
+import { grantAmount, grantPriceCeiling } from '@/modules/data/globals'
 import { agree } from './plural'
 
 // A number written out in prose is a number nobody remembers to change, so the
@@ -36,16 +32,4 @@ export const grantCeilingDativeText = ceilingText(
   grantPriceCeiling,
   'milljón',
   'milljónum',
-)
-
-/** When the next grant applies, by the date an application is approved */
-export const nextGrantStartText = '1. nóvember'
-
-export const nextGrantAmountText = amountText(nextGrant.amount)
-
-/** The next ceiling as "8 milljónir", for "kosta meira en …" */
-export const nextGrantCeilingText = ceilingText(
-  nextGrant.priceCeiling,
-  'milljón',
-  'milljónir',
 )

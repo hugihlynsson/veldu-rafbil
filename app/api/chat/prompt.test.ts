@@ -4,11 +4,7 @@ import systemPrompt from './prompt'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import cars from '@/modules/data/cars'
 import { carRef, resolveCarRefs } from '@/modules/chat/cars'
-import {
-  grantAmountText,
-  nextGrantAmountText,
-  nextGrantCeilingText,
-} from '@/modules/copy/grantCopy'
+import { grantAmountText } from '@/modules/copy/grantCopy'
 import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 
 describe('the assistant system prompt', () => {
@@ -50,11 +46,6 @@ describe('the assistant system prompt', () => {
 
   it('names the grant the prices actually use', () => {
     expect(systemPrompt).toContain(grantAmountText)
-  })
-
-  it('names the grant from 1 November, which prices the expected cars', () => {
-    expect(systemPrompt).toContain(nextGrantAmountText)
-    expect(systemPrompt).toContain(nextGrantCeilingText)
   })
 
   // /api/cars and llms.txt quote the same bounds; the prompt once had its own

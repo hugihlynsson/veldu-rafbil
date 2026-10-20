@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import carFilter from './carFilter'
 import { deriveCar, Car } from '@/modules/data/cars'
+import { grantAmount, grantPriceCeiling } from '@/modules/data/globals'
 import type { NewCar } from '@/modules/data/newCarSchema'
 
 const car = (over: Partial<NewCar>): Car =>
@@ -45,8 +46,9 @@ describe('carFilter', () => {
   })
 
   it('compares price after the grant', () => {
-    // 9,400,000 after the grant, so a 9,500,000 limit keeps it.
-    expect(keep({ price: 9_500_000 }, car({ price: 9_900_000 }))).toBe(true)
+    const listed = grantPriceCeiling - 100_000
+    const limit = listed - grantAmount + 100_000
+    expect(keep({ price: limit }, car({ price: listed }))).toBe(true)
   })
 
   it('matches names on make, model and subModel together', () => {

@@ -11,7 +11,6 @@ import { GridIcon, ListIcon } from './ViewIcons'
 import Title from '@/components/Title'
 import { pageColumn } from '@/components/pageColumn'
 import Intro from './Intro'
-import GrantChangeNotice from './GrantChangeNotice'
 import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/filters/FilterModal'
 import ActiveFilters from '@/components/filters/ActiveFilters'
@@ -234,8 +233,6 @@ export default function CarList() {
         <Title />
 
         <Intro />
-
-        <GrantChangeNotice />
 
         <div
           ref={controlsRef}

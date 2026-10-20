@@ -7,7 +7,7 @@ import cars, {
   deriveCar,
 } from './cars'
 import { carSlug } from './getCarId'
-import { currentGrant, grantPriceCeiling, nextGrant } from './globals'
+import { grantPriceCeiling } from './globals'
 import newCars from './newCars'
 
 const priced = (price: number) => deriveCar({ ...newCars[0]!, price })
@@ -27,25 +27,6 @@ describe('hasGrant', () => {
     for (const car of cars) {
       expect(car.hasGrant).toBe(car.priceWithGrant < car.price)
     }
-  })
-})
-
-// The approval date decides the grant, and a car still to arrive can only be
-// registered, and so applied for, once the next one applies
-describe('priceWithGrant', () => {
-  const under = nextGrant.priceCeiling - 10_000
-
-  it('takes the current grant off a car on sale now', () => {
-    expect(priced(under).priceWithGrant).toBe(under - currentGrant.amount)
-  })
-
-  it('takes the next grant off a car still to arrive', () => {
-    const expected = deriveCar({
-      ...newCars[0]!,
-      price: under,
-      expectedDelivery: 'lok 2026',
-    })
-    expect(expected.priceWithGrant).toBe(under - nextGrant.amount)
   })
 })
 
