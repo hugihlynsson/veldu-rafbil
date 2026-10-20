@@ -54,3 +54,32 @@ export const similarTo = (car: Car): Car[] =>
   (similarCars[carSlug(car)] ?? []).flatMap(
     (slug) => currentCarWithSlug(slug) ?? [],
   )
+
+/**
+ * The cars someone comparing these would weigh next: those the most of them
+ * are similar to first, then as near the top of their lists as they stand.
+ * None of the compared cars, nor another variant of one.
+ */
+export const similarToAll = (
+  compared: ReadonlyArray<Car>,
+  count: number = SIMILAR_COUNT,
+): Car[] => {
+  const ranked = new Map<string, { car: Car; votes: number; rank: number }>()
+  compared.forEach((car, carIndex) => {
+    similarTo(car).forEach((other, position) => {
+      if (compared.some((one) => sameModel(one, other))) return
+      const seen = ranked.get(other.id)
+      if (seen) seen.votes += 1
+      else
+        ranked.set(other.id, {
+          car: other,
+          votes: 1,
+          rank: position * compared.length + carIndex,
+        })
+    })
+  })
+  return [...ranked.values()]
+    .toSorted((a, b) => b.votes - a.votes || a.rank - b.rank)
+    .map(({ car }) => car)
+    .slice(0, count)
+}

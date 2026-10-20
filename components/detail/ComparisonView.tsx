@@ -3,10 +3,18 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import type { Car } from '@/modules/data/cars'
-import { carSlug } from '@/modules/data/getCarId'
-import { carPathOf, comparisonPath } from '@/modules/detail/paths'
-import { comparisonTitle, MIN_COMPARED } from '@/modules/detail/comparison'
+import listedCars, { type Car } from '@/modules/data/cars'
+import { carName, carSlug } from '@/modules/data/getCarId'
+import {
+  carPathOf,
+  comparisonPath,
+  comparisonPathOf,
+} from '@/modules/detail/paths'
+import {
+  comparisonTitle,
+  MAX_COMPARED,
+  MIN_COMPARED,
+} from '@/modules/detail/comparison'
 import { specRows } from '@/modules/detail/specs'
 import { deprecatedNotice } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
@@ -15,6 +23,7 @@ import PricePill from '@/components/PricePill'
 import EvDatabaseLink from '@/components/EvDatabaseLink'
 import CompareMoreLink from './CompareMoreLink'
 import PageTop from './PageTop'
+import SimilarCars from './SimilarCars'
 import { Lane, ScrollLanes } from './ScrollLanes'
 import ShareButton from '@/components/ShareButton'
 import CrossIcon from '@/components/CrossIcon'
@@ -27,6 +36,8 @@ interface Props {
   slugs: ReadonlyArray<string>
   /** The model's verdict, in a boundary of its own so the figures never wait on it */
   verdict: ReactNode
+  /** The cars to weigh next, offered under the verdict */
+  similar: ReadonlyArray<Car>
 }
 
 // The car page's photo and the list's cards keep these edges from md
@@ -58,7 +69,12 @@ const columns: Record<number, string> = {
   4: 'grid-cols-4',
 }
 
-const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
+const ComparisonView: FunctionComponent<Props> = ({
+  cars,
+  slugs,
+  verdict,
+  similar,
+}) => {
   const goneCount = cars.filter((car) => car.deprecated).length
   const title = comparisonTitle(cars)
   const crowded = cars.length > 3
@@ -69,6 +85,7 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
     columns[cars.length],
   )
   const canRemove = cars.length > MIN_COMPARED
+  const hasRoom = cars.length < MAX_COMPARED
   const wide = cars.length > 2
   const body = clsx(gutter, wide && wideGutter)
   // A strip of the columns, which scrolls sideways on a phone with three or
@@ -223,6 +240,26 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
           <div className={body}>{verdict}</div>
         )}
 
+        {/* Most who open a comparison came from a link to it and leave from
+            here, so the next cars to look at stand right under the verdict */}
+        {similar.length > 0 && (
+          <SimilarCars
+            cars={similar}
+            heading={
+              hasRoom ? 'Bera saman við:' : 'Þú gætir líka haft áhuga á:'
+            }
+            compareWith={
+              hasRoom
+                ? (other) => ({
+                    href: comparisonPathOf([...cars, other]),
+                    label: `Bæta ${carName(other, [other])} við samanburðinn`,
+                  })
+                : undefined
+            }
+            className={clsx(body, 'mt-8 mb-6 md:mt-10 md:mb-8')}
+          />
+        )}
+
         <Lane scrolls={wide} className={clsx(lane, 'mt-2')}>
           <dl className={clsx(laneContent, 'm-0')}>
             {specRows(cars).map((row) => (
@@ -345,6 +382,16 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
         >
           <PlusIcon size={16} /> Bera saman fleiri
         </CompareMoreLink>
+        <Link
+          href="/"
+          className={clsx(
+            secondaryButton,
+            'py-3 px-5 max-sm:basis-full max-sm:px-2.5',
+          )}
+        >
+          Skoða {agree(listedCars.length, 'allan', 'alla')} {listedCars.length}{' '}
+          {agree(listedCars.length, 'bílinn', 'bílana')}
+        </Link>
       </div>
     </main>
   )
