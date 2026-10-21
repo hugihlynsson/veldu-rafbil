@@ -764,7 +764,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'smart-1-brabus': [
     'volvo-ex30-twin-motor-performance',
     'smart-3-brabus',
-    'mg-mgs6-dual-motor',
+    'byd-atto-3-evo-base',
   ],
   'smart-3-pulse': [
     'volvo-ex30-twin-motor-performance',
