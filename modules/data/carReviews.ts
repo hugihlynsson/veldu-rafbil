@@ -319,7 +319,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig reynist framhjóladrifið í snjó?',
       'Hvað drífur hann raunverulega í kulda?',
     ],
-    facts: '7d08f4ef8424',
+    facts: '11167890b9a6',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'bmw-ix1-xdrive-30': {
@@ -392,10 +392,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'BYD Dolphin er nettur fimm sæta hlaðbakur sem hentar vel í innanbæjarakstur og sem hagkvæmur heimilisbíll. Hann er lipur í þröngum stæðum og þéttbýli, og innanrýmið nýtist vel miðað við stærðina.',
       'Stærsti styrkur hans er verðið: í sínum verðflokki er hann ódýrari á hvern kílómetra drægni en flestir og meðal þeirra sneggstu, með stærri rafhlöðu en gengur og gerist.',
-      'Á móti kemur að hann hleður mjög hægt, skottið er minna en hjá flestum keppinautunum og hann má ekki draga kerru. Nissan Leaf Standard Range kostar það sama, drífur 18 km lengra, hleður með um 30% styttri stoppum, er með 92 l stærra skott og má draga allt að 975 kg.',
+      'Á móti kemur að hann hleður mjög hægt, skottið er minna en hjá flestum keppinautunum og hann má ekki draga kerru. Nissan Leaf Standard Range kostar 200.000 kr. meira, en drífur 18 km lengra, hleður með um 30% styttri stoppum, er með 92 l stærra skott og má draga allt að 975 kg.',
       'Fyrir þá sem hlaða heima, aka mest innanbæjar og þurfa hvorki kerru né mikið farangursrými er Dolphin hagkvæmur og skemmtilegur kostur.',
     ],
-    facts: '0eb51c6bd957',
+    facts: '3a93b502309c',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Rúmast barnavagn í skottinu?',
@@ -436,10 +436,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'BYD Seal er lágur og rennilegur fólksbíll með skottloki og fjórhjóladrifi, sem höfðar til þeirra sem vilja sportlegan akstur frekar en hefðbundinn jeppling. Hann er meðal sneggstu og aflmestu bíla á sínu verði.',
       'Afl og snerpa eru hans sterkasta hlið, og lágur þyngdarpunktur gerir hann stöðugan og skemmtilegan á malbiki. Auk skottsins er 53 l framskott undir vélarhlífinni, og hann má draga 1.500 kg.',
-      'Hann hleður hins vegar hægar en flestir keppinautar hans og skottið er eitt það minnsta í þessum verðflokki. Tesla Model 3 Performance kostar nánast það sama, drífur 51 km lengra, hleður með um 35% styttri stoppum, er sneggri og með 194 l stærra skott, en má ekki draga kerru.',
+      'Hann hleður hins vegar hægar en flestir keppinautar hans og skottið er eitt það minnsta í þessum verðflokki. Tesla Model 3 Performance kostar um 320.000 kr. meira, drífur 51 km lengra, hleður með um 35% styttri stoppum, er sneggri og með 194 l stærra skott, en má ekki draga kerru.',
       'Seal á best við þá sem setja kraft og akstursánægju ofar hraðhleðslu og fjölskylduplássi.',
     ],
-    facts: 'a6413b1fb65f',
+    facts: 'ed6fa5bd1127',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig ræður hann við íslenskan vetur?',
@@ -458,7 +458,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'BYD Seal U er fimm sæta jepplingur sem höfðar einkum til fjölskyldna sem leita að þægilegum bíl í hversdagsleikann. Hann leggur áherslu á hljóðlátan og mjúkan akstur fremur en sportlega eiginleika.',
       'Bíllinn státar af einni stærstu rafhlöðunni í sínum verðflokki og fimm hundruð kílómetra uppgefinni drægni. Það dugar sérlega vel í daglegan akstur án þess að þurfa sífellt að stinga í samband, og kemur manni vel á leið milli landshluta þótt reikna megi með minni drægni í vetrarkulda.',
-      'Stærsti veikleikinn er hraðhleðslan, en hann er meðal þeirra sem hlaða allra hægast og kallar því á óvenju löng hlé á langferðum. Hann er jafnframt mjög seinn upp á hundraðið og aðeins framhjóladrifinn. Á sama verði stendur til boða BYD Evo, sem færir manni fjórhjóladrif í snjóinn, miklu meiri kraft og um 40% styttri hleðslustopp, þótt fórna þurfi 30 kílómetrum af drægni.',
+      'Stærsti veikleikinn er hraðhleðslan, en hann er meðal þeirra sem hlaða allra hægast og kallar því á óvenju löng hlé á langferðum. Hann er jafnframt mjög seinn upp á hundraðið og aðeins framhjóladrifinn. Fyrir 200.000 kr. meira stendur til boða BYD Evo, sem færir manni fjórhjóladrif í snjóinn, miklu meiri kraft og um 40% styttri hleðslustopp, þótt fórna þurfi 30 kílómetrum af drægni.',
       'Seal U hentar því best þeim sem vilja rólegan og rúmgóðan ferðafélaga og setja drægni ofar snöggum hleðsluhléum og fjórhjóladrifi í vetrarfærð.',
     ],
     questions: [
@@ -473,14 +473,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað nær stóra rafhlaðan langt á veturna?',
       'Er hann nógu rúmgóður sem fjölskyldubíll?',
     ],
-    facts: 'ee8f985fcc30',
+    facts: '87f7e340ffa6',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'byd-sealion-7-base': {
     paragraphs: [
       'BYD Sealion 7 er rúmgóður og sportlegur jepplingur með fjórhjóladrifi sem höfðar sérstaklega til þeirra sem leita að kraftmiklum fjölskyldubíl með öruggt veggrip í snjó og hálku.',
       'Helsti styrkur bílsins felst í afli og afköstum. Hann er gríðarlega snöggur í viðbragði og hefur meira afl en flestir keppinautar hans, auk þess sem hraðhleðslan tekur skemmri tíma en almennt gerist í sínum verðflokki, sem léttir langferðir milli landshluta.',
-      'Helsti ókosturinn er sá að hann drífur styttra en flestir bílar á svipuðu verði og kostar meira á hvern kílómetra drægni. Til dæmis er Tesla Model Y Long Range Dual Motor 460.000 kr. ódýrari og býður upp á 98 km meiri drægni, á meðan Kia EV6 2025 Long Range AWD býður upp á um 30% styttri hleðslustopp fyrir talsvert lægra verð.',
+      'Helsti ókosturinn er sá að hann drífur styttra en flestir bílar á svipuðu verði og kostar meira á hvern kílómetra drægni. Til dæmis kostar Tesla Model Y Long Range Dual Motor nánast það sama en býður upp á 98 km meiri drægni, á meðan Kia EV6 2025 Long Range AWD býður upp á um 30% styttri hleðslustopp fyrir talsvert lægra verð.',
       'Fyrir þá sem vilja mikið afl og afburða hröðun er Sealion 7 skemmtilegur kostur, en kaupendur sem horfa stíft í langdrægni fá meira fyrir peninginn annars staðar.',
     ],
     questions: [
@@ -495,17 +495,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann betur smíðaður en Tesla Model Y?',
       'Hvernig er plássið í aftursætunum?',
     ],
-    facts: '0dc5d736199d',
+    facts: 'c063f6f16abe',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'byd-tang-flagship': {
     paragraphs: [
       'BYD Tang Flagship er stór sjö sæta jeppi með fjórhjóladrifi, ætlaður stórum fjölskyldum sem vilja hefðbundið jeppalag og ríflegt innanrými.',
       'Hann er meðal þeirra aflmestu á svipuðu verði og hröðunin er snörp fyrir jafn stóran bíl. Farangursrýmið er með því stærsta í hans verðflokki þegar aftasta sætaröðin er felld niður.',
-      'Stærsti veikleikinn kemur fram á langferðum: hann drífur styttra en flestir keppinautar hans og er meðal þeirra sem hlaða hægast. Hyundai IONIQ 9 Long Range AWD kostar 290.000 kr. meira en drífur 75 km lengra, hleður með um 55% styttri stoppum og má draga 1.000 kg meira.',
+      'Stærsti veikleikinn kemur fram á langferðum: hann drífur styttra en flestir keppinautar hans og er meðal þeirra sem hlaða hægast. Hyundai IONIQ 9 Long Range AWD kostar 1.000.000 kr. meira en drífur 75 km lengra, hleður með um 55% styttri stoppum og má draga 1.000 kg meira.',
       'Tang hentar best þeim sem hlaða heima og meta pláss og afl ofar langferðum.',
     ],
-    facts: '8595ff0ef13c',
+    facts: '0645c71f96fd',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Af hverju hann frekar en Hyundai IONIQ 9?',
@@ -714,7 +714,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Finnst mikið fyrir þyngdinni í akstri?',
       'Hvernig reynist hann í miklum snjó?',
     ],
-    facts: 'e95938acf647',
+    facts: '4169360cadd6',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hyundai-inster-base': {
@@ -780,7 +780,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hentar hann sem eini bíll heimilisins?',
       'Er hann of aflítill á þjóðveginum?',
     ],
-    facts: '2de5096c9a6e',
+    facts: 'a4c8905fb0f9',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hyundai-ioniq-3-long-range': {
@@ -834,7 +834,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er aflminni og hægari en flestir á svipuðu verði, þótt það skipti minna máli í bíl af þessari gerð. XPENG X9 AWD Performance er 400.000 kr. dýrari en hleður með um 45% styttri stoppum og er aflmeiri, en drífur 35 km styttra.',
       'IONIQ 9 er einn sterkasti kosturinn fyrir stórar fjölskyldur sem ferðast um landið með fullan bíl eða kerru aftan í.',
     ],
-    facts: '34d26216dba6',
+    facts: '7752adc32691',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er Performance útfærslan þess virði?',
@@ -1229,7 +1229,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er fremur dýr, drífur styttra en flestir þeirra og ábyrgðin á rafhlöðunni er með þeim stystu. XPENG X9 AWD Performance er 400.000 kr. ódýrari, drífur 58 km lengra og hleður með um 50% styttri stoppum.',
       'EV9 er sterkur kostur fyrir stórar fjölskyldur sem draga hjólhýsi, en maður borgar fyrir stærðina.',
     ],
-    facts: 'b9a50e4bdd6f',
+    facts: '8ab1fdbe024f',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Kemst hann til Akureyrar að vetrarlagi?',
@@ -1712,7 +1712,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar hægari og aflminni en flestir keppinautar hans og skottið er eitt það minnsta. Mercedes-Benz CLA 350 4MATIC fæst með fjórhjóladrifi og 229 km meiri drægni fyrir 1.900.000 kr. meira.',
       'CLA 200 er glæsilegur og sparneytinn ferðabíll fyrir þá sem þurfa hvorki fjórhjóladrif né mikið pláss.',
     ],
-    facts: '3908360a97bf',
+    facts: '970e766d62f3',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að taka CLA 350 4MATIC?',
@@ -1822,7 +1822,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er fremur dýr og þriðja sætaröðin hentar helst börnum. Skoda Peaq 90x er 800.000 kr. ódýrari, drífur nánast jafn langt og er með 395 l stærra skott, þótt hleðslustoppin séu um 55% lengri.',
       'GLB 350 er traustur ferðabíll fyrir þá sem vilja sjö sæti, mikla drægni og stutt hleðslustopp í meðfærilegri stærð.',
     ],
-    facts: 'd49336def5c3',
+    facts: '0c693a16c435',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Rúmast barnabílstólar í þriðju röðinni?',
@@ -2098,7 +2098,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kemst farangur fyrir tvo í skottið?',
       'Dugar hann sem bíll allan ársins hring?',
     ],
-    facts: 'e6541c0fb606',
+    facts: 'd1d1b768c18a',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mg-mg4-urban-standard-range': {
@@ -2339,7 +2339,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað drífur hann langt á veturna?',
       'Kemst barnavagn fyrir í skottinu?',
     ],
-    facts: '528a0e7f9f72',
+    facts: 'e9b7ae8aad5d',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'nissan-leaf-extended-range': {
@@ -2405,7 +2405,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Dugar drægnin í hringferð á sumrin?',
       'Hvernig er plássið fyrir fjölskyldu?',
     ],
-    facts: '38c512d3dc6c',
+    facts: '04192a38cd87',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'opel-grandland-awd': {
@@ -2591,7 +2591,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að skottið er minna en hjá flestum keppinautum hans og aftursætin eru fremur þröng. Ford Capri kostar það sama, drífur álíka langt og hleður jafn hratt, en er með 165 l stærra skott.',
       'Polestar 2 er fyrir þá sem setja akstursánægju og drægni ofar plássi.',
     ],
-    facts: 'fc4ef3c13da2',
+    facts: 'ef701fae05fc',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er Performance-útfærslan þess virði?',
@@ -3087,7 +3087,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kemst barnavagn fyrir í skottinu?',
       'Hvernig ræður framdrifið við vetrarfærð?',
     ],
-    facts: 'cba0f193e02d',
+    facts: '3e93b99672eb',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'renault-scenic-e-tech-ev60': {
@@ -3273,7 +3273,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er fremur dýr og hægari en flestir þeirra. Peugeot e-5008 Dual Motor er 900.000 kr. ódýrari og tekur líka sjö, en drífur 140 km styttra, hleður hægar og má draga 1.000 kg minna.',
       'Peaq 90x er einn sterkasti sjö sæta kosturinn fyrir stórar fjölskyldur sem ferðast um landið.',
     ],
-    facts: '073a50ccd45c',
+    facts: '171f329f5460',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Rúmast þrír barnastólar í annarri röð?',
@@ -3467,10 +3467,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Subaru e-Outback er stór jepplingur með fjórhjóladrifi, 4,84 m á lengd, byggður á hefð Subaru fyrir vetrarhæfni og hagnýtri hönnun, fyrir þá sem ferðast í hvaða veðri sem er.',
       'Hann er sneggri og aflmeiri en flestir á svipuðu verði, og skottið er stærra en hjá flestum þeirra.',
-      'Drægni og hraðhleðsla eru hins vegar aðeins í meðallagi. BYD Sealion 7 er 100.000 kr. ódýrari, hleður með um 15% styttri stoppum og er mun aflmeiri, en skottið er 113 l minna.',
+      'Drægni og hraðhleðsla eru hins vegar aðeins í meðallagi. BYD Sealion 7 er 500.000 kr. ódýrari, hleður með um 15% styttri stoppum og er mun aflmeiri, en skottið er 113 l minna.',
       'e-Outback er traustur kostur fyrir þá sem setja grip, pláss og Subaru-merkið í forgang.',
     ],
-    facts: '8cd9b6b98c4c',
+    facts: '4584fba6dc65',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig dugar fjórhjóladrifið í snjó?',
@@ -3602,7 +3602,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er lágur og með litla veghæð, sem hentar síður á malarvegum og í djúpum snjó, og hann má aðeins draga 1.000 kg, minna en flestir þeirra. Þeir sem þurfa meiri dráttargetu gætu frekar litið á Polestar 2 Long Range Dual Motor, sem má draga 500 kg meira, en hann kostar 700.000 kr. meira og drífur 64 km styttra.',
       'Fyrir langferðir á góðum vegum er Model 3 Long Range einn sterkasti kosturinn.',
     ],
-    facts: '53992529e7d2',
+    facts: '9b9ed8b7de42',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar Long Range afturhjóladrif sig?',
@@ -3636,7 +3636,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann of lágur fyrir íslenska vegi?',
       'Mun ég sakna drægninnar úr Long Range?',
     ],
-    facts: '27e417b8161b',
+    facts: '2ed17fdd6648',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'tesla-model-y-standard-range': {
@@ -3862,10 +3862,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Toyota C-HR+ AWD er meðalstór jepplingur með fjórhjóladrifi og sérstæðu útliti, systurbíll Subaru Uncharted, fyrir þá sem vilja lipran bíl með gott grip og snerpu.',
       'Hann er sneggri og aflmeiri en flestir á svipuðu verði, má draga 1.500 kg, og Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir aðrir framleiðendur.',
-      'Hann drífur hins vegar styttra og hleður hægar en flestir keppinautar hans, og skottið er minna. BYD Sealion 7 er 200.000 kr. ódýrari, sneggri, hleður með um 15% styttri stoppum og er með 104 l stærra skott.',
+      'Hann drífur hins vegar styttra og hleður hægar en flestir keppinautar hans, og skottið er minna. BYD Sealion 7 er 600.000 kr. ódýrari, sneggri, hleður með um 15% styttri stoppum og er með 104 l stærra skott.',
       'C-HR+ AWD er fyrir þá sem vilja Toyota með fjórhjóladrifi og langa ábyrgð, en gefur eftir í plássi og hleðslu.',
     ],
-    facts: 'd6443c720dd9',
+    facts: '9701836d5110',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Af hverju er Subaru Uncharted ódýrari?',
@@ -4009,7 +4009,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er hann í langkeyrslu?',
       'Kemst barnabílstóll fyrir í aftursætinu?',
     ],
-    facts: '42b2b52c8311',
+    facts: 'c29ed185f283',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-cross-base': {
@@ -4053,7 +4053,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Fæst hann með fjórhjóladrifi?',
       'Kemst hann milli landshluta á veturna?',
     ],
-    facts: '61dda0332545',
+    facts: '6913fbc62630',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-3-neo-58-kwh': {
