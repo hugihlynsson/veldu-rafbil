@@ -96,7 +96,8 @@ entries.
 "Verðskrá" PDF on `cdn.sanity.io/files/mcx434c9/production/`. The PDF has no
 text layer, so render it with `pdf pages`; page 1 prints "Verð" (before the
 grant) beside "Verð m/ styrk". The Atto 3 Evo is sold here as "EVO AWD", at
-`/typur/evo-awd`. Read for the EVO only, on 2026-10-21.
+`/typur/evo-awd`. The PDF's `Last-Modified` header is its upload date. Read
+for every model on 2026-10-21, from lists uploaded on 2026-08-17.
 
 **Range Rover is the one that cannot be started from its entries.** Both
 Electric rows point at `rangerover.com/en-gb`, the manufacturer's UK site rather
