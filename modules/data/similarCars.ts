@@ -90,15 +90,15 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'mercedes-benz-glc-400-4matic',
     'audi-q6-e-tron-base',
   ],
+  'byd-atto-3-evo-base': [
+    'smart-1-brabus',
+    'xpeng-g6-awd-performance',
+    'subaru-uncharted-base',
+  ],
   'byd-dolphin-base': [
     'volkswagen-id-3-pro',
     'renault-r5-e-tech-52-kwh',
     'nissan-leaf-standard-range',
-  ],
-  'byd-evo-base': [
-    'smart-1-brabus',
-    'xpeng-g6-awd-performance',
-    'subaru-uncharted-base',
   ],
   'byd-seal-base': [
     'tesla-model-3-performance',
@@ -107,7 +107,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'byd-seal-u-base': [
     'opel-grandland-base',
-    'byd-evo-base',
+    'byd-atto-3-evo-base',
     'mazda-cx-6e-78-kwh',
   ],
   'byd-sealion-7-base': [

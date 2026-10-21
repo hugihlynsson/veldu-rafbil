@@ -388,6 +388,28 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     facts: 'ce78c7e8497b',
     model: 'gemini-3.8-flash, thinking medium',
   },
+  'byd-atto-3-evo-base': {
+    paragraphs: [
+      'BYD Atto 3 Evo, sem umboðið selur sem EVO AWD, er ný kynslóð Atto 3: kraftmikill fimm sæta jepplingur sem leggur megináherslu á mikil afköst og akstursánægju. Hann sameinar fjórhjóladrif og mikið vélarafl á fremur hagstæðu verði, og höfðar sérstaklega til þeirra sem vilja mikla snerpu í daglegum akstri.',
+      'Helsti styrkleiki bílsins er hve snöggur og aflmikill hann er, enda er hann meðal þeirra allra sneggstu í sínum verðflokki. Fjórhjóladrifið tryggir gott veggrip í snjó og hálku, og á ferðum milli landshluta hleður hann hraðar en flestir aðrir. Farangursrýmið er 490 lítrar, auk 101 lítra hólfs undir húddinu.',
+      'Helsti ókosturinn er drægnin, en bíllinn drífur fremur stutt og styttra en flestir keppinautar. Hún dugar í flestan daglegan akstur en rýrnar í íslenskum vetrarkulda og krefst meiri skipulagningar á langferðum. Ef slíkt vegur þungt gæti XPENG G6 AWD Performance hentað betur, en hann býður upp á 80 km meiri drægni og um 30% styttri hleðslustopp fyrir 200.000 kr. meira.',
+      'Fyrir þá sem setja mikið afl og öruggt vetrargrip í fyrsta sæti er Atto 3 Evo áhugaverður kostur, svo framarlega sem drægnin uppfyllir þarfirnar.',
+    ],
+    questions: [
+      'Er XPENG G6 AWD Performance betri kostur?',
+      'Hvernig er hann miðað við Smart #1 Brabus?',
+      'Af hverju frekar hann en Subaru Uncharted?',
+      'Hversu hratt hleður hann á langferðum?',
+      'Hvað dregur hann í miklum vetrarkulda?',
+      'Minnkar aflið þegar rafhlaðan tæmist?',
+      'Er hann of stífur í daglegum akstri?',
+      'Hvernig virkar fjórhjóladrifið í snjó?',
+      'Eyðir hann miklu við sportlegan akstur?',
+      'Hvernig er plássið í aftursætunum?',
+    ],
+    facts: 'db6ccff2d4e3',
+    model: 'gemini-3.8-flash, thinking medium',
+  },
   'byd-dolphin-base': {
     paragraphs: [
       'BYD Dolphin er nettur fimm sæta hlaðbakur sem hentar vel í innanbæjarakstur og sem hagkvæmur heimilisbíll. Hann er lipur í þröngum stæðum og þéttbýli, og innanrýmið nýtist vel miðað við stærðina.',
@@ -409,28 +431,6 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er ábyrgðin á rafhlöðunni?',
       'Spólar hann mikið við hröðun?',
     ],
-  },
-  'byd-evo-base': {
-    paragraphs: [
-      'BYD Evo er ný kynslóð Atto 3: kraftmikill fimm sæta jepplingur sem leggur megináherslu á mikil afköst og akstursánægju. Hann sameinar fjórhjóladrif og mikið vélarafl á fremur hagstæðu verði, og höfðar sérstaklega til þeirra sem vilja mikla snerpu í daglegum akstri.',
-      'Helsti styrkleiki bílsins er hve snöggur og aflmikill hann er, enda er hann meðal þeirra allra sneggstu í sínum verðflokki. Fjórhjóladrifið tryggir gott veggrip í snjó og hálku, og á ferðum milli landshluta hleður hann hraðar en flestir aðrir. Farangursrýmið er 490 lítrar, auk 101 lítra hólfs undir húddinu.',
-      'Helsti ókosturinn er drægnin, en bíllinn drífur fremur stutt og styttra en flestir keppinautar. Hún dugar í flestan daglegan akstur en rýrnar í íslenskum vetrarkulda og krefst meiri skipulagningar á langferðum. Ef slíkt vegur þungt gæti XPENG G6 AWD Performance hentað betur, en hann býður upp á 80 km meiri drægni og um 30% styttri hleðslustopp fyrir 200.000 kr. meira.',
-      'Fyrir þá sem setja mikið afl og öruggt vetrargrip í fyrsta sæti er BYD Evo áhugaverður kostur, svo framarlega sem drægnin uppfyllir þarfirnar.',
-    ],
-    questions: [
-      'Er XPENG G6 AWD Performance betri kostur?',
-      'Hvernig er hann miðað við Smart #1 Brabus?',
-      'Af hverju frekar hann en Subaru Uncharted?',
-      'Hversu hratt hleður hann á langferðum?',
-      'Hvað dregur hann í miklum vetrarkulda?',
-      'Minnkar aflið þegar rafhlaðan tæmist?',
-      'Er hann of stífur í daglegum akstri?',
-      'Hvernig virkar fjórhjóladrifið í snjó?',
-      'Eyðir hann miklu við sportlegan akstur?',
-      'Hvernig er plássið í aftursætunum?',
-    ],
-    facts: '3f0f6f9dca5a',
-    model: 'gemini-3.8-flash, thinking medium',
   },
   'byd-seal-base': {
     paragraphs: [
@@ -458,12 +458,12 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'BYD Seal U er fimm sæta jepplingur sem höfðar einkum til fjölskyldna sem leita að þægilegum bíl í hversdagsleikann. Hann leggur áherslu á hljóðlátan og mjúkan akstur fremur en sportlega eiginleika.',
       'Bíllinn státar af einni stærstu rafhlöðunni í sínum verðflokki og fimm hundruð kílómetra uppgefinni drægni. Það dugar sérlega vel í daglegan akstur án þess að þurfa sífellt að stinga í samband, og kemur manni vel á leið milli landshluta þótt reikna megi með minni drægni í vetrarkulda.',
-      'Stærsti veikleikinn er hraðhleðslan, en hann er meðal þeirra sem hlaða allra hægast og kallar því á óvenju löng hlé á langferðum. Hann er jafnframt mjög seinn upp á hundraðið og aðeins framhjóladrifinn. Fyrir 200.000 kr. meira stendur til boða BYD Evo, sem færir manni fjórhjóladrif í snjóinn, miklu meiri kraft og um 40% styttri hleðslustopp, þótt fórna þurfi 30 kílómetrum af drægni.',
+      'Stærsti veikleikinn er hraðhleðslan, en hann er meðal þeirra sem hlaða allra hægast og kallar því á óvenju löng hlé á langferðum. Hann er jafnframt mjög seinn upp á hundraðið og aðeins framhjóladrifinn. Fyrir 200.000 kr. meira stendur til boða BYD Atto 3 Evo, sem færir manni fjórhjóladrif í snjóinn, miklu meiri kraft og um 40% styttri hleðslustopp, þótt fórna þurfi 30 kílómetrum af drægni.',
       'Seal U hentar því best þeim sem vilja rólegan og rúmgóðan ferðafélaga og setja drægni ofar snöggum hleðsluhléum og fjórhjóladrifi í vetrarfærð.',
     ],
     questions: [
-      'Af hverju að velja hann frekar en BYD Evo?',
-      'Er BYD Evo mikið minni að innan?',
+      'Af hverju hann frekar en Atto 3 Evo?',
+      'Er Atto 3 Evo mikið minni að innan?',
       'Er Opel Grandland betri á langferðum?',
       'Af hverju er Mazda CX-6e ódýrari?',
       'Hvað tekur hraðhleðsla langan tíma?',
@@ -473,7 +473,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað nær stóra rafhlaðan langt á veturna?',
       'Er hann nógu rúmgóður sem fjölskyldubíll?',
     ],
-    facts: '87f7e340ffa6',
+    facts: '9846d2f8c951',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'byd-sealion-7-base': {
