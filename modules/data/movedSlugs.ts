@@ -4,4 +4,5 @@
 // its slug: it is marked deprecated rather than taken out.
 export const movedSlugs: Readonly<Record<string, string>> = {
   'volvo-ec40-recharge-twin': 'volvo-ec40-twin-motor',
+  'byd-evo-base': 'byd-atto-3-evo-base',
 }
