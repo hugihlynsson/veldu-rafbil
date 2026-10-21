@@ -3,7 +3,8 @@
  * questions its chat offers to start on, written by the advisor's model from
  * the prompts in scripts/reviewPrompt.ts.
  *
- *   npx tsx --env-file=.env.local scripts/car-reviews.ts           the missing and out-of-date ones
+ *   npx tsx --env-file=.env.local scripts/car-reviews.ts           the missing and out-of-date ones, if only a few
+ *   npx tsx --env-file=.env.local scripts/car-reviews.ts --due     the missing and out-of-date ones, however many
  *   npx tsx --env-file=.env.local scripts/car-reviews.ts <slug>…   these, afresh
  *   npx tsx --env-file=.env.local scripts/car-reviews.ts --all     every one, afresh
  *   npx tsx --env-file=.env.local scripts/car-reviews.ts --questions [<slug>…]
@@ -61,9 +62,17 @@ const MIN_QUESTIONS = QUESTION_COUNT - 2
 // Low left an ungrammatical question in about one car in five, and a
 // question costs a fraction of its review either way
 const questionsThinkingLevel = 'medium'
+// A car added or repriced puts itself and a few neighbours out of date. A
+// change to the grant puts nearly every one, at a billed minute each, and a
+// run that size is asked for with --due rather than walked into
+const MAX_UNASKED = 8
+// Below this share of pages read, the reviews would be written blind to
+// boot space and towing, and paid for all the same
+const MIN_PAGES_READ = 0.9
 
 const args = process.argv.slice(2)
 const all = args.includes('--all')
+const allDue = args.includes('--due')
 const onlyQuestions = args.includes('--questions')
 const named = new Set(args.filter((arg) => !arg.startsWith('--')))
 
@@ -85,6 +94,12 @@ const due = onlyQuestions
         carReviews[slug].facts !== reviewFactsKey(car)
       )
     })
+
+if (named.size === 0 && !all && !allDue && due.length > MAX_UNASKED) {
+  throw new Error(
+    `${due.length} reviews are due, more than a car or two changing explains. Name the ones to write, or pass --due to write them all:\n${due.map(carSlug).join(' ')}`,
+  )
+}
 
 // Kept reviews whose questions are written on their own
 const questionsDue = cars.filter((car) => {
@@ -151,6 +166,11 @@ const readAllDetails = async (): Promise<DetailsOf> => {
   }
   await Promise.all(Array.from({ length: PAGE_CONCURRENCY }, reader))
   console.log(`Read ${read.size} of ${urls.length} ev-database pages`)
+  if (read.size < urls.length * MIN_PAGES_READ) {
+    throw new Error(
+      'Too few ev-database pages read to write reviews from; it may be rate limiting',
+    )
+  }
   return (car) => (car.evDatabaseUrl ? read.get(car.evDatabaseUrl) : undefined)
 }
 

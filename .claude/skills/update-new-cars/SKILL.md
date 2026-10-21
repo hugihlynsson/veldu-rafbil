@@ -223,11 +223,16 @@ make, then model. The fields that are easy to get wrong:
 - **Each car's page has a review in `modules/data/carReviews.ts`, written by
   the advisor's model.** After any change to a car's figures, and after the
   similar-cars run above, run
-  `npx tsx --env-file=.env.local scripts/car-reviews.ts`: it writes a review
-  for each new car and again for each whose figures, or whose similar cars'
-  figures, changed, and keeps the rest. A test fails until it has been run.
-  Each review takes a minute or more and costs a little, and is part of the
-  change: read the new ones in the diff as you would the figures.
+  `npx tsx --env-file=.env.local scripts/car-reviews.ts <slug>…`, naming the
+  cars this change put out of date: each car added or whose figures changed,
+  each car whose entry in `similarCars.ts` you edited, and each car that
+  offers a changed car as similar. A test fails until they are written. Each
+  review takes a minute or more and is billed, so name them rather than
+  running it bare: a bare run writes every review that is out of date, for
+  whatever reason, and stops instead when that is more than a few. If it does,
+  something other than this change put them out of date (a change to the
+  grant does it to nearly all of them), so say so in the report rather than
+  writing them. Read the new ones in the diff as you would the figures.
 
 And, for a car that is genuinely new to the list:
 
