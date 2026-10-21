@@ -3335,14 +3335,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Smart #1 Brabus er lítill jepplingur sem virkar nánast eins og hreinræktaður sportbíll í dulargervi. Hann er sérsniðinn fyrir þá sem vilja gríðarlega snerpu í liprum bíl sem er auðvelt að athafna sig á í þéttbýli.',
       'Helsti styrkur hans liggur í hröðun og afli, en hann er meðal þeirra allra sneggstu í sínum verðflokki. Fjórhjóladrifið sér til þess að mikill krafturinn skili sér örugglega ofan í götuna við íslenskar aðstæður, jafnt í snjó sem hálku.',
-      'Aftur á móti gefur bíllinn mikið eftir í langkeyrslu. Hann drífur mjög stutt og hleður hægar en flestir keppinautar, svo vetrarferðir milli landshluta kalla á tíð hleðslustopp. Ef meiri drægni skiptir máli býður hinn náskyldi Volvo EX30 Twin Motor Performance upp á enn betri hröðun og 50 km meiri drægni á örlítið lægra verði. Innan sömu tegundar má líka skoða Smart #1 Pulse, sem býður upp á sama fjórhjóladrif og afl en sparar 700.000 kr.',
+      'Aftur á móti gefur bíllinn mikið eftir í langkeyrslu. Hann drífur mjög stutt og hleður hægar en flestir keppinautar, svo vetrarferðir milli landshluta kalla á tíð hleðslustopp. Ef meiri drægni skiptir máli býður hinn náskyldi Volvo EX30 Twin Motor Performance upp á enn betri hröðun og 50 km meiri drægni á örlítið lægra verði, og BYD Atto 3 Evo kostar það sama og er jafn snöggur en drífur 70 km lengra og hleður með um 20% styttri stoppum. Innan sömu tegundar má líka skoða Smart #1 Pulse, sem býður upp á sama fjórhjóladrif og afl en sparar 700.000 kr.',
       'Þetta er skemmtileg og kraftmikil vasa-raketta fyrir þá sem setja akstursgleði í forgang, en síður heppilegur ferðabíll á löngum leiðum.',
     ],
     questions: [
       'Af hverju hann frekar en Volvo EX30?',
       'Finnst mikill munur á honum og Pulse?',
       'Er Smart #3 Brabus betri í langferðir?',
-      'Er MG MGS6 Dual Motor betri ferðabíll?',
+      'Er BYD Atto 3 Evo betri ferðabíll?',
       'Borgar sig að taka Pro+-útfærsluna?',
       'Ráða bremsurnar við allan kraftinn?',
       'Er fjöðrunin of stíf í bæjarkeyrslu?',
@@ -3350,7 +3350,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Eyðir hann miklu í Brabus-stillingu?',
       'Hentar hann sem eini bíll á heimilinu?',
     ],
-    facts: 'a003fbe2abdb',
+    facts: '70ca40ec0745',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'smart-3-pulse': {
