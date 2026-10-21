@@ -95,6 +95,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'renault-r5-e-tech-52-kwh',
     'nissan-leaf-standard-range',
   ],
+  'byd-evo-base': [
+    'smart-1-brabus',
+    'xpeng-g6-awd-performance',
+    'subaru-uncharted-base',
+  ],
   'byd-seal-base': [
     'tesla-model-3-performance',
     'polestar-2-long-range-dual-motor',
@@ -102,7 +107,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'byd-seal-u-base': [
     'opel-grandland-base',
-    'mg-mgs6-dual-motor',
+    'byd-evo-base',
     'mazda-cx-6e-78-kwh',
   ],
   'byd-sealion-7-base': [

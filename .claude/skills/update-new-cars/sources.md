@@ -92,6 +92,12 @@ Range Rover, Suzuki, Volvo. Some may be on the BL or Askja issuu pages; check
 those listings first. Otherwise, the importer's site as linked from the existing
 entries.
 
+**BYD** (Vatt): each model page on byd.is, readable with curl, links a
+"Verðskrá" PDF on `cdn.sanity.io/files/mcx434c9/production/`. The PDF has no
+text layer, so render it with `pdf pages`; page 1 prints "Verð" (before the
+grant) beside "Verð m/ styrk". The Atto 3 Evo is sold here as "EVO AWD", at
+`/typur/evo-awd`. Read for the EVO only, on 2026-10-21.
+
 **Range Rover is the one that cannot be started from its entries.** Both
 Electric rows point at `rangerover.com/en-gb`, the manufacturer's UK site rather
 than an Icelandic seller, so there is no importer page to work back to and no

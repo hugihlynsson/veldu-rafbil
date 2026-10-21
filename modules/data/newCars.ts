@@ -296,6 +296,22 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'BYD',
+    model: 'Evo',
+    heroImageName: 'byd-evo',
+    price: 7_490_000,
+    sellerUrl: 'https://byd.is/typur/evo-awd',
+    acceleration: 3.9,
+    capacity: 76,
+    range: 470,
+    evDatabaseUrl:
+      'https://ev-database.org/car/3475/BYD-ATTO-3-Evo-AWD-Excellence',
+    drive: 'AWD',
+    seats: 5,
+    power: 330,
+    timeToCharge10To80: 25,
+  },
+  {
+    make: 'BYD',
     model: 'Seal',
     heroImageName: 'byd-seal',
     price: 8_190_000,
