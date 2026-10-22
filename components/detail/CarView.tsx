@@ -23,7 +23,12 @@ interface Props {
   similar: ReadonlyArray<Car>
   /** None for a car whose review is yet to be written */
   review?: CarReview
+  /** Over the list on a desktop, which is the page and has the logo */
+  sheet?: boolean
 }
+
+/** The name that labels the sheet the car is shown in */
+export const SHEET_TITLE_ID = 'car-sheet-title'
 
 // Price per km of range is left to the list's sorting: a ratio few buyers
 // weigh a car by, beside a price shown under the name
@@ -42,7 +47,7 @@ const eyebrow =
 const sectionLabel = 'm-0 text-sm font-semibold'
 
 /** One car's own page: its photo and figures, a review, and the cars like it */
-const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
+const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
   const subTitle = carSubtitle(car)
   const notice = deprecatedNotice(car)
   const grantChange = grantChangeNotice(car)
@@ -51,24 +56,36 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
     .filter(({ key }) => figureOrder.includes(key))
     .toSorted((a, b) => figureOrder.indexOf(a.key) - figureOrder.indexOf(b.key))
 
+  // In a sheet the list is the page behind, with its own landmark and logo
+  const Root = sheet ? 'article' : 'main'
+
   return (
-    <main className="max-w-page mx-auto pb-14 md:pb-24">
-      {/* The list's gap from the logo to its intro, which pads its top */}
-      <header className={clsx(pageColumn, 'pt-4 pb-6 xs:pt-6')}>
-        <PageTop />
-      </header>
+    <Root
+      className={clsx('max-w-page mx-auto', sheet ? 'pb-12' : 'pb-14 md:pb-24')}
+    >
+      {!sheet && (
+        // The list's gap from the logo to its intro, which pads its top
+        <header className={clsx(pageColumn, 'pt-4 pb-6 xs:pt-6')}>
+          <PageTop />
+        </header>
+      )}
 
       {/* Edge to edge on a phone, and from md as wide as the column, as the
-          list has its photos */}
-      <div className="md:pl-10 md:pr-6">
+          list has its photos. A sheet is only ever md up, and its photo runs
+          to its edges: the window less 64px, up to the sheet's 880px */}
+      <div className={clsx(!sheet && 'md:pl-10 md:pr-6')}>
         <Image
           alt=""
-          sizes="(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 64px), 960px"
+          sizes={
+            sheet
+              ? '(max-width: 943px) calc(100vw - 64px), 880px'
+              : '(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 64px), 960px'
+          }
           src={`/images/${car.heroImageName}.jpg`}
           width={1920}
           height={1280}
           preload
-          className="w-full h-auto block md:rounded-lg"
+          className={clsx('w-full h-auto block', !sheet && 'md:rounded-lg')}
         />
       </div>
 
@@ -82,7 +99,10 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
             <div className="pt-8 md:pt-14">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
-                  <h1 className="m-0 font-semibold text-display leading-tight">
+                  <h1
+                    id={sheet ? SHEET_TITLE_ID : undefined}
+                    className="m-0 font-semibold text-display leading-tight"
+                  >
                     <span>{car.make}</span>{' '}
                     <span className="font-normal">{car.model}</span>
                   </h1>
@@ -96,6 +116,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
                 {!notice && (
                   <ShareButton
                     title={car.label}
+                    path={carPathOf(car)}
                     label="Deila"
                     event="Car shared"
                     variant="quiet"
@@ -171,6 +192,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
               {!notice && (
                 <ShareButton
                   title={car.label}
+                  path={carPathOf(car)}
                   label="Deila bílnum"
                   event="Car shared"
                   className="-ml-0.5"
@@ -250,7 +272,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review }) => {
           </section>
         </div>
       </div>
-    </main>
+    </Root>
   )
 }
 

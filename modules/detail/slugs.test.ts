@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest'
 
 import cars, { allCars, type Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
-import { carPathOf } from './paths'
+import { carPathOf, comparisonPathOf } from './paths'
 import { MAX_COMPARED } from './comparison'
-import { readSegment, resolveCompared, resolveSlugs } from './slugs'
+import { carAtPath, readSegment, resolveCompared, resolveSlugs } from './slugs'
 
 const [a, b, c] = cars as readonly [Car, Car, Car, ...Car[]]
 const slugsOf = (path: string) => path.split('/').slice(2)
@@ -77,5 +77,20 @@ describe('resolveCompared', () => {
 
   it('drops a malformed segment rather than throwing on it', () => {
     expect(resolveCompared(['%25E0', carSlug(a)]).cars).toEqual([a])
+  })
+})
+
+// The list's sheet opens at the car's address and is shown for as long as
+// the URL reads as it
+describe('carAtPath', () => {
+  it("reads a car's own address back as the car", () => {
+    expect(carAtPath(carPathOf(a))).toBe(a)
+  })
+
+  it('is no car on any other page', () => {
+    expect(carAtPath('/')).toBeUndefined()
+    expect(carAtPath(comparisonPathOf([a, b]))).toBeUndefined()
+    expect(carAtPath(`${carPathOf(a)}/more`)).toBeUndefined()
+    expect(carAtPath('/bill/no-such-car')).toBeUndefined()
   })
 })

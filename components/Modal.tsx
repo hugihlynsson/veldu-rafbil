@@ -63,9 +63,10 @@ const Modal: React.FunctionComponent<Props> = ({
   // Layout rather than passive: a phone raises the keyboard only for a focus
   // inside the tap that asked for it, and passive effects run after the event
   useLayoutEffect(() => {
+    const dialog = dialogRef.current
     const unlock = lockBodyScroll()
     unlockBodyScroll.current = unlock
-    dialogRef.current?.showModal()
+    dialog?.showModal()
     // preventScroll: the dialog is fixed, and scrolling to it moves the list
     initialFocusRef?.current?.focus({ preventScroll: true })
     // A frame with the enter styles gives the transition something to move from
@@ -73,6 +74,9 @@ const Modal: React.FunctionComponent<Props> = ({
     return () => {
       clearTimeout(timer)
       unlock()
+      // Unmounted while open, as the car sheet is by the browser's back:
+      // closing still hands focus back. Once the leave has closed it, a no-op.
+      dialog?.close()
     }
     // Once, on mount: a ref object keeps its identity across renders
   }, [initialFocusRef])

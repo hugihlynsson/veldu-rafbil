@@ -37,12 +37,14 @@ const filterKey = z.enum(filterKeys as [FilterKey, ...FilterKey[]])
  */
 export const productEventSchema = z.discriminatedUnion('name', [
   // A path, not a query: a sort or a filter is a view of the one page.
-  // `from` is the page before it in the same tab, absent on arrival.
+  // `from` is the page before it in the same tab, absent on arrival. `sheet`
+  // is a car opened over the list on a desktop, rather than as its page.
   event('page_viewed', {
     viewId: z.string().min(1).max(40),
     from: pageKind.optional(),
     query: z.string().max(300),
     referrer: z.string().max(253).optional(),
+    sheet: z.literal(true).optional(),
   }),
   // Sent each time the tab is hidden as well as when the page is left, the
   // totals growing, as a phone may never say it was left: read the largest
@@ -68,6 +70,8 @@ export const productEventSchema = z.discriminatedUnion('name', [
   }),
   // Its place in the list as it was sorted and filtered, from 0
   event('car_opened', { car: slug, position: z.int().min(0).max(10_000) }),
+  // From the sheet to the car's own page
+  event('car_sheet_expanded', { car: slug }),
   event('compare_toggled', {
     car: slug,
     added: z.boolean(),
