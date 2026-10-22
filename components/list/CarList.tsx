@@ -54,7 +54,8 @@ const ChatContainer = dynamic(() => import('@/components/chat/ChatContainer'), {
   ssr: false,
 })
 
-// Fetched as a mouse first reaches the cars, so a click on one finds it in
+// Fetched as a pointer first reaches the cars, where it would open: a mouse
+// passing over, or a tablet's first touch, which is mostly a scroll
 const loadCarSheet = () => import('@/components/detail/CarSheet')
 const CarSheet = dynamic(loadCarSheet, { ssr: false })
 
@@ -263,8 +264,8 @@ export default function CarList() {
 
       <div
         className={clsx(view === 'grid' && gridLayout)}
-        onPointerEnter={(event) => {
-          if (event.pointerType === 'mouse') void loadCarSheet()
+        onPointerEnter={() => {
+          if (opensInSheet()) void loadCarSheet()
         }}
       >
         {sortCars(filteredCars, sorting, direction).map((car, index) => (
