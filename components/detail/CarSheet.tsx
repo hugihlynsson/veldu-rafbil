@@ -110,8 +110,10 @@ const CarSheet: FunctionComponent<Props> = ({ car, onChat }) => {
           <div
             ref={panelRef}
             onClickCapture={openLinkedCar}
+            // The car page's photo width, which is the list's content, and
+            // CarView's sheet `sizes` with it
             className={clsx(
-              'relative w-[calc(100%-4rem)] max-w-[880px] max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain rounded-sheet bg-surface shadow-(--shadow-modal)',
+              'relative w-[calc(100%-4rem)] max-w-[960px] max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain rounded-sheet bg-surface shadow-(--shadow-modal)',
               panelMotion,
             )}
           >
