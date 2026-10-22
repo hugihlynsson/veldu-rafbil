@@ -166,9 +166,10 @@ export default function CarList() {
 
   // Closing hands a key's focus back to the card that opened the sheet, which
   // a step through it has since left behind: the list goes to the car last
-  // shown instead, focused only for a key, as a tap would ring it. A task
-  // later, as the browser puts back the list's scroll as of opening once the
-  // back's popstate is done, which Next renders in.
+  // shown instead, focused only for a key, as a tap would ring it. Smooth, so
+  // the list is seen to move from where the sheet opened. A task later, as
+  // the browser puts back the list's scroll as of opening once the back's
+  // popstate is done, which Next renders in, and would cut a scroll short.
   const openedSheetCar = useRef(sheetCar)
   const lastSheetCar = useRef(sheetCar)
   useEffect(() => {
@@ -183,7 +184,10 @@ export default function CarList() {
     const card = document.getElementById(last.id)
     if (!card) return
     const timer = setTimeout(() => {
-      card.scrollIntoView({ block: 'center' })
+      card.scrollIntoView({
+        block: 'center',
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+      })
       if (getInputModality() === 'keyboard') {
         card.focus({ preventScroll: true })
       }
