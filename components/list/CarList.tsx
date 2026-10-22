@@ -142,12 +142,14 @@ export default function CarList() {
   // and otherwise its page, which leads back to the list as it was left
   const showCar = (car: CarData) => {
     rememberListSearch(window.location.search)
-    if (opensInSheet()) showCarSheet(car, 'push')
+    // Picked from the bar in a sheet, it takes that sheet's place in history
+    if (opensInSheet()) showCarSheet(car, sheetCar ? 'replace' : 'push')
     else router.push(carPathOf(car))
   }
 
   // Open for as long as the URL is the car's, so back closes it
   const sheetCar = carAtPath(usePathname())
+  const [sheetChatSlot, setSheetChatSlot] = useState<HTMLElement | null>(null)
   useListShown()
 
   const comparison = useComparison()
@@ -309,11 +311,13 @@ export default function CarList() {
         <CompareTray cars={comparison.selected} onRemove={removeCompared} />
       )}
 
-      {sheetCar && <CarSheet car={sheetCar} />}
+      {sheetCar && <CarSheet car={sheetCar} chatSlotRef={setSheetChatSlot} />}
 
-      {/* The tray takes the bar's place while there is a car in it */}
+      {/* The tray takes the bar's place while there is a car in it, on the
+          page but not over it in the sheet */}
       <ChatContainer
-        hide={editingFilters || isComparing}
+        hide={editingFilters || (isComparing && !sheetChatSlot)}
+        container={sheetChatSlot}
         onShowCar={showCar}
         filters={filters}
         onApplyFilters={applySuggestedFilters}
