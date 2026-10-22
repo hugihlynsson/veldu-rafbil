@@ -51,7 +51,10 @@ export async function POST(req: Request) {
 
   const started = performance.now()
   let answered:
-    | { answers: Record<string, unknown>; usage: { input_tokens: number } }
+    | {
+        answers: Record<string, unknown>
+        usage: { input_tokens: number | null }
+      }
     | undefined
   const ask: AskModel | undefined =
     client &&
@@ -78,7 +81,7 @@ export async function POST(req: Request) {
       supersedes: parsed.data.supersedes,
       result,
       answers: answered?.answers,
-      inputTokens: answered?.usage.input_tokens,
+      inputTokens: answered?.usage.input_tokens ?? undefined,
       millis,
       model: modelName,
       ...deployment(),
