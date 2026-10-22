@@ -18,3 +18,5 @@ Disallow: /api/verdict
 # Worth reading instead, for anything automated:
 #   /llms.txt   what this site holds and how to read the figures
 #   /api/cars   every car as JSON, prices already adjusted for the grant
+
+Sitemap: https://veldurafbil.is/sitemap.xml
