@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest'
 
-import { deriveCar } from '@/modules/data/cars'
+import cars, { deriveCar } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
 import type { NewCar } from '@/modules/data/newCarSchema'
-import { closestCars } from './similar'
+import { closestCars, similarTo, similarToAll } from './similar'
 
 const base: NewCar = {
   make: 'Kia',
@@ -62,5 +63,52 @@ describe('closestCars', () => {
     expect(closestCars(looking, [sevenSeater, fiveSeater], 1)).toEqual([
       fiveSeater,
     ])
+  })
+})
+
+describe('similarToAll', () => {
+  const bySlug = (...slugs: string[]) =>
+    slugs.map((slug) => {
+      const found = cars.find((car) => carSlug(car) === slug)
+      if (!found) throw new Error(`No car ${slug}`)
+      return found
+    })
+
+  it('offers what the most of the compared cars are similar to first', () => {
+    const compared = cars.filter((car) => similarTo(car).length > 0).slice(0, 3)
+    const offered = similarToAll(compared)
+    const votes = (car: (typeof offered)[number]) =>
+      compared.filter((one) => similarTo(one).some((o) => o.id === car.id))
+        .length
+    expect(offered.map(votes)).toEqual(
+      offered.map(votes).toSorted((a, b) => b - a),
+    )
+  })
+
+  it('never offers a compared car or another variant of one', () => {
+    for (const compared of [
+      bySlug('skoda-peaq-90x', 'peugeot-e-5008-dual-motor'),
+      bySlug('byd-seal-base', 'byd-sealion-7-base'),
+      bySlug(
+        'tesla-model-y-long-range-dual-motor',
+        'kia-ev6-2025-long-range-awd',
+      ),
+    ]) {
+      const offered = similarToAll(compared)
+      expect(offered.length).toBeGreaterThan(0)
+      for (const car of offered) {
+        expect(
+          compared.some(
+            (one) => one.make === car.make && one.model === car.model,
+          ),
+        ).toBe(false)
+      }
+    }
+  })
+
+  it('offers at most three', () => {
+    for (let i = 0; i + 4 <= cars.length; i += 4) {
+      expect(similarToAll(cars.slice(i, i + 4)).length).toBeLessThanOrEqual(3)
+    }
   })
 })

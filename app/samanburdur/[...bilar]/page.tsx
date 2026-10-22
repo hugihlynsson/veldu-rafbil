@@ -18,6 +18,7 @@ import Footer from '@/components/Footer'
 import PageChat from '@/components/detail/PageChat'
 import { comparisonSuggestions } from '@/modules/chat/suggestions'
 import { peekVerdict } from '@/app/api/verdict/[...slugs]/verdict'
+import { similarToAll } from '@/modules/detail/similar'
 
 interface Props {
   params: Promise<{ bilar: string[] }>
@@ -81,6 +82,7 @@ export default async function Page(props: Props) {
       <ComparisonView
         cars={cars}
         slugs={slugs}
+        similar={similarToAll(cars)}
         verdict={
           <Suspense fallback={<VerdictPlaceholder />}>
             <WrittenVerdict cars={cars} />
