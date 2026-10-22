@@ -10,6 +10,7 @@ import React, {
 } from 'react'
 import clsx from 'clsx'
 
+import { getInputModality } from '@/utils/inputModality'
 import lockBodyScroll from '@/utils/lockBodyScroll'
 
 /**
@@ -28,6 +29,20 @@ type State = 'initializing' | 'visible' | 'leaving'
 export const panelMotion =
   'opacity-0 translate-y-6 transition-[opacity,translate] duration-300 ease-in-cubic group-data-[state=visible]/modal:opacity-100 group-data-[state=visible]/modal:translate-y-0 group-data-[state=visible]/modal:ease-out-cubic group-data-[state=leaving]/modal:duration-200'
 
+type ReturnFocus = 'always' | 'keyboard'
+
+// Closing is what hands focus back to whatever opened the dialog
+const closeDialog = (
+  dialog: HTMLDialogElement | null,
+  returnFocus: ReturnFocus,
+) => {
+  dialog?.close()
+  if (returnFocus === 'always' || getInputModality() === 'keyboard') return
+  if (document.activeElement instanceof HTMLElement) {
+    document.activeElement.blur()
+  }
+}
+
 interface Modal {
   /** Animates out, then closes and unmounts */
   close: () => void
@@ -40,6 +55,11 @@ interface Props {
   onDone: () => void
   /** Focused after open: showModal() lands on the close button otherwise */
   initialFocusRef?: React.RefObject<HTMLElement | null>
+  /**
+   * Who gets focus handed back on close. `keyboard` lets it go after a tap or
+   * a click, where it would only ring whatever was tapped to open the dialog
+   */
+  returnFocus?: ReturnFocus
   /** Layout and backdrop for this particular dialog */
   className?: string
   children: (modal: Modal) => ReactNode
@@ -53,6 +73,7 @@ const Modal: React.FunctionComponent<Props> = ({
   labelledBy,
   onDone,
   initialFocusRef,
+  returnFocus = 'always',
   className,
   children,
 }) => {
@@ -76,14 +97,15 @@ const Modal: React.FunctionComponent<Props> = ({
       unlock()
       // Unmounted while open, as the car sheet is by the browser's back:
       // closing still hands focus back. Once the leave has closed it, a no-op.
-      dialog?.close()
+      if (dialog?.open) closeDialog(dialog, returnFocus)
     }
-    // Once, on mount: a ref object keeps its identity across renders
-  }, [initialFocusRef])
+    // Once, on mount: a ref object keeps its identity across renders, and
+    // a dialog's returnFocus is written once
+  }, [initialFocusRef, returnFocus])
 
-  // Closing before unmount is what hands focus back to whatever opened us
+  // Before unmount, so focus is handed back as the dialog goes
   const finishClosing = useEffectEvent(() => {
-    dialogRef.current?.close()
+    closeDialog(dialogRef.current, returnFocus)
     onDone()
   })
 

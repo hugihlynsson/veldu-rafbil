@@ -44,6 +44,7 @@ import {
   useListShown,
 } from '@/utils/carSheet'
 import useComparison from '@/utils/useComparison'
+import useInputModality from '@/utils/inputModality'
 import CompareTray from '@/components/detail/CompareTray'
 import type { SheetChat } from '@/components/detail/CarSheet'
 import { track } from '@/utils/track'
@@ -160,6 +161,8 @@ export default function CarList() {
   const sheetCar = carAtPath(usePathname())
   const [sheetChat, setSheetChat] = useState<SheetChat | null>(null)
   useListShown()
+  // From the start, so the sheet knows whether a key or a tap opened it
+  useInputModality()
 
   const comparison = useComparison()
   const isComparing = comparison.selected.length > 0
