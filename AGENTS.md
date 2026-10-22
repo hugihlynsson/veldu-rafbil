@@ -113,6 +113,9 @@ Copy that counts things needs Icelandic plural agreement: use `agree()` from
 
 `/api/chat`, the advisor, and `/api/filter-suggestions`, the filter pills above
 the chat input, are public, free to use, and spend money on every call.
+`/api/verdict`, a comparison's written summary, spends it once for each set of
+cars and figures, and serves the rest from the cache — so a script naming new
+sets is what it has to stop, which is what its hourly budget is for.
 
 - **Their limits are a security boundary, not a nicety.** The rate limits, the
   body schemas, the car-details tool's allowlist, redirect check, timeout,
