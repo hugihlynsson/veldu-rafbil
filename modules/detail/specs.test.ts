@@ -70,10 +70,14 @@ describe('specRows', () => {
     )
   })
 
-  it('names the drive under the power', () => {
-    expect(row('power', car({ drive: 'AWD' }))?.cells[0]?.detail).toBe(
-      'Fjórhjóladrif',
-    )
+  it('gives the horsepower under the power', () => {
+    expect(row('power', car({ power: 150 }))?.cells[0]?.detail).toBe('204 hö')
+  })
+
+  it('gives the drive a row of its own, unranked', () => {
+    const cells = row('drive', car({ drive: 'AWD' }), car({}))?.cells
+    expect(cells?.[0]).toMatchObject({ text: 'AWD', detail: 'Fjórhjóladrif' })
+    expect(cells?.every((cell) => !cell.best)).toBe(true)
   })
 
   it('writes prices with the list grouping', () => {
