@@ -30,8 +30,7 @@ interface Props {
 /** The name that labels the sheet the car is shown in */
 export const SHEET_TITLE_ID = 'car-sheet-title'
 
-// Price per km of range is left to the list's sorting: a ratio few buyers
-// weigh a car by, beside a price shown under the name
+// Eight, which fill the rows two to a row on a phone and four from lg
 const figureOrder: SpecKey[] = [
   'range',
   'acceleration',
@@ -39,10 +38,9 @@ const figureOrder: SpecKey[] = [
   'seats',
   'charging',
   'power',
+  'drive',
+  'value',
 ]
-// The drive under the power, as it had before it had a row of its own, which
-// here would leave a seventh figure alone on the last line of the grid
-const detailFrom: Partial<Record<SpecKey, SpecKey>> = { power: 'drive' }
 
 const eyebrow =
   'm-0 uppercase text-eyebrow font-semibold tracking-wider text-stone'
@@ -55,10 +53,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
   const notice = deprecatedNotice(car)
   const grantChange = grantChangeNotice(car)
   // The price is the pill under the name
-  const rows = specRows([car])
-  const detailOf = (key: SpecKey) =>
-    rows.find((row) => row.key === (detailFrom[key] ?? key))?.cells[0]?.detail
-  const figures = rows
+  const figures = specRows([car])
     .filter(({ key }) => figureOrder.includes(key))
     .toSorted((a, b) => figureOrder.indexOf(a.key) - figureOrder.indexOf(b.key))
 
@@ -102,8 +97,8 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
             under the photo as it is on a phone */}
         <div className="md:max-w-prose md:mx-auto">
           {/* The name and the figures read as one block, narrower than the
-              text under them */}
-          <div className="md:max-w-column">
+              text under them until four figures to a row need its width */}
+          <div className="md:max-w-column lg:max-w-none">
             <div className="pt-8 md:pt-14">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
@@ -156,7 +151,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
               )}
             </div>
 
-            <dl className="m-0 mt-10 md:mt-14 grid grid-cols-2 gap-x-6 gap-y-5 md:grid-cols-3">
+            <dl className="m-0 mt-10 md:mt-14 grid grid-cols-2 gap-x-6 gap-y-5 md:grid-cols-3 lg:grid-cols-4">
               {figures.map((row) => (
                 <div key={row.key}>
                   <dt className={eyebrow}>{row.label}</dt>
@@ -164,9 +159,9 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
                     <div className="text-2xl font-normal">
                       {row.cells[0]?.text}
                     </div>
-                    {detailOf(row.key) && (
+                    {row.cells[0]?.detail && (
                       <div className="mt-0.5 text-xs font-medium text-stone">
-                        {detailOf(row.key)}
+                        {row.cells[0]?.detail}
                       </div>
                     )}
                   </dd>
