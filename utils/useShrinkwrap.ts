@@ -1,4 +1,4 @@
-import { measureLineStats, prepareWithSegments } from '@chenglou/pretext'
+import { measureLineStats, prepare } from '@chenglou/pretext'
 import { useLayoutEffect, useRef } from 'react'
 
 // Holds a bubble of pre-line text to the narrowest width that wraps it into
@@ -20,11 +20,11 @@ const useShrinkwrap = <T extends HTMLElement>(text: string) => {
       const style = getComputedStyle(element)
       const parentStyle = getComputedStyle(parent)
       const font = `${style.fontStyle} ${style.fontWeight} ${style.fontSize} ${style.fontFamily}`
-      // A paragraph at a time, as pre-wrap would count the space a line
-      // breaks at, which pre-line hangs out of the box
+      // A paragraph at a time, as pre-line is normal white space between its
+      // newlines, and pre-wrap would keep the runs of spaces it collapses
       const paragraphs = text
         .split('\n')
-        .map((paragraph) => prepareWithSegments(paragraph, font))
+        .map((paragraph) => prepare(paragraph, font))
       const padding =
         parseFloat(style.paddingLeft) +
         parseFloat(style.paddingRight) +
