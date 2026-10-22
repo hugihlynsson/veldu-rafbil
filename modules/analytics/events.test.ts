@@ -43,6 +43,7 @@ const tracked = {
     count: 31,
   },
   car_opened: { name: 'car_opened', car: 'kia-ev3', position: 4 },
+  car_sheet_expanded: { name: 'car_sheet_expanded', car: 'kia-ev3' },
   compare_toggled: {
     name: 'compare_toggled',
     car: 'kia-ev3',
@@ -87,6 +88,11 @@ const batch = (events: unknown[]) => ({
 describe('productEventSchema', () => {
   it.each(Object.values(tracked))('reads $name as a page sends it', (event) => {
     expect(productEventSchema.parse(onPage(event))).toEqual(onPage(event))
+  })
+
+  it('reads a car viewed in the sheet over the list', () => {
+    const viewed = onPage({ ...tracked.page_viewed, sheet: true })
+    expect(productEventSchema.parse(viewed)).toEqual(viewed)
   })
 
   it('refuses a field the event does not have', () => {

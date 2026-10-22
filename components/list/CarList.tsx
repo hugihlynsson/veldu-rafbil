@@ -37,7 +37,7 @@ import { agree } from '@/modules/copy/plural'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import { useFilters, useSorting, useView } from '@/utils/useListState'
 import { rememberListSearch } from '@/utils/listReturn'
-import { opensInSheet, showCarSheet } from '@/utils/carSheet'
+import { opensInSheet, showCarSheet, useListShown } from '@/utils/carSheet'
 import useComparison from '@/utils/useComparison'
 import CompareTray from '@/components/detail/CompareTray'
 import { track } from '@/utils/track'
@@ -148,6 +148,7 @@ export default function CarList() {
 
   // Open for as long as the URL is the car's, so back closes it
   const sheetCar = carAtPath(usePathname())
+  useListShown()
 
   const comparison = useComparison()
   const isComparing = comparison.selected.length > 0

@@ -4,11 +4,11 @@ import { notFound, permanentRedirect } from 'next/navigation'
 import { carPath, shareImagePath, shareImageSize } from '@/modules/detail/paths'
 import { readSegment, resolveSlugs } from '@/modules/detail/slugs'
 import { similarTo } from '@/modules/detail/similar'
+import { reviewOf } from '@/modules/detail/review'
 import { deprecatedNotice } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { allCars } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
-import carReviews from '@/modules/data/carReviews'
 import CarView from '@/components/detail/CarView'
 import PageChat from '@/components/detail/PageChat'
 import Footer from '@/components/Footer'
@@ -67,8 +67,7 @@ export default async function Page(props: Props) {
   // A renamed car, or a slug in the wrong case: the one address the page has
   if (slug !== segment) permanentRedirect(carPath(slug))
 
-  // Buying advice, which a car no longer sold new is past
-  const review = car.deprecated ? undefined : carReviews[carSlug(car)]
+  const review = reviewOf(car)
 
   return (
     <>

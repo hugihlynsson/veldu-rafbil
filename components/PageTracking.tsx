@@ -10,6 +10,8 @@ import {
   scrollDepth,
   type PageKind,
 } from '@/modules/analytics/visit'
+import { isListShown, sheetScrollDepth } from '@/utils/carSheet'
+import { takePageBeforeLoad } from '@/utils/pageBeforeLoad'
 import { flushTracked, track } from '@/utils/track'
 
 // The page before this one in the tab, for the next to say it came from
@@ -41,21 +43,29 @@ export default function PageTracking() {
     const referrer = isFirstView
       ? referrerHost(document.referrer, window.location.host)
       : undefined
+    const from = isFirstView ? takePageBeforeLoad() : previousPage
     isFirstView = false
+    // The list stays under the sheet with the page locked behind it, so the
+    // sheet's own panel is what is read, and the query is still the list's
+    const inSheet = page.kind === 'car' && isListShown()
+    const depth = inSheet ? sheetScrollDepth : currentDepth
 
     track({
       name: 'page_viewed',
       viewId,
-      from: previousPage,
-      query: window.location.search.slice(0, 300),
+      from,
+      query: inSheet ? '' : window.location.search.slice(0, 300),
       ...(referrer && { referrer }),
+      ...(inSheet && { sheet: true }),
     })
     previousPage = page.kind
 
     let engagedMs = 0
     let visibleSince: number | null =
       document.visibilityState === 'visible' ? performance.now() : null
-    let maxScroll = currentDepth()
+    // A sheet opens at its top, but a car swapped into one is counted before
+    // the panel is scrolled back up from the last
+    let maxScroll = inSheet ? 0 : depth()
     let measuring = false
 
     const engaged = () =>
@@ -79,7 +89,7 @@ export default function PageTracking() {
       measuring = true
       requestAnimationFrame(() => {
         measuring = false
-        maxScroll = Math.max(maxScroll, currentDepth())
+        maxScroll = Math.max(maxScroll, depth())
       })
     }
 
@@ -95,10 +105,14 @@ export default function PageTracking() {
       }
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true })
+    // Capturing, as a scroll inside the sheet's panel does not bubble
+    window.addEventListener('scroll', onScroll, {
+      capture: true,
+      passive: true,
+    })
     document.addEventListener('visibilitychange', onVisibilityChange)
     return () => {
-      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('scroll', onScroll, { capture: true })
       document.removeEventListener('visibilitychange', onVisibilityChange)
       if (visibleSince !== null) report()
     }

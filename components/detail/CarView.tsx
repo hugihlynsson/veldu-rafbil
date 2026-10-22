@@ -1,4 +1,4 @@
-import { FunctionComponent, MouseEvent } from 'react'
+import { FunctionComponent } from 'react'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -23,8 +23,8 @@ interface Props {
   similar: ReadonlyArray<Car>
   /** None for a car whose review is yet to be written */
   review?: CarReview
-  /** Over the list, where a similar car takes this one's place */
-  sheet?: { onOpenCar: (car: Car, event: MouseEvent) => void }
+  /** Over the list on a desktop, which is the page and has the logo */
+  sheet?: boolean
 }
 
 /** The name that labels the sheet the car is shown in */
@@ -100,7 +100,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <h1
-                    id={sheet && SHEET_TITLE_ID}
+                    id={sheet ? SHEET_TITLE_ID : undefined}
                     className="m-0 font-semibold text-display leading-tight"
                   >
                     <span>{car.make}</span>{' '}
@@ -239,9 +239,6 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
                   <div className="flex-1 min-w-0 py-2 text-balance md:p-0 md:px-1">
                     <Link
                       href={carPathOf(other)}
-                      onClick={
-                        sheet && ((event) => sheet.onOpenCar(other, event))
-                      }
                       className="text-base font-semibold leading-tight text-tint no-underline after:absolute after:inset-0 after:rounded-card after:border after:border-line md:after:border-0"
                     >
                       {other.make}{' '}
