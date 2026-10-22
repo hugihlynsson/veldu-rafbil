@@ -148,7 +148,7 @@ const withModel = async (client: TypeSafeClient) => {
       const started = performance.now()
       const result = await client.systemOne(request)
       millis = Math.round(performance.now() - started)
-      run.inputTokens += result.usage.input_tokens
+      run.inputTokens += result.usage.input_tokens ?? 0
       if (verbose) {
         console.log(
           `  ${JSON.stringify(testCase.text)} ${JSON.stringify(

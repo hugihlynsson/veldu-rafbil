@@ -1,3 +1,4 @@
+import { zstdDecompressSync } from 'node:zlib'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { MAX_INTENT_LENGTH } from '@/modules/list/filterIntent'
@@ -18,6 +19,10 @@ const loadPost = async (key: string) => {
       }),
     )
 }
+
+// The SDK sends a body this size zstd-compressed
+const readSent = (init?: RequestInit) =>
+  JSON.parse(zstdDecompressSync(init?.body as Uint8Array).toString())
 
 afterEach(() => {
   vi.unstubAllEnvs()
@@ -79,7 +84,7 @@ describe('POST /api/filter-suggestions', () => {
 describe('POST /api/filter-suggestions with a key', () => {
   it('asks Jev about what the text left open, and adds what it is sure of', async () => {
     const fetch = vi.fn(async (_url: string, init?: RequestInit) => {
-      const { questions } = JSON.parse(String(init?.body))
+      const { questions } = readSent(init)
       const answers = Object.fromEntries(
         Object.keys(questions).map((key) => [
           key,
@@ -105,10 +110,11 @@ describe('POST /api/filter-suggestions with a key', () => {
 
     const response = await post({ text: '7 sæta fyrir veturinn' })
     const [url, init] = fetch.mock.calls[0]!
-    const sent = JSON.parse(String(init?.body))
+    const sent = readSent(init)
 
     expect(fetch).toHaveBeenCalledTimes(1)
     expect(url).toBe('https://api.typesafe.ai/v1/systemone')
+    expect(new Headers(init?.headers).get('content-encoding')).toBe('zstd')
     expect(sent.state).toEqual({ request: '7 sæta fyrir veturinn' })
     expect(Object.keys(sent.questions)).not.toContain('seats')
     expect(await response.json()).toEqual({
