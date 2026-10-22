@@ -1,6 +1,6 @@
 'use client'
 
-import { type ReactNode, useRef, useState } from 'react'
+import { type ReactNode, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import { usePathname, useRouter } from 'next/navigation'
@@ -44,7 +44,7 @@ import {
   useListShown,
 } from '@/utils/carSheet'
 import useComparison from '@/utils/useComparison'
-import useInputModality from '@/utils/inputModality'
+import useInputModality, { getInputModality } from '@/utils/inputModality'
 import CompareTray from '@/components/detail/CompareTray'
 import type { SheetChat } from '@/components/detail/CarSheet'
 import { track } from '@/utils/track'
@@ -164,6 +164,37 @@ export default function CarList() {
   // From the start, so the sheet knows whether a key or a tap opened it
   useInputModality()
 
+  // Closing hands a key's focus back to the card that opened the sheet, which
+  // a step through it has since left behind: the list goes to the car last
+  // shown instead, focused only for a key, as a tap would ring it. Smooth, so
+  // the list is seen to move from where the sheet opened. A task later, as
+  // the browser puts back the list's scroll as of opening once the back's
+  // popstate is done, which Next renders in, and would cut a scroll short.
+  const openedSheetCar = useRef(sheetCar)
+  const lastSheetCar = useRef(sheetCar)
+  useEffect(() => {
+    const opened = openedSheetCar.current
+    const last = lastSheetCar.current
+    lastSheetCar.current = sheetCar
+    if (sheetCar) {
+      if (!last) openedSheetCar.current = sheetCar
+      return
+    }
+    if (!last || last.id === opened?.id) return
+    const card = document.getElementById(last.id)
+    if (!card) return
+    const timer = setTimeout(() => {
+      card.scrollIntoView({
+        block: 'center',
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+      })
+      if (getInputModality() === 'keyboard') {
+        card.focus({ preventScroll: true })
+      }
+    })
+    return () => clearTimeout(timer)
+  }, [sheetCar])
+
   const comparison = useComparison()
   const isComparing = comparison.selected.length > 0
 
@@ -191,6 +222,7 @@ export default function CarList() {
   }
 
   const filteredCars = cars.filter(carFilter(filters))
+  const shownCars = sortCars(filteredCars, sorting, direction)
 
   const hasFilter = Object.values(filters).length > 0
 
@@ -271,7 +303,7 @@ export default function CarList() {
           if (opensInSheet()) void loadCarSheet()
         }}
       >
-        {sortCars(filteredCars, sorting, direction).map((car, index) => (
+        {shownCars.map((car, index) => (
           <Car
             preload={index <= 1}
             position={index}
@@ -323,7 +355,9 @@ export default function CarList() {
         <CompareTray cars={comparison.selected} onRemove={removeCompared} />
       )}
 
-      {sheetCar && <CarSheet car={sheetCar} onChat={setSheetChat} />}
+      {sheetCar && (
+        <CarSheet car={sheetCar} shown={shownCars} onChat={setSheetChat} />
+      )}
 
       {/* The tray takes the bar's place while there is a car in it, on the
           page but not over it in the sheet. There the chat is about the

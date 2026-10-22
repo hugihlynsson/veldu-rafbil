@@ -44,6 +44,12 @@ const tracked = {
   },
   car_opened: { name: 'car_opened', car: 'kia-ev3', position: 4 },
   car_sheet_expanded: { name: 'car_sheet_expanded', car: 'kia-ev3' },
+  car_sheet_stepped: {
+    name: 'car_sheet_stepped',
+    car: 'kia-ev3',
+    direction: 'next',
+    method: 'key',
+  },
   compare_toggled: {
     name: 'compare_toggled',
     car: 'kia-ev3',

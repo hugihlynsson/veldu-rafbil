@@ -4,6 +4,7 @@ import { scrollDepth } from '@/modules/analytics/visit'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import type { Car } from '@/modules/data/cars'
 import { carPathOf } from '@/modules/detail/paths'
+import { stepOfKey, type SheetStep } from '@/modules/detail/sheetStep'
 
 // A screen as wide as --breakpoint-md and tall enough to read a car in a
 // panel, touch or not: a tablet, and a desktop. A phone keeps going to the
@@ -79,3 +80,29 @@ export const scrollSheetToTop = () =>
     top: 0,
     behavior: prefersReducedMotion() ? 'auto' : 'smooth',
   })
+
+// Where ←→ already mean something, as moving a caret or a choice
+const ARROW_KEY_OWNERS =
+  'input, textarea, select, [role=slider], [role=radiogroup], [role=tablist], [role=listbox], [role=menu]'
+
+/**
+ * Where an arrow key steps the sheet to, unless the key is another's: a field
+ * or widget that takes arrows, or a dialog opened over the sheet, which may
+ * have left the focus on the body rather than in itself.
+ */
+export const sheetStepOf = (
+  event: KeyboardEvent,
+  sheet: Element | null | undefined,
+): SheetStep | null => {
+  const step = stepOfKey(event)
+  if (!step) return null
+  const target = event.target
+  if (
+    target instanceof HTMLElement &&
+    (target.isContentEditable || target.closest(ARROW_KEY_OWNERS))
+  ) {
+    return null
+  }
+  const dialogs = document.querySelectorAll('dialog[open]')
+  return [...dialogs].some((dialog) => dialog !== sheet) ? null : step
+}

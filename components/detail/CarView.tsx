@@ -79,14 +79,14 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
 
       {/* Edge to edge on a phone, and from md as wide as the column, as the
           list has its photos. A sheet is only ever md up, and its photo runs
-          to its edges: the window less 64px, up to the sheet's 960px, which
-          CarSheet sets */}
+          to its edges: the window less 184px, the margins and the step
+          buttons, up to the sheet's 960px, which CarSheet sets */}
       <div className={clsx(!sheet && 'md:pl-10 md:pr-6')}>
         <Image
           alt=""
           sizes={
             sheet
-              ? '(max-width: 1023px) calc(100vw - 64px), 960px'
+              ? '(max-width: 1143px) calc(100vw - 184px), 960px'
               : '(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 64px), 960px'
           }
           src={`/images/${car.heroImageName}.jpg`}

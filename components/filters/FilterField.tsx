@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react'
 
+import ChevronIcon from '@/components/ChevronIcon'
+
 const controlClasses =
   'block w-full border border-line-strong rounded-xl bg-surface p-2.75 text-base font-normal text-tint transition-[border-color] duration-200 hover:border-clay'
 
@@ -108,22 +110,11 @@ export const FilterSelect: React.FunctionComponent<SelectProps> = ({
           </option>
         ))}
       </select>
-      <svg
-        width="12"
-        height="12"
-        viewBox="0 0 12 12"
-        fill="none"
-        aria-hidden="true"
+      <ChevronIcon
+        size={12}
+        direction="down"
         className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-stone"
-      >
-        <path
-          d="m2.5 4.5 3.5 3.5 3.5-3.5"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      />
     </div>
   </Field>
 )
