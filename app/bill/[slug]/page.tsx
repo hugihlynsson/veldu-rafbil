@@ -12,6 +12,7 @@ import { carSlug } from '@/modules/data/getCarId'
 import CarView from '@/components/detail/CarView'
 import PageChat from '@/components/detail/PageChat'
 import Footer from '@/components/Footer'
+import { carStructuredData, serializeStructuredData } from './structuredData'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -71,6 +72,12 @@ export default async function Page(props: Props) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeStructuredData(carStructuredData(car)),
+        }}
+      />
       <CarView car={car} similar={similarTo(car)} review={review} />
       <Footer />
       <PageChat cars={[car]} starters={review?.questions} />
