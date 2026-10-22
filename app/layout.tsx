@@ -5,6 +5,7 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 import Fathom from '@/components/Fathom'
 import PageTracking from '@/components/PageTracking'
+import { SITE_URL } from '@/modules/siteUrl'
 
 // rsms's InterVariable 4.1 rather than Google's cut, which drops glyphs the
 // list uses, ↗ among them. Served from here, so the first paint waits on no
@@ -34,9 +35,7 @@ const inter = localFont({
 // own URL instead
 export const metadata: Metadata = {
   metadataBase:
-    process.env.VERCEL_ENV === 'preview'
-      ? undefined
-      : new URL('https://veldurafbil.is'),
+    process.env.VERCEL_ENV === 'preview' ? undefined : new URL(SITE_URL),
 }
 
 type Props = {
