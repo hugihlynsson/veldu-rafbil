@@ -5,10 +5,11 @@ import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import type { Car } from '@/modules/data/cars'
 import { carPathOf } from '@/modules/detail/paths'
 
-// A mouse on a screen as wide as --breakpoint-md, where the list stays in
-// view around the sheet. A phone keeps going to the car's page, which takes
-// the whole screen either way.
-const SHEET_MEDIA = '(min-width: 768px) and (pointer: fine)'
+// A screen as wide as --breakpoint-md and tall enough to read a car in a
+// panel, touch or not: a tablet, and a desktop. A phone keeps going to the
+// car's page, which takes the whole screen either way, and the height keeps
+// one held sideways, as wide as a tablet, from a sheet it could barely read.
+const SHEET_MEDIA = '(min-width: 768px) and (min-height: 600px)'
 
 /** A click the page may take over, rather than one asking for a new tab */
 export const isPlainClick = (event: MouseEvent): boolean =>

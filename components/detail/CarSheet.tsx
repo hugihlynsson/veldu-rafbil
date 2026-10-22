@@ -6,6 +6,7 @@ import {
   useEffect,
   useLayoutEffect,
   useRef,
+  useState,
 } from 'react'
 import clsx from 'clsx'
 
@@ -24,6 +25,7 @@ import {
   isPlainClick,
   showCarSheet,
 } from '@/utils/carSheet'
+import { getInputModality } from '@/utils/inputModality'
 import { leavePageBeforeLoad } from '@/utils/pageBeforeLoad'
 import { track } from '@/utils/track'
 import CarView, { SHEET_TITLE_ID } from './CarView'
@@ -56,14 +58,21 @@ const CarSheet: FunctionComponent<Props> = ({ car, onChat }) => {
   const shownCar = useRef(car)
   const path = carPathOf(car)
 
+  // The close button for a keyboard, to start from; for a tap or a click the
+  // panel, as focus moved by script rings what it lands on, and on the panel
+  // the keys scroll the sheet
+  const focusStart = () =>
+    getInputModality() === 'keyboard' ? closeRef : panelRef
+  const [initialFocusRef] = useState(focusStart)
+
   // A car linked from this one takes its place, read from its top. The link
   // that opened it is gone with the page it was on, so focus needs a new home.
-  // Not on arrival, when the modal has already focused the close button.
+  // Not on arrival, when the modal has already focused where it starts.
   useEffect(() => {
     if (shownCar.current === car) return
     shownCar.current = car
     panelRef.current?.scrollTo({ top: 0 })
-    closeRef.current?.focus({ preventScroll: true })
+    focusStart().current?.focus({ preventScroll: true })
   }, [car])
 
   // The review's questions come from here, which the list would otherwise
@@ -100,7 +109,8 @@ const CarSheet: FunctionComponent<Props> = ({ car, onChat }) => {
     <Modal
       labelledBy={SHEET_TITLE_ID}
       onDone={closeCarSheet}
-      initialFocusRef={closeRef}
+      initialFocusRef={initialFocusRef}
+      returnFocus="keyboard"
       className="items-center data-[state=visible]:backdrop:bg-backdrop-strong"
     >
       {({ close }) => (
@@ -109,11 +119,12 @@ const CarSheet: FunctionComponent<Props> = ({ car, onChat }) => {
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
           <div
             ref={panelRef}
+            tabIndex={-1}
             onClickCapture={openLinkedCar}
             // The car page's photo width, which is the list's content, and
             // CarView's sheet `sizes` with it
             className={clsx(
-              'relative w-[calc(100%-4rem)] max-w-[960px] max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain rounded-sheet bg-surface shadow-(--shadow-modal)',
+              'relative w-[calc(100%-4rem)] max-w-[960px] max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain outline-none rounded-sheet bg-surface shadow-(--shadow-modal)',
               panelMotion,
             )}
           >
