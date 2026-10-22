@@ -1,4 +1,5 @@
 import './globals.css'
+import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
@@ -28,6 +29,15 @@ const inter = localFont({
   weight: '400 900',
   variable: '--font-inter',
 })
+
+// Unset on a preview, where Next resolves share images against the preview's
+// own URL instead
+export const metadata: Metadata = {
+  metadataBase:
+    process.env.VERCEL_ENV === 'preview'
+      ? undefined
+      : new URL('https://veldurafbil.is'),
+}
 
 type Props = {
   children: React.ReactNode
