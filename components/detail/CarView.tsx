@@ -40,6 +40,9 @@ const figureOrder: SpecKey[] = [
   'charging',
   'power',
 ]
+// The drive under the power, as it had before it had a row of its own, which
+// here would leave a seventh figure alone on the last line of the grid
+const detailFrom: Partial<Record<SpecKey, SpecKey>> = { power: 'drive' }
 
 const eyebrow =
   'm-0 uppercase text-eyebrow font-semibold tracking-wider text-stone'
@@ -52,7 +55,10 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
   const notice = deprecatedNotice(car)
   const grantChange = grantChangeNotice(car)
   // The price is the pill under the name
-  const figures = specRows([car])
+  const rows = specRows([car])
+  const detailOf = (key: SpecKey) =>
+    rows.find((row) => row.key === (detailFrom[key] ?? key))?.cells[0]?.detail
+  const figures = rows
     .filter(({ key }) => figureOrder.includes(key))
     .toSorted((a, b) => figureOrder.indexOf(a.key) - figureOrder.indexOf(b.key))
 
@@ -158,9 +164,9 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
                     <div className="text-2xl font-normal">
                       {row.cells[0]?.text}
                     </div>
-                    {row.cells[0]?.detail && (
+                    {detailOf(row.key) && (
                       <div className="mt-0.5 text-xs font-medium text-stone">
-                        {row.cells[0]?.detail}
+                        {detailOf(row.key)}
                       </div>
                     )}
                   </dd>

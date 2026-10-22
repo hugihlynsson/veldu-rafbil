@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { driveLabels } from '@/modules/data/drives'
+import { toHorsepower } from '@/modules/data/horsepower'
 import { Car } from '@/modules/data/cars'
 import { formatKmPerMinute } from '@/modules/data/getKmPerMinutesCharged'
 import PricePill from '@/components/PricePill'
@@ -228,7 +229,7 @@ const NewCar: FunctionComponent<Props> = ({
             </div>
             <div
               className={statDetail}
-              title={`Afl (${Math.round(car.power * 1.34102)} hö)`}
+              title={`Afl (${toHorsepower(car.power)} hö)`}
             >
               {car.power} kW<span className="sr-only"> afl</span>
             </div>

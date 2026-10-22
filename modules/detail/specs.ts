@@ -2,6 +2,7 @@ import type { Car } from '@/modules/data/cars'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { driveLabels } from '@/modules/data/drives'
 import { formatKmPerMinute } from '@/modules/data/getKmPerMinutesCharged'
+import { toHorsepower } from '@/modules/data/horsepower'
 
 interface Spec {
   label: string
@@ -61,13 +62,18 @@ const specs = {
     text: (car) => `${car.acceleration.toFixed(1)}s`,
     detail: () => '0-100 km/klst',
   },
-  // The drive under the power, as the list's card has it under the range:
-  // which wheels the power goes to
   power: {
     label: 'Afl',
     better: 'higher',
     value: (car) => car.power,
     text: (car) => `${car.power} kW`,
+    detail: (car) => `${toHorsepower(car.power)} hö`,
+  },
+  // Not ranked: which wheels are driven is a need, not a score. The code as
+  // the figure, as on the list's card, since the name outgrows a phone's column
+  drive: {
+    label: 'Drif',
+    text: (car) => car.drive,
     detail: (car) => driveLabels[car.drive],
   },
   // Not ranked: a seventh seat is no use to most, and costs extra. The most
