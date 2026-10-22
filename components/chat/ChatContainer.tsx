@@ -1,6 +1,7 @@
 'use client'
 
 import { Suspense, useState } from 'react'
+import { createPortal } from 'react-dom'
 import dynamic from 'next/dynamic'
 import ChatInput from './ChatInput'
 import type { Car } from '@/modules/data/cars'
@@ -22,6 +23,9 @@ const ChatModal = dynamic(importChatModal)
 
 interface Props {
   hide: boolean
+  /** A sheet's place for the bar while one is over the page, which
+   * showModal() makes inert and covers */
+  container?: HTMLElement | null
   /** Called once the chat has closed, so the car's card can take the focus */
   onShowCar: (car: Car) => void
   /** The list's filters, which the bar suggests changes to as it is typed in */
@@ -35,6 +39,7 @@ interface Props {
 
 export default function ChatContainer({
   hide,
+  container,
   onShowCar,
   filters,
   onApplyFilters,
@@ -45,9 +50,10 @@ export default function ChatContainer({
   const composer = useComposer()
   const chatModal = useChunk(importChatModal)
   const [wantsChatOpen, setWantsChatOpen] = useState<boolean>(false)
-  // The input remounts each time it moves in and out of the modal, and only
-  // its first arrival on the page is an entrance
-  const [hasOpenedChat, setHasOpenedChat] = useState<boolean>(false)
+  // The input remounts each time it moves between the page and a dialog, and
+  // only its first arrival on the page is an entrance
+  const [hasMoved, setHasMoved] = useState<boolean>(false)
+  if (container && !hasMoved) setHasMoved(true)
 
   // Waits for the modal's chunk, as handing over while it is in flight would
   // take the input with it, and for the session, as the modal keeps what it
@@ -71,16 +77,17 @@ export default function ChatContainer({
         chatModal.load()
         if (!wantsChatOpen) track({ name: 'chat_opened' })
         setWantsChatOpen(true)
-        setHasOpenedChat(true)
+        setHasMoved(true)
       }}
-      animateIn={!hasOpenedChat}
+      animateIn={!hasMoved}
+      lifted={Boolean(container) && !isChatOpen}
       hide={hide}
       disabled={conversation.isBusy}
       hasMessages={conversation.hasMessages}
       sendMessage={conversation.send}
       starters={starters}
       filterSuggestions={
-        !isChatOpen && filters && onApplyFilters
+        !isChatOpen && !container && filters && onApplyFilters
           ? { filters, onApply: onApplyFilters }
           : undefined
       }
@@ -110,6 +117,8 @@ export default function ChatContainer({
             }}
           />
         </Suspense>
+      ) : container ? (
+        createPortal(chatInput, container)
       ) : (
         chatInput
       )}

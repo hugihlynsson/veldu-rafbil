@@ -37,9 +37,15 @@ import { agree } from '@/modules/copy/plural'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import { useFilters, useSorting, useView } from '@/utils/useListState'
 import { rememberListSearch } from '@/utils/listReturn'
-import { opensInSheet, showCarSheet, useListShown } from '@/utils/carSheet'
+import {
+  opensInSheet,
+  scrollSheetToTop,
+  showCarSheet,
+  useListShown,
+} from '@/utils/carSheet'
 import useComparison from '@/utils/useComparison'
 import CompareTray from '@/components/detail/CompareTray'
+import type { SheetChat } from '@/components/detail/CarSheet'
 import { track } from '@/utils/track'
 
 // Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
@@ -140,14 +146,18 @@ export default function CarList() {
   const router = useRouter()
   // A car picked in the chat opens as a card does: in a sheet on a desktop,
   // and otherwise its page, which leads back to the list as it was left
+  // From the bar in a sheet, the sheet's own car is scrolled up to, as on its
+  // page, and another takes the sheet's place in history
   const showCar = (car: CarData) => {
     rememberListSearch(window.location.search)
-    if (opensInSheet()) showCarSheet(car, 'push')
+    if (sheetCar?.id === car.id) scrollSheetToTop()
+    else if (opensInSheet()) showCarSheet(car, sheetCar ? 'replace' : 'push')
     else router.push(carPathOf(car))
   }
 
   // Open for as long as the URL is the car's, so back closes it
   const sheetCar = carAtPath(usePathname())
+  const [sheetChat, setSheetChat] = useState<SheetChat | null>(null)
   useListShown()
 
   const comparison = useComparison()
@@ -309,11 +319,16 @@ export default function CarList() {
         <CompareTray cars={comparison.selected} onRemove={removeCompared} />
       )}
 
-      {sheetCar && <CarSheet car={sheetCar} />}
+      {sheetCar && <CarSheet car={sheetCar} onChat={setSheetChat} />}
 
-      {/* The tray takes the bar's place while there is a car in it */}
+      {/* The tray takes the bar's place while there is a car in it, on the
+          page but not over it in the sheet. There the chat is about the
+          sheet's car, as it is on the car's page. */}
       <ChatContainer
-        hide={editingFilters || isComparing}
+        hide={editingFilters || (isComparing && !sheetChat)}
+        container={sheetChat?.container}
+        about={sheetChat && sheetCar ? [sheetCar] : undefined}
+        starters={sheetChat?.starters}
         onShowCar={showCar}
         filters={filters}
         onApplyFilters={applySuggestedFilters}
