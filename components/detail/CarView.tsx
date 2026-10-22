@@ -61,7 +61,8 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
 
   return (
     <Root
-      className={clsx('max-w-page mx-auto', sheet ? 'pb-12' : 'pb-14 md:pb-24')}
+      // In a sheet, the end scrolls clear of the chat bar raised over it
+      className={clsx('max-w-page mx-auto', sheet ? 'pb-24' : 'pb-14 md:pb-24')}
     >
       {!sheet && (
         // The list's gap from the logo to its intro, which pads its top

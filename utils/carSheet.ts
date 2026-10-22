@@ -1,6 +1,7 @@
 import { useLayoutEffect, type MouseEvent } from 'react'
 
 import { scrollDepth } from '@/modules/analytics/visit'
+import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import type { Car } from '@/modules/data/cars'
 import { carPathOf } from '@/modules/detail/paths'
 
@@ -70,3 +71,10 @@ export const sheetScrollDepth = (): number =>
         sheetPanel.scrollHeight,
       )
     : 0
+
+/** Up to the open sheet's photo and name, as a car's page scrolls to its own */
+export const scrollSheetToTop = () =>
+  sheetPanel?.scrollTo({
+    top: 0,
+    behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+  })

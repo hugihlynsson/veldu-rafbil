@@ -54,6 +54,8 @@ interface Props {
   onIntent?: () => void
   /** Fades the pill in as it mounts */
   animateIn?: boolean
+  /** In a sheet's dialog, raised clear of the panel's bottom edge */
+  lifted?: boolean
   /** The questions offered to start on; the general ones when left out */
   starters?: ReadonlyArray<string>
   /** Left out where the list is not what is in view, as inside the chat */
@@ -76,6 +78,7 @@ const ChatInput: React.FunctionComponent<Props> = ({
   onFocusRingChange,
   onIntent,
   animateIn = false,
+  lifted = false,
   starters = CHAT_SUGGESTIONS,
   filterSuggestions,
 }) => {
@@ -193,12 +196,15 @@ const ChatInput: React.FunctionComponent<Props> = ({
   return (
     <div
       className={clsx(
-        'fixed bottom-[calc(1rem+var(--keyboard-inset))] left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col-reverse items-center gap-3',
-        'sm:bottom-[calc(1.5rem+var(--keyboard-inset))]',
-        // Only the hiding fades: a transition on the bottom drags the bar
-        // behind a keyboard on its way in. Invisible once it has, so a
-        // hidden bar takes no tab or tap meant for what is in its place.
-        'transition-[opacity,visibility] duration-300',
+        'fixed left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col-reverse items-center gap-3 duration-300',
+        // On the page only the hiding fades: a transition on the bottom drags
+        // the bar behind a keyboard on its way in. A sheet is only ever on a
+        // desktop, so there it rises from the page's place as the sheet opens
+        // and goes back down as it leaves. Invisible once hidden, so a hidden
+        // bar takes no tab or tap meant for what is in its place.
+        lifted
+          ? 'bottom-12 starting:bottom-6 group-data-[state=leaving]/modal:bottom-6 transition-[bottom,opacity,visibility] ease-out-cubic'
+          : 'bottom-[calc(1rem+var(--keyboard-inset))] sm:bottom-[calc(1.5rem+var(--keyboard-inset))] transition-[opacity,visibility]',
         hide && 'opacity-0 invisible',
       )}
       onBlur={(event) => {

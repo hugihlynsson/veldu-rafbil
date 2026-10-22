@@ -23,7 +23,7 @@ const ChatModal = dynamic(importChatModal)
 
 interface Props {
   hide: boolean
-  /** A dialog's place for the bar while one is over the page, which
+  /** A sheet's place for the bar while one is over the page, which
    * showModal() makes inert and covers */
   container?: HTMLElement | null
   /** Called once the chat has closed, so the car's card can take the focus */
@@ -80,6 +80,7 @@ export default function ChatContainer({
         setHasMoved(true)
       }}
       animateIn={!hasMoved}
+      lifted={Boolean(container) && !isChatOpen}
       hide={hide}
       disabled={conversation.isBusy}
       hasMessages={conversation.hasMessages}

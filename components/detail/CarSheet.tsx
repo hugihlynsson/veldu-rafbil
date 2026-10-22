@@ -3,8 +3,8 @@
 import {
   FunctionComponent,
   MouseEvent,
-  type Ref,
   useEffect,
+  useLayoutEffect,
   useRef,
 } from 'react'
 import clsx from 'clsx'
@@ -28,10 +28,16 @@ import { leavePageBeforeLoad } from '@/utils/pageBeforeLoad'
 import { track } from '@/utils/track'
 import CarView, { SHEET_TITLE_ID } from './CarView'
 
+/** The chat bar's place in the sheet, and what it offers to ask there */
+export interface SheetChat {
+  container: HTMLElement
+  starters?: ReadonlyArray<string>
+}
+
 interface Props {
   car: Car
   /** Where the chat bar goes, as showModal() makes the page behind inert */
-  chatSlotRef: Ref<HTMLDivElement>
+  onChat: (chat: SheetChat | null) => void
 }
 
 // Frosted, so they read over the photo and over the text it scrolls into
@@ -43,8 +49,9 @@ const sheetButton =
  * list where it was. Loaded behind next/dynamic: it carries every car's
  * review, which a visitor who never opens one should not download.
  */
-const CarSheet: FunctionComponent<Props> = ({ car, chatSlotRef }) => {
+const CarSheet: FunctionComponent<Props> = ({ car, onChat }) => {
   const panelRef = useRef<HTMLDivElement>(null)
+  const chatSlotRef = useRef<HTMLDivElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
   const shownCar = useRef(car)
   const path = carPathOf(car)
@@ -58,6 +65,15 @@ const CarSheet: FunctionComponent<Props> = ({ car, chatSlotRef }) => {
     panelRef.current?.scrollTo({ top: 0 })
     closeRef.current?.focus({ preventScroll: true })
   }, [car])
+
+  // The review's questions come from here, which the list would otherwise
+  // load with every car's review. Layout, so the bar is in before a paint.
+  useLayoutEffect(() => {
+    const container = chatSlotRef.current
+    if (!container) return
+    onChat({ container, starters: reviewOf(car)?.questions })
+    return () => onChat(null)
+  }, [car, onChat])
 
   // How far down it is read is the panel's scroll, the page being locked
   useEffect(() => {
