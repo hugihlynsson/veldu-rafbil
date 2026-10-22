@@ -72,6 +72,12 @@ export const productEventSchema = z.discriminatedUnion('name', [
   event('car_opened', { car: slug, position: z.int().min(0).max(10_000) }),
   // From the sheet to the car's own page
   event('car_sheet_expanded', { car: slug }),
+  // To the car beside it in the list, `car` being the one stepped to
+  event('car_sheet_stepped', {
+    car: slug,
+    direction: z.enum(['previous', 'next']),
+    method: z.enum(['key', 'button']),
+  }),
   event('compare_toggled', {
     car: slug,
     added: z.boolean(),
