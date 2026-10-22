@@ -1,6 +1,7 @@
 import { carWithSlug, type Car } from '@/modules/data/cars'
 import { movedSlugs } from '@/modules/data/movedSlugs'
 import { MAX_COMPARED } from './comparison'
+import { CAR_PATH } from './paths'
 
 export interface ResolvedSlugs {
   /** In the order the URL names them */
@@ -56,4 +57,11 @@ export const resolveCompared = (
     cars: cars.slice(0, MAX_COMPARED),
     slugs: slugs.slice(0, MAX_COMPARED),
   }
+}
+
+/** The car whose own page a path is, which the list opens over itself */
+export const carAtPath = (pathname: string): Car | undefined => {
+  const [, root, segment, ...rest] = pathname.split('/')
+  if (`/${root}` !== CAR_PATH || !segment || rest.length > 0) return undefined
+  return resolveSlugs([readSegment(segment)]).cars[0]
 }

@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, MouseEvent } from 'react'
 import clsx from 'clsx'
 import { trackEvent } from 'fathom-client'
 import Image from 'next/image'
@@ -14,6 +14,7 @@ import ShareButton from '@/components/ShareButton'
 import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf } from '@/modules/detail/paths'
 import { rememberListSearch } from '@/utils/listReturn'
+import { opensInSheet, showCarSheet } from '@/utils/carSheet'
 import { track } from '@/utils/track'
 
 interface Props {
@@ -80,9 +81,12 @@ const NewCar: FunctionComponent<Props> = ({
   const subTitle = [car.subModel, showSeats && `${car.seats} sæti`]
     .filter(Boolean)
     .join(' · ')
-  const openCar = () => {
+  const openCar = (event: MouseEvent) => {
     rememberListSearch(window.location.search)
     track({ name: 'car_opened', car: carSlug(car), position })
+    if (!opensInSheet(event)) return
+    event.preventDefault()
+    showCarSheet(car, 'push')
   }
   const delivery =
     car.expectedDelivery && `Væntanlegur ${car.expectedDelivery.toLowerCase()}`

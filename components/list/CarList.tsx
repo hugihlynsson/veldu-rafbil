@@ -3,7 +3,7 @@
 import { type ReactNode, useRef, useState } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { trackEvent } from 'fathom-client'
 
 import Car from './NewCar'
@@ -18,6 +18,7 @@ import ActiveFilters from '@/components/filters/ActiveFilters'
 import cars, { type Car as CarData } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf } from '@/modules/detail/paths'
+import { carAtPath } from '@/modules/detail/slugs'
 import carFilter from '@/modules/list/carFilter'
 import {
   fieldsFromFilters,
@@ -36,6 +37,7 @@ import { agree } from '@/modules/copy/plural'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import { useFilters, useSorting, useView } from '@/utils/useListState'
 import { rememberListSearch } from '@/utils/listReturn'
+import { opensInSheet, showCarSheet } from '@/utils/carSheet'
 import useComparison from '@/utils/useComparison'
 import CompareTray from '@/components/detail/CompareTray'
 import { track } from '@/utils/track'
@@ -45,6 +47,10 @@ import { track } from '@/utils/track'
 const ChatContainer = dynamic(() => import('@/components/chat/ChatContainer'), {
   ssr: false,
 })
+
+// Fetched as a mouse first reaches the cars, so a click on one finds it in
+const loadCarSheet = () => import('@/components/detail/CarSheet')
+const CarSheet = dynamic(loadCarSheet, { ssr: false })
 
 // The header and the line under the list share the text column of a card
 const column = `${pageColumn} py-4 xs:py-6`
@@ -132,12 +138,16 @@ export default function CarList() {
   }
 
   const router = useRouter()
-  // A car picked in the chat opens its page, which leads back to the list as
-  // it was left, as a card does
+  // A car picked in the chat opens as a card does: in a sheet on a desktop,
+  // and otherwise its page, which leads back to the list as it was left
   const showCar = (car: CarData) => {
     rememberListSearch(window.location.search)
-    router.push(carPathOf(car))
+    if (opensInSheet()) showCarSheet(car, 'push')
+    else router.push(carPathOf(car))
   }
+
+  // Open for as long as the URL is the car's, so back closes it
+  const sheetCar = carAtPath(usePathname())
 
   const comparison = useComparison()
   const isComparing = comparison.selected.length > 0
@@ -240,7 +250,12 @@ export default function CarList() {
         </div>
       </header>
 
-      <div className={clsx(view === 'grid' && gridLayout)}>
+      <div
+        className={clsx(view === 'grid' && gridLayout)}
+        onPointerEnter={(event) => {
+          if (event.pointerType === 'mouse') void loadCarSheet()
+        }}
+      >
         {sortCars(filteredCars, sorting, direction).map((car, index) => (
           <Car
             preload={index <= 1}
@@ -292,6 +307,8 @@ export default function CarList() {
       {isComparing && (
         <CompareTray cars={comparison.selected} onRemove={removeCompared} />
       )}
+
+      {sheetCar && <CarSheet car={sheetCar} />}
 
       {/* The tray takes the bar's place while there is a car in it */}
       <ChatContainer
