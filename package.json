@@ -1,7 +1,7 @@
 {
   "name": "evs",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
   "license": "MIT",
   "engines": {
     "node": "^22.22.1 || ^24 || >=26"
@@ -42,6 +42,7 @@
     "lint-staged": "^17.6.0",
     "oxfmt": "^0.74.0",
     "oxlint": "^1.89.0",
+    "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vitest": "^5.0.5"
   },
@@ -49,6 +50,7 @@
     "*": "oxfmt --no-error-on-unmatched-pattern"
   },
   "allowScripts": {
-    "fsevents@2.3.3": true
+    "fsevents@2.3.3": true,
+    "esbuild": false
   }
 }

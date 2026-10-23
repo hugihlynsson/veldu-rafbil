@@ -27,7 +27,7 @@ export const APPLY_THRESHOLD = 0.6
 
 // The most chance we take of picking a bracket tighter than the person meant.
 // Too loose shows a few cars too many; too tight hides the ones they wanted.
-export const TOO_TIGHT_RISK = 0.2
+const TOO_TIGHT_RISK = 0.2
 
 /**
  * Of brackets ordered loosest first, the tightest that is too tight with a
@@ -52,7 +52,7 @@ export const conservativeIndex = (
 // On cases.ts every question but two scored 0.8 or more and every wish but two
 // under 0.5; those two, short wishes with no verb, came to 0.55–0.77, so it
 // sits close above them.
-export const ADVISOR_THRESHOLD = 0.8
+const ADVISOR_THRESHOLD = 0.8
 
 // The response is whatever came back over the wire, so it is read defensively
 const readProbabilities = (
