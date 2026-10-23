@@ -1,15 +1,15 @@
 ---
 name: update-new-cars
-description: Refresh the car list in modules/newCars.ts against the sellers' current price lists — prices, new and discontinued variants, expected deliveries. Use when asked to update, sweep, or check prices for one make or all of them.
+description: Refresh the car list in modules/data/newCars.ts against the sellers' current price lists — prices, new and discontinued variants, expected deliveries, seat counts. Use when asked to update, sweep, or check prices or seats for one make or all of them.
 ---
 
 # Updating the car list
 
-The list is `modules/newCars.ts`: hand-written `NewCar` literals, one per
+The list is `modules/data/newCars.ts`: hand-written `NewCar` literals, one per
 variant. Updating it means reading each importer's current price list, comparing
-it with what is there, and editing the difference. Read the "Adding or updating
-a car" and "Domain rules" sections of `AGENTS.md` first; this file covers the
-process and does not repeat them.
+it with what is there, and editing the difference. `AGENTS.md` covers the
+repo's conventions; the rules about a car field are comments in the module that
+owns it. This file is the process, end to end.
 
 Where each make's price list lives, and how to get at it, is in
 [sources.md](sources.md). Fix that file when a URL rots or you learn a better
@@ -43,9 +43,9 @@ way in; the next run depends on it.
     unlabelled one; the fine print sometimes says so outright ("verð án
     sérstaks styrks … er fullt verð").
   - **Only the price with the grant.** Add the grant back. Read the amount from
-    `grantAmount` in `modules/globals.ts` rather than typing it, and check the
-    sum is still under the ceiling in `modules/getPriceWithGrant.ts`; a car over
-    it gets no grant, so a figure labelled "með styrk" cannot belong to one.
+    `grantAmount` in `modules/data/globals.ts` rather than typing it, and check the
+    sum is still under `grantPriceCeiling` beside it; a car over it gets no
+    grant, so a figure labelled "með styrk" cannot belong to one.
   - **Only one figure and no label.** Toyota's and Lexus's lists print a single
     "VERÐ", and it is the pre-grant price: it equals what the list already has.
     When a list is unlabelled, compare it with the existing entry before
@@ -63,12 +63,12 @@ Work per make. If the user named makes, do those; otherwise sweep all of them,
 in alphabetical order so the diff stays readable.
 
 Before opening a price list, pull up what the list currently says for that make
-(`grep -n "make: 'Kia'" modules/newCars.ts`, then read the entries). You are
+(`grep -n "make: 'Kia'" modules/data/newCars.ts`, then read the entries). You are
 looking for a difference, so know the starting point.
 
 To see which makes are worth a look first, check the freshness signals instead
 of opening everything. The last time the make was touched is
-`git log -1 --format=%ad -S"make: 'Kia'" -- modules/newCars.ts`; a price list
+`git log -1 --format=%ad -S"make: 'Kia'" -- modules/data/newCars.ts`; a price list
 uploaded after that date has not been applied yet. The upload date of an issuu
 document comes from `scripts/issuu-pages.sh`, and dated filenames (Polestar)
 carry their own. A list older than the last touch can be skipped, and it is
@@ -111,6 +111,8 @@ The shapes you will meet, best first:
   can fetch.
 
 Read the price table and the spec page of a brochure, not the equipment lists.
+`seats` is the exception: a third row is usually an option, so the options and
+equipment rows are where its figure lives. See "Seats" under Compare.
 
 ### 3. Compare
 
@@ -124,6 +126,12 @@ For each electric variant in the list, sort it into one of:
 | Now shipping                  | Delete `expectedDelivery`                                    |
 | Delivery date changed         | Edit `expectedDelivery`                                      |
 | Spec really changed           | Edit — new model year, bigger battery, not a rounding change |
+| Seat option added or dropped  | Edit `seats` (see below)                                     |
+| Estimated price now listed    | Replace the estimate with the list price                     |
+
+**An expected car's price may be an estimate.** Nothing in the data marks one,
+so read the price of every car with `expectedDelivery` off the list rather than
+assuming it is current, and say in the report which estimates were replaced.
 
 **Removing a car.** A car missing from a price list is not proof it is gone —
 lists get split, renamed and sometimes just not uploaded. Remove one only when
@@ -135,6 +143,28 @@ flag it in the report. Removing a car also means deleting its photo in
 which the existing numbers appear to follow (the EV2 entry has 8.5 s and 30 min
 where the brochure says 8.6 s and 29 min). Do not overwrite a spec because the
 brochure differs in the last digit. Change it when the car itself changed.
+
+**Seats are the field a brochure will mislead you on.** `seats` is the most the
+model can be ordered with in Iceland, paid options included — the AGENTS.md rule
+says why. Two things follow from that, and both cut against the habits above:
+
+- **The options list is the source, not the spec page.** A spec page prints the
+  seat count of the trim it describes, which is the five-seat one whenever the
+  third row costs extra. The figure you want is in the options, the equipment
+  rows, or a "7 sæti" line item with a price beside it. This is the only field
+  worth opening those rows for.
+- **ev-database is European, and the rule is Icelandic.** Its Seats field
+  describes the configuration sold somewhere, not the one this importer will
+  order. Use it to learn that an option exists, then confirm from the Icelandic
+  list that it is offered here. A car that is a seven-seater abroad and a
+  five-seater here is a `5`, and getting that backwards is the bug the
+  assistant's system prompt used to carry a hand-written line about.
+
+When the list neither confirms nor denies a third row, leave the number alone
+and put the car under **Doubtful** in the report. The seat counts now in the
+data were taken from model knowledge rather than from price lists — the sweep
+that reads a make's list is the first chance to check them, so say in the report
+which ones you confirmed, not only which ones you changed.
 
 **Range is the exception, and it follows a rule.** `range` is the lower of the
 two WLTP figures, the brochure's and ev-database's. Expect it to move often: the
@@ -149,29 +179,87 @@ did not read a list for keeps the range it has.
 
 ### 4. Adding a car
 
-Follow the "Adding or updating a car" steps in `AGENTS.md`, plus:
+A `NewCar` literal goes in with its make — the list is roughly alphabetical by
+make, then model. The fields that are easy to get wrong:
+
+- **`price`** in ISK with numeric separators, `9_990_000`. The list price,
+  before the grant, per "What counts as one entry" above.
+- **`seats` is the most the model can be ordered with here, paid options
+  included.** A third row that costs extra still counts, so a Mercedes GLB sold
+  with an optional third row is a `7`. This is the one field that does not
+  describe the trim the entry is priced at: someone filtering for seven seats
+  wants every car that _can_ carry seven. A configuration Iceland never gets
+  does not count, so read the Icelandic list, not the international brochure.
+- **`expectedDelivery`** is a lowercase-able Icelandic phrase (`sumar 2026`),
+  and having one at all is what makes a car count as expected rather than
+  available — it drives both the availability filter and the badge on the card.
+  Leave it out for a car that is on the road here.
+- **`heroImageName`** names the photo under "Hero photos" below. A test fails
+  while the file is missing.
+- **Make, model and `subModel` are a car's identity.** `getCarId()` builds the
+  card's anchor, the target the chat scrolls to and the React key out of them,
+  so two entries differing only in price collide and a test fails.
+- **A car's slug is in shared links to its page and to comparisons, which
+  have to keep working.**
+  The slug is its id less `car-`, so renaming a car (its make, model or
+  `subModel`) changes it, and nothing else notices. When you rename one, point
+  the old slug at the new one in `modules/data/movedSlugs.ts`, which redirects
+  it.
+- **A car no longer sold new is marked, not taken out.** Set `deprecated` to
+  the day it stopped being sold (`'2026-10-11'`). It leaves the list, the
+  advisor and `/api/cars`, but keeps its page, which says it is no longer
+  sold and offers the similar cars that are. Then run the similar-cars and
+  review scripts below: its review is dropped, and other cars that offered it
+  as similar get another.
+- **Each car's page offers similar cars from `modules/data/similarCars.ts`,
+  picked by hand.** After adding, renaming or dropping a car, run
+  `npx tsx scripts/similar-cars.ts`: it fills in an entry for each new car from
+  price and range alone, works out again any entry naming a car that is gone,
+  and keeps the rest. Then look the new entry over, so it offers cars of the
+  same kind and seats, and offer the new car in the entry of a car or two near
+  it, in place of one offered often. Never run it with `--all`, which drops
+  every hand-picked entry. A test fails until every car has an entry and is
+  offered on another car's page.
+- **Each car's page has a review in `modules/data/carReviews.ts`, written by
+  the advisor's model.** After any change to a car's figures, and after the
+  similar-cars run above, run
+  `npx tsx --env-file=.env.local scripts/car-reviews.ts <slug>…`, naming the
+  cars this change put out of date: each car added or whose figures changed,
+  each car whose entry in `similarCars.ts` you edited, and each car that
+  offers a changed car as similar. A test fails until they are written. Each
+  review takes a minute or more and is billed, so name them rather than
+  running it bare: a bare run writes every review that is out of date, for
+  whatever reason, and stops instead when that is more than a few. If it does,
+  something other than this change put them out of date (a change to the
+  grant does it to nearly all of them), so say so in the report rather than
+  writing them. Read the new ones in the diff as you would the figures.
+
+And, for a car that is genuinely new to the list:
 
 - **Specs come from ev-database.** Find the variant with `WebSearch` limited to
   `ev-database.org` (`"ev-database Kia EV2 61 kWh"`), then read the page with
   `WebFetch`. Guessing the URL does not work: the path needs the exact slug
   (`/car/3491/Kia-EV2-61-kWh`), and a wrong slug is a 404 even for a real id.
   Sibling variants often have adjacent ids, which helps only once you know the
-  slug. Every `evDatabaseURL` must be unique to one entry; a test fails
-  otherwise. `acceleration`, `power` and `timeToCharge10T080` come from that
+  slug. Every `evDatabaseUrl` must be unique to one entry; a test fails
+  otherwise. `acceleration`, `power` and `timeToCharge10To80` come from that
   page, cross-checked against the brochure's spec page, and `range` is the lower
   of the two, as under "Specs on existing cars". `capacity`
   is the nominal figure, as the existing entries have it (EV2: 42.2 in the list,
   where ev-database's usable figure is 41.0). Where the two disagree on any
   other spec by more than rounding, say so in the report instead of choosing
-  silently.
-- **If ev-database has no entry yet**, leave `evDatabaseURL` out and use the
+  silently. **`seats` is not one of these** — ev-database gives a European
+  configuration and the field wants the Icelandic maximum, so take it from the
+  importer's own list per "Seats" above.
+- **If ev-database has no entry yet**, leave `evDatabaseUrl` out and use the
   brochure's figures, and say so in the report.
-- **`sellerURL` is the car's own model page**, not the importer's front page.
+- **`sellerUrl` is the car's own model page**, not the importer's front page.
   Seven cars once pointed at a site root and had to be fixed.
-- **`subModel`** names the variant. Front- and all-wheel-drive siblings must not
-  share a name. When a second variant joins a model that had none, name the
-  existing one as well (the EV2 became "Standard Range" beside a new "Long
-  Range", as the EV3 already is).
+- **`subModel`** names the variant, and per the identity rule above two entries
+  must not share one. Front- and all-wheel-drive siblings must not share a name.
+  When a second variant joins a model that had none, name the existing one as
+  well (the EV2 became "Standard Range" beside a new "Long Range", as the EV3
+  already is).
 - **A sibling variant can share the photo.** Two i4 entries use `bmw-i4`, and
   the EV2 Long Range uses `kia-ev2`. Check whether the model's existing photo
   fits before looking for a new one.
@@ -181,6 +269,36 @@ Follow the "Adding or updating a car" steps in `AGENTS.md`, plus:
   finished entry, with every field filled in, in the report along with what is
   waiting on (the photo, per "Hero photos" below). The Polestar 4 SUV was found
   this way.
+
+#### Estimating a price
+
+An importer often announces a model before it prices it ("Væntanlegt" in the
+price column). It can still go in, with an estimated `price`, when the owner
+asks for it; otherwise it goes under **Not finished** in the report. The
+estimate is worked out the same way every time:
+
+1. **Start from the German price on ev-database.** Every model page has one,
+   and it is the one base that is there for every make.
+2. **Work out the make's kr/€ ratio.** For each car of that make already in the
+   list, divide its `price` (before the grant) by its own ev-database German
+   price.
+3. **Interpolate between the two nearest cars.** The ratio falls as the price
+   rises (Hyundai in 2026: INSTER 182, IONIQ 9 153, IONIQ 5 140), so the nearest
+   car alone is biased. Take the cars whose German price is just below and just
+   above the new one, and weight their ratios by how close it is to each. With
+   nothing close on one side, use the nearest car alone. Compare like with
+   like when a make prices a line apart: Mercedes' people carriers (EQV,
+   eVito Tourer) sell at about 210 kr/€ where its cars sit near 175, so the
+   VLE was estimated from the vans.
+4. **No car of the make in the list?** Use the same importer's other makes,
+   which tend to price alike. Another importer is the last resort.
+5. **Round to the nearest 100.000 kr. and add 500.000 kr.** An estimate that
+   errs high lets the real price come in cheaper, and the round figure reads as
+   an estimate (the IONIQ 3 Standard Range: €28,950 × 177 ≈ 5.130.000 →
+   5.600.000).
+6. **Show the working in the report and the PR**: the German price, the cars
+   and ratios used, and the result, so the next sweep knows the price is one to
+   replace.
 
 #### Hero photos
 
@@ -200,12 +318,18 @@ other one there.
 
    ```bash
    sips --cropToHeightWidth <H> <W> --cropOffset <Y> <X> source.jpg --out crop.jpg
-   sips --resampleWidth 1920 -s format jpeg -s formatOptions 80 crop.jpg \
-     --out public/images/<heroImageName>.jpg
    ```
 
-   Aim near the sizes already there (a couple of hundred KB, none over a
-   megabyte); lower `formatOptions` if the file is far above that.
+   Then resize and compress with sharp's mozjpeg encoder, which `next`
+   already installs. The target is about 200 KB, what the owner gets from
+   TinyPNG; `sips` needs a visibly worse quality to get there. Raise or lower
+   `quality` until the size lands near it (77 did for the EQS):
+
+   ```bash
+   node -e "require('sharp')('crop.jpg').resize(1920,1280)
+     .jpeg({quality:77,mozjpeg:true}).toFile('public/images/<heroImageName>.jpg')
+     .then(i=>console.log(i.size))"
+   ```
 
 4. **Look at the result** with the Read tool and compare it with a neighbour
    (`audi-q6.jpg` is a good reference for framing). Check the dimensions with
@@ -231,12 +355,14 @@ with a short plain message in the repo's style: `Update Skoda lineup`,
 End with what the user needs to act on, not with the diff:
 
 - **Changed**, grouped by make: old price → new price, old range → new range,
-  added, removed.
+  old seats → new seats, added, removed.
+- **Confirmed**: seat counts the list bore out, since they went in unverified.
 - **Not finished**: cars found but held back for want of a photo, with the
   entry ready to paste; cars with no ev-database entry.
 - **Doubtful**: cars missing from a list but not confirmed gone, a price whose
-  label you could not read, and spec disagreements other than range, which the
-  lower-of-two rule already settles.
+  label you could not read, a seat count the list neither confirmed nor denied,
+  and spec disagreements other than range, which the lower-of-two rule already
+  settles.
 - **Not checked**: makes whose source was blocked, unreadable, or not in
   `sources.md`, so the user knows what the sweep did not cover.
 

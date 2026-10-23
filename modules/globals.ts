@@ -1,1 +1,0 @@
-export const grantAmount = 500_000 // In ISK

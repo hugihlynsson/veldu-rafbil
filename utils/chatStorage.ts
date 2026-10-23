@@ -1,26 +1,40 @@
-import { UIDataTypes, UIMessage, UITools } from 'ai'
+import type { ChatMessage } from '@/modules/chat/message'
 
-export const CHAT_STORAGE_KEY = 'veldu-rafbil-chat-messages'
+const CHAT_STORAGE_KEY = 'veldu-rafbil-chat-messages'
+const CONVERSATION_ID_KEY = 'veldu-rafbil-chat-conversation'
 
-type StoredMessage = UIMessage<unknown, UIDataTypes, UITools>
+// For when storage throws, so a conversation still keeps one id while the tab
+// is open
+let unstoredConversationId: string | undefined
 
-// Every one of these can throw: localStorage is unavailable in private mode in
-// some browsers, the stored JSON can be half-written or from an older shape,
-// and setItem throws once the quota is full. None of that is worth taking the
-// whole page down for, so a broken history reads as no history.
-export const readStoredMessages = (): StoredMessage[] => {
-  if (typeof window === 'undefined') return []
+// Only a secure origin has randomUUID, so a phone trying the dev server over
+// the LAN goes without an id rather than without the chat
+const newConversationId = (): string | undefined => crypto.randomUUID?.()
+
+// Unvalidated, so the bar can tell a conversation is waiting without loading
+// what reads one
+export const hasStoredMessages = (): boolean => {
+  try {
+    return Boolean(localStorage.getItem(CHAT_STORAGE_KEY))
+  } catch {
+    return false
+  }
+}
+
+// Private mode can make even reading throw
+export const readStoredMessages = async (): Promise<ChatMessage[]> => {
   try {
     const stored = localStorage.getItem(CHAT_STORAGE_KEY)
     if (!stored) return []
-    const parsed = JSON.parse(stored)
-    return Array.isArray(parsed) ? parsed : []
+    // Behind an import() so the bar can import this file without zod
+    const { parseStoredMessages } = await import('@/modules/chat/message')
+    return await parseStoredMessages(stored)
   } catch {
     return []
   }
 }
 
-export const writeStoredMessages = (messages: StoredMessage[]): void => {
+export const writeStoredMessages = (messages: ChatMessage[]): void => {
   try {
     localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(messages))
   } catch {
@@ -28,8 +42,28 @@ export const writeStoredMessages = (messages: StoredMessage[]): void => {
   }
 }
 
+/**
+ * The id the log groups this conversation's turns by. It is kept beside the
+ * messages, as a stored conversation picked up days later is the same one,
+ * and clearing the chat starts a new one.
+ */
+export const getConversationId = (): string | undefined => {
+  try {
+    const stored = localStorage.getItem(CONVERSATION_ID_KEY)
+    if (stored) return stored
+    const id = newConversationId()
+    if (id) localStorage.setItem(CONVERSATION_ID_KEY, id)
+    return id
+  } catch {
+    unstoredConversationId ??= newConversationId()
+    return unstoredConversationId
+  }
+}
+
 export const clearStoredMessages = (): void => {
+  unstoredConversationId = undefined
   try {
     localStorage.removeItem(CHAT_STORAGE_KEY)
+    localStorage.removeItem(CONVERSATION_ID_KEY)
   } catch {}
 }

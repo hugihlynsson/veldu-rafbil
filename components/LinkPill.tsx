@@ -1,27 +1,36 @@
 import React, { ReactNode, FunctionComponent } from 'react'
 import Link from 'next/link'
+import clsx from 'clsx'
 
 interface Props {
+  /** Where it sits: the pill sets none of its own margins */
+  className?: string
   external?: boolean
   extra?: string
+  /** A size down, for a column a quarter of a phone wide */
+  compact?: boolean
   href: React.ComponentProps<typeof Link>['href']
   onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
   children?: ReactNode
   title?: string
 }
 
-// `current`, `onGray` and `large` were props with styling behind them that
-// nothing had passed in a long time, so the branches went with them.
 const LinkPill: FunctionComponent<Props> = ({
   children,
+  className,
   external,
   extra,
+  compact,
   href,
   onClick,
   title,
 }) => (
   <Link
-    className="group inline-flex self-start items-center shrink-0 mt-2 py-1 px-3 text-inherit text-sm font-semibold rounded-full no-underline -ml-0.5 mr-2.5 bg-cloud transition-all duration-100 hover:bg-smoke active:scale-[0.98]"
+    className={clsx(
+      'group inline-flex self-start items-center shrink-0 text-inherit font-semibold rounded-full no-underline bg-cloud transition duration-100 hover:bg-smoke active:scale-[0.98]',
+      compact ? 'py-1 px-2 text-xs md:px-3 md:text-sm' : 'py-1 px-3 text-sm',
+      className,
+    )}
     onClick={onClick}
     href={href}
     target={external ? '_blank' : undefined}
@@ -30,7 +39,7 @@ const LinkPill: FunctionComponent<Props> = ({
   >
     {children}{' '}
     {extra && (
-      <span className="uppercase font-bold text-[10px] rounded-2xl py-0.5 px-1.5 my-0 ml-[5px] -mr-[7px] align-top inline-block text-[#444] bg-white transition-colors duration-100 group-hover:bg-white/80">
+      <span className="uppercase font-bold text-eyebrow rounded-full py-0.5 px-1.5 my-0 ml-1.25 -mr-1.75 align-top inline-block text-stone bg-raised transition-colors duration-100 group-hover:bg-raised/80">
         {extra}
       </span>
     )}

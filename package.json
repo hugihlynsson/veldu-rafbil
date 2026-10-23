@@ -1,27 +1,29 @@
 {
   "name": "evs",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
   "license": "MIT",
   "engines": {
     "node": "^22.22.1 || ^24 || >=26"
   },
   "dependencies": {
-    "@ai-sdk/google": "^4.0.18",
-    "@ai-sdk/react": "^4.0.68",
+    "@ai-sdk/google": "^4.0.103",
+    "@ai-sdk/react": "^4.0.153",
     "@axiomhq/js": "^2.0.0",
+    "@chenglou/pretext": "^1.0.0",
     "@tailwindcss/postcss": "^4.3.2",
-    "ai": "^7.0.97",
-    "babel-plugin-react-compiler": "^1.0.0",
+    "@typesafe-ai/sdk": "^0.7.0",
+    "ai": "^7.0.149",
     "clsx": "^2.1.1",
     "fathom-client": "^3.7.2",
-    "next": "^16.3.1",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0",
+    "next": "^16.4.2",
+    "nuqs": "^2.10.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
     "tailwindcss": "^4.3.3",
-    "zod": "^4.6.5"
+    "zod": "^4.6.7"
   },
   "scripts": {
     "build": "next build",
@@ -33,16 +35,22 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@types/node": "^24.13.5",
+    "@types/node": "^24.19.2",
     "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "husky": "^9.1.7",
-    "lint-staged": "^17.5.1",
-    "oxfmt": "^0.68.0",
-    "oxlint": "^1.83.0",
+    "lint-staged": "^17.6.0",
+    "oxfmt": "^0.74.0",
+    "oxlint": "^1.89.0",
+    "tsx": "^4.23.15",
     "typescript": "^7.0.2",
-    "vitest": "^5.0.1"
+    "vitest": "^5.0.5"
   },
   "lint-staged": {
     "*": "oxfmt --no-error-on-unmatched-pattern"
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true,
+    "esbuild": false
   }
 }

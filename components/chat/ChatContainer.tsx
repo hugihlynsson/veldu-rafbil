@@ -1,0 +1,127 @@
+'use client'
+
+import { Suspense, useState } from 'react'
+import { createPortal } from 'react-dom'
+import dynamic from 'next/dynamic'
+import ChatInput from './ChatInput'
+import type { Car } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
+import { CHAT_SUGGESTIONS } from '@/modules/chat/suggestions'
+import type { Filters } from '@/modules/list/filters'
+import useChunk from '@/utils/useChunk'
+import useComposer from '@/utils/useComposer'
+import useConversation from '@/utils/useConversation'
+import useKeyboardInset from '@/utils/useKeyboardInset'
+import { track } from '@/utils/track'
+
+// react-markdown is fetched the first time the chat opens, warmed on focus.
+// One import for both: written twice, each is built as a copy of its own and
+// the warm-up fetches the other, and an import() inside the component makes
+// the React Compiler skip it.
+const importChatModal = () => import('./ChatModal')
+const ChatModal = dynamic(importChatModal)
+
+interface Props {
+  hide: boolean
+  /** A sheet's place for the bar while one is over the page, which
+   * showModal() makes inert and covers */
+  container?: HTMLElement | null
+  /** Called once the chat has closed, so the car's card can take the focus */
+  onShowCar: (car: Car) => void
+  /** The list's filters, which the bar suggests changes to as it is typed in */
+  filters?: Filters
+  onApplyFilters?: (filters: Filters) => void
+  /** The cars the page it is on is about, which each question carries */
+  about?: ReadonlyArray<Car>
+  /** The questions offered to start on; the general ones when left out */
+  starters?: ReadonlyArray<string>
+}
+
+export default function ChatContainer({
+  hide,
+  container,
+  onShowCar,
+  filters,
+  onApplyFilters,
+  about,
+  starters = CHAT_SUGGESTIONS,
+}: Props) {
+  const conversation = useConversation(about && { about: about.map(carSlug) })
+  const composer = useComposer()
+  const chatModal = useChunk(importChatModal)
+  const [wantsChatOpen, setWantsChatOpen] = useState<boolean>(false)
+  // The input remounts each time it moves between the page and a dialog, and
+  // only its first arrival on the page is an entrance
+  const [hasMoved, setHasMoved] = useState<boolean>(false)
+  if (container && !hasMoved) setHasMoved(true)
+
+  // Waits for the modal's chunk, as handing over while it is in flight would
+  // take the input with it, and for the session, as the modal keeps what it
+  // was opened on to tell the messages already said from the ones arriving
+  const { session } = conversation
+  const isChatOpen = wantsChatOpen && chatModal.isLoaded && session !== null
+
+  // Keeps the input above a phone keyboard rather than behind it
+  useKeyboardInset()
+
+  // One input in two places: showModal() makes everything outside it inert
+  const chatInput = (
+    <ChatInput
+      {...composer.inputProps}
+      onIntent={() => {
+        chatModal.load()
+        conversation.load()
+        track({ name: 'chat_bar_focused' })
+      }}
+      onOpenChat={() => {
+        chatModal.load()
+        if (!wantsChatOpen) track({ name: 'chat_opened' })
+        setWantsChatOpen(true)
+        setHasMoved(true)
+      }}
+      animateIn={!hasMoved}
+      lifted={Boolean(container) && !isChatOpen}
+      hide={hide}
+      disabled={conversation.isBusy}
+      hasMessages={conversation.hasMessages}
+      sendMessage={conversation.send}
+      starters={starters}
+      filterSuggestions={
+        !isChatOpen && !container && filters && onApplyFilters
+          ? { filters, onApply: onApplyFilters }
+          : undefined
+      }
+    />
+  )
+
+  return (
+    <>
+      {conversation.engine}
+      {isChatOpen ? (
+        // Its own boundary: the modal suspends on its first render even with
+        // its chunk in, and the one above would hide the engine with it.
+        // Strict Mode remounts what reappears, and the engine stops the
+        // question just sent as it unmounts.
+        <Suspense fallback={chatInput}>
+          <ChatModal
+            session={session}
+            composer={chatInput}
+            composerRef={composer.ref}
+            about={about?.map(carSlug)}
+            starters={starters}
+            onDone={(pickedCar) => {
+              setWantsChatOpen(false)
+              // A car picked from the answer opens instead
+              if (pickedCar) onShowCar(pickedCar)
+              else composer.focusOnArrival()
+            }}
+          />
+        </Suspense>
+      ) : container ? (
+        createPortal(chatInput, container)
+      ) : (
+        chatInput
+      )}
+    </>
+  )
+}

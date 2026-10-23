@@ -1,41 +1,42 @@
 'use client'
 
 import React from 'react'
-import MiniCar from '../MiniCar'
-import { UIDataTypes, UIMessage, UITools } from 'ai'
-import { findMentionedCars } from '../../modules/chatHelpers'
+import clsx from 'clsx'
+import MiniCar from '@/components/list/MiniCar'
+import type { Car } from '@/modules/data/cars'
+import { getAnswerCars } from '@/modules/chat/cars'
+import type { ChatMessage } from '@/modules/chat/message'
 
 interface Props {
-  lastMessage?: UIMessage<unknown, UIDataTypes, UITools>
-  onClose: () => void
+  lastMessage?: ChatMessage
+  animate: boolean
+  onPick: (car: Car) => void
 }
 
 const MentionedCars: React.FunctionComponent<Props> = ({
   lastMessage,
-  onClose,
+  animate,
+  onPick,
 }) => {
   if (!lastMessage || lastMessage.role !== 'assistant') return null
 
-  // Find cars mentioned in the last assistant message (only when not streaming)
-  const text =
-    lastMessage.parts
-      ?.filter((part) => part.type === 'text')
-      .map((part) => part.text)
-      .join(' ') ?? ''
-  const mentionedCars = text ? findMentionedCars(text) : []
+  const mentionedCars = getAnswerCars(lastMessage)
 
   if (mentionedCars.length === 0) return null
 
   return (
     <div className="mb-3">
-      <div className="flex gap-3 w-full overflow-x-auto pl-5 pr-20 scroll-pl-5 scroll-pr-20 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      <div className="flex gap-3 w-full overflow-x-auto pl-5 pr-20 scroll-pl-5 scroll-pr-20 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {mentionedCars.map((car, index) => (
           <div
-            key={`${car.make}-${car.model}-${car.subModel}`}
-            className="opacity-0 animate-[slideInCar_0.5s_cubic-bezier(0.16,1,0.3,1)_forwards] shrink-0"
-            style={{ animationDelay: `${index * 0.1}s` }}
+            key={car.id}
+            className={clsx(
+              'shrink-0',
+              animate && 'animate-car-in [--rise:4px]',
+            )}
+            style={animate ? { animationDelay: `${index * 0.1}s` } : undefined}
           >
-            <MiniCar car={car} onClose={onClose} />
+            <MiniCar car={car} onSelect={() => onPick(car)} />
           </div>
         ))}
       </div>

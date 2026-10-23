@@ -9,7 +9,7 @@ just that its page loaded. Where a make says "listing only", the page was
 fetched and its links seen, but no list was read yet.
 
 A make that appears in the car list but not here has no known price-list page.
-Start from the `sellerURL` of its existing entries, and say in the report that
+Start from the `sellerUrl` of its existing entries, and say in the report that
 it was a guess.
 
 ## Importers with one page for several makes
@@ -42,23 +42,45 @@ newest price lists first. Fetch the listing with WebFetch, then run
 
 Askja documents read so far, as slugs under `issuu.com/askja/docs/`:
 `kia_ev2_ver_listi`, `ev3_20240910`, `kia_ev4_verdlisti`, `kia_ev5_verdlisti`,
-`kia_ev6_ver_listi`, `kia_ev9_gt_verdlisti`, `kia_pv5_verdlisti`.
+`kia_ev6_ver_listi`, `kia_ev9_gt_verdlisti`, `kia_pv5_verdlisti`,
+`eqs_ver_listi`, `c-class_verdlisti`, `cla_ver_listi`, `eqa_eqb_verdlisti`,
+`eqe_suv_verdlisti`, `eqs_suv_verdlisti`, `g-class_verdlisti`, `glb_ver_listi`,
+`n_r_glc_ver_listi`, `vito_tourer_verdlisti`. `glc_verdlisti` and
+`amg_verdlisti` are combustion and hybrid only.
+
+BL documents read so far, under `issuu.com/hallih/docs/`:
+`subaru_ver__listi_sept2015lr` (all three Subaru EVs), `mg_ver_listi`,
+`nissan_ver__listi_febr__ar_2016lr`, `renault_ver__listi___g__st_2015lr`
+(the R5 and Scenic; its Rafale is a plug-in hybrid),
+`nm70462_hyundai_ver__b__klingur___g` (every Hyundai EV, the IONIQ 3 and
+STARIA Electric included since October 2026; the IONIQ 9 rows carry no grant
+column, being over the ceiling), `bmw_ver_listi_xdrive_26.02.2019_lr` (iX3,
+iX1, iX and i4; no i5) and `hongqi_-_verdlisti` (EHS5 and EHS7).
+`dacia_ver__listi_16.01_2018_lr` has no EVs. Since October 2026 the MG list
+holds the MGS5, MGS6 and Cyberster as well as the MG4 Urban, and the Nissan list
+holds one Ariya row (Evolve 4WD) beside the Leaf; the Ariya's other trims are
+on its model page on nissan.is, readable with curl, unlabelled and before the
+grant. The iX1 table is headed "Sérverð", which may be an offer.
+
+The listing's HTML embeds each document as JSON with its `documentId` (the
+upload timestamp), `title` and `uri`, so one curl of `?ps=100` maps every
+recent upload to its slug without opening the documents.
 
 ## Per make
 
-| Make          | Entry point                                              | How to read it                                                                                                                                                                                                                                                                                           |
-| ------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Audi          | https://www.audi.is/is/nyr-audi/verdlistar/              | **Read.** 403 to WebFetch and curl; the built-in browser loads it. Its "Nánar" links are PDFs on `www.hekla.is/static/files/efni/verdlistar/audi/` (`q4-e-tron.pdf`, `q6-e-tron.pdf`, `a6.pdf`), which curl fetches and `pdf text` reads. The e-tron GT and SQ6 are not in Audi's list.                  |
-| Lexus         | https://www.lexus.is/new-cars/kynningarefni              | **Read.** The combined list is an iPaper flipbook at `kynningarefni.toyota.is/verdlistilexus`; run `scripts/ipaper-text.py` on it and look for the RZ and ES pages. One unlabelled "VERÐ": the pre-grant price.                                                                                          |
-| Mazda         | https://mazda.is/verdlistar                              | **Read.** Direct PDFs at `skjol.mazda.is/media/19/` (`mazda6e-verd.pdf`, `cx-6e.pdf`). The price table is an image inside the PDF, so `pdf text` skips it: render with `pdf pages` at scale 5 and crop the table.                                                                                        |
-| Mercedes-Benz | https://www.mercedes-benz.is/site/verdlistar/            | Listing only. Links go to Askja's issuu documents, one per model line.                                                                                                                                                                                                                                   |
-| Polestar      | https://brimborg.polestarimporter.com/is/verdlistar      | **Read.** Direct PDFs at `…/static/files/Polestar<N>/`, the filename ending in the list's date (`…_20260910.pdf`); `pdf text` reads the price rows; the first figure is the price, the second "Verð með 500.000 kr. styrk". Polestar 2 Performance is an option package on the base car, not a row.      |
-| Porsche       | https://dealer.porsche.com/is/island/is-IS/nyir-bilar    | Listing only. Starting prices are printed on the page ("frá"), so a PDF may be unnecessary. The "Sækja verðlista" buttons expose no URL to WebFetch; the browser may.                                                                                                                                    |
-| Škoda         | https://www.skoda.is/nyr-skoda/verdlistar                | Listing only. PDFs on `www.hekla.is/static/files/efni/verdlistar/skoda/` (`peaq`, `epiq`, `elroq`, `enyaq`); same route as Audi.                                                                                                                                                                         |
-| Subaru        | https://www.subaru.is/verdlisti/                         | Listing only. WebFetch returns the page without the price-list link; use the built-in browser. Also listed in BL's issuu.                                                                                                                                                                                |
-| Tesla         | https://www.tesla.com/is_is                              | **Partly.** 403 to WebFetch. The built-in browser shows "Verð frá" for Model Y and Model 3, the entry trims only. `/modely/design` gave financing and upgrade amounts rather than trim prices, and needs clicking through. Other trims are unsettled.                                                    |
-| Toyota        | https://www.toyota.is/new-cars/kynningarefni             | **Read.** The list is an iPaper flipbook at `kynningarefni.toyota.is/verdlisti`; run `scripts/ipaper-text.py` on it and search for `RAFMAGN`. One unlabelled "VERÐ": the pre-grant price. It also holds the vans and the Hilux, which are not in the car list. The built-in browser refuses this domain. |
-| Volkswagen    | https://www.volkswagen.is/is/kaup-tilbod/verdlistar.html | Listing only. PDFs on `www.hekla.is/static/files/efni/verdlistar/vw/` (`id3`, `id4`, `id7`, `idcross`, `idbuzz-people`, `id-polo`); same route as Audi.                                                                                                                                                  |
+| Make          | Entry point                                              | How to read it                                                                                                                                                                                                                                                                                                                |
+| ------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Audi          | https://www.audi.is/is/nyr-audi/verdlistar/              | **Read.** 403 to WebFetch and curl; the built-in browser loads it. Its "Nánar" links are PDFs on `www.hekla.is/static/files/efni/verdlistar/audi/` (`q4-e-tron.pdf`, `q6-e-tron.pdf`, `a6.pdf`), which curl fetches and `pdf text` reads. The e-tron GT and SQ6 are not in Audi's list.                                       |
+| Lexus         | https://www.lexus.is/new-cars/kynningarefni              | **Read.** The combined list is an iPaper flipbook at `kynningarefni.toyota.is/verdlistilexus`; run `scripts/ipaper-text.py` on it and look for the RZ and ES pages. One unlabelled "VERÐ": the pre-grant price.                                                                                                               |
+| Mazda         | https://mazda.is/verdlistar                              | **Read.** Direct PDFs at `skjol.mazda.is/media/19/` (`mazda6e-verd.pdf`, `cx-6e.pdf`). The price table is an image inside the PDF, so `pdf text` skips it: render with `pdf pages` at scale 5 and crop the table.                                                                                                             |
+| Mercedes-Benz | https://www.mercedes-benz.is/site/verdlistar/            | **Read.** Links go to Askja's issuu documents, one per model line; the electric GLC is `n_r_glc_ver_listi`, not `glc_verdlisti`. The site menu's "100% rafbílar" list names every EV, priced or not. Vans (EQT, EQV, eVito Tourer) are on `/vans/site/verdlistar/`. A "Sérverð" row is a temporary offer, not the list price. |
+| Polestar      | https://brimborg.polestarimporter.com/is/verdlistar      | **Read.** Direct PDFs at `…/static/files/Polestar<N>/`, the filename ending in the list's date (`…_20260910.pdf`); `pdf text` reads the price rows; the first figure is the price, the second "Verð með 500.000 kr. styrk". Polestar 2 Performance is an option package on the base car, not a row.                           |
+| Porsche       | https://dealer.porsche.com/is/island/is-IS/nyir-bilar    | Listing only. Starting prices are printed on the page ("frá"), so a PDF may be unnecessary. The "Sækja verðlista" buttons expose no URL to WebFetch; the browser may.                                                                                                                                                         |
+| Škoda         | https://www.skoda.is/nyr-skoda/verdlistar                | Listing only. PDFs on `www.hekla.is/static/files/efni/verdlistar/skoda/` (`peaq`, `epiq`, `elroq`, `enyaq`); same route as Audi.                                                                                                                                                                                              |
+| Subaru        | https://www.subaru.is/verdlisti/                         | **Read.** One combined list on BL's issuu, `hallih/docs/subaru_ver__listi_sept2015lr` (the slug's date is not the list's), run through `scripts/issuu-pages.sh`: ten pages, two per model, the electric three first. "Verð kr." is the price; "M. styrk Orkusjóðs" has the grant off.                                         |
+| Tesla         | https://www.tesla.com/is_is                              | **Partly.** 403 to WebFetch. The built-in browser shows "Verð frá" for Model Y and Model 3, the entry trims only. `/modely/design` gave financing and upgrade amounts rather than trim prices, and needs clicking through. Other trims are unsettled.                                                                         |
+| Toyota        | https://www.toyota.is/new-cars/kynningarefni             | **Read.** The list is an iPaper flipbook at `kynningarefni.toyota.is/verdlisti`; run `scripts/ipaper-text.py` on it and search for `RAFMAGN`. One unlabelled "VERÐ": the pre-grant price. It also holds the vans and the Hilux, which are not in the car list. The built-in browser refuses this domain.                      |
+| Volkswagen    | https://www.volkswagen.is/is/kaup-tilbod/verdlistar.html | Listing only. PDFs on `www.hekla.is/static/files/efni/verdlistar/vw/` (`id3`, `id4`, `id7`, `idcross`, `idbuzz-people`, `id-polo`); same route as Audi.                                                                                                                                                                       |
 
 Hekla is the importer behind Audi, Škoda and Volkswagen, and its static PDFs
 have not needed a browser.
@@ -66,5 +88,19 @@ have not needed a browser.
 ## Makes with no page from the owner
 
 BYD, Citroën, Fiat, Ford, GWM, Jeep, KGM, Leapmotor, Maxus, Opel, Peugeot,
-Suzuki, Volvo. Some may be on the BL or Askja issuu pages; check those listings
-first. Otherwise, the importer's site as linked from the existing entries.
+Range Rover, Suzuki, Volvo. Some may be on the BL or Askja issuu pages; check
+those listings first. Otherwise, the importer's site as linked from the existing
+entries.
+
+**BYD** (Vatt): each model page on byd.is, readable with curl, links a
+"Verðskrá" PDF on `cdn.sanity.io/files/mcx434c9/production/`. The PDF has no
+text layer, so render it with `pdf pages`; page 1 prints "Verð" (before the
+grant) beside "Verð m/ styrk". The Atto 3 Evo is sold here as "EVO AWD", at
+`/typur/evo-awd`. The PDF's `Last-Modified` header is its upload date. Read
+for every model on 2026-10-21, from lists uploaded on 2026-08-17.
+
+**Range Rover is the one that cannot be started from its entries.** Both
+Electric rows point at `rangerover.com/en-gb`, the manufacturer's UK site rather
+than an Icelandic seller, so there is no importer page to work back to and no
+price to check against. Find the Icelandic importer's model page, fix
+`sellerUrl` on both rows, and record the price list here.

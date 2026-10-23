@@ -1,0 +1,63 @@
+'use client'
+
+import { FunctionComponent } from 'react'
+import { trackEvent } from 'fathom-client'
+
+import type { Car } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
+import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
+import { sellerLink } from '@/modules/sellerLink'
+import { track } from '@/utils/track'
+import LinkPill from './LinkPill'
+
+interface Props {
+  car: Car
+  /** Price per km of range in the badge, when that is what the list ranks by */
+  showValue?: boolean
+  compact?: boolean
+  /** Without the badge, for a column too narrow to hold it beside the price */
+  bare?: boolean
+  className?: string
+}
+
+/** A car's price after the grant, as a link to the seller */
+const PricePill: FunctionComponent<Props> = ({
+  car,
+  showValue,
+  compact,
+  bare,
+  className,
+}) => (
+  <LinkPill
+    className={className}
+    href={sellerLink(car.sellerUrl)}
+    external
+    compact={compact}
+    extra={
+      bare
+        ? undefined
+        : (car.expectedDelivery && car.hasGrant && 'áætlað verð með styrk ↗') ||
+          (car.expectedDelivery && 'áætlað verð ↗') ||
+          (showValue &&
+            `${car.hasGrant ? 'með styrk ' : ''}${addDecimalSeparators(
+              Math.round(car.pricePerKm),
+            )} kr. á km.`) ||
+          (car.hasGrant && 'með styrk') ||
+          undefined
+    }
+    title={
+      car.hasGrant
+        ? `Fullt verð án styrks: ${addDecimalSeparators(car.price)} kr.`
+        : undefined
+    }
+    onClick={() => {
+      trackEvent('Seller clicked')
+      track({ name: 'seller_clicked', car: carSlug(car) })
+    }}
+  >
+    {addDecimalSeparators(car.priceWithGrant)} kr.
+    {!car.expectedDelivery && ' ↗'}
+  </LinkPill>
+)
+
+export default PricePill

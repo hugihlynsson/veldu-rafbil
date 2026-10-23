@@ -1,0 +1,72 @@
+type Window = { count: number; resetAt: number }
+
+export interface RateLimitResult {
+  ok: boolean
+  retryAfterSeconds: number
+}
+
+export type RateLimit = (key: string) => RateLimitResult
+
+/**
+ * A limiter with windows of its own, so one public endpoint spending its
+ * allowance does not spend another's. In memory, so a caller spread across
+ * warm instances gets a multiple of this.
+ */
+export const createRateLimit = (
+  maxRequests: number,
+  windowMs = 60_000,
+): RateLimit => {
+  const windows = new Map<string, Window>()
+
+  // Without this the map grows one entry per address for the life of the instance
+  const sweep = (now: number) => {
+    for (const [key, window] of windows) {
+      if (window.resetAt <= now) windows.delete(key)
+    }
+  }
+
+  return (key: string): RateLimitResult => {
+    const now = Date.now()
+    if (windows.size > 10_000) sweep(now)
+
+    const existing = windows.get(key)
+
+    if (!existing || existing.resetAt <= now) {
+      windows.set(key, { count: 1, resetAt: now + windowMs })
+      return { ok: true, retryAfterSeconds: 0 }
+    }
+
+    existing.count += 1
+
+    return {
+      ok: existing.count <= maxRequests,
+      retryAfterSeconds: Math.ceil((existing.resetAt - now) / 1000),
+    }
+  }
+}
+
+export const chatRateLimit = createRateLimit(12)
+
+// Typing asks more often than chatting does, debounced as it is
+export const filterSuggestionsRateLimit = createRateLimit(60)
+
+// A tap or a send each, so far fewer than the requests behind them
+export const suggestionOutcomeRateLimit = createRateLimit(30)
+
+// Spends nothing but log space: a page sends its events a few seconds' worth
+// at a time, and a visitor clicking through cars sends one most pages
+export const productEventRateLimit = createRateLimit(60)
+
+// Only a verdict no one has asked for before reaches the model; the rest are
+// read from the cache and never count
+export const verdictRateLimit = createRateLimit(10)
+
+// However many callers ask, the verdicts an instance will buy in an hour: the
+// limit above rests on a header a script can vary from one request to the next
+export const verdictBudget = createRateLimit(60, 60 * 60_000)
+
+// x-forwarded-for is spoofable, so this buys politeness, not identity
+export const clientKey = (request: Pick<Request, 'headers'>): string =>
+  request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+  request.headers.get('x-real-ip') ||
+  'unknown'

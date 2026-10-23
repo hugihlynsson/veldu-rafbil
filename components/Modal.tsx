@@ -1,16 +1,49 @@
 'use client'
 
-import React, { ReactNode, useLayoutEffect, useRef, useState } from 'react'
+import React, {
+  ReactNode,
+  useEffect,
+  useEffectEvent,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react'
 import clsx from 'clsx'
 
-/** How long the leave animation gets before the dialog actually closes */
+import { getInputModality } from '@/utils/inputModality'
+import lockBodyScroll from '@/utils/lockBodyScroll'
+
+/**
+ * How long the leave animation gets before the dialog actually closes. The
+ * leave transitions are shorter, since they only start once React re-renders.
+ */
 const LEAVE_MS = 300
 
 type State = 'initializing' | 'visible' | 'leaving'
 
+/**
+ * The enter and leave of the panel inside, the same for every modal. It
+ * transitions `translate` rather than `transform`: Tailwind v4 sets the
+ * individual property, which a transform transition never reaches.
+ */
+export const panelMotion =
+  'opacity-0 translate-y-6 transition-[opacity,translate] duration-300 ease-in-cubic group-data-[state=visible]/modal:opacity-100 group-data-[state=visible]/modal:translate-y-0 group-data-[state=visible]/modal:ease-out-cubic group-data-[state=leaving]/modal:duration-200'
+
+type ReturnFocus = 'always' | 'keyboard'
+
+// Closing is what hands focus back to whatever opened the dialog
+const closeDialog = (
+  dialog: HTMLDialogElement | null,
+  returnFocus: ReturnFocus,
+) => {
+  dialog?.close()
+  if (returnFocus === 'always' || getInputModality() === 'keyboard') return
+  if (document.activeElement instanceof HTMLElement) {
+    document.activeElement.blur()
+  }
+}
+
 interface Modal {
-  /** True once the enter animation should be running */
-  isVisible: boolean
   /** Animates out, then closes and unmounts */
   close: () => void
 }
@@ -20,80 +53,85 @@ interface Props {
   labelledBy: string
   /** Called once the leave animation has finished and the dialog is closed */
   onDone: () => void
-  /** Called as the leave animation starts, for anything that should not wait */
-  onLeave?: () => void
-  /**
-   * Focused after the dialog opens. showModal() puts focus on the first
-   * focusable thing, which is the close button in both of ours, so anything
-   * that wants focus elsewhere has to ask for it after that, not before.
-   */
+  /** Focused after open: showModal() lands on the close button otherwise */
   initialFocusRef?: React.RefObject<HTMLElement | null>
+  /**
+   * Who gets focus handed back on close. `keyboard` lets it go after a tap or
+   * a click, where it would only ring whatever was tapped to open the dialog
+   */
+  returnFocus?: ReturnFocus
   /** Layout and backdrop for this particular dialog */
   className?: string
   children: (modal: Modal) => ReactNode
 }
 
 /**
- * The shared half of a modal: a real <dialog>, so that Escape, the backdrop and
- * the focus trap are the browser's job rather than ours, wrapped in the enter
- * and leave animation that <dialog> does not do on its own.
- *
- * `data-state` is on the dialog element, so a caller can drive its backdrop
- * from Tailwind (`data-[state=visible]:backdrop:bg-black/30`), and the panel
- * inside gets `isVisible` to animate with.
+ * A real <dialog>, so that Escape, the backdrop and the focus trap are the
+ * browser's job, wrapped in the animation it does not do on its own.
  */
 const Modal: React.FunctionComponent<Props> = ({
   labelledBy,
   onDone,
-  onLeave,
   initialFocusRef,
+  returnFocus = 'always',
   className,
   children,
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null)
+  const unlockBodyScroll = useRef<(() => void) | null>(null)
   const [state, setState] = useState<State>('initializing')
 
-  // Layout rather than passive, for the sake of the phone keyboard. A phone
-  // raises it only for a focus that happens inside the tap that asked for it,
-  // and React holds passive effects back until after the event has been and
-  // gone — so opening from a tap left the chat input focused with no keyboard
-  // under it, which reads as not focused at all. A layout effect runs during
-  // the commit, which for a tap is still inside the event.
+  // Layout rather than passive: a phone raises the keyboard only for a focus
+  // inside the tap that asked for it, and passive effects run after the event
   useLayoutEffect(() => {
-    dialogRef.current?.showModal()
-    // preventScroll: the dialog is a fixed overlay, and letting the browser
-    // scroll the page to reveal the focused field moves the list underneath
+    const dialog = dialogRef.current
+    const unlock = lockBodyScroll()
+    unlockBodyScroll.current = unlock
+    dialog?.showModal()
+    // preventScroll: the dialog is fixed, and scrolling to it moves the list
     initialFocusRef?.current?.focus({ preventScroll: true })
-    // A frame with the enter styles still applied is what gives the transition
-    // something to move from
+    // A frame with the enter styles gives the transition something to move from
     const timer = setTimeout(() => setState('visible'), 1)
-    return () => clearTimeout(timer)
-    // Opening happens once, on mount. A ref is not reactive, so the dependency
-    // the rule asks for here would mean nothing.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    return () => {
+      clearTimeout(timer)
+      unlock()
+      // Unmounted while open, as the car sheet is by the browser's back:
+      // closing still hands focus back. Once the leave has closed it, a no-op.
+      if (dialog?.open) closeDialog(dialog, returnFocus)
+    }
+    // Once, on mount: a ref object keeps its identity across renders, and
+    // a dialog's returnFocus is written once
+  }, [initialFocusRef, returnFocus])
 
-  const close = () => {
-    setState('leaving')
-    onLeave?.()
-    setTimeout(() => {
-      // Closing before unmount is what hands focus back to whatever opened us
-      dialogRef.current?.close()
-      onDone()
-    }, LEAVE_MS)
-  }
+  // Before unmount, so focus is handed back as the dialog goes
+  const finishClosing = useEffectEvent(() => {
+    closeDialog(dialogRef.current, returnFocus)
+    onDone()
+  })
+
+  // Here rather than in close: the children are handed close during render,
+  // so it reads no ref, and a second close while leaving finishes once
+  useEffect(() => {
+    if (state !== 'leaving') return
+    // As the leave starts, so the page is in place to scroll and to take
+    // focus by the time the dialog is gone
+    unlockBodyScroll.current?.()
+    const timer = setTimeout(finishClosing, LEAVE_MS)
+    return () => clearTimeout(timer)
+  }, [state])
+
+  const close = () => setState('leaving')
 
   return (
-    // oxlint and jsx-a11y do not know <dialog>: the click is backdrop dismissal
-    // and Escape is handled natively through onCancel below
+    // <dialog>: the click is backdrop dismissal, Escape is handled by onCancel
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
     <dialog
       ref={dialogRef}
       data-state={state}
       aria-labelledby={labelledBy}
       className={clsx(
-        'hidden open:flex fixed inset-0 m-0 h-full w-full max-h-none max-w-none border-0 bg-transparent p-0 justify-center',
-        'backdrop:bg-black/0 backdrop:transition-[background-color] backdrop:delay-100 data-[state=visible]:backdrop:delay-0',
+        'group/modal hidden open:flex fixed inset-0 m-0 h-full w-full max-h-none max-w-none border-0 bg-transparent p-0 justify-center',
+        'backdrop:bg-transparent backdrop:transition-[background-color] backdrop:duration-300 data-[state=leaving]:backdrop:duration-200 data-[state=leaving]:backdrop:delay-50',
         className,
       )}
       onCancel={(event) => {
@@ -105,7 +143,7 @@ const Modal: React.FunctionComponent<Props> = ({
         if (event.target === event.currentTarget) close()
       }}
     >
-      {children({ isVisible: state === 'visible', close })}
+      {children({ close })}
     </dialog>
   )
 }

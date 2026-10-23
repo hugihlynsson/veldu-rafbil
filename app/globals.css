@@ -1,69 +1,357 @@
 @import 'tailwindcss';
 
+/* Every colour in the UI is one of these roles, and the block below is the
+   only place a role takes a different value. A component asks for the role it
+   means — `bg-lab`, `text-stone`, `border-line` — and never for a theme, so
+   there is no `dark:` variant anywhere in `components/`. Tailwind's own
+   colours, radii and shadows are cleared, so `bg-gray-100` or `shadow-md`
+   generates nothing rather than a value that ignores the dark block, the
+   corner scaling or the shadows' overrides. */
 @theme {
+  --color-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+
+  /* Brand. `sky` and the white on it are the same in both themes — the blue is
+     the one thing on the page that should not shift. Only the hover moves,
+     since a darker blue on a dark page reads as nothing happening. `focus` is
+     a separate token because a 2px ring of #201be3 on a dark page is a ring
+     nobody can see; it is the brand lightened until it clears 3:1 */
   --color-sky: #201be3;
-  --color-sky-darker: #1a15b7;
+  --color-sky-hover: #1a15b7;
+  --color-on-sky: #fff;
+  --color-focus: #201be3;
+
+  /* Text, strongest first */
   --color-tint: #111;
   --color-stone: #555;
   --color-clay: #767676;
-  --color-smoke: #ddd;
-  --color-cloud: #eee;
-  --color-lab: #fff;
 
+  /* Surfaces, from the page outwards. In light they descend from white; in
+     dark they climb from the page, which is the same ladder read upside down */
+  --color-lab: #fff; /* the page */
+  --color-haze: #f8f8f8; /* a band set back from it: the footer, a hover */
+  --color-surface: #fff; /* a panel over it: the filter sheet */
+  --color-glass: #fff; /* a translucent panel, always used with an alpha */
+  --color-veil: #dcdcdc; /* the chat bar, likewise */
+  --color-cloud: #eee; /* a fill on the page: pills, chat bubbles */
+  --color-smoke: #ddd; /* the same fill, hovered */
+  --color-shade: #eee; /* a card on the page, hovered */
+  --color-raised: #fff; /* a control lifted off a tinted track */
+  --color-track: rgb(0 0 0 / 0.04); /* that track: the sorting tabs */
+
+  /* Lines. A divider is decoration; the edge of a field is how anyone finds
+     it, so `line-strong` clears 3:1 on white and on `haze` */
+  --color-line: #eee; /* a divider */
+  --color-line-strong: #8f8f8f; /* the edge of something you can click or type in */
+  /* A filter chip's edge, softer than a field's: its own text is what tells
+     you it is there, so the line is only a shape around it */
+  --color-line-chip: #ddd;
+  /* The edge of a translucent panel: the chat bar and the pills over the
+     page. What is behind it changes, so it is the page's ink at an alpha
+     rather than a grey that would only suit one background */
+  --color-edge: rgb(0 0 0 / 0.06);
+  --color-edge-strong: rgb(0 0 0 / 0.12);
+
+  /* Overlays */
+  --color-backdrop: rgb(0 0 0 / 0.2);
+  --color-backdrop-strong: rgb(0 0 0 / 0.3);
+
+  /* The Örflæði band, which is its own small palette: a card that inverts the
+     page it sits on, against a band that barely leaves it. Dark inverts both
+     halves of that — a white card with dark type on a near-black band */
+  --color-mist: #e2e8f0;
+  --color-ink: #1a202c;
+  --color-on-ink: #fff;
+
+  /* The chat's error state */
+  --color-alarm: #b42318;
+  --color-alarm-surface: #fef3f2;
+  --color-alarm-fill: #fee4e2;
+  --color-alarm-fill-hover: #fecdca;
+
+  /* Sizes the default type scale lacks, named for what they set */
+  --text-eyebrow: 0.625rem; /* the uppercase label over a figure */
+  --text-fine: 0.6875rem; /* the small print on a car in the chat */
+  --text-control: 0.8125rem; /* a control's label, a step under `sm` */
+  --text-display: 2rem; /* a car's name, and the Örflæði heading */
+
+  /* The steps the layout takes. Cleared first, like the colours, so a
+     `lg:` that nothing defines generates nothing */
+  --breakpoint-*: initial;
   --breakpoint-xs: 375px;
+  --breakpoint-sm: 500px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px; /* the page at its widest: a third column fits */
+
+  /* The column a car's text sits in on a phone, the widest it gets beside the
+     photo from md, and the page at its widest */
+  --container-column: 480px;
+  --container-card-text: 380px;
+  --container-page: 1024px;
+  --container-grid: 1200px; /* the grid, which reaches past the page from lg */
+
+  /* Radii, written at their round-corner size. A squircle of the same radius
+     hugs the corner more tightly, so `--corner` grows them where one is drawn
+     (below) and they read as soft as before. Every radius goes through here,
+     arbitrary ones included, or it misses the scaling */
+  --radius: calc(0.25rem * var(--corner));
+  --radius-sm: calc(0.25rem * var(--corner));
+  --radius-lg: calc(0.5rem * var(--corner));
+  --radius-xl: calc(0.75rem * var(--corner));
+  --radius-2xl: calc(1rem * var(--corner));
+  --radius-3xl: calc(1.5rem * var(--corner));
+  --radius-4xl: calc(2rem * var(--corner));
+  --radius-toggle: calc(10px * var(--corner));
+  --radius-card: calc(14px * var(--corner));
+  --radius-sheet: calc(20px * var(--corner));
+
+  /* Motion. Everything that arrives rises the same way; `--rise` shortens
+     the distance for the cars under an answer, which are big enough that
+     10px reads as a jump */
+  --ease-in-cubic: cubic-bezier(0.32, 0, 0.67, 0);
+  --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-message-in: rise 0.3s ease-in-out;
+  --animate-bar-in: rise 0.5s var(--ease-out-expo) backwards;
+  --animate-follow-up-in: rise 0.4s var(--ease-out-expo) backwards;
+  --animate-car-in: rise 0.5s var(--ease-out-expo) backwards;
+  --animate-pill-in: pill-in 0.3s ease-out backwards;
+  --animate-pill-out: pill-out 0.2s ease-in forwards;
+  --animate-typing: typing 1.4s infinite;
+  --animate-phrase-in: phrase-in 0.35s var(--ease-out-cubic) backwards;
+  --animate-phrase-out: phrase-out 0.25s var(--ease-in-cubic) forwards;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(var(--rise, 10px));
+    }
+  }
+
+  /* Tipped back as they come in from the input. The perspective is what
+     makes the tilt read as depth; without one, rotateX only squashes */
+  @keyframes pill-in {
+    from {
+      opacity: 0;
+      transform: perspective(400px) translateY(10px) rotateX(40deg) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: perspective(400px) translateY(0) rotateX(0) scale(1);
+    }
+  }
+
+  @keyframes pill-out {
+    from {
+      opacity: 1;
+      transform: perspective(400px) translateY(0) rotateX(0) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: perspective(400px) translateY(10px) rotateX(40deg) scale(0.95);
+    }
+  }
+
+  /* A line that turns into the next, softened at both ends by a slight blur */
+  @keyframes phrase-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+      filter: blur(2px);
+    }
+  }
+
+  @keyframes phrase-out {
+    to {
+      opacity: 0;
+      transform: translateY(-6px);
+      filter: blur(2px);
+    }
+  }
+
+  @keyframes typing {
+    0%,
+    60%,
+    100% {
+      transform: translateY(0);
+    }
+    30% {
+      transform: translateY(-10px);
+    }
+  }
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* Where each modal stops filling a phone and floats as a panel. The filter
+   sheet waits for the height too: centred on a short screen, it would scroll
+   more of its fields than it shows */
+@custom-variant chat-panel (@media (width >= 600px));
+@custom-variant sheet-panel (@media (width >= 800px) and (height >= 600px));
+
+/* Inline, as the face is a variable next/font sets on <html> */
+@theme inline {
+  --font-sans: var(--font-inter), sans-serif;
 }
 
-html {
-  min-height: 100vh;
+/* Shadows are deliberately not `@theme`: Tailwind inlines a theme shadow into
+   the utility itself, so redefining one below would never reach it. As plain
+   properties they stay references, read as `shadow-(--shadow-chip)`. */
+:root {
+  /* The Örflæði logo is a fixed white SVG served as an <img>, so it cannot
+     take a colour from the page. Inverting it is what lets the card it sits
+     on flip: none while the card is dark, invert(1) once the card is white */
+  --ink-logo-filter: none;
+
+  /* The side margin of text on a phone, where the photos run edge to edge.
+     Light needs a real gutter to hold text off the black bezel; dark is
+     black to the bezel, so the page and the phone read as one surface and
+     text only needs to clear the rounded edge of the glass */
+  --gutter: 1rem;
+
+  --shadow-hairline: 0 1px 0px 0 rgb(0 0 0 / 0.05);
+  --shadow-raised:
+    0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-pill: 0 4px 24px rgb(0 0 0 / 0);
+  --shadow-chip: 0 2px 8px rgb(0 0 0 / 0.04);
+  --shadow-chip-hover: 0 4px 12px rgb(0 0 0 / 0.08);
+  --shadow-chip-press: 0 2px 6px rgb(0 0 0 / 0.06);
+  --shadow-sheet: 0px 0px 40px 0px rgb(0 0 0 / 0.1);
+  --shadow-sheet-footer: 0 0 32px 0 rgb(0 0 0 / 0.1);
+  --shadow-modal: 0px 8px 60px rgb(0 0 0 / 0.15);
+  --shadow-card: 0 2px 32px rgb(0 0 0 / 0.2);
+  --shadow-card-hover: 0 8px 64px rgb(0 0 0 / 0.3);
 }
 
-body {
-  margin: 0;
-  color: #111;
-  width: 100%;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  @variant xs {
+    --gutter: 1.5rem;
+  }
 }
 
-button,
-input {
-  font-family: Inter, sans-serif;
+/* The dark values. Every one of them was picked against the surface it lands
+   on rather than by eye: body text clears 4.5:1 everywhere it appears, the
+   quiet greys clear it on every fill they sit on, and the lines that bound a
+   control clear 3:1. Read a pair off the ladder above before adding one.
+
+   The surfaces are neutral grey on purpose. Nothing here carries a hue, so
+   the brand blue and the Örflæði band are the only colour on the page. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* `sky` and `on-sky` are absent: the brand does not change theme */
+    --color-sky-hover: #4039ef;
+    --color-focus: #8f9bff;
+
+    --color-tint: #f4f4f4;
+    --color-stone: #b9b9b9;
+    --color-clay: #999;
+
+    --color-lab: #000;
+    --color-haze: #0f0f0f;
+    --color-surface: #1e1e1e;
+    --color-glass: #181818;
+    --color-veil: #343434;
+    --color-cloud: #262626;
+    --color-smoke: #303030;
+    --color-shade: #1a1a1a;
+    --color-raised: #383838;
+    --color-track: rgb(255 255 255 / 0.09);
+
+    --color-line: #3a3a3a;
+    --color-line-strong: #757575;
+    --color-line-chip: #4a4a4a;
+    --color-edge: rgb(255 255 255 / 0.06);
+    --color-edge-strong: rgb(255 255 255 / 0.12);
+
+    --color-backdrop: rgb(0 0 0 / 0.55);
+    --color-backdrop-strong: rgb(0 0 0 / 0.65);
+
+    --color-mist: #1a1a1a;
+    --color-ink: #fff;
+    --color-on-ink: #111;
+    --ink-logo-filter: invert(1);
+    --gutter: 10px;
+
+    --color-alarm: #ffb4a8;
+    --color-alarm-surface: #3b1a15;
+    --color-alarm-fill: #55261f;
+    --color-alarm-fill-hover: #6d3329;
+
+    /* Dark draws depth with the surface ladder, not with shadows: everything
+       that casts one in light already sits a step lighter than what is under
+       it here. The two left are hairlines, edges where the fill is the same
+       on both sides */
+    --shadow-hairline: 0 1px 0px 0 rgb(255 255 255 / 0.07);
+    --shadow-raised: none;
+    --shadow-pill: none;
+    --shadow-chip: none;
+    --shadow-chip-hover: none;
+    --shadow-chip-press: none;
+    --shadow-sheet: none;
+    --shadow-sheet-footer: 0 -1px 0px 0 rgb(255 255 255 / 0.07);
+    --shadow-modal: none;
+    --shadow-card: none;
+    --shadow-card-hover: none;
+  }
 }
 
-/* Almost every control here is appearance-none with no border, so the browser
-   default ring has nothing to draw around. Without this, tabbing through the
-   page is invisible.
-
-   It belongs in the base layer: unlayered, it outranks every Tailwind utility
-   no matter the specificity, so a control that draws its own ring somewhere
-   else — the chat input, whose ring lives on the pill around it — got this one
-   on top of its own. */
+/* In the base layer like everything global: a rule outside a layer outranks
+   every utility, whatever its specificity */
 @layer base {
+  :root {
+    /* Both themes, so the number spinners, the select menu, the scrollbars
+       and the caret follow the page rather than staying white under it */
+    color-scheme: light dark;
+    /* Kept up to date by utils/useKeyboardInset while a phone keyboard is up */
+    --keyboard-inset: 0px;
+    --viewport-offset: 0px;
+    font-feature-settings:
+      'liga' 1,
+      'calt' 1; /* fix for Chrome */
+  }
+
+  html {
+    min-height: 100vh;
+  }
+
+  body {
+    color: var(--color-tint);
+    background-color: var(--color-lab);
+    width: 100%;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Controls here are appearance-none, so there is no default ring to draw */
   :focus-visible {
-    outline: 2px solid var(--color-sky);
+    outline: 2px solid var(--color-focus);
     outline-offset: 2px;
   }
 }
 
+/* iOS-style continuous corners where the browser can draw them, and plain
+   round ones elsewhere. A pill keeps round ends: a squircle there reads as a
+   squashed rectangle, so anything meant to be a pill or a circle is
+   `rounded-full`, whatever its size */
 :root {
-  /* Kept up to date by utils/useKeyboardInset while a phone keyboard is up */
-  --keyboard-inset: 0px;
-  font-family: Inter, sans-serif;
-  font-feature-settings:
-    'liga' 1,
-    'calt' 1; /* fix for Chrome */
+  --corner: 1;
 }
-
-@supports (font-variation-settings: normal) {
+@supports (corner-shape: squircle) {
   :root {
-    font-family: InterVariable, sans-serif;
+    --corner: 1.6;
+  }
+  @layer base {
+    /* The pseudo-elements too, which `*` misses: drawn round at a radius
+       grown for a squircle, a hover card bulges in over what it frames */
+    *,
+    ::before,
+    ::after {
+      corner-shape: squircle;
+    }
+    .rounded-full {
+      corner-shape: round;
+    }
   }
 }
 
@@ -80,136 +368,90 @@ input {
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+/* In the components layer, under the utilities, like every other rule here.
+   The chrome inside a message is mixed out of `currentColor` rather than any
+   token: these rules run inside both bubbles, and the bubbles carry opposite
+   text colours in either theme. Tinting with the text is right in all four. */
+@layer components {
+  .message-content p {
+    margin: 0 0 0.5em 0;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .message-content p:last-child {
+    margin-bottom: 0;
   }
-}
-
-@keyframes typing {
-  0%,
-  60%,
-  100% {
-    transform: translateY(0);
+  .message-content strong {
+    font-weight: 600;
   }
-  30% {
-    transform: translateY(-10px);
+  .message-content em {
+    font-style: italic;
   }
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
+  .message-content code {
+    background-color: color-mix(in srgb, currentColor 6%, transparent);
+    padding: 2px 4px;
+    border-radius: var(--radius-sm);
+    font-family:
+      'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas,
+      'Courier New', monospace;
+    font-size: 0.9em;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .message-content pre {
+    background-color: color-mix(in srgb, currentColor 6%, transparent);
+    padding: 8px 10px;
+    border-radius: var(--radius-lg);
+    overflow-x: auto;
+    margin: 0.5em 0;
   }
-}
-
-@keyframes slideInCar {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
+  .message-content pre code {
+    background-color: transparent;
+    padding: 0;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .message-content ul,
+  .message-content ol {
+    margin: 0.5em 0;
+    padding-left: 1.5em;
   }
-}
-
-@keyframes fadeInUpRotate {
-  from {
-    opacity: 0;
-    transform: translateY(10px) rotateX(40deg) scale(0.95);
+  .message-content ul {
+    list-style-type: disc;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0) rotateX(0) scale(1);
+  .message-content ol {
+    list-style-type: decimal;
   }
-}
-
-/* Chat message markdown styling */
-.message-content p {
-  margin: 0 0 0.5em 0;
-}
-.message-content p:last-child {
-  margin-bottom: 0;
-}
-.message-content strong {
-  font-weight: 600;
-}
-.message-content em {
-  font-style: italic;
-}
-.message-content code {
-  background-color: rgba(0, 0, 0, 0.06);
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-family:
-    'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New',
-    monospace;
-  font-size: 0.9em;
-}
-.message-content pre {
-  background-color: rgba(0, 0, 0, 0.06);
-  padding: 8px 10px;
-  border-radius: 8px;
-  overflow-x: auto;
-  margin: 0.5em 0;
-}
-.message-content pre code {
-  background-color: transparent;
-  padding: 0;
-}
-.message-content ul,
-.message-content ol {
-  margin: 0.5em 0;
-  padding-left: 1.5em;
-}
-.message-content ul {
-  list-style-type: disc;
-}
-.message-content ol {
-  list-style-type: decimal;
-}
-.message-content li {
-  margin: 0.25em 0;
-}
-.message-content a {
-  color: inherit;
-  text-decoration: underline;
-}
-.message-content a:hover {
-  opacity: 0.8;
-}
-.message-content .table-wrapper {
-  overflow-x: auto;
-  margin: 0.5em -14px;
-  padding: 0 14px;
-  -webkit-overflow-scrolling: touch;
-}
-.message-content table {
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 13px;
-}
-.message-content th,
-.message-content td {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 6px 8px;
-  text-align: left;
-}
-.message-content th {
-  background-color: rgba(0, 0, 0, 0.04);
-  font-weight: 600;
-}
-.message-content tr:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.02);
+  .message-content li {
+    margin: 0.25em 0;
+  }
+  .message-content a {
+    color: inherit;
+    text-decoration: underline;
+  }
+  .message-content a:hover {
+    opacity: 0.8;
+  }
+  .message-content hr {
+    border-top-color: color-mix(in srgb, currentColor 10%, transparent);
+    margin: 1em 0;
+  }
+  .message-content .table-wrapper {
+    /* Out to the bubble's edges, which its px-3.5 holds the text off */
+    overflow-x: auto;
+    margin: 0.5em calc(var(--spacing) * -3.5);
+    padding: 0 calc(var(--spacing) * 3.5);
+  }
+  .message-content table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 13px;
+  }
+  .message-content th,
+  .message-content td {
+    border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+    padding: 6px 8px;
+    text-align: left;
+  }
+  .message-content th {
+    background-color: color-mix(in srgb, currentColor 4%, transparent);
+    font-weight: 600;
+  }
+  .message-content tr:nth-child(even) {
+    background-color: color-mix(in srgb, currentColor 2%, transparent);
+  }
 }

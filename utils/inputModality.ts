@@ -1,24 +1,16 @@
 import { useEffect } from 'react'
 
-type Modality = 'pointer' | 'keyboard'
+type Modality = 'pointer' | 'touch' | 'keyboard'
 
-// Whether the reader last pointed at something or pressed a key.
-//
-// The browser already knows: it is how :focus-visible decides whether to draw
-// a ring. It will not answer for a text field though, where the pseudo-class
-// matches however focus arrived, click included — so anything drawing its own
-// ring around a text field has to keep track itself. The chat pill does.
-//
-// It lives outside React because it is a fact about the page rather than about
-// any component: the chat input is unmounted and mounted again as it moves in
-// and out of the dialog, and the gesture that moved it must not go with it.
+// :focus-visible will not answer for a text field, and this outlives the chat
+// input, which is remounted as it moves in and out of the dialog.
 let modality: Modality = 'pointer'
 let isTracking = false
 
 export const getInputModality = (): Modality => modality
 
-const handlePointerDown = () => {
-  modality = 'pointer'
+const handlePointerDown = (event: PointerEvent) => {
+  modality = event.pointerType === 'touch' ? 'touch' : 'pointer'
 }
 
 const handleKeyDown = (event: KeyboardEvent) => {
@@ -27,11 +19,7 @@ const handleKeyDown = (event: KeyboardEvent) => {
   modality = 'keyboard'
 }
 
-/**
- * Starts tracking, once per page. The listeners are passive, capturing so that
- * nothing can hide a gesture by stopping propagation on the way up, and are
- * never removed — the question outlives every component that asks it.
- */
+/** Starts tracking once per page; capturing, so no gesture can be hidden */
 const useInputModality = (): void => {
   useEffect(() => {
     if (isTracking) return

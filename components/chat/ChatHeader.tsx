@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import CloseButton from '../CloseButton'
+import CloseButton from '@/components/CloseButton'
 
 interface Props {
   hasMessages: boolean
@@ -15,7 +15,7 @@ const ChatHeader: React.FunctionComponent<Props> = ({
   onClearChat,
 }) => {
   return (
-    <header className="relative text-lg text-center p-[14px_16px] shadow-[0_1px_0px_0_rgba(0,0,0,0.05)] font-semibold">
+    <header className="relative text-center px-4 py-3.5 shadow-(--shadow-hairline)">
       <CloseButton onClick={onClose} />
       <h2 id="chat-modal-title" className="m-0 text-lg font-semibold">
         Spjall
@@ -25,7 +25,7 @@ const ChatHeader: React.FunctionComponent<Props> = ({
           type="button"
           aria-label="Hreinsa spjall"
           onClick={onClearChat}
-          className="absolute right-[11px] top-[11px] flex items-center justify-center h-8 w-8 border-0 p-0 rounded-2xl appearance-none bg-transparent text-stone cursor-pointer transition-all duration-200 hover:bg-cloud hover:text-tint"
+          className="absolute right-2.75 top-2.75 flex items-center justify-center h-8 w-8 border-0 p-0 rounded-full appearance-none bg-transparent text-stone cursor-pointer transition-colors duration-200 hover:bg-cloud hover:text-tint"
         >
           <svg
             width="14"

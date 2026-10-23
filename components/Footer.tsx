@@ -1,42 +1,32 @@
 'use client'
 
 import { FunctionComponent } from 'react'
-import Orflaedi from './Orflaedi'
+import Logo from './Logo'
+import TextLink from './TextLink'
+
+const paragraph =
+  'mx-auto max-w-column text-sm leading-6 text-pretty px-(--gutter) text-stone md:max-w-page md:px-10'
 
 const Footer: FunctionComponent<{}> = () => (
-  <>
-    <Orflaedi />
-    <footer className="bg-[#f8f8f8] py-8 pb-[100px] xs:pt-14 md:pt-14">
-      <p className="mx-auto max-w-[480px] text-sm leading-6 px-4 text-stone xs:px-6 md:max-w-[1024px] md:px-10">
-        Veldu Rafbíl er smíðuð af{' '}
-        <a
-          href="https://hugihlynsson.com"
-          className="text-tint font-semibold no-underline hover:underline"
-        >
-          Huga Hlynssyni
-        </a>{' '}
-        og er geymd á{' '}
-        <a
-          href="https://github.com/hugihlynsson/veldu-rafbil"
-          className="text-tint font-semibold no-underline hover:underline"
-        >
-          GitHub
-        </a>
-        .{' '}
-      </p>
+  <footer className="bg-haze pt-8 pb-34 xs:pt-14">
+    <div className={paragraph}>
+      <Logo className="block w-40 h-auto mb-4 text-tint" />
+    </div>
+    <p className={paragraph}>
+      Veldu Rafbíl er smíðuð af{' '}
+      <TextLink href="https://hugihlynsson.com">Huga Hlynssyni</TextLink> og er
+      geymd á{' '}
+      <TextLink href="https://github.com/hugihlynsson/veldu-rafbil">
+        GitHub
+      </TextLink>
+      .{' '}
+    </p>
 
-      <p className="mx-auto max-w-[480px] text-sm leading-6 px-4 text-stone xs:px-6 md:max-w-[1024px] md:px-10">
-        Ef þú ert með ábendingu eða fyrirspurn geturu sent póst á{' '}
-        <a
-          href="mailto:hugi@hey.com"
-          className="text-tint font-semibold no-underline hover:underline"
-        >
-          hugi@hey.com
-        </a>
-        .
-      </p>
-    </footer>
-  </>
+    <p className={paragraph}>
+      Ef þú ert með ábendingu eða fyrirspurn geturu sent póst á{' '}
+      <TextLink href="mailto:hugi@hey.com">hugi@hey.com</TextLink>.
+    </p>
+  </footer>
 )
 
 export default Footer

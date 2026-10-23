@@ -1,15 +1,10 @@
 import { useEffect } from 'react'
 
 /**
- * Publishes how much of the bottom of the page the on-screen keyboard is
- * covering, as `--keyboard-inset`, for anything pinned down there to sit on
- * top of rather than behind.
- *
- * A phone keyboard shrinks the visual viewport and leaves the layout viewport
- * alone, and `position: fixed` answers to the layout one — so a bar at the
- * bottom of the screen stays at the bottom of the screen, under the keyboard,
- * where it cannot be seen or reached. visualViewport is what reports the
- * difference; there is no CSS that asks the question on its own.
+ * Publishes the keyboard's height as `--keyboard-inset`: it shrinks the visual
+ * viewport only, and `position: fixed` answers to the layout one. And as
+ * `--viewport-offset`, how far the browser has panned the layout viewport up
+ * to reveal the focused field, for anything pinned to the top to follow.
  */
 const useKeyboardInset = (): void => {
   useEffect(() => {
@@ -17,8 +12,7 @@ const useKeyboardInset = (): void => {
     if (!viewport) return
 
     const update = () => {
-      // offsetTop counts the part of the layout viewport scrolled out of sight
-      // above, which the browser does on its own to reveal the focused field
+      // offsetTop is the part of the layout viewport scrolled out of sight
       const inset = Math.max(
         0,
         window.innerHeight - viewport.height - viewport.offsetTop,
@@ -26,6 +20,10 @@ const useKeyboardInset = (): void => {
       document.documentElement.style.setProperty(
         '--keyboard-inset',
         `${Math.round(inset)}px`,
+      )
+      document.documentElement.style.setProperty(
+        '--viewport-offset',
+        `${Math.round(Math.max(0, viewport.offsetTop))}px`,
       )
     }
 
@@ -36,6 +34,7 @@ const useKeyboardInset = (): void => {
       viewport.removeEventListener('resize', update)
       viewport.removeEventListener('scroll', update)
       document.documentElement.style.removeProperty('--keyboard-inset')
+      document.documentElement.style.removeProperty('--viewport-offset')
     }
   }, [])
 }

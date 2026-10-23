@@ -10,6 +10,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitAny": true,
+    "noUncheckedIndexedAccess": true,
     "preserveConstEnums": true,
     "removeComments": false,
     "skipLibCheck": true,
@@ -21,6 +22,9 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "incremental": true,
+    "paths": {
+      "@/*": ["./*"]
+    },
     "plugins": [
       {
         "name": "next"

@@ -4,6 +4,13 @@ Icelandic single-page site listing every 100% electric car sold new in Iceland,
 with sorting, filtering and an AI advisor chat. Next.js App Router + TypeScript +
 Tailwind v4, deployed on Vercel.
 
+This file holds the conventions, not the contracts. A rule about how one module
+behaves is a comment in that module with a test beside it — read it there, where
+the next reader is already looking and where the change that breaks it has to
+touch it. What is here is what the code cannot tell you on its own, so a file
+is named here only where it is the place to start, and a refactor should rarely
+need to touch this file.
+
 ## Verifying a change
 
 `npm test`, `npm run typecheck` and `npm run lint`, plus `npm run build` for
@@ -11,205 +18,188 @@ anything beyond a data edit. The first three run on every pull request; Vercel
 builds the preview, so CI does not repeat the build. The build needs no
 environment variables and should print no warnings.
 
+The lint budget is zero. `.oxlintrc.json` keeps a few rules at warning rather
+than error, where the real fix would be a bigger refactor than whatever you came
+here to do, and a clean checkout produces none of them. A warning your change
+introduces is yours to fix; downgrading a rule to clear a run is not a fix.
+
+Formatting takes care of itself — a husky pre-commit hook runs oxfmt over the
+staged files and then oxlint over the repo, so don't hand-format.
+
 Tests are Vitest and live next to what they test. They cover the pure logic in
-`modules/`; there are no component tests, and the browser-facing code in
-`utils/` mostly cannot have one without a DOM. Two kinds are worth writing:
-tests that pin a contract two places have to agree on (a URL round trip, a
-query mapping), and tests over the car data itself — most commits edit that
-file, and most corrections to it have been a bad link or an image that does not
-resolve.
+`modules/` and beside the routes; there are no component tests. Two kinds are
+worth writing: tests that pin a contract two places have to agree on (a URL
+round trip, a query mapping), and tests over the car data itself — most
+commits edit that file, and most corrections to it have been a bad link or a
+photo that does not resolve.
 
-Formatting takes care of itself: a husky pre-commit hook runs oxfmt over the
-staged files and then oxlint over the repo, so don't hand-format. `.oxfmtrc.json`
-carries the style and the paths oxfmt must leave alone — generated files and
-lockfiles belong to their tools.
+## Comments
 
-`.oxlintrc.json` keeps a few rules at warning rather than error, where the real
-fix is a bigger refactor than whatever you came here to do. Today that is the
-URL-sync effects in `app/newCars.tsx`, which go away when sorting and filter
-state stops being kept in React _and_ in the URL, and not before. Treat the
-warnings a clean checkout produces as the budget: a run after your change should
-show the same ones it showed before. A new warning is yours to fix, and
-downgrading a rule to clear a run is not a fix.
+Default to none — good names and structure should carry the meaning. Add one
+only when it explains a non-obvious _why_: a workaround, an invariant, a
+constraint the code itself doesn't show. Most comments should be one-liners.
 
-## Layout
+Don't write a comment that restates what the code already says, narrates the
+change ("removed X", "added for the Y fix"), or explains something a reader
+gets from the name. If you'd delete the comment and the code would still be
+just as clear, don't write it.
 
-| Path              | What lives there                                                     |
-| ----------------- | -------------------------------------------------------------------- |
-| `modules/`        | Pure logic: no React, no browser. The car data lives here too        |
-| `utils/`          | The things that _do_ need React or the browser                       |
-| `components/`     | The UI, including the chat                                           |
-| `app/page.tsx`    | Server component: turns `searchParams` into sorting and filter state |
-| `app/newCars.tsx` | `'use client'` — all list state, sorting, filtering, URL sync        |
+This is also where a rule about the domain goes. Write it next to the code it
+governs rather than here, and pin it with a test.
 
-The whole rule for which of the first two a new file goes in: if it can be
-tested in plain node, it is a module, and it gets a test next to it. If it
-reaches for the DOM, a hook or storage, it is a util.
+## Where code goes
 
-The car database is a single file of hand-written `NewCar` literals in
-`modules/`. It is by far the largest file in the repo and most commits touch
-only it. Anything that reads a car field should go through the helpers rather
-than re-deriving it.
+- Anything that reaches for the DOM, a hook or storage is a util, in `utils/`.
+- Everything else is pure logic with a test next to it. It lives beside the one
+  route that uses it, and moves to `modules/`, in the folder for its part of the
+  site, once anything else does. A file in `app/` is only served if it is a
+  `route.ts` or a `page.tsx`, so the rest are safe there.
+- Code the browser must never load, like the system prompt and the model calls,
+  stays beside its route, where an import from a component would look as wrong
+  as it is.
+- No `index.ts` that re-exports a folder: one import would pull the whole folder
+  into the list's first load, which `firstLoad.test.ts` guards.
+- Import across folders with `@/` and within one with `./`.
 
-`components/Modal.tsx` is the shared half of every modal — a real `<dialog>`,
-so that Escape, the backdrop and the focus trap are the browser's job, wrapped
-in the enter and leave animation `<dialog>` does not do by itself. A caller
-gives it a label, an `onDone`, optionally an element to focus (because
-`showModal()` would otherwise land on the close button), and a render prop that
-receives the visibility and a close function. The dialog carries `data-state`,
-so a caller styles its own backdrop from it. Don't hand-roll a second one.
+Three components exist so another copy never gets written — `FilterField.tsx`
+for a field in the filter modal, `Modal.tsx` for a modal, and
+`SuggestionPills.tsx` for a stack of pills above the chat input. Don't
+hand-roll any of them.
 
-A modal made with `showModal()` sits in the top layer and makes the whole page
-behind it inert, so anything that has to stay usable while one is open belongs
-_inside_ the dialog. That is why the chat's single input is rendered either on
-the page or as the dialog's composer, and why the draft lives in the container
-rather than the input: the input is unmounted and mounted again by that move.
-Render such things beside the panel rather than within it — the panel is scaled
-and blurred, and a transform or a filter becomes the containing block of the
-fixed things inside it.
+## The car data
 
-Watch the names: the client component and the data module can share a name and
-differ only by extension. They are not related.
+`modules/data/newCars.ts` is one file of hand-written `NewCar` literals. It is by
+far the largest file in the repo and most commits touch only it. Adding or
+updating a car is the `update-new-cars` skill — read it rather than working from
+a brochure directly.
 
-## Domain rules that are easy to get wrong
+`NewCar` is inferred from the Zod schema in `modules/data/newCarSchema.ts`, and
+`newCars.test.ts` checks every entry against it. A field is added there, with
+its bounds, rather than as a type of its own.
 
-**The grant is baked into every displayed price.** Cars under a price ceiling
-get a government grant; both numbers live in `modules/` and change by
-legislation, so read them, never inline them. `car.price` is the _list_ price;
-anything user-facing — display, sorting by price, sorting by value, the
-price/range/value filters, and the car summary fed to the LLM — must go through
-`getPriceWithGrant()`. Never compare or render `car.price` raw except as the
-"full price without grant" tooltip.
+Never re-derive a car field. Read cars through `modules/data/cars.ts`: each
+`Car` already carries its id, label, price after the grant, price per km and
+charge rate, and the module that works each one out holds its rule. Copy that
+names the grant reads `modules/copy/grantCopy.ts`, and every number in the list
+UI goes through `addDecimalSeparators`.
 
-**Range is WLTP**, a manufacturer figure. Real Icelandic range is lower, and the
-system prompt tells the assistant to say so.
+The grant is worth stating twice, because getting it wrong is silent:
+`car.price` is the _list_ price, everything user-facing reads
+`car.priceWithGrant`, and raw `car.price` is only ever the "full price without
+grant" tooltip.
 
-**Fast-charge is derived, not stored.** `getKmPerMinutesCharged` computes it and
-returns a fixed-precision **string**, so callers wrap it in `Number()` before
-comparing.
-
-**`addDecimalSeparators` exists because `toLocaleString()` breaks SSR** — it can
-differ between Node and the browser and cause hydration mismatches. Use it for
-every number rendered in the list UI.
-
-**`stableSort`, not `Array.prototype.sort`**, for the car list, so equal-ranked
-cars keep a deterministic order.
+No number about the data is written out by hand — copy that counts cars
+interpolates the length of the list, and copy that names the grant reads the
+figures. Keep it that way.
 
 ## Sorting and filtering
 
-The contract in `modules/sorting.ts`:
-
-- `ascendingSorter` always compares ascending; `carSorter` negates afterwards for
-  `desc`. Add a new `Sorting` case there and TypeScript's exhaustive switch will
-  flag everywhere else that needs it.
-- `defaultDirection` is the "most useful first" direction per sorting. The URL
-  only records deviations from it — the flip parameter means "flipped from the
-  default", not "descending".
-- Adding a sorting means touching every link in that chain: the `Sorting` and
-  query types, both directions of the query mapping, the default direction, the
-  sorter, and the toggle list in the client component. Let the exhaustive
-  switches lead you.
-
-Filters follow the same shape, and the multi-value ones travel as a comma
-separated list — anything that writes one has to join and anything that reads
-one has to split. A filter that round-trips through the URL wants a test, since
-a multi-value filter coming back as a single value matches nothing and fails
-quietly.
+The state lives in the URL, held by [nuqs](https://nuqs.dev), so a shared link
+arrives sorted and filtered. Each filter is one entry in `filterDefinitions` in
+`modules/list/filters.ts` and each sorting one in `sortingDefinitions` in
+`modules/list/sorting.ts`; the comment on each table says what else a new one
+needs.
 
 ## Everything user-facing is Icelandic
 
 UI copy, and **the query parameters too**. Keep the code identifiers English and
-the wire format Icelandic. The mapping lives in `modules/filters.ts`,
-`modules/sorting.ts` and the hooks in `app/newCars.tsx`, and has to stay in sync
-in both directions — read it there rather than from a list in this file.
+the wire format Icelandic. `llms.txt` is the one exception on the site — its
+readers are agents, not Icelandic car buyers.
 
-New copy that counts things needs Icelandic plural agreement: use `agree()`
-from `modules/plural.ts` rather than testing the number yourself. The singular
-goes with a count ending in 1 _except_ one ending in 11, which is the part that
-is easy to get wrong.
+Copy that counts things needs Icelandic plural agreement: use `agree()` from
+`modules/copy/plural.ts` rather than testing the number yourself.
 
-## Adding or updating a car
+## The AI endpoints
 
-1. Add a `NewCar` entry to the data module, grouped with its make (the list is
-   roughly alphabetical by make, then model).
-2. `price` in ISK using numeric separators: `9_990_000`. List price, pre-grant.
-3. Drop the photo in `public/images/`, named after the car's hero image field
-   and matching the dimensions and aspect ratio of the ones already there.
-4. `expectedDelivery` is a lowercase-able Icelandic phrase and is what makes a
-   car count as "expected" rather than available — it drives both the
-   availability filter and the badge on the card.
-5. Commit messages for this are short and plain: `Add BMW iX3 40`,
-   `Update Skoda lineup`, `Fix B05 seller link`.
+`/api/chat`, the advisor, and `/api/filter-suggestions`, the filter pills above
+the chat input, are public, free to use, and spend money on every call.
+`/api/verdict`, a comparison's written summary, spends it once for each set of
+cars and figures, and serves the rest from the cache — so a script naming new
+sets is what it has to stop, which is what its hourly budget is for.
 
-Copy that counts cars — the site's own description, the assistant's system
-prompt — interpolates the length of the list, so no count needs updating by
-hand. Keep it that way.
+- **Their limits are a security boundary, not a nicety.** The rate limits, the
+  body schemas, the car-details tool's allowlist, redirect check, timeout,
+  response cap and per-answer call limit, and `readSuggestions` putting every
+  suggestion back through its filter's parser: tests pin each one, and all of
+  them stay. The model chooses the URL that tool fetches, and a model can be
+  talked into choosing anything.
+- **A model is chosen on Icelandic, not on general benchmarks.** The advisor
+  only ever answers in Icelandic, so one that tops the English leaderboards and
+  stumbles here is no use; the trade-off is score against cost and speed. The
+  comment on each model constant says what the last comparison found and how to
+  re-run it — do that before changing the model, and update the comment.
+- **Keep anything per-request out of the chat's system prompt.** It inlines the
+  whole car list, and the provider's prompt caching only hits on an identical
+  prefix.
+- **A model never writes a filter value.** The parser reads what a request
+  states outright, for free; a model only picks from options cut from the car
+  data or from the numbers the request gives. A suggestion is tapped, or
+  sent from the bar's button once that shows how many cars it leaves, never
+  applied for you, since a wrong filter quietly empties the list.
 
-## Chat advisor
+## Published data
 
-Lives in `app/api/chat/` and streams from a hosted model through the Vercel AI
-SDK. The model name and provider are config, not architecture: read the route
-rather than assuming. It needs the provider's API key; telemetry is optional and
-its client is only constructed when its token is set.
-
-**The model is picked on Icelandic performance, not on general benchmarks.** The
-advisor only ever answers in Icelandic, so a model that tops the English
-leaderboards and stumbles here is no use, and the trade-off to weigh is score
-against cost and speed — the chat is public and free to use. Miðeind's Icelandic
-LLM leaderboard is the yardstick:
-
-<https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard>
-
-The comment on the model constant in the route says why the current one won.
-Re-run that comparison before swapping the model, and update the comment with
-what you found.
-
-- The endpoint is public and spends money, so `POST` is guarded before it
-  reaches the model: a per-IP rate limit (in-memory and best effort — one window
-  per serverless instance) and a schema check on the body that bounds the
-  message count and size. That schema deliberately stays loose about what is
-  _inside_ a message part; the SDK's conversion owns that shape.
-- The **entire car list is inlined into the system prompt** on every request, as
-  post-grant prices. Changing `NewCar` fields or the grant changes what the model
-  sees — keep the summary in step.
-- Follow-up questions travel inside the message text as markers, parsed and
-  stripped by `modules/chatHelpers.ts`. The stripping also has to handle a
-  partial marker arriving mid-stream — keep that behaviour if you touch it.
-- The car-details tool scrapes an external database with regexes. It is
-  best-effort and returns a message rather than throwing on failure. **The URL is
-  checked against the set of URLs in the car data before anything is fetched** —
-  the model chooses that argument, and a model can be talked into choosing
-  anything. The allowlist, the timeout and the response cap are a security
-  boundary, not a nicety; a test pins the allowlist, and all three stay.
-- Chat history is persisted in `localStorage` through `utils/chatStorage.ts`. Go
-  through it rather than touching `localStorage` directly: every call there can
-  throw (private mode, a full quota, half-written JSON from an older shape) and a
-  broken history must read as an empty one rather than take the page down.
+`/api/cars` and `/llms.txt` are for readers who cannot see the commit that
+changes them, so their shape is a promise and deliberately not `NewCar`: a field
+added to a car does not reach them unless it is added there on purpose. The
+reasoning is in `app/api/cars/carApi.ts`, and its test fails if it is broken.
 
 ## Styling
 
-Tailwind v4 — **no `tailwind.config.js`**. The theme, colours and the extra
-breakpoint are the `@theme` block in `app/globals.css`; read the palette there
-rather than guessing a colour name. Design is mobile-first. Chat markdown is
-styled by plain CSS rules at the bottom of that file, not by utilities.
+Tailwind v4 — **no `tailwind.config.js`**; the theme is the `@theme` block in
+`app/globals.css`. Tailwind's default palette, radii, shadows and breakpoints
+are cleared there, so `bg-gray-100` or `xl:` silently compiles to nothing. Use
+the names defined there, and add one there when a value repeats rather than
+writing it in brackets. Design is mobile-first. Chat markdown is styled by
+plain CSS rules at the bottom of that file, not by utilities.
+
+Light and dark share one set of names. Every colour token is a role — text,
+surface, line, overlay — and the `prefers-color-scheme` block under `@theme`
+is the only place a role takes a different value. So there is no `dark:`
+variant in the codebase, and a new colour should not add one: give the role a
+value in both blocks instead of a literal and a variant beside it. The dark
+values were each picked against the surface they land on rather than by eye,
+so take a pair off the ladder in that file rather than inventing one.
+
+Shadows are the exception that has to live outside `@theme`, read as
+`shadow-(--shadow-chip)`: Tailwind inlines a theme shadow into the utility
+itself, where a dark override would never reach it.
 
 ## Gotchas
 
-- **React Compiler is on.** Don't add `useMemo`/`useCallback`/`memo` by hand; the
-  compiler handles memoisation.
-- **The chat is loaded lazily, on purpose** — the container is a `next/dynamic`
-  import so the AI SDK is off the list's hydration path, and the modal is another
-  one inside it so the markdown renderer is fetched only once someone opens the
-  chat, warmed on intent. Importing either statically puts tens of kilobytes back
-  into the first load for visitors who never chat, which is most of them.
+- **React Compiler is on.** Don't add `useMemo`/`useCallback`/`memo` by hand;
+  the compiler handles memoisation.
+- **The chat is loaded lazily, on purpose** — the bar is a `next/dynamic`
+  import so it is off the list's hydration path, the engine holding `useChat`
+  is another inside it so the AI SDK and zod wait until someone focuses the
+  bar, and the modal a third so the markdown renderer is fetched only once
+  someone opens the chat. Importing any of them statically puts tens of
+  kilobytes back into what every visitor downloads, though most never chat.
 - **`next/image` `sizes` is load-bearing.** A typo in it is silent: the browser
   falls back to `100vw` and fetches the largest candidate. `deviceSizes` in
-  `next.config.js` is tuned to the phones people actually use.
-- **Sorting and filter state lives in React _and_ in the URL** via
-  `router.replace`. Adding state means updating the effect that serialises it,
-  or the URL silently drifts from the UI.
+  `next.config.ts` is tuned to the phones people actually use. A `sizes` with
+  no `vw` in it is worse than none — Next then puts every configured width in
+  the srcset — and an image without one gets a 1x/2x pair off its `width`
+  prop, so that prop has to be the size the box really renders at.
+- **A `showModal()` dialog makes the page behind it inert**, so anything that
+  must stay usable while one is open belongs _inside_ it, and anything fixed
+  belongs beside the panel rather than within it — a transform or a filter
+  becomes the containing block of the fixed things inside it.
+- **Nothing rendered on both sides may read the runtime's default locale.** It
+  is not the same in node as in an Icelandic browser, and it surfaces as a
+  hydration mismatch rather than an error.
+- **Functions run in Dublin**, `regions` in `vercel.json`: the Vercel region
+  nearest Iceland, where nearly every visitor is. Set it there, not with
+  `preferredRegion` in a route, which this Next deprecates with a build warning.
 - Analytics is loaded by a component that injects the script itself. Use its
   `trackEvent` helper for new events, and don't add a second `<script>` for it.
+  Fathom only counts; what was done and to which cars goes through `track` in
+  `utils/track.ts`, to `/api/umferd` and the `veldu-rafbil-events` dataset in
+  Axiom. An event is declared in `modules/analytics/events.ts` before a page
+  can send it, and the browser imports only its type, so zod stays off the
+  list's first load.
+- Commit messages are short and plain: `Add BMW iX3 40`, `Update Skoda lineup`,
+  `Fix B05 seller link`.
 - **Leave the `nextjs-agent-rules` block at the bottom of this file alone.**
   `next dev` rewrites whatever sits between those two markers on startup. It
   preserves everything around them, so the rest of this file is yours.
