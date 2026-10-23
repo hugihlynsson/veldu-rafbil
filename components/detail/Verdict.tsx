@@ -255,8 +255,9 @@ const Verdict: FunctionComponent<Props> = ({ cars, written, endpoint }) => {
   if (verdict)
     return (
       <ReviewSection>
-        {/* Only the words arrive; the heading was there all along */}
-        <div className="animate-message-in">
+        {/* Only the words arrive, the heading there all along, and one
+            rendered with the page was never waited for */}
+        <div className={clsx(verdict !== written && 'animate-message-in')}>
           {verdict.paragraphs.map((paragraph) => (
             <p
               key={paragraph}
