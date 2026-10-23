@@ -219,7 +219,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
                 Bera alla saman <span aria-hidden>→</span>
               </Link>
             </div>
-            <ul className="mt-3 mx-0.5 mb-0 p-0 list-none grid gap-3 md:mx-0 md:grid-cols-3">
+            <ul className="mt-3 -mx-0.5 mb-0 p-0 list-none grid gap-3 md:mx-0 md:grid-cols-3">
               {similar.map((other) => (
                 // The whole card opens the car's page; the button over it compares
                 <li
