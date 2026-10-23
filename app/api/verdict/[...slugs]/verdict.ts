@@ -39,14 +39,19 @@ const keyOf = (cars: ReadonlyArray<Car>): string => {
 
 /**
  * The verdict kept under a key, or `written` kept there when there is none.
- * One function for reading and keeping, as unstable_cache keys on its source:
- * without `written` a miss throws, and nothing is kept.
+ * Without `written` a miss throws, and nothing is kept.
  */
-const kept = (key: string, written?: Verdict): Promise<Verdict> =>
-  unstable_cache(async () => {
+const kept = (key: string, written?: Verdict): Promise<Verdict> => {
+  const keep = async () => {
     if (!written) throw new NotWritten()
     return written
-  }, ['verdict', key])()
+  }
+  // unstable_cache keys on its callback's source as compiled, which is not the
+  // same in every bundle: the page's, which never keeps a verdict, minified
+  // this to a bare throw and so read under a key nothing ever wrote to
+  keep.toString = () => 'verdict'
+  return unstable_cache(keep, ['verdict', key])()
+}
 
 const peek = async (key: string): Promise<Verdict | null> => {
   try {
