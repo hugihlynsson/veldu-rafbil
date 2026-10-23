@@ -191,7 +191,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
           )}
 
           {(!notice || car.evDatabaseUrl) && (
-            <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <div className="mt-11 md:mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
               {!notice && (
                 <ShareButton
                   title={car.label}
@@ -207,7 +207,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
             </div>
           )}
 
-          <section aria-labelledby="similar" className="mt-12 md:mt-16">
+          <section aria-labelledby="similar" className="mt-13 md:mt-16">
             <div className="flex items-baseline justify-between gap-4">
               <h2 id="similar" className={sectionLabel}>
                 Þú gætir líka haft áhuga á:
@@ -219,7 +219,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
                 Bera alla saman <span aria-hidden>→</span>
               </Link>
             </div>
-            <ul className="mt-3 mb-0 p-0 list-none grid gap-3 md:grid-cols-3">
+            <ul className="mt-3 -mx-0.5 mb-0 p-0 list-none grid gap-3 md:mx-0 md:grid-cols-3">
               {similar.map((other) => (
                 // The whole card opens the car's page; the button over it compares
                 <li
