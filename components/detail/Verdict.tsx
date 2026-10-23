@@ -51,12 +51,7 @@ const Skeleton: FunctionComponent = () => (
   </div>
 )
 
-/** The verdict's place while the page checks for one already written */
-export const VerdictPlaceholder: FunctionComponent = () => (
-  <ReviewSection>
-    <Skeleton />
-  </ReviewSection>
-)
+const phraseClassName = 'min-w-0 truncate font-semibold leading-snug'
 
 interface Line {
   text: string
@@ -107,7 +102,7 @@ const ThinkingLine: FunctionComponent<{
         setLine(next(line))
       }}
       className={clsx(
-        'min-w-0 truncate font-semibold leading-snug',
+        phraseClassName,
         leaving ? 'animate-phrase-out' : 'animate-phrase-in',
       )}
     >
@@ -128,6 +123,14 @@ const TICK_MS = 200
 // Long enough to see the bar reach its end before the words take its place
 const FILL_MS = 300
 
+const ProgressTrack: FunctionComponent<{ children?: ReactNode }> = ({
+  children,
+}) => (
+  <div aria-hidden className="mt-2 h-1 rounded-full bg-cloud overflow-hidden">
+    {children}
+  </div>
+)
+
 const ProgressBar: FunctionComponent<Progress> = ({ writingAt, filled }) => {
   // Empty on the server and as it hydrates, wherever the clocks stand
   const [startedAt] = useState(() => performance.now())
@@ -147,7 +150,7 @@ const ProgressBar: FunctionComponent<Progress> = ({ writingAt, filled }) => {
       )
 
   return (
-    <div aria-hidden className="mt-2 h-1 rounded-full bg-cloud overflow-hidden">
+    <ProgressTrack>
       <div
         className="h-full rounded-full bg-stone transition-[width] ease-linear"
         style={{
@@ -155,9 +158,42 @@ const ProgressBar: FunctionComponent<Progress> = ({ writingAt, filled }) => {
           transitionDuration: `${filled ? FILL_MS : TICK_MS}ms`,
         }}
       />
-    </div>
+    </ProgressTrack>
   )
 }
+
+// One line whatever the phrase, so the card holds still as they turn
+const StatusLine: FunctionComponent<{ children: ReactNode }> = ({
+  children,
+}) => (
+  <output className="block mt-2 text-sm leading-snug">
+    <span className="flex items-start gap-2">
+      <span
+        aria-hidden
+        className="w-2 h-2 mt-1.5 shrink-0 rounded-full bg-stone animate-pulse"
+      />
+      {children}
+    </span>
+  </output>
+)
+
+/**
+ * The verdict's place while the page checks for one already written, keeping
+ * room for the line and bar that show if one is to be written, so their
+ * arrival moves nothing below
+ */
+export const VerdictPlaceholder: FunctionComponent = () => (
+  <ReviewSection>
+    <div aria-hidden className="invisible">
+      <StatusLine>
+        <span className={phraseClassName}>{firstPhrase}</span>
+      </StatusLine>
+      <ProgressTrack />
+    </div>
+
+    <Skeleton />
+  </ReviewSection>
+)
 
 const Working: FunctionComponent<{
   names: ReadonlyArray<string>
@@ -166,17 +202,10 @@ const Working: FunctionComponent<{
   // Headed as the verdict will be, so only what is under it changes when it
   // arrives, and the line below is the one that says it is being written
   <ReviewSection>
-    {/* One line whatever the phrase, so the card holds still as they turn */}
-    <output className="block mt-2 text-sm leading-snug">
-      <span className="flex items-start gap-2">
-        <span
-          aria-hidden
-          className="w-2 h-2 mt-1.5 shrink-0 rounded-full bg-stone animate-pulse"
-        />
-        <span className="sr-only">Gervigreindin ber bílana saman</span>
-        <ThinkingLine names={names} />
-      </span>
-    </output>
+    <StatusLine>
+      <span className="sr-only">Gervigreindin ber bílana saman</span>
+      <ThinkingLine names={names} />
+    </StatusLine>
 
     <ProgressBar {...progress} />
 
