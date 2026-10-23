@@ -58,6 +58,34 @@ afterEach(() => {
     vi.doUnmock(mocked)
 })
 
+describe('peekVerdict', () => {
+  // As Next keys it, so a key that carries the callback's source would differ
+  // between the page's bundle and the route's
+  const keyedOnSource = () => {
+    const kept = new Map<string, unknown>()
+    vi.doMock('next/cache', () => ({
+      unstable_cache:
+        (read: () => Promise<unknown>, parts: string[]) => async () => {
+          const key = `${read.toString()}-${parts.join(',')}`
+          if (!kept.has(key)) kept.set(key, await read())
+          return kept.get(key)
+        },
+    }))
+    return kept
+  }
+
+  it('reads the verdict the route kept, under a key no compiler changes', async () => {
+    answering(['stop'])
+    const kept = keyedOnSource()
+    expect(await finished()).toBe('verdict')
+    const { peekVerdict } = await import('./verdict')
+    expect(await peekVerdict([b, a])).toMatchObject({
+      paragraphs: expect.any(Array),
+    })
+    for (const key of kept.keys()) expect(key).not.toMatch(/=>|throw/)
+  })
+})
+
 describe('writeVerdict', () => {
   it('asks once when the first answer is kept', async () => {
     const { calls } = answering(['stop'])
