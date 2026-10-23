@@ -87,7 +87,7 @@ have not needed a browser.
 
 ## Makes with no page from the owner
 
-BYD, Citroën, Fiat, Ford, GWM, Jeep, KGM, Leapmotor, Maxus, Opel, Peugeot,
+BYD, Citroën, Fiat, Ford, GWM, JAC, Jeep, KGM, Leapmotor, Maxus, Opel, Peugeot,
 Range Rover, Suzuki, Volvo. Some may be on the BL or Askja issuu pages; check
 those listings first. Otherwise, the importer's site as linked from the existing
 entries.
@@ -98,6 +98,16 @@ text layer, so render it with `pdf pages`; page 1 prints "Verð" (before the
 grant) beside "Verð m/ styrk". The Atto 3 Evo is sold here as "EVO AWD", at
 `/typur/evo-awd`. The PDF's `Last-Modified` header is its upload date. Read
 for every model on 2026-10-21, from lists uploaded on 2026-08-17.
+
+**JAC** (Suzuki bílar): jac.is is built like byd.is, on the same Sanity
+project, with a page per model at `/typur/<model>` (`e30x`, `t9-ev`) linking a
+"Verðskrá" and a "Tækniupplýsingar" PDF. Both PDFs have a text layer, so
+`pdf text` reads them; the price list prints "Verð" (before the grant) beside
+"Verð m/ styrk". Trust the PDFs over the model page's spec table: on
+2026-10-23 the T9 page said 212 kW and 7.5 s where both PDFs said 70 + 150 kW
+and 8.5 s. The Norwegian site, jacmotors.no, uses the same images at higher
+resolution and is the place to look for a photo. Read on 2026-10-23, from
+lists uploaded on 2026-04-01 (E30X) and 2026-08-06 (T9 EV).
 
 **Range Rover is the one that cannot be started from its entries.** Both
 Electric rows point at `rangerover.com/en-gb`, the manufacturer's UK site rather
