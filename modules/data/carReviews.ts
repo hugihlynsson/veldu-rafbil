@@ -916,10 +916,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'jac-e30x-base': {
     paragraphs: [
-      'JAC E30X er lítill fimm dyra hlaðbakur frá kínverska framleiðandanum JAC, en Volkswagen á helming í móðurfélagi hans. Útlitið sækir í retro-stíl með kringlóttum ljósum og sker sig úr í umferðinni, og hann hentar best sem lipur bíll í bæinn eða annar bíll á heimili.',
-      'Drægnin er stutt í stóra samhenginu en lengri en hjá flestum í sínum verðflokki, og hver km af drægni kostar minna en hjá flestum þeirra. Hann er líka sneggri af stað en flestir á svipuðu verði, svo hann er ekki eftirbátur í umferðinni.',
-      'Á móti kemur að hann hleður hægt, með þeim hægustu á þessu verði, skottið er lítið og hann má ekki draga kerru. MG MG4 Urban Long Range kostar það sama en er með 267 l stærra skott og má draga allt að 500 kg, og Leapmotor B03X ProMax er 200.000 kr. ódýrari með um 55% styttri hleðslustopp.',
-      'E30X er sérstæður og vel búinn smábíll í bæinn, en sá sem ekur oft út á land eða þarf pláss fær meira fyrir peninginn annars staðar.',
+      'JAC E30X er lítill og skemmtilegur hlaðbakur með kringlótt ljós og útlit sem minnir á gömlu smábílana. Hann er hugsaður sem bæjarbíll og passar vel sem annar bíll á heimilinu. JAC er kannski ekki þekkt nafn hér, en þetta er rótgróinn kínverskur framleiðandi og Volkswagen á helminginn í móðurfélaginu.',
+      'Drægnin er auðvitað ekki mikil miðað við rafbíla almennt, en hann kemst lengra en flestir á svipuðu verði og þú borgar minna fyrir hvern km. Hann er líka sprækari af stað en flestir í þessum flokki.',
+      'Gallarnir eru að hann hleður hægt, skottið er lítið og það má ekki setja á hann krók. Ef þig vantar pláss kostar MG MG4 Urban Long Range það sama, er með 267 l stærra skott og má draga allt að 500 kg. Leapmotor B03X ProMax er svo 200.000 kr. ódýrari með um 55% styttri hleðslustopp.',
+      'Fínn og öðruvísi bæjarbíll, en ef þú ferð oft út á land eða þarft pláss færðu meira fyrir peninginn annars staðar.',
     ],
     questions: [
       'Af hverju hann frekar en MG MG4 Urban?',
@@ -937,10 +937,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'jac-t9-ev-base': {
     paragraphs: [
-      'JAC T9 EV er stór fjórhjóladrifinn pallbíll með tvöföldu húsi og fimm sætum, 5,33 m á lengd, frá kínverska framleiðandanum JAC, sem hefur lengi smíðað vörubíla og pallbíla. Hann er byggður eins og hefðbundinn vinnupallbíll, á grind með heila hásingu og blaðfjaðrir að aftan, og hentar þeim sem þurfa pall og dráttargetu í vinnu eða sveit.',
-      'Hann má draga 2.000 kg, meira en flestir á svipuðu verði, og með fjórhjóladrifinu er hann einn fárra rafbíla hér sem ræður við raunveruleg verk utan malbiks. Hann getur líka gefið rafmagn út, til dæmis fyrir verkfæri á vinnusvæði.',
-      'Drægnin er hins vegar mjög stutt, með þeirri stystu á þessu verði, og hann hleður hægt, svo langferðir með kerru í vetrarkulda kalla á mörg og löng stopp. KGM Musso EV 4WD er 600.000 kr. ódýrari, með 49 km meiri drægni og um 35% styttri hleðslustopp, en má draga 200 kg minna.',
-      'T9 EV er sterkur vinnubíll fyrir þá sem draga þungt og aka mest í heimabyggð, en til langferða er hann ekki gerður.',
+      'JAC T9 EV er stór pallbíll með fjórhjóladrifi og tvöföldu húsi, rúmir fimm metrar á lengd og með pláss fyrir fimm. JAC hefur lengi smíðað vörubíla og pallbíla, og þessi er byggður eins og gamaldags vinnujálkur: á grind, með heila hásingu og fjaðrir að aftan. Hann er fyrir þá sem þurfa pall og krók, í vinnunni eða í sveitinni.',
+      'Hann má draga 2.000 kg, meira en flestir á svipuðu verði, og með fjórhjóladrifinu kemst hann um malarvegi, snjó og vinnusvæði. Svo geturðu stungið verkfærum beint í samband við hann.',
+      'Gallinn er drægnin: hún er mjög stutt, með þeirri stystu á þessu verði, og hann hleður hægt, svo með kerru aftan í og í frosti þarf að stoppa oft og lengi. KGM Musso EV 4WD er 600.000 kr. ódýrari, með 49 km meiri drægni og um 35% styttri hleðslustopp, en má draga 200 kg minna.',
+      'Sterkur vinnubíll ef þú dregur þungt og keyrir mest í heimabyggð, en langferðabíll er hann ekki.',
     ],
     questions: [
       'Af hverju hann frekar en KGM Musso EV 4WD?',
