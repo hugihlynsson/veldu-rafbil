@@ -167,7 +167,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'hyundai-inster-base': [
     'kia-ev2-standard-range',
-    'leapmotor-b10-base',
+    'jac-e30x-base',
     'leapmotor-b03x-promax',
   ],
   'hyundai-inster-long-range': [
@@ -210,19 +210,29 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'toyota-proace-verso-base',
     'kia-pv5-base',
   ],
+  'jac-e30x-base': [
+    'leapmotor-b03x-promax',
+    'mg-mg4-urban-long-range',
+    'renault-r5-e-tech-base',
+  ],
+  'jac-t9-ev-base': [
+    'kgm-musso-ev-4wd',
+    'kgm-musso-ev-base',
+    'subaru-e-outback-base',
+  ],
   'jeep-avenger-base': [
     'fiat-600e-base',
     'suzuki-e-vitara-4x4-allgrip',
     'toyota-urban-cruiser-active-fwd',
   ],
   'kgm-musso-ev-base': [
+    'jac-t9-ev-base',
     'kgm-torres-evx',
     'leapmotor-c10-promax-awd',
-    'hongqi-ehs5-base',
   ],
   'kgm-musso-ev-4wd': [
+    'jac-t9-ev-base',
     'subaru-e-outback-base',
-    'peugeot-e-5008-dual-motor',
     'kgm-torres-evx',
   ],
   'kgm-torres-evx': [
@@ -304,7 +314,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'leapmotor-b03x-promax': [
     'leapmotor-b05-pro',
     'mg-mg4-urban-long-range',
-    'hyundai-inster-base',
+    'jac-e30x-base',
   ],
   'leapmotor-b05-pro': [
     'leapmotor-b03x-promax',
