@@ -31,8 +31,11 @@ way in; the next run depends on it.
   base moves the variant moves with it.
 - **Only 100% electric cars.** The importers' lists are full of hybrids, plug-in
   hybrids and diesel siblings of the EV. Skip them. Lists also mix in commercial
-  vehicles: cargo vans and pickups (Kia PV5 Cargo, Toyota Hilux, Proace) are not
-  in the list, while people carriers (PV5 Passenger, Proace Verso) are.
+  vehicles: cargo vans (Kia PV5 Cargo, Proace) are not in the list, while people
+  carriers (PV5 Passenger, Proace Verso) are. A pickup goes by its cab: a double
+  cab with five seats carries a family as well as a load, and is in the list
+  (KGM Musso EV, JAC T9 EV), while a two-seat single cab is a work truck and is
+  not.
 - **`price` is always the price before the grant, with VAT.** The site
   subtracts the grant itself, so a figure that already has it deducted gets it
   deducted twice. Lists differ in what they print, and nearly all of them label
