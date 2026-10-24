@@ -2932,6 +2932,22 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Toyota',
+    model: 'Hilux',
+    heroImageName: 'toyota-hilux',
+    price: 12_590_000,
+    sellerUrl: 'https://www.toyota.is/new-cars/hilux',
+    acceleration: 9,
+    capacity: 59.2,
+    range: 255,
+    evDatabaseUrl:
+      'https://ev-database.org/car/3652/Toyota-Hilux-Electric-592-kWh',
+    drive: 'AWD',
+    seats: 5,
+    power: 144,
+    timeToCharge10To80: 30,
+  },
+  {
+    make: 'Toyota',
     model: 'Proace City Verso',
     heroImageName: 'toyota-proace-city-verso',
     price: 8_050_000,
