@@ -324,9 +324,11 @@ other one there.
    ```
 
    Then resize and compress with sharp's mozjpeg encoder, which `next`
-   already installs. The target is about 200 KB, what the owner gets from
-   TinyPNG; `sips` needs a visibly worse quality to get there. Raise or lower
-   `quality` until the size lands near it (77 did for the EQS):
+   already installs. The target is 200–300 KB: under it gives away detail for
+   no gain, over it costs every visitor. `sips` needs a visibly worse quality
+   to get there. The quality that lands in it depends on the photo, so try a few
+   and take one inside the range (77 did for the EQS, 90 for the plain sky
+   behind the JAC T9 EV, 70 for the greenhouse behind the Toyota Hilux):
 
    ```bash
    node -e "require('sharp')('crop.jpg').resize(1920,1280)

@@ -951,10 +951,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Af hverju hleður hann svona hægt?',
       'Getur hann knúið verkfæri með rafmagni?',
       'Hvað nær ábyrgðin á rafhlöðunni yfir?',
-      'Hvernig er hann miðað við Subaru e-Outback?',
+      'Af hverju hann frekar en Toyota Hilux?',
       'Er JAC traustur framleiðandi?',
     ],
-    facts: 'b013446935c0',
+    facts: '5e4baafee8c2',
   },
   'jeep-avenger-base': {
     paragraphs: [
@@ -1005,9 +1005,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'KGM Musso EV 4WD er stór rafdrifinn pallbíll með fjórhjóladrifi, rúmlega fimm metrar á lengd, frá kóreska framleiðandanum sem áður hét SsangYong. Hann hentar þeim sem þurfa pall, dráttargetu og grip í vinnu, á malarvegum og utan malbiks.',
       'Hann má draga 1.800 kg, meira en flestir á svipuðu verði, og fjórhjóladrifið nýtist vel í snjó og drullu. KGM ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km, mun lengur en flestir aðrir framleiðendur.',
       'Gallarnir eru að hann er meðal þeirra sem drífa styst og hlaða hægast í þessum verðflokki, svo langferðir kalla á þolinmæði. Framhjóladrifni KGM Musso EV er 1.300.000 kr. ódýrari og drífur 41 km lengra, fyrir þá sem þurfa pallinn en ekki fjórhjóladrifið. Sá sem dregur þungt fær 200 kg meiri dráttargetu í JAC T9 EV, en hann er 600.000 kr. dýrari og drífur 49 km styttra.',
-      'Musso EV 4WD er ódýrari fjórhjóladrifni rafpallbíllinn sem seldur er hér, sniðinn að vinnu frekar en langferðum.',
+      'Musso EV 4WD er ódýrasti fjórhjóladrifni rafpallbíllinn sem seldur er hér, sniðinn að vinnu frekar en langferðum.',
     ],
-    facts: '7c1121447b0c',
+    facts: 'b2d51bc1b9ed',
     questions: [
       'Hvernig er drægnin þegar dregið er?',
       'Hvað má setja mikla þyngd á pallinn?',
@@ -1016,7 +1016,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Af hverju hleður hann svona hægt?',
       'Er JAC T9 EV betri kostur með kerru?',
       'Dugar framhjóladrifna gerðin í vinnu?',
-      'Af hverju hann frekar en Subaru e-Outback?',
+      'Hvernig er hann miðað við Toyota Hilux?',
       'Hvað felst í milljón km ábyrgðinni?',
       'Er KGM bara nýtt nafn á SsangYong?',
     ],
@@ -3920,6 +3920,27 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hratt hleður hann í frosti?',
       'Hvernig er útsýnið aftur úr honum?',
     ],
+  },
+  'toyota-hilux-base': {
+    paragraphs: [
+      'Toyota Hilux er pallbíll með tvöföldu húsi, fjórhjóladrifi og plássi fyrir fimm, og þetta er rafútgáfan af honum. Hilux hefur í áratugi verið einn þekktasti vinnubíll heims, frægur fyrir að endast og þola illa meðferð. Rafútgáfan er fyrir þá sem vilja það nafn án dísilvélar, í vinnu í bænum eða í sveitinni.',
+      'Stærsti kosturinn er Toyota sjálft: umboð og verkstæði um allt land og orðspor fyrir áreiðanleika sem fáir ná. Hann má draga 1.600 kg, sem dugar fyrir flestar kerrur, þótt flestir á svipuðu verði dragi meira.',
+      'Gallinn er að hann fær ekki rafbílastyrkinn og er dýr, drægnin er mjög stutt, með þeirri stystu á þessu verði, og hann hleður hægt. Með kerru í frosti kemstu ekki langt. KGM Musso EV 4WD er 4.900.000 kr. ódýrari, með 124 km meiri drægni og um 20% styttri hleðslustopp, og JAC T9 EV er 4.300.000 kr. ódýrari og má draga 400 kg meira.',
+      'Hilux er fyrir þá sem treysta merkinu og keyra stuttar vegalengdir, en á pappírnum færðu meira fyrir minna annars staðar.',
+    ],
+    questions: [
+      'Af hverju hann frekar en KGM Musso EV 4WD?',
+      'Er JAC T9 EV betri kostur með kerru?',
+      'Hvað dregur dísilútgáfan miklu meira?',
+      'Hvað kemst hann langt með kerru í frosti?',
+      'Hvað má setja mikla þyngd á pallinn?',
+      'Er hann jafn sterkur og dísil-Hilux?',
+      'Af hverju fær hann ekki rafbílastyrk?',
+      'Hvað nær ábyrgðin á rafhlöðunni yfir?',
+      'Er hann með driflæsingu og lágt drif?',
+      'Hvernig er hann í akstri á malarvegum?',
+    ],
+    facts: 'fbb2dda80466',
   },
   'toyota-proace-city-verso-base': {
     paragraphs: [

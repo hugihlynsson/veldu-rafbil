@@ -218,7 +218,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'jac-t9-ev-base': [
     'kgm-musso-ev-4wd',
     'kgm-musso-ev-base',
-    'subaru-e-outback-base',
+    'toyota-hilux-base',
   ],
   'jeep-avenger-base': [
     'fiat-600e-base',
@@ -230,11 +230,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'kgm-torres-evx',
     'leapmotor-c10-promax-awd',
   ],
-  'kgm-musso-ev-4wd': [
-    'jac-t9-ev-base',
-    'subaru-e-outback-base',
-    'kgm-torres-evx',
-  ],
+  'kgm-musso-ev-4wd': ['jac-t9-ev-base', 'toyota-hilux-base', 'kgm-torres-evx'],
   'kgm-torres-evx': [
     'leapmotor-c10-promax',
     'renault-scenic-e-tech-ev60',
@@ -895,6 +891,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'subaru-uncharted-base',
     'byd-sealion-7-base',
     'nissan-ariya-e-4orce',
+  ],
+  'toyota-hilux-base': [
+    'jac-t9-ev-base',
+    'kgm-musso-ev-4wd',
+    'kgm-musso-ev-base',
   ],
   'toyota-proace-city-verso-base': [
     'mercedes-benz-eqt-200',
