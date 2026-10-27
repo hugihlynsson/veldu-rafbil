@@ -390,14 +390,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'byd-atto-3-evo-base': {
     paragraphs: [
-      'BYD Atto 3 Evo, sem umboðið selur sem EVO AWD, er ný kynslóð Atto 3: kraftmikill fimm sæta jepplingur sem leggur megináherslu á mikil afköst og akstursánægju. Hann sameinar fjórhjóladrif og mikið vélarafl á fremur hagstæðu verði, og höfðar sérstaklega til þeirra sem vilja mikla snerpu í daglegum akstri.',
-      'Helsti styrkleiki bílsins er hve snöggur og aflmikill hann er, enda er hann meðal þeirra allra sneggstu í sínum verðflokki. Fjórhjóladrifið tryggir gott veggrip í snjó og hálku, og á ferðum milli landshluta hleður hann hraðar en flestir aðrir. Farangursrýmið er 490 lítrar, auk 101 lítra hólfs undir húddinu.',
-      'Helsti ókosturinn er drægnin, en bíllinn drífur fremur stutt og styttra en flestir keppinautar. Hún dugar í flestan daglegan akstur en rýrnar í íslenskum vetrarkulda og krefst meiri skipulagningar á langferðum. Ef slíkt vegur þungt gæti XPENG G6 AWD Performance hentað betur, en hann býður upp á 80 km meiri drægni og um 30% styttri hleðslustopp fyrir 200.000 kr. meira.',
-      'Fyrir þá sem setja mikið afl og öruggt vetrargrip í fyrsta sæti er Atto 3 Evo áhugaverður kostur, svo framarlega sem drægnin uppfyllir þarfirnar.',
+      'BYD Atto 3 Evo, sem umboðið selur sem EVO AWD, er ný kynslóð Atto 3: fimm sæta jepplingur í millistærð með fjórhjóladrifi og miklu afli. Hann er fyrir þá sem vilja sprækan fjölskyldubíl sem ræður við vetrarfærðina. BYD er stærsti rafbílaframleiðandi heims og smíðar rafhlöðurnar sínar sjálft.',
+      'Hann er með þeim sneggstu á sínu verði og hleður hraðar en flestir þeirra, svo stoppin á leiðinni út á land eru stutt. Skottið er líka stærra en hjá flestum á svipuðu verði, og framskott bætist við.',
+      'Gallinn er drægnin: hann drífur styttra en flestir á svipuðu verði, og veturinn tekur sinn toll. Hongqi EHS5 er líka fjórhjóladrifinn og álíka sprækur, en kostar 1.000.000 kr. minna, drífur 52 km lengra og hleðslustoppin eru um 30% styttri. Hongqi er hins vegar nýtt merki hér. XPENG G6 AWD Performance drífur 80 km lengra og er með 81 l stærra skott, fyrir 200.000 kr. meira.',
+      'Skemmtilegur og sprækur jepplingur, en á þessu verði færðu meiri drægni annars staðar.',
     ],
     questions: [
       'Er XPENG G6 AWD Performance betri kostur?',
-      'Hvernig er hann miðað við Smart #1 Brabus?',
+      'Er Hongqi EHS5 ekki betri kaup?',
       'Af hverju frekar hann en Subaru Uncharted?',
       'Hversu hratt hleður hann á langferðum?',
       'Hvað dregur hann í miklum vetrarkulda?',
@@ -407,8 +407,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Eyðir hann miklu við sportlegan akstur?',
       'Hvernig er plássið í aftursætunum?',
     ],
-    facts: 'db6ccff2d4e3',
-    model: 'gemini-3.8-flash, thinking medium',
+    facts: '85e3433d18b7',
   },
   'byd-dolphin-base': {
     paragraphs: [
@@ -924,7 +923,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     questions: [
       'Af hverju hann frekar en MG MG4 Urban?',
       'Af hverju hann frekar en Leapmotor B03X?',
-      'Hvernig er hann miðað við Renault R5?',
+      'Hvernig er hann miðað við Leapmotor B05?',
       'Hve langt tekur hleðslustopp á ferðalagi?',
       'Kemst barnavagn í skottið?',
       'Má setja á hann hjólagrind?',
@@ -933,7 +932,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver stendur að baki JAC?',
       'Hvernig er skjárinn og hugbúnaðurinn?',
     ],
-    facts: 'bfe61cdbfb41',
+    facts: '17d797989c77',
   },
   'jac-t9-ev-base': {
     paragraphs: [
@@ -1134,18 +1133,18 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kia-ev3-long-range-awd': {
     paragraphs: [
       'Kia EV3 Long Range AWD er lítill jepplingur með fjórhjóladrifi, ætlaður þeim sem vilja lipran bíl í þéttbýli sem ræður líka við vetrarfærð og langferðir.',
-      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og má draga 1.500 kg, meira en flestir keppinautar hans.',
+      'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, svo hann dugar vel milli landshluta, líka á veturna.',
       'Helsti ókosturinn er að skottið er minna en hjá flestum þeirra. Skoda Elroq 85x er 200.000 kr. ódýrari, líka fjórhjóladrifinn og drífur álíka langt, en er með 57 l stærra skott og má draga 300 kg meira. Framhjóladrifni Kia EV3 Long Range sparar 1.100.000 kr. og drífur 33 km lengra.',
       'EV3 Long Range AWD er hagkvæmur kostur fyrir þá sem vilja nettan og langdrægan bíl með öruggu gripi allt árið.',
     ],
-    facts: '433a17ab73b8',
+    facts: '601107deef96',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er fjórhjóladrifið 1,1 milljónar virði?',
       'Af hverju hann frekar en Skoda Elroq?',
       'Hleður hann hraðar en Skoda Elroq 85x?',
       'Er Subaru Uncharted miklu sprækari?',
-      'Af hverju hann frekar en Smart #3 Pulse?',
+      'Er Hongqi EHS5 ekki betri kaup?',
       'Hentar framhjóladrifna útfærslan betur?',
       'Er skottið nógu stórt fyrir fjölskyldu?',
       'Ræður hann vel við 1.500 kg tengivagn?',
@@ -1375,10 +1374,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'leapmotor-b03x-promax': {
     paragraphs: [
-      'Leapmotor B03X ProMax er smábíll með fimm sætum sem hentar einkar vel sem lipur borgarbíll eða í styttri ferðir á milli nærliggjandi bæja. Hann höfðar fyrst og fremst til þeirra sem vilja nýjan og einfaldan rafbíl fyrir daglegar þarfir án mikils tilkostnaðar.',
-      'Þótt hann drífi mjög stutt á heildina litið kemst hann lengra en flestir í sínum verðflokki, sem dugar prýðilega í hversdagslegt skutl jafnvel í vetrarkulda. Þegar lagt er í lengri ferðir er hann meðal þeirra sem hlaða hraðast miðað við keppinautana, þannig að hleðslustoppin verða styttri. Hann er einnig aflmeiri en gengur og gerist meðal sambærilegra bíla, sem gerir hann sérlega snöggan og léttan í vasa í þéttbýli.',
-      'Stærsti gallinn er hins vegar sá að systurbíllinn Leapmotor B05 Pro er 100.000 kr. ódýrari, kemst 19 km lengra og er með afturhjóladrifi. Einnig býður MG MG4 Urban Long Range upp á 34 km meiri drægni, þótt hann tefji um þriðjungi lengur við hraðhleðslustöðvar.',
-      'Fyrir kaupendur sem horfa stíft í verð og vilja lipran bíl í bæinn er B03X ProMax fyllilega athugunarverður, en hagkvæmari valkostir innan sömu fjölskyldu gera honum engu að síður erfitt fyrir.',
+      'Leapmotor B03X ProMax er lítill jepplingur með fimm sætum og aðeins hærri setstöðu en venjulegur smábíll. Hann er hugsaður sem ódýr og einfaldur heimilisbíll fyrir bæinn og styttri ferðir út fyrir hann. Leapmotor er ungt kínverskt merki sem Stellantis, eigandi Peugeot og Opel, á stóran hlut í.',
+      'Drægnin er stutt miðað við rafbíla almennt, en hann kemst lengra en flestir á svipuðu verði og þú borgar lítið fyrir hvern km. Hann hleður líka með þeim hröðustu í þessum verðflokki, svo stoppin á leiðinni út á land verða styttri.',
+      'Það sem flækir málið er systurbíllinn Leapmotor B05 Pro: hann er 100.000 kr. ódýrari og drífur 19 km lengra, en er með afturhjóladrifi, sem er síðra í snjó og hálku, og 62 l minna skott. Vantar þig pláss er MG MG4 Urban Long Range með 170 l stærra skott og 34 km meiri drægni fyrir 200.000 kr. meira, en hleðslustoppin eru um 30% lengri.',
+      'Hagkvæmur bæjarbíll, og betri kostur en B05 ef þú keyrir mikið í snjó.',
     ],
     questions: [
       'Af hverju hann frekar en Leapmotor B05 Pro?',
@@ -1393,18 +1392,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er raundrægnin í íslenskum vetri?',
     ],
     facts: 'be8b2a9c38a3',
-    model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-b05-pro': {
     paragraphs: [
-      'Leapmotor B05 Pro er fimmsæta fólksbíll sem höfðar einkum til þeirra sem leita að hagkvæmum hversdagsbíl. Hann sker sig úr með því hve mikið fæst fyrir tiltölulega lágt kaupverð, bæði hvað varðar drægni og afl.',
-      'Þótt bíllinn dragi fremur stutt á heildina litið kemst hann lengra en flestir á svipuðu verði. Hleðslustoppin á langferðum eru tiltölulega stutt miðað við samkeppnina, og hann býr yfir mun meira afli og snerpu en flestir ódýrari rafbílar, sem kemur sér vel við að taka fram úr eða aka inn á stofnbrautir.',
-      'Afturhjóladrifið krefst hins vegar meiri varkárni í hálku og snjó en framhjóladrif keppinauta eins og MG MG4 Urban Long Range, auk þess sem drægnin dregst saman í íslenskum vetrarkulda. Fyrir þá sem aka mikið milli landshluta getur Leapmotor B05 ProMax borgað sig, enda býður hann upp á umtalsvert meiri drægni fyrir hóflegan verðmun. Fyrir daglegan akstur í og við bæinn er Pro-útfærslan engu að síður einkar kjarngóður kostur.',
+      'Leapmotor B05 Pro er fimm sæta hlaðbakur sem höfðar einkum til þeirra sem leita að hagkvæmum hversdagsbíl. Hann sker sig úr með því hve mikið fæst fyrir tiltölulega lágt kaupverð, bæði hvað varðar drægni og afl.',
+      'Þótt bíllinn drífi fremur stutt á heildina litið kemst hann lengra en flestir á svipuðu verði. Hleðslustoppin á langferðum eru tiltölulega stutt miðað við samkeppnina, og hann býr yfir mun meira afli og snerpu en flestir ódýrari rafbílar, sem kemur sér vel við að taka fram úr eða aka inn á stofnbrautir.',
+      'Afturhjóladrifið krefst hins vegar meiri varkárni í hálku og snjó en framhjóladrif keppinauta eins og MG MG4 Urban Long Range, sem er líka með 232 l stærra skott, auk þess sem drægnin dregst saman í íslenskum vetrarkulda. Fyrir þá sem aka mikið milli landshluta getur Leapmotor B05 ProMax borgað sig, enda býður hann upp á umtalsvert meiri drægni fyrir hóflegan verðmun. Fyrir daglegan akstur í og við bæinn er Pro-útfærslan engu að síður einkar kjarngóður kostur.',
     ],
     questions: [
       'Borgar ProMax-útfærslan sig fyrir mig?',
       'Hvað hefur hann fram yfir MG MG4?',
-      'Er hann betri kaup en Hyundai INSTER?',
+      'Er hann betri kaup en JAC E30X?',
       'Hvernig er hann miðað við Leapmotor B03X?',
       'Hvernig ræður afturdrifið við vetrarfærð?',
       'Munar miklu um meira afl en í keppinautum?',
@@ -1413,7 +1411,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hve mikið dregst drægnin saman í kulda?',
       'Hvernig er plássið í aftursætunum?',
     ],
-    facts: 'c307e4ef69b1',
+    facts: 'b5d2a518dc65',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-b05-promax': {
@@ -4385,9 +4383,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'volvo-ex60-p12': {
     paragraphs: [
-      'Volvo EX60 P12 er fjórhjóladrifinn lúxusjepplingur sem hentar kröfuhörðum ökumönnum sem þurfa á miklu langdrægi að halda í alls kyns veðrum. Bíllinn drífur lengst allra bíla í sínum verðflokki, sem gerir vetrarferðir milli landshluta áhyggjulausar.',
-      'Auk framúrskarandi drægni hleður hann meðal þeirra allra hröðustu þegar stoppað er á langferðum. Hann býr yfir gríðarlegu afli, er meðal þeirra allra sneggstu og fjórhjóladrifið tryggir öruggt grip í snjó og bleytu. Þrátt fyrir hátt kaupverð fær maður mjög mikið fyrir peninginn þegar litið er til kílómetrafjöldans sem hann kemst á hverri hleðslu.',
-      'Helsti ókosturinn er kaupverðið, enda er bíllinn fremur dýr. Hafi maður ekki þörf fyrir svo mikla drægni má spara heila milljón króna með því að velja útfærsluna Volvo EX60 P10, sem dugar enn afar vel. Audi Q6 e-tron býður einnig upp á talsvert lægra verð, þótt hann fari styttra og hlaði hægar. Fyrir þá sem vilja hámarksdrægni og mikil afköst er EX60 P12 engu að síður eitt heildstæðasta valið.',
+      'Volvo EX60 P12 er lúxusjepplingur í millistærð með fjórhjóladrifi, og drífur lengst allra á sínu verði. Hann er fyrir þá sem keyra mikið út á land og vilja hugsa sem minnst um hleðslu, sumar sem vetur.',
+      'Hann hleður líka með þeim hröðustu, svo þegar þú þarft að stoppa er það stutt. Aflið er mikið, hann er með þeim sneggstu á sínu verði og má draga 2.400 kg, sem dugar fyrir flest hjólhýsi. Miðað við drægnina færðu líka mikið fyrir peninginn.',
+      'Veikleikarnir eru fáir og sá stærsti er verðið. BMW iX3 50 xDrive er nánast jafnoki hans: 100.000 kr. ódýrari og drífur álíka langt, en er sekúndu lengur í hundraðið og má draga 400 kg minna. Ef þú þarft ekki alla þessa drægni sparar Volvo EX60 P10 þér 1.000.000 kr. og drífur samt langt.',
+      'Ef drægni og krókur skipta þig mestu er erfitt að gera betur á þessu verði.',
     ],
     questions: [
       'Borgar sig að spara og velja P10?',
@@ -4402,7 +4401,6 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Borgar risarafhlaðan sig miðað við verð?',
     ],
     facts: '122bd17716d0',
-    model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-ex90-twin-motor': {
     paragraphs: [
