@@ -86,7 +86,7 @@ const CarView: FunctionComponent<Props> = ({
           list has its photos. A sheet is only ever md up, and its photo runs
           to its edges: the window less 184px, the margins and the step
           buttons, up to the sheet's 960px, which CarSheet sets */}
-      <div className={clsx(!sheet && 'md:pl-10 md:pr-6')}>
+      <div className={clsx(!sheet && 'md:px-10')}>
         {sheet ? (
           <SheetHero car={car} />
         ) : (

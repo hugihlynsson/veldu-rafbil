@@ -30,7 +30,7 @@ interface Props {
 }
 
 // The car page's photo and the list's cards keep these edges from md
-const gutter = 'px-(--gutter) md:pl-10 md:pr-6'
+const gutter = 'px-(--gutter) md:px-10'
 // Three or four cars outgrow the page from lg, centred on it as the list's
 // grid is, while the header stays where the list has it
 const breakout =
@@ -81,7 +81,7 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
     scrollingWidth[cars.length],
   )
   // The width the columns share: the page less its edges, or the grid's
-  const pageWidth = wide ? 1200 : 960
+  const pageWidth = wide ? 1200 : 944
 
   return (
     <main className="max-w-page mx-auto pb-14 md:pb-24">
