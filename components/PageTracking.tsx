@@ -6,21 +6,19 @@ import { usePathname } from 'next/navigation'
 import {
   MAX_DURATION_MS,
   pageOf,
+  readShare,
   referrerHost,
   scrollDepth,
   type PageKind,
 } from '@/modules/analytics/visit'
 import { isListShown, sheetScrollDepth } from '@/utils/carSheet'
 import { takePageBeforeLoad } from '@/utils/pageBeforeLoad'
-import { flushTracked, track } from '@/utils/track'
+import { flushTracked, shortId, track } from '@/utils/track'
 
 // The page before this one in the tab, for the next to say it came from
 let previousPage: PageKind | undefined
 // Only the first page of a document was reached from document.referrer
 let isFirstView = true
-
-const newViewId = () =>
-  crypto.randomUUID?.().slice(0, 8) ?? Math.random().toString(36).slice(2, 10)
 
 const currentDepth = () =>
   scrollDepth(
@@ -39,11 +37,17 @@ export default function PageTracking() {
 
   useEffect(() => {
     const page = pageOf(pathname)
-    const viewId = newViewId()
+    const viewId = shortId()
     const referrer = isFirstView
       ? referrerHost(document.referrer, window.location.host)
       : undefined
     const from = isFirstView ? takePageBeforeLoad() : previousPage
+    const shared = readShare(window.location.search)
+    if (shared.found) {
+      const { pathname, hash } = window.location
+      window.history.replaceState(null, '', pathname + shared.search + hash)
+    }
+    const shareId = isFirstView ? shared.shareId : undefined
     isFirstView = false
     // The list stays under the sheet with the page locked behind it, so the
     // sheet's own panel is what is read, and the query is still the list's
@@ -54,8 +58,9 @@ export default function PageTracking() {
       name: 'page_viewed',
       viewId,
       from,
-      query: inSheet ? '' : window.location.search.slice(0, 300),
+      query: inSheet ? '' : shared.search.slice(0, 300),
       ...(referrer && { referrer }),
+      ...(shareId && { shareId }),
       ...(inSheet && { sheet: true }),
     })
     previousPage = page.kind

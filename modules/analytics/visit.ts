@@ -84,3 +84,35 @@ export const referrerHost = (
     return undefined
   }
 }
+
+// Icelandic, as every parameter on the site is: "shared"
+export const SHARE_PARAM = 'deilt'
+
+// Read by the schema too, as an id it refused would drop the whole page view
+export const SHARE_ID_PATTERN = /^[0-9a-z]{4,12}$/
+
+/** A link to share, naming the share it is, in place of any it was opened from */
+export const shareUrl = (href: string, shareId: string): string => {
+  const url = new URL(href)
+  url.searchParams.set(SHARE_PARAM, shareId)
+  return url.href
+}
+
+/**
+ * The share a page was opened from, and the query without it. The query is
+ * what the address bar keeps, so a reload or a bookmark is not counted again.
+ */
+export const readShare = (
+  search: string,
+): { shareId: string | undefined; search: string; found: boolean } => {
+  const params = new URLSearchParams(search)
+  const found = params.has(SHARE_PARAM)
+  const candidate = params.get(SHARE_PARAM) ?? ''
+  params.delete(SHARE_PARAM)
+  const rest = params.toString()
+  return {
+    shareId: SHARE_ID_PATTERN.test(candidate) ? candidate : undefined,
+    search: rest ? `?${rest}` : '',
+    found,
+  }
+}
