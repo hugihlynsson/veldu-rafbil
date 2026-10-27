@@ -25,6 +25,8 @@ interface Props {
   review?: CarReview
   /** Over the list on a desktop, which is the page and has the logo */
   sheet?: boolean
+  /** For everything under the photo, as a sheet steps to the car */
+  contentClassName?: string
 }
 
 /** The photo at the top, which CarSheet also preloads for the cars either side */
@@ -59,7 +61,13 @@ const eyebrow =
 const sectionLabel = 'm-0 text-sm font-semibold'
 
 /** One car's own page: its photo and figures, a review, and the cars like it */
-const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
+const CarView: FunctionComponent<Props> = ({
+  car,
+  similar,
+  review,
+  sheet,
+  contentClassName,
+}) => {
   const subTitle = carSubtitle(car)
   const notice = deprecatedNotice(car)
   const grantChange = grantChangeNotice(car)
@@ -95,7 +103,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
         />
       </div>
 
-      <div className={pageColumn}>
+      <div className={clsx(pageColumn, contentClassName)}>
         {/* The review's measure, which the rest of the page keeps, centred
             under the photo as it is on a phone */}
         <div className="md:max-w-prose md:mx-auto">

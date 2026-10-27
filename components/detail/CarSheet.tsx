@@ -101,7 +101,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
   const shownCar = useRef(car)
   const path = carPathOf(car)
   const { previous, next } = neighboursOf(shown, car)
-  // Which way the car came in, so it slides from that side
+  // Which way the car came in, so what is under its photo slides from that side
   const [arrival, setArrival] = useState<SheetStep | null>(null)
 
   // The close button for a keyboard, to start from; for a tap or a click the
@@ -291,15 +291,17 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
                 </div>
               </div>
 
-              {/* Keyed, so the photo goes with the car rather than lingering */}
-              <div key={car.id} className={clsx(arrival && arrivals[arrival])}>
-                <CarView
-                  car={car}
-                  similar={similarTo(car)}
-                  review={reviewOf(car)}
-                  sheet
-                />
-              </div>
+              {/* Keyed, so the photo goes with the car rather than lingering.
+                  Only what is under it slides: the photo is preloaded, and
+                  faded it would show the sheet through it. */}
+              <CarView
+                key={car.id}
+                car={car}
+                similar={similarTo(car)}
+                review={reviewOf(car)}
+                sheet
+                contentClassName={clsx(arrival && arrivals[arrival])}
+              />
             </div>
             {canStep && stepButtonTo('next')}
           </div>
