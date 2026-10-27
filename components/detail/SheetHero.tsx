@@ -38,7 +38,9 @@ const SheetHero: FunctionComponent<Props> = ({ car }) => {
             preload
             className={clsx(
               'w-full h-auto block',
-              !isTop && 'absolute top-0 left-0',
+              // Positioned either way, so the new one stays over the old as its
+              // fade ends: an opacity of 1 would drop it under the absolute one
+              isTop ? 'relative' : 'absolute top-0 left-0',
               fading && (loaded === layer ? 'animate-hero-in' : 'opacity-0'),
             )}
             onLoad={isTop ? () => setLoaded(layer) : undefined}
