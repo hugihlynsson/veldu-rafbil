@@ -27,6 +27,17 @@ interface Props {
   sheet?: boolean
 }
 
+/** The photo at the top, which CarSheet also preloads for the cars either side */
+export const heroImageProps = (car: Car, sheet?: boolean) => ({
+  alt: '',
+  sizes: sheet
+    ? '(max-width: 1143px) calc(100vw - 184px), 960px'
+    : '(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 64px), 960px',
+  src: `/images/${car.heroImageName}.jpg`,
+  width: 1920,
+  height: 1280,
+})
+
 /** The name that labels the sheet the car is shown in */
 export const SHEET_TITLE_ID = 'car-sheet-title'
 
@@ -78,15 +89,7 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
           buttons, up to the sheet's 960px, which CarSheet sets */}
       <div className={clsx(!sheet && 'md:pl-10 md:pr-6')}>
         <Image
-          alt=""
-          sizes={
-            sheet
-              ? '(max-width: 1143px) calc(100vw - 184px), 960px'
-              : '(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 64px), 960px'
-          }
-          src={`/images/${car.heroImageName}.jpg`}
-          width={1920}
-          height={1280}
+          {...heroImageProps(car, sheet)}
           preload
           className={clsx('w-full h-auto block', !sheet && 'md:rounded-lg')}
         />
