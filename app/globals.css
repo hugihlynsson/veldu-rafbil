@@ -124,6 +124,7 @@
   --animate-phrase-out: phrase-out 0.25s var(--ease-in-cubic) forwards;
   --animate-step-next: step-next 0.3s var(--ease-out-cubic) backwards;
   --animate-step-previous: step-previous 0.3s var(--ease-out-cubic) backwards;
+  --animate-hero-in: hero-in 0.2s ease-out;
 
   @keyframes rise {
     from {
@@ -185,6 +186,12 @@
     from {
       opacity: 0;
       transform: translateX(-2rem);
+    }
+  }
+
+  @keyframes hero-in {
+    from {
+      opacity: 0;
     }
   }
 

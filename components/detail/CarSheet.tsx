@@ -35,7 +35,8 @@ import {
 import { getInputModality } from '@/utils/inputModality'
 import { leavePageBeforeLoad } from '@/utils/pageBeforeLoad'
 import { track } from '@/utils/track'
-import CarView, { heroImageProps, SHEET_TITLE_ID } from './CarView'
+import CarView, { SHEET_TITLE_ID } from './CarView'
+import { heroImageProps } from './heroImage'
 
 /** The chat bar's place in the sheet, and what it offers to ask there */
 export interface SheetChat {
@@ -291,11 +292,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
                 </div>
               </div>
 
-              {/* Keyed, so the photo goes with the car rather than lingering.
-                  Only what is under it slides: the photo is preloaded, and
-                  faded it would show the sheet through it. */}
               <CarView
-                key={car.id}
                 car={car}
                 similar={similarTo(car)}
                 review={reviewOf(car)}

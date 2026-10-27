@@ -17,6 +17,8 @@ import CompareIcon from '@/components/CompareIcon'
 import ShareButton from '@/components/ShareButton'
 import { pageColumn } from '@/components/pageColumn'
 import PageTop from './PageTop'
+import { heroImageProps } from './heroImage'
+import SheetHero from './SheetHero'
 
 interface Props {
   car: Car
@@ -28,17 +30,6 @@ interface Props {
   /** For everything under the photo, as a sheet steps to the car */
   contentClassName?: string
 }
-
-/** The photo at the top, which CarSheet also preloads for the cars either side */
-export const heroImageProps = (car: Car, sheet?: boolean) => ({
-  alt: '',
-  sizes: sheet
-    ? '(max-width: 1143px) calc(100vw - 184px), 960px'
-    : '(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 64px), 960px',
-  src: `/images/${car.heroImageName}.jpg`,
-  width: 1920,
-  height: 1280,
-})
 
 /** The name that labels the sheet the car is shown in */
 export const SHEET_TITLE_ID = 'car-sheet-title'
@@ -96,14 +87,20 @@ const CarView: FunctionComponent<Props> = ({
           to its edges: the window less 184px, the margins and the step
           buttons, up to the sheet's 960px, which CarSheet sets */}
       <div className={clsx(!sheet && 'md:pl-10 md:pr-6')}>
-        <Image
-          {...heroImageProps(car, sheet)}
-          preload
-          className={clsx('w-full h-auto block', !sheet && 'md:rounded-lg')}
-        />
+        {sheet ? (
+          <SheetHero car={car} />
+        ) : (
+          <Image
+            {...heroImageProps(car)}
+            preload
+            className="w-full h-auto block md:rounded-lg"
+          />
+        )}
       </div>
 
-      <div className={clsx(pageColumn, contentClassName)}>
+      {/* Keyed, so a sheet's step starts its slide over, and what is in it
+          starts afresh with each car */}
+      <div key={car.id} className={clsx(pageColumn, contentClassName)}>
         {/* The review's measure, which the rest of the page keeps, centred
             under the photo as it is on a phone */}
         <div className="md:max-w-prose md:mx-auto">
