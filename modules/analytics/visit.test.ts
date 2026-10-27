@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest'
 
-import { deviceOf, pageOf, referrerHost, scrollDepth } from './visit'
+import { productEventSchema } from './events'
+import {
+  deviceOf,
+  pageOf,
+  readShare,
+  referrerHost,
+  scrollDepth,
+  shareUrl,
+} from './visit'
 
 describe('pageOf', () => {
   it('reads the list, the rewrite a query takes it to included', () => {
@@ -73,5 +81,53 @@ describe('referrerHost', () => {
   it('names none for the site itself, or none at all', () => {
     expect(referrerHost('https://a.is/bill/kia-ev3', 'a.is')).toBeUndefined()
     expect(referrerHost('', 'a.is')).toBeUndefined()
+  })
+})
+
+describe('shareUrl and readShare', () => {
+  it('reads back the share a link was made for', () => {
+    const url = new URL(shareUrl('https://a.is/bill/kia-ev3', 'k3f9x2a1'))
+    expect(readShare(url.search)).toEqual({
+      shareId: 'k3f9x2a1',
+      search: '',
+      found: true,
+    })
+  })
+
+  it('names only the latest share of a link opened from another', () => {
+    const url = shareUrl('https://a.is/bill/kia-ev3?deilt=old1', 'new2')
+    expect(new URL(url).searchParams.getAll('deilt')).toEqual(['new2'])
+  })
+
+  it('keeps the rest of the query', () => {
+    expect(readShare('?verd=6000000&deilt=k3f9&rod=dragi')).toEqual({
+      shareId: 'k3f9',
+      search: '?verd=6000000&rod=dragi',
+      found: true,
+    })
+    expect(readShare('?verd=6000000').found).toBe(false)
+  })
+
+  it('names no share the schema would refuse, though it still clears it', () => {
+    for (const junk of ['', 'k3', 'K3F9X2', '<script>', 'a'.repeat(13)]) {
+      expect(readShare(`?deilt=${encodeURIComponent(junk)}`)).toEqual({
+        shareId: undefined,
+        search: '',
+        found: true,
+      })
+    }
+  })
+
+  it('names one the schema reads', () => {
+    const { shareId } = readShare('?deilt=k3f9x2a1')
+    const viewed = {
+      name: 'page_viewed',
+      viewId: 'a1b2',
+      query: '',
+      shareId,
+      page: { kind: 'car', slugs: ['kia-ev3'] },
+      ageMs: 0,
+    }
+    expect(productEventSchema.safeParse(viewed).success).toBe(true)
   })
 })

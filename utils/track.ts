@@ -21,6 +21,10 @@ let timer: ReturnType<typeof setTimeout> | undefined
 let listening = false
 let unstoredSessionId: string | undefined
 
+/** An id short enough to sit in a link, for a page view or a share */
+export const shortId = (): string =>
+  crypto.randomUUID?.().slice(0, 8) ?? Math.random().toString(36).slice(2, 10)
+
 /**
  * What ties one tab's events together: kept for the tab, so it lasts a reload
  * and goes with the tab, and is never the same visitor on another day. Only a

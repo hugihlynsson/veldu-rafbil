@@ -3,7 +3,13 @@ import { z } from 'zod'
 import { MAX_COMPARED } from '@/modules/detail/comparison'
 import { filterKeys, type FilterKey } from '@/modules/list/filters'
 import { sortings, type Sorting } from '@/modules/list/sorting'
-import { devices, MAX_BATCH, MAX_DURATION_MS, pageKinds } from './visit'
+import {
+  devices,
+  MAX_BATCH,
+  MAX_DURATION_MS,
+  pageKinds,
+  SHARE_ID_PATTERN,
+} from './visit'
 
 // What a page reports of how it is used, read on the server. The browser only
 // imports the types, so zod stays off the list's first load.
@@ -12,6 +18,7 @@ const slug = z.string().min(1).max(100)
 const pageKind = z.enum(pageKinds)
 const conversationId = z.uuid().optional()
 const milliseconds = z.int().min(0).max(MAX_DURATION_MS)
+const shareId = z.string().regex(SHARE_ID_PATTERN)
 
 // Every event says where it happened and how long it waited to be sent, which
 // the server turns into when it happened, as a phone's clock can be anything
@@ -39,11 +46,14 @@ export const productEventSchema = z.discriminatedUnion('name', [
   // A path, not a query: a sort or a filter is a view of the one page.
   // `from` is the page before it in the same tab, absent on arrival. `sheet`
   // is a car opened over the list on a desktop, rather than as its page.
+  // `shareId` is the share whose link it was opened from, which the query
+  // leaves out.
   event('page_viewed', {
     viewId: z.string().min(1).max(40),
     from: pageKind.optional(),
     query: z.string().max(300),
     referrer: z.string().max(253).optional(),
+    shareId: shareId.optional(),
     sheet: z.literal(true).optional(),
   }),
   // Sent each time the tab is hidden as well as when the page is left, the
@@ -94,7 +104,9 @@ export const productEventSchema = z.discriminatedUnion('name', [
   event('verdict_failed', { waitMs: milliseconds }),
   event('seller_clicked', { car: slug }),
   event('ev_database_clicked', { car: slug }),
+  // Its id is in the link, and on each page_viewed the link opens
   event('shared', {
+    shareId,
     target: pageKind,
     method: z.enum(['sheet', 'copy']),
   }),

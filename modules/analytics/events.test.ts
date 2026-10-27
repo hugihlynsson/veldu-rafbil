@@ -67,7 +67,12 @@ const tracked = {
   verdict_failed: { name: 'verdict_failed', waitMs: 61_000 },
   seller_clicked: { name: 'seller_clicked', car: 'kia-ev3' },
   ev_database_clicked: { name: 'ev_database_clicked', car: 'kia-ev3' },
-  shared: { name: 'shared', target: 'comparison', method: 'sheet' },
+  shared: {
+    name: 'shared',
+    shareId: 'k3f9x2a1',
+    target: 'comparison',
+    method: 'sheet',
+  },
   chat_bar_focused: { name: 'chat_bar_focused' },
   chat_opened: { name: 'chat_opened' },
   chat_question_sent: { name: 'chat_question_sent', conversationId },
@@ -98,6 +103,11 @@ describe('productEventSchema', () => {
 
   it('reads a car viewed in the sheet over the list', () => {
     const viewed = onPage({ ...tracked.page_viewed, sheet: true })
+    expect(productEventSchema.parse(viewed)).toEqual(viewed)
+  })
+
+  it('reads a view opened from a shared link', () => {
+    const viewed = onPage({ ...tracked.page_viewed, shareId: 'k3f9x2a1' })
     expect(productEventSchema.parse(viewed)).toEqual(viewed)
   })
 
