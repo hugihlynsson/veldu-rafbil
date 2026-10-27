@@ -91,7 +91,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'audi-q6-e-tron-base',
   ],
   'byd-atto-3-evo-base': [
-    'smart-1-brabus',
+    'hongqi-ehs5-base',
     'xpeng-g6-awd-performance',
     'subaru-uncharted-base',
   ],
@@ -213,7 +213,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'jac-e30x-base': [
     'leapmotor-b03x-promax',
     'mg-mg4-urban-long-range',
-    'renault-r5-e-tech-base',
+    'leapmotor-b05-pro',
   ],
   'jac-t9-ev-base': [
     'kgm-musso-ev-4wd',
@@ -259,7 +259,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'kia-ev3-long-range-awd': [
     'skoda-elroq-85x',
     'subaru-uncharted-base',
-    'smart-3-pulse',
+    'hongqi-ehs5-base',
   ],
   'kia-ev4-base': [
     'renault-scenic-e-tech-ev87',
@@ -315,7 +315,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'leapmotor-b05-pro': [
     'leapmotor-b03x-promax',
     'mg-mg4-urban-long-range',
-    'hyundai-inster-base',
+    'jac-e30x-base',
   ],
   'leapmotor-b05-promax': [
     'mg-mg4-urban-long-range',
