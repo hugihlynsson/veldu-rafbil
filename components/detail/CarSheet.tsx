@@ -61,9 +61,23 @@ const stepButton = clsx(
   'shrink-0 w-11 h-11 aria-disabled:opacity-40 aria-disabled:cursor-default aria-disabled:hover:bg-glass/70 aria-disabled:active:scale-100',
 )
 
+// After the panel has started to rise, out from beside it rather than up with it
+const stepMotion =
+  'shrink-0 opacity-0 transition-[opacity,translate] duration-300 ease-in-cubic group-data-[state=visible]/modal:opacity-100 group-data-[state=visible]/modal:translate-x-0 group-data-[state=visible]/modal:ease-out-cubic group-data-[state=visible]/modal:delay-150 group-data-[state=leaving]/modal:duration-150'
+
 const steps = {
-  previous: { label: 'Fyrri bíll', key: 'ArrowLeft', chevron: 'left' },
-  next: { label: 'Næsti bíll', key: 'ArrowRight', chevron: 'right' },
+  previous: {
+    label: 'Fyrri bíll',
+    key: 'ArrowLeft',
+    chevron: 'left',
+    from: 'translate-x-3',
+  },
+  next: {
+    label: 'Næsti bíll',
+    key: 'ArrowRight',
+    chevron: 'right',
+    from: '-translate-x-3',
+  },
 } as const
 
 /**
@@ -128,23 +142,25 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
   const stepButtonTo = (to: SheetStep) => {
     const other = to === 'previous' ? previous : next
     return (
-      <button
-        ref={to === 'previous' ? previousRef : nextRef}
-        type="button"
-        title={other?.label}
-        aria-label={steps[to].label}
-        aria-keyshortcuts={steps[to].key}
-        aria-disabled={!other}
-        className={stepButton}
-        onClick={(event) => {
-          // Safari does not focus a clicked button, and focus left on the
-          // body would be moved to close
-          event.currentTarget.focus({ preventScroll: true })
-          step(to, 'button')
-        }}
-      >
-        <ChevronIcon size={16} direction={steps[to].chevron} />
-      </button>
+      <div className={clsx(stepMotion, steps[to].from)}>
+        <button
+          ref={to === 'previous' ? previousRef : nextRef}
+          type="button"
+          title={other?.label}
+          aria-label={steps[to].label}
+          aria-keyshortcuts={steps[to].key}
+          aria-disabled={!other}
+          className={stepButton}
+          onClick={(event) => {
+            // Safari does not focus a clicked button, and focus left on the
+            // body would be moved to close
+            event.currentTarget.focus({ preventScroll: true })
+            step(to, 'button')
+          }}
+        >
+          <ChevronIcon size={16} direction={steps[to].chevron} />
+        </button>
+      </div>
     )
   }
   const canStep = Boolean(previous || next)
@@ -197,12 +213,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
       {({ close }) => (
         <>
           {/* Its gaps are the backdrop's, which a click there closes */}
-          <div
-            className={clsx(
-              'flex items-center gap-4 pointer-events-none *:pointer-events-auto',
-              panelMotion,
-            )}
-          >
+          <div className="flex items-center gap-4 pointer-events-none *:pointer-events-auto">
             {canStep && stepButtonTo('previous')}
             {/* The car page's photo width, which is the list's content, less
                 room at either side for a step button and its gap, kept when
@@ -214,7 +225,10 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
               ref={panelRef}
               tabIndex={-1}
               onClickCapture={openLinkedCar}
-              className="relative w-[min(960px,calc(100vw-11.5rem))] max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain outline-none rounded-sheet bg-surface shadow-(--shadow-modal)"
+              className={clsx(
+                'relative w-[min(960px,calc(100vw-11.5rem))] max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain outline-none rounded-sheet bg-surface shadow-(--shadow-modal)',
+                panelMotion,
+              )}
             >
               {/* No height of its own, so the photo starts at the sheet's top */}
               <div className="sticky top-0 z-2 h-0">
@@ -260,7 +274,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
             </div>
             {canStep && stepButtonTo('next')}
           </div>
-          {/* Beside the row: its translate would hold the fixed bar inside */}
+          {/* Beside the panel: its translate would hold the fixed bar inside */}
           <div ref={chatSlotRef} className="contents" />
         </>
       )}
