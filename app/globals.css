@@ -122,6 +122,9 @@
   --animate-typing: typing 1.4s infinite;
   --animate-phrase-in: phrase-in 0.35s var(--ease-out-cubic) backwards;
   --animate-phrase-out: phrase-out 0.25s var(--ease-in-cubic) forwards;
+  --animate-step-next: step-next 0.3s var(--ease-out-cubic) backwards;
+  --animate-step-previous: step-previous 0.3s var(--ease-out-cubic) backwards;
+  --animate-hero-in: hero-in 0.2s ease-out;
 
   @keyframes rise {
     from {
@@ -168,6 +171,27 @@
       opacity: 0;
       transform: translateY(-6px);
       filter: blur(2px);
+    }
+  }
+
+  /* The car stepped to comes in from the side of the arrow pressed */
+  @keyframes step-next {
+    from {
+      opacity: 0;
+      transform: translateX(2rem);
+    }
+  }
+
+  @keyframes step-previous {
+    from {
+      opacity: 0;
+      transform: translateX(-2rem);
+    }
+  }
+
+  @keyframes hero-in {
+    from {
+      opacity: 0;
     }
   }
 

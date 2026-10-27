@@ -9,7 +9,9 @@ import {
   useRef,
   useState,
 } from 'react'
+import { preload } from 'react-dom'
 import clsx from 'clsx'
+import { getImageProps } from 'next/image'
 
 import type { Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
@@ -34,6 +36,7 @@ import { getInputModality } from '@/utils/inputModality'
 import { leavePageBeforeLoad } from '@/utils/pageBeforeLoad'
 import { track } from '@/utils/track'
 import CarView, { SHEET_TITLE_ID } from './CarView'
+import { heroImageProps } from './heroImage'
 
 /** The chat bar's place in the sheet, and what it offers to ask there */
 export interface SheetChat {
@@ -65,6 +68,11 @@ const stepButton = clsx(
 const stepMotion =
   'shrink-0 opacity-0 transition-[opacity,translate] duration-300 ease-in-cubic group-data-[state=visible]/modal:opacity-100 group-data-[state=visible]/modal:translate-x-0 group-data-[state=visible]/modal:ease-out-cubic group-data-[state=visible]/modal:delay-150 group-data-[state=leaving]/modal:duration-150'
 
+const arrivals = {
+  previous: 'animate-step-previous',
+  next: 'animate-step-next',
+} as const
+
 const steps = {
   previous: {
     label: 'Fyrri bíll',
@@ -94,6 +102,8 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
   const shownCar = useRef(car)
   const path = carPathOf(car)
   const { previous, next } = neighboursOf(shown, car)
+  // Which way the car came in, so what is under its photo slides from that side
+  const [arrival, setArrival] = useState<SheetStep | null>(null)
 
   // The close button for a keyboard, to start from; for a tap or a click the
   // panel, as focus moved by script rings what it lands on, and on the panel
@@ -123,6 +133,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
       carAtPath(window.location.pathname) ?? car,
     )[to]
     if (!other) return
+    setArrival(to)
     track({
       name: 'car_sheet_stepped',
       car: carSlug(other),
@@ -199,8 +210,24 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
     // The expand button links to this car, and opens its page on its own
     if (!other || other.id === car.id) return
     event.preventDefault()
+    setArrival(null)
     showCarSheet(other, 'replace')
   }
+
+  // A step swaps the photo at once, rather than leaving the last one up
+  // until the next has loaded, so the next is fetched before it is asked for
+  useEffect(() => {
+    for (const other of [previous, next]) {
+      if (!other) continue
+      const { props } = getImageProps(heroImageProps(other, true))
+      preload(props.src, {
+        as: 'image',
+        imageSrcSet: props.srcSet,
+        imageSizes: props.sizes,
+        fetchPriority: 'low',
+      })
+    }
+  }, [previous, next])
 
   return (
     <Modal
@@ -226,7 +253,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
               tabIndex={-1}
               onClickCapture={openLinkedCar}
               className={clsx(
-                'relative w-[min(960px,calc(100vw-11.5rem))] max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain outline-none rounded-sheet bg-surface shadow-(--shadow-modal)',
+                'relative w-[min(960px,calc(100vw-11.5rem))] max-h-[calc(100dvh-4rem)] overflow-x-hidden overflow-y-auto overscroll-contain outline-none rounded-sheet bg-surface shadow-(--shadow-modal)',
                 panelMotion,
               )}
             >
@@ -270,6 +297,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
                 similar={similarTo(car)}
                 review={reviewOf(car)}
                 sheet
+                contentClassName={clsx(arrival && arrivals[arrival])}
               />
             </div>
             {canStep && stepButtonTo('next')}

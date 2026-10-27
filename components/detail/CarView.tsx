@@ -17,6 +17,8 @@ import CompareIcon from '@/components/CompareIcon'
 import ShareButton from '@/components/ShareButton'
 import { pageColumn } from '@/components/pageColumn'
 import PageTop from './PageTop'
+import { heroImageProps } from './heroImage'
+import SheetHero from './SheetHero'
 
 interface Props {
   car: Car
@@ -25,6 +27,8 @@ interface Props {
   review?: CarReview
   /** Over the list on a desktop, which is the page and has the logo */
   sheet?: boolean
+  /** For everything under the photo, as a sheet steps to the car */
+  contentClassName?: string
 }
 
 /** The name that labels the sheet the car is shown in */
@@ -48,7 +52,13 @@ const eyebrow =
 const sectionLabel = 'm-0 text-sm font-semibold'
 
 /** One car's own page: its photo and figures, a review, and the cars like it */
-const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
+const CarView: FunctionComponent<Props> = ({
+  car,
+  similar,
+  review,
+  sheet,
+  contentClassName,
+}) => {
   const subTitle = carSubtitle(car)
   const notice = deprecatedNotice(car)
   const grantChange = grantChangeNotice(car)
@@ -77,22 +87,20 @@ const CarView: FunctionComponent<Props> = ({ car, similar, review, sheet }) => {
           to its edges: the window less 184px, the margins and the step
           buttons, up to the sheet's 960px, which CarSheet sets */}
       <div className={clsx(!sheet && 'md:pl-10 md:pr-6')}>
-        <Image
-          alt=""
-          sizes={
-            sheet
-              ? '(max-width: 1143px) calc(100vw - 184px), 960px'
-              : '(max-width: 767px) 100vw, (max-width: 1023px) calc(100vw - 64px), 960px'
-          }
-          src={`/images/${car.heroImageName}.jpg`}
-          width={1920}
-          height={1280}
-          preload
-          className={clsx('w-full h-auto block', !sheet && 'md:rounded-lg')}
-        />
+        {sheet ? (
+          <SheetHero car={car} />
+        ) : (
+          <Image
+            {...heroImageProps(car)}
+            preload
+            className="w-full h-auto block md:rounded-lg"
+          />
+        )}
       </div>
 
-      <div className={pageColumn}>
+      {/* Keyed, so a sheet's step starts its slide over, and what is in it
+          starts afresh with each car */}
+      <div key={car.id} className={clsx(pageColumn, contentClassName)}>
         {/* The review's measure, which the rest of the page keeps, centred
             under the photo as it is on a phone */}
         <div className="md:max-w-prose md:mx-auto">
