@@ -109,6 +109,31 @@ and 8.5 s. The Norwegian site, jacmotors.no, uses the same images at higher
 resolution and is the place to look for a photo. Read on 2026-10-23, from
 lists uploaded on 2026-04-01 (E30X) and 2026-08-06 (T9 EV).
 
+**Ford** (Brimborg): each `ford.is/bill/<model>` page, readable with curl, links
+its PDF, and `pdf text` reads it. The first figure is the price. The page's
+"Tilboð" rows are offers on stock cars, not the list price. Read on 2026-10-31.
+
+**KGM** (Bílabúð Benna): `kgm.benni.is/musso-ev/` and `/torres-evx/` link a PDF
+under `wp-content/uploads/<year>/<month>/`. Its text layer loses most digits, so
+render it with `pdf pages` at scale 3 or more. Read on 2026-10-31.
+
+**Suzuki**: `suzuki.is/e-vitara/` links a PDF that `pdf text` reads, "Verð - Verð
+m/ styrk" on one line. Read on 2026-10-31.
+
+**Peugeot** (Brimborg): 403 to curl, so use the built-in browser. Each model
+page prints "Fullt verð frá" per trim, before the grant, and links a PDF under
+`/content/dam/peugeot/iceland/verdlistar/`. Read on 2026-10-31 from the pages.
+
+**Not found on 2026-10-31**: Citroën, Opel and Volvo load in the built-in browser
+but print no price on the model page. Porsche's pages come back with no text.
+Fiat's list link on isband.is is a file download. Leapmotor and GWM print no
+price, and Tesla's Model 3 page shows financing amounts by default.
+
+**Placeholders**: Askja keeps a document's slug while a list is being reissued,
+with one page that says so. On 2026-10-31 `kia_ev9_gt_verdlisti`, `eqt_verdlisti`,
+`eqv_verdlisti` and `t-class_verdlisti` were placeholders. The STARIA Electric
+has moved from BL's main Hyundai list to `hyundai_fyrirt_kjalausnir`.
+
 **Range Rover is the one that cannot be started from its entries.** Both
 Electric rows point at `rangerover.com/en-gb`, the manufacturer's UK site rather
 than an Icelandic seller, so there is no importer page to work back to and no
