@@ -1729,7 +1729,7 @@ const newCars: Array<NewCar> = [
     model: 'Ariya',
     subModel: 'e-4ORCE',
     heroImageName: 'nissan-ariya',
-    price: 8_990_000,
+    price: 8_490_000,
     sellerUrl: 'https://www.nissan.is/vehicles/new-vehicles/ariya.html',
     acceleration: 5.7,
     capacity: 87,
