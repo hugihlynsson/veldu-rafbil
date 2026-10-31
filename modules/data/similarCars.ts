@@ -127,7 +127,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'fiat-500e-base': [
     'mini-aceman-e',
-    'hyundai-ioniq-3-standard-range',
+    'mini-cooper-se',
     'renault-r5-e-tech-52-kwh',
   ],
   'fiat-600e-base': [
@@ -512,10 +512,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'smart-3-pulse',
     'skoda-elroq-85x',
   ],
-  'mini-aceman-e': [
+  'mini-aceman-e': ['fiat-500e-base', 'mini-cooper-se', 'fiat-600e-base'],
+  'mini-cooper-se': [
+    'mini-aceman-e',
+    'renault-r5-e-tech-52-kwh',
     'fiat-500e-base',
-    'volvo-ex30-single-motor',
-    'fiat-600e-base',
   ],
   'mini-countryman-e': [
     'bmw-ix1-edrive-20',

@@ -560,7 +560,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig hentar hann sem annar bíll?',
       'Kemst barnabílstóll í aftursætið?',
     ],
-    facts: '5488fd47efae',
+    facts: 'f54bf2a8131a',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'fiat-600e-base': {
@@ -2280,7 +2280,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur mjög stutt, sérstaklega í vetrarkulda, er meðal þeirra sem hlaða hægast í sínum verðflokki og skottið er eitt það minnsta. Fiat 600e er 100.000 kr. ódýrari, drífur 90 km lengra og hleður með um 30% styttri stoppum.',
       'Aceman E er heillandi bæjarbíll, en síður heppilegur ef ferðast er reglulega milli landshluta.',
     ],
-    facts: '935ff53f71a4',
+    facts: 'ced01556fdba',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að taka Aceman SE útfærsluna?',
@@ -2293,6 +2293,25 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kemst hefðbundinn barnavagn í skottið?',
       'Komast fullorðnir fyrir í aftursætunum?',
       'Dugar hann sem eini bíll á heimilinu?',
+    ],
+  },
+  'mini-cooper-se': {
+    paragraphs: [
+      'Mini Cooper SE er lítill og lipur þriggja dyra hlaðbakur með framhjóladrifi og fjórum sætum, með sterkan svip og go-kart tilfinninguna sem Mini er þekktur fyrir. Hann er fyrir þig sem vilt skemmtilegan bæjarbíl og lætur stílinn ráða.',
+      'Hann er sneggri en flestir á svipuðu verði, og smæðin gerir hann auðveldan í þröngum stæðum og borgarumferð. Drægnin dugar vel í daglegt snatt.',
+      'Á móti kemur að hann drífur styttra og hleður hægar en flestir í sínum verðflokki, skottið er með þeim minnstu og hann má ekki draga kerru. Renault R5 E-Tech 52 kWh er 1.000.000 kr. ódýrari kostur í sama anda, drífur álíka langt og er með 126 l stærra skott, en er 1,3 s hægari í hundraðið.',
+      'Cooper SE velurðu með hjartanu, frekar en sem eina bíl heimilisins.',
+    ],
+    facts: 'e3d0963f06e5',
+    questions: [
+      'Af hverju hann frekar en Mini Aceman?',
+      'Er Renault R5 betri kaup?',
+      'Hvernig er hann miðað við Fiat 500e?',
+      'Hversu vel fer um fólk aftur í?',
+      'Kemst vikuinnkaupin í skottið?',
+      'Dugar hann sem eini bíll heimilisins?',
+      'Hvernig er hann í snjó og hálku?',
+      'Hvernig er að keyra hann í bænum?',
     ],
   },
   'mini-countryman-e': {
