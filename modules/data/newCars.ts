@@ -778,7 +778,7 @@ const newCars: Array<NewCar> = [
     model: 'EV2',
     subModel: 'Long Range',
     heroImageName: 'kia-ev2',
-    price: 5_390_777,
+    price: 5_690_777,
     sellerUrl: 'https://syningarsalur.askja.is/kia/ev2',
     acceleration: 9.5,
     capacity: 61,
@@ -950,7 +950,7 @@ const newCars: Array<NewCar> = [
     make: 'Kia',
     model: 'PV5',
     heroImageName: 'kia-pv5',
-    price: 8_590_777,
+    price: 7_790_777,
     sellerUrl:
       'https://www.kia.com/is/fyrirtaekjalausnir/pbv/vehicles/pv5-passenger/',
     acceleration: 10.6,
