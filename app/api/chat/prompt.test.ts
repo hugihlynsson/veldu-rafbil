@@ -4,7 +4,12 @@ import systemPrompt from './prompt'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import cars from '@/modules/data/cars'
 import { carRef, resolveCarRefs } from '@/modules/chat/cars'
-import { grantAmountText } from '@/modules/copy/grantCopy'
+import {
+  grantAmountText,
+  grantLostRangeText,
+  grantStartText,
+  previousGrantAmountText,
+} from '@/modules/copy/grantCopy'
 import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 
 describe('the assistant system prompt', () => {
@@ -46,6 +51,15 @@ describe('the assistant system prompt', () => {
 
   it('names the grant the prices actually use', () => {
     expect(systemPrompt).toContain(grantAmountText)
+  })
+
+  // Buyers still quote the old figures, and an application decided after the
+  // change gets the new grant however early the car was registered
+  it('explains what changed about the grant and what decides it', () => {
+    expect(systemPrompt).toContain(
+      `lækkaði ${grantStartText} úr ${previousGrantAmountText} og bílar sem kosta ${grantLostRangeText} fá hann ekki lengur`,
+    )
+    expect(systemPrompt).toContain('Dagsetning samþykktrar umsóknar ræður')
   })
 
   // /api/cars and llms.txt quote the same bounds; the prompt once had its own

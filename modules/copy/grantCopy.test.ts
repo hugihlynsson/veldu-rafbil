@@ -27,6 +27,12 @@ describe('the grant copy', () => {
     expect(copy.grantCeilingDativeText).toBe('8 milljónum')
   })
 
+  it('names what the grant was and the prices that lost it', async () => {
+    const copy = await import('./grantCopy')
+    expect(copy.previousGrantAmountText).toBe('500.000 kr.')
+    expect(copy.grantLostRangeText).toBe('8–10 milljónir')
+  })
+
   it('carries a change to the law into the prose', async () => {
     const copy = await copyWith(700_000, 12_000_000)
     expect(copy.grantAmountText).toBe('700.000 kr.')
