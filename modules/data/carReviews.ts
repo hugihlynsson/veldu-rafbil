@@ -99,7 +99,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Finnst manni hann vera kraftlítill?',
       'Er hann mikið veglegri en Skoda Enyaq?',
     ],
-    facts: 'a92931dba794',
+    facts: '055185004643',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'audi-q6-e-tron-base': {
@@ -363,7 +363,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann hljóðlátari en keppinautarnir?',
       'Hvaða hleðslustöðvar nýta hann best?',
     ],
-    facts: 'be65ae93b3e0',
+    facts: 'bee4f10c465e',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'bmw-ix3-50-xdrive': {
@@ -1857,6 +1857,27 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     ],
     facts: '3abea2538f91',
     model: 'gemini-3.8-flash, thinking medium',
+  },
+  'mercedes-benz-gla-350-4matic': {
+    paragraphs: [
+      'Mercedes-Benz GLA 350 4MATIC er nettur fimm sæta jepplingur með fjórhjóladrifi og lúxusyfirbragði Mercedes, fyrir þig sem vilt komast langt á hleðslunni án þess að fara í stærri bíl.',
+      'Drægnin er það sem hann gerir best: hann er meðal þeirra langdrægustu á sínu verði og hleður með þeim hraðasta, svo ferðir milli landshluta kalla á fá og stutt stopp, líka í vetrarkulda. Hann má líka draga 2.000 kg, sem dugar fyrir flest hjólhýsi.',
+      'Skottið er hins vegar minna en hjá flestum á svipuðu verði, og hann fær ekki rafbílastyrkinn. Vanti þig pláss er Tesla Model Y Performance 60.000 kr. ódýrari með 454 l stærra skott, en drífur 63 km styttra og stoppin eru um 80% lengri. BMW iX3 40 kostar 500.000 kr. meira og er með 61 l stærra skott, en er aðeins afturhjóladrifinn.',
+      'GLA er lipur langferðabíll með krók sem munar um, ef þú kemst af með minna skott.',
+    ],
+    facts: 'dc98c186bdce',
+    questions: [
+      'Af hverju hann frekar en BMW iX3 40?',
+      'Er Tesla Model Y Performance betri kaup?',
+      'Er Polestar 4 SUV betri kostur?',
+      'Hvernig er hann miðað við Mercedes GLB?',
+      'Er skottið nógu stórt fyrir fjölskyldu?',
+      'Hvernig ræður hann við 2.000 kg hjólhýsi?',
+      'Hvernig reynist fjórhjóladrifið í snjó?',
+      'Hvernig fer um fimm manns í honum?',
+      'Hvað gerir hann svona fljótan að hlaða?',
+      'Er innréttingin verðsins virði?',
+    ],
   },
   'mercedes-benz-glb-350-4matic-eq': {
     paragraphs: [

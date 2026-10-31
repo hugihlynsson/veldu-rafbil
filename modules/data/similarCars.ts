@@ -23,7 +23,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'audi-q4-e-tron-45-quattro': [
     'volvo-ex40-recharge-twin',
     'skoda-enyaq-rs',
-    'bmw-ix1-xdrive-30',
+    'mercedes-benz-gla-350-4matic',
   ],
   'audi-q6-e-tron-base': [
     'volvo-ex60-p10',
@@ -82,7 +82,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'bmw-ix3-40': [
     'polestar-4-suv-long-range-dual-motor',
-    'volkswagen-id-7-gtx',
+    'mercedes-benz-gla-350-4matic',
     'tesla-model-y-performance',
   ],
   'bmw-ix3-50-xdrive': [
@@ -416,6 +416,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'bmw-ix1-xdrive-30',
     'mini-countryman-se-4x4',
     'audi-q4-e-tron-45-quattro',
+  ],
+  'mercedes-benz-gla-350-4matic': [
+    'polestar-4-suv-long-range-dual-motor',
+    'bmw-ix3-40',
+    'tesla-model-y-performance',
   ],
   'mercedes-benz-glb-350-4matic-eq': [
     'skoda-peaq-90x',
