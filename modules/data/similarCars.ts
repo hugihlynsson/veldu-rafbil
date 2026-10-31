@@ -58,7 +58,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'bmw-i5-m60-xdrive': [
     'porsche-taycan-4s-plus',
     'porsche-cayenne-s-coupe',
-    'audi-e-tron-gt-quattro',
+    'polestar-5-performance',
   ],
   'bmw-ix-xdrive-45-sport': [
     'porsche-macan-4-electric',
@@ -627,6 +627,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'skoda-enyaq-rs',
     'bmw-ix3-40',
   ],
+  'polestar-5-performance': [
+    'bmw-i5-m60-xdrive',
+    'porsche-taycan-4s-cross-turismo',
+    'porsche-taycan-4s-plus',
+  ],
   'porsche-macan-4-electric': [
     'polestar-3-performance',
     'bmw-ix-xdrive-45-sport',
@@ -649,7 +654,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'porsche-taycan-4s-plus': [
     'bmw-i5-m60-xdrive',
-    'audi-e-tron-gt-quattro',
+    'polestar-5-performance',
     'porsche-cayenne-s',
   ],
   'porsche-taycan-4-cross-turismo': [
