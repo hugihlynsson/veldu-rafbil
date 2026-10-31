@@ -2966,7 +2966,7 @@ const newCars: Array<NewCar> = [
     make: 'Toyota',
     model: 'Proace Verso',
     heroImageName: 'toyota-proace-verso',
-    price: 10_390_000,
+    price: 9_890_000,
     sellerUrl: 'https://www.toyota.is/new-cars/proace-verso',
     acceleration: 13.3,
     capacity: 75,
