@@ -2390,7 +2390,7 @@ const newCars: Array<NewCar> = [
     model: 'Epiq',
     subModel: '55',
     heroImageName: 'skoda-epiq',
-    price: 5_490_000,
+    price: 5_690_000,
     sellerUrl: 'https://www.skoda.is/models/epiq/epiq',
     acceleration: 7.1,
     capacity: 51.7,
