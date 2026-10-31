@@ -589,7 +589,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Ford Capri er stór fólksbíll með afturhlera sem sameinar sportlegt útlit og mikla hagnýtingu. Með fjórhjóladrifi og stærra skotti en flestir keppinautar hefur hann mikla yfirburði í daglegu fjölskyldulífi og ræður vel við allar íslenskar aðstæður.',
       'Bíllinn stendur sérstaklega vel að vígi í langkeyrslu. Hann er meðal þeirra langdrægustu í sínum verðflokki og hleður hraðar en gengur og gerist, sem þýðir styttri hleðslustopp á ferðalögum milli landshluta jafnvel í vetrarkulda. Að auki er hann snöggur upp og öruggur í hálku og snjó.',
-      'Helsti gallinn er dráttargetan, en 1.200 kg geta reynst naumt fyrir stærri ferðavagna. Þar dregur Polestar 2 Long Range Dual Motor til dæmis 300 kg meira, þótt hann gefi töluvert eftir í farangursrými. Þá kemst Tesla Model 3 Long Range Fjórhjóladrif 68 km lengra og kostar 700.000 kr. minna.',
+      'Helsti gallinn er dráttargetan, en 1.200 kg geta reynst naumt fyrir stærri ferðavagna. Þar dregur Polestar 2 Long Range Dual Motor til dæmis 300 kg meira, þótt hann gefi töluvert eftir í farangursrými. Þá kemst Tesla Model 3 Long Range Fjórhjóladrif 68 km lengra og kostar 1.200.000 kr. minna.',
       'Capri er engu að síður afbragðs valkostur fyrir þá sem leita að rúmgóðum og traustum ferðabíl sem sameinar drægni, pláss og gott grip.',
     ],
     questions: [
@@ -604,7 +604,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kemst stór barnavagn fyrir í skottinu?',
       'Hve lengi er hann að hlaða í kulda?',
     ],
-    facts: '0084495e4496',
+    facts: '433e5b4e7e10',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'ford-explorer-er-awd': {
@@ -626,7 +626,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er raundrægnin í vetrarkulda?',
       'Er hann sneggri en keppinautarnir?',
     ],
-    facts: 'd81505123fa3',
+    facts: 'b1c3f87de310',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'ford-mustang-mach-e-lr-awd': {
@@ -655,7 +655,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Ford Puma er lipur smájepplingur sem hentar sérlega vel í borgarumhverfi og dagleg erindi, en býður upp á óvænt mikið notagildi miðað við stærð. Þótt hann sé stuttur og auðveldur í þröngum stæðum nýtir hann plássið einstaklega vel.',
       'Helsti styrkleiki Puma er farangursrýmið, enda státar hann af einu stærsta skottinu miðað við verð, auk þess að vera með hentugt framskott fyrir hleðslukapla. Hann má einnig draga létta kerru, sem er fjarri því sjálfgefið í þessum flokki, og tekur við hraðhleðslu sneggra en flestir keppinautarnir.',
-      'Helsti gallinn er að hann drífur mjög stutt, þótt drægnin sé í meðallagi miðað við verðmiðann, sem kallar á meiri fyrirhyggju í vetrarferðum milli landshluta. Fyrir þá sem horfa mikið í langferðir býður Leapmotor B10 67.1 kWh upp á 58 km meiri drægni fyrir aðeins 100.000 kr. viðbótarkostnað, en fórnar á móti talsverðu skottrými.',
+      'Helsti gallinn er að hann drífur mjög stutt, og styttra en flestir á svipuðu verði, sem kallar á meiri fyrirhyggju í vetrarferðum milli landshluta. Fyrir þá sem horfa mikið í langferðir býður Leapmotor B10 67.1 kWh upp á 58 km meiri drægni fyrir 400.000 kr. meira, en fórnar á móti talsverðu skottrými.',
       'Puma er kjörinn fyrir þá sem leita að ódýrum, liprum og praktískum fjölskyldubíl í daglega amstrið án þess að sprengja fjárhagsáætlunina.',
     ],
     questions: [
@@ -670,7 +670,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann lipur í þröngum stæðum?',
       'Dugar framhjóladrifið vel í snjó?',
     ],
-    facts: '87194115ca2c',
+    facts: 'd0dfd5fe0cea',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hongqi-ehs5-base': {
@@ -692,7 +692,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Eyðir hann miklu með svona mikið afl?',
       'Er hann þægilegur eða of sportlegur?',
     ],
-    facts: 'a6487532cc08',
+    facts: 'f95b2bcf0e39',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hongqi-ehs7-premium': {
@@ -743,11 +743,11 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Hyundai INSTER er örjepplingur og einn allra minnsti rafbíllinn sem völ er á. Hann er sérsniðinn fyrir þá sem leita að nettum og liprum borgarbíl en vilja um leið njóta hækkaðrar setustöðu jepplingsins.',
       'Fyrir daglegan akstur og snatt innanbæjar reynist hann einkar hentugur, sérstaklega í þröngum bílastæðum. Í þessari Long Range útgáfu færðu bæði meiri drægni og talsvert stærra skott en í ódýrari útfærslu bílsins, sem gerir hann mun hagnýtari í hversdagslegri notkun. Drægnin dugar ágætlega innanbæjar allan ársins hring, þótt gera verði ráð fyrir að hún dragist saman í íslenskum vetrarkulda.',
-      'Að baki býr þó að bíllinn er mjög aflítill og með þeim hægustu í sínum verðflokki. Hann hleður einnig hægar en flestir keppinautar hans, sem kemur niður á honum á langferðum milli landshluta. Ef pláss og kraftur skipta máli kostar Ford Puma aðeins 200.000 kr. meira, en býður upp á 172 lítrum stærra skott og um 25% styttri hleðslustopp.',
+      'Að baki býr þó að bíllinn er mjög aflítill og með þeim hægustu í sínum verðflokki. Hann hleður einnig hægar en flestir keppinautar hans, sem kemur niður á honum á langferðum milli landshluta. Ef pláss og kraftur skipta máli er Ford Puma 100.000 kr. ódýrari og býður upp á 172 lítrum stærra skott og um 25% styttri hleðslustopp.',
       'INSTER Long Range er lipur og skemmtilegur kostur í þéttbýli, en hentar síður sem alhliða fjölskyldubíll eða í mikil ferðalög.',
     ],
     questions: [
-      'Er Ford Puma þess virði að borga meira?',
+      'Borgar sig frekar að velja Ford Puma?',
       'Borgar ódýrari útfærslan sig frekar?',
       'Er skottið virkilega stærra í Long Range?',
       'Er Renault R5 E-Tech betri kostur?',
@@ -758,7 +758,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað tekur hraðhleðsla langan tíma?',
       'Hvernig dugar hann í vetrarkulda?',
     ],
-    facts: 'a39475f5ab89',
+    facts: 'ec6631b76377',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hyundai-ioniq-3-standard-range': {
@@ -780,7 +780,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hæg er hraðhleðslan í raun?',
       'Hvað kemst hann langt í vetrarkulda?',
     ],
-    facts: '7d68129a415a',
+    facts: '8578568e6b17',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hyundai-ioniq-3-long-range': {
@@ -911,7 +911,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er plássið í öftustu sætaröðinni?',
       'Er auðvelt að fjarlægja aftari sætin?',
     ],
-    facts: '4f306f812607',
+    facts: '9334560c0922',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'jac-e30x-base': {
@@ -940,7 +940,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'JAC T9 EV er stór, fjórhjóladrifinn pallbíll sem er hugsaður sem vinnuhestur fyrir þá sem þurfa gott pallpláss og fimm sæti í grófari verkefni. Hann ber með sér mikinn svip en glímir við sömu áskoranir og flestir aðrir rafdrifnir pallbílar hvað varðar loftmótstöðu og orkunotkun.',
       'Helsti styrkleiki hans er fjórhjóladrifið, sem tryggir öruggt grip í snjó, bleytu og á lausamöl. Fyrir vinnusvæði eða staðbundinn rekstur þar sem hægt er að stinga honum í samband yfir nótt leysir hann verkin prýðilega án útblásturs.',
-      'Á langferðum gefur hann hins vegar verulega eftir. Drægnin er með því stysta sem gerist í sínum verðflokki, sérstaklega í vetrarkulda, og hleðslan er afar hæg. Keppinauturinn KGM Musso EV 4WD reynist mun hagstæðari kostur: hann er 600.000 kr. ódýrari, drífur 49 km lengra, hleðslustoppin eru um 35% styttri og honum fylgir rausnarleg tíu ára ábyrgð á rafhlöðunni.',
+      'Á langferðum gefur hann hins vegar verulega eftir. Drægnin er með því stysta sem gerist í sínum verðflokki, sérstaklega í vetrarkulda, og hleðslan er afar hæg. Keppinauturinn KGM Musso EV 4WD reynist mun hagstæðari kostur: hann er 740.000 kr. ódýrari, drífur 49 km lengra, hleðslustoppin eru um 35% styttri og honum fylgir rausnarleg tíu ára ábyrgð á rafhlöðunni.',
       'JAC T9 EV getur hentað ágætlega sem vinnubíll í nærumhverfinu, en til ferðalaga milli landshluta krefst hann mikillar þolinmæði.',
     ],
     questions: [
@@ -955,7 +955,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað rýrnar drægnin mikið í kulda?',
       'Hversu mikið má setja á pallinn?',
     ],
-    facts: '888fc37241e2',
+    facts: '7f3a9b33e80b',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'jeep-avenger-base': {
@@ -999,7 +999,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu mikil er burðargetan á pallinum?',
       'Er hann nógu sprækur fullhlaðinn?',
     ],
-    facts: '9688afdf59b2',
+    facts: '2aecea2b4259',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kgm-musso-ev-4wd': {
@@ -1021,7 +1021,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað ber pallurinn mikla þyngd?',
       'Hvernig nýtist hann á ójöfnum slóðum?',
     ],
-    facts: '7e0a2367162d',
+    facts: 'a25dd249e67a',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kgm-torres-evx': {
@@ -1043,7 +1043,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig nýtast 839 lítrar í skottinu?',
       'Er hann nógu sprækur miðað við stærðina?',
     ],
-    facts: 'dcb575867438',
+    facts: 'faefa0672849',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev2-standard-range': {
@@ -1087,7 +1087,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Dugar 750 kg dráttargeta fyrir kerrur?',
       'Er sætishæðin hærri en í venjulegum bíl?',
     ],
-    facts: '65eb04fe4b39',
+    facts: 'c3637cc3d6bd',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev3-standard-range': {
@@ -1108,7 +1108,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kemst barnavagn fyrir í skottinu?',
       'Hvað dregur hann í raun á veturna?',
     ],
-    facts: 'c8f02ceacb86',
+    facts: 'b7f711563bfa',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev3-long-range': {
@@ -1240,7 +1240,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað kemst mikið fyrir í framskottinu?',
       'Finnst manni hann vera kraftlítill?',
     ],
-    facts: '552f87828b2b',
+    facts: 'e2f873e0da7b',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev6-2025-long-range-awd': {
@@ -1262,7 +1262,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað hefur dráttur mikil áhrif á drægni?',
       'Hvernig er plássið í aftursætinu?',
     ],
-    facts: '1f41ff4b861c',
+    facts: '84c917766948',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev9-base': {
@@ -1313,7 +1313,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Kia PV5 er stór, allt að sjö sæta fjölnotabíll sem byggður er á sendibíl. Hann er sérsniðinn fyrir stórfjölskyldur eða hvers kyns hópa þar sem hámarksrými og hagnýting ráða för fremur en sportlegir aksturseiginleikar.',
       'Helsti kostur bílsins er gríðarlegt burðarþol og farangursrými, en skottið tekur 1.330 lítra og er það stærsta í sínum verðflokki. Hann má einnig draga allt að 1.500 kg, sem kemur sér vel í útilegum og ferðalögum með mikinn búnað.',
-      'Aðrir þættir krefjast hins vegar nokkurra málamiðlana. Bíllinn drífur fremur stutt, hleður hægar en flestir keppinautar og er mjög aflítill. Þá veitir afturhjóladrif minna grip í snjó og hálku en fjórhjóladrif. Ef fólki dugar hefðbundnari fjölskyldubíll væri jepplingurinn Peugeot e-5008 Dual Motor áhugaverður kostur, en hann býður upp á fjórhjóladrif og 61 km meiri drægni á lægra verði, þótt skottið sé 468 lítrum minna.',
+      'Aðrir þættir krefjast hins vegar nokkurra málamiðlana. Bíllinn drífur fremur stutt, hleður hægar en flestir keppinautar og er mjög aflítill. Þá veitir afturhjóladrif minna grip í snjó og hálku en fjórhjóladrif. Ef fólki dugar hefðbundnari fjölskyldubíll væri jepplingurinn Peugeot e-5008 Dual Motor áhugaverður kostur, en hann býður upp á fjórhjóladrif og 61 km meiri drægni, þótt hann kosti 700.000 kr. meira og skottið sé 468 lítrum minna.',
       'Fyrir þá sem setja sætafjölda og geymslupláss ofar öllu öðru er PV5 engu að síður sérlega rúmgóður og hagnýtur kostur.',
     ],
     questions: [
@@ -1328,7 +1328,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig reynist hann sem dráttarbíll?',
       'Hve hæg er hleðslan í langferðum?',
     ],
-    facts: '46a0af61cb5a',
+    facts: '681aaf9177e0',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-t03-base': {
@@ -1482,7 +1482,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Rúmar skottið stóran barnavagn?',
       'Hversu hratt hleður hann á ferðalögum?',
     ],
-    facts: '3a1b2d55a923',
+    facts: '32e3fcec9662',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-c10-pro': {
@@ -1504,7 +1504,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig reynist afturhjóladrifið í snjó?',
       'Hvernig er plássið í aftursætunum?',
     ],
-    facts: '14fc13a1df9e',
+    facts: 'd539c22b37a7',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-c10-promax': {
@@ -1526,7 +1526,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu lítið er farangursrýmið í raun?',
       'Hvernig reynist afturdrifið í hálku?',
     ],
-    facts: 'b262dadfeb1c',
+    facts: '9450e9f86faa',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-c10-promax-awd': {
@@ -1548,7 +1548,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann of kraftmikill fyrir vetrarfærð?',
       'Borgar sig að fórna drægni fyrir 4x4?',
     ],
-    facts: '65b59e883987',
+    facts: 'd34760a5939c',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'lexus-es-350e': {
@@ -1724,7 +1724,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann of langur í innanbæjarakstri?',
       'Hversu hratt hleður hann á langferðum?',
     ],
-    facts: '25404af052f7',
+    facts: '7476a0d68926',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-c-400-4matic': {
@@ -1993,11 +1993,11 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Mercedes-Benz EQT 200 er fjölnotabíll byggður á sendibíl sem getur rúmað allt að sjö manns í fremur nettri yfirbyggingu. Hann hentar sérstaklega stórum fjölskyldum eða þeim sem þurfa mikið rými og auðvelt aðgengi í daglegu lífi.',
       'Helsti styrkleiki bílsins er notagildið. Skottið er stórt og hann má draga 1.500 kg, sem er talsvert meira en flestir keppinautar hans í svipuðum verðflokki ráða við. Þetta gerir hann óvenju færan í að grípa í kerrur eða hjólhýsi miðað við aðra rafbíla af svipaðri stærð.',
-      'Á móti kemur að hann drífur mjög stutt og hleður hægt. Í íslenskum vetrarkulda dugar drægnin lítið í ferðalög milli landshluta án tíðra og langra viðkomna á hraðhleðslustöðvum. Fyrir þá sem þurfa að aka reglulega út á land býður Kia PV5 upp á mun meiri drægni, helmingi styttri hleðslustopp og enn meira pláss, þótt verðið sé hærra.',
+      'Á móti kemur að hann drífur mjög stutt og hleður hægt. Í íslenskum vetrarkulda dugar drægnin lítið í ferðalög milli landshluta án tíðra og langra viðkomna á hraðhleðslustöðvum. Fyrir þá sem þurfa að aka reglulega út á land býður Kia PV5 upp á mun meiri drægni, helmingi styttri hleðslustopp og enn meira pláss, og kostar þar að auki 99.000 kr. minna.',
       'EQT er því prýðilegur og hagnýtur kostur í innanbæjarakstur og stórinnkaup, en síður heppilegur sem aðalbíll fyrir þá sem ferðast mikið um landið.',
     ],
     questions: [
-      'Borgar sig að borga meira fyrir Kia PV5?',
+      'Borgar sig frekar að velja Kia PV5?',
       'Er Toyota Proace City Verso betri kaup?',
       'Rúmar Hyundai STARIA Electric miklu meira?',
       'Er hann eins og sendibíll í akstri?',
@@ -2008,7 +2008,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kemst hann milli landshluta á veturna?',
       'Henta rennihurðirnar vel í þröngum stæðum?',
     ],
-    facts: '9c2669ef1011',
+    facts: '7cc9c2a759e6',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-eqv-300': {
@@ -2103,7 +2103,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Mercedes-Benz eVito Tourer er stór, níu sæta fjölnotabíll sem byggður er á sendibíl. Hann er sérsniðinn fyrir stórar fjölskyldur eða hópferðir þar sem þörf er á að koma mörgum á milli staða með ríflegan farangur.',
       'Helsti styrkur bílsins er ótrúlegt rými. Jafnvel þótt öll níu sætin séu setin er skottið eitt það stærsta sem völ er á og tekur nærri heilan rúmmetra af töskum og búnaði, sem leysir flestan plássvanda í daglegu lífi.',
-      'Á móti kemur að bíllinn er dýr og drægnin með því stysta sem gerist í þessum verðflokki, sem kallar á tíð stopp á langferðum. Hann hleður fremur hægt og er aðeins framhjóladrifinn. Stór ókostur er líka að hann má alls ekki draga kerru. Ef dráttargeta skiptir máli kemur Toyota Proace Verso sterklega til greina, en hann má draga 1.000 kg, tekur um 20% styttri hleðslustopp og er 3.600.000 kr. ódýrari, þótt hann bjóði minna skottrými.',
+      'Á móti kemur að bíllinn er dýr og drægnin með því stysta sem gerist í þessum verðflokki, sem kallar á tíð stopp á langferðum. Hann hleður fremur hægt og er aðeins framhjóladrifinn. Stór ókostur er líka að hann má alls ekki draga kerru. Ef dráttargeta skiptir máli kemur Toyota Proace Verso sterklega til greina, en hann má draga 1.000 kg, tekur um 20% styttri hleðslustopp og er 4.100.000 kr. ódýrari, þótt hann bjóði minna skottrými.',
       'Bíllinn hentar því best þeim sem setja níu sæti og risavaxið skott í forgang, en síður þeim sem ferðast mikið milli landshluta í vetrarfærð eða þurfa að draga vagna.',
     ],
     questions: [
@@ -2118,7 +2118,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er auðvelt að taka sætin úr honum?',
       'Rúmast 9 stórar töskur í skottinu?',
     ],
-    facts: 'e0ee132ee8b7',
+    facts: '093161402c24',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mg-cyberster-gt': {
@@ -2206,7 +2206,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hentar hann sem aðalbíll á heimilinu?',
       'Er hann nógu kraftmikill á þjóðvegi?',
     ],
-    facts: 'd4084f401d63',
+    facts: '29d69adf6d35',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mg-mgs5-lux': {
@@ -2227,7 +2227,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Dugar hann vel sem fjölskyldubíll?',
       'Hvar er sparað til að ná lágu verði?',
     ],
-    facts: '0c488c6f3a85',
+    facts: '605b65e95dd9',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mg-mgs6-dual-motor': {
@@ -2249,7 +2249,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er hljóðvistin á þjóðveginum?',
       'Fæst annað fjórhjóladrif á þessu verði?',
     ],
-    facts: '08480db8aaf6',
+    facts: '5143be3d839e',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mini-aceman-e': {
@@ -2344,10 +2344,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Nissan Ariya e-4ORCE er meðalstór jepplingur með fjórhjóladrifi, mýkt og góðri hljóðvist, ætlaður þeim sem vilja þægilegan og vandaðan fjölskyldubíl.',
       'Fjöðrunin tekur vel á ójöfnum og innanrýmið er notalegt, og hann má draga 1.500 kg.',
-      'Gallarnir eru að hann drífur styttra en flestir á svipuðu verði, er meðal þeirra sem hlaða hægast og skottið er minna en hjá flestum keppinautum hans. Kia EV6 2025 Long Range AWD er 1.400.000 kr. ódýrari, drífur 29 km lengra, hleður með um 60% styttri stoppum og er með 75 l stærra skott.',
+      'Gallarnir eru að hann drífur styttra en flestir á svipuðu verði, er meðal þeirra sem hlaða hægast og skottið er minna en hjá flestum keppinautum hans. Kia EV6 2025 Long Range AWD er 900.000 kr. ódýrari, drífur 29 km lengra, hleður með um 60% styttri stoppum og er með 75 l stærra skott.',
       'Ariya e-4ORCE er fyrir þá sem setja þægindi ofar hleðsluhraða, en keppinautarnir gefa meira fyrir peninginn.',
     ],
-    facts: 'e72f491725d7',
+    facts: '51c0725f9e82',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Er e-4ORCE þess virði miðað við framdrifið?',
@@ -2381,7 +2381,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað drífur hann langt á veturna?',
       'Kemst barnavagn fyrir í skottinu?',
     ],
-    facts: 'cec299368457',
+    facts: '292aab2f17c3',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'nissan-leaf-extended-range': {
@@ -2410,10 +2410,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Opel Frontera er kassalaga jepplingur sem býður allt að sjö sæti á verði sem er með því lægsta á listanum. Hann hentar stærri fjölskyldum sem vilja hagnýtan bíl í dagleg verkefni fyrir lítið.',
       'Fáir aðrir sjö sæta bílar komast nálægt verðinu, og skottið er stærra en hjá flestum á svipuðu verði. Kassalaga lagið gefur gott höfuðrými og útsýni.',
-      'Gallarnir eru að í sínum verðflokki er hann meðal þeirra sem drífa styst, hlaða hægast, eru hægastir og draga minnst, svo hann hentar illa til ferða milli landshluta. Peugeot e-5008 tekur líka sjö, drífur 197 km lengra og er með 456 l stærra skott, en kostar 3.100.000 kr. meira.',
+      'Gallarnir eru að í sínum verðflokki er hann meðal þeirra sem drífa styst, hlaða hægast, eru hægastir og draga minnst, svo hann hentar illa til ferða milli landshluta. Peugeot e-5008 tekur líka sjö, drífur 197 km lengra og er með 456 l stærra skott, en kostar 2.800.000 kr. meira.',
       'Frontera er ódýrasta leiðin að sjö sætum, sniðin að nærumhverfinu frekar en langferðum.',
     ],
-    facts: '3227ee318235',
+    facts: '77da20a5a55c',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Passar fullorðinn í aftasta bekkinn?',
@@ -2432,7 +2432,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Opel Grandland er fimm sæta jepplingur sem hentar vel þeim sem vilja látlausan og hagnýtan fjölskyldubíl. Hann leggur áherslu á hefðbundið notagildi og þægindi frekar en óþarfa prjál.',
       'Helsti styrkleikinn er hve mikla drægni maður fær fyrir verðið, en bíllinn er ódýrari á hvern kílómetra en flestir keppinautar hans. Uppgefin drægni dugar prýðilega milli landshluta yfir sumartímann, þótt reikna megi með að hún dragist saman í vetrarkulda eins og ávallt á Íslandi.',
-      'Helsti gallinn er hversu aflítill og seinn bíllinn er miðað við aðra í sínum verðflokki, auk þess sem hann er aðeins framhjóladrifinn. Ef hugurinn stendur til öruggara grips í snjó og miklu meiri snerpu er Opel Grandland AWD aðeins 400.000 kr. dýrari. Einnig fæst Peugeot e-3008 á 420.000 kr. lægra verði með svipaða drægni en mun sneggri í sprettinum.',
+      'Helsti gallinn er hversu aflítill og seinn bíllinn er miðað við aðra í sínum verðflokki, auk þess sem hann er aðeins framhjóladrifinn. Ef hugurinn stendur til öruggara grips í snjó og miklu meiri snerpu er Opel Grandland AWD aðeins 400.000 kr. dýrari. Einnig fæst Peugeot e-3008 á 600.000 kr. lægra verði með svipaða drægni en mun sneggri í sprettinum.',
       'Fyrir þá sem horfa fyrst og fremst í hagkvæma drægni er þetta fyllilega gildur kostur, en fjórhjóladrifna útfærslan heillar líklega mun meira fyrir íslenskar aðstæður.',
     ],
     questions: [
@@ -2447,17 +2447,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Dugar drægnin í hringferð á sumrin?',
       'Hvernig er plássið fyrir fjölskyldu?',
     ],
-    facts: 'cbe1c5d227f5',
+    facts: 'a8155a8cef01',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'opel-grandland-awd': {
     paragraphs: [
       'Opel Grandland AWD er meðalstór jepplingur með fjórhjóladrifi, 4,65 m á lengd, sem leggur áherslu á notagildi og þægindi.',
       'Hann er snöggur, skottið er í meðallagi á þessu verði og hann má draga 1.350 kg.',
-      'Gallinn er að drægni og hleðsla eru aðeins í meðallagi á þessu verði. Systurbíllinn Peugeot e-3008 Dual Motor er 300.000 kr. ódýrari, drífur 33 km lengra og er með 103 l stærra skott, og Subaru Solterra kostar það sama, drífur 17 km lengra og er mun sneggri. Framhjóladrifni Opel Grandland er 400.000 kr. ódýrari og drífur 29 km lengra.',
+      'Gallinn er að drægni og hleðsla eru aðeins í meðallagi á þessu verði. Systurbíllinn Peugeot e-3008 Dual Motor er 500.000 kr. ódýrari, drífur 33 km lengra og er með 103 l stærra skott, og Subaru Solterra kostar það sama, drífur 17 km lengra og er mun sneggri. Framhjóladrifni Opel Grandland er 400.000 kr. ódýrari og drífur 29 km lengra.',
       'Grandland AWD er prýðilegur fyrir fjölskylduakstur í vetrarfærð, en systurbíllinn frá Peugeot gefur meira fyrir minna.',
     ],
-    facts: 'b6dc8b885bf0',
+    facts: '1c7bd1945135',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Af hverju hann frekar en Peugeot e-3008?',
@@ -2498,10 +2498,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Peugeot e-2008 er lítill jepplingur með sérstökum frönskum svip og hærri setstöðu, ætlaður þeim sem vilja lipran og þægilegan bíl í daglegt skutl.',
       'Hann er mjög ódýr og hleður hraðar en flestir á svipuðu verði, svo hleðslustoppin eru styttri en hjá helstu keppinautum hans.',
-      'Hann drífur hins vegar styttra og er meðal þeirra hægustu í sínum verðflokki, og hann má ekki draga kerru. Kia EV3 Standard Range kostar 51.000 kr. meira, drífur 24 km lengra, er mun sneggri og má draga 500 kg.',
+      'Hann drífur hins vegar styttra og er meðal þeirra hægustu í sínum verðflokki, og hann má ekki draga kerru. Kia EV3 Standard Range kostar 400.000 kr. meira, drífur 24 km lengra, er mun sneggri og má draga 500 kg.',
       'e-2008 er lipur bæjarbíll fyrir þá sem þurfa hvorki kerru né mikla drægni.',
     ],
-    facts: '7889c30cc41d',
+    facts: '55096815edf1',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að taka frekar Kia EV3?',
@@ -2520,7 +2520,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Peugeot e-3008 er jepplingur sem sker sig úr fyrir djarfa hönnun og vandað innanrými. Hann hentar vel fólki sem leitar að stílhreinum fjölskyldubíl til daglegra nota og ferðalaga.',
       'Helsti styrkleiki bílsins er að hann drífur lengra en flestir í sínum verðflokki og er ódýrari á hvern kílómetra drægni en keppinautarnir. Þessi mikla drægni gefur gott öryggi þegar ekið er á milli landshluta, jafnvel þótt dregið geti úr henni í vetrarkulda.',
-      'Á móti kemur að bíllinn hleður hægar en flestir og er aðeins framhjóladrifinn. Ef fjórhjóladrif í snjó og hálku skiptir máli leysir Peugeot e-3008 Dual Motor það fyrir 520.000 kr. viðbót. Þá má einnig líta til Hongqi EHS5, sem er 680.000 kr. ódýrari, með fjórhjóladrifi og um 45% styttri hleðslustoppum.',
+      'Á móti kemur að bíllinn hleður hægar en flestir og er aðeins framhjóladrifinn. Ef fjórhjóladrif í snjó og hálku skiptir máli leysir Peugeot e-3008 Dual Motor það fyrir 500.000 kr. viðbót. Þá má einnig líta til Hongqi EHS5, sem er 500.000 kr. ódýrari, með fjórhjóladrifi og um 45% styttri hleðslustoppum.',
       'Peugeot e-3008 er því áhugaverður kostur fyrir þá sem vilja mikla drægni og fágað yfirbragð, svo lengi sem lengri hleðslustopp á þjóðveginum eru ekki að þvælast fyrir.',
     ],
     questions: [
@@ -2535,17 +2535,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er fótaplássið í aftursætunum?',
       'Er skottið nógu stórt fyrir barnavagn?',
     ],
-    facts: '2b88a41fc61a',
+    facts: 'e07ac6c3df49',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'peugeot-e-3008-dual-motor': {
     paragraphs: [
       'Peugeot e-3008 Dual Motor er meðalstór jepplingur með fjórhjóladrifi og djörfu útliti, með sérstæðu ökumannsrými, litlu stýri og bogadregnum skjá. Hann höfðar til þeirra sem vilja þægilegan og hljóðlátan fjölskyldubíl sem sker sig úr.',
       'Í sínum verðflokki drífur hann lengra og er aflmeiri en flestir, og skottið er stærra en hjá flestum.',
-      'Gallinn er að hann hleður hægar en flestir keppinautar hans. Skoda Elroq 85x er 500.000 kr. ódýrari, drífur 45 km lengra, hleður með um 30% styttri stoppum og má draga 450 kg meira, en skottið er 118 l minna. Þurfi ekki fjórhjóladrif fæst framhjóladrifinn Peugeot e-3008 fyrir 520.000 kr. minna, með sömu drægni.',
+      'Gallinn er að hann hleður hægar en flestir keppinautar hans. Skoda Elroq 85x er 300.000 kr. ódýrari, drífur 45 km lengra, hleður með um 30% styttri stoppum og má draga 450 kg meira, en skottið er 118 l minna. Þurfi ekki fjórhjóladrif fæst framhjóladrifinn Peugeot e-3008 fyrir 500.000 kr. minna, með sömu drægni.',
       'e-3008 Dual Motor er álitlegur kostur fyrir þá sem meta drægni, rými og franska hönnun ofar hraðri hleðslu.',
     ],
-    facts: '6e79c038d63f',
+    facts: '8d7a10b66e5c',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig er hann við Skoda Elroq 85x?',
@@ -2564,10 +2564,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Peugeot e-5008 er stór sjö sæta jepplingur með framhjóladrifi, 4,8 m á lengd, sem býður jepplingalag frekar en sendibílalag fyrir stærri fjölskyldur á viðráðanlegu verði.',
       'Hann er einn ódýrasti rafbíllinn sem rúmar sjö, og skottið er eitt það stærsta á svipuðu verði. Drægnin er í meðallagi, sem dugar fyrir ferðir milli landshluta.',
-      'Á móti kemur að hann er meðal þeirra hægustu í sínum verðflokki, hleður hægar og dregur minna en flestir keppinautar hans. Skoda Peaq 90x kostar 1.800.000 kr. meira en er fjórhjóladrifinn, drífur 111 km lengra, hleður með um 35% styttri stoppum og má draga 1.000 kg meira.',
+      'Á móti kemur að hann er meðal þeirra hægustu í sínum verðflokki, hleður hægar og dregur minna en flestir keppinautar hans. Skoda Peaq 90x kostar 2.100.000 kr. meira en er fjórhjóladrifinn, drífur 111 km lengra, hleður með um 35% styttri stoppum og má draga 1.000 kg meira.',
       'e-5008 er skynsamlegur kostur fyrir barnmargar fjölskyldur sem vilja sjö sæti og mikið pláss fyrir hóflegt verð.',
     ],
-    facts: 'db7937bb15e9',
+    facts: 'b5f8cd3e6cb5',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að velja Dual Motor?',
@@ -2586,10 +2586,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Peugeot e-5008 Dual Motor er stór sjö sæta jepplingur með fjórhjóladrifi, 4,8 m á lengd, fyrir stærri fjölskyldur sem vilja jepplingalag og grip í vetrarfærð.',
       'Skottið er eitt það stærsta á svipuðu verði og hann er mun sneggri en framhjóladrifna útfærslan.',
-      'Gallarnir eru að hann drífur styttra, er meðal þeirra sem hlaða hægast og dregur minna en flestir keppinautar hans. Skoda Peaq 90x kostar 900.000 kr. meira en drífur 140 km lengra, hleður með um 40% styttri stoppum og má draga 1.000 kg meira. Framhjóladrifni Peugeot e-5008 er 920.000 kr. ódýrari og drífur 29 km lengra.',
+      'Gallarnir eru að hann drífur styttra, er meðal þeirra sem hlaða hægast og dregur minna en flestir keppinautar hans. Skoda Peaq 90x kostar 1.100.000 kr. meira en drífur 140 km lengra, hleður með um 40% styttri stoppum og má draga 1.000 kg meira. Framhjóladrifni Peugeot e-5008 er 1.000.000 kr. ódýrari og drífur 29 km lengra.',
       'e-5008 Dual Motor hentar fjölskyldum sem þurfa sjö sæti og fjórhjóladrif, en síður sem langferðabíll.',
     ],
-    facts: '6dd453c262b4',
+    facts: '5931fc771b06',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig er plássið í öftustu sætunum?',
@@ -2623,17 +2623,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er raundrægnin á veturna?',
       'Hvað tekur langan tíma að hraðhlaða hann?',
     ],
-    facts: '91bd302752e1',
+    facts: 'fd860798d136',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'polestar-2-long-range-dual-motor': {
     paragraphs: [
       'Polestar 2 Long Range Dual Motor er lágur og sportlegur fólksbíll með afturhlera og fjórhjóladrifi, með skandinavískum gæðablæ, fyrir þá sem vilja snerpu og góða aksturseiginleika frekar en jeppling.',
       'Í sínum verðflokki er hann meðal þeirra langdrægustu og þeirra sem hlaða hraðast, og sneggri og aflmeiri en flestir. Hann má draga 1.500 kg og auk skottsins er lítið framskott.',
-      'Á móti kemur að skottið er minna en hjá flestum keppinautum hans og aftursætin eru fremur þröng. Ford Capri kostar það sama, drífur álíka langt og hleður jafn hratt, en er með 165 l stærra skott.',
+      'Á móti kemur að skottið er minna en hjá flestum keppinautum hans og aftursætin eru fremur þröng. Ford Capri kostar 500.000 kr. meira, drífur álíka langt og hleður jafn hratt, en er með 165 l stærra skott.',
       'Polestar 2 er fyrir þá sem setja akstursánægju og drægni ofar plássi.',
     ],
-    facts: 'd4969088eba3',
+    facts: '785bc79cc4b8',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er Performance-útfærslan þess virði?',
@@ -3139,7 +3139,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur styttra, hleður hægar og er aflminni en flestir keppinautar hans. Renault Scenic E-Tech EV87 kostar 900.000 kr. meira og drífur 193 km lengra, og XPENG G6 RWD Standard Range kostar 100.000 kr. meira, hleður með um 35% styttri stoppum og má draga 400 kg meira.',
       'Scenic EV60 er þægilegur fjölskyldubíll, en flestum borgar sig stærri rafhlaðan.',
     ],
-    facts: 'becc1bcc05fa',
+    facts: '19a0e99798a6',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að taka frekar EV87?',
@@ -3161,7 +3161,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar hægari og aflminni en flestir þeirra og má draga minna. XPENG G6 RWD Long Range er 100.000 kr. ódýrari, hleður með um 45% styttri stoppum og má draga 400 kg meira, en drífur 53 km styttra.',
       'Scenic EV87 er hagkvæmur ferðafélagi fyrir þá sem setja pláss og drægni fyrir peninginn í fyrsta sæti.',
     ],
-    facts: '2b557ecca5f3',
+    facts: '68ba20997aa7',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Kemst hann til Akureyrar án þess að hlaða?',
@@ -3180,7 +3180,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Skoda Epiq er lítill jepplingur sem hentar vel sem lipur og sparneytinn bíll í daglegan akstur. Hann byggir á hagnýtri hönnun sem Skoda er þekkt fyrir, þar sem notagildi og aðgengi eru í forgrunni í nettari yfirbyggingu.',
       'Þótt drægnin sé fremur stutt á heildina litið dregur hann lengra en flestir í sínum verðflokki, og hann er afar ódýr á hvern kílómetra drægni. Hann hleður hraðar en flestir keppinautar og er óvenju snöggur miðað við ódýran bíl, sem gerir hann lipran í umferðinni og styttir stopp á hraðhleðslustöðvum.',
-      'Helsti ókosturinn er að hann er aðeins framhjóladrifinn og í íslenskum vetrarkulda dugar drægnin tæpast í langferðir milli landshluta án þess að gera hlé til að hlaða. Ef markmiðið er að spara enn frekar býður Kia EV2 Long Range upp á svipaða drægni fyrir 99.000 kr. minna, en þar verða hleðslustoppin um 20% lengri og bíllinn er mun aflminni.',
+      'Helsti ókosturinn er að hann er aðeins framhjóladrifinn og í íslenskum vetrarkulda dugar drægnin tæpast í langferðir milli landshluta án þess að gera hlé til að hlaða. Kia EV2 Long Range kostar nánast það sama og býður upp á svipaða drægni, en þar verða hleðslustoppin um 20% lengri og bíllinn er mun aflminni.',
       'Á heildina litið er Epiq mjög skynsamlegur kostur sem veitir mikla lipurð, sprækan mótor og skjóta hleðslu á lágu verði.',
     ],
     questions: [
@@ -3195,7 +3195,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er raunveruleg vetrardrægni?',
       'Dugar hann sem eini bíll heimilisins?',
     ],
-    facts: 'd142c842cb52',
+    facts: '1e09a0bf0230',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'skoda-elroq-85': {
@@ -3205,7 +3205,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann má aðeins draga 1.000 kg, minna en flestir þeirra, og er aðeins afturhjóladrifinn. Skoda Elroq 85x fæst með fjórhjóladrifi og 1.800 kg dráttargetu fyrir 400.000 kr. meira, með nánast sömu drægni.',
       'Elroq 85 er skynsamlegt val fyrir þá sem vilja langdrægan jeppling á góðu verði og þurfa ekki að draga mikið.',
     ],
-    facts: '8dcdbb4dd4f3',
+    facts: '1878c15214f6',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Borgar sig að taka 85x frekar?',
@@ -3224,10 +3224,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Skoda Elroq 85x er meðalstór jepplingur með fjórhjóladrifi, hagnýtu innanrými og hárri setstöðu, fyrir fjölskyldur sem vilja traustan bíl í vetrarfærð og á ferðalögum.',
       'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og má draga 1.800 kg, meira en flestir þeirra.',
-      'Veikleikarnir eru fáir: afl og snerpa eru aðeins í meðallagi, og skottið líka. Peugeot e-3008 Dual Motor kostar 500.000 kr. meira og er með 118 l stærra skott, en drífur 45 km styttra og hleður með um 40% lengri stoppum.',
+      'Veikleikarnir eru fáir: afl og snerpa eru aðeins í meðallagi, og skottið líka. Peugeot e-3008 Dual Motor kostar 300.000 kr. meira og er með 118 l stærra skott, en drífur 45 km styttra og hleður með um 40% lengri stoppum.',
       'Elroq 85x er einn heildstæðasti fjórhjóladrifni bíllinn á sínu verði.',
     ],
-    facts: 'ed17b9140526',
+    facts: '02ab6b0d289c',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að spara og velja 85-gerðina?',
@@ -3249,7 +3249,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Skottið er hins vegar minna en hjá flestum keppinautum hans, og hleðsla og snerpa eru aðeins í meðallagi. Skoda Elroq 85x er 1.700.000 kr. ódýrari, drífur 20 km lengra og má draga jafn mikið, og gefur aðeins eftir í snerpu.',
       'Elroq RS er fyrir þá sem vilja sportlegasta Elroq-inn, en 85x gefur meira fyrir peninginn.',
     ],
-    facts: '552592c6f51d',
+    facts: '7b047551b4c0',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að taka hann frekar en 85x?',
@@ -3293,7 +3293,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er fremur dýr og drægni og hleðsla eru aðeins í meðallagi. Smart #5 Brabus er 200.000 kr. ódýrari, drífur álíka langt, hleður með um 40% styttri stoppum og er mun sneggri, en má draga 600 kg minna.',
       'Enyaq RS er fyrir þá sem vilja rúmgóðan jeppling sem dregur hjólhýsi, með sportlegum blæ.',
     ],
-    facts: '469a3e95dfa7',
+    facts: '6d9caf663a79',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borga kraftarnir sig miðað við 85X?',
@@ -3312,10 +3312,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Skoda Peaq 90x er stór sjö sæta jeppi með fjórhjóladrifi, 4,87 m á lengd, sem leggur áherslu á hagnýtt pláss og ferðagetu fyrir stórar fjölskyldur.',
       'Hann er meðal þeirra langdrægustu í sínum verðflokki og hleður hraðar en flestir keppinautar hans. Skottið er eitt það stærsta og hann má draga 2.000 kg, meira en flestir þeirra.',
-      'Gallarnir eru að hann er fremur dýr og hægari en flestir þeirra. Peugeot e-5008 Dual Motor er 900.000 kr. ódýrari og tekur líka sjö, en drífur 140 km styttra, hleður hægar og má draga 1.000 kg minna.',
+      'Gallarnir eru að hann er fremur dýr og hægari en flestir þeirra. Peugeot e-5008 Dual Motor er 1.100.000 kr. ódýrari og tekur líka sjö, en drífur 140 km styttra, hleður hægar og má draga 1.000 kg minna.',
       'Peaq 90x er einn sterkasti sjö sæta kosturinn fyrir stórar fjölskyldur sem ferðast um landið.',
     ],
-    facts: '10c6962dcc16',
+    facts: 'b0e8be323215',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Rúmast þrír barnastólar í annarri röð?',
@@ -3333,8 +3333,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'smart-1-pro': {
     paragraphs: [
       'Smart #1 Pro+ er lítill jepplingur sem markar nýja tíma fyrir Smart-merkið í samstarfi Mercedes-Benz og Geely. Hann sameinar nútímalegt útlit og lipurð í borginni við hærri setustöðu og meira notagildi en eldri gerðir merkisins voru þekktar fyrir. Hann hentar einkar vel fyrir þá sem leita að snaggaralegum og stílhreinum bíl í daglegan akstur.',
-      'Í sínum verðflokki sker hann sig úr með miklu afli og hann er sneggri en flestir keppinautar hans. Þegar farið er út fyrir bæinn hleður hann einnig hraðar en aðrir bílar á svipuðu verði, sem styttir stopp á hraðhleðslustöðvum. Drægnin er í meðallagi miðað við verð og dugar vel flesta daga ársins, þótt reikna verði með að hún styttist í íslenskum vetrarkulda.',
-      'Helsti ókosturinn er að bíllinn er eingöngu afturhjóladrifinn, sem getur reynst erfiðara í snjó og vetrarfærð. Fyrir þá sem þurfa meira grip býður Smart #1 Pulse upp á fjórhjóladrif, en hann er 900.000 kr. dýrari. Vilji maður meiri drægni fyrir minni pening er MG MGS5 LUX einnig 400.000 kr. ódýrari kostur. Smart #1 Pro+ er engu að síður kraftmikill og skemmtilegur kostur fyrir þá sem vilja lipran jeppling á góðu verði.',
+      'Í sínum verðflokki sker hann sig úr með miklu afli og hann er sneggri en flestir keppinautar hans. Þegar farið er út fyrir bæinn hleður hann einnig hraðar en aðrir bílar á svipuðu verði, sem styttir stopp á hraðhleðslustöðvum. Drægnin er meiri en hjá flestum á svipuðu verði og dugar vel flesta daga ársins, þótt reikna verði með að hún styttist í íslenskum vetrarkulda.',
+      'Helsti ókosturinn er að bíllinn er eingöngu afturhjóladrifinn, sem getur reynst erfiðara í snjó og vetrarfærð. Fyrir þá sem þurfa meira grip býður Smart #1 Pulse upp á fjórhjóladrif, en hann er 900.000 kr. dýrari. Vilji maður meiri drægni kostar MG MGS5 LUX aðeins 100.000 kr. meira. Smart #1 Pro+ er engu að síður kraftmikill og skemmtilegur kostur fyrir þá sem vilja lipran jeppling á góðu verði.',
     ],
     questions: [
       'Dugar afturhjóladrifið eða þarf ég Pulse?',
@@ -3348,7 +3348,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Nýtist aflið vel á afturhjóladrifinu?',
       'Er hann að innan eins og Mercedes-Benz?',
     ],
-    facts: 'ccadf461679c',
+    facts: '354c245d78ff',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'smart-1-pulse': {
@@ -3358,7 +3358,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst, hleður hægar en flestir þeirra og skottið er eitt það minnsta. Afturhjóladrifni Smart #1 Pro+ er 900.000 kr. ódýrari og drífur 40 km lengra, fyrir þá sem þurfa ekki fjórhjóladrifið.',
       'Smart #1 Pulse er fyrir þá sem setja kraft og fjórhjóladrif ofar drægni og plássi.',
     ],
-    facts: '7e9d745dd0cc',
+    facts: 'ad38d2667cef',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Af hverju hann frekar en Volvo EX30?',
@@ -3377,7 +3377,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Smart #1 Brabus er lítill jepplingur sem virkar nánast eins og hreinræktaður sportbíll í dulargervi. Hann er sérsniðinn fyrir þá sem vilja gríðarlega snerpu í liprum bíl sem er auðvelt að athafna sig á í þéttbýli.',
       'Helsti styrkur hans liggur í hröðun og afli, en hann er meðal þeirra allra sneggstu í sínum verðflokki. Fjórhjóladrifið sér til þess að mikill krafturinn skili sér örugglega ofan í götuna við íslenskar aðstæður, jafnt í snjó sem hálku.',
-      'Aftur á móti gefur bíllinn mikið eftir í langkeyrslu. Hann drífur mjög stutt og hleður hægar en flestir keppinautar, svo vetrarferðir milli landshluta kalla á tíð hleðslustopp. Ef meiri drægni skiptir máli býður hinn náskyldi Volvo EX30 Twin Motor Performance upp á enn betri hröðun og 50 km meiri drægni á örlítið lægra verði, og BYD Atto 3 Evo kostar það sama og er jafn snöggur en drífur 70 km lengra og hleður með um 20% styttri stoppum. Innan sömu tegundar má líka skoða Smart #1 Pulse, sem býður upp á sama fjórhjóladrif og afl en sparar 700.000 kr.',
+      'Aftur á móti gefur bíllinn mikið eftir í langkeyrslu. Hann drífur mjög stutt og hleður hægar en flestir keppinautar, svo vetrarferðir milli landshluta kalla á tíð hleðslustopp. Ef meiri drægni skiptir máli býður hinn náskyldi Volvo EX30 Twin Motor Performance upp á enn betri hröðun og 50 km meiri drægni fyrir 600.000 kr. meira, og BYD Atto 3 Evo kostar 700.000 kr. meira og er jafn snöggur en drífur 70 km lengra og hleður með um 20% styttri stoppum. Innan sömu tegundar má líka skoða Smart #1 Pulse, sem býður upp á sama fjórhjóladrif og afl en sparar 500.000 kr.',
       'Þetta er skemmtileg og kraftmikil vasa-raketta fyrir þá sem setja akstursgleði í forgang, en síður heppilegur ferðabíll á löngum leiðum.',
     ],
     questions: [
@@ -3392,14 +3392,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Eyðir hann miklu í Brabus-stillingu?',
       'Hentar hann sem eini bíll á heimilinu?',
     ],
-    facts: '6ba5ec10b9d9',
+    facts: '99b8b6647b5b',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'smart-3-pulse': {
     paragraphs: [
       'Smart #3 Pulse er sportlegur og nettur jepplingur sem höfðar sérstaklega til þeirra sem leita að miklu afli í lipurri stærð. Hann sker sig úr fyrir fjórhjóladrifið sem tryggir gott grip í snjó og vetrarfærð.',
       'Helsti styrkur bílsins liggur í kraftinum, enda er hann sneggri en flestir í sínum verðflokki og með þeim allra aflmestu. Fyrir fólk sem kann að meta snarpa hröðun og lipra aksturseiginleika býður hann upp á mikla skemmtun í hversdagsakstri.',
-      'Á móti kemur að hann drífur fremur stutt og hleður hægar á ferðalögum en flestir keppinautar. Ef meiri drægni og sneggri hleðsla skipta máli er Volvo EX30 Twin Motor Performance öflugur valkostur með styttri hleðslustoppum, eða MG MGS6 Dual Motor sem kostar 400.000 kr. minna og kemst 70 km lengra á hleðslunni.',
+      'Á móti kemur að hann drífur fremur stutt og hleður hægar á ferðalögum en flestir keppinautar. Ef meiri drægni og sneggri hleðsla skipta máli er Volvo EX30 Twin Motor Performance öflugur valkostur með styttri hleðslustoppum, eða MG MGS6 Dual Motor sem kostar 300.000 kr. meira og kemst 70 km lengra á hleðslunni.',
       'Smart #3 Pulse hentar fyrst og fremst þeim sem setja mikla hestaflaorku, hönnun og öruggt vetrargrip í forgang en gera minni kröfur um langdrægni á ferðalögum.',
     ],
     questions: [
@@ -3414,17 +3414,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er raunveruleg drægni á veturna?',
       'Hvernig er fjöðrunin á slæmum vegum?',
     ],
-    facts: '6fcbe8825e54',
+    facts: 'bdd306f88f71',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'smart-3-brabus': {
     paragraphs: [
       'Smart #3 Brabus er öflugasta útfærsla #3, rennilegur jepplingur með fjórhjóladrifi og gríðarlegu afli, meðal sneggstu bíla á sínu verði.',
       'Hann er aflmeiri en flestir keppinautar hans og má draga 1.600 kg.',
-      'Gallarnir eru að hann drífur styttra, hleður hægar og er með minna skott en flestir þeirra. Volvo EX30 Twin Motor Performance er 300.000 kr. ódýrari, álíka snöggur, drífur 35 km lengra og hleður með um 10% styttri stoppum. Smart #3 Pulse er 500.000 kr. ódýrari og aðeins sjónarmun hægari.',
+      'Gallarnir eru að hann drífur styttra, hleður hægar og er með minna skott en flestir þeirra. Volvo EX30 Twin Motor Performance kostar 400.000 kr. meira, er álíka snöggur, drífur 35 km lengra og hleður með um 10% styttri stoppum. Smart #3 Pulse er 500.000 kr. ódýrari og aðeins sjónarmun hægari.',
       'Smart #3 Brabus er fyrir þá sem vilja mikinn kraft og sportlegan svip, en #3 Pulse gefur meira fyrir peninginn.',
     ],
-    facts: '935a4a147f8e',
+    facts: '70767fd41e18',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er Brabus þess virði umfram Pulse?',
@@ -3443,10 +3443,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Smart #5 Pro er stór og kassalaga jepplingur, ný stefna hjá merki sem var þekkt fyrir smábíla. Hann hentar fjölskyldum sem vilja mikið pláss og áberandi útlit.',
       'Skottið er með þeim stærstu í sínum verðflokki, 72 l framskott bætist við og hann má draga 1.600 kg, meira en flestir keppinautar hans. Hann er líka sneggri og aflmeiri en flestir þeirra, með stærri rafhlöðu en gengur og gerist.',
-      'Á móti kemur að hann hleður fremur hægt á langferðum og er afturhjóladrifinn, sem krefst meiri varkárni í snjó og hálku. XPENG G6 RWD Standard Range er 100.000 kr. ódýrari með um 25% styttri hleðslustopp, en drífur 30 km styttra og skottið er 59 l minna.',
+      'Á móti kemur að hann hleður fremur hægt á langferðum og er afturhjóladrifinn, sem krefst meiri varkárni í snjó og hálku. XPENG G6 RWD Standard Range kostar 100.000 kr. meira og er með um 25% styttri hleðslustopp, en drífur 30 km styttra og skottið er 59 l minna.',
       'Fyrir þá sem leita að rúmgóðum og sprækum fjölskyldubíl sem getur dregið hjólhýsi er #5 Pro fýsilegur kostur, svo lengi sem hraðhleðslan er ekki í forgangi.',
     ],
-    facts: '5339e7e97b53',
+    facts: '0cb63366d3b1',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að taka Pulse-útfærsluna?',
@@ -3512,7 +3512,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Drægni og hraðhleðsla eru hins vegar aðeins í meðallagi. BYD Sealion 7 er 500.000 kr. ódýrari, hleður með um 15% styttri stoppum og er mun aflmeiri, en skottið er 113 l minna.',
       'e-Outback er traustur kostur fyrir þá sem setja grip, pláss og Subaru-merkið í forgang.',
     ],
-    facts: '888b2d74b59a',
+    facts: 'cba2ecfbb195',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig dugar fjórhjóladrifið í snjó?',
@@ -3575,10 +3575,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Suzuki e Vitara 4x4 AllGrip er lítill jepplingur með fjórhjóladrifi, frá merki sem er þekkt fyrir trausta og einfalda vetrarbíla, fyrir þá sem vilja fjórhjóladrif á viðráðanlegu verði.',
       'Suzuki ábyrgist rafhlöðuna í allt að 10 ár, lengur en flestir aðrir framleiðendur, og hann er lipur í þéttbýli.',
-      'Á móti kemur að hann er meðal þeirra sem drífa styst og hlaða hægast á svipuðu verði, skottið er eitt það minnsta og hann má aðeins draga 750 kg. Smart #1 Pulse kostar 150.000 kr. meira, líka fjórhjóladrifinn, en hleður með um 40% styttri stoppum, er með 75 l stærra skott og má draga 850 kg meira.',
+      'Á móti kemur að hann er meðal þeirra sem drífa styst og hlaða hægast á svipuðu verði, skottið er eitt það minnsta og hann má aðeins draga 750 kg. Smart #1 Pulse er 350.000 kr. ódýrari, líka fjórhjóladrifinn, hleður með um 40% styttri stoppum, er með 75 l stærra skott og má draga 850 kg meira.',
       'e Vitara er hagkvæmur fjórhjóladrifsbíll með langa ábyrgð, fyrir þá sem aka mest í nærumhverfinu.',
     ],
-    facts: '9baf17ac4006',
+    facts: 'e29c134278bc',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig virkar AllGrip drifið í snjó?',
@@ -3797,7 +3797,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann drífur styttra og skottið er minna en hjá flestum keppinautum hans og hann er dýrari á hvern kílómetra drægni en flestir þeirra. Systurbíllinn Subaru Solterra er 1.500.000 kr. ódýrari með nánast sömu drægni, og Kia EV6 2025 Long Range AWD er líka 1.500.000 kr. ódýrari, hleður með um 40% styttri stoppum og má draga 300 kg meira.',
       'bZ4X AWD er traustur kostur fyrir þá sem vilja Toyota með fjórhjóladrifi, en systurbíllinn frá Subaru er sami bíll fyrir mun minna.',
     ],
-    facts: 'a4a57c14db42',
+    facts: 'cfb6615d1741',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvað fær maður umfram Subaru Solterra?',
@@ -3875,7 +3875,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu lipur er hann í borgarakstri?',
       'Hvernig er plássið í aftursætunum?',
     ],
-    facts: '1eb6228a8b3e',
+    facts: 'c75d3d868e7a',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'toyota-c-hr-77-kwh': {
@@ -3907,7 +3907,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann drífur hins vegar styttra og hleður hægar en flestir keppinautar hans, og skottið er minna. BYD Sealion 7 er 600.000 kr. ódýrari, sneggri, hleður með um 15% styttri stoppum og er með 104 l stærra skott.',
       'C-HR+ AWD er fyrir þá sem vilja Toyota með fjórhjóladrifi og langa ábyrgð, en gefur eftir í plássi og hleðslu.',
     ],
-    facts: '3567486b5332',
+    facts: '733cfcb8d39c',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Af hverju er Subaru Uncharted ódýrari?',
@@ -3926,7 +3926,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Toyota Hilux er pallbíll með tvöföldu húsi, fjórhjóladrifi og plássi fyrir fimm, og þetta er rafútgáfan af honum. Hilux hefur í áratugi verið einn þekktasti vinnubíll heims, frægur fyrir að endast og þola illa meðferð. Rafútgáfan er fyrir þá sem vilja það nafn án dísilvélar, í vinnu í bænum eða í sveitinni.',
       'Stærsti kosturinn er Toyota sjálft: umboð og verkstæði um allt land og orðspor fyrir áreiðanleika sem fáir ná. Hann má draga 1.600 kg, sem dugar fyrir flestar kerrur, þótt flestir á svipuðu verði dragi meira.',
-      'Gallinn er að hann fær ekki rafbílastyrkinn og er dýr, drægnin er mjög stutt, með þeirri stystu á þessu verði, og hann hleður hægt. Með kerru í frosti kemstu ekki langt. KGM Musso EV 4WD er 4.400.000 kr. ódýrari, með 124 km meiri drægni og um 20% styttri hleðslustopp, og JAC T9 EV er 3.800.000 kr. ódýrari og má draga 400 kg meira.',
+      'Gallinn er að hann fær ekki rafbílastyrkinn og er dýr, drægnin er mjög stutt, með þeirri stystu á þessu verði, og hann hleður hægt. Með kerru í frosti kemstu ekki langt. KGM Musso EV 4WD er 4.500.000 kr. ódýrari, með 124 km meiri drægni og um 20% styttri hleðslustopp, og JAC T9 EV er 3.800.000 kr. ódýrari og má draga 400 kg meira.',
       'Hilux er fyrir þá sem treysta merkinu og keyra stuttar vegalengdir, en á pappírnum færðu meira fyrir minna annars staðar.',
     ],
     questions: [
@@ -3941,13 +3941,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann með driflæsingu og lágt drif?',
       'Hvernig er hann í akstri á malarvegum?',
     ],
-    facts: '289bef3e4eb2',
+    facts: '0bba74a3d4b6',
   },
   'toyota-proace-city-verso-base': {
     paragraphs: [
       'Toyota Proace City Verso er rafdrifinn fjölnotabíll sem býður upp á sæti fyrir allt að sjö manns. Hann er hannaður sem hagnýtur og einfaldur bíll fyrir stórar fjölskyldur eða skutlþarfir í þéttbýli, þar sem nýting á hverjum sentimetra skiptir meira máli en lúxus eða sportlegir eiginleikar.',
       'Helsti styrkleiki hans er einmitt sætafjöldinn, enda fáir bílar á þessu verði sem rúma sjö manns. Fyrir vikið leysir hann daglegan akstur stórra heimila með miklum ágætum í bæjarakstri.',
-      'Hann gefur hins vegar verulega eftir í rafkerfinu. Bíllinn drífur mjög stutt og hleður mjög hægt, auk þess að vera meðal þeirra aflminnstu í sínum verðflokki. Takmörkuð drægnin og framhjóladrifið gera það að verkum að hann er illa fallinn í krefjandi vetrarferðir milli landshluta. Ef fólk vill rýmri ferðamöguleika gæti Kia PV5 hentað betur, en hann býður 67 km meiri drægni og um 15% styttri hleðslustopp fyrir aðeins hærra verð.',
+      'Hann gefur hins vegar verulega eftir í rafkerfinu. Bíllinn drífur mjög stutt og hleður mjög hægt, auk þess að vera meðal þeirra aflminnstu í sínum verðflokki. Takmörkuð drægnin og framhjóladrifið gera það að verkum að hann er illa fallinn í krefjandi vetrarferðir milli landshluta. Ef fólk vill rýmri ferðamöguleika gæti Kia PV5 hentað betur, en hann býður 67 km meiri drægni og um 15% styttri hleðslustopp fyrir 660.000 kr. minna.',
       'Proace City Verso er prýðilegur sjö sæta vinnuhestur fyrir bæinn, en krefst mikillar þolinmæði á langferðum.',
     ],
     questions: [
@@ -3962,14 +3962,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Koma þrír barnastólar fyrir í röð?',
       'Er hægt að taka öftustu sætin úr?',
     ],
-    facts: '20b99f7029d4',
+    facts: '3f65c6d4c0a0',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'toyota-proace-verso-base': {
     paragraphs: [
       'Toyota Proace Verso er stór, níu sæta fjölnotabíll sem er sniðinn fyrir stórfjölskyldur eða ferðaþjónustu sem þurfa að flytja marga í einu. Hann býður upp á mikið rými innan stokks, en tæknilega ber hann skýr merki þess að vera byggður á sendibíl.',
       'Helsti styrkleiki bílsins er sætafjöldinn, enda eru sárafáir rafbílar sem rúma allt að níu manns. Í hversdagslegum snúningum og innanbæjarakstri nýtist þetta mikla pláss afskaplega vel, auk þess sem bíllinn nýtur góðs af víðtæku þjónustuneti Toyota.',
-      'Hins vegar gefur hann mikið eftir í afköstum og rafhlöðutækni. Drægnin er meðal þess stysta sem gerist í sínum verðflokki, sem reynir á í íslenskum vetrarkulda, og á langferðum hleður hann mjög hægt. Hann er einnig mjög aflítill og aðeins fáanlegur með framhjóladrifi. Hyundai STARIA Electric er mun öflugri kostur með 48 km meiri drægni og um 50% styttri hleðslustopp, á meðan Peugeot e-Traveller býður upp á nánast sama bíl en er 600.000 kr. ódýrari.',
+      'Hins vegar gefur hann mikið eftir í afköstum og rafhlöðutækni. Drægnin er meðal þess stysta sem gerist í sínum verðflokki, sem reynir á í íslenskum vetrarkulda, og á langferðum hleður hann mjög hægt. Hann er einnig mjög aflítill og aðeins fáanlegur með framhjóladrifi. Hyundai STARIA Electric er mun öflugri kostur með 48 km meiri drægni og um 50% styttri hleðslustopp, á meðan Peugeot e-Traveller býður upp á nánast sama bíl en er 100.000 kr. ódýrari.',
       'Toyota Proace Verso leysir plássvanda stórra hópa vel, en tæknilega stendur hann helstu keppinautum talsvert að baki.',
     ],
     questions: [
@@ -3984,7 +3984,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar framhjóladrifið í snjó?',
       'Hvað dregur hann fullhlaðinn á veturna?',
     ],
-    facts: '01679d605348',
+    facts: '3667029200b1',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'toyota-urban-cruiser-active-fwd': {
@@ -4013,10 +4013,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Toyota Urban Cruiser Active AWD er lítill jepplingur með fjórhjóladrifi, systurbíll Suzuki e Vitara 4x4, fyrir þá sem vilja fjórhjóladrif og traust Toyota-merki í nettum bíl.',
       'Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 300.000 km, mun lengur en flestir aðrir framleiðendur, og fjórhjóladrifið gefur grip í snjó og hálku.',
-      'Gallarnir eru að hann er meðal þeirra sem drífa styst, hlaða hægast og draga minnst á svipuðu verði, og skottið er eitt það minnsta. Smart #3 Pulse er 100.000 kr. ódýrari, líka fjórhjóladrifinn, en drífur 20 km lengra og hleður með um 40% styttri stoppum.',
+      'Gallarnir eru að hann er meðal þeirra sem drífa styst, hlaða hægast og draga minnst á svipuðu verði, og skottið er eitt það minnsta. Smart #3 Pulse er 800.000 kr. ódýrari, líka fjórhjóladrifinn, en drífur 20 km lengra og hleður með um 40% styttri stoppum.',
       'Urban Cruiser AWD hentar þeim sem setja fjórhjóladrif og langa ábyrgð í forgang og aka mest í nærumhverfinu.',
     ],
-    facts: 'df7aa31ff4e9',
+    facts: '604771e778b9',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Af hverju er Suzuki e Vitara ódýrari?',
@@ -4038,7 +4038,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst á svipuðu verði og hleður hægar en flestir þeirra. Hyundai IONIQ 9 Long Range AWD kostar 200.000 kr. meira, tekur líka sjö, drífur 132 km lengra, hleður með um 30% styttri stoppum og má draga 900 kg meira.',
       'ID. Buzz GTX er heillandi og hagnýtur fjölskyldubíll fyrir þá sem þurfa mest pláss og ferðast mest í styttri ferðum.',
     ],
-    facts: 'd84e9a87f373',
+    facts: 'd885a192dc46',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Hvernig er hann miðað við Hyundai IONIQ 9?',
@@ -4072,7 +4072,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er hann í langkeyrslu?',
       'Kemst barnabílstóll fyrir í aftursætinu?',
     ],
-    facts: '765ac89305d6',
+    facts: '8196cca71c35',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-cross-base': {
@@ -4144,11 +4144,11 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volkswagen-id-4-gtx': {
     paragraphs: [
       'Volkswagen ID.4 GTX er sportlegasta útgáfa hins þekkta fjölskyldujepplings, með fjórhjóladrifi og meira afli, fyrir þá sem vilja rúmgóðan bíl með auknu viðbragði.',
-      'Hann má draga 1.800 kg, meira en flestir á svipuðu verði, og drægnin og hleðslan eru í meðallagi.',
-      'Að öðru leyti sker hann sig lítið úr meðal keppinautanna. Volkswagen ID.4 Pro 4MOTION er 1.100.000 kr. ódýrari, líka fjórhjóladrifinn og drífur álíka langt, en má draga 600 kg minna.',
+      'Hann má draga 1.800 kg, meira en flestir á svipuðu verði, og hann drífur lengra og hleður hraðar en flestir þeirra.',
+      'Að öðru leyti sker hann sig lítið úr meðal keppinautanna. Volkswagen ID.4 Pro 4MOTION er 900.000 kr. ódýrari, líka fjórhjóladrifinn og drífur álíka langt, en má draga 600 kg minna.',
       'ID.4 GTX er traustur fjölskyldubíll sem gerir flest vel, en ID.4 Pro 4MOTION gefur meira fyrir peninginn nema dráttargetan skipti máli.',
     ],
-    facts: '1b353d65ebc8',
+    facts: '2eef76ae6433',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er hann þess virði umfram Pro 4MOTION?',
@@ -4167,10 +4167,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Volkswagen ID.4 Pro 4MOTION er meðalstór jepplingur með fjórhjóladrifi, þrautreyndur og hagnýtur fjölskyldubíll með þægilegum og fyrirsjáanlegum akstri.',
       'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og skottið er stærra en hjá flestum þeirra, svo hann hentar jafnt í daglegt skutl og ferðir milli landshluta.',
-      'Gallarnir eru að hann má aðeins draga 1.200 kg, minna en flestir keppinautar hans, og snerpan er í meðallagi. XPENG G6 AWD Performance er 100.000 kr. ódýrari, drífur álíka langt, hleður með um 25% styttri stoppum, er mun sneggri og má draga 300 kg meira.',
+      'Gallarnir eru að hann má aðeins draga 1.200 kg, minna en flestir keppinautar hans, og snerpan er í meðallagi. XPENG G6 AWD Performance kostar 700.000 kr. meira, drífur álíka langt, hleður með um 25% styttri stoppum, er mun sneggri og má draga 300 kg meira.',
       'ID.4 Pro 4MOTION er öruggt val fyrir þá sem vilja hefðbundinn og hagnýtan fjölskyldubíl með fjórhjóladrifi.',
     ],
-    facts: '94c23ad3e149',
+    facts: 'b377614d8146',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að velja GTX-útfærsluna?',
@@ -4302,7 +4302,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst, hleður hægar en flestir keppinautar hans og skottið er eitt það minnsta. Volvo EX30 Single Motor Extended Range kostar 400.000 kr. meira, drífur 136 km lengra, hleður hraðar og má draga 600 kg meira.',
       'EX30 Single Motor er skemmtilegur borgarbíll, en flestum borgar sig stærri rafhlaðan.',
     ],
-    facts: '911d81e418d9',
+    facts: '4cb5ee519b5d',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Hverjum hentar minni rafhlaðan best?',
@@ -4324,7 +4324,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hins vegar er skottið eitt það minnsta, aftursætin eru þröng og hann er aðeins afturhjóladrifinn. Toyota C-HR+ kostar 200.000 kr. meira og er 29 cm lengri með 98 l stærra skott, en mun hægari og má ekki draga kerru.',
       'EX30 hentar þeim sem vilja snarpan og vandaðan smábíl sem getur dregið kerru, en síður fjölskyldum sem þurfa pláss.',
     ],
-    facts: 'ac1f6deb601f',
+    facts: 'ed765b9f68e0',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Borgar Twin Motor sig fyrir 300 þúsund?',
@@ -4358,7 +4358,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er óþægilegt að hafa allt á miðskjánum?',
       'Kemst barnavagn fyrir í skottinu?',
     ],
-    facts: '2de288035abc',
+    facts: '4592fca1b80a',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-ex30-cross-country-twin-motor-performance': {
@@ -4368,7 +4368,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar meðal þeirra sem drífa styst, hleður hægar en flestir keppinautar hans og skottið er eitt það minnsta. Volvo EX30 Twin Motor Performance er sami bíll án Cross Country-útlitsins, 1.230.000 kr. ódýrari og drífur 23 km lengra.',
       'EX30 Cross Country er fyrir þá sem vilja grófara útlit og mikinn kraft í nettum bíl.',
     ],
-    facts: '156542718743',
+    facts: 'c60528bf0f67',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Ræður hann vel við grófa malarvegi?',
@@ -4477,7 +4477,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur styttra en flestir þeirra og er aðeins afturhjóladrifinn. XPENG G6 RWD Long Range kostar 700.000 kr. meira og drífur 135 km lengra, og XPENG G6 AWD Performance fæst með fjórhjóladrifi fyrir 1.100.000 kr. meira.',
       'G6 Standard Range er rúmgóður og hraðhlaðandi bíll fyrir þá sem aka mest í nærumhverfinu og meta pláss.',
     ],
-    facts: '72f81dec8b9f',
+    facts: '0ae649a3dde0',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Af hverju hann frekar en Tesla Model Y?',
@@ -4499,7 +4499,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er aðeins afturhjóladrifinn og merkið er nýlegt hér á landi. XPENG G6 AWD Performance fæst með fjórhjóladrifi og mun meira afli fyrir 400.000 kr. meira, með nánast sömu drægni.',
       'G6 Long Range gefur mikið fyrir peninginn, fyrir þá sem setja drægni, hraða hleðslu og pláss í forgang.',
     ],
-    facts: '60a87eb8ddf1',
+    facts: 'cc821ccdb0eb',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Borgar Performance sig fyrir 400 þúsund?',
@@ -4518,10 +4518,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'XPENG G6 AWD Performance er stór jepplingur með fjórhjóladrifi og rennilegu coupé-lagi, frá kínverska merkinu XPENG, sem sameinar mikið pláss, mikla drægni og mikið afl.',
       'Hann er meðal sneggstu og aflmestu bíla á svipuðu verði, drífur lengra en flestir þeirra og er meðal þeirra sem hlaða hraðast. Skottið er stærra en hjá flestum keppinautum hans og hann má draga 1.500 kg.',
-      'Veikleikarnir eru fáir: merkið er nýlegt hér á landi og flestu er stýrt í gegnum snertiskjá. Volkswagen ID.4 Pro 4MOTION kostar 100.000 kr. meira frá rótgrónara merki, en hleður með um 35% lengri stoppum og er mun aflminni.',
+      'Veikleikarnir eru fáir: merkið er nýlegt hér á landi og flestu er stýrt í gegnum snertiskjá. Volkswagen ID.4 Pro 4MOTION er 700.000 kr. ódýrari frá rótgrónara merki, en hleður með um 35% lengri stoppum og er mun aflminni.',
       'G6 AWD Performance er einn sterkasti fjórhjóladrifni kosturinn á sínu verði, fyrir þá sem treysta nýju merki.',
     ],
-    facts: '889b1e412acc',
+    facts: '9fbc5bf606b1',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Af hverju hann frekar en Tesla Model Y?',
