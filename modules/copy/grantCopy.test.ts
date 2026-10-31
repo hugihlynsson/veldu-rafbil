@@ -22,15 +22,15 @@ describe('the grant copy', () => {
 
   it('names the grant and the ceiling as the law stands', async () => {
     const copy = await import('./grantCopy')
-    expect(copy.grantAmountText).toBe('500.000 kr.')
-    expect(copy.grantCeilingText).toBe('10 milljónir')
-    expect(copy.grantCeilingDativeText).toBe('10 milljónum')
+    expect(copy.grantAmountText).toBe('400.000 kr.')
+    expect(copy.grantCeilingText).toBe('8 milljónir')
+    expect(copy.grantCeilingDativeText).toBe('8 milljónum')
   })
 
-  it('names the grant from 1 November', async () => {
+  it('names what the grant was and the prices that lost it', async () => {
     const copy = await import('./grantCopy')
-    expect(copy.nextGrantAmountText).toBe('400.000 kr.')
-    expect(copy.nextGrantCeilingText).toBe('8 milljónir')
+    expect(copy.previousGrantAmountText).toBe('500.000 kr.')
+    expect(copy.grantLostRangeText).toBe('8–10 milljónir')
   })
 
   it('carries a change to the law into the prose', async () => {
@@ -65,13 +65,13 @@ describe('the grant copy', () => {
   it('reads as the sentences that use it', async () => {
     const copy = await import('./grantCopy')
     expect(`sem kosta minna en ${copy.grantCeilingText}`).toBe(
-      'sem kosta minna en 10 milljónir',
+      'sem kosta minna en 8 milljónir',
     )
     expect(`sækja um ${copy.grantAmountText} rafbílastyrk`).toBe(
-      'sækja um 500.000 kr. rafbílastyrk',
+      'sækja um 400.000 kr. rafbílastyrk',
     )
     expect(`fyrir bíla undir ${copy.grantCeilingDativeText} kr`).toBe(
-      'fyrir bíla undir 10 milljónum kr',
+      'fyrir bíla undir 8 milljónum kr',
     )
   })
 })

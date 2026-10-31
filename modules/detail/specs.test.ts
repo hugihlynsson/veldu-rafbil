@@ -82,7 +82,7 @@ describe('specRows', () => {
 
   it('writes prices with the list grouping', () => {
     expect(
-      row('price', car({ price: 6_490_000 }), car({}))?.cells[0],
+      row('price', car({ price: 6_390_000 }), car({}))?.cells[0],
     ).toMatchObject({ text: '5.990.000 kr.', detail: 'með styrk' })
   })
 })

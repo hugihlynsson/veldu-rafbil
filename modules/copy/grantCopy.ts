@@ -2,7 +2,8 @@ import addDecimalSeparators from './addDecimalSeparators'
 import {
   grantAmount,
   grantPriceCeiling,
-  nextGrant,
+  previousGrantAmount,
+  previousGrantPriceCeiling,
 } from '@/modules/data/globals'
 import { agree } from './plural'
 
@@ -11,6 +12,9 @@ import { agree } from './plural'
 
 const amountText = (amount: number) => `${addDecimalSeparators(amount)} kr.`
 
+const millionsText = (ceiling: number) =>
+  String(ceiling / 1_000_000).replace('.', ',')
+
 // A ceiling that is not a whole number of millions takes the plural whatever
 // it ends in: agree() alone would read the 1 in 1,5 as a singular.
 const ceilingText = (ceiling: number, singular: string, plural: string) => {
@@ -18,7 +22,7 @@ const ceilingText = (ceiling: number, singular: string, plural: string) => {
   const word = Number.isInteger(millions)
     ? agree(millions, singular, plural)
     : plural
-  return `${String(millions).replace('.', ',')} ${word}`
+  return `${millionsText(ceiling)} ${word}`
 }
 
 /** The grant itself, e.g. "500.000 kr." */
@@ -38,14 +42,14 @@ export const grantCeilingDativeText = ceilingText(
   'milljónum',
 )
 
-/** When the next grant applies, by the date an application is approved */
-export const nextGrantStartText = '1. nóvember'
+/** The date the current grant took over, by the date an application is approved */
+export const grantStartText = '1. nóvember 2026'
 
-export const nextGrantAmountText = amountText(nextGrant.amount)
+export const previousGrantAmountText = amountText(previousGrantAmount)
 
-/** The next ceiling as "8 milljónir", for "kosta meira en …" */
-export const nextGrantCeilingText = ceilingText(
-  nextGrant.priceCeiling,
+/** The prices that lost the grant altogether, e.g. "8–10 milljónir" */
+export const grantLostRangeText = `${millionsText(grantPriceCeiling)}–${ceilingText(
+  previousGrantPriceCeiling,
   'milljón',
   'milljónir',
-)
+)}`

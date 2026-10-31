@@ -6,8 +6,9 @@ import cars from '@/modules/data/cars'
 import { carRef, resolveCarRefs } from '@/modules/chat/cars'
 import {
   grantAmountText,
-  nextGrantAmountText,
-  nextGrantCeilingText,
+  grantLostRangeText,
+  grantStartText,
+  previousGrantAmountText,
 } from '@/modules/copy/grantCopy'
 import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 
@@ -52,9 +53,13 @@ describe('the assistant system prompt', () => {
     expect(systemPrompt).toContain(grantAmountText)
   })
 
-  it('names the grant from 1 November, which prices the expected cars', () => {
-    expect(systemPrompt).toContain(nextGrantAmountText)
-    expect(systemPrompt).toContain(nextGrantCeilingText)
+  // Buyers still quote the old figures, and an application decided after the
+  // change gets the new grant however early the car was registered
+  it('explains what changed about the grant and what decides it', () => {
+    expect(systemPrompt).toContain(
+      `lækkaði ${grantStartText} úr ${previousGrantAmountText} og bílar sem kosta ${grantLostRangeText} fá hann ekki lengur`,
+    )
+    expect(systemPrompt).toContain('Dagsetning samþykktrar umsóknar ræður')
   })
 
   // /api/cars and llms.txt quote the same bounds; the prompt once had its own
