@@ -1677,6 +1677,23 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Mini',
+    model: 'Cooper',
+    subModel: 'SE',
+    heroImageName: 'mini-cooper',
+    price: 6_490_000,
+    sellerUrl:
+      'https://www.mini.is/is_IS/home/model-range/all-electric-mini-cooper.html',
+    acceleration: 6.7,
+    capacity: 54.2,
+    range: 402,
+    evDatabaseUrl: 'https://ev-database.org/car/1998/Mini-Cooper-SE',
+    drive: 'FWD',
+    seats: 4,
+    power: 160,
+    timeToCharge10To80: 29,
+  },
+  {
+    make: 'Mini',
     model: 'Countryman',
     subModel: 'E',
     heroImageName: 'mini-countryman-e',
