@@ -1357,6 +1357,23 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Mercedes-Benz',
+    model: 'GLA',
+    subModel: '350 4MATIC',
+    heroImageName: 'mercedes-gla',
+    price: 9_490_000,
+    sellerUrl: 'https://www.mercedes-benz.is/new-models/gla-electric/',
+    acceleration: 5.4,
+    capacity: 85,
+    range: 643,
+    evDatabaseUrl:
+      'https://ev-database.org/car/3687/Mercedes-Benz-GLA-350-4MATIC',
+    drive: 'AWD',
+    seats: 5,
+    power: 260,
+    timeToCharge10To80: 18,
+  },
+  {
+    make: 'Mercedes-Benz',
     model: 'GLB',
     subModel: '350 4MATIC EQ',
     heroImageName: 'mercedes-glb',
