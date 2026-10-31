@@ -253,7 +253,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'kia-ev3-long-range': [
     'nissan-leaf-extended-range',
-    'mazda-6e-long-range',
+    'xpeng-l03-rwd-long-range',
     'hyundai-kona-electric-65-kwh',
   ],
   'kia-ev3-long-range-awd': [
@@ -759,13 +759,13 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'smart-1-pro': [
     'kia-ev3-standard-range',
-    'volvo-ex30-single-motor',
+    'xpeng-l03-rwd-standard-range',
     'mg-mgs5-lux',
   ],
   'smart-1-pulse': [
     'leapmotor-c10-promax-awd',
     'suzuki-e-vitara-4x4-allgrip',
-    'volvo-ex30-single-motor',
+    'xpeng-l03-awd-performance',
   ],
   'smart-1-brabus': [
     'volvo-ex30-twin-motor-performance',
@@ -1036,6 +1036,21 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'volvo-ex60-p10',
     'mercedes-benz-glc-300-4matic',
     'tesla-model-y-performance',
+  ],
+  'xpeng-l03-rwd-standard-range': [
+    'smart-1-pro',
+    'kia-ev3-standard-range',
+    'leapmotor-c10-pro',
+  ],
+  'xpeng-l03-rwd-long-range': [
+    'kia-ev3-long-range',
+    'leapmotor-c10-promax',
+    'hyundai-kona-electric-65-kwh',
+  ],
+  'xpeng-l03-awd-performance': [
+    'leapmotor-c10-promax-awd',
+    'smart-1-pulse',
+    'xpeng-g6-rwd-standard-range',
   ],
   'xpeng-x9-awd-performance': [
     'kia-ev9-base',
