@@ -241,7 +241,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst og hlaða hægast í þessum verðflokki, og skottið er minna en hjá flestum. Porsche Taycan 4S Plus er 940.000 kr. ódýrari, álíka snöggur og hleður með um 50% styttri stoppum, en má ekki draga kerru. BMW i5 eDrive40 er 6.400.000 kr. ódýrari og drífur 42 km lengra, fyrir þá sem geta verið án aflsins.',
       'i5 M60 er fyrir þá sem vilja kraftmikinn BMW-fólksbíl og eru tilbúnir að borga mikið fyrir aflið umfram drægni og hleðslu.',
     ],
-    facts: '9785c0800f9d',
+    facts: 'aa30b569368f',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er hann þess virði fram yfir eDrive40?',
@@ -2779,6 +2779,27 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann þægilegri en Volkswagen ID.7 GTX?',
     ],
   },
+  'polestar-5-performance': {
+    paragraphs: [
+      'Polestar 5 Performance er lágur og langur fjögurra dyra GT-bíll með fjórhjóladrifi, flaggskip Polestar, fyrir þig sem vilt ofurbílaafl í bíl sem hentar líka í langferðir.',
+      'Hann er sneggstur og aflmestur allra á sínu verði, og stór rafhlaðan gerir það að verkum að hann drífur fremur langt, þótt flestir á þessu verði drífi lengra. Hann má líka draga 1.800 kg, og þó að þeir flestir dragi meira dugar það fyrir venjulega kerru.',
+      'Á móti kemur að hann er mjög dýr, skottið er með þeim minnstu á þessu verði og hann hleður hægar en flestir keppinautar hans. BMW i5 M60 xDrive er 100.000 kr. ódýrari með 63 l stærra skott, en stoppin eru um 40% lengri og hann er 0,6 s hægari í hundraðið. Porsche Taycan 4s Cross Turismo er 40.000 kr. ódýrari, drífur 52 km lengra og hleður með um 35% styttri stoppum, en má ekki draga kerru.',
+      'Polestar 5 er fyrir þig sem vilt allra mesta aflið með skandinavísku yfirbragði.',
+    ],
+    facts: '1e842876764c',
+    questions: [
+      'Af hverju hann frekar en Porsche Taycan?',
+      'Er BMW i5 M60 betri kostur?',
+      'Hvernig er hann miðað við Taycan 4S Plus?',
+      'Hversu lítið er skottið í raun og veru?',
+      'Er pláss fyrir þrjá aftur í?',
+      'Nýtist allt þetta afl á íslenskum vegum?',
+      'Hvernig er hann í snjó og hálku?',
+      'Hvernig er drægnin í vetrarkulda?',
+      'Hvað gerir 1.800 kg kerra við drægnina?',
+      'Hvernig er að láta þjónusta Polestar hér?',
+    ],
+  },
   'porsche-macan-4-electric': {
     paragraphs: [
       'Porsche Macan 4 Electric er lúxussportjepplingur með fjórhjóladrifi og rótgrónum aksturseiginleikum Porsche, fyrir þá sem vilja vandaðan og þægilegan bíl án þess að fórna akstursánægjunni.',
@@ -2874,7 +2895,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann drífur styttra en flestir þeirra, skottið er eitt það minnsta og hann má ekki draga kerru. Porsche Taycan 4 Plus er 2.000.000 kr. ódýrari, drífur 86 km lengra og gefur aðeins eftir í snerpu, og Porsche Cayenne S kostar 1.000.000 kr. meira, er álíka snöggur, drífur 96 km lengra og má draga 3.000 kg.',
       'Taycan 4S Plus er fyrir þá sem setja hraða og akstursupplifun í fyrsta sæti.',
     ],
-    facts: '6a16ac30fd97',
+    facts: 'c0bbdd9515ed',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Borgar sig að taka 4 Plus í staðinn?',
