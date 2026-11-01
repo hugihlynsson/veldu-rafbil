@@ -138,7 +138,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'ford-capri-base': [
     'polestar-2-long-range-dual-motor',
     'tesla-model-3-long-range-fjorhjoladrif',
-    'volkswagen-id-4-pro-4motion',
+    'ford-explorer-er-awd',
   ],
   'ford-explorer-er-awd': [
     'volkswagen-id-4-pro-4motion',
@@ -815,7 +815,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'subaru-e-outback-base': [
     'toyota-bz4x-touring-awd',
     'byd-sealion-7-base',
-    'kgm-musso-ev-4wd',
+    'kia-ev5-awd',
   ],
   'subaru-solterra-base': [
     'toyota-bz4x-awd',
@@ -885,7 +885,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'toyota-bz4x-touring-base': [
     'subaru-e-outback-base',
     'kia-ev5-base',
-    'nissan-ariya-base',
+    'smart-5-pulse',
   ],
   'toyota-bz4x-touring-awd': [
     'subaru-e-outback-base',

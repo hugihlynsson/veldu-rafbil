@@ -84,7 +84,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Audi Q4 e-tron quattro er meðalstór jepplingur sem höfðar til þeirra sem leita að fáguðum fjölskyldubíl með vönduðu yfirbragði og traustu fjórhjóladrifi fyrir íslenskar aðstæður.',
       'Farangursrýmið er ágætt og dugar vel fyrir daglegan búslóð eða ferðatöskur í helgarferðir. Fjórhjóladrifið tryggir öruggt grip í snjó og hálku, og drægnin dugar vel í daglegan akstur og styttri ferðalög, þótt búast megi við að hún skerðist í vetrarkulda.',
-      'Miðað við bíla á svipuðu verði gefur hann hins vegar töluvert eftir: hann drífur styttra en flestir keppinautar, hleður hægar, er talsvert aflminni og dregur minna. Ef meira pláss og geta skipta máli býður hinn náskyldi Skoda Enyaq RS til dæmis upp á 55 km meiri drægni, 65 l stærra skott og heilum 1.000 kg meiri dráttargetu.',
+      'Miðað við bíla á svipuðu verði gefur hann hins vegar töluvert eftir: hann drífur styttra en flestir keppinautar, hleður hægar, er talsvert aflminni og dregur minna. Ef meira pláss og geta skipta máli býður hinn náskyldi Skoda Enyaq RS til dæmis upp á 55 km meiri drægni, 65 l stærra skott og heilum 1.000 kg meiri dráttargetu, og Mercedes-Benz GLA 350 4MATIC kostar það sama en drífur 155 km lengra.',
       'Audi Q4 er lipur og þægilegur úrvalsbíll, en kaupendur sem horfa strangt á hvað fæst fyrir krónuna finna meiri drægni og getu annars staðar.',
     ],
     questions: [
@@ -92,8 +92,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er Volvo EX40 betri kaup en hann?',
       'Er hann miklu stærri en BMW iX1?',
       'Af hverju má hann draga svona lítið?',
-      'Dugar afturdrifna útgáfan ekki líka?',
-      'Borgar sig að velja Sportback-gerðina?',
+      'Hversu vel dugar fjórhjóladrifið í snjó?',
+      'Er Mercedes-Benz GLA 350 betri kaup?',
       'Er hann hljóðlátari en Volvo EX40?',
       'Hversu hægur er hann í hraðhleðslu?',
       'Finnst manni hann vera kraftlítill?',
@@ -589,14 +589,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Ford Capri er stór fólksbíll með afturhlera sem sameinar sportlegt útlit og mikla hagnýtingu. Með fjórhjóladrifi og stærra skotti en flestir keppinautar hefur hann mikla yfirburði í daglegu fjölskyldulífi og ræður vel við allar íslenskar aðstæður.',
       'Bíllinn stendur sérstaklega vel að vígi í langkeyrslu. Hann er meðal þeirra langdrægustu í sínum verðflokki og hleður hraðar en gengur og gerist, sem þýðir styttri hleðslustopp á ferðalögum milli landshluta jafnvel í vetrarkulda. Að auki er hann snöggur upp og öruggur í hálku og snjó.',
-      'Helsti gallinn er dráttargetan, en 1.200 kg geta reynst naumt fyrir stærri ferðavagna. Þar dregur Polestar 2 Long Range Dual Motor til dæmis 300 kg meira, þótt hann gefi töluvert eftir í farangursrými. Þá kemst Tesla Model 3 Long Range Fjórhjóladrif 68 km lengra og kostar 1.200.000 kr. minna.',
+      'Helsti gallinn er dráttargetan, en 1.200 kg geta reynst naumt fyrir stærri ferðavagna. Polestar 2 Long Range Dual Motor er 500.000 kr. ódýrari með svipaða drægni og má draga 300 kg meira, þótt hann gefi töluvert eftir í farangursrými. Ford Explorer ER AWD, jepplingurinn á sama grunni, er 600.000 kr. ódýrari og drífur 26 km styttra.',
       'Capri er engu að síður afbragðs valkostur fyrir þá sem leita að rúmgóðum og traustum ferðabíl sem sameinar drægni, pláss og gott grip.',
     ],
     questions: [
       'Er hann mun rúmbetri en Polestar 2?',
       'Er hann betri ferðabíll en Tesla Model 3?',
-      'Er hann skemmtilegri en Volkswagen ID.4?',
-      'Gefur afturhjóladrifið miklu meiri drægni?',
+      'Er Ford Explorer ER AWD betri kaup?',
+      'Hvernig er hann miðað við Tesla Model Y?',
       'Bitnar sportlegt lagið á höfuðrýminu?',
       'Hvers konar vagn ræður hann við að draga?',
       'Er fjöðrunin of stíf á íslenskum vegum?',
@@ -604,7 +604,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kemst stór barnavagn fyrir í skottinu?',
       'Hve lengi er hann að hlaða í kulda?',
     ],
-    facts: '433e5b4e7e10',
+    facts: '4ea6b42b2b87',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'ford-explorer-er-awd': {
@@ -642,8 +642,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Af hverju er Kia EV6 miklu ódýrari?',
       'Er hann skemmtilegri en Skoda Enyaq?',
       'Er framskottið með tæmingu fyrir vatn?',
-      'Borgar sig að velja frekar GT-gerðina?',
-      'Dugar afturdrifna gerðin á veturna?',
+      'Er hann betri kaup en Tesla Model Y?',
+      'Hvernig reynist fjórhjóladrifið í snjó?',
       'Er fjöðrunin of stíf á grófum vegum?',
       'Hvaða raundrægni fæst í frosti?',
       'Er hann hljóðlátari en Tesla Model Y?',
@@ -984,7 +984,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'KGM Musso EV er rúmlega fimm metra langur, fimm sæta pallbíll sem höfðar einkum til þeirra sem leita að hagnýtum vinnubíl eða stóru palli á hagstæðu verði. Hann sker sig úr sem einn fárra hreinna rafpallbíla á markaðnum í þessum stærðarflokki.',
       'Helstu kostir hans liggja í burðargetu og áreiðanleika. Hann má draga 1.800 kg, sem er meðal þess mesta miðað við aðra á svipuðu verði, og tíu ára eða einnar milljónar kílómetra ábyrgð á rafhlöðunni er sérlega rífleg og veitir mikla hugarró til langs tíma.',
-      'Stærsti gallinn er að bíllinn er framhjóladrifinn, sem getur reynst erfitt fyrir stóran pallbíl í íslenskum vetraraðstæðum. Hann drífur einnig styttra en flestir og hleður mjög hægt, svo hleðslustopp á langferðum verða óhjákvæmilega löng. Ef fjórhjóladrif er skilyrði kemur KGM Musso EV 4WD til greina, en hann er töluvert dýrari og fær ekki ríkisstyrkinn.',
+      'Stærsti gallinn er að bíllinn er framhjóladrifinn, sem getur reynst erfitt fyrir stóran pallbíl í íslenskum vetraraðstæðum. Hann drífur einnig styttra en flestir og hleður mjög hægt, svo hleðslustopp á langferðum verða óhjákvæmilega löng. Ef fjórhjóladrif er skilyrði kemur KGM Musso EV 4WD til greina, en hann er töluvert dýrari.',
       'Musso EV er því áhugaverður vinnuhestur fyrir þá sem þurfa mikla dráttargetu og pall, en krefst nokkurra málamiðlana í fannfergi og ferðalögum milli landshluta.',
     ],
     questions: [
@@ -1006,7 +1006,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'KGM Musso EV 4WD er stór, fimm sæta pallbíll með fjórhjóladrifi sem höfðar sérstaklega til þeirra sem leita að hagnýtum vinnubíl fyrir grófari verk og krefjandi vetrarfærð. Hann er meðal allra lengstu bílanna og fyllir skarð sem fáir rafbílar sinna hérlendis.',
       'Helstu kostir hans snúa að notagildinu. Hann má draga mun þyngri kerrur en flestir keppinautar og fjórhjóladrifið tryggir gott grip við erfiðar aðstæður. Ábyrgðin á rafhlöðunni er sömuleiðis óvenju rausnarleg og með þeim allra lengstu sem sjást, sem veitir mikið öryggi til langs tíma.',
-      'Stærsti gallinn er hins vegar drægnin, en hann drífur mjög stutt og hleður jafnframt afar hægt miðað við aðra bíla á svipuðu verði. Í vetrarkulda eða með þungan farm á króknum verða hleðslustoppin því bæði tíð og löng. Fyrir þá sem geta verið án fjórhjóladrifsins sparar framdrifna útgáfan, KGM Musso EV, heilar 1.700.000 krónur og drífur örlítið lengra.',
+      'Stærsti gallinn er hins vegar drægnin, en hann drífur mjög stutt og hleður jafnframt afar hægt miðað við aðra bíla á svipuðu verði. Í vetrarkulda eða með þungan farm á króknum verða hleðslustoppin því bæði tíð og löng. Fyrir þá sem geta verið án fjórhjóladrifsins sparar framdrifna útgáfan, KGM Musso EV, heilar 1.700.000 krónur og drífur 41 km lengra.',
       'Þetta er prýðilegur kostur sem vinnuþjarkur nærri heimahöfn, en síður heppilegur ferðabíll í langakstur á milli landshluta.',
     ],
     questions: [
@@ -1203,7 +1203,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Kia EV5 er meðalstór jepplingur með kassalaga og nýtískulegu útliti sem höfðar sérstaklega til fjölskyldufólks sem leitar að þægilegum bíl í hversdagsrútínuna. Hann býður upp á gott pláss miðað við ytri mál, með stærra skott en flestir keppinautar hans og rúmgóðu farþegarými.',
       'Helsti styrkur bílsins liggur í þessu hagnýta innanrými. Farangursrýmið tekur auðveldlega við barnakerrum og ferðatöskum, auk þess sem lítið framskott nýtist vel fyrir snúrur. Drægnin og hleðsluhraðinn eru í meðallagi, sem dugar flestum ágætlega í daglegum erindum og á hefðbundnum langferðum.',
-      'Aftur á móti er bíllinn framhjóladrifinn, dregur minna en flestir í sínum verðflokki og er meðal þeirra hægustu að taka við sér. Fyrir þá sem vilja betra grip í vetrarfærð og getu til að ferðast með þyngri hjólhýsi liggur beinast við að líta á Kia EV5 AWD. Hann kostar aðeins 300.000 kr. meira en bætir við fjórhjóladrifi og 600 kg meiri dráttargetu, þótt fórna þurfi örfáum kílómetrum af drægni.',
+      'Aftur á móti er bíllinn framhjóladrifinn, dregur minna en flestir í sínum verðflokki og er meðal þeirra hægustu að taka við sér. Fyrir þá sem vilja betra grip í vetrarfærð og getu til að ferðast með þyngri hjólhýsi liggur beinast við að líta á Kia EV5 AWD. Hann kostar aðeins 300.000 kr. meira en bætir við fjórhjóladrifi og 600 kg meiri dráttargetu, þótt hann drífi 46 km styttra. Nissan Ariya er 600.000 kr. ódýrari með álíka drægni, en hleðslustoppin eru um 35% lengri.',
       'Kia EV5 er heilsteyptur og notadrjúgur fjölskyldubíll, en á íslenskum vegum gæti fjórhjóladrifna útfærslan reynst flestum mun fýsilegri kostur.',
     ],
     questions: [
@@ -1752,7 +1752,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-cla-200': {
     paragraphs: [
       'Mercedes-Benz CLA 200 er fágaður fólksbíll með skottloki í stærri flokki stallbaka. Hann einkennist af lágri loftmótstöðu og sportlegu útliti, og höfðar einkum til þeirra sem vilja vandaðan og þægilegan ferðabíl fremur en hefðbundinn fjölskyldubíl.',
-      'Þótt rafhlaðan sé lítil nýtir bíllinn orkuna einstaklega vel og drífur lengra en flestir í sínum verðflokki. Hraðhleðslan er jafnframt með því allra besta sem gerist, sem styttir stopp á ferðalögum um landið til muna. Hann fær líka dýrmætt aukapláss í stóru, 101 lítra framskotti.',
+      'Þótt rafhlaðan sé lítil nýtir bíllinn orkuna vel, svo drægnin er í meðallagi í sínum verðflokki. Hann hleður líka hraðar en flestir keppinautar hans, sem styttir stopp á ferðalögum um landið. Hann fær líka dýrmætt aukapláss í stóru, 101 lítra framskotti.',
       'Helsti ókosturinn við íslenskar aðstæður er að bíllinn er afturhjóladrifinn, auk þess sem hann er mun aflminni en keppinautarnir og skottið að aftan fremur lítið. Þeir sem þurfa öruggt grip í snjó og hálku ættu að skoða Tesla Model 3 Long Range Fjórhjóladrif, sem býður fjórhjóladrif, mun meiri drægni og stærra skott á lægra verði, eða fjórhjóladrifna bróðurinn Mercedes-Benz CLA 350 4MATIC.',
       'Bíllinn hentar sérlega vel þeim sem leggja áherslu á hönnun, akstursgæði og snögg hleðslustopp, en geta verið án fjórhjóladrifs.',
     ],
@@ -1847,7 +1847,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er BMW iX1 xDrive 30 betri á langferðum?',
       'Borgar sig að uppfæra í Audi Q4 e-tron?',
       'Er Mini Countryman SE 4x4 skemmtilegri?',
-      'Býður EQA 250+ upp á mun meiri drægni?',
+      'Er hann betri kaup en Kia EV5 AWD?',
       'Kemst barnavagn í 340 lítra skottið?',
       'Hve mikið dregur úr drægni með hjólhýsi?',
       'Hversu lengi er hann að hraðhlaða í 80%?',
@@ -1862,7 +1862,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Mercedes-Benz GLA 350 4MATIC er nettur fimm sæta jepplingur með fjórhjóladrifi og lúxusyfirbragði Mercedes, fyrir þig sem vilt komast langt á hleðslunni án þess að fara í stærri bíl.',
       'Drægnin er það sem hann gerir best: hann er meðal þeirra langdrægustu á sínu verði og hleður með þeim hraðasta, svo ferðir milli landshluta kalla á fá og stutt stopp, líka í vetrarkulda. Hann má líka draga 2.000 kg, sem dugar fyrir flest hjólhýsi.',
-      'Skottið er hins vegar minna en hjá flestum á svipuðu verði, og hann fær ekki rafbílastyrkinn. Vanti þig pláss er Tesla Model Y Performance 60.000 kr. ódýrari með 454 l stærra skott, en drífur 63 km styttra og stoppin eru um 80% lengri. BMW iX3 40 kostar 500.000 kr. meira og er með 61 l stærra skott, en er aðeins afturhjóladrifinn.',
+      'Skottið er hins vegar minna en hjá flestum á svipuðu verði. Vanti þig pláss er Tesla Model Y Performance 60.000 kr. ódýrari með 454 l stærra skott, en drífur 63 km styttra og stoppin eru um 80% lengri. BMW iX3 40 kostar 500.000 kr. meira og er með 61 l stærra skott, en er aðeins afturhjóladrifinn.',
       'GLA er lipur langferðabíll með krók sem munar um, ef þú kemst af með minna skott.',
     ],
     facts: 'dc98c186bdce',
@@ -2155,7 +2155,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann skemmtilegri í akstri en BYD Seal?',
       'Henta vængjahurðirnar í þröngum stæðum?',
       'Hvernig þolir blæjutakið íslenskan vetur?',
-      'Hvernig er afturdrifna útfærslan?',
+      'Hentar hann sem eini bíll heimilisins?',
       'Af hverju hleður hann svona hægt?',
       'Finnst mikið fyrir þyngdinni í beygjum?',
       'Kemst farangur fyrir tvo í skottið?',
@@ -3328,7 +3328,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'skoda-enyaq-85x': {
     paragraphs: [
       'Skoda Enyaq 85X er rúmgóður jepplingur með fjórhjóladrifi, 4,66 m á lengd, sem leggur áherslu á pláss og yfirvegaðan akstur, fyrir fjölskyldur sem vilja traustan ferðabíl allt árið.',
-      'Hann drífur lengra en flestir á svipuðu verði, skottið er stærra en hjá flestum þeirra og hann nýtir orkuna vel.',
+      'Skottið er stærra en hjá flestum á svipuðu verði, drægnin er í meðallagi og hann nýtir orkuna vel.',
       'Gallarnir eru að hann er hægari en flestir keppinautar hans og má aðeins draga 1.200 kg. Smart #5 Pulse kostar það sama, drífur álíka langt, hleður með um 40% styttri stoppum, er með 45 l stærra skott og má draga 400 kg meira.',
       'Enyaq 85X er traust og skynsamlegt val fyrir þá sem setja pláss og hagnýti í fyrsta sæti.',
     ],
@@ -3351,7 +3351,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Skoda Enyaq RS er sportlegasta útfærsla Enyaq, rúmgóður jepplingur með fjórhjóladrifi og stífari akstri, sem sameinar hagnýtt innanrými og kraftmeira yfirbragð.',
       'Skottið er stærra en hjá flestum á svipuðu verði og hann má draga 2.200 kg, 1.000 kg meira en Enyaq 85X og með því mesta í hans verðflokki.',
-      'Á móti kemur að hann er fremur dýr og drægni og hleðsla eru aðeins í meðallagi. Smart #5 Brabus er 200.000 kr. ódýrari, drífur álíka langt, hleður með um 40% styttri stoppum og er mun sneggri, en má draga 600 kg minna.',
+      'Á móti kemur að hann er fremur dýr og drægni og hleðsla eru aðeins í meðallagi. Smart #5 Brabus er 200.000 kr. ódýrari, drífur álíka langt, hleður með um 40% styttri stoppum og er mun sneggri, en má draga 600 kg minna. Náskyldur Volkswagen ID.4 GTX er 2.300.000 kr. ódýrari og drífur 14 km styttra.',
       'Enyaq RS er fyrir þá sem vilja rúmgóðan jeppling sem dregur hjólhýsi, með sportlegum blæ.',
     ],
     facts: '6d9caf663a79',
@@ -3570,10 +3570,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Subaru e-Outback er stór jepplingur með fjórhjóladrifi, 4,84 m á lengd, byggður á hefð Subaru fyrir vetrarhæfni og hagnýtri hönnun, fyrir þá sem ferðast í hvaða veðri sem er.',
       'Hann er sneggri og aflmeiri en flestir á svipuðu verði, og skottið er stærra en hjá flestum þeirra.',
-      'Drægni og hraðhleðsla eru hins vegar aðeins í meðallagi. BYD Sealion 7 er 500.000 kr. ódýrari, hleður með um 15% styttri stoppum og er mun aflmeiri, en skottið er 113 l minna.',
+      'Drægnin er hins vegar aðeins í meðallagi og hann hleður hægar en flestir þeirra. BYD Sealion 7 er 500.000 kr. ódýrari, hleður með um 15% styttri stoppum og er mun aflmeiri, en skottið er 113 l minna.',
       'e-Outback er traustur kostur fyrir þá sem setja grip, pláss og Subaru-merkið í forgang.',
     ],
-    facts: 'cba2ecfbb195',
+    facts: '3cb9b31310c0',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig dugar fjórhjóladrifið í snjó?',
@@ -3833,7 +3833,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Toyota bZ4X er meðalstór jepplingur með framhjóladrifi, ætlaður þeim sem vilja þægilegan fjölskyldubíl frá merki sem er þekkt fyrir áreiðanleika.',
       'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, svo hann dugar vel í ferðir milli landshluta.',
-      'Á móti kemur að hann er aflminni og hægari en flestir keppinautar hans, skottið er minna og hann er meðal þeirra sem draga minnst, aðeins 750 kg. Toyota bZ4X AWD fæst með fjórhjóladrifi og 1.500 kg dráttargetu fyrir 400.000 kr. meira.',
+      'Á móti kemur að hann er aflminni og hægari en flestir keppinautar hans, skottið er minna og hann er meðal þeirra sem draga minnst, aðeins 750 kg. Toyota bZ4X AWD fæst með fjórhjóladrifi og 1.500 kg dráttargetu fyrir 400.000 kr. meira. Systurbíllinn Subaru Solterra er líka fjórhjóladrifinn og 1.100.000 kr. ódýrari, en drífur 60 km styttra.',
       'bZ4X er skynsamlegur kostur fyrir þá sem vilja mikla drægni og þurfa hvorki fjórhjóladrif né kerru.',
     ],
     facts: '2cb2fe080e06',
@@ -3880,7 +3880,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar aflminni og hægari en flestir þeirra og meðal þeirra sem draga minnst, aðeins 750 kg. Toyota bZ4X Touring AWD fæst með fjórhjóladrifi og 1.500 kg dráttargetu fyrir 500.000 kr. meira.',
       'bZ4X Touring er traustur fjölskyldubíll fyrir þá sem þurfa pláss fyrir farangur frekar en kerru.',
     ],
-    facts: '9654fd62fc96',
+    facts: '288a337bd0fb',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að taka Touring AWD?',
@@ -3965,7 +3965,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Toyota C-HR+ AWD er meðalstór jepplingur með fjórhjóladrifi og sérstæðu útliti, systurbíll Subaru Uncharted, fyrir þá sem vilja lipran bíl með gott grip og snerpu.',
       'Snerpa og afl eru í meðallagi á svipuðu verði. Hann má draga 1.500 kg, og Toyota ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir aðrir framleiðendur.',
-      'Hann drífur hins vegar styttra og hleður hægar en flestir keppinautar hans, og skottið er minna. BYD Sealion 7 er 600.000 kr. ódýrari, sneggri, hleður með um 15% styttri stoppum og er með 104 l stærra skott.',
+      'Hann drífur hins vegar styttra og hleður hægar en flestir keppinautar hans, og skottið er minna. BYD Sealion 7 er 600.000 kr. ódýrari, sneggri, hleður með um 15% styttri stoppum og er með 104 l stærra skott. Systurbíllinn Subaru Uncharted er 2.000.000 kr. ódýrari og drífur 15 km styttra.',
       'C-HR+ AWD er fyrir þá sem vilja Toyota með fjórhjóladrifi og langa ábyrgð, en gefur eftir í plássi og hleðslu.',
     ],
     facts: '733cfcb8d39c',
@@ -3987,7 +3987,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Toyota Hilux er pallbíll með tvöföldu húsi, fjórhjóladrifi og plássi fyrir fimm, og þetta er rafútgáfan af honum. Hilux hefur í áratugi verið einn þekktasti vinnubíll heims, frægur fyrir að endast og þola illa meðferð. Rafútgáfan er fyrir þá sem vilja það nafn án dísilvélar, í vinnu í bænum eða í sveitinni.',
       'Stærsti kosturinn er Toyota sjálft: umboð og verkstæði um allt land og orðspor fyrir áreiðanleika sem fáir ná. Hann má draga 1.600 kg, sem dugar fyrir flestar kerrur, þótt flestir á svipuðu verði dragi meira.',
-      'Gallinn er að hann fær ekki rafbílastyrkinn og er dýr, drægnin er mjög stutt, með þeirri stystu á þessu verði, og hann hleður hægt. Með kerru í frosti kemstu ekki langt. KGM Musso EV 4WD er 4.500.000 kr. ódýrari, með 124 km meiri drægni og um 20% styttri hleðslustopp, og JAC T9 EV er 3.800.000 kr. ódýrari og má draga 400 kg meira.',
+      'Gallinn er að hann er dýr, drægnin er mjög stutt, með þeirri stystu á þessu verði, og hann hleður hægt. Með kerru í frosti kemstu ekki langt. KGM Musso EV 4WD er 4.500.000 kr. ódýrari, með 124 km meiri drægni og um 20% styttri hleðslustopp, og JAC T9 EV er 3.800.000 kr. ódýrari og má draga 400 kg meira.',
       'Hilux er fyrir þá sem treysta merkinu og keyra stuttar vegalengdir, en á pappírnum færðu meira fyrir minna annars staðar.',
     ],
     questions: [
@@ -3997,7 +3997,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað kemst hann langt með kerru í frosti?',
       'Hvað má setja mikla þyngd á pallinn?',
       'Er hann jafn sterkur og dísil-Hilux?',
-      'Af hverju fær hann ekki rafbílastyrk?',
+      'Hvernig reynist fjórhjóladrifið í snjó?',
       'Hvað nær ábyrgðin á rafhlöðunni yfir?',
       'Er hann með driflæsingu og lágt drif?',
       'Hvernig er hann í akstri á malarvegum?',
@@ -4280,7 +4280,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Af hverju að velja hann fram yfir BMW iX1?',
       'Hvernig er hann miðað við Audi Q4 e-tron?',
       'Hver er munurinn á honum og Volvo EX40?',
-      'Dugar Single Motor útfærslan?',
+      'Hvernig er drægnin með kerru í frosti?',
       'Bitnar hallandi þakið á höfuðplássi?',
       'Hvernig er útsýnið aftur úr honum?',
       'Er hann þess virði miðað við hátt verð?',
@@ -4345,7 +4345,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann betri kostur en Audi Q4 e-tron?',
       'Borgar sig að spara og velja BMW iX1?',
       'Hvað hefur hann fram yfir Lexus UX 300e?',
-      'Dugar afturhjóladrifna útfærslan?',
+      'Er hann rúmbetri en BMW iX1?',
       'Er þetta sami bíll og XC40 Recharge?',
       'Er hann þess virði miðað við verðið?',
       'Nýtist allt þetta afl í daglegum akstri?',

@@ -15,7 +15,7 @@ const writingRules = [
   shared.voice,
   '- Ekki endursegja tölurnar: þær eru í töflu beint fyrir ofan textann þinn. Segðu frekar hvað þær þýða í daglegu lífi.',
   shared.noArithmetic,
-  shared.grant,
+  '- Verðið er það sem kaupandinn borgar. Nefndu aldrei rafbílastyrkinn, hvorki að bíll fái hann né að hann fái hann ekki.',
   shared.winterRange,
   '- Tölur taktu aðeins úr gögnunum hér að neðan, aldrei úr minni. Notaðu óhikað almenna þekkingu á bílnum og framleiðandanum, til dæmis hvar merkið stendur í gæðum og verði, fyrir hvað það er þekkt, hvort það rekur eigið hleðslunet eða hvernig bíllinn er í akstri: það er oft það sem kaupandi vill helst vita og tölurnar sýna ekki.',
   shared.numberStyle,
@@ -42,7 +42,7 @@ const carSystemPrompt = `${intro} Einhver hefur opnað síðu bílsins hér að 
 - Hraðhleðsla á langferðum, þar sem hleðslustöðvar eru strjálar utan höfuðborgarsvæðisins.
 - Fjórhjóladrif í snjó, hálku og á malarvegum.
 - Pláss: farangursrými, sætafjöldi og dráttargeta fyrir kerru eða hjólhýsi.
-- Verðið eftir styrk og hvað maður fær fyrir það, til dæmis verð á hvern km drægni.
+- Verðið og hvað maður fær fyrir það, til dæmis verð á hvern km drægni.
 Veldu það sem segir mest um þennan bíl. Ekki fara yfir allt.
 
 ${writingRules}
@@ -505,13 +505,15 @@ const describeDetails = (details: CarDetails | undefined): string[] => {
   ].filter((part): part is string => Boolean(part))
 }
 
-// Its charging is left to its standing and the comparisons, which say it
-// without a figure. When it arrives is left out too: a review kept for years
-// would read as dated by it
+// The price is what the buyer pays, grant or none: a review treats it as part
+// of the price, so the model is not told which cars have it. Its charging is
+// left to its standing and the comparisons, which say it without a figure.
+// When it arrives is left out too: a review kept for years would read as dated
+// by it
 const describeCar = (car: Car, details: DetailsOf): string =>
   [
     car.label,
-    `${addDecimalSeparators(car.priceWithGrant)} kr.${car.hasGrant ? ' eftir styrk' : ', fær ekki styrk'}`,
+    `${addDecimalSeparators(car.priceWithGrant)} kr.`,
     `${car.range} km drægni (WLTP)`,
     `${decimal(car.capacity)} kWh rafhlaða`,
     `0-100 km/klst á ${decimal(car.acceleration)} s`,

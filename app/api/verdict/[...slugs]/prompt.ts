@@ -1,4 +1,5 @@
 import type { Car } from '@/modules/data/cars'
+import { grantAmountText } from '@/modules/copy/grantCopy'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { driveLabels } from '@/modules/data/drives'
 import { advisorIntro, writingRules } from '@/modules/detail/writingRules'
@@ -14,7 +15,7 @@ const comparisonSystemPrompt = `${advisorIntro} Einhver er að bera saman bílan
 ${writingRules.voice}
 - Ekki endursegja tölurnar: þær eru í töflu beint fyrir neðan textann þinn. Segðu frekar hvað þær þýða í daglegu lífi.
 ${writingRules.noArithmetic} Til að bera saman tölur af ev-database, nefndu tölurnar sjálfar frekar en muninn á þeim.
-${writingRules.grant}
+- Verðin eru eftir ${grantAmountText} ríkisstyrk þar sem hann á við.
 ${writingRules.winterRange}
 - Tölur taktu aðeins úr gögnunum hér að neðan, aldrei úr minni. Notaðu óhikað almenna þekkingu á bílunum og framleiðendunum, til dæmis hvar merkið stendur í gæðum og verði eða hvernig bíllinn er í akstri.
 ${writingRules.numberStyle}

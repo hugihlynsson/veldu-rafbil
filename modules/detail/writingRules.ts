@@ -1,4 +1,3 @@
-import { grantAmountText } from '@/modules/copy/grantCopy'
 import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 
 // What the model is told of every text it writes about the cars: a car's
@@ -13,7 +12,6 @@ export const writingRules = {
     '- Skrifaðu á eðlilegri, lipurri íslensku, í samtalstón, eins og fróður vinur en ekki sölumaður.',
   noArithmetic:
     '- Reiknaðu aldrei sjálf(ur). Munurinn á tölunum er reiknaður fyrir þig: taktu hann orðréttan.',
-  grant: `- Verðin eru eftir ${grantAmountText} ríkisstyrk þar sem hann á við.`,
   winterRange: `- Drægnin er samkvæmt WLTP. Í íslenskum vetri er hún nær ${Math.round(realRangeLowFactor * 100)}–${Math.round(realRangeHighFactor * 100)}% af því.`,
   numberStyle:
     '- Skrifaðu tölur að íslenskum sið: komma í tugabrotum (7,7 s) og punktur í þúsundum (100.000 kr.).',
