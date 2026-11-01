@@ -44,6 +44,17 @@ describe('the car reviews', () => {
     }
   })
 
+  // The price a review quotes is what the buyer pays, grant or none. "Styrkur"
+  // is also a car's strength, so only the grant's own forms are looked for
+  it('never mentions the grant', () => {
+    const named = /rafbílastyrk|ríkisstyrk|\bstyrk(inn|num|s)?\b/i
+    for (const [slug, { paragraphs, questions }] of Object.entries(
+      carReviews,
+    )) {
+      expect([...paragraphs, ...questions].join(' '), slug).not.toMatch(named)
+    }
+  })
+
   // The chat offers three at a time, drawn afresh each time it is focused
   it('has questions to start on with each, as pills can show them', () => {
     for (const { questions } of Object.values(carReviews)) {
