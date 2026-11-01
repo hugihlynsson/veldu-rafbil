@@ -2280,7 +2280,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur mjög stutt, sérstaklega í vetrarkulda, er meðal þeirra sem hlaða hægast í sínum verðflokki og skottið er eitt það minnsta. Fiat 600e er 100.000 kr. ódýrari, drífur 90 km lengra og hleður með um 30% styttri stoppum.',
       'Aceman E er heillandi bæjarbíll, en síður heppilegur ef ferðast er reglulega milli landshluta.',
     ],
-    facts: 'ced01556fdba',
+    facts: '059d6def4aea',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að taka Aceman SE útfærsluna?',

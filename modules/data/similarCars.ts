@@ -512,7 +512,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'smart-3-pulse',
     'skoda-elroq-85x',
   ],
-  'mini-aceman-e': ['fiat-500e-base', 'mini-cooper-se', 'fiat-600e-base'],
+  'mini-aceman-e': [
+    'volvo-ex30-single-motor',
+    'mini-cooper-se',
+    'fiat-600e-base',
+  ],
   'mini-cooper-se': [
     'mini-aceman-e',
     'renault-r5-e-tech-52-kwh',
