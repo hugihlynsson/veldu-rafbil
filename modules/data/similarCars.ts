@@ -153,7 +153,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'ford-puma-base': [
     'mg-mgs5-comfort',
     'peugeot-e-2008-54-kwh',
-    'leapmotor-b10-67-1-kwh',
+    'leapmotor-b10-design',
   ],
   'hongqi-ehs5-base': [
     'peugeot-e-3008-base',
@@ -168,7 +168,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'hyundai-inster-base': [
     'kia-ev2-standard-range',
     'jac-e30x-base',
-    'leapmotor-b03x-promax',
+    'leapmotor-b03x-design',
   ],
   'hyundai-inster-long-range': [
     'ford-puma-base',
@@ -201,7 +201,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'xpeng-x9-awd-performance',
   ],
   'hyundai-kona-electric-65-kwh': [
-    'leapmotor-c10-promax',
+    'hongqi-ehs5-base',
     'volkswagen-id-3-neo-58-kwh',
     'tesla-model-y-standard-range',
   ],
@@ -211,9 +211,9 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'kia-pv5-base',
   ],
   'jac-e30x-base': [
-    'leapmotor-b03x-promax',
+    'leapmotor-b03x-design',
     'mg-mg4-urban-long-range',
-    'leapmotor-b05-pro',
+    'hyundai-inster-base',
   ],
   'jac-t9-ev-base': [
     'kgm-musso-ev-4wd',
@@ -228,23 +228,23 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'kgm-musso-ev-base': [
     'jac-t9-ev-base',
     'kgm-torres-evx',
-    'leapmotor-c10-promax-awd',
+    'leapmotor-c10-design-awd',
   ],
   'kgm-musso-ev-4wd': ['jac-t9-ev-base', 'toyota-hilux-base', 'kgm-torres-evx'],
   'kgm-torres-evx': [
-    'leapmotor-c10-promax',
+    'xpeng-l03-rwd-long-range',
     'renault-scenic-e-tech-ev60',
     'kgm-musso-ev-base',
   ],
   'kia-ev2-standard-range': [
-    'leapmotor-b10-base',
+    'ford-puma-base',
     'opel-frontera-base',
     'gwm-ora-3-48-kwh',
   ],
   'kia-ev2-long-range': [
     'volkswagen-id-polo-base',
     'nissan-leaf-standard-range',
-    'leapmotor-c10-pro',
+    'skoda-epiq-55',
   ],
   'kia-ev3-standard-range': [
     'peugeot-e-2008-54-kwh',
@@ -298,28 +298,28 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'peugeot-e-5008-dual-motor',
   ],
   'leapmotor-t03-base': [
-    'leapmotor-b03x-pro',
+    'leapmotor-b03x-life',
     'mg-mg4-urban-standard-range',
     'hyundai-inster-base',
   ],
-  'leapmotor-b03x-pro': [
+  'leapmotor-b03x-life': [
     'mg-mg4-urban-standard-range',
     'leapmotor-t03-base',
     'hyundai-inster-base',
   ],
-  'leapmotor-b03x-promax': [
-    'leapmotor-b05-pro',
+  'leapmotor-b03x-design': [
+    'leapmotor-b05-design',
     'mg-mg4-urban-long-range',
     'jac-e30x-base',
   ],
   'leapmotor-b05-pro': [
-    'leapmotor-b03x-promax',
+    'leapmotor-b03x-design',
     'mg-mg4-urban-long-range',
     'jac-e30x-base',
   ],
-  'leapmotor-b05-promax': [
+  'leapmotor-b05-design': [
     'mg-mg4-urban-long-range',
-    'leapmotor-b10-base',
+    'leapmotor-b10-design',
     'kia-ev2-standard-range',
   ],
   'leapmotor-b10-base': [
@@ -327,10 +327,10 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'opel-frontera-base',
     'mg-mg4-urban-long-range',
   ],
-  'leapmotor-b10-67-1-kwh': [
+  'leapmotor-b10-design': [
     'kia-ev2-long-range',
     'mg-mgs5-comfort',
-    'leapmotor-c10-pro',
+    'xpeng-l03-rwd-standard-range',
   ],
   'leapmotor-c10-pro': [
     'mg-mgs5-lux',
@@ -342,7 +342,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'xpeng-g6-rwd-standard-range',
     'kgm-torres-evx',
   ],
-  'leapmotor-c10-promax-awd': [
+  'leapmotor-c10-design-awd': [
     'suzuki-e-vitara-4x4-allgrip',
     'smart-1-pulse',
     'xpeng-g6-rwd-standard-range',
@@ -488,17 +488,17 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'byd-seal-base',
   ],
   'mg-mg4-urban-standard-range': [
-    'leapmotor-b03x-pro',
+    'leapmotor-b03x-life',
     'hyundai-inster-base',
-    'leapmotor-b05-pro',
+    'jac-e30x-base',
   ],
   'mg-mg4-urban-long-range': [
-    'leapmotor-b10-base',
-    'leapmotor-b05-promax',
-    'leapmotor-b03x-promax',
+    'jac-e30x-base',
+    'leapmotor-b05-design',
+    'leapmotor-b03x-design',
   ],
   'mg-mgs5-comfort': [
-    'leapmotor-b10-67-1-kwh',
+    'leapmotor-b10-design',
     'ford-puma-base',
     'kia-ev3-standard-range',
   ],
@@ -553,7 +553,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'kia-ev4-fastback',
   ],
   'opel-frontera-base': [
-    'leapmotor-b10-base',
+    'ford-puma-base',
     'kia-ev2-standard-range',
     'peugeot-e-5008-base',
   ],
@@ -778,7 +778,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'mg-mgs5-lux',
   ],
   'smart-1-pulse': [
-    'leapmotor-c10-promax-awd',
+    'leapmotor-c10-design-awd',
     'suzuki-e-vitara-4x4-allgrip',
     'xpeng-l03-awd-performance',
   ],
@@ -1055,15 +1055,15 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'xpeng-l03-rwd-standard-range': [
     'smart-1-pro',
     'kia-ev3-standard-range',
-    'leapmotor-c10-pro',
+    'leapmotor-b10-design',
   ],
   'xpeng-l03-rwd-long-range': [
     'kia-ev3-long-range',
-    'leapmotor-c10-promax',
+    'tesla-model-y-standard-range',
     'hyundai-kona-electric-65-kwh',
   ],
   'xpeng-l03-awd-performance': [
-    'leapmotor-c10-promax-awd',
+    'leapmotor-c10-design-awd',
     'smart-1-pulse',
     'xpeng-g6-rwd-standard-range',
   ],

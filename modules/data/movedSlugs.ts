@@ -5,4 +5,9 @@
 export const movedSlugs: Readonly<Record<string, string>> = {
   'volvo-ec40-recharge-twin': 'volvo-ec40-twin-motor',
   'byd-evo-base': 'byd-atto-3-evo-base',
+  'leapmotor-b03x-promax': 'leapmotor-b03x-design',
+  'leapmotor-b03x-pro': 'leapmotor-b03x-life',
+  'leapmotor-b05-promax': 'leapmotor-b05-design',
+  'leapmotor-b10-67-1-kwh': 'leapmotor-b10-design',
+  'leapmotor-c10-promax-awd': 'leapmotor-c10-design-awd',
 }
