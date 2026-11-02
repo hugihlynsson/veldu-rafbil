@@ -126,8 +126,14 @@ page prints "Fullt verð frá" per trim, before the grant, and links a PDF under
 
 **Not found on 2026-10-31**: Citroën, Opel and Volvo load in the built-in browser
 but print no price on the model page. Porsche's pages come back with no text.
-Fiat's list link on isband.is is a file download. Leapmotor and GWM print no
-price, and Tesla's Model 3 page shows financing amounts by default.
+Fiat's list link on isband.is is a file download. GWM prints no price, and
+Tesla's Model 3 page shows financing amounts by default.
+
+**Leapmotor** (ÍSBAND): leapmotor.net/is prints no price, but
+`isband.is/nyir-bilar/leapmotor/`, readable with curl, lists each car it sells
+under the name it advertises, with "Listaverð" before the grant. Read on
+2026-11-02. Its "með rafbílastyrk" figures deduct 500.000 kr., not
+`grantAmount`, so take the Listaverð.
 
 **Placeholders**: Askja keeps a document's slug while a list is being reissued,
 with one page that says so. On 2026-10-31 `kia_ev9_gt_verdlisti`, `eqt_verdlisti`,
