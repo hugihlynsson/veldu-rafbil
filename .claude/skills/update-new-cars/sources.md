@@ -107,7 +107,10 @@ project, with a page per model at `/typur/<model>` (`e30x`, `t9-ev`) linking a
 2026-10-23 the T9 page said 212 kW and 7.5 s where both PDFs said 70 + 150 kW
 and 8.5 s. The Norwegian site, jacmotors.no, uses the same images at higher
 resolution and is the place to look for a photo. Read on 2026-10-23, from
-lists uploaded on 2026-04-01 (E30X) and 2026-08-06 (T9 EV).
+lists uploaded on 2026-04-01 (E30X) and 2026-08-06 (T9 EV). BYD and JAC
+reissued every list on 2026-10-30, printing the 400.000 kr. grant; read on
+2026-11-03 with no price changed. A BYD PDF renders its page small in the
+middle of an A4 sheet, so crop the middle third at scale 4 to read the row.
 
 **Ford** (Brimborg): each `ford.is/bill/<model>` page, readable with curl, links
 its PDF, and `pdf text` reads it. The first figure is the price. The page's
@@ -123,11 +126,27 @@ m/ styrk" on one line. Read on 2026-10-31.
 **Peugeot** (Brimborg): 403 to curl, so use the built-in browser. Each model
 page prints "Fullt verð frá" per trim, before the grant, and links a PDF under
 `/content/dam/peugeot/iceland/verdlistar/`. Read on 2026-10-31 from the pages.
+By 2026-11-03 the pages had moved to `/tegundir/<model>/e-<model>.html`; the
+old URLs redirect there, except `E-Traveller.html`, which is a 404, and the
+menu no longer lists the e-Traveller. The menu lists an e-308 and e-308 SW that
+the car list does not have, with no price on their pages.
 
 **Not found on 2026-10-31**: Citroën, Opel and Volvo load in the built-in browser
 but print no price on the model page. Porsche's pages come back with no text.
 Fiat's list link on isband.is is a file download. GWM prints no price, and
 Tesla's Model 3 page shows financing amounts by default.
+
+**Still not found on 2026-11-03**: Volvo's configurator, `/is/build/<model>`,
+says "Verð fæst hjá söluráðgjafa" in place of a price. `nyirbilar.brimborg.is`
+lists only the cars in stock, not a price list. jeep.com/is lists only the
+Avenger 4xe hybrid, and `isband.is/nyir-bilar/fiat/` is an old review.
+
+**Tesla**: the built-in browser reads `/is_is/model3/design` and
+`/is_is/modely/design` once the prices stop animating (wait a few seconds, or
+the figures read as fractions of the real ones). "Staðgreiðsla" is the price
+before the grant. Premium shows its Long Range trims only after a click on
+it. Read on 2026-11-03. The Model Y page says a seven-seat layout comes with
+Premium AWD, but no seat option could be selected.
 
 **Leapmotor** (ÍSBAND): leapmotor.net/is prints no price, but
 `isband.is/nyir-bilar/leapmotor/`, readable with curl, lists each car it sells
@@ -137,7 +156,8 @@ under the name it advertises, with "Listaverð" before the grant. Read on
 
 **Placeholders**: Askja keeps a document's slug while a list is being reissued,
 with one page that says so. On 2026-10-31 `kia_ev9_gt_verdlisti`, `eqt_verdlisti`,
-`eqv_verdlisti` and `t-class_verdlisti` were placeholders. The STARIA Electric
+`eqv_verdlisti` and `t-class_verdlisti` were placeholders, and still were on
+2026-11-03; kia.com's EV9 page says "Verðlisti í vinnslu". The STARIA Electric
 has moved from BL's main Hyundai list to `hyundai_fyrirt_kjalausnir`.
 
 **Range Rover is the one that cannot be started from its entries.** Both
