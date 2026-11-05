@@ -46,6 +46,52 @@ describe('readNews', () => {
   })
 })
 
+describe('readNews on a day a car changed more than once', () => {
+  it('tells a car added and corrected the same day as one new car', () => {
+    const items = readNews([
+      entry('2026-10-04', { added: true, price: { to: 6_300_000 } }),
+      entry('2026-10-04', { price: { from: 6_300_000, to: 6_000_000 } }),
+    ])
+    expect(items).toEqual([
+      expect.objectContaining({ kind: 'added', price: { to: 6_000_000 } }),
+    ])
+  })
+
+  it('tells two price changes in a day as one, from the first to the last', () => {
+    const items = readNews([
+      entry('2026-10-01', { added: true, price: { to: 3 } }),
+      entry('2026-10-05', { price: { from: 3, to: 2 } }),
+      entry('2026-10-05', { price: { from: 2, to: 1 } }),
+    ])
+    expect(items.at(-1)).toEqual(
+      expect.objectContaining({ kind: 'price', price: { from: 3, to: 1 } }),
+    )
+    expect(items).toHaveLength(2)
+  })
+
+  it('tells nothing of a price that came back to where it was', () => {
+    const items = readNews([
+      entry('2026-10-01', { added: true, price: { to: 3 } }),
+      entry('2026-10-05', { price: { from: 3, to: 2 } }),
+      entry('2026-10-05', { price: { from: 2, to: 3 } }),
+    ])
+    expect(items).toHaveLength(1)
+  })
+
+  it('tells a car renamed the same day it was added by its new name', () => {
+    const items = readNews([
+      { ...entry('2026-11-05', { added: true }), label: 'Old name' },
+      {
+        ...entry('2026-11-05', { renamedFrom: 'Old name' }),
+        label: 'New name',
+      },
+    ])
+    expect(items).toEqual([
+      expect.objectContaining({ kind: 'added', label: 'New name' }),
+    ])
+  })
+})
+
 describe('newsDays', () => {
   const items = readNews([
     entry('2025-12-31', { added: true }, 'a'),
