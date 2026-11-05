@@ -15,9 +15,15 @@ interface Props {
   latest: Latest
   /** Where it sits: its margins and width, which differ by the page around it */
   className?: string
+  /** The photo's width where the default does not fit beside the text */
+  imageClassName?: string
 }
 
-const LatestNews: FunctionComponent<Props> = ({ latest, className }) => (
+const LatestNews: FunctionComponent<Props> = ({
+  latest,
+  className,
+  imageClassName,
+}) => (
   <Link
     href={latest.path}
     className={clsx(
@@ -26,7 +32,12 @@ const LatestNews: FunctionComponent<Props> = ({ latest, className }) => (
     )}
   >
     {latest.image && (
-      <div className="w-32 aspect-[3/2] shrink-0 overflow-hidden rounded-lg bg-cloud md:w-40">
+      <div
+        className={clsx(
+          'w-32 aspect-[3/2] shrink-0 overflow-hidden rounded-lg bg-cloud md:w-40',
+          imageClassName,
+        )}
+      >
         {/* 128px on a phone and 160px from md, where its width is taken. The
             zoom eases in over 500ms and back in 300ms, as a slow return
             lingers after the pointer has gone */}

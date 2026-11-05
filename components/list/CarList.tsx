@@ -250,7 +250,10 @@ export default function CarList({ latest }: Props) {
           {latest && (
             <LatestNews
               latest={latest}
-              className="self-start mt-1 mb-10 lg:shrink-0 lg:w-[28rem] lg:mt-6 lg:mb-8"
+              className="self-start mt-1 mb-10 lg:shrink-0 lg:w-[25.5rem] lg:mt-6 lg:mb-8"
+              // Beside an intro that keeps to three lines, the photo takes the
+              // phone's size so the headline keeps its room
+              imageClassName="lg:w-32"
             />
           )}
         </div>
