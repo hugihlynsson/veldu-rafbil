@@ -286,7 +286,7 @@ const CarView: FunctionComponent<Props> = ({
             <section aria-labelledby="history" className="mt-13 md:mt-16">
               <div className="flex items-baseline justify-between gap-4">
                 <h2 id="history" className={sectionLabel}>
-                  Saga á listanum:
+                  Uppfærslur:
                 </h2>
                 <Link
                   href={NEWS_PATH}
@@ -299,7 +299,7 @@ const CarView: FunctionComponent<Props> = ({
                 {history.map((item, index) => (
                   <li
                     key={`${item.date}-${item.kind}-${index}`}
-                    className="flex flex-col gap-0.5 py-2.5 border-b border-line text-sm sm:flex-row sm:gap-4"
+                    className="flex flex-col gap-0.5 py-2.5 border-b border-line last:border-b-0 text-sm sm:flex-row sm:gap-4"
                   >
                     <time
                       dateTime={item.date}

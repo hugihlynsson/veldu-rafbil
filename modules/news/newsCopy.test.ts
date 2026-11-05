@@ -136,6 +136,11 @@ describe('itemText', () => {
     )
   })
 
+  it('tells a car joining the list as registered, with its list price', () => {
+    const added = item('added', 'A', { price: { to: 6_490_000 } })
+    expect(itemText(added, 'history')).toBe('Skráður, listaverð 6.490.000 kr.')
+  })
+
   it('writes a delivery as the comparison does', () => {
     expect(
       itemText(item('added', 'A', { delivery: { to: 'Lok 2026' } }), 'news'),

@@ -89,7 +89,7 @@ export const itemText = (item: NewsItem, told: 'news' | 'history'): string => {
 
   switch (item.kind) {
     case 'added': {
-      const start = news ? 'Nýr á lista' : 'Kom á listann'
+      const start = news ? 'Nýr á lista' : 'Skráður'
       if (delivery?.to) return `${start}, væntanlegur ${when(delivery.to)}`
       return price && !news ? `${start}, listaverð ${kr(price.to)}` : start
     }
