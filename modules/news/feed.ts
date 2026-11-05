@@ -1,6 +1,7 @@
 import carChanges from '@/modules/data/carChanges'
 import { carWithSlug } from '@/modules/data/cars'
 import {
+  dayKinds,
   newsDays,
   readNews,
   type LatestNews,
@@ -43,6 +44,16 @@ export const historyOf = (slug: string): NewsItem[] =>
 
 const [newest] = days
 
+// The first car the day tells of that still has a page, in the order the
+// headline names them: a new car before a new price
+const leadImage = (day: NewsDay) => {
+  const car = dayKinds
+    .flatMap((kind) => day.items[kind])
+    .map(({ slug }) => carWithSlug(slug))
+    .find(Boolean)
+  return car ? { image: `/images/${car.heroImageName}.jpg` } : {}
+}
+
 /**
  * The newest day's news, which the list's front page leads with. It links to
  * all of them rather than to the day, which tops that page anyway.
@@ -51,4 +62,5 @@ export const latestNews: LatestNews | undefined = newest && {
   date: newest.date,
   headline: headlineOf(newest),
   path: NEWS_PATH,
+  ...leadImage(newest),
 }

@@ -52,6 +52,8 @@ export interface LatestNews {
   date: string
   headline: string
   path: string
+  /** The photo of the car it leads with, if that car has one */
+  image?: string
 }
 
 /** The kinds a day's news is told in, in the order it is */
