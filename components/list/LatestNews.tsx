@@ -7,24 +7,23 @@ import type { LatestNews as Latest } from '@/modules/news/news'
 
 /**
  * The newest day of updates under the intro, as a story is set beside its
- * photo: a label, the headline and the day. The photo beside the text takes a
- * fill on hover, as the rows on the updates page do, reaching 10px past the
- * photo and rounding by its radius and those 10px so the corners run parallel
+ * photo: a label, the headline and the day. Its photo zooms on hover, as a new
+ * car's does on the updates page
  */
 const LatestNews: FunctionComponent<{ latest: Latest }> = ({ latest }) => (
   <Link
     href={latest.path}
-    className="relative isolate self-start mt-1 mb-10 max-w-[33em] flex items-center gap-4 text-tint no-underline before:absolute before:-inset-2.5 before:-z-10 before:rounded-[calc(var(--radius-lg)+10px)] before:bg-shade before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100"
+    className="group self-start mt-1 mb-10 max-w-[33em] flex items-center gap-4 text-tint no-underline md:gap-5"
   >
     {latest.image && (
-      <div className="w-32 aspect-[3/2] shrink-0 overflow-hidden rounded-lg bg-cloud">
-        {/* The size the box renders at, so the 1x/2x pair is 128 and 256 */}
+      <div className="w-32 aspect-[3/2] shrink-0 overflow-hidden rounded-lg bg-cloud md:w-40">
+        {/* 128px on a phone and 160px from md, where its width is taken */}
         <Image
           alt=""
           src={latest.image}
-          width={128}
-          height={85}
-          className="w-full h-full object-cover"
+          width={160}
+          height={107}
+          className="w-full h-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out group-hover:scale-105"
         />
       </div>
     )}
