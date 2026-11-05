@@ -239,11 +239,18 @@ export default function CarList({ latest }: Props) {
       <header className={clsx('flex flex-col items-stretch md:pb-10', column)}>
         <Title />
 
-        <Intro />
+        {/* The newest update beside the intro from lg, where the intro alone
+            leaves half the header empty, and under it on narrower screens */}
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between lg:gap-12">
+          <Intro />
 
-        {latest && (
-          <LatestNews latest={latest} className="self-start mt-1 mb-10" />
-        )}
+          {latest && (
+            <LatestNews
+              latest={latest}
+              className="self-start mt-1 mb-10 lg:shrink-0 lg:w-96 lg:mt-6 lg:mb-8"
+            />
+          )}
+        </div>
 
         <div
           ref={controlsRef}
