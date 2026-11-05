@@ -15,7 +15,7 @@ import NewsDaySections from '@/components/news/NewsDaySections'
 // Told in full; the rest are a line each, by month
 const FULL_DAYS = 20
 
-const title = 'Nýtt – Veldu Rafbíl'
+const title = 'Uppfærslur – Veldu Rafbíl'
 const description =
   'Nýir rafbílar á Íslandi, verðbreytingar og bílar sem hætta í sölu, um leið og þeir birtast á Veldu Rafbíl.'
 
@@ -53,7 +53,7 @@ export default function Page() {
         <div className={pageColumn}>
           <div className="md:max-w-prose md:mx-auto">
             <h1 className="m-0 mt-4 font-semibold text-display leading-tight">
-              Nýtt
+              Uppfærslur
             </h1>
             <p className="mt-2 mb-0 text-base leading-normal text-pretty text-stone">
               Nýir bílar, ný verð og bílar sem hætta í sölu, daginn sem þeir

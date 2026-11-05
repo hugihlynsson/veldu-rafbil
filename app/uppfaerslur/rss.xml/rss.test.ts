@@ -33,9 +33,9 @@ describe('the news feed', () => {
 
   it('links each day to its page, as its own id', () => {
     const feed = buildFeed([day], () => 'x')
-    expect(feed).toContain(`<link>${SITE_URL}/nytt/2026-10-31</link>`)
+    expect(feed).toContain(`<link>${SITE_URL}/uppfaerslur/2026-10-31</link>`)
     expect(feed).toContain(
-      `<guid isPermaLink="true">${SITE_URL}/nytt/2026-10-31</guid>`,
+      `<guid isPermaLink="true">${SITE_URL}/uppfaerslur/2026-10-31</guid>`,
     )
     expect(feed).toContain('<pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>')
   })

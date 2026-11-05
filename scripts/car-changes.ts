@@ -1,6 +1,6 @@
 /**
  * Writes modules/data/carChanges.ts: what each change to newCars.ts did to
- * each car, which /nytt and each car's page tell.
+ * each car, which /uppfaerslur and each car's page tell.
  *
  *   npx tsx scripts/car-changes.ts             what this branch changed, dated today
  *   npx tsx scripts/car-changes.ts --rebuild   the whole log afresh, from the git history

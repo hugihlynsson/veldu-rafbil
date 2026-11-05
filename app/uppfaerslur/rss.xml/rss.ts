@@ -56,7 +56,7 @@ export const buildFeed = (
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Veldu Rafbíl – Nýtt</title>
+    <title>Veldu Rafbíl – Uppfærslur</title>
     <link>${SITE_URL}${NEWS_PATH}</link>
     <atom:link href="${SITE_URL}${NEWS_FEED_PATH}" rel="self" type="application/rss+xml" />
     <description>Nýir rafbílar á Íslandi, verðbreytingar og bílar sem hætta í sölu.</description>

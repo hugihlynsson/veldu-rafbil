@@ -237,7 +237,7 @@ make, then model. The fields that are easy to get wrong:
   grant does it to nearly all of them), so say so in the report rather than
   writing them. Read the new ones in the diff as you would the figures.
 - **What changed is news, logged in `modules/data/carChanges.ts`.** It is
-  what `/nytt` and the history on each car's page are told from. Once the
+  what `/uppfaerslur` and the history on each car's page are told from. Once the
   edits to `newCars.ts` are done, run `npx tsx scripts/car-changes.ts`. It
   works out what the branch changed since it left main, so run it again after
   any later edit rather than editing the log; it dates every entry today. A

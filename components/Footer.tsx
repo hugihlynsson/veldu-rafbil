@@ -24,8 +24,8 @@ const Footer: FunctionComponent<{}> = () => (
     </p>
 
     <p className={paragraph}>
-      Nýir bílar og ný verð birtast jafnóðum undir{' '}
-      <TextLink href={NEWS_PATH}>Nýtt</TextLink>.
+      Nýir bílar og ný verð birtast jafnóðum í{' '}
+      <TextLink href={NEWS_PATH}>uppfærslunum</TextLink>.
     </p>
 
     <p className={paragraph}>
