@@ -22,14 +22,14 @@ const detailOf = (item: NewsItem, car: Car | undefined): string => {
   return `${addDecimalSeparators(car.priceWithGrant)} kr.${grant} · ${car.range} km${delivery}`
 }
 
-// A row of a list rather than a card: the photo is as tall as the two lines
-// beside it, and a run of twenty reads as one list
+// A row of a list rather than a card, without dividers: the photo is as tall
+// as the two lines beside it, and a run of twenty reads as one list
 const Row: FunctionComponent<{ item: NewsItem }> = ({ item }) => {
   const car = carWithSlug(item.slug)
   const parts = detailOf(item, car).split(' · ')
 
   return (
-    <li className="relative flex items-start gap-3 py-2.5 border-b border-line last:border-b-0">
+    <li className="relative flex items-start gap-3 py-2">
       {car ? (
         // The size the box renders at, so the 1x/2x pair is 128 and 256
         <Image
