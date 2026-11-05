@@ -62,10 +62,12 @@ export default function Page() {
             </p>
 
             {recent.map((day) => (
-              <article key={day.date} className="mt-12 md:mt-16">
+              // Days are set apart by space and a date in the page's ink, a
+              // step larger than the labels under it, rather than by a line
+              <article key={day.date} className="mt-16 md:mt-24">
                 <time
                   dateTime={day.date}
-                  className="uppercase text-eyebrow font-semibold tracking-wider text-stone"
+                  className="uppercase text-xs font-semibold tracking-wider text-tint"
                 >
                   {dayText(day.date)}
                 </time>

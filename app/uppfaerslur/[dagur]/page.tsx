@@ -92,7 +92,7 @@ export default async function Page({ params }: Props) {
             </Link>
             <time
               dateTime={day.date}
-              className="block mt-6 uppercase text-eyebrow font-semibold tracking-wider text-stone"
+              className="block mt-6 uppercase text-xs font-semibold tracking-wider text-tint"
             >
               {dayText(day.date)}
             </time>
