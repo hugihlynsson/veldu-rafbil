@@ -2113,7 +2113,7 @@ const newCars: Array<NewCar> = [
     model: 'Macan',
     subModel: '4 Electric',
     heroImageName: 'porsche-macan',
-    price: 13_950_000,
+    price: 12_950_000,
     sellerUrl:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Macan-Electric',
     acceleration: 5.2,
@@ -2130,7 +2130,7 @@ const newCars: Array<NewCar> = [
     model: 'Macan',
     subModel: '4s Electric',
     heroImageName: 'porsche-macan',
-    price: 15_450_000,
+    price: 13_950_000,
     sellerUrl:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Macan-Electric',
     acceleration: 4.1,
@@ -2147,7 +2147,7 @@ const newCars: Array<NewCar> = [
     model: 'Taycan',
     subModel: 'Plus',
     heroImageName: 'porsche-taycan',
-    price: 15_450_000,
+    price: 13_950_000,
     sellerUrl: 'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Taycan',
     acceleration: 4.8,
     capacity: 105,
@@ -2163,7 +2163,7 @@ const newCars: Array<NewCar> = [
     model: 'Taycan',
     subModel: '4 Plus',
     heroImageName: 'porsche-taycan',
-    price: 16_950_000,
+    price: 15_950_000,
     sellerUrl: 'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Taycan',
     acceleration: 4.6,
     capacity: 105,
@@ -2195,7 +2195,7 @@ const newCars: Array<NewCar> = [
     model: 'Taycan',
     subModel: '4 Cross Turismo',
     heroImageName: 'porsche-taycan-cross-turismo',
-    price: 17_950_000,
+    price: 16_950_000,
     sellerUrl:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Taycan-Cross-Turismo',
     acceleration: 4.7,
@@ -2213,7 +2213,7 @@ const newCars: Array<NewCar> = [
     model: 'Taycan',
     subModel: '4s Cross Turismo',
     heroImageName: 'porsche-taycan-cross-turismo-alt',
-    price: 19_950_000,
+    price: 18_950_000,
     sellerUrl:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Taycan-Cross-Turismo',
     acceleration: 3.8,
@@ -2230,7 +2230,7 @@ const newCars: Array<NewCar> = [
     make: 'Porsche',
     model: 'Cayenne',
     heroImageName: 'porsche-cayenne',
-    price: 16_950_000,
+    price: 15_950_000,
     sellerUrl:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
     acceleration: 4.8,
@@ -2247,7 +2247,7 @@ const newCars: Array<NewCar> = [
     model: 'Cayenne',
     subModel: 'Coupé',
     heroImageName: 'porsche-cayenne-coupe',
-    price: 17_450_000,
+    price: 16_450_000,
     sellerUrl:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
     acceleration: 4.8,
@@ -2265,7 +2265,7 @@ const newCars: Array<NewCar> = [
     model: 'Cayenne',
     subModel: 'S',
     heroImageName: 'porsche-cayenne',
-    price: 19_950_000,
+    price: 18_950_000,
     sellerUrl:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
     acceleration: 3.8,
@@ -2283,7 +2283,7 @@ const newCars: Array<NewCar> = [
     model: 'Cayenne',
     subModel: 'S Coupé',
     heroImageName: 'porsche-cayenne-coupe-alt',
-    price: 20_450_000,
+    price: 19_450_000,
     sellerUrl:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
     acceleration: 3.8,
@@ -2301,7 +2301,7 @@ const newCars: Array<NewCar> = [
     model: 'Cayenne',
     subModel: 'Turbo',
     heroImageName: 'porsche-cayenne-turbo',
-    price: 26_450_000,
+    price: 24_950_000,
     sellerUrl:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
     acceleration: 2.5,
@@ -2319,7 +2319,7 @@ const newCars: Array<NewCar> = [
     model: 'Cayenne',
     subModel: 'Turbo Coupé',
     heroImageName: 'porsche-cayenne-coupe-turbo',
-    price: 26_950_000,
+    price: 25_450_000,
     sellerUrl:
       'https://dealer.porsche.com/is/island/is-IS/nyir-bilar/Cayenne-Electric',
     acceleration: 2.5,
