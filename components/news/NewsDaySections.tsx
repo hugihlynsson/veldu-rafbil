@@ -149,7 +149,7 @@ const NewsDaySections: FunctionComponent<{ day: NewsDay }> = ({ day }) =>
               'mb-0 p-0 list-none',
               kind === 'added'
                 ? 'mt-3 grid grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3 md:gap-x-6 md:gap-y-8'
-                : 'mt-1 md:mt-2 md:grid md:grid-cols-2 md:gap-x-8',
+                : 'mt-1 md:mt-2 md:grid md:grid-cols-2 md:gap-x-8 lg:grid-cols-3 lg:gap-x-6',
             )}
           >
             {day.items[kind].map((item) => (

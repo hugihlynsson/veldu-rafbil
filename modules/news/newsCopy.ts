@@ -97,8 +97,10 @@ export const itemText = (item: NewsItem, told: 'news' | 'history'): string => {
       if (!price) return ''
       const { from = 0, to } = price
       if (news) {
-        const change = fell(price) ? 'Lækkaði' : 'Hækkaði'
-        return `${kr(to)} · ${change} um ${addDecimalSeparators(Math.abs(to - from))}`
+        // An arrow rather than "Lækkaði um", so a row of figures fits a
+        // third of the page on one line
+        const arrow = fell(price) ? '↓' : '↑'
+        return `${kr(to)} · ${arrow} ${addDecimalSeparators(Math.abs(to - from))}`
       }
       const verb = fell(price) ? 'lækkaði' : 'hækkaði'
       return `Listaverð ${verb} úr ${kr(from)} í ${kr(to)}`
