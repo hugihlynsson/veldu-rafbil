@@ -412,6 +412,21 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'porsche-taycan-plus',
     'volvo-es90-twin-motor-performance',
   ],
+  'mercedes-benz-amg-gt-4-door-coupe-53-4matic': [
+    'polestar-5-performance',
+    'porsche-taycan-4s-plus',
+    'mercedes-benz-eqs-580-4matic',
+  ],
+  'mercedes-benz-amg-gt-4-door-coupe-55-4matic': [
+    'porsche-cayenne-turbo-coupe',
+    'polestar-5-performance',
+    'mercedes-benz-eqs-580-4matic',
+  ],
+  'mercedes-benz-amg-gt-4-door-coupe-63-4matic': [
+    'porsche-cayenne-turbo-coupe',
+    'porsche-cayenne-turbo',
+    'polestar-5-performance',
+  ],
   'mercedes-benz-eqa-suv-300-4matic': [
     'bmw-ix1-xdrive-30',
     'mini-countryman-se-4x4',
@@ -443,7 +458,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'porsche-macan-4-electric',
   ],
   'mercedes-benz-eqs-580-4matic': [
-    'bmw-i5-m60-xdrive',
+    'mercedes-benz-amg-gt-4-door-coupe-55-4matic',
     'porsche-taycan-4s-plus',
     'range-rover-electric-ev450',
   ],
@@ -640,7 +655,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'polestar-5-performance': [
     'bmw-i5-m60-xdrive',
     'porsche-taycan-4s-cross-turismo',
-    'porsche-taycan-4s-plus',
+    'mercedes-benz-amg-gt-4-door-coupe-53-4matic',
   ],
   'porsche-macan-4-electric': [
     'polestar-3-performance',
@@ -705,7 +720,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'porsche-cayenne-turbo-coupe': [
     'range-rover-electric-ev550',
     'mercedes-benz-g-class-580-eq',
-    'mercedes-benz-eqs-580-4matic',
+    'mercedes-benz-amg-gt-4-door-coupe-63-4matic',
   ],
   'range-rover-electric-ev450': [
     'mercedes-benz-eqs-suv-580-4matic',
