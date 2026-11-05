@@ -292,7 +292,7 @@ const CarView: FunctionComponent<Props> = ({
                   href={NEWS_PATH}
                   className="text-sm font-semibold text-tint no-underline hover:underline"
                 >
-                  Allar uppfærslur <span aria-hidden>→</span>
+                  Sjá allar <span aria-hidden>→</span>
                 </Link>
               </div>
               <ol className="mt-2 mb-0 p-0 list-none">
