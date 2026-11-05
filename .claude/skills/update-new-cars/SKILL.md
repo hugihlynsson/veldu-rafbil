@@ -244,7 +244,9 @@ make, then model. The fields that are easy to get wrong:
   test fails until it is run. Read the new lines at the end of the file: a
   rename it did not recognise shows as one car taken out and another added, so
   add the old slug to `movedSlugs.ts` (which a rename needs anyway) and run it
-  again.
+  again. Every branch adds to the end of the file, so two open at once conflict
+  there: take main's version of the file and run the script again, which
+  writes this branch's entries afresh on top of it.
 
 And, for a car that is genuinely new to the list:
 
