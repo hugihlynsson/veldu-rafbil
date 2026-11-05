@@ -1,37 +1,39 @@
-'use client'
-
 import { FunctionComponent } from 'react'
+
+import { latestNews } from '@/modules/news/feed'
+import LatestNews from './list/LatestNews'
 import Logo from './Logo'
 import TextLink from './TextLink'
-import { NEWS_PATH } from '@/modules/news/paths'
 
-const paragraph =
-  'mx-auto max-w-column text-sm leading-6 text-pretty px-(--gutter) text-stone md:max-w-page md:px-10'
-
+// Rendered on the server only, by each page, so the change log it reads the
+// latest update from never reaches the browser
 const Footer: FunctionComponent<{}> = () => (
   <footer className="bg-haze pt-8 pb-34 xs:pt-14">
-    <div className={paragraph}>
-      <Logo className="block w-40 h-auto mb-4 text-tint" />
+    <div className="mx-auto max-w-column px-(--gutter) md:max-w-page md:px-10 md:flex md:items-start md:justify-between md:gap-12">
+      <div className="text-sm leading-6 text-pretty text-stone">
+        <Logo className="block w-40 h-auto mb-4 text-tint" />
+        <p className="m-0">
+          Veldu Rafbíl er smíðuð af{' '}
+          <TextLink href="https://hugihlynsson.com">Huga Hlynssyni</TextLink> og
+          er geymd á{' '}
+          <TextLink href="https://github.com/hugihlynsson/veldu-rafbil">
+            GitHub
+          </TextLink>
+          .
+        </p>
+        <p className="m-0">
+          Ef þú ert með ábendingu eða fyrirspurn geturu sent póst á{' '}
+          <TextLink href="mailto:hugi@hey.com">hugi@hey.com</TextLink>.
+        </p>
+      </div>
+
+      {latestNews && (
+        <LatestNews
+          latest={latestNews}
+          className="mt-8 md:mt-1 md:max-w-md md:shrink-0"
+        />
+      )}
     </div>
-    <p className={paragraph}>
-      Veldu Rafbíl er smíðuð af{' '}
-      <TextLink href="https://hugihlynsson.com">Huga Hlynssyni</TextLink> og er
-      geymd á{' '}
-      <TextLink href="https://github.com/hugihlynsson/veldu-rafbil">
-        GitHub
-      </TextLink>
-      .{' '}
-    </p>
-
-    <p className={paragraph}>
-      Nýir bílar og ný verð birtast jafnóðum í{' '}
-      <TextLink href={NEWS_PATH}>uppfærslunum</TextLink>.
-    </p>
-
-    <p className={paragraph}>
-      Ef þú ert með ábendingu eða fyrirspurn geturu sent póst á{' '}
-      <TextLink href="mailto:hugi@hey.com">hugi@hey.com</TextLink>.
-    </p>
   </footer>
 )
 

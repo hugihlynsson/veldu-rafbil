@@ -241,7 +241,9 @@ export default function CarList({ latest }: Props) {
 
         <Intro />
 
-        {latest && <LatestNews latest={latest} />}
+        {latest && (
+          <LatestNews latest={latest} className="self-start mt-1 mb-10" />
+        )}
 
         <div
           ref={controlsRef}

@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react'
+import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -10,10 +11,19 @@ import type { LatestNews as Latest } from '@/modules/news/news'
  * photo: a label, the headline and the day. Its photo zooms on hover, as a new
  * car's does on the updates page
  */
-const LatestNews: FunctionComponent<{ latest: Latest }> = ({ latest }) => (
+interface Props {
+  latest: Latest
+  /** Where it sits: its margins and width, which differ by the page around it */
+  className?: string
+}
+
+const LatestNews: FunctionComponent<Props> = ({ latest, className }) => (
   <Link
     href={latest.path}
-    className="group self-start mt-1 mb-10 max-w-[33em] flex items-center gap-4 text-tint no-underline md:gap-5"
+    className={clsx(
+      'group max-w-[33em] flex items-center gap-4 text-tint no-underline md:gap-5',
+      className,
+    )}
   >
     {latest.image && (
       <div className="w-32 aspect-[3/2] shrink-0 overflow-hidden rounded-lg bg-cloud md:w-40">
