@@ -23,50 +23,50 @@ const detailOf = (item: NewsItem, car: Car | undefined): string => {
   return `${addDecimalSeparators(car.priceWithGrant)} kr.${grant} · ${car.range} km${delivery}`
 }
 
-// On a phone every car is a row of a list, its photo as tall as the two lines
-// beside it, so a run of twenty reads as one list. From md a new car is a tile
-// with its photo over its name, the text inset from the photo's edges, and the
-// rest stay rows with a larger photo, two to a line: a day of twenty new
-// prices would otherwise be a wall of photos
+// A new car is a tile, its photo over its name and the text inset from the
+// photo's edges: two to a line on a phone, three from md. Every other change
+// is a row, its photo beside two lines, so a day of twenty new prices reads as
+// one list rather than a wall of photos; from md the rows go two to a line
+// with a larger photo
 const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
   item,
   tile,
 }) => {
   const car = carWithSlug(item.slug)
   const parts = detailOf(item, car).split(' · ')
-  const box = tile
-    ? 'md:w-full md:h-auto md:aspect-[3/2] md:rounded-xl'
-    : 'md:w-30 md:h-20 md:rounded-lg'
 
   return (
     <li
       className={clsx(
-        'group relative flex items-start gap-3 py-2.5',
+        'group relative flex',
         tile
-          ? 'md:flex-col md:gap-3 md:py-0'
+          ? 'flex-col gap-2 md:gap-3'
           : // The fill reaches 10px past the photo on every side, as a similar
             // car's does on a car's page, and rounds by the photo's radius
             // and those 10px, so the two corners run parallel
-            'md:items-center md:gap-4 md:isolate md:before:absolute md:before:-inset-x-2.5 md:before:inset-y-0 md:before:-z-10 md:before:rounded-[calc(var(--radius-lg)+10px)] md:before:bg-shade md:before:opacity-0 md:before:transition-opacity md:before:duration-200 md:hover:before:opacity-100',
+            'items-start gap-3 py-2.5 md:items-center md:gap-4 md:isolate md:before:absolute md:before:-inset-x-2.5 md:before:inset-y-0 md:before:-z-10 md:before:rounded-[calc(var(--radius-lg)+10px)] md:before:bg-shade md:before:opacity-0 md:before:transition-opacity md:before:duration-200 md:hover:before:opacity-100',
       )}
     >
       {/* The frame clips the photo, which a tile zooms within on hover */}
       <div
         className={clsx(
-          'w-18 h-12 shrink-0 overflow-hidden rounded-sm bg-cloud',
-          box,
+          'shrink-0 overflow-hidden bg-cloud',
+          tile
+            ? 'w-full aspect-[3/2] rounded-lg md:rounded-xl'
+            : 'w-18 h-12 rounded-sm md:w-30 md:h-20 md:rounded-lg',
         )}
       >
         {car && (
           <Image
             alt=""
             src={`/images/${car.heroImageName}.jpg`}
-            // A tile is a third of the page from md, some 290px at most. A
-            // row's photo is 72px on a phone and 120px from md, where its
-            // width is taken, so its 1x/2x pair is 128 and 256 either way
+            // A tile is half the column on a phone and a third of the page
+            // from md, some 290px at most. A row's photo is 72px on a phone
+            // and 120px from md, where its width is taken, so its 1x/2x pair
+            // is 128 and 256 either way
             {...(tile
               ? {
-                  sizes: '(max-width: 767px) 72px, 290px',
+                  sizes: '(max-width: 767px) 50vw, 290px',
                   width: 290,
                   height: 193,
                 }
@@ -74,13 +74,18 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
             className={clsx(
               'w-full h-full object-cover',
               tile &&
-                'motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out md:group-hover:scale-105 motion-safe:md:group-hover:duration-500',
+                'motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out group-hover:scale-105 motion-safe:group-hover:duration-500',
             )}
           />
         )}
       </div>
-      <div className={clsx('flex-1 min-w-0', tile && 'md:px-3')}>
-        <div className="text-base leading-snug">
+      <div className={clsx('flex-1 min-w-0', tile && 'px-1 md:px-3')}>
+        <div
+          className={clsx(
+            'leading-snug',
+            tile ? 'text-sm md:text-base' : 'text-base',
+          )}
+        >
           {car ? (
             <Link
               href={carPathOf(car)}
@@ -92,23 +97,35 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
             <span className="font-semibold">{item.label}</span>
           )}
           {car?.subModel && (
-            <span className="text-sm font-medium text-stone">
+            <span
+              className={clsx(
+                'font-medium text-stone',
+                tile ? 'text-xs md:text-sm' : 'text-sm',
+              )}
+            >
               {' '}
               {car.subModel}
             </span>
           )}
         </div>
-        {/* A line of figures breaks at a dot on the narrowest phones rather
-            than inside one; a sentence wraps as any other */}
-        <div className="mt-0.5 text-sm font-medium text-stone">
-          {parts.length > 1
+        {/* A row's line of figures breaks at a dot on the narrowest phones
+            rather than inside one. A tile's is too narrow on a phone to keep
+            a figure whole, so it wraps as a sentence does, with each dot held
+            to the end of its line rather than starting the next */}
+        <div
+          className={clsx(
+            'mt-0.5 font-medium text-stone',
+            tile ? 'text-control md:text-sm' : 'text-sm',
+          )}
+        >
+          {!tile && parts.length > 1
             ? parts.map((part, index) => (
                 <span key={part}>
                   {index > 0 && ' · '}
                   <span className="whitespace-nowrap">{part}</span>
                 </span>
               ))
-            : parts[0]}
+            : parts.join('\u00a0· ')}
         </div>
       </div>
     </li>
@@ -129,10 +146,10 @@ const NewsDaySections: FunctionComponent<{ day: NewsDay }> = ({ day }) =>
           </h3>
           <ul
             className={clsx(
-              'mt-1 mb-0 p-0 list-none md:grid',
+              'mb-0 p-0 list-none',
               kind === 'added'
-                ? 'md:mt-3 md:grid-cols-3 md:gap-x-6 md:gap-y-8'
-                : 'md:mt-2 md:grid-cols-2 md:gap-x-8',
+                ? 'mt-3 grid grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3 md:gap-x-6 md:gap-y-8'
+                : 'mt-1 md:mt-2 md:grid md:grid-cols-2 md:gap-x-8',
             )}
           >
             {day.items[kind].map((item) => (
