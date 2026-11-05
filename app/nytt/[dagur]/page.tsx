@@ -87,7 +87,7 @@ export default async function Page({ params }: Props) {
               href={NEWS_PATH}
               className="text-sm font-semibold text-stone no-underline hover:underline"
             >
-              <span aria-hidden>←</span> Fréttir
+              <span aria-hidden>←</span> Nýtt
             </Link>
             <time
               dateTime={day.date}

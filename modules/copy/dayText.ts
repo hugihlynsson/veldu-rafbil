@@ -20,6 +20,10 @@ export const dayText = (date: string): string => {
   return `${day}. ${months[month - 1]} ${year}`
 }
 
+/** A day without its year, as "31. október", where the year goes without saying */
+export const dayMonthText = (date: string): string =>
+  dayText(date).replace(/ \d+$/, '')
+
 /** The month a day is in, as "október 2026" */
 export const monthText = (date: string): string =>
   dayText(date).replace(/^\d+\. /, '')

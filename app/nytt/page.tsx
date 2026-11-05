@@ -9,14 +9,13 @@ import type { NewsDay } from '@/modules/news/news'
 import { NEWS_FEED_PATH, NEWS_PATH, newsDayPath } from '@/modules/news/paths'
 import PageTop from '@/components/detail/PageTop'
 import Footer from '@/components/Footer'
-import TextLink from '@/components/TextLink'
 import { pageColumn } from '@/components/pageColumn'
 import NewsDaySections from '@/components/news/NewsDaySections'
 
 // Told in full; the rest are a line each, by month
 const FULL_DAYS = 20
 
-const title = 'Fréttir – Veldu Rafbíl'
+const title = 'Nýtt – Veldu Rafbíl'
 const description =
   'Nýir rafbílar á Íslandi, verðbreytingar og bílar sem hætta í sölu, um leið og þeir birtast á Veldu Rafbíl.'
 
@@ -54,12 +53,11 @@ export default function Page() {
         <div className={pageColumn}>
           <div className="md:max-w-prose md:mx-auto">
             <h1 className="m-0 mt-4 font-semibold text-display leading-tight">
-              Fréttir
+              Nýtt
             </h1>
             <p className="mt-2 mb-0 text-base leading-normal text-pretty text-stone">
               Nýir bílar, ný verð og bílar sem hætta í sölu, daginn sem þeir
-              breytast á listanum. Fæst líka sem{' '}
-              <TextLink href={NEWS_FEED_PATH}>RSS-straumur</TextLink>.
+              breytast á listanum.
             </p>
 
             {recent.map((day) => (
@@ -85,7 +83,7 @@ export default function Page() {
             {older.size > 0 && (
               <section aria-labelledby="older" className="mt-16">
                 <h2 id="older" className="m-0 text-sm font-semibold">
-                  Eldri fréttir:
+                  Eldra:
                 </h2>
                 {[...older].map(([month, ofMonth]) => (
                   <div key={month} className="mt-4">

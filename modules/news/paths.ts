@@ -1,4 +1,4 @@
-export const NEWS_PATH = '/frettir'
+export const NEWS_PATH = '/nytt'
 
 /** A day's news, by the day as 2026-10-31 */
 export const newsDayPath = (date: string): string => `${NEWS_PATH}/${date}`

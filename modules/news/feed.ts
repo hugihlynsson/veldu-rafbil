@@ -1,7 +1,14 @@
 import carChanges from '@/modules/data/carChanges'
 import { carWithSlug } from '@/modules/data/cars'
-import { newsDays, readNews, type NewsDay, type NewsItem } from './news'
+import {
+  newsDays,
+  readNews,
+  type LatestNews,
+  type NewsDay,
+  type NewsItem,
+} from './news'
 import { dayHeadline, type NameOf } from './newsCopy'
+import { newsDayPath } from './paths'
 
 // The log runs back to 2020, and each car's page tells its own in full. The
 // news starts later: a price from years ago is history, not news, and a page
@@ -33,3 +40,12 @@ export const headlineOf = (day: NewsDay): string => dayHeadline(day, nameOf)
 /** Everything the log tells of one car, newest first, from 2020 on */
 export const historyOf = (slug: string): NewsItem[] =>
   items.filter((item) => item.slug === slug).toReversed()
+
+const [newest] = days
+
+/** The newest day's news, which the list's front page links to */
+export const latestNews: LatestNews | undefined = newest && {
+  date: newest.date,
+  headline: headlineOf(newest),
+  path: newsDayPath(newest.date),
+}

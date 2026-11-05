@@ -17,16 +17,16 @@ describe('sitemap', () => {
     for (const car of allCars) {
       expect(urls).toContain(`${SITE_URL}/bill/${carSlug(car)}`)
     }
-    expect(urls).toContain(`${SITE_URL}/frettir`)
+    expect(urls).toContain(`${SITE_URL}/nytt`)
     for (const { date } of days) {
-      expect(urls).toContain(`${SITE_URL}/frettir/${date}`)
+      expect(urls).toContain(`${SITE_URL}/nytt/${date}`)
     }
     expect(urls).toHaveLength(allCars.length + days.length + 2)
   })
 
   it('dates the news alone', () => {
     const dated = entries.filter(({ lastModified }) => lastModified)
-    expect(dated.every(({ url }) => url.includes('/frettir'))).toBe(true)
+    expect(dated.every(({ url }) => url.includes('/nytt'))).toBe(true)
     expect(dated).toHaveLength(days.length + 1)
   })
 

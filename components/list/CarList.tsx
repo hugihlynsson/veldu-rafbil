@@ -10,7 +10,9 @@ import Car from './NewCar'
 import { GridIcon, ListIcon } from './ViewIcons'
 import Title from '@/components/Title'
 import { pageColumn } from '@/components/pageColumn'
+import type { LatestNews as LatestNewsLine } from '@/modules/news/news'
 import Intro from './Intro'
+import LatestNews from './LatestNews'
 import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/filters/FilterModal'
 import ActiveFilters from '@/components/filters/ActiveFilters'
@@ -83,7 +85,12 @@ const viewItems: Array<[string, View, ReactNode]> = [
   ['Yfirlit', 'grid', <GridIcon key="grid" />],
 ]
 
-export default function CarList() {
+interface Props {
+  /** Worked out on the server, so the change log never reaches the browser */
+  latest?: LatestNewsLine
+}
+
+export default function CarList({ latest }: Props) {
   const { sorting, direction, toggleSorting } = useSorting()
   const { filters, setFilters } = useFilters()
   const { view, setView } = useView()
@@ -233,6 +240,8 @@ export default function CarList() {
         <Title />
 
         <Intro />
+
+        {latest && <LatestNews latest={latest} />}
 
         <div
           ref={controlsRef}

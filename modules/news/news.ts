@@ -47,6 +47,13 @@ export const readNews = (entries: ReadonlyArray<CarChange>): NewsItem[] => {
   return items
 }
 
+/** The newest day's news as the list's front page leads with it */
+export interface LatestNews {
+  date: string
+  headline: string
+  path: string
+}
+
 /** The kinds a day's news is told in, in the order it is */
 export const dayKinds = ['added', 'price', 'delivery', 'removed'] as const
 export type DayKind = (typeof dayKinds)[number]
