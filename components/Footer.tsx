@@ -3,6 +3,7 @@
 import { FunctionComponent } from 'react'
 import Logo from './Logo'
 import TextLink from './TextLink'
+import { NEWS_FEED_PATH, NEWS_PATH } from '@/modules/news/paths'
 
 const paragraph =
   'mx-auto max-w-column text-sm leading-6 text-pretty px-(--gutter) text-stone md:max-w-page md:px-10'
@@ -20,6 +21,12 @@ const Footer: FunctionComponent<{}> = () => (
         GitHub
       </TextLink>
       .{' '}
+    </p>
+
+    <p className={paragraph}>
+      Nýir bílar og ný verð birtast í{' '}
+      <TextLink href={NEWS_PATH}>fréttunum</TextLink>, sem fást líka sem{' '}
+      <TextLink href={NEWS_FEED_PATH}>RSS-straumur</TextLink>.
     </p>
 
     <p className={paragraph}>

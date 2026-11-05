@@ -42,8 +42,20 @@ describe('pageOf', () => {
     ])
   })
 
+  it('reads the news and each day of it as one kind of page', () => {
+    for (const path of ['/frettir', '/frettir/2026-10-31']) {
+      expect(pageOf(path)).toEqual({ kind: 'news', slugs: [] })
+    }
+  })
+
   it('reads anything else as another page', () => {
-    for (const path of ['/bill', '/bill/a/b', '/samanburdur', '/llms.txt']) {
+    for (const path of [
+      '/bill',
+      '/bill/a/b',
+      '/samanburdur',
+      '/llms.txt',
+      '/frettirnar',
+    ]) {
       expect(pageOf(path)).toEqual({ kind: 'other', slugs: [] })
     }
   })

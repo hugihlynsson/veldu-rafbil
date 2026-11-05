@@ -10,6 +10,10 @@ import { carPathOf, comparisonPathOf } from '@/modules/detail/paths'
 import { specRows, type SpecKey } from '@/modules/detail/specs'
 import { carSubtitle, deprecatedNotice } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
+import { dayText } from '@/modules/copy/dayText'
+import type { NewsItem } from '@/modules/news/news'
+import { itemText } from '@/modules/news/newsCopy'
+import { NEWS_PATH } from '@/modules/news/paths'
 import PricePill from '@/components/PricePill'
 import EvDatabaseLink from '@/components/EvDatabaseLink'
 import CompareIcon from '@/components/CompareIcon'
@@ -24,6 +28,11 @@ interface Props {
   similar: ReadonlyArray<Car>
   /** None for a car whose review is yet to be written */
   review?: CarReview
+  /**
+   * What the change log tells of it, newest first. Passed from the page, as
+   * the sheet over the list leaves it out rather than bring the log with it
+   */
+  history?: ReadonlyArray<NewsItem>
   /** Over the list on a desktop, which is the page and has the logo */
   sheet?: boolean
   /** For everything under the photo, as a sheet steps to the car */
@@ -55,6 +64,7 @@ const CarView: FunctionComponent<Props> = ({
   car,
   similar,
   review,
+  history = [],
   sheet,
   contentClassName,
 }) => {
@@ -271,6 +281,38 @@ const CarView: FunctionComponent<Props> = ({
               ))}
             </ul>
           </section>
+
+          {history.length > 0 && (
+            <section aria-labelledby="history" className="mt-13 md:mt-16">
+              <div className="flex items-baseline justify-between gap-4">
+                <h2 id="history" className={sectionLabel}>
+                  Saga á listanum:
+                </h2>
+                <Link
+                  href={NEWS_PATH}
+                  className="text-sm font-semibold text-tint no-underline hover:underline"
+                >
+                  Fréttir <span aria-hidden>→</span>
+                </Link>
+              </div>
+              <ol className="mt-2 mb-0 p-0 list-none">
+                {history.map((item, index) => (
+                  <li
+                    key={`${item.date}-${item.kind}-${index}`}
+                    className="flex flex-col gap-0.5 py-2.5 border-b border-line text-sm sm:flex-row sm:gap-4"
+                  >
+                    <time
+                      dateTime={item.date}
+                      className="shrink-0 font-medium text-stone sm:w-36"
+                    >
+                      {dayText(item.date)}
+                    </time>
+                    <span>{itemText(item, 'history')}</span>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
         </div>
       </div>
     </Root>
