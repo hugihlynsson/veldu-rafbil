@@ -263,9 +263,13 @@ And, for a car that is genuinely new to the list:
   When a second variant joins a model that had none, name the existing one as
   well (the EV2 became "Standard Range" beside a new "Long Range", as the EV3
   already is).
-- **A sibling variant can share the photo.** Two i4 entries use `bmw-i4`, and
-  the EV2 Long Range uses `kia-ev2`. Check whether the model's existing photo
-  fits before looking for a new one.
+- **Each variant gets its own photo where one can be found.** Variants sit side
+  by side in the list and in comparisons, where the same photo twice reads as a
+  duplicate. Makers often shoot each variant in its own colour and setting (the
+  AMG GT 53, 55 and 63 each have one), so look in that variant's own press
+  release before the model's. Share a photo, as the two i4 entries share
+  `bmw-i4`, only when no other usable shot of the model exists, and say so in
+  the report.
 - **A new body style needs its own photo.** A test fails until the file exists,
   and a car with the wrong photo is worse than a missing car. Do not add the
   entry with a photo that does not exist: leave the tree passing, and put the
