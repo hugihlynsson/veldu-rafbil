@@ -54,13 +54,21 @@ BL documents read so far, under `issuu.com/hallih/docs/`:
 (the R5 and Scenic; its Rafale is a plug-in hybrid),
 `nm70462_hyundai_ver__b__klingur___g` (every Hyundai EV, the IONIQ 3 and
 STARIA Electric included since October 2026; the IONIQ 9 rows carry no grant
-column, being over the ceiling), `bmw_ver_listi_xdrive_26.02.2019_lr` (iX3,
-iX1, iX and i4; no i5) and `hongqi_-_verdlisti` (EHS5 and EHS7).
+column, being over the ceiling), `bmw_ver_listi_xdrive_26.02.2019_lr` (iX5,
+i3, iX3, iX, iX1 and i4 since November 2026; no i5; 30 pages, every model's
+price table on an even page) and `hongqi_-_verdlisti` (EHS5 and EHS7).
 `dacia_ver__listi_16.01_2018_lr` has no EVs. Since October 2026 the MG list
 holds the MGS5, MGS6 and Cyberster as well as the MG4 Urban, and the Nissan list
 holds one Ariya row (Evolve 4WD) beside the Leaf; the Ariya's other trims are
 on its model page on nissan.is, readable with curl, unlabelled and before the
-grant. The iX1 table is headed "Sérverð", which may be an offer.
+grant. The BMW list carries the iX1 twice: the table on page 10 is the list
+price, and page 14's, headed "Sérverð", is a stale offer whose grant figures
+match neither the current grant nor the ceiling.
+
+BMW's press photos moved from PressClub to newsroom.bmwgroup.com, whose model
+pages embed every photo as a `content.presspage.com` URL. Each one has `500_`
+and `800_` variants for picking, and the bare name is the full-resolution
+original.
 
 The listing's HTML embeds each document as JSON with its `documentId` (the
 upload timestamp), `title` and `uri`, so one curl of `?ps=100` maps every
