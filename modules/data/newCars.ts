@@ -1442,7 +1442,7 @@ const newCars: Array<NewCar> = [
     model: 'EQA SUV',
     subModel: '300 4MATIC',
     heroImageName: 'mercedes-eqa',
-    price: 8_290_000,
+    price: 7_990_000,
     sellerUrl: 'https://www.mercedes-benz.is/models/eqa-fl/',
     acceleration: 7.7,
     capacity: 66.5,
