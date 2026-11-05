@@ -53,7 +53,7 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
           'shrink-0 overflow-hidden bg-cloud',
           tile
             ? 'w-full aspect-[3/2] rounded-lg md:rounded-xl'
-            : 'w-18 h-12 rounded-sm md:w-30 md:h-20 md:rounded-lg',
+            : 'w-18 h-12 rounded-sm md:w-24 md:h-16 md:rounded-lg',
         )}
       >
         {car && (
@@ -62,7 +62,7 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
             src={`/images/${car.heroImageName}.jpg`}
             // A tile is half the column on a phone and a third of the page
             // from md, some 290px at most. A row's photo is 72px on a phone
-            // and 120px from md, where its width is taken, so its 1x/2x pair
+            // and 96px from md, where its width is taken, so its 1x/2x pair
             // is 128 and 256 either way
             {...(tile
               ? {
@@ -70,7 +70,7 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
                   width: 290,
                   height: 193,
                 }
-              : { width: 120, height: 80 })}
+              : { width: 96, height: 64 })}
             className={clsx(
               'w-full h-full object-cover',
               tile &&
