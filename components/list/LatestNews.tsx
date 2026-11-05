@@ -17,13 +17,15 @@ const LatestNews: FunctionComponent<{ latest: Latest }> = ({ latest }) => (
   >
     {latest.image && (
       <div className="w-32 aspect-[3/2] shrink-0 overflow-hidden rounded-lg bg-cloud md:w-40">
-        {/* 128px on a phone and 160px from md, where its width is taken */}
+        {/* 128px on a phone and 160px from md, where its width is taken. The
+            zoom eases in over 500ms and back in 300ms, as a slow return
+            lingers after the pointer has gone */}
         <Image
           alt=""
           src={latest.image}
           width={160}
           height={107}
-          className="w-full h-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out group-hover:scale-105"
+          className="w-full h-full object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out group-hover:scale-105 motion-safe:group-hover:duration-500"
         />
       </div>
     )}

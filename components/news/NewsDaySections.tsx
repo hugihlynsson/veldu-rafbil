@@ -74,7 +74,7 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
             className={clsx(
               'w-full h-full object-cover',
               tile &&
-                'motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out md:group-hover:scale-105',
+                'motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out md:group-hover:scale-105 motion-safe:md:group-hover:duration-500',
             )}
           />
         )}
