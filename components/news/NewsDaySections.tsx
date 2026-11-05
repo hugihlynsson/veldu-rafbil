@@ -29,7 +29,7 @@ const Row: FunctionComponent<{ item: NewsItem }> = ({ item }) => {
   const parts = detailOf(item, car).split(' · ')
 
   return (
-    <li className="relative flex items-start gap-3 py-2.5 border-b border-line">
+    <li className="relative flex items-start gap-3 py-2.5 border-b border-line last:border-b-0">
       {car ? (
         // The size the box renders at, so the 1x/2x pair is 128 and 256
         <Image
