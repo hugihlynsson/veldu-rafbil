@@ -244,13 +244,13 @@ export default function CarList({ latest }: Props) {
         {/* The newest update beside the intro from lg, where the intro alone
             leaves half the header empty, and under it on narrower screens.
             The header gives up some of its right padding there for it */}
-        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between lg:gap-10">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           <Intro />
 
           {latest && (
             <LatestNews
               latest={latest}
-              className="self-start mt-1 mb-10 lg:shrink-0 lg:w-[25.5rem] lg:mt-6 lg:mb-8"
+              className="self-start mt-1 mb-10 lg:self-center lg:shrink-0 lg:w-[25.5rem] lg:mt-6 lg:mb-8"
               // Beside an intro that keeps to three lines, the photo takes the
               // phone's size so the headline keeps its room
               imageClassName="lg:w-32"
