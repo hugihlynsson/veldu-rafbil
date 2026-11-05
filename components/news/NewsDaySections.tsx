@@ -28,6 +28,7 @@ const detailOf = (item: NewsItem, car: Car | undefined): string => {
 // is a row, its photo beside two lines, so a day of twenty new prices reads as
 // one list rather than a wall of photos; from md the rows go two to a line
 // with a larger photo, and from lg three, in the type a tile has on a phone
+// and a photo a step smaller to match
 const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
   item,
   tile,
@@ -53,7 +54,7 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
           'shrink-0 overflow-hidden bg-cloud',
           tile
             ? 'w-full aspect-[3/2] rounded-lg md:rounded-xl'
-            : 'w-18 h-12 rounded-sm md:w-24 md:h-16 md:rounded-lg',
+            : 'w-18 h-12 rounded-sm md:w-24 md:h-16 md:rounded-lg lg:w-21 lg:h-14',
         )}
       >
         {car && (
@@ -62,8 +63,8 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
             src={`/images/${car.heroImageName}.jpg`}
             // A tile is half the column on a phone and a third of the page
             // from md, some 290px at most. A row's photo is 72px on a phone
-            // and 96px from md, where its width is taken, so its 1x/2x pair
-            // is 128 and 256 either way
+            // 96px from md, where its width is taken, and 84px from lg, so its
+            // 1x/2x pair is 128 and 256 throughout
             {...(tile
               ? {
                   sizes: '(max-width: 767px) 50vw, 290px',
