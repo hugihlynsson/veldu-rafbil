@@ -44,9 +44,10 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
         'group relative flex items-start gap-3 py-2.5',
         tile
           ? 'md:flex-col md:gap-3 md:py-0'
-          : // The fill reaches past the photo and the text, as a similar car's
-            // does on a car's page, rather than stopping flush at the photo
-            'md:items-center md:gap-4 md:isolate md:before:absolute md:before:-inset-x-2.5 md:before:inset-y-0 md:before:-z-10 md:before:rounded-xl md:before:bg-shade md:before:opacity-0 md:before:transition-opacity md:before:duration-200 md:hover:before:opacity-100',
+          : // The fill reaches 10px past the photo on every side, as a similar
+            // car's does on a car's page, and rounds by the photo's radius
+            // and those 10px, so the two corners run parallel
+            'md:items-center md:gap-4 md:isolate md:before:absolute md:before:-inset-x-2.5 md:before:inset-y-0 md:before:-z-10 md:before:rounded-[calc(var(--radius-lg)+10px)] md:before:bg-shade md:before:opacity-0 md:before:transition-opacity md:before:duration-200 md:hover:before:opacity-100',
       )}
     >
       {/* The frame clips the photo, which a tile zooms within on hover */}
