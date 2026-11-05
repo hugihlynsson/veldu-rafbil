@@ -1,5 +1,5 @@
 import { dayText } from '@/modules/copy/dayText'
-import { dayKinds, type NewsDay } from '@/modules/news/news'
+import { dayKinds, type NewsDay, type NewsItem } from '@/modules/news/news'
 import {
   daySummary,
   itemText,
@@ -22,7 +22,7 @@ const escape = (text: string) =>
 // The time of day is not kept, and a reader orders by the day alone anyway
 const pubDate = (date: string) => new Date(`${date}T00:00:00Z`).toUTCString()
 
-const description = (day: NewsDay) => {
+const description = (day: NewsDay, labelOf: LabelOf) => {
   const sections = dayKinds.flatMap((kind) => {
     const items = day.items[kind]
     if (items.length === 0) return []
@@ -30,17 +30,22 @@ const description = (day: NewsDay) => {
       kind === 'price' ? `${kindLabels[kind]} (${priceNote})` : kindLabels[kind]
     const lines = items.map(
       (item) =>
-        `<li>${escape(`${item.label}: ${itemText(item, 'news')}`)}</li>`,
+        `<li>${escape(`${labelOf(item)}: ${itemText(item, 'news')}`)}</li>`,
     )
     return [`<h3>${escape(heading)}</h3><ul>${lines.join('')}</ul>`]
   })
   return `<p>${escape(`${dayText(day.date)}: ${daySummary(day)}`)}</p>${sections.join('')}`
 }
 
+// A car by the name it has now, as the day's page names it, rather than the
+// one it had when the entry was written
+type LabelOf = (item: NewsItem) => string
+
 /** The news as RSS 2.0, a day to an item, newest first */
 export const buildFeed = (
   days: ReadonlyArray<NewsDay>,
   headlineOf: (day: NewsDay) => string,
+  labelOf: LabelOf = (item) => item.label,
 ): string => {
   const items = days.slice(0, MAX_ITEMS).map((day) => {
     const url = `${SITE_URL}${newsDayPath(day.date)}`
@@ -49,7 +54,7 @@ export const buildFeed = (
       <link>${url}</link>
       <guid isPermaLink="true">${url}</guid>
       <pubDate>${pubDate(day.date)}</pubDate>
-      <description>${escape(description(day))}</description>
+      <description>${escape(description(day, labelOf))}</description>
     </item>`
   })
 

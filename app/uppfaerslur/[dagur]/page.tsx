@@ -3,14 +3,14 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { carWithSlug } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
 import { dayText } from '@/modules/copy/dayText'
 import {
   LIST_SHARE_IMAGE_PATH,
   shareImagePath,
   shareImageSize,
 } from '@/modules/detail/paths'
-import { dayOn, days, headlineOf } from '@/modules/news/feed'
+import { dayOn, days, headlineOf, leadCar } from '@/modules/news/feed'
 import type { NewsDay } from '@/modules/news/news'
 import { daySummary } from '@/modules/news/newsCopy'
 import { NEWS_FEED_PATH, NEWS_PATH, newsDayPath } from '@/modules/news/paths'
@@ -30,10 +30,10 @@ export const dynamicParams = false
 export const generateStaticParams = () =>
   days.map(({ date }) => ({ dagur: date }))
 
-// The first new car with a page leads the share, as it leads the headline
+// The day's share leads with the car its headline and the front page do
 const shareImage = (day: NewsDay) => {
-  const car = day.items.added.find(({ slug }) => carWithSlug(slug))
-  return car ? shareImagePath([car.slug]) : LIST_SHARE_IMAGE_PATH
+  const car = leadCar(day)
+  return car ? shareImagePath([carSlug(car)]) : LIST_SHARE_IMAGE_PATH
 }
 
 export const generateMetadata = async ({

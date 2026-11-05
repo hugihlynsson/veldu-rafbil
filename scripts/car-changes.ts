@@ -99,14 +99,38 @@ const rebuild = async (): Promise<CarChange[]> => {
   return entries
 }
 
-const mainBranch = () => {
-  for (const name of ['origin/main', 'main']) {
-    try {
-      git('rev-parse', '--verify', '--quiet', name)
-      return name
-    } catch {}
+const exists = (name: string) => {
+  try {
+    git('rev-parse', '--verify', '--quiet', name)
+    return true
+  } catch {
+    return false
   }
-  throw new Error('No main branch to work out the changes from')
+}
+
+const isAncestor = (older: string, newer: string) => {
+  try {
+    git('merge-base', '--is-ancestor', older, newer)
+    return true
+  } catch {
+    return false
+  }
+}
+
+// The newest main there is. A stale origin/main would put the branch's start
+// before changes it already has from main, and those would be logged again as
+// this branch's, dated today; so it is fetched first, and a local main that
+// is further on still wins.
+const mainBranch = () => {
+  try {
+    git('fetch', '--quiet', 'origin', 'main')
+  } catch {
+    console.warn('Could not fetch main; working from the copy there is')
+  }
+  const names = ['origin/main', 'main'].filter(exists)
+  const [first, second] = names
+  if (!first) throw new Error('No main branch to work out the changes from')
+  return second && isAncestor(first, second) ? second : first
 }
 
 const sinceMain = async (): Promise<CarChange[]> => {

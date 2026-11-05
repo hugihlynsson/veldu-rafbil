@@ -34,6 +34,11 @@ const namesOf = (items: ReadonlyArray<NewsItem>, nameOf: NameOf) => [
 // As the comparison sets it: "Væntanlegur lok 2026"
 const when = (delivery: string) => delivery.toLowerCase()
 
+// Names joined with "og" take a plural verb however many there are, so this
+// is not agree(), which reads the singular in 21 or 31 as Icelandic counts do
+const verb = (names: ReadonlyArray<string>, singular: string, plural: string) =>
+  names.length === 1 ? singular : plural
+
 const fell = ({ from = 0, to }: { from?: number; to: number }) => to < from
 
 /** A day's news in a line, told by the biggest of it: a new car first */
@@ -42,7 +47,7 @@ export const dayHeadline = (day: NewsDay, nameOf: NameOf): string => {
 
   if (added.length > 0) {
     const names = namesOf(added, nameOf)
-    return `${someNames(names)} ${agree(names.length, 'bætist', 'bætast')} við`
+    return `${someNames(names)} ${verb(names, 'bætist', 'bætast')} við`
   }
   if (price.length > 0) {
     const cars = new Set(price.map(({ slug }) => slug)).size
@@ -55,11 +60,11 @@ export const dayHeadline = (day: NewsDay, nameOf: NameOf): string => {
   if (delivery.length > 0) {
     const names = namesOf(delivery, nameOf)
     return delivery.every((item) => !item.delivery?.to)
-      ? `${someNames(names)} ${agree(names.length, 'kominn', 'komnir')} í sölu`
+      ? `${someNames(names)} ${verb(names, 'kominn', 'komnir')} í sölu`
       : `Breytt afhending á ${someNames(names)}`
   }
   const names = namesOf(removed, nameOf)
-  return `${someNames(names)} ${agree(names.length, 'hættir', 'hætta')} í sölu`
+  return `${someNames(names)} ${verb(names, 'hættir', 'hætta')} í sölu`
 }
 
 /** Everything a day brought, counted, as "2 nýir bílar og 5 verðbreytingar." */

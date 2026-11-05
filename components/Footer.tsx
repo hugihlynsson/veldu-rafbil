@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 
 import { latestNews } from '@/modules/news/feed'
-import LatestNews from './list/LatestNews'
+import LatestNews from '@/components/list/LatestNews'
 import Logo from './Logo'
 import TextLink from './TextLink'
 
