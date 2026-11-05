@@ -10,4 +10,10 @@ export const movedSlugs: Readonly<Record<string, string>> = {
   'leapmotor-b05-promax': 'leapmotor-b05-design',
   'leapmotor-b10-67-1-kwh': 'leapmotor-b10-design',
   'leapmotor-c10-promax-awd': 'leapmotor-c10-design-awd',
+  'mercedes-benz-amg-gt-4-door-coupe-53-4matic':
+    'mercedes-benz-amg-gt-53-4matic',
+  'mercedes-benz-amg-gt-4-door-coupe-55-4matic':
+    'mercedes-benz-amg-gt-55-4matic',
+  'mercedes-benz-amg-gt-4-door-coupe-63-4matic':
+    'mercedes-benz-amg-gt-63-4matic',
 }
