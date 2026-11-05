@@ -42,10 +42,10 @@ const LatestNews: FunctionComponent<Props> = ({ latest, className }) => (
       </div>
     )}
     <div className="min-w-0">
-      <div className="uppercase text-eyebrow font-semibold tracking-wider text-stone">
+      <div className="uppercase text-eyebrow font-bold tracking-wider text-stone">
         Nýtt
       </div>
-      <div className="mt-1 text-sm font-semibold leading-snug text-balance md:text-base">
+      <div className="mt-1 text-sm font-semibold leading-tight text-balance md:text-base">
         {latest.headline}
       </div>
       <div className="mt-1 text-sm font-medium text-stone">
