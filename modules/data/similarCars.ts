@@ -40,9 +40,19 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'bmw-ix-xdrive-60-sport',
     'porsche-cayenne-base',
   ],
+  'bmw-i3-40-xdrive': [
+    'mercedes-benz-cla-350-4matic',
+    'volkswagen-id-7-gtx',
+    'audi-a6-e-tron-sportback-quattro',
+  ],
+  'bmw-i3-50-xdrive': [
+    'bmw-i4-40-xdrive',
+    'mercedes-benz-c-400-4matic',
+    'mercedes-benz-cla-shooting-brake-350-4matic',
+  ],
   'bmw-i4-40-xdrive': [
     'mercedes-benz-cla-350-4matic',
-    'audi-a6-e-tron-sportback-quattro',
+    'bmw-i3-50-xdrive',
     'mercedes-benz-c-400-4matic',
   ],
   'bmw-i4-m60-xdrive': [
@@ -89,6 +99,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'volvo-ex60-p12',
     'mercedes-benz-glc-400-4matic',
     'audi-q6-e-tron-base',
+  ],
+  'bmw-ix5-60-xdrive': [
+    'bmw-ix-xdrive-60-sport',
+    'porsche-cayenne-base',
+    'mercedes-benz-eqe-suv-350-4matic',
   ],
   'byd-atto-3-evo-base': [
     'hongqi-ehs5-base',
@@ -412,6 +427,21 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'porsche-taycan-plus',
     'volvo-es90-twin-motor-performance',
   ],
+  'mercedes-benz-amg-gt-4-door-coupe-53-4matic': [
+    'polestar-5-performance',
+    'porsche-taycan-4s-plus',
+    'mercedes-benz-eqs-580-4matic',
+  ],
+  'mercedes-benz-amg-gt-4-door-coupe-55-4matic': [
+    'porsche-cayenne-turbo-coupe',
+    'polestar-5-performance',
+    'mercedes-benz-eqs-580-4matic',
+  ],
+  'mercedes-benz-amg-gt-4-door-coupe-63-4matic': [
+    'porsche-cayenne-turbo-coupe',
+    'porsche-cayenne-turbo',
+    'polestar-5-performance',
+  ],
   'mercedes-benz-eqa-suv-300-4matic': [
     'bmw-ix1-xdrive-30',
     'mini-countryman-se-4x4',
@@ -443,7 +473,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'porsche-macan-4-electric',
   ],
   'mercedes-benz-eqs-580-4matic': [
-    'bmw-i5-m60-xdrive',
+    'mercedes-benz-amg-gt-4-door-coupe-55-4matic',
     'porsche-taycan-4s-plus',
     'range-rover-electric-ev450',
   ],
@@ -640,7 +670,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'polestar-5-performance': [
     'bmw-i5-m60-xdrive',
     'porsche-taycan-4s-cross-turismo',
-    'porsche-taycan-4s-plus',
+    'mercedes-benz-amg-gt-4-door-coupe-53-4matic',
   ],
   'porsche-macan-4-electric': [
     'polestar-3-performance',
@@ -678,7 +708,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'audi-a6-e-tron-avant-quattro',
   ],
   'porsche-cayenne-base': [
-    'bmw-ix-xdrive-60-sport',
+    'bmw-ix5-60-xdrive',
     'audi-sq6-e-tron-base',
     'porsche-macan-4s-electric',
   ],
@@ -705,7 +735,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'porsche-cayenne-turbo-coupe': [
     'range-rover-electric-ev550',
     'mercedes-benz-g-class-580-eq',
-    'mercedes-benz-eqs-580-4matic',
+    'mercedes-benz-amg-gt-4-door-coupe-63-4matic',
   ],
   'range-rover-electric-ev450': [
     'mercedes-benz-eqs-suv-580-4matic',
@@ -969,7 +999,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'volkswagen-id-7-gtx': [
     'polestar-4-long-range-dual-motor',
-    'bmw-ix3-40',
+    'bmw-i3-40-xdrive',
     'audi-a6-e-tron-avant-quattro',
   ],
   'volvo-ec40-twin-motor': [
