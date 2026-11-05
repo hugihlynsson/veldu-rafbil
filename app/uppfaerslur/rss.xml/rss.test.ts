@@ -40,6 +40,16 @@ describe('the news feed', () => {
     expect(feed).toContain('<pubDate>Sat, 31 Oct 2026 00:00:00 GMT</pubDate>')
   })
 
+  it('names each car as it is called now, not as it was', () => {
+    const feed = buildFeed(
+      [day],
+      () => 'x',
+      () => 'Smart #1 Pulse',
+    )
+    expect(feed).toContain('Smart #1 Pulse: ')
+    expect(feed).not.toContain('Brabus')
+  })
+
   it('has an item for each of the newest days', () => {
     const feed = buildFeed(days, headlineOf)
     expect(feed.match(/<item>/g)).toHaveLength(Math.min(days.length, 50))

@@ -1,11 +1,12 @@
 import carChanges from '@/modules/data/carChanges'
-import { carWithSlug } from '@/modules/data/cars'
+import { carWithSlug, type Car } from '@/modules/data/cars'
 import {
   dayKinds,
   newsDays,
   readNews,
   type LatestNews,
   type NewsDay,
+  type NewsItem,
 } from './news'
 import { dayHeadline, type NameOf } from './newsCopy'
 import { NEWS_PATH } from './paths'
@@ -37,15 +38,25 @@ export const nameOf: NameOf = (item) => {
 
 export const headlineOf = (day: NewsDay): string => dayHeadline(day, nameOf)
 
-const [newest] = days
+/** A car by its full name as the data has it now, or as it last was */
+export const labelOf = (item: NewsItem): string =>
+  carWithSlug(item.slug)?.label ?? item.label
 
-// The first car the day tells of that still has a page, in the order the
-// headline names them: a new car before a new price
-const leadImage = (day: NewsDay) => {
-  const car = dayKinds
+/**
+ * The car a day leads with, for its photo wherever the day is shown: the first
+ * the day tells of that still has a page, in the order the headline names
+ * them, so a new car before a new price
+ */
+export const leadCar = (day: NewsDay): Car | undefined =>
+  dayKinds
     .flatMap((kind) => day.items[kind])
     .map(({ slug }) => carWithSlug(slug))
-    .find(Boolean)
+    .find((car) => car !== undefined)
+
+const [newest] = days
+
+const leadImage = (day: NewsDay) => {
+  const car = leadCar(day)
   return car ? { image: `/images/${car.heroImageName}.jpg` } : {}
 }
 
