@@ -1742,6 +1742,69 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     facts: '391929ce5981',
     model: 'gemini-3.8-flash, thinking medium',
   },
+  'mercedes-benz-amg-gt-4-door-coupe-53-4matic': {
+    paragraphs: [
+      'Mercedes-AMG GT 4-Door Coupé 53 4MATIC+ er lágur og langur fjögurra dyra hlaðbakur í lúxusflokki með fjórhjóladrifi, inngangurinn í rafmagnaða AMG GT-línuna. Hann er fyrir þig sem vilt sportlegan GT-bíl sem fer líka létt með langferðir.',
+      'Drægnin er með því mesta í hans verðflokki, svo Akureyri á einni hleðslu er raunhæf, líka um hávetur. Þegar þú stoppar hleður hann hraðast bíla á svipuðu verði, og miðað við þá færðu flesta km fyrir krónuna. Hann er líka hörkusnöggur, þó flestir keppinautar hans séu sneggri.',
+      'Á móti kemur að skottið er með þeim minnstu á þessu verði og hann má ekki draga kerru. Mercedes-Benz EQS 580 4MATIC er 3.500.000 kr. dýrari, en með 154 l stærra skott og má draga allt að 1.700 kg, þó hleðslustoppin séu um 65% lengri. Porsche Taycan 4S Plus er 3.500.000 kr. ódýrari og 0,2 s sneggri, en drífur 252 km styttra.',
+      'GT 53 er fyrir þig sem vilt AMG-akstur án þess að fórna drægninni.',
+    ],
+    facts: 'edad44f38f62',
+    questions: [
+      'Af hverju hann frekar en Taycan 4S Plus?',
+      'Er EQS 580 betri kostur fyrir fjölskyldu?',
+      'Hvað fæ ég meira með GT 55?',
+      'Kemst hann til Akureyrar á einni hleðslu?',
+      'Hvernig er drægnin í vetrarkulda?',
+      'Dugar skottið í ferðalag fyrir fjóra?',
+      'Er pláss fyrir þrjá aftur í?',
+      'Hvernig er hann í snjó og hálku?',
+      'Af hverju má hann ekki draga kerru?',
+      'Hvernig er að láta þjónusta AMG hér?',
+    ],
+  },
+  'mercedes-benz-amg-gt-4-door-coupe-55-4matic': {
+    paragraphs: [
+      'Mercedes-AMG GT 4-Door Coupé 55 4MATIC+ er lágur fjögurra dyra hlaðbakur í lúxusflokki með þremur rafmótorum og fjórhjóladrifi, miðjan í AMG GT-línunni. Hann er fyrir þig sem vilt ofursportbílasnerpu í bíl sem tekur fimm.',
+      'Miðað við aðra í sínum verðflokki drífur hann með þeim lengstu og hleður hraðast, svo ferð út á land kallar á fá og stutt stopp. Hann er líka sneggri og aflmeiri en flestir keppinautar hans.',
+      'Gallarnir eru að skottið er eitt það minnsta á þessu verði og hann má ekki draga kerru. Mercedes-Benz EQS 580 4MATIC er 3.500.000 kr. ódýrari, drífur 169 km lengra, með 154 l stærra skott og má draga allt að 1.700 kg, en er 1,3 s hægari. Og Mercedes-Benz AMG GT 4-Door Coupé 53 4MATIC+ sparar þér 7.000.000 kr. og drífur 109 km lengra, en er 1,1 s hægari.',
+      'GT 55 er hraðskreiður ferðabíll sem fórnar fáu nema skotti og krók.',
+    ],
+    facts: 'e29482a7ea8b',
+    questions: [
+      'Er hann 7 milljóna virði umfram GT 53?',
+      'Hvað munar miklu á honum og GT 63?',
+      'Af hverju frekar hann en EQS 580?',
+      'Er Cayenne Turbo Coupé betri kostur?',
+      'Kemst hann til Akureyrar á einni hleðslu?',
+      'Hvernig er drægnin í vetrarkulda?',
+      'Nýtist allt þetta afl á íslenskum vegum?',
+      'Dugar skottið í ferðalag fyrir fjóra?',
+      'Hvernig er hann í snjó og hálku?',
+      'Af hverju má hann ekki draga kerru?',
+    ],
+  },
+  'mercedes-benz-amg-gt-4-door-coupe-63-4matic': {
+    paragraphs: [
+      'Mercedes-AMG GT 4-Door Coupé 63 4MATIC+ er flaggskip AMG GT-línunnar, lágur fjögurra dyra hlaðbakur í lúxusflokki með fjórhjóladrifi. Hann er aflmestur og sneggstur allra rafbíla á listanum, fyrir þig sem vilt það allra mesta.',
+      'Hann hleður líka hraðast allra, svo stoppin á langferð verða stutt, og drægnin er mikil, nóg til að fara á milli landshluta um hávetur án þess að hugsa mikið um það.',
+      'Á móti kemur að hann er mjög dýr, skottið er fremur lítið og hann má ekki draga kerru. Mercedes-Benz AMG GT 4-Door Coupé 55 4MATIC+ er 6.000.000 kr. ódýrari og aðeins 0,4 s hægari, en hleðslustoppin eru um 45% lengri. Polestar 5 Performance er 16.000.000 kr. ódýrari og má draga allt að 1.800 kg, en er 0,8 s hægari og stoppin um 150% lengri.',
+      'GT 63 er fyrir þig sem vilt hraðskreiðasta rafbílinn hér og spyrð ekki um verðið.',
+    ],
+    facts: 'f4551892865a',
+    questions: [
+      'Er hann 6 milljóna virði umfram GT 55?',
+      'Hvað fæ ég fyrir verðið umfram GT 53?',
+      'Er Cayenne Turbo Coupé betri kostur?',
+      'Af hverju frekar hann en Polestar 5?',
+      'Nýtist allt þetta afl á íslenskum vegum?',
+      'Hvernig er hann í snjó og hálku?',
+      'Hleður hann jafn hratt á íslenskum stöðvum?',
+      'Kemst hann til Akureyrar á einni hleðslu?',
+      'Dugar skottið í ferðalag fyrir fjóra?',
+      'Af hverju má hann ekki draga kerru?',
+    ],
+  },
   'mercedes-benz-eqa-suv-300-4matic': {
     paragraphs: [
       'Mercedes-Benz EQA 300 4MATIC er meðalstór jepplingur sem ber með sér hefðbundið lúxusyfirbragð merkisins í lipurri stærð. Hann hentar einkum þeim sem leita að fágaðri upplifun í innanbæjarakstri og vilja njóta gæða í daglegu lífi.',
@@ -1875,19 +1938,18 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-eqs-580-4matic': {
     paragraphs: [
       'Mercedes-Benz EQS 580 4MATIC er stór og rennilegur lúxusfólksbíll með fjórhjóladrifi, rúmlega fimm metrar á lengd, smíðaður fyrir afslappaðar langferðir í hámarksþægindum.',
-      'Hann drífur lengst allra rafbíla á listanum, svo hringvegurinn kallar á fá stopp, jafnvel í vetrarkulda. Hann hleður líka hraðar en flestir á svipuðu verði og Mercedes ábyrgist rafhlöðuna í 10 ár, lengur en flestir aðrir framleiðendur.',
+      'Hann drífur lengst allra rafbíla á listanum, svo hringvegurinn kallar á fá stopp, jafnvel í vetrarkulda, og Mercedes ábyrgist rafhlöðuna í 10 ár, lengur en flestir aðrir framleiðendur.',
       'Á móti kemur að hann er mjög dýr, skottið og dráttargetan eru minni en hjá flestum keppinautum hans, og lágur fólksbíll býður ekki veghæð jeppa. Range Rover Electric EV450 er 400.000 kr. ódýrari, með 123 l stærra skott og má draga 800 kg meira, en drífur 269 km styttra.',
       'EQS er fyrir þá sem vilja hágæða ferðabíl sem kemst lengra á einni hleðslu en nokkur annar.',
     ],
-    facts: '0ab14f1ef800',
-    model: 'gemini-3.8-flash, thinking high',
+    facts: '74e48ad2050a',
     questions: [
       'Kemst hann til Akureyrar á einni hleðslu?',
       'Hvernig er raunveruleg drægni í frosti?',
       'Hvað tekur langan tíma að hraðhlaða hann?',
       'Hvað felst í 10 ára rafhlöðuábyrgðinni?',
       'Er hann betri en Range Rover Electric?',
-      'Hvernig er hann miðað við BMW i5 M60?',
+      'Hvernig er hann miðað við AMG GT 55?',
       'Er lág veghæð vandamál á veturna?',
       'Hvað má hann draga þunga kerru?',
       'Dugar skottið fyrir fjölskylduferðir?',
@@ -2713,7 +2775,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     questions: [
       'Hvernig er hann miðað við BMW i5 M60?',
       'Hví hleður hann hægar en Porsche Taycan?',
-      'Er hann sneggri en Porsche Taycan 4S?',
+      'Hvernig er hann miðað við AMG GT 53?',
       'Hvernig reynist hann sem dráttarbíll?',
       'Hversu lítið er farangursrýmið í raun?',
       'Hvernig nýtast öll þessi 650 kW daglega?',
@@ -2722,8 +2784,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hentar hann vel í langferðir innanlands?',
       'Er nóg pláss fyrir fólk í aftursætunum?',
     ],
-    facts: '6ce72958a9c9',
-    model: 'gemini-3.8-flash, thinking medium',
+    facts: '171db47baad6',
   },
   'porsche-macan-4-electric': {
     paragraphs: [
@@ -2991,8 +3052,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'porsche-cayenne-turbo-coupe': {
     paragraphs: [
       'Porsche Cayenne Turbo Coupé er stór lúxusjeppi með sportlegu kúpubaki, sniðinn fyrir þá sem vilja afköst ofurbíls í bland við hversdagslegt notagildi. Hann sker sig úr með ógnarkrafti og aksturseiginleikum sem eiga fáa sína líka meðal hárra bíla.',
-      'Drægnin dugar léttilega á milli landshluta á öllum árstímum, og á langferðum hleður hann hraðast allra bíla í sínum verðflokki. Hann er meðal allra sneggstu bíla götunnar og fátítt er að sjá jafn snöggan bíl sem má draga þrjú tonn, svo hann hikar hvergi við stór hjólhýsi eða hestakerrur í ófærð.',
-      'Rennilegt bakið kemur þó niður á farangursrýminu, sem er minna en hjá flestum keppinautum. Fyrir vikið býður hefðbundinn Porsche Cayenne Turbo upp á 213 lítrum stærra skott og er 500.000 kr. ódýrari með nákvæmlega sömu hröðun og afli.',
+      'Drægnin dugar léttilega á milli landshluta á öllum árstímum, og á langferðum hleður hann hraðar en flestir í sínum verðflokki. Hann er meðal allra sneggstu bíla götunnar og fátítt er að sjá jafn snöggan bíl sem má draga þrjú tonn, svo hann hikar hvergi við stór hjólhýsi eða hestakerrur í ófærð.',
+      'Rennilegt bakið kostar þó pláss. Hefðbundinn Porsche Cayenne Turbo býður upp á 213 lítrum stærra skott og er 500.000 kr. ódýrari með nákvæmlega sömu hröðun og afli.',
       'Cayenne Turbo Coupé er óhemju dýr draumabíll fyrir þá sem leita að tæknilegum fullkomleika og mikilli getu á veginum, svo lengi sem útlitið má kosta smávegis pláss.',
     ],
     questions: [
@@ -3007,8 +3068,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hratt hleður hann í raun?',
       'Er hann þess virði yfir venjulegan Coupé?',
     ],
-    facts: '47d17e37673d',
-    model: 'gemini-3.8-flash, thinking medium',
+    facts: '2d3533928ba6',
   },
   'range-rover-electric-ev450': {
     paragraphs: [
