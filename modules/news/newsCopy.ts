@@ -1,9 +1,21 @@
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { listNames } from '@/modules/copy/listNames'
 import { agree } from '@/modules/copy/plural'
-import type { NewsDay, NewsItem } from './news'
+import type { DayKind, NewsDay, NewsItem } from './news'
 
 // Every word here agrees with bíll, which is what each of them is about
+
+/** A day's news under these headings, on its page and in the feed */
+export const kindLabels: Record<DayKind, string> = {
+  added: 'Nýir á lista',
+  price: 'Verðbreytingar',
+  delivery: 'Afhending',
+  removed: 'Hættir í sölu',
+}
+
+// What the log keeps is the list price, as the grant on a past day is not
+// kept, so the heading over the prices says so in the list's own words
+export const priceNote = 'fullt verð án styrks'
 
 /** What a headline calls the car an item is about, its variants as one */
 export type NameOf = (item: NewsItem) => string
@@ -67,11 +79,6 @@ export const daySummary = ({ items }: NewsDay): string => {
   ])}.`
 }
 
-const priceVerbs = {
-  fell: { news: 'lækkar', history: 'lækkaði' },
-  rose: { news: 'hækkar', history: 'hækkaði' },
-}
-
 /**
  * What happened to the car, beside its name: as news on the day, or looking
  * back from its own page
@@ -88,8 +95,13 @@ export const itemText = (item: NewsItem, told: 'news' | 'history'): string => {
     }
     case 'price': {
       if (!price) return ''
-      const verb = fell(price) ? priceVerbs.fell[told] : priceVerbs.rose[told]
-      return `Listaverð ${verb} úr ${kr(price.from ?? 0)} í ${kr(price.to)}`
+      const { from = 0, to } = price
+      if (news) {
+        const change = fell(price) ? 'Lækkaði' : 'Hækkaði'
+        return `${kr(to)} · ${change} um ${addDecimalSeparators(Math.abs(to - from))}`
+      }
+      const verb = fell(price) ? 'lækkaði' : 'hækkaði'
+      return `Listaverð ${verb} úr ${kr(from)} í ${kr(to)}`
     }
     case 'delivery':
       if (!delivery?.to) return news ? 'Kominn í sölu' : 'Kom í sölu'

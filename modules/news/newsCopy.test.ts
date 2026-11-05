@@ -123,12 +123,14 @@ describe('daySummary', () => {
 })
 
 describe('itemText', () => {
-  it('gives the list price from and to, as news and looking back', () => {
+  it('gives the new price and the change as news, and both looking back', () => {
     const cut = lower('Ford Puma')
     cut.price = { from: 5_190_000, to: 4_890_000 }
-    expect(itemText(cut, 'news')).toBe(
-      'Listaverð lækkar úr 5.190.000 kr. í 4.890.000 kr.',
-    )
+    expect(itemText(cut, 'news')).toBe('4.890.000 kr. · Lækkaði um 300.000')
+    const rise = item('price', 'Ford Capri', {
+      price: { from: 7_990_000, to: 8_190_000 },
+    })
+    expect(itemText(rise, 'news')).toBe('8.190.000 kr. · Hækkaði um 200.000')
     expect(itemText(cut, 'history')).toBe(
       'Listaverð lækkaði úr 5.190.000 kr. í 4.890.000 kr.',
     )

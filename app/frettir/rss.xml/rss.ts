@@ -1,6 +1,11 @@
 import { dayText } from '@/modules/copy/dayText'
 import { dayKinds, type NewsDay } from '@/modules/news/news'
-import { daySummary, itemText } from '@/modules/news/newsCopy'
+import {
+  daySummary,
+  itemText,
+  kindLabels,
+  priceNote,
+} from '@/modules/news/newsCopy'
 import { NEWS_FEED_PATH, NEWS_PATH, newsDayPath } from '@/modules/news/paths'
 import { SITE_URL } from '@/modules/siteUrl'
 
@@ -18,13 +23,18 @@ const escape = (text: string) =>
 const pubDate = (date: string) => new Date(`${date}T00:00:00Z`).toUTCString()
 
 const description = (day: NewsDay) => {
-  const lines = dayKinds.flatMap((kind) =>
-    day.items[kind].map(
+  const sections = dayKinds.flatMap((kind) => {
+    const items = day.items[kind]
+    if (items.length === 0) return []
+    const heading =
+      kind === 'price' ? `${kindLabels[kind]} (${priceNote})` : kindLabels[kind]
+    const lines = items.map(
       (item) =>
         `<li>${escape(`${item.label}: ${itemText(item, 'news')}`)}</li>`,
-    ),
-  )
-  return `<p>${escape(`${dayText(day.date)}: ${daySummary(day)}`)}</p><ul>${lines.join('')}</ul>`
+    )
+    return [`<h3>${escape(heading)}</h3><ul>${lines.join('')}</ul>`]
+  })
+  return `<p>${escape(`${dayText(day.date)}: ${daySummary(day)}`)}</p>${sections.join('')}`
 }
 
 /** The news as RSS 2.0, a day to an item, newest first */
