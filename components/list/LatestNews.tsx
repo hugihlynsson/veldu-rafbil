@@ -18,7 +18,7 @@ const LatestNews: FunctionComponent<{ latest: Latest }> = ({ latest }) => {
   return (
     <Link
       href={latest.path}
-      className="group self-start -mt-3 mb-8 max-w-[33em] flex items-center gap-3 rounded-card border border-line-chip p-2 pr-3.5 text-sm leading-6 text-pretty text-tint no-underline transition-colors duration-100 hover:bg-haze md:text-base"
+      className="group self-start -mt-3 mb-8 max-w-[33em] flex items-center gap-3 rounded-card border border-line-chip p-2 pr-3.5 text-sm leading-snug text-pretty text-tint no-underline transition-colors duration-100 hover:bg-haze md:text-base"
     >
       {latest.image && (
         // The size the box renders at, so the 1x/2x pair is 128 and 256, as
