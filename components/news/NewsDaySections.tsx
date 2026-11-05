@@ -26,6 +26,7 @@ const detailOf = (item: NewsItem, car: Car | undefined): string => {
 // beside it, and a run of twenty reads as one list
 const Row: FunctionComponent<{ item: NewsItem }> = ({ item }) => {
   const car = carWithSlug(item.slug)
+  const parts = detailOf(item, car).split(' · ')
 
   return (
     <li className="relative flex items-start gap-3 py-2.5 border-b border-line">
@@ -60,16 +61,17 @@ const Row: FunctionComponent<{ item: NewsItem }> = ({ item }) => {
             </span>
           )}
         </div>
-        {/* On the narrowest phones it breaks at a dot, not inside a figure */}
+        {/* A line of figures breaks at a dot on the narrowest phones rather
+            than inside one; a sentence wraps as any other */}
         <div className="mt-0.5 text-sm font-medium text-stone">
-          {detailOf(item, car)
-            .split(' · ')
-            .map((part, index) => (
-              <span key={part}>
-                {index > 0 && ' · '}
-                <span className="whitespace-nowrap">{part}</span>
-              </span>
-            ))}
+          {parts.length > 1
+            ? parts.map((part, index) => (
+                <span key={part}>
+                  {index > 0 && ' · '}
+                  <span className="whitespace-nowrap">{part}</span>
+                </span>
+              ))
+            : parts[0]}
         </div>
       </div>
     </li>
