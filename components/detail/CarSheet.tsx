@@ -18,6 +18,7 @@ import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf } from '@/modules/detail/paths'
 import { reviewOf } from '@/modules/detail/review'
 import { similarTo } from '@/modules/detail/similar'
+import { historyOf } from '@/modules/news/history'
 import { carAtPath } from '@/modules/detail/slugs'
 import { neighboursOf } from '@/modules/list/neighbours'
 import type { SheetStep } from '@/modules/detail/sheetStep'
@@ -91,7 +92,8 @@ const steps = {
 /**
  * A car's page over the list on a desktop, so a look at one car leaves the
  * list where it was. Loaded behind next/dynamic: it carries every car's
- * review, which a visitor who never opens one should not download.
+ * review and the change log, which a visitor who never opens one should not
+ * download.
  */
 const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
   const panelRef = useRef<HTMLDivElement>(null)
@@ -296,6 +298,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
                 car={car}
                 similar={similarTo(car)}
                 review={reviewOf(car)}
+                history={historyOf(carSlug(car))}
                 sheet
                 contentClassName={clsx(arrival && arrivals[arrival])}
               />

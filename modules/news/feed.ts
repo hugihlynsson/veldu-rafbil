@@ -6,7 +6,6 @@ import {
   readNews,
   type LatestNews,
   type NewsDay,
-  type NewsItem,
 } from './news'
 import { dayHeadline, type NameOf } from './newsCopy'
 import { NEWS_PATH } from './paths'
@@ -37,10 +36,6 @@ export const nameOf: NameOf = (item) => {
 }
 
 export const headlineOf = (day: NewsDay): string => dayHeadline(day, nameOf)
-
-/** Everything the log tells of one car, newest first, from 2020 on */
-export const historyOf = (slug: string): NewsItem[] =>
-  items.filter((item) => item.slug === slug).toReversed()
 
 const [newest] = days
 

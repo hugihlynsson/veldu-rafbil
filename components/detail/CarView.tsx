@@ -28,10 +28,7 @@ interface Props {
   similar: ReadonlyArray<Car>
   /** None for a car whose review is yet to be written */
   review?: CarReview
-  /**
-   * What the change log tells of it, newest first. Passed from the page, as
-   * the sheet over the list leaves it out rather than bring the log with it
-   */
+  /** What the change log tells of it, newest first */
   history?: ReadonlyArray<NewsItem>
   /** Over the list on a desktop, which is the page and has the logo */
   sheet?: boolean

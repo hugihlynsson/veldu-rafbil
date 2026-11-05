@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
-import { days, headlineOf, historyOf, NEWS_SINCE } from './feed'
+import { days, headlineOf, NEWS_SINCE } from './feed'
+import { historyOf } from './history'
 import { daySummary } from './newsCopy'
 
 describe('the news', () => {
