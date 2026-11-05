@@ -8,7 +8,7 @@ import {
   type NewsItem,
 } from './news'
 import { dayHeadline, type NameOf } from './newsCopy'
-import { newsDayPath } from './paths'
+import { NEWS_PATH } from './paths'
 
 // The log runs back to 2020, and each car's page tells its own in full. The
 // news starts later: a price from years ago is history, not news, and a page
@@ -43,9 +43,12 @@ export const historyOf = (slug: string): NewsItem[] =>
 
 const [newest] = days
 
-/** The newest day's news, which the list's front page links to */
+/**
+ * The newest day's news, which the list's front page leads with. It links to
+ * all of them rather than to the day, which tops that page anyway.
+ */
 export const latestNews: LatestNews | undefined = newest && {
   date: newest.date,
   headline: headlineOf(newest),
-  path: newsDayPath(newest.date),
+  path: NEWS_PATH,
 }
