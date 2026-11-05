@@ -45,7 +45,7 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
           : // The fill reaches 10px past the photo on every side, as a similar
             // car's does on a car's page, and rounds by the photo's radius
             // and those 10px, so the two corners run parallel
-            'items-start gap-3 py-2.5 md:items-center md:gap-4 md:isolate md:before:absolute md:before:-inset-x-2.5 md:before:inset-y-0 md:before:-z-10 md:before:rounded-[calc(var(--radius-lg)+10px)] md:before:bg-shade md:before:opacity-0 md:before:transition-opacity md:before:duration-200 md:hover:before:opacity-100',
+            'items-start gap-3 py-2.5 md:items-center md:gap-4 lg:gap-3 md:isolate md:before:absolute md:before:-inset-x-2.5 md:before:inset-y-0 md:before:-z-10 md:before:rounded-[calc(var(--radius-lg)+10px)] md:before:bg-shade md:before:opacity-0 md:before:transition-opacity md:before:duration-200 md:hover:before:opacity-100',
       )}
     >
       {/* The frame clips the photo, which a tile zooms within on hover */}
