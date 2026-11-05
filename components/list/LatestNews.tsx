@@ -5,9 +5,8 @@ import { dayMonthText } from '@/modules/copy/dayText'
 import type { LatestNews as Latest } from '@/modules/news/news'
 
 /**
- * The newest day of updates, under the intro. Set apart by a fill and the
- * brand's badge rather than size, so it stands out without outweighing the
- * intro it follows
+ * The newest day of updates, under the intro. Set apart by a fill rather than
+ * size, so it stands out without outweighing the intro it follows
  */
 const LatestNews: FunctionComponent<{ latest: Latest }> = ({ latest }) => {
   const words = latest.headline.split(' ')
@@ -17,13 +16,10 @@ const LatestNews: FunctionComponent<{ latest: Latest }> = ({ latest }) => {
   return (
     <Link
       href={latest.path}
-      className="group self-start -mt-3 mb-8 max-w-[33em] flex items-baseline gap-2.5 rounded-card bg-cloud px-3.5 py-2.5 text-sm leading-6 text-pretty text-tint no-underline transition-colors duration-100 hover:bg-smoke md:text-base"
+      className="group self-start -mt-3 mb-8 max-w-[33em] rounded-card bg-cloud px-3.5 py-2.5 text-sm leading-6 text-pretty text-tint no-underline transition-colors duration-100 hover:bg-smoke md:text-base"
     >
-      <span className="shrink-0 rounded-full bg-sky px-2 text-xs leading-5 font-semibold text-on-sky">
-        Nýtt
-      </span>
       <span>
-        <span className="font-semibold">{dayMonthText(latest.date)}:</span>{' '}
+        <span className="font-semibold">Nýtt {dayMonthText(latest.date)}:</span>{' '}
         <span className="group-hover:underline">{rest}</span>{' '}
         {/* The arrow never goes to a line of its own */}
         <span className="whitespace-nowrap">
