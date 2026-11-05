@@ -51,6 +51,22 @@ describe('dayHeadline', () => {
     ).toBe('XPENG L03 og Mini Cooper bætast við')
   })
 
+  // Names joined with "og" are plural, unlike a count of 21 bílar
+  it('takes a plural verb for 21 names, as for any run of them', () => {
+    const added = Array.from({ length: 21 }, (_, i) =>
+      item('added', `Car ${i}`),
+    )
+    expect(dayHeadline(day(...added), nameOf)).toBe(
+      'Car 0, Car 1 og 19 fleiri bætast við',
+    )
+    const removed = Array.from({ length: 21 }, (_, i) =>
+      item('removed', `Car ${i}`),
+    )
+    expect(dayHeadline(day(...removed), nameOf)).toBe(
+      'Car 0, Car 1 og 19 fleiri hætta í sölu',
+    )
+  })
+
   it('counts the rest of a long run of names', () => {
     const added = ['A 1', 'B 1', 'C 1', 'D 1', 'E 1'].map((label) =>
       item('added', label),
