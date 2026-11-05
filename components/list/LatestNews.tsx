@@ -18,7 +18,7 @@ const LatestNews: FunctionComponent<{ latest: Latest }> = ({ latest }) => {
   return (
     <Link
       href={latest.path}
-      className="group self-start -mt-3 mb-8 max-w-[33em] flex items-center gap-3 rounded-card border border-line-chip p-2 pr-3.5 text-sm leading-snug text-pretty text-tint no-underline transition-colors duration-100 hover:bg-haze md:text-base"
+      className="self-start -mt-3 mb-8 max-w-[33em] flex items-center gap-3 rounded-card border border-line-chip p-2 pr-3.5 text-sm leading-snug text-pretty text-tint no-underline transition-colors duration-100 hover:bg-haze"
     >
       {latest.image && (
         // The size the box renders at, so the 1x/2x pair is 128 and 256, as
@@ -33,11 +33,9 @@ const LatestNews: FunctionComponent<{ latest: Latest }> = ({ latest }) => {
       )}
       <span className={latest.image ? undefined : 'pl-1.5'}>
         <span className="font-semibold">Nýtt {dayMonthText(latest.date)}:</span>{' '}
-        <span className="group-hover:underline">{rest}</span>{' '}
-        {/* The arrow never goes to a line of its own */}
+        {rest} {/* The arrow never goes to a line of its own */}
         <span className="whitespace-nowrap">
-          <span className="group-hover:underline">{last}</span>{' '}
-          <span aria-hidden>→</span>
+          {last} <span aria-hidden>→</span>
         </span>
       </span>
     </Link>
