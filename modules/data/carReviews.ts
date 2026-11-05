@@ -1805,14 +1805,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     facts: '391929ce5981',
     model: 'gemini-3.8-flash, thinking medium',
   },
-  'mercedes-benz-amg-gt-4-door-coupe-53-4matic': {
+  'mercedes-benz-amg-gt-53-4matic': {
     paragraphs: [
-      'Mercedes-AMG GT 4-Door Coupé 53 4MATIC+ er lágur og langur fjögurra dyra hlaðbakur í lúxusflokki með fjórhjóladrifi, inngangurinn í rafmagnaða AMG GT-línuna. Hann er fyrir þig sem vilt sportlegan GT-bíl sem fer líka létt með langferðir.',
+      'Mercedes-AMG GT 53 4MATIC+ er lágur og langur fjögurra dyra hlaðbakur í lúxusflokki með fjórhjóladrifi, inngangurinn í rafmagnaða AMG GT-línuna. Hann er fyrir þig sem vilt sportlegan GT-bíl sem fer líka létt með langferðir.',
       'Drægnin er með því mesta í hans verðflokki, svo Akureyri á einni hleðslu er raunhæf, líka um hávetur. Þegar þú stoppar hleður hann hraðast bíla á svipuðu verði, og miðað við þá færðu flesta km fyrir krónuna. Hann er líka hörkusnöggur, þó flestir keppinautar hans séu sneggri.',
       'Á móti kemur að skottið er með þeim minnstu á þessu verði og hann má ekki draga kerru. Mercedes-Benz EQS 580 4MATIC er 3.500.000 kr. dýrari, en með 154 l stærra skott og má draga allt að 1.700 kg, þó hleðslustoppin séu um 65% lengri. Porsche Taycan 4S Plus er 3.500.000 kr. ódýrari og 0,2 s sneggri, en drífur 252 km styttra.',
       'GT 53 er fyrir þig sem vilt AMG-akstur án þess að fórna drægninni.',
     ],
-    facts: 'edad44f38f62',
+    facts: '5a7ec3b95467',
     questions: [
       'Af hverju hann frekar en Taycan 4S Plus?',
       'Er EQS 580 betri kostur fyrir fjölskyldu?',
@@ -1826,14 +1826,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er að láta þjónusta AMG hér?',
     ],
   },
-  'mercedes-benz-amg-gt-4-door-coupe-55-4matic': {
+  'mercedes-benz-amg-gt-55-4matic': {
     paragraphs: [
-      'Mercedes-AMG GT 4-Door Coupé 55 4MATIC+ er lágur fjögurra dyra hlaðbakur í lúxusflokki með þremur rafmótorum og fjórhjóladrifi, miðjan í AMG GT-línunni. Hann er fyrir þig sem vilt ofursportbílasnerpu í bíl sem tekur fimm.',
+      'Mercedes-AMG GT 55 4MATIC+ er lágur fjögurra dyra hlaðbakur í lúxusflokki með þremur rafmótorum og fjórhjóladrifi, miðjan í AMG GT-línunni. Hann er fyrir þig sem vilt ofursportbílasnerpu í bíl sem tekur fimm.',
       'Miðað við aðra í sínum verðflokki drífur hann með þeim lengstu og hleður hraðast, svo ferð út á land kallar á fá og stutt stopp. Hann er líka sneggri og aflmeiri en flestir keppinautar hans.',
-      'Gallarnir eru að skottið er eitt það minnsta á þessu verði og hann má ekki draga kerru. Mercedes-Benz EQS 580 4MATIC er 3.500.000 kr. ódýrari, drífur 169 km lengra, með 154 l stærra skott og má draga allt að 1.700 kg, en er 1,3 s hægari. Og Mercedes-Benz AMG GT 4-Door Coupé 53 4MATIC+ sparar þér 7.000.000 kr. og drífur 109 km lengra, en er 1,1 s hægari.',
+      'Gallarnir eru að skottið er eitt það minnsta á þessu verði og hann má ekki draga kerru. Mercedes-Benz EQS 580 4MATIC er 3.500.000 kr. ódýrari, drífur 169 km lengra, með 154 l stærra skott og má draga allt að 1.700 kg, en er 1,3 s hægari. Og Mercedes-Benz AMG GT 53 4MATIC+ sparar þér 7.000.000 kr. og drífur 109 km lengra, en er 1,1 s hægari.',
       'GT 55 er hraðskreiður ferðabíll sem fórnar fáu nema skotti og krók.',
     ],
-    facts: 'e29482a7ea8b',
+    facts: '5bc187829d8a',
     questions: [
       'Er hann 7 milljóna virði umfram GT 53?',
       'Hvað munar miklu á honum og GT 63?',
@@ -1847,14 +1847,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Af hverju má hann ekki draga kerru?',
     ],
   },
-  'mercedes-benz-amg-gt-4-door-coupe-63-4matic': {
+  'mercedes-benz-amg-gt-63-4matic': {
     paragraphs: [
-      'Mercedes-AMG GT 4-Door Coupé 63 4MATIC+ er flaggskip AMG GT-línunnar, lágur fjögurra dyra hlaðbakur í lúxusflokki með fjórhjóladrifi. Hann er aflmestur og sneggstur allra rafbíla á listanum, fyrir þig sem vilt það allra mesta.',
+      'Mercedes-AMG GT 63 4MATIC+ er flaggskip AMG GT-línunnar, lágur fjögurra dyra hlaðbakur í lúxusflokki með fjórhjóladrifi. Hann er aflmestur og sneggstur allra rafbíla á listanum, fyrir þig sem vilt það allra mesta.',
       'Hann hleður líka hraðast allra, svo stoppin á langferð verða stutt, og drægnin er mikil, nóg til að fara á milli landshluta um hávetur án þess að hugsa mikið um það.',
-      'Á móti kemur að hann er mjög dýr, skottið er fremur lítið og hann má ekki draga kerru. Mercedes-Benz AMG GT 4-Door Coupé 55 4MATIC+ er 6.000.000 kr. ódýrari og aðeins 0,4 s hægari, en hleðslustoppin eru um 45% lengri. Polestar 5 Performance er 16.000.000 kr. ódýrari og má draga allt að 1.800 kg, en er 0,8 s hægari og stoppin um 150% lengri.',
+      'Á móti kemur að hann er mjög dýr, skottið er fremur lítið og hann má ekki draga kerru. Mercedes-Benz AMG GT 55 4MATIC+ er 6.000.000 kr. ódýrari og aðeins 0,4 s hægari, en hleðslustoppin eru um 45% lengri. Polestar 5 Performance er 16.000.000 kr. ódýrari og má draga allt að 1.800 kg, en er 0,8 s hægari og stoppin um 150% lengri.',
       'GT 63 er fyrir þig sem vilt hraðskreiðasta rafbílinn hér og spyrð ekki um verðið.',
     ],
-    facts: 'f4551892865a',
+    facts: 'b74d2357d35d',
     questions: [
       'Er hann 6 milljóna virði umfram GT 55?',
       'Hvað fæ ég fyrir verðið umfram GT 53?',
@@ -2005,7 +2005,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er mjög dýr, skottið og dráttargetan eru minni en hjá flestum keppinautum hans, og lágur fólksbíll býður ekki veghæð jeppa. Range Rover Electric EV450 er 400.000 kr. ódýrari, með 123 l stærra skott og má draga 800 kg meira, en drífur 269 km styttra.',
       'EQS er fyrir þá sem vilja hágæða ferðabíl sem kemst lengra á einni hleðslu en nokkur annar.',
     ],
-    facts: '74e48ad2050a',
+    facts: '80e286420ecf',
     questions: [
       'Kemst hann til Akureyrar á einni hleðslu?',
       'Hvernig er raunveruleg drægni í frosti?',
@@ -2847,7 +2847,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hentar hann vel í langferðir innanlands?',
       'Er nóg pláss fyrir fólk í aftursætunum?',
     ],
-    facts: '171db47baad6',
+    facts: '4a7e478a889c',
   },
   'porsche-macan-4-electric': {
     paragraphs: [
@@ -3130,7 +3130,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hratt hleður hann í raun?',
       'Er hann þess virði yfir venjulegan Coupé?',
     ],
-    facts: '2d3533928ba6',
+    facts: 'db8cb818dcb5',
   },
   'range-rover-electric-ev450': {
     paragraphs: [
