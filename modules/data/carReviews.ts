@@ -1805,7 +1805,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     facts: '391929ce5981',
     model: 'gemini-3.8-flash, thinking medium',
   },
-  'mercedes-benz-amg-gt-4-door-coupe-53-4matic': {
+  'mercedes-benz-amg-gt-53-4matic': {
     paragraphs: [
       'Mercedes-AMG GT 4-Door Coupé 53 4MATIC+ er lágur og langur fjögurra dyra hlaðbakur í lúxusflokki með fjórhjóladrifi, inngangurinn í rafmagnaða AMG GT-línuna. Hann er fyrir þig sem vilt sportlegan GT-bíl sem fer líka létt með langferðir.',
       'Drægnin er með því mesta í hans verðflokki, svo Akureyri á einni hleðslu er raunhæf, líka um hávetur. Þegar þú stoppar hleður hann hraðast bíla á svipuðu verði, og miðað við þá færðu flesta km fyrir krónuna. Hann er líka hörkusnöggur, þó flestir keppinautar hans séu sneggri.',
@@ -1826,7 +1826,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er að láta þjónusta AMG hér?',
     ],
   },
-  'mercedes-benz-amg-gt-4-door-coupe-55-4matic': {
+  'mercedes-benz-amg-gt-55-4matic': {
     paragraphs: [
       'Mercedes-AMG GT 4-Door Coupé 55 4MATIC+ er lágur fjögurra dyra hlaðbakur í lúxusflokki með þremur rafmótorum og fjórhjóladrifi, miðjan í AMG GT-línunni. Hann er fyrir þig sem vilt ofursportbílasnerpu í bíl sem tekur fimm.',
       'Miðað við aðra í sínum verðflokki drífur hann með þeim lengstu og hleður hraðast, svo ferð út á land kallar á fá og stutt stopp. Hann er líka sneggri og aflmeiri en flestir keppinautar hans.',
@@ -1847,7 +1847,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Af hverju má hann ekki draga kerru?',
     ],
   },
-  'mercedes-benz-amg-gt-4-door-coupe-63-4matic': {
+  'mercedes-benz-amg-gt-63-4matic': {
     paragraphs: [
       'Mercedes-AMG GT 4-Door Coupé 63 4MATIC+ er flaggskip AMG GT-línunnar, lágur fjögurra dyra hlaðbakur í lúxusflokki með fjórhjóladrifi. Hann er aflmestur og sneggstur allra rafbíla á listanum, fyrir þig sem vilt það allra mesta.',
       'Hann hleður líka hraðast allra, svo stoppin á langferð verða stutt, og drægnin er mikil, nóg til að fara á milli landshluta um hávetur án þess að hugsa mikið um það.',

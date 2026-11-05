@@ -1388,7 +1388,7 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Mercedes-Benz',
-    model: 'AMG GT 4-Door Coupé',
+    model: 'AMG GT',
     subModel: '53 4MATIC+',
     heroImageName: 'mercedes-amg-gt-53-4-door-coupe',
     price: 22_490_000,
@@ -1405,7 +1405,7 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Mercedes-Benz',
-    model: 'AMG GT 4-Door Coupé',
+    model: 'AMG GT',
     subModel: '55 4MATIC+',
     heroImageName: 'mercedes-amg-gt-55-4-door-coupe',
     price: 29_490_000,
@@ -1422,7 +1422,7 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Mercedes-Benz',
-    model: 'AMG GT 4-Door Coupé',
+    model: 'AMG GT',
     subModel: '63 4MATIC+',
     heroImageName: 'mercedes-amg-gt-63-4-door-coupe',
     price: 35_490_000,
