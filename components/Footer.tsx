@@ -9,7 +9,7 @@ import TextLink from './TextLink'
 // latest update from never reaches the browser
 const Footer: FunctionComponent<{}> = () => (
   <footer className="bg-haze pt-8 pb-34 xs:pt-14">
-    <div className="mx-auto max-w-column px-(--gutter) md:max-w-page md:px-10 md:flex md:items-start md:justify-between md:gap-12">
+    <div className="mx-auto max-w-column px-(--gutter) md:max-w-page md:px-10 lg:flex lg:items-center lg:justify-between lg:gap-10">
       <div className="text-sm leading-6 text-pretty text-stone">
         <Logo className="block w-40 h-auto mb-4 text-tint" />
         <p className="m-0">
@@ -28,10 +28,7 @@ const Footer: FunctionComponent<{}> = () => (
       </div>
 
       {latestNews && (
-        <LatestNews
-          latest={latestNews}
-          className="mt-8 md:mt-1 md:max-w-md md:shrink-0"
-        />
+        <LatestNews latest={latestNews} className="mt-8 lg:mt-0" />
       )}
     </div>
   </footer>

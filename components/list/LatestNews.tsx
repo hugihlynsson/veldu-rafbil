@@ -6,46 +6,37 @@ import Link from 'next/link'
 import { dayText } from '@/modules/copy/dayText'
 import type { LatestNews as Latest } from '@/modules/news/news'
 
-/**
- * The newest day of updates under the intro, as a story is set beside its
- * photo: a label, the headline and the day. Its photo zooms on hover, as a new
- * car's does on the updates page
- */
 interface Props {
   latest: Latest
-  /** Where it sits: its margins and width, which differ by the page around it */
+  /** Where it sits, which differs by the page around it: its margins alone */
   className?: string
-  /** The photo's width where the default does not fit beside the text */
-  imageClassName?: string
 }
 
-const LatestNews: FunctionComponent<Props> = ({
-  latest,
-  className,
-  imageClassName,
-}) => (
+/**
+ * The newest day of updates, as a story is set beside its photo: a label, the
+ * headline and the day. One size wherever it is, under the list's intro and in
+ * the footer: beside other content from lg, at a width that keeps the intro
+ * to three lines and the headline to two. Its photo zooms on hover, as a new
+ * car's does on the updates page
+ */
+const LatestNews: FunctionComponent<Props> = ({ latest, className }) => (
   <Link
     href={latest.path}
     className={clsx(
-      'group max-w-[33em] flex items-center gap-4 text-tint no-underline md:gap-5',
+      'group max-w-[33em] flex items-center gap-4 text-tint no-underline md:gap-5 lg:w-[25.5rem] lg:shrink-0',
       className,
     )}
   >
     {latest.image && (
-      <div
-        className={clsx(
-          'w-32 aspect-[3/2] shrink-0 overflow-hidden rounded-lg bg-cloud md:w-40',
-          imageClassName,
-        )}
-      >
-        {/* 128px on a phone and 160px from md, where its width is taken. The
+      <div className="w-32 aspect-[3/2] shrink-0 overflow-hidden rounded-lg bg-cloud">
+        {/* The size the box renders at, so the 1x/2x pair is 128 and 256. The
             zoom eases in over 500ms and back in 300ms, as a slow return
             lingers after the pointer has gone */}
         <Image
           alt=""
           src={latest.image}
-          width={160}
-          height={107}
+          width={128}
+          height={85}
           className="w-full h-full object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out group-hover:scale-105 motion-safe:group-hover:duration-500"
         />
       </div>
