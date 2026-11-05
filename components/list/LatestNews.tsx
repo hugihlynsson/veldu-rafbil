@@ -28,7 +28,7 @@ const LatestNews: FunctionComponent<Props> = ({ latest, className }) => (
     )}
   >
     {latest.image && (
-      <div className="w-32 aspect-[3/2] shrink-0 overflow-hidden rounded-lg bg-cloud">
+      <div className="w-32 h-[89px] shrink-0 overflow-hidden rounded-lg bg-cloud">
         {/* The size the box renders at, so the 1x/2x pair is 128 and 256. The
             zoom eases in over 500ms and back in 300ms, as a slow return
             lingers after the pointer has gone */}
@@ -36,7 +36,7 @@ const LatestNews: FunctionComponent<Props> = ({ latest, className }) => (
           alt=""
           src={latest.image}
           width={128}
-          height={85}
+          height={89}
           className="w-full h-full object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out group-hover:scale-105 motion-safe:group-hover:duration-500"
         />
       </div>
