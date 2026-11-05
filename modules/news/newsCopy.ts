@@ -103,7 +103,7 @@ export const itemText = (item: NewsItem, told: 'news' | 'history'): string => {
         return `${kr(to)} · ${arrow} ${addDecimalSeparators(Math.abs(to - from))}`
       }
       const verb = fell(price) ? 'lækkaði' : 'hækkaði'
-      return `Listaverð ${verb} úr ${kr(from)} í ${kr(to)}`
+      return `Listaverð ${verb} í ${addDecimalSeparators(to)} kr, um ${addDecimalSeparators(Math.abs(to - from))}`
     }
     case 'delivery':
       if (!delivery?.to) return news ? 'Kominn í sölu' : 'Kom í sölu'
