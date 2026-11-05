@@ -250,7 +250,7 @@ export default function CarList({ latest }: Props) {
           {latest && (
             <LatestNews
               latest={latest}
-              className="self-start mt-1 mb-10 lg:shrink-0 lg:w-[26rem] lg:mt-6 lg:mb-8"
+              className="self-start mt-1 mb-10 lg:shrink-0 lg:w-[28rem] lg:mt-6 lg:mb-8"
             />
           )}
         </div>
