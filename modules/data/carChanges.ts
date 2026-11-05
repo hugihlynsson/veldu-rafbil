@@ -1972,9 +1972,9 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-05","slug":"bmw-i3-40-xdrive","label":"BMW i3 40 xDrive","added":true,"price":{"to":9790000}},
   {"date":"2026-11-05","slug":"bmw-i3-50-xdrive","label":"BMW i3 50 xDrive","added":true,"price":{"to":10790000}},
   {"date":"2026-11-05","slug":"bmw-ix5-60-xdrive","label":"BMW iX5 60 xDrive","added":true,"price":{"to":16490000}},
-  {"date":"2026-11-05","slug":"mercedes-benz-amg-gt-4-door-coupe-53-4matic","label":"Mercedes-Benz AMG GT 4-Door Coupé 53 4MATIC+","added":true,"price":{"to":22490000}},
-  {"date":"2026-11-05","slug":"mercedes-benz-amg-gt-4-door-coupe-55-4matic","label":"Mercedes-Benz AMG GT 4-Door Coupé 55 4MATIC+","added":true,"price":{"to":29490000}},
-  {"date":"2026-11-05","slug":"mercedes-benz-amg-gt-4-door-coupe-63-4matic","label":"Mercedes-Benz AMG GT 4-Door Coupé 63 4MATIC+","added":true,"price":{"to":35490000}},
+  {"date":"2026-11-05","slug":"mercedes-benz-amg-gt-53-4matic","label":"Mercedes-Benz AMG GT 4-Door Coupé 53 4MATIC+","added":true,"price":{"to":22490000}},
+  {"date":"2026-11-05","slug":"mercedes-benz-amg-gt-55-4matic","label":"Mercedes-Benz AMG GT 4-Door Coupé 55 4MATIC+","added":true,"price":{"to":29490000}},
+  {"date":"2026-11-05","slug":"mercedes-benz-amg-gt-63-4matic","label":"Mercedes-Benz AMG GT 4-Door Coupé 63 4MATIC+","added":true,"price":{"to":35490000}},
   {"date":"2026-11-05","slug":"porsche-macan-4-electric","label":"Porsche Macan 4 Electric","price":{"from":13950000,"to":12950000}},
   {"date":"2026-11-05","slug":"porsche-macan-4s-electric","label":"Porsche Macan 4s Electric","price":{"from":15450000,"to":13950000}},
   {"date":"2026-11-05","slug":"porsche-taycan-plus","label":"Porsche Taycan Plus","price":{"from":15450000,"to":13950000}},
@@ -1987,6 +1987,9 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-05","slug":"porsche-cayenne-s-coupe","label":"Porsche Cayenne S Coupé","price":{"from":20450000,"to":19450000}},
   {"date":"2026-11-05","slug":"porsche-cayenne-turbo","label":"Porsche Cayenne Turbo","price":{"from":26450000,"to":24950000}},
   {"date":"2026-11-05","slug":"porsche-cayenne-turbo-coupe","label":"Porsche Cayenne Turbo Coupé","price":{"from":26950000,"to":25450000}},
+  {"date":"2026-11-05","slug":"mercedes-benz-amg-gt-53-4matic","label":"Mercedes-Benz AMG GT 53 4MATIC+","renamedFrom":"Mercedes-Benz AMG GT 4-Door Coupé 53 4MATIC+"},
+  {"date":"2026-11-05","slug":"mercedes-benz-amg-gt-55-4matic","label":"Mercedes-Benz AMG GT 55 4MATIC+","renamedFrom":"Mercedes-Benz AMG GT 4-Door Coupé 55 4MATIC+"},
+  {"date":"2026-11-05","slug":"mercedes-benz-amg-gt-63-4matic","label":"Mercedes-Benz AMG GT 63 4MATIC+","renamedFrom":"Mercedes-Benz AMG GT 4-Door Coupé 63 4MATIC+"},
 ]
 
 export default carChanges
