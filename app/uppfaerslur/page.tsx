@@ -51,24 +51,24 @@ export default function Page() {
           <PageTop />
         </header>
         <div className={pageColumn}>
-          <div className="md:max-w-prose md:mx-auto">
+          <div>
             <h1 className="m-0 mt-4 font-semibold text-display leading-tight">
               Uppfærslur
             </h1>
-            <p className="mt-2 mb-0 text-base leading-normal text-pretty text-stone">
+            <p className="mt-2 mb-0 max-w-prose text-base leading-normal text-pretty text-stone">
               Nýir bílar, ný verð og bílar sem hætta í sölu, daginn sem þeir
               breytast á listanum.
             </p>
 
             {recent.map((day) => (
-              <article key={day.date} className="mt-12">
+              <article key={day.date} className="mt-12 md:mt-16">
                 <time
                   dateTime={day.date}
                   className="uppercase text-eyebrow font-semibold tracking-wider text-stone"
                 >
                   {dayText(day.date)}
                 </time>
-                <h2 className="m-0 mt-1 text-xl font-semibold leading-tight text-balance">
+                <h2 className="m-0 mt-1 max-w-prose text-xl font-semibold leading-tight text-balance md:text-2xl">
                   <Link
                     href={newsDayPath(day.date)}
                     className="text-tint no-underline hover:underline"

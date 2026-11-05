@@ -82,7 +82,7 @@ export default async function Page({ params }: Props) {
           <PageTop />
         </header>
         <article className={pageColumn}>
-          <div className="md:max-w-prose md:mx-auto">
+          <div>
             <Link
               href={NEWS_PATH}
               className="text-sm font-semibold text-stone no-underline hover:underline"
@@ -95,7 +95,7 @@ export default async function Page({ params }: Props) {
             >
               {dayText(day.date)}
             </time>
-            <h1 className="m-0 mt-1 font-semibold text-display leading-tight text-balance">
+            <h1 className="m-0 mt-1 max-w-prose font-semibold text-display leading-tight text-balance">
               {headlineOf(day)}
             </h1>
             <p className="mt-2 mb-0 text-base text-stone">{daySummary(day)}</p>
