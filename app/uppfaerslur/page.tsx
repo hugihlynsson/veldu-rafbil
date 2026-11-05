@@ -9,6 +9,7 @@ import type { NewsDay } from '@/modules/news/news'
 import { NEWS_FEED_PATH, NEWS_PATH, newsDayPath } from '@/modules/news/paths'
 import PageTop from '@/components/detail/PageTop'
 import Footer from '@/components/Footer'
+import PageChat from '@/components/detail/PageChat'
 import { pageColumn } from '@/components/pageColumn'
 import NewsDaySections from '@/components/news/NewsDaySections'
 
@@ -113,6 +114,7 @@ export default function Page() {
         </div>
       </main>
       <Footer />
+      <PageChat />
     </>
   )
 }
