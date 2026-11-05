@@ -244,7 +244,7 @@ export default function CarList({ latest }: Props) {
         {/* The newest update beside the intro from lg, where the intro alone
             leaves half the header empty, and under it on narrower screens.
             The header gives up some of its right padding there for it */}
-        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between lg:gap-8">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between lg:gap-10">
           <Intro />
 
           {latest && (
