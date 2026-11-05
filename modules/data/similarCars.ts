@@ -40,9 +40,19 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'bmw-ix-xdrive-60-sport',
     'porsche-cayenne-base',
   ],
+  'bmw-i3-40-xdrive': [
+    'mercedes-benz-cla-350-4matic',
+    'volkswagen-id-7-gtx',
+    'audi-a6-e-tron-sportback-quattro',
+  ],
+  'bmw-i3-50-xdrive': [
+    'bmw-i4-40-xdrive',
+    'mercedes-benz-c-400-4matic',
+    'mercedes-benz-cla-shooting-brake-350-4matic',
+  ],
   'bmw-i4-40-xdrive': [
     'mercedes-benz-cla-350-4matic',
-    'audi-a6-e-tron-sportback-quattro',
+    'bmw-i3-50-xdrive',
     'mercedes-benz-c-400-4matic',
   ],
   'bmw-i4-m60-xdrive': [
@@ -89,6 +99,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'volvo-ex60-p12',
     'mercedes-benz-glc-400-4matic',
     'audi-q6-e-tron-base',
+  ],
+  'bmw-ix5-60-xdrive': [
+    'bmw-ix-xdrive-60-sport',
+    'porsche-cayenne-base',
+    'mercedes-benz-eqe-suv-350-4matic',
   ],
   'byd-atto-3-evo-base': [
     'hongqi-ehs5-base',
@@ -678,7 +693,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'audi-a6-e-tron-avant-quattro',
   ],
   'porsche-cayenne-base': [
-    'bmw-ix-xdrive-60-sport',
+    'bmw-ix5-60-xdrive',
     'audi-sq6-e-tron-base',
     'porsche-macan-4s-electric',
   ],
@@ -969,7 +984,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'volkswagen-id-7-gtx': [
     'polestar-4-long-range-dual-motor',
-    'bmw-ix3-40',
+    'bmw-i3-40-xdrive',
     'audi-a6-e-tron-avant-quattro',
   ],
   'volvo-ec40-twin-motor': [

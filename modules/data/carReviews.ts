@@ -168,6 +168,48 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig ræður hann við mikinn snjó?',
     ],
   },
+  'bmw-i3-40-xdrive': {
+    paragraphs: [
+      'BMW i3 40 xDrive er fjórhjóladrifinn fólksbíll í millistærð, með skottloki, og í raun nýi rafmagnsþristurinn frá BMW. Hann er fyrir þig sem vilt lágan og lipran bíl sem er gaman að keyra, en þarft samt að komast landshluta á milli án vesens.',
+      'Og það gerir hann vel. Miðað við aðra í sínum verðflokki drífur hann með þeim lengstu og er meðal þeirra sem hlaða hraðast, svo stoppin á leiðinni norður verða fá og stutt, líka í frosti. Hann er líka meðal þeirra ódýrustu á hvern km drægni og dregur meira en flestir á svipuðu verði, svo kerran fer með í sumarbústaðinn.',
+      'Það sem þú gefur eftir er skottið, sem er minna en hjá flestum á svipuðu verði. Ef farangurinn skiptir meira máli er Volkswagen ID.7 GTX skutbíll sem kostar 200.000 kr. meira og tekur 154 l meira, en drífur á móti 126 km styttra og hleður hægar.',
+      'Dugi skottið þér færðu hér fólksbíl sem fer langt, hleður hratt og keyrir eins og BMW á að gera.',
+    ],
+    questions: [
+      'Borgar sig að taka 50 xDrive frekar?',
+      'Er Volkswagen ID.7 GTX betri fjölskyldubíll?',
+      'Af hverju hann frekar en Mercedes-Benz CLA?',
+      'Er Audi A6 e-tron Sportback betri kaup?',
+      'Hvernig er hann í akstri miðað við BMW i4?',
+      'Kemst barnavagn fyrir í skottinu?',
+      'Er pláss fyrir fullorðna aftur í?',
+      'Er lág veghæðin vandamál í snjó?',
+      'Hvað dregur kerra drægnina mikið niður?',
+      'Hvernig er nýi skjárinn í notkun?',
+    ],
+    facts: '58898f2866b7',
+  },
+  'bmw-i3-50-xdrive': {
+    paragraphs: [
+      'BMW i3 50 xDrive er fjórhjóladrifinn fólksbíll í millistærð, með skottloki, og öflugri gerðin af nýja rafmagnsþristinum frá BMW. Hann er fyrir þig sem keyrir mikið utanbæjar og vilt helst aldrei þurfa að hugsa um hvar næsta hleðslustöð er.',
+      'Drægnin er það sem stendur upp úr: hann drífur lengst allra rafbíla sem eru seldir hér, svo jafnvel í vetrarkulda kemstu landshluta á milli á einni hleðslu. Hann er líka ódýrastur á hvern km drægni af bílum á svipuðu verði, er meðal þeirra sem hlaða hraðast og er sneggri og aflmeiri en flestir keppinautar hans.',
+      'Gallinn er skottið, sem er með því minnsta í verðflokknum. Mercedes-Benz CLA Shooting Brake 350 4MATIC er skutbíll sem kostar aðeins 200.000 kr. meira og tekur 105 l meira, en drífur 169 km styttra. Og þurfirðu ekki alla þessa drægni sparar BMW i3 40 xDrive þér 1.000.000 kr. fyrir 202 km minni drægni.',
+      'Ef drægnin skiptir þig öllu og skottið litlu er erfitt að gera betur.',
+    ],
+    questions: [
+      'Dugar 40 xDrive mér ekki alveg eins vel?',
+      'Af hverju hann frekar en BMW i4?',
+      'Hentar Mercedes-Benz CLA skutbíllinn betur?',
+      'Er Mercedes-Benz C 400 betri kaup?',
+      'Kemst hann hringinn með einu stoppi?',
+      'Hve langt fer hann í raun í frosti?',
+      'Er skottið of lítið fyrir ferðalög?',
+      'Kemst barnavagn fyrir í skottinu?',
+      'Hvernig fer hann með 1.800 kg kerru?',
+      'Er hann of snöggur fyrir hálkuna?',
+    ],
+    facts: '92a4279d30e2',
+  },
   'bmw-i4-40-xdrive': {
     paragraphs: [
       'BMW i4 40 xDrive er lágur og rennilegur fólksbíll með afturhlera og fjórhjóladrifi, ætlaður þeim sem meta hefðbundna akstursánægju BMW og vilja sitja neðar en í jepplingi. Afturhlerinn gerir farangursrýmið aðgengilegt og innréttingin ber vott um vandaðan frágang.',
@@ -175,7 +217,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Í sínum verðflokki drífur hann þó styttra og hleður hægar en flestir, og skottið er minna en hjá flestum keppinautunum. Mercedes-Benz CLA 350 4MATIC er 1.700.000 kr. ódýrari, drífur 224 km lengra og hleður með um 40% styttri stoppum, og Audi A6 e-tron Sportback quattro er 1.500.000 kr. ódýrari, drífur 166 km lengra og er með 32 l stærra skott.',
       'i4 40 xDrive er fyrir þá sem kjósa akstursánægju og fólksbílalag fram yfir drægni og pláss.',
     ],
-    facts: '2f6ab5387944',
+    facts: '33ba753850c3',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Kemst hann til Akureyrar án þess að hlaða?',
@@ -387,6 +429,27 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     ],
     facts: 'ce78c7e8497b',
     model: 'gemini-3.8-flash, thinking medium',
+  },
+  'bmw-ix5-60-xdrive': {
+    paragraphs: [
+      'BMW iX5 60 xDrive er stór fjórhjóladrifinn lúxusjeppi, rafmagnsútgáfan af X5, með loftpúðafjöðrun. Hann er fyrir fjölskylduna sem vill pláss, kraft og drægni í einum bíl og ætlar sér að draga eitthvað þungt.',
+      'Miðað við aðra í sínum verðflokki drífur hann lengst og er ódýrastur á hvern km drægni, svo hringferð að vetri er lítið mál. Hann hleður líka hraðar en flestir, skottið er stærra en hjá flestum og hann er meðal þeirra sem draga mest, svo hjólhýsið er ekki vandamál. Snerpan vantar ekki heldur.',
+      'Á móti kemur að hann er mjög dýr, og hann tekur fimm, svo ef þú þarft sjö sæti er hann ekki bíllinn. Porsche Cayenne kostar 460.000 kr. meira, er með 163 l stærra skott og dregur 300 kg meira, en drífur 203 km styttra.',
+      'Ef þú vilt stóran jeppa sem kemst langt og dregur þungt er fátt sem slær hann út á þessu verði.',
+    ],
+    questions: [
+      'Af hverju hann frekar en Porsche Cayenne?',
+      'Hvernig er hann miðað við BMW iX?',
+      'Hvað fæ ég meira en í Mercedes-Benz EQE SUV?',
+      'Er hægt að fá hann með sjö sætum?',
+      'Hve langt fer hann með hjólhýsi aftan í?',
+      'Finnst þyngdin í akstri?',
+      'Hvernig er fjöðrunin á malarvegum?',
+      'Hvernig er plássið aftur í?',
+      'Er hann of stór fyrir bílastæði í bænum?',
+      'Hvernig reynist hann í djúpum snjó?',
+    ],
+    facts: '2121347808a9',
   },
   'byd-atto-3-evo-base': {
     paragraphs: [
@@ -2886,7 +2949,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er mjög dýr og hægari en flestir keppinautar hans, þótt hann sé langt frá því að vera seinn. Sú snerpa fæst í Porsche Cayenne S fyrir 3.000.000 kr. meira, með sama skottinu og álíka drægni.',
       'Grunngerð Cayenne er sú hagnýtasta í línunni og fyrir flesta sú skynsamlegasta: hún gefur lítið eftir nema í snerpu.',
     ],
-    facts: '8c3a2a6d53ca',
+    facts: 'bc4f5a52a1c2',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Borgar Cayenne S sig fram yfir hann?',
@@ -4159,7 +4222,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar fremur dýr og afl og snerpa eru aðeins í meðallagi miðað við verðið. Polestar 4 Long Range Dual Motor er 400.000 kr. ódýrari og mun sneggri, en skottið er 79 l minna.',
       'ID.7 GTX er heilsteyptur langferðabíll fyrir fjölskyldur sem vilja pláss, drægni og dráttargetu.',
     ],
-    facts: '7a716fa27cce',
+    facts: '134d07366dbc',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig hentar hann í að draga hjólhýsi?',
