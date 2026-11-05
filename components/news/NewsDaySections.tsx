@@ -41,38 +41,49 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
   return (
     <li
       className={clsx(
-        'relative flex items-start gap-3 py-2.5',
-        tile ? 'md:flex-col md:gap-3 md:py-0' : 'md:items-center md:gap-4',
+        'group relative flex items-start gap-3 py-2.5',
+        tile
+          ? 'md:flex-col md:gap-3 md:py-0'
+          : // The fill reaches past the photo and the text, as a similar car's
+            // does on a car's page, rather than stopping flush at the photo
+            'md:items-center md:gap-4 md:isolate md:before:absolute md:before:-inset-x-2.5 md:before:inset-y-0 md:before:-z-10 md:before:rounded-xl md:before:bg-shade md:before:opacity-0 md:before:transition-opacity md:before:duration-200 md:hover:before:opacity-100',
       )}
     >
-      {car ? (
-        <Image
-          alt=""
-          src={`/images/${car.heroImageName}.jpg`}
-          // A tile is a third of the page from md, some 290px at most. A row's
-          // photo is 72px on a phone and 120px from md, where its width is
-          // taken, so its 1x/2x pair is 128 and 256 either way
-          {...(tile
-            ? {
-                sizes: '(max-width: 767px) 72px, 290px',
-                width: 290,
-                height: 193,
-              }
-            : { width: 120, height: 80 })}
-          className={clsx(
-            'w-18 h-12 shrink-0 rounded-sm object-cover bg-cloud',
-            box,
-          )}
-        />
-      ) : (
-        <div className={clsx('w-18 h-12 shrink-0 rounded-sm bg-cloud', box)} />
-      )}
+      {/* The frame clips the photo, which a tile zooms within on hover */}
+      <div
+        className={clsx(
+          'w-18 h-12 shrink-0 overflow-hidden rounded-sm bg-cloud',
+          box,
+        )}
+      >
+        {car && (
+          <Image
+            alt=""
+            src={`/images/${car.heroImageName}.jpg`}
+            // A tile is a third of the page from md, some 290px at most. A
+            // row's photo is 72px on a phone and 120px from md, where its
+            // width is taken, so its 1x/2x pair is 128 and 256 either way
+            {...(tile
+              ? {
+                  sizes: '(max-width: 767px) 72px, 290px',
+                  width: 290,
+                  height: 193,
+                }
+              : { width: 120, height: 80 })}
+            className={clsx(
+              'w-full h-full object-cover',
+              tile &&
+                'motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out md:group-hover:scale-105',
+            )}
+          />
+        )}
+      </div>
       <div className={clsx('flex-1 min-w-0', tile && 'md:px-3')}>
         <div className="text-base leading-snug">
           {car ? (
             <Link
               href={carPathOf(car)}
-              className="font-semibold text-tint no-underline after:absolute after:inset-0 hover:underline"
+              className="font-semibold text-tint no-underline after:absolute after:inset-0"
             >
               {car.make} <span className="font-normal">{car.model}</span>
             </Link>
