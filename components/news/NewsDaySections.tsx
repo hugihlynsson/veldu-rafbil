@@ -27,7 +27,7 @@ const detailOf = (item: NewsItem, car: Car | undefined): string => {
 // photo's edges: two to a line on a phone, three from md. Every other change
 // is a row, its photo beside two lines, so a day of twenty new prices reads as
 // one list rather than a wall of photos; from md the rows go two to a line
-// with a larger photo
+// with a larger photo, and from lg three, in the type a tile has on a phone
 const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
   item,
   tile,
@@ -83,7 +83,7 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
         <div
           className={clsx(
             'leading-snug',
-            tile ? 'text-sm md:text-base' : 'text-base',
+            tile ? 'text-sm md:text-base' : 'text-base lg:text-sm',
           )}
         >
           {car ? (
@@ -100,7 +100,7 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
             <span
               className={clsx(
                 'font-medium text-stone',
-                tile ? 'text-xs md:text-sm' : 'text-sm',
+                tile ? 'text-xs md:text-sm' : 'text-sm lg:text-xs',
               )}
             >
               {' '}
@@ -115,7 +115,7 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
         <div
           className={clsx(
             'mt-0.5 font-medium text-stone',
-            tile ? 'text-control md:text-sm' : 'text-sm',
+            tile ? 'text-control md:text-sm' : 'text-sm lg:text-control',
           )}
         >
           {!tile && parts.length > 1
