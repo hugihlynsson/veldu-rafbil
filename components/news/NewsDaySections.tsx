@@ -25,48 +25,49 @@ const detailOf = (item: NewsItem, car: Car | undefined): string => {
 
 // On a phone every car is a row of a list, its photo as tall as the two lines
 // beside it, so a run of twenty reads as one list. From md a new car is a tile
-// with its photo over its name, as the similar cars on a car's page are, and
-// the rest stay rows, in columns: a day of twenty new prices would otherwise
-// be a wall of photos
+// with its photo over its name, the text inset from the photo's edges, and the
+// rest stay rows with a larger photo, two to a line: a day of twenty new
+// prices would otherwise be a wall of photos
 const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
   item,
   tile,
 }) => {
   const car = carWithSlug(item.slug)
   const parts = detailOf(item, car).split(' · ')
-  const tileBox = tile && 'md:w-full md:h-auto md:aspect-[3/2] md:rounded-lg'
+  const box = tile
+    ? 'md:w-full md:h-auto md:aspect-[3/2] md:rounded-xl'
+    : 'md:w-30 md:h-20 md:rounded-lg'
 
   return (
     <li
       className={clsx(
         'relative flex items-start gap-3 py-2.5',
-        tile && 'md:flex-col md:gap-2.5 md:py-0',
+        tile ? 'md:flex-col md:gap-3 md:py-0' : 'md:items-center md:gap-4',
       )}
     >
       {car ? (
         <Image
           alt=""
           src={`/images/${car.heroImageName}.jpg`}
-          // A tile is a third of the page from md, some 290px at most; a row's
-          // photo is 72px everywhere, so its 1x/2x pair is 128 and 256
+          // A tile is a third of the page from md, some 290px at most. A row's
+          // photo is 72px on a phone and 120px from md, where its width is
+          // taken, so its 1x/2x pair is 128 and 256 either way
           {...(tile
             ? {
                 sizes: '(max-width: 767px) 72px, 290px',
                 width: 290,
                 height: 193,
               }
-            : { width: 72, height: 48 })}
+            : { width: 120, height: 80 })}
           className={clsx(
             'w-18 h-12 shrink-0 rounded-sm object-cover bg-cloud',
-            tileBox,
+            box,
           )}
         />
       ) : (
-        <div
-          className={clsx('w-18 h-12 shrink-0 rounded-sm bg-cloud', tileBox)}
-        />
+        <div className={clsx('w-18 h-12 shrink-0 rounded-sm bg-cloud', box)} />
       )}
-      <div className={clsx('flex-1 min-w-0', tile && 'md:px-0.5')}>
+      <div className={clsx('flex-1 min-w-0', tile && 'md:px-3')}>
         <div className="text-base leading-snug">
           {car ? (
             <Link
@@ -116,10 +117,10 @@ const NewsDaySections: FunctionComponent<{ day: NewsDay }> = ({ day }) =>
           </h3>
           <ul
             className={clsx(
-              'mt-1 mb-0 p-0 list-none md:grid md:gap-x-6',
+              'mt-1 mb-0 p-0 list-none md:grid',
               kind === 'added'
-                ? 'md:mt-3 md:grid-cols-3 md:gap-y-7'
-                : 'md:grid-cols-2 lg:grid-cols-3',
+                ? 'md:mt-3 md:grid-cols-3 md:gap-x-6 md:gap-y-8'
+                : 'md:mt-2 md:grid-cols-2 md:gap-x-8',
             )}
           >
             {day.items[kind].map((item) => (
