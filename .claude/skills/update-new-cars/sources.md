@@ -178,8 +178,28 @@ November list prices only the IONIQ 3's 61 kWh, though its page still offers
 the 42,2 kWh. Hekla's PDFs carry a `Last-Modified` header worth checking
 before reading them.
 
-**Range Rover is the one that cannot be started from its entries.** Both
-Electric rows point at `rangerover.com/en-gb`, the manufacturer's UK site rather
-than an Icelandic seller, so there is no importer page to work back to and no
-price to check against. Find the Icelandic importer's model page, fix
-`sellerUrl` on both rows, and record the price list here.
+**Found on 2026-11-06**, for makes that had no list here:
+
+- **Volvo**: the site's "Kaupa" menu links a PDF per model on
+  `azure-eu-assets.contentstack.com`, dated in the filename
+  (`VOLVO_EX30_Verdlisti_20261028.pdf`). The menu sits in a shadow root, so
+  open it in the built-in browser and walk shadow roots for "Verðlisti"; the
+  links change with each upload. EX30, EX30 Cross Country, EX60, EX90 and ES90
+  have one, the EX40 and EC40 none, but `/is/cars/electric-cars/` prints their
+  "Verð frá". `pdf text` reads them; the one figure is the price before the
+  grant. Brimborg's stock (`nyirbilar.brimborg.is/is/nyir-bilar?fueltype=2`,
+  pages 1-7) shows what is on order and when, not the list price.
+- **Range Rover** (BL): `landrover.is/range-rover/<model>/electric` links its
+  model's list under `landrover.is/uploads/` (`RangeRover-verðlisti-14.10.2026.pdf`,
+  `RRSport-Verðlisti-14.10.2026.pdf`); `pdf text` reads the EV rows, one column
+  per trim, the first priced one the entry. Photos: rangerover.com's model page
+  embeds 2560 px originals under `/content/dam/lrdx/global/l461/`; landrover.is
+  serves at most 1600 px, and the media site 750 px.
+- **Jeep and Fiat** (ÍSBAND): `isband.is/nyir-bilar/verdlistar-baeklingar/verdlisti-jeep/`
+  and `.../verdlisti-fiat/` answer with the PDF itself, not a page, so the
+  built-in browser offers a download; fetch them with curl and `pdf text`.
+  The Jeep list sells the Avenger as the 4xe hybrid only; the Fiat list (January 2026) prints "Leitið til sölumanna" for the 500e.
+- **GWM** (Hekla): `hekla.is/static/files/efni/verdlistar/ora/ora-03.pdf`, where
+  the car is now the ORA 300 Pure.
+- **Opel and Citroën**: still none. opelisland.is links a van list through
+  `/navigation-partials/…/brochures-pricelist.html`, but no car list was found.
