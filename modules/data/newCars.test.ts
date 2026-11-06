@@ -34,14 +34,9 @@ describe('the car data', () => {
   // Variants sit side by side in the list and in comparisons, where one photo
   // twice reads as a duplicate. These still share one for want of another shot.
   const sharedPhotos = new Set([
-    'lexus-rz',
     'mercedes-glc',
-    'porsche-taycan',
     'renault-r5',
-    'skoda-elroq',
     'smart-five-pulse',
-    'tesla-model-3',
-    'tesla-model-y-back',
     'xpeng-l03',
   ])
 
