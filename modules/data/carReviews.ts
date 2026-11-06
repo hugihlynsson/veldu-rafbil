@@ -4340,7 +4340,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'volvo-ex40-recharge-twin': {
     paragraphs: [
-      'Volvo EX40 Recharge Twin er meðalstór jepplingur, sami bíll og hét áður XC40 Recharge: kassalaga, hár í sæti og með rólegu, skandinavísku innréttinguna sem Volvo er þekkt fyrir. Hann hentar þér ef þú vilt þéttan og öruggan fjölskyldubíl sem á samt nóg inni þegar þú stígur á gjöfina.',
+      'Volvo EX40 Recharge Twin er meðalstór jepplingur, sami bíll og hét áður XC40 Recharge: kassalaga, hár í sæti og með rólegu, skandinavísku innréttinguna sem Volvo er þekkt fyrir. Hann hentar ef þú vilt þéttan og öruggan fjölskyldubíl sem á samt nóg inni þegar þú stígur á gjöfina.',
       'Og það á hann. Hann er sneggri og aflmeiri en flestir á svipuðu verði, og krókurinn ber meira en hjá flestum keppinautum hans, svo hjólhýsið eða stóra kerran er ekkert mál.',
       'Gallinn er plássið aftast: skottið er með þeim minnstu miðað við keppinautana, og þú borgar meira á hvern km drægni en hjá flestum þeirra. BMW iX1 xDrive 30 er 700.000 kr. ódýrari og með 49 l stærra skott, en hann drífur 99 km styttra og hleðslustoppin eru um 25% lengri.',
       'EX40 er bíllinn fyrir þann sem vill kraft og krók í nettum pakka og getur lifað með minna skotti.',
