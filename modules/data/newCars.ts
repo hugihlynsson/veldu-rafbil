@@ -1256,6 +1256,7 @@ const newCars: Array<NewCar> = [
     make: 'Lexus',
     model: 'UX',
     subModel: '300e',
+    deprecated: '2026-11-06',
     heroImageName: 'lexus-ux-300e',
     price: 10_890_000,
     sellerUrl: 'https://www.lexus.is/car-models/ux-300e/',
@@ -1830,7 +1831,7 @@ const newCars: Array<NewCar> = [
     model: 'Countryman',
     subModel: 'SE 4x4',
     heroImageName: 'mini-countryman-se',
-    price: 8_890_000,
+    price: 7_990_000,
     sellerUrl:
       'https://www.mini.is/is_IS/home/model-range/all-electric-mini-countryman.html',
     acceleration: 5.6,
