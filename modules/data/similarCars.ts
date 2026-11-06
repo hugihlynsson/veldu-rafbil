@@ -543,7 +543,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'skoda-elroq-85x',
   ],
   'mini-aceman-e': [
-    'volvo-ex30-single-motor',
+    'volvo-ex30-single-motor-extended-range',
     'mini-cooper-se',
     'fiat-600e-base',
   ],
@@ -719,7 +719,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'porsche-cayenne-s': [
     'bmw-ix-xdrive-60-sport',
-    'porsche-taycan-4s-cross-turismo',
+    'range-rover-sport-electric-ev450',
     'range-rover-electric-ev450',
   ],
   'porsche-cayenne-s-coupe': [
@@ -739,13 +739,23 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'range-rover-electric-ev450': [
     'mercedes-benz-eqs-suv-580-4matic',
-    'mercedes-benz-g-class-580-eq',
+    'range-rover-sport-electric-ev550',
     'porsche-cayenne-turbo',
   ],
   'range-rover-electric-ev550': [
     'porsche-cayenne-turbo-coupe',
     'mercedes-benz-g-class-580-eq',
     'mercedes-benz-eqs-580-4matic',
+  ],
+  'range-rover-sport-electric-ev450': [
+    'porsche-cayenne-s',
+    'bmw-ix-xdrive-60-sport',
+    'range-rover-electric-ev450',
+  ],
+  'range-rover-sport-electric-ev550': [
+    'porsche-cayenne-turbo',
+    'mercedes-benz-eqs-suv-580-4matic',
+    'range-rover-electric-ev550',
   ],
   'renault-r5-e-tech-base': [
     'gwm-ora-3-48-kwh',
