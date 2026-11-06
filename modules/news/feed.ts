@@ -11,15 +11,26 @@ import {
 import { dayHeadline, type NameOf } from './newsCopy'
 import { NEWS_PATH } from './paths'
 
-// The log runs back to 2020, and each car's page tells its own in full. The
-// news starts later: a price from years ago is history, not news, and a page
-// for every day of it would be hundreds saying little.
-export const NEWS_SINCE = '2026-01-01'
-
 const items = readNews(carChanges)
 
-/** The days with news, newest first */
-export const days: ReadonlyArray<NewsDay> = newsDays(items, NEWS_SINCE)
+/** Every day with news the log tells of, newest first, back to 2020 */
+export const allDays: ReadonlyArray<NewsDay> = newsDays(items, '')
+
+/** How far back the updates page goes */
+export const NEWS_MONTHS = 12
+
+// Counted back from the newest day rather than from today: the pages are built
+// at the deploy, so they change when the data does and not with the calendar.
+// A price from years ago is history, not news, and each car's page tells it.
+const newest = allDays[0]?.date ?? ''
+export const NEWS_SINCE = newest
+  ? `${Number(newest.slice(0, 4)) - NEWS_MONTHS / 12}${newest.slice(4)}`
+  : ''
+
+/** The days the updates page shows, newest first */
+export const days: ReadonlyArray<NewsDay> = allDays.filter(
+  ({ date }) => date > NEWS_SINCE,
+)
 
 export const dayOn = (date: string): NewsDay | undefined =>
   days.find((day) => day.date === date)
@@ -53,7 +64,7 @@ export const leadCar = (day: NewsDay): Car | undefined =>
     .map(({ slug }) => carWithSlug(slug))
     .find((car) => car !== undefined)
 
-const [newest] = days
+const [latestDay] = days
 
 const leadImage = (day: NewsDay) => {
   const car = leadCar(day)
@@ -64,9 +75,9 @@ const leadImage = (day: NewsDay) => {
  * The newest day's news, which the list's front page leads with. It links to
  * all of them rather than to the day, which tops that page anyway.
  */
-export const latestNews: LatestNews | undefined = newest && {
-  date: newest.date,
-  headline: headlineOf(newest),
+export const latestNews: LatestNews | undefined = latestDay && {
+  date: latestDay.date,
+  headline: headlineOf(latestDay),
   path: NEWS_PATH,
-  ...leadImage(newest),
+  ...leadImage(latestDay),
 }
