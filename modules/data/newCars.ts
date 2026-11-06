@@ -967,7 +967,7 @@ const newCars: Array<NewCar> = [
     make: 'Kia',
     model: 'EV9',
     heroImageName: 'kia-ev9',
-    price: 12_790_777,
+    price: 11_990_777,
     sellerUrl: 'https://www.kia.com/is/new-cars/ev9/premiere/',
     acceleration: 6.0,
     capacity: 99.8,
@@ -2483,6 +2483,7 @@ const newCars: Array<NewCar> = [
     seats: 5,
     power: 331,
     timeToCharge10To80: 22,
+    expectedDelivery: 'snemma 2027',
   },
   {
     make: 'Range Rover',
@@ -2501,6 +2502,7 @@ const newCars: Array<NewCar> = [
     seats: 5,
     power: 404,
     timeToCharge10To80: 22,
+    expectedDelivery: 'snemma 2027',
   },
   {
     make: 'Renault',
@@ -2586,7 +2588,6 @@ const newCars: Array<NewCar> = [
     seats: 5,
     power: 155,
     timeToCharge10To80: 24,
-    expectedDelivery: 'lok 2026',
   },
   {
     make: 'Skoda',

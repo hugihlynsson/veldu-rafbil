@@ -2001,6 +2001,10 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-06","slug":"volvo-ex30-single-motor-extended-range","label":"Volvo EX30 Single Motor Extended Range","price":{"from":7090000,"to":6490000}},
   {"date":"2026-11-06","slug":"volvo-ex30-twin-motor-performance","label":"Volvo EX30 Twin Motor Performance","price":{"from":7390000,"to":7190000}},
   {"date":"2026-11-06","slug":"volvo-ex30-cross-country-twin-motor-performance","label":"Volvo EX30 Cross Country Twin Motor Performance","price":{"from":8220000,"to":7990000}},
+  {"date":"2026-11-06","slug":"kia-ev9-base","label":"Kia EV9","price":{"from":12790777,"to":11990777}},
+  {"date":"2026-11-06","slug":"range-rover-sport-electric-ev450","label":"Range Rover Sport Electric EV450","delivery":{"to":"snemma 2027"}},
+  {"date":"2026-11-06","slug":"range-rover-sport-electric-ev550","label":"Range Rover Sport Electric EV550","delivery":{"to":"snemma 2027"}},
+  {"date":"2026-11-06","slug":"skoda-epiq-55","label":"Skoda Epiq 55","delivery":{"from":"lok 2026"}},
 ]
 
 export default carChanges

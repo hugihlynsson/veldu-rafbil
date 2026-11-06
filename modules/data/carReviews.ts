@@ -576,7 +576,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Nýtist þetta mikla afl í daglegum akstri?',
       'Hvað felur rafhlöðuábyrgðin í sér?',
     ],
-    facts: '684ac25ebe1c',
+    facts: '0b6b2abcc37c',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'citroen-e-c4-base': {
@@ -893,8 +893,6 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er aflminni og hægari en flestir á svipuðu verði, þótt það skipti minna máli í bíl af þessari gerð. XPENG X9 AWD Performance er 400.000 kr. dýrari en hleður með um 45% styttri stoppum og er aflmeiri, en drífur 35 km styttra.',
       'IONIQ 9 er einn sterkasti kosturinn fyrir stórar fjölskyldur sem ferðast um landið með fullan bíl eða kerru aftan í.',
     ],
-    facts: '7752adc32691',
-    model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er Performance útfærslan þess virði?',
       'Hvernig er hann miðað við Kia EV9?',
@@ -907,6 +905,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað tekur langan tíma að hraðhlaða hann?',
       'Hvernig virkar fjórhjóladrifið í snjó?',
     ],
+    facts: '26ab741a296f',
+    model: 'gemini-3.8-flash, thinking high',
   },
   'hyundai-ioniq-9-long-range-performance-awd': {
     paragraphs: [
@@ -1324,13 +1324,11 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'kia-ev9-base': {
     paragraphs: [
-      'Kia EV9 er stór og kassalaga sjö sæta jeppi með fjórhjóladrifi, rúmlega fimm metrar á lengd, með fullgildri þriðju sætaröð. Hann hentar stórum fjölskyldum sem þurfa mörg sæti og mikið pláss.',
-      'Skottið er stærra en hjá flestum á svipuðu verði, 52 l framskott bætist við og hann má draga 2.500 kg, meira en flestir keppinautar hans. Hann hleður líka fremur hratt.',
-      'Gallarnir eru að hann er fremur dýr, drífur styttra en flestir þeirra og ábyrgðin á rafhlöðunni er með þeim stystu. XPENG X9 AWD Performance er 400.000 kr. ódýrari, drífur 58 km lengra og hleður með um 50% styttri stoppum.',
-      'EV9 er sterkur kostur fyrir stórar fjölskyldur sem draga hjólhýsi, en maður borgar fyrir stærðina.',
+      'Kia EV9 er stór og kassalaga sjö sæta jeppi með fjórhjóladrifi, rúmlega fimm metrar á lengd, með fullgildri þriðju sætaröð. Hann hentar ef þú átt stóra fjölskyldu og þarft mörg sæti og mikið pláss.',
+      'Skottið er með þeim stærstu á svipuðu verði, 52 l framskott bætist við og hann má draga 2.500 kg, meira en flestir keppinautar hans. Hann hleður líka fremur hratt.',
+      'Gallarnir eru að hann drífur styttra og er dýrari á hvern km drægni en flestir þeirra. Hyundai IONIQ 9 Long Range AWD kostar nánast það sama, drífur 93 km lengra og er með 80 l stærra skott, og XPENG X9 AWD Performance kostar 400.000 kr. meira en drífur 58 km lengra og hleðslustoppin eru um 50% styttri.',
+      'EV9 er sterkur kostur fyrir stórar fjölskyldur sem draga hjólhýsi, en IONIQ 9 gefur meira fyrir sama pening.',
     ],
-    facts: '8ab1fdbe024f',
-    model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Kemst hann til Akureyrar að vetrarlagi?',
       'Hvað dregur hjólhýsi mikið af drægninni?',
@@ -1340,9 +1338,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Borgar GT-útfærslan sig fyrir kraftinn?',
       'Hversu hratt hleður hann í miklum kulda?',
       'Hvernig ræður hann við mikinn snjó?',
-      'Hver eru ábyrgðarkjörin á rafhlöðunni?',
+      'Hver er munurinn á Air, Earth og GT-Line?',
       'Af hverju frekar hann en XPENG X9?',
     ],
+    facts: '76b0fece380d',
   },
   'kia-ev9-gt': {
     paragraphs: [
@@ -4683,12 +4682,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'xpeng-x9-awd-performance': {
     paragraphs: [
       'XPENG X9 AWD Performance er stór sjö sæta fjölnotabíll með fjórhjóladrifi, 5,3 m á lengd, með framúrstefnulegu útliti og fullgildu rými í öllum sætaröðum, fyrir stórar fjölskyldur.',
-      'Hann hleður hraðast allra rafbíla á listanum, þrátt fyrir stóra rafhlöðu, svo hleðslustopp á langferðum verða óvenju stutt. Hann er líka aflmeiri en flestir á svipuðu verði.',
-      'Gallarnir eru að hann er dýr, drífur styttra og er hægari en flestir keppinautar hans, og merkið er nýlegt hér á landi. Hyundai IONIQ 9 Long Range AWD er 400.000 kr. ódýrari, tekur líka sjö og drífur 35 km lengra, þótt hleðslustoppin séu um 90% lengri.',
+      'Hann hleður hraðast í sínum verðflokki þrátt fyrir stóra rafhlöðu, svo hleðslustoppin á langferðum verða óvenju stutt. Plássið er líka einstakt: skottið er það stærsta á listanum.',
+      'Gallarnir eru að hann drífur styttra, er hægari og dregur minna en flestir keppinautar hans, og merkið er nýlegt hér á landi. Hyundai IONIQ 9 Long Range AWD er 400.000 kr. ódýrari, tekur líka sjö, drífur 35 km lengra og má draga 1.000 kg meira, þótt hleðslustoppin séu um 90% lengri.',
       'X9 er fyrir stórar fjölskyldur sem ferðast um landið og vilja eyða sem minnstum tíma við hleðslustöðvar.',
     ],
-    facts: '3a4dbdd8b686',
-    model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Af hverju hann frekar en Hyundai IONIQ 9?',
       'Hvernig er hann miðað við Kia EV9?',
@@ -4701,6 +4698,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar fjórhjóladrifið í snjó?',
       'Er góð þjónusta við merkið á Íslandi?',
     ],
+    facts: '8614e497d430',
   },
 }
 
