@@ -233,10 +233,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'bmw-i4-m60-xdrive': {
     paragraphs: [
-      'BMW i4 M60 xDrive er stór fólksbíll með afturhlera sem sameinar sportlegan svip og mikla afkastagetu. Hann hentar ökumönnum sem vilja hámarks akstursánægju, lúxus og kraftmikinn bíl sem smellur engu að síður vel inn í daglega rútínu.',
-      'Helsti styrkur hans er gríðarlegt afl og eldsnögg hröðun, þar sem fjórhjóladrifið tryggir öruggt grip í snjó og hálku. Ólíkt mörgum öðrum lágum sportbílum fylgir honum ágæt dráttargeta fyrir léttari vagna, og stór afturhlerinn gerir hleðslu í skottið mun þægilegri en í hefðbundnum stallbak.',
-      'Hins vegar drífur hann fremur langt á heildina litið en gefur töluvert eftir í drægni miðað við aðra í sínum verðflokki, auk þess sem skottið er með þeim minnstu. Ef meiri drægni skiptir höfuðmáli kemst Volvo ES90 Twin Motor Performance mun lengra á hverri hleðslu. Ef aflið má vera ögn hóflegra fæst BMW i4 40 xDrive fyrir tveimur milljónum króna minna með nánast sömu drægni.',
-      'Þetta er fyrst og fremst bíll fyrir þá sem setja krafta og lipran akstur í algjöran forgang.',
+      'BMW i4 M60 xDrive er stór fólksbíll með afturhlera, sportlegur í útliti og með M-merkið aftan á. Hann hentar ef þú vilt kraftmikinn bíl sem er samt nógu praktískur fyrir hversdaginn.',
+      'Aflið og hröðunin eru aðalatriðið: hann er meðal þeirra sneggstu og aflmestu á svipuðu verði. Afturhlerinn gerir skottið aðgengilegra en í stallbak, og hann má draga léttan vagn.',
+      'Á móti kemur að drægnin er bara í meðallagi og styttri en hjá flestum keppinautum hans, hann hleður hægar og skottið er með þeim minnstu. Volvo ES90 Twin Motor Performance er 1.200.000 kr. ódýrari, drífur 128 km lengra og hleðslustoppin eru um 35% styttri, þótt hann sé 0,3 s hægari í 0-100 km/klst. Og ef aflið má vera minna fæst BMW i4 40 xDrive fyrir 2.000.000 kr. minna með nánast sömu drægni.',
+      'i4 M60 er bíllinn fyrir þá sem vilja kraftinn fyrst og praktíkina svo.',
     ],
     questions: [
       'Mun ég finna muninn á 40 xDrive?',
@@ -250,18 +250,15 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er raundrægnin á þjóðveginum?',
       'Hvað má hann draga þungan vagn?',
     ],
-    facts: 'b0c97588333c',
-    model: 'gemini-3.8-flash, thinking medium',
+    facts: 'b5d13e6938bb',
   },
   'bmw-i5-edrive40': {
     paragraphs: [
-      'BMW i5 eDrive40 er stór lúxusfólksbíll með skottloki og afturhjóladrifi, rúmlega fimm metrar á lengd, þar sem lögð er áhersla á fágaðan akstur, hljóðlátt innanrými og þægindi á langferðum.',
-      'Hann drífur fremur langt og kemst á milli landshluta án fyrirhafnar, og góð hljóðeinangrun og afturhjóladrifið gefa honum yfirvegaða og skemmtilega aksturseiginleika á greiðfærum vegum.',
-      'Í sínum verðflokki hleður hann hins vegar hægar, er aflminni og dregur minna en flestir, skottið er minna og afturhjóladrifið krefst meiri aðgæslu í snjó og hálku. Volvo ES90 Twin Motor er 510.000 kr. ódýrari, fjórhjóladrifinn, drífur 97 km lengra, hleður með um 35% styttri stoppum og má draga 500 kg meira.',
-      'i5 eDrive40 er fyrir þá sem vilja hljóðlátan og fágaðan langferðabíl í klassísku fólksbílasniði.',
+      'BMW i5 eDrive40 er stór lúxusfólksbíll með skottloki og afturhjóladrifi, rúmlega fimm metrar á lengd, smíðaður fyrir rólegan og hljóðlátan akstur á langferðum.',
+      'Hann drífur fremur langt og kemst á milli landshluta án fyrirhafnar, og góð hljóðeinangrun og afturhjóladrifið gera hann yfirvegaðan og skemmtilegan á greiðfærum vegum.',
+      'Í sínum verðflokki hleður hann hins vegar hægar, er aflminni og dregur minna en flestir, skottið er með þeim minnstu og afturhjóladrifið kallar á meiri aðgát í snjó og hálku. Volvo ES90 Twin Motor er 1.700.000 kr. ódýrari, fjórhjóladrifinn, drífur 97 km lengra, hleðslustoppin eru um 35% styttri og hann má draga 500 kg meira.',
+      'i5 eDrive40 er fyrir þá sem vilja klassískan þýskan langferðabíl, en keppinautarnir gefa meira fyrir peninginn.',
     ],
-    facts: '14e5487f8e2f',
-    model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Af hverju frekar hann en Volvo ES90?',
       'Er hann þægilegri en Lexus ES 350e?',
@@ -274,6 +271,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er hljóðvistin á grófu malbiki?',
       'Hvernig er fótarýmið í aftursætunum?',
     ],
+    facts: 'c6b254b35742',
   },
   'bmw-i5-m60-xdrive': {
     paragraphs: [
@@ -1522,13 +1520,11 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'lexus-es-350e': {
     paragraphs: [
-      'Lexus ES 350e er stór og fágaður lúxusfólksbíll með skottloki og framhjóladrifi, rúmlega fimm metrar á lengd, sem setur þægindi, mýkt og hljóðláta ferð ofar afli. Hann hentar þeim sem kunna að meta rótgróinn áreiðanleika Lexus og vilja afslappaðan langferðabíl.',
+      'Lexus ES 350e er stór og fágaður lúxusfólksbíll með skottloki og framhjóladrifi, rúmlega fimm metrar á lengd, sem setur þægindi, mýkt og hljóðláta ferð ofar afli. Hann hentar ef þú kannt að meta rótgróinn áreiðanleika Lexus og vilt afslappaðan langferðabíl.',
       'Lexus ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir aðrir framleiðendur, og vönduð fjöðrun og lágvær gangur gera ferðirnar ljúfar. Hann drífur líka fremur langt.',
-      'Á móti kemur að hann er meðal þeirra aflminnstu og hægustu á svipuðu verði, hleður hægar en flestir keppinautar hans og má ekki draga kerru. BMW i5 eDrive40 er 90.000 kr. ódýrari, drífur álíka langt, er mun sneggri og má draga 1.500 kg.',
+      'Á móti kemur að hann er meðal þeirra aflminnstu og hægustu á svipuðu verði, hleður hægar en flestir keppinautar hans og má ekki draga kerru. Volvo ES90 Twin Motor er 1.800.000 kr. ódýrari, fjórhjóladrifinn, drífur 99 km lengra og hleðslustoppin eru um 40% styttri.',
       'ES 350e er fyrir þá sem setja ró, þægindi og langa ábyrgð í öndvegi.',
     ],
-    facts: 'a0a3432aa141',
-    model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Dugar framhjóladrifið í vetrarfærð?',
       'Borgar sig að taka 500e-útfærsluna?',
@@ -1541,13 +1537,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Má setja hjólagrind á hann?',
       'Hvernig er fótarýmið í aftursætunum?',
     ],
+    facts: 'e3893813c6fa',
   },
   'lexus-es-500e': {
     paragraphs: [
-      'Lexus ES 500e er veglegur stallbakur í stærri flokki fólksbíla, ætlaður þeim sem leita að fágaðri hljóðvist, þægindum og vönduðum frágangi sem merkið er rómað fyrir. Hann kemur með fjórhjóladrifi sem tryggir gott veggrip í snjó og vetrarfærð.',
-      'Auk öruggs grips býður bíllinn upp á lipra hröðun og ágætlega rúmgott skott fyrir hefðbundinn farangur. Aksturseiginleikarnir miða fyrst og fremst að mýkt og vellíðan í daglegu lífi fremur en óhefluðum krafti.',
-      'Á móti kemur að hann gefur eftir í drægni og hleður hægar en flestir keppinautar í sínum verðflokki, sem þýðir fleiri og lengri stopp á hringferðinni. Einnig má hann alls ekki draga kerru, sem er talsverður ókostur hérlendis. Ef tölurnar ráða ferð er Volvo ES90 Twin Motor Performance mun meira spennandi kostur, en hann er 800.000 kr. ódýrari, býður upp á 150 km meiri drægni, um 45% styttri hleðslustopp og má draga allt að 2.000 kg.',
-      'Lexus ES 500e höfðar því einkum til þeirra sem heillast af fágun og rólegum lúxus merkisins og sætta sig við að ferðalögin taki aðeins lengri tíma.',
+      'Lexus ES 500e er stór og fágaður fólksbíll með skottloki og fjórhjóladrifi, ætlaður þeim sem setja hljóðvist, þægindi og vandaðan frágang ofar öllu. Fjórhjóladrifið gerir hann öruggari í vetrarfærð en framhjóladrifnu útgáfuna.',
+      'Hann er líka 2,5 s sneggri í 0-100 km/klst en sú útgáfa, en aksturinn snýst fyrst og fremst um mýkt og ró frekar en kraft.',
+      'Á móti kemur að hann drífur styttra og hleður hægar en flestir á svipuðu verði, skottið er minna og hann má ekki draga kerru, sem er talsverður ókostur hérlendis. Volvo ES90 Twin Motor Performance er 1.800.000 kr. ódýrari, drífur 150 km lengra, hleðslustoppin eru um 45% styttri og hann má draga allt að 2.000 kg. Lexus ES 350e sparar 1.000.000 kr. og drífur 51 km lengra.',
+      'ES 500e er fyrir þá sem heillast af rólegum lúxus Lexus og vilja fjórhjóladrif, en tölurnar tala sínu máli.',
     ],
     questions: [
       'Af hverju hann frekar en Volvo ES90?',
@@ -1561,8 +1558,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig virkar fjórhjóladrifið í snjó?',
       'Hversu mikið pláss er í skottinu?',
     ],
-    facts: '1148e6384e68',
-    model: 'gemini-3.8-flash, thinking medium',
+    facts: 'ee0e68741af5',
   },
   'lexus-rz-350e': {
     paragraphs: [
@@ -1780,7 +1776,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig nýtast öll þessi 500 kW hérlendis?',
       'Hversu hratt hleður hann í reynd?',
     ],
-    facts: '391929ce5981',
+    facts: 'e444978c2820',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-amg-gt-53-4matic': {
@@ -2283,13 +2279,11 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'mini-aceman-e': {
     paragraphs: [
-      'Mini Aceman E er lítill og nettur jepplingur með líflegri hönnun Mini, ætlaður þeim sem vilja persónulegan og lipran bæjarbíl með fimm sætum.',
-      'Hann er auðveldur í þröngum stæðum og fremur ódýr, og vandaður frágangur og sérstæð innrétting gera hann eftirminnilegri en flesta smábíla. Hann má líka draga 750 kg, sem Fiat 500e og Fiat 600e mega ekki.',
-      'Á móti kemur að hann drífur mjög stutt, sérstaklega í vetrarkulda, er meðal þeirra sem hlaða hægast í sínum verðflokki og skottið er eitt það minnsta. Fiat 600e er 100.000 kr. ódýrari, drífur 90 km lengra og hleður með um 30% styttri stoppum.',
-      'Aceman E er heillandi bæjarbíll, en síður heppilegur ef ferðast er reglulega milli landshluta.',
+      'Mini Aceman E er lítill og nettur jepplingur með líflegri hönnun Mini, fyrir þá sem vilja persónulegan og lipran bæjarbíl með fimm sætum.',
+      'Hann er auðveldur í þröngum stæðum og fremur ódýr, og vandaður frágangur og sérstæð innrétting gera hann eftirminnilegri en flesta smábíla. Hann má líka draga 750 kg, sem Fiat 600e má ekki.',
+      'Á móti kemur að hann drífur mjög stutt, sérstaklega í vetrarkulda, er meðal þeirra sem hlaða hægast í sínum verðflokki og skottið er eitt það minnsta. Volvo EX30 Single Motor Extended Range kostar aðeins 100.000 kr. meira, drífur 165 km lengra og hleðslustoppin eru um 35% styttri.',
+      'Aceman E er heillandi bæjarbíll, en síður heppilegur ef þú ferð reglulega á milli landshluta.',
     ],
-    facts: '059d6def4aea',
-    model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að taka Aceman SE útfærsluna?',
       'Af hverju hann frekar en Fiat 600e?',
@@ -2302,6 +2296,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Komast fullorðnir fyrir í aftursætunum?',
       'Dugar hann sem eini bíll á heimilinu?',
     ],
+    facts: 'd6aaebeaf690',
   },
   'mini-cooper-se': {
     paragraphs: [
@@ -2345,10 +2340,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'mini-countryman-se-4x4': {
     paragraphs: [
-      'Mini Countryman SE 4x4 er meðalstór jepplingur með ríkan persónuleika, sem sameinar sérkenni Mini og þægindi hærri bíls. Hann hentar einkar vel þeim sem vilja skemmtilegan og áberandi bíl til daglegra nota.',
-      'Fjórhjóladrifið og lipur hröðun gera hann öruggan og traustan í vetrarfærð og á hálum vegum. Innanrýmið er vel heppnað og farangursrýmið nýtist vel fyrir hefðbundnar þarfir fjölskyldunnar, þótt bíllinn haldi þéttbýlisvænni stærð sinni.',
-      'Helsti gallinn kemur fram á langferðum: hann drífur fremur stutt og hleður hægar en flestir keppinautar í sínum verðflokki, sem lengir hleðslustoppin utan höfuðborgarsvæðisins. Hann dregur einnig fremur lítið. Ef mikil dráttargeta skiptir máli býður Mercedes-Benz EQA SUV 300 4MATIC upp á 600 kg meiri dráttargetu á sama verði, þótt skottið í honum sé umtalsvert minna.',
-      'Countryman SE er fyrst og fremst hönnunar- og lífsstílsbíll fyrir þá sem meta akstursgleði og útlit meira en langdrægni á hverja krónu.',
+      'Mini Countryman SE 4x4 er meðalstór jepplingur með ríkan persónuleika, sem sameinar sérkenni Mini og þægindi hærri bíls. Hann hentar ef þú vilt skemmtilegan og áberandi bíl til daglegra nota.',
+      'Fjórhjóladrifið og lipur hröðun gera hann öruggan í vetrarfærð og á hálum vegum, og innanrýmið er vel heppnað, með hringlaga skjánum sem setur svip á bílinn.',
+      'Helsti gallinn kemur fram á langferðum: hann drífur fremur stutt og hleður hægar en flestir keppinautar í sínum verðflokki, sem lengir hleðslustoppin utan höfuðborgarsvæðisins. Skottið er líka minna og hann dregur minna en flestir. Ef krókurinn skiptir máli má Mercedes-Benz EQA SUV 300 4MATIC draga 600 kg meira á sama verði, þótt skottið í honum sé 120 l minna.',
+      'Countryman SE er fyrst og fremst hönnunar- og lífsstílsbíll fyrir þá sem meta akstursgleði og útlit meira en drægni á hverja krónu.',
     ],
     questions: [
       'Af hverju er BMW iX1 xDrive 30 dýrari?',
@@ -2362,8 +2357,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar drægnin á hringveginum?',
       'Hvernig virkar fjórhjóladrifið í hálku?',
     ],
-    facts: '37f5bf4628c7',
-    model: 'gemini-3.8-flash, thinking medium',
+    facts: '85187a1fd59f',
   },
   'nissan-ariya-base': {
     paragraphs: [
@@ -3042,7 +3036,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er raundrægnin í vetrarfærð?',
       'Er hann lipur þrátt fyrir stærðina?',
     ],
-    facts: '24d8e912082b',
+    facts: '089bd685a8c3',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-cayenne-s-coupe': {
@@ -3111,25 +3105,23 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'range-rover-electric-ev450': {
     paragraphs: [
-      'Range Rover Electric EV450 er stór lúxusjeppi sem færir hefðbundna fágun merkisins yfir í rafdrifinn veruleika. Hann hentar þeim sem leita að fágaðri akstursupplifun, miklum þægindum og traustri nærveru á veginum frekar en ærandi afli.',
-      'Stærsti styrkleiki hans í daglegu lífi er plássið, en 733 lítra skottið er stærra en hjá flestum keppinautum. Hann má draga 2.500 kg og fjórhjóladrifið tryggir gott grip í snjó og hálku. Þótt hann drífi fremur langt af öllum rafbílum er drægnin styttri en hjá flestum á svipuðu verði, en 600 kílómetrar duga samt hæglega í langferðir milli landshluta.',
-      'Helsti galli bílsins er að hann er meðal þeirra hægustu og aflminnstu í sínum verðflokki. Ef snerpa skiptir meira máli er Porsche Cayenne Turbo til dæmis rúmum þremur sekúndum sneggri upp í hundraðið og með enn stærra skott. Þeir sem þurfa fleiri sæti gætu einnig litið til Mercedes-Benz EQS SUV 580 4MATIC, sem rúmar sjö manns og drífur aðeins lengra.',
-      'Þetta er því virðulegur lúxusferðabíll sem leggur áherslu á rólegheit, rými og þægindi fram yfir hraða.',
+      'Range Rover Electric EV450 er stór lúxusjeppi sem færir hefðbundna fágun merkisins yfir í rafmagnið. Hann hentar ef þú leitar að rólegri og þægilegri akstursupplifun og traustri nærveru á veginum frekar en ærandi afli.',
+      'Stærsti styrkleiki hans í daglegu lífi er plássið, en skottið er stærra en hjá flestum keppinautum. Hann má draga 2.500 kg, og þótt drægnin sé styttri en hjá flestum á svipuðu verði drífur hann fremur langt og dugar vel í langferðir milli landshluta.',
+      'Helsti galli bílsins er að hann er meðal þeirra hægustu og aflminnstu í sínum verðflokki. Range Rover Sport Electric EV550 er 3.700.000 kr. ódýrari og 1,1 s sneggri í 0-100 km/klst, þótt skottið sé 106 l minna, og Porsche Cayenne Turbo er 3,1 s sneggri og með 104 l stærra skott.',
+      'Þetta er virðulegur lúxusferðabíll sem leggur áherslu á rólegheit, rými og þægindi fram yfir hraða.',
     ],
     questions: [
       'Munar miklu um meira afl í EV550?',
       'Er hann of seinn miðað við verðið?',
+      'Hvað hefur hann fram yfir Sport Electric?',
       'Er hann þýðari en Porsche Cayenne Turbo?',
       'Er Mercedes-Benz EQS SUV betri ferðabíll?',
-      'Kemst hann meira en Mercedes-Benz G-class?',
       'Hvernig er vaðdýptin og torfærargetan?',
       'Er hljóðvistin eins góð og í bensínbílnum?',
-      'Hleður hann á 800 volta spennu?',
       'Hvað dregur tengivagn mikið úr drægninni?',
       'Hvernig er raunveruleg drægni á þjóðvegi?',
     ],
-    facts: 'efc4bf602151',
-    model: 'gemini-3.8-flash, thinking medium',
+    facts: '22bae9f0311a',
   },
   'range-rover-electric-ev550': {
     paragraphs: [
@@ -3152,6 +3144,44 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     ],
     facts: 'ff500b6cb4c4',
     model: 'gemini-3.8-flash, thinking medium',
+  },
+  'range-rover-sport-electric-ev450': {
+    paragraphs: [
+      'Range Rover Sport Electric EV450 er stór lúxusjeppi, lægri og sportlegri en stóri bróðirinn og fyrsti Sportinn sem gengur eingöngu fyrir rafmagni. Hann hentar ef þú vilt yfirvegaðan og virðulegan jeppa sem kemst líka út fyrir malbikið.',
+      'Plássið og krókurinn eru hans sterkustu hliðar: skottið er stærra og hann dregur meira en flestir á svipuðu verði, svo hjólhýsið eða hestakerran fylgir með án vandræða. Og Range Rover-nafnið stendur enn fyrir sitt þegar vegurinn breytist í slóða.',
+      'Á móti kemur að hann er meðal þeirra hægustu og drífur styttra og hleður hægar en flestir keppinautar hans. Porsche Cayenne S kostar aðeins 60.000 kr. meira, drífur 53 km lengra, er 1,8 s sneggri í 0-100 km/klst, hleðslustoppin eru um 35% styttri og skottið 244 l stærra. Það er erfitt að horfa fram hjá því.',
+      'Sport Electric EV450 er fyrir þann sem vill Range Rover og er tilbúinn að borga fyrir merkið.',
+    ],
+    questions: [
+      'Er EV550 þess virði fyrir meiri snerpu?',
+      'Af hverju hann frekar en Porsche Cayenne S?',
+      'Hvernig er hann miðað við BMW iX?',
+      'Hver er munurinn á honum og Range Rover?',
+      'Hvernig dugar hann í torfærum?',
+      'Hvað dregur hjólhýsi mikið úr drægninni?',
+      'Hvernig er raundrægnin á veturna?',
+      'Hvernig er plássið í aftursætunum?',
+    ],
+    facts: '8ddb662103c2',
+  },
+  'range-rover-sport-electric-ev550': {
+    paragraphs: [
+      'Range Rover Sport Electric EV550 er aflmeiri útgáfa rafmagnaða Sportsins, stór lúxusjeppi sem er lægri og sportlegri en stóri Range Roverinn. Hann hentar ef þú vilt virðulegan jeppa sem á líka nóg inni þegar þú stígur á gjöfina.',
+      'Skottið er stærra og krókurinn ber meira en hjá flestum á svipuðu verði, svo kerran eða hjólhýsið fylgir með. Hann er fremur snöggur, þótt flestir keppinautar hans séu enn sneggri.',
+      'Gallarnir eru að hann drífur styttra og hleður hægar en flestir þeirra. Porsche Cayenne Turbo kostar 3.100.000 kr. meira en er 2 s sneggri í 0-100 km/klst, með um 30% styttri hleðslustopp og 210 l stærra skott. Og ef snerpan skiptir ekki öllu sparar Range Rover Sport Electric EV450 3.000.000 kr. með sömu drægni og sama skotti.',
+      'EV550 er fyrir þann sem vill Range Rover með aukakrafti, en EV450 gefur flestum það sem skiptir máli.',
+    ],
+    questions: [
+      'Munar miklu á honum og EV450?',
+      'Af hverju hann frekar en Cayenne Turbo?',
+      'Er Mercedes-Benz EQS SUV betri ferðabíll?',
+      'Hver er munurinn á honum og Range Rover?',
+      'Hvernig dugar hann í torfærum?',
+      'Hvað má hann draga þungt hjólhýsi?',
+      'Hvernig er raundrægnin á veturna?',
+      'Hvað tekur hraðhleðsla langan tíma?',
+    ],
+    facts: 'e5c5435d1e19',
   },
   'renault-r5-e-tech-base': {
     paragraphs: [
@@ -3440,10 +3470,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'smart-1-brabus': {
     paragraphs: [
-      'Smart #1 Brabus er lítill jepplingur sem virkar nánast eins og hreinræktaður sportbíll í dulargervi. Hann er sérsniðinn fyrir þá sem vilja gríðarlega snerpu í liprum bíl sem er auðvelt að athafna sig á í þéttbýli.',
-      'Helsti styrkur hans liggur í hröðun og afli, en hann er meðal þeirra allra sneggstu í sínum verðflokki. Fjórhjóladrifið sér til þess að mikill krafturinn skili sér örugglega ofan í götuna við íslenskar aðstæður, jafnt í snjó sem hálku.',
-      'Aftur á móti gefur bíllinn mikið eftir í langkeyrslu. Hann drífur mjög stutt og hleður hægar en flestir keppinautar, svo vetrarferðir milli landshluta kalla á tíð hleðslustopp. Ef meiri drægni skiptir máli býður hinn náskyldi Volvo EX30 Twin Motor Performance upp á enn betri hröðun og 50 km meiri drægni fyrir 600.000 kr. meira, og BYD Atto 3 Evo kostar 700.000 kr. meira og er jafn snöggur en drífur 70 km lengra og hleður með um 20% styttri stoppum. Innan sömu tegundar má líka skoða Smart #1 Pulse, sem býður upp á sama fjórhjóladrif og afl en sparar 500.000 kr.',
-      'Þetta er skemmtileg og kraftmikil vasa-raketta fyrir þá sem setja akstursgleði í forgang, en síður heppilegur ferðabíll á löngum leiðum.',
+      'Smart #1 Brabus er lítill jepplingur sem hagar sér nánast eins og sportbíll í dulargervi. Hann hentar ef þú vilt mikla snerpu í liprum bíl sem er auðvelt að athafna sig á í bænum.',
+      'Helsti styrkur hans liggur í hröðun og afli, en hann er meðal þeirra sneggstu í sínum verðflokki, og krókurinn ber meira en hjá flestum keppinautum hans.',
+      'Hann gefur hins vegar mikið eftir í langkeyrslu: hann drífur mjög stutt og hleður hægar en flestir, svo vetrarferðir milli landshluta kalla á tíð stopp. Volvo EX30 Twin Motor Performance kostar 400.000 kr. meira, er 0,3 s sneggri og drífur 50 km lengra, og BYD Atto 3 Evo kostar 700.000 kr. meira, drífur 70 km lengra, hleðslustoppin eru um 20% styttri og skottið 263 l stærra. Smart #1 Pulse er með sama afl og sparar 500.000 kr.',
+      'Þetta er skemmtileg vasaraketta fyrir þá sem setja akstursgleði í forgang, en síður góður ferðabíll.',
     ],
     questions: [
       'Af hverju hann frekar en Volvo EX30?',
@@ -3457,8 +3487,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Eyðir hann miklu í Brabus-stillingu?',
       'Hentar hann sem eini bíll á heimilinu?',
     ],
-    facts: '99b8b6647b5b',
-    model: 'gemini-3.8-flash, thinking medium',
+    facts: '2a9e546b7f36',
   },
   'smart-3-pulse': {
     paragraphs: [
@@ -3479,18 +3508,16 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er raunveruleg drægni á veturna?',
       'Hvernig er fjöðrunin á slæmum vegum?',
     ],
-    facts: 'bdd306f88f71',
+    facts: '75587bd05fe0',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'smart-3-brabus': {
     paragraphs: [
-      'Smart #3 Brabus er öflugasta útfærsla #3, rennilegur jepplingur með fjórhjóladrifi og gríðarlegu afli, meðal sneggstu bíla á sínu verði.',
-      'Hann er aflmeiri en flestir keppinautar hans og má draga 1.600 kg.',
-      'Gallarnir eru að hann drífur styttra, hleður hægar og er með minna skott en flestir þeirra. Volvo EX30 Twin Motor Performance kostar 400.000 kr. meira, er álíka snöggur, drífur 35 km lengra og hleður með um 10% styttri stoppum. Smart #3 Pulse er 500.000 kr. ódýrari og aðeins sjónarmun hægari.',
+      'Smart #3 Brabus er öflugasta útfærsla #3, rennilegur jepplingur með fjórhjóladrifi og miklu afli, meðal sneggstu bíla á sínu verði.',
+      'Hann er aflmeiri en flestir keppinautar hans og krókurinn ber 1.600 kg, meira en hjá flestum þeirra.',
+      'Gallarnir eru að hann drífur styttra, er með minna skott og er dýrari á hvern km drægni en flestir. Volvo EX30 Twin Motor Performance kostar 200.000 kr. meira, er álíka snöggur, drífur 35 km lengra og hleðslustoppin eru um 10% styttri. Smart #3 Pulse er 500.000 kr. ódýrari og aðeins sjónarmun hægari.',
       'Smart #3 Brabus er fyrir þá sem vilja mikinn kraft og sportlegan svip, en #3 Pulse gefur meira fyrir peninginn.',
     ],
-    facts: '70767fd41e18',
-    model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er Brabus þess virði umfram Pulse?',
       'Hvernig er plássið miðað við Volvo EX30?',
@@ -3503,6 +3530,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er nóg höfuðpláss í aftursætunum?',
       'Hve mikið dregur kerra úr drægninni?',
     ],
+    facts: 'a6dca03c36f3',
   },
   'smart-5-pro': {
     paragraphs: [
@@ -3940,7 +3968,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu lipur er hann í borgarakstri?',
       'Hvernig er plássið í aftursætunum?',
     ],
-    facts: 'c75d3d868e7a',
+    facts: 'b70eab9de109',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'toyota-c-hr-77-kwh': {
@@ -4296,13 +4324,11 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'volvo-es90-twin-motor': {
     paragraphs: [
-      'Volvo ES90 Twin Motor er stór og fágaður fólksbíll með afturhlera, fimm metrar á lengd, þar sem skandinavískur lúxus, hljóðlátur akstur og þægindi eru í fyrirrúmi. Hann hentar þeim sem vilja vandaðan langferðabíl með klassísku fólksbílasniði frekar en jeppa.',
+      'Volvo ES90 Twin Motor er stór og fágaður fólksbíll með afturhlera, fimm metrar á lengd, þar sem skandinavískur lúxus, hljóðlátur akstur og þægindi eru í fyrirrúmi. Hann hentar ef þú vilt vandaðan langferðabíl í fólksbílasniði frekar en jeppa.',
       'Stærsti kosturinn er hve vel hann hentar í langferðir: hann drífur lengra og hleður hraðar en flestir á svipuðu verði, sem kemur sér vel í vetrarakstri milli landshluta. Hann má líka draga 2.000 kg.',
-      'Gallarnir eru að skottið er eitt það minnsta og hann er hægari en flestir keppinautar hans. Mercedes-Benz C 400 4MATIC er 1.000.000 kr. ódýrari, drífur 83 km lengra og er sneggri, og Audi A6 e-tron Sportback quattro er 2.500.000 kr. ódýrari, drífur 33 km lengra og er með 56 l stærra skott.',
+      'Gallarnir eru að skottið er eitt það minnsta og hann er hægari en flestir keppinautar hans. Audi A6 e-tron Sportback quattro er 1.300.000 kr. ódýrari, drífur 33 km lengra, er 0,9 s sneggri og með 61 l stærra skott, og Mercedes-Benz C 400 4MATIC kostar 200.000 kr. meira en drífur 83 km lengra og er með 103 l stærra skott.',
       'ES90 er sterkur kostur fyrir þá sem meta drægni, hraða hleðslu og fágun ofar plássi.',
     ],
-    facts: 'e5c03adf2eda',
-    model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er Performance-útfærslan þess virði?',
       'Er skottið of lítið fyrir fjölskyldu?',
@@ -4315,16 +4341,15 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er erfitt að leggja honum í bænum?',
       'Er hann betri en Mercedes-Benz C 400?',
     ],
+    facts: 'f363ffff7fd5',
   },
   'volvo-es90-twin-motor-performance': {
     paragraphs: [
-      'Volvo ES90 Twin Motor Performance er stór lúxusfólksbíll með afturhlera og fjórhjóladrifi, fimm metrar á lengd, aflmeiri útgáfa ES90, sem sameinar langferðaþægindi og mikla snerpu.',
+      'Volvo ES90 Twin Motor Performance er stór lúxusfólksbíll með afturhlera og fjórhjóladrifi, fimm metrar á lengd, aflmeiri útgáfa ES90 sem sameinar langferðaþægindi og mikla snerpu.',
       'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði og er meðal þeirra sneggstu og aflmestu. Hann má draga 2.000 kg.',
-      'Helsti ókosturinn er að skottið er eitt það minnsta. Volvo ES90 Twin Motor er 800.000 kr. ódýrari með sömu drægni og hleðslu, og gefur aðeins eftir í snerpu.',
+      'Helsti ókosturinn er að skottið er eitt það minnsta. Volvo ES90 Twin Motor er 1.000.000 kr. ódýrari með sömu drægni og álíka löng hleðslustopp, og er 1,4 s hægari í 0-100 km/klst.',
       'ES90 Twin Motor Performance er fyrir þá sem vilja langdrægan lúxusfólksbíl með miklu afli, en flestum dugar ódýrari útfærslan.',
     ],
-    facts: '123ea68e52a8',
-    model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Mun ég finna mun á Performance-útgáfunni?',
       'Af hverju hann frekar en BMW i4 M60 xDrive?',
@@ -4337,6 +4362,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hve hratt hleður hann frá 10 í 80%?',
       'Er erfitt að leggja honum í bílastæði?',
     ],
+    facts: '8a31170b2a1c',
   },
   'volvo-ex40-recharge-twin': {
     paragraphs: [
@@ -4358,39 +4384,15 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     ],
     facts: '39582f867511',
   },
-  'volvo-ex30-single-motor': {
-    paragraphs: [
-      'Volvo EX30 Single Motor er lítill og nettur jepplingur með afturhjóladrifi og skandinavísku yfirbragði, ódýrasta útfærsla EX30, fyrir þá sem vilja vandaðan bæjarbíl.',
-      'Hann er sneggri og aflmeiri en flestir á svipuðu verði, léttur og kvikur í daglegum akstri.',
-      'Gallarnir eru að hann er meðal þeirra sem drífa styst, hleður hægar en flestir keppinautar hans og skottið er eitt það minnsta. Volvo EX30 Single Motor Extended Range kostar 400.000 kr. meira, drífur 136 km lengra, hleður hraðar og má draga 600 kg meira.',
-      'EX30 Single Motor er skemmtilegur borgarbíll, en flestum borgar sig stærri rafhlaðan.',
-    ],
-    facts: '4cb5ee519b5d',
-    model: 'gemini-3.8-flash, thinking medium',
-    questions: [
-      'Hverjum hentar minni rafhlaðan best?',
-      'Munar miklu um fjórhjóladrifið?',
-      'Hvernig er hann miðað við Kia EV3?',
-      'Af hverju frekar hann en Smart #1?',
-      'Kemst barnavagn í skottið á honum?',
-      'Hvernig duga aftursætin fyrir fullorðna?',
-      'Hvað dregur hann í frosti á þjóðvegi?',
-      'Dugar afturhjóladrifið í vetrarfærð?',
-      'Hvað má hann draga þunga kerru?',
-      'Hvað tekur hraðhleðsla langan tíma?',
-    ],
-  },
   'volvo-ex30-single-motor-extended-range': {
     paragraphs: [
-      'Volvo EX30 Single Motor Extended Range er lítill og nettur jepplingur með vandaðri skandinavískri hönnun, ætlaður þeim sem vilja gæðatilfinningu í lipurri stærð frekar en stóran fjölskyldubíl.',
+      'Volvo EX30 Single Motor Extended Range er lítill og nettur jepplingur með vandaðri skandinavískri hönnun, fyrir þá sem vilja gæðatilfinningu í lipurri stærð frekar en stóran fjölskyldubíl.',
       'Hann er sneggri og hleður hraðar en flestir á svipuðu verði, og þrátt fyrir smæðina má hann draga 1.600 kg, meira en flestir þeirra.',
-      'Hins vegar er skottið eitt það minnsta, aftursætin eru þröng og hann er aðeins afturhjóladrifinn. Toyota C-HR+ kostar 200.000 kr. meira og er 29 cm lengri með 98 l stærra skott, en mun hægari og má ekki draga kerru.',
-      'EX30 hentar þeim sem vilja snarpan og vandaðan smábíl sem getur dregið kerru, en síður fjölskyldum sem þurfa pláss.',
+      'Hins vegar er skottið eitt það minnsta, aftursætin eru þröng og hann er aðeins afturhjóladrifinn. Toyota C-HR+ kostar 800.000 kr. meira og er með 91 l stærra skott, en hann er 3 s hægari í 0-100 km/klst og má ekki draga kerru.',
+      'EX30 er snarpur og vandaður smábíll sem getur dregið kerru, en síðri kostur fyrir fjölskyldur sem þurfa pláss.',
     ],
-    facts: 'ed765b9f68e0',
-    model: 'gemini-3.8-flash, thinking medium',
     questions: [
-      'Borgar Twin Motor sig fyrir 300 þúsund?',
+      'Borgar Twin Motor sig fyrir 700 þúsund?',
       'Hvernig dugar afturhjóladrifið í snjó?',
       'Kemst hann til Akureyrar á einni hleðslu?',
       'Hvað dregur kerra mikið úr drægninni?',
@@ -4401,13 +4403,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hve hratt hleður hann í miklu frosti?',
       'Er skjástýringin flókin í akstri?',
     ],
+    facts: 'f052bd6fd3d7',
   },
   'volvo-ex30-twin-motor-performance': {
     paragraphs: [
-      'Volvo EX30 Twin Motor Performance er lítill jepplingur sem einkennist af miklu afli í nettum bíl. Hann hentar vel þeim sem vilja lipran borgarbíl með öryggi fjórhjóladrifs í vetrarfærð, en hafa minni þörf fyrir mikið rými.',
-      'Stærsti kosturinn er án efa hröðunin, en bíllinn er meðal þeirra allra sneggstu í sínum verðflokki og tekur aðeins 3,6 s upp í hundraðið. Fjórhjóladrifið kemur sér sérlega vel í snjó og hálku, þar sem tveir rafmótorar tryggja gott grip og öruggan akstur við krefjandi aðstæður.',
-      'Aðalveikleikinn er sá að bíllinn drífur fremur stutt, og styttra en flestir keppinautar hans. Í vetrarkulda munar um það á lengri ferðum á milli landshluta. Ef meiri drægni og pláss skipta meira máli en ofurhröðun gæti MG MGS6 Dual Motor hentað betur, en hann er 600.000 kr. ódýrari og kemst 35 km lengra. Sé fjórhjóladrif ekki nauðsynlegt má líka skoða Volvo EX30 Single Motor Extended Range, sem kostar 300.000 kr. minna og bætir við 30 km drægni.',
-      'Þetta er afskaplega skemmtilegur og snöggur bíll fyrir þá sem setja viðbragð og akstursgleði í fyrsta sæti frekar en langdrægni.',
+      'Volvo EX30 Twin Motor Performance er lítill jepplingur sem einkennist af miklu afli í nettum bíl. Hann hentar ef þú vilt lipran bæjarbíl með fjórhjóladrifi fyrir veturinn en þarft ekki mikið pláss.',
+      'Stærsti kosturinn er hröðunin, en hann er meðal þeirra sneggstu í sínum verðflokki. Krókurinn ber líka meira en hjá flestum keppinautum hans.',
+      'Aðalveikleikinn er að hann drífur fremur stutt, og styttra en flestir þeirra, og skottið er með þeim minnstu. Ef drægni og pláss skipta meira máli en hröðunin er MG MGS6 Dual Motor 400.000 kr. ódýrari, drífur 35 km lengra og er með 270 l stærra skott. Sé fjórhjóladrif ekki nauðsynlegt sparar Volvo EX30 Single Motor Extended Range 700.000 kr. og drífur 25 km lengra.',
+      'Þetta er skemmtilegur og snöggur bíll fyrir þá sem setja viðbragð og akstursgleði ofar drægni.',
     ],
     questions: [
       'Er MG MGS6 Dual Motor miklu stærri?',
@@ -4421,8 +4424,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er óþægilegt að hafa allt á miðskjánum?',
       'Kemst barnavagn fyrir í skottinu?',
     ],
-    facts: '4592fca1b80a',
-    model: 'gemini-3.8-flash, thinking medium',
+    facts: '07c1fa897b3d',
   },
   'volvo-ex30-cross-country-twin-motor-performance': {
     paragraphs: [
@@ -4443,7 +4445,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er aftursætið of þröngt fyrir fullorðna?',
       'Hve miklu hægar hleður hann en aðrir?',
     ],
-    facts: 'a13782a95275',
+    facts: 'd3ff5348b204',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-ex60-p10': {
