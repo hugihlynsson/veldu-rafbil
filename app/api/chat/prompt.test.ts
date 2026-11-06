@@ -11,6 +11,8 @@ import {
   previousGrantAmountText,
 } from '@/modules/copy/grantCopy'
 import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
+import { allNews } from '@/modules/news/history'
+import { recentChangesSection } from './recentChanges'
 
 describe('the assistant system prompt', () => {
   const lines = systemPrompt.split('\n')
@@ -67,6 +69,26 @@ describe('the assistant system prompt', () => {
     const low = Math.round(realRangeLowFactor * 100)
     const high = Math.round(realRangeHighFactor * 100)
     expect(systemPrompt).toContain(`${low}%-${high}% af WLTP`)
+  })
+
+  // What changed and when, which the updates page and each car's page show
+  // beside the chat; the advisor would otherwise guess
+  it('tells what changed on the list, with the rules for reading it', () => {
+    expect(systemPrompt).toContain(recentChangesSection(allNews))
+    expect(systemPrompt).toContain('listaverð FYRIR ríkisstyrk')
+    expect(systemPrompt).toContain('Þú veist ekki hvaða dagur er í dag')
+    expect(systemPrompt).toContain('svo ekki giska')
+  })
+
+  // The changes go after the cars, whose lines carry the refs, and before the
+  // rules that read them
+  it('sets the changes between the car list and the rules', () => {
+    const changes = systemPrompt.indexOf('Breytingar á listanum frá')
+    const lastCar = Math.max(
+      ...cars.map((car) => systemPrompt.indexOf(`${car.label}: `)),
+    )
+    expect(changes).toBeGreaterThan(lastCar)
+    expect(changes).toBeLessThan(systemPrompt.indexOf('Gott að hafa í huga'))
   })
 
   // A marker the chat UI would render as text rather than a follow-up chip

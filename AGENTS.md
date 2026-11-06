@@ -86,7 +86,10 @@ UI goes through `addDecimalSeparators`.
 The grant is worth stating twice, because getting it wrong is silent:
 `car.price` is the _list_ price, everything user-facing reads
 `car.priceWithGrant`, and raw `car.price` is only ever the "full price without
-grant" tooltip.
+grant" tooltip. The one other list price shown is a past one, from the change
+log in `modules/data/carChanges.ts`: what the grant was on a past day is not
+kept, so the news and a car's history give the price the seller set and call
+it listaverð.
 
 No number about the data is written out by hand — copy that counts cars
 interpolates the length of the list, and copy that names the grant reads the

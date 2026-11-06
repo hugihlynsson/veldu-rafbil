@@ -31,6 +31,24 @@ describe('the car data', () => {
     expect(orphans).toEqual([])
   })
 
+  // Variants sit side by side in the list and in comparisons, where one photo
+  // twice reads as a duplicate. These still share one for want of another shot.
+  const sharedPhotos = new Set(['mercedes-glc', 'renault-r5'])
+
+  it('gives each car on sale a photo of its own', () => {
+    const byPhoto = new Map<string, Array<string>>()
+    for (const car of newCars.filter((car) => !car.deprecated)) {
+      const name = car.heroImageName
+      byPhoto.set(name, [...(byPhoto.get(name) ?? []), carLabel(car)])
+    }
+    const shared = [...byPhoto].filter(([, cars]) => cars.length > 1)
+
+    expect(shared.filter(([name]) => !sharedPhotos.has(name))).toEqual([])
+    expect(
+      [...sharedPhotos].filter((name) => (byPhoto.get(name)?.length ?? 0) < 2),
+    ).toEqual([])
+  })
+
   // A collision is three bugs at once: two cards on one id, the chat scrolling
   // to whichever came first, and a list React cannot tell apart.
   it('gives every car an id of its own', () => {

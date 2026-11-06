@@ -14,14 +14,19 @@ const ChatContainer = dynamic(() => import('@/components/chat/ChatContainer'), {
 })
 
 interface Props {
-  cars: ReadonlyArray<Car>
+  /**
+   * The car whose page this is, or the cars compared. None for a page about
+   * no car in particular, such as the updates, whose questions go as the
+   * list's do: the advisor would take several for a comparison
+   */
+  cars?: ReadonlyArray<Car>
   /** Written with the car's review; the general ones without it */
   starters?: ReadonlyArray<string>
 }
 
 /**
- * The advisor's bar on a car's page or a comparison, carrying the cars it is
- * about with each question. A car picked from an answer opens its own page,
+ * The advisor's bar on a page other than the list, carrying the cars the page
+ * is about, if any, with each question. A car picked from an answer opens its own page,
  * unless it is the car whose page this is, which is scrolled up to.
  */
 const PageChat: FunctionComponent<Props> = ({ cars, starters }) => {
@@ -30,7 +35,7 @@ const PageChat: FunctionComponent<Props> = ({ cars, starters }) => {
   const showCar = (car: Car) => {
     // By id: the page's cars came from the server, a picked one from the
     // client's own list, so they are never the same object
-    if (cars.length === 1 && cars[0]?.id === car.id) {
+    if (cars?.length === 1 && cars[0]?.id === car.id) {
       window.scrollTo({
         top: 0,
         behavior: prefersReducedMotion() ? 'auto' : 'smooth',

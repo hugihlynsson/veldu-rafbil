@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import cars from '@/modules/data/cars'
 import { listHeadline } from '@/modules/copy/listHeadline'
 import { LIST_SHARE_IMAGE_PATH, shareImageSize } from '@/modules/detail/paths'
+import { latestNews } from '@/modules/news/feed'
 import CarList from '@/components/list/CarList'
 import Footer from '@/components/Footer'
 
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <main>
-      <CarList />
+      <CarList latest={latestNews} />
       <Footer />
     </main>
   )

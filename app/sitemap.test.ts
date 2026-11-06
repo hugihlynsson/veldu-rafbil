@@ -4,18 +4,30 @@ import { describe, expect, it } from 'vitest'
 
 import { allCars } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
+import { days } from '@/modules/news/feed'
 import { SITE_URL } from '@/modules/siteUrl'
 import sitemap from './sitemap'
 
-const urls = sitemap().map(({ url }) => url)
+const entries = sitemap()
+const urls = entries.map(({ url }) => url)
 
 describe('sitemap', () => {
-  it('lists the list and every car page that is built', () => {
+  it('lists the list, every car page and every day of news that is built', () => {
     expect(urls).toContain(`${SITE_URL}/`)
     for (const car of allCars) {
       expect(urls).toContain(`${SITE_URL}/bill/${carSlug(car)}`)
     }
-    expect(urls).toHaveLength(allCars.length + 1)
+    expect(urls).toContain(`${SITE_URL}/uppfaerslur`)
+    for (const { date } of days) {
+      expect(urls).toContain(`${SITE_URL}/uppfaerslur/${date}`)
+    }
+    expect(urls).toHaveLength(allCars.length + days.length + 2)
+  })
+
+  it('dates the news alone', () => {
+    const dated = entries.filter(({ lastModified }) => lastModified)
+    expect(dated.every(({ url }) => url.includes('/uppfaerslur'))).toBe(true)
+    expect(dated).toHaveLength(days.length + 1)
   })
 
   it('names each page once', () => {

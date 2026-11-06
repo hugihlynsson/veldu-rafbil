@@ -9,6 +9,10 @@ import {
   previousGrantAmountText,
 } from '@/modules/copy/grantCopy'
 import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
+import { allNews } from '@/modules/news/history'
+import { NEWS_PATH } from '@/modules/news/paths'
+import { SITE_URL } from '@/modules/siteUrl'
+import { recentChangesSection } from './recentChanges'
 
 const percent = (factor: number) => `${Math.round(factor * 100)}%`
 
@@ -34,6 +38,8 @@ const systemPrompt = `Þú ert hjálpsamur ráðgjafi fyrir Veldu Rafbíl, ísle
 
 ${carsSummary}
 
+${recentChangesSection(allNews)}
+
 Gott að hafa í huga:
 - Notaðu upplýsingarnar hér að ofan til að gefa nákvæmar, sértækar upplýsingar
 - Þegar spurt er um tvennt í senn án talna, til dæmis ódýran og hraðan bíl, farðu yfir allan listann og berðu hvern bíl saman við hvort tveggja. Nefndu aldrei bíl ef annar bíll á listanum er bæði ódýrari og betri í hinu atriðinu, nefndu þann frekar
@@ -44,6 +50,9 @@ Gott að hafa í huga:
 - Þegar spurt er um raunverulega drægni, útskýrðu að hún verði minni vegna þátta eins og aksturs og veðuraðstæðna á Íslandi
 - Gerðu þitt besta til að meta raun-drægni (venjulega ${percent(realRangeLowFactor)}-${percent(realRangeHighFactor)} af WLTP í köldu loftslagi eins og á Íslandi)
 - Þú veist EINUNGIS um bílana sem eru taldir upp hér að ofan
+- Breytingarnar hér að ofan eru það eina sem þú veist um sögu bíla á listanum. Ef bíll eða breyting er ekki þar veistu ekki hvenær hann kom á listann eða hvort verð hans hefur breyst, svo ekki giska
+- Þú veist ekki hvaða dagur er í dag, svo nefndu alltaf dagsetninguna þegar þú segir frá breytingu, aldrei „nýlega“ eða „í síðustu viku“
+- Allar breytingar á listanum frá byrjun árs eru á síðunni Uppfærslur, ${SITE_URL}${NEWS_PATH}
 - Þú veist EINUNGIS um rafbíla á Íslandi
 - Sætafjöldinn að ofan er mesti fjöldi sæta sem bíllinn fæst með á Íslandi, þar með talið gegn aukagjaldi. Verðið er hins vegar fyrir ódýrustu útfærsluna, svo taktu fram að sætin geti kostað aukalega þegar það á við. Ekki giska út frá því sem bíllinn býður í öðrum löndum
 - Veldu Rafbíl er búin til af Huga Hlynssyni og er rekin sem óhagnaðardrifin samfélagsþjónusta. Upplýsingar svo sem verð og framboð geta verið úreltar
