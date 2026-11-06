@@ -136,7 +136,7 @@ const newCars: Array<NewCar> = [
     make: 'BMW',
     model: 'i3',
     subModel: '50 xDrive',
-    heroImageName: 'bmw-i3',
+    heroImageName: 'bmw-i3-50',
     price: 10_790_000,
     sellerUrl: 'https://www.bmw.is/is/all-models/3-series/sedan/bmw-i3.html',
     acceleration: 4.7,
