@@ -279,7 +279,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'kia-ev4-base': [
     'renault-scenic-e-tech-ev87',
     'tesla-model-3-long-range-afturhjoladrif',
-    'skoda-elroq-85',
+    'skoda-elroq-85x',
   ],
   'kia-ev4-fastback': [
     'tesla-model-3-long-range-afturhjoladrif',
@@ -608,7 +608,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'fiat-600e-base',
   ],
   'peugeot-e-3008-base': [
-    'skoda-elroq-85',
+    'skoda-elroq-85x',
     'renault-scenic-e-tech-ev87',
     'hongqi-ehs5-base',
   ],
@@ -768,7 +768,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'hyundai-ioniq-3-standard-range',
   ],
   'renault-scenic-e-tech-ev60': [
-    'skoda-elroq-85',
+    'skoda-elroq-85x',
     'xpeng-g6-rwd-standard-range',
     'kgm-torres-evx',
   ],
@@ -825,7 +825,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'smart-1-brabus': [
     'volvo-ex30-twin-motor-performance',
     'smart-3-brabus',
-    'byd-atto-3-evo-base',
+    'volkswagen-id-polo-gti',
   ],
   'smart-3-pulse': [
     'volvo-ex30-twin-motor-performance',
@@ -894,7 +894,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'tesla-model-y-standard-range': [
     'xpeng-g6-rwd-standard-range',
-    'skoda-elroq-85',
+    'skoda-elroq-85x',
     'hyundai-kona-electric-65-kwh',
   ],
   'tesla-model-y-premium-long-range': [
@@ -981,6 +981,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'skoda-epiq-55',
     'renault-r5-e-tech-52-kwh',
     'byd-dolphin-base',
+  ],
+  'volkswagen-id-polo-gti': [
+    'mini-cooper-se',
+    'smart-1-brabus',
+    'volvo-ex30-twin-motor-performance',
   ],
   'volkswagen-id-cross-base': [
     'citroen-e-c4-base',
@@ -1078,7 +1083,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'smart-5-pro',
   ],
   'xpeng-g6-rwd-long-range': [
-    'skoda-elroq-85',
+    'skoda-elroq-85x',
     'peugeot-e-3008-base',
     'renault-scenic-e-tech-ev87',
   ],
