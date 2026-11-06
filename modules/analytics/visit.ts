@@ -1,10 +1,11 @@
 import { CAR_PATH, COMPARISON_PATH } from '@/modules/detail/paths'
 import { MAX_COMPARED } from '@/modules/detail/comparison'
+import { NEWS_PATH } from '@/modules/news/paths'
 
 // What the browser can say about a visit without the schema that checks it,
 // which waits on the server with zod
 
-export const pageKinds = ['list', 'car', 'comparison', 'other'] as const
+export const pageKinds = ['list', 'car', 'comparison', 'news', 'other'] as const
 export type PageKind = (typeof pageKinds)[number]
 
 /** Which of the site's pages a path is, and the cars it is about */
@@ -50,6 +51,9 @@ export const pageOf = (pathname: string): Page => {
   const compared = slugsUnder(pathname, COMPARISON_PATH)
   if (compared && compared.length > 0) {
     return { kind: 'comparison', slugs: compared }
+  }
+  if (pathname === NEWS_PATH || pathname.startsWith(`${NEWS_PATH}/`)) {
+    return { kind: 'news', slugs: [] }
   }
   return { kind: 'other', slugs: [] }
 }

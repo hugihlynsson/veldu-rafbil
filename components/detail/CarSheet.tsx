@@ -35,6 +35,7 @@ import {
 import { getInputModality } from '@/utils/inputModality'
 import { leavePageBeforeLoad } from '@/utils/pageBeforeLoad'
 import { track } from '@/utils/track'
+import useCarHistory from '@/utils/useCarHistory'
 import CarView, { SHEET_TITLE_ID } from './CarView'
 import { heroImageProps } from './heroImage'
 
@@ -91,7 +92,9 @@ const steps = {
 /**
  * A car's page over the list on a desktop, so a look at one car leaves the
  * list where it was. Loaded behind next/dynamic: it carries every car's
- * review, which a visitor who never opens one should not download.
+ * review, which a visitor who never opens one should not download. The
+ * change log is not among them: it grows with every change to the data, so
+ * each car's updates are fetched as the car opens.
  */
 const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
   const panelRef = useRef<HTMLDivElement>(null)
@@ -102,6 +105,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
   const shownCar = useRef(car)
   const path = carPathOf(car)
   const { previous, next } = neighboursOf(shown, car)
+  const history = useCarHistory(carSlug(car))
   // Which way the car came in, so what is under its photo slides from that side
   const [arrival, setArrival] = useState<SheetStep | null>(null)
 
@@ -296,6 +300,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
                 car={car}
                 similar={similarTo(car)}
                 review={reviewOf(car)}
+                history={history}
                 sheet
                 contentClassName={clsx(arrival && arrivals[arrival])}
               />

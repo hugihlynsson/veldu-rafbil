@@ -8,6 +8,7 @@ import { reviewOf } from '@/modules/detail/review'
 import { deprecatedNotice } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { allCars } from '@/modules/data/cars'
+import { historyOf } from '@/modules/news/history'
 import { carSlug } from '@/modules/data/getCarId'
 import CarView from '@/components/detail/CarView'
 import PageChat from '@/components/detail/PageChat'
@@ -78,7 +79,12 @@ export default async function Page(props: Props) {
           __html: serializeStructuredData(carStructuredData(car)),
         }}
       />
-      <CarView car={car} similar={similarTo(car)} review={review} />
+      <CarView
+        car={car}
+        similar={similarTo(car)}
+        review={review}
+        history={historyOf(slug)}
+      />
       <Footer />
       <PageChat cars={[car]} starters={review?.questions} />
     </>

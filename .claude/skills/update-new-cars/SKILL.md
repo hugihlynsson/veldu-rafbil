@@ -236,6 +236,17 @@ make, then model. The fields that are easy to get wrong:
   something other than this change put them out of date (a change to the
   grant does it to nearly all of them), so say so in the report rather than
   writing them. Read the new ones in the diff as you would the figures.
+- **What changed is news, logged in `modules/data/carChanges.ts`.** It is
+  what `/uppfaerslur` and the history on each car's page are told from. Once the
+  edits to `newCars.ts` are done, run `npx tsx scripts/car-changes.ts`. It
+  works out what the branch changed since it left main, so run it again after
+  any later edit rather than editing the log; it dates every entry today. A
+  test fails until it is run. Read the new lines at the end of the file: a
+  rename it did not recognise shows as one car taken out and another added, so
+  add the old slug to `movedSlugs.ts` (which a rename needs anyway) and run it
+  again. Every branch adds to the end of the file, so two open at once conflict
+  there: take main's version of the file and run the script again, which
+  writes this branch's entries afresh on top of it.
 
 And, for a car that is genuinely new to the list:
 
