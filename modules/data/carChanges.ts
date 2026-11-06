@@ -1993,6 +1993,14 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-05","slug":"mercedes-benz-eqa-suv-300-4matic","label":"Mercedes-Benz EQA SUV 300 4MATIC","price":{"from":8290000,"to":7990000}},
   {"date":"2026-11-06","slug":"lexus-ux-300e","label":"Lexus UX 300e","removed":true},
   {"date":"2026-11-06","slug":"mini-countryman-se-4x4","label":"Mini Countryman SE 4x4","price":{"from":8890000,"to":7990000}},
+  {"date":"2026-11-06","slug":"range-rover-sport-electric-ev450","label":"Range Rover Sport Electric EV450","added":true,"price":{"to":18890000}},
+  {"date":"2026-11-06","slug":"range-rover-sport-electric-ev550","label":"Range Rover Sport Electric EV550","added":true,"price":{"to":21890000}},
+  {"date":"2026-11-06","slug":"volvo-es90-twin-motor","label":"Volvo ES90 Twin Motor","price":{"from":12990000,"to":11790000}},
+  {"date":"2026-11-06","slug":"volvo-es90-twin-motor-performance","label":"Volvo ES90 Twin Motor Performance","price":{"from":13790000,"to":12790000}},
+  {"date":"2026-11-06","slug":"volvo-ex30-single-motor","label":"Volvo EX30 Single Motor","removed":true},
+  {"date":"2026-11-06","slug":"volvo-ex30-single-motor-extended-range","label":"Volvo EX30 Single Motor Extended Range","price":{"from":7090000,"to":6490000}},
+  {"date":"2026-11-06","slug":"volvo-ex30-twin-motor-performance","label":"Volvo EX30 Twin Motor Performance","price":{"from":7390000,"to":7190000}},
+  {"date":"2026-11-06","slug":"volvo-ex30-cross-country-twin-motor-performance","label":"Volvo EX30 Cross Country Twin Motor Performance","price":{"from":8220000,"to":7990000}},
 ]
 
 export default carChanges
