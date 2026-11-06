@@ -178,6 +178,21 @@ November list prices only the IONIQ 3's 61 kWh, though its page still offers
 the 42,2 kWh. Hekla's PDFs carry a `Last-Modified` header worth checking
 before reading them.
 
+**Stock and delivery, read on 2026-11-06**, the place to check an
+`expectedDelivery` against:
+
+- **Hekla** (Škoda, VW, Audi): `hekla.is/is/bilar/nyir-bilar-syningasalur?filter-gerd=skoda&filter-tegund=<model>`
+  (`filter-gerd=volkswagen-folksbilar` for VW) marks each car "Til á lager" or
+  "Væntanlegur" with its configured price. The Epiq was in stock that day.
+- **Land Rover** (BL): `landrover.is/offers-and-finance/cars-in-stock/range-rover?models=<model>&states=new`;
+  no electric Range Rover was in stock that day.
+- **BL's** `bl.is/nyir-bilar/<MAKE>` renders nothing without its script, and
+  hyundai.is says nothing of delivery, so the IONIQ 3 and STARIA could not be checked.
+- **Kia EV9**: the current list is `askja/docs/ev9_verdlisti` (Air, Earth and
+  GT-Line), linked from kia.com's EV9 page; `kia_ev9_gt_verdlisti` is the GT's
+  and was still a placeholder. kia.com's menu "Frá" figures can lag the lists:
+  it said 8.590.777 for the PV5 Passenger, which the list prices at 7.790.777.
+
 **Found on 2026-11-06**, for makes that had no list here:
 
 - **Volvo**: the site's "Kaupa" menu links a PDF per model on
