@@ -1991,6 +1991,8 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-05","slug":"mercedes-benz-amg-gt-55-4matic","label":"Mercedes-Benz AMG GT 55 4MATIC+","renamedFrom":"Mercedes-Benz AMG GT 4-Door Coupé 55 4MATIC+"},
   {"date":"2026-11-05","slug":"mercedes-benz-amg-gt-63-4matic","label":"Mercedes-Benz AMG GT 63 4MATIC+","renamedFrom":"Mercedes-Benz AMG GT 4-Door Coupé 63 4MATIC+"},
   {"date":"2026-11-05","slug":"mercedes-benz-eqa-suv-300-4matic","label":"Mercedes-Benz EQA SUV 300 4MATIC","price":{"from":8290000,"to":7990000}},
+  {"date":"2026-11-06","slug":"lexus-ux-300e","label":"Lexus UX 300e","removed":true},
+  {"date":"2026-11-06","slug":"mini-countryman-se-4x4","label":"Mini Countryman SE 4x4","price":{"from":8890000,"to":7990000}},
 ]
 
 export default carChanges
