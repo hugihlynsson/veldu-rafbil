@@ -37,7 +37,6 @@ describe('the car data', () => {
     'bmw-i3',
     'bmw-i4',
     'bmw-ix3',
-    'kia-ev3',
     'lexus-rz',
     'mercedes-glc',
     'porsche-taycan',

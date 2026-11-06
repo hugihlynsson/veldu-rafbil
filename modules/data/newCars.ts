@@ -873,7 +873,7 @@ const newCars: Array<NewCar> = [
     make: 'Kia',
     model: 'EV3',
     subModel: 'Long Range AWD',
-    heroImageName: 'kia-ev3',
+    heroImageName: 'kia-ev3-long-range-awd',
     price: 7_390_777,
     sellerUrl: 'https://www.kia.com/is/nyir-bilar/ev-3/upplifdu/',
     acceleration: 6.6,
