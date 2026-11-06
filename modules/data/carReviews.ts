@@ -1214,10 +1214,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'kia-ev4-base': {
     paragraphs: [
-      'Kia EV4 er fimm sæta hlaðbakur í millistærð sem höfðar til þeirra sem vilja lipran fólksbíl en gera ríkar kröfur um ferðafrelsi. Hann býður upp á mikla drægni sem dugar vel milli landshluta, jafnvel í íslenskum vetrarkulda.',
-      'Helsti styrkleiki hans er hversu mikið maður fær fyrir peninginn, enda er hann meðal þeirra allra langdrægustu í sínum verðflokki og mjög ódýr á hvern kílómetra drægni. Á langferðum munar einnig um að hann hleður hraðar en flestir keppinautar hans, sem skilar sér í styttri viðkomum á hleðslustöðvum.',
-      'Á móti kemur að bíllinn er aðeins framhjóladrifinn, fremur aflítill og skottið er minna en gengur og gerist. Dráttargetan er jafnframt fremur lítil, eða eitt tonn. Hafi fólk áhuga á meira plássi býður stallbakurinn Kia EV4 Fastback upp á 55 lítrum stærra skott á lægra verði. Sé leitað að enn meira rými og afli býður Tesla Model 3 Long Range Afturhjóladrif upp á 159 lítrum stærra skott og mun betri hröðun.',
-      'Fyrir kaupendur sem leita að hefðbundnum hlaðbak með mikla drægni og skjóta hleðslu á góðu verði er þetta engu að síður mjög fýsilegur kostur.',
+      'Kia EV4 er fimm sæta hlaðbakur í millistærð, fyrir þá sem vilja lipran fólksbíl en gera ríkar kröfur um ferðafrelsi. Hann býður upp á mikla drægni sem dugar vel milli landshluta, jafnvel í íslenskum vetrarkulda.',
+      'Helsti styrkleiki hans er hversu mikið maður fær fyrir peninginn, enda er hann meðal þeirra langdrægustu í sínum verðflokki og mjög ódýr á hvern km drægni. Á langferðum munar líka um að hann hleður hraðar en flestir keppinautar hans, svo stoppin á hleðslustöðvum verða styttri.',
+      'Á móti kemur að hann er aðeins framhjóladrifinn, fremur aflítill og skottið er minna en hjá flestum þeirra. Dráttargetan er líka fremur lítil, eitt tonn. Kia EV4 Fastback er 200.000 kr. ódýrari með 55 l stærra skott, og Tesla Model 3 Long Range Afturhjóladrif er 300.000 kr. ódýrari, drífur 125 km lengra, er 2,5 s sneggri og með 247 l stærra skott.',
+      'Fyrir kaupendur sem leita að hefðbundnum hlaðbak með mikla drægni og skjóta hleðslu á góðu verði er þetta engu að síður fýsilegur kostur.',
     ],
     questions: [
       'Af hverju er Fastback-útfærslan ódýrari?',
@@ -1231,8 +1231,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kemst barnavagn fyrir í skottinu?',
       'Kemst hann til Akureyrar á einni hleðslu?',
     ],
-    facts: 'df12eb8f93e0',
-    model: 'gemini-3.8-flash, thinking medium',
+    facts: '1d21efba7bdb',
   },
   'kia-ev4-fastback': {
     paragraphs: [
@@ -2567,7 +2566,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Borgar sig að taka Dual Motor útgáfuna?',
       'Hvernig er hann miðað við Hongqi EHS5?',
       'Er hann betri en Renault Scenic E-Tech?',
-      'Hvernig er hann miðað við Skoda Elroq 85?',
+      'Hvernig er hann miðað við Skoda Elroq 85x?',
       'Hversu mikill galli er hæga hleðslan?',
       'Er mikill munur á afli í Dual Motor?',
       'Dugar framhjóladrifið í vetrarfærð?',
@@ -2575,8 +2574,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er fótaplássið í aftursætunum?',
       'Er skottið nógu stórt fyrir barnavagn?',
     ],
-    facts: 'e07ac6c3df49',
-    model: 'gemini-3.8-flash, thinking medium',
+    facts: '3d4937d2e99f',
   },
   'peugeot-e-3008-dual-motor': {
     paragraphs: [
@@ -3233,11 +3231,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur styttra, hleður hægar og er aflminni en flestir keppinautar hans. Renault Scenic E-Tech EV87 kostar 900.000 kr. meira og drífur 193 km lengra, og XPENG G6 RWD Standard Range kostar 100.000 kr. meira, hleður með um 35% styttri stoppum og má draga 400 kg meira.',
       'Scenic EV60 er þægilegur fjölskyldubíll, en flestum borgar sig stærri rafhlaðan.',
     ],
-    facts: '19a0e99798a6',
-    model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að taka frekar EV87?',
-      'Af hverju ekki frekar Skoda Elroq 85?',
+      'Af hverju ekki frekar Skoda Elroq 85x?',
       'Kemst hann á Akureyri án þess að hlaða?',
       'Hvernig reynist framhjóladrifið í snjó?',
       'Rúmast þrír barnabílstólar í aftursætinu?',
@@ -3247,6 +3243,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig virkar innbyggða Google-kerfið?',
       'Ræður hann við að draga hjólhýsi?',
     ],
+    facts: '815e772cc813',
   },
   'renault-scenic-e-tech-ev87': {
     paragraphs: [
@@ -3291,28 +3288,6 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     ],
     facts: '1e09a0bf0230',
     model: 'gemini-3.8-flash, thinking medium',
-  },
-  'skoda-elroq-85': {
-    paragraphs: [
-      'Skoda Elroq 85 er meðalstór jepplingur með afturhjóladrifi, með hagnýtu innanrými og hárri setstöðu Skoda, fyrir þá sem vilja traustan bíl fyrir daglegt líf og ferðalög.',
-      'Hann er meðal þeirra langdrægustu í sínum verðflokki, hleður hraðar og er sneggri en flestir keppinautar hans, svo hann dugar léttilega milli landshluta.',
-      'Gallarnir eru að hann má aðeins draga 1.000 kg, minna en flestir þeirra, og er aðeins afturhjóladrifinn. Skoda Elroq 85x fæst með fjórhjóladrifi og 1.800 kg dráttargetu fyrir 400.000 kr. meira, með nánast sömu drægni.',
-      'Elroq 85 er skynsamlegt val fyrir þá sem vilja langdrægan jeppling á góðu verði og þurfa ekki að draga mikið.',
-    ],
-    facts: '1878c15214f6',
-    model: 'gemini-3.8-flash, thinking medium',
-    questions: [
-      'Borgar sig að taka 85x frekar?',
-      'Hvernig er hann miðað við Tesla Model Y?',
-      'Er hann betri kostur en XPENG G6?',
-      'Hvernig er hann í snjó á afturdrifinu?',
-      'Kemst hann til Akureyrar í einum rykk?',
-      'Hvað tekur hraðhleðsla langan tíma?',
-      'Er skottið nógu stórt fyrir fjölskyldu?',
-      'Er nóg pláss fyrir tvo barnabílstóla?',
-      'Dugir dráttargetan fyrir léttan vagn?',
-      'Hvernig er ábyrgðin á rafhlöðunni?',
-    ],
   },
   'skoda-elroq-85x': {
     paragraphs: [
@@ -3471,14 +3446,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Smart #1 Brabus er lítill jepplingur sem hagar sér nánast eins og sportbíll í dulargervi. Hann hentar ef þú vilt mikla snerpu í liprum bíl sem er auðvelt að athafna sig á í bænum.',
       'Helsti styrkur hans liggur í hröðun og afli, en hann er meðal þeirra sneggstu í sínum verðflokki, og krókurinn ber meira en hjá flestum keppinautum hans.',
-      'Hann gefur hins vegar mikið eftir í langkeyrslu: hann drífur mjög stutt og hleður hægar en flestir, svo vetrarferðir milli landshluta kalla á tíð stopp. Volvo EX30 Twin Motor Performance kostar 400.000 kr. meira, er 0,3 s sneggri og drífur 50 km lengra, og BYD Atto 3 Evo kostar 700.000 kr. meira, drífur 70 km lengra, hleðslustoppin eru um 20% styttri og skottið 263 l stærra. Smart #1 Pulse er með sama afl og sparar 500.000 kr.',
+      'Hann gefur hins vegar mikið eftir í langkeyrslu: hann drífur mjög stutt og hleður hægar en flestir, svo vetrarferðir milli landshluta kalla á tíð stopp. Volvo EX30 Twin Motor Performance kostar 400.000 kr. meira, er 0,3 s sneggri og drífur 50 km lengra, og Smart #3 Brabus kostar 200.000 kr. meira, drífur 15 km lengra og er með 57 l stærra skott. Smart #1 Pulse er með sama afl og sparar 500.000 kr.',
       'Þetta er skemmtileg vasaraketta fyrir þá sem setja akstursgleði í forgang, en síður góður ferðabíll.',
     ],
     questions: [
       'Af hverju hann frekar en Volvo EX30?',
       'Finnst mikill munur á honum og Pulse?',
       'Er Smart #3 Brabus betri í langferðir?',
-      'Er BYD Atto 3 Evo betri ferðabíll?',
+      'Er VW ID. Polo GTI skemmtilegri í akstri?',
       'Borgar sig að taka Pro+-útfærsluna?',
       'Ráða bremsurnar við allan kraftinn?',
       'Er fjöðrunin of stíf í bæjarkeyrslu?',
@@ -3486,7 +3461,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Eyðir hann miklu í Brabus-stillingu?',
       'Hentar hann sem eini bíll á heimilinu?',
     ],
-    facts: '2a9e546b7f36',
+    facts: '65c203d989a0',
   },
   'smart-3-pulse': {
     paragraphs: [
@@ -3780,20 +3755,19 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar aðeins afturhjóladrifinn og einfaldar búinn en dýrari útfærslurnar. Tesla Model Y Premium Long Range kostar 1.900.000 kr. meira og drífur 84 km lengra, og Tesla Model Y Long Range Dual Motor fæst með fjórhjóladrifi fyrir 2.300.000 kr. meira.',
       'Model Y Standard Range er sterkt val fyrir þá sem vilja mikið pláss og hleðslunet Tesla á hagstæðu verði.',
     ],
-    facts: '584a2225a6eb',
-    model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Dugar afturhjóladrifið í íslenskum vetri?',
       'Borgar sig að velja Dual Motor útfærsluna?',
       'Kemst hann til Akureyrar á einni hleðslu?',
       'Kemst tvöfaldur vagn auðveldlega í skottið?',
-      'Hvernig er hann miðað við Skoda Elroq 85?',
+      'Hvernig er hann miðað við Skoda Elroq 85x?',
       'Er XPENG G6 betri kostur en hann?',
       'Má hlaða rafhlöðuna daglega í 100%?',
       'Hversu mikið má hann draga?',
       'Er fjöðrunin of stíf á íslenskum vegum?',
       'Er þess virði að taka Premium Long Range?',
     ],
+    facts: '9fa1b3804c9f',
   },
   'tesla-model-y-premium-long-range': {
     paragraphs: [
@@ -4166,6 +4140,25 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     ],
     facts: '8196cca71c35',
     model: 'gemini-3.8-flash, thinking medium',
+  },
+  'volkswagen-id-polo-gti': {
+    paragraphs: [
+      'Volkswagen ID. Polo GTI er lítill og sprækur hlaðbakur, fyrsti rafmagnaði GTI-bíllinn frá Volkswagen, og ber merki sem hefur fylgt sportlegum Volkswagen í hálfa öld. Hann hentar ef þú vilt nettan bæjarbíl sem er líka skemmtilegur á hlykkjóttum vegi.',
+      'Styrkur hans liggur síður í tölunum en í akstrinum: GTI-útfærslan fær sportlegri fjöðrun, sportsæti og skarpara yfirbragð, og hann passar í hvaða stæði sem er. Hann má líka draga 1.200 kg, sem Mini Cooper SE má ekki.',
+      'Á móti kemur að hann drífur styttra, er aflminni og með minna skott en flestir á svipuðu verði, og rafhlaðan er með þeim minnstu. Volvo EX30 Twin Motor Performance er 420.000 kr. ódýrari, fjórhjóladrifinn, 3,2 s sneggri og drífur 26 km lengra. Og venjulegi Volkswagen ID. Polo sparar 2.100.000 kr., drífur 30 km lengra og er aðeins 0,3 s hægari.',
+      'ID. Polo GTI er fyrir þann sem vill GTI-merkið og aksturstilfinninguna, en tölurnar mæla með venjulega Polo.',
+    ],
+    questions: [
+      'Er hann þess virði umfram venjulegan Polo?',
+      'Af hverju hann frekar en Volvo EX30?',
+      'Er hann skemmtilegri en Mini Cooper SE?',
+      'Hvernig er hann miðað við Smart #1 Brabus?',
+      'Hvernig dugar framhjóladrifið í snjó?',
+      'Kemst hann til Akureyrar á einni hleðslu?',
+      'Er fjöðrunin of stíf á íslenskum vegum?',
+      'Kemst barnavagn fyrir í skottinu?',
+    ],
+    facts: '463717c2e095',
   },
   'volkswagen-id-cross-base': {
     paragraphs: [
@@ -4563,20 +4556,19 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er aðeins afturhjóladrifinn og merkið er nýlegt hér á landi. XPENG G6 AWD Performance fæst með fjórhjóladrifi og mun meira afli fyrir 400.000 kr. meira, með nánast sömu drægni.',
       'G6 Long Range gefur mikið fyrir peninginn, fyrir þá sem setja drægni, hraða hleðslu og pláss í forgang.',
     ],
-    facts: 'cc821ccdb0eb',
-    model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Borgar Performance sig fyrir 400 þúsund?',
       'Dugar afturhjóladrifið í íslenskum vetri?',
       'Kemst hann til Akureyrar á einni hleðslu?',
       'Nýtist hraðhleðslan vel á Íslandi?',
-      'Hvernig er hann miðað við Skoda Elroq 85?',
+      'Hvernig er hann miðað við Skoda Elroq 85x?',
       'Er hann betri en Renault Scenic E-Tech?',
       'Hvernig hefur fellihýsi áhrif á drægni?',
       'Er gott pláss fyrir tvo barnabílstóla?',
       'Dugar Standard Range í daglegan akstur?',
       'Er óhætt að kaupa bíl frá nýju merki?',
     ],
+    facts: '472711f442b5',
   },
   'xpeng-g6-awd-performance': {
     paragraphs: [

@@ -2005,6 +2005,8 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-06","slug":"range-rover-sport-electric-ev450","label":"Range Rover Sport Electric EV450","delivery":{"to":"snemma 2027"}},
   {"date":"2026-11-06","slug":"range-rover-sport-electric-ev550","label":"Range Rover Sport Electric EV550","delivery":{"to":"snemma 2027"}},
   {"date":"2026-11-06","slug":"skoda-epiq-55","label":"Skoda Epiq 55","delivery":{"from":"lok 2026"}},
+  {"date":"2026-11-06","slug":"skoda-elroq-85","label":"Skoda Elroq 85","removed":true},
+  {"date":"2026-11-06","slug":"volkswagen-id-polo-gti","label":"Volkswagen ID. Polo GTI","added":true,"price":{"to":7610000},"delivery":{"to":"2027"}},
 ]
 
 export default carChanges

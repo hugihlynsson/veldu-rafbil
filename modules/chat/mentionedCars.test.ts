@@ -96,9 +96,9 @@ describe('findMentionedCars', () => {
   it('lists cars in the order the answer names them', () => {
     expect(
       labels(
-        'Besti kosturinn er **Skoda Elroq 85**, en Kia EV3 Long Range og BYD Dolphin koma líka til greina.',
+        'Besti kosturinn er **Skoda Elroq 85x**, en Kia EV3 Long Range og BYD Dolphin koma líka til greina.',
       ),
-    ).toEqual(['Skoda Elroq 85', 'Kia EV3 Long Range', 'BYD Dolphin'])
+    ).toEqual(['Skoda Elroq 85x', 'Kia EV3 Long Range', 'BYD Dolphin'])
   })
 
   it('keeps to the variant an answer names', () => {
