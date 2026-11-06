@@ -1020,7 +1020,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'volvo-ex40-recharge-twin': [
     'audi-q4-e-tron-45-quattro',
     'bmw-ix1-xdrive-30',
-    'lexus-ux-300e',
+    'volvo-ec40-twin-motor',
   ],
   'volvo-ex30-single-motor': [
     'mini-aceman-e',

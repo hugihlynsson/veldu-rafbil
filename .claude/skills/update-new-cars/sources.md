@@ -168,6 +168,16 @@ with one page that says so. On 2026-10-31 `kia_ev9_gt_verdlisti`, `eqt_verdlisti
 2026-11-03; kia.com's EV9 page says "Verðlisti í vinnslu". The STARIA Electric
 has moved from BL's main Hyundai list to `hyundai_fyrirt_kjalausnir`.
 
+**Gaps seen on 2026-11-06**, each a car still in the list but missing from its
+importer's current list: BL's Mini list (`mini_ver__listi_09.10.2017lr`, six
+pages) has only the Cooper E and Countryman SE ALL4, though mini.is still
+shows the Aceman; Lexus' 2026 list has no UX, and `lexus.is/car-models/ux-300e/`
+redirects to `/new-cars`, which lists none; Škoda's November Elroq list starts
+at the 85x; VW's November ID.3 list has only the ID.3 Pro; and Hyundai's
+November list prices only the IONIQ 3's 61 kWh, though its page still offers
+the 42,2 kWh. Hekla's PDFs carry a `Last-Modified` header worth checking
+before reading them.
+
 **Range Rover is the one that cannot be started from its entries.** Both
 Electric rows point at `rangerover.com/en-gb`, the manufacturer's UK site rather
 than an Icelandic seller, so there is no importer page to work back to and no
