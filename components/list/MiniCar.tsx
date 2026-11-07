@@ -29,7 +29,7 @@ const MiniCar: FunctionComponent<Props> = ({ car, onSelect }) => {
           className="w-full h-full object-cover block"
         />
       </div>
-      <div className="h-20 py-2.5 px-3 flex-1 flex flex-col justify-center">
+      <div className="h-20 py-2.5 pl-3 pr-4 flex-1 flex flex-col justify-center">
         <div className="text-sm font-semibold mb-0.75 leading-[1.3]">
           <span>{car.make}</span>{' '}
           <span className="font-normal">{car.model}</span>
