@@ -52,7 +52,7 @@ const ChatMessage: React.FunctionComponent<Props> = ({
             .join('')}
         />
       ) : (
-        <div className="message-content max-w-[90%] px-3.5 py-2.5 rounded-2xl text-sm leading-6 wrap-break-word bg-cloud text-tint">
+        <div className="message-content w-full text-sm leading-6 wrap-break-word text-tint">
           {message.parts?.map((part, index) =>
             part.type === 'text' ? (
               <ReactMarkdown
