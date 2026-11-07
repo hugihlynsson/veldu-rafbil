@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { scheduleWords, startReveal } from './reveal'
+import {
+  markShown,
+  scheduleWords,
+  shownAt,
+  startReveal,
+  startShown,
+} from './reveal'
 
 describe('scheduleWords', () => {
   it('spreads the first burst over a moment from when it arrived', () => {
@@ -67,5 +73,40 @@ describe('scheduleWords', () => {
   it('leaves the reveal alone when nothing arrived', () => {
     const reveal = startReveal()
     expect(scheduleWords(reveal, 0, 100)).toEqual({ times: [], reveal })
+  })
+})
+
+describe('shownAt', () => {
+  const word = (offset: number, part = 0) => ({ part, offset })
+
+  it('takes a word past the end of the text on screen as just arrived', () => {
+    const shown = startShown()
+    expect(shownAt(shown, word(0))).toBeUndefined()
+    markShown(shown, [{ word: word(0), length: 4, arrivesAt: 100 }])
+    expect(shownAt(shown, word(5))).toBeUndefined()
+  })
+
+  it('keeps the time of a word whose start markdown has moved since', () => {
+    // '**Kia' arrived at 7, and is 'Kia' at 9 once its bold closes
+    const shown = startShown()
+    markShown(shown, [
+      { word: word(7), length: 5, arrivesAt: 100 },
+      { word: word(13), length: 3, arrivesAt: 120 },
+    ])
+    expect(shownAt(shown, word(9))).toBe(100)
+    expect(shownAt(shown, word(13))).toBe(120)
+  })
+
+  it('follows the last word as it grows', () => {
+    const shown = startShown()
+    markShown(shown, [{ word: word(0), length: 1, arrivesAt: 100 }])
+    markShown(shown, [{ word: word(0), length: 6 }])
+    expect(shownAt(shown, word(3))).toBe(100)
+  })
+
+  it('keeps each part apart', () => {
+    const shown = startShown()
+    markShown(shown, [{ word: word(0), length: 10, arrivesAt: 100 }])
+    expect(shownAt(shown, word(2, 1))).toBeUndefined()
   })
 })

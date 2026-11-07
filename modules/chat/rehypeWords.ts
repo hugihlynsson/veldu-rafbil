@@ -1,50 +1,56 @@
 import type { ElementContent, Root, RootContent } from 'hast'
 
+export interface Word {
+  /** Which text part of the message it is in */
+  part: number
+  /** Where it starts in that part's markdown, near enough: inline code counts
+   * from its backtick and an escape as one character, the same way each time */
+  offset: number
+}
+
 /**
- * Wraps each word of an answer in a span named after where it starts in the
+ * Wraps each word of an answer in a span that says where it starts in the
  * markdown, so the browser can tell the words it has shown from the ones that
  * just arrived. React rebuilds the answer on every chunk and recreates the
  * words after any change of shape, so the elements themselves say nothing.
  */
 const rehypeWords =
   ({ part }: { part: number }) =>
-  (tree: Root, file: { value: unknown }) => {
-    tree.children = split(tree.children, part, String(file.value))
+  (tree: Root) => {
+    tree.children = split(tree.children, part)
   }
 
 const split = <T extends RootContent>(
   children: T[],
   part: number,
-  source: string,
 ): (T | ElementContent)[] =>
   children.flatMap((child): (T | ElementContent)[] => {
     if (child.type === 'element') {
-      child.children = split(child.children, part, source)
+      child.children = split(child.children, part)
       return [child]
     }
-    if (child.type !== 'text') return [child]
-    const start = child.position?.start.offset
-    const end = child.position?.end.offset
-    if (start === undefined || end === undefined) return [child]
+    const start = child.type === 'text' && child.position?.start.offset
+    if (child.type !== 'text' || typeof start !== 'number') return [child]
 
-    // Looked up in the source rather than counted from the node's start, which
-    // sits before the backtick of inline code and counts an escape as one
-    let cursor = start
     return Array.from(
       child.value.matchAll(/\s+|\S+/g),
-      ({ 0: text, index }): ElementContent => {
-        if (/^\s/.test(text)) return { type: 'text', value: text }
-        const found = source.indexOf(text, cursor)
-        const offset = found >= 0 && found < end ? found : start + index
-        cursor = offset + text.length
-        return {
-          type: 'element',
-          tagName: 'span',
-          properties: { dataWord: `${part}:${offset}` },
-          children: [{ type: 'text', value: text }],
-        }
-      },
+      ({ 0: text, index }): ElementContent =>
+        /^\s/.test(text)
+          ? { type: 'text', value: text }
+          : {
+              type: 'element',
+              tagName: 'span',
+              properties: { dataWord: `${part}:${start + index}` },
+              children: [{ type: 'text', value: text }],
+            },
     )
   })
+
+export const readWord = (name: string | undefined): Word | undefined => {
+  const [part, offset] = name?.split(':').map(Number) ?? []
+  return Number.isInteger(part) && Number.isInteger(offset)
+    ? { part: part!, offset: offset! }
+    : undefined
+}
 
 export default rehypeWords

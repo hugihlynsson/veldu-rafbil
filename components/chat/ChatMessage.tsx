@@ -28,7 +28,8 @@ const ChatMessage: React.FunctionComponent<Props> = ({
   const [scrollsOnArrival] = useState(isLastUserMessage)
   // Only an answer arriving now: one already there when the chat opened is
   // shown whole
-  const answerRef = useWordReveal<HTMLDivElement>(animate)
+  const { ref: answerRef, enabled: revealsWords } =
+    useWordReveal<HTMLDivElement>(animate)
 
   useEffect(() => {
     if (scrollsOnArrival) {
@@ -66,7 +67,9 @@ const ChatMessage: React.FunctionComponent<Props> = ({
               <ReactMarkdown
                 key={index}
                 remarkPlugins={[remarkGfm]}
-                rehypePlugins={animate ? [[rehypeWords, { part: index }]] : []}
+                rehypePlugins={
+                  revealsWords ? [[rehypeWords, { part: index }]] : []
+                }
                 components={{
                   table: ({ children }) => (
                     <div className="table-wrapper">

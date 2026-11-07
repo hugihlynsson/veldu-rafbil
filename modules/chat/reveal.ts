@@ -1,3 +1,5 @@
+import type { Word } from './rehypeWords'
+
 // The model sends an answer in bursts of about ten words every 150–400ms, so
 // each burst's words are spread over the time until the next one is due
 // rather than shown at once. Times are in the caller's clock, ms.
@@ -15,7 +17,7 @@ const MIN_STEP_MS = 4
 const MAX_STEP_MS = 60
 
 export interface Reveal {
-  /** When the last word scheduled so far appears */
+  /** The first moment free for the next word, a step after the last one */
   cursor: number
   /** When the last burst arrived */
   lastArrival: number | undefined
@@ -55,5 +57,57 @@ export const scheduleWords = (
   return {
     times: Array.from({ length: count }, (_, index) => from + index * step),
     reveal: { cursor: from + count * step, lastArrival: now, gap },
+  }
+}
+
+/**
+ * The words of one answer shown so far. An answer only grows at its end, so a
+ * word that starts before the end of the text last on screen has been shown,
+ * whatever markdown has made of it since: a closing `**` moves the start of
+ * the word it opened, and that word must not count as arriving again.
+ */
+export interface Shown {
+  /** Per part, where the text last on screen ends */
+  reach: Map<number, number>
+  /** Per part, the offsets of the words that arrived and when each appears,
+   * in order */
+  times: Map<number, [offset: number, at: number][]>
+}
+
+export const startShown = (): Shown => ({ reach: new Map(), times: new Map() })
+
+/** When a word that has been shown appears, or undefined for one just arrived.
+ * Taken from the nearest word that arrived at or before it, as its start may
+ * have moved since. */
+export const shownAt = (shown: Shown, word: Word): number | undefined => {
+  if (word.offset >= (shown.reach.get(word.part) ?? 0)) return undefined
+  const times = shown.times.get(word.part) ?? []
+  let low = 0
+  let high = times.length
+  while (low < high) {
+    const mid = (low + high) >> 1
+    if (times[mid]![0] <= word.offset) low = mid + 1
+    else high = mid
+  }
+  return low > 0 ? times[low - 1]![1] : -Infinity
+}
+
+/** Records the words on screen once each has been looked up: when the ones
+ * that just arrived appear, and how far the text now reaches, as the last
+ * word grows with the chunks after the one it arrived in */
+export const markShown = (
+  shown: Shown,
+  words: ReadonlyArray<{ word: Word; length: number; arrivesAt?: number }>,
+) => {
+  for (const { word, length, arrivesAt } of words) {
+    if (arrivesAt !== undefined) {
+      const times = shown.times.get(word.part) ?? []
+      times.push([word.offset, arrivesAt])
+      shown.times.set(word.part, times)
+    }
+    shown.reach.set(
+      word.part,
+      Math.max(shown.reach.get(word.part) ?? 0, word.offset + length),
+    )
   }
 }
