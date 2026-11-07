@@ -4,7 +4,9 @@ import { useLayoutEffect, useRef } from 'react'
 // Holds a bubble of pre-line text to the narrowest width that wraps it into
 // no more lines than its max-width does, so the lines come out even rather
 // than one long one over a short last one. CSS can neither balance a box's
-// lines nor size it to the lines it ends up with.
+// lines nor size it to the lines it ends up with. The element needs
+// `white-space: pre-line` and `overflow-wrap: break-word`, as that is how the
+// text is measured.
 const useShrinkwrap = <T extends HTMLElement>(text: string) => {
   const ref = useRef<T>(null)
 
