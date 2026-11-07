@@ -493,7 +493,9 @@
   .message-content table {
     border-collapse: separate;
     border-spacing: 0;
-    border: 1px solid var(--color-line);
+    /* The header's dividers as they land, 6% over its 7%, so the outline
+       and those lines read as one colour */
+    border: 1px solid color-mix(in srgb, currentColor 13%, transparent);
     border-radius: var(--radius-card);
     background-color: var(--color-tile);
     width: 100%;
