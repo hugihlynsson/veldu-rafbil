@@ -2007,6 +2007,10 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-06","slug":"skoda-epiq-55","label":"Skoda Epiq 55","delivery":{"from":"lok 2026"}},
   {"date":"2026-11-06","slug":"skoda-elroq-85","label":"Skoda Elroq 85","removed":true},
   {"date":"2026-11-06","slug":"volkswagen-id-polo-gti","label":"Volkswagen ID. Polo GTI","added":true,"price":{"to":7610000},"delivery":{"to":"2027"}},
+  {"date":"2026-11-07","slug":"audi-a2-e-tron-125-kw","label":"Audi A2 e-tron 125 kW","added":true,"price":{"to":7100000},"delivery":{"to":"2027"}},
+  {"date":"2026-11-07","slug":"audi-a2-e-tron-140-kw","label":"Audi A2 e-tron 140 kW","added":true,"price":{"to":7700000},"delivery":{"to":"2027"}},
+  {"date":"2026-11-07","slug":"audi-a2-e-tron-170-kw","label":"Audi A2 e-tron 170 kW","added":true,"price":{"to":8900000},"delivery":{"to":"2027"}},
+  {"date":"2026-11-07","slug":"audi-a2-e-tron-240-kw","label":"Audi A2 e-tron 240 kW","added":true,"price":{"to":9300000},"delivery":{"to":"2027"}},
 ]
 
 export default carChanges

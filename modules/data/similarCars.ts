@@ -5,6 +5,26 @@
 // price and range alone: look it over, and offer the new car on a page or two.
 
 const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
+  'audi-a2-e-tron-125-kw': [
+    'volvo-ex30-twin-motor-performance',
+    'volkswagen-id-3-neo-58-kwh',
+    'kia-ev4-base',
+  ],
+  'audi-a2-e-tron-140-kw': [
+    'bmw-ix1-edrive-20',
+    'hyundai-ioniq-3-long-range',
+    'mercedes-benz-eqa-suv-300-4matic',
+  ],
+  'audi-a2-e-tron-170-kw': [
+    'mercedes-benz-cla-200',
+    'polestar-2-long-range-dual-motor',
+    'ford-capri-base',
+  ],
+  'audi-a2-e-tron-240-kw': [
+    'audi-q4-e-tron-45-quattro',
+    'mercedes-benz-gla-350-4matic',
+    'tesla-model-3-performance',
+  ],
   'audi-a6-e-tron-sportback-quattro': [
     'mercedes-benz-cla-350-4matic',
     'bmw-i4-40-xdrive',
@@ -22,7 +42,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'audi-q4-e-tron-45-quattro': [
     'volvo-ex40-recharge-twin',
-    'skoda-enyaq-rs',
+    'audi-a2-e-tron-240-kw',
     'mercedes-benz-gla-350-4matic',
   ],
   'audi-q6-e-tron-base': [
@@ -279,7 +299,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'kia-ev4-base': [
     'renault-scenic-e-tech-ev87',
     'tesla-model-3-long-range-afturhjoladrif',
-    'skoda-elroq-85x',
+    'audi-a2-e-tron-125-kw',
   ],
   'kia-ev4-fastback': [
     'tesla-model-3-long-range-afturhjoladrif',
@@ -409,7 +429,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'mercedes-benz-cla-200': [
     'polestar-2-long-range-performance',
-    'byd-seal-base',
+    'audi-a2-e-tron-170-kw',
     'tesla-model-3-long-range-fjorhjoladrif',
   ],
   'mercedes-benz-cla-350-4matic': [
@@ -1049,7 +1069,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'volvo-ex30-twin-motor-performance': [
     'smart-3-pulse',
-    'smart-1-brabus',
+    'audi-a2-e-tron-140-kw',
     'mg-mgs6-dual-motor',
   ],
   'volvo-ex30-cross-country-twin-motor-performance': [
