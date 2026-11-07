@@ -10,7 +10,7 @@ import TextLink from './TextLink'
 const Footer: FunctionComponent<{}> = () => (
   <footer className="bg-haze pt-8 pb-34 xs:pt-14">
     <div className="mx-auto max-w-column px-(--gutter) md:max-w-page md:px-10 lg:flex lg:items-center lg:justify-between lg:gap-10">
-      <div className="text-sm leading-6 text-pretty text-stone">
+      <div className="text-sm leading-normal text-pretty text-stone">
         <Logo className="block w-40 h-auto mb-4 text-tint" />
         <p className="m-0">
           Veldu Rafbíl er smíðuð af{' '}
