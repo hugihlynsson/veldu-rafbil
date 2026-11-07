@@ -500,12 +500,15 @@
     background-color: var(--color-tile);
     width: 100%;
     font-size: 13px;
+    /* Tighter than the answer's, so a cell that wraps holds together; the
+       cells' padding makes up the rest, so a row of one line stays 38px */
+    line-height: 1.4;
   }
   .message-content th,
   .message-content td {
     border-right: 1px solid var(--color-line);
     border-bottom: 1px solid var(--color-line);
-    padding: 7px var(--cell-x);
+    padding: 10px var(--cell-x);
     text-align: left;
     vertical-align: top;
   }
