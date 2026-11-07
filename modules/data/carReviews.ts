@@ -4385,7 +4385,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Volvo EC40 Twin Motor er rennilegur jepplingur með sportlegu útliti. Hann er sniðinn fyrir þá sem vilja fáguð gæði Volvo, háa sætisstöðu og öruggt grip, en kjósa djarfara og straumlínulagaðra snið en hefðbundnir fjölskyldubílar bjóða upp á.',
       'Fjórhjóladrifið og ríflegt aflið koma sér sérlega vel í snjó og hálku. Bíllinn drífur lengra en flestir í sínum verðflokki, sem dugar léttilega á milli landshluta jafnvel þótt vetrarkuldinn éti hluta af drægninni. Á ferðalögum utan bæjarins hleður hann líka fremur hratt, þótt það sé aðeins í meðallagi á þessu verði.',
       'Bíllinn gefur fátt eftir í akstri eða tækni og helsti ókosturinn er hár verðmiði. Ef þú ekur aðallega innanbæjar og þarft ekki jafn mikla drægni getur BMW iX1 xDrive 30 verið fýsilegur valkostur, enda er hann 700.000 kr. ódýrari, þótt það komi á kostnað drægninnar og þýði um 30% lengri hleðslustopp.',
-      'Uppfærður EC40, P8 Performance, er væntanlegur snemma 2027 með nýju andliti, stærri skjá og aðeins meira afli, en verður líklega töluvert dýrari. Fyrir þá sem vilja kraftmikinn lúxusjeppling sem svíkur mann ekki á langferðum í vetrarveðri er EC40 afar heilsteypt val.',
+      'Uppfærður EC40, P8 Performance, er væntanlegur snemma 2027 með nýju andliti, stærri skjá og aðeins meira afli, en verðið hér á landi liggur ekki fyrir. Fyrir þá sem vilja kraftmikinn lúxusjeppling sem svíkur mann ekki á langferðum í vetrarveðri er EC40 afar heilsteypt val.',
     ],
     questions: [
       'Af hverju hann frekar en nýi EX40?',
@@ -4405,8 +4405,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volvo-ec40-p8-performance': {
     paragraphs: [
       'Volvo EC40 P8 Performance er uppfærður EC40: jepplingur með hallandi þaklínu, sami bíll og EX40 að framan en sportlegri að aftan. Hann fékk í haust nýtt andlit, Matrix LED-ljós og stærri skjá, 11,2 tommu í stað 9, og er væntanlegur snemma 2027. Hann hentar ef þú vilt nettan bíl með meiri stíl en kassalaga jepplingur býður.',
-      'Hann er sneggri og aflmeiri en flestir á svipuðu verði, og fjórhjóladrifið gerir hann öruggan í vetrarfærð.',
-      'Gallinn er verðið, sem er enn áætlað. Miðað við það hleður hann hægar en flestir á svipuðu verði, og hallandi þakið tekur af skottinu og höfuðplássinu aftur í. Skoda Enyaq RS er 710.000 kr. ódýrari og drífur álíka langt. Og ef þú vilt bíl strax er EC40 Twin Motor, sem hann leysir af hólmi, 1.300.000 kr. ódýrari og nánast jafn snöggur og langdrægur.',
+      'Hann er sneggri og aflmeiri en flestir á svipuðu verði, svo hann á nóg inni við framúrakstur á þjóðveginum.',
+      'Verðið er enn áætlað, en miðað við það hleður hann hægar en flestir á svipuðu verði, og hallandi þakið tekur af skottinu og höfuðplássinu aftur í. Skoda Enyaq RS er 710.000 kr. ódýrari, drífur álíka langt og er með mun stærra skott. Og ef þú vilt bíl strax er EC40 Twin Motor, sem hann leysir af hólmi, 1.300.000 kr. ódýrari, nánast jafn snöggur og drífur jafn langt.',
       'Nýi EC40 er fyrir þann sem vill útlitið og nýjustu tæknina og getur beðið, en sá eldri gefur meira fyrir peninginn á meðan hann fæst.',
     ],
     questions: [
@@ -4470,7 +4470,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Volvo EX40 Recharge Twin er meðalstór jepplingur, sami bíll og hét áður XC40 Recharge: kassalaga, hár í sæti og með rólegu, skandinavísku innréttinguna sem Volvo er þekkt fyrir. Hann hentar ef þú vilt þéttan og öruggan fjölskyldubíl sem á samt nóg inni þegar þú stígur á gjöfina.',
       'Og það á hann. Hann er sneggri og aflmeiri en flestir á svipuðu verði, og krókurinn ber meira en hjá flestum keppinautum hans, svo hjólhýsið eða stóra kerran er ekkert mál.',
       'Gallinn er plássið aftast: skottið er með þeim minnstu miðað við keppinautana, og þú borgar meira á hvern km drægni en hjá flestum þeirra. BMW iX1 xDrive 30 er 700.000 kr. ódýrari og með 49 l stærra skott, en hann drífur 99 km styttra og hleðslustoppin eru um 25% lengri.',
-      'Uppfærður EX40, P8 Performance, er væntanlegur snemma 2027 með nýju andliti, stærri skjá og aðeins meira afli, en verður líklega töluvert dýrari. EX40 er bíllinn fyrir þann sem vill kraft og krók í nettum pakka og getur lifað með minna skotti.',
+      'Uppfærður EX40, P8 Performance, er væntanlegur snemma 2027 með nýju andliti, stærri skjá og aðeins meira afli, en verðið hér á landi liggur ekki fyrir. EX40 er bíllinn fyrir þann sem vill kraft og krók í nettum pakka og getur lifað með minna skotti.',
     ],
     questions: [
       'Borgar sig að bíða eftir nýja EX40?',
@@ -4489,8 +4489,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volvo-ex40-p8-performance': {
     paragraphs: [
       'Volvo EX40 P8 Performance er uppfærður EX40: nettur, kassalaga jepplingur sem fékk í haust nýtt andlit, Matrix LED-ljós og stærri skjá, 11,2 tommu í stað 9. Hann er væntanlegur snemma 2027. Hann hentar ef þú vilt lítinn fjölskyldubíl sem situr hátt en á samt nóg inni þegar þú stígur á gjöfina.',
-      'Og það á hann: hann er sneggri og aflmeiri en flestir á svipuðu verði. Með fjórhjóladrifi og krók fyrir allt að 1.800 kg er hann líka fínn í vetrarfærð og með kerruna aftan í.',
-      'Gallinn er verðið, sem er enn áætlað. Miðað við það drífur hann styttra og hleður hægar en flestir á svipuðu verði, og skottið er lítið. Skoda Enyaq RS er 710.000 kr. ódýrari og drífur álíka langt. Og ef þú vilt bíl strax er EX40 Recharge Twin, sem hann leysir af hólmi, 1.300.000 kr. ódýrari og nánast jafn snöggur og langdrægur.',
+      'Og það á hann: hann er sneggri og aflmeiri en flestir á svipuðu verði, og krókurinn ber allt að 1.800 kg, svo kerran eða hjólhýsið er ekkert mál.',
+      'Verðið er enn áætlað, en miðað við það drífur hann styttra og hleður hægar en flestir á svipuðu verði, og skottið er lítið. Skoda Enyaq RS er 710.000 kr. ódýrari, drífur álíka langt og er með mun stærra skott. Og ef þú vilt bíl strax er EX40 Recharge Twin, sem hann leysir af hólmi, 1.300.000 kr. ódýrari og nánast jafn snöggur og langdrægur.',
       'Nýi EX40 er fyrir þann sem vill nýjasta útlitið og tæknina og getur beðið, en sá eldri gefur meira fyrir peninginn á meðan hann fæst.',
     ],
     questions: [
