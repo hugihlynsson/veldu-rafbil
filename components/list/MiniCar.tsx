@@ -14,11 +14,13 @@ const MiniCar: FunctionComponent<Props> = ({ car, onSelect }) => {
     <button
       type="button"
       onClick={onSelect}
-      className="flex flex-row w-full p-0 border-0 bg-transparent cursor-pointer text-left rounded-card overflow-hidden no-underline text-inherit transition-colors duration-200 max-w-full hover:bg-cloud"
+      className="flex flex-row w-full p-0 border border-line bg-tile cursor-pointer text-left rounded-card overflow-hidden no-underline text-inherit transition duration-200 max-w-full hover:bg-tile-hover hover:-translate-y-0.5 hover:shadow-(--shadow-chip-hover) active:translate-y-0 active:shadow-(--shadow-chip-press)"
     >
-      <div className="relative w-30 min-w-30 bg-cloud shrink-0">
+      <div className="relative w-30 h-20 bg-cloud shrink-0">
         {/* The size the box really renders at, so the 1x/2x pair lands on
-            128 and 256 rather than the hero's 540 and 1080 */}
+            128 and 256 rather than the hero's 540 and 1080. The height is
+            pinned with the text's rather than stretched to it, as a photo
+            drawn taller than its prop is one Next warns about */}
         <Image
           alt={`${car.make} ${car.model}`}
           src={`/images/${car.heroImageName}.jpg`}
@@ -27,7 +29,7 @@ const MiniCar: FunctionComponent<Props> = ({ car, onSelect }) => {
           className="w-full h-full object-cover block"
         />
       </div>
-      <div className="py-2.5 px-3 flex-1 flex flex-col justify-center border border-line border-l-0 rounded-r-card">
+      <div className="h-20 py-2.5 px-3 flex-1 flex flex-col justify-center">
         <div className="text-sm font-semibold mb-0.75 leading-[1.3]">
           <span>{car.make}</span>{' '}
           <span className="font-normal">{car.model}</span>

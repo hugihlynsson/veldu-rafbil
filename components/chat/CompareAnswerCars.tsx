@@ -42,7 +42,7 @@ const CompareAnswerCars: React.FunctionComponent<Props> = ({
         })
       }}
       className={clsx(
-        'group flex items-center gap-3 w-full max-w-[500px] py-2.5 pl-2.5 pr-4 rounded-card border border-line no-underline text-inherit transition-colors duration-200 hover:bg-cloud',
+        'group flex items-center gap-3 w-full max-w-[500px] py-2.5 pl-2.5 pr-4 rounded-card border border-line bg-tile no-underline text-inherit transition duration-200 hover:bg-tile-hover hover:-translate-y-0.5 hover:shadow-(--shadow-chip-hover) active:translate-y-0 active:shadow-(--shadow-chip-press)',
         animate && 'animate-follow-up-in',
       )}
     >
@@ -55,7 +55,7 @@ const CompareAnswerCars: React.FunctionComponent<Props> = ({
             src={`/images/${car.heroImageName}.jpg`}
             width={48}
             height={32}
-            className="w-12 h-8 rounded-lg object-cover ring-2 ring-glass"
+            className="w-12 h-8 rounded-lg object-cover ring-2 ring-tile transition-shadow duration-200 group-hover:ring-tile-hover"
           />
         ))}
       </div>
