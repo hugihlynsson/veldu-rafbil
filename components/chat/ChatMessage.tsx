@@ -5,8 +5,10 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { useEffect, useRef, useState } from 'react'
 import type { ChatMessage as Message } from '@/modules/chat/message'
+import rehypeWords from '@/modules/chat/rehypeWords'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import useShrinkwrap from '@/utils/useShrinkwrap'
+import useWordReveal from '@/utils/useWordReveal'
 import clsx from 'clsx'
 
 interface Props {
@@ -24,6 +26,9 @@ const ChatMessage: React.FunctionComponent<Props> = ({
   // As it was on arrival: a question scrolls into view once, and not again
   // when a later one makes it the last no longer
   const [scrollsOnArrival] = useState(isLastUserMessage)
+  // Only an answer arriving now: one already there when the chat opened is
+  // shown whole
+  const answerRef = useWordReveal<HTMLDivElement>(animate)
 
   useEffect(() => {
     if (scrollsOnArrival) {
@@ -52,12 +57,16 @@ const ChatMessage: React.FunctionComponent<Props> = ({
             .join('')}
         />
       ) : (
-        <div className="message-content w-full text-sm leading-6 wrap-break-word text-tint">
+        <div
+          ref={answerRef}
+          className="message-content w-full text-sm leading-6 wrap-break-word text-tint"
+        >
           {message.parts?.map((part, index) =>
             part.type === 'text' ? (
               <ReactMarkdown
                 key={index}
                 remarkPlugins={[remarkGfm]}
+                rehypePlugins={animate ? [[rehypeWords, { part: index }]] : []}
                 components={{
                   table: ({ children }) => (
                     <div className="table-wrapper">
