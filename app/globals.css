@@ -39,6 +39,10 @@
   --color-shade: #eee; /* a card on the page, hovered */
   --color-raised: #fff; /* a control lifted off a tinted track */
   --color-track: rgb(0 0 0 / 0.04); /* that track: the sorting tabs */
+  /* A card inside the chat panel: a car, a comparison, a table. White on the
+     panel's frosted white in light, where a hover lifts it instead */
+  --color-tile: #fff;
+  --color-tile-hover: #fff;
 
   /* Lines. A divider is decoration; the edge of a field is how anyone finds
      it, so `line-strong` clears 3:1 on white and on `haze` */
@@ -280,6 +284,9 @@
     --color-shade: #1a1a1a;
     --color-raised: #383838;
     --color-track: rgb(255 255 255 / 0.09);
+    /* `cloud` and `smoke`, a step and two up from the panel's `glass` */
+    --color-tile: #262626;
+    --color-tile-hover: #303030;
 
     --color-line: #3a3a3a;
     --color-line-strong: #757575;
@@ -393,9 +400,7 @@
 }
 
 /* In the components layer, under the utilities, like every other rule here.
-   The chrome inside a message is mixed out of `currentColor` rather than any
-   token: these rules run inside both bubbles, and the bubbles carry opposite
-   text colours in either theme. Tinting with the text is right in all four. */
+   Only an answer is run through markdown, so these sit on the panel */
 @layer components {
   .message-content p {
     margin: 0 0 0.5em 0;
@@ -451,31 +456,72 @@
     opacity: 0.8;
   }
   .message-content hr {
-    border-top-color: color-mix(in srgb, currentColor 10%, transparent);
+    border-top-color: var(--color-line);
     margin: 1em 0;
   }
-  .message-content .table-wrapper {
-    /* Out to the panel's edges, which the message's px-5 holds the text off */
-    overflow-x: auto;
-    margin: 0.5em calc(var(--spacing) * -5);
-    padding: 0 calc(var(--spacing) * 5);
+  .message-content h1,
+  .message-content h2,
+  .message-content h3,
+  .message-content h4 {
+    font-weight: 600;
+    margin: 1em 0 0.25em;
   }
+  .message-content h1,
+  .message-content h2 {
+    font-size: var(--text-base);
+  }
+  .message-content :is(h1, h2, h3, h4):first-child {
+    margin-top: 0;
+  }
+  .message-content blockquote {
+    border-left: 2px solid var(--color-line-chip);
+    padding-left: 0.75em;
+    margin: 0.5em 0;
+    color: var(--color-stone);
+  }
+  .message-content .table-wrapper {
+    --cell-x: 10px;
+    /* Out to the panel's edges, which the message's px-5 holds the text off,
+       and back in by less than that: by a cell's padding and the border
+       less, so the first column's text lines up with the answer's */
+    overflow-x: auto;
+    margin: 0.75em calc(var(--spacing) * -5);
+    padding: 0 calc(var(--spacing) * 5 - var(--cell-x) - 1px);
+  }
+  /* Separate rather than collapsed, as a collapsed table draws no radius.
+     Each cell draws only its right and bottom edge, and the table the rest */
   .message-content table {
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    background-color: var(--color-tile);
     width: 100%;
     font-size: 13px;
   }
   .message-content th,
   .message-content td {
-    border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
-    padding: 6px 8px;
+    border-right: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+    padding: 7px var(--cell-x);
     text-align: left;
+    vertical-align: top;
+  }
+  .message-content :is(th, td):last-child {
+    border-right: 0;
+  }
+  .message-content tbody tr:last-child > td {
+    border-bottom: 0;
   }
   .message-content th {
     background-color: color-mix(in srgb, currentColor 4%, transparent);
     font-weight: 600;
   }
-  .message-content tr:nth-child(even) {
-    background-color: color-mix(in srgb, currentColor 2%, transparent);
+  /* The header fills to the table's edge, so its top corners round with it */
+  .message-content thead tr:first-child > :first-child {
+    border-top-left-radius: calc(var(--radius-card) - 1px);
+  }
+  .message-content thead tr:first-child > :last-child {
+    border-top-right-radius: calc(var(--radius-card) - 1px);
   }
 }
