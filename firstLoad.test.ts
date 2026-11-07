@@ -19,8 +19,8 @@ const resolveLocal = (specifier: string, from: string): string | undefined => {
   )
 }
 
-/** Every package the file pulls into the chunk it is part of */
-const packagesImportedBy = (entry: string): Set<string> => {
+/** Every package and file of ours the file pulls into the chunk it is part of */
+const importGraph = (entry: string) => {
   const packages = new Set<string>()
   const seen = new Set<string>()
   const queue = [entry]
@@ -42,8 +42,11 @@ const packagesImportedBy = (entry: string): Set<string> => {
     }
   }
 
-  return packages
+  return { packages, files: seen }
 }
+
+const packagesImportedBy = (entry: string): Set<string> =>
+  importGraph(entry).packages
 
 const heavyPackages = [
   'zod',
@@ -91,5 +94,21 @@ describe('the chat bar', () => {
 
   it.each(heavyPackages)('leaves out %s', (name) => {
     expect(importsOf(packages, name)).toEqual([])
+  })
+})
+
+// Every car's review is several times the size of the car list, and grows
+// with it: the sheet fetches the one it shows, and the list never has them
+describe('the reviews', () => {
+  const reviews = path.join(root, 'modules/data/carReviews.ts')
+  const sheet = path.join(root, 'components/detail/CarSheet.tsx')
+
+  it.each([
+    ['the list', carList],
+    ['the sheet over it', sheet],
+  ])('stay out of %s', (_name, entry) => {
+    const { files } = importGraph(entry)
+    expect(files).toContain(entry)
+    expect(files).not.toContain(reviews)
   })
 })

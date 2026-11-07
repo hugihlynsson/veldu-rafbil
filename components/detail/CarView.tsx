@@ -28,7 +28,7 @@ interface Props {
   car: Car
   similar: ReadonlyArray<Car>
   /** None for a car whose review is yet to be written */
-  review?: CarReview
+  review?: Pick<CarReview, 'paragraphs'>
   /** What the change log tells of it, newest first */
   history?: ReadonlyArray<NewsItem>
   /** Over the list on a desktop, which is the page and has the logo */
