@@ -34,7 +34,7 @@
   --color-surface: #fff; /* a panel over it: the filter sheet */
   --color-glass: #fff; /* a translucent panel, always used with an alpha */
   --color-veil: #dcdcdc; /* the chat bar, likewise */
-  --color-cloud: #eee; /* a fill on the page: pills, chat bubbles */
+  --color-cloud: #eee; /* a fill on the page: pills */
   --color-smoke: #ddd; /* the same fill, hovered */
   --color-shade: #eee; /* a card on the page, hovered */
   --color-raised: #fff; /* a control lifted off a tinted track */
@@ -455,10 +455,10 @@
     margin: 1em 0;
   }
   .message-content .table-wrapper {
-    /* Out to the bubble's edges, which its px-3.5 holds the text off */
+    /* Out to the panel's edges, which the message's px-5 holds the text off */
     overflow-x: auto;
-    margin: 0.5em calc(var(--spacing) * -3.5);
-    padding: 0 calc(var(--spacing) * 3.5);
+    margin: 0.5em calc(var(--spacing) * -5);
+    padding: 0 calc(var(--spacing) * 5);
   }
   .message-content table {
     border-collapse: collapse;
