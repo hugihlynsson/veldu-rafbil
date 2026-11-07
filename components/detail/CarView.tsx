@@ -19,6 +19,7 @@ import EvDatabaseLink from '@/components/EvDatabaseLink'
 import CompareIcon from '@/components/CompareIcon'
 import ShareButton from '@/components/ShareButton'
 import { pageColumn } from '@/components/pageColumn'
+import { photoZoomFromMd } from '@/components/photoZoom'
 import PageTop from './PageTop'
 import { heroImageProps } from './heroImage'
 import SheetHero from './SheetHero'
@@ -229,21 +230,26 @@ const CarView: FunctionComponent<Props> = ({
                 // The whole card opens the car's page; the button over it compares
                 <li
                   key={other.id}
-                  className="relative flex items-center gap-3 rounded-card overflow-hidden transition-colors duration-200 hover:bg-shade md:flex-col md:items-stretch md:overflow-visible md:hover:bg-transparent md:isolate md:before:absolute md:before:-inset-1 md:before:-bottom-3 md:before:-z-10 md:before:rounded-xl md:before:bg-shade md:before:opacity-0 md:before:transition-opacity md:before:duration-200 md:hover:before:opacity-100"
+                  className="group relative flex items-center gap-3 rounded-card overflow-hidden transition-colors duration-200 hover:bg-shade md:flex-col md:items-stretch md:overflow-visible md:hover:bg-transparent"
                 >
                   {/* Beside the name, flush to the card with its border drawn
-                      over it. Above the name it needs no border, and on hover
-                      the card shows 4px past the photo: rounded-xl is the
-                      photo's rounded-lg grown by those 4px, at whatever
-                      --corner scales them by */}
-                  <Image
-                    alt=""
-                    sizes="(max-width: 767px) 128px, 210px"
-                    src={`/images/${other.heroImageName}.jpg`}
-                    width={128}
-                    height={85}
-                    className="w-32 h-auto aspect-[3/2] shrink-0 self-stretch object-cover md:w-full md:rounded-lg"
-                  />
+                      over it. Above the name it needs no border, and the
+                      card's larger corner would clip the photo's own */}
+                  <div className="w-32 aspect-[3/2] shrink-0 self-stretch overflow-hidden md:w-full md:rounded-lg">
+                    <Image
+                      alt=""
+                      sizes="(max-width: 767px) 128px, 210px"
+                      src={`/images/${other.heroImageName}.jpg`}
+                      width={128}
+                      height={85}
+                      // Still while the compare link, the li's only direct
+                      // link, is hovered, as that does not open the car
+                      className={clsx(
+                        'w-full h-full object-cover md:group-has-[>a:hover]:scale-100',
+                        photoZoomFromMd,
+                      )}
+                    />
+                  </div>
                   <div className="flex-1 min-w-0 py-2 text-balance md:p-0 md:px-1">
                     <Link
                       href={carPathOf(other)}

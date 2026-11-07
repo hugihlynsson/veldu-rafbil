@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { photoZoom } from '@/components/photoZoom'
 import { carWithSlug, type Car } from '@/modules/data/cars'
 import { carPathOf } from '@/modules/detail/paths'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
@@ -42,19 +43,19 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
         'group relative flex',
         tile
           ? 'flex-col gap-2 md:gap-3'
-          : // The fill reaches 10px past the photo on every side, as a similar
-            // car's does on a car's page, and rounds by the photo's radius
-            // and those 10px, so the two corners run parallel
-            'items-start gap-3 py-2.5 md:items-center md:gap-4 lg:gap-3 md:isolate md:before:absolute md:before:-inset-x-2.5 md:before:inset-y-0 md:before:-z-10 md:before:rounded-[calc(var(--radius-lg)+10px)] md:before:bg-shade md:before:opacity-0 md:before:transition-opacity md:before:duration-200 md:hover:before:opacity-100',
+          : // The fill reaches 8px past the photo on every side and rounds by
+            // the photo's radius and those 8px, so the two corners run
+            // parallel. Text taller than the photo pushes it out, to 4px past
+            // the text's box. A row fills rather than zooming its photo
+            'items-start gap-3 py-2.5 md:items-center md:gap-4 lg:gap-3 md:[--photo-h:--spacing(16)] lg:[--photo-h:--spacing(14)] md:isolate md:before:absolute md:before:-inset-x-2 md:before:inset-y-[min(50%_-_var(--photo-h)/2_-_8px,6px)] md:before:-z-10 md:before:rounded-[calc(var(--radius-lg)+8px)] md:before:bg-shade md:before:opacity-0 md:before:transition-opacity md:before:duration-200 md:hover:before:opacity-100',
       )}
     >
-      {/* The frame clips the photo, which a tile zooms within on hover */}
       <div
         className={clsx(
           'shrink-0 overflow-hidden bg-cloud',
           tile
             ? 'w-full aspect-[3/2] rounded-lg md:rounded-xl'
-            : 'w-18 h-12 rounded-sm md:w-24 md:h-16 md:rounded-lg lg:w-21 lg:h-14',
+            : 'w-18 h-12 rounded-sm md:w-24 md:h-(--photo-h) md:rounded-lg lg:w-21',
         )}
       >
         {car && (
@@ -72,11 +73,7 @@ const Row: FunctionComponent<{ item: NewsItem; tile: boolean }> = ({
                   height: 193,
                 }
               : { width: 96, height: 64 })}
-            className={clsx(
-              'w-full h-full object-cover',
-              tile &&
-                'motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out group-hover:scale-105 motion-safe:group-hover:duration-500',
-            )}
+            className={clsx('w-full h-full object-cover', tile && photoZoom)}
           />
         )}
       </div>
