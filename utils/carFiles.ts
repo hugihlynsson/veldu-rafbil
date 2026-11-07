@@ -14,14 +14,20 @@ import { carHistoryPath } from '@/modules/news/paths'
  */
 const perCarFile = <T>(pathOf: (slug: string) => string, empty: T) => {
   const asked = new Map<string, Promise<T>>()
+  // Read in render, so a car fetched ahead opens with its file in rather than
+  // a frame without it
+  const arrived = new Map<string, T>()
 
   const fileFor = (slug: string): Promise<T> => {
     const known = asked.get(slug)
     if (known) return known
     const request = fetch(pathOf(slug))
-      .then((response) =>
-        response.ok ? (response.json() as Promise<T>) : empty,
-      )
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`${response.status}`)
+        const file = (await response.json()) as T
+        arrived.set(slug, file)
+        return file
+      })
       .catch(() => {
         asked.delete(slug)
         return empty
@@ -36,6 +42,7 @@ const perCarFile = <T>(pathOf: (slug: string) => string, empty: T) => {
     const [loaded, setLoaded] = useState<{ slug: string; file: T }>()
 
     useEffect(() => {
+      if (arrived.has(slug)) return
       let current = true
       void fileFor(slug).then((file) => {
         if (current) setLoaded({ slug, file })
@@ -45,6 +52,7 @@ const perCarFile = <T>(pathOf: (slug: string) => string, empty: T) => {
       }
     }, [slug])
 
+    if (arrived.has(slug)) return arrived.get(slug) as T
     return loaded?.slug === slug ? loaded.file : empty
   }
 

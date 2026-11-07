@@ -1,4 +1,4 @@
-import { allCars } from '@/modules/data/cars'
+import { allCars, carWithSlug } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { sheetReviewOf } from '@/modules/detail/review'
 
@@ -20,7 +20,6 @@ const headers = {
 }
 
 export async function GET(_request: Request, { params }: Context) {
-  const { slug } = await params
-  const car = allCars.find((other) => carSlug(other) === slug)
+  const car = carWithSlug((await params).slug)
   return Response.json(car ? sheetReviewOf(car) : null, { headers })
 }
