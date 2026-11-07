@@ -19,7 +19,7 @@ const answering = (finishes: string[]) => {
     logAfterResponse: async (event: () => Promise<object>) =>
       logged.push(await event()),
   }))
-  vi.doMock('@ai-sdk/google', () => ({ google: () => 'model' }))
+  vi.doMock('@ai-sdk/openai', () => ({ openai: () => 'model' }))
   vi.doMock('ai', () => ({
     streamText: (call: unknown) => {
       const finish = finishes[calls.length] ?? 'stop'
@@ -52,7 +52,7 @@ afterEach(() => {
     'next/cache',
     'next/server',
     '@/app/api/publicEndpoint',
-    '@ai-sdk/google',
+    '@ai-sdk/openai',
     'ai',
   ])
     vi.doUnmock(mocked)
