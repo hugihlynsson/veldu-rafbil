@@ -4,7 +4,7 @@ import TextLink from '@/components/TextLink'
 
 export default function Intro() {
   return (
-    <p className="leading-normal text-sm pt-6 m-0 mb-8 text-stone max-w-[33em] text-pretty md:text-base">
+    <p className="leading-5.5 text-sm pt-6 m-0 mb-8 text-stone max-w-[33em] text-pretty md:text-base md:leading-6">
       Listi yfir alla {cars.length} bílana sem eru seldir á Íslandi og eru 100%
       rafdrifnir. Upplýsingar um drægni eru samkvæmt{' '}
       <TextLink href="http://wltpfacts.eu/">WLTP</TextLink> mælingum frá
