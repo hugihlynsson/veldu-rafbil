@@ -15,7 +15,9 @@ const ChatHeader: React.FunctionComponent<Props> = ({
   onClearChat,
 }) => {
   return (
-    <header className="relative text-center px-4 py-3.5 shadow-(--shadow-hairline)">
+    // Solid on a phone, where it meets the browser's bar, which is painted
+    // the page's colour from theme-color; the frosted panel is a shade off it
+    <header className="relative text-center px-4 py-3.5 shadow-(--shadow-hairline) bg-lab chat-panel:bg-transparent">
       <CloseButton onClick={onClose} />
       <h2 id="chat-modal-title" className="m-0 text-lg font-semibold">
         Spjall

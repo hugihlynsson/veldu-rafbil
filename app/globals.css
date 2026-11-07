@@ -513,8 +513,10 @@
   .message-content tbody tr:last-child > td {
     border-bottom: 0;
   }
+  /* A step past the frosted panel around the table, which a lighter tint
+     matched and so lost the header against */
   .message-content th {
-    background-color: color-mix(in srgb, currentColor 4%, transparent);
+    background-color: color-mix(in srgb, currentColor 7%, transparent);
     font-weight: 600;
   }
   /* The header fills to the table's edge, so its top corners round with it */
