@@ -493,17 +493,22 @@
   .message-content table {
     border-collapse: separate;
     border-spacing: 0;
-    border: 1px solid var(--color-line);
+    /* The header's dividers as they land, 6% over its 7%, so the outline
+       and those lines read as one colour */
+    border: 1px solid color-mix(in srgb, currentColor 13%, transparent);
     border-radius: var(--radius-card);
     background-color: var(--color-tile);
     width: 100%;
     font-size: 13px;
+    /* Tighter than the answer's, so a cell that wraps holds together; the
+       cells' padding makes up the rest, so a row of one line stays 38px */
+    line-height: 1.4;
   }
   .message-content th,
   .message-content td {
     border-right: 1px solid var(--color-line);
     border-bottom: 1px solid var(--color-line);
-    padding: 7px var(--cell-x);
+    padding: 10px var(--cell-x);
     text-align: left;
     vertical-align: top;
   }
@@ -513,8 +518,12 @@
   .message-content tbody tr:last-child > td {
     border-bottom: 0;
   }
+  /* A step past the frosted panel around the table, which a lighter tint
+     matched and so lost the header against */
   .message-content th {
-    background-color: color-mix(in srgb, currentColor 4%, transparent);
+    background-color: color-mix(in srgb, currentColor 7%, transparent);
+    /* Translucent over that fill rather than `line`, which it matches */
+    border-color: color-mix(in srgb, currentColor 6%, transparent);
     font-weight: 600;
   }
   /* The header fills to the table's edge, so its top corners round with it */
