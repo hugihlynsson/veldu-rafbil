@@ -1040,7 +1040,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'volvo-ec40-twin-motor': [
     'bmw-ix1-xdrive-30',
     'audi-q4-e-tron-45-quattro',
-    'polestar-2-long-range-performance',
+    'volvo-ex40-p8-performance',
   ],
   'volvo-es90-twin-motor': [
     'bmw-i5-edrive40',
@@ -1056,6 +1056,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'audi-q4-e-tron-45-quattro',
     'bmw-ix1-xdrive-30',
     'volvo-ec40-twin-motor',
+  ],
+  'volvo-ex40-p8-performance': [
+    'audi-q4-e-tron-45-quattro',
+    'bmw-ix1-xdrive-30',
+    'skoda-enyaq-rs',
   ],
   'volvo-ex30-single-motor': [
     'mini-aceman-e',

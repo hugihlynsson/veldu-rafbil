@@ -4388,7 +4388,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Fyrir þá sem vilja kraftmikinn lúxusjeppling sem svíkur mann ekki á langferðum í vetrarveðri er EC40 afar heilsteypt val.',
     ],
     questions: [
-      'Af hverju hann frekar en Polestar 2?',
+      'Af hverju hann frekar en nýi EX40?',
       'Af hverju að velja hann fram yfir BMW iX1?',
       'Hvernig er hann miðað við Audi Q4 e-tron?',
       'Hver er munurinn á honum og Volvo EX40?',
@@ -4399,7 +4399,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig reynist fjórhjóladrifið í færð?',
       'Hvernig nýtist skottið í langferðir?',
     ],
-    facts: 'f1e0fb74c18e',
+    facts: '64f73fe781ef',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-es90-twin-motor': {
@@ -4449,9 +4449,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Volvo EX40 Recharge Twin er meðalstór jepplingur, sami bíll og hét áður XC40 Recharge: kassalaga, hár í sæti og með rólegu, skandinavísku innréttinguna sem Volvo er þekkt fyrir. Hann hentar ef þú vilt þéttan og öruggan fjölskyldubíl sem á samt nóg inni þegar þú stígur á gjöfina.',
       'Og það á hann. Hann er sneggri og aflmeiri en flestir á svipuðu verði, og krókurinn ber meira en hjá flestum keppinautum hans, svo hjólhýsið eða stóra kerran er ekkert mál.',
       'Gallinn er plássið aftast: skottið er með þeim minnstu miðað við keppinautana, og þú borgar meira á hvern km drægni en hjá flestum þeirra. BMW iX1 xDrive 30 er 700.000 kr. ódýrari og með 49 l stærra skott, en hann drífur 99 km styttra og hleðslustoppin eru um 25% lengri.',
-      'EX40 er bíllinn fyrir þann sem vill kraft og krók í nettum pakka og getur lifað með minna skotti.',
+      'Uppfærður EX40, P8 Performance, er væntanlegur snemma 2027 með nýju andliti, stærri skjá og aðeins meira afli, en verður líklega töluvert dýrari. EX40 er bíllinn fyrir þann sem vill kraft og krók í nettum pakka og getur lifað með minna skotti.',
     ],
     questions: [
+      'Borgar sig að bíða eftir nýja EX40?',
       'Er hann betri kostur en Audi Q4 e-tron?',
       'Borgar sig að spara og velja BMW iX1?',
       'Hver er munurinn á EX40 og EC40?',
@@ -4463,6 +4464,27 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hve mikið dregur kuldinn úr drægninni?',
     ],
     facts: '39582f867511',
+  },
+  'volvo-ex40-p8-performance': {
+    paragraphs: [
+      'Volvo EX40 P8 Performance er uppfærður EX40: nettur, kassalaga jepplingur sem fékk í haust nýtt andlit, Matrix LED-ljós og stærri skjá, 11,2 tommu í stað 9. Hann er væntanlegur snemma 2027. Hann hentar ef þú vilt lítinn fjölskyldubíl sem situr hátt en á samt nóg inni þegar þú stígur á gjöfina.',
+      'Og það á hann: hann er sneggri og aflmeiri en flestir á svipuðu verði. Með fjórhjóladrifi og krók fyrir allt að 1.800 kg er hann líka fínn í vetrarfærð og með kerruna aftan í.',
+      'Gallinn er verðið, sem er enn áætlað. Miðað við það drífur hann styttra og hleður hægar en flestir á svipuðu verði, og skottið er lítið. Skoda Enyaq RS er 710.000 kr. ódýrari og drífur álíka langt. Og ef þú vilt bíl strax er EX40 Recharge Twin, sem hann leysir af hólmi, 1.300.000 kr. ódýrari og nánast jafn snöggur og langdrægur.',
+      'Nýi EX40 er fyrir þann sem vill nýjasta útlitið og tæknina og getur beðið, en sá eldri gefur meira fyrir peninginn á meðan hann fæst.',
+    ],
+    questions: [
+      'Hvað er nýtt miðað við eldri EX40?',
+      'Borgar sig að bíða eftir honum?',
+      'Er hann betri kostur en Skoda Enyaq RS?',
+      'Hvernig er hann miðað við Audi Q4 e-tron?',
+      'Borgar sig að spara og velja BMW iX1?',
+      'Hvenær kemur hann til landsins?',
+      'Kemst barnavagn í skottið á honum?',
+      'Hversu þunga kerru má hann draga?',
+      'Hvernig er fjórhjóladrifið í snjó?',
+      'Hve mikið dregur kuldinn úr drægninni?',
+    ],
+    facts: '916734caa59a',
   },
   'volvo-ex30-single-motor-extended-range': {
     paragraphs: [
