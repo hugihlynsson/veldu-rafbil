@@ -12,6 +12,10 @@ export const comparisonPathOf = (compared: ReadonlyArray<Car>): string =>
 
 export const carPath = (slug: string): string => `${CAR_PATH}/${slug}`
 
+/** One car's review, which the sheet over the list fetches as it opens */
+export const carReviewPath = (slug: string): string =>
+  `${carPath(slug)}/umsogn.json`
+
 /** The page about these cars: one car's own, or a comparison of several */
 export const pagePath = (slugs: ReadonlyArray<string>): string => {
   const [only] = slugs

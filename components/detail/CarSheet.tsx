@@ -16,7 +16,6 @@ import { getImageProps } from 'next/image'
 import type { Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf } from '@/modules/detail/paths'
-import { reviewOf } from '@/modules/detail/review'
 import { similarTo } from '@/modules/detail/similar'
 import { carAtPath } from '@/modules/detail/slugs'
 import { neighboursOf } from '@/modules/list/neighbours'
@@ -35,7 +34,11 @@ import {
 import { getInputModality } from '@/utils/inputModality'
 import { leavePageBeforeLoad } from '@/utils/pageBeforeLoad'
 import { track } from '@/utils/track'
-import useCarHistory from '@/utils/useCarHistory'
+import {
+  prefetchCarReview,
+  useCarHistory,
+  useCarReview,
+} from '@/utils/carFiles'
 import CarView, { SHEET_TITLE_ID } from './CarView'
 import { heroImageProps } from './heroImage'
 
@@ -91,10 +94,9 @@ const steps = {
 
 /**
  * A car's page over the list on a desktop, so a look at one car leaves the
- * list where it was. Loaded behind next/dynamic: it carries every car's
- * review, which a visitor who never opens one should not download. The
- * change log is not among them: it grows with every change to the data, so
- * each car's updates are fetched as the car opens.
+ * list where it was. Its review and updates are fetched for the one car, as
+ * every car's would grow with the list; the review ahead, as a link to the
+ * car is pointed at, since it sits high enough in the sheet to be seen arrive.
  */
 const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
   const panelRef = useRef<HTMLDivElement>(null)
@@ -106,6 +108,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
   const path = carPathOf(car)
   const { previous, next } = neighboursOf(shown, car)
   const history = useCarHistory(carSlug(car))
+  const review = useCarReview(carSlug(car))
   // Which way the car came in, so what is under its photo slides from that side
   const [arrival, setArrival] = useState<SheetStep | null>(null)
 
@@ -187,14 +190,14 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [])
 
-  // The review's questions come from here, which the list would otherwise
-  // load with every car's review. Layout, so the bar is in before a paint.
+  // The review's questions come from here, as the list does not have them.
+  // Layout, so the bar is in before a paint.
   useLayoutEffect(() => {
     const container = chatSlotRef.current
     if (!container) return
-    onChat({ container, starters: reviewOf(car)?.questions })
+    onChat({ container, starters: review?.questions })
     return () => onChat(null)
-  }, [car, onChat])
+  }, [review, onChat])
 
   // How far down it is read is the panel's scroll, the page being locked
   useEffect(() => {
@@ -219,10 +222,12 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
   }
 
   // A step swaps the photo at once, rather than leaving the last one up
-  // until the next has loaded, so the next is fetched before it is asked for
+  // until the next has loaded, so the next is fetched before it is asked for,
+  // and its review with it
   useEffect(() => {
     for (const other of [previous, next]) {
       if (!other) continue
+      prefetchCarReview(carSlug(other))
       const { props } = getImageProps(heroImageProps(other, true))
       preload(props.src, {
         as: 'image',
@@ -299,7 +304,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
               <CarView
                 car={car}
                 similar={similarTo(car)}
-                review={reviewOf(car)}
+                review={review ?? undefined}
                 history={history}
                 sheet
                 contentClassName={clsx(arrival && arrivals[arrival])}

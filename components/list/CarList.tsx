@@ -1,6 +1,12 @@
 'use client'
 
-import { type ReactNode, useEffect, useRef, useState } from 'react'
+import {
+  type ReactNode,
+  type SyntheticEvent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import { usePathname, useRouter } from 'next/navigation'
@@ -44,6 +50,7 @@ import {
   showCarSheet,
   useListShown,
 } from '@/utils/carSheet'
+import { prefetchCarReview } from '@/utils/carFiles'
 import useComparison from '@/utils/useComparison'
 import useInputModality, { getInputModality } from '@/utils/inputModality'
 import CompareTray from '@/components/detail/CompareTray'
@@ -227,6 +234,16 @@ export default function CarList({ latest }: Props) {
     })
   }
 
+  // The review of the car a card's link opens, fetched as the pointer or the
+  // focus reaches it, so the sheet opens with it in rather than shifting what
+  // is under it once it arrives
+  const prefetchLinkedReview = (event: SyntheticEvent) => {
+    if (!(event.target instanceof Element) || !opensInSheet()) return
+    const link = event.target.closest('a')
+    const linked = link && carAtPath(link.pathname)
+    if (linked) prefetchCarReview(carSlug(linked))
+  }
+
   const filteredCars = cars.filter(carFilter(filters))
   const shownCars = sortCars(filteredCars, sorting, direction)
 
@@ -320,6 +337,8 @@ export default function CarList({ latest }: Props) {
         onPointerEnter={() => {
           if (opensInSheet()) void loadCarSheet()
         }}
+        onPointerOver={prefetchLinkedReview}
+        onFocus={prefetchLinkedReview}
       >
         {shownCars.map((car, index) => (
           <Car
