@@ -19,6 +19,12 @@ const listQueryRules = listQueryKeys.map((key) => ({
   has: [{ type: 'query' as const, key }],
 }))
 
+export const securityHeaders = [
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  { key: 'Content-Security-Policy', value: "frame-ancestors 'self'" },
+]
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   reactCompiler: true,
@@ -68,14 +74,24 @@ const nextConfig: NextConfig = {
     ]
   },
   async headers() {
-    // Next marks the rewritten page uncacheable, but its HTML depends on
-    // nothing but the URL and the deployment, which is part of Vercel's cache
-    // key. This header reaches only Vercel's CDN, so the browser still
-    // revalidates and no cache downstream outlives a deploy.
-    return listQueryRules.map((rule) => ({
-      ...rule,
-      headers: [{ key: 'Vercel-CDN-Cache-Control', value: 'max-age=31536000' }],
-    }))
+    return [
+      // frame-ancestors alone rather than a whole policy, which would need a
+      // nonce for Next's inline scripts and the analytics script
+      {
+        source: '/:path*',
+        headers: securityHeaders,
+      },
+      // Next marks the rewritten page uncacheable, but its HTML depends on
+      // nothing but the URL and the deployment, which is part of Vercel's
+      // cache key. This header reaches only Vercel's CDN, so the browser still
+      // revalidates and no cache downstream outlives a deploy.
+      ...listQueryRules.map((rule) => ({
+        ...rule,
+        headers: [
+          { key: 'Vercel-CDN-Cache-Control', value: 'max-age=31536000' },
+        ],
+      })),
+    ]
   },
   async rewrites() {
     return {

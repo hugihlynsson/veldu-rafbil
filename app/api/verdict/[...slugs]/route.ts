@@ -2,7 +2,7 @@ import { MIN_COMPARED } from '@/modules/detail/comparison'
 import { readSegment, resolveCompared } from '@/modules/detail/slugs'
 import { encodeEvent, type VerdictEvent } from '@/modules/detail/verdictEvents'
 import { clientKey, verdictBudget, verdictRateLimit } from '@/modules/rateLimit'
-import { rateLimitedText } from '@/modules/chat/progress'
+import { rateLimited } from '@/app/api/publicEndpoint'
 import { peekVerdict, writeVerdict } from './verdict'
 
 // The model thinks, looks each car up and then writes, which takes a while
@@ -48,15 +48,7 @@ export async function GET(
   // Counted only here, where a verdict is about to be bought
   const caller = verdictRateLimit(clientKey(request))
   const limit = caller.ok ? verdictBudget('all') : caller
-  if (!limit.ok) {
-    return Response.json(
-      { error: rateLimitedText },
-      {
-        status: 429,
-        headers: { 'Retry-After': String(limit.retryAfterSeconds) },
-      },
-    )
-  }
+  if (!limit.ok) return rateLimited(limit)
 
   const job = writeVerdict(cars)
   const encoder = new TextEncoder()

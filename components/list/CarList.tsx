@@ -236,11 +236,15 @@ export default function CarList({ latest }: Props) {
 
   // The review of the car a card's link opens, fetched as the pointer or the
   // focus reaches it, so the sheet opens with it in rather than shifting what
-  // is under it once it arrives
+  // is under it once it arrives. On a move rather than an over, which the list
+  // scrolling under a still pointer fires for every card it passes.
+  const prefetchedLink = useRef<Element | null>(null)
   const prefetchLinkedReview = (event: SyntheticEvent) => {
-    if (!(event.target instanceof Element) || !opensInSheet()) return
+    if (!(event.target instanceof Element)) return
     const link = event.target.closest('a')
-    const linked = link && carAtPath(link.pathname)
+    if (!link || link === prefetchedLink.current) return
+    prefetchedLink.current = link
+    const linked = opensInSheet() && carAtPath(link.pathname)
     if (linked) prefetchCarReview(carSlug(linked))
   }
 
@@ -337,7 +341,7 @@ export default function CarList({ latest }: Props) {
         onPointerEnter={() => {
           if (opensInSheet()) void loadCarSheet()
         }}
-        onPointerOver={prefetchLinkedReview}
+        onPointerMove={prefetchLinkedReview}
         onFocus={prefetchLinkedReview}
       >
         {shownCars.map((car, index) => (

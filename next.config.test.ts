@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 
-import nextConfig from './next.config'
+import nextConfig, { securityHeaders } from './next.config'
 import type { Filters } from './modules/list/filters'
 import {
   serializeFilters,
@@ -137,4 +137,15 @@ describe('the CDN cache for a list rendered per request', () => {
       expect(await responseHeader(query, 'CDN-Cache-Control')).toBeUndefined()
     },
   )
+})
+
+describe('the security headers', () => {
+  it('are sent with every path, whatever its query', async () => {
+    const everywhere = (await nextConfig.headers!()).filter(
+      (rule) => rule.source === '/:path*' && !rule.has && !rule.missing,
+    )
+    expect(everywhere.flatMap((rule) => rule.headers)).toEqual(
+      expect.arrayContaining(securityHeaders),
+    )
+  })
 })

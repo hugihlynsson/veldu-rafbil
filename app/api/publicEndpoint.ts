@@ -2,7 +2,18 @@ import { Axiom } from '@axiomhq/js'
 import { after } from 'next/server'
 
 import { rateLimitedText } from '@/modules/chat/progress'
-import { clientKey, type RateLimit } from '@/modules/rateLimit'
+import {
+  clientKey,
+  type RateLimit,
+  type RateLimitResult,
+} from '@/modules/rateLimit'
+
+/** The answer to a caller past its allowance, with when to ask again */
+export const rateLimited = ({ retryAfterSeconds }: RateLimitResult) =>
+  Response.json(
+    { error: rateLimitedText },
+    { status: 429, headers: { 'Retry-After': String(retryAfterSeconds) } },
+  )
 
 /**
  * The checks every public endpoint that spends money makes before any work:
@@ -14,15 +25,7 @@ export const readGuardedBody = async (
   rateLimit: RateLimit,
 ): Promise<{ body: unknown } | Response> => {
   const limit = rateLimit(clientKey(request))
-  if (!limit.ok) {
-    return Response.json(
-      { error: rateLimitedText },
-      {
-        status: 429,
-        headers: { 'Retry-After': String(limit.retryAfterSeconds) },
-      },
-    )
-  }
+  if (!limit.ok) return rateLimited(limit)
 
   try {
     return { body: await request.json() }

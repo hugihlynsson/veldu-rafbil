@@ -111,9 +111,11 @@ describe('GET /api/verdict', () => {
   it('refuses a caller past ten verdicts a minute', async () => {
     const { get } = await loadGet()
     const statuses = []
-    for (let i = 0; i < 11; i++) statuses.push((await get(pair)).status)
-    expect(statuses.slice(0, 10).every((status) => status === 200)).toBe(true)
-    expect(statuses[10]).toBe(429)
+    for (let i = 0; i < 10; i++) statuses.push((await get(pair)).status)
+    expect(statuses.every((status) => status === 200)).toBe(true)
+    const refused = await get(pair)
+    expect(refused.status).toBe(429)
+    expect(refused.headers.get('Retry-After')).toBe('60')
     expect((await get(pair, '10.3.0.2')).status).toBe(200)
   })
 
