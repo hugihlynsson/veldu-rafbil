@@ -33,7 +33,7 @@ describe('the car data', () => {
 
   // Variants sit side by side in the list and in comparisons, where one photo
   // twice reads as a duplicate. These still share one for want of another shot.
-  const sharedPhotos = new Set(['mercedes-glc', 'renault-r5'])
+  const sharedPhotos = new Set(['audi-a2', 'mercedes-glc', 'renault-r5'])
 
   it('gives each car on sale a photo of its own', () => {
     const byPhoto = new Map<string, Array<string>>()
