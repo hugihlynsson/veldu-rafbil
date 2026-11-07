@@ -9,6 +9,7 @@ import { toHorsepower } from '@/modules/data/horsepower'
 import { Car } from '@/modules/data/cars'
 import { formatKmPerMinute } from '@/modules/data/getKmPerMinutesCharged'
 import PricePill from '@/components/PricePill'
+import { photoZoom } from '@/components/photoZoom'
 import type { View } from '@/modules/list/view'
 import CompareToggle from '@/components/detail/CompareToggle'
 import ShareButton from '@/components/ShareButton'
@@ -116,8 +117,10 @@ const NewCar: FunctionComponent<Props> = ({
         tabIndex={-1}
         aria-hidden
         className={clsx(
-          'block',
-          grid ? 'md:-mx-1' : 'md:w-[40%] md:grow md:self-center',
+          'group block overflow-hidden',
+          grid
+            ? 'md:-mx-1 md:rounded-lg'
+            : 'md:w-[40%] md:grow md:self-center md:rounded-sm',
         )}
       >
         <Image
@@ -127,10 +130,7 @@ const NewCar: FunctionComponent<Props> = ({
           src={`/images/${car.heroImageName}.jpg`}
           width={1920}
           height={1280}
-          className={clsx(
-            'w-full h-auto',
-            grid ? 'md:rounded-lg' : 'md:rounded-sm',
-          )}
+          className={clsx('w-full h-auto', photoZoom)}
         />
       </Link>
 

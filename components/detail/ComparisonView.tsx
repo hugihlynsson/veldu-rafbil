@@ -20,6 +20,7 @@ import ShareButton from '@/components/ShareButton'
 import CrossIcon from '@/components/CrossIcon'
 import PlusIcon from '@/components/PlusIcon'
 import { pageColumn } from '@/components/pageColumn'
+import { photoZoom } from '@/components/photoZoom'
 
 interface Props {
   cars: ReadonlyArray<Car>
@@ -120,19 +121,29 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
           >
             {cars.map((car) => (
               <div key={car.id} className="relative -mx-1 snap-start">
-                <Image
-                  alt=""
-                  sizes={
-                    wide
-                      ? `(max-width: 767px) 45vw, (max-width: ${pageWidth - 1}px) ${Math.ceil(100 / cars.length)}vw, ${Math.ceil(pageWidth / cars.length)}px`
-                      : `(max-width: ${pageWidth - 1}px) ${Math.ceil(100 / cars.length)}vw, ${Math.ceil(pageWidth / cars.length)}px`
-                  }
-                  src={`/images/${car.heroImageName}.jpg`}
-                  width={1920}
-                  height={1280}
-                  preload
-                  className="w-full h-auto rounded-lg block"
-                />
+                {/* The name under it is the stop for the keyboard and screen
+                    readers. The remove button is a sibling laid over it, so
+                    hovering that leaves the photo still */}
+                <Link
+                  href={carPathOf(car)}
+                  tabIndex={-1}
+                  aria-hidden
+                  className="group block overflow-hidden rounded-lg"
+                >
+                  <Image
+                    alt=""
+                    sizes={
+                      wide
+                        ? `(max-width: 767px) 45vw, (max-width: ${pageWidth - 1}px) ${Math.ceil(100 / cars.length)}vw, ${Math.ceil(pageWidth / cars.length)}px`
+                        : `(max-width: ${pageWidth - 1}px) ${Math.ceil(100 / cars.length)}vw, ${Math.ceil(pageWidth / cars.length)}px`
+                    }
+                    src={`/images/${car.heroImageName}.jpg`}
+                    width={1920}
+                    height={1280}
+                    preload
+                    className={clsx('w-full h-auto block', photoZoom)}
+                  />
+                </Link>
                 {canRemove && (
                   <Link
                     href={comparisonPath(
