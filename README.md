@@ -36,7 +36,8 @@ figures, those caveats and a `generatedAt`.
 
 `/llms.txt` is the short version of the same thing, for AI agents, following
 the [llms.txt convention](https://llmstxt.org). `/robots.txt` lets crawlers at
-both and keeps them off `/api/chat`, the one route that costs money to read.
+both and keeps them off `/api/chat` and `/api/verdict`, which bill a hosted
+model when called.
 
 The car photos are not in the JSON — they are served for this site, not for
 others to hotlink.
