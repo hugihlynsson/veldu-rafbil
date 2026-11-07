@@ -517,6 +517,8 @@
      matched and so lost the header against */
   .message-content th {
     background-color: color-mix(in srgb, currentColor 7%, transparent);
+    /* Translucent over that fill rather than `line`, which it matches */
+    border-color: color-mix(in srgb, currentColor 6%, transparent);
     font-weight: 600;
   }
   /* The header fills to the table's edge, so its top corners round with it */
