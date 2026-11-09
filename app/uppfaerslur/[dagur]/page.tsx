@@ -18,7 +18,7 @@ import PageTop from '@/components/detail/PageTop'
 import Footer from '@/components/Footer'
 import PageChat from '@/components/detail/PageChat'
 import { pageColumn } from '@/components/pageColumn'
-import NewsDaySections from '@/components/news/NewsDaySections'
+import DayArticle from '@/components/news/DayArticle'
 
 interface Props {
   params: Promise<{ dagur: string }>
@@ -82,7 +82,7 @@ export default async function Page({ params }: Props) {
         <header className={clsx(pageColumn, 'pt-4 pb-6 xs:pt-6')}>
           <PageTop />
         </header>
-        <article className={pageColumn}>
+        <div className={pageColumn}>
           <div>
             <Link
               href={NEWS_PATH}
@@ -90,18 +90,7 @@ export default async function Page({ params }: Props) {
             >
               <span aria-hidden>←</span> Allar uppfærslur
             </Link>
-            <time
-              dateTime={day.date}
-              className="block mt-6 uppercase text-xs font-semibold tracking-wider text-tint"
-            >
-              {dayText(day.date)}
-            </time>
-            <h1 className="m-0 mt-1 max-w-prose font-semibold text-display leading-tight text-balance">
-              {headlineOf(day)}
-            </h1>
-            <p className="mt-2 mb-0 text-base text-stone">{daySummary(day)}</p>
-
-            <NewsDaySections day={day} />
+            <DayArticle day={day} page className="mt-6 lg:mt-10" />
 
             <nav
               aria-label="Aðrir dagar"
@@ -122,7 +111,7 @@ export default async function Page({ params }: Props) {
               )}
             </nav>
           </div>
-        </article>
+        </div>
       </main>
       <Footer />
       <PageChat />
