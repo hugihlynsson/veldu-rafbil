@@ -57,7 +57,7 @@ const everyFilter: Required<Filters> = {
 }
 
 const listQueries: [string, string][] = [
-  ['a sorting', serializeSorting({ sorting: 'price', direction: 'asc' })],
+  ['a sorting', serializeSorting({ sorting: 'range', direction: 'desc' })],
   [
     'a flipped sorting',
     serializeSorting({ sorting: 'name', direction: 'desc' }),
