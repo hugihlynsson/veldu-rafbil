@@ -14,8 +14,8 @@ export const kindLabels: Record<DayKind, string> = {
 }
 
 // What the log keeps is the list price, as the grant on a past day is not
-// kept, so the heading over the prices says so in the list's own words
-export const priceNote = 'fullt verð án styrks'
+// kept, so the heading over the prices calls it what a car's history does
+export const priceNote = 'listaverð án styrks'
 
 /** What a headline calls the car an item is about, its variants as one */
 export type NameOf = (item: NewsItem) => string
@@ -112,8 +112,10 @@ export const itemText = (item: NewsItem, told: 'news' | 'history'): string => {
     }
     case 'delivery':
       if (!delivery?.to) return news ? 'Kominn í sölu' : 'Kom í sölu'
-      if (!delivery.from) return `Væntanlegur ${when(delivery.to)}`
-      return `Afhending ${news ? 'færist' : 'færðist'}: ${when(delivery.from)} → ${when(delivery.to)}`
+      // The news is under a heading that says the delivery changed, so it
+      // gives only when the car is expected now. Its history tells both
+      if (!delivery.from || news) return `Væntanlegur ${when(delivery.to)}`
+      return `Afhending færðist: ${when(delivery.from)} → ${when(delivery.to)}`
     case 'removed':
       return news ? 'Hættur í sölu' : 'Hætti í sölu'
     case 'renamed':

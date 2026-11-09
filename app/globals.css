@@ -87,6 +87,7 @@
   --breakpoint-sm: 500px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px; /* the page at its widest: a third column fits */
+  --breakpoint-xl: 1400px; /* room in the margin beside the page for a rail */
 
   /* The column a car's text sits in on a phone, the widest it gets beside the
      photo from md, and the page at its widest */
@@ -94,6 +95,9 @@
   --container-card-text: 380px;
   --container-page: 1024px;
   --container-grid: 1200px; /* the grid, which reaches past the page from lg */
+  /* The page inside its gutters: what a container query asks for to mean
+     "this has the page's full width" */
+  --container-wide: 944px;
 
   /* Radii, written at their round-corner size. A squircle of the same radius
      hugs the corner more tightly, so `--corner` grows them where one is drawn

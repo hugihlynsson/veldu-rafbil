@@ -11,7 +11,7 @@ import PageTop from '@/components/detail/PageTop'
 import Footer from '@/components/Footer'
 import PageChat from '@/components/detail/PageChat'
 import { pageColumn } from '@/components/pageColumn'
-import NewsDaySections from '@/components/news/NewsDaySections'
+import DayArticle, { railed } from '@/components/news/DayArticle'
 
 // Told in full; the rest are a line each, by month
 const FULL_DAYS = 20
@@ -62,47 +62,42 @@ export default function Page() {
             </p>
 
             {recent.map((day) => (
-              // Days are set apart by space and a date in the page's ink, a
-              // step larger than the labels under it, rather than by a line
-              <article key={day.date} className="mt-16 md:mt-24">
-                <time
-                  dateTime={day.date}
-                  className="uppercase text-xs font-semibold tracking-wider text-tint"
-                >
-                  {dayText(day.date)}
-                </time>
-                <h2 className="m-0 mt-1 max-w-prose text-xl font-semibold leading-tight text-balance md:text-2xl">
-                  <Link
-                    href={newsDayPath(day.date)}
-                    className="text-tint no-underline hover:underline"
-                  >
-                    {headlineOf(day)}
-                  </Link>
-                </h2>
-                <NewsDaySections day={day} />
-              </article>
+              <DayArticle
+                key={day.date}
+                day={day}
+                className="mt-16 md:mt-24 lg:mt-20"
+              />
             ))}
 
             {older.size > 0 && (
-              <section aria-labelledby="older" className="mt-16">
+              <section aria-labelledby="older" className="mt-16 md:mt-24">
                 <h2 id="older" className="m-0 text-sm font-semibold">
                   Eldra:
                 </h2>
                 {[...older].map(([month, ofMonth]) => (
-                  <div key={month} className="mt-4">
-                    <h3 className="m-0 text-eyebrow uppercase font-semibold tracking-wider text-stone">
+                  <div
+                    key={month}
+                    className={clsx(
+                      railed,
+                      'mt-4 lg:items-baseline lg:mt-0 lg:py-3 lg:border-t lg:border-line lg:first-of-type:mt-4',
+                    )}
+                  >
+                    <h3 className="m-0 text-eyebrow uppercase font-semibold tracking-wider text-stone lg:text-xs">
                       {month}
                     </h3>
-                    <ul className="mt-1 mb-0 p-0 list-none">
+                    <ul className="mt-1 mb-0 p-0 list-none lg:mt-0">
                       {ofMonth.map((day) => (
-                        <li key={day.date} className="py-1 text-base">
+                        <li
+                          key={day.date}
+                          className="py-1 text-base lg:flex lg:items-baseline lg:justify-between lg:gap-6"
+                        >
                           <Link
                             href={newsDayPath(day.date)}
                             className="text-tint no-underline hover:underline"
                           >
                             {headlineOf(day)}
                           </Link>{' '}
-                          <span className="text-sm text-stone">
+                          <span className="text-sm text-stone lg:shrink-0">
                             {dayText(day.date)}
                           </span>
                         </li>

@@ -168,4 +168,13 @@ describe('itemText', () => {
       ),
     ).toBe('Afhending færðist: lok 2026 → 2027')
   })
+
+  it('gives a moved delivery as when the car is expected now', () => {
+    expect(
+      itemText(
+        item('delivery', 'A', { delivery: { from: 'Lok 2026', to: '2027' } }),
+        'news',
+      ),
+    ).toBe('Væntanlegur 2027')
+  })
 })
