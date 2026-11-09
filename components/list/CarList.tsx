@@ -74,11 +74,11 @@ const column = `${pageColumn} py-4 xs:py-6`
 const carWord = (count: number) => agree(count, 'bíll', 'bílar')
 
 const toggleSortings: Sorting[] = [
-  'name',
   'price',
   'range',
-  'acceleration',
   'value',
+  'acceleration',
+  'name',
 ]
 
 // From lg the grid outgrows the page, centred on it and kept clear of the

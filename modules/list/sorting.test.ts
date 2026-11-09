@@ -50,11 +50,11 @@ const car = (over: Partial<NewCar>): Car =>
   })
 
 describe('reading the sorting out of the query', () => {
-  it('defaults to name when the param is missing or unknown', () => {
-    expect(readSorting({})).toBe('name')
-    expect(readSorting({ radaeftir: 'bogus' })).toBe('name')
+  it('defaults to price when the param is missing or unknown', () => {
+    expect(readSorting({})).toBe('price')
+    expect(readSorting({ radaeftir: 'bogus' })).toBe('price')
     // `in` used to answer for these, and a function is not a Sorting
-    expect(readSorting({ radaeftir: 'toString' })).toBe('name')
+    expect(readSorting({ radaeftir: 'toString' })).toBe('price')
   })
 
   it.each(sortings)('round trips %s through its Icelandic param', (sorting) => {
@@ -210,7 +210,7 @@ describe('sorting survives a round trip through the URL', () => {
   // The tidy URL the site is meant to have when nothing has been chosen
   it('writes nothing for the default sorting in its default direction', () => {
     expect(
-      getQueryFromSorting('name', sortingDefinitions.name.defaultDirection),
+      getQueryFromSorting('price', sortingDefinitions.price.defaultDirection),
     ).toEqual({})
   })
 

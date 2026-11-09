@@ -132,7 +132,7 @@ const parseAsFlip = createParser<boolean>({
 
 // What nuqs is handed, on the server and in the browser alike
 export const sortingParsers = {
-  sorting: parseAsSorting.withDefault('name'),
+  sorting: parseAsSorting.withDefault('price'),
   flipped: parseAsFlip.withDefault(false),
 }
 export const sortingUrlKeys = { sorting: 'radaeftir', flipped: 'ofugt' }
