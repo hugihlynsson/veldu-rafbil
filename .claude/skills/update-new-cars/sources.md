@@ -224,5 +224,6 @@ CLA list on 2026-11-09. The EV5 list now prints only the AWD, though kia.com's
 EV5 page still names the front-wheel-drive car's 530 km. The PV5 list prices the
 Passenger in Earth trim only. Polestar 5's list is now `polestar5_verdlisti_20261105.pdf`;
 its second "Verð" is the showroom car with options, not a trim. Tesla's design
-pages showed only partial, still-animating figures while the browser pane was
-hidden, so read them with the pane showing.
+pages hold partial, still-animating figures while the browser pane is hidden;
+a screenshot makes them render, after which `find` " kr" reads every trim.
+Read that way the same day, every Model 3 and Model Y price was unchanged.
