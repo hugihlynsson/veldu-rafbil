@@ -23,7 +23,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'audi-a2-e-tron-240-kw': [
     'audi-q4-e-tron-45-quattro',
     'mercedes-benz-gla-350-4matic',
-    'tesla-model-3-performance',
+    'volkswagen-id-3-gti',
   ],
   'audi-a6-e-tron-sportback-quattro': [
     'mercedes-benz-cla-350-4matic',
@@ -218,7 +218,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'hyundai-ioniq-3-long-range': [
     'volkswagen-id-3-neo-58-kwh',
     'renault-r5-e-tech-52-kwh',
-    'mg-mgs5-lux',
+    'volkswagen-id-3-neo-79-kwh',
   ],
   'hyundai-ioniq-5-long-range-awd': [
     'kia-ev6-2025-long-range-awd',
@@ -297,7 +297,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'hongqi-ehs5-base',
   ],
   'kia-ev4-base': [
-    'renault-scenic-e-tech-ev87',
+    'volkswagen-id-3-neo-79-kwh',
     'tesla-model-3-long-range-afturhjoladrif',
     'audi-a2-e-tron-125-kw',
   ],
@@ -1005,7 +1005,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'volkswagen-id-polo-gti': [
     'mini-cooper-se',
     'smart-1-brabus',
-    'volvo-ex30-twin-motor-performance',
+    'volkswagen-id-3-gti',
   ],
   'volkswagen-id-cross-base': [
     'citroen-e-c4-base',
@@ -1021,6 +1021,16 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'hyundai-ioniq-3-long-range',
     'nissan-leaf-extended-range',
     'kia-ev3-long-range',
+  ],
+  'volkswagen-id-3-neo-79-kwh': [
+    'kia-ev4-base',
+    'hyundai-ioniq-3-long-range',
+    'renault-scenic-e-tech-ev87',
+  ],
+  'volkswagen-id-3-gti': [
+    'audi-a2-e-tron-240-kw',
+    'skoda-elroq-rs',
+    'tesla-model-3-performance',
   ],
   'volkswagen-id-4-gtx': [
     'skoda-elroq-rs',
