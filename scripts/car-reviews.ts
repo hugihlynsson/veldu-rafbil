@@ -19,10 +19,12 @@
  * after each, so a run cut short keeps what it finished.
  *
  * Every car's ev-database page is read first, whichever are written: where a
- * car stands on boot space or towing is among all of them.
+ * car stands on boot space or towing is among all of them. Pages read in the
+ * last month are taken from ~/.cache/veldu-rafbil instead.
  */
 import { execFileSync } from 'node:child_process'
-import { writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import os from 'node:os'
 import path from 'node:path'
 import { google } from '@ai-sdk/google'
 import { generateText, type LanguageModelUsage } from 'ai'
@@ -38,11 +40,16 @@ import {
   readReview,
   reviewFactsKey,
   reviewPrompt,
-  type CarDetails,
   type DetailsOf,
 } from './reviewPrompt'
 import { advisorModel } from '@/modules/chat/model'
-import { fetchCarSpecs } from '@/modules/data/evDatabase'
+import {
+  allowedURLs,
+  fetchOnSite,
+  readCapped,
+  readCarSpecs,
+} from '@/modules/data/evDatabase'
+import { pagesToRead, type PageCache } from './evDatabaseCache'
 
 const file = path.join(__dirname, '../modules/data/carReviews.ts')
 
@@ -69,6 +76,25 @@ const MAX_UNASKED = 8
 // Below this share of pages read, the reviews would be written blind to
 // boot space and towing, and paid for all the same
 const MIN_PAGES_READ = 0.9
+
+// Outside the checkout, so every worktree of it shares one
+const cacheFile = path.join(
+  os.homedir(),
+  '.cache/veldu-rafbil/ev-database.json',
+)
+
+const readCache = (): PageCache => {
+  try {
+    return JSON.parse(readFileSync(cacheFile, 'utf8')) as PageCache
+  } catch {
+    return {}
+  }
+}
+
+const saveCache = (cache: PageCache) => {
+  mkdirSync(path.dirname(cacheFile), { recursive: true })
+  writeFileSync(cacheFile, JSON.stringify(cache))
+}
 
 const args = process.argv.slice(2)
 const all = args.includes('--all')
@@ -152,23 +178,44 @@ export default carReviews
 }
 
 // Read here rather than looked up by the model, which skipped them often
-// enough that a car's boot or towing went unsaid where it stood out
+// enough that a car's boot or towing went unsaid where it stood out. Kept
+// between runs, and between worktrees, so a run reads only what changed
 const readAllDetails = async (): Promise<DetailsOf> => {
   const urls = [...new Set(cars.flatMap((car) => car.evDatabaseUrl ?? []))]
-  const read = new Map<string, CarDetails>()
-  const pending = [...urls]
+  const cache = readCache()
+  const pending = pagesToRead(urls, cache, Date.now())
+  let limited = false
   const reader = async () => {
-    for (let url = pending.shift(); url; url = pending.shift()) {
-      const specs = await fetchCarSpecs(url).catch(() => null)
-      if (specs) read.set(url, readDetails(specs))
-      else console.error(`Could not read ${url}`)
+    for (let url = pending.shift(); url && !limited; url = pending.shift()) {
+      const response = allowedURLs.has(url)
+        ? await fetchOnSite(url).catch(() => null)
+        : null
+      // Every page after the first 429 would be one too, and asking only
+      // keeps the block going
+      if (response?.status === 429) limited = true
+      if (!response?.ok) {
+        await response?.body?.cancel()
+        if (!limited) console.error(`Could not read ${url}`)
+        continue
+      }
+      const specs = readCarSpecs(url, await readCapped(response))
+      cache[url] = { specs, read: Date.now() }
+      saveCache(cache)
     }
   }
   await Promise.all(Array.from({ length: PAGE_CONCURRENCY }, reader))
-  console.log(`Read ${read.size} of ${urls.length} ev-database pages`)
+  const read = new Map(
+    urls.flatMap((url) => {
+      const page = cache[url]
+      return page ? [[url, readDetails(page.specs)] as const] : []
+    }),
+  )
+  console.log(
+    `Have ${read.size} of ${urls.length} ev-database pages${limited ? '; it answered 429, so the rest wait for a later run' : ''}`,
+  )
   if (read.size < urls.length * MIN_PAGES_READ) {
     throw new Error(
-      'Too few ev-database pages read to write reviews from; it may be rate limiting',
+      `Too few ev-database pages to write reviews from. Those read are kept in ${cacheFile}; run again once it stops rate limiting`,
     )
   }
   return (car) => (car.evDatabaseUrl ? read.get(car.evDatabaseUrl) : undefined)

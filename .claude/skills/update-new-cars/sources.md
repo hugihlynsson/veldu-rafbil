@@ -12,6 +12,52 @@ A make that appears in the car list but not here has no known price-list page.
 Start from the `sellerUrl` of its existing entries, and say in the report that
 it was a guess.
 
+## Last read
+
+When each make's price list was last read and compared with the car list,
+and the date of the list it was read from (its upload date, or the date it
+prints). Update a make's row whenever you read its list, whether or not
+anything changed. The dates before 2026-11-10 were pieced together from the
+commits and the notes below, so a "—" means nothing recorded, not never.
+
+| Make          | Last read  | List dated | Note                                     |
+| ------------- | ---------- | ---------- | ---------------------------------------- |
+| Audi          | 2026-11-07 | —          |                                          |
+| BMW           | 2026-11-05 | —          |                                          |
+| BYD           | 2026-11-03 | 2026-10-30 |                                          |
+| Citroën       | —          | —          | No list found                            |
+| Fiat          | 2026-11-06 | 2026-01    | 500e unpriced ("Leitið til sölumanna")   |
+| Ford          | 2026-10-31 | —          |                                          |
+| GWM           | 2026-11-06 | —          |                                          |
+| Hongqi        | 2026-10-18 | —          |                                          |
+| Hyundai       | 2026-11-06 | 2026-11    |                                          |
+| JAC           | 2026-11-03 | 2026-10-30 |                                          |
+| Jeep          | 2026-11-06 | —          | Avenger list is the 4xe hybrid only      |
+| KGM           | 2026-10-31 | —          |                                          |
+| Kia           | 2026-11-10 | 2026-11-09 | EV5, EV6 and PV5; EV9 read on 2026-11-06 |
+| Leapmotor     | 2026-11-02 | —          |                                          |
+| Lexus         | 2026-11-10 | —          |                                          |
+| Mazda         | 2026-11-10 | 2026-11-02 |                                          |
+| Mercedes-Benz | 2026-11-05 | —          | CLA read on 2026-11-10, from 2026-11-09  |
+| MG            | 2026-10-18 | 2026-10    |                                          |
+| Mini          | 2026-11-06 | —          | List lacks the Aceman                    |
+| Nissan        | 2026-10-18 | 2026-10    |                                          |
+| Opel          | —          | —          | No car list found                        |
+| Peugeot       | 2026-11-03 | —          | Read from the model pages                |
+| Polestar      | 2026-11-10 | 2026-11-05 | Polestar 5; the rest from earlier lists  |
+| Porsche       | 2026-11-05 | —          |                                          |
+| Range Rover   | 2026-11-06 | 2026-10-14 |                                          |
+| Renault       | 2026-10-18 | 2026-10    |                                          |
+| Škoda         | 2026-11-06 | 2026-11    |                                          |
+| Smart         | —          | —          | Askja; no document recorded as read      |
+| Subaru        | 2026-10-18 | 2026-10    |                                          |
+| Suzuki        | 2026-10-31 | —          |                                          |
+| Tesla         | 2026-11-10 | —          | Design pages; no dated list              |
+| Toyota        | 2026-11-10 | —          |                                          |
+| Volkswagen    | 2026-11-06 | 2026-11    |                                          |
+| Volvo         | 2026-11-06 | 2026-10-28 |                                          |
+| XPENG         | —          | —          | Askja; no document recorded as read      |
+
 ## Importers with one page for several makes
 
 Two importers publish nearly everything on issuu. Their profile pages list the
