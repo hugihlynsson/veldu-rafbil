@@ -20,6 +20,25 @@ describe('readNews', () => {
     expect(kinds).toEqual(['added', 'price', 'delivery', 'removed'])
   })
 
+  it('tells a new price for an expected car as a re-estimate', () => {
+    const items = readNews([
+      entry('2026-01-01', {
+        added: true,
+        price: { to: 3 },
+        delivery: { to: 'lok 2026' },
+      }),
+      entry('2026-02-01', { price: { from: 3, to: 2 } }),
+      entry('2026-03-01', { delivery: { from: 'lok 2026' } }),
+      entry('2026-04-01', { price: { from: 2, to: 1 } }),
+    ])
+    expect(items.map(({ kind }) => kind)).toEqual([
+      'added',
+      'estimate',
+      'delivery',
+      'price',
+    ])
+  })
+
   it('tells nothing of a car while it is not sold', () => {
     const items = readNews([
       entry('2026-01-01', { added: true }),
