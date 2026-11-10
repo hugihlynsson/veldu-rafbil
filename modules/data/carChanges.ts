@@ -2016,6 +2016,7 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-10","slug":"kia-pv5-base","label":"Kia PV5","price":{"from":7790777,"to":8690777}},
   {"date":"2026-11-10","slug":"volkswagen-id-3-neo-58-kwh","label":"Volkswagen ID.3 Neo 58 kWh","price":{"from":6390000,"to":6190000}},
   {"date":"2026-11-10","slug":"volkswagen-id-3-neo-79-kwh","label":"Volkswagen ID.3 Neo 79 kWh","added":true,"price":{"to":7490000},"delivery":{"to":"lok 2026"}},
+  {"date":"2026-11-10","slug":"volkswagen-id-3-gti","label":"Volkswagen ID.3 GTI","added":true,"price":{"to":8600000},"delivery":{"to":"snemma 2027"}},
 ]
 
 export default carChanges
