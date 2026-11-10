@@ -125,7 +125,7 @@ const MAX_SEATS_UP_CARGO = 2000
 // the one behind them is a slip on the page, as the Solterra's 452 l over 421
 const MIN_FOLDED_GAIN = 1.5
 
-/** A car's page, as fetchCarSpecs reads it, in numbers */
+/** A car's page, as readCarSpecs reads it, in numbers */
 export const readDetails = (
   specs: Readonly<Record<string, string | undefined>>,
 ): CarDetails => {

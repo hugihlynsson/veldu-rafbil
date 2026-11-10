@@ -129,14 +129,3 @@ export const readCarSpecs = (url: string, html: string): CarSpecs => {
   )
   return { ...read, ...specCorrections[url] }
 }
-
-/**
- * A car's page read for a script, which has no model to tell why it failed:
- * nothing for a page off the list, or one that could not be read
- */
-export const fetchCarSpecs = async (url: string): Promise<CarSpecs | null> => {
-  if (!allowedURLs.has(url)) return null
-  const response = await fetchOnSite(url)
-  if (!response?.ok) return null
-  return readCarSpecs(url, await readCapped(response))
-}

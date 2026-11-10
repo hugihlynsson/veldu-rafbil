@@ -1,10 +1,6 @@
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
-import { allowedURLs, fetchCarSpecs, specCorrections } from './evDatabase'
-
-afterEach(() => {
-  vi.restoreAllMocks()
-})
+import { allowedURLs, readCarSpecs, specCorrections } from './evDatabase'
 
 describe('the corrections to a car page', () => {
   // A car's page renamed would otherwise leave its correction reaching nothing
@@ -15,16 +11,12 @@ describe('the corrections to a car page', () => {
     expect(orphaned).toEqual([])
   })
 
-  it('stand in for what the page says', async () => {
+  it('stand in for what the page says', () => {
     const [url, correction] = Object.entries(specCorrections)[0]!
-    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
-      new Response(
-        `<tr><td>Tow Hitch</td><td>No</td></tr>
-         <tr><td>Towing Weight Braked</td><td>0 kg</td></tr>
-         <tr><td>Seats</td><td>5</td></tr>`,
-      ),
-    )
+    const html = `<tr><td>Tow Hitch</td><td>No</td></tr>
+       <tr><td>Towing Weight Braked</td><td>0 kg</td></tr>
+       <tr><td>Seats</td><td>5</td></tr>`
 
-    expect(await fetchCarSpecs(url)).toEqual({ seats: '5', ...correction })
+    expect(readCarSpecs(url, html)).toEqual({ seats: '5', ...correction })
   })
 })

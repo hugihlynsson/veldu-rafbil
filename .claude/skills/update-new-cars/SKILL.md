@@ -69,13 +69,21 @@ Before opening a price list, pull up what the list currently says for that make
 (`grep -n "make: 'Kia'" modules/data/newCars.ts`, then read the entries). You are
 looking for a difference, so know the starting point.
 
-To see which makes are worth a look first, check the freshness signals instead
-of opening everything. The last time the make was touched is
-`git log -1 --format=%ad -S"make: 'Kia'" -- modules/data/newCars.ts`; a price list
-uploaded after that date has not been applied yet. The upload date of an issuu
-document comes from `scripts/issuu-pages.sh`, and dated filenames (Polestar)
-carry their own. A list older than the last touch can be skipped, and it is
-worth saying so in the report.
+To see which makes are worth a look first, read the "Last read" table at the
+top of [sources.md](sources.md): when each make's list was last read, and the
+date of the list it was read from. A make whose importer has uploaded a list
+since then is worth reading; one whose newest list is the one in the table can
+be skipped, and it is worth saying so in the report. The upload date of an
+issuu document comes from `scripts/issuu-pages.sh`, a Hekla PDF's from its
+`Last-Modified` header, and dated filenames (Polestar, Volvo) carry their own.
+
+Git history cannot stand in for the table. `git log -S"make: 'Kia'"` moves
+only when a car of the make is added or removed, never on a price edit, and
+no commit at all records a list read that changed nothing.
+
+**Update the table for every make you read, changed or not**, in the same
+commit as the data. A row left behind makes the next sweep read that list
+again, or worse, skip one that has moved.
 
 ### 2. Get the current price list
 
@@ -180,6 +188,13 @@ owner can look them over.
 Tesla is the one make that takes its own figure instead: each trim's
 "Vottuð drægni (WLTP)" on its design page, at the default wheels, in place of
 the lower of the two. The owner asked for it on 2026-11-10.
+
+ev-database answers 429 after some 200 page reads in a row, and stays
+blocked for a while. Read only the pages of cars whose list you read, one at
+a time. If a 429 comes back, stop reading pages: keep the ranges those cars
+already have and list them under **Not checked**. Its front page,
+`https://ev-database.org/`, still loads under the block, but the range it
+prints is the site's real-world estimate, not WLTP, so it cannot stand in.
 
 The brochure side only exists for a make whose list you read this run. A car you
 did not read a list for keeps the range it has.
