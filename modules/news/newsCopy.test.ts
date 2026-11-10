@@ -20,6 +20,7 @@ const day = (...items: NewsItem[]): NewsDay => ({
   items: {
     added: items.filter(({ kind }) => kind === 'added'),
     price: items.filter(({ kind }) => kind === 'price'),
+    estimate: items.filter(({ kind }) => kind === 'estimate'),
     delivery: items.filter(({ kind }) => kind === 'delivery'),
     removed: items.filter(({ kind }) => kind === 'removed'),
   },
@@ -94,6 +95,21 @@ describe('dayHeadline', () => {
     )
   })
 
+  it('tells a re-estimate after a price change, and as an estimate', () => {
+    const estimate = item('estimate', 'Volkswagen ID.3 Neo', {
+      price: { from: 6_390_000, to: 6_190_000 },
+    })
+    expect(dayHeadline(day(estimate), nameOf)).toBe(
+      'Áætlað verð á Volkswagen ID.3 lækkar',
+    )
+    expect(dayHeadline(day(estimate, lower('Kia PV5')), nameOf)).toBe(
+      'Verð á Kia PV5 lækkar',
+    )
+    expect(daySummary(day(estimate, lower('Kia PV5')))).toBe(
+      '1 verðbreyting og 1 breyting á áætluðu verði.',
+    )
+  })
+
   it('tells cars arriving apart from deliveries moving', () => {
     expect(
       dayHeadline(
@@ -149,6 +165,16 @@ describe('itemText', () => {
     expect(itemText(rise, 'news')).toBe('8.190.000 kr. · ↑ 200.000')
     expect(itemText(cut, 'history')).toBe(
       'Listaverð lækkaði í 4.890.000 kr, um 300.000',
+    )
+  })
+
+  it('gives a re-estimate as the estimate it is, looking back', () => {
+    const estimate = item('estimate', 'A', {
+      price: { from: 6_390_000, to: 6_190_000 },
+    })
+    expect(itemText(estimate, 'news')).toBe('6.190.000 kr. · ↓ 200.000')
+    expect(itemText(estimate, 'history')).toBe(
+      'Áætlað listaverð lækkaði í 6.190.000 kr, um 200.000',
     )
   })
 

@@ -1,6 +1,12 @@
 import type { CarChange } from '@/modules/data/carChanges'
 
-export type NewsKind = 'added' | 'price' | 'delivery' | 'removed' | 'renamed'
+export type NewsKind =
+  | 'added'
+  | 'price'
+  | 'estimate'
+  | 'delivery'
+  | 'removed'
+  | 'renamed'
 
 /** One thing a change told a buyer about one car */
 export interface NewsItem {
@@ -86,7 +92,11 @@ export const readNews = (entries: ReadonlyArray<CarChange>): NewsItem[] => {
         price !== undefined &&
         before.price !== price
       ) {
-        item('price', { price: { from: before.price, to: price } })
+        // An expected car's price is the seller's estimate, so a new one is
+        // a re-estimate rather than the price changing
+        item(before.delivery ? 'estimate' : 'price', {
+          price: { from: before.price, to: price },
+        })
       }
       if (before.delivery !== delivery) {
         item('delivery', {
@@ -112,7 +122,13 @@ export interface LatestNews {
 }
 
 /** The kinds a day's news is told in, in the order it is */
-export const dayKinds = ['added', 'price', 'delivery', 'removed'] as const
+export const dayKinds = [
+  'added',
+  'price',
+  'estimate',
+  'delivery',
+  'removed',
+] as const
 export type DayKind = (typeof dayKinds)[number]
 
 export interface NewsDay {
@@ -133,6 +149,7 @@ export const newsDays = (
       const byKind = {
         added: of('added'),
         price: of('price'),
+        estimate: of('estimate'),
         delivery: of('delivery'),
         removed: of('removed'),
       }

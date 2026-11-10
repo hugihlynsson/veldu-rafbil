@@ -289,13 +289,13 @@ const CarView: FunctionComponent<Props> = ({
             <section aria-labelledby="history" className="mt-13 md:mt-16">
               <div className="flex items-baseline justify-between gap-4">
                 <h2 id="history" className={sectionLabel}>
-                  Uppfærslur:
+                  Saga:
                 </h2>
                 <Link
                   href={NEWS_PATH}
                   className="text-sm font-semibold text-tint no-underline hover:underline"
                 >
-                  Sjá allar <span aria-hidden>→</span>
+                  Allar uppfærslur <span aria-hidden>→</span>
                 </Link>
               </div>
               <ol className="mt-2 mb-0 p-0 list-none">

@@ -9,6 +9,7 @@ import type { DayKind, NewsDay, NewsItem } from './news'
 export const kindLabels: Record<DayKind, string> = {
   added: 'Nýir á lista',
   price: 'Verðbreytingar',
+  estimate: 'Nýtt áætlað verð',
   delivery: 'Afhending',
   removed: 'Hættir í sölu',
 }
@@ -16,6 +17,10 @@ export const kindLabels: Record<DayKind, string> = {
 // What the log keeps is the list price, as the grant on a past day is not
 // kept, so the heading over the prices calls it what a car's history does
 export const priceNote = 'listaverð án styrks'
+
+/** Whether the heading over a kind takes the note on which price it gives */
+export const notesPrice = (kind: DayKind): boolean =>
+  kind === 'price' || kind === 'estimate'
 
 /** What a headline calls the car an item is about, its variants as one */
 export type NameOf = (item: NewsItem) => string
@@ -43,7 +48,7 @@ const fell = ({ from = 0, to }: { from?: number; to: number }) => to < from
 
 /** A day's news in a line, told by the biggest of it: a new car first */
 export const dayHeadline = (day: NewsDay, nameOf: NameOf): string => {
-  const { added, price, delivery, removed } = day.items
+  const { added, price, estimate, delivery, removed } = day.items
 
   if (added.length > 0) {
     const names = namesOf(added, nameOf)
@@ -56,6 +61,14 @@ export const dayHeadline = (day: NewsDay, nameOf: NameOf): string => {
       return `Verð á ${nameOf(only)} ${fell(only.price) ? 'lækkar' : 'hækkar'}`
     }
     return `Verðbreytingar á ${cars} ${agree(cars, 'bíl', 'bílum')}`
+  }
+  if (estimate.length > 0) {
+    const cars = new Set(estimate.map(({ slug }) => slug)).size
+    const [only] = estimate
+    if (cars === 1 && only?.price) {
+      return `Áætlað verð á ${nameOf(only)} ${fell(only.price) ? 'lækkar' : 'hækkar'}`
+    }
+    return `Nýtt áætlað verð á ${cars} ${agree(cars, 'bíl', 'bílum')}`
   }
   if (delivery.length > 0) {
     const names = namesOf(delivery, nameOf)
@@ -75,6 +88,11 @@ export const daySummary = ({ items }: NewsDay): string => {
   return `${listNames([
     ...count(items.added.length, 'nýr bíll', 'nýir bílar'),
     ...count(items.price.length, 'verðbreyting', 'verðbreytingar'),
+    ...count(
+      items.estimate.length,
+      'breyting á áætluðu verði',
+      'breytingar á áætluðu verði',
+    ),
     ...count(
       items.delivery.length,
       'breyting á afhendingu',
@@ -98,7 +116,8 @@ export const itemText = (item: NewsItem, told: 'news' | 'history'): string => {
       if (delivery?.to) return `${start}, væntanlegur ${when(delivery.to)}`
       return price && !news ? `${start}, listaverð ${kr(price.to)}` : start
     }
-    case 'price': {
+    case 'price':
+    case 'estimate': {
       if (!price) return ''
       const { from = 0, to } = price
       if (news) {
@@ -108,7 +127,8 @@ export const itemText = (item: NewsItem, told: 'news' | 'history'): string => {
         return `${kr(to)} · ${arrow} ${addDecimalSeparators(Math.abs(to - from))}`
       }
       const verb = fell(price) ? 'lækkaði' : 'hækkaði'
-      return `Listaverð ${verb} í ${addDecimalSeparators(to)} kr, um ${addDecimalSeparators(Math.abs(to - from))}`
+      const what = item.kind === 'estimate' ? 'Áætlað listaverð' : 'Listaverð'
+      return `${what} ${verb} í ${addDecimalSeparators(to)} kr, um ${addDecimalSeparators(Math.abs(to - from))}`
     }
     case 'delivery':
       if (!delivery?.to) return news ? 'Kominn í sölu' : 'Kom í sölu'

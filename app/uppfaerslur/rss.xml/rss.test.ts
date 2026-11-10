@@ -17,6 +17,7 @@ const day: NewsDay = {
       },
     ],
     price: [],
+    estimate: [],
     delivery: [],
     removed: [],
   },

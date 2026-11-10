@@ -4,6 +4,7 @@ import {
   daySummary,
   itemText,
   kindLabels,
+  notesPrice,
   priceNote,
 } from '@/modules/news/newsCopy'
 import { NEWS_FEED_PATH, NEWS_PATH, newsDayPath } from '@/modules/news/paths'
@@ -26,8 +27,9 @@ const description = (day: NewsDay, labelOf: LabelOf) => {
   const sections = dayKinds.flatMap((kind) => {
     const items = day.items[kind]
     if (items.length === 0) return []
-    const heading =
-      kind === 'price' ? `${kindLabels[kind]} (${priceNote})` : kindLabels[kind]
+    const heading = notesPrice(kind)
+      ? `${kindLabels[kind]} (${priceNote})`
+      : kindLabels[kind]
     const lines = items.map(
       (item) =>
         `<li>${escape(`${labelOf(item)}: ${itemText(item, 'news')}`)}</li>`,

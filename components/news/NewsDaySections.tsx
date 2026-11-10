@@ -10,7 +10,12 @@ import { carPathOf } from '@/modules/detail/paths'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import type { NewsDay, NewsItem } from '@/modules/news/news'
 import { dayKinds } from '@/modules/news/news'
-import { itemText, kindLabels, priceNote } from '@/modules/news/newsCopy'
+import {
+  itemText,
+  kindLabels,
+  notesPrice,
+  priceNote,
+} from '@/modules/news/newsCopy'
 
 // A new car is told by its figures now, under a heading that already says it
 // is new
@@ -177,7 +182,7 @@ const NewsDaySections: FunctionComponent<{ day: NewsDay }> = ({ day }) =>
         >
           <h3 className="m-0 text-sm font-semibold lg:sr-only">
             {kindLabels[kind]}
-            {kind === 'price' && (
+            {notesPrice(kind) && (
               <span className="font-medium text-stone"> · {priceNote}</span>
             )}
           </h3>

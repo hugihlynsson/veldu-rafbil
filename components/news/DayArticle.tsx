@@ -5,7 +5,12 @@ import Link from 'next/link'
 import { dayText } from '@/modules/copy/dayText'
 import { headlineOf } from '@/modules/news/feed'
 import { dayKinds, type NewsDay } from '@/modules/news/news'
-import { daySummary, kindLabels, priceNote } from '@/modules/news/newsCopy'
+import {
+  daySummary,
+  kindLabels,
+  notesPrice,
+  priceNote,
+} from '@/modules/news/newsCopy'
 import { newsDayPath } from '@/modules/news/paths'
 import NewsDaySections from './NewsDaySections'
 
@@ -87,7 +92,7 @@ const DayArticle: FunctionComponent<Props> = ({ day, page, className }) => {
                   >
                     <dt>
                       {kindLabels[kind]}
-                      {kind === 'price' && (
+                      {notesPrice(kind) && (
                         <span className="block text-xs text-clay">
                           {priceNote}
                         </span>
