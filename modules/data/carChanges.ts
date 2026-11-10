@@ -2014,6 +2014,8 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-07","slug":"volvo-ec40-p8-performance","label":"Volvo EC40 P8 Performance","added":true,"price":{"to":10500000},"delivery":{"to":"snemma 2027"}},
   {"date":"2026-11-07","slug":"volvo-ex40-p8-performance","label":"Volvo EX40 P8 Performance","added":true,"price":{"to":10500000},"delivery":{"to":"snemma 2027"}},
   {"date":"2026-11-10","slug":"kia-pv5-base","label":"Kia PV5","price":{"from":7790777,"to":8690777}},
+  {"date":"2026-11-10","slug":"volkswagen-id-3-neo-58-kwh","label":"Volkswagen ID.3 Neo 58 kWh","price":{"from":6390000,"to":6190000}},
+  {"date":"2026-11-10","slug":"volkswagen-id-3-neo-79-kwh","label":"Volkswagen ID.3 Neo 79 kWh","added":true,"price":{"to":7490000},"delivery":{"to":"lok 2026"}},
 ]
 
 export default carChanges

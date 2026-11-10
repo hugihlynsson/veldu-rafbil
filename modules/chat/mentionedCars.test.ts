@@ -84,6 +84,7 @@ describe('findMentionedCars', () => {
     expect(labels('BYD Seal U er stærri.')).toEqual(['BYD Seal U'])
     expect(labels('Þú gætir líka skoðað ID.3 Neo.')).toEqual([
       'Volkswagen ID.3 Neo 58 kWh',
+      'Volkswagen ID.3 Neo 79 kWh',
     ])
     expect(labels('Bíll Ni4 er ekki til, né EV30.')).toEqual([])
   })
