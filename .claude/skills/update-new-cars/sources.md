@@ -20,43 +20,43 @@ prints). Update a make's row whenever you read its list, whether or not
 anything changed. The dates before 2026-11-10 were pieced together from the
 commits and the notes below, so a "—" means nothing recorded, not never.
 
-| Make          | Last read  | List dated | Note                                     |
-| ------------- | ---------- | ---------- | ---------------------------------------- |
-| Audi          | 2026-11-07 | —          |                                          |
-| BMW           | 2026-11-05 | —          |                                          |
-| BYD           | 2026-11-03 | 2026-10-30 |                                          |
-| Citroën       | —          | —          | No price published; see 2026-11-10 note  |
-| Fiat          | 2026-11-06 | 2026-01    | 500e unpriced ("Leitið til sölumanna")   |
-| Ford          | 2026-10-31 | —          |                                          |
-| GWM           | 2026-11-06 | —          |                                          |
-| Hongqi        | 2026-10-18 | —          |                                          |
-| Hyundai       | 2026-11-06 | 2026-11    |                                          |
-| JAC           | 2026-11-03 | 2026-10-30 |                                          |
-| Jeep          | 2026-11-06 | —          | Avenger list is the 4xe hybrid only      |
-| KGM           | 2026-10-31 | —          |                                          |
-| Kia           | 2026-11-10 | 2026-11-09 | EV5, EV6 and PV5; EV9 read on 2026-11-06 |
-| Leapmotor     | 2026-11-02 | —          |                                          |
-| Lexus         | 2026-11-10 | —          |                                          |
-| Mazda         | 2026-11-10 | 2026-11-02 |                                          |
-| Mercedes-Benz | 2026-11-05 | —          | CLA read on 2026-11-10, from 2026-11-09  |
-| MG            | 2026-10-18 | 2026-10    |                                          |
-| Mini          | 2026-11-06 | —          | List lacks the Aceman                    |
-| Nissan        | 2026-10-18 | 2026-10    |                                          |
-| Opel          | —          | —          | No price published; see 2026-11-10 note  |
-| Peugeot       | 2026-11-03 | —          | Read from the model pages                |
-| Polestar      | 2026-11-10 | 2026-11-05 | Polestar 5; the rest from earlier lists  |
-| Porsche       | 2026-11-05 | —          |                                          |
-| Range Rover   | 2026-11-06 | 2026-10-14 |                                          |
-| Renault       | 2026-10-18 | 2026-10    |                                          |
-| Škoda         | 2026-11-06 | 2026-11    |                                          |
-| Smart         | 2026-11-10 | 2026-11-02 |                                          |
-| Subaru        | 2026-10-18 | 2026-10    |                                          |
-| Suzuki        | 2026-10-31 | —          |                                          |
-| Tesla         | 2026-11-10 | —          | Design pages; no dated list              |
-| Toyota        | 2026-11-10 | —          |                                          |
-| Volkswagen    | 2026-11-10 | 2026-11-10 | ID.3 Neo list of 2026-11-10; ID.3 11-04  |
-| Volvo         | 2026-11-06 | 2026-10-28 |                                          |
-| XPENG         | 2026-11-10 | 2026-11-02 |                                          |
+| Make          | Last read  | List dated | Note                                           |
+| ------------- | ---------- | ---------- | ---------------------------------------------- |
+| Audi          | 2026-11-07 | —          |                                                |
+| BMW           | 2026-11-05 | —          |                                                |
+| BYD           | 2026-11-03 | 2026-10-30 |                                                |
+| Citroën       | —          | —          | No price published; see 2026-11-10 note        |
+| Fiat          | 2026-11-06 | 2026-01    | 500e unpriced ("Leitið til sölumanna")         |
+| Ford          | 2026-11-10 | 2026-06-22 | Capri; Explorer 06-12, Puma 04-08, Mach-E 2025 |
+| GWM           | 2026-11-06 | —          |                                                |
+| Hongqi        | 2026-11-10 | 2026-10-31 |                                                |
+| Hyundai       | 2026-11-06 | 2026-11    |                                                |
+| JAC           | 2026-11-03 | 2026-10-30 |                                                |
+| Jeep          | 2026-11-06 | —          | Avenger list is the 4xe hybrid only            |
+| KGM           | 2026-11-10 | 2026-10-30 |                                                |
+| Kia           | 2026-11-10 | 2026-11-09 | EV5, EV6 and PV5; EV9 read on 2026-11-06       |
+| Leapmotor     | 2026-11-02 | —          |                                                |
+| Lexus         | 2026-11-10 | —          |                                                |
+| Mazda         | 2026-11-10 | 2026-11-02 |                                                |
+| Mercedes-Benz | 2026-11-05 | —          | CLA read on 2026-11-10, from 2026-11-09        |
+| MG            | 2026-11-10 | 2026-10-31 |                                                |
+| Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
+| Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
+| Opel          | —          | —          | No price published; see 2026-11-10 note        |
+| Peugeot       | 2026-11-03 | —          | Read from the model pages                      |
+| Polestar      | 2026-11-10 | 2026-11-05 | Polestar 5; the rest from earlier lists        |
+| Porsche       | 2026-11-05 | —          |                                                |
+| Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
+| Renault       | 2026-11-10 | 2026-10-31 |                                                |
+| Škoda         | 2026-11-06 | 2026-11    |                                                |
+| Smart         | 2026-11-10 | 2026-11-02 |                                                |
+| Subaru        | 2026-11-10 | 2026-10-31 |                                                |
+| Suzuki        | 2026-11-10 | 2026-10-30 |                                                |
+| Tesla         | 2026-11-10 | —          | Design pages; no dated list                    |
+| Toyota        | 2026-11-10 | —          |                                                |
+| Volkswagen    | 2026-11-10 | 2026-11-10 | ID.3 Neo list of 2026-11-10; ID.3 11-04        |
+| Volvo         | 2026-11-06 | 2026-10-28 |                                                |
+| XPENG         | 2026-11-10 | 2026-11-02 |                                                |
 
 ## Importers with one page for several makes
 
@@ -296,3 +296,11 @@ Read that way the same day, every Model 3 and Model Y price was unchanged.
   42,2 kWh (hyundai.is names both batteries). Askja's showroom,
   `syningarsalur.askja.is`, lists only an "EV5 AWD", while kia.com's EV5 page
   still describes the front-wheel-drive car.
+
+**Read on 2026-11-10**: BL reissued its Hongqi, MG, Nissan, Renault and Subaru
+lists on 2026-10-31, KGM and Suzuki theirs on 2026-10-30, and every price
+matched. Each BL model's table sits under its photo on an even page; crop the
+band below the photo rather than reading the whole page. The Nissan list
+prices the Ariya Evolve 4WD at 8.490.000 while nissan.is says "Verð frá
+8.990.000"; the list was kept. Ford's PDFs are unchanged since June, and their
+`Last-Modified` dates them.
