@@ -2013,6 +2013,7 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-07","slug":"audi-a2-e-tron-240-kw","label":"Audi A2 e-tron 240 kW","added":true,"price":{"to":9300000},"delivery":{"to":"2027"}},
   {"date":"2026-11-07","slug":"volvo-ec40-p8-performance","label":"Volvo EC40 P8 Performance","added":true,"price":{"to":10500000},"delivery":{"to":"snemma 2027"}},
   {"date":"2026-11-07","slug":"volvo-ex40-p8-performance","label":"Volvo EX40 P8 Performance","added":true,"price":{"to":10500000},"delivery":{"to":"snemma 2027"}},
+  {"date":"2026-11-10","slug":"kia-pv5-base","label":"Kia PV5","price":{"from":7790777,"to":8690777}},
 ]
 
 export default carChanges
