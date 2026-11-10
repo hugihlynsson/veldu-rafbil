@@ -177,6 +177,10 @@ first) for its side; its page shows a second, lower rating (TEH), which is not
 what the rule refers to. Say in the report which range changes you made, so the
 owner can look them over.
 
+Tesla is the one make that takes its own figure instead: each trim's
+"Vottuð drægni (WLTP)" on its design page, at the default wheels, in place of
+the lower of the two. The owner asked for it on 2026-11-10.
+
 The brochure side only exists for a make whose list you read this run. A car you
 did not read a list for keeps the range it has.
 
