@@ -166,7 +166,15 @@ const FiltersModal: React.FunctionComponent<Props> = ({
         const handleKeyPress = (
           event: React.KeyboardEvent<HTMLInputElement | HTMLSelectElement>,
         ) => {
-          if (event.key === 'Enter') handleDone()
+          // keyCode 229 catches Safari, which has no isComposing and confirms IME input with Enter
+          if (
+            event.key !== 'Enter' ||
+            event.nativeEvent.isComposing ||
+            event.keyCode === 229
+          )
+            return
+          event.preventDefault()
+          handleDone()
         }
 
         return (
