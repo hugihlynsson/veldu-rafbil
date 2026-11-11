@@ -38,7 +38,7 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Leapmotor     | 2026-11-02 | —          |                                                |
 | Lexus         | 2026-11-10 | —          |                                                |
 | Mazda         | 2026-11-10 | 2026-11-02 |                                                |
-| Mercedes-Benz | 2026-11-05 | —          | CLA read on 2026-11-10, from 2026-11-09        |
+| Mercedes-Benz | 2026-11-05 | —          | CLA 11-10 (list 11-09), VLE 11-11 (list 11-11) |
 | MG            | 2026-11-10 | 2026-10-31 |                                                |
 | Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
 | Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
@@ -93,7 +93,7 @@ Askja documents read so far, as slugs under `issuu.com/askja/docs/`:
 `smart_5_ver_listi`, `xpeng_ver_listar` (every XPENG, one model per two
 pages), `c-class_verdlisti`, `cla_ver_listi`, `eqa_eqb_verdlisti`,
 `eqe_suv_verdlisti`, `eqs_suv_verdlisti`, `g-class_verdlisti`, `glb_ver_listi`,
-`n_r_glc_ver_listi`, `vito_tourer_verdlisti`. `glc_verdlisti` and
+`n_r_glc_ver_listi`, `vito_tourer_verdlisti`, `vle_ver_listi`. `glc_verdlisti` and
 `amg_verdlisti` are combustion and hybrid only.
 
 BL documents read so far, under `issuu.com/hallih/docs/`:
