@@ -1164,12 +1164,11 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu löng er rafhlöðuábyrgðin?',
       'Hvað skerðist drægnin mikið með kerru?',
       'Hversu langan tíma tekur hraðhleðsla?',
-      'Er betra að velja KGM Torres EVX?',
+      'Hvernig er hann miðað við e-Transporter?',
       'Hvað ber pallurinn mikla þyngd?',
       'Hvernig nýtist hann á ójöfnum slóðum?',
     ],
-    facts: 'a25dd249e67a',
-    model: 'gemini-3.8-flash, thinking medium',
+    facts: 'ff6cd0ff7162',
   },
   'kgm-torres-evx': {
     paragraphs: [
@@ -4145,12 +4144,12 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Toyota Proace Verso er stór, níu sæta fjölnotabíll sem er sniðinn fyrir stórfjölskyldur eða ferðaþjónustu sem þurfa að flytja marga í einu. Hann býður upp á mikið rými innan stokks, en tæknilega ber hann skýr merki þess að vera byggður á sendibíl.',
       'Helsti styrkleiki bílsins er sætafjöldinn, enda eru sárafáir rafbílar sem rúma allt að níu manns. Í hversdagslegum snúningum og innanbæjarakstri nýtist þetta mikla pláss afskaplega vel, auk þess sem bíllinn nýtur góðs af víðtæku þjónustuneti Toyota.',
-      'Hins vegar gefur hann mikið eftir í afköstum og rafhlöðutækni. Drægnin er meðal þess stysta sem gerist í sínum verðflokki, sem reynir á í íslenskum vetrarkulda, og á langferðum hleður hann mjög hægt. Hann er einnig mjög aflítill og aðeins fáanlegur með framhjóladrifi. Hyundai STARIA Electric er mun öflugri kostur með 48 km meiri drægni og um 50% styttri hleðslustopp, á meðan Peugeot e-Traveller býður upp á nánast sama bíl en er 100.000 kr. ódýrari.',
+      'Hins vegar gefur hann mikið eftir í afköstum og rafhlöðutækni. Drægnin er meðal þess stysta sem gerist í sínum verðflokki, sem reynir á í íslenskum vetrarkulda, og á langferðum hleður hann mjög hægt. Hann er einnig mjög aflítill og aðeins fáanlegur með framhjóladrifi. Ef fimm sæti duga þér er Volkswagen e-Transporter 100.000 kr. dýrari en með fjórhjóladrif og 60 kW meira afl, á meðan Peugeot e-Traveller býður upp á nánast sama bíl og er 100.000 kr. ódýrari.',
       'Toyota Proace Verso leysir plássvanda stórra hópa vel, en tæknilega stendur hann helstu keppinautum talsvert að baki.',
     ],
     questions: [
       'Er hann betri en Peugeot e-Traveller?',
-      'Er Hyundai STARIA Electric betri kostur?',
+      'Er Volkswagen e-Transporter betri kostur?',
       'Er Mercedes-Benz eVito Tourer betri?',
       'Dugar 100 kW mótorinn fyrir níu manns?',
       'Kemst farangur fyrir með öll níu sætin?',
@@ -4160,8 +4159,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar framhjóladrifið í snjó?',
       'Hvað dregur hann fullhlaðinn á veturna?',
     ],
-    facts: '3667029200b1',
-    model: 'gemini-3.8-flash, thinking medium',
+    facts: 'f1787335c7d7',
   },
   'toyota-urban-cruiser-active-fwd': {
     paragraphs: [
@@ -4446,6 +4444,27 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hljóðlátur er hann á grófu malbiki?',
       'Hversu hratt hleður hann í miklu frosti?',
     ],
+  },
+  'volkswagen-e-transporter-base': {
+    paragraphs: [
+      'Volkswagen e-Transporter er sendibíll með fimm sætum, þremur frammi og tveimur í annarri röð, og L-laga skilrúmi sem skilur farþegana frá flutningsrýminu fyrir aftan. Hann hentar ef þú þarft að koma vinnuflokknum og verkfærunum á staðinn í einum bíl, en vilt líka geta notað hann sem fjölskyldubíl um helgar.',
+      'Það sem greinir hann frá hinum rafsendibílunum er fjórhjóladrifið, sem kemur sér vel á malarvegum, í snjó og á drullugu vinnusvæði. Hann er líka miklu sprækari en þeir, enda er Toyota Proace Verso 4,7 s hægari í 0-100 km/klst. Nýi Transporterinn er smíðaður í samstarfi við Ford og Hekla þjónustar hann.',
+      'Á móti kemur að hann drífur með því stysta sem gerist í sínum verðflokki og hleður hægt, svo með fullan bíl í vetrarkulda þarftu að skipuleggja ferðir út á land vel. Ef þú flytur frekar fólk en farm tekur Toyota Proace Verso allt að níu manns, er 100.000 kr. ódýrari og með 41 km meiri drægni. Og ef pallur dugar er JAC T9 EV líka fjórhjóladrifinn, 1.200.000 kr. ódýrari og með 20 km meiri drægni.',
+      'Fínn vinnujálkur ef þú vilt fjórhjóladrif og sæti fyrir allan flokkinn. Í langferðir er hann síðri.',
+    ],
+    questions: [
+      'Hvað má hann draga þunga kerru?',
+      'Hvað ber hann mikinn farm?',
+      'Hversu mikið pláss er aftan við skilrúmið?',
+      'Er Toyota Proace Verso betri kostur?',
+      'Er JAC T9 EV betri sem vinnubíll?',
+      'Hvernig dugar drægnin í vetrarkulda?',
+      'Hvernig reynist fjórhjóladrifið í snjó?',
+      'Hversu hratt hleður hann á ferðalögum?',
+      'Er hann þægilegur í daglegum akstri?',
+      'Er langa útgáfan líka í boði?',
+    ],
+    facts: 'd87d9e13da24',
   },
   'volvo-ec40-twin-motor': {
     paragraphs: [
