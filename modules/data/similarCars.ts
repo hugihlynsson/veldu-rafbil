@@ -623,7 +623,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'kia-ev2-standard-range',
   ],
   'peugeot-e-2008-54-kwh': [
-    'kia-ev3-standard-range',
+    'renault-r4-e-tech-base',
     'ford-puma-base',
     'fiat-600e-base',
   ],
@@ -777,6 +777,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'mercedes-benz-eqs-suv-580-4matic',
     'range-rover-electric-ev550',
   ],
+  'renault-r4-e-tech-base': [
+    'peugeot-e-2008-54-kwh',
+    'renault-r5-e-tech-52-kwh',
+    'smart-1-pro',
+  ],
   'renault-r5-e-tech-base': [
     'gwm-ora-3-48-kwh',
     'hyundai-inster-long-range',
@@ -784,7 +789,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'renault-r5-e-tech-52-kwh': [
     'volkswagen-id-polo-base',
-    'byd-dolphin-base',
+    'renault-r4-e-tech-base',
     'hyundai-ioniq-3-standard-range',
   ],
   'renault-scenic-e-tech-ev60': [
