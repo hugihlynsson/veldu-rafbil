@@ -7,7 +7,7 @@ import { headlineOf } from '@/modules/news/feed'
 import { dayKinds, type NewsDay } from '@/modules/news/news'
 import {
   daySummary,
-  kindLabels,
+  kindLabel,
   notesPrice,
   priceNote,
 } from '@/modules/news/newsCopy'
@@ -91,7 +91,7 @@ const DayArticle: FunctionComponent<Props> = ({ day, page, className }) => {
                     className="flex justify-between gap-3 py-1.5 border-t border-line last:pb-0"
                   >
                     <dt>
-                      {kindLabels[kind]}
+                      {kindLabel(kind, day.items[kind].length)}
                       {notesPrice(kind) && (
                         <span className="block text-xs text-clay">
                           {priceNote}

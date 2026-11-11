@@ -3,7 +3,7 @@ import { dayKinds, type NewsDay, type NewsItem } from '@/modules/news/news'
 import {
   daySummary,
   itemText,
-  kindLabels,
+  kindLabel,
   notesPrice,
   priceNote,
 } from '@/modules/news/newsCopy'
@@ -28,8 +28,8 @@ const description = (day: NewsDay, labelOf: LabelOf) => {
     const items = day.items[kind]
     if (items.length === 0) return []
     const heading = notesPrice(kind)
-      ? `${kindLabels[kind]} (${priceNote})`
-      : kindLabels[kind]
+      ? `${kindLabel(kind, items.length)} (${priceNote})`
+      : kindLabel(kind, items.length)
     const lines = items.map(
       (item) =>
         `<li>${escape(`${labelOf(item)}: ${itemText(item, 'news')}`)}</li>`,

@@ -12,7 +12,7 @@ import type { NewsDay, NewsItem } from '@/modules/news/news'
 import { dayKinds } from '@/modules/news/news'
 import {
   itemText,
-  kindLabels,
+  kindLabel,
   notesPrice,
   priceNote,
 } from '@/modules/news/newsCopy'
@@ -181,7 +181,7 @@ const NewsDaySections: FunctionComponent<{ day: NewsDay }> = ({ day }) =>
           className="@container mt-6 md:mt-8 lg:mt-10 lg:first-of-type:mt-5"
         >
           <h3 className="m-0 text-sm font-semibold lg:sr-only">
-            {kindLabels[kind]}
+            {kindLabel(kind, day.items[kind].length)}
             {notesPrice(kind) && (
               <span className="font-medium text-stone"> · {priceNote}</span>
             )}

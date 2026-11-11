@@ -5,14 +5,19 @@ import type { DayKind, NewsDay, NewsItem } from './news'
 
 // Every word here agrees with bíll, which is what each of them is about
 
-/** A day's news under these headings, on its page and in the feed */
-export const kindLabels: Record<DayKind, string> = {
-  added: 'Nýir á lista',
-  price: 'Verðbreytingar',
-  estimate: 'Nýtt áætlað verð',
-  delivery: 'Afhending',
-  removed: 'Hættir í sölu',
+// A heading is read without its count beside it, so 21 cars take the plural
+// as any number of cars but one does, not the singular a stated 21 would
+const kindLabels: Record<DayKind, [singular: string, plural: string]> = {
+  added: ['Nýr á lista', 'Nýir á lista'],
+  price: ['Verðbreyting', 'Verðbreytingar'],
+  estimate: ['Nýtt áætlað verð', 'Nýtt áætlað verð'],
+  delivery: ['Afhending', 'Afhending'],
+  removed: ['Hættur í sölu', 'Hættir í sölu'],
 }
+
+/** The heading a day's news of a kind goes under, on its page and in the feed */
+export const kindLabel = (kind: DayKind, count: number): string =>
+  kindLabels[kind][count === 1 ? 0 : 1]
 
 // What the log keeps is the list price, as the grant on a past day is not
 // kept, so the heading over the prices calls it what a car's history does
