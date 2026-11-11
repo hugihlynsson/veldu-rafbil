@@ -2578,6 +2578,22 @@ const newCars: Array<NewCar> = [
   },
   {
     make: 'Renault',
+    model: 'R4 E-Tech',
+    heroImageName: 'renault-r4',
+    price: 5_390_000,
+    sellerUrl: 'https://www.renault.is/cars/r4-e-tech-electric/renault-4.html',
+    acceleration: 8.2,
+    capacity: 52,
+    range: 407,
+    evDatabaseUrl:
+      'https://ev-database.org/car/3127/Renault-4-E-Tech-52kWh-150hp',
+    drive: 'FWD',
+    seats: 5,
+    power: 110,
+    timeToCharge10To80: 31,
+  },
+  {
+    make: 'Renault',
     model: 'R5 E-Tech',
     heroImageName: 'renault-r5',
     price: 4_990_000,

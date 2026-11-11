@@ -47,7 +47,7 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Polestar      | 2026-11-10 | 2026-11-05 | Polestar 5; the rest from earlier lists        |
 | Porsche       | 2026-11-05 | —          |                                                |
 | Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
-| Renault       | 2026-11-10 | 2026-10-31 |                                                |
+| Renault       | 2026-11-11 | 2026-11-11 | R4 E-Tech added                                |
 | Škoda         | 2026-11-06 | 2026-11    |                                                |
 | Smart         | 2026-11-10 | 2026-11-02 |                                                |
 | Subaru        | 2026-11-10 | 2026-10-31 |                                                |
@@ -99,7 +99,7 @@ pages), `c-class_verdlisti`, `cla_ver_listi`, `eqa_eqb_verdlisti`,
 BL documents read so far, under `issuu.com/hallih/docs/`:
 `subaru_ver__listi_sept2015lr` (all three Subaru EVs), `mg_ver_listi`,
 `nissan_ver__listi_febr__ar_2016lr`, `renault_ver__listi___g__st_2015lr`
-(the R5 and Scenic; its Rafale is a plug-in hybrid),
+(the R5, R4 since November 2026 and Scenic; its Rafale is a plug-in hybrid),
 `nm70462_hyundai_ver__b__klingur___g` (every Hyundai EV, the IONIQ 3 and
 STARIA Electric included since October 2026; the IONIQ 9 rows carry no grant
 column, being over the ceiling), `bmw_ver_listi_xdrive_26.02.2019_lr` (iX5,
