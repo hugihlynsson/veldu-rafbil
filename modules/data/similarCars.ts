@@ -265,7 +265,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'kgm-torres-evx',
     'leapmotor-c10-design-awd',
   ],
-  'kgm-musso-ev-4wd': ['jac-t9-ev-base', 'toyota-hilux-base', 'kgm-torres-evx'],
+  'kgm-musso-ev-4wd': [
+    'jac-t9-ev-base',
+    'toyota-hilux-base',
+    'volkswagen-e-transporter-base',
+  ],
   'kgm-torres-evx': [
     'xpeng-l03-rwd-long-range',
     'renault-scenic-e-tech-ev60',
@@ -985,7 +989,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'toyota-proace-verso-base': [
     'peugeot-e-traveller-base',
     'mercedes-benz-evito-tourer',
-    'hyundai-staria-electric-base',
+    'volkswagen-e-transporter-base',
   ],
   'toyota-urban-cruiser-active-fwd': [
     'suzuki-e-vitara-4x4-allgrip',
@@ -1051,6 +1055,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'polestar-4-long-range-dual-motor',
     'bmw-i3-40-xdrive',
     'audi-a6-e-tron-avant-quattro',
+  ],
+  'volkswagen-e-transporter-base': [
+    'toyota-proace-verso-base',
+    'peugeot-e-traveller-base',
+    'jac-t9-ev-base',
   ],
   'volvo-ec40-twin-motor': [
     'bmw-ix1-xdrive-30',

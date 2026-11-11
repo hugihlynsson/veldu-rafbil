@@ -3473,6 +3473,22 @@ const newCars: Array<NewCar> = [
     timeToCharge10To80: 26,
   },
   {
+    make: 'Volkswagen',
+    model: 'e-Transporter',
+    heroImageName: 'vw-e-transporter',
+    price: 9_990_000,
+    sellerUrl: 'https://www.volkswagen.is/is/bilar/nyr-transporter.html',
+    acceleration: 8.6,
+    capacity: 70.9,
+    range: 310,
+    evDatabaseUrl:
+      'https://ev-database.org/car/3797/Volkswagen-e-Transporter-Kombi-L1-160-kW-4MOTION-71-kWh',
+    drive: 'AWD',
+    seats: 5,
+    power: 160,
+    timeToCharge10To80: 29,
+  },
+  {
     make: 'Volvo',
     model: 'EC40',
     subModel: 'Twin Motor',
