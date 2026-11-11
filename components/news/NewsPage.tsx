@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { dayRangeText } from '@/modules/copy/dayText'
 import type { NewsDay } from '@/modules/news/news'
+import { NEWS_PATH } from '@/modules/news/paths'
 import PageTop from '@/components/detail/PageTop'
 import { pageColumn } from '@/components/pageColumn'
 import DayArticle from './DayArticle'
@@ -16,12 +17,16 @@ export interface NeighbourPage {
 
 interface Props {
   title: string
-  intro: ReactNode
+  /** The updates page's own, under its title */
+  intro?: ReactNode
   days: ReadonlyArray<NewsDay>
   older?: NeighbourPage
   newer?: NeighbourPage
-  /** Over the title, as a day's page has its way back */
-  back?: ReactNode
+  /**
+   * A page further back, which a reader steps through rather than lands on:
+   * its title is a line under the way back, so the days start near the top
+   */
+  stepped?: boolean
 }
 
 const stepLink =
@@ -37,7 +42,7 @@ const NewsPage: FunctionComponent<Props> = ({
   days,
   older,
   newer,
-  back,
+  stepped,
 }) => (
   <main className="max-w-page mx-auto pb-14 md:pb-24">
     <header className={clsx(pageColumn, 'pt-4 pb-6 xs:pt-6')}>
@@ -45,24 +50,38 @@ const NewsPage: FunctionComponent<Props> = ({
     </header>
     <div className={pageColumn}>
       <div>
-        {back}
-        <h1
-          className={clsx(
-            'm-0 font-semibold text-display leading-tight text-balance',
-            back ? 'mt-6 lg:mt-10' : 'mt-4',
-          )}
-        >
-          {title}
-        </h1>
-        <p className="mt-2 mb-0 max-w-prose text-base leading-normal text-pretty text-stone">
-          {intro}
-        </p>
+        {stepped ? (
+          <>
+            <Link
+              href={NEWS_PATH}
+              className="text-sm font-semibold text-stone no-underline hover:underline"
+            >
+              <span aria-hidden>←</span> Uppfærslur
+            </Link>
+            <h1 className="m-0 mt-1 text-2xl font-semibold leading-tight text-balance">
+              {title}
+            </h1>
+          </>
+        ) : (
+          <>
+            <h1 className="m-0 mt-4 font-semibold text-display leading-tight text-balance">
+              {title}
+            </h1>
+            <p className="mt-2 mb-0 max-w-prose text-base leading-normal text-pretty text-stone">
+              {intro}
+            </p>
+          </>
+        )}
 
-        {days.map((day) => (
+        {days.map((day, index) => (
           <DayArticle
             key={day.date}
             day={day}
-            className="mt-16 md:mt-24 lg:mt-20"
+            className={
+              stepped && index === 0
+                ? 'mt-10 md:mt-14'
+                : 'mt-16 md:mt-24 lg:mt-20'
+            }
           />
         ))}
 

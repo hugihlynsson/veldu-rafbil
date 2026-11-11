@@ -159,15 +159,6 @@ export const newsDays = (
     })
     .toSorted((a, b) => b.date.localeCompare(a.date))
 
-/** What several days brought, together */
-export const itemsOf = (days: ReadonlyArray<NewsDay>): NewsDay['items'] => ({
-  added: days.flatMap(({ items }) => items.added),
-  price: days.flatMap(({ items }) => items.price),
-  estimate: days.flatMap(({ items }) => items.estimate),
-  delivery: days.flatMap(({ items }) => items.delivery),
-  removed: days.flatMap(({ items }) => items.removed),
-})
-
 /** Whether a cursor is a day of the calendar, as 2026-10-24 */
 export const isDay = (cursor: string): boolean => {
   const time = Date.parse(`${cursor}T00:00:00Z`)

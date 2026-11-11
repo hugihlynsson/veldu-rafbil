@@ -1,11 +1,9 @@
 import { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { dayRangeText } from '@/modules/copy/dayText'
 import { frontDays, olderPage } from '@/modules/news/feed'
-import { isDay, itemsOf, type NewsDay } from '@/modules/news/news'
-import { daySummary } from '@/modules/news/newsCopy'
+import { isDay, type NewsDay } from '@/modules/news/news'
 import { NEWS_PATH, newsPagePath } from '@/modules/news/paths'
 import Footer from '@/components/Footer'
 import PageChat from '@/components/detail/PageChat'
@@ -48,16 +46,8 @@ export default async function Page(props: Props) {
   return (
     <>
       <NewsPage
-        title={`Uppfærslur ${rangeOf(days)}`}
-        intro={daySummary({ items: itemsOf(days) })}
-        back={
-          <Link
-            href={NEWS_PATH}
-            className="text-sm font-semibold text-stone no-underline hover:underline"
-          >
-            <span aria-hidden>←</span> Nýjustu uppfærslur
-          </Link>
-        }
+        title={rangeOf(days)}
+        stepped
         days={days}
         older={
           older

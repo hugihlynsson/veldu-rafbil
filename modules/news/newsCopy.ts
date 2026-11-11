@@ -96,8 +96,8 @@ export const dayHeadline = (day: NewsDay, nameOf: NameOf): string => {
   return `${someNames(names)} ${verb(names, 'hættir', 'hætta')} í sölu`
 }
 
-/** Everything a day brought, or a year, counted, as "2 nýir bílar og 5 verðbreytingar." */
-export const daySummary = ({ items }: Pick<NewsDay, 'items'>): string => {
+/** Everything a day brought, counted, as "2 nýir bílar og 5 verðbreytingar." */
+export const daySummary = ({ items }: NewsDay): string => {
   const count = (n: number, singular: string, plural: string) =>
     n > 0 ? [`${n} ${agree(n, singular, plural)}`] : []
 
