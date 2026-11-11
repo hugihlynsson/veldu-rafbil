@@ -1,12 +1,14 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  archivePageOn,
+  archivePages,
   days,
-  daysIn,
+  frontDays,
   headlineOf,
-  NEWS_SINCE,
+  NEWS_PAGE_DAYS,
   newsYears,
-  recentDays,
+  pagePathOf,
 } from './feed'
 import { historyOf } from './history'
 import { daySummary } from './newsCopy'
@@ -20,18 +22,31 @@ describe('the news', () => {
     }
   })
 
-  it('lists the twelve months back from its newest day', () => {
-    const [newest] = days
-    expect(recentDays[0]).toBe(newest)
-    expect(NEWS_SINCE).toBe(
-      `${Number(newest!.date.slice(0, 4)) - 1}${newest!.date.slice(4)}`,
-    )
-    expect(recentDays).toEqual(days.filter(({ date }) => date > NEWS_SINCE))
+  it('shows the newest days in front and the rest a page at a time', () => {
+    expect(frontDays[0]).toBe(days[0])
+    expect([frontDays, ...archivePages].flat()).toEqual(days)
+    for (const page of archivePages) {
+      expect(page).toHaveLength(NEWS_PAGE_DAYS)
+      expect(archivePageOn(page[0]!.date)).toBe(page)
+    }
   })
 
-  it('files every day under one year, the years newest first', () => {
-    expect(newsYears.flatMap(daysIn)).toEqual(days)
-    expect(newsYears.toSorted().toReversed()).toEqual(newsYears)
+  it('finds each day the page it is told on', () => {
+    expect(pagePathOf(days[0]!.date)).toBe('/uppfaerslur')
+    const [page] = archivePages
+    for (const day of page!) {
+      expect(pagePathOf(day.date)).toBe(`/uppfaerslur/eldri/${page![0]!.date}`)
+    }
+  })
+
+  it('jumps to each year, newest first, at its last day', () => {
+    expect(newsYears.map(({ year }) => year)).toEqual([
+      ...new Set(days.map(({ date }) => date.slice(0, 4))),
+    ])
+    for (const { year, path } of newsYears) {
+      const last = days.find(({ date }) => date.startsWith(year))!
+      expect(path).toBe(pagePathOf(last.date))
+    }
   })
 
   it('tells of each car on sale from its start on the list', () => {

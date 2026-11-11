@@ -1,4 +1,3 @@
-import { dayText } from '@/modules/copy/dayText'
 import { carWithSlug } from '@/modules/data/cars'
 import { carPathOf } from '@/modules/detail/paths'
 import { SITE_URL } from '@/modules/siteUrl'
@@ -6,19 +5,14 @@ import { breadcrumbList, siteOrganization } from '@/modules/structuredData'
 import { dayShareImagePath, headlineOf, labelOf } from './feed'
 import { dayKinds, type NewsDay } from './news'
 import { dayDescription } from './newsCopy'
-import { NEWS_PATH, newsDayPath, newsYearPath } from './paths'
+import { NEWS_PATH, newsDayPath } from './paths'
 
-/** The trail down to the updates, a year of them, or a day */
-export const newsBreadcrumbs = (date?: string) => {
-  const year = date?.slice(0, 4)
-  return breadcrumbList([
+/** The trail down to the updates, and to a page under them */
+export const newsBreadcrumbs = (page?: { name: string; path: string }) =>
+  breadcrumbList([
     { name: 'Uppfærslur', path: NEWS_PATH },
-    ...(year ? [{ name: year, path: newsYearPath(year) }] : []),
-    ...(date && date !== year
-      ? [{ name: dayText(date), path: newsDayPath(date) }]
-      : []),
+    ...(page ? [page] : []),
   ])
-}
 
 /**
  * A day's page as a news article, about the cars it tells of that still have

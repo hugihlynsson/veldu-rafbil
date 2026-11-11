@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest'
 
 import { allCars } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
-import { days, newsYears } from '@/modules/news/feed'
+import { archivePages, days } from '@/modules/news/feed'
 import { SITE_URL } from '@/modules/siteUrl'
 import sitemap from './sitemap'
 
@@ -12,27 +12,27 @@ const entries = sitemap()
 const urls = entries.map(({ url }) => url)
 
 describe('sitemap', () => {
-  it('lists the list, every car page and every year and day of news', () => {
+  it('lists the list, every car page and every page and day of news', () => {
     expect(urls).toContain(`${SITE_URL}/`)
     for (const car of allCars) {
       expect(urls).toContain(`${SITE_URL}/bill/${carSlug(car)}`)
     }
     expect(urls).toContain(`${SITE_URL}/uppfaerslur`)
-    for (const year of newsYears) {
-      expect(urls).toContain(`${SITE_URL}/uppfaerslur/ar/${year}`)
+    for (const [newest] of archivePages) {
+      expect(urls).toContain(`${SITE_URL}/uppfaerslur/eldri/${newest!.date}`)
     }
     for (const { date } of days) {
       expect(urls).toContain(`${SITE_URL}/uppfaerslur/${date}`)
     }
     expect(urls).toHaveLength(
-      allCars.length + newsYears.length + days.length + 2,
+      allCars.length + archivePages.length + days.length + 2,
     )
   })
 
   it('dates the news alone', () => {
     const dated = entries.filter(({ lastModified }) => lastModified)
     expect(dated.every(({ url }) => url.includes('/uppfaerslur'))).toBe(true)
-    expect(dated).toHaveLength(newsYears.length + days.length + 1)
+    expect(dated).toHaveLength(archivePages.length + days.length + 1)
   })
 
   it('names each page once', () => {

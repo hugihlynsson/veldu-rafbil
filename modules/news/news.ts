@@ -167,3 +167,25 @@ export const itemsOf = (days: ReadonlyArray<NewsDay>): NewsDay['items'] => ({
   delivery: days.flatMap(({ items }) => items.delivery),
   removed: days.flatMap(({ items }) => items.removed),
 })
+
+/**
+ * Days, newest first, in pages of `size` counted from the oldest, so a page
+ * once full never changes: news only ever grows the newest page. The front
+ * page shows that one and, while it holds less than a page, the full one
+ * under it, so it always shows at least `size` days.
+ */
+export const newsPages = (
+  days: ReadonlyArray<NewsDay>,
+  size: number,
+): { front: NewsDay[]; archive: NewsDay[][] } => {
+  const oldestFirst = days.toReversed()
+  const pages: NewsDay[][] = []
+  for (let start = 0; start < oldestFirst.length; start += size) {
+    pages.unshift(oldestFirst.slice(start, start + size).toReversed())
+  }
+  const [newest = [], under, ...older] = pages
+  if (!under) return { front: newest, archive: [] }
+  return newest.length < size
+    ? { front: [...newest, ...under], archive: older }
+    : { front: newest, archive: [under, ...older] }
+}

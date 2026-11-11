@@ -5,8 +5,9 @@ export const NEWS_PATH = '/uppfaerslur'
 /** A day's news, by the day as 2026-10-31 */
 export const newsDayPath = (date: string): string => `${NEWS_PATH}/${date}`
 
-/** A year's news, by the year as 2025 */
-export const newsYearPath = (year: string): string => `${NEWS_PATH}/ar/${year}`
+/** A page of older news, by the newest day on it */
+export const newsPagePath = (date: string): string =>
+  `${NEWS_PATH}/eldri/${date}`
 
 export const NEWS_FEED_PATH = `${NEWS_PATH}/rss.xml`
 

@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs'
 import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
-import { carHistoryPath, newsDayPath, newsYearPath } from './paths'
+import { carHistoryPath, newsDayPath, newsPagePath } from './paths'
 
 const root = path.join(__dirname, '../..')
 
@@ -16,9 +16,9 @@ describe('carHistoryPath', () => {
 })
 
 // Each is linked to from pages and the sitemap, and only a folder serves it
-describe('newsDayPath and newsYearPath', () => {
-  it('name the routes that serve a day and a year', () => {
-    for (const route of [newsDayPath('[dagur]'), newsYearPath('[ar]')]) {
+describe('newsDayPath and newsPagePath', () => {
+  it('name the routes that serve a day and a page of days', () => {
+    for (const route of [newsDayPath('[dagur]'), newsPagePath('[dagur]')]) {
       expect(existsSync(path.join(root, 'app', route, 'page.tsx'))).toBe(true)
     }
   })

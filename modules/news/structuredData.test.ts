@@ -35,22 +35,20 @@ describe('dayArticle', () => {
 })
 
 describe('newsBreadcrumbs', () => {
-  const names = (date?: string) =>
-    newsBreadcrumbs(date).itemListElement.map(({ name, item }) => [name, item])
-
-  it('steps from the front page through the year to the day', () => {
-    expect(names()).toEqual([
+  it('steps from the front page through the updates to a page under them', () => {
+    const steps = (page?: { name: string; path: string }) =>
+      newsBreadcrumbs(page).itemListElement.map(({ name, item }) => [
+        name,
+        item,
+      ])
+    expect(steps()).toEqual([
       ['Veldu Rafbíl', `${SITE_URL}/`],
       ['Uppfærslur', `${SITE_URL}/uppfaerslur`],
     ])
-    expect(names('2025')).toEqual([
-      ['Veldu Rafbíl', `${SITE_URL}/`],
-      ['Uppfærslur', `${SITE_URL}/uppfaerslur`],
-      ['2025', `${SITE_URL}/uppfaerslur/ar/2025`],
-    ])
-    expect(names('2025-12-23').at(-1)).toEqual([
-      '23. desember 2025',
-      `${SITE_URL}/uppfaerslur/2025-12-23`,
-    ])
+    expect(
+      steps({ name: '23. desember 2025', path: '/uppfaerslur/2025-12-23' }).at(
+        -1,
+      ),
+    ).toEqual(['23. desember 2025', `${SITE_URL}/uppfaerslur/2025-12-23`])
   })
 })

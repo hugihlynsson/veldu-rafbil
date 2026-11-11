@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import type { CarChange } from '@/modules/data/carChanges'
-import { newsDays, readNews } from './news'
+import { newsDays, newsPages, readNews, type NewsDay } from './news'
 
 const entry = (
   date: string,
@@ -131,5 +131,40 @@ describe('newsDays', () => {
     const [, day] = newsDays(items, '2026-01-01')
     expect(day?.items.added.map(({ slug }) => slug)).toEqual(['b'])
     expect(Object.values(day?.items ?? {}).flat()).toHaveLength(1)
+  })
+})
+
+describe('newsPages', () => {
+  // Day n of a log, a day apart, newest first
+  const log = (n: number): NewsDay[] =>
+    Array.from({ length: n }, (_, i) => ({
+      date: `2026-01-${String(n - i).padStart(2, '0')}`,
+      items: { added: [], price: [], estimate: [], delivery: [], removed: [] },
+    }))
+  const dates = (days: ReadonlyArray<NewsDay>) => days.map(({ date }) => date)
+
+  it('tells every day once, the front page first, newest first', () => {
+    for (const n of [0, 1, 6, 7, 8, 13, 14, 15, 29]) {
+      const { front, archive } = newsPages(log(n), 7)
+      expect(dates([front, ...archive].flat())).toEqual(dates(log(n)))
+    }
+  })
+
+  it('fills every archive page, and shows a page to two less a day in front', () => {
+    for (const n of [7, 8, 13, 14, 15, 29]) {
+      const { front, archive } = newsPages(log(n), 7)
+      expect(front.length).toBeGreaterThanOrEqual(7)
+      expect(front.length).toBeLessThan(14)
+      for (const page of archive) expect(page).toHaveLength(7)
+    }
+  })
+
+  // An address a search engine has indexed keeps what it found there
+  it('never changes a page as news comes', () => {
+    const before = newsPages(log(20), 7).archive.map(dates)
+    for (const n of [21, 22, 26, 27, 28]) {
+      const after = newsPages(log(n), 7).archive.map(dates)
+      expect(after.slice(after.length - before.length)).toEqual(before)
+    }
   })
 })
