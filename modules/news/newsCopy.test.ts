@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import type { NewsDay, NewsItem } from './news'
+import { dayKinds, type DayKind, type NewsDay, type NewsItem } from './news'
 import { dayHeadline, daySummary, itemText, kindLabel } from './newsCopy'
 
 const item = (
@@ -206,15 +206,28 @@ describe('itemText', () => {
 })
 
 describe('kindLabel', () => {
-  it('agrees with one car', () => {
-    expect(kindLabel('added', 1)).toBe('Nýr á lista')
-    expect(kindLabel('price', 1)).toBe('Verðbreyting')
-    expect(kindLabel('removed', 1)).toBe('Hættur í sölu')
+  const headings: Record<DayKind, [one: string, many: string]> = {
+    added: ['Nýr á lista', 'Nýir á lista'],
+    price: ['Verðbreyting', 'Verðbreytingar'],
+    estimate: ['Nýtt áætlað verð', 'Nýtt áætlað verð'],
+    delivery: ['Afhending', 'Afhending'],
+    removed: ['Hættur í sölu', 'Hættir í sölu'],
+  }
+
+  it('gives every kind its heading over one row', () => {
+    for (const kind of dayKinds) {
+      expect(kindLabel(kind, 1), kind).toBe(headings[kind][0])
+    }
   })
 
-  it('takes the plural for any other count, 21 too', () => {
-    expect(kindLabel('added', 2)).toBe('Nýir á lista')
-    expect(kindLabel('added', 21)).toBe('Nýir á lista')
-    expect(kindLabel('removed', 3)).toBe('Hættir í sölu')
+  // 21 is where agree() would read the singular, which a heading must not
+  it('takes the plural over any other number of rows, 21 too', () => {
+    for (const kind of dayKinds) {
+      for (const count of [2, 3, 11, 21, 31]) {
+        expect(kindLabel(kind, count), `${kind} ${count}`).toBe(
+          headings[kind][1],
+        )
+      }
+    }
   })
 })
