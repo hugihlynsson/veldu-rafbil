@@ -16,7 +16,7 @@ import {
 // Adding a field to NewCar does not add it here — this shape is a promise to
 // people who cannot see the commit that changes it, so it changes on purpose.
 export interface ApiCar {
-  // What the car's page, its own document and a comparison are addressed by
+  // What the car's page and a comparison are addressed by
   slug: string
   make: string
   model: string
@@ -82,7 +82,7 @@ export const toApiCar = (car: Car): ApiCar => ({
   sellerUrl: car.sellerUrl,
 })
 
-export interface Envelope {
+export interface CarsPayload {
   source: {
     name: string
     description: string
@@ -93,9 +93,6 @@ export interface Envelope {
   disclaimer: string
   generatedAt: string
   commit?: string
-}
-
-export interface CarsPayload extends Envelope {
   grant: {
     name: string
     currency: 'ISK'
@@ -112,12 +109,12 @@ export interface CarsPayload extends Envelope {
   cars: Array<ApiCar>
 }
 
-// Provenance rides with every document, so one read on its own still says
-// whose figures these are and how old
-export const buildEnvelope = (
+// The caveats ride in the envelope so a reader holding only this knows how old
+// the figures are and what they mean
+export const buildCarsPayload = (
   generatedAt: Date,
   commit?: string,
-): Envelope => ({
+): CarsPayload => ({
   source: {
     name: 'Veldu Rafbíl',
     description:
@@ -131,15 +128,6 @@ export const buildEnvelope = (
     'Veldu Rafbíl is run as a non-profit community service. The car list is maintained by hand from sellers’ published price lists, so prices and availability can be out of date. Check with the seller before relying on a figure.',
   generatedAt: generatedAt.toISOString(),
   ...(commit ? { commit } : {}),
-})
-
-// The caveats ride in the envelope so a reader holding only this knows what
-// the figures mean
-export const buildCarsPayload = (
-  generatedAt: Date,
-  commit?: string,
-): CarsPayload => ({
-  ...buildEnvelope(generatedAt, commit),
   grant: {
     name: 'Rafbílastyrkur',
     currency: 'ISK',
@@ -150,7 +138,7 @@ export const buildCarsPayload = (
   notes: {
     range: `rangeWltpKm is the manufacturer WLTP figure. Real range in Iceland is lower — cold, wind and hills — and usually lands between ${Math.round(realRangeLowFactor * 100)}% and ${Math.round(realRangeHighFactor * 100)}% of it, which is what estimatedRealRangeKm reports. Those are estimates, not measurements.`,
     fastCharge: `minutes10To80 is the time from 10% to 80% on a fast charger. kmPerMinute is the WLTP range that window covers, ${Math.round(chargeWindowShare * 100)}% of it, divided by those minutes.`,
-    pages: `Each car has a page at /bill/{slug}, and a document at /api/cars/{slug} adding its review and price history. /samanburdur/{slug}/{slug} compares up to ${MAX_COMPARED} cars side by side. All paths are relative to the origin this document was served from.`,
+    pages: `Each car has a page at /bill/{slug}, with its review and price history. /samanburdur/{slug}/{slug} compares up to ${MAX_COMPARED} cars side by side. All paths are relative to the origin this document was served from.`,
   },
   count: cars.length,
   cars: cars.map(toApiCar),

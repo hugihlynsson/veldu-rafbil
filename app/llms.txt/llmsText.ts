@@ -29,11 +29,10 @@ The site is in Icelandic. The list is at \`/\`, and its sorting and filtering tr
 ## Data
 
 - [Car list (JSON)](/api/cars): All ${cars.length} cars as one document, with the grant already worked out and every figure named for what it is. Start here for any question across cars. Static and cacheable; no key, no rate limit.
-- \`/api/cars/{slug}\`: One car's document: its row in the list, a written review in Icelandic, and its price and delivery history. Take \`slug\` from the list. Static too, and served for cars no longer sold new.
 
 ## Pages to link people to
 
-- \`${CAR_PATH}/{slug}\`: A car's own page.
+- \`${CAR_PATH}/{slug}\`: A car's own page, with a written review and its price and delivery history, server-rendered. Take \`slug\` from the list.
 - \`${COMPARISON_PATH}/{slug}/{slug}\`: Up to ${MAX_COMPARED} cars side by side, in the order given. To compare cars yourself, read the list; link here to show a person the comparison.
 - [Uppfærslur](${NEWS_PATH}): Every price change, new car and delivery estimate by day, with an [RSS feed](${NEWS_FEED_PATH}).
 

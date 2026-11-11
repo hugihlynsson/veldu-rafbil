@@ -57,7 +57,7 @@ describe('the published car payload', () => {
   })
 
   // A consumer joins on these between two fetches of the document, and builds
-  // the car's page, its document and a comparison from them
+  // the car's page and a comparison from them
   it('gives every car a slug of its own, the one its page is at', () => {
     const slugs = payload.cars.map((car) => car.slug)
     expect(new Set(slugs).size).toBe(slugs.length)
@@ -134,9 +134,9 @@ describe('the published car payload', () => {
   })
 
   // The link means the same inside and out, so it keeps one name. The
-  // ev-database link is the largest field and filters nothing, so it waits
-  // for the car's own document.
-  it('publishes the seller link and leaves the rest to the car document', () => {
+  // ev-database link was the largest field and filters nothing; the car's
+  // page carries it.
+  it('publishes the seller link and not the ev-database one', () => {
     const car = cars.find((car) => car.evDatabaseUrl)!
     const published = toApiCar(car)
     expect(published.sellerUrl).toBe(car.sellerUrl)

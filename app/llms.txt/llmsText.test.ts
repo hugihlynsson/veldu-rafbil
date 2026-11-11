@@ -30,9 +30,8 @@ describe('llms.txt', () => {
     expect(summary?.startsWith('> ')).toBe(true)
   })
 
-  it('points at the machine-readable list and each car’s document', () => {
+  it('points at the machine-readable list', () => {
     expect(text).toContain('(/api/cars)')
-    expect(text).toContain('`/api/cars/{slug}`')
   })
 
   // An agent builds these from a slug, so they have to be the paths served
