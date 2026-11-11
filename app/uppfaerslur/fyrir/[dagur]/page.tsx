@@ -1,7 +1,13 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { dayOn, frontDays, olderPage } from '@/modules/news/feed'
+import { shareImageSize } from '@/modules/detail/paths'
+import {
+  dayOn,
+  dayShareImagePath,
+  frontDays,
+  olderPage,
+} from '@/modules/news/feed'
 import { daysRangeText } from '@/modules/news/newsCopy'
 import { NEWS_PATH, newsPagePath } from '@/modules/news/paths'
 import Footer from '@/components/Footer'
@@ -25,10 +31,19 @@ const read = async ({ params }: Props) => {
 
 export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const page = await read(props)
+  const [newest] = page?.days ?? []
+  if (!page || !newest) return { title: 'Veldu Rafbíl' }
+
+  const title = `Uppfærslur ${daysRangeText(page.days)} – Veldu Rafbíl`
   return {
-    title: page?.days.length
-      ? `Uppfærslur ${daysRangeText(page.days)} – Veldu Rafbíl`
-      : 'Veldu Rafbíl',
+    title,
+    openGraph: {
+      title,
+      siteName: 'Veldu Rafbíl',
+      locale: 'is_IS',
+      images: [{ url: dayShareImagePath(newest), ...shareImageSize }],
+    },
+    twitter: { card: 'summary_large_image' },
     // Every day here has its own page, which is the one to find; these are
     // only the way back through them
     robots: { index: false, follow: true },

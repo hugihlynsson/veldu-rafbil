@@ -20,8 +20,8 @@ const items = readNews(carChanges)
 /** Every day with news the log tells of, newest first, back to 2020 */
 export const days: ReadonlyArray<NewsDay> = newsDays(items, '')
 
-// A day in full is its photos and a row per car, some 35 KB of page, so ten
-// keep a page of them under 400 KB
+// Each day is told in full, its photos and a row per car, so a page weighs
+// what its days brought rather than a set amount for each day
 export const NEWS_PAGE_DAYS = 10
 
 /** The days the updates page shows, newest first */

@@ -10,6 +10,7 @@ export const siteOrganization = {
   '@type': 'Organization',
   name: 'Veldu Rafbíl',
   url: `${SITE_URL}/`,
+  logo: `${SITE_URL}/icon-512.png`,
 } as const
 
 /** Where a page sits under the site, from the front page down to it */
