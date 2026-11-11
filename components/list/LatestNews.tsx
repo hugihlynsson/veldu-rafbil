@@ -11,6 +11,8 @@ interface Props {
   latest: Latest
   /** Where it sits, which differs by the page around it: its margins alone */
   className?: string
+  /** Under the list's intro it is above the fold; in the footer it is not */
+  preload?: boolean
 }
 
 /**
@@ -19,7 +21,11 @@ interface Props {
  * the footer: beside other content from lg, at a width that keeps the intro
  * to three lines and the headline to two
  */
-const LatestNews: FunctionComponent<Props> = ({ latest, className }) => (
+const LatestNews: FunctionComponent<Props> = ({
+  latest,
+  className,
+  preload,
+}) => (
   <Link
     href={latest.path}
     className={clsx(
@@ -31,6 +37,7 @@ const LatestNews: FunctionComponent<Props> = ({ latest, className }) => (
       <div className="w-32 h-[89px] shrink-0 overflow-hidden rounded-lg bg-cloud">
         {/* The size the box renders at, so the 1x/2x pair is 128 and 256 */}
         <Image
+          preload={preload}
           alt=""
           src={latest.image}
           width={128}
