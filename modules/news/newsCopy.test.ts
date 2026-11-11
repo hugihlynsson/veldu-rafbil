@@ -1,7 +1,13 @@
 import { describe, expect, it } from 'vitest'
 
 import { dayKinds, type DayKind, type NewsDay, type NewsItem } from './news'
-import { dayHeadline, daySummary, itemText, kindLabel } from './newsCopy'
+import {
+  dayDescription,
+  dayHeadline,
+  daySummary,
+  itemText,
+  kindLabel,
+} from './newsCopy'
 
 const item = (
   kind: NewsItem['kind'],
@@ -229,5 +235,61 @@ describe('kindLabel', () => {
         )
       }
     }
+  })
+})
+
+describe('dayDescription', () => {
+  const labelOf = ({ label }: NewsItem) => label
+
+  it('tells each car by name and price, after the date', () => {
+    expect(
+      dayDescription(
+        day(
+          item('added', 'Ford Puma Base', { price: { to: 4990000 } }),
+          item('price', 'Kia EV3 Long Range', {
+            price: { from: 6290000, to: 5990000 },
+          }),
+          item('removed', 'Audi Q4 40'),
+        ),
+        labelOf,
+      ),
+    ).toBe(
+      '31. október 2026: Ford Puma Base bætist við, listaverð 4.990.000 kr. Listaverð á Kia EV3 Long Range lækkar í 5.990.000 kr. Audi Q4 40 hættir í sölu.',
+    )
+  })
+
+  it('tells an expected car by when it comes, and one now in sale as such', () => {
+    expect(
+      dayDescription(
+        day(
+          item('added', 'Polestar 5', { delivery: { to: 'Lok 2026' } }),
+          item('delivery', 'BMW iX3 40', { delivery: { from: 'Vor 2026' } }),
+        ),
+        labelOf,
+      ),
+    ).toBe(
+      '31. október 2026: Polestar 5 bætist við, væntanlegur lok 2026. BMW iX3 40 kominn í sölu.',
+    )
+  })
+
+  // A search result cuts a description off near 160 characters
+  it('counts what does not fit rather than cutting a name off', () => {
+    const cuts = Array.from({ length: 21 }, (_, i) =>
+      item('price', `Tesla Model Y ${i}`, {
+        price: { from: 7000000, to: 6500000 },
+      }),
+    )
+    const text = dayDescription(day(...cuts), labelOf)
+    expect(text.length).toBeLessThanOrEqual(160)
+    expect(text).toBe(
+      '31. október 2026: Listaverð á Tesla Model Y 0 lækkar í 6.500.000 kr. Listaverð á Tesla Model Y 1 lækkar í 6.500.000 kr. 19 breytingar til viðbótar.',
+    )
+  })
+
+  it('tells the first car however long its name', () => {
+    const long = 'X'.repeat(200)
+    expect(dayDescription(day(item('removed', long)), labelOf)).toBe(
+      `31. október 2026: ${long} hættir í sölu.`,
+    )
   })
 })

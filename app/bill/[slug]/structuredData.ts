@@ -42,8 +42,3 @@ export const carStructuredData = (car: Car) => {
     }),
   }
 }
-
-// A car's name in the data can carry anything, and a </script> in it would
-// end the tag the page writes this into
-export const serializeStructuredData = (data: object): string =>
-  JSON.stringify(data).replace(/</g, '\\u003c')

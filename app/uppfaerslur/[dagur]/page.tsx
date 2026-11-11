@@ -3,20 +3,26 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { carSlug } from '@/modules/data/getCarId'
-import { dayText } from '@/modules/copy/dayText'
+import { shareImageSize } from '@/modules/detail/paths'
 import {
-  LIST_SHARE_IMAGE_PATH,
-  shareImagePath,
-  shareImageSize,
-} from '@/modules/detail/paths'
-import { dayOn, days, headlineOf, leadCar } from '@/modules/news/feed'
-import type { NewsDay } from '@/modules/news/news'
-import { daySummary } from '@/modules/news/newsCopy'
-import { NEWS_FEED_PATH, NEWS_PATH, newsDayPath } from '@/modules/news/paths'
+  dayOn,
+  days,
+  dayShareImagePath,
+  headlineOf,
+  labelOf,
+} from '@/modules/news/feed'
+import { dayDescription } from '@/modules/news/newsCopy'
+import {
+  NEWS_FEED_PATH,
+  NEWS_PATH,
+  newsDayPath,
+  newsYearPath,
+} from '@/modules/news/paths'
+import { dayArticle, newsBreadcrumbs } from '@/modules/news/structuredData'
 import PageTop from '@/components/detail/PageTop'
 import Footer from '@/components/Footer'
 import PageChat from '@/components/detail/PageChat'
+import StructuredData from '@/components/StructuredData'
 import { pageColumn } from '@/components/pageColumn'
 import DayArticle from '@/components/news/DayArticle'
 
@@ -30,12 +36,6 @@ export const dynamicParams = false
 export const generateStaticParams = () =>
   days.map(({ date }) => ({ dagur: date }))
 
-// The day's share leads with the car its headline and the front page do
-const shareImage = (day: NewsDay) => {
-  const car = leadCar(day)
-  return car ? shareImagePath([carSlug(car)]) : LIST_SHARE_IMAGE_PATH
-}
-
 export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
@@ -43,7 +43,7 @@ export const generateMetadata = async ({
   if (!day) return { title: 'Veldu Rafbíl' }
 
   const title = `${headlineOf(day)} – Veldu Rafbíl`
-  const description = `${dayText(day.date)}: ${daySummary(day)}`
+  const description = dayDescription(day, labelOf)
 
   return {
     title,
@@ -59,11 +59,13 @@ export const generateMetadata = async ({
       siteName: 'Veldu Rafbíl',
       locale: 'is_IS',
       publishedTime: day.date,
-      images: [{ url: shareImage(day), ...shareImageSize }],
+      images: [{ url: dayShareImagePath(day), ...shareImageSize }],
     },
     twitter: { card: 'summary_large_image' },
   }
 }
+
+const crumbLink = 'text-stone no-underline hover:underline'
 
 const stepLink =
   'block py-2 text-sm font-semibold text-tint no-underline hover:underline'
@@ -75,21 +77,29 @@ export default async function Page({ params }: Props) {
   const index = days.indexOf(day)
   const newer = days[index - 1]
   const older = days[index + 1]
+  const year = day.date.slice(0, 4)
 
   return (
     <>
+      <StructuredData data={[dayArticle(day), newsBreadcrumbs(day.date)]} />
       <main className="max-w-page mx-auto pb-14 md:pb-24">
         <header className={clsx(pageColumn, 'pt-4 pb-6 xs:pt-6')}>
           <PageTop />
         </header>
         <div className={pageColumn}>
           <div>
-            <Link
-              href={NEWS_PATH}
-              className="text-sm font-semibold text-stone no-underline hover:underline"
+            <nav
+              aria-label="Leiðarslóð"
+              className="flex gap-2 text-sm font-semibold text-stone"
             >
-              <span aria-hidden>←</span> Allar uppfærslur
-            </Link>
+              <Link href={NEWS_PATH} className={crumbLink}>
+                <span aria-hidden>←</span> Allar uppfærslur
+              </Link>
+              <span aria-hidden>·</span>
+              <Link href={newsYearPath(year)} className={crumbLink}>
+                {year}
+              </Link>
+            </nav>
             <DayArticle day={day} page className="mt-6 lg:mt-10" />
 
             <nav

@@ -1,20 +1,23 @@
 import { Metadata } from 'next'
 import clsx from 'clsx'
-import Link from 'next/link'
 
-import { dayText, monthText } from '@/modules/copy/dayText'
 import { LIST_SHARE_IMAGE_PATH, shareImageSize } from '@/modules/detail/paths'
-import { days, headlineOf } from '@/modules/news/feed'
-import type { NewsDay } from '@/modules/news/news'
-import { NEWS_FEED_PATH, NEWS_PATH, newsDayPath } from '@/modules/news/paths'
+import { recentDays } from '@/modules/news/feed'
+import { NEWS_FEED_PATH, NEWS_PATH } from '@/modules/news/paths'
+import { newsBreadcrumbs } from '@/modules/news/structuredData'
 import PageTop from '@/components/detail/PageTop'
 import Footer from '@/components/Footer'
 import PageChat from '@/components/detail/PageChat'
+import StructuredData from '@/components/StructuredData'
 import { pageColumn } from '@/components/pageColumn'
-import DayArticle, { railed } from '@/components/news/DayArticle'
+import DayArticle from '@/components/news/DayArticle'
+import DayLines from '@/components/news/DayLines'
+import YearLinks from '@/components/news/YearLinks'
 
-// Told in full; the rest are a line each, by month
-const FULL_DAYS = 20
+// Told in full, a couple of months of news; the rest of the year are a line
+// each, and the years before on their own pages. Each day in full is its
+// photos and a row per car, so twenty made the page some 700 KB.
+const FULL_DAYS = 10
 
 const title = 'Uppfærslur – Veldu Rafbíl'
 const description =
@@ -38,15 +41,11 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  const recent = days.slice(0, FULL_DAYS)
-  const older = new Map<string, NewsDay[]>()
-  for (const day of days.slice(FULL_DAYS)) {
-    const month = monthText(day.date)
-    older.set(month, [...(older.get(month) ?? []), day])
-  }
+  const older = recentDays.slice(FULL_DAYS)
 
   return (
     <>
+      <StructuredData data={newsBreadcrumbs()} />
       <main className="max-w-page mx-auto pb-14 md:pb-24">
         <header className={clsx(pageColumn, 'pt-4 pb-6 xs:pt-6')}>
           <PageTop />
@@ -61,7 +60,7 @@ export default function Page() {
               breytast á listanum.
             </p>
 
-            {recent.map((day) => (
+            {recentDays.slice(0, FULL_DAYS).map((day) => (
               <DayArticle
                 key={day.date}
                 day={day}
@@ -69,44 +68,16 @@ export default function Page() {
               />
             ))}
 
-            {older.size > 0 && (
+            {older.length > 0 && (
               <section aria-labelledby="older" className="mt-16 md:mt-24">
                 <h2 id="older" className="m-0 text-sm font-semibold">
                   Eldra:
                 </h2>
-                {[...older].map(([month, ofMonth]) => (
-                  <div
-                    key={month}
-                    className={clsx(
-                      railed,
-                      'mt-4 lg:items-baseline lg:mt-0 lg:py-3 lg:border-t lg:border-line lg:first-of-type:mt-4',
-                    )}
-                  >
-                    <h3 className="m-0 text-eyebrow uppercase font-semibold tracking-wider text-stone lg:text-xs">
-                      {month}
-                    </h3>
-                    <ul className="mt-1 mb-0 p-0 list-none lg:mt-0">
-                      {ofMonth.map((day) => (
-                        <li
-                          key={day.date}
-                          className="py-1 text-base lg:flex lg:items-baseline lg:justify-between lg:gap-6"
-                        >
-                          <Link
-                            href={newsDayPath(day.date)}
-                            className="text-tint no-underline hover:underline"
-                          >
-                            {headlineOf(day)}
-                          </Link>{' '}
-                          <span className="text-sm text-stone lg:shrink-0">
-                            {dayText(day.date)}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+                <DayLines days={older} heading="h3" />
               </section>
             )}
+
+            <YearLinks className="mt-12 md:mt-16" />
           </div>
         </div>
       </main>

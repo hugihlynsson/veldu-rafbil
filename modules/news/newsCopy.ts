@@ -1,7 +1,8 @@
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
+import { dayText } from '@/modules/copy/dayText'
 import { listNames } from '@/modules/copy/listNames'
 import { agree } from '@/modules/copy/plural'
-import type { DayKind, NewsDay, NewsItem } from './news'
+import { dayKinds, type DayKind, type NewsDay, type NewsItem } from './news'
 
 // An adjective or participle here agrees with bíll, which is what each line
 // is about; a noun such as verðbreyting takes only its own number
@@ -95,8 +96,8 @@ export const dayHeadline = (day: NewsDay, nameOf: NameOf): string => {
   return `${someNames(names)} ${verb(names, 'hættir', 'hætta')} í sölu`
 }
 
-/** Everything a day brought, counted, as "2 nýir bílar og 5 verðbreytingar." */
-export const daySummary = ({ items }: NewsDay): string => {
+/** Everything a day brought, or a year, counted, as "2 nýir bílar og 5 verðbreytingar." */
+export const daySummary = ({ items }: Pick<NewsDay, 'items'>): string => {
   const count = (n: number, singular: string, plural: string) =>
     n > 0 ? [`${n} ${agree(n, singular, plural)}`] : []
 
@@ -156,4 +157,63 @@ export const itemText = (item: NewsItem, told: 'news' | 'history'): string => {
     case 'renamed':
       return `Hét áður ${item.renamedFrom}`
   }
+}
+
+// What a search result shows of a description before it cuts it off
+const DESCRIPTION_LENGTH = 160
+
+// A sentence a description tells an item in, by the car's full name
+const itemSentence = (item: NewsItem, label: string): string => {
+  const { price, delivery } = item
+  switch (item.kind) {
+    case 'added':
+      if (delivery?.to)
+        return `${label} bætist við, væntanlegur ${when(delivery.to)}.`
+      return price
+        ? `${label} bætist við, listaverð ${kr(price.to)}`
+        : `${label} bætist við.`
+    case 'price':
+    case 'estimate': {
+      if (!price) return ''
+      const what = item.kind === 'estimate' ? 'Áætlað listaverð' : 'Listaverð'
+      return `${what} á ${label} ${fell(price) ? 'lækkar' : 'hækkar'} í ${kr(price.to)}`
+    }
+    case 'delivery':
+      return delivery?.to
+        ? `${label} nú væntanlegur ${when(delivery.to)}.`
+        : `${label} kominn í sölu.`
+    case 'removed':
+      return `${label} hættir í sölu.`
+    case 'renamed':
+      return ''
+  }
+}
+
+/**
+ * A day's news for a search result: its date and as much of what it brought
+ * as fits, by name and price, counting the rest rather than cutting a name
+ * off. The first item is told however long it is.
+ */
+export const dayDescription = (
+  day: NewsDay,
+  labelOf: (item: NewsItem) => string,
+): string => {
+  const sentences = dayKinds
+    .flatMap((kind) => day.items[kind])
+    .map((item) => itemSentence(item, labelOf(item)))
+    .filter(Boolean)
+
+  const rest = (n: number) =>
+    n > 0 ? ` ${n} ${agree(n, 'breyting', 'breytingar')} til viðbótar.` : ''
+
+  let text = `${dayText(day.date)}:`
+  let told = 0
+  for (const sentence of sentences) {
+    const next = `${text} ${sentence}`
+    const left = sentences.length - told - 1
+    if (told > 0 && (next + rest(left)).length > DESCRIPTION_LENGTH) break
+    text = next
+    told += 1
+  }
+  return text + rest(sentences.length - told)
 }

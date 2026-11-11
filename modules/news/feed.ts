@@ -1,5 +1,7 @@
 import carChanges from '@/modules/data/carChanges'
 import { carWithSlug, type Car } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
+import { LIST_SHARE_IMAGE_PATH, shareImagePath } from '@/modules/detail/paths'
 import {
   dayKinds,
   newsDays,
@@ -14,23 +16,31 @@ import { NEWS_PATH } from './paths'
 const items = readNews(carChanges)
 
 /** Every day with news the log tells of, newest first, back to 2020 */
-export const allDays: ReadonlyArray<NewsDay> = newsDays(items, '')
+export const days: ReadonlyArray<NewsDay> = newsDays(items, '')
 
-/** How far back the updates page goes */
+/** How far back the updates page lists the days, a line each */
 export const NEWS_MONTHS = 12
 
 // Counted back from the newest day rather than from today: the pages are built
 // at the deploy, so they change when the data does and not with the calendar.
-// A price from years ago is history, not news, and each car's page tells it.
-const newest = allDays[0]?.date ?? ''
+// Every day before it still has its page, reached by its year.
+const newest = days[0]?.date ?? ''
 export const NEWS_SINCE = newest
   ? `${Number(newest.slice(0, 4)) - NEWS_MONTHS / 12}${newest.slice(4)}`
   : ''
 
-/** The days the updates page shows, newest first */
-export const days: ReadonlyArray<NewsDay> = allDays.filter(
+/** The days the updates page lists, newest first */
+export const recentDays: ReadonlyArray<NewsDay> = days.filter(
   ({ date }) => date > NEWS_SINCE,
 )
+
+/** Every year with news, newest first */
+export const newsYears: ReadonlyArray<string> = [
+  ...new Set(days.map(({ date }) => date.slice(0, 4))),
+]
+
+export const daysIn = (year: string): ReadonlyArray<NewsDay> =>
+  days.filter(({ date }) => date.startsWith(`${year}-`))
 
 export const dayOn = (date: string): NewsDay | undefined =>
   days.find((day) => day.date === date)
@@ -63,6 +73,12 @@ export const leadCar = (day: NewsDay): Car | undefined =>
     .flatMap((kind) => day.items[kind])
     .map(({ slug }) => carWithSlug(slug))
     .find((car) => car !== undefined)
+
+/** The share image a day is shown with, of the car it leads with */
+export const dayShareImagePath = (day: NewsDay): string => {
+  const car = leadCar(day)
+  return car ? shareImagePath([carSlug(car)]) : LIST_SHARE_IMAGE_PATH
+}
 
 const [latestDay] = days
 
