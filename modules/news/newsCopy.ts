@@ -1,5 +1,5 @@
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
-import { dayText } from '@/modules/copy/dayText'
+import { dayRangeText, dayText } from '@/modules/copy/dayText'
 import { listNames } from '@/modules/copy/listNames'
 import { agree } from '@/modules/copy/plural'
 import { dayKinds, type DayKind, type NewsDay, type NewsItem } from './news'
@@ -95,6 +95,10 @@ export const dayHeadline = (day: NewsDay, nameOf: NameOf): string => {
   const names = namesOf(removed, nameOf)
   return `${someNames(names)} ${verb(names, 'hættir', 'hætta')} í sölu`
 }
+
+/** The days a page of them spans, newest first, as "4.–17. desember 2023" */
+export const daysRangeText = (days: ReadonlyArray<NewsDay>): string =>
+  dayRangeText(days.at(-1)?.date ?? '', days[0]?.date ?? '')
 
 /** Everything a day brought, counted, as "2 nýir bílar og 5 verðbreytingar." */
 export const daySummary = ({ items }: NewsDay): string => {

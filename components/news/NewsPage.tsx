@@ -2,15 +2,15 @@ import { FunctionComponent, ReactNode } from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
 
-import { dayRangeText } from '@/modules/copy/dayText'
 import type { NewsDay } from '@/modules/news/news'
+import { daysRangeText } from '@/modules/news/newsCopy'
 import { NEWS_PATH } from '@/modules/news/paths'
 import PageTop from '@/components/detail/PageTop'
 import { pageColumn } from '@/components/pageColumn'
 import DayArticle from './DayArticle'
 
 /** A neighbouring page of days, named by the days it holds */
-export interface NeighbourPage {
+interface NeighbourPage {
   path: string
   days: ReadonlyArray<NewsDay>
 }
@@ -31,9 +31,6 @@ interface Props {
 
 const stepLink =
   'block py-2 text-sm font-semibold text-tint no-underline hover:underline'
-
-const rangeOf = ({ days }: NeighbourPage) =>
-  dayRangeText(days.at(-1)?.date ?? '', days[0]?.date ?? '')
 
 /** Days of news in full, newest first, between the pages either side */
 const NewsPage: FunctionComponent<Props> = ({
@@ -67,9 +64,11 @@ const NewsPage: FunctionComponent<Props> = ({
             <h1 className="m-0 mt-4 font-semibold text-display leading-tight text-balance">
               {title}
             </h1>
-            <p className="mt-2 mb-0 max-w-prose text-base leading-normal text-pretty text-stone">
-              {intro}
-            </p>
+            {intro && (
+              <p className="mt-2 mb-0 max-w-prose text-base leading-normal text-pretty text-stone">
+                {intro}
+              </p>
+            )}
           </>
         )}
 
@@ -92,7 +91,7 @@ const NewsPage: FunctionComponent<Props> = ({
           >
             {newer && (
               <Link href={newer.path} className={stepLink}>
-                <span aria-hidden>←</span> Nýrri: {rangeOf(newer)}
+                <span aria-hidden>←</span> Nýrri: {daysRangeText(newer.days)}
               </Link>
             )}
             {older && (
@@ -100,7 +99,7 @@ const NewsPage: FunctionComponent<Props> = ({
                 href={older.path}
                 className={clsx(stepLink, 'text-right sm:col-start-2')}
               >
-                Eldri: {rangeOf(older)} <span aria-hidden>→</span>
+                Eldri: {daysRangeText(older.days)} <span aria-hidden>→</span>
               </Link>
             )}
           </nav>

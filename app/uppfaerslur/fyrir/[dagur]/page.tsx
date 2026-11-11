@@ -1,9 +1,8 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { dayRangeText } from '@/modules/copy/dayText'
-import { frontDays, olderPage } from '@/modules/news/feed'
-import { isDay, type NewsDay } from '@/modules/news/news'
+import { dayOn, frontDays, olderPage } from '@/modules/news/feed'
+import { daysRangeText } from '@/modules/news/newsCopy'
 import { NEWS_PATH, newsPagePath } from '@/modules/news/paths'
 import Footer from '@/components/Footer'
 import PageChat from '@/components/detail/PageChat'
@@ -17,19 +16,18 @@ interface Props {
 // until the next deploy, which is the only thing that brings news
 export const generateStaticParams = () => []
 
+// Only a day with news, as every link here names one, so the pages are as
+// many as the days rather than one for every date there is
 const read = async ({ params }: Props) => {
   const cursor = (await params).dagur
-  return isDay(cursor) ? olderPage(cursor) : undefined
+  return dayOn(cursor) ? olderPage(cursor) : undefined
 }
-
-const rangeOf = (days: ReadonlyArray<NewsDay>) =>
-  dayRangeText(days.at(-1)?.date ?? '', days[0]?.date ?? '')
 
 export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const page = await read(props)
   return {
     title: page?.days.length
-      ? `Uppfærslur ${rangeOf(page.days)} – Veldu Rafbíl`
+      ? `Uppfærslur ${daysRangeText(page.days)} – Veldu Rafbíl`
       : 'Veldu Rafbíl',
     // Every day here has its own page, which is the one to find; these are
     // only the way back through them
@@ -46,7 +44,7 @@ export default async function Page(props: Props) {
   return (
     <>
       <NewsPage
-        title={rangeOf(days)}
+        title={daysRangeText(days)}
         stepped
         days={days}
         older={

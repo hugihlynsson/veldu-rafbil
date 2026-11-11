@@ -4,6 +4,7 @@ import { dayKinds, type DayKind, type NewsDay, type NewsItem } from './news'
 import {
   dayDescription,
   dayHeadline,
+  daysRangeText,
   daySummary,
   itemText,
   kindLabel,
@@ -291,5 +292,16 @@ describe('dayDescription', () => {
     expect(dayDescription(day(item('removed', long)), labelOf)).toBe(
       `31. október 2026: ${long} hættir í sölu.`,
     )
+  })
+})
+
+describe('daysRangeText', () => {
+  const on = (date: string): NewsDay => ({ ...day(), date })
+
+  it('runs from the oldest day to the newest of days newest first', () => {
+    expect(
+      daysRangeText([on('2023-12-17'), on('2023-12-09'), on('2023-12-04')]),
+    ).toBe('4.–17. desember 2023')
+    expect(daysRangeText([on('2023-12-17')])).toBe('17. desember 2023')
   })
 })

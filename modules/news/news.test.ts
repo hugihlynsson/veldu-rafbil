@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import type { CarChange } from '@/modules/data/carChanges'
-import { isDay, newsDays, pageBefore, readNews, type NewsDay } from './news'
+import { newsDays, pageBefore, readNews, type NewsDay } from './news'
 
 const entry = (
   date: string,
@@ -192,22 +192,5 @@ describe('pageBefore', () => {
 
   it('has no newer page past the newest day', () => {
     expect(pageBefore(log(5), '2026-02-01', 10).newer).toBeUndefined()
-  })
-})
-
-describe('isDay', () => {
-  it('takes a day of the calendar and nothing else', () => {
-    expect(isDay('2026-10-24')).toBe(true)
-    expect(isDay('2024-02-29')).toBe(true)
-    for (const cursor of [
-      '2026-02-30',
-      '2025-02-29',
-      '2026-13-01',
-      '2026-1-1',
-      'gær',
-      '',
-    ]) {
-      expect(isDay(cursor)).toBe(false)
-    }
   })
 })
