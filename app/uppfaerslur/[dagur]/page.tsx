@@ -11,6 +11,7 @@ import {
   dayShareImagePath,
   headlineOf,
   labelOf,
+  publishedTime,
 } from '@/modules/news/feed'
 import { dayDescription } from '@/modules/news/newsCopy'
 import { NEWS_FEED_PATH, NEWS_PATH, newsDayPath } from '@/modules/news/paths'
@@ -21,6 +22,7 @@ import PageChat from '@/components/detail/PageChat'
 import StructuredData from '@/components/StructuredData'
 import { pageColumn } from '@/components/pageColumn'
 import DayArticle from '@/components/news/DayArticle'
+import Pager from '@/components/news/Pager'
 
 interface Props {
   params: Promise<{ dagur: string }>
@@ -54,15 +56,12 @@ export const generateMetadata = async ({
       description,
       siteName: 'Veldu Rafbíl',
       locale: 'is_IS',
-      publishedTime: day.date,
+      publishedTime: publishedTime(day),
       images: [{ url: dayShareImagePath(day), ...shareImageSize }],
     },
     twitter: { card: 'summary_large_image' },
   }
 }
-
-const stepLink =
-  'block py-2 text-sm font-semibold text-tint no-underline hover:underline'
 
 export default async function Page({ params }: Props) {
   const day = dayOn((await params).dagur)
@@ -97,24 +96,22 @@ export default async function Page({ params }: Props) {
             </Link>
             <DayArticle day={day} page className="mt-6 lg:mt-10" />
 
-            <nav
-              aria-label="Aðrir dagar"
-              className="mt-12 pt-4 border-t border-line grid gap-1 sm:grid-cols-2"
-            >
-              {newer && (
-                <Link href={newsDayPath(newer.date)} className={stepLink}>
-                  <span aria-hidden>←</span> {headlineOf(newer)}
-                </Link>
-              )}
-              {older && (
-                <Link
-                  href={newsDayPath(older.date)}
-                  className={clsx(stepLink, 'text-right sm:col-start-2')}
-                >
-                  {headlineOf(older)} <span aria-hidden>→</span>
-                </Link>
-              )}
-            </nav>
+            <Pager
+              label="Aðrir dagar"
+              newer={
+                newer && {
+                  href: newsDayPath(newer.date),
+                  text: headlineOf(newer),
+                }
+              }
+              older={
+                older && {
+                  href: newsDayPath(older.date),
+                  text: headlineOf(older),
+                }
+              }
+              className="mt-12"
+            />
           </div>
         </div>
       </main>

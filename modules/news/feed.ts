@@ -55,16 +55,25 @@ export const headlineOf = (day: NewsDay): string => dayHeadline(day, nameOf)
 export const labelOf = (item: NewsItem): string =>
   carWithSlug(item.slug)?.label ?? item.label
 
+/** The cars a day tells of that have a page, each once, in the order it does */
+export const carsOf = (day: NewsDay): Car[] => [
+  ...new Set(
+    dayKinds
+      .flatMap((kind) => day.items[kind])
+      .map(({ slug }) => carWithSlug(slug))
+      .filter((car) => car !== undefined),
+  ),
+]
+
+/** When a day's news is published: its midnight, which in Iceland is UTC's */
+export const publishedTime = (day: NewsDay): string => `${day.date}T00:00:00Z`
+
 /**
  * The car a day leads with, for its photo wherever the day is shown: the first
  * the day tells of that still has a page, in the order the headline names
  * them, so a new car before a new price
  */
-export const leadCar = (day: NewsDay): Car | undefined =>
-  dayKinds
-    .flatMap((kind) => day.items[kind])
-    .map(({ slug }) => carWithSlug(slug))
-    .find((car) => car !== undefined)
+export const leadCar = (day: NewsDay): Car | undefined => carsOf(day)[0]
 
 /** The share image a day is shown with, of the car it leads with */
 export const dayShareImagePath = (day: NewsDay): string => {

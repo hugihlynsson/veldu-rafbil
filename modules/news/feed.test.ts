@@ -1,9 +1,12 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  carsOf,
+  dayOn,
   days,
   frontDays,
   headlineOf,
+  leadCar,
   NEWS_PAGE_DAYS,
   olderPage,
   olderThanFront,
@@ -33,6 +36,28 @@ describe('the news', () => {
 
   it('steps from the first older page back to the front', () => {
     expect(olderPage(olderThanFront!).newer).toBeNull()
+  })
+
+  // The route takes only a day with news, so a link to any other is a 404
+  it('links only to cursors the older pages take', () => {
+    const cursors = [olderThanFront!]
+    for (let page = olderPage(cursors[0]!); page.older;) {
+      cursors.push(page.older)
+      page = olderPage(page.older)
+    }
+    for (const cursor of cursors) {
+      expect(dayOn(cursor)).toBeDefined()
+      const { newer } = olderPage(cursor)
+      if (newer) expect(dayOn(newer)).toBeDefined()
+    }
+  })
+
+  it('names each car a day tells of once, the one it leads with first', () => {
+    for (const day of days) {
+      const cars = carsOf(day)
+      expect(new Set(cars).size).toBe(cars.length)
+      expect(cars[0]).toBe(leadCar(day))
+    }
   })
 
   it('tells of each car on sale from its start on the list', () => {

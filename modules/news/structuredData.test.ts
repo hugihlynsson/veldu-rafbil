@@ -13,7 +13,7 @@ describe('dayArticle', () => {
     for (const day of days) {
       const article = dayArticle(day)
       expect(article.url).toBe(`${SITE_URL}/uppfaerslur/${day.date}`)
-      expect(article.datePublished).toBe(day.date)
+      expect(article.datePublished).toBe(`${day.date}T00:00:00Z`)
       expect(article.image.startsWith(`${SITE_URL}/mynd`)).toBe(true)
       for (const { url } of article.about) expect(carPages).toContain(url)
     }

@@ -8,6 +8,7 @@ import { NEWS_PATH } from '@/modules/news/paths'
 import PageTop from '@/components/detail/PageTop'
 import { pageColumn } from '@/components/pageColumn'
 import DayArticle from './DayArticle'
+import Pager from './Pager'
 
 /** A neighbouring page of days, named by the days it holds */
 interface NeighbourPage {
@@ -28,9 +29,6 @@ interface Props {
    */
   stepped?: boolean
 }
-
-const stepLink =
-  'block py-2 text-sm font-semibold text-tint no-underline hover:underline'
 
 /** Days of news in full, newest first, between the pages either side */
 const NewsPage: FunctionComponent<Props> = ({
@@ -84,26 +82,22 @@ const NewsPage: FunctionComponent<Props> = ({
           />
         ))}
 
-        {(older || newer) && (
-          <nav
-            aria-label="Fleiri uppfærslur"
-            className="mt-16 pt-4 border-t border-line grid gap-1 sm:grid-cols-2 md:mt-24"
-          >
-            {newer && (
-              <Link href={newer.path} className={stepLink}>
-                <span aria-hidden>←</span> Nýrri: {daysRangeText(newer.days)}
-              </Link>
-            )}
-            {older && (
-              <Link
-                href={older.path}
-                className={clsx(stepLink, 'text-right sm:col-start-2')}
-              >
-                Eldri: {daysRangeText(older.days)} <span aria-hidden>→</span>
-              </Link>
-            )}
-          </nav>
-        )}
+        <Pager
+          label="Fleiri uppfærslur"
+          newer={
+            newer && {
+              href: newer.path,
+              text: `Nýrri: ${daysRangeText(newer.days)}`,
+            }
+          }
+          older={
+            older && {
+              href: older.path,
+              text: `Eldri: ${daysRangeText(older.days)}`,
+            }
+          }
+          className="mt-16 md:mt-24"
+        />
       </div>
     </div>
   </main>

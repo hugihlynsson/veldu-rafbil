@@ -1,9 +1,14 @@
-import { carWithSlug } from '@/modules/data/cars'
 import { carPathOf } from '@/modules/detail/paths'
 import { SITE_URL } from '@/modules/siteUrl'
 import { breadcrumbList, siteOrganization } from '@/modules/structuredData'
-import { dayShareImagePath, headlineOf, labelOf } from './feed'
-import { dayKinds, type NewsDay } from './news'
+import {
+  carsOf,
+  dayShareImagePath,
+  headlineOf,
+  labelOf,
+  publishedTime,
+} from './feed'
+import type { NewsDay } from './news'
 import { dayDescription } from './newsCopy'
 import { NEWS_PATH, newsDayPath } from './paths'
 
@@ -21,14 +26,6 @@ export const newsBreadcrumbs = (page?: { name: string; path: string }) =>
  */
 export const dayArticle = (day: NewsDay) => {
   const url = `${SITE_URL}${newsDayPath(day.date)}`
-  const cars = [
-    ...new Set(
-      dayKinds
-        .flatMap((kind) => day.items[kind])
-        .map(({ slug }) => carWithSlug(slug))
-        .filter((car) => car !== undefined),
-    ),
-  ]
 
   return {
     '@context': 'https://schema.org',
@@ -38,11 +35,11 @@ export const dayArticle = (day: NewsDay) => {
     url,
     mainEntityOfPage: url,
     inLanguage: 'is',
-    datePublished: day.date,
+    datePublished: publishedTime(day),
     image: `${SITE_URL}${dayShareImagePath(day)}`,
     author: siteOrganization,
     publisher: siteOrganization,
-    about: cars.map((car) => ({
+    about: carsOf(day).map((car) => ({
       '@type': 'Car',
       name: car.label,
       url: `${SITE_URL}${carPathOf(car)}`,
