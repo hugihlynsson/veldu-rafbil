@@ -5,11 +5,12 @@ import { LIST_SHARE_IMAGE_PATH, shareImagePath } from '@/modules/detail/paths'
 import {
   dayKinds,
   newsDays,
-  newsPages,
+  pageBefore,
   readNews,
   type LatestNews,
   type NewsDay,
   type NewsItem,
+  type NewsPage,
 } from './news'
 import { dayHeadline, type NameOf } from './newsCopy'
 import { NEWS_PATH, newsPagePath } from './paths'
@@ -19,38 +20,27 @@ const items = readNews(carChanges)
 /** Every day with news the log tells of, newest first, back to 2020 */
 export const days: ReadonlyArray<NewsDay> = newsDays(items, '')
 
-// A page in full is its photos and a row per car, so twenty days made the
-// updates page some 700 KB; seven to thirteen keep it near half that
-export const NEWS_PAGE_DAYS = 7
-
-const pages = newsPages(days, NEWS_PAGE_DAYS)
+// A day in full is its photos and a row per car, so twenty made the updates
+// page some 700 KB; ten keep it near half that
+export const NEWS_PAGE_DAYS = 10
 
 /** The days the updates page shows, newest first */
-export const frontDays: ReadonlyArray<NewsDay> = pages.front
+export const frontDays: ReadonlyArray<NewsDay> = days.slice(0, NEWS_PAGE_DAYS)
 
-/** The pages of older days, newest first, each named by its newest day */
-export const archivePages: ReadonlyArray<ReadonlyArray<NewsDay>> = pages.archive
+/** The days before the updates page's, by their cursor */
+export const olderThanFront = frontDays.at(-1)?.date
 
-export const archivePageOn = (
-  date: string,
-): ReadonlyArray<NewsDay> | undefined =>
-  archivePages.find(([newest]) => newest?.date === date)
+/** A page of older days, and the cursors either side, from a cursor */
+export const olderPage = (cursor: string): NewsPage =>
+  pageBefore(days, cursor, NEWS_PAGE_DAYS)
 
-/** Where a day is told among the others: the updates page, or an older one */
-export const pagePathOf = (date: string): string => {
-  const newest = archivePages.find((page) =>
-    page.some((day) => day.date === date),
-  )?.[0]
-  return newest ? newsPagePath(newest.date) : NEWS_PATH
-}
-
-/** Every year with news, newest first, by the page its last day is on */
+/** Every year with news, newest first, at the page that ends it */
 export const newsYears: ReadonlyArray<{ year: string; path: string }> = [
-  ...new Map(days.map(({ date }) => [date.slice(0, 4), date])).keys(),
-].flatMap((year) => {
-  const last = days.find(({ date }) => date.startsWith(year))
-  return last ? [{ year, path: pagePathOf(last.date) }] : []
-})
+  ...new Set(days.map(({ date }) => date.slice(0, 4))),
+].map((year, index) => ({
+  year,
+  path: index === 0 ? NEWS_PATH : newsPagePath(`${Number(year) + 1}-01-01`),
+}))
 
 export const dayOn = (date: string): NewsDay | undefined =>
   days.find((day) => day.date === date)

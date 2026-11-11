@@ -168,24 +168,43 @@ export const itemsOf = (days: ReadonlyArray<NewsDay>): NewsDay['items'] => ({
   removed: days.flatMap(({ items }) => items.removed),
 })
 
+/** Whether a cursor is a day of the calendar, as 2026-10-24 */
+export const isDay = (cursor: string): boolean => {
+  const time = Date.parse(`${cursor}T00:00:00Z`)
+  return (
+    /^\d{4}-\d{2}-\d{2}$/.test(cursor) &&
+    !Number.isNaN(time) &&
+    new Date(time).toISOString().slice(0, 10) === cursor
+  )
+}
+
+/** A page of days, and the cursors to the pages either side of it */
+export interface NewsPage {
+  days: NewsDay[]
+  /** The cursor to the days before these, if there are any */
+  older?: string
+  /** The cursor to the days after these, `null` when they are the newest */
+  newer?: string | null
+}
+
 /**
- * Days, newest first, in pages of `size` counted from the oldest, so a page
- * once full never changes: news only ever grows the newest page. The front
- * page shows that one and, while it holds less than a page, the full one
- * under it, so it always shows at least `size` days.
+ * The `size` days before a cursor, newest first. The cursor is a day, as
+ * 2026-10-24, and need not be one with news. The page newer than this one is
+ * the `size` days from the cursor on, so stepping back and forth lands on
+ * the same pages; once fewer are left than that, it is the newest days.
  */
-export const newsPages = (
+export const pageBefore = (
   days: ReadonlyArray<NewsDay>,
+  cursor: string,
   size: number,
-): { front: NewsDay[]; archive: NewsDay[][] } => {
-  const oldestFirst = days.toReversed()
-  const pages: NewsDay[][] = []
-  for (let start = 0; start < oldestFirst.length; start += size) {
-    pages.unshift(oldestFirst.slice(start, start + size).toReversed())
+): NewsPage => {
+  const page = days.filter(({ date }) => date < cursor).slice(0, size)
+  const last = page.at(-1)
+  const ahead = days.filter(({ date }) => date >= cursor).toReversed()
+  return {
+    days: page,
+    ...(last &&
+      days.some(({ date }) => date < last.date) && { older: last.date }),
+    ...(ahead.length > 0 && { newer: ahead[size]?.date ?? null }),
   }
-  const [newest = [], under, ...older] = pages
-  if (!under) return { front: newest, archive: [] }
-  return newest.length < size
-    ? { front: [...newest, ...under], archive: older }
-    : { front: newest, archive: [under, ...older] }
 }

@@ -1,14 +1,13 @@
 import { describe, expect, it } from 'vitest'
 
 import {
-  archivePageOn,
-  archivePages,
   days,
   frontDays,
   headlineOf,
   NEWS_PAGE_DAYS,
   newsYears,
-  pagePathOf,
+  olderPage,
+  olderThanFront,
 } from './feed'
 import { historyOf } from './history'
 import { daySummary } from './newsCopy'
@@ -22,30 +21,28 @@ describe('the news', () => {
     }
   })
 
-  it('shows the newest days in front and the rest a page at a time', () => {
-    expect(frontDays[0]).toBe(days[0])
-    expect([frontDays, ...archivePages].flat()).toEqual(days)
-    for (const page of archivePages) {
-      expect(page).toHaveLength(NEWS_PAGE_DAYS)
-      expect(archivePageOn(page[0]!.date)).toBe(page)
+  it('shows the newest days in front, and every one before a page at a time', () => {
+    expect(frontDays).toEqual(days.slice(0, NEWS_PAGE_DAYS))
+    const seen = [...frontDays]
+    for (let cursor = olderThanFront; cursor;) {
+      const page = olderPage(cursor)
+      seen.push(...page.days)
+      cursor = page.older
     }
+    expect(seen).toEqual(days)
   })
 
-  it('finds each day the page it is told on', () => {
-    expect(pagePathOf(days[0]!.date)).toBe('/uppfaerslur')
-    const [page] = archivePages
-    for (const day of page!) {
-      expect(pagePathOf(day.date)).toBe(`/uppfaerslur/eldri/${page![0]!.date}`)
-    }
+  it('steps from the first older page back to the front', () => {
+    expect(olderPage(olderThanFront!).newer).toBeNull()
   })
 
-  it('jumps to each year, newest first, at its last day', () => {
-    expect(newsYears.map(({ year }) => year)).toEqual([
-      ...new Set(days.map(({ date }) => date.slice(0, 4))),
-    ])
-    for (const { year, path } of newsYears) {
-      const last = days.find(({ date }) => date.startsWith(year))!
-      expect(path).toBe(pagePathOf(last.date))
+  it('jumps to each year, newest first, at its last days', () => {
+    const [newest, ...older] = newsYears
+    expect(newest?.path).toBe('/uppfaerslur')
+    for (const { year, path } of older) {
+      const cursor = path.split('/').at(-1)!
+      expect(cursor).toBe(`${Number(year) + 1}-01-01`)
+      expect(olderPage(cursor).days[0]?.date.startsWith(year)).toBe(true)
     }
   })
 

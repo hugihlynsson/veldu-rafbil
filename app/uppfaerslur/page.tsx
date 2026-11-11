@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { LIST_SHARE_IMAGE_PATH, shareImageSize } from '@/modules/detail/paths'
-import { archivePages, frontDays } from '@/modules/news/feed'
+import { frontDays, olderPage, olderThanFront } from '@/modules/news/feed'
 import { NEWS_FEED_PATH, NEWS_PATH, newsPagePath } from '@/modules/news/paths'
 import { newsBreadcrumbs } from '@/modules/news/structuredData'
 import Footer from '@/components/Footer'
@@ -30,8 +30,6 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  const [older] = archivePages
-
   return (
     <>
       <StructuredData data={newsBreadcrumbs()} />
@@ -39,7 +37,14 @@ export default function Page() {
         title="Uppfærslur"
         intro="Nýir bílar, ný verð og bílar sem hætta í sölu, daginn sem þeir breytast á listanum."
         days={frontDays}
-        older={older?.[0] && { path: newsPagePath(older[0].date), days: older }}
+        older={
+          olderThanFront
+            ? {
+                path: newsPagePath(olderThanFront),
+                days: olderPage(olderThanFront).days,
+              }
+            : undefined
+        }
       />
       <Footer />
       <PageChat />

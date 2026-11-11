@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import type { CarChange } from '@/modules/data/carChanges'
-import { newsDays, newsPages, readNews, type NewsDay } from './news'
+import { isDay, newsDays, pageBefore, readNews, type NewsDay } from './news'
 
 const entry = (
   date: string,
@@ -134,37 +134,80 @@ describe('newsDays', () => {
   })
 })
 
-describe('newsPages', () => {
-  // Day n of a log, a day apart, newest first
+describe('pageBefore', () => {
+  // Days of news on the 1st to the nth, newest first
   const log = (n: number): NewsDay[] =>
     Array.from({ length: n }, (_, i) => ({
       date: `2026-01-${String(n - i).padStart(2, '0')}`,
       items: { added: [], price: [], estimate: [], delivery: [], removed: [] },
     }))
-  const dates = (days: ReadonlyArray<NewsDay>) => days.map(({ date }) => date)
+  const dates = ({ days }: { days: ReadonlyArray<NewsDay> }) =>
+    days.map(({ date }) => date.slice(-2))
 
-  it('tells every day once, the front page first, newest first', () => {
-    for (const n of [0, 1, 6, 7, 8, 13, 14, 15, 29]) {
-      const { front, archive } = newsPages(log(n), 7)
-      expect(dates([front, ...archive].flat())).toEqual(dates(log(n)))
+  it('gives the days before the cursor, newest first', () => {
+    const page = pageBefore(log(25), '2026-01-21', 10)
+    expect(dates(page)).toEqual([
+      '20',
+      '19',
+      '18',
+      '17',
+      '16',
+      '15',
+      '14',
+      '13',
+      '12',
+      '11',
+    ])
+    expect(page.older).toBe('2026-01-11')
+    expect(page.newer).toBeNull()
+  })
+
+  it('takes any day as a cursor, news or not', () => {
+    const days = log(25).filter((_, i) => i % 2 === 0)
+    expect(dates(pageBefore(days, '2026-01-20', 3))).toEqual(['19', '17', '15'])
+  })
+
+  it('has no older page at the first day, and nothing before it', () => {
+    expect(pageBefore(log(25), '2026-01-06', 10).older).toBeUndefined()
+    expect(pageBefore(log(25), '2026-01-01', 10).days).toEqual([])
+  })
+
+  // Back and forth lands on the same pages, not on pages shifted by a day
+  it('steps newer to the page it came from', () => {
+    const days = log(29)
+    let cursor = '2026-01-30'
+    const back: string[][] = []
+    for (let page = pageBefore(days, cursor, 5); page.older;) {
+      back.push(dates(page))
+      cursor = page.older
+      page = pageBefore(days, cursor, 5)
+    }
+    let page = pageBefore(days, cursor, 5)
+    for (const expected of back.toReversed()) {
+      expect(page.newer).not.toBeUndefined()
+      page = pageBefore(days, page.newer ?? '9999-12-31', 5)
+      expect(dates(page)).toEqual(expected)
     }
   })
 
-  it('fills every archive page, and shows a page to two less a day in front', () => {
-    for (const n of [7, 8, 13, 14, 15, 29]) {
-      const { front, archive } = newsPages(log(n), 7)
-      expect(front.length).toBeGreaterThanOrEqual(7)
-      expect(front.length).toBeLessThan(14)
-      for (const page of archive) expect(page).toHaveLength(7)
-    }
+  it('has no newer page past the newest day', () => {
+    expect(pageBefore(log(5), '2026-02-01', 10).newer).toBeUndefined()
   })
+})
 
-  // An address a search engine has indexed keeps what it found there
-  it('never changes a page as news comes', () => {
-    const before = newsPages(log(20), 7).archive.map(dates)
-    for (const n of [21, 22, 26, 27, 28]) {
-      const after = newsPages(log(n), 7).archive.map(dates)
-      expect(after.slice(after.length - before.length)).toEqual(before)
+describe('isDay', () => {
+  it('takes a day of the calendar and nothing else', () => {
+    expect(isDay('2026-10-24')).toBe(true)
+    expect(isDay('2024-02-29')).toBe(true)
+    for (const cursor of [
+      '2026-02-30',
+      '2025-02-29',
+      '2026-13-01',
+      '2026-1-1',
+      'gær',
+      '',
+    ]) {
+      expect(isDay(cursor)).toBe(false)
     }
   })
 })
