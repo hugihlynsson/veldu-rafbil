@@ -29,7 +29,7 @@ interface Props {
   view?: View
   compared: boolean
   compareFull: boolean
-  onToggleCompare: () => void
+  onToggleCompare: (car: Car) => void
 }
 
 const statLabel =
@@ -110,10 +110,14 @@ const NewCar: FunctionComponent<Props> = ({
       )}
     >
       {/* The biggest thing to tap, so it opens the car too; one stop for the
-          keyboard and screen readers is the name */}
+          keyboard and screen readers is the name. Only the name prefetches,
+          all three going to one page: the browser works out again on every
+          frame whether each prefetching Link is in view, and three a card
+          made that some 700 of them. */}
       <Link
         href={carPathOf(car)}
         onClick={openCar}
+        prefetch={false}
         tabIndex={-1}
         aria-hidden
         className={clsx(
@@ -205,7 +209,7 @@ const NewCar: FunctionComponent<Props> = ({
             full={compareFull}
             onToggle={() => {
               if (!compared) trackEvent('Compare added')
-              onToggleCompare()
+              onToggleCompare(car)
             }}
             // Found on hover by a mouse, as the share button is. A car in the
             // tray keeps it, so it says so wherever the pointer is
@@ -267,6 +271,7 @@ const NewCar: FunctionComponent<Props> = ({
         <Link
           href={carPathOf(car)}
           onClick={openCar}
+          prefetch={false}
           className={clsx(
             'inline-block text-sm text-stone no-underline font-medium transition-colors duration-100 hover:underline hover:text-tint',
             grid && 'md:justify-self-start md:self-start md:text-xs',

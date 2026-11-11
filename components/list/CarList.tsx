@@ -3,6 +3,7 @@
 import {
   type ReactNode,
   type SyntheticEvent,
+  useDeferredValue,
   useEffect,
   useRef,
   useState,
@@ -51,7 +52,7 @@ import {
   useListShown,
 } from '@/utils/carSheet'
 import { prefetchCarReview } from '@/utils/carFiles'
-import useComparison from '@/utils/useComparison'
+import useComparison, { toggleComparedCar } from '@/utils/useComparison'
 import useInputModality, { getInputModality } from '@/utils/inputModality'
 import CompareTray from '@/components/detail/CompareTray'
 import type { SheetChat } from '@/components/detail/CarSheet'
@@ -211,17 +212,11 @@ export default function CarList({ latest }: Props) {
   const comparison = useComparison()
   const isComparing = comparison.selected.length > 0
 
+  // A full tray takes no more, and the toggle says so
   const toggleCompared = (car: CarData) => {
-    const added = !comparison.isSelected(car)
-    // A full tray takes no more, and the toggle says so
-    if (added && comparison.isFull) return
-    comparison.toggle(car)
-    track({
-      name: 'compare_toggled',
-      car: carSlug(car),
-      added,
-      count: comparison.selected.length + (added ? 1 : -1),
-    })
+    const toggled = toggleComparedCar(car)
+    if (toggled)
+      track({ name: 'compare_toggled', car: carSlug(car), ...toggled })
   }
 
   const removeCompared = (car: CarData) => {
@@ -248,10 +243,19 @@ export default function CarList({ latest }: Props) {
     if (linked) prefetchCarReview(carSlug(linked))
   }
 
-  const filteredCars = cars.filter(carFilter(filters))
-  const shownCars = sortCars(filteredCars, sorting, direction)
+  // The cards follow a tap a frame behind the controls, in a render that
+  // yields: reordering every card in one go held a phone's next paint for
+  // longer than the 200ms a tap is given. The toggle and the chips answer at
+  // once, and the count and the cards catch up.
+  const listSorting = useDeferredValue(sorting)
+  const listDirection = useDeferredValue(direction)
+  const listFilters = useDeferredValue(filters)
+  const listView = useDeferredValue(view)
 
-  const hasFilter = Object.values(filters).length > 0
+  const filteredCars = cars.filter(carFilter(listFilters))
+  const shownCars = sortCars(filteredCars, listSorting, listDirection)
+
+  const hasFilter = Object.values(listFilters).length > 0
 
   const filteredCarCount = cars.length - filteredCars.length
 
@@ -331,13 +335,13 @@ export default function CarList({ latest }: Props) {
             it has to stay mounted to be announced at all */}
         <div aria-live="polite" className="sr-only">
           {`${filteredCars.length} ${carWord(filteredCars.length)} á listanum, raðað eftir ${sortingDefinitions[
-            sorting
-          ].label.toLowerCase()}, ${direction === 'desc' ? 'lækkandi' : 'hækkandi'} röð.`}
+            listSorting
+          ].label.toLowerCase()}, ${listDirection === 'desc' ? 'lækkandi' : 'hækkandi'} röð.`}
         </div>
       </header>
 
       <div
-        className={clsx(view === 'grid' && gridLayout)}
+        className={clsx(listView === 'grid' && gridLayout)}
         onPointerEnter={() => {
           if (opensInSheet()) void loadCarSheet()
         }}
@@ -350,12 +354,12 @@ export default function CarList({ latest }: Props) {
             position={index}
             car={car}
             key={car.id}
-            view={view}
-            showValue={sorting === 'value' || Boolean(filters.value)}
-            showSeats={Boolean(filters.seats)}
+            view={listView}
+            showValue={listSorting === 'value' || Boolean(listFilters.value)}
+            showSeats={Boolean(listFilters.seats)}
             compared={comparison.isSelected(car)}
             compareFull={comparison.isFull}
-            onToggleCompare={() => toggleCompared(car)}
+            onToggleCompare={toggleCompared}
           />
         ))}
       </div>

@@ -63,6 +63,25 @@ const subscribe = (listener: () => void) => {
   }
 }
 
+/**
+ * Puts a car in the tray or takes it out, and says which and how many the tray
+ * holds after; nothing, for a full tray, which takes no more. It reads the
+ * tray rather than a render's view of it, so it stays one function for every
+ * card and a tap re-renders only the card it changed.
+ */
+export const toggleComparedCar = (
+  car: Car,
+): { added: boolean; count: number } | undefined => {
+  const selected = read()
+  const added = !selected.includes(car)
+  if (added && selected.length >= MAX_COMPARED) return undefined
+  const next = added
+    ? [...selected, car]
+    : selected.filter((other) => other !== car)
+  write(next)
+  return { added, count: next.length }
+}
+
 /** Puts these cars in the tray on the list, in place of what was there */
 export const setComparedCars = (selected: ReadonlyArray<Car>) =>
   write(selected.slice(0, MAX_COMPARED))
@@ -78,14 +97,9 @@ const useComparison = () => {
   const isSelected = (car: Car) => selected.includes(car)
   const isFull = selected.length >= MAX_COMPARED
 
-  const toggle = (car: Car) => {
-    if (isSelected(car)) write(selected.filter((other) => other !== car))
-    else if (!isFull) write([...selected, car])
-  }
-
   const remove = (car: Car) => write(selected.filter((other) => other !== car))
 
-  return { selected, isSelected, isFull, toggle, remove }
+  return { selected, isSelected, isFull, remove }
 }
 
 export default useComparison
