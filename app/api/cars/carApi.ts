@@ -114,7 +114,10 @@ export interface CarsPayload extends Envelope {
 
 // Provenance rides with every document, so one read on its own still says
 // whose figures these are and how old
-export const buildEnvelope = (generatedAt: Date, commit?: string): Envelope => ({
+export const buildEnvelope = (
+  generatedAt: Date,
+  commit?: string,
+): Envelope => ({
   source: {
     name: 'Veldu Rafbíl',
     description:

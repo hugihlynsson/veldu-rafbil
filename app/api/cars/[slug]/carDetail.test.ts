@@ -8,7 +8,8 @@ import { reviewOf } from '@/modules/detail/review'
 import { historyOf } from '@/modules/news/history'
 
 const at = new Date('2026-01-01T00:00:00.000Z')
-const detailOf = (car: (typeof allCars)[number]) => buildCarDetail(car, at, 'abc123')
+const detailOf = (car: (typeof allCars)[number]) =>
+  buildCarDetail(car, at, 'abc123')
 
 describe('a car’s published document', () => {
   // A reader holding both must not find two answers to one question
@@ -24,8 +25,16 @@ describe('a car’s published document', () => {
   })
 
   it('carries the same provenance as the list', () => {
-    const { source, disclaimer, generatedAt, commit } = buildCarsPayload(at, 'abc123')
-    expect(detailOf(allCars[0]!)).toMatchObject({ source, disclaimer, generatedAt, commit })
+    const { source, disclaimer, generatedAt, commit } = buildCarsPayload(
+      at,
+      'abc123',
+    )
+    expect(detailOf(allCars[0]!)).toMatchObject({
+      source,
+      disclaimer,
+      generatedAt,
+      commit,
+    })
   })
 
   it('says a car is no longer sold new, and gives it no review', () => {
@@ -62,8 +71,9 @@ describe('a car’s published document', () => {
 
   it('keeps the photos unpublished, as the list does', () => {
     for (const car of allCars) {
-      expect(JSON.stringify(detailOf(car)), carSlug(car)).not.toContain('/images/')
+      expect(JSON.stringify(detailOf(car)), carSlug(car)).not.toContain(
+        '/images/',
+      )
     }
   })
-
 })
