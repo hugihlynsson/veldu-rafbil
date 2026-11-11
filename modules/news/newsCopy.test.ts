@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import type { NewsDay, NewsItem } from './news'
-import { dayHeadline, daySummary, itemText } from './newsCopy'
+import { dayHeadline, daySummary, itemText, kindLabel } from './newsCopy'
 
 const item = (
   kind: NewsItem['kind'],
@@ -202,5 +202,19 @@ describe('itemText', () => {
         'news',
       ),
     ).toBe('Væntanlegur 2027')
+  })
+})
+
+describe('kindLabel', () => {
+  it('agrees with one car', () => {
+    expect(kindLabel('added', 1)).toBe('Nýr á lista')
+    expect(kindLabel('price', 1)).toBe('Verðbreyting')
+    expect(kindLabel('removed', 1)).toBe('Hættur í sölu')
+  })
+
+  it('takes the plural for any other count, 21 too', () => {
+    expect(kindLabel('added', 2)).toBe('Nýir á lista')
+    expect(kindLabel('added', 21)).toBe('Nýir á lista')
+    expect(kindLabel('removed', 3)).toBe('Hættir í sölu')
   })
 })
