@@ -1,7 +1,7 @@
 # Veldu Rafbíl — https://github.com/hugihlynsson/veldu-rafbil
 #
-# Nearly all of this site is one public page and one public data file, and both
-# are meant to be read. Crawl them.
+# Nearly all of this site is public pages and public data files, and all of
+# them are meant to be read. Crawl them.
 
 User-Agent: *
 Allow: /
@@ -18,5 +18,6 @@ Disallow: /api/verdict
 # Worth reading instead, for anything automated:
 #   /llms.txt   what this site holds and how to read the figures
 #   /api/cars   every car as JSON, prices already adjusted for the grant
+#   /api/cars/{slug}   one car, with its review and price history
 
 Sitemap: https://veldurafbil.is/sitemap.xml
