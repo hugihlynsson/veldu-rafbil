@@ -23,3 +23,19 @@ export const dayText = (date: string): string => {
 /** The month a day is in, as "október 2026" */
 export const monthText = (date: string): string =>
   dayText(date).replace(/^\d+\. /, '')
+
+/**
+ * The days from one to another, saying the month and year once where they
+ * share them: "4.–17. desember 2023", "20. nóvember – 17. desember 2023"
+ */
+export const dayRangeText = (from: string, to: string): string => {
+  if (from === to) return dayText(to)
+  const [first, last] = [dayText(from), dayText(to)]
+  if (from.slice(0, 7) === to.slice(0, 7)) {
+    return `${first.split(' ')[0]}–${last}`
+  }
+  if (from.slice(0, 4) === to.slice(0, 4)) {
+    return `${first.replace(/ \d+$/, '')} – ${last}`
+  }
+  return `${first} – ${last}`
+}

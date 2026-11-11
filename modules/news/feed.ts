@@ -1,12 +1,16 @@
 import carChanges from '@/modules/data/carChanges'
 import { carWithSlug, type Car } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
+import { LIST_SHARE_IMAGE_PATH, shareImagePath } from '@/modules/detail/paths'
 import {
   dayKinds,
   newsDays,
+  pageBefore,
   readNews,
   type LatestNews,
   type NewsDay,
   type NewsItem,
+  type PageOfDays,
 } from './news'
 import { dayHeadline, type NameOf } from './newsCopy'
 import { NEWS_PATH } from './paths'
@@ -14,23 +18,21 @@ import { NEWS_PATH } from './paths'
 const items = readNews(carChanges)
 
 /** Every day with news the log tells of, newest first, back to 2020 */
-export const allDays: ReadonlyArray<NewsDay> = newsDays(items, '')
+export const days: ReadonlyArray<NewsDay> = newsDays(items, '')
 
-/** How far back the updates page goes */
-export const NEWS_MONTHS = 12
-
-// Counted back from the newest day rather than from today: the pages are built
-// at the deploy, so they change when the data does and not with the calendar.
-// A price from years ago is history, not news, and each car's page tells it.
-const newest = allDays[0]?.date ?? ''
-export const NEWS_SINCE = newest
-  ? `${Number(newest.slice(0, 4)) - NEWS_MONTHS / 12}${newest.slice(4)}`
-  : ''
+// Each day is told in full, its photos and a row per car, so a page weighs
+// what its days brought rather than a set amount for each day
+export const NEWS_PAGE_DAYS = 10
 
 /** The days the updates page shows, newest first */
-export const days: ReadonlyArray<NewsDay> = allDays.filter(
-  ({ date }) => date > NEWS_SINCE,
-)
+export const frontDays: ReadonlyArray<NewsDay> = days.slice(0, NEWS_PAGE_DAYS)
+
+/** The days before the updates page's, by their cursor */
+export const olderThanFront = frontDays.at(-1)?.date
+
+/** A page of older days, and the cursors either side, from a cursor */
+export const olderPage = (cursor: string): PageOfDays =>
+  pageBefore(days, cursor, NEWS_PAGE_DAYS)
 
 export const dayOn = (date: string): NewsDay | undefined =>
   days.find((day) => day.date === date)
@@ -53,16 +55,31 @@ export const headlineOf = (day: NewsDay): string => dayHeadline(day, nameOf)
 export const labelOf = (item: NewsItem): string =>
   carWithSlug(item.slug)?.label ?? item.label
 
+/** The cars a day tells of that have a page, each once, in the order it does */
+export const carsOf = (day: NewsDay): Car[] => [
+  ...new Set(
+    dayKinds
+      .flatMap((kind) => day.items[kind])
+      .map(({ slug }) => carWithSlug(slug))
+      .filter((car) => car !== undefined),
+  ),
+]
+
+/** When a day's news is published: its midnight, which in Iceland is UTC's */
+export const publishedTime = (day: NewsDay): string => `${day.date}T00:00:00Z`
+
 /**
  * The car a day leads with, for its photo wherever the day is shown: the first
  * the day tells of that still has a page, in the order the headline names
  * them, so a new car before a new price
  */
-export const leadCar = (day: NewsDay): Car | undefined =>
-  dayKinds
-    .flatMap((kind) => day.items[kind])
-    .map(({ slug }) => carWithSlug(slug))
-    .find((car) => car !== undefined)
+export const leadCar = (day: NewsDay): Car | undefined => carsOf(day)[0]
+
+/** The share image a day is shown with, of the car it leads with */
+export const dayShareImagePath = (day: NewsDay): string => {
+  const car = leadCar(day)
+  return car ? shareImagePath([carSlug(car)]) : LIST_SHARE_IMAGE_PATH
+}
 
 const [latestDay] = days
 

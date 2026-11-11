@@ -158,3 +158,34 @@ export const newsDays = (
         : []
     })
     .toSorted((a, b) => b.date.localeCompare(a.date))
+
+/** A page of days, and the cursors to the pages either side of it */
+export interface PageOfDays {
+  days: NewsDay[]
+  /** The cursor to the days before these, if there are any */
+  older?: string
+  /** The cursor to the days after these, `null` when they are the newest */
+  newer?: string | null
+}
+
+/**
+ * The `size` days before a cursor, newest first. The cursor is a day, as
+ * 2026-10-24, and need not be one with news, though only one is linked to. The page newer than this one is
+ * the `size` days from the cursor on, so stepping back and forth lands on
+ * the same pages; once fewer are left than that, it is the newest days.
+ */
+export const pageBefore = (
+  days: ReadonlyArray<NewsDay>,
+  cursor: string,
+  size: number,
+): PageOfDays => {
+  const page = days.filter(({ date }) => date < cursor).slice(0, size)
+  const last = page.at(-1)
+  const ahead = days.filter(({ date }) => date >= cursor).toReversed()
+  return {
+    days: page,
+    ...(last &&
+      days.some(({ date }) => date < last.date) && { older: last.date }),
+    ...(ahead.length > 0 && { newer: ahead[size]?.date ?? null }),
+  }
+}

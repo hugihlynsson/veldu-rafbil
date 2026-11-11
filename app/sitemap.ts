@@ -7,9 +7,11 @@ import { days } from '@/modules/news/feed'
 import { NEWS_PATH, newsDayPath } from '@/modules/news/paths'
 import { SITE_URL } from '@/modules/siteUrl'
 
-// The list, every car's page, those no longer sold included, and the news, as
-// each is built and searched for. Not the comparisons: any set of cars is one,
-// and a crawler finds those people share by their links.
+// The list, every car's page, those no longer sold included, and the news, its
+// page and every day's, as each is built and searched for. Not the pages of
+// older days, which hold nothing a day's own page does not, nor the
+// comparisons: any set of cars is one, and a crawler finds those people
+// share by their links.
 //
 // Only the news has a date. A car's page changes with more than its own entry
 // in the log — the grant, the cars like it, its review — and a wrong date is

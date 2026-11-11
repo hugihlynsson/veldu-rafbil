@@ -12,7 +12,7 @@ const entries = sitemap()
 const urls = entries.map(({ url }) => url)
 
 describe('sitemap', () => {
-  it('lists the list, every car page and every day of news that is built', () => {
+  it('lists the list, every car page and every day of news', () => {
     expect(urls).toContain(`${SITE_URL}/`)
     for (const car of allCars) {
       expect(urls).toContain(`${SITE_URL}/bill/${carSlug(car)}`)

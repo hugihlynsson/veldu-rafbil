@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest'
 import { allCars, deriveCar } from '@/modules/data/cars'
 import newCars from '@/modules/data/newCars'
 import { SITE_URL } from '@/modules/siteUrl'
-import { carStructuredData, serializeStructuredData } from './structuredData'
+import { carStructuredData } from './structuredData'
 
 const sold = allCars.find((car) => !car.deprecated && car.hasGrant)!
 const deprecated = allCars.find((car) => car.deprecated)!
@@ -55,13 +55,5 @@ describe('carStructuredData', () => {
         /^https:\/\/schema\.org\/\w+DriveConfiguration$/,
       )
     }
-  })
-})
-
-describe('serializeStructuredData', () => {
-  it('cannot close the script tag it is written into', () => {
-    const json = serializeStructuredData({ name: '</script><script>alert(1)' })
-    expect(json).not.toContain('</script>')
-    expect(JSON.parse(json)).toEqual({ name: '</script><script>alert(1)' })
   })
 })

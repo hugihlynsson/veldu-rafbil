@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import type { CarChange } from '@/modules/data/carChanges'
-import { newsDays, readNews } from './news'
+import { newsDays, pageBefore, readNews, type NewsDay } from './news'
 
 const entry = (
   date: string,
@@ -131,5 +131,66 @@ describe('newsDays', () => {
     const [, day] = newsDays(items, '2026-01-01')
     expect(day?.items.added.map(({ slug }) => slug)).toEqual(['b'])
     expect(Object.values(day?.items ?? {}).flat()).toHaveLength(1)
+  })
+})
+
+describe('pageBefore', () => {
+  // Days of news on the 1st to the nth, newest first
+  const log = (n: number): NewsDay[] =>
+    Array.from({ length: n }, (_, i) => ({
+      date: `2026-01-${String(n - i).padStart(2, '0')}`,
+      items: { added: [], price: [], estimate: [], delivery: [], removed: [] },
+    }))
+  const dates = ({ days }: { days: ReadonlyArray<NewsDay> }) =>
+    days.map(({ date }) => date.slice(-2))
+
+  it('gives the days before the cursor, newest first', () => {
+    const page = pageBefore(log(25), '2026-01-21', 10)
+    expect(dates(page)).toEqual([
+      '20',
+      '19',
+      '18',
+      '17',
+      '16',
+      '15',
+      '14',
+      '13',
+      '12',
+      '11',
+    ])
+    expect(page.older).toBe('2026-01-11')
+    expect(page.newer).toBeNull()
+  })
+
+  it('takes any day as a cursor, news or not', () => {
+    const days = log(25).filter((_, i) => i % 2 === 0)
+    expect(dates(pageBefore(days, '2026-01-20', 3))).toEqual(['19', '17', '15'])
+  })
+
+  it('has no older page at the first day, and nothing before it', () => {
+    expect(pageBefore(log(25), '2026-01-06', 10).older).toBeUndefined()
+    expect(pageBefore(log(25), '2026-01-01', 10).days).toEqual([])
+  })
+
+  // Back and forth lands on the same pages, not on pages shifted by a day
+  it('steps newer to the page it came from', () => {
+    const days = log(29)
+    let cursor = '2026-01-30'
+    const back: string[][] = []
+    for (let page = pageBefore(days, cursor, 5); page.older;) {
+      back.push(dates(page))
+      cursor = page.older
+      page = pageBefore(days, cursor, 5)
+    }
+    let page = pageBefore(days, cursor, 5)
+    for (const expected of back.toReversed()) {
+      expect(page.newer).not.toBeUndefined()
+      page = pageBefore(days, page.newer ?? '9999-12-31', 5)
+      expect(dates(page)).toEqual(expected)
+    }
+  })
+
+  it('has no newer page past the newest day', () => {
+    expect(pageBefore(log(5), '2026-02-01', 10).newer).toBeUndefined()
   })
 })

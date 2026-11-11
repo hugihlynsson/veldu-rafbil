@@ -14,6 +14,9 @@ import { NEWS_PATH } from '@/modules/news/paths'
 import { SITE_URL } from '@/modules/siteUrl'
 import { recentChangesSection } from './recentChanges'
 
+// The updates page goes back as far as the log does
+const firstNewsYear = allNews[0]?.date.slice(0, 4)
+
 const percent = (factor: number) => `${Math.round(factor * 100)}%`
 
 // The figures each card shows, so an answer about charging or battery size
@@ -52,7 +55,7 @@ Gott að hafa í huga:
 - Þú veist EINUNGIS um bílana sem eru taldir upp hér að ofan
 - Breytingarnar hér að ofan eru það eina sem þú veist um sögu bíla á listanum. Ef bíll eða breyting er ekki þar veistu ekki hvenær hann kom á listann eða hvort verð hans hefur breyst, svo ekki giska
 - Þú veist ekki hvaða dagur er í dag, svo nefndu alltaf dagsetninguna þegar þú segir frá breytingu, aldrei „nýlega“ eða „í síðustu viku“
-- Allar breytingar á listanum frá byrjun árs eru á síðunni Uppfærslur, ${SITE_URL}${NEWS_PATH}
+- Allar breytingar á listanum frá ${firstNewsYear} eru á síðunni Uppfærslur, ${SITE_URL}${NEWS_PATH}
 - Þú veist EINUNGIS um rafbíla á Íslandi
 - Sætafjöldinn að ofan er mesti fjöldi sæta sem bíllinn fæst með á Íslandi, þar með talið gegn aukagjaldi. Verðið er hins vegar fyrir ódýrustu útfærsluna, svo taktu fram að sætin geti kostað aukalega þegar það á við. Ekki giska út frá því sem bíllinn býður í öðrum löndum
 - Veldu Rafbíl er búin til af Huga Hlynssyni og er rekin sem óhagnaðardrifin samfélagsþjónusta. Upplýsingar svo sem verð og framboð geta verið úreltar
