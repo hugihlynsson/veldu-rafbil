@@ -7,7 +7,6 @@ import type { NewsDay } from '@/modules/news/news'
 import PageTop from '@/components/detail/PageTop'
 import { pageColumn } from '@/components/pageColumn'
 import DayArticle from './DayArticle'
-import YearLinks from './YearLinks'
 
 /** A neighbouring page of days, named by the days it holds */
 export interface NeighbourPage {
@@ -72,23 +71,21 @@ const NewsPage: FunctionComponent<Props> = ({
             aria-label="Fleiri uppfærslur"
             className="mt-16 pt-4 border-t border-line grid gap-1 sm:grid-cols-2 md:mt-24"
           >
-            {older && (
-              <Link href={older.path} className={stepLink}>
-                <span aria-hidden>←</span> Eldri: {rangeOf(older)}
+            {newer && (
+              <Link href={newer.path} className={stepLink}>
+                <span aria-hidden>←</span> Nýrri: {rangeOf(newer)}
               </Link>
             )}
-            {newer && (
+            {older && (
               <Link
-                href={newer.path}
-                className={clsx(stepLink, 'sm:col-start-2 sm:text-right')}
+                href={older.path}
+                className={clsx(stepLink, 'text-right sm:col-start-2')}
               >
-                Nýrri: {rangeOf(newer)} <span aria-hidden>→</span>
+                Eldri: {rangeOf(older)} <span aria-hidden>→</span>
               </Link>
             )}
           </nav>
         )}
-
-        <YearLinks className="mt-12 md:mt-16" />
       </div>
     </div>
   </main>

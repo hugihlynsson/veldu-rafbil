@@ -13,7 +13,7 @@ import {
   type NewsPage,
 } from './news'
 import { dayHeadline, type NameOf } from './newsCopy'
-import { NEWS_PATH, newsPagePath } from './paths'
+import { NEWS_PATH } from './paths'
 
 const items = readNews(carChanges)
 
@@ -33,14 +33,6 @@ export const olderThanFront = frontDays.at(-1)?.date
 /** A page of older days, and the cursors either side, from a cursor */
 export const olderPage = (cursor: string): NewsPage =>
   pageBefore(days, cursor, NEWS_PAGE_DAYS)
-
-/** Every year with news, newest first, at the page that ends it */
-export const newsYears: ReadonlyArray<{ year: string; path: string }> = [
-  ...new Set(days.map(({ date }) => date.slice(0, 4))),
-].map((year, index) => ({
-  year,
-  path: index === 0 ? NEWS_PATH : newsPagePath(`${Number(year) + 1}-01-01`),
-}))
 
 export const dayOn = (date: string): NewsDay | undefined =>
   days.find((day) => day.date === date)

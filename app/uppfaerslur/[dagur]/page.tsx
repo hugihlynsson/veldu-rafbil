@@ -101,17 +101,17 @@ export default async function Page({ params }: Props) {
               aria-label="Aðrir dagar"
               className="mt-12 pt-4 border-t border-line grid gap-1 sm:grid-cols-2"
             >
-              {older && (
-                <Link href={newsDayPath(older.date)} className={stepLink}>
-                  <span aria-hidden>←</span> {headlineOf(older)}
+              {newer && (
+                <Link href={newsDayPath(newer.date)} className={stepLink}>
+                  <span aria-hidden>←</span> {headlineOf(newer)}
                 </Link>
               )}
-              {newer && (
+              {older && (
                 <Link
-                  href={newsDayPath(newer.date)}
-                  className={clsx(stepLink, 'sm:col-start-2 sm:text-right')}
+                  href={newsDayPath(older.date)}
+                  className={clsx(stepLink, 'text-right sm:col-start-2')}
                 >
-                  {headlineOf(newer)} <span aria-hidden>→</span>
+                  {headlineOf(older)} <span aria-hidden>→</span>
                 </Link>
               )}
             </nav>

@@ -5,7 +5,6 @@ import {
   frontDays,
   headlineOf,
   NEWS_PAGE_DAYS,
-  newsYears,
   olderPage,
   olderThanFront,
 } from './feed'
@@ -34,16 +33,6 @@ describe('the news', () => {
 
   it('steps from the first older page back to the front', () => {
     expect(olderPage(olderThanFront!).newer).toBeNull()
-  })
-
-  it('jumps to each year, newest first, at its last days', () => {
-    const [newest, ...older] = newsYears
-    expect(newest?.path).toBe('/uppfaerslur')
-    for (const { year, path } of older) {
-      const cursor = path.split('/').at(-1)!
-      expect(cursor).toBe(`${Number(year) + 1}-01-01`)
-      expect(olderPage(cursor).days[0]?.date.startsWith(year)).toBe(true)
-    }
   })
 
   it('tells of each car on sale from its start on the list', () => {
