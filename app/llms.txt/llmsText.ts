@@ -7,6 +7,9 @@ import {
   realRangeLowFactor,
 } from '@/modules/data/globals'
 import { sortingUrlKeys } from '@/modules/list/sorting'
+import { MAX_COMPARED } from '@/modules/detail/comparison'
+import { CAR_PATH, COMPARISON_PATH } from '@/modules/detail/paths'
+import { NEWS_FEED_PATH, NEWS_PATH } from '@/modules/news/paths'
 
 // https://llmstxt.org: one markdown file telling a model what a site holds.
 // English, unlike the rest of the site — its readers are agents and whoever is
@@ -21,11 +24,17 @@ const buildLlmsText = (): string => `# Veldu Rafbíl
 
 > Veldu Rafbíl ("choose an electric car") lists every 100% electric car sold new in Iceland — currently ${cars.length} — with price, range, charging and drivetrain figures, a link to the seller, and an AI advisor that answers questions about them in Icelandic. It is run as a non-profit community service by Hugi Hlynsson.
 
-The site itself is a single page in Icelandic, at \`/\`. Sorting and filtering travel in the query string, and those parameter names are Icelandic too: ${param(sortingUrlKeys.sorting)} sorts, and ${param(filterUrlKeys.price)} and ${param(filterUrlKeys.range)} are two of the filters. To read the cars, use the JSON below rather than scraping the page.
+The site is in Icelandic. The list is at \`/\`, and its sorting and filtering travel in the query string, with Icelandic parameter names too: ${param(sortingUrlKeys.sorting)} sorts, and ${param(filterUrlKeys.price)} and ${param(filterUrlKeys.range)} are two of the filters. To read the cars, use the JSON below rather than scraping the pages.
 
 ## Data
 
-- [Car list (JSON)](/api/cars): All ${cars.length} cars as one document, with the grant already worked out and every figure named for what it is. Static and cacheable; no key, no rate limit.
+- [Car list (JSON)](/api/cars): All ${cars.length} cars as one document, with the grant already worked out and every figure named for what it is. Start here for any question across cars. Static and cacheable; no key, no rate limit.
+
+## Pages to link people to
+
+- \`${CAR_PATH}/{slug}\`: A car's own page, with a written review and its price and delivery history, server-rendered. Take \`slug\` from the list.
+- \`${COMPARISON_PATH}/{slug}/{slug}\`: Up to ${MAX_COMPARED} cars side by side, in the order given. To compare cars yourself, read the list; link here to show a person the comparison.
+- [Uppfærslur](${NEWS_PATH}): Every price change, new car and delivery estimate by day, with an [RSS feed](${NEWS_FEED_PATH}).
 
 ## Reading the figures
 

@@ -1,6 +1,8 @@
 import type { Availability } from '@/modules/data/cars'
 import type { Drive } from '@/modules/data/newCarSchema'
 import cars, { Car } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
+import { MAX_COMPARED } from '@/modules/detail/comparison'
 import { chargeWindowShare } from '@/modules/data/getKmPerMinutesCharged'
 import {
   grantAmount,
@@ -14,7 +16,8 @@ import {
 // Adding a field to NewCar does not add it here — this shape is a promise to
 // people who cannot see the commit that changes it, so it changes on purpose.
 export interface ApiCar {
-  id: string
+  // What the car's page and a comparison are addressed by
+  slug: string
   make: string
   model: string
   subModel?: string
@@ -45,15 +48,12 @@ export interface ApiCar {
   // Icelandic, e.g. "sumar 2026", and only on an `expected` car
   expectedDelivery?: string
   sellerUrl: string
-  evDatabaseUrl?: string
-  // Relative to the origin this was served from
-  pagePath: string
 }
 
 // The photos stay unpublished: a path to them invites hotlinking and the bill
 // lands on the image optimiser. Serving them later means a CDN URL, a new field.
 export const toApiCar = (car: Car): ApiCar => ({
-  id: car.id,
+  slug: carSlug(car),
   make: car.make,
   model: car.model,
   ...(car.subModel ? { subModel: car.subModel } : {}),
@@ -80,8 +80,6 @@ export const toApiCar = (car: Car): ApiCar => ({
   availability: car.availability,
   ...(car.expectedDelivery ? { expectedDelivery: car.expectedDelivery } : {}),
   sellerUrl: car.sellerUrl,
-  ...(car.evDatabaseUrl ? { evDatabaseUrl: car.evDatabaseUrl } : {}),
-  pagePath: `/#${car.id}`,
 })
 
 export interface CarsPayload {
@@ -105,7 +103,7 @@ export interface CarsPayload {
   notes: {
     range: string
     fastCharge: string
-    paths: string
+    pages: string
   }
   count: number
   cars: Array<ApiCar>
@@ -140,7 +138,7 @@ export const buildCarsPayload = (
   notes: {
     range: `rangeWltpKm is the manufacturer WLTP figure. Real range in Iceland is lower — cold, wind and hills — and usually lands between ${Math.round(realRangeLowFactor * 100)}% and ${Math.round(realRangeHighFactor * 100)}% of it, which is what estimatedRealRangeKm reports. Those are estimates, not measurements.`,
     fastCharge: `minutes10To80 is the time from 10% to 80% on a fast charger. kmPerMinute is the WLTP range that window covers, ${Math.round(chargeWindowShare * 100)}% of it, divided by those minutes.`,
-    paths: 'pagePath is relative to the origin this document was served from.',
+    pages: `Each car has a page at /bill/{slug}, with its review and price history. /samanburdur/{slug}/{slug} compares up to ${MAX_COMPARED} cars side by side. All paths are relative to the origin this document was served from.`,
   },
   count: cars.length,
   cars: cars.map(toApiCar),

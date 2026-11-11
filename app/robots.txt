@@ -1,7 +1,7 @@
 # Veldu Rafbíl — https://github.com/hugihlynsson/veldu-rafbil
 #
-# Nearly all of this site is one public page and one public data file, and both
-# are meant to be read. Crawl them.
+# Nearly all of this site is public pages and public data files, and all of
+# them are meant to be read. Crawl them.
 
 User-Agent: *
 Allow: /
