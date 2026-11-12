@@ -30,12 +30,18 @@ way in; the next run depends on it.
   900.000 kr. Performance package, and its price is derived that way, so when the
   base moves the variant moves with it.
 - **Only 100% electric cars.** The importers' lists are full of hybrids, plug-in
-  hybrids and diesel siblings of the EV. Skip them. Lists also mix in commercial
-  vehicles: cargo vans (Kia PV5 Cargo, Proace) are not in the list, while people
-  carriers (PV5 Passenger, Proace Verso) are. A pickup goes by its cab: a double
-  cab with five seats carries a family as well as a load, and is in the list
-  (KGM Musso EV, JAC T9 EV), while a two-seat single cab is a work truck and is
-  not.
+  hybrids and diesel siblings of the EV. Skip them.
+- **Only passenger cars, EU category M1.** Lists also mix in light commercial
+  vehicles, category N1, and those are not in the list however many seats they
+  have: cargo vans (Kia PV5 Cargo, Proace), crew vans with a bench behind a
+  partition (VW e-Transporter L-shape, Proace Crew Cab L) and pickups, double
+  cab or not (Toyota Hilux, KGM Musso EV, JAC T9 EV, Isuzu D-Max EV, Maxus
+  eTerron 9). The people-carrier version of a van is M1 and is in (PV5
+  Passenger, Proace Verso, eVito Tourer). The owner settled this on
+  2026-11-12. A price list rarely names the category, so look it up: a van's
+  people-carrier version is usually M1, a pickup is N1 unless the maker says
+  otherwise, and a list that prints a price without VAT ("Verð án vsk") is
+  usually selling an N1 to businesses that can reclaim it.
 - **`price` is always the price before the grant, with VAT.** The site
   subtracts the grant itself, so a figure that already has it deducted gets it
   deducted twice. Lists differ in what they print, and nearly all of them label

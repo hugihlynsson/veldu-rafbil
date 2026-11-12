@@ -250,30 +250,15 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'mg-mg4-urban-long-range',
     'hyundai-inster-base',
   ],
-  'jac-t9-ev-base': [
-    'kgm-musso-ev-4wd',
-    'kgm-musso-ev-base',
-    'toyota-hilux-base',
-  ],
   'jeep-avenger-base': [
     'fiat-600e-base',
     'suzuki-e-vitara-4x4-allgrip',
     'toyota-urban-cruiser-active-fwd',
   ],
-  'kgm-musso-ev-base': [
-    'jac-t9-ev-base',
-    'kgm-torres-evx',
-    'leapmotor-c10-design-awd',
-  ],
-  'kgm-musso-ev-4wd': [
-    'jac-t9-ev-base',
-    'toyota-hilux-base',
-    'volkswagen-e-transporter-base',
-  ],
   'kgm-torres-evx': [
     'xpeng-l03-rwd-long-range',
     'renault-scenic-e-tech-ev60',
-    'kgm-musso-ev-base',
+    'volkswagen-id-cross-base',
   ],
   'kia-ev2-standard-range': [
     'ford-puma-base',
@@ -976,11 +961,6 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'byd-sealion-7-base',
     'nissan-ariya-e-4orce',
   ],
-  'toyota-hilux-base': [
-    'jac-t9-ev-base',
-    'kgm-musso-ev-4wd',
-    'kgm-musso-ev-base',
-  ],
   'toyota-proace-city-verso-base': [
     'mercedes-benz-eqt-200',
     'kia-pv5-base',
@@ -989,7 +969,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'toyota-proace-verso-base': [
     'hyundai-staria-electric-base',
     'mercedes-benz-evito-tourer',
-    'volkswagen-e-transporter-base',
+    'mercedes-benz-eqv-300',
   ],
   'toyota-urban-cruiser-active-fwd': [
     'suzuki-e-vitara-4x4-allgrip',
@@ -1055,11 +1035,6 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'polestar-4-long-range-dual-motor',
     'bmw-i3-40-xdrive',
     'audi-a6-e-tron-avant-quattro',
-  ],
-  'volkswagen-e-transporter-base': [
-    'toyota-proace-verso-base',
-    'mercedes-benz-evito-tourer',
-    'jac-t9-ev-base',
   ],
   'volvo-ec40-twin-motor': [
     'bmw-ix1-xdrive-30',

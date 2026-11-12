@@ -1082,28 +1082,6 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     facts: '134c7b0209cc',
     model: 'gemini-3.8-flash, thinking medium',
   },
-  'jac-t9-ev-base': {
-    paragraphs: [
-      'JAC T9 EV er stór, fjórhjóladrifinn pallbíll sem er hugsaður sem vinnuhestur fyrir þá sem þurfa gott pallpláss og fimm sæti í grófari verkefni. Hann ber með sér mikinn svip en glímir við sömu áskoranir og flestir aðrir rafdrifnir pallbílar hvað varðar loftmótstöðu og orkunotkun.',
-      'Helsti styrkleiki hans er fjórhjóladrifið, sem tryggir öruggt grip í snjó, bleytu og á lausamöl. Fyrir vinnusvæði eða staðbundinn rekstur þar sem hægt er að stinga honum í samband yfir nótt leysir hann verkin prýðilega án útblásturs.',
-      'Á langferðum gefur hann hins vegar verulega eftir. Drægnin er með því stysta sem gerist í sínum verðflokki, sérstaklega í vetrarkulda, og hleðslan er afar hæg. Keppinauturinn KGM Musso EV 4WD reynist mun hagstæðari kostur: hann er 740.000 kr. ódýrari, drífur 49 km lengra, hleðslustoppin eru um 35% styttri og honum fylgir rausnarleg tíu ára ábyrgð á rafhlöðunni.',
-      'JAC T9 EV getur hentað ágætlega sem vinnubíll í nærumhverfinu, en til ferðalaga milli landshluta krefst hann mikillar þolinmæði.',
-    ],
-    questions: [
-      'Er hann betri en KGM Musso EV 4WD?',
-      'Er hann aflmeiri en KGM Musso EV 4WD?',
-      'Dugir ódýrari KGM Musso EV í vinnuna?',
-      'Er hann betri kostur en Toyota Hilux?',
-      'Hvaða máli skiptir að vera með 220 kW?',
-      'Hversu hæg er hraðhleðslan í raun?',
-      'Hvernig reynist hann á grófum vinnusvæðum?',
-      'Hvernig virkar fjórhjóladrifið í snjó?',
-      'Hvað rýrnar drægnin mikið í kulda?',
-      'Hversu mikið má setja á pallinn?',
-    ],
-    facts: '7f3a9b33e80b',
-    model: 'gemini-3.8-flash, thinking medium',
-  },
   'jeep-avenger-base': {
     paragraphs: [
       'Jeep Avenger er afar nettur og snaggaralegur smájepplingur, sniðinn fyrir þá sem heillast af grófu útliti vörumerkisins en aka aðallega innanbæjar. Hann er framhjóladrifinn og meðal allra stystu bílanna á markaðnum, sem gerir hann lipran í þéttbýli og þægilegan að leggja í þröng stæði.',
@@ -1126,49 +1104,6 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     facts: '2c42ac9ab86b',
     model: 'gemini-3.8-flash, thinking medium',
   },
-  'kgm-musso-ev-base': {
-    paragraphs: [
-      'KGM Musso EV er rúmlega fimm metra langur, fimm sæta pallbíll sem höfðar einkum til þeirra sem leita að hagnýtum vinnubíl eða stóru palli á hagstæðu verði. Hann sker sig úr sem einn fárra hreinna rafpallbíla á markaðnum í þessum stærðarflokki.',
-      'Helstu kostir hans liggja í burðargetu og áreiðanleika. Hann má draga 1.800 kg, sem er meðal þess mesta miðað við aðra á svipuðu verði, og tíu ára eða einnar milljónar kílómetra ábyrgð á rafhlöðunni er sérlega rífleg og veitir mikla hugarró til langs tíma.',
-      'Stærsti gallinn er að bíllinn er framhjóladrifinn, sem getur reynst erfitt fyrir stóran pallbíl í íslenskum vetraraðstæðum. Hann drífur einnig styttra en flestir og hleður mjög hægt, svo hleðslustopp á langferðum verða óhjákvæmilega löng. Ef fjórhjóladrif er skilyrði kemur KGM Musso EV 4WD til greina, en hann er töluvert dýrari.',
-      'Musso EV er því áhugaverður vinnuhestur fyrir þá sem þurfa mikla dráttargetu og pall, en krefst nokkurra málamiðlana í fannfergi og ferðalögum milli landshluta.',
-    ],
-    questions: [
-      'Borgar sig að taka 4WD-útfærsluna?',
-      'Hvernig er hann miðað við JAC T9 EV?',
-      'Af hverju hann frekar en KGM Torres EVX?',
-      'Hvernig dugar framhjóladrif í snjó?',
-      'Hvernig ræður framhjóladrif við drátt?',
-      'Hvað skerðist drægnin mikið við drátt?',
-      'Hvað tekur hraðhleðsla langan tíma?',
-      'Hvað gildir milljón kílómetra ábyrgðin?',
-      'Hversu mikil er burðargetan á pallinum?',
-      'Er hann nógu sprækur fullhlaðinn?',
-    ],
-    facts: 'a4d0f018dc5e',
-    model: 'gemini-3.8-flash, thinking medium',
-  },
-  'kgm-musso-ev-4wd': {
-    paragraphs: [
-      'KGM Musso EV 4WD er stór, fimm sæta pallbíll með fjórhjóladrifi sem höfðar sérstaklega til þeirra sem leita að hagnýtum vinnubíl fyrir grófari verk og krefjandi vetrarfærð. Hann er meðal allra lengstu bílanna og fyllir skarð sem fáir rafbílar sinna hérlendis.',
-      'Helstu kostir hans snúa að notagildinu. Hann má draga mun þyngri kerrur en flestir keppinautar og fjórhjóladrifið tryggir gott grip við erfiðar aðstæður. Ábyrgðin á rafhlöðunni er sömuleiðis óvenju rausnarleg og með þeim allra lengstu sem sjást, sem veitir mikið öryggi til langs tíma.',
-      'Stærsti gallinn er hins vegar drægnin, en hann drífur mjög stutt og hleður jafnframt afar hægt miðað við aðra bíla á svipuðu verði. Í vetrarkulda eða með þungan farm á króknum verða hleðslustoppin því bæði tíð og löng. Fyrir þá sem geta verið án fjórhjóladrifsins sparar framdrifna útgáfan, KGM Musso EV, heilar 1.700.000 krónur og drífur 41 km lengra.',
-      'Þetta er prýðilegur kostur sem vinnuþjarkur nærri heimahöfn, en síður heppilegur ferðabíll í langakstur á milli landshluta.',
-    ],
-    questions: [
-      'Hvað má hann draga þunga kerru?',
-      'Hvernig er hann miðað við JAC T9 EV?',
-      'Er hann betri kostur en Toyota Hilux?',
-      'Dugir framdrifna útfærslan í snjó?',
-      'Hversu löng er rafhlöðuábyrgðin?',
-      'Hvað skerðist drægnin mikið með kerru?',
-      'Hversu langan tíma tekur hraðhleðsla?',
-      'Hvernig er hann miðað við e-Transporter?',
-      'Hvað ber pallurinn mikla þyngd?',
-      'Hvernig nýtist hann á ójöfnum slóðum?',
-    ],
-    facts: 'ff6cd0ff7162',
-  },
   'kgm-torres-evx': {
     paragraphs: [
       'KGM Torres EVX er millistór jepplingur með hrjúft og kassalaga yfirbragð sem höfðar sérstaklega til fjölskyldna og fólks sem þarf mikið notagildi í hversdagsleikanum. Drægnin dugar vel í daglegan akstur og innanbæjarstúss, en bíllinn sker sig fyrst og fremst úr fyrir rými og áreiðanleika.',
@@ -1182,13 +1117,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hæg er hraðhleðslan á ferðalögum?',
       'Er XPENG L03 betri á langferðum?',
       'Af hverju hann frekar en Renault Scenic?',
-      'Hvernig er hann miðað við KGM Musso EV?',
+      'Hvernig er hann miðað við VW ID. Cross?',
       'Hvað nær 10 ára rafhlöðuábyrgðin yfir?',
       'Hvernig hefur dráttur áhrif á drægnina?',
       'Hvernig nýtast 839 lítrar í skottinu?',
       'Er hann nógu sprækur miðað við stærðina?',
     ],
-    facts: 'ba2c9e69897a',
+    facts: '89b65fb11bc0',
   },
   'kia-ev2-standard-range': {
     paragraphs: [
@@ -4074,27 +4009,6 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er útsýnið aftur úr honum?',
     ],
   },
-  'toyota-hilux-base': {
-    paragraphs: [
-      'Toyota Hilux er pallbíll með tvöföldu húsi, fjórhjóladrifi og plássi fyrir fimm, og þetta er rafútgáfan af honum. Hilux hefur í áratugi verið einn þekktasti vinnubíll heims, frægur fyrir að endast og þola illa meðferð. Rafútgáfan er fyrir þá sem vilja það nafn án dísilvélar, í vinnu í bænum eða í sveitinni.',
-      'Stærsti kosturinn er Toyota sjálft: umboð og verkstæði um allt land og orðspor fyrir áreiðanleika sem fáir ná. Hann má draga 1.600 kg, sem dugar fyrir flestar kerrur, þótt flestir á svipuðu verði dragi meira.',
-      'Gallinn er að hann er dýr, drægnin er mjög stutt, með þeirri stystu á þessu verði, og hann hleður hægt. Með kerru í frosti kemstu ekki langt. KGM Musso EV 4WD er 4.500.000 kr. ódýrari, með 124 km meiri drægni og um 20% styttri hleðslustopp, og JAC T9 EV er 3.800.000 kr. ódýrari og má draga 400 kg meira.',
-      'Hilux er fyrir þá sem treysta merkinu og keyra stuttar vegalengdir, en á pappírnum færðu meira fyrir minna annars staðar.',
-    ],
-    questions: [
-      'Af hverju hann frekar en KGM Musso EV 4WD?',
-      'Er JAC T9 EV betri kostur með kerru?',
-      'Hvað dregur dísilútgáfan miklu meira?',
-      'Hvað kemst hann langt með kerru í frosti?',
-      'Hvað má setja mikla þyngd á pallinn?',
-      'Er hann jafn sterkur og dísil-Hilux?',
-      'Hvernig reynist fjórhjóladrifið í snjó?',
-      'Hvað nær ábyrgðin á rafhlöðunni yfir?',
-      'Er hann með driflæsingu og lágt drif?',
-      'Hvernig er hann í akstri á malarvegum?',
-    ],
-    facts: '0bba74a3d4b6',
-  },
   'toyota-proace-city-verso-base': {
     paragraphs: [
       'Toyota Proace City Verso er fjölnotabíll byggður á sendibíl sem rúmar allt að sjö manns í sæti. Hann er látlaus og hannaður með praktísk not í fyrirrúmi, sem höfðar sérstaklega til stórra fjölskyldna eða þeirra sem þurfa að flytja marga dags daglega.',
@@ -4127,7 +4041,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     questions: [
       'Er Hyundai STARIA Electric betri kostur?',
       'Er Mercedes-Benz eVito Tourer betri?',
-      'Er Volkswagen e-Transporter betri í snjó?',
+      'Borgar sig að fara í Mercedes-Benz EQV?',
       'Er hann of máttlaus fullhlaðinn fólki?',
       'Dugar hann í ferðir milli landshluta?',
       'Er auðvelt að taka aftursætin úr honum?',
@@ -4136,7 +4050,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar framhjóladrifið í hálku?',
       'Hvernig ræður hann við að draga vagn?',
     ],
-    facts: '9f27b947a0f8',
+    facts: 'c1be4c656217',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'toyota-urban-cruiser-active-fwd': {
@@ -4422,28 +4336,6 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hljóðlátur er hann á grófu malbiki?',
       'Hversu hratt hleður hann í miklu frosti?',
     ],
-  },
-  'volkswagen-e-transporter-base': {
-    paragraphs: [
-      'Volkswagen e-Transporter er stór fjölnotabíll byggður á sendibíl, með sætum fyrir allt að fimm. Það sem greinir hann helst frá öðrum sambærilegum bílum er fjórhjóladrifið, sem tryggir öruggt grip í snjó og vetrarfærð á íslenskum vegum.',
-      'Fyrir utan drifið er hann merkjanlega snarpari en flestir keppinautar hans, sem gerir aksturinn liprari bæði í bænum og við framúrakstur. Hann má einnig draga allt að 1.000 kg kerru, sem kemur sér vel í ýmsum verkefnum.',
-      'Helsti gallinn er drægnin. Bíllinn drífur mjög stutt, sem þýðir tíð stopp á langferðum í vetrarkulda, og hann hleður jafnframt hægt. Skottið er einnig óvenju lítið miðað við ytra mál bílsins. Ef hlutverkið er að flytja stóran hóp er Toyota Proace Verso mun rúmbetri valkostur með sæti fyrir allt að níu manns og 41 km meiri drægni, þótt fórna þurfi fjórhjóladrifinu.',
-      'Volkswagen e-Transporter hentar því einkum þeim sem setja fjórhjóladrif og vetraröryggi í fyrsta sæti en keyra mestanpart styttri ferðir dags daglega.',
-    ],
-    questions: [
-      'Hentar hann betur en Toyota Proace Verso?',
-      'Er hægt að fá hann með fleiri en 5 sætum?',
-      'Af hverju er skottið svona lítið?',
-      'Hvernig nýtist fjórhjóladrifið í færðinni?',
-      'Hvernig er hann miðað við JAC T9 EV?',
-      'Hvernig er hann við Mercedes-Benz eVito?',
-      'Hvað þýðir 1.000 kg dráttargeta í reynd?',
-      'Er hann raunverulega svona sprækur?',
-      'Hvað kemst hann langt á veturna?',
-      'Hve hæg er hraðhleðslan í ferðalögum?',
-    ],
-    facts: '6694ad2c0439',
-    model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-ec40-twin-motor': {
     paragraphs: [
