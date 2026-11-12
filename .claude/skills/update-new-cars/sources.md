@@ -22,39 +22,39 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 
 | Make          | Last read  | List dated | Note                                           |
 | ------------- | ---------- | ---------- | ---------------------------------------------- |
-| Audi          | 2026-11-07 | —          |                                                |
-| BMW           | 2026-11-05 | —          |                                                |
+| Audi          | 2026-11-07 | 2026-11-04 | Q4 and Q6; A6 03-18                            |
+| BMW           | 2026-11-05 | 2026-11-04 |                                                |
 | BYD           | 2026-11-03 | 2026-10-30 |                                                |
 | Citroën       | —          | —          | No price published; see 2026-11-10 note        |
 | Fiat          | 2026-11-06 | 2026-01    | 500e unpriced ("Leitið til sölumanna")         |
 | Ford          | 2026-11-10 | 2026-06-22 | Capri; Explorer 06-12, Puma 04-08, Mach-E 2025 |
-| GWM           | 2026-11-06 | —          |                                                |
+| GWM           | 2026-11-06 | 2026-01-20 |                                                |
 | Hongqi        | 2026-11-10 | 2026-10-31 |                                                |
 | Hyundai       | 2026-11-06 | 2026-11    |                                                |
 | JAC           | 2026-11-03 | 2026-10-30 |                                                |
 | Jeep          | 2026-11-06 | —          | Avenger list is the 4xe hybrid only            |
 | KGM           | 2026-11-10 | 2026-10-30 |                                                |
-| Kia           | 2026-11-10 | 2026-11-09 | EV5, EV6 and PV5; EV9 read on 2026-11-06       |
-| Leapmotor     | 2026-11-02 | —          |                                                |
-| Lexus         | 2026-11-10 | —          |                                                |
+| Kia           | 2026-11-12 | 2026-11-09 | EV9 on 11-12; EV5, EV6 and PV5 on 11-10        |
+| Leapmotor     | 2026-11-12 | —          | ÍSBAND page; no dated list                     |
+| Lexus         | 2026-11-12 | —          |                                                |
 | Mazda         | 2026-11-10 | 2026-11-02 |                                                |
 | Mercedes-Benz | 2026-11-05 | —          | CLA 11-10 (list 11-09), VLE 11-11 (list 11-11) |
 | MG            | 2026-11-10 | 2026-10-31 |                                                |
 | Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
 | Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
 | Opel          | —          | —          | No price published; see 2026-11-10 note        |
-| Peugeot       | 2026-11-03 | —          | Model pages; e-Traveller gone 11-12            |
-| Polestar      | 2026-11-10 | 2026-11-05 | Polestar 5; the rest from earlier lists        |
-| Porsche       | 2026-11-05 | —          |                                                |
+| Peugeot       | 2026-11-12 | —          | Read from the model pages                      |
+| Polestar      | 2026-11-12 | 2026-11-05 | Polestar 5; 2, 3 and 4 from 2026-10-29         |
+| Porsche       | 2026-11-12 | 2026-10-30 |                                                |
 | Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
 | Renault       | 2026-11-11 | 2026-11-11 | R4 E-Tech added                                |
-| Škoda         | 2026-11-06 | 2026-11    |                                                |
+| Škoda         | 2026-11-12 | 2026-11-10 | Enyaq; Peaq, Epiq and Elroq 11-09              |
 | Smart         | 2026-11-10 | 2026-11-02 |                                                |
 | Subaru        | 2026-11-10 | 2026-10-31 |                                                |
 | Suzuki        | 2026-11-10 | 2026-10-30 |                                                |
-| Tesla         | 2026-11-10 | —          | Design pages; no dated list                    |
-| Toyota        | 2026-11-10 | —          |                                                |
-| Volkswagen    | 2026-11-11 | 2026-11-10 | ID.3 Neo list of 2026-11-10; ID.3 11-04        |
+| Tesla         | 2026-11-12 | —          | Design pages; no dated list                    |
+| Toyota        | 2026-11-12 | —          |                                                |
+| Volkswagen    | 2026-11-12 | 2026-11-10 | ID.4 and ID.3 Neo; ID.3, ID.7, Polo 11-04      |
 | Volvo         | 2026-11-06 | 2026-10-28 |                                                |
 | XPENG         | 2026-11-10 | 2026-11-02 |                                                |
 
@@ -136,7 +136,7 @@ recent upload to its slug without opening the documents.
 | Subaru        | https://www.subaru.is/verdlisti/                      | **Read.** One combined list on BL's issuu, `hallih/docs/subaru_ver__listi_sept2015lr` (the slug's date is not the list's), run through `scripts/issuu-pages.sh`: ten pages, two per model, the electric three first. "Verð kr." is the price; "M. styrk Orkusjóðs" has the grant off.                                                                                                                                                                                                                                                           |
 | Tesla         | https://www.tesla.com/is_is                           | **Partly.** 403 to WebFetch. The built-in browser shows "Verð frá" for Model Y and Model 3, the entry trims only. `/modely/design` gave financing and upgrade amounts rather than trim prices, and needs clicking through. Other trims are unsettled.                                                                                                                                                                                                                                                                                           |
 | Toyota        | https://www.toyota.is/new-cars/kynningarefni          | **Read.** The list is an iPaper flipbook at `kynningarefni.toyota.is/verdlisti`; run `scripts/ipaper-text.py` on it and search for `RAFMAGN`. One unlabelled "VERÐ": the pre-grant price. It also holds the vans, crew cabs and both Hilux pickups, mild-hybrid and electric; none is in the car list, being N1, but the Proace Verso and Proace City Verso are. The built-in browser refuses this domain.                                                                                                                                      |
-| Volkswagen    | 2026-11-10                                            | 2026-11-10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | ID.3 Neo list of 2026-11-10; ID.3 11-04 |
+| Volkswagen    | `hekla.is/static/files/efni/verdlistar/vw/`           | **Read.** Hekla PDFs on `www.hekla.is/static/files/efni/verdlistar/vw/` (`id3`, `neo`, `id4`, `id7`, `id-polo`), each with a `Last-Modified` header; `pdf text` reads them, "Verð" before "Verð m. styrk". No `id5` or `id-buzz` PDF answers there.                                                                                                                                                                                                                                                                                             |
 
 Hekla is the importer behind Audi, Škoda and Volkswagen, and its static PDFs
 have not needed a browser.
@@ -320,3 +320,14 @@ band below the photo rather than reading the whole page. The Nissan list
 prices the Ariya Evolve 4WD at 8.490.000 while nissan.is says "Verð frá
 8.990.000"; the list was kept. Ford's PDFs are unchanged since June, and their
 `Last-Modified` dates them.
+
+**Read on 2026-11-12**: every price matched, so the sweep changed only
+ranges. Škoda's November lists and VW's ID.4 list print lower WLTP figures
+than the car list had (Epiq 435, ID.4 GTX 521), and Peugeot's model pages give
+the AWD e-3008 500 km and e-5008 467 km, where the list had the
+front-wheel-drive figure. The issuu listing's `documentId` starts with the
+upload time as `yymmddHHMMSS`. BYD's and JAC's Sanity PDF links are
+content-hashed, so a new upload gets a new link, and each answers with a
+`Last-Modified` header. Volvo's electric-cars page now prints a "Verð frá"
+for the EX60 alone, not for the EX40 and EC40. Peugeot's e-308 and e-308 SW
+pages still print no price.
