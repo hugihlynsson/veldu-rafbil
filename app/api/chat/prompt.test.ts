@@ -27,6 +27,18 @@ describe('the assistant system prompt', () => {
     }
   })
 
+  // The card labels it, and an advisor quoting it bare would promise a price
+  // the seller has not set
+  it('marks the price of an expected car, and only that, as an estimate', () => {
+    for (const car of cars) {
+      const marked = lineOf(car)?.includes(
+        `${addDecimalSeparators(car.priceWithGrant)} kr (áætlað verð)`,
+      )
+      expect(marked, car.id).toBe(car.availability === 'expected')
+    }
+    expect(systemPrompt).toContain('Segðu alltaf að verðið sé áætlað')
+  })
+
   // Without them a question about charging was answered from the model's
   // memory, and could disagree with the card beside the chat
   it('gives every car the battery and fast-charge figures its card shows', () => {

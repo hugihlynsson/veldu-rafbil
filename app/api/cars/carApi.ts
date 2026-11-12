@@ -45,7 +45,8 @@ export interface ApiCar {
     kmPerMinute: number
   }
   availability: Availability
-  // Icelandic, e.g. "sumar 2026", and only on an `expected` car
+  // Icelandic, e.g. "sumar 2026", and only on an `expected` car, whose
+  // `price` is an estimate until it arrives
   expectedDelivery?: string
   sellerUrl: string
 }
@@ -102,6 +103,7 @@ export interface CarsPayload {
   }
   notes: {
     range: string
+    availability: string
     fastCharge: string
     pages: string
   }
@@ -137,6 +139,7 @@ export const buildCarsPayload = (
   },
   notes: {
     range: `rangeWltpKm is the manufacturer WLTP figure. Real range in Iceland is lower — cold, wind and hills — and usually lands between ${Math.round(realRangeLowFactor * 100)}% and ${Math.round(realRangeHighFactor * 100)}% of it, which is what estimatedRealRangeKm reports. Those are estimates, not measurements.`,
+    availability: `A car with availability "expected" is not on the road in Iceland yet, and expectedDelivery says when. Its price.list and price.withGrant are estimates that can change until it arrives, and the site labels them so. Say so when you quote one.`,
     fastCharge: `minutes10To80 is the time from 10% to 80% on a fast charger. kmPerMinute is the WLTP range that window covers, ${Math.round(chargeWindowShare * 100)}% of it, divided by those minutes.`,
     pages: `Each car has a page at /bill/{slug}, with its review and price history. /samanburdur/{slug}/{slug} compares up to ${MAX_COMPARED} cars side by side. All paths are relative to the origin this document was served from.`,
   },

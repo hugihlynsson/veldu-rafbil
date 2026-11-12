@@ -2015,6 +2015,7 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-11","slug":"mercedes-benz-vle-300","label":"Mercedes-Benz VLE 300","price":{"from":15300000,"to":14990000}},
   {"date":"2026-11-11","slug":"mercedes-benz-vle-400-4matic","label":"Mercedes-Benz VLE 400 4MATIC","price":{"from":16800000,"to":15990000}},
   {"date":"2026-11-12","slug":"peugeot-e-traveller-base","label":"Peugeot e-Traveller","removed":true},
+  {"date":"2026-11-12","slug":"volkswagen-id-tiguan-pro-4motion","label":"Volkswagen ID. Tiguan Pro 4MOTION","added":true,"price":{"to":7990000},"delivery":{"to":"2027"}},
 ]
 
 export default carChanges

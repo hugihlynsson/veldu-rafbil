@@ -1022,13 +1022,18 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'tesla-model-3-performance',
   ],
   'volkswagen-id-4-gtx': [
+    'volkswagen-id-tiguan-pro-4motion',
     'skoda-elroq-rs',
     'ford-mustang-mach-e-lr-awd',
-    'skoda-enyaq-85x',
   ],
   'volkswagen-id-4-pro-4motion': [
+    'volkswagen-id-tiguan-pro-4motion',
     'ford-explorer-er-awd',
     'xpeng-g6-awd-performance',
+  ],
+  'volkswagen-id-tiguan-pro-4motion': [
+    'volkswagen-id-4-pro-4motion',
+    'skoda-enyaq-85x',
     'hyundai-ioniq-5-long-range-awd',
   ],
   'volkswagen-id-7-gtx': [
