@@ -2021,6 +2021,8 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-11","slug":"mercedes-benz-vle-300","label":"Mercedes-Benz VLE 300","price":{"from":15300000,"to":14990000}},
   {"date":"2026-11-11","slug":"mercedes-benz-vle-400-4matic","label":"Mercedes-Benz VLE 400 4MATIC","price":{"from":16800000,"to":15990000}},
   {"date":"2026-11-11","slug":"volkswagen-e-transporter-base","label":"Volkswagen e-Transporter","added":true,"price":{"to":9990000}},
+  {"date":"2026-11-12","slug":"isuzu-d-max-ev-base","label":"Isuzu D-Max EV","added":true,"price":{"to":13890000}},
+  {"date":"2026-11-12","slug":"maxus-eterron-9-base","label":"Maxus eTerron 9","added":true,"price":{"to":10990000}},
 ]
 
 export default carChanges

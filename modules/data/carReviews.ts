@@ -1061,6 +1061,27 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     facts: '99f6b475a30d',
     model: 'gemini-3.8-flash, thinking medium',
   },
+  'isuzu-d-max-ev-base': {
+    paragraphs: [
+      'Isuzu D-Max EV er rafútgáfan af D-Max, pallbíl með tvöföldu húsi, fjórhjóladrifi og sætum fyrir fimm. Isuzu smíðaði hann til að gera sama gagn og dísilbíllinn, svo hann er fyrir þig ef þú vilt vinnubíl sem þolir sama puð en gengur fyrir rafmagni.',
+      'Stærsti kosturinn er krókurinn: hann má draga 3.500 kg, jafn mikið og dísil-D-Max og mest af öllum á þessu verði. Hestakerra, bátur eða vélavagn eru því engin fyrirstaða, og fjórhjóladrifið hjálpar á malarvegum og í snjó.',
+      'Á móti kemur að hann er dýr, drífur mjög stutt og hleður hægt, svo með kerru aftan í og frost úti kemstu ekki langt á hleðslunni. Maxus eTerron 9 má líka draga 3.500 kg en er 2.900.000 kr. ódýrari, með 167 km meiri drægni og um 55% styttri hleðslustopp. Toyota Hilux er 1.300.000 kr. ódýrari og drífur nánast jafn langt.',
+      'Fínn ef þú dregur þungt og keyrir stuttar leiðir, en á pappírnum er eTerron 9 betri kaup.',
+    ],
+    questions: [
+      'Er Maxus eTerron 9 betri kaup?',
+      'Af hverju hann frekar en Toyota Hilux?',
+      'Hvað kemst hann langt með kerru í frosti?',
+      'Hversu lengi er hann að hraðhlaða?',
+      'Hvað má setja mikla þyngd á pallinn?',
+      'Hvernig reynist fjórhjóladrifið í snjó?',
+      'Er hann jafn sterkur og dísil-D-Max?',
+      'Hvað nær ábyrgðin á rafhlöðunni yfir?',
+      'Er hann með lágt drif og driflæsingu?',
+      'Hver þjónustar Isuzu á Íslandi?',
+    ],
+    facts: '5534d35ca9fb',
+  },
   'jac-e30x-base': {
     paragraphs: [
       'JAC E30X er nettur hlaðbakur í smábílaflokki, hannaður sem lipur borgarbíll. Hann hentar sérlega vel sem annar bíll heimilisins eða fyrir þá sem aka mest innanbæjar og vilja komast á nýjan rafbíl á hagstæðu verði.',
@@ -1087,13 +1108,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'JAC T9 EV er stór, fjórhjóladrifinn pallbíll sem er hugsaður sem vinnuhestur fyrir þá sem þurfa gott pallpláss og fimm sæti í grófari verkefni. Hann ber með sér mikinn svip en glímir við sömu áskoranir og flestir aðrir rafdrifnir pallbílar hvað varðar loftmótstöðu og orkunotkun.',
       'Helsti styrkleiki hans er fjórhjóladrifið, sem tryggir öruggt grip í snjó, bleytu og á lausamöl. Fyrir vinnusvæði eða staðbundinn rekstur þar sem hægt er að stinga honum í samband yfir nótt leysir hann verkin prýðilega án útblásturs.',
-      'Á langferðum gefur hann hins vegar verulega eftir. Drægnin er með því stysta sem gerist í sínum verðflokki, sérstaklega í vetrarkulda, og hleðslan er afar hæg. Keppinauturinn KGM Musso EV 4WD reynist mun hagstæðari kostur: hann er 740.000 kr. ódýrari, drífur 49 km lengra, hleðslustoppin eru um 35% styttri og honum fylgir rausnarleg tíu ára ábyrgð á rafhlöðunni.',
+      'Á langferðum gefur hann hins vegar verulega eftir. Drægnin er með því stysta sem gerist í sínum verðflokki, sérstaklega í vetrarkulda, og hleðslan er afar hæg. Keppinauturinn KGM Musso EV 4WD reynist mun hagstæðari kostur: hann er 740.000 kr. ódýrari, drífur 49 km lengra, hleðslustoppin eru um 35% styttri og honum fylgir rausnarleg tíu ára ábyrgð á rafhlöðunni. Maxus eTerron 9 er 2.200.000 kr. dýrari en drífur 100 km lengra og má draga 3.500 kg.',
       'JAC T9 EV getur hentað ágætlega sem vinnubíll í nærumhverfinu, en til ferðalaga milli landshluta krefst hann mikillar þolinmæði.',
     ],
     questions: [
       'Er hann betri en KGM Musso EV 4WD?',
       'Er hann aflmeiri en KGM Musso EV 4WD?',
-      'Dugir ódýrari KGM Musso EV í vinnuna?',
+      'Borgar sig að taka Maxus eTerron 9?',
       'Er hann betri kostur en Toyota Hilux?',
       'Hvaða máli skiptir að vera með 220 kW?',
       'Hversu hæg er hraðhleðslan í raun?',
@@ -1102,7 +1123,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað rýrnar drægnin mikið í kulda?',
       'Hversu mikið má setja á pallinn?',
     ],
-    facts: '7f3a9b33e80b',
+    facts: '30da36fbda83',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'jeep-avenger-base': {
@@ -1710,6 +1731,27 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     ],
     facts: 'fe950b519ed7',
     model: 'gemini-3.8-flash, thinking medium',
+  },
+  'maxus-eterron-9-base': {
+    paragraphs: [
+      'Maxus eTerron 9 er stór pallbíll með tvöföldu húsi, fimm sætum og fjórhjóladrifi, frá atvinnubílamerki SAIC, sem á líka MG. Hann er hugsaður jafnt sem vinnubíll og fjölskyldubíll, og er fyrir þig ef þú vilt rafmagnspallbíl sem kemst eitthvað.',
+      'Hann sker sig úr hinum rafmagnspallbílunum á flestum sviðum. Rafhlaðan er stærri og aflið meira en hjá flestum á svipuðu verði, og hann má draga 3.500 kg, mest af öllum á þessu verði. Hann drífur líka lengra en hinir: Toyota Hilux er 1.600.000 kr. dýrari og með 175 km minni drægni.',
+      'Gallinn er að á þessu verði er drægnin samt fremur stutt, og stóra rafhlaðan er lengi að fyllast, svo hann hleður hægt á ferðalögum. JAC T9 EV er 2.200.000 kr. ódýrari ef þú sættir þig við 100 km minni drægni og 105 kW minna afl.',
+      'Á pappírnum besti rafmagnspallbíllinn á listanum, ef þú setur ekki fyrir þig lítt þekkt merki.',
+    ],
+    questions: [
+      'Er hann betri kaup en JAC T9 EV?',
+      'Af hverju er Isuzu D-Max EV dýrari?',
+      'Hvað kemst hann langt með kerru?',
+      'Hversu lengi er hann að hraðhlaða?',
+      'Hvað má setja mikla þyngd á pallinn?',
+      'Hvernig reynist fjórhjóladrifið í snjó?',
+      'Hver þjónustar Maxus á Íslandi?',
+      'Hvað nær ábyrgðin á rafhlöðunni yfir?',
+      'Er hann þægilegur sem fjölskyldubíll?',
+      'Hvað styttist drægnin mikið í kulda?',
+    ],
+    facts: 'd6e3e64bf0a1',
   },
   'mazda-6e-long-range': {
     paragraphs: [
@@ -4101,13 +4143,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Toyota Hilux er pallbíll með tvöföldu húsi, fjórhjóladrifi og plássi fyrir fimm, og þetta er rafútgáfan af honum. Hilux hefur í áratugi verið einn þekktasti vinnubíll heims, frægur fyrir að endast og þola illa meðferð. Rafútgáfan er fyrir þá sem vilja það nafn án dísilvélar, í vinnu í bænum eða í sveitinni.',
       'Stærsti kosturinn er Toyota sjálft: umboð og verkstæði um allt land og orðspor fyrir áreiðanleika sem fáir ná. Hann má draga 1.600 kg, sem dugar fyrir flestar kerrur, þótt flestir á svipuðu verði dragi meira.',
-      'Gallinn er að hann er dýr, drægnin er mjög stutt, með þeirri stystu á þessu verði, og hann hleður hægt. Með kerru í frosti kemstu ekki langt. KGM Musso EV 4WD er 4.500.000 kr. ódýrari, með 124 km meiri drægni og um 20% styttri hleðslustopp, og JAC T9 EV er 3.800.000 kr. ódýrari og má draga 400 kg meira.',
+      'Gallinn er að hann er dýr, drægnin er mjög stutt, með þeirri stystu á þessu verði, og hann hleður hægt. Með kerru í frosti kemstu ekki langt. KGM Musso EV 4WD er 4.500.000 kr. ódýrari, með 124 km meiri drægni og um 20% styttri hleðslustopp, og JAC T9 EV er 3.800.000 kr. ódýrari og má draga 400 kg meira. Ef þú dregur mjög þungt má Isuzu D-Max EV draga 3.500 kg, en hann er 1.300.000 kr. dýrari og drífur ekki nema 8 km lengra.',
       'Hilux er fyrir þá sem treysta merkinu og keyra stuttar vegalengdir, en á pappírnum færðu meira fyrir minna annars staðar.',
     ],
     questions: [
       'Af hverju hann frekar en KGM Musso EV 4WD?',
       'Er JAC T9 EV betri kostur með kerru?',
-      'Hvað dregur dísilútgáfan miklu meira?',
+      'Er Isuzu D-Max EV betri í þungan drátt?',
       'Hvað kemst hann langt með kerru í frosti?',
       'Hvað má setja mikla þyngd á pallinn?',
       'Er hann jafn sterkur og dísil-Hilux?',
@@ -4116,7 +4158,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann með driflæsingu og lágt drif?',
       'Hvernig er hann í akstri á malarvegum?',
     ],
-    facts: '0bba74a3d4b6',
+    facts: 'c7685a2c152e',
   },
   'toyota-proace-city-verso-base': {
     paragraphs: [

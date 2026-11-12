@@ -245,6 +245,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'toyota-proace-verso-base',
     'kia-pv5-base',
   ],
+  'isuzu-d-max-ev-base': [
+    'toyota-hilux-base',
+    'maxus-eterron-9-base',
+    'kgm-musso-ev-4wd',
+  ],
   'jac-e30x-base': [
     'leapmotor-b03x-design',
     'mg-mg4-urban-long-range',
@@ -252,7 +257,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'jac-t9-ev-base': [
     'kgm-musso-ev-4wd',
-    'kgm-musso-ev-base',
+    'maxus-eterron-9-base',
     'toyota-hilux-base',
   ],
   'jeep-avenger-base': [
@@ -415,6 +420,11 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'volvo-ex40-recharge-twin',
     'audi-q4-e-tron-45-quattro',
     'mercedes-benz-eqa-suv-300-4matic',
+  ],
+  'maxus-eterron-9-base': [
+    'jac-t9-ev-base',
+    'isuzu-d-max-ev-base',
+    'toyota-hilux-base',
   ],
   'mazda-6e-long-range': [
     'tesla-model-3-afturhjoladrif',
@@ -977,9 +987,9 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'nissan-ariya-e-4orce',
   ],
   'toyota-hilux-base': [
+    'isuzu-d-max-ev-base',
     'jac-t9-ev-base',
     'kgm-musso-ev-4wd',
-    'kgm-musso-ev-base',
   ],
   'toyota-proace-city-verso-base': [
     'mercedes-benz-eqt-200',

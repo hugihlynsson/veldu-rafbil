@@ -31,12 +31,14 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | GWM           | 2026-11-06 | —          |                                                                      |
 | Hongqi        | 2026-11-10 | 2026-10-31 |                                                                      |
 | Hyundai       | 2026-11-06 | 2026-11    |                                                                      |
+| Isuzu         | 2026-11-12 | 2026-10-02 | D-Max EV on BL's issuu; see 2026-11-12 note                          |
 | JAC           | 2026-11-03 | 2026-10-30 |                                                                      |
 | Jeep          | 2026-11-06 | —          | Avenger list is the 4xe hybrid only                                  |
 | KGM           | 2026-11-10 | 2026-10-30 |                                                                      |
 | Kia           | 2026-11-10 | 2026-11-09 | EV5, EV6 and PV5; EV9 read on 2026-11-06                             |
 | Leapmotor     | 2026-11-02 | —          |                                                                      |
 | Lexus         | 2026-11-10 | —          |                                                                      |
+| Maxus         | 2026-11-12 | 2026-03-18 | eTerron 9; see 2026-11-12 note                                       |
 | Mazda         | 2026-11-10 | 2026-11-02 |                                                                      |
 | Mercedes-Benz | 2026-11-05 | —          | CLA 11-10 (list 11-09), VLE 11-11 (list 11-11)                       |
 | MG            | 2026-11-10 | 2026-10-31 |                                                                      |
@@ -300,6 +302,26 @@ Read that way the same day, every Model 3 and Model Y price was unchanged.
   42,2 kWh (hyundai.is names both batteries). Askja's showroom,
   `syningarsalur.askja.is`, lists only an "EV5 AWD", while kia.com's EV5 page
   still describes the front-wheel-drive car.
+
+**Found on 2026-11-12**, commercial makers' people carriers and pickups:
+
+- **Isuzu** (BL): `isuzu.is` has no model pages; `/verdlisti/` embeds BL's
+  issuu document `hallih/docs/isuzu_ver__listi_facelift_18___g__s`, whose
+  page 1 prices the D-Max EV Lux below the diesels. Its 361 km is the city
+  cycle, as Isuzu rates the car at 263 km WLTP combined.
+- **Maxus** (Vatt): `maxus.is` is built like byd.is; each `/typur/<model>`
+  page links a "Verðskrá" PDF on `cdn.sanity.io/files/mcx434c9/production/`
+  that `pdf text` reads. Beside the eTerron 9 it sells the e-Deliver 5 and 7
+  vans, not yet checked for a passenger version.
+- **Ford's vans** are on `ford.is/verdlistar`, beside the cars. The
+  E-Tourneo Custom, eight seats, is in the Tourneo Custom list
+  (`assets.mango.is/media/21/EKHnwu_tourneo_c.pdf`), and `ford.is/bill/tourneo-kombi`
+  is its page. It is not in the car list yet, waiting on a photo:
+  `fromtheroad.ford.com` serves its press photos only to a browser.
+- **No people carrier** in BL's Renault list
+  (`hallih/docs/renault_atvinnub_lar_ver_listi_01.10.2026`: the Kangoo, Trafic
+  and Master E-Tech are two- and three-seat vans), ÍSBAND's Fiat Professional
+  list, Peugeot's e-Partner and e-Expert, or Opel's and Citroën's vans.
 
 **Read on 2026-11-10**: BL reissued its Hongqi, MG, Nissan, Renault and Subaru
 lists on 2026-10-31, KGM and Suzuki theirs on 2026-10-30, and every price
