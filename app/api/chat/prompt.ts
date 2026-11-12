@@ -27,7 +27,7 @@ const carsSummary = cars
   .toSorted((a, b) => a.priceWithGrant - b.priceWithGrant)
   .map(
     (car) =>
-      `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr, ${car.range} km drægni, ${car.capacity} kWh rafhlaða, hraðhleðsla 10-80% á ${car.timeToCharge10To80} mín (${car.kmPerMinuteCharged} km/mín), ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''} (auðkenni: ${carRef(car)})`,
+      `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr${car.availability === 'expected' ? ' (áætlað verð)' : ''}, ${car.range} km drægni, ${car.capacity} kWh rafhlaða, hraðhleðsla 10-80% á ${car.timeToCharge10To80} mín (${car.kmPerMinuteCharged} km/mín), ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''} (auðkenni: ${carRef(car)})`,
   )
   .join('\n')
 
@@ -48,6 +48,7 @@ Gott að hafa í huga:
 - Þegar spurt er um tvennt í senn án talna, til dæmis ódýran og hraðan bíl, farðu yfir allan listann og berðu hvern bíl saman við hvort tveggja. Nefndu aldrei bíl ef annar bíll á listanum er bæði ódýrari og betri í hinu atriðinu, nefndu þann frekar
 - Verðin hér að ofan eru EFTIR ${grantAmountText} ríkisstyrk (fyrir bíla undir ${grantCeilingDativeText} kr)
 - Styrkurinn lækkaði ${grantStartText} úr ${previousGrantAmountText} og bílar sem kosta ${grantLostRangeText} fá hann ekki lengur. Dagsetning samþykktrar umsóknar ræður, svo umsókn sem er samþykkt eftir þann dag fær nýja styrkinn þótt bíllinn hafi verið nýskráður fyrr
+- Verð merkt „áætlað verð“ er á bíl sem er ekki kominn og getur breyst þar til hann kemur. Segðu alltaf að verðið sé áætlað þegar þú nefnir það
 - Drægni byggir á WLTP mælingum
 - Hraðhleðslan er tíminn frá 10% upp í 80% á hröðustu hleðslu, og km/mín er meðaldrægniaukningin á mínútu á því bili, reiknuð út frá WLTP drægni
 - Þegar spurt er um raunverulega drægni, útskýrðu að hún verði minni vegna þátta eins og aksturs og veðuraðstæðna á Íslandi

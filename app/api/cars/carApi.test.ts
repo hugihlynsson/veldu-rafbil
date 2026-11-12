@@ -158,6 +158,7 @@ describe('the published car payload', () => {
     expect(payload.grant.priceCeiling).toBe(grantPriceCeiling)
     expect(payload.grant.note).toContain('price.withGrant')
     expect(payload.notes.range).toContain('WLTP')
+    expect(payload.notes.availability).toContain('estimates')
     expect(payload.disclaimer).toContain('by hand')
   })
 })

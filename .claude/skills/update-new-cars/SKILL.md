@@ -146,9 +146,12 @@ For each electric variant in the list, sort it into one of:
 | Seat option added or dropped  | Edit `seats` (see below)                                     |
 | Estimated price now listed    | Replace the estimate with the list price                     |
 
-**An expected car's price may be an estimate.** Nothing in the data marks one,
-so read the price of every car with `expectedDelivery` off the list rather than
-assuming it is current, and say in the report which estimates were replaced.
+**An expected car's price may be an estimate.** The site calls every expected
+car's price an estimate (the card, the advisor, `/api/cars` and `llms.txt`), but
+nothing in the data says whether it is the importer's figure or one worked out
+under "Estimating a price". So read the price of every car with
+`expectedDelivery` off the list rather than assuming it is current, and say in
+the report which estimates were replaced.
 
 **Removing a car.** A car missing from a price list is not proof it is gone —
 lists get split, renamed and sometimes just not uploaded. Remove one only when
