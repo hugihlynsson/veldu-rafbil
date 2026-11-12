@@ -11,6 +11,22 @@ const formerNames: Readonly<Record<string, keyof NewCar>> = {
   timeToCharge10T080: 'timeToCharge10To80',
 }
 
+// Cars that left the data for never belonging on the list, not for going off
+// sale: the N1 vehicles taken out on 2026-11-12, when the list became M1 only.
+// The history still has them, so a rebuild would otherwise tell the news they
+// came and went.
+export const neverListed: ReadonlySet<string> = new Set([
+  'jac-t9-ev-base',
+  'kgm-musso-ev-4wd',
+  'kgm-musso-ev-base',
+  'toyota-hilux-base',
+  'volkswagen-e-transporter-base',
+])
+
+export const withoutNeverListed = (
+  entries: ReadonlyArray<CarChange>,
+): CarChange[] => entries.filter(({ slug }) => !neverListed.has(slug))
+
 /** A car as one version of newCars.ts had it, under today's field names */
 export type CarVersion = Partial<NewCar> & Pick<NewCar, 'make' | 'model'>
 
