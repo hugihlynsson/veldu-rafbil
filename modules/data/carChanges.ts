@@ -2005,8 +2005,8 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-07","slug":"audi-a2-e-tron-140-kw","label":"Audi A2 e-tron 140 kW","added":true,"price":{"to":7700000},"delivery":{"to":"2027"}},
   {"date":"2026-11-07","slug":"audi-a2-e-tron-170-kw","label":"Audi A2 e-tron 170 kW","added":true,"price":{"to":8900000},"delivery":{"to":"2027"}},
   {"date":"2026-11-07","slug":"audi-a2-e-tron-240-kw","label":"Audi A2 e-tron 240 kW","added":true,"price":{"to":9300000},"delivery":{"to":"2027"}},
-  {"date":"2026-11-07","slug":"volvo-ec40-p8-performance","label":"Volvo EC40 P8 Performance","added":true,"price":{"to":10500000},"delivery":{"to":"snemma 2027"}},
-  {"date":"2026-11-07","slug":"volvo-ex40-p8-performance","label":"Volvo EX40 P8 Performance","added":true,"price":{"to":10500000},"delivery":{"to":"snemma 2027"}},
+  {"date":"2026-11-07","slug":"volvo-ec40-p8-awd","label":"Volvo EC40 P8 Performance","added":true,"price":{"to":10500000},"delivery":{"to":"snemma 2027"}},
+  {"date":"2026-11-07","slug":"volvo-ex40-p8-awd","label":"Volvo EX40 P8 Performance","added":true,"price":{"to":10500000},"delivery":{"to":"snemma 2027"}},
   {"date":"2026-11-10","slug":"kia-pv5-base","label":"Kia PV5","price":{"from":7790777,"to":8690777}},
   {"date":"2026-11-10","slug":"volkswagen-id-3-neo-58-kwh","label":"Volkswagen ID.3 Neo 58 kWh","price":{"from":6390000,"to":6190000}},
   {"date":"2026-11-10","slug":"volkswagen-id-3-neo-79-kwh","label":"Volkswagen ID.3 Neo 79 kWh","added":true,"price":{"to":7490000},"delivery":{"to":"lok 2026"}},
@@ -2015,6 +2015,8 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-11","slug":"mercedes-benz-vle-300","label":"Mercedes-Benz VLE 300","price":{"from":15300000,"to":14990000}},
   {"date":"2026-11-11","slug":"mercedes-benz-vle-400-4matic","label":"Mercedes-Benz VLE 400 4MATIC","price":{"from":16800000,"to":15990000}},
   {"date":"2026-11-12","slug":"peugeot-e-traveller-base","label":"Peugeot e-Traveller","removed":true},
+  {"date":"2026-11-12","slug":"volvo-ec40-p8-awd","label":"Volvo EC40 P8 AWD","renamedFrom":"Volvo EC40 P8 Performance"},
+  {"date":"2026-11-12","slug":"volvo-ex40-p8-awd","label":"Volvo EX40 P8 AWD","renamedFrom":"Volvo EX40 P8 Performance"},
 ]
 
 export default carChanges
