@@ -55,7 +55,7 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Tesla         | 2026-11-12 | —          | Design pages; no dated list                    |
 | Toyota        | 2026-11-12 | —          |                                                |
 | Volkswagen    | 2026-11-12 | 2026-11-10 | ID.4 and ID.3 Neo; ID.3, ID.7, Polo 11-04      |
-| Volvo         | 2026-11-06 | 2026-10-28 |                                                |
+| Volvo         | 2026-11-06 | 2026-10-28 | EX40/EC40 2027.5 P8 AWD unpriced on 11-12      |
 | XPENG         | 2026-11-10 | 2026-11-02 |                                                |
 
 ## Importers with one page for several makes
