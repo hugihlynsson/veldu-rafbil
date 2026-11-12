@@ -241,7 +241,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'tesla-model-y-standard-range',
   ],
   'hyundai-staria-electric-base': [
-    'peugeot-e-traveller-base',
+    'mercedes-benz-evito-tourer',
     'toyota-proace-verso-base',
     'kia-pv5-base',
   ],
@@ -533,8 +533,8 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'mercedes-benz-evito-tourer': [
     'mercedes-benz-eqv-300',
+    'hyundai-staria-electric-base',
     'toyota-proace-verso-base',
-    'peugeot-e-traveller-base',
   ],
   'mg-cyberster-gt': [
     'tesla-model-3-performance',
@@ -987,7 +987,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'hyundai-staria-electric-base',
   ],
   'toyota-proace-verso-base': [
-    'peugeot-e-traveller-base',
+    'hyundai-staria-electric-base',
     'mercedes-benz-evito-tourer',
     'volkswagen-e-transporter-base',
   ],
@@ -1058,7 +1058,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'volkswagen-e-transporter-base': [
     'toyota-proace-verso-base',
-    'peugeot-e-traveller-base',
+    'mercedes-benz-evito-tourer',
     'jac-t9-ev-base',
   ],
   'volvo-ec40-twin-motor': [
