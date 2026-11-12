@@ -1165,7 +1165,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Dugar 750 kg dráttargeta fyrir kerrur?',
       'Er sætishæðin hærri en í venjulegum bíl?',
     ],
-    facts: 'c70108c5ce11',
+    facts: 'c1ce211cf4fd',
   },
   'kia-ev3-standard-range': {
     paragraphs: [
@@ -1404,7 +1404,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Ræður hann vel við 1.500 kg kerru?',
       'Tefrir hæg hraðhleðsla á ferðalögum?',
     ],
-    facts: 'bfd4e27c86d7',
+    facts: '2d2cff7e9f02',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-t03-base': {
@@ -2441,7 +2441,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað drífur hann langt á veturna?',
       'Kemst barnavagn fyrir í skottinu?',
     ],
-    facts: '292aab2f17c3',
+    facts: '408ccc50e6a9',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'nissan-leaf-extended-range': {
@@ -2514,10 +2514,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Opel Grandland AWD er meðalstór jepplingur með fjórhjóladrifi, 4,65 m á lengd, sem leggur áherslu á notagildi og þægindi.',
       'Hann er snöggur, skottið er í meðallagi á þessu verði og hann má draga 1.350 kg.',
-      'Gallinn er að drægni og hleðsla eru aðeins í meðallagi á þessu verði. Systurbíllinn Peugeot e-3008 Dual Motor er 500.000 kr. ódýrari, drífur 33 km lengra og er með 103 l stærra skott, og Subaru Solterra kostar það sama, drífur 17 km lengra og er mun sneggri. Framhjóladrifni Opel Grandland er 400.000 kr. ódýrari og drífur 29 km lengra.',
+      'Gallinn er að drægni og hleðsla eru aðeins í meðallagi á þessu verði. Systurbíllinn Peugeot e-3008 Dual Motor er 500.000 kr. ódýrari, drífur álíka langt og er með 103 l stærra skott, og Subaru Solterra kostar það sama, drífur 17 km lengra og er mun sneggri. Framhjóladrifni Opel Grandland er 400.000 kr. ódýrari og drífur 29 km lengra.',
       'Grandland AWD er prýðilegur fyrir fjölskylduakstur í vetrarfærð, en systurbíllinn frá Peugeot gefur meira fyrir minna.',
     ],
-    facts: '1c7bd1945135',
+    facts: 'd4e5bb1eb5bd',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Af hverju hann frekar en Peugeot e-3008?',
@@ -2600,11 +2600,11 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'peugeot-e-3008-dual-motor': {
     paragraphs: [
       'Peugeot e-3008 Dual Motor er meðalstór jepplingur með fjórhjóladrifi og djörfu útliti, með sérstæðu ökumannsrými, litlu stýri og bogadregnum skjá. Hann höfðar til þeirra sem vilja þægilegan og hljóðlátan fjölskyldubíl sem sker sig úr.',
-      'Í sínum verðflokki drífur hann lengra og er aflmeiri en flestir, og skottið er stærra en hjá flestum.',
-      'Gallinn er að hann hleður hægar en flestir keppinautar hans. Skoda Elroq 85x er 300.000 kr. ódýrari, drífur 45 km lengra, hleður með um 30% styttri stoppum og má draga 450 kg meira, en skottið er 118 l minna. Þurfi ekki fjórhjóladrif fæst framhjóladrifinn Peugeot e-3008 fyrir 500.000 kr. minna, með sömu drægni.',
-      'e-3008 Dual Motor er álitlegur kostur fyrir þá sem meta drægni, rými og franska hönnun ofar hraðri hleðslu.',
+      'Í sínum verðflokki er hann aflmeiri en flestir og skottið er stærra en hjá flestum, en drægnin er aðeins í meðallagi.',
+      'Gallinn er að hann hleður hægar en flestir keppinautar hans. Skoda Elroq 85x er 300.000 kr. ódýrari, drífur 70 km lengra, hleður með um 30% styttri stoppum og má draga 450 kg meira, en skottið er 118 l minna. Þurfi ekki fjórhjóladrif fæst framhjóladrifinn Peugeot e-3008 fyrir 500.000 kr. minna, og hann drífur 25 km lengra.',
+      'e-3008 Dual Motor er álitlegur kostur fyrir þá sem meta afl, rými og franska hönnun ofar drægni og hraðri hleðslu.',
     ],
-    facts: '8d7a10b66e5c',
+    facts: 'b32d53c3098f',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig er hann við Skoda Elroq 85x?',
@@ -2645,7 +2645,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Peugeot e-5008 Dual Motor er stór, sjö sæta jepplingur með fjórhjóladrifi. Hann höfðar sérstaklega til stærri fjölskyldna sem þurfa mikið rými fyrir fólk og farangur ásamt traustu gripi í vetrarfærð.',
       'Helsti styrkur bílsins er innanrýmið, enda er skottið með þeim allra stærstu miðað við bíla á svipuðu verði. Þar fer vel um allan farangur, sem gerir daglegan amstur og ferðalög með börn mun þægilegri. Fjórhjóladrifið kemur sér einnig vel í snjó og á hálum vegum.',
-      'Á móti kemur að bíllinn drífur fremur stutt, hleður hægar en flestir keppinautar og dregur minna en aðrir í þessum stærðarflokki. Hafi fólk bolmagn til að borga 1.100.000 kr. meira býður Skoda Peaq 90x upp á 140 km meiri drægni, um 40% styttri hleðslustopp og 1.000 kg meiri dráttargetu. Sé fjórhjóladrifið hins vegar óþarfi má spara heila milljón með því að velja framhjóladrifinn Peugeot e-5008.',
+      'Á móti kemur að bíllinn drífur fremur stutt, hleður hægar en flestir keppinautar og dregur minna en aðrir í þessum stærðarflokki. Hafi fólk bolmagn til að borga 1.100.000 kr. meira býður Skoda Peaq 90x upp á 146 km meiri drægni, um 40% styttri hleðslustopp og 1.000 kg meiri dráttargetu. Sé fjórhjóladrifið hins vegar óþarfi má spara heila milljón með því að velja framhjóladrifinn Peugeot e-5008.',
       'Bíllinn er því prýðilegur kostur fyrir stórar fjölskyldur sem vilja mikið pláss og fjórhjóladrif á góðu verði, en síður fyrir þá sem aka reglulega langar vegalengdir milli landshluta.',
     ],
     questions: [
@@ -2660,7 +2660,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er skottið nýtilegt með öll sjö sætin?',
       'Er 73 kWh rafhlaða of lítil í svona bíl?',
     ],
-    facts: 'fbb421af8b3d',
+    facts: 'f7e8acdb5458',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'polestar-2-long-range-dual-motor': {
@@ -3291,8 +3291,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'skoda-epiq-55': {
     paragraphs: [
       'Skoda Epiq er lítill jepplingur sem hentar vel sem lipur og sparneytinn bíll í daglegan akstur. Hann byggir á hagnýtri hönnun sem Skoda er þekkt fyrir, þar sem notagildi og aðgengi eru í forgrunni í nettari yfirbyggingu.',
-      'Þótt drægnin sé fremur stutt á heildina litið dregur hann lengra en flestir í sínum verðflokki, og hann er afar ódýr á hvern kílómetra drægni. Hann hleður hraðar en flestir keppinautar og er óvenju snöggur miðað við ódýran bíl, sem gerir hann lipran í umferðinni og styttir stopp á hraðhleðslustöðvum.',
-      'Helsti ókosturinn er að hann er aðeins framhjóladrifinn og í íslenskum vetrarkulda dugar drægnin tæpast í langferðir milli landshluta án þess að gera hlé til að hlaða. Kia EV2 Long Range kostar nánast það sama og býður upp á svipaða drægni, en þar verða hleðslustoppin um 20% lengri og bíllinn er mun aflminni.',
+      'Drægnin er fremur stutt á heildina litið og í meðallagi á þessu verði. Hann hleður hins vegar hraðar en flestir keppinautar og er óvenju snöggur miðað við ódýran bíl, sem gerir hann lipran í umferðinni og styttir stopp á hraðhleðslustöðvum.',
+      'Helsti ókosturinn er að hann er aðeins framhjóladrifinn og í íslenskum vetrarkulda dugar drægnin tæpast í langferðir milli landshluta án þess að gera hlé til að hlaða. Kia EV2 Long Range kostar nánast það sama og drífur 18 km lengra, en þar verða hleðslustoppin um 20% lengri og bíllinn er mun aflminni.',
       'Á heildina litið er Epiq mjög skynsamlegur kostur sem veitir mikla lipurð, sprækan mótor og skjóta hleðslu á lágu verði.',
     ],
     questions: [
@@ -3307,17 +3307,17 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er raunveruleg vetrardrægni?',
       'Dugar hann sem eini bíll heimilisins?',
     ],
-    facts: '1e09a0bf0230',
+    facts: '6bbf58f97856',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'skoda-elroq-85x': {
     paragraphs: [
       'Skoda Elroq 85x er meðalstór jepplingur með fjórhjóladrifi, hagnýtu innanrými og hárri setstöðu, fyrir fjölskyldur sem vilja traustan bíl í vetrarfærð og á ferðalögum.',
       'Hann drífur lengra og hleður hraðar en flestir á svipuðu verði, og má draga 1.800 kg, meira en flestir þeirra.',
-      'Veikleikarnir eru fáir: afl og snerpa eru aðeins í meðallagi, og skottið líka. Peugeot e-3008 Dual Motor kostar 300.000 kr. meira og er með 118 l stærra skott, en drífur 45 km styttra og hleður með um 40% lengri stoppum.',
+      'Veikleikarnir eru fáir: afl og snerpa eru aðeins í meðallagi, og skottið líka. Peugeot e-3008 Dual Motor kostar 300.000 kr. meira og er með 118 l stærra skott, en drífur 70 km styttra og hleður með um 40% lengri stoppum.',
       'Elroq 85x er einn heildstæðasti fjórhjóladrifni bíllinn á sínu verði.',
     ],
-    facts: '02ab6b0d289c',
+    facts: 'fbf784666e75',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að spara og velja 85-gerðina?',
@@ -3351,7 +3351,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Munar mikið um kraftinn miðað við 85x?',
       'Hvernig nýtist aflið í vetrarfærð?',
     ],
-    facts: '19347c3a0b37',
+    facts: '222ec84135ab',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'skoda-enyaq-85x': {
@@ -3380,10 +3380,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Skoda Enyaq RS er sportlegasta útfærsla Enyaq, rúmgóður jepplingur með fjórhjóladrifi og stífari akstri, sem sameinar hagnýtt innanrými og kraftmeira yfirbragð.',
       'Skottið er stærra en hjá flestum á svipuðu verði og hann má draga 2.200 kg, 1.000 kg meira en Enyaq 85X og með því mesta í hans verðflokki.',
-      'Á móti kemur að hann er fremur dýr og drægni og hleðsla eru aðeins í meðallagi. Smart #5 Brabus er 200.000 kr. ódýrari, drífur álíka langt, hleður með um 40% styttri stoppum og er mun sneggri, en má draga 600 kg minna. Náskyldur Volkswagen ID.4 GTX er 2.300.000 kr. ódýrari og drífur 14 km styttra.',
+      'Á móti kemur að hann er fremur dýr og drægni og hleðsla eru aðeins í meðallagi. Smart #5 Brabus er 200.000 kr. ódýrari, drífur álíka langt, hleður með um 40% styttri stoppum og er mun sneggri, en má draga 600 kg minna. Náskyldur Volkswagen ID.4 GTX er 2.300.000 kr. ódýrari og drífur 22 km styttra.',
       'Enyaq RS er fyrir þá sem vilja rúmgóðan jeppling sem dregur hjólhýsi, með sportlegum blæ.',
     ],
-    facts: '6d9caf663a79',
+    facts: 'f5cd672fca18',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borga kraftarnir sig miðað við 85X?',
@@ -3402,10 +3402,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Skoda Peaq 90x er stór sjö sæta jeppi með fjórhjóladrifi, 4,87 m á lengd, sem leggur áherslu á hagnýtt pláss og ferðagetu fyrir stórar fjölskyldur.',
       'Hann er meðal þeirra langdrægustu í sínum verðflokki og hleður hraðar en flestir keppinautar hans. Skottið er eitt það stærsta og hann má draga 2.000 kg, meira en flestir þeirra.',
-      'Gallarnir eru að hann er fremur dýr og hægari en flestir þeirra. Peugeot e-5008 Dual Motor er 1.100.000 kr. ódýrari og tekur líka sjö, en drífur 140 km styttra, hleður hægar og má draga 1.000 kg minna.',
+      'Gallarnir eru að hann er fremur dýr og hægari en flestir þeirra. Peugeot e-5008 Dual Motor er 1.100.000 kr. ódýrari og tekur líka sjö, en drífur 146 km styttra, hleður hægar og má draga 1.000 kg minna.',
       'Peaq 90x er einn sterkasti sjö sæta kosturinn fyrir stórar fjölskyldur sem ferðast um landið.',
     ],
-    facts: 'b0e8be323215',
+    facts: '016b9a95c78f',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Rúmast þrír barnastólar í annarri röð?',
@@ -4137,7 +4137,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er hann í langkeyrslu?',
       'Kemst barnabílstóll fyrir í aftursætinu?',
     ],
-    facts: '8196cca71c35',
+    facts: 'db4ee295b148',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-polo-gti': {
@@ -4274,11 +4274,11 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volkswagen-id-4-gtx': {
     paragraphs: [
       'Volkswagen ID.4 GTX er sportlegasta útgáfa hins þekkta fjölskyldujepplings, með fjórhjóladrifi og meira afli, fyrir þá sem vilja rúmgóðan bíl með auknu viðbragði.',
-      'Hann má draga 1.800 kg, meira en flestir á svipuðu verði, og hann drífur lengra og hleður hraðar en flestir þeirra.',
-      'Að öðru leyti sker hann sig lítið úr meðal keppinautanna. Volkswagen ID.4 Pro 4MOTION er 900.000 kr. ódýrari, líka fjórhjóladrifinn og drífur álíka langt, en má draga 600 kg minna.',
+      'Hann má draga 1.800 kg, meira en flestir á svipuðu verði, og hann er aflmeiri og sneggri en flestir þeirra.',
+      'Að öðru leyti sker hann sig lítið úr meðal keppinautanna. Volkswagen ID.4 Pro 4MOTION er 900.000 kr. ódýrari, líka fjórhjóladrifinn og drífur 15 km lengra, en má draga 600 kg minna.',
       'ID.4 GTX er traustur fjölskyldubíll sem gerir flest vel, en ID.4 Pro 4MOTION gefur meira fyrir peninginn nema dráttargetan skipti máli.',
     ],
-    facts: '2eef76ae6433',
+    facts: 'f7d3d08db5c5',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er hann þess virði umfram Pro 4MOTION?',
