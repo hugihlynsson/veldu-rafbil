@@ -2021,6 +2021,12 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-11","slug":"mercedes-benz-vle-300","label":"Mercedes-Benz VLE 300","price":{"from":15300000,"to":14990000}},
   {"date":"2026-11-11","slug":"mercedes-benz-vle-400-4matic","label":"Mercedes-Benz VLE 400 4MATIC","price":{"from":16800000,"to":15990000}},
   {"date":"2026-11-11","slug":"volkswagen-e-transporter-base","label":"Volkswagen e-Transporter","added":true,"price":{"to":9990000}},
+  {"date":"2026-11-12","slug":"peugeot-e-traveller-base","label":"Peugeot e-Traveller","removed":true},
+  {"date":"2026-11-12","slug":"jac-t9-ev-base","label":"JAC T9 EV","name":"JAC T9 EV","removed":true},
+  {"date":"2026-11-12","slug":"kgm-musso-ev-base","label":"KGM Musso EV","name":"KGM Musso EV","removed":true},
+  {"date":"2026-11-12","slug":"kgm-musso-ev-4wd","label":"KGM Musso EV 4WD","name":"KGM Musso EV","removed":true},
+  {"date":"2026-11-12","slug":"toyota-hilux-base","label":"Toyota Hilux","name":"Toyota Hilux","removed":true},
+  {"date":"2026-11-12","slug":"volkswagen-e-transporter-base","label":"Volkswagen e-Transporter","name":"Volkswagen e-Transporter","removed":true},
 ]
 
 export default carChanges
