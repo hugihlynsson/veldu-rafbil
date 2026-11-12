@@ -20,43 +20,43 @@ prints). Update a make's row whenever you read its list, whether or not
 anything changed. The dates before 2026-11-10 were pieced together from the
 commits and the notes below, so a "—" means nothing recorded, not never.
 
-| Make          | Last read  | List dated | Note                                              |
-| ------------- | ---------- | ---------- | ------------------------------------------------- |
-| Audi          | 2026-11-07 | —          |                                                   |
-| BMW           | 2026-11-05 | —          |                                                   |
-| BYD           | 2026-11-03 | 2026-10-30 |                                                   |
-| Citroën       | —          | —          | No price published; see 2026-11-10 note           |
-| Fiat          | 2026-11-06 | 2026-01    | 500e unpriced ("Leitið til sölumanna")            |
-| Ford          | 2026-11-10 | 2026-06-22 | Capri; Explorer 06-12, Puma 04-08, Mach-E 2025    |
-| GWM           | 2026-11-06 | —          |                                                   |
-| Hongqi        | 2026-11-10 | 2026-10-31 |                                                   |
-| Hyundai       | 2026-11-06 | 2026-11    |                                                   |
-| JAC           | 2026-11-03 | 2026-10-30 |                                                   |
-| Jeep          | 2026-11-06 | —          | Avenger list is the 4xe hybrid only               |
-| KGM           | 2026-11-10 | 2026-10-30 |                                                   |
-| Kia           | 2026-11-10 | 2026-11-09 | EV5, EV6 and PV5; EV9 read on 2026-11-06          |
-| Leapmotor     | 2026-11-02 | —          |                                                   |
-| Lexus         | 2026-11-10 | —          |                                                   |
-| Mazda         | 2026-11-10 | 2026-11-02 |                                                   |
-| Mercedes-Benz | 2026-11-05 | —          | CLA 11-10 (list 11-09), VLE 11-11 (list 11-11)    |
-| MG            | 2026-11-10 | 2026-10-31 |                                                   |
-| Mini          | 2026-11-06 | —          | List lacks the Aceman                             |
-| Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD       |
-| Opel          | —          | —          | No price published; see 2026-11-10 note           |
-| Peugeot       | 2026-11-03 | —          | Read from the model pages; e-Traveller gone 11-12 |
-| Polestar      | 2026-11-10 | 2026-11-05 | Polestar 5; the rest from earlier lists           |
-| Porsche       | 2026-11-05 | —          |                                                   |
-| Range Rover   | 2026-11-06 | 2026-10-14 |                                                   |
-| Renault       | 2026-11-11 | 2026-11-11 | R4 E-Tech added                                   |
-| Škoda         | 2026-11-06 | 2026-11    |                                                   |
-| Smart         | 2026-11-10 | 2026-11-02 |                                                   |
-| Subaru        | 2026-11-10 | 2026-10-31 |                                                   |
-| Suzuki        | 2026-11-10 | 2026-10-30 |                                                   |
-| Tesla         | 2026-11-10 | —          | Design pages; no dated list                       |
-| Toyota        | 2026-11-10 | —          |                                                   |
-| Volkswagen    | 2026-11-11 | 2026-11-10 | ID.3 Neo list of 2026-11-10; ID.3 11-04           |
-| Volvo         | 2026-11-06 | 2026-10-28 |                                                   |
-| XPENG         | 2026-11-10 | 2026-11-02 |                                                   |
+| Make          | Last read  | List dated | Note                                           |
+| ------------- | ---------- | ---------- | ---------------------------------------------- |
+| Audi          | 2026-11-07 | —          |                                                |
+| BMW           | 2026-11-05 | —          |                                                |
+| BYD           | 2026-11-03 | 2026-10-30 |                                                |
+| Citroën       | —          | —          | No price published; see 2026-11-10 note        |
+| Fiat          | 2026-11-06 | 2026-01    | 500e unpriced ("Leitið til sölumanna")         |
+| Ford          | 2026-11-10 | 2026-06-22 | Capri; Explorer 06-12, Puma 04-08, Mach-E 2025 |
+| GWM           | 2026-11-06 | —          |                                                |
+| Hongqi        | 2026-11-10 | 2026-10-31 |                                                |
+| Hyundai       | 2026-11-06 | 2026-11    |                                                |
+| JAC           | 2026-11-03 | 2026-10-30 |                                                |
+| Jeep          | 2026-11-06 | —          | Avenger list is the 4xe hybrid only            |
+| KGM           | 2026-11-10 | 2026-10-30 |                                                |
+| Kia           | 2026-11-10 | 2026-11-09 | EV5, EV6 and PV5; EV9 read on 2026-11-06       |
+| Leapmotor     | 2026-11-02 | —          |                                                |
+| Lexus         | 2026-11-10 | —          |                                                |
+| Mazda         | 2026-11-10 | 2026-11-02 |                                                |
+| Mercedes-Benz | 2026-11-05 | —          | CLA 11-10 (list 11-09), VLE 11-11 (list 11-11) |
+| MG            | 2026-11-10 | 2026-10-31 |                                                |
+| Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
+| Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
+| Opel          | —          | —          | No price published; see 2026-11-10 note        |
+| Peugeot       | 2026-11-03 | —          | Read from the model pages                      |
+| Polestar      | 2026-11-10 | 2026-11-05 | Polestar 5; the rest from earlier lists        |
+| Porsche       | 2026-11-05 | —          |                                                |
+| Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
+| Renault       | 2026-11-11 | 2026-11-11 | R4 E-Tech added                                |
+| Škoda         | 2026-11-06 | 2026-11    |                                                |
+| Smart         | 2026-11-10 | 2026-11-02 |                                                |
+| Subaru        | 2026-11-10 | 2026-10-31 |                                                |
+| Suzuki        | 2026-11-10 | 2026-10-30 |                                                |
+| Tesla         | 2026-11-10 | —          | Design pages; no dated list                    |
+| Toyota        | 2026-11-10 | —          |                                                |
+| Volkswagen    | 2026-11-11 | 2026-11-10 | ID.3 Neo list of 2026-11-10; ID.3 11-04        |
+| Volvo         | 2026-11-06 | 2026-10-28 |                                                |
+| XPENG         | 2026-11-10 | 2026-11-02 |                                                |
 
 ## Importers with one page for several makes
 
@@ -185,10 +185,7 @@ page prints "Fullt verð frá" per trim, before the grant, and links a PDF under
 By 2026-11-03 the pages had moved to `/tegundir/<model>/e-<model>.html`; the
 old URLs redirect there, except `E-Traveller.html`, which is a 404, and the
 menu no longer lists the e-Traveller. The menu lists an e-308 and e-308 SW that
-the car list does not have, with no price on their pages. On 2026-11-12 neither
-the e-Rifter nor the e-Traveller had a page, a PDF, a sitemap entry or a car in
-Brimborg's stock, and both are deprecated. `/sitemap.xml`, fetched from inside
-the site in the built-in browser, lists every model page Peugeot still has.
+the car list does not have, with no price on their pages.
 
 **Not found on 2026-10-31**: Citroën, Opel and Volvo load in the built-in browser
 but print no price on the model page. Porsche's pages come back with no text.

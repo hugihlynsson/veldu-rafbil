@@ -2105,7 +2105,6 @@ const newCars: Array<NewCar> = [
   {
     make: 'Peugeot',
     model: 'e-Traveller',
-    deprecated: '2026-11-03',
     heroImageName: 'peugeot-e-traveller',
     price: 9_790_000,
     sellerUrl: 'https://www.peugeotisland.is/tegundir/E-Traveller.html',
