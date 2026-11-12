@@ -2016,6 +2016,9 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-11","slug":"mercedes-benz-vle-400-4matic","label":"Mercedes-Benz VLE 400 4MATIC","price":{"from":16800000,"to":15990000}},
   {"date":"2026-11-12","slug":"peugeot-e-traveller-base","label":"Peugeot e-Traveller","removed":true},
   {"date":"2026-11-12","slug":"volkswagen-id-tiguan-pro-4motion","label":"Volkswagen ID. Tiguan Pro 4MOTION","added":true,"price":{"to":7990000},"delivery":{"to":"2027"}},
+  {"date":"2026-11-12","slug":"lexus-tz-450e-standard-range","label":"Lexus TZ 450e Standard Range","added":true,"price":{"to":18100000},"delivery":{"to":"snemma 2027"}},
+  {"date":"2026-11-12","slug":"lexus-tz-450e-long-range","label":"Lexus TZ 450e Long Range","added":true,"price":{"to":19900000},"delivery":{"to":"snemma 2027"}},
+  {"date":"2026-11-12","slug":"lexus-tz-550e","label":"Lexus TZ 550e","added":true,"price":{"to":21700000},"delivery":{"to":"snemma 2027"}},
 ]
 
 export default carChanges

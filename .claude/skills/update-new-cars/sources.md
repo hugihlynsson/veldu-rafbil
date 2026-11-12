@@ -36,7 +36,7 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | KGM           | 2026-11-10 | 2026-10-30 |                                                |
 | Kia           | 2026-11-12 | 2026-11-09 | EV9 on 11-12; EV5, EV6 and PV5 on 11-10        |
 | Leapmotor     | 2026-11-12 | —          | ÍSBAND page; no dated list                     |
-| Lexus         | 2026-11-12 | —          |                                                |
+| Lexus         | 2026-11-12 | —          | TZ unpriced; estimated from NL prices          |
 | Mazda         | 2026-11-10 | 2026-11-02 |                                                |
 | Mercedes-Benz | 2026-11-05 | —          | CLA 11-10 (list 11-09), VLE 11-11 (list 11-11) |
 | MG            | 2026-11-10 | 2026-10-31 |                                                |

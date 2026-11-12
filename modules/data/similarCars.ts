@@ -314,7 +314,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'kia-ev9-gt': [
     'hyundai-ioniq-9-long-range-performance-awd',
     'volvo-ex90-twin-motor',
-    'mercedes-benz-vle-300',
+    'lexus-tz-450e-standard-range',
   ],
   'kia-pv5-base': [
     'toyota-proace-city-verso-base',
@@ -395,6 +395,21 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'porsche-macan-4s-electric',
     'audi-sq6-e-tron-base',
     'mercedes-benz-eqe-suv-350-4matic',
+  ],
+  'lexus-tz-450e-standard-range': [
+    'volvo-ex90-twin-motor',
+    'kia-ev9-gt',
+    'hyundai-ioniq-9-long-range-performance-awd',
+  ],
+  'lexus-tz-450e-long-range': [
+    'volvo-ex90-twin-motor-performance',
+    'volvo-ex90-twin-motor',
+    'mercedes-benz-eqs-suv-580-4matic',
+  ],
+  'lexus-tz-550e': [
+    'mercedes-benz-eqs-suv-580-4matic',
+    'volvo-ex90-twin-motor-performance',
+    'kia-ev9-gt',
   ],
   'lexus-ux-300e': [
     'volvo-ex40-recharge-twin',
@@ -487,7 +502,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'range-rover-electric-ev450',
   ],
   'mercedes-benz-eqs-suv-580-4matic': [
-    'range-rover-electric-ev450',
+    'lexus-tz-550e',
     'volvo-ex90-twin-motor-performance',
     'porsche-cayenne-turbo',
   ],
@@ -1109,7 +1124,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'volvo-ex90-twin-motor-performance': [
     'kia-ev9-gt',
     'mercedes-benz-vle-400-4matic',
-    'porsche-cayenne-base',
+    'lexus-tz-450e-long-range',
   ],
   'xpeng-g6-rwd-standard-range': [
     'tesla-model-y-standard-range',
