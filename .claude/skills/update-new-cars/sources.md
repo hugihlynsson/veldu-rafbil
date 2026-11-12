@@ -288,7 +288,13 @@ Read that way the same day, every Model 3 and Model Y price was unchanged.
   2026-11-02. "Verð" is the price; a "sérverð" row (#5 Pulse) is an offer.
 - **Volkswagen**: the ID.3 Neo has its own list, `vw/neo.pdf`, linked from
   the verdlistar page and uploaded on 2026-11-10. `vw/id3.pdf` is still the
-  ID.3 Pro alone, uploaded on 2026-11-04, so both are on sale. The vans are
+  ID.3 Pro alone, uploaded on 2026-11-04, so both are on sale. The ID.
+  Tiguan was added on 2026-11-12 with an estimated price, from its model page
+  `volkswagen.is/is/bilar/id-tiguan.html` (pre-orders open, no price); no
+  `vw/id-tiguan.pdf` answered that day, and `vw/tiguan.pdf` is a 2025
+  placeholder saying there is no list. Check for a list each sweep, and add
+  the Pure and Pro (rear-wheel drive) only if Hekla lists them: it sells the
+  ID.4 with four-wheel drive alone. The vans are
   under `vw-atvinnubilar/`, linked from `volkswagen.is/is/bilar/nyr-transporter.html`.
   Only the five-seat crew van is in the list, from
   `e-transporter_lshape_2026.pdf` (uploaded 2026-09-03), and only the short
