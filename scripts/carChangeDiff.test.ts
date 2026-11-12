@@ -1,10 +1,14 @@
 import { describe, expect, it } from 'vitest'
 
-import type { CarChange } from '@/modules/data/carChanges'
+import carChanges, { type CarChange } from '@/modules/data/carChanges'
+import { allCars } from '@/modules/data/cars'
+import { carSlug } from '@/modules/data/getCarId'
 import {
   diffVersions,
   followRenames,
+  neverListed,
   readVersion,
+  withoutNeverListed,
   type CarVersion,
 } from './carChangeDiff'
 
@@ -171,5 +175,38 @@ describe('followRenames', () => {
       new Map([['a', 'b']]),
     )
     expect(moved.map(({ slug }) => slug)).toEqual(['b~2024-01-01', 'b'])
+  })
+})
+
+describe('neverListed', () => {
+  it('drops their entries and keeps the rest', () => {
+    const entries: CarChange[] = [
+      {
+        date: '2026-10-24',
+        slug: 'toyota-hilux-base',
+        label: 'Toyota Hilux',
+        added: true,
+      },
+      {
+        date: '2026-10-24',
+        slug: 'kia-ev3-long-range',
+        label: 'Kia EV3 Long Range',
+        added: true,
+      },
+    ]
+    expect(withoutNeverListed(entries).map(({ slug }) => slug)).toEqual([
+      'kia-ev3-long-range',
+    ])
+  })
+
+  // A car back in the data would be hidden from the news while it is listed
+  it('names no car in the data', () => {
+    expect(
+      allCars.map(carSlug).filter((slug) => neverListed.has(slug)),
+    ).toEqual([])
+  })
+
+  it('has nothing in the log', () => {
+    expect(carChanges.filter(({ slug }) => neverListed.has(slug))).toEqual([])
   })
 })

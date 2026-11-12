@@ -8,7 +8,8 @@
  * A branch's entries are worked out afresh from where it left main on every
  * run, so it can be run again after each edit and dates them all the day of
  * the last. --rebuild dates each change by the commit that brought it to
- * main, and drops any entry edited by hand.
+ * main, and drops any entry edited by hand, and any for a car in
+ * `neverListed`.
  */
 import { execFileSync } from 'node:child_process'
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
@@ -23,6 +24,7 @@ import {
   diffVersions,
   followRenames,
   readVersion,
+  withoutNeverListed,
   type CarVersion,
 } from './carChangeDiff'
 
@@ -96,7 +98,7 @@ const rebuild = async (): Promise<CarChange[]> => {
     apply(after, date)
   }
   apply(working(), dayOf(new Date()))
-  return entries
+  return withoutNeverListed(entries)
 }
 
 const exists = (name: string) => {
