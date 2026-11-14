@@ -5,7 +5,6 @@ import Link from 'next/link'
 
 import Logo from './Logo'
 import { useListHref } from '@/utils/listReturn'
-import prefersReducedMotion from '@/utils/prefersReducedMotion'
 
 /**
  * The footer's wordmark, leading where the one atop the page does: back to the
@@ -15,13 +14,12 @@ import prefersReducedMotion from '@/utils/prefersReducedMotion'
 const FooterLogo: FunctionComponent = () => {
   const listHref = useListHref()
 
+  // On the list the remembered search may be older than the one in the URL,
+  // since it is kept only on leaving, so following the link could change it
   const scrollUpOnList = (event: MouseEvent<HTMLAnchorElement>) => {
     if (window.location.pathname !== '/') return
     event.preventDefault()
-    window.scrollTo({
-      top: 0,
-      behavior: prefersReducedMotion() ? 'auto' : 'smooth',
-    })
+    window.scrollTo(0, 0)
   }
 
   return (
