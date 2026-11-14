@@ -75,7 +75,7 @@ describe('specRows', () => {
     const cells = row('towing', car({ towing: 2500 }), car({}))?.cells
     expect(cells?.[0]).toMatchObject({
       text: '2.500 kg',
-      detail: 'hemlaður vagn',
+      detail: 'Hemluð',
     })
     expect(cells?.every((cell) => !cell.best)).toBe(true)
   })

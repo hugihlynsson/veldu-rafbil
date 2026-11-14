@@ -90,7 +90,7 @@ const specs = {
       if (car.towing === 0) return 'Enginn krókur'
       return `${addDecimalSeparators(car.towing)} kg`
     },
-    detail: (car) => (car.towing ? 'hemlaður vagn' : undefined),
+    detail: (car) => (car.towing ? 'Hemluð' : undefined),
   },
 } satisfies Record<string, Spec>
 
