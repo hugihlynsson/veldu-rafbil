@@ -9,7 +9,6 @@ import {
   filterUrlKeys,
   filtersFromFields,
   normalizeFilters,
-  towingOptions,
 } from './filters'
 import type { Filters } from './filters'
 import { getFiltersFromQuery, serializeFilters } from './query'
@@ -290,20 +289,17 @@ describe('the filter modal fields', () => {
     expect(filtersFromFields(fields)).toEqual({})
   })
 
+  // A trailer's own weight, typed in, as a link would carry it
+  it('reads a towing weight as typed, in whole kg', () => {
+    expect(filtersFromFields({ towing: '1250' })).toEqual({ towing: 1250 })
+    expect(filtersFromFields({ towing: '1249.5' })).toEqual({ towing: 1250 })
+    expect(fieldsFromFilters({ towing: 1250 })).toEqual({ towing: '1250' })
+  })
+
   it('trims what is typed around the names', () => {
     expect(filtersFromFields({ name: ' Tesla ,Kia, ' })).toEqual({
       name: ['Tesla', 'Kia'],
     })
-  })
-})
-
-describe('towingOptions', () => {
-  // An option that leaves no car is one nobody can use
-  it('each leaves cars, fewer than the one before', () => {
-    const counts = towingOptions.map((towing) => matches({ towing }))
-    expect(counts.every((count) => count > 0)).toBe(true)
-    expect(new Set(counts).size).toBe(counts.length)
-    expect(counts).toEqual(counts.toSorted((a, b) => b - a))
   })
 })
 

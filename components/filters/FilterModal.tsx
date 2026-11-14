@@ -1,12 +1,10 @@
 import React, { useRef, useState } from 'react'
 
 import cars from '@/modules/data/cars'
-import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import {
   fieldFromFilter,
   fieldsFromFilters,
   filtersFromFields,
-  towingOptions,
   type FilterFields,
   type FilterKey,
   type Filters,
@@ -75,16 +73,13 @@ const fields: { [Key in FilterKey]-?: Field } = {
       ['7', '7+'],
     ],
   },
+  // A number rather than steps, so a trailer's own weight can be typed in
   towing: {
-    kind: 'select',
+    kind: 'input',
     label: 'Dráttargeta',
-    options: [
-      ['', 'Skiptir ekki máli'],
-      ...towingOptions.map((kg): [string, string] => [
-        String(kg),
-        `${addDecimalSeparators(kg)}+ kg`,
-      ]),
-    ],
+    hint: 'Lágmark, kg',
+    type: 'number',
+    placeholder: '1500',
   },
   availability: {
     kind: 'select',

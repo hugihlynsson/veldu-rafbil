@@ -158,12 +158,6 @@ export const filterDefinitions = {
   }),
 }
 
-/**
- * The towing minimums the filter modal offers, in kg: what people tow, from
- * a small trailer to a heavy caravan, rather than where the cars stand
- */
-export const towingOptions = [750, 1000, 1500, 2000, 2500]
-
 export type FilterKey = keyof typeof filterDefinitions
 
 type ValueRead<Definition> =
