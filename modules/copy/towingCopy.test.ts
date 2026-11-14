@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest'
 
-import { towingText } from './towingCopy'
+import { towingFigure, towingText } from './towingCopy'
+
+describe('towingFigure', () => {
+  it('tells a figure from no towbar and from no figure at all', () => {
+    expect(towingFigure(1500)).toBe('1.500 kg')
+    expect(towingFigure(0)).toBe('Enginn krókur')
+    expect(towingFigure(null)).toBe('Óþekkt')
+  })
+})
 
 describe('towingText', () => {
   it('gives the figure in kg', () => {

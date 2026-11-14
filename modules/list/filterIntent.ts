@@ -68,6 +68,33 @@ export const readNumber = (raw: string, preferDecimal = false): number =>
 export const within = (value: number, min: number, max: number) =>
   Number.isFinite(value) && value >= min && value <= max
 
+// Below the lightest a car tows and above what the EU allows one. Shared with
+// the filter suggestions, so a number reads as towing in both or in neither.
+export const MIN_TOWING = 300
+export const MAX_TOWING = 3500
+
+/** A towing weight in kg, where a number under ten can only be tonnes */
+export const readTowing = (raw: string): number | undefined => {
+  const value = readNumber(raw, true)
+  const kg = Math.round(value < 10 ? value * 1000 : value)
+  return within(kg, MIN_TOWING, MAX_TOWING) ? kg : undefined
+}
+
+// What makes a weight in kg one to tow rather than the car's own. Not "bat"
+// as a stem, which "batterí" begins with.
+const towingWords = new RegExp(
+  String.raw`${START}(?:drag\w*|dreg\w*|dratt\w*|krok\w*|kerr\w*|hjolhys\w*|fellihys\w*|tjaldvag\w*|eftirvag\w*|hestaker\w*|bat|batur|batinn|batnum|bats|batar|batana)${END}`,
+  'u',
+)
+
+// What may stand between a towing word and its number: bounds and little
+// else, so "dráttarkrókur og 500 lítra skott" is not read as towing
+const TOWING_GAP =
+  'minnst|lagmark|yfir|amk|ad|minnsta|kosti|um|ca|sirka|allt|upp|i|er|undir|hamark|max|mesta|lagi|meira|minna|en'
+
+// A number followed by one of these is some other figure's
+const OTHER_UNIT = String.raw`(?:km|kilometr\w*|kr|kronur\w*|isk|kwh|kw|ho|hestofl\w*|hp|ps|litr\w*|l|sek\w*|s|saet\w*|manna|manns|milljon\w*|miljon\w*|millj\w*|m|mkr|thus\w*)`
+
 // What a rule has read is blanked with this rather than cut, so later indices
 // still hold
 const READ = '\u0000'
@@ -230,7 +257,7 @@ const fillerWords = new Set(
   mesta lagi upp ekki innan verd verdi kostar kosta budget draegni saeti
   saeta saetum drif drifi hrodun sek hledsla hradhledsla hradhledslu km
   kilometra manna tharf bara rafmagns bilarnir bilana kg kilo kiloa tonn
-  tonnum drattargeta drattargetu
+  tonnum
   `
     .trim()
     .split(/\s+/),
@@ -253,6 +280,7 @@ export interface ParsedIntent {
  */
 export const parseFilterIntent = (text: string): ParsedIntent => {
   let rest = foldText(text.slice(0, MAX_INTENT_LENGTH))
+  const aboutTowing = towingWords.test(rest)
   const filters: Filters = {}
   const drives: Drive[] = []
   const names: Array<{ index: number; entry: NameEntry }> = []
@@ -308,17 +336,32 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
     () => set('seats', 7),
   )
 
-  // A weight is what the car must tow, and "1,5 tonn" can only mean a tonne
-  // and a half. There is no filter for the most a car tows, so "undir 1000
-  // kg" is read and dropped. Not "kilo" alone, which "kilometra" begins with.
+  // "dregur 1500" or "dráttargeta minnst 2000", the unit left out or not.
+  // There is no filter for the most a car tows, so "undir 1000" is read and
+  // dropped.
   take(
-    String.raw`${START}${NUM}\s*(kg|kilo(?:a|in|um|gr\w*)?|tonn\w*)${END}`,
+    String.raw`${START}(?:drag\w*|dreg\w*|dratt\w*)(?:[\s:]+(?:${TOWING_GAP})){0,3}[\s:]+${NUM}${END}(?!\s*${OTHER_UNIT}${END})`,
     (match, before) => {
+      const [text, raw] = match
+      const min = readTowing(raw)
+      if (min === undefined) return false
+      if (boundBefore(before + text.slice(0, -raw.length)) !== 'upper')
+        set('towing', min)
+    },
+  )
+
+  // A weight is only a weight to tow where the request is about towing, as
+  // "um 1500 kg" alone is the car's own. "1,5 tonn" can only mean a tonne and
+  // a half. Not "kilo" alone, which "kilometra" begins with.
+  take(
+    String.raw`${START}${NUM}\s*(kg|kilo(?:a|in|um|gr\w*)?|tonn\w*)${END}(?:\s+dratt\w*)?`,
+    (match, before) => {
+      if (!aboutTowing) return false
       const tonnes = (match[2] ?? '').startsWith('tonn')
       const min = Math.round(
         parseNumber(match[1], tonnes) * (tonnes ? 1000 : 1),
       )
-      if (!within(min, 100, 3500)) return false
+      if (!within(min, MIN_TOWING, MAX_TOWING)) return false
       if (boundBefore(before) !== 'upper') set('towing', min)
     },
   )
@@ -369,18 +412,6 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
       const min = parseNumber(raw)
       if (!within(min, 50, 1500)) return false
       set('range', min)
-    },
-  )
-
-  // "dregur 1500" or "dráttargeta minnst 2000", with the unit left out
-  take(
-    String.raw`${START}(?:drag\w*|dreg\w*|dratt\w*)\s+(?:\p{L}+\s+){0,3}${NUM}${END}`,
-    (match, before) => {
-      const [text, raw] = match
-      const min = parseNumber(raw)
-      if (!within(min, 300, 3500)) return false
-      if (boundBefore(before + text.slice(0, -raw.length)) !== 'upper')
-        set('towing', min)
     },
   )
 

@@ -94,7 +94,7 @@ export const intentCases: IntentCase[] = [
     expect: { towing: 2000 },
   },
   {
-    text: '7 sæti og 2 tonn',
+    text: '7 sæti og 2 tonna dráttargeta',
     kind: 'literal',
     expect: { seats: 7, towing: 2000 },
   },
@@ -271,6 +271,14 @@ export const intentCases: IntentCase[] = [
     expect: { towing: { oneOf: ['caravan', 'heavy'] } },
   },
   { text: 'með hjólagrind', kind: 'vague', expect: {} },
+  { text: 'dráttargeta', kind: 'vague', expect: { towing: 'any' } },
+  // A number by a towing word that is some other figure, or a car's own weight
+  {
+    text: 'dráttarkrókur og 500 lítra skott',
+    kind: 'vague',
+    expect: { towing: { oneOf: ['small_trailer'] } },
+  },
+  { text: 'léttur bíll, um 1500 kg', kind: 'number', expect: {} },
   {
     text: 'fyrir sveitina, mikið um malarvegi og snjó',
     kind: 'vague',

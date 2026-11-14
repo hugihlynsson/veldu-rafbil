@@ -135,9 +135,11 @@ sets is what it has to stop, which is what its hourly budget is for.
   whole car list, and the provider's prompt caching only hits on an identical
   prefix.
 - **A model never writes a filter value.** The parser reads what a request
-  states outright, for free; a model only picks from options cut from the car
-  data or from the numbers the request gives. A suggestion is tapped, or
-  sent from the bar's button once that shows how many cars it leaves, never
+  states outright, for free; a model only picks from options written in the
+  code or from the numbers the request gives. Options about where cars stand,
+  like "cheap", are cut from the car data so they move with it; ones about
+  something else, like a caravan's weight, are fixed. A suggestion is tapped,
+  or sent from the bar's button once that shows how many cars it leaves, never
   applied for you, since a wrong filter quietly empties the list.
 
 ## Published data

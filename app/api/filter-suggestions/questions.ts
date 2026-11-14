@@ -6,7 +6,7 @@ import type {
 
 import type { FilterKey, FilterValue } from '@/modules/list/filters'
 import cars, { type Car } from '@/modules/data/cars'
-import { readNumber, within } from '@/modules/list/filterIntent'
+import { readNumber, readTowing, within } from '@/modules/list/filterIntent'
 
 export interface Option<Key extends FilterKey> {
   label: string
@@ -70,7 +70,7 @@ const theNumber = (text: string) =>
 // The parser's bounds for each unit, so a number is offered to a filter only
 // where it would have read it with the unit written out
 const statedNumber =
-  <Key extends 'range' | 'towing' | 'acceleration' | 'value'>(
+  <Key extends 'range' | 'acceleration' | 'value'>(
     [min, max]: [number, number],
     label: (value: number) => string,
     description: (value: number) => string,
@@ -268,12 +268,16 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
             'A large caravan, a heavy boat or a heavy load: at least 2,000 kg on a braked trailer',
         },
       ],
-      fromNumber: statedNumber(
-        [300, 3500],
-        (min) => `at_least_${min}_kg`,
-        (min) =>
-          `as the weight the car must tow: at least ${min} kg on a braked trailer`,
-      ),
+      // Read as the parser reads a towing number, so "1,5" is a tonne and a half
+      fromNumber: (text) => {
+        const min = readTowing(text)
+        if (min === undefined) return undefined
+        return {
+          label: `at_least_${min}_kg`,
+          value: min,
+          description: `${theNumber(text)} as the weight the car must tow: at least ${min} kg on a braked trailer`,
+        }
+      },
     },
     acceleration: {
       key: 'acceleration',

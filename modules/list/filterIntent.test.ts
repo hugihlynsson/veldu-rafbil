@@ -4,9 +4,12 @@ import cars from '@/modules/data/cars'
 import carFilter from './carFilter'
 import {
   MAX_INTENT_LENGTH,
+  MAX_TOWING,
+  MIN_TOWING,
   needsModel,
   parseFilterIntent,
   readsAsQuestion,
+  readTowing,
 } from './filterIntent'
 
 const read = (text: string) => parseFilterIntent(text).filters
@@ -144,6 +147,42 @@ describe('parseFilterIntent', () => {
     })
   })
 
+  it('reads a towing weight however it is written', () => {
+    expect(read('1500 kg dráttargeta')).toEqual({ towing: 1500 })
+    expect(read('dráttargeta að minnsta kosti 1800')).toEqual({ towing: 1800 })
+    expect(read('getur dregið 1,5 tonn')).toEqual({ towing: 1500 })
+    expect(read('dregur 1.600 kg')).toEqual({ towing: 1600 })
+    expect(read('kerra 750 kg')).toEqual({ towing: 750 })
+  })
+
+  // "dráttargeta 2" says nothing else
+  it('reads a towing number under ten as tonnes', () => {
+    expect(read('dráttargeta 1,5')).toEqual({ towing: 1500 })
+  })
+
+  // A misread is offered as certain, and a wrong filter empties the list
+  it('reads no towing from a number that is some other figure', () => {
+    for (const text of [
+      'dráttarkrókur og 500 lítra skott',
+      'dráttarkrók og 400 hestöfl',
+      'dregur vel og kostar 2000',
+      'léttur bíll, um 1500 kg',
+      'burðargeta 500 kg',
+      '150 kg á þakið',
+    ]) {
+      expect(read(text).towing, text).toBeUndefined()
+    }
+  })
+
+  it('drops a towing ceiling, as no filter holds one', () => {
+    expect(read('dráttargeta undir 1000 kg')).toEqual({})
+  })
+
+  // Unlike "drægni", which every car has: plenty tow nothing
+  it('leaves "dráttargeta" alone for a model', () => {
+    expect(parseFilterIntent('dráttargeta').unread).toEqual(['drattargeta'])
+  })
+
   it('reads 0-100 as the sprint, not as two numbers', () => {
     expect(parseFilterIntent('0-100 á 5 sek')).toEqual({
       filters: { acceleration: 5 },
@@ -195,5 +234,23 @@ describe('readsAsQuestion', () => {
     expect(readsAsQuestion('Erum fimm í fjölskyldunni')).toBe(false)
     expect(readsAsQuestion('Má ekki kosta meira en 6.000.000')).toBe(false)
     expect(readsAsQuestion('Er að leita að jeppa sem dregur kerru')).toBe(false)
+  })
+})
+
+// The parser and the suggestions both read towing through this, so one bound
+// cannot drift from the other
+describe('readTowing', () => {
+  it('takes a number between the bounds, in kg or tonnes', () => {
+    expect(readTowing(String(MIN_TOWING))).toBe(MIN_TOWING)
+    expect(readTowing(String(MAX_TOWING))).toBe(MAX_TOWING)
+    expect(readTowing(String(MIN_TOWING - 1))).toBeUndefined()
+    expect(readTowing(String(MAX_TOWING + 1))).toBeUndefined()
+    expect(readTowing('1,5')).toBe(1500)
+    expect(readTowing('1.500')).toBe(1500)
+  })
+
+  it('reads a weight with its unit by the same bounds', () => {
+    expect(read(`${MIN_TOWING - 1} kg kerra`)).toEqual({})
+    expect(read(`${MIN_TOWING} kg kerra`)).toEqual({ towing: MIN_TOWING })
   })
 })
