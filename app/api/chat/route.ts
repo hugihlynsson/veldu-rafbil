@@ -1,4 +1,7 @@
-import { google } from '@ai-sdk/google'
+import {
+  openai,
+  type OpenAILanguageModelResponsesOptions,
+} from '@ai-sdk/openai'
 import { getMessageText } from '@/modules/chat/message'
 import { chatRateLimit } from '@/modules/rateLimit'
 import {
@@ -44,11 +47,17 @@ export async function POST(req: Request) {
 
   try {
     return await streamChat({
-      model: google(modelName),
+      model: openai(modelName),
       messages,
       providerOptions: {
-        // Every answer waits on the thinking before its first visible token
-        google: { thinkingConfig: { thinkingLevel: 'low' } },
+        openai: {
+          // Every answer waits on the thinking before its first visible token
+          reasoningEffort: 'medium',
+          // Otherwise a summary of the thinking is streamed to the visitor
+          reasoningSummary: null,
+          // Sends every answer to the same cache, as they share the prefix
+          promptCacheKey: 'chat',
+        } satisfies OpenAILanguageModelResponsesOptions,
       },
       onFinish: (finish) => {
         outcome ??= { finish }

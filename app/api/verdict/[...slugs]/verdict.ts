@@ -1,4 +1,7 @@
-import { google } from '@ai-sdk/google'
+import {
+  openai,
+  type OpenAILanguageModelResponsesOptions,
+} from '@ai-sdk/openai'
 import { streamText, type LanguageModelUsage } from 'ai'
 import { createHash } from 'node:crypto'
 import { unstable_cache } from 'next/cache'
@@ -21,9 +24,9 @@ const ordered = (cars: ReadonlyArray<Car>) =>
   cars.toSorted((a, b) => carSlug(a).localeCompare(carSlug(b)))
 
 // Medium, as the reviews are written: whoever first opens a set of cars waits
-// on every token of its thinking. On three sets, high took 16-29 s against
-// medium's 13-17 s, for verdicts no better to read
-const thinkingLevel = 'medium'
+// on every token of its thinking. On Gemini 3.8 Flash, high took 16-29 s on
+// three sets against medium's 13-17 s, for verdicts no better to read
+const reasoningEffort = 'medium'
 
 /**
  * Everything the model is given, hashed: a verdict lasts as long as the
@@ -33,7 +36,7 @@ const thinkingLevel = 'medium'
 const keyOf = (cars: ReadonlyArray<Car>): string => {
   const { system, prompt } = verdictPrompt(ordered(cars))
   return createHash('sha256')
-    .update(`${advisorModel} ${thinkingLevel}\n${system}\n${prompt}`)
+    .update(`${advisorModel} ${reasoningEffort}\n${system}\n${prompt}`)
     .digest('hex')
 }
 
@@ -119,11 +122,14 @@ const write = async (
 
   const answer = async () => {
     const result = streamText({
-      model: google(advisorModel),
+      model: openai(advisorModel),
       system,
       prompt: `${prompt}\n\n${verdictDetails(pages)}`,
       providerOptions: {
-        google: { thinkingConfig: { thinkingLevel } },
+        openai: {
+          reasoningEffort,
+          reasoningSummary: null,
+        } satisfies OpenAILanguageModelResponsesOptions,
       },
       maxOutputTokens: 16_384,
       abortSignal,
@@ -142,8 +148,8 @@ const write = async (
   }
 
   let result = await answer()
-  // Gemini stops an answer as a content filter now and then, for a set of
-  // cars the same request writes a verdict for on the next try
+  // A content filter stops an answer now and then, for a set of cars the same
+  // request writes a verdict for on the next try
   if ((await result.finishReason) === 'content-filter') {
     usage.blocked = {
       reason: await result.rawFinishReason,

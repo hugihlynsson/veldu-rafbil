@@ -26,7 +26,10 @@ import { execFileSync } from 'node:child_process'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
-import { google } from '@ai-sdk/google'
+import {
+  openai,
+  type OpenAILanguageModelResponsesOptions,
+} from '@ai-sdk/openai'
 import { generateText, type LanguageModelUsage } from 'ai'
 
 import cars, { type Car } from '@/modules/data/cars'
@@ -53,11 +56,10 @@ import { pagesToRead, type PageCache } from './evDatabaseCache'
 
 const file = path.join(__dirname, '../modules/data/carReviews.ts')
 
-// Written once per car and kept, so it can think longer than the chat, whose
-// every answer waits on its thinking. Medium rather than high: the gaps and
-// standings are worked out in code, and high spent about twice the tokens
-// and time on thinking for reviews no better to read
-const thinkingLevel = 'medium'
+// Medium rather than high: the gaps and standings are worked out in code, and
+// on Gemini 3.8 Flash high spent about twice the tokens and time on thinking
+// for reviews no better to read
+const reasoningEffort = 'medium'
 const CONCURRENCY = 4
 // Pages from ev-database at once, which is no one's to hammer
 const PAGE_CONCURRENCY = 6
@@ -66,9 +68,18 @@ const MIN_WORDS = 70
 // Asked for QUESTION_COUNT: a few too long for a pill are left out, more is
 // a prompt the model is not following
 const MIN_QUESTIONS = QUESTION_COUNT - 2
-// Low left an ungrammatical question in about one car in five, and a
-// question costs a fraction of its review either way
-const questionsThinkingLevel = 'medium'
+// On Gemini 3.8 Flash, low left an ungrammatical question in about one car in
+// five, and a question costs a fraction of its review either way
+const questionsReasoningEffort = 'medium'
+
+const options = (
+  effort: OpenAILanguageModelResponsesOptions['reasoningEffort'],
+) => ({
+  openai: {
+    reasoningEffort: effort,
+    reasoningSummary: null,
+  } satisfies OpenAILanguageModelResponsesOptions,
+})
 // A car added or repriced puts itself and a few neighbours out of date. A
 // change to the grant puts nearly every one, at a billed minute each, and a
 // run that size is asked for with --due rather than walked into
@@ -227,12 +238,10 @@ const write = async (
 ): Promise<{ review: CarReview; usage: LanguageModelUsage }> => {
   const { system, prompt } = reviewPrompt(car, details)
   const result = await generateText({
-    model: google(advisorModel),
+    model: openai(advisorModel),
     system,
     prompt,
-    providerOptions: {
-      google: { thinkingConfig: { thinkingLevel } },
-    },
+    providerOptions: options(reasoningEffort),
     maxOutputTokens: 16_384,
     abortSignal: AbortSignal.timeout(300_000),
   })
@@ -249,7 +258,7 @@ const write = async (
     paragraphs,
     questions: [],
     facts: reviewFactsKey(car),
-    model: `${advisorModel}, thinking ${thinkingLevel}`,
+    model: `${advisorModel}, thinking ${reasoningEffort}`,
   }
   const questions = await writeQuestions(car, review)
   return {
@@ -264,12 +273,10 @@ const writeQuestions = async (
 ): Promise<{ questions: string[]; usage: LanguageModelUsage }> => {
   const { system, prompt } = questionsPrompt(car, review)
   const result = await generateText({
-    model: google(advisorModel),
+    model: openai(advisorModel),
     system,
     prompt,
-    providerOptions: {
-      google: { thinkingConfig: { thinkingLevel: questionsThinkingLevel } },
-    },
+    providerOptions: options(questionsReasoningEffort),
     // The thinking counts toward it, and once took all of 8.192
     maxOutputTokens: 16_384,
     abortSignal: AbortSignal.timeout(120_000),
