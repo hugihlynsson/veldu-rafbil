@@ -121,7 +121,7 @@ export const createFetchCarDetailsTool = () => {
   let calls = 0
 
   return tool({
-    description: `Fetch detailed specifications of a car from EV Database, for example dimensions, cargo space, towing capacity or battery warranty: what the basic car list does not have. The tool will not answer the users question: You must use this info to write a helpful answer. Fetch at most ${MAX_CALLS_PER_ANSWER} cars for one answer, the ones the question is about.`,
+    description: `Fetch detailed specifications of a car from EV Database, for example dimensions, cargo space, unbraked towing or battery warranty: what the basic car list does not have. The list already gives each car's braked towing, so do not fetch for that. The tool will not answer the users question: You must use this info to write a helpful answer. Fetch at most ${MAX_CALLS_PER_ANSWER} cars for one answer, the ones the question is about.`,
     inputSchema: z.object({
       car: z
         .string()

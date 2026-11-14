@@ -44,6 +44,7 @@ const car = (over: Partial<NewCar>): Car =>
     range: 400,
     drive: 'FWD',
     seats: 5,
+    towing: 1500,
     timeToCharge10To80: 30,
     power: 150,
     ...over,

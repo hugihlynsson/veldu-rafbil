@@ -15,6 +15,7 @@ const base: NewCar = {
   range: 600,
   drive: 'FWD',
   seats: 5,
+  towing: 1500,
   timeToCharge10To80: 31,
   power: 150,
 }
@@ -68,6 +69,24 @@ describe('specRows', () => {
     expect(row('seats', ...compared)?.cells.every((cell) => !cell.best)).toBe(
       true,
     )
+  })
+
+  it('gives towing in kg on a braked trailer, unranked', () => {
+    const cells = row('towing', car({ towing: 2500 }), car({}))?.cells
+    expect(cells?.[0]).toMatchObject({
+      text: '2.500 kg',
+      detail: 'hemlaður vagn',
+    })
+    expect(cells?.every((cell) => !cell.best)).toBe(true)
+  })
+
+  it('tells a car that takes no towbar from one with no figure', () => {
+    expect(row('towing', car({ towing: 0 }))?.cells[0]).toEqual({
+      text: 'Enginn krókur',
+      detail: undefined,
+      best: false,
+    })
+    expect(row('towing', car({ towing: null }))?.cells[0]?.text).toBe('Óþekkt')
   })
 
   it('gives the horsepower under the power', () => {

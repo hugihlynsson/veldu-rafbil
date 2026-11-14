@@ -9,7 +9,7 @@ body:
       options:
         - A car is missing
         - A price is wrong
-        - A spec is wrong (range, battery, seats, charging…)
+        - A spec is wrong (range, battery, seats, towing, charging…)
         - A link or photo is broken
         - A car is no longer sold
     validations:

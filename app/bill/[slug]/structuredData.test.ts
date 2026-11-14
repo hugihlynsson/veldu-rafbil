@@ -38,6 +38,18 @@ describe('carStructuredData', () => {
     )
   })
 
+  it('gives the braked towing in kg, and nothing for a car without a figure', () => {
+    expect(
+      carStructuredData(deriveCar({ ...sold, towing: 1600 })).trailerWeight,
+    ).toEqual({ '@type': 'QuantitativeValue', value: 1600, unitCode: 'KGM' })
+    for (const towing of [0, null]) {
+      expect(
+        carStructuredData(deriveCar({ ...sold, towing })),
+        String(towing),
+      ).not.toHaveProperty('trailerWeight')
+    }
+  })
+
   it('names the page and a photo that exists, in full', () => {
     for (const car of allCars) {
       const { url, image } = carStructuredData(car)

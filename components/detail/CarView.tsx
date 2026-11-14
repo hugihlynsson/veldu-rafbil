@@ -47,7 +47,7 @@ const figureOrder: SpecKey[] = [
   'capacity',
   'seats',
   'charging',
-  'power',
+  'towing',
   'drive',
   'value',
 ]

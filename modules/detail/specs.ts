@@ -82,6 +82,16 @@ const specs = {
     label: 'Sæti',
     text: (car) => String(car.seats),
   },
+  // Not ranked either: most never tow, and a heavier trailer is no score
+  towing: {
+    label: 'Dráttargeta',
+    text: (car) => {
+      if (car.towing === null) return 'Óþekkt'
+      if (car.towing === 0) return 'Enginn krókur'
+      return `${addDecimalSeparators(car.towing)} kg`
+    },
+    detail: (car) => (car.towing ? 'hemlaður vagn' : undefined),
+  },
 } satisfies Record<string, Spec>
 
 export interface SpecCell {
