@@ -34,26 +34,26 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | JAC           | 2026-11-03 | 2026-10-30 |                                                |
 | Jeep          | 2026-11-06 | —          | Avenger list is the 4xe hybrid only            |
 | KGM           | 2026-11-10 | 2026-10-30 |                                                |
-| Kia           | 2026-11-12 | 2026-11-09 | EV9 on 11-12; EV5, EV6 and PV5 on 11-10        |
-| Leapmotor     | 2026-11-12 | —          | ÍSBAND page; no dated list                     |
-| Lexus         | 2026-11-12 | —          | TZ unpriced; estimated from NL prices          |
+| Kia           | 2026-11-14 | 2026-11-13 | PV5 11-14; EV9 11-12; EV5 and EV6 11-10        |
+| Leapmotor     | 2026-11-14 | —          | ÍSBAND page; no dated list                     |
+| Lexus         | 2026-11-14 | —          | TZ unpriced; estimated from NL prices          |
 | Mazda         | 2026-11-10 | 2026-11-02 |                                                |
 | Mercedes-Benz | 2026-11-05 | —          | CLA 11-10 (list 11-09), VLE 11-11 (list 11-11) |
 | MG            | 2026-11-10 | 2026-10-31 |                                                |
 | Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
 | Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
 | Opel          | —          | —          | No price published; see 2026-11-10 note        |
-| Peugeot       | 2026-11-12 | —          | Read from the model pages                      |
+| Peugeot       | 2026-11-14 | —          | Read from the model pages                      |
 | Polestar      | 2026-11-12 | 2026-11-05 | Polestar 5; 2, 3 and 4 from 2026-10-29         |
 | Porsche       | 2026-11-12 | 2026-10-30 |                                                |
 | Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
-| Renault       | 2026-11-11 | 2026-11-11 | R4 E-Tech added                                |
+| Renault       | 2026-11-14 | 2026-11-13 |                                                |
 | Škoda         | 2026-11-12 | 2026-11-10 | Enyaq; Peaq, Epiq and Elroq 11-09              |
 | Smart         | 2026-11-10 | 2026-11-02 |                                                |
 | Subaru        | 2026-11-10 | 2026-10-31 |                                                |
 | Suzuki        | 2026-11-10 | 2026-10-30 |                                                |
-| Tesla         | 2026-11-12 | —          | Design pages; no dated list                    |
-| Toyota        | 2026-11-12 | —          |                                                |
+| Tesla         | 2026-11-14 | —          | Design pages; no dated list                    |
+| Toyota        | 2026-11-14 | —          |                                                |
 | Volkswagen    | 2026-11-12 | 2026-11-10 | ID.4 and ID.3 Neo; ID.3, ID.7, Polo 11-04      |
 | Volvo         | 2026-11-06 | 2026-10-28 |                                                |
 | XPENG         | 2026-11-10 | 2026-11-02 |                                                |
@@ -337,3 +337,13 @@ content-hashed, so a new upload gets a new link, and each answers with a
 `Last-Modified` header. Volvo's electric-cars page now prints a "Verð frá"
 for the EX60 alone, not for the EX40 and EC40. Peugeot's e-308 and e-308 SW
 pages still print no price.
+
+**Checked on 2026-11-14**: no newer list than the one last read for Audi,
+BYD, Ford, GWM, JAC, KGM, Mazda, Polestar, Porsche, Range Rover, Škoda,
+Suzuki, Volkswagen and Volvo (by `Last-Modified` or the dated filename), nor
+on Askja's and BL's issuu listings beyond the Kia PV5 and Renault lists of
+2026-11-13. Renault's put the R4 E-Tech up 200.000 kr. The PV5 list gives
+the Passenger one rear row (one rear legroom figure, a 60:40 bench) and no
+seat count, against the 7 in the car list. Peugeot's model pages moved again,
+to `/tegundir/<number>/e-<number>.html` (`/tegundir/3008/e-3008.html`); the
+prices render client-side, so `find` "verð frá" in the built-in browser.

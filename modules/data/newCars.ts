@@ -2588,7 +2588,7 @@ const newCars: Array<NewCar> = [
     make: 'Renault',
     model: 'R4 E-Tech',
     heroImageName: 'renault-r4',
-    price: 5_390_000,
+    price: 5_590_000,
     sellerUrl: 'https://www.renault.is/cars/r4-e-tech-electric/renault-4.html',
     acceleration: 8.2,
     capacity: 52,
