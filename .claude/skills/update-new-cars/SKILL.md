@@ -253,17 +253,10 @@ make, then model. The fields that are easy to get wrong:
   offered on another car's page.
 - **Each car's page has a review in `modules/data/carReviews.ts`, written by
   the advisor's model.** After any change to a car's figures, and after the
-  similar-cars run above, run
-  `npx tsx --env-file=.env.local scripts/car-reviews.ts <slug>…`, naming the
-  cars this change put out of date: each car added or whose figures changed,
-  each car whose entry in `similarCars.ts` you edited, and each car that
-  offers a changed car as similar. A test fails until they are written. Each
-  review takes a minute or more and is billed, so name them rather than
-  running it bare: a bare run writes every review that is out of date, for
-  whatever reason, and stops instead when that is more than a few. If it does,
-  something other than this change put them out of date (a change to the
-  grant does it to nearly all of them), so say so in the report rather than
-  writing them. Read the new ones in the diff as you would the figures.
+  similar-cars run above, follow the `write-car-reviews` skill. It names the
+  cars to write, finds a new car's boot, towing and body when ev-database is
+  blocking, and says what to read for in the result. A test fails until they
+  are written.
 - **What changed is news, logged in `modules/data/carChanges.ts`.** It is
   what `/uppfaerslur` and the history on each car's page are told from. Once the
   edits to `newCars.ts` are done, run `npx tsx scripts/car-changes.ts`. It
