@@ -36,7 +36,9 @@ for weeks at a time), the site's front page, which lists every car and has
 kept answering through the blocks. The front page has no length or warranty,
 and gives boot and frunk as one figure, kept as `cargoWithFrunk`; the prompt
 compares every car on the two together. A car whose `evDatabaseUrl` changes is
-looked up again, as is one that gains a link.
+looked up again, as is one that gains a link. To do that without writing any
+review, as when only a link changed, run
+`npx tsx scripts/car-reviews.ts --details`.
 
 A link that answers 404 stops the run, rather than taking the car off the list
 by its id and shipping the broken link: find the right page with

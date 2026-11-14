@@ -9,6 +9,7 @@
  *   npx tsx --env-file=.env.local scripts/car-reviews.ts --all     every one, afresh
  *   npx tsx --env-file=.env.local scripts/car-reviews.ts --questions [<slug>…]
  *                                                                  only the questions, keeping the reviews
+ *   npx tsx scripts/car-reviews.ts --details                         only the details of cars with none, or a changed link
  *   npx tsx scripts/car-reviews.ts --refresh-details                 only the details, from ev-database, slowly
  *
  * The questions are written from the review, so a review written afresh gets
@@ -102,6 +103,8 @@ const all = args.includes('--all')
 const allDue = args.includes('--due')
 const onlyQuestions = args.includes('--questions')
 const refreshDetails = args.includes('--refresh-details')
+const onlyDetails = args.includes('--details')
+const noReviews = refreshDetails || onlyDetails
 const named = new Set(args.filter((arg) => !arg.startsWith('--')))
 
 const unknown = [...named].filter(
@@ -112,7 +115,7 @@ if (unknown.length > 0) {
 }
 
 const due =
-  onlyQuestions || refreshDetails
+  onlyQuestions || noReviews
     ? []
     : cars.filter((car) => {
         const slug = carSlug(car)
@@ -134,7 +137,7 @@ if (named.size === 0 && !all && !allDue && due.length > MAX_UNASKED) {
 const questionsDue = cars.filter((car) => {
   const slug = carSlug(car)
   const review = carReviews[slug]
-  if (!review || due.includes(car) || refreshDetails) return false
+  if (!review || due.includes(car) || noReviews) return false
   if (onlyQuestions) return named.size === 0 || named.has(slug)
   return !review.questions?.length
 })
@@ -402,6 +405,16 @@ const main = async () => {
   // As the reviews are saved below: a car no longer on the list drops out
   saveDetailsFile(readDetailsFile())
   if (refreshDetails) return refresh()
+  if (onlyDetails) {
+    await loadDetails()
+    const missing = lacking(cars, readDetailsFile()).map(carSlug)
+    console.log(
+      missing.length > 0
+        ? `No details yet for ${missing.join(', ')}`
+        : 'Every car has its details',
+    )
+    return
+  }
   const details = due.length > 0 ? await loadDetails() : () => undefined
   console.log(
     `Writing ${due.length} reviews and questions for ${questionsDue.length} more, ${CONCURRENCY} at a time`,

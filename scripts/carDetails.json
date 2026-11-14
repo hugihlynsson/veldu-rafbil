@@ -1832,6 +1832,7 @@
   "volvo-ec40-p8-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3737/Volvo-EC40-P8-AWD",
     "body": "SUV",
     "segment": "C - Medium",
     "towing": 1800,
@@ -1867,7 +1868,7 @@
   "volvo-ex40-p8-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
-    "evDatabaseUrl": "https://ev-database.org/car/3734/Volvo-EX40-P8-Performance-AWD",
+    "evDatabaseUrl": "https://ev-database.org/car/3733/Volvo-EX40-P8-AWD",
     "body": "SUV",
     "segment": "C - Medium",
     "towing": 1800,

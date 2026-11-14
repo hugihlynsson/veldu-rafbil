@@ -37,7 +37,7 @@ describe('the details reviews are written from', () => {
   })
 
   it('holds each car as read from the ev-database page it links to now', () => {
-    // A link changed or added since: a review run reads the details again
+    // A link changed or added since: `npx tsx scripts/car-reviews.ts --details`
     expect(lacking(cars, file).map(carSlug)).toEqual([])
   })
 })
