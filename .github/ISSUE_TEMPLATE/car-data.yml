@@ -1,0 +1,36 @@
+name: Car missing or wrong
+description: A price, a spec, a link or a photo is wrong, or a car is missing from the list
+title: '[Car] '
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is it?
+      options:
+        - A car is missing
+        - A price is wrong
+        - A spec is wrong (range, battery, seats, charging…)
+        - A link or photo is broken
+        - A car is no longer sold
+    validations:
+      required: true
+  - type: input
+    id: car
+    attributes:
+      label: Which car?
+      placeholder: Kia EV3 Long Range
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: The seller's page or price list
+      description: Prices and specs are copied by hand from the seller's own pages, so this link is what the fix is checked against.
+      placeholder: https://
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Anything else?
+      description: What the site shows and what it should show, if it isn't obvious from the link.
