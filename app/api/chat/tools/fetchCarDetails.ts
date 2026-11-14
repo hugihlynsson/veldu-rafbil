@@ -46,9 +46,15 @@ export const upgradeCarDetailsCalls = <Part extends { type: string }>(
     return car ? [{ ...part, input: { car } }] : []
   })
 
+// The list carries braked towing, checked against the makers. The page's own
+// reads 0 for no figure as well as for no towbar, and handed both, the model
+// has to pick one.
+const carriedByList = new Set(['towingBraked', 'towHitch'])
+
 /** The fields the list does not carry, as the model is handed them */
 const readSpecs = (url: string, html: string): string => {
   const formatted = Object.entries(readCarSpecs(url, html))
+    .filter(([key]) => !carriedByList.has(key))
     .map(([key, value]) => `${key}: ${value}`)
     .join('\n')
 

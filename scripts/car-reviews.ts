@@ -9,6 +9,8 @@
  *   npx tsx --env-file=.env.local scripts/car-reviews.ts --all     every one, afresh
  *   npx tsx --env-file=.env.local scripts/car-reviews.ts --questions [<slug>…]
  *                                                                  only the questions, keeping the reviews
+ *   npx tsx scripts/car-reviews.ts --details                         only the details of cars with none, or a changed link
+ *   npx tsx scripts/car-reviews.ts --refresh-details                 only the details, from ev-database, slowly
  *
  * The questions are written from the review, so a review written afresh gets
  * new ones, and a review kept without any gets them on the next run.
@@ -18,14 +20,16 @@
  * for a minute or more, so a few are written at once, and the file is saved
  * after each, so a run cut short keeps what it finished.
  *
- * Every car's ev-database page is read first, whichever are written: where a
- * car stands on boot space or towing is among all of them. Pages read in the
- * last month are taken from ~/.cache/veldu-rafbil instead.
+ * A review is written from every car's details in scripts/carDetails.json,
+ * whichever are written: where a car stands on boot space is among all of
+ * them. Its towing is the list's own, in newCars.ts. A car with none there is looked up first, on its ev-database
+ * page or else the site's front-page list, and one found on neither stops the
+ * run until it is written in by hand, as the write-car-reviews skill says.
  */
 import { execFileSync } from 'node:child_process'
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
-import os from 'node:os'
+import { readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
+import { setTimeout as sleep } from 'node:timers/promises'
 import { google } from '@ai-sdk/google'
 import { generateText, type LanguageModelUsage } from 'ai'
 
@@ -35,7 +39,6 @@ import carReviews, { type CarReview } from '@/modules/data/carReviews'
 import {
   questionsPrompt,
   QUESTION_COUNT,
-  readDetails,
   readQuestions,
   readReview,
   reviewFactsKey,
@@ -49,7 +52,15 @@ import {
   readCapped,
   readCarSpecs,
 } from '@/modules/data/evDatabase'
-import { pagesToRead, type PageCache } from './evDatabaseCache'
+import {
+  lacking,
+  listEntry,
+  pageEntry,
+  pruned,
+  toRefresh,
+  type DetailsFile,
+} from './carDetails'
+import { evDatabaseId, fetchList, LIST_URL } from './evDatabaseList'
 
 const file = path.join(__dirname, '../modules/data/carReviews.ts')
 
@@ -59,8 +70,9 @@ const file = path.join(__dirname, '../modules/data/carReviews.ts')
 // and time on thinking for reviews no better to read
 const thinkingLevel = 'medium'
 const CONCURRENCY = 4
-// Pages from ev-database at once, which is no one's to hammer
-const PAGE_CONCURRENCY = 6
+// One page at a time, ten in 90 s: reading 200 at six at once got a block
+// from ev-database that lasted weeks
+const PAGE_INTERVAL_MS = 9_000
 // The prompt asks for some 150 words: far fewer is an answer that stopped
 const MIN_WORDS = 70
 // Asked for QUESTION_COUNT: a few too long for a pill are left out, more is
@@ -73,33 +85,26 @@ const questionsThinkingLevel = 'medium'
 // change to the grant puts nearly every one, at a billed minute each, and a
 // run that size is asked for with --due rather than walked into
 const MAX_UNASKED = 8
-// Below this share of pages read, the reviews would be written blind to
-// boot space and towing, and paid for all the same
-const MIN_PAGES_READ = 0.9
+// Below this share of cars with details, every standing on boot space would
+// be among too few of them to mean much
+const MIN_WITH_DETAILS = 0.9
 
-// Outside the checkout, so every worktree of it shares one
-const cacheFile = path.join(
-  os.homedir(),
-  '.cache/veldu-rafbil/ev-database.json',
-)
+const detailsFile = path.join(__dirname, 'carDetails.json')
+const today = new Date().toISOString().slice(0, 10)
 
-const readCache = (): PageCache => {
-  try {
-    return JSON.parse(readFileSync(cacheFile, 'utf8')) as PageCache
-  } catch {
-    return {}
-  }
-}
+const readDetailsFile = (): DetailsFile =>
+  JSON.parse(readFileSync(detailsFile, 'utf8')) as DetailsFile
 
-const saveCache = (cache: PageCache) => {
-  mkdirSync(path.dirname(cacheFile), { recursive: true })
-  writeFileSync(cacheFile, JSON.stringify(cache))
-}
+const saveDetailsFile = (file: DetailsFile) =>
+  writeFileSync(detailsFile, `${JSON.stringify(pruned(cars, file), null, 2)}\n`)
 
 const args = process.argv.slice(2)
 const all = args.includes('--all')
 const allDue = args.includes('--due')
 const onlyQuestions = args.includes('--questions')
+const refreshDetails = args.includes('--refresh-details')
+const onlyDetails = args.includes('--details')
+const noReviews = refreshDetails || onlyDetails
 const named = new Set(args.filter((arg) => !arg.startsWith('--')))
 
 const unknown = [...named].filter(
@@ -109,17 +114,18 @@ if (unknown.length > 0) {
   throw new Error(`No car on the list has the slug ${unknown.join(', ')}`)
 }
 
-const due = onlyQuestions
-  ? []
-  : cars.filter((car) => {
-      const slug = carSlug(car)
-      if (named.size > 0) return named.has(slug)
-      return (
-        all ||
-        !carReviews[slug] ||
-        carReviews[slug].facts !== reviewFactsKey(car)
-      )
-    })
+const due =
+  onlyQuestions || noReviews
+    ? []
+    : cars.filter((car) => {
+        const slug = carSlug(car)
+        if (named.size > 0) return named.has(slug)
+        return (
+          all ||
+          !carReviews[slug] ||
+          carReviews[slug].facts !== reviewFactsKey(car)
+        )
+      })
 
 if (named.size === 0 && !all && !allDue && due.length > MAX_UNASKED) {
   throw new Error(
@@ -131,7 +137,7 @@ if (named.size === 0 && !all && !allDue && due.length > MAX_UNASKED) {
 const questionsDue = cars.filter((car) => {
   const slug = carSlug(car)
   const review = carReviews[slug]
-  if (!review || due.includes(car)) return false
+  if (!review || due.includes(car) || noReviews) return false
   if (onlyQuestions) return named.size === 0 || named.has(slug)
   return !review.questions?.length
 })
@@ -177,48 +183,112 @@ export default carReviews
   if (format) execFileSync('npx', ['oxfmt', file], { stdio: 'ignore' })
 }
 
-// Read here rather than looked up by the model, which skipped them often
-// enough that a car's boot or towing went unsaid where it stood out. Kept
-// between runs, and between worktrees, so a run reads only what changed
-const readAllDetails = async (): Promise<DetailsOf> => {
-  const urls = [...new Set(cars.flatMap((car) => car.evDatabaseUrl ?? []))]
-  const cache = readCache()
-  const pending = pagesToRead(urls, cache, Date.now())
-  let limited = false
-  const reader = async () => {
-    for (let url = pending.shift(); url && !limited; url = pending.shift()) {
-      const response = allowedURLs.has(url)
-        ? await fetchOnSite(url).catch(() => null)
-        : null
-      // Every page after the first 429 would be one too, and asking only
-      // keeps the block going
-      if (response?.status === 429) limited = true
-      if (!response?.ok) {
-        await response?.body?.cancel()
-        if (!limited) console.error(`Could not read ${url}`)
-        continue
-      }
-      const specs = readCarSpecs(url, await readCapped(response))
-      cache[url] = { specs, read: Date.now() }
-      saveCache(cache)
+// Each of the cars' pages, one at a time and stopping at the first 429:
+// every page after it would be one too, and asking only keeps the block going
+const readPages = async (
+  wanted: ReadonlyArray<Car>,
+  file: DetailsFile,
+): Promise<{ read: number; limited: boolean; gone: Set<string> }> => {
+  const urls = [
+    ...new Set(wanted.flatMap((car) => car.evDatabaseUrl ?? [])),
+  ].filter((url) => allowedURLs.has(url))
+  let read = 0
+  // A wrong slug is a 404 even for a car the site has
+  const gone = new Set<string>()
+  for (const [index, url] of urls.entries()) {
+    if (index > 0) await sleep(PAGE_INTERVAL_MS)
+    const response = await fetchOnSite(url).catch(() => null)
+    if (response?.status === 429) {
+      await response.body?.cancel()
+      return { read, limited: true, gone }
     }
+    if (!response?.ok) {
+      await response?.body?.cancel()
+      if (response?.status === 404 || response?.status === 410) gone.add(url)
+      console.error(
+        `Could not read ${url} (${response?.status ?? 'no answer'})`,
+      )
+      continue
+    }
+    const specs = readCarSpecs(url, await readCapped(response))
+    for (const car of wanted) {
+      if (car.evDatabaseUrl === url) {
+        file[carSlug(car)] = pageEntry(specs, url, today)
+      }
+    }
+    saveDetailsFile(file)
+    read++
   }
-  await Promise.all(Array.from({ length: PAGE_CONCURRENCY }, reader))
-  const read = new Map(
-    urls.flatMap((url) => {
-      const page = cache[url]
-      return page ? [[url, readDetails(page.specs)] as const] : []
-    }),
+  return { read, limited: false, gone }
+}
+
+// Some 9 MB in one request, rather than a page for each car
+const readFromList = async (wanted: ReadonlyArray<Car>, file: DetailsFile) => {
+  const read = await fetchList()
+  if ('error' in read) {
+    console.error(`Could not read ${LIST_URL}: ${read.error}`)
+    return
+  }
+  for (const car of wanted) {
+    const url = car.evDatabaseUrl
+    const row = url && read.list.get(evDatabaseId(url) ?? '')
+    if (row) file[carSlug(car)] = listEntry(row.specs, url, today)
+  }
+  saveDetailsFile(file)
+}
+
+// Given rather than looked up by the model, which skipped them often enough
+// that a car's boot went unsaid where it stood out. Kept in the
+// repo rather than read each run, so a run reads only the cars added since,
+// and a block on ev-database holds up nothing but a new car's review
+const loadDetails = async (): Promise<DetailsOf> => {
+  const file = readDetailsFile()
+  const { limited, gone } = await readPages(lacking(cars, file), file)
+  if (limited) console.log('ev-database answered 429; trying its front page')
+  // The list has a car by its id alone, and would hide a broken link
+  const listed = lacking(cars, file).filter(
+    (car) => car.evDatabaseUrl && !gone.has(car.evDatabaseUrl),
   )
-  console.log(
-    `Have ${read.size} of ${urls.length} ev-database pages${limited ? '; it answered 429, so the rest wait for a later run' : ''}`,
+  if (listed.length > 0) await readFromList(listed, file)
+
+  const missing = lacking(cars, file)
+  const broken = missing.filter(
+    (car) => car.evDatabaseUrl && gone.has(car.evDatabaseUrl),
   )
-  if (read.size < urls.length * MIN_PAGES_READ) {
+  if (broken.length > 0) {
     throw new Error(
-      `Too few ev-database pages to write reviews from. Those read are kept in ${cacheFile}; run again once it stops rate limiting`,
+      `The ev-database page of ${broken.map(carSlug).join(', ')} is not there. Fix its evDatabaseUrl in newCars.ts, finding the page with scripts/ev-database-list.ts`,
     )
   }
-  return (car) => (car.evDatabaseUrl ? read.get(car.evDatabaseUrl) : undefined)
+  const missingDue = missing.filter((car) => due.includes(car))
+  const hint = `Write theirs into ${path.relative(process.cwd(), detailsFile)} by hand, from the maker's specifications, as the write-car-reviews skill says`
+  if (missingDue.length > 0) {
+    throw new Error(
+      `No details for ${missingDue.map(carSlug).join(', ')}, whose reviews would guess the body and boot without them. ${hint}`,
+    )
+  }
+  if (missing.length > cars.length * (1 - MIN_WITH_DETAILS)) {
+    throw new Error(
+      `No details for ${missing.length} cars: ${missing.map(carSlug).join(', ')}. ${hint}`,
+    )
+  }
+  return (car) => file[carSlug(car)]
+}
+
+// Brings the details read off the list, or long ago, up to their pages. A
+// run of its own, as at ten pages in 90 s it can take half an hour, and safe
+// to cut short or start again: each page is saved as it is read
+const refresh = async () => {
+  const file = readDetailsFile()
+  const wanted = toRefresh(cars, file, today)
+  const pages = new Set(wanted.map((car) => car.evDatabaseUrl)).size
+  console.log(
+    `Reading ${pages} ev-database pages, one every ${PAGE_INTERVAL_MS / 1000} s`,
+  )
+  const { read, limited } = await readPages(wanted, file)
+  console.log(
+    `Read ${read} of ${pages}${limited ? '; it answered 429, so the rest wait for a later run' : ''}`,
+  )
 }
 
 const write = async (
@@ -332,7 +402,20 @@ const worker = async (details: DetailsOf) => {
 
 // Not a top-level await, which tsx runs this module without
 const main = async () => {
-  const details = due.length > 0 ? await readAllDetails() : () => undefined
+  // As the reviews are saved below: a car no longer on the list drops out
+  saveDetailsFile(readDetailsFile())
+  if (refreshDetails) return refresh()
+  if (onlyDetails) {
+    await loadDetails()
+    const missing = lacking(cars, readDetailsFile()).map(carSlug)
+    console.log(
+      missing.length > 0
+        ? `No details yet for ${missing.join(', ')}`
+        : 'Every car has its details',
+    )
+    return
+  }
+  const details = due.length > 0 ? await loadDetails() : () => undefined
   console.log(
     `Writing ${due.length} reviews and questions for ${questionsDue.length} more, ${CONCURRENCY} at a time`,
   )

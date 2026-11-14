@@ -14,7 +14,7 @@ const bySlug = new Map(cars.map((car) => [carSlug(car), car]))
 describe('the car reviews', () => {
   it('has one for every car', () => {
     const missing = [...bySlug.keys()].filter((slug) => !(slug in carReviews))
-    // A new or renamed car: run `npx tsx --env-file=.env.local scripts/car-reviews.ts`
+    // A new or renamed car: the write-car-reviews skill writes its review
     expect(missing).toEqual([])
   })
 

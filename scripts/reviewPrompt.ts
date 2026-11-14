@@ -103,6 +103,8 @@ export interface CarDetails {
   cargo?: number
   cargoMax?: number
   frunk?: number
+  /** Boot and frunk as one figure, where they are not given apart */
+  cargoWithFrunk?: number
   warrantyYears?: number
   warrantyKm?: number
 }
@@ -110,6 +112,14 @@ export interface CarDetails {
 export type DetailsOf = (car: Car) => CarDetails | undefined
 
 const noDetails: DetailsOf = () => undefined
+
+// Boot and frunk together: the one figure every source gives alike, as
+// ev-database's front page does not give the frunk apart
+const storage = (details: CarDetails | undefined): number | undefined =>
+  details?.cargoWithFrunk ??
+  (details?.cargo === undefined
+    ? undefined
+    : details.cargo + (details.frunk ?? 0))
 
 // "160,000 km", "8 years": the number in it, if there is one
 const numberIn = (text?: string): number | undefined => {
@@ -357,7 +367,7 @@ const metrics: Metric[] = [
   {
     label: 'Farangursrými',
     better: 'higher',
-    value: (car, details) => details(car)?.cargo,
+    value: (car, details) => storage(details(car)),
     difference: {
       format: (gap) => `${addDecimalSeparators(gap)} l`,
       more: (gap) => `${gap} stærra skott`,
@@ -471,7 +481,7 @@ const metrics: Metric[] = [
 
 // The site's body types in the words an Icelandic buyer uses for them. An
 // SUV is a jepplingur or a jeppi by its size, which the model is left to say
-const bodyNames: Record<string, string> = {
+export const bodyNames: Readonly<Record<string, string>> = {
   SUV: 'jepplingur eða jeppi, eftir stærð',
   Sedan: 'fólksbíll með skottloki (stallbakur)',
   'Liftback Sedan': 'fólksbíll með afturhlera (hlaðbakur)',
@@ -487,6 +497,7 @@ const bodyNames: Record<string, string> = {
 const describeDetails = (details: CarDetails | undefined): string[] => {
   if (!details) return ['engar nánari upplýsingar af ev-database']
   const { body, segment, length, cargo, cargoMax, frunk } = details
+  const { cargoWithFrunk } = details
   const { warrantyYears, warrantyKm } = details
   return [
     body && `yfirbygging: ${bodyNames[body] ?? body}`,
@@ -494,6 +505,8 @@ const describeDetails = (details: CarDetails | undefined): string[] => {
     length && `${decimal(Number((length / 1000).toFixed(2)))} m á lengd`,
     cargo &&
       `${addDecimalSeparators(cargo)} l farangursrými${cargoMax ? ` (${addDecimalSeparators(cargoMax)} l með aftursætin niðri)` : ''}`,
+    cargoWithFrunk &&
+      `${addDecimalSeparators(cargoWithFrunk)} l farangursrými, framskott meðtalið`,
     frunk && `${addDecimalSeparators(frunk)} l framskott`,
     warrantyYears &&
       `${warrantyYears} ára ábyrgð á rafhlöðu${warrantyKm ? ` eða ${addDecimalSeparators(warrantyKm)} km` : ''}`,
@@ -548,6 +561,9 @@ const listDifferences = (
 const PRICE_BAND = 0.2
 // Fewer than this at a similar price, and where it stands among them says little
 const MIN_BAND = 5
+// A figure only a few cars have, as length and warranty were while the car
+// pages were blocked, would rank a car against those few as if against all
+const MIN_WITH_FIGURE = 0.5
 
 // In words rather than as a share, since a share is what the model would
 // quote, and "ahead of 98% of them" reads as a spec sheet, not as advice
@@ -596,7 +612,7 @@ export const describeStanding = (
       const others = all.filter(
         (other) => other !== car && metric.value(other, details) !== undefined,
       )
-      if (others.length === 0) return []
+      if (others.length < (all.length - 1) * MIN_WITH_FIGURE) return []
       const band = others.filter(
         (other) =>
           Math.abs(other.priceWithGrant - car.priceWithGrant) <=
