@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 
 import { latestNews } from '@/modules/news/feed'
 import LatestNews from '@/components/list/LatestNews'
-import Logo from './Logo'
+import FooterLogo from './FooterLogo'
 import TextLink from './TextLink'
 
 // Rendered on the server only, by each page, so the change log it reads the
@@ -11,7 +11,7 @@ const Footer: FunctionComponent<{}> = () => (
   <footer className="bg-haze pt-8 pb-34 xs:pt-14">
     <div className="mx-auto max-w-column px-(--gutter) md:max-w-page md:px-10 lg:flex lg:items-center lg:justify-between lg:gap-10">
       <div className="text-sm leading-5.5 text-pretty text-stone">
-        <Logo className="block w-40 h-auto mb-4 text-tint" />
+        <FooterLogo />
         <p className="m-0">
           Veldu Rafbíl er smíðuð af{' '}
           <TextLink href="https://hugihlynsson.com">Huga Hlynssyni</TextLink> og
