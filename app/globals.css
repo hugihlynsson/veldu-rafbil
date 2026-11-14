@@ -202,8 +202,8 @@
     }
   }
 
-  /* A count rolls the way it went: a larger number up from below, once the
-     last has nearly gone, so the two never cross */
+  /* A count rolls the way it went: a larger number up from below, waiting
+     until the last is mostly out of the way */
   @keyframes count-up-in {
     from {
       opacity: 0;
