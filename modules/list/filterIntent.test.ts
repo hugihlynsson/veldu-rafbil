@@ -158,6 +158,26 @@ describe('parseFilterIntent', () => {
   // "dráttargeta 2" says nothing else
   it('reads a towing number under ten as tonnes', () => {
     expect(read('dráttargeta 1,5')).toEqual({ towing: 1500 })
+    expect(read('dráttargeta 2 og undir 8 milljónum')).toEqual({
+      price: 8_000_000,
+      towing: 2000,
+    })
+  })
+
+  // Left for a model, which can tell a horse trailer from two tonnes
+  it('reads no tonnes from a number that counts what follows it', () => {
+    expect(read('draga 2 hesta').towing).toBeUndefined()
+    expect(read('dregur 2 kerrur').towing).toBeUndefined()
+  })
+
+  // A unit left over is a word for a model, and a billed request
+  it('reads the unit after a towing number with it, however inflected', () => {
+    expect(parseFilterIntent('dráttargeta 2 tonna')).toEqual({
+      filters: { towing: 2000 },
+      unread: [],
+      numbers: [],
+    })
+    expect(parseFilterIntent('dregur 1500 kílógrömm').unread).toEqual([])
   })
 
   // A misread is offered as certain, and a wrong filter empties the list
@@ -172,6 +192,12 @@ describe('parseFilterIntent', () => {
     ]) {
       expect(read(text).towing, text).toBeUndefined()
     }
+  })
+
+  it('reads a negated floor or ceiling the way it points', () => {
+    expect(read('dráttargeta ekki minni en 1500')).toEqual({ towing: 1500 })
+    expect(read('dráttargeta ekki meira en 1500')).toEqual({})
+    expect(read('dregur ekki 1500 kg').towing).toBeUndefined()
   })
 
   it('drops a towing ceiling, as no filter holds one', () => {
@@ -247,6 +273,12 @@ describe('readTowing', () => {
     expect(readTowing(String(MAX_TOWING + 1))).toBeUndefined()
     expect(readTowing('1,5')).toBe(1500)
     expect(readTowing('1.500')).toBe(1500)
+  })
+
+  // "við erum þrjú með hjólhýsi" would otherwise be offered 3,000 kg
+  it('reads no tonnes from a number spelled out', () => {
+    expect(readTowing('thrju')).toBeUndefined()
+    expect(readTowing('tveir')).toBeUndefined()
   })
 
   it('reads a weight with its unit by the same bounds', () => {

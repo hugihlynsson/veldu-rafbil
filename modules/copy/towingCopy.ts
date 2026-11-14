@@ -11,6 +11,16 @@ export const towingFigure = (towing: NewCar['towing']): string => {
   return `${addDecimalSeparators(towing)} kg`
 }
 
+/**
+ * A car's towing as a review is written from it, in everyday words, as the
+ * review is to be: nothing where the figure is not known
+ */
+export const towingClause = (towing: NewCar['towing']): string | undefined => {
+  if (towing === null) return undefined
+  if (towing === 0) return 'má ekki draga kerru'
+  return `má draga ${addDecimalSeparators(towing)} kg`
+}
+
 /** A car's towing as a model is told it, among its other figures */
 export const towingText = (towing: NewCar['towing']): string => {
   if (towing === null) return 'dráttargeta óþekkt'

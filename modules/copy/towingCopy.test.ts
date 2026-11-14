@@ -1,12 +1,21 @@
 import { describe, expect, it } from 'vitest'
 
-import { towingFigure, towingText } from './towingCopy'
+import { towingClause, towingFigure, towingText } from './towingCopy'
 
 describe('towingFigure', () => {
   it('tells a figure from no towbar and from no figure at all', () => {
     expect(towingFigure(1500)).toBe('1.500 kg')
     expect(towingFigure(0)).toBe('Enginn krókur')
     expect(towingFigure(null)).toBe('Óþekkt')
+  })
+})
+
+describe('towingClause', () => {
+  // A review says nothing it has no figure for
+  it('says nothing of a car whose figure is not known', () => {
+    expect(towingClause(1500)).toBe('má draga 1.500 kg')
+    expect(towingClause(0)).toBe('má ekki draga kerru')
+    expect(towingClause(null)).toBeUndefined()
   })
 })
 

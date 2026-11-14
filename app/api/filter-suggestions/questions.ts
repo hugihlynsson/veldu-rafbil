@@ -268,9 +268,12 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
             'A large caravan, a heavy boat or a heavy load: at least 2,000 kg on a braked trailer',
         },
       ],
-      // Read as the parser reads a towing number, so "1,5" is a tonne and a half
+      // Read as the parser reads a towing number, so "1,5" is a tonne and a
+      // half. A whole digit under ten is not offered as tonnes: by "3 börn og
+      // hjólhýsi" it counts children, and 3,000 kg leaves a handful of cars.
       fromNumber: (text) => {
-        const min = readTowing(text)
+        const min =
+          /[.,]/.test(text) || Number(text) >= 10 ? readTowing(text) : undefined
         if (min === undefined) return undefined
         return {
           label: `at_least_${min}_kg`,

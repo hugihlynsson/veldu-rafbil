@@ -99,6 +99,12 @@ describe('withNumbers', () => {
     ).toContain('"atta" (8)')
   })
 
+  it('offers towing in tonnes only for a number with a decimal', () => {
+    expect(stated(['1,5']).towing).toEqual([1500])
+    expect(stated(['3']).towing).toEqual([])
+    expect(stated(['1300']).towing).toEqual([1300])
+  })
+
   it('offers seats only for more people than nearly every car seats', () => {
     expect(stated(['4', '5', '6']).seats).toEqual([6])
   })

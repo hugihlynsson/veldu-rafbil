@@ -4,6 +4,7 @@ import cars, { type Car } from '@/modules/data/cars'
 import type { CarReview } from '@/modules/data/carReviews'
 import { similarTo } from '@/modules/detail/similar'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
+import { towingClause } from '@/modules/copy/towingCopy'
 import { driveLabels } from '@/modules/data/drives'
 import {
   advisorIntro as intro,
@@ -514,11 +515,7 @@ const describeCar = (car: Car, details: DetailsOf): string =>
     `${car.power} kW`,
     driveLabels[car.drive].toLowerCase(),
     `allt að ${car.seats} sæti`,
-    ...(car.towing === 0
-      ? ['má ekki draga kerru']
-      : car.towing
-        ? [`má draga ${addDecimalSeparators(car.towing)} kg`]
-        : []),
+    ...(car.towing === null ? [] : [towingClause(car.towing)]),
     ...describeDetails(details(car)),
   ].join(', ')
 
