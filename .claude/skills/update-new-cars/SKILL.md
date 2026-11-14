@@ -203,7 +203,8 @@ blocked for a while. Read only the pages of cars whose list you read, one at
 a time. If a 429 comes back, stop reading pages: keep the ranges those cars
 already have and list them under **Not checked**. Its front page,
 `https://ev-database.org/`, still loads under the block, but the range it
-prints is the site's real-world estimate, not WLTP, so it cannot stand in.
+prints is the site's real-world estimate, not WLTP, so it cannot stand in. The
+rest of what it lists still helps add a car, as "Adding a car" below says.
 
 The brochure side only exists for a make whose list you read this run. A car you
 did not read a list for keeps the range it has.
@@ -253,17 +254,10 @@ make, then model. The fields that are easy to get wrong:
   offered on another car's page.
 - **Each car's page has a review in `modules/data/carReviews.ts`, written by
   the advisor's model.** After any change to a car's figures, and after the
-  similar-cars run above, run
-  `npx tsx --env-file=.env.local scripts/car-reviews.ts <slug>…`, naming the
-  cars this change put out of date: each car added or whose figures changed,
-  each car whose entry in `similarCars.ts` you edited, and each car that
-  offers a changed car as similar. A test fails until they are written. Each
-  review takes a minute or more and is billed, so name them rather than
-  running it bare: a bare run writes every review that is out of date, for
-  whatever reason, and stops instead when that is more than a few. If it does,
-  something other than this change put them out of date (a change to the
-  grant does it to nearly all of them), so say so in the report rather than
-  writing them. Read the new ones in the diff as you would the figures.
+  similar-cars run above, follow the `write-car-reviews` skill. It names the
+  cars to write, finds a new car's boot, towing and body when ev-database is
+  blocking, and says what to read for in the result. A test fails until they
+  are written.
 - **What changed is news, logged in `modules/data/carChanges.ts`.** It is
   what `/uppfaerslur` and the history on each car's page are told from. Once the
   edits to `newCars.ts` are done, run `npx tsx scripts/car-changes.ts`. It
@@ -278,13 +272,14 @@ make, then model. The fields that are easy to get wrong:
 
 And, for a car that is genuinely new to the list:
 
-- **Specs come from ev-database.** Find the variant with `WebSearch` limited to
-  `ev-database.org` (`"ev-database Kia EV2 61 kWh"`), then read the page with
-  `WebFetch`. Guessing the URL does not work: the path needs the exact slug
-  (`/car/3491/Kia-EV2-61-kWh`), and a wrong slug is a 404 even for a real id.
-  Sibling variants often have adjacent ids, which helps only once you know the
-  slug. Every `evDatabaseUrl` must be unique to one entry; a test fails
-  otherwise. `acceleration`, `power` and `timeToCharge10To80` come from that
+- **Specs come from ev-database.** Find the variant with
+  `npx tsx scripts/ev-database-list.ts "Kia EV2"`, which reads the site's front
+  page and prints every matching car with its page's URL, then read the page
+  with `WebFetch`. Guessing the URL does not work: the path needs the exact slug
+  (`/car/3490/Kia-EV2-422-kWh`), and a wrong slug is a 404 even for a real id.
+  A car too new for the front page is found with `WebSearch` limited to
+  `ev-database.org` (`"ev-database Kia EV2 61 kWh"`). Every `evDatabaseUrl`
+  must be unique to one entry; a test fails otherwise. `acceleration`, `power` and `timeToCharge10To80` come from that
   page, cross-checked against the brochure's spec page, and `range` is the lower
   of the two, as under "Specs on existing cars". `capacity`
   is the nominal figure, as the existing entries have it (EV2: 42.2 in the list,
@@ -293,6 +288,19 @@ And, for a car that is genuinely new to the list:
   silently. **`seats` is not one of these** — ev-database gives a European
   configuration and the field wants the Icelandic maximum, so take it from the
   importer's own list per "Seats" above.
+- **If its page answers 429**, the car still goes in. ev-database has blocked
+  its pages for weeks at a time, while the front page kept answering, so the
+  list script above still gives `evDatabaseUrl`, `acceleration` and the German
+  price. It has no WLTP range, power, nominal battery or 10–80% time, so take
+  those, in this order, from: `WebSearch` limited to `ev-database.org` and
+  asking for the figure (`"Kia EV2 61 kWh WLTP"`, `"nominal capacity"`,
+  `"10-80%"`), whose snippets quote the blocked page; fleetnews.co.uk, which
+  republishes ev-database's data under the same reference number; and the
+  maker's own spec sheet. The list's usable battery and average 10–80% kW
+  are a rough check on a charge time (minutes ≈ usable kWh × 0.7 ÷ kW × 60),
+  never a source for one. With no ev-database WLTP figure, `range` is the
+  brochure's alone. Say in the report which figures came from where, so the
+  next sweep checks them against the page.
 - **If ev-database has no entry yet**, leave `evDatabaseUrl` out and use the
   brochure's figures, and say so in the report.
 - **`sellerUrl` is the car's own model page**, not the importer's front page.
@@ -323,8 +331,11 @@ price column). It can still go in, with an estimated `price`, when the owner
 asks for it; otherwise it goes under **Not finished** in the report. The
 estimate is worked out the same way every time:
 
-1. **Start from the German price on ev-database.** Every model page has one,
-   and it is the one base that is there for every make.
+1. **Start from the German price on ev-database.** Every model has one, and it
+   is the one base that is there for every make.
+   `npx tsx scripts/ev-database-list.ts "<make>"` prints the make's German
+   prices in one request, while its pages are blocked or not; a price marked
+   archive is the last one asked before it was discontinued there.
 2. **Work out the make's kr/€ ratio.** For each car of that make already in the
    list, divide its `price` (before the grant) by its own ev-database German
    price.

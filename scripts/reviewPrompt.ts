@@ -473,7 +473,7 @@ const metrics: Metric[] = [
 
 // The site's body types in the words an Icelandic buyer uses for them. An
 // SUV is a jepplingur or a jeppi by its size, which the model is left to say
-const bodyNames: Record<string, string> = {
+export const bodyNames: Readonly<Record<string, string>> = {
   SUV: 'jepplingur eða jeppi, eftir stærð',
   Sedan: 'fólksbíll með skottloki (stallbakur)',
   'Liftback Sedan': 'fólksbíll með afturhlera (hlaðbakur)',
