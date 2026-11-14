@@ -2,297 +2,334 @@
   "audi-a2-e-tron-125-kw": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3725/Audi-A2-e-tron-125-kW---50-kWh",
     "body": "Hatchback",
     "segment": "C - Medium",
-    "cargo": 409,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 409
   },
   "audi-a2-e-tron-140-kw": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3726/Audi-A2-e-tron-140-kW---58-kWh",
     "body": "Hatchback",
     "segment": "C - Medium",
-    "cargo": 409,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 409
   },
   "audi-a2-e-tron-170-kw": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3727/Audi-A2-e-tron-170-kW---79-kWh",
     "body": "Hatchback",
     "segment": "C - Medium",
-    "cargo": 409,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 409
   },
   "audi-a2-e-tron-240-kw": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3728/Audi-A2-e-tron-240-kW---79-kWh",
     "body": "Hatchback",
     "segment": "C - Medium",
-    "cargo": 409,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 409
   },
   "audi-a6-e-tron-sportback-quattro": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3052/Audi-A6-Sportback-e-tron-quattro",
     "body": "Liftback Sedan",
     "segment": "E - Executive",
-    "cargo": 529,
-    "towing": 2100
+    "towing": 2100,
+    "cargoWithFrunk": 529
   },
   "audi-a6-e-tron-avant-quattro": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3054/Audi-A6-Avant-e-tron-quattro",
     "body": "Station/Estate",
     "segment": "E - Executive",
-    "cargo": 529,
-    "towing": 2100
+    "towing": 2100,
+    "cargoWithFrunk": 529
   },
   "audi-e-tron-gt-quattro": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1420/Audi-e-tron-GT-quattro",
     "body": "Sedan",
     "segment": "F - Luxury",
-    "cargo": 490,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 490
   },
   "audi-q4-e-tron-45-quattro": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2014/Audi-Q4-e-tron-45-quattro",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 520,
-    "towing": 1200
+    "towing": 1200,
+    "cargoWithFrunk": 520
   },
   "audi-q6-e-tron-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2146/Audi-Q6-SUV-e-tron-quattro",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 590,
-    "towing": 2400
+    "towing": 2400,
+    "cargoWithFrunk": 590
   },
   "audi-q6-e-tron-sportback": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3043/Audi-Q6-Sportback-e-tron-quattro",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 575,
-    "towing": 2400
+    "towing": 2400,
+    "cargoWithFrunk": 575
   },
   "audi-sq6-e-tron-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2147/Audi-SQ6-SUV-e-tron",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 578,
-    "towing": 2400
+    "towing": 2400,
+    "cargoWithFrunk": 578
   },
   "bmw-i3-40-xdrive": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3814/BMW-i3-40-xDrive",
     "body": "Sedan",
     "segment": "D - Large",
-    "cargo": 451,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 451
   },
   "bmw-i3-50-xdrive": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3657/BMW-i3-50-xDrive",
     "body": "Sedan",
     "segment": "D - Large",
-    "cargo": 451,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 451
   },
   "bmw-i4-40-xdrive": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3206/BMW-i4-xDrive40",
     "body": "Liftback Sedan",
     "segment": "D - Large",
-    "cargo": 470,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 470
   },
   "bmw-i4-m60-xdrive": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3207/BMW-i4-M60-xDrive",
     "body": "Liftback Sedan",
     "segment": "D - Large",
-    "cargo": 470,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 470
   },
   "bmw-i5-edrive40": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1906/BMW-i5-eDrive40-Sedan",
     "body": "Sedan",
     "segment": "E - Executive",
-    "cargo": 490,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 490
   },
   "bmw-i5-m60-xdrive": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3114/BMW-i5-M60-xDrive-Sedan",
     "body": "Sedan",
     "segment": "E - Executive",
-    "cargo": 490,
-    "towing": 2000
+    "towing": 2000,
+    "cargoWithFrunk": 490
   },
   "bmw-ix-xdrive-45-sport": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3109/BMW-iX-xDrive45",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 500,
-    "towing": 2500
+    "towing": 2500,
+    "cargoWithFrunk": 500
   },
   "bmw-ix-xdrive-60-sport": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3110/BMW-iX-xDrive60",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 500,
-    "towing": 2500
+    "towing": 2500,
+    "cargoWithFrunk": 500
   },
   "bmw-ix1-edrive-20": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3458/BMW-iX1-eDrive20",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 490,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 490
   },
   "bmw-ix1-xdrive-30": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3459/BMW-iX1-xDrive30",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 490,
-    "towing": 1200
+    "towing": 1200,
+    "cargoWithFrunk": 490
   },
   "bmw-ix3-40": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3505/BMW-iX3-40",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 578,
-    "towing": 2000
+    "towing": 2000,
+    "cargoWithFrunk": 578
   },
   "bmw-ix3-50-xdrive": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3290/BMW-iX3-50-xDrive",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 578,
-    "towing": 2000
+    "towing": 2000,
+    "cargoWithFrunk": 578
   },
   "bmw-ix5-60-xdrive": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3664/BMW-iX5-60-xDrive",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 708,
-    "towing": 2700
+    "towing": 2700,
+    "cargoWithFrunk": 708
   },
   "byd-atto-3-evo-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3475/BYD-ATTO-3-Evo-AWD-Excellence",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 591,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 591
   },
   "byd-dolphin-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3297/BYD-DOLPHIN-604-kWh",
     "body": "Hatchback",
     "segment": "C - Medium",
-    "cargo": 345
+    "cargoWithFrunk": 345
   },
   "byd-seal-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2002/BYD-SEAL-825-kWh-AWD-Excellence",
     "body": "Sedan",
     "segment": "D - Large",
-    "cargo": 453,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 453
   },
   "byd-seal-u-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2067/BYD-SEAL-U-87-kWh-Design",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 552,
-    "towing": 1300
+    "towing": 1300,
+    "cargoWithFrunk": 552
   },
   "byd-sealion-7-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3072/BYD-SEALION-7-913-kWh-AWD-Excellence",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 578,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 578
   },
   "byd-tang-flagship": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2095/BYD-TANG-Flagship",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 940,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 940
   },
   "citroen-e-c4-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3048/Citroen-e-C4-54-kWh",
     "body": "Hatchback",
     "segment": "C - Medium",
-    "cargo": 380,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 380
   },
   "fiat-500e-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1285/Fiat-500e-Hatchback-42-kWh",
     "body": "Hatchback",
     "segment": "A - Mini",
-    "cargo": 185,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 185
   },
   "fiat-600e-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1945/Fiat-600e",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 360,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 360
   },
   "ford-capri-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2242/Ford-Capri-Extended-Range-AWD",
     "body": "Liftback Sedan",
     "segment": "D - Large",
-    "cargo": 572,
-    "towing": 1200
+    "towing": 1200,
+    "cargoWithFrunk": 572
   },
   "ford-explorer-er-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2169/Ford-Explorer-Extended-Range-AWD",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 536,
-    "towing": 1200
+    "towing": 1200,
+    "cargoWithFrunk": 536
   },
   "ford-mustang-mach-e-lr-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2279/Ford-Mustang-Mach-E-ER-AWD",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 619,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 619
   },
   "ford-puma-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3073/Ford-Puma-Gen-E",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 566,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 566
   },
   "hongqi-ehs5-base": {
     "source": "https://electricvehicleweb.com/hongqi-ehs5/",
@@ -308,302 +345,340 @@
   "hongqi-ehs7-premium": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3265/Hongqi-E-HS7-111-kWh-AWD-Pro",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 705,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 705
   },
   "hyundai-inster-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2230/Hyundai-INSTER-Standard-Range",
     "body": "SUV",
     "segment": "A - Mini",
-    "cargo": 280,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 280
   },
   "hyundai-inster-long-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2231/Hyundai-INSTER-Long-Range",
     "body": "SUV",
     "segment": "A - Mini",
-    "cargo": 351,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 351
   },
   "hyundai-ioniq-3-standard-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3554/Hyundai-IONIQ-3-422-kWh",
     "body": "Hatchback",
     "segment": "B - Compact",
-    "cargo": 441,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 441
   },
   "hyundai-ioniq-3-long-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3555/Hyundai-IONIQ-3-61-kWh",
     "body": "Hatchback",
     "segment": "B - Compact",
-    "cargo": 441,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 441
   },
   "hyundai-ioniq-5-long-range-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2237/Hyundai-IONIQ-5-84-kWh-AWD",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 544,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 544
   },
   "hyundai-ioniq-9-long-range-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3068/Hyundai-IONIQ-9-Long-Range-AWD",
     "body": "SUV",
     "segment": "F - Luxury",
-    "cargo": 960,
-    "towing": 2500
+    "towing": 2500,
+    "cargoWithFrunk": 960
   },
   "hyundai-ioniq-9-long-range-performance-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3069/Hyundai-IONIQ-9-Performance-AWD",
     "body": "SUV",
     "segment": "F - Luxury",
-    "cargo": 960,
-    "towing": 2500
+    "towing": 2500,
+    "cargoWithFrunk": 960
   },
   "hyundai-kona-electric-65-kwh": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1830/Hyundai-Kona-Electric-65-kWh",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 493,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 493
   },
   "hyundai-staria-electric-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3724/Hyundai-STARIA-Electric-84-kWh",
     "body": "Small Passenger Van",
     "segment": "N - Passenger Van",
-    "cargo": 855,
-    "towing": 2000
+    "towing": 2000,
+    "cargoWithFrunk": 855
   },
   "jac-e30x-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3641/JAC-E30X-515-kWh",
     "body": "Hatchback",
     "segment": "B - Compact",
-    "cargo": 310,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 310
   },
   "jeep-avenger-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1816/Jeep-Avenger-Electric",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 355,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 355
   },
   "kgm-torres-evx": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2189/KGM-Torres-EVX",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 839,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 839
   },
   "kia-ev2-standard-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3490/Kia-EV2-422-kWh",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 377,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 377
   },
   "kia-ev2-long-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3491/Kia-EV2-61-kWh",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 377,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 377
   },
   "kia-ev3-standard-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2211/Kia-EV3-Standard-Range",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 485,
-    "towing": 500
+    "towing": 500,
+    "cargoWithFrunk": 485
   },
   "kia-ev3-long-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2212/Kia-EV3-Long-Range",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 485,
-    "towing": 1000
+    "towing": 1000,
+    "cargoWithFrunk": 485
   },
   "kia-ev3-long-range-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3639/Kia-EV3-Long-Range-AWD",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 438,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 438
   },
   "kia-ev4-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3124/Kia-EV4-Hatchback-814-kWh",
     "body": "Hatchback",
     "segment": "C - Medium",
-    "cargo": 435,
-    "towing": 1000
+    "towing": 1000,
+    "cargoWithFrunk": 435
   },
   "kia-ev4-fastback": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3122/Kia-EV4-Fastback-814-kWh",
     "body": "Sedan",
     "segment": "C - Medium",
-    "cargo": 490,
-    "towing": 1000
+    "towing": 1000,
+    "cargoWithFrunk": 490
   },
   "kia-ev5-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3300/Kia-EV5-814-kWh",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 610,
-    "towing": 1200
+    "towing": 1200,
+    "cargoWithFrunk": 610
   },
   "kia-ev5-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3489/Kia-EV5-814-kWh-AWD",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 610,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 610
   },
   "kia-ev6-2025-long-range-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3029/Kia-EV6-Long-Range-AWD",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 510,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 510
   },
   "kia-ev9-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1835/Kia-EV9-998-kWh-AWD",
     "body": "SUV",
     "segment": "F - Luxury",
-    "cargo": 880,
-    "towing": 2500
+    "towing": 2500,
+    "cargoWithFrunk": 880
   },
   "kia-ev9-gt": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3196/Kia-EV9-998-kWh-AWD-GT",
     "body": "SUV",
     "segment": "F - Luxury",
-    "cargo": 880,
-    "towing": 2500
+    "towing": 2500,
+    "cargoWithFrunk": 880
   },
   "kia-pv5-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3289/Kia-PV5-Passenger-712-kWh",
     "body": "Small Passenger Van",
     "segment": "N - Passenger Van",
-    "cargo": 1330,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 1330
   },
   "leapmotor-t03-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3039/Leapmotor-T03",
     "body": "Hatchback",
     "segment": "A - Mini",
-    "cargo": 210,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 210
   },
   "leapmotor-b03x-life": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3665/Leapmotor-B03X-398-kWh",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 407,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 407
   },
   "leapmotor-b03x-design": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3666/Leapmotor-B03X-530-kWh",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 407,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 407
   },
   "leapmotor-b05-design": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3564/Leapmotor-B05-671-kWh",
     "body": "Hatchback",
     "segment": "C - Medium",
-    "cargo": 345,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 345
   },
   "leapmotor-b10-design": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3233/Leapmotor-B10-671-kWh",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 430,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 430
   },
   "leapmotor-c10-design-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3388/Leapmotor-C10-AWD-819-kWh",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 467,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 467
   },
   "lexus-es-350e": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3492/Lexus-ES-350e",
     "body": "Sedan",
     "segment": "E - Executive",
-    "cargo": 517,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 517
   },
   "lexus-es-500e": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3493/Lexus-ES-500e-DIRECT-4",
     "body": "Sedan",
     "segment": "E - Executive",
-    "cargo": 517,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 517
   },
   "lexus-rz-350e": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3293/Lexus-RZ-350e",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 522,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 522
   },
   "lexus-rz-500e": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3294/Lexus-RZ-500e",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 522,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 522
   },
   "lexus-rz-550e-f-sport": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3295/Lexus-RZ-550e-F-SPORT",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 522,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 522
   },
   "lexus-tz-450e-standard-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3819/Lexus-TZ-450e-Standard-Range",
     "body": "SUV",
     "segment": "F - Luxury",
     "towing": 1500
@@ -611,6 +686,7 @@
   "lexus-tz-450e-long-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3820/Lexus-TZ-450e-Long-Range",
     "body": "SUV",
     "segment": "F - Luxury",
     "towing": 1500
@@ -618,6 +694,7 @@
   "lexus-tz-550e": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3821/Lexus-TZ-550e-Long-Range",
     "body": "SUV",
     "segment": "F - Luxury",
     "towing": 1500
@@ -625,682 +702,767 @@
   "mazda-6e-long-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3108/Mazda-6e-Long-Range-80-kWh",
     "body": "Liftback Sedan",
     "segment": "D - Large",
-    "cargo": 407,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 407
   },
   "mazda-cx-6e-78-kwh": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3596/Mazda-CX-6e-78-kWh",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 548,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 548
   },
   "mercedes-benz-c-400-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3551/Mercedes-Benz-C-400-4MATIC",
     "body": "Sedan",
     "segment": "D - Large",
-    "cargo": 571,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 571
   },
   "mercedes-benz-cla-200": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3370/Mercedes-Benz-CLA-200",
     "body": "Sedan",
     "segment": "D - Large",
-    "cargo": 506,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 506
   },
   "mercedes-benz-cla-350-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3140/Mercedes-Benz-CLA-350-4MATIC",
     "body": "Sedan",
     "segment": "D - Large",
-    "cargo": 506,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 506
   },
   "mercedes-benz-cla-shooting-brake-350-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3397/Mercedes-Benz-CLA-Shooting-Brake-350-4MATIC",
     "body": "Station/Estate",
     "segment": "D - Large",
-    "cargo": 556,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 556
   },
   "mercedes-benz-cla-amg-45-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3711/Mercedes-Benz-CLA-AMG-45-4MATICplus",
     "body": "Sedan",
     "segment": "D - Large",
-    "cargo": 491,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 491
   },
   "mercedes-benz-amg-gt-53-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3702/Mercedes-Benz-AMG-GT-4-Door-Coupe-53-4MATICplus",
     "body": "Liftback Sedan",
     "segment": "F - Luxury",
-    "cargo": 456,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 456
   },
   "mercedes-benz-amg-gt-55-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3627/Mercedes-Benz-AMG-GT-4-Door-Coupe-55-4MATICplus",
     "body": "Liftback Sedan",
     "segment": "F - Luxury",
-    "cargo": 456,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 456
   },
   "mercedes-benz-amg-gt-63-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3626/Mercedes-Benz-AMG-GT-4-Door-Coupe-63-4MATICplus",
     "body": "Liftback Sedan",
     "segment": "F - Luxury",
-    "cargo": 456,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 456
   },
   "mercedes-benz-eqa-suv-300-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1986/Mercedes-Benz-EQA-300-4MATIC",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 340,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 340
   },
   "mercedes-benz-gla-350-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3687/Mercedes-Benz-GLA-350-4MATIC",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 517,
-    "towing": 2000
+    "towing": 2000,
+    "cargoWithFrunk": 517
   },
   "mercedes-benz-glb-350-4matic-eq": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3407/Mercedes-Benz-GLB-350-4MATIC",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 667,
-    "towing": 2000
+    "towing": 2000,
+    "cargoWithFrunk": 667
   },
   "mercedes-benz-glc-300-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3654/Mercedes-Benz-GLC-300-4MATIC",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 698,
-    "towing": 2400
+    "towing": 2400,
+    "cargoWithFrunk": 698
   },
   "mercedes-benz-glc-400-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3296/Mercedes-Benz-GLC-400-4MATIC",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 698,
-    "towing": 2400
+    "towing": 2400,
+    "cargoWithFrunk": 698
   },
   "mercedes-benz-eqe-suv-350-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2047/Mercedes-Benz-EQE-SUV-350-4MATIC",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 520,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 520
   },
   "mercedes-benz-eqs-580-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3580/Mercedes-Benz-EQS-580-4MATIC",
     "body": "Sedan",
     "segment": "F - Luxury",
-    "cargo": 610,
-    "towing": 1700
+    "towing": 1700,
+    "cargoWithFrunk": 610
   },
   "mercedes-benz-eqs-suv-580-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2090/Mercedes-Benz-EQS-SUV-580-4MATIC",
     "body": "SUV",
     "segment": "F - Luxury",
-    "cargo": 645,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 645
   },
   "mercedes-benz-eqt-200": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1908/Mercedes-Benz-EQT-200-Standard",
     "body": "Small Passenger Van",
     "segment": "N - Passenger Van",
-    "cargo": 551,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 551
   },
   "mercedes-benz-eqv-300": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1240/Mercedes-EQV-300-Long",
     "body": "Small Passenger Van",
     "segment": "N - Passenger Van",
-    "cargo": 1030,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 1030
   },
   "mercedes-benz-vle-300": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3519/Mercedes-Benz-VLE-300",
     "body": "Small Passenger Van",
     "segment": "N - Passenger Van",
-    "cargo": 795,
-    "towing": 1750
+    "towing": 1750,
+    "cargoWithFrunk": 795
   },
   "mercedes-benz-vle-400-4matic": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3739/Mercedes-Benz-VLE-400-4MATIC",
     "body": "Small Passenger Van",
     "segment": "N - Passenger Van",
-    "cargo": 795,
-    "towing": 2500
+    "towing": 2500,
+    "cargoWithFrunk": 795
   },
   "mercedes-benz-g-class-580-eq": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2192/Mercedes-Benz-G-580",
     "body": "SUV",
     "segment": "F - Luxury",
-    "cargo": 555,
-    "towing": 0
+    "towing": 3500,
+    "cargoWithFrunk": 555
   },
   "mercedes-benz-evito-tourer": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1615/Mercedes-eVito-Tourer-Long-90-kWh",
     "body": "Small Passenger Van",
     "segment": "N - Passenger Van",
-    "cargo": 990,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 990
   },
   "mg-cyberster-gt": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2203/MG-Cyberster-GT",
     "body": "Cabriolet",
     "segment": "S - Sports",
-    "cargo": 249,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 249
   },
   "mg-mg4-urban-standard-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3470/MG-MG4-Urban-Standard-Range",
     "body": "Hatchback",
     "segment": "C - Medium",
-    "cargo": 577,
-    "towing": 500
+    "towing": 500,
+    "cargoWithFrunk": 577
   },
   "mg-mg4-urban-long-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3471/MG-MG4-Urban-Comfort-Long-Range",
     "body": "Hatchback",
     "segment": "C - Medium",
-    "cargo": 577,
-    "towing": 500
+    "towing": 500,
+    "cargoWithFrunk": 577
   },
   "mg-mgs5-comfort": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3146/MG-MGS5-EV-49-kWh",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 453,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 453
   },
   "mg-mgs5-lux": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3147/MG-MGS5-EV-64-kWh",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 453,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 453
   },
   "mg-mgs6-dual-motor": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3419/MG-MGS6-EV-Dual-Motor-77-kWh",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 595,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 595
   },
   "mini-aceman-e": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2190/Mini-Aceman-E",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 300,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 300
   },
   "mini-cooper-se": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1998/Mini-Cooper-SE",
     "body": "Hatchback",
     "segment": "B - Compact",
-    "cargo": 200,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 200
   },
   "mini-countryman-e": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1994/Mini-Countryman-E",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 460,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 460
   },
   "mini-countryman-se-4x4": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1995/Mini-Countryman-SE-ALL4",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 460,
-    "towing": 1200
+    "towing": 1200,
+    "cargoWithFrunk": 460
   },
   "nissan-ariya-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3681/Nissan-Ariya-87kWh",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 468,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 468
   },
   "nissan-ariya-e-4orce": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3682/Nissan-Ariya-e-4ORCE-87kWh---225-kW",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 415,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 415
   },
   "nissan-leaf-standard-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3365/Nissan-LEAF-Standard-Range-52-kWh",
     "body": "Liftback Sedan",
     "segment": "C - Medium",
-    "cargo": 437,
-    "towing": 975
+    "towing": 975,
+    "cargoWithFrunk": 437
   },
   "nissan-leaf-extended-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3366/Nissan-LEAF-Extended-Range-75-kWh",
     "body": "Liftback Sedan",
     "segment": "C - Medium",
-    "cargo": 437,
-    "towing": 975
+    "towing": 975,
+    "cargoWithFrunk": 437
   },
   "opel-frontera-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2238/Opel-Frontera-Electric-44-kWh",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 460,
-    "towing": 350
+    "towing": 350,
+    "cargoWithFrunk": 460
   },
   "opel-grandland-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3037/Opel-Grandland-Electric-73-kWh",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 550,
-    "towing": 1200
+    "towing": 1200,
+    "cargoWithFrunk": 550
   },
   "opel-grandland-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3201/Opel-Grandland-Electric-73-kWh-AWD",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 485,
-    "towing": 1350
+    "towing": 1350,
+    "cargoWithFrunk": 485
   },
   "gwm-ora-3-48-kwh": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2091/GWM-ORA-03-48-kWh",
     "body": "Hatchback",
     "segment": "C - Medium",
-    "cargo": 228,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 228
   },
   "peugeot-e-2008-54-kwh": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1947/Peugeot-e-2008-54-kWh",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 434,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 434
   },
   "peugeot-e-3008-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2003/Peugeot-e-3008-73-kWh",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 588,
-    "towing": 1250
+    "towing": 1250,
+    "cargoWithFrunk": 588
   },
   "peugeot-e-3008-dual-motor": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2004/Peugeot-e-3008-73-kWh-Dual-Motor",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 588,
-    "towing": 1350
+    "towing": 1350,
+    "cargoWithFrunk": 588
   },
   "peugeot-e-5008-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2149/Peugeot-e-5008-73-kWh",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 916,
-    "towing": 1000
+    "towing": 1000,
+    "cargoWithFrunk": 916
   },
   "peugeot-e-5008-dual-motor": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2150/Peugeot-e-5008-73-kWh-Dual-Motor",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 862,
-    "towing": 1000
+    "towing": 1000,
+    "cargoWithFrunk": 862
   },
   "polestar-2-long-range-dual-motor": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3152/Polestar-2-Long-Range-Dual-Motor",
     "body": "Liftback Sedan",
     "segment": "D - Large",
-    "cargo": 448,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 448
   },
   "polestar-2-long-range-performance": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3153/Polestar-2-Long-Range-Performance",
     "body": "Liftback Sedan",
     "segment": "D - Large",
-    "cargo": 448,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 448
   },
   "polestar-3-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1758/Polestar-3-Long-Range-Dual-motor",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 516,
-    "towing": 2200
+    "towing": 2200,
+    "cargoWithFrunk": 516
   },
   "polestar-3-performance": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1759/Polestar-3-Long-Range-Performance",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 516,
-    "towing": 2200
+    "towing": 2200,
+    "cargoWithFrunk": 516
   },
   "polestar-4-long-range-dual-motor": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1842/Polestar-4-Long-Range-Dual-Motor",
     "body": "Liftback Sedan",
     "segment": "E - Executive",
-    "cargo": 541,
-    "towing": 2000
+    "towing": 2000,
+    "cargoWithFrunk": 541
   },
   "polestar-4-suv-long-range-dual-motor": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3715/Polestar-4-SUV-Dual-Motor",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 545,
-    "towing": 2000
+    "towing": 2000,
+    "cargoWithFrunk": 545
   },
   "polestar-5-performance": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3299/Polestar-5-Performance",
     "body": "Sedan",
     "segment": "F - Luxury",
-    "cargo": 427,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 427
   },
   "porsche-macan-4-electric": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3704/Porsche-Macan-4-Electric",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 624,
-    "towing": 2500
+    "towing": 2500,
+    "cargoWithFrunk": 624
   },
   "porsche-macan-4s-electric": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3705/Porsche-Macan-4S-Electric",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 624,
-    "towing": 2500
+    "towing": 2500,
+    "cargoWithFrunk": 624
   },
   "porsche-taycan-plus": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2099/Porsche-Taycan-Plus",
     "body": "Sedan",
     "segment": "F - Luxury",
-    "cargo": 491,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 491
   },
   "porsche-taycan-4-plus": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3061/Porsche-Taycan-4-Plus",
     "body": "Sedan",
     "segment": "F - Luxury",
-    "cargo": 491,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 491
   },
   "porsche-taycan-4s-plus": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2101/Porsche-Taycan-4S-Plus",
     "body": "Sedan",
     "segment": "F - Luxury",
-    "cargo": 491,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 491
   },
   "porsche-taycan-4-cross-turismo": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2110/Porsche-Taycan-4-Cross-Turismo",
     "body": "Station/Estate",
     "segment": "F - Luxury",
-    "cargo": 530,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 530
   },
   "porsche-taycan-4s-cross-turismo": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2111/Porsche-Taycan-4S-Cross-Turismo",
     "body": "Station/Estate",
     "segment": "F - Luxury",
-    "cargo": 530,
-    "towing": 0
+    "towing": 0,
+    "cargoWithFrunk": 530
   },
   "porsche-cayenne-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3398/Porsche-Cayenne-Electric",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 871,
-    "towing": 3000
+    "towing": 3000,
+    "cargoWithFrunk": 871
   },
   "porsche-cayenne-coupe": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3560/Porsche-Cayenne-Coupe-Electric",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 624,
-    "towing": 3000
+    "towing": 3000,
+    "cargoWithFrunk": 624
   },
   "porsche-cayenne-s": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3486/Porsche-Cayenne-S-Electric",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 871,
-    "towing": 3000
+    "towing": 3000,
+    "cargoWithFrunk": 871
   },
   "porsche-cayenne-s-coupe": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3561/Porsche-Cayenne-S-Coupe-Electric",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 624,
-    "towing": 3000
+    "towing": 3000,
+    "cargoWithFrunk": 624
   },
   "porsche-cayenne-turbo": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3399/Porsche-Cayenne-Turbo-Electric",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 837,
-    "towing": 3000
+    "towing": 3000,
+    "cargoWithFrunk": 837
   },
   "porsche-cayenne-turbo-coupe": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3562/Porsche-Cayenne-Turbo-Coupe-Electric",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 624,
-    "towing": 3000
+    "towing": 3000,
+    "cargoWithFrunk": 624
   },
   "range-rover-electric-ev450": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3716/Land-Rover-Range-Rover-EV450",
     "body": "SUV",
     "segment": "F - Luxury",
-    "cargo": 733,
-    "towing": 2500
+    "towing": 2500,
+    "cargoWithFrunk": 733
   },
   "range-rover-electric-ev550": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3717/Land-Rover-Range-Rover-EV550",
     "body": "SUV",
     "segment": "F - Luxury",
-    "cargo": 733,
-    "towing": 2500
+    "towing": 2500,
+    "cargoWithFrunk": 733
   },
   "range-rover-sport-electric-ev450": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3815/Land-Rover-Range-Rover-Sport-EV450",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 627,
-    "towing": 2500
+    "towing": 2500,
+    "cargoWithFrunk": 627
   },
   "range-rover-sport-electric-ev550": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3816/Land-Rover-Range-Rover-Sport-EV550",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 627,
-    "towing": 2500
+    "towing": 2500,
+    "cargoWithFrunk": 627
   },
   "renault-r4-e-tech-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3127/Renault-4-E-Tech-52kWh-150hp",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 420,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 420
   },
   "renault-r5-e-tech-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2134/Renault-5-E-Tech-40kWh-120hp",
     "body": "Hatchback",
     "segment": "B - Compact",
-    "cargo": 326,
-    "towing": 500
+    "towing": 500,
+    "cargoWithFrunk": 326
   },
   "renault-r5-e-tech-52-kwh": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2135/Renault-5-E-Tech-52kWh-150hp",
     "body": "Hatchback",
     "segment": "B - Compact",
-    "cargo": 326,
-    "towing": 500
+    "towing": 500,
+    "cargoWithFrunk": 326
   },
   "renault-scenic-e-tech-ev60": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3218/Renault-Scenic-E-Tech-EV60-170hp",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 545,
-    "towing": 1100
+    "towing": 1100,
+    "cargoWithFrunk": 545
   },
   "renault-scenic-e-tech-ev87": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3219/Renault-Scenic-E-Tech-EV87-220hp",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 545,
-    "towing": 1100
+    "towing": 1100,
+    "cargoWithFrunk": 545
   },
   "skoda-epiq-55": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3622/Skoda-Epiq-55",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 500,
-    "towing": 1200
+    "towing": 1200,
+    "cargoWithFrunk": 500
   },
   "skoda-elroq-85x": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3372/Skoda-Elroq-85x",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 470,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 470
   },
   "skoda-elroq-rs": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3568/Skoda-Elroq-RS",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 491,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 491
   },
   "skoda-enyaq-85x": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3098/Skoda-Enyaq-85x",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 585,
-    "towing": 1200
+    "towing": 1200,
+    "cargoWithFrunk": 585
   },
   "skoda-enyaq-rs": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3572/Skoda-Enyaq-RS",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 606,
-    "towing": 2200
+    "towing": 2200,
+    "cargoWithFrunk": 606
   },
   "skoda-peaq-90x": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3660/Skoda-Peaq-90x",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 972,
-    "towing": 2000
+    "towing": 2000,
+    "cargoWithFrunk": 972
   },
   "smart-1-pro": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1667/Smart-1",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 338,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 338
   },
   "smart-1-pulse": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1920/Smart-1-Pulse",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 328,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 328
   },
   "smart-1-brabus": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1748/Smart-1-Brabus",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 328,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 328
   },
   "smart-3-pulse": {
     "source": "https://media.smart.com/eu/download/cdb4f8e3-8917-4272-aae9-0f629ff004fd/smart3-vehiclespecsheet.pdf",
@@ -1316,270 +1478,304 @@
   "smart-3-brabus": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2000/Smart-3-Brabus",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 385,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 385
   },
   "smart-5-pro": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3141/Smart-5-Pro",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 702,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 702
   },
   "smart-5-pulse": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3144/Smart-5-Pulse",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 677,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 677
   },
   "smart-5-brabus": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3179/Smart-5-Brabus",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 677,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 677
   },
   "subaru-e-outback-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3506/Subaru-E-Outback-AWD",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 633,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 633
   },
   "subaru-solterra-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3434/Subaru-Solterra-AWD-731-kWh",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 421,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 421
   },
   "subaru-uncharted-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3437/Subaru-Uncharted-77-kWh-AWD",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 403,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 403
   },
   "suzuki-e-vitara-4x4-allgrip": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3213/Suzuki-e-VITARA-61-kWh-4WD-AllGrip",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 238,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 238
   },
   "tesla-model-3-afturhjoladrif": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3186/Tesla-Model-3-RWD",
     "body": "Sedan",
     "segment": "D - Large",
-    "cargo": 682,
-    "towing": 1000
+    "towing": 1000,
+    "cargoWithFrunk": 682
   },
   "tesla-model-3-long-range-afturhjoladrif": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3330/Tesla-Model-3-Long-Range-RWD",
     "body": "Sedan",
     "segment": "D - Large",
-    "cargo": 682,
-    "towing": 1000
+    "towing": 1000,
+    "cargoWithFrunk": 682
   },
   "tesla-model-3-long-range-fjorhjoladrif": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3405/Tesla-Model-3-Premium-AWD",
     "body": "Sedan",
     "segment": "D - Large",
-    "cargo": 682,
-    "towing": 1000
+    "towing": 1000,
+    "cargoWithFrunk": 682
   },
   "tesla-model-3-performance": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2188/Tesla-Model-3-Performance",
     "body": "Sedan",
     "segment": "D - Large",
-    "cargo": 682,
-    "towing": 500
+    "towing": 500,
+    "cargoWithFrunk": 682
   },
   "tesla-model-y-standard-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3741/Tesla-Model-Y-RWD",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 952,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 952
   },
   "tesla-model-y-premium-long-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3595/Tesla-Model-Y-Premium-RWD",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 971,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 971
   },
   "tesla-model-y-long-range-dual-motor": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3333/Tesla-Model-Y-Premium-AWD",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 938,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 938
   },
   "tesla-model-y-performance": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3269/Tesla-Model-Y-Performance",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 971,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 971
   },
   "toyota-bz4x-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3134/Toyota-bZ4X-FWD-731-kWh",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 452,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 452
   },
   "toyota-bz4x-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3135/Toyota-bZ4X-AWD-731-kWh",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 452,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 452
   },
   "toyota-bz4x-touring-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3400/Toyota-bZ4X-Touring-FWD-747-kWh",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 669,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 669
   },
   "toyota-bz4x-touring-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3401/Toyota-bZ4X-Touring-AWD-747-kWh",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 669,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 669
   },
   "toyota-c-hr-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3393/Toyota-C-HRplus-577-kWh",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 416
+    "cargoWithFrunk": 416
   },
   "toyota-c-hr-77-kwh": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3394/Toyota-C-HRplus-77-kWh",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 416,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 416
   },
   "toyota-c-hr-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3395/Toyota-C-HRplus-77-kWh-AWD",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 416,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 416
   },
   "toyota-proace-city-verso-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2165/Toyota-Proace-City-Verso-L1-50-kWh",
     "body": "Small Passenger Van",
     "segment": "N - Passenger Van",
-    "cargo": 775,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 775
   },
   "toyota-proace-verso-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2266/Toyota-PROACE-Verso-M-75-kWh",
     "body": "Small Passenger Van",
     "segment": "N - Passenger Van",
-    "cargo": 603,
-    "towing": 1000
+    "towing": 1000,
+    "cargoWithFrunk": 603
   },
   "toyota-urban-cruiser-active-fwd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3209/Toyota-Urban-Cruiser-611-kWh",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 238,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 238
   },
   "toyota-urban-cruiser-active-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3210/Toyota-Urban-Cruiser-611-kWh-AWD",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 238,
-    "towing": 750
+    "towing": 750,
+    "cargoWithFrunk": 238
   },
   "volkswagen-id-buzz-gtx": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2157/Volkswagen-ID-Buzz-LWB-GTX-",
     "body": "Small Passenger Van",
     "segment": "N - Passenger Van",
-    "cargo": 1340,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 1340
   },
   "volkswagen-id-polo-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3581/Volkswagen-ID-Polo-155-kW---52-kWh",
     "body": "Hatchback",
     "segment": "B - Compact",
-    "cargo": 441,
-    "towing": 1200
+    "towing": 1200,
+    "cargoWithFrunk": 441
   },
   "volkswagen-id-polo-gti": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3825/Volkswagen-ID-Polo-GTI",
     "body": "Hatchback",
     "segment": "B - Compact",
-    "cargo": 441,
-    "towing": 1200
+    "towing": 1200,
+    "cargoWithFrunk": 441
   },
   "volkswagen-id-cross-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3673/Volkswagen-ID-Cross-155-kW---52-kWh",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 500,
-    "towing": 1200
+    "towing": 1200,
+    "cargoWithFrunk": 500
   },
   "volkswagen-id-3-pro": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2213/Volkswagen-ID3-Pro",
     "body": "Hatchback",
     "segment": "C - Medium",
-    "cargo": 385
+    "cargoWithFrunk": 385
   },
   "volkswagen-id-3-neo-58-kwh": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3521/Volkswagen-ID3-Neo-140-kW---58-kWh",
     "body": "Hatchback",
     "segment": "C - Medium",
-    "cargo": 385
+    "cargoWithFrunk": 385
   },
   "volkswagen-id-3-neo-79-kwh": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3522/Volkswagen-ID3-Neo-170-kW---79-kWh",
     "body": "Hatchback",
     "segment": "C - Medium",
-    "cargo": 385
+    "cargoWithFrunk": 385
   },
   "volkswagen-id-3-gti": {
     "source": "https://www.electrifying.com/reviews/volkswagen-reviews/id-3-gti/review",
@@ -1591,198 +1787,223 @@
   "volkswagen-id-4-gtx": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3252/Volkswagen-ID4-GTX",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 543,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 543
   },
   "volkswagen-id-4-pro-4motion": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3251/Volkswagen-ID4-Pro-4MOTION",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 543,
-    "towing": 1200
+    "towing": 1200,
+    "cargoWithFrunk": 543
   },
   "volkswagen-id-tiguan-pro-4motion": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3832/Volkswagen-ID-Tiguan-Pro-4MOTION",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 565,
-    "towing": 2000
+    "towing": 2000,
+    "cargoWithFrunk": 565
   },
   "volkswagen-id-7-gtx": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3261/Volkswagen-ID7-Tourer-GTX",
     "body": "Station/Estate",
     "segment": "E - Executive",
-    "cargo": 605,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 605
   },
   "volvo-ec40-twin-motor": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3156/Volvo-EC40-Twin-Motor",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 435,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 435
   },
   "volvo-ec40-p8-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3737/Volvo-EC40-P8-AWD",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 435,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 435
   },
   "volvo-es90-twin-motor": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3129/Volvo-ES90-Twin-Motor",
     "body": "Liftback Sedan",
     "segment": "F - Luxury",
-    "cargo": 468,
-    "towing": 2000
+    "towing": 2000,
+    "cargoWithFrunk": 468
   },
   "volvo-es90-twin-motor-performance": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3130/Volvo-ES90-Twin-Motor-Performance",
     "body": "Liftback Sedan",
     "segment": "F - Luxury",
-    "cargo": 468,
-    "towing": 2000
+    "towing": 2000,
+    "cargoWithFrunk": 468
   },
   "volvo-ex40-recharge-twin": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3160/Volvo-EX40-Twin-Motor",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 441,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 441
   },
   "volvo-ex40-p8-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3733/Volvo-EX40-P8-AWD",
     "body": "SUV",
     "segment": "C - Medium",
-    "cargo": 441,
-    "towing": 1800
+    "towing": 1800,
+    "cargoWithFrunk": 441
   },
   "volvo-ex30-single-motor-extended-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1910/Volvo-EX30-Single-Motor-ER",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 325,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 325
   },
   "volvo-ex30-twin-motor-performance": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/1911/Volvo-EX30-Twin-Motor-Performance",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 325,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 325
   },
   "volvo-ex30-cross-country-twin-motor-performance": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3118/Volvo-EX30-Cross-Country",
     "body": "SUV",
     "segment": "B - Compact",
-    "cargo": 325,
-    "towing": 1600
+    "towing": 1600,
+    "cargoWithFrunk": 325
   },
   "volvo-ex60-p10": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3442/Volvo-EX60-P10-AWD",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 575,
-    "towing": 2400
+    "towing": 2400,
+    "cargoWithFrunk": 575
   },
   "volvo-ex60-p12": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3443/Volvo-EX60-P12-AWD",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 575,
-    "towing": 2400
+    "towing": 2400,
+    "cargoWithFrunk": 575
   },
   "volvo-ex90-twin-motor": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3324/Volvo-EX90-Twin-Motor",
     "body": "SUV",
     "segment": "F - Luxury",
-    "cargo": 703,
-    "towing": 2200
+    "towing": 2200,
+    "cargoWithFrunk": 703
   },
   "volvo-ex90-twin-motor-performance": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3325/Volvo-EX90-Twin-Motor-Performance",
     "body": "SUV",
     "segment": "F - Luxury",
-    "cargo": 703,
-    "towing": 2200
+    "towing": 2200,
+    "cargoWithFrunk": 703
   },
   "xpeng-g6-rwd-standard-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2181/XPENG-G6-RWD-Standard-Range",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 571,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 571
   },
   "xpeng-g6-rwd-long-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2182/XPENG-G6-RWD-Long-Range",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 571,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 571
   },
   "xpeng-g6-awd-performance": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/2183/XPENG-G6-AWD-Performance",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 571,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 571
   },
   "xpeng-g9-awd-performance": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3279/XPENG-G9-AWD-Performance",
     "body": "SUV",
     "segment": "E - Executive",
-    "cargo": 731,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 731
   },
   "xpeng-l03-rwd-standard-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3676/XPENG-L03-RWD-Standard-Range",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 456,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 456
   },
   "xpeng-l03-rwd-long-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3677/XPENG-L03-RWD-Long-Range",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 456,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 456
   },
   "xpeng-l03-awd-performance": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3678/XPENG-L03-AWD-Performance",
     "body": "SUV",
     "segment": "D - Large",
-    "cargo": 411,
-    "towing": 1500
+    "towing": 1500,
+    "cargoWithFrunk": 411
   },
   "xpeng-x9-awd-performance": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
+    "evDatabaseUrl": "https://ev-database.org/car/3613/XPENG-X9-AWD-Performance",
     "body": "MPV",
     "segment": "F - Luxury",
     "towing": 1500

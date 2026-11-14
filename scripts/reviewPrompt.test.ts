@@ -94,10 +94,20 @@ describe('carFacts', () => {
     expect(withDetails).toContain(
       'yfirbygging: jepplingur eða jeppi, eftir stærð, 460 l farangursrými, 25 l framskott, má ekki draga kerru',
     )
-    expect(withDetails).toContain('394 l stærra skott')
+    // Its frunk counts, as the list's one figure for a car counts it
+    expect(withDetails).toContain('369 l stærra skott')
     expect(withDetails).toContain('má draga allt að 1.600 kg')
     expect(withDetails).toContain('ábyrgð á rafhlöðu 1 ári lengri')
     expect(facts).toContain('engar nánari upplýsingar af ev-database')
+  })
+
+  // The front page gives one figure for both, and a page gives them apart
+  it('weighs a boot given with its frunk against one given apart', () => {
+    const details: DetailsOf = (car) =>
+      car === kia ? { cargoWithFrunk: 485 } : { cargo: 854, frunk: 117 }
+    const withDetails = carFacts(kia, [tesla], [kia, tesla], details)
+    expect(withDetails).toContain('485 l farangursrými, framskott meðtalið')
+    expect(withDetails).toContain('486 l stærra skott')
   })
 
   // "It comes with all-wheel drive too" answers a drawback the review names
@@ -267,6 +277,18 @@ describe('describeStanding', () => {
     expect(describeStanding(middle, field, details)).toContain(
       'Dráttargeta — af öllum: má ekki draga kerru',
     )
+  })
+
+  // As length and warranty were, read for the few cars whose pages answered
+  it('leaves out a figure most cars have none of', () => {
+    const details: DetailsOf = (car) =>
+      car === middle || car === field[0] ? { length: 4400 } : undefined
+    expect(describeStanding(middle, field, details)).not.toContain('Lengd')
+    expect(
+      describeStanding(middle, field, (car) =>
+        car === field[5] ? undefined : { length: 4400 },
+      ),
+    ).toContain('Lengd')
   })
 
   it('leaves out what ev-database has nothing on', () => {

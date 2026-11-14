@@ -91,6 +91,9 @@ describe('the front page list', () => {
     ])
     expect(names('e-tron gt')).toEqual(['Audi e-tron GT'])
     expect(names('1285')).toEqual(['Audi e-tron GT'])
+    // A model named by a number is found by it, after the car with that id
+    expect(names('125')).toEqual(['Audi A2 e-tron 125 kW - 50 kWh'])
+    expect(names('3725')).toEqual(['Audi A2 e-tron 125 kW - 50 kWh'])
     expect(names('Kia')).toEqual([])
   })
 

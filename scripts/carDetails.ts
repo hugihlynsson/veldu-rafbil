@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 import type { Car } from '@/modules/data/cars'
-import type { CarSpecs } from '@/modules/data/evDatabase'
+import { specCorrections, type CarSpecs } from '@/modules/data/evDatabase'
 import { carSlug } from '@/modules/data/getCarId'
 import { bodyNames, readDetails, type CarDetails } from './reviewPrompt'
 import { LIST_URL } from './evDatabaseList'
@@ -17,6 +17,8 @@ export const detailsEntrySchema = z.strictObject({
   /** The car's ev-database page, its front-page list, or any page read by hand */
   source: z.url({ protocol: /^https$/ }),
   read: z.iso.date(),
+  /** The car's evDatabaseUrl when it was read, so a changed one is read again */
+  evDatabaseUrl: z.url().optional(),
   // Written by hand in ev-database's words, which reviewPrompt translates
   body: z
     .string()
@@ -29,6 +31,7 @@ export const detailsEntrySchema = z.strictObject({
   cargo: litres,
   cargoMax: litres,
   frunk: litres,
+  cargoWithFrunk: litres,
   towing: z.int().min(0).max(5000).optional(),
   warrantyYears: z.int().min(1).max(20).optional(),
   warrantyKm: z.int().min(10_000).max(2_000_000).optional(),
@@ -36,7 +39,11 @@ export const detailsEntrySchema = z.strictObject({
 
 // Not inferred from the schema, which a page naming a new body would fail:
 // the file's test catches that, rather than the run that read it
-export type DetailsEntry = CarDetails & { source: string; read: string }
+export type DetailsEntry = CarDetails & {
+  source: string
+  read: string
+  evDatabaseUrl?: string
+}
 export type DetailsFile = Record<string, DetailsEntry>
 
 // A car's page changes with a new model year, and reading all of them again
@@ -55,11 +62,52 @@ export const entryFrom = (
   return { source, read: today, ...Object.fromEntries(details) }
 }
 
-/** The cars with no entry at all, which a run looks up before writing */
+/** An entry from a car's own page, which readCarSpecs has corrected */
+export const pageEntry = (
+  specs: CarSpecs,
+  url: string,
+  today: string,
+): DetailsEntry => {
+  const { source, read, ...figures } = entryFrom(specs, url, today)
+  return { source, read, evDatabaseUrl: url, ...figures }
+}
+
+/**
+ * An entry from the front page's row for a car. Its cargo counts the frunk,
+ * which a page gives apart, so it is kept apart from a page's boot. The
+ * corrections readCarSpecs makes to a page apply to the row as well
+ */
+export const listEntry = (
+  specs: CarSpecs,
+  url: string,
+  today: string,
+): DetailsEntry => {
+  const { source, read, cargo, ...figures } = entryFrom(
+    { ...specs, ...specCorrections[url] },
+    LIST_URL,
+    today,
+  )
+  return {
+    source,
+    read,
+    evDatabaseUrl: url,
+    ...figures,
+    ...(cargo === undefined ? {} : { cargoWithFrunk: cargo }),
+  }
+}
+
+/**
+ * The cars a run looks up before writing: those with no entry, and those
+ * whose entry was read for another evDatabaseUrl than the car has now
+ */
 export const lacking = (
   cars: ReadonlyArray<Car>,
   file: Readonly<DetailsFile>,
-): Car[] => cars.filter((car) => !file[carSlug(car)])
+): Car[] =>
+  cars.filter((car) => {
+    const entry = file[carSlug(car)]
+    return !entry || entry.evDatabaseUrl !== car.evDatabaseUrl
+  })
 
 /**
  * The cars whose ev-database page is worth reading again: those read off the
