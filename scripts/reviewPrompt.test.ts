@@ -89,16 +89,30 @@ describe('carFacts', () => {
   it('says what ev-database adds, where it has it', () => {
     const details: DetailsOf = (car) =>
       car === kia
-        ? { body: 'SUV', cargo: 460, frunk: 25, towing: 0, warrantyYears: 7 }
-        : { body: 'SUV', cargo: 854, towing: 1600, warrantyYears: 8 }
+        ? { body: 'SUV', cargo: 460, frunk: 25, warrantyYears: 7 }
+        : { body: 'SUV', cargo: 854, warrantyYears: 8 }
     const withDetails = carFacts(kia, [tesla], [kia, tesla], details)
     expect(withDetails).toContain(
-      'yfirbygging: jepplingur eða jeppi, eftir stærð, 460 l farangursrými, 25 l framskott, má ekki draga kerru',
+      'yfirbygging: jepplingur eða jeppi, eftir stærð, 460 l farangursrými, 25 l framskott',
     )
     expect(withDetails).toContain('394 l stærra skott')
-    expect(withDetails).toContain('má draga allt að 1.600 kg')
     expect(withDetails).toContain('ábyrgð á rafhlöðu 1 ári lengri')
     expect(facts).toContain('engar nánari upplýsingar af ev-database')
+  })
+
+  // ev-database reads 0 for a car it has no figure for, as well as for one
+  // that takes no towbar, so the list's own figure is the one told
+  it('takes towing from the list, even with no ev-database page', () => {
+    const cannot = deriveCar({ ...base, towing: 0 })
+    const tows = deriveCar({ ...tesla, towing: 1600 })
+    const told = carFacts(cannot, [tows], [cannot, tows])
+    expect(told).toContain('allt að 5 sæti, má ekki draga kerru')
+    expect(told).toContain('má draga 1.600 kg')
+    expect(told).toContain('má draga allt að 1.600 kg')
+    const unknown = deriveCar({ ...base, towing: null })
+    expect(carFacts(unknown, [tesla], [unknown, tesla])).not.toMatch(
+      /Long Range, [^\n]*draga/,
+    )
   })
 
   // "It comes with all-wheel drive too" answers a drawback the review names
@@ -211,6 +225,7 @@ describe('reviewFactsKey', () => {
     expect(reviewFactsKey({ ...a, range: a.range + 1 })).not.toBe(
       reviewFactsKey(a),
     )
+    expect(reviewFactsKey({ ...a, towing: 0 })).not.toBe(reviewFactsKey(a))
   })
 })
 
@@ -264,8 +279,10 @@ describe('describeStanding', () => {
 
   // A buyer with a trailer rules it out on that alone
   it('says outright that a car cannot tow', () => {
-    const details: DetailsOf = (car) => ({ towing: car === middle ? 0 : 750 })
-    expect(describeStanding(middle, field, details)).toContain(
+    const towing = field.map((car) =>
+      deriveCar({ ...car, towing: car === middle ? 0 : 750 }),
+    )
+    expect(describeStanding(towing[2]!, towing)).toContain(
       'Dráttargeta — af öllum: má ekki draga kerru',
     )
   })
@@ -287,14 +304,12 @@ describe('readDetails', () => {
       readDetails({
         length: '4440 mm',
         cargoVolume: '404 L',
-        towingBraked: '1800 kg',
         batteryWarrantyPeriod: '10 years',
         batteryWarrantyMileage: '1,000,000 km',
       }),
     ).toMatchObject({
       length: 4440,
       cargo: 404,
-      towing: 1800,
       warrantyYears: 10,
       warrantyKm: 1_000_000,
     })
@@ -321,8 +336,10 @@ describe('readDetails', () => {
     ).toMatchObject({ cargo: 421, cargoMax: undefined })
   })
 
-  it('takes a car that takes no hitch to tow nothing', () => {
-    expect(readDetails({ towHitch: 'No' }).towing).toBe(0)
-    expect(readDetails({}).towing).toBeUndefined()
+  // The list holds a car's towing, checked against its maker
+  it('reads no towing off the page', () => {
+    expect(
+      readDetails({ towHitch: 'No', towingBraked: '1800 kg' }),
+    ).not.toHaveProperty('towing')
   })
 })

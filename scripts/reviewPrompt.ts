@@ -102,7 +102,6 @@ export interface CarDetails {
   cargo?: number
   cargoMax?: number
   frunk?: number
-  towing?: number
   warrantyYears?: number
   warrantyKm?: number
 }
@@ -146,9 +145,6 @@ export const readDetails = (
     cargo,
     cargoMax: cargo === undefined ? undefined : cargoMax,
     frunk: numberIn(specs.frunk),
-    // A car that takes no hitch tows nothing, whatever weight the page leaves
-    towing:
-      specs.towHitch?.toLowerCase() === 'no' ? 0 : numberIn(specs.towingBraked),
     warrantyYears: numberIn(specs.batteryWarrantyPeriod),
     warrantyKm: numberIn(specs.batteryWarrantyMileage),
   }
@@ -384,10 +380,11 @@ const metrics: Metric[] = [
   {
     label: 'Dráttargeta',
     better: 'higher',
-    value: (car, details) => details(car)?.towing,
-    difference: (other, car, details) => {
-      const theirs = details(other)?.towing
-      const its = details(car)?.towing
+    // The list's figure, not ev-database's, which reads 0 for no figure too
+    value: (car) => car.towing ?? undefined,
+    difference: (other, car) => {
+      const theirs = other.towing ?? undefined
+      const its = car.towing ?? undefined
       if (theirs === undefined || its === undefined || theirs === its) {
         return undefined
       }
@@ -488,7 +485,7 @@ const bodyNames: Record<string, string> = {
 // What ev-database adds to the list's figures, where it has a page for it
 const describeDetails = (details: CarDetails | undefined): string[] => {
   if (!details) return ['engar nánari upplýsingar af ev-database']
-  const { body, segment, length, cargo, cargoMax, frunk, towing } = details
+  const { body, segment, length, cargo, cargoMax, frunk } = details
   const { warrantyYears, warrantyKm } = details
   return [
     body && `yfirbygging: ${bodyNames[body] ?? body}`,
@@ -497,9 +494,6 @@ const describeDetails = (details: CarDetails | undefined): string[] => {
     cargo &&
       `${addDecimalSeparators(cargo)} l farangursrými${cargoMax ? ` (${addDecimalSeparators(cargoMax)} l með aftursætin niðri)` : ''}`,
     frunk && `${addDecimalSeparators(frunk)} l framskott`,
-    towing === 0
-      ? 'má ekki draga kerru'
-      : towing && `má draga ${addDecimalSeparators(towing)} kg`,
     warrantyYears &&
       `${warrantyYears} ára ábyrgð á rafhlöðu${warrantyKm ? ` eða ${addDecimalSeparators(warrantyKm)} km` : ''}`,
   ].filter((part): part is string => Boolean(part))
@@ -520,6 +514,11 @@ const describeCar = (car: Car, details: DetailsOf): string =>
     `${car.power} kW`,
     driveLabels[car.drive].toLowerCase(),
     `allt að ${car.seats} sæti`,
+    ...(car.towing === 0
+      ? ['má ekki draga kerru']
+      : car.towing
+        ? [`má draga ${addDecimalSeparators(car.towing)} kg`]
+        : []),
     ...describeDetails(details(car)),
   ].join(', ')
 
@@ -665,6 +664,7 @@ const quoted = (car: Car) => [
   car.drive,
   car.seats,
   car.timeToCharge10To80,
+  car.towing,
   car.evDatabaseUrl ?? null,
 ]
 

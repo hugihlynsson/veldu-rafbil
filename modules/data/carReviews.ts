@@ -33,7 +33,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Af hverju er hann dýrari en Kia EV4?',
       'Hvernig eru aksturseiginleikar hans?',
     ],
-    facts: '30b5349aa2ba',
+    facts: '1308ab70ff31',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'audi-a2-e-tron-140-kw': {
@@ -55,7 +55,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Finnst manni hann vera kraftlítill?',
       'Hversu hratt hleður hann á ferðalögum?',
     ],
-    facts: '69d06816c8c2',
+    facts: '83bbb5527ccd',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'audi-a2-e-tron-170-kw': {
@@ -77,7 +77,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað getur hann dregið þungan vagn?',
       'Hversu mikil er raunhæf vetrardrægni?',
     ],
-    facts: 'f07fe1418f85',
+    facts: '84f3a730f45a',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'audi-a2-e-tron-240-kw': {
@@ -98,7 +98,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er raundrægnin í vetrarkulda?',
       'Hvað tekur hleðslustopp á ferðalögum?',
     ],
-    facts: 'd756a3aff712',
+    facts: '5dc4af42d969',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'audi-a6-e-tron-sportback-quattro': {
@@ -120,7 +120,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig reynist quattro-drifið í snjó?',
       'Hve hratt hleður hann á ferðalögum?',
     ],
-    facts: 'b7341b393a5c',
+    facts: '8d0a09aa2c3e',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'audi-a6-e-tron-avant-quattro': {
@@ -142,7 +142,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hratt hleður hann á ferðalögum?',
       'Kemst hann milli Reykjavíkur og Akureyrar?',
     ],
-    facts: 'e205d8619ba8',
+    facts: '7b41afe7e1ca',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'audi-e-tron-gt-quattro': {
@@ -164,7 +164,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Dugar skottið fyrir venjulegan farangur?',
       'Hvernig er fjórhjóladrifið í miklum snjó?',
     ],
-    facts: '2895e50f5cdc',
+    facts: 'd467ea0157e4',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'audi-q4-e-tron-45-quattro': {
@@ -185,7 +185,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig rúmar hann barnabílstóla?',
       'Fyrir hverja er hann besti kosturinn?',
     ],
-    facts: '9f0c64c39989',
+    facts: '54c7c17b62e6',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'audi-q6-e-tron-base': {
@@ -195,7 +195,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti ókosturinn er að hann er hægari en flestir keppinautar hans. Volvo EX60 P10 kostar 100.000 kr. minna, drífur 35 km lengra, hleður með um 15% styttri stoppum og er mun sneggri.',
       'Q6 e-tron er traustur kostur fyrir fjölskyldur sem ferðast um landið, með kerru eða hjólhýsi ef svo ber undir.',
     ],
-    facts: '7479b9645f79',
+    facts: '5e7dc8823c2c',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Af hverju hann frekar en Volvo EX60 P10?',
@@ -229,7 +229,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hve hratt hleður hann í raun á ferðalagi?',
       'Munast mikið um 2.400 kg dráttargetu?',
     ],
-    facts: '9778c97a087e',
+    facts: '64daecc5cfe9',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'audi-sq6-e-tron-base': {
@@ -250,7 +250,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Nær hann fullum hleðsluhraða hérlendis?',
       'Er hann með nothæft geymslurými að framan?',
     ],
-    facts: '3ee31f060bc6',
+    facts: 'b4d48b7c4cfc',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'bmw-i3-40-xdrive': {
@@ -272,7 +272,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað dregur kerra drægnina mikið niður?',
       'Hvernig er nýi skjárinn í notkun?',
     ],
-    facts: '58898f2866b7',
+    facts: '64e1dbaae0b4',
   },
   'bmw-i3-50-xdrive': {
     paragraphs: [
@@ -293,7 +293,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig fer hann með 1.800 kg kerru?',
       'Er hann of snöggur fyrir hálkuna?',
     ],
-    facts: '92a4279d30e2',
+    facts: 'fd8a00bb05f8',
   },
   'bmw-i4-40-xdrive': {
     paragraphs: [
@@ -302,7 +302,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Í sínum verðflokki drífur hann þó styttra og hleður hægar en flestir, og skottið er minna en hjá flestum keppinautunum. Mercedes-Benz CLA 350 4MATIC er 1.700.000 kr. ódýrari, drífur 224 km lengra og hleður með um 40% styttri stoppum, og Audi A6 e-tron Sportback quattro er 1.500.000 kr. ódýrari, drífur 166 km lengra og er með 32 l stærra skott.',
       'i4 40 xDrive er fyrir þá sem kjósa akstursánægju og fólksbílalag fram yfir drægni og pláss.',
     ],
-    facts: '33ba753850c3',
+    facts: '30d50f6a4d20',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Kemst hann til Akureyrar án þess að hlaða?',
@@ -336,7 +336,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er raundrægnin á þjóðveginum?',
       'Hvað má hann draga þungan vagn?',
     ],
-    facts: 'b5d13e6938bb',
+    facts: 'a606f23a5543',
   },
   'bmw-i5-edrive40': {
     paragraphs: [
@@ -357,7 +357,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er hljóðvistin á grófu malbiki?',
       'Hvernig er fótarýmið í aftursætunum?',
     ],
-    facts: 'c6b254b35742',
+    facts: 'eb9605674076',
   },
   'bmw-i5-m60-xdrive': {
     paragraphs: [
@@ -378,7 +378,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann mjúkur þrátt fyrir M-aflið?',
       'Hvernig er hann í sportlegum akstri?',
     ],
-    facts: 'b86c3570b649',
+    facts: '874538a7ac43',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'bmw-ix-xdrive-45-sport': {
@@ -400,7 +400,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann með loftpúðafjöðrun?',
       'Er hann með fjórhjólastýringu?',
     ],
-    facts: '3adcfa78a769',
+    facts: 'cd06d032aba9',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'bmw-ix-xdrive-60-sport': {
@@ -422,7 +422,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Dettur drægnin mikið niður í vetrarkulda?',
       'Hvernig eru þægindin á lélegum vegum?',
     ],
-    facts: '60d3e349f8f7',
+    facts: '3a297dacef8c',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'bmw-ix1-edrive-20': {
@@ -444,7 +444,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er raundrægnin á þjóðveginum?',
       'Kemst stór barnavagn fyrir í skottinu?',
     ],
-    facts: 'b898d4586541',
+    facts: '19988f652a97',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'bmw-ix1-xdrive-30': {
@@ -466,7 +466,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig reynist fjórhjóladrifið í snjó?',
       'Er hann hljóðlátur á grófu malbiki?',
     ],
-    facts: '07e5506abf76',
+    facts: '3120513b7164',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'bmw-ix3-40': {
@@ -488,7 +488,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann hljóðlátari en keppinautarnir?',
       'Hvaða hleðslustöðvar nýta hann best?',
     ],
-    facts: 'bee4f10c465e',
+    facts: '7383d6bb3cc4',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'bmw-ix3-50-xdrive': {
@@ -510,7 +510,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hratt hleður 108 kWh rafhlaðan?',
       'Er hann þess virði miðað við verðið?',
     ],
-    facts: 'ce78c7e8497b',
+    facts: 'fbb2daec8265',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'bmw-ix5-60-xdrive': {
@@ -532,7 +532,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann of stór fyrir bílastæði í bænum?',
       'Hvernig reynist hann í djúpum snjó?',
     ],
-    facts: '870f71aabda4',
+    facts: '092f09685864',
   },
   'byd-atto-3-evo-base': {
     paragraphs: [
@@ -552,7 +552,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er hleðsluferillinn í kulda?',
       'Er hann nógu rúmgóður fyrir fjölskyldu?',
     ],
-    facts: '92dc0c418cde',
+    facts: '477b54307c5b',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'byd-dolphin-base': {
@@ -574,7 +574,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er hann á langferðum?',
       'Hvar finnur maður helst sparnaðinn?',
     ],
-    facts: 'c2cbbf750c20',
+    facts: 'cdf7b259368d',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'byd-seal-base': {
@@ -596,7 +596,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er fjöðrunin of stíf fyrir Ísland?',
       'Er hann of lágur fyrir íslenska vegi?',
     ],
-    facts: '437cc5dfce17',
+    facts: '9c3e43d0716a',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'byd-seal-u-base': {
@@ -618,7 +618,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar framhjóladrifið í snjó?',
       'Hvað rúmar skottið miðað við aðra?',
     ],
-    facts: '4c77f78c02ea',
+    facts: '0be24c6d957a',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'byd-sealion-7-base': {
@@ -640,7 +640,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað er raunhæf vetrardrægni á honum?',
       'Hvað má hann draga þungan vagn?',
     ],
-    facts: 'eae64e6acf18',
+    facts: 'a8512f5f5775',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'byd-tang-flagship': {
@@ -662,7 +662,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Nýtist þetta mikla afl í daglegum akstri?',
       'Hvað felur rafhlöðuábyrgðin í sér?',
     ],
-    facts: '0b6b2abcc37c',
+    facts: '7d8d242a568f',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'citroen-e-c4-base': {
@@ -684,7 +684,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað kemst mikið í skottið?',
       'Hvernig er plássið í aftursætinu?',
     ],
-    facts: 'b01ba1f5cc39',
+    facts: 'e4b2a924b401',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'fiat-500e-base': {
@@ -706,7 +706,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig hentar hann sem annar bíll?',
       'Kemst barnabílstóll í aftursætið?',
     ],
-    facts: 'f54bf2a8131a',
+    facts: 'b8776d419370',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'fiat-600e-base': {
@@ -728,7 +728,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig reynist hann í snjó?',
       'Hvernig er hljóðvist og fjöðrun?',
     ],
-    facts: 'e52904b29c0f',
+    facts: '301043ccbaf7',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'ford-capri-base': {
@@ -750,7 +750,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kemst stór barnavagn fyrir í skottinu?',
       'Hve lengi er hann að hlaða í kulda?',
     ],
-    facts: '4ea6b42b2b87',
+    facts: '3ace0ce9f14e',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'ford-explorer-er-awd': {
@@ -772,7 +772,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er raundrægnin í vetrarkulda?',
       'Er hann sneggri en keppinautarnir?',
     ],
-    facts: 'b1c3f87de310',
+    facts: '75048a16208b',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'ford-mustang-mach-e-lr-awd': {
@@ -794,7 +794,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað dregur 99 kWh rafhlaðan að vetri?',
       'Ræður hann vel við fellihýsi í reynd?',
     ],
-    facts: '5aa9e852e7c1',
+    facts: 'f12b72c74e9c',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'ford-puma-base': {
@@ -816,7 +816,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann lipur í þröngum stæðum?',
       'Dugar framhjóladrifið vel í snjó?',
     ],
-    facts: '59fdc3e4f824',
+    facts: '264e9f9bdc0e',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hongqi-ehs5-base': {
@@ -838,7 +838,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Eyðir hann miklu með svona mikið afl?',
       'Er hann þægilegur eða of sportlegur?',
     ],
-    facts: 'f95b2bcf0e39',
+    facts: '07d718e8f0cf',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hongqi-ehs7-premium': {
@@ -860,7 +860,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er raundrægnin á langkeyrslu?',
       'Hvernig er hljóðvistin og þægindin?',
     ],
-    facts: '57e6012d9ff0',
+    facts: '30f42a1a5a11',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hyundai-inster-base': {
@@ -882,7 +882,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hve mikið rúmar skottið í raun?',
       'Rúmar hann fjóra fullorðna vel?',
     ],
-    facts: '7808df54f00c',
+    facts: 'fcbe3fd33884',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hyundai-inster-long-range': {
@@ -904,7 +904,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað tekur hraðhleðsla langan tíma?',
       'Hvernig dugar hann í vetrarkulda?',
     ],
-    facts: 'ec6631b76377',
+    facts: 'b6bf7a7f9d01',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hyundai-ioniq-3-standard-range': {
@@ -926,7 +926,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hæg er hraðhleðslan í raun?',
       'Hvað kemst hann langt í vetrarkulda?',
     ],
-    facts: '8578568e6b17',
+    facts: '208bf7300985',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hyundai-ioniq-3-long-range': {
@@ -948,7 +948,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kemst barnavagn fyrir í skottinu?',
       'Hvernig er plássið í aftursætinu?',
     ],
-    facts: 'dbb01a46d11c',
+    facts: 'a503a0e1d581',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hyundai-ioniq-5-long-range-awd': {
@@ -970,7 +970,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er gott pláss fyrir þrjá í aftursætinu?',
       'Hvernig reynist fjórhjóladrifið í snjó?',
     ],
-    facts: '28c669b4860f',
+    facts: '91c96a1e4458',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hyundai-ioniq-9-long-range-awd': {
@@ -992,7 +992,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað tekur langan tíma að hraðhlaða hann?',
       'Hvernig virkar fjórhjóladrifið í snjó?',
     ],
-    facts: '26ab741a296f',
+    facts: '08a8eff8742b',
     model: 'gemini-3.8-flash, thinking high',
   },
   'hyundai-ioniq-9-long-range-performance-awd': {
@@ -1002,7 +1002,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er fremur dýr og drægni, hleðsla og snerpa eru aðeins í meðallagi miðað við verðið. Hyundai IONIQ 9 Long Range AWD er 1.500.000 kr. ódýrari með sama rými og álíka drægni, og munar þar aðeins um snerpuna.',
       'IONIQ 9 Performance er fyrir þá sem vilja stærsta Hyundai-jeppann með aukinni snerpu, en flestum dugar ódýrari útfærslan.',
     ],
-    facts: '17fdf58f42b6',
+    facts: '9b0130a7bb9c',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er Performance-útfærslan þess virði?',
@@ -1036,7 +1036,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kemst barnavagn fyrir í skottinu?',
       'Er hann með V2L tengi fyrir raftæki?',
     ],
-    facts: '9fcc17e260d1',
+    facts: '704ead389e0f',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'hyundai-staria-electric-base': {
@@ -1057,7 +1057,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er erfitt að leggja svona stórum bíl?',
       'Hversu fljótur er hann að hraðhlaða?',
     ],
-    facts: '925f5cfa000f',
+    facts: '6388858ff243',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'jac-e30x-base': {
@@ -1079,7 +1079,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvaða langferðir ræður hann við?',
       'Hvernig reynist hann í vetrarkulda?',
     ],
-    facts: '134c7b0209cc',
+    facts: 'a2a2030b4468',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'jeep-avenger-base': {
@@ -1101,7 +1101,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Finnst manni hann vera aflítill?',
       'Er hann nógu lipur í þröngum stæðum?',
     ],
-    facts: '2c42ac9ab86b',
+    facts: '62f578d6ab87',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kgm-torres-evx': {
@@ -1123,7 +1123,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig nýtast 839 lítrar í skottinu?',
       'Er hann nógu sprækur miðað við stærðina?',
     ],
-    facts: '89b65fb11bc0',
+    facts: '4031aa60e1c6',
   },
   'kia-ev2-standard-range': {
     paragraphs: [
@@ -1144,7 +1144,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kemst barnavagn fyrir í skottinu?',
       'Dugar drægnin í daglegan vetrarakstur?',
     ],
-    facts: '76a5cb5471bb',
+    facts: 'e778737c8ff5',
   },
   'kia-ev2-long-range': {
     paragraphs: [
@@ -1165,7 +1165,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Dugar 750 kg dráttargeta fyrir kerrur?',
       'Er sætishæðin hærri en í venjulegum bíl?',
     ],
-    facts: 'c1ce211cf4fd',
+    facts: '7560d141cc54',
   },
   'kia-ev3-standard-range': {
     paragraphs: [
@@ -1185,7 +1185,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kemst barnavagn fyrir í skottinu?',
       'Hvað dregur hann í raun á veturna?',
     ],
-    facts: 'b7f711563bfa',
+    facts: 'c18b18b20177',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev3-long-range': {
@@ -1207,7 +1207,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar framdrifið í snjó?',
       'Rúmar skottið stóran barnavagn?',
     ],
-    facts: '633b99d526f1',
+    facts: 'c790870ef964',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev3-long-range-awd': {
@@ -1229,7 +1229,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar veghæðin í snjó?',
       'Kemst hann milli landshluta á veturna?',
     ],
-    facts: '3906e8b999d4',
+    facts: 'aa2ccc701c03',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev4-base': {
@@ -1251,7 +1251,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig reynist framhjóladrifið í snjó?',
       'Hve hratt hleður hann á ferðalögum?',
     ],
-    facts: '7a2ac5323389',
+    facts: 'd5703e8c41eb',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev4-fastback': {
@@ -1273,7 +1273,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er lofthæðin í aftursætunum?',
       'Hvernig er hljóðvistin á þjóðveginum?',
     ],
-    facts: '60bd62334240',
+    facts: '488d20924092',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev5-base': {
@@ -1295,7 +1295,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Rúmar skottið stóran barnavagn?',
       'Hvernig er hljóðvist og þægindi í honum?',
     ],
-    facts: '8ef7994a0598',
+    facts: '43c7b3c06008',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev5-awd': {
@@ -1317,7 +1317,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað kemst mikið fyrir í framskottinu?',
       'Finnst manni hann vera kraftlítill?',
     ],
-    facts: 'e2f873e0da7b',
+    facts: 'c147d32a4f36',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev6-2025-long-range-awd': {
@@ -1339,7 +1339,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hleður hann svona hratt á öllum stöðvum?',
       'Hve mikið dregur fellihýsi úr drægni?',
     ],
-    facts: 'a1ae9f58ba7a',
+    facts: '57b49cbb6c6c',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-ev9-base': {
@@ -1361,7 +1361,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er munurinn á Air, Earth og GT-Line?',
       'Af hverju frekar hann en XPENG X9?',
     ],
-    facts: '76b0fece380d',
+    facts: '5abb79eb2d7c',
   },
   'kia-ev9-gt': {
     paragraphs: [
@@ -1382,7 +1382,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Rúmast fullorðnir í öftustu sætunum?',
       'Hversu hratt hleður hann á ferðalögum?',
     ],
-    facts: 'd58380ed9a99',
+    facts: '8aca698a406b',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'kia-pv5-base': {
@@ -1404,7 +1404,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Ræður hann vel við 1.500 kg kerru?',
       'Tefrir hæg hraðhleðsla á ferðalögum?',
     ],
-    facts: '2d2cff7e9f02',
+    facts: 'e045ef40c4c1',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-t03-base': {
@@ -1426,7 +1426,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað kemst hann langt í vetrarkulda?',
       'Hentar hann vel sem annar bíll?',
     ],
-    facts: '8d023da9676e',
+    facts: '27fd5e39efdf',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-b03x-life': {
@@ -1448,7 +1448,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað kemst hann langt á veturna?',
       'Kemst barnavagn fyrir í skottinu?',
     ],
-    facts: 'cbeb337ae7eb',
+    facts: 'ff414f25dad4',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-b03x-design': {
@@ -1470,7 +1470,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er plássið fyrir fjölskyldu?',
       'Hvernig dugar hann í lengri ferðum?',
     ],
-    facts: 'f21660d6593c',
+    facts: '8cd80e62f81c',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-b05-design': {
@@ -1492,7 +1492,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hve hratt hleður hann í langferðum?',
       'Hvernig er plássið í aftursætunum?',
     ],
-    facts: 'cf4f554ba77c',
+    facts: 'ba7c8accb3b4',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'leapmotor-b10-design': {
@@ -1514,7 +1514,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Rúmar skottið stóran barnavagn?',
       'Hversu hratt hleður hann á ferðalögum?',
     ],
-    facts: '6c3878285cbb',
+    facts: '4c2c3582cd91',
   },
   'leapmotor-c10-design-awd': {
     paragraphs: [
@@ -1535,7 +1535,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann of kraftmikill fyrir vetrarfærð?',
       'Borgar sig að fórna drægni fyrir 4x4?',
     ],
-    facts: 'fe1ebe11e2fe',
+    facts: 'e16573a39d26',
   },
   'lexus-es-350e': {
     paragraphs: [
@@ -1556,7 +1556,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Má setja hjólagrind á hann?',
       'Hvernig er fótarýmið í aftursætunum?',
     ],
-    facts: 'e3893813c6fa',
+    facts: 'e9abdb43715f',
   },
   'lexus-es-500e': {
     paragraphs: [
@@ -1577,7 +1577,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig virkar fjórhjóladrifið í snjó?',
       'Hversu mikið pláss er í skottinu?',
     ],
-    facts: 'ee0e68741af5',
+    facts: '6c566370b6d4',
   },
   'lexus-rz-350e': {
     paragraphs: [
@@ -1586,7 +1586,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Í sínum verðflokki drífur hann hins vegar styttra, hleður hægar og er meðal þeirra aflminnstu, og hann má aðeins draga 750 kg. Polestar 3 er 200.000 kr. ódýrari, fjórhjóladrifinn, drífur 69 km lengra, er mun sneggri og má draga 1.450 kg meira.',
       'RZ 350e heillar með hljóðlátum munaði, en fyrir verðið fæst meira afl og drægni annars staðar.',
     ],
-    facts: 'ec012d7291f7',
+    facts: 'd87c92cac77e',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Dugar framhjóladrifið í vetrarfærð?',
@@ -1620,7 +1620,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Dugar drægnin milli landshluta á vetri?',
       'Hvernig er fjöðrunin og mýktin í akstri?',
     ],
-    facts: '4096aa609d86',
+    facts: '27dacf96d42a',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'lexus-rz-550e-f-sport': {
@@ -1642,7 +1642,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er raundrægnin á veturna?',
       'Er hann hljóðlátari en keppinautarnir?',
     ],
-    facts: 'fe950b519ed7',
+    facts: '420dbf1d7a83',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'lexus-tz-450e-standard-range': {
@@ -1664,7 +1664,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er Lexus í áreiðanleika?',
       'Hvernig er hann í akstri miðað við stærð?',
     ],
-    facts: 'a911febf11af',
+    facts: '622a44eb02f3',
   },
   'lexus-tz-450e-long-range': {
     paragraphs: [
@@ -1685,7 +1685,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann hljóðlátur á grófu malbiki?',
       'Hvernig eru sætin í miðröðinni?',
     ],
-    facts: '1718632ff2e1',
+    facts: 'b2ffd617b61c',
   },
   'lexus-tz-550e': {
     paragraphs: [
@@ -1706,7 +1706,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er Lexus í áreiðanleika?',
       'Hvernig er fjöðrunin á íslenskum vegum?',
     ],
-    facts: '464abe7fcacc',
+    facts: 'd9b83ae90ded',
   },
   'mazda-6e-long-range': {
     paragraphs: [
@@ -1727,7 +1727,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Opnast afturrúðan með skottlokinu?',
       'Hver er raundrægni hans að vetrarlagi?',
     ],
-    facts: 'b3355a35d994',
+    facts: 'f27d033f9bc2',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mazda-cx-6e-78-kwh': {
@@ -1749,7 +1749,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann of langur í innanbæjarakstri?',
       'Hversu hratt hleður hann á langferðum?',
     ],
-    facts: '7476a0d68926',
+    facts: '114dcee238c4',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-c-400-4matic': {
@@ -1759,7 +1759,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti ókosturinn er að skottið er minna en hjá flestum keppinautum hans. Audi A6 e-tron Sportback quattro er 1.500.000 kr. ódýrari, með 32 l stærra skott og má draga 300 kg meira, þótt hann drífi 50 km styttra.',
       'C 400 er sterkur kostur fyrir þá sem vilja snöggan og langdrægan lúxusfólksbíl.',
     ],
-    facts: '096b3d2801da',
+    facts: 'cdbbf3d5a0a1',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Kemst hann milli Reykjavíkur og Akureyrar?',
@@ -1793,7 +1793,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hve hratt hleður hann á ferðalögum?',
       'Hve mikið minnkar drægnin með kerru?',
     ],
-    facts: '2d5947c47e5c',
+    facts: 'e98240b22e80',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-cla-350-4matic': {
@@ -1815,7 +1815,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er raundrægni hans að vetrarlagi?',
       'Hvað tekur dæmigert hraðhleðslustopp?',
     ],
-    facts: 'a16a120e6767',
+    facts: '5141733634cd',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-cla-shooting-brake-350-4matic': {
@@ -1837,7 +1837,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig fer um fullorðna í aftursætinu?',
       'Af hverju skutbíl frekar en jeppling?',
     ],
-    facts: '2a430b64fbda',
+    facts: '62087b18ea57',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-cla-amg-45-4matic': {
@@ -1859,7 +1859,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig nýtast öll þessi 500 kW hérlendis?',
       'Hversu hratt hleður hann í reynd?',
     ],
-    facts: 'e444978c2820',
+    facts: '8060f97ff518',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-amg-gt-53-4matic': {
@@ -1869,7 +1869,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að skottið er með þeim minnstu á þessu verði og hann má ekki draga kerru. Mercedes-Benz EQS 580 4MATIC er 3.500.000 kr. dýrari, en með 154 l stærra skott og má draga allt að 1.700 kg, þó hleðslustoppin séu um 65% lengri. Porsche Taycan 4S Plus er 3.500.000 kr. ódýrari og 0,2 s sneggri, en drífur 252 km styttra.',
       'GT 53 er fyrir þig sem vilt AMG-akstur án þess að fórna drægninni.',
     ],
-    facts: '5a7ec3b95467',
+    facts: '039bf6b85a00',
     questions: [
       'Af hverju hann frekar en Taycan 4S Plus?',
       'Er EQS 580 betri kostur fyrir fjölskyldu?',
@@ -1890,7 +1890,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að skottið er eitt það minnsta á þessu verði og hann má ekki draga kerru. Mercedes-Benz EQS 580 4MATIC er 3.500.000 kr. ódýrari, drífur 169 km lengra, með 154 l stærra skott og má draga allt að 1.700 kg, en er 1,3 s hægari. Og Mercedes-Benz AMG GT 53 4MATIC+ sparar þér 7.000.000 kr. og drífur 109 km lengra, en er 1,1 s hægari.',
       'GT 55 er hraðskreiður ferðabíll sem fórnar fáu nema skotti og krók.',
     ],
-    facts: '5bc187829d8a',
+    facts: 'bc9171fa67e3',
     questions: [
       'Er hann 7 milljóna virði umfram GT 53?',
       'Hvað munar miklu á honum og GT 63?',
@@ -1911,7 +1911,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er mjög dýr, skottið er fremur lítið og hann má ekki draga kerru. Mercedes-Benz AMG GT 55 4MATIC+ er 6.000.000 kr. ódýrari og aðeins 0,4 s hægari, en hleðslustoppin eru um 45% lengri. Polestar 5 Performance er 16.000.000 kr. ódýrari og má draga allt að 1.800 kg, en er 0,8 s hægari og stoppin um 150% lengri.',
       'GT 63 er fyrir þig sem vilt hraðskreiðasta rafbílinn hér og spyrð ekki um verðið.',
     ],
-    facts: 'b74d2357d35d',
+    facts: 'ada71436d9f0',
     questions: [
       'Er hann 6 milljóna virði umfram GT 55?',
       'Hvað fæ ég fyrir verðið umfram GT 53?',
@@ -1944,7 +1944,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar fjórhjóladrifið í snjó?',
       'Er mikill lúxusbragur á innanrýminu?',
     ],
-    facts: '1f46ca7ff653',
+    facts: '42f92a95500a',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-gla-350-4matic': {
@@ -1954,7 +1954,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Skottið er hins vegar minna en hjá flestum á svipuðu verði. Vanti þig pláss er Tesla Model Y Performance 60.000 kr. ódýrari með 454 l stærra skott, en drífur 63 km styttra og stoppin eru um 80% lengri. BMW iX3 40 kostar 500.000 kr. meira og er með 61 l stærra skott, en er aðeins afturhjóladrifinn.',
       'GLA er lipur langferðabíll með krók sem munar um, ef þú kemst af með minna skott.',
     ],
-    facts: 'dc98c186bdce',
+    facts: 'f5b7b44a85ca',
     questions: [
       'Af hverju hann frekar en BMW iX3 40?',
       'Er Tesla Model Y Performance betri kaup?',
@@ -1987,7 +1987,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Af hverju hleður hann svona hratt?',
       'Hvað má hann draga þunga kerru?',
     ],
-    facts: '7644d2a093f9',
+    facts: '8a5aafd02306',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-glc-300-4matic': {
@@ -2008,7 +2008,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað kemst mikið fyrir í framskottinu?',
       'Finnst mikill munur á afli í GLC 400?',
     ],
-    facts: 'fa5649bc4e95',
+    facts: 'd010942880ce',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-glc-400-4matic': {
@@ -2030,7 +2030,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hratt hleður hann í kulda?',
       'Hvernig eru þægindin á löngum ferðum?',
     ],
-    facts: 'a29533271d92',
+    facts: '28a3275327d4',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-eqe-suv-350-4matic': {
@@ -2052,7 +2052,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er fágaða innanrýmið í raun?',
       'Dugar dráttargetan fyrir hestakerru?',
     ],
-    facts: '989ad5008d8f',
+    facts: '5b95b6c7acdd',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-eqs-580-4matic': {
@@ -2062,7 +2062,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er mjög dýr, skottið og dráttargetan eru minni en hjá flestum keppinautum hans, og lágur fólksbíll býður ekki veghæð jeppa. Range Rover Electric EV450 er 400.000 kr. ódýrari, með 123 l stærra skott og má draga 800 kg meira, en drífur 269 km styttra.',
       'EQS er fyrir þá sem vilja hágæða ferðabíl sem kemst lengra á einni hleðslu en nokkur annar.',
     ],
-    facts: '80e286420ecf',
+    facts: 'ae49150b3696',
     questions: [
       'Kemst hann til Akureyrar á einni hleðslu?',
       'Hvernig er raunveruleg drægni í frosti?',
@@ -2095,7 +2095,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er skottið nýtilegt með öll 7 sætin?',
       'Hvernig er fjórhjóladrifið í miklum snjó?',
     ],
-    facts: '8214e0ab66a7',
+    facts: '2fe26e62bc27',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-eqt-200': {
@@ -2117,7 +2117,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað kemst hann langt í vetrarkulda?',
       'Er hann þægilegri en vinnusendibíll?',
     ],
-    facts: '59b4f6f63f01',
+    facts: '04eff4c9b0b2',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-eqv-300': {
@@ -2139,7 +2139,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hentar hann í fólksflutninga á Íslandi?',
       'Hvað tekur langferðahleðsla langan tíma?',
     ],
-    facts: '492d968035ce',
+    facts: 'a668d0cd1f69',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-vle-300': {
@@ -2161,7 +2161,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað kemst mikill farangur með 7 sætum?',
       'Hentar hann vel í fólksflutninga?',
     ],
-    facts: '719a9b0c870b',
+    facts: '8d8144562a7d',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-vle-400-4matic': {
@@ -2183,7 +2183,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er gott skottpláss með öll sætin uppi?',
       'Hvaða drægni má búast við í frosti?',
     ],
-    facts: '7503f642e558',
+    facts: 'f66453b2bdd7',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-g-class-580-eq': {
@@ -2205,7 +2205,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Af hverju er skottið svona lítið?',
       'Er hann þægilegri en bensín-G-bíllinn?',
     ],
-    facts: 'cf5b06043267',
+    facts: '9095cd333476',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mercedes-benz-evito-tourer': {
@@ -2227,7 +2227,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann nógu aflmikill með níu í bílnum?',
       'Hentar hann í ferðaþjónustu út á land?',
     ],
-    facts: 'ee8694e3dba4',
+    facts: '21fb1316facf',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mg-cyberster-gt': {
@@ -2248,7 +2248,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Finnst mikil þyngd í kröppum beygjum?',
       'Hvernig er hljóðvist með blæjuna uppi?',
     ],
-    facts: '00f5fd50e401',
+    facts: 'fad4e4c2be76',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mg-mg4-urban-standard-range': {
@@ -2270,7 +2270,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hæg er hraðhleðslan í raun?',
       'Hvað dregur hann í vetrarkulda?',
     ],
-    facts: '79ce396da008',
+    facts: 'f5eeead41e53',
   },
   'mg-mg4-urban-long-range': {
     paragraphs: [
@@ -2291,7 +2291,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kemst hann á Akureyri á einni hleðslu?',
       'Dugar hann sem aðalbíll fyrir fjölskyldu?',
     ],
-    facts: '5b4a1a4fd4ba',
+    facts: '8d2fb0f9e420',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mg-mgs5-comfort': {
@@ -2313,7 +2313,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hentar hann sem aðalbíll á heimilinu?',
       'Er hann nógu kraftmikill á þjóðvegi?',
     ],
-    facts: '52546506f82c',
+    facts: '2c4a49fb4ec6',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mg-mgs5-lux': {
@@ -2334,7 +2334,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Dugar hann vel sem fjölskyldubíll?',
       'Hvar er sparað til að ná lágu verði?',
     ],
-    facts: '605b65e95dd9',
+    facts: 'dddcf7020022',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mg-mgs6-dual-motor': {
@@ -2356,7 +2356,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er hljóðvistin á þjóðveginum?',
       'Fæst annað fjórhjóladrif á þessu verði?',
     ],
-    facts: '5143be3d839e',
+    facts: '358b05066c46',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'mini-aceman-e': {
@@ -2378,7 +2378,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Komast fullorðnir fyrir í aftursætunum?',
       'Dugar hann sem eini bíll á heimilinu?',
     ],
-    facts: 'd6aaebeaf690',
+    facts: 'a78d1f4a030f',
   },
   'mini-cooper-se': {
     paragraphs: [
@@ -2387,7 +2387,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur styttra og hleður hægar en flestir í sínum verðflokki, skottið er með þeim minnstu og hann má ekki draga kerru. Renault R5 E-Tech 52 kWh er 1.000.000 kr. ódýrari kostur í sama anda, drífur álíka langt og er með 126 l stærra skott, en er 1,3 s hægari í hundraðið.',
       'Cooper SE velurðu með hjartanu, frekar en sem eina bíl heimilisins.',
     ],
-    facts: 'e3d0963f06e5',
+    facts: '1507717658a8',
     questions: [
       'Af hverju hann frekar en Mini Aceman?',
       'Er Renault R5 betri kaup?',
@@ -2418,7 +2418,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig reynist hringlaga skjárinn?',
       'Hvernig fer um fullorðna aftur í?',
     ],
-    facts: 'bef6499c22fe',
+    facts: '83ab57bdfac7',
   },
   'mini-countryman-se-4x4': {
     paragraphs: [
@@ -2439,7 +2439,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar drægnin á hringveginum?',
       'Hvernig virkar fjórhjóladrifið í hálku?',
     ],
-    facts: '85187a1fd59f',
+    facts: 'd011f7a21436',
   },
   'nissan-ariya-base': {
     paragraphs: [
@@ -2448,7 +2448,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann hleður hægar og er hægari en flestir keppinautar hans, og hann er meðal þeirra sem draga minnst, aðeins 750 kg. Hyundai IONIQ 5 Long Range AWD kostar það sama, er fjórhjóladrifinn, drífur 21 km lengra, hleður með um 60% styttri stoppum og má draga 850 kg meira.',
       'Ariya er ljúfur ferðabíll, en fyrir sama verð fæst mun meira hjá keppinautunum.',
     ],
-    facts: '641e74816f8a',
+    facts: '2789e1a34409',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvað hefur hann fram yfir Hyundai IONIQ 5?',
@@ -2470,7 +2470,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann drífur styttra en flestir á svipuðu verði, er meðal þeirra sem hlaða hægast og skottið er minna en hjá flestum keppinautum hans. Kia EV6 2025 Long Range AWD er 900.000 kr. ódýrari, drífur 29 km lengra, hleður með um 60% styttri stoppum og er með 75 l stærra skott.',
       'Ariya e-4ORCE er fyrir þá sem setja þægindi ofar hleðsluhraða, en keppinautarnir gefa meira fyrir peninginn.',
     ],
-    facts: '51c0725f9e82',
+    facts: 'dce03e2c7cb9',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Er e-4ORCE þess virði miðað við framdrifið?',
@@ -2504,7 +2504,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað drífur hann langt á veturna?',
       'Kemst barnavagn fyrir í skottinu?',
     ],
-    facts: '408ccc50e6a9',
+    facts: '84066df8754f',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'nissan-leaf-extended-range': {
@@ -2514,7 +2514,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti ókosturinn er að hann dregur minna en flestir keppinautar hans og skottið er aðeins í meðallagi. Kia EV3 Long Range er 99.000 kr. ódýrari og drífur álíka langt, sem jepplingur með hærri setstöðu.',
       'Leaf Extended Range er eitt skynsamlegasta valið fyrir þá sem vilja mikla drægni á hagstæðu verði.',
     ],
-    facts: 'dba5d7b6ab78',
+    facts: '91edf65cffb8',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er Kia EV3 Long Range rúmbetri?',
@@ -2536,7 +2536,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að í sínum verðflokki er hann meðal þeirra sem drífa styst, hlaða hægast, eru hægastir og draga minnst, svo hann hentar illa til ferða milli landshluta. Peugeot e-5008 tekur líka sjö, drífur 197 km lengra og er með 456 l stærra skott, en kostar 2.800.000 kr. meira.',
       'Frontera er ódýrasta leiðin að sjö sætum, sniðin að nærumhverfinu frekar en langferðum.',
     ],
-    facts: '80efac5b701f',
+    facts: '4047dab9103f',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Passar fullorðinn í aftasta bekkinn?',
@@ -2570,7 +2570,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Dugar drægnin í hringferð á sumrin?',
       'Hvernig er plássið fyrir fjölskyldu?',
     ],
-    facts: 'a8155a8cef01',
+    facts: 'b59d5717bd13',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'opel-grandland-awd': {
@@ -2580,7 +2580,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallinn er að drægni og hleðsla eru aðeins í meðallagi á þessu verði. Systurbíllinn Peugeot e-3008 Dual Motor er 500.000 kr. ódýrari, drífur álíka langt og er með 103 l stærra skott, og Subaru Solterra kostar það sama, drífur 17 km lengra og er mun sneggri. Framhjóladrifni Opel Grandland er 400.000 kr. ódýrari og drífur 29 km lengra.',
       'Grandland AWD er prýðilegur fyrir fjölskylduakstur í vetrarfærð, en systurbíllinn frá Peugeot gefur meira fyrir minna.',
     ],
-    facts: 'd4e5bb1eb5bd',
+    facts: 'c00b9e83ab15',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Af hverju hann frekar en Peugeot e-3008?',
@@ -2602,7 +2602,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er meðal þeirra sem drífa styst og hlaða hægast í sínum verðflokki, skottið er eitt það minnsta og hann má ekki draga kerru. Kia EV2 Standard Range er 500.000 kr. ódýrari, hleður með um 35% styttri stoppum, er með 134 l stærra skott og má draga 750 kg.',
       'Ora 3 er skemmtilegur kostur fyrir þá sem leita að ódýrum og sérviskulegum bíl í bæjarakstur og hlaða heima, en síður sniðinn fyrir miklar langferðir.',
     ],
-    facts: '1306da9c6713',
+    facts: '5419a8711e5f',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Af hverju hann frekar en Kia EV2?',
@@ -2636,7 +2636,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er hann í þröngum borgargötum?',
       'Hentar hann vel sem fyrsti rafbíll?',
     ],
-    facts: '0bddcff83541',
+    facts: 'a002520e1a83',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'peugeot-e-3008-base': {
@@ -2658,7 +2658,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er fótaplássið í aftursætunum?',
       'Er skottið nógu stórt fyrir barnavagn?',
     ],
-    facts: '3d4937d2e99f',
+    facts: 'c733a7c57c31',
   },
   'peugeot-e-3008-dual-motor': {
     paragraphs: [
@@ -2667,7 +2667,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallinn er að hann hleður hægar en flestir keppinautar hans. Skoda Elroq 85x er 300.000 kr. ódýrari, drífur 70 km lengra, hleður með um 30% styttri stoppum og má draga 450 kg meira, en skottið er 118 l minna. Þurfi ekki fjórhjóladrif fæst framhjóladrifinn Peugeot e-3008 fyrir 500.000 kr. minna, og hann drífur 25 km lengra.',
       'e-3008 Dual Motor er álitlegur kostur fyrir þá sem meta afl, rými og franska hönnun ofar drægni og hraðri hleðslu.',
     ],
-    facts: 'b32d53c3098f',
+    facts: '131817440da4',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig er hann við Skoda Elroq 85x?',
@@ -2701,7 +2701,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Tefur hleðslutíminn mikið á ferðalögum?',
       'Hvað má hann draga þungan vagn?',
     ],
-    facts: 'c7ad3f52436e',
+    facts: 'cbd6ff98e2df',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'peugeot-e-5008-dual-motor': {
@@ -2723,7 +2723,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er skottið nýtilegt með öll sjö sætin?',
       'Er 73 kWh rafhlaða of lítil í svona bíl?',
     ],
-    facts: 'f7e8acdb5458',
+    facts: '9cff4640ec57',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'polestar-2-long-range-dual-motor': {
@@ -2733,7 +2733,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að skottið er minna en hjá flestum keppinautum hans og aftursætin eru fremur þröng. Ford Capri kostar 500.000 kr. meira, drífur álíka langt og hleður jafn hratt, en er með 165 l stærra skott.',
       'Polestar 2 er fyrir þá sem setja akstursánægju og drægni ofar plássi.',
     ],
-    facts: '785bc79cc4b8',
+    facts: '8dc88f0e3afb',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er Performance-útfærslan þess virði?',
@@ -2767,7 +2767,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Ræður hann vel við 1.500 kg hestakerru?',
       'Hvernig er plássið í aftursætunum?',
     ],
-    facts: 'e75f28f51ee8',
+    facts: '7cfff78cba3d',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'polestar-3-base': {
@@ -2777,7 +2777,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann hleður hins vegar hægar en flestir þeirra og skottið er minna. Volvo EX60 P12, frá systurmerki Polestar, er 1.100.000 kr. ódýrari, drífur 182 km lengra og hleður með um 50% styttri stoppum.',
       'Polestar 3 er fyrir þá sem vilja langdrægan og kraftmikinn jeppling með sterkan svip.',
     ],
-    facts: '00f289332ef9',
+    facts: '59d6672be687',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar Performance útfærslan sig?',
@@ -2811,7 +2811,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað má hann draga mikla þyngd?',
       'Hvernig ræður hann við mikinn snjó?',
     ],
-    facts: 'c76cfbc02e22',
+    facts: '072c9d0241c4',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'polestar-4-long-range-dual-motor': {
@@ -2821,7 +2821,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hraðhleðslan og skottið eru hins vegar aðeins í meðallagi. Tesla Model Y Performance er 160.000 kr. ódýrari, álíka snöggur og með 328 l stærra skott, en má draga 400 kg minna.',
       'Polestar 4 er fyrir þá sem vilja mikla drægni, afl og sérkenni.',
     ],
-    facts: '062ae057f595',
+    facts: '88c70f62cded',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er óþægilegt að vera án afturrúðu?',
@@ -2843,7 +2843,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hraðhleðslan og skottið eru hins vegar aðeins í meðallagi. BMW iX3 40 kostar 200.000 kr. meira, drífur 37 km lengra og hleður með um 35% styttri stoppum, en er aðeins afturhjóladrifinn og mun hægari.',
       'Polestar 4 SUV er fyrir þá sem setja akstursánægju, kraft og áberandi hönnun í fyrsta sæti.',
     ],
-    facts: 'fddb4ef97543',
+    facts: 'fe37eaf30299',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig virkar myndavélaspegillinn í snjó?',
@@ -2877,7 +2877,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hentar hann vel í langferðir innanlands?',
       'Er nóg pláss fyrir fólk í aftursætunum?',
     ],
-    facts: '4a7e478a889c',
+    facts: '4ee482cea717',
   },
   'porsche-macan-4-electric': {
     paragraphs: [
@@ -2898,7 +2898,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Finnst manni hann vanta meira afl?',
       'Hvernig stendur hann sig í snjó?',
     ],
-    facts: 'b5924446a0f9',
+    facts: '679962bad04d',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-macan-4s-electric': {
@@ -2920,7 +2920,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig reynist hann í vetrarfærð?',
       'Er aksturinn eins og í sportbíl?',
     ],
-    facts: '8d862759521c',
+    facts: '2a5bd4735884',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-taycan-plus': {
@@ -2942,7 +2942,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Rúmar skottið nóg fyrir fjölskyldu?',
       'Hversu hratt hleður hann á ferðalagi?',
     ],
-    facts: 'ee093f2c5e12',
+    facts: '85c7dae52b40',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-taycan-4-plus': {
@@ -2964,7 +2964,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig fer um fullorðna í aftursætinu?',
       'Hvaða hleðslustöðvar nýta hámarkshraðann?',
     ],
-    facts: '4a84b2b119c3',
+    facts: '2ec0d768c250',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-taycan-4s-plus': {
@@ -2986,7 +2986,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hratt hleður hann á ferðalögum?',
       'Hvernig er hann í miklum snjó og hálku?',
     ],
-    facts: '745e542e0efc',
+    facts: '7e62e227e309',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-taycan-4-cross-turismo': {
@@ -3008,7 +3008,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar veghæðin í vetrarsnjó?',
       'Er miðsætið aftur í raun nothæft?',
     ],
-    facts: '2ed2f8466a2e',
+    facts: 'f1f69b89d270',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-taycan-4s-cross-turismo': {
@@ -3030,7 +3030,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hratt hleður hann á ferðalögum?',
       'Hvernig reynist hann í vetrarfærð?',
     ],
-    facts: 'b33907ea68d1',
+    facts: '9f716729a8b9',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-cayenne-base': {
@@ -3052,7 +3052,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig kemst hann áfram í miklum snjó?',
       'Er hleðslutíminn í alvöru svona stuttur?',
     ],
-    facts: 'bcb704a32bc4',
+    facts: '74174657550b',
   },
   'porsche-cayenne-coupe': {
     paragraphs: [
@@ -3073,7 +3073,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað gefur Turbo-útfærslan umfram hann?',
       'Kemst stór barnavagn í skottið á honum?',
     ],
-    facts: '098845994a7e',
+    facts: '8d6155525014',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-cayenne-s': {
@@ -3095,7 +3095,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er raundrægnin í vetrarfærð?',
       'Er hann lipur þrátt fyrir stærðina?',
     ],
-    facts: '089bd685a8c3',
+    facts: 'c392d8046b11',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-cayenne-s-coupe': {
@@ -3117,7 +3117,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Af hverju hleður hann svona hratt?',
       'Hvernig er drægnin með 3 tonna kerru?',
     ],
-    facts: '9bc9a4125300',
+    facts: 'e432aa8c2554',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-cayenne-turbo': {
@@ -3138,7 +3138,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað má hann draga mikla þyngd?',
       'Hvað er skottið nákvæmlega stórt?',
     ],
-    facts: '1b13a58e1146',
+    facts: '19d19e305c4c',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'porsche-cayenne-turbo-coupe': {
@@ -3160,7 +3160,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu hratt hleður hann í raun?',
       'Er hann þess virði yfir venjulegan Coupé?',
     ],
-    facts: 'db8cb818dcb5',
+    facts: 'fc24df4f6d48',
   },
   'range-rover-electric-ev450': {
     paragraphs: [
@@ -3180,7 +3180,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað dregur tengivagn mikið úr drægninni?',
       'Hvernig er raunveruleg drægni á þjóðvegi?',
     ],
-    facts: '22bae9f0311a',
+    facts: '00a60a989bfe',
   },
   'range-rover-electric-ev550': {
     paragraphs: [
@@ -3201,7 +3201,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er beygjuradíusinn á honum?',
       'Hvernig virkar loftfjöðrunin í ójöfnum?',
     ],
-    facts: 'ff500b6cb4c4',
+    facts: 'e359609a986c',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'range-rover-sport-electric-ev450': {
@@ -3221,7 +3221,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er raundrægnin á veturna?',
       'Hvernig er plássið í aftursætunum?',
     ],
-    facts: '8ddb662103c2',
+    facts: '9107dc80f785',
   },
   'range-rover-sport-electric-ev550': {
     paragraphs: [
@@ -3240,7 +3240,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er raundrægnin á veturna?',
       'Hvað tekur hraðhleðsla langan tíma?',
     ],
-    facts: 'e5c5435d1e19',
+    facts: '3d31e7bee299',
   },
   'renault-r4-e-tech-base': {
     paragraphs: [
@@ -3261,7 +3261,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er pláss fyrir barnavagn í skottinu?',
       'Má setja dráttarkrók á hann?',
     ],
-    facts: 'a164cff702e4',
+    facts: 'a8e24a74b3f0',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'renault-r5-e-tech-base': {
@@ -3271,7 +3271,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er meðal þeirra sem drífa styst og hlaða hægast á svipuðu verði, skottið er eitt það minnsta og hann má aðeins draga 500 kg. Renault R5 E-Tech 52 kWh kostar 500.000 kr. meira og drífur 109 km lengra, og Kia EV2 Standard Range er 500.000 kr. ódýrari og drífur 17 km lengra.',
       'R5 er sjarmerandi bæjarbíll, en flestum borgar sig stærri rafhlaðan.',
     ],
-    facts: '056bc33c9339',
+    facts: 'e58b7bf6cbe2',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Borgar sig að taka 52 kWh útfærsluna?',
@@ -3305,7 +3305,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu stórt er skottið í honum?',
       'Hvað drífur hann langt í vetrarkulda?',
     ],
-    facts: '7b5390ef274d',
+    facts: 'c8d798016f31',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'renault-scenic-e-tech-ev60': {
@@ -3327,7 +3327,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig virkar innbyggða Google-kerfið?',
       'Ræður hann við að draga hjólhýsi?',
     ],
-    facts: '815e772cc813',
+    facts: '6b50a7d294a9',
   },
   'renault-scenic-e-tech-ev87': {
     paragraphs: [
@@ -3336,7 +3336,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar hægari og aflminni en flestir þeirra og má draga minna. XPENG G6 RWD Long Range er 100.000 kr. ódýrari, hleður með um 45% styttri stoppum og má draga 400 kg meira, en drífur 53 km styttra.',
       'Scenic EV87 er hagkvæmur ferðafélagi fyrir þá sem setja pláss og drægni fyrir peninginn í fyrsta sæti.',
     ],
-    facts: '68ba20997aa7',
+    facts: 'e5241c89bfa3',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Kemst hann til Akureyrar án þess að hlaða?',
@@ -3370,7 +3370,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er raunveruleg vetrardrægni?',
       'Dugar hann sem eini bíll heimilisins?',
     ],
-    facts: '6bbf58f97856',
+    facts: '7e4dc375a8c1',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'skoda-elroq-85x': {
@@ -3380,7 +3380,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Veikleikarnir eru fáir: afl og snerpa eru aðeins í meðallagi, og skottið líka. Peugeot e-3008 Dual Motor kostar 300.000 kr. meira og er með 118 l stærra skott, en drífur 70 km styttra og hleður með um 40% lengri stoppum.',
       'Elroq 85x er einn heildstæðasti fjórhjóladrifni bíllinn á sínu verði.',
     ],
-    facts: 'fbf784666e75',
+    facts: '924091eb79c5',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að spara og velja 85-gerðina?',
@@ -3414,7 +3414,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Munar mikið um kraftinn miðað við 85x?',
       'Hvernig nýtist aflið í vetrarfærð?',
     ],
-    facts: '222ec84135ab',
+    facts: '068070eb4465',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'skoda-enyaq-85x': {
@@ -3424,7 +3424,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er hægari en flestir keppinautar hans og má aðeins draga 1.200 kg. Smart #5 Pulse kostar það sama, drífur álíka langt, hleður með um 40% styttri stoppum, er með 45 l stærra skott og má draga 400 kg meira.',
       'Enyaq 85X er traust og skynsamlegt val fyrir þá sem setja pláss og hagnýti í fyrsta sæti.',
     ],
-    facts: 'b82cbee71353',
+    facts: '53fca164f58b',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Af hverju hann frekar en Smart #5 Pulse?',
@@ -3446,7 +3446,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er fremur dýr og drægni og hleðsla eru aðeins í meðallagi. Smart #5 Brabus er 200.000 kr. ódýrari, drífur álíka langt, hleður með um 40% styttri stoppum og er mun sneggri, en má draga 600 kg minna. Náskyldur Volkswagen ID.4 GTX er 2.300.000 kr. ódýrari og drífur 22 km styttra.',
       'Enyaq RS er fyrir þá sem vilja rúmgóðan jeppling sem dregur hjólhýsi, með sportlegum blæ.',
     ],
-    facts: 'f5cd672fca18',
+    facts: 'a8408e088ff0',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borga kraftarnir sig miðað við 85X?',
@@ -3468,7 +3468,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er fremur dýr og hægari en flestir þeirra. Peugeot e-5008 Dual Motor er 1.100.000 kr. ódýrari og tekur líka sjö, en drífur 146 km styttra, hleður hægar og má draga 1.000 kg minna.',
       'Peaq 90x er einn sterkasti sjö sæta kosturinn fyrir stórar fjölskyldur sem ferðast um landið.',
     ],
-    facts: '016b9a95c78f',
+    facts: 'eb8c4e1b94f8',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Rúmast þrír barnastólar í annarri röð?',
@@ -3501,7 +3501,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Nýtist aflið vel á afturhjóladrifinu?',
       'Er hann að innan eins og Mercedes-Benz?',
     ],
-    facts: '389e5e1062e5',
+    facts: '1f3790eccf04',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'smart-1-pulse': {
@@ -3511,7 +3511,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst, hleður hægar en flestir þeirra og skottið er eitt það minnsta. Afturhjóladrifni Smart #1 Pro+ er 900.000 kr. ódýrari og drífur 40 km lengra, fyrir þá sem þurfa ekki fjórhjóladrifið.',
       'Smart #1 Pulse er fyrir þá sem setja kraft og fjórhjóladrif ofar drægni og plássi.',
     ],
-    facts: 'dd60cc10ff48',
+    facts: '58b542554782',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Af hverju hann frekar en Volvo EX30?',
@@ -3545,7 +3545,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Eyðir hann miklu í Brabus-stillingu?',
       'Hentar hann sem eini bíll á heimilinu?',
     ],
-    facts: '65c203d989a0',
+    facts: '8f6e79236372',
   },
   'smart-3-pulse': {
     paragraphs: [
@@ -3566,7 +3566,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er raunveruleg drægni á veturna?',
       'Hvernig er fjöðrunin á slæmum vegum?',
     ],
-    facts: '75587bd05fe0',
+    facts: '02c746af8136',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'smart-3-brabus': {
@@ -3588,7 +3588,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er nóg höfuðpláss í aftursætunum?',
       'Hve mikið dregur kerra úr drægninni?',
     ],
-    facts: 'a6dca03c36f3',
+    facts: '12b3fe8e0def',
   },
   'smart-5-pro': {
     paragraphs: [
@@ -3597,7 +3597,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann hleður fremur hægt á langferðum og er afturhjóladrifinn, sem krefst meiri varkárni í snjó og hálku. XPENG G6 RWD Standard Range kostar 100.000 kr. meira og er með um 25% styttri hleðslustopp, en drífur 30 km styttra og skottið er 59 l minna.',
       'Fyrir þá sem leita að rúmgóðum og sprækum fjölskyldubíl sem getur dregið hjólhýsi er #5 Pro fýsilegur kostur, svo lengi sem hraðhleðslan er ekki í forgangi.',
     ],
-    facts: '0cb63366d3b1',
+    facts: '9049d31d0dee',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að taka Pulse-útfærsluna?',
@@ -3619,7 +3619,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Veikleikarnir eru fáir, helst að merkið á sér styttri sögu í stærri jepplingum en rótgrónari framleiðendur. Skoda Enyaq 85X kostar það sama frá þekktara merki, en hleður með um 60% lengri stoppum og er með minna skott.',
       'Smart #5 Pulse gefur mikið fyrir peninginn, fyrir þá sem vilja pláss, afl og hraða hleðslu.',
     ],
-    facts: '938e3e189cfc',
+    facts: 'c4b377baa02c',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Hvernig er hann miðað við Skoda Enyaq 85X?',
@@ -3641,7 +3641,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er fremur dýr og drægnin aðeins í meðallagi. Smart #5 Pulse er 1.300.000 kr. ódýrari með sömu drægni, rými og hleðslu, og gefur aðeins eftir í snerpu.',
       'Smart #5 Brabus er fyrir þá sem vilja allra mest afl, en #5 Pulse gefur meira fyrir peninginn.',
     ],
-    facts: '8488f665740e',
+    facts: 'b287894eaace',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að velja hann fram yfir Pulse?',
@@ -3663,7 +3663,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Drægnin er hins vegar aðeins í meðallagi og hann hleður hægar en flestir þeirra. BYD Sealion 7 er 500.000 kr. ódýrari, hleður með um 15% styttri stoppum og er mun aflmeiri, en skottið er 113 l minna.',
       'e-Outback er traustur kostur fyrir þá sem setja grip, pláss og Subaru-merkið í forgang.',
     ],
-    facts: '3cb9b31310c0',
+    facts: '4e651fd06aca',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig dugar fjórhjóladrifið í snjó?',
@@ -3685,7 +3685,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti ókosturinn er skottið, sem er minna en hjá flestum keppinautum hans. Kia EV6 2025 Long Range AWD kostar nánast það sama en hleður með um 40% styttri stoppum, er með 69 l stærra skott og má draga 300 kg meira.',
       'Solterra er traustur kostur fyrir þá sem setja fjórhjóladrif og veghæð í forgang, en keppinautarnir hlaða hraðar og rúma meira.',
     ],
-    facts: 'e632b0490132',
+    facts: '9c43adc5e71f',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig er hann ólíkur Toyota bZ4X?',
@@ -3719,7 +3719,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig ræður hann við grófa malarvegi?',
       'Hvernig er fjöðrunin á holóttum vegum?',
     ],
-    facts: 'b7275c7ef4a3',
+    facts: '68fc61c88b61',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'suzuki-e-vitara-4x4-allgrip': {
@@ -3729,7 +3729,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er meðal þeirra sem drífa styst og hlaða hægast á svipuðu verði, skottið er eitt það minnsta og hann má aðeins draga 750 kg. Smart #1 Pulse er 350.000 kr. ódýrari, líka fjórhjóladrifinn, hleður með um 40% styttri stoppum, er með 75 l stærra skott og má draga 850 kg meira.',
       'e Vitara er hagkvæmur fjórhjóladrifsbíll með langa ábyrgð, fyrir þá sem aka mest í nærumhverfinu.',
     ],
-    facts: 'e29c134278bc',
+    facts: '1d5ecb055b2c',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig virkar AllGrip drifið í snjó?',
@@ -3763,7 +3763,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hentar skottið vel fyrir barnavagna?',
       'Hversu þungt má hann draga?',
     ],
-    facts: 'ad0e594e1c47',
+    facts: 'd6f1ab0ec1ed',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'tesla-model-3-long-range-afturhjoladrif': {
@@ -3773,7 +3773,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar lágur, með litla veghæð og aðeins afturhjóladrifinn, sem hentar síður í snjó og á malarvegum. Tesla Model 3 Long Range Fjórhjóladrif fæst fyrir 600.000 kr. meira, en drífur 90 km styttra.',
       'Fyrir þá sem horfa fyrst og fremst í drægni á langferðum er þetta einn álitlegasti kosturinn.',
     ],
-    facts: '96f1881e3e24',
+    facts: '27fb06dc5b60',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig er afturhjóladrifið í snjó?',
@@ -3795,7 +3795,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er lágur og með litla veghæð, sem hentar síður á malarvegum og í djúpum snjó, og hann má aðeins draga 1.000 kg, minna en flestir þeirra. Þeir sem þurfa meiri dráttargetu gætu frekar litið á Polestar 2 Long Range Dual Motor, sem má draga 500 kg meira, en hann kostar 700.000 kr. meira og drífur 64 km styttra.',
       'Fyrir langferðir á góðum vegum er Model 3 Long Range einn sterkasti kosturinn.',
     ],
-    facts: '3851c7f213f7',
+    facts: '2452984eb205',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar Long Range afturhjóladrif sig?',
@@ -3829,7 +3829,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann of lágur fyrir íslenskan vetur?',
       'Hve mikið hefur aflið áhrif á drægnina?',
     ],
-    facts: '31cd089877de',
+    facts: '4ad3a8702e32',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'tesla-model-y-standard-range': {
@@ -3851,7 +3851,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er fjöðrunin of stíf á íslenskum vegum?',
       'Er þess virði að taka Premium Long Range?',
     ],
-    facts: '9fa1b3804c9f',
+    facts: '7d7bdf43a182',
   },
   'tesla-model-y-premium-long-range': {
     paragraphs: [
@@ -3872,7 +3872,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig nýtist hleðslunet Tesla hér?',
       'Kemst hann milli landshluta í frosti?',
     ],
-    facts: '600e61345673',
+    facts: 'a94e1168bfea',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'tesla-model-y-long-range-dual-motor': {
@@ -3894,7 +3894,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað má hann draga þunga kerru?',
       'Hvernig er raunveruleg vetrardrægni?',
     ],
-    facts: '63e35ee100b7',
+    facts: 'efc8af97d7cd',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'tesla-model-y-performance': {
@@ -3915,7 +3915,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig hafa 21 tommu felgurnar áhrif?',
       'Hvernig er lægri veghæðin í vetrarfærð?',
     ],
-    facts: '7b5761c6f0c0',
+    facts: '4923a5cc420b',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'toyota-bz4x-base': {
@@ -3925,7 +3925,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er aflminni og hægari en flestir keppinautar hans, skottið er minna og hann er meðal þeirra sem draga minnst, aðeins 750 kg. Toyota bZ4X AWD fæst með fjórhjóladrifi og 1.500 kg dráttargetu fyrir 400.000 kr. meira. Systurbíllinn Subaru Solterra er líka fjórhjóladrifinn og 1.100.000 kr. ódýrari, en drífur 60 km styttra.',
       'bZ4X er skynsamlegur kostur fyrir þá sem vilja mikla drægni og þurfa hvorki fjórhjóladrif né kerru.',
     ],
-    facts: '2cb2fe080e06',
+    facts: 'e23c7780ce86',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að velja AWD-útfærsluna?',
@@ -3947,7 +3947,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann drífur styttra og skottið er minna en hjá flestum keppinautum hans og hann er dýrari á hvern kílómetra drægni en flestir þeirra. Systurbíllinn Subaru Solterra er 1.500.000 kr. ódýrari með nánast sömu drægni, og Kia EV6 2025 Long Range AWD er líka 1.500.000 kr. ódýrari, hleður með um 40% styttri stoppum og má draga 300 kg meira.',
       'bZ4X AWD er traustur kostur fyrir þá sem vilja Toyota með fjórhjóladrifi, en systurbíllinn frá Subaru er sami bíll fyrir mun minna.',
     ],
-    facts: 'cfb6615d1741',
+    facts: 'adb8f9a4aab4',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvað fær maður umfram Subaru Solterra?',
@@ -3969,7 +3969,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar aflminni og hægari en flestir þeirra og meðal þeirra sem draga minnst, aðeins 750 kg. Toyota bZ4X Touring AWD fæst með fjórhjóladrifi og 1.500 kg dráttargetu fyrir 500.000 kr. meira.',
       'bZ4X Touring er traustur fjölskyldubíll fyrir þá sem þurfa pláss fyrir farangur frekar en kerru.',
     ],
-    facts: '288a337bd0fb',
+    facts: '55ef60654198',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Borgar sig að taka Touring AWD?',
@@ -3991,7 +3991,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann drífur styttra og hleður hægar en flestir þeirra. Smart #5 Brabus er 100.000 kr. ódýrari, drífur 35 km lengra og hleður með um 40% styttri stoppum, með álíka stórt skott.',
       'bZ4X Touring AWD er snöggur og rúmgóður fjölskyldubíll, ef tíðari hleðslustopp á hringveginum henta.',
     ],
-    facts: '7eef4bd7410a',
+    facts: '7368f8436511',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Af hverju hann frekar en Smart #5 Brabus?',
@@ -4025,7 +4025,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu lipur er hann í borgarakstri?',
       'Hvernig er plássið í aftursætunum?',
     ],
-    facts: 'b70eab9de109',
+    facts: 'eb1d1fab8ebe',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'toyota-c-hr-77-kwh': {
@@ -4047,7 +4047,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er hann hljóðlátur á þjóðveginum?',
       'Heldur hann hleðsluhraða í frosti?',
     ],
-    facts: 'cc9cd7ab1cd9',
+    facts: '3b3a53b02407',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'toyota-c-hr-awd': {
@@ -4057,7 +4057,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann drífur hins vegar styttra og hleður hægar en flestir keppinautar hans, og skottið er minna. BYD Sealion 7 er 600.000 kr. ódýrari, sneggri, hleður með um 15% styttri stoppum og er með 104 l stærra skott. Systurbíllinn Subaru Uncharted er 2.000.000 kr. ódýrari og drífur 15 km styttra.',
       'C-HR+ AWD er fyrir þá sem vilja Toyota með fjórhjóladrifi og langa ábyrgð, en gefur eftir í plássi og hleðslu.',
     ],
-    facts: '733cfcb8d39c',
+    facts: 'c2969363dd35',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Af hverju er Subaru Uncharted ódýrari?',
@@ -4091,7 +4091,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað kemst hann langt að vetrarlagi?',
       'Hversu hratt hleður hann á ferðalögum?',
     ],
-    facts: '144536160f70',
+    facts: 'd0e67fc47a13',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'toyota-proace-verso-base': {
@@ -4113,7 +4113,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar framhjóladrifið í hálku?',
       'Hvernig ræður hann við að draga vagn?',
     ],
-    facts: 'c1be4c656217',
+    facts: '181ca88fc63b',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'toyota-urban-cruiser-active-fwd': {
@@ -4123,7 +4123,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur styttra, hleður hægar og er hægari en flestir á svipuðu verði, skottið er eitt það minnsta og hann má aðeins draga 750 kg. Kia EV3 Long Range er 400.000 kr. ódýrari, drífur 179 km lengra, hleður með um 50% styttri stoppum, er með 222 l stærra skott og má draga 250 kg meira.',
       'Urban Cruiser er látlaus bæjarbíll með langa ábyrgð, en fyrir sama verð fæst mun meira annars staðar.',
     ],
-    facts: 'bc15f532ca41',
+    facts: 'd04275abb606',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Er hann nógu rúmgóður sem fjölskyldubíll?',
@@ -4145,7 +4145,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Gallarnir eru að hann er meðal þeirra sem drífa styst, hlaða hægast og draga minnst á svipuðu verði, og skottið er eitt það minnsta. Smart #3 Pulse er 800.000 kr. ódýrari, líka fjórhjóladrifinn, en drífur 20 km lengra og hleður með um 40% styttri stoppum.',
       'Urban Cruiser AWD hentar þeim sem setja fjórhjóladrif og langa ábyrgð í forgang og aka mest í nærumhverfinu.',
     ],
-    facts: '604771e778b9',
+    facts: 'd6ab3f6fbd2e',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Af hverju er Suzuki e Vitara ódýrari?',
@@ -4178,7 +4178,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig virkar fjórhjóladrifið í snjó?',
       'Hvað skerðist drægnin mikið í kulda?',
     ],
-    facts: '96d37afd53a6',
+    facts: 'f69ed1761f30',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-polo-base': {
@@ -4200,7 +4200,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er hann í langkeyrslu?',
       'Kemst barnabílstóll fyrir í aftursætinu?',
     ],
-    facts: 'db4ee295b148',
+    facts: '16d20b0ddc2e',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-polo-gti': {
@@ -4222,7 +4222,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig nýtist 1.200 kg dráttargetan?',
       'Hve mikið minnkar drægnin í vetrarkulda?',
     ],
-    facts: 'c7e71a65c5f1',
+    facts: '0a7ff8b5c7d9',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-cross-base': {
@@ -4232,7 +4232,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Helsti gallinn er að hann drífur styttra en flestir keppinautar hans, sem finnst fljótt í vetrarkulda. Renault Scenic E-Tech EV60 er stærri bíll með 70 l stærra skott fyrir 300.000 kr. meira, en drífur álíka langt og hleður hægar.',
       'ID. Cross hentar þeim sem vilja snarpan og hagnýtan smájeppling í daglegt amstur og meta hraða hleðslu ofar mikilli drægni.',
     ],
-    facts: '7add7bcf8fc0',
+    facts: '40b049a149de',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvað dregur hann í vetrarkulda?',
@@ -4266,7 +4266,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Fæst hann með fjórhjóladrifi?',
       'Kemst hann milli landshluta á veturna?',
     ],
-    facts: '4ae192984ec3',
+    facts: '00405d90decc',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-3-neo-58-kwh': {
@@ -4288,7 +4288,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar hann í hringferð um landið?',
       'Er hann of aflítill á þjóðveginum?',
     ],
-    facts: 'cef3c0fd965b',
+    facts: '0dcd1e6d0516',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-3-neo-79-kwh': {
@@ -4309,7 +4309,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hve hratt hleður hann í langferðum?',
       'Hvernig nýtist liðugildi hans í þéttbýli?',
     ],
-    facts: 'fd10e06f3ce6',
+    facts: '2b449cf33b0b',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-3-gti': {
@@ -4331,7 +4331,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er veggripið miðað við aflið?',
       'Er hann nógu lipur miðað við þyngdina?',
     ],
-    facts: '89fcf85f38dd',
+    facts: '74a505881d62',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-4-gtx': {
@@ -4353,7 +4353,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig virkar fjórhjóladrifið í snjó?',
       'Tefur hleðslutíminn mikið á langferðum?',
     ],
-    facts: '1a4db7dcf8fb',
+    facts: 'd109de9cbcdb',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-4-pro-4motion': {
@@ -4375,7 +4375,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Rúmar skottið stóran barnavagn vel?',
       'Hvernig er raundrægnin á þjóðveginum?',
     ],
-    facts: '931432dde44c',
+    facts: '4598e6f71da8',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-tiguan-pro-4motion': {
@@ -4396,7 +4396,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hver er raundrægnin á hringveginum?',
       'Hvernig fer um þrjá í aftursætinu?',
     ],
-    facts: '68f032c4d1e9',
+    facts: 'b4d3ed81c81b',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-7-gtx': {
@@ -4406,7 +4406,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hann er hins vegar fremur dýr og afl og snerpa eru aðeins í meðallagi miðað við verðið. Polestar 4 Long Range Dual Motor er 400.000 kr. ódýrari og mun sneggri, en skottið er 79 l minna.',
       'ID.7 GTX er heilsteyptur langferðabíll fyrir fjölskyldur sem vilja pláss, drægni og dráttargetu.',
     ],
-    facts: '134d07366dbc',
+    facts: 'e21acfd6f333',
     model: 'gemini-3.8-flash, thinking high',
     questions: [
       'Hvernig hentar hann í að draga hjólhýsi?',
@@ -4440,7 +4440,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig reynist fjórhjóladrifið í færð?',
       'Hvernig nýtist skottið í langferðir?',
     ],
-    facts: '64f73fe781ef',
+    facts: 'b0f40c470b82',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-ec40-p8-performance': {
@@ -4462,7 +4462,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er fjórhjóladrifið í snjó?',
       'Hve mikið dregur kuldinn úr drægninni?',
     ],
-    facts: '1b6126fa45ec',
+    facts: 'dc5d975dffee',
   },
   'volvo-es90-twin-motor': {
     paragraphs: [
@@ -4483,7 +4483,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er erfitt að leggja honum í bænum?',
       'Er hann betri en Mercedes-Benz C 400?',
     ],
-    facts: 'f363ffff7fd5',
+    facts: '98161e377862',
   },
   'volvo-es90-twin-motor-performance': {
     paragraphs: [
@@ -4504,7 +4504,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hve hratt hleður hann frá 10 í 80%?',
       'Er erfitt að leggja honum í bílastæði?',
     ],
-    facts: '8a31170b2a1c',
+    facts: 'f728b02f365b',
   },
   'volvo-ex40-recharge-twin': {
     paragraphs: [
@@ -4525,7 +4525,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er raunverulegur hleðsluhraði?',
       'Hve mikið dregur kuldinn úr drægninni?',
     ],
-    facts: '39582f867511',
+    facts: '429a6dcf00c8',
   },
   'volvo-ex40-p8-performance': {
     paragraphs: [
@@ -4546,13 +4546,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er fjórhjóladrifið í snjó?',
       'Hve mikið dregur kuldinn úr drægninni?',
     ],
-    facts: '2dbc475324af',
+    facts: 'ac64eb0782bb',
   },
   'volvo-ex30-single-motor-extended-range': {
     paragraphs: [
       'Volvo EX30 Single Motor Extended Range er lítill og nettur jepplingur með vandaðri skandinavískri hönnun, fyrir þá sem vilja gæðatilfinningu í lipurri stærð frekar en stóran fjölskyldubíl.',
       'Hann er sneggri og hleður hraðar en flestir á svipuðu verði, og þrátt fyrir smæðina má hann draga 1.600 kg, meira en flestir þeirra.',
-      'Hins vegar er skottið eitt það minnsta, aftursætin eru þröng og hann er aðeins afturhjóladrifinn. Toyota C-HR+ kostar 800.000 kr. meira og er með 91 l stærra skott, en hann er 3 s hægari í 0-100 km/klst og má ekki draga kerru.',
+      'Hins vegar er skottið eitt það minnsta, aftursætin eru þröng og hann er aðeins afturhjóladrifinn. Toyota C-HR+ kostar 800.000 kr. meira og er með 91 l stærra skott, en hann er 3 s hægari í 0-100 km/klst og má aðeins draga 750 kg.',
       'EX30 er snarpur og vandaður smábíll sem getur dregið kerru, en síðri kostur fyrir fjölskyldur sem þurfa pláss.',
     ],
     questions: [
@@ -4567,7 +4567,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hve hratt hleður hann í miklu frosti?',
       'Er skjástýringin flókin í akstri?',
     ],
-    facts: 'f052bd6fd3d7',
+    facts: 'dfc485955d99',
   },
   'volvo-ex30-twin-motor-performance': {
     paragraphs: [
@@ -4588,7 +4588,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu miklu munar um fjórhjóladrifið?',
       'Hvernig er raunveruleg vetrardrægni?',
     ],
-    facts: '0ccc396e75be',
+    facts: 'a0a8426e9ce2',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-ex30-cross-country-twin-motor-performance': {
@@ -4610,7 +4610,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Er aftursætið of þröngt fyrir fullorðna?',
       'Hve miklu hægar hleður hann en aðrir?',
     ],
-    facts: 'd3ff5348b204',
+    facts: 'b4f14214f0e9',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-ex60-p10': {
@@ -4620,7 +4620,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann er fremur dýr og skottið er aðeins í meðallagi. Þurfi enn meiri drægni fæst Volvo EX60 P12 fyrir 1.000.000 kr. meira, með 810 km drægni.',
       'EX60 P10 er heildstæður kostur fyrir þá sem vilja vandaðan fjölskyldujeppa til ferðalaga um landið, með kerru aftan í ef svo ber undir.',
     ],
-    facts: 'f6fe2d361a59',
+    facts: 'c9d8b956a70c',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Er P12-útfærslan þess virði?',
@@ -4654,7 +4654,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hve hratt hleður hann á ferðalögum?',
       'Borgar risarafhlaðan sig miðað við verð?',
     ],
-    facts: '122bd17716d0',
+    facts: 'd5bd72911a4b',
   },
   'volvo-ex90-twin-motor': {
     paragraphs: [
@@ -4675,7 +4675,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Nýtist stóra rafhlaðan vel á veturna?',
       'Hvað má hann draga mikla þyngd?',
     ],
-    facts: 'b1cc06907485',
+    facts: '848b2f91a2e9',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volvo-ex90-twin-motor-performance': {
@@ -4697,7 +4697,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er hann í akstri miðað við stærð?',
       'Hvernig eru hljóðvist og fjöðrun í honum?',
     ],
-    facts: '1300bf08d7a0',
+    facts: 'af5a9390f300',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'xpeng-g6-rwd-standard-range': {
@@ -4707,7 +4707,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að hann drífur styttra en flestir þeirra og er aðeins afturhjóladrifinn. XPENG G6 RWD Long Range kostar 700.000 kr. meira og drífur 135 km lengra, og XPENG G6 AWD Performance fæst með fjórhjóladrifi fyrir 1.100.000 kr. meira.',
       'G6 Standard Range er rúmgóður og hraðhlaðandi bíll fyrir þá sem aka mest í nærumhverfinu og meta pláss.',
     ],
-    facts: '0ae649a3dde0',
+    facts: '6a2f681d7311',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Af hverju hann frekar en Tesla Model Y?',
@@ -4741,7 +4741,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Dugar Standard Range í daglegan akstur?',
       'Er óhætt að kaupa bíl frá nýju merki?',
     ],
-    facts: '472711f442b5',
+    facts: '1a8138c67540',
   },
   'xpeng-g6-awd-performance': {
     paragraphs: [
@@ -4762,7 +4762,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu miklu meira má hann draga?',
       'Er fjöðrunin of stíf með öllu þessu afli?',
     ],
-    facts: '4624f5ad8f58',
+    facts: 'f37b5d1db575',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'xpeng-g9-awd-performance': {
@@ -4772,7 +4772,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Drægnin er hins vegar aðeins í meðallagi og hann má draga minna en flestir þeirra, og merkið er nýlegt hér á landi. Volvo EX60 P10 kostar 200.000 kr. meira, drífur 120 km lengra og má draga 900 kg meira, þótt hleðslustoppin séu um 30% lengri.',
       'G9 er fyrir þá sem vilja rúmgóðan og tæknivæddan jeppling sem hleður á mettíma.',
     ],
-    facts: 'dd8cf3998bf6',
+    facts: '7e7d26a14874',
     model: 'gemini-3.8-flash, thinking medium',
     questions: [
       'Af hverju frekar hann en Volvo EX60?',
@@ -4794,7 +4794,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Á móti kemur að drægnin er samt fremur stutt, sérstaklega í vetrarkulda, og skottið er fremur lítið. XPENG L03 RWD Long Range kostar 500.000 kr. meira og drífur 75 km lengra, með um 20% styttri hleðslustopp. Kia EV3 Standard Range kostar 300.000 kr. meira frá rótgrónara merki, en drífur 15 km styttra og stoppin eru um 40% lengri.',
       'L03 Standard Range gefur þér mikið fyrir lítið, svo lengi sem drægnin dugar.',
     ],
-    facts: 'b3a26610c324',
+    facts: '763efac8ac1a',
     questions: [
       'Borgar Long Range útfærslan sig?',
       'Af hverju hann frekar en Kia EV3?',
@@ -4813,7 +4813,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Skottið er hins vegar fremur lítið, og afturhjóladrifið kallar á aðgát í snjó og hálku. Kia EV3 Long Range kostar 400.000 kr. meira og drífur 85 km lengra, en stoppin eru um 35% lengri og hann má draga 500 kg minna. XPENG L03 AWD Performance fæst með fjórhjóladrifi fyrir 500.000 kr. meira, en drífur 80 km styttra.',
       'Long Range er skynsamlegasta útfærsla L03 fyrir flesta.',
     ],
-    facts: '424103ff47b5',
+    facts: '082c90fe7ff9',
     questions: [
       'Borgar AWD Performance sig fyrir veturinn?',
       'Af hverju hann frekar en Kia EV3 Long Range?',
@@ -4832,7 +4832,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Aflið kostar þó drægni: hann drífur styttra en flestir á svipuðu verði og skottið er minna en hjá flestum. XPENG L03 RWD Long Range er 500.000 kr. ódýrari og drífur 80 km lengra, ef þú getur verið án fjórhjóladrifsins. Leapmotor C10 Design AWD kostar 100.000 kr. meira, er sneggri og með stærra skott, en stoppin eru um 50% lengri.',
       'Performance er fyrir þig sem metur afl og grip meira en drægni.',
     ],
-    facts: 'b26a49049f4c',
+    facts: '46120d7bb6dc',
     questions: [
       'Borgar sig frekar að taka Long Range?',
       'Af hverju hann frekar en Leapmotor C10 AWD?',
@@ -4863,7 +4863,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar fjórhjóladrifið í snjó?',
       'Er góð þjónusta við merkið á Íslandi?',
     ],
-    facts: '8614e497d430',
+    facts: 'ab80936fcd9c',
   },
 }
 
