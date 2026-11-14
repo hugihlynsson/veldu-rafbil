@@ -87,7 +87,7 @@ const NewCar: FunctionComponent<Props> = ({
   const subTitle = [
     car.subModel,
     showSeats && `${car.seats} sæti`,
-    showTowing && car.towing && `dregur ${addDecimalSeparators(car.towing)} kg`,
+    showTowing && car.towing && `Dregur ${addDecimalSeparators(car.towing)} kg`,
   ]
     .filter(Boolean)
     .join(' · ')
