@@ -34,7 +34,13 @@ were read off ev-database. A car with no entry is looked up when the script
 runs: first its ev-database page, then, if that fails (ev-database answers 429
 for weeks at a time), the site's front page, which lists every car and has
 kept answering through the blocks. The front page has no length or warranty,
-and its boot figure includes the frunk.
+and gives boot and frunk as one figure, kept as `cargoWithFrunk`; the prompt
+compares every car on the two together. A car whose `evDatabaseUrl` changes is
+looked up again, as is one that gains a link.
+
+A link that answers 404 stops the run, rather than taking the car off the list
+by its id and shipping the broken link: find the right page with
+`scripts/ev-database-list.ts` and fix `evDatabaseUrl` in `newCars.ts`.
 
 A car on neither, usually one with no `evDatabaseUrl`, stops the run with
 `No details for <slug>`. Write its entry by hand, then run the script again:
@@ -62,7 +68,9 @@ A car on neither, usually one with no `evDatabaseUrl`, stops the run with
   prompt puts into Icelandic. **`segment`** is the European letter and its name:
   `B - Compact`, `C - Medium`, `D - Large`, `E - Executive`.
 - **`source`** is the one page you read the figures on, and `read` is today.
-  `carDetails.test.ts` checks every entry's bounds and body.
+  A car that has an `evDatabaseUrl` gets the same in its entry, or the next
+  run takes the entry for one read off another page and looks the car up
+  again. `carDetails.test.ts` checks every entry's bounds, body and link.
 
 Where to look, in order:
 

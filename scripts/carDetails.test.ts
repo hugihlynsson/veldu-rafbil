@@ -3,11 +3,14 @@ import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 import cars, { type Car } from '@/modules/data/cars'
+import { specCorrections } from '@/modules/data/evDatabase'
 import { carSlug } from '@/modules/data/getCarId'
 import {
   detailsEntrySchema,
   entryFrom,
   lacking,
+  listEntry,
+  pageEntry,
   MAX_AGE_DAYS,
   pruned,
   toRefresh,
@@ -32,17 +35,16 @@ describe('the details reviews are written from', () => {
     // A review run drops the rest, and puts them in order
     expect(Object.keys(file)).toEqual(Object.keys(pruned(cars, file)))
   })
+
+  it('holds each car as read from the ev-database page it links to now', () => {
+    // A link changed or added since: a review run reads the details again
+    expect(lacking(cars, file).map(carSlug)).toEqual([])
+  })
 })
 
 const page = 'https://ev-database.org/car/1/A'
 const car = (slug: string, evDatabaseUrl?: string) =>
-  ({
-    ...cars[0],
-    make: slug,
-    model: '',
-    subModel: undefined,
-    evDatabaseUrl,
-  }) as Car
+  ({ ...cars[0], id: `car-${slug}`, evDatabaseUrl }) as Car
 const today = '2026-11-14'
 
 describe('the details a run reads', () => {
@@ -54,11 +56,19 @@ describe('the details a run reads', () => {
       withPage,
       withoutPage,
     ])
-    expect(
-      lacking([withPage], {
-        [carSlug(withPage)]: { source: page, read: today },
-      }),
-    ).toEqual([])
+  })
+
+  // A link corrected, or added once the site lists the car, is another car
+  it('looks a car up again once its page changes', () => {
+    const at = (evDatabaseUrl?: string) => ({
+      [carSlug(withPage)]: { source: page, read: today, evDatabaseUrl },
+      [carSlug(withoutPage)]: { source: page, read: today },
+    })
+    expect(lacking([withPage, withoutPage], at(page))).toEqual([])
+    expect(lacking([withPage], at('https://ev-database.org/car/2/B'))).toEqual([
+      withPage,
+    ])
+    expect(lacking([withPage], at())).toEqual([withPage])
   })
 
   it('reads a page again for details off the list, or long ago', () => {
@@ -89,5 +99,26 @@ describe('the details a run reads', () => {
       read: today,
       body: 'SUV',
     })
+    expect(pageEntry({ carBody: 'SUV' }, page, today)).toMatchObject({
+      evDatabaseUrl: page,
+    })
+  })
+
+  // The front page's one figure counts the frunk a page gives apart
+  it('keeps a boot read off the list apart from one read off a page', () => {
+    expect(listEntry({ cargoVolume: '409 L' }, page, today)).toEqual({
+      source: LIST_URL,
+      read: today,
+      evDatabaseUrl: page,
+      cargoWithFrunk: 409,
+    })
+  })
+
+  it('corrects a row of the list as it does the page', () => {
+    const [url, correction] = Object.entries(specCorrections)[0]!
+    const row = { towHitch: 'No', towingBraked: '1000 kg' }
+    expect(listEntry(row, url, today).towing).toBe(
+      entryFrom(correction, url, today).towing,
+    )
   })
 })

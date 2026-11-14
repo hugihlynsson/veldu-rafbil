@@ -52,8 +52,9 @@ import {
   readCarSpecs,
 } from '@/modules/data/evDatabase'
 import {
-  entryFrom,
   lacking,
+  listEntry,
+  pageEntry,
   pruned,
   toRefresh,
   type DetailsFile,
@@ -184,35 +185,38 @@ export default carReviews
 const readPages = async (
   wanted: ReadonlyArray<Car>,
   file: DetailsFile,
-): Promise<{ read: number; limited: boolean }> => {
+): Promise<{ read: number; limited: boolean; gone: Set<string> }> => {
   const urls = [
     ...new Set(wanted.flatMap((car) => car.evDatabaseUrl ?? [])),
   ].filter((url) => allowedURLs.has(url))
   let read = 0
+  // A wrong slug is a 404 even for a car the site has
+  const gone = new Set<string>()
   for (const [index, url] of urls.entries()) {
     if (index > 0) await sleep(PAGE_INTERVAL_MS)
     const response = await fetchOnSite(url).catch(() => null)
     if (response?.status === 429) {
       await response.body?.cancel()
-      return { read, limited: true }
+      return { read, limited: true, gone }
     }
     if (!response?.ok) {
       await response?.body?.cancel()
-      console.error(`Could not read ${url}`)
+      if (response?.status === 404 || response?.status === 410) gone.add(url)
+      console.error(
+        `Could not read ${url} (${response?.status ?? 'no answer'})`,
+      )
       continue
     }
-    const entry = entryFrom(
-      readCarSpecs(url, await readCapped(response)),
-      url,
-      today,
-    )
+    const specs = readCarSpecs(url, await readCapped(response))
     for (const car of wanted) {
-      if (car.evDatabaseUrl === url) file[carSlug(car)] = entry
+      if (car.evDatabaseUrl === url) {
+        file[carSlug(car)] = pageEntry(specs, url, today)
+      }
     }
     saveDetailsFile(file)
     read++
   }
-  return { read, limited: false }
+  return { read, limited: false, gone }
 }
 
 // Some 9 MB in one request, rather than a page for each car
@@ -223,9 +227,9 @@ const readFromList = async (wanted: ReadonlyArray<Car>, file: DetailsFile) => {
     return
   }
   for (const car of wanted) {
-    const id = car.evDatabaseUrl && evDatabaseId(car.evDatabaseUrl)
-    const row = id ? read.list.get(id) : undefined
-    if (row) file[carSlug(car)] = entryFrom(row.specs, LIST_URL, today)
+    const url = car.evDatabaseUrl
+    const row = url && read.list.get(evDatabaseId(url) ?? '')
+    if (row) file[carSlug(car)] = listEntry(row.specs, url, today)
   }
   saveDetailsFile(file)
 }
@@ -236,16 +240,23 @@ const readFromList = async (wanted: ReadonlyArray<Car>, file: DetailsFile) => {
 // and a block on ev-database holds up nothing but a new car's review
 const loadDetails = async (): Promise<DetailsOf> => {
   const file = readDetailsFile()
-  if (lacking(cars, file).length > 0) {
-    const { limited } = await readPages(lacking(cars, file), file)
-    if (limited) console.log('ev-database answered 429; trying its front page')
-  }
-  if (lacking(cars, file).some((car) => car.evDatabaseUrl)) {
-    await readFromList(lacking(cars, file), file)
-  }
-  saveDetailsFile(file)
+  const { limited, gone } = await readPages(lacking(cars, file), file)
+  if (limited) console.log('ev-database answered 429; trying its front page')
+  // The list has a car by its id alone, and would hide a broken link
+  const listed = lacking(cars, file).filter(
+    (car) => car.evDatabaseUrl && !gone.has(car.evDatabaseUrl),
+  )
+  if (listed.length > 0) await readFromList(listed, file)
 
   const missing = lacking(cars, file)
+  const broken = missing.filter(
+    (car) => car.evDatabaseUrl && gone.has(car.evDatabaseUrl),
+  )
+  if (broken.length > 0) {
+    throw new Error(
+      `The ev-database page of ${broken.map(carSlug).join(', ')} is not there. Fix its evDatabaseUrl in newCars.ts, finding the page with scripts/ev-database-list.ts`,
+    )
+  }
   const missingDue = missing.filter((car) => due.includes(car))
   const hint = `Write theirs into ${path.relative(process.cwd(), detailsFile)} by hand, from the maker's specifications, as the write-car-reviews skill says`
   if (missingDue.length > 0) {
@@ -388,6 +399,8 @@ const worker = async (details: DetailsOf) => {
 
 // Not a top-level await, which tsx runs this module without
 const main = async () => {
+  // As the reviews are saved below: a car no longer on the list drops out
+  saveDetailsFile(readDetailsFile())
   if (refreshDetails) return refresh()
   const details = due.length > 0 ? await loadDetails() : () => undefined
   console.log(

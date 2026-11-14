@@ -137,22 +137,22 @@ export const readList = (html: string): Map<string, ListRow> =>
   )
 
 /**
- * The cars a search names: the one with that id, or those whose name has
- * every word of it, whatever the case
+ * The cars a search names: those whose name has every word of it, whatever
+ * the case, after the one whose id it is. A number is both, as "500" is a
+ * Fiat as well as an id
  */
 export const findInList = (
   list: ReadonlyMap<string, ListRow>,
   query: string,
 ): ListRow[] => {
   const words = query.toLowerCase().split(/\s+/).filter(Boolean)
-  const [first] = words
-  if (words.length === 1 && first && /^\d+$/.test(first)) {
-    const row = list.get(first)
-    return row ? [row] : []
-  }
-  return [...list.values()].filter((row) =>
-    words.every((word) => row.name.toLowerCase().includes(word)),
+  const byId = list.get(query.trim())
+  const byName = [...list.values()].filter(
+    (row) =>
+      row !== byId &&
+      words.every((word) => row.name.toLowerCase().includes(word)),
   )
+  return byId ? [byId, ...byName] : byName
 }
 
 /** The front page, read whole, or why it could not be */
