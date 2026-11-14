@@ -1,6 +1,7 @@
 import type { Car } from '@/modules/data/cars'
 import { grantAmountText } from '@/modules/copy/grantCopy'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
+import { towingText } from '@/modules/copy/towingCopy'
 import { driveLabels } from '@/modules/data/drives'
 import { advisorIntro, writingRules } from '@/modules/detail/writingRules'
 import type { Verdict } from '@/modules/detail/verdictEvents'
@@ -9,7 +10,7 @@ import type { Verdict } from '@/modules/detail/verdictEvents'
 // correction there reaches both; the rest are only a comparison's
 const comparisonSystemPrompt = `${advisorIntro} Einhver er að bera saman bílana hér að neðan og þú átt að hjálpa viðkomandi að velja á milli þeirra.
 
-Á eftir tölunum fylgir það sem ev-database segir um hvern bíl, til dæmis stærð hans, farangursrými og dráttargetu. Bíll sem hefur enga ev-database síðu hefur engar slíkar upplýsingar.
+Á eftir tölunum fylgir það sem ev-database segir um hvern bíl, til dæmis stærð hans og farangursrými. Bíll sem hefur enga ev-database síðu hefur engar slíkar upplýsingar. Dráttargetan í tölunum er fyrir eftirvagn með hemlum og gengur framar því sem ev-database segir um hana.
 
 Þegar þú skrifar:
 ${writingRules.voice}
@@ -142,6 +143,7 @@ const describeCar = (car: Car): string =>
     `${car.power} kW`,
     driveLabels[car.drive].toLowerCase(),
     `allt að ${car.seats} sæti`,
+    towingText(car.towing),
   ].join(', ')
 
 // The model is given every gap worked out, so a figure in its text is one it

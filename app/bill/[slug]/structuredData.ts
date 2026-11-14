@@ -29,6 +29,13 @@ export const carStructuredData = (car: Car) => {
     fuelType: 'Electricity',
     vehicleSeatingCapacity: car.seats,
     driveWheelConfiguration: driveConfigurations[car.drive],
+    ...(car.towing && {
+      trailerWeight: {
+        '@type': 'QuantitativeValue',
+        value: car.towing,
+        unitCode: 'KGM',
+      },
+    }),
     ...(!car.deprecated && {
       offers: {
         '@type': 'Offer',

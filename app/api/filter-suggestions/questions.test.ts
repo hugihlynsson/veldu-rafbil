@@ -45,6 +45,7 @@ describe('intentRequest', () => {
       'drive',
       'fastcharge',
       'range',
+      'towing',
       'value',
     ])
   })
@@ -80,6 +81,7 @@ describe('withNumbers', () => {
       price: [8_000_000],
       range: [600],
       seats: [8],
+      towing: [600],
       drive: [],
       acceleration: [8],
       fastcharge: [],
@@ -95,6 +97,12 @@ describe('withNumbers', () => {
       (questions.seats?.criteria as Record<string, string> | undefined)
         ?.seats_8,
     ).toContain('"atta" (8)')
+  })
+
+  it('offers towing in tonnes only for a number with a decimal', () => {
+    expect(stated(['1,5']).towing).toEqual([1500])
+    expect(stated(['3']).towing).toEqual([])
+    expect(stated(['1300']).towing).toEqual([1300])
   })
 
   it('offers seats only for more people than nearly every car seats', () => {

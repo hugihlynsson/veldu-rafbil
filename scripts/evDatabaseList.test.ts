@@ -75,10 +75,12 @@ describe('the front page list', () => {
 
   // The list's 0 is a figure it does not have, but a towbar it rules out
   it('reads a car that takes no towbar as towing nothing', () => {
-    expect(readDetails(list.get('1285')!.specs)).toMatchObject({
+    const { specs } = list.get('1285')!
+    expect(specs).toMatchObject({ towHitch: 'No' })
+    expect(specs.towingBraked).toBeUndefined()
+    expect(readDetails(specs)).toMatchObject({
       body: 'Liftback Sedan',
       cargo: undefined,
-      towing: 0,
     })
   })
 

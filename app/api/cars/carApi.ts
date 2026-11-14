@@ -40,6 +40,10 @@ export interface ApiCar {
   // costs extra included. `price` is the cheapest trim's, so seating this many
   // can cost more than the figure beside it.
   seats: number
+  // Named for its unit and the trailer it is for, since an unbraked trailer
+  // gets far less. 0 and null differ: the first is a car approved to tow
+  // nothing, the second one whose figure is not known.
+  towingBrakedKg: number | null
   fastCharge: {
     minutes10To80: number
     kmPerMinute: number
@@ -74,6 +78,7 @@ export const toApiCar = (car: Car): ApiCar => ({
   powerKw: car.power,
   drive: car.drive,
   seats: car.seats,
+  towingBrakedKg: car.towing,
   fastCharge: {
     minutes10To80: car.timeToCharge10To80,
     kmPerMinute: car.kmPerMinuteCharged,
@@ -105,6 +110,7 @@ export interface CarsPayload {
     range: string
     availability: string
     fastCharge: string
+    towing: string
     pages: string
   }
   count: number
@@ -141,6 +147,7 @@ export const buildCarsPayload = (
     range: `rangeWltpKm is the manufacturer WLTP figure. Real range in Iceland is lower — cold, wind and hills — and usually lands between ${Math.round(realRangeLowFactor * 100)}% and ${Math.round(realRangeHighFactor * 100)}% of it, which is what estimatedRealRangeKm reports. Those are estimates, not measurements.`,
     availability: `A car with availability "expected" is not on the road in Iceland yet, and expectedDelivery says when. Its price.list and price.withGrant are estimates that can change until it arrives, and the site labels them so. Say so when you quote one.`,
     fastCharge: `minutes10To80 is the time from 10% to 80% on a fast charger. kmPerMinute is the WLTP range that window covers, ${Math.round(chargeWindowShare * 100)}% of it, divided by those minutes.`,
+    towing: `towingBrakedKg is the maker's limit for a trailer with its own brakes; an unbraked one gets less. 0 means the car is approved to tow nothing, so it takes no towbar. null means no figure is known, not that it cannot tow. The towbar itself is often a paid option.`,
     pages: `Each car has a page at /bill/{slug}, with its review and price history. /samanburdur/{slug}/{slug} compares up to ${MAX_COMPARED} cars side by side. All paths are relative to the origin this document was served from.`,
   },
   count: cars.length,

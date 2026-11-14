@@ -46,9 +46,15 @@ export const upgradeCarDetailsCalls = <Part extends { type: string }>(
     return car ? [{ ...part, input: { car } }] : []
   })
 
+// The list carries braked towing, checked against the makers. The page's own
+// reads 0 for no figure as well as for no towbar, and handed both, the model
+// has to pick one.
+const carriedByList = new Set(['towingBraked', 'towHitch'])
+
 /** The fields the list does not carry, as the model is handed them */
 const readSpecs = (url: string, html: string): string => {
   const formatted = Object.entries(readCarSpecs(url, html))
+    .filter(([key]) => !carriedByList.has(key))
     .map(([key, value]) => `${key}: ${value}`)
     .join('\n')
 
@@ -121,7 +127,7 @@ export const createFetchCarDetailsTool = () => {
   let calls = 0
 
   return tool({
-    description: `Fetch detailed specifications of a car from EV Database, for example dimensions, cargo space, towing capacity or battery warranty: what the basic car list does not have. The tool will not answer the users question: You must use this info to write a helpful answer. Fetch at most ${MAX_CALLS_PER_ANSWER} cars for one answer, the ones the question is about.`,
+    description: `Fetch detailed specifications of a car from EV Database, for example dimensions, cargo space, unbraked towing or battery warranty: what the basic car list does not have. The list already gives each car's braked towing, so do not fetch for that. The tool will not answer the users question: You must use this info to write a helpful answer. Fetch at most ${MAX_CALLS_PER_ANSWER} cars for one answer, the ones the question is about.`,
     inputSchema: z.object({
       car: z
         .string()

@@ -1,5 +1,6 @@
 import type { Car } from '@/modules/data/cars'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
+import { towingFigure } from '@/modules/copy/towingCopy'
 import { driveLabels } from '@/modules/data/drives'
 import { formatKmPerMinute } from '@/modules/data/getKmPerMinutesCharged'
 import { toHorsepower } from '@/modules/data/horsepower'
@@ -81,6 +82,12 @@ const specs = {
   seats: {
     label: 'Sæti',
     text: (car) => String(car.seats),
+  },
+  // Not ranked either: most never tow, and a heavier trailer is no score
+  towing: {
+    label: 'Dráttargeta',
+    text: (car) => towingFigure(car.towing),
+    detail: (car) => (car.towing ? 'Hemluð' : undefined),
   },
 } satisfies Record<string, Spec>
 

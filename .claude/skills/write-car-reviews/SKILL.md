@@ -1,6 +1,6 @@
 ---
 name: write-car-reviews
-description: Write or refresh the reviews on each car's page in modules/data/carReviews.ts, and the details they are written from in scripts/carDetails.json — including finding a car's boot, towing and body when ev-database is blocked. Use after a car is added or its figures change, when carReviews.test.ts fails, or when asked to write, rewrite or fix a review.
+description: Write or refresh the reviews on each car's page in modules/data/carReviews.ts, and the details they are written from in scripts/carDetails.json — including finding a car's boot and body when ev-database is blocked. Use after a car is added or its figures change, when carReviews.test.ts fails, or when asked to write, rewrite or fix a review.
 ---
 
 # Writing the car reviews
@@ -29,16 +29,17 @@ does it to nearly all of them), so say so rather than passing `--due`.
 ## 2. If it stops for a car's details
 
 A review is written from every car's details in `scripts/carDetails.json`:
-body, segment, length, boot, frunk, towing and battery warranty, by slug. Most
-were read off ev-database. A car with no entry is looked up when the script
-runs: first its ev-database page, then, if that fails (ev-database answers 429
-for weeks at a time), the site's front page, which lists every car and has
-kept answering through the blocks. The front page has no length or warranty,
-and gives boot and frunk as one figure, kept as `cargoWithFrunk`; the prompt
-compares every car on the two together. A car whose `evDatabaseUrl` changes is
-looked up again, as is one that gains a link. To do that without writing any
-review, as when only a link changed, run
-`npx tsx scripts/car-reviews.ts --details`.
+body, segment, length, boot, frunk and battery warranty, by slug. Most were
+read off ev-database. Towing is not among them: a review takes the list's own
+`towing` from `newCars.ts`, which the `update-new-cars` skill sources. A car
+with no entry is looked up when the script runs: first its ev-database page,
+then, if that fails (ev-database answers 429 for weeks at a time), the site's
+front page, which lists every car and has kept answering through the blocks.
+The front page has no length or warranty, and gives boot and frunk as one
+figure, kept as `cargoWithFrunk`; the prompt compares every car on the two
+together. A car whose `evDatabaseUrl` changes is looked up again, as is one
+that gains a link. To do that without writing any review, as when only a link
+changed, run `npx tsx scripts/car-reviews.ts --details`.
 
 A link that answers 404 stops the run, rather than taking the car off the list
 by its id and shipping the broken link: find the right page with
@@ -56,15 +57,13 @@ A car on neither, usually one with no `evDatabaseUrl`, stops the run with
   "length": 4750,
   "cargo": 462,
   "cargoMax": 1601,
-  "frunk": 48,
-  "towing": 1500
+  "frunk": 48
 }
 ```
 
 - **Units:** mm for length, litres for `cargo` (seats up), `cargoMax` (seats
-  folded) and `frunk`, kg braked for `towing`. `towing: 0` means it takes no
-  towbar. Leave out a field you could not find, rather than guessing or
-  writing 0.
+  folded) and `frunk`. Leave out a field you could not find, rather than
+  guessing or writing 0.
 - **`body`** is one of ev-database's names, the keys of `bodyNames` in
   `scripts/reviewPrompt.ts` (`SUV`, `Hatchback`, `Liftback Sedan`, …), which the
   prompt puts into Icelandic. **`segment`** is the European letter and its name:
@@ -87,14 +86,12 @@ Where to look, in order:
 2. **fleetnews.co.uk**, which republishes ev-database's data under the same
    reference number.
 3. **The maker's own specifications**: a spec-sheet PDF, the press site, or a
-   country site's technical data. Iceland's importer rarely lists boot or
-   towing; the UK, German or French sites usually do.
+   country site's technical data. Iceland's importer rarely lists the boot;
+   the UK, German or French sites usually do.
 4. **A specialist review** (electrifying.com, carsguide, Auto Express) for
    what the maker does not give.
 
-A variant shares the body, segment, length and boot of its siblings, but not
-always their towing, which often differs by motor: look that one up for the
-variant itself.
+A variant shares the body, segment, length and boot of its siblings.
 
 ## 3. Read what it wrote
 

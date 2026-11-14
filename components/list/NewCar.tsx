@@ -4,6 +4,7 @@ import { trackEvent } from 'fathom-client'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { driveLabels } from '@/modules/data/drives'
 import { toHorsepower } from '@/modules/data/horsepower'
 import { Car } from '@/modules/data/cars'
@@ -23,6 +24,7 @@ interface Props {
   car: Car
   showValue?: boolean
   showSeats?: boolean
+  showTowing?: boolean
   preload?: boolean
   /** Its place in the list as sorted and filtered, from 0 */
   position: number
@@ -68,6 +70,7 @@ const NewCar: FunctionComponent<Props> = ({
   car,
   showValue,
   showSeats,
+  showTowing,
   preload,
   position,
   view = 'list',
@@ -80,7 +83,12 @@ const NewCar: FunctionComponent<Props> = ({
 
   // Not agree(): sæti is neuter and reads the same at every count. A car
   // without a subModel gets the seat count on its own rather than a lone dot.
-  const subTitle = [car.subModel, showSeats && `${car.seats} sæti`]
+  // The towing filter lets through only cars with a figure.
+  const subTitle = [
+    car.subModel,
+    showSeats && `${car.seats} sæti`,
+    showTowing && car.towing && `Dregur ${addDecimalSeparators(car.towing)} kg`,
+  ]
     .filter(Boolean)
     .join(' · ')
   const openCar = (event: MouseEvent) => {

@@ -128,6 +128,11 @@ describe('getFiltersFromQuery', () => {
     expect(getFiltersFromQuery({ saeti: '7' }).seats).toBe(7)
   })
 
+  it('reads towing in whole kg, rounding a fraction up', () => {
+    expect(getFiltersFromQuery({ drattargeta: '1499.5' }).towing).toBe(1500)
+    expect(getFiltersFromQuery({ drattargeta: '0' })).toEqual({})
+  })
+
   // Seconds and km per minute are measurements, not prices
   it('leaves the filters that are not prices fractional', () => {
     expect(getFiltersFromQuery({ hrodun: '7.25' }).acceleration).toBe(7.25)
@@ -151,6 +156,7 @@ describe('filters survive a round trip through the URL', () => {
     ['a price', { price: 6_000_000 }],
     ['a range', { range: 400 }],
     ['a seat count', { seats: 7 }],
+    ['a towing weight', { towing: 1500 }],
     ['an acceleration', { acceleration: 7 }],
     ['a value', { value: 20_000 }],
     ['a fastcharge', { fastcharge: 3 }],
@@ -165,6 +171,7 @@ describe('filters survive a round trip through the URL', () => {
         price: 9_000_000,
         range: 300,
         seats: 5,
+        towing: 1500,
         acceleration: 9,
         value: 30_000,
         fastcharge: 2,
@@ -205,6 +212,7 @@ describe('filters survive a round trip through the URL', () => {
       price: 9_000_000,
       range: 300,
       seats: 5,
+      towing: 1500,
       acceleration: 9,
       value: 30_000,
       fastcharge: 2,
@@ -281,6 +289,13 @@ describe('the filter modal fields', () => {
     expect(filtersFromFields(fields)).toEqual({})
   })
 
+  // A trailer's own weight, typed in, as a link would carry it
+  it('reads a towing weight as typed, in whole kg', () => {
+    expect(filtersFromFields({ towing: '1250' })).toEqual({ towing: 1250 })
+    expect(filtersFromFields({ towing: '1249.5' })).toEqual({ towing: 1250 })
+    expect(fieldsFromFilters({ towing: 1250 })).toEqual({ towing: '1250' })
+  })
+
   it('trims what is typed around the names', () => {
     expect(filtersFromFields({ name: ' Tesla ,Kia, ' })).toEqual({
       name: ['Tesla', 'Kia'],
@@ -297,6 +312,7 @@ describe('filterKeys', () => {
       'price',
       'range',
       'seats',
+      'towing',
       'drive',
       'acceleration',
       'value',

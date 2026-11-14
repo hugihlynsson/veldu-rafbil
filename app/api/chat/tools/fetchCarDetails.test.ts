@@ -137,6 +137,22 @@ describe('fetchCarDetails', () => {
     expect(result.specifications).not.toContain('seats: 7')
   })
 
+  it('hands over unbraked towing, but not the braked figure the list has', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      page(
+        `<table>
+          <tr><td>Towing Weight Unbraked</td><td>750 kg</td></tr>
+          <tr><td>Towing Weight Braked</td><td>0 kg</td></tr>
+          <tr><td>Tow Hitch</td><td>No</td></tr>
+        </table>`,
+      ),
+    )
+
+    const result = await run(aCar())
+
+    expect(result.specifications).toBe('towingUnbraked: 750 kg')
+  })
+
   it('says so rather than inventing figures for a page with no table', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(page('<p>Ekkert hér</p>'))
 

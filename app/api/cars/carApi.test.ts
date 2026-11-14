@@ -97,6 +97,16 @@ describe('the published car payload', () => {
     }
   })
 
+  // Renamed, since a bare `towing` would leave a reader to guess the trailer.
+  // A null stays null: read as 0 it would say the car cannot tow.
+  it('publishes the braked towing under its unit, keeping null apart from 0', () => {
+    for (const car of cars) {
+      expect(toApiCar(car).towingBrakedKg, label(car)).toBe(car.towing)
+    }
+    expect(payload.cars[0]).not.toHaveProperty('towing')
+    expect(payload.notes.towing).toContain('null')
+  })
+
   it('turns the fixed-precision charge rate back into a number', () => {
     for (const car of payload.cars) {
       expect(Number.isFinite(car.fastCharge.kmPerMinute), car.slug).toBe(true)

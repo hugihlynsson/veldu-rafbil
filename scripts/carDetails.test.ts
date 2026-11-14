@@ -3,7 +3,6 @@ import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 import cars, { type Car } from '@/modules/data/cars'
-import { specCorrections } from '@/modules/data/evDatabase'
 import { carSlug } from '@/modules/data/getCarId'
 import {
   detailsEntrySchema,
@@ -114,11 +113,9 @@ describe('the details a run reads', () => {
     })
   })
 
-  it('corrects a row of the list as it does the page', () => {
-    const [url, correction] = Object.entries(specCorrections)[0]!
-    const row = { towHitch: 'No', towingBraked: '1000 kg' }
-    expect(listEntry(row, url, today).towing).toBe(
-      entryFrom(correction, url, today).towing,
-    )
+  // The list holds a car's towing, checked against its maker
+  it('keeps no towing from a row of the list', () => {
+    const row = { towHitch: 'Yes', towingBraked: '1600 kg' }
+    expect(listEntry(row, page, today)).not.toHaveProperty('towing')
   })
 })

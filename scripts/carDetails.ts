@@ -32,7 +32,6 @@ export const detailsEntrySchema = z.strictObject({
   cargoMax: litres,
   frunk: litres,
   cargoWithFrunk: litres,
-  towing: z.int().min(0).max(5000).optional(),
   warrantyYears: z.int().min(1).max(20).optional(),
   warrantyKm: z.int().min(10_000).max(2_000_000).optional(),
 })

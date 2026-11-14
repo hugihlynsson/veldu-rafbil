@@ -358,6 +358,7 @@ export default function CarList({ latest }: Props) {
             view={listView}
             showValue={listSorting === 'value' || Boolean(listFilters.value)}
             showSeats={Boolean(listFilters.seats)}
+            showTowing={Boolean(listFilters.towing)}
             compared={comparison.isSelected(car)}
             compareFull={comparison.isFull}
             onToggleCompare={toggleCompared}

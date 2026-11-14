@@ -73,6 +73,14 @@ const fields: { [Key in FilterKey]-?: Field } = {
       ['7', '7+'],
     ],
   },
+  // A number rather than steps, so a trailer's own weight can be typed in
+  towing: {
+    kind: 'input',
+    label: 'Dráttargeta',
+    hint: 'Lágmark, kg',
+    type: 'number',
+    placeholder: '1500',
+  },
   availability: {
     kind: 'select',
     label: 'Framboð',

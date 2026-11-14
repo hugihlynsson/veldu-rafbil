@@ -21,8 +21,8 @@
  * after each, so a run cut short keeps what it finished.
  *
  * A review is written from every car's details in scripts/carDetails.json,
- * whichever are written: where a car stands on boot space or towing is among
- * all of them. A car with none there is looked up first, on its ev-database
+ * whichever are written: where a car stands on boot space is among all of
+ * them. Its towing is the list's own, in newCars.ts. A car with none there is looked up first, on its ev-database
  * page or else the site's front-page list, and one found on neither stops the
  * run until it is written in by hand, as the write-car-reviews skill says.
  */
@@ -85,8 +85,8 @@ const questionsThinkingLevel = 'medium'
 // change to the grant puts nearly every one, at a billed minute each, and a
 // run that size is asked for with --due rather than walked into
 const MAX_UNASKED = 8
-// Below this share of cars with details, every standing on boot space or
-// towing would be among too few of them to mean much
+// Below this share of cars with details, every standing on boot space would
+// be among too few of them to mean much
 const MIN_WITH_DETAILS = 0.9
 
 const detailsFile = path.join(__dirname, 'carDetails.json')
@@ -238,7 +238,7 @@ const readFromList = async (wanted: ReadonlyArray<Car>, file: DetailsFile) => {
 }
 
 // Given rather than looked up by the model, which skipped them often enough
-// that a car's boot or towing went unsaid where it stood out. Kept in the
+// that a car's boot went unsaid where it stood out. Kept in the
 // repo rather than read each run, so a run reads only the cars added since,
 // and a block on ev-database holds up nothing but a new car's review
 const loadDetails = async (): Promise<DetailsOf> => {

@@ -30,6 +30,10 @@ export const newCarSchema = z.strictObject({
   // The most the model can be ordered with here, paid options included. People,
   // so whole ones, and a passenger car is neither a bike nor a bus.
   seats: z.int().min(2).max(9),
+  // kg on a braked trailer, the maker's figure: 0 where it approves none, so
+  // the car takes no towbar, and null where none has been found, which the
+  // site says rather than guess either way. 3,500 kg is the EU's cap for a car.
+  towing: z.int().min(0).max(3500).nullable(),
   // Minutes on a fast charger
   timeToCharge10To80: z.number().positive().lt(180),
   // kW

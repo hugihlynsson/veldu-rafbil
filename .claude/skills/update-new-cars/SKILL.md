@@ -222,6 +222,15 @@ make, then model. The fields that are easy to get wrong:
   describe the trim the entry is priced at: someone filtering for seven seats
   wants every car that _can_ carry seven. A configuration Iceland never gets
   does not count, so read the Icelandic list, not the international brochure.
+- **`towing` is the maker's braked-trailer figure in kg**, for that variant:
+  it often differs by motor, so a sibling's figure is no source. `0` is for a
+  car the maker approves to tow nothing — its spec sheet says "no towing", or
+  the towbar it offers is for a bike carrier only. `null` is for a car whose
+  figure you could not find, and the page then says "Óþekkt" rather than "Enginn
+  krókur". ev-database's front-page list reads `0` for "no data" as well as for
+  "no towbar", so confirm a `0` on the car's page or the maker's spec sheet
+  (the UK, German or French sites usually give towing; Icelandic importers
+  rarely do), and when ev-database and the maker disagree, take the maker's.
 - **`expectedDelivery`** is a lowercase-able Icelandic phrase (`sumar 2026`),
   and having one at all is what makes a car count as expected rather than
   available — it drives both the availability filter and the badge on the card.
@@ -255,7 +264,7 @@ make, then model. The fields that are easy to get wrong:
 - **Each car's page has a review in `modules/data/carReviews.ts`, written by
   the advisor's model.** After any change to a car's figures, and after the
   similar-cars run above, follow the `write-car-reviews` skill. It names the
-  cars to write, finds a new car's boot, towing and body when ev-database is
+  cars to write, finds a new car's boot and body when ev-database is
   blocking, and says what to read for in the result. A test fails until they
   are written.
 - **What changed is news, logged in `modules/data/carChanges.ts`.** It is

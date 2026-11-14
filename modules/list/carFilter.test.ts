@@ -18,6 +18,7 @@ const car = (over: Partial<NewCar>): Car =>
     range: 500,
     drive: 'AWD',
     seats: 5,
+    towing: 1500,
     timeToCharge10To80: 25,
     power: 250,
     ...over,
@@ -43,6 +44,13 @@ describe('carFilter', () => {
     expect(keep({ seats: 5 }, car({ seats: 5 }))).toBe(true)
     expect(keep({ seats: 7 }, car({ seats: 5 }))).toBe(false)
     expect(keep({ seats: 7 }, car({ seats: 8 }))).toBe(true)
+  })
+
+  it('treats towing as a minimum, and an unknown figure as none', () => {
+    expect(keep({ towing: 1500 }, car({ towing: 1500 }))).toBe(true)
+    expect(keep({ towing: 1600 }, car({ towing: 1500 }))).toBe(false)
+    expect(keep({ towing: 750 }, car({ towing: 0 }))).toBe(false)
+    expect(keep({ towing: 750 }, car({ towing: null }))).toBe(false)
   })
 
   it('compares price after the grant', () => {
