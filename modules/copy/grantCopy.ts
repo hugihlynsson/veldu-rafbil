@@ -25,17 +25,17 @@ const ceilingText = (ceiling: number, singular: string, plural: string) => {
   return `${millionsText(ceiling)} ${word}`
 }
 
-/** The grant itself, e.g. "500.000 kr." */
+/** The grant itself, e.g. "400.000 kr." */
 export const grantAmountText = amountText(grantAmount)
 
-/** The ceiling as "10 milljónir", for "kosta minna en …" */
+/** The ceiling as "8 milljónir", for "kosta minna en …" */
 export const grantCeilingText = ceilingText(
   grantPriceCeiling,
   'milljón',
   'milljónir',
 )
 
-/** The ceiling as "10 milljónum", for "undir …" */
+/** The ceiling as "8 milljónum", for "undir …" */
 export const grantCeilingDativeText = ceilingText(
   grantPriceCeiling,
   'milljón',
