@@ -1628,7 +1628,7 @@
     "cargo": 435,
     "towing": 1800
   },
-  "volvo-ec40-p8-performance": {
+  "volvo-ec40-p8-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
     "body": "SUV",
@@ -1660,7 +1660,7 @@
     "cargo": 441,
     "towing": 1800
   },
-  "volvo-ex40-p8-performance": {
+  "volvo-ex40-p8-awd": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
     "body": "SUV",
