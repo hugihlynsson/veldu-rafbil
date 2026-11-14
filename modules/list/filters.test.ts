@@ -9,6 +9,7 @@ import {
   filterUrlKeys,
   filtersFromFields,
   normalizeFilters,
+  towingOptions,
 } from './filters'
 import type { Filters } from './filters'
 import { getFiltersFromQuery, serializeFilters } from './query'
@@ -128,6 +129,11 @@ describe('getFiltersFromQuery', () => {
     expect(getFiltersFromQuery({ saeti: '7' }).seats).toBe(7)
   })
 
+  it('reads towing in whole kg, rounding a fraction up', () => {
+    expect(getFiltersFromQuery({ drattargeta: '1499.5' }).towing).toBe(1500)
+    expect(getFiltersFromQuery({ drattargeta: '0' })).toEqual({})
+  })
+
   // Seconds and km per minute are measurements, not prices
   it('leaves the filters that are not prices fractional', () => {
     expect(getFiltersFromQuery({ hrodun: '7.25' }).acceleration).toBe(7.25)
@@ -151,6 +157,7 @@ describe('filters survive a round trip through the URL', () => {
     ['a price', { price: 6_000_000 }],
     ['a range', { range: 400 }],
     ['a seat count', { seats: 7 }],
+    ['a towing weight', { towing: 1500 }],
     ['an acceleration', { acceleration: 7 }],
     ['a value', { value: 20_000 }],
     ['a fastcharge', { fastcharge: 3 }],
@@ -165,6 +172,7 @@ describe('filters survive a round trip through the URL', () => {
         price: 9_000_000,
         range: 300,
         seats: 5,
+        towing: 1500,
         acceleration: 9,
         value: 30_000,
         fastcharge: 2,
@@ -205,6 +213,7 @@ describe('filters survive a round trip through the URL', () => {
       price: 9_000_000,
       range: 300,
       seats: 5,
+      towing: 1500,
       acceleration: 9,
       value: 30_000,
       fastcharge: 2,
@@ -288,6 +297,16 @@ describe('the filter modal fields', () => {
   })
 })
 
+describe('towingOptions', () => {
+  // An option that leaves no car is one nobody can use
+  it('each leaves cars, fewer than the one before', () => {
+    const counts = towingOptions.map((towing) => matches({ towing }))
+    expect(counts.every((count) => count > 0)).toBe(true)
+    expect(new Set(counts).size).toBe(counts.length)
+    expect(counts).toEqual(counts.toSorted((a, b) => b - a))
+  })
+})
+
 // The chips and the filter suggestions both stand in this order, and the
 // suggestions cut from its end, so price and seats outlast the narrower asks
 describe('filterKeys', () => {
@@ -297,6 +316,7 @@ describe('filterKeys', () => {
       'price',
       'range',
       'seats',
+      'towing',
       'drive',
       'acceleration',
       'value',

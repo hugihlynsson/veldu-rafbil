@@ -45,6 +45,7 @@ describe('intentRequest', () => {
       'drive',
       'fastcharge',
       'range',
+      'towing',
       'value',
     ])
   })
@@ -80,6 +81,7 @@ describe('withNumbers', () => {
       price: [8_000_000],
       range: [600],
       seats: [8],
+      towing: [600],
       drive: [],
       acceleration: [8],
       fastcharge: [],

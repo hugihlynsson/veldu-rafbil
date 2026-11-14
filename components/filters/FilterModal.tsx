@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react'
 
 import cars from '@/modules/data/cars'
+import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import {
   fieldFromFilter,
   fieldsFromFilters,
   filtersFromFields,
+  towingOptions,
   type FilterFields,
   type FilterKey,
   type Filters,
@@ -71,6 +73,17 @@ const fields: { [Key in FilterKey]-?: Field } = {
       ['5', '5+'],
       ['6', '6+'],
       ['7', '7+'],
+    ],
+  },
+  towing: {
+    kind: 'select',
+    label: 'Dráttargeta',
+    options: [
+      ['', 'Skiptir ekki máli'],
+      ...towingOptions.map((kg): [string, string] => [
+        String(kg),
+        `${addDecimalSeparators(kg)}+ kg`,
+      ]),
     ],
   },
   availability: {

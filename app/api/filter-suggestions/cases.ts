@@ -87,6 +87,19 @@ export const intentCases: IntentCase[] = [
     kind: 'literal',
     expect: { fastcharge: 15 },
   },
+  { text: '1500 kg dráttargeta', kind: 'literal', expect: { towing: 1500 } },
+  {
+    text: 'dráttargeta minnst 2000',
+    kind: 'literal',
+    expect: { towing: 2000 },
+  },
+  {
+    text: '7 sæti og 2 tonn',
+    kind: 'literal',
+    expect: { seats: 7, towing: 2000 },
+  },
+  // No filter holds the most a car tows
+  { text: 'dráttargeta undir 1000 kg', kind: 'literal', expect: {} },
   // When the car can be had is never suggested
   { text: 'fáanlegur strax, 5 sæti', kind: 'literal', expect: { seats: 5 } },
   { text: 'væntanlegir bílar', kind: 'literal', expect: {} },
@@ -235,6 +248,29 @@ export const intentCases: IntentCase[] = [
     expect: { price: { oneOf: ['cheap', 'mid_priced'] } },
   },
   { text: 'bíll fyrir veturinn', kind: 'vague', expect: { drive: ['AWD'] } },
+  {
+    text: 'þarf að geta dregið kerru',
+    kind: 'vague',
+    expect: { towing: { oneOf: ['small_trailer'] } },
+  },
+  {
+    text: 'með dráttarkrók',
+    kind: 'vague',
+    expect: { towing: { oneOf: ['small_trailer'] } },
+  },
+  {
+    text: 'fjölskyldubíll sem dregur hjólhýsið',
+    kind: 'vague',
+    expect: { towing: { oneOf: ['caravan', 'heavy'] } },
+    allow: ['seats'],
+  },
+  // Towing is no call for all-wheel drive, and a bike rack is no towing
+  {
+    text: 'dregur bátinn upp í bústað',
+    kind: 'vague',
+    expect: { towing: { oneOf: ['caravan', 'heavy'] } },
+  },
+  { text: 'með hjólagrind', kind: 'vague', expect: {} },
   {
     text: 'fyrir sveitina, mikið um malarvegi og snjó',
     kind: 'vague',
@@ -400,6 +436,11 @@ export const intentCases: IntentCase[] = [
   { text: 'kemst 600 á hleðslunni', kind: 'number', expect: { range: 600 } },
   { text: 'við erum 8', kind: 'number', expect: { seats: 8 } },
   {
+    text: 'hjólhýsið er 1300 á þyngd',
+    kind: 'number',
+    expect: { towing: 1300 },
+  },
+  {
     text: 'ekki dýrari en 8',
     kind: 'number',
     expect: { price: 8_000_000 },
@@ -471,7 +512,7 @@ export const intentCases: IntentCase[] = [
     text: 'er hægt að draga kerru?',
     kind: 'question',
     expect: {},
-    allow: ['drive'],
+    allow: ['drive', 'towing'],
   },
   {
     text: 'borgar sig að bíða eftir nýjum bílum?',
@@ -650,7 +691,7 @@ export const intentCases: IntentCase[] = [
     text: 'get ég dregið hjólhýsi á rafbíl?',
     kind: 'question',
     expect: {},
-    allow: ['drive'],
+    allow: ['drive', 'towing'],
   },
   {
     text: 'hvaða sjö sæta bíll er ódýrastur?',

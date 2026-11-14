@@ -43,6 +43,14 @@ const chipText: {
     value: `${min}+`,
     removeLabel: `Fjarlægja sætasíu: lágmark ${min} sæti`,
   }),
+  towing: (min) => {
+    const kg = addDecimalSeparators(min)
+    return {
+      label: 'Dráttargeta:',
+      value: `↑${kg} kg`,
+      removeLabel: `Fjarlægja dráttargetusíu: lágmark ${kg} kg`,
+    }
+  },
   drive: (drives) => ({
     label: 'Drif:',
     value: drives.join(', '),

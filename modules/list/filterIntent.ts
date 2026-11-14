@@ -229,7 +229,8 @@ const fillerWords = new Set(
   eitthvad undir yfir hamark lagmark max minnst amk meira minna minnsta kosti
   mesta lagi upp ekki innan verd verdi kostar kosta budget draegni saeti
   saeta saetum drif drifi hrodun sek hledsla hradhledsla hradhledslu km
-  kilometra manna tharf bara rafmagns bilarnir bilana
+  kilometra manna tharf bara rafmagns bilarnir bilana kg kilo kiloa tonn
+  tonnum drattargeta drattargetu
   `
     .trim()
     .split(/\s+/),
@@ -307,6 +308,21 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
     () => set('seats', 7),
   )
 
+  // A weight is what the car must tow, and "1,5 tonn" can only mean a tonne
+  // and a half. There is no filter for the most a car tows, so "undir 1000
+  // kg" is read and dropped. Not "kilo" alone, which "kilometra" begins with.
+  take(
+    String.raw`${START}${NUM}\s*(kg|kilo(?:a|in|um|gr\w*)?|tonn\w*)${END}`,
+    (match, before) => {
+      const tonnes = (match[2] ?? '').startsWith('tonn')
+      const min = Math.round(
+        parseNumber(match[1], tonnes) * (tonnes ? 1000 : 1),
+      )
+      if (!within(min, 100, 3500)) return false
+      if (boundBefore(before) !== 'upper') set('towing', min)
+    },
+  )
+
   // The lower end of "5 til 8 milljónir" is no filter, so it is read with the
   // ceiling rather than left for a model to place
   take(
@@ -353,6 +369,18 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
       const min = parseNumber(raw)
       if (!within(min, 50, 1500)) return false
       set('range', min)
+    },
+  )
+
+  // "dregur 1500" or "dráttargeta minnst 2000", with the unit left out
+  take(
+    String.raw`${START}(?:drag\w*|dreg\w*|dratt\w*)\s+(?:\p{L}+\s+){0,3}${NUM}${END}`,
+    (match, before) => {
+      const [text, raw] = match
+      const min = parseNumber(raw)
+      if (!within(min, 300, 3500)) return false
+      if (boundBefore(before + text.slice(0, -raw.length)) !== 'upper')
+        set('towing', min)
     },
   )
 

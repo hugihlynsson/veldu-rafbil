@@ -44,9 +44,10 @@ const parseAsKronur = createParser({
   serialize: String,
 })
 
-// A seat count is a whole number of people. The UI offers a short list, but
-// the URL can carry anything, and half a seat would render in the chip.
-const parseAsSeats = createParser({
+// A seat count is a whole number of people, and a towing weight is in whole
+// kg. The UI offers a short list, but the URL can carry anything, and half a
+// seat would render in the chip. Up, as both are minimums.
+const parseAsWholeMinimum = createParser({
   parse: (value) => {
     const parsed = positive(value)
     return parsed === null ? null : Math.ceil(parsed)
@@ -115,8 +116,15 @@ export const filterDefinitions = {
   }),
   seats: filter({
     urlKey: 'saeti',
-    parser: parseAsSeats,
+    parser: parseAsWholeMinimum,
     test: (min) => (car) => car.seats >= min,
+  }),
+  towing: filter({
+    urlKey: 'drattargeta',
+    parser: parseAsWholeMinimum,
+    // A car whose figure is not known is left out: offered for a trailer, it
+    // may turn out to take none
+    test: (min) => (car) => (car.towing ?? 0) >= min,
   }),
   drive: filter({
     urlKey: 'drif',
@@ -149,6 +157,12 @@ export const filterDefinitions = {
     test: (availability) => (car) => car.availability === availability,
   }),
 }
+
+/**
+ * The towing minimums the filter modal offers, in kg: what people tow, from
+ * a small trailer to a heavy caravan, rather than where the cars stand
+ */
+export const towingOptions = [750, 1000, 1500, 2000, 2500]
 
 export type FilterKey = keyof typeof filterDefinitions
 

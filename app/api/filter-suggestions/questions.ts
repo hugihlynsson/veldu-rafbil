@@ -70,7 +70,7 @@ const theNumber = (text: string) =>
 // The parser's bounds for each unit, so a number is offered to a filter only
 // where it would have read it with the unit written out
 const statedNumber =
-  <Key extends 'range' | 'acceleration' | 'value'>(
+  <Key extends 'range' | 'towing' | 'acceleration' | 'value'>(
     [min, max]: [number, number],
     label: (value: number) => string,
     description: (value: number) => string,
@@ -220,13 +220,13 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
       ordered: false,
       instructions:
         'Which drive does the person in `request` need? In Icelandic, fjórhjóladrif, jeppi, snjór, hálka, ófærð, malarvegir, brekkur and hálendið point to all-wheel drive.',
-      none: 'Drive is not mentioned, and nothing is said about winter, snow, gravel, the highlands or towing; long trips alone need no particular drive, and nor does power or charging',
+      none: 'Drive is not mentioned, and nothing is said about winter, snow, gravel or the highlands; long trips alone need no particular drive, and nor does power, charging or towing',
       options: [
         {
           label: 'all_wheel_drive',
           value: ['AWD'],
           description:
-            'All-wheel drive: winter, snow, ice, gravel roads, the highlands, towing',
+            'All-wheel drive: winter, snow, ice, gravel roads, the highlands',
         },
         {
           label: 'rear_wheel_drive',
@@ -239,6 +239,41 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
           description: 'Front-wheel drive',
         },
       ],
+    },
+    // Trailer weights rather than brackets cut from the list: a caravan weighs
+    // what it weighs, however much the cars on sale can pull
+    towing: {
+      key: 'towing',
+      ordered: true,
+      instructions:
+        'Does the person in `request` need to tow something? In Icelandic, draga, dregur, dráttargeta, dráttarkrókur, krókur, kerra, hjólhýsi, fellihýsi, tjaldvagn, hestakerra and bátur ask for towing.',
+      none: 'Towing is not mentioned: nothing about a trailer, a towbar, a caravan or a boat. A bike rack or a roof box is not towing',
+      options: [
+        {
+          label: 'small_trailer',
+          value: 750,
+          description:
+            'A small trailer, such as a utility trailer (kerra) or a tent trailer, or a towbar with nothing more said: at least 750 kg on a braked trailer',
+        },
+        {
+          label: 'caravan',
+          value: 1500,
+          description:
+            'A caravan (hjólhýsi), a folding camper (fellihýsi), a boat or a horse trailer: at least 1,500 kg on a braked trailer',
+        },
+        {
+          label: 'heavy',
+          value: 2000,
+          description:
+            'A large caravan, a heavy boat or a heavy load: at least 2,000 kg on a braked trailer',
+        },
+      ],
+      fromNumber: statedNumber(
+        [300, 3500],
+        (min) => `at_least_${min}_kg`,
+        (min) =>
+          `as the weight the car must tow: at least ${min} kg on a braked trailer`,
+      ),
     },
     acceleration: {
       key: 'acceleration',
@@ -374,7 +409,7 @@ const advisorQuestion: NoulQuestion = {
 // Every question is answered on its own, so each is told what the words
 // around a number mean, or a "7" that is a price is read as seats too
 const statedInstructions =
-  'Options that name a number are read off `request`. Take one only when the words around that number say it is about this: kosta, verð, dýr and milljónir are price; km, kemst, drægni and keyra are distance; sæti, manna, erum and börn are people; sek and í hundraðið are acceleration.'
+  'Options that name a number are read off `request`. Take one only when the words around that number say it is about this: kosta, verð, dýr and milljónir are price; km, kemst, drægni and keyra are distance; sæti, manna, erum and börn are people; draga, kerra, hjólhýsi, kg and tonn are towing; sek and í hundraðið are acceleration.'
 
 const toChoice = (question: IntentQuestion<FilterKey>): ChoiceQuestion => {
   const stated = question.stated ?? []

@@ -21,6 +21,14 @@ describe('filterChipText', () => {
     })
   })
 
+  it('writes towing in kg with a thousands dot', () => {
+    expect(filterChipText('towing', 1500)).toEqual({
+      label: 'Dráttargeta:',
+      value: '↑1.500 kg',
+      removeLabel: 'Fjarlægja dráttargetusíu: lágmark 1.500 kg',
+    })
+  })
+
   it('writes an acceleration to one decimal', () => {
     expect(filterChipText('acceleration', 7).value).toBe('↓7.0s')
   })

@@ -50,6 +50,7 @@ const everyFilter: Required<Filters> = {
   price: 9_000_000,
   range: 300,
   seats: 5,
+  towing: 1500,
   acceleration: 9,
   value: 30_000,
   fastcharge: 2,

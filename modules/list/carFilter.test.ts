@@ -46,6 +46,13 @@ describe('carFilter', () => {
     expect(keep({ seats: 7 }, car({ seats: 8 }))).toBe(true)
   })
 
+  it('treats towing as a minimum, and an unknown figure as none', () => {
+    expect(keep({ towing: 1500 }, car({ towing: 1500 }))).toBe(true)
+    expect(keep({ towing: 1600 }, car({ towing: 1500 }))).toBe(false)
+    expect(keep({ towing: 750 }, car({ towing: 0 }))).toBe(false)
+    expect(keep({ towing: 750 }, car({ towing: null }))).toBe(false)
+  })
+
   it('compares price after the grant', () => {
     const listed = grantPriceCeiling - 100_000
     const limit = listed - grantAmount + 100_000
