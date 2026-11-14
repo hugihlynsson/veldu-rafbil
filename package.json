@@ -7,8 +7,8 @@
     "node": "^22.22.1 || ^24 || >=26"
   },
   "dependencies": {
-    "@ai-sdk/google": "^4.0.111",
-    "@ai-sdk/react": "^4.0.166",
+    "@ai-sdk/google": "^4.0.117",
+    "@ai-sdk/react": "^4.0.173",
     "@axiomhq/js": "^2.0.0",
     "@chenglou/pretext": "^1.0.0",
     "@tailwindcss/postcss": "^4.3.4",
