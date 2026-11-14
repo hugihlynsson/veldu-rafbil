@@ -11,6 +11,7 @@ import { MAX_COMPARED, MIN_COMPARED } from '@/modules/detail/comparison'
 import { rememberListSearch } from '@/utils/listReturn'
 import CrossIcon from '@/components/CrossIcon'
 import PlusIcon from '@/components/PlusIcon'
+import RollingNumber from './RollingNumber'
 import { track } from '@/utils/track'
 
 interface Props {
@@ -39,7 +40,7 @@ const CompareTray: FunctionComponent<Props> = ({ cars, onRemove }) => {
           <h2 className="m-0 text-sm font-semibold">
             Samanburður{' '}
             <span className="font-medium text-stone">
-              {cars.length} af {MAX_COMPARED}
+              <RollingNumber value={cars.length} /> af {MAX_COMPARED}
             </span>
           </h2>
 
