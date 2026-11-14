@@ -2019,6 +2019,7 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-12","slug":"lexus-tz-450e-standard-range","label":"Lexus TZ 450e Standard Range","added":true,"price":{"to":18100000},"delivery":{"to":"snemma 2027"}},
   {"date":"2026-11-12","slug":"lexus-tz-450e-long-range","label":"Lexus TZ 450e Long Range","added":true,"price":{"to":19900000},"delivery":{"to":"snemma 2027"}},
   {"date":"2026-11-12","slug":"lexus-tz-550e","label":"Lexus TZ 550e","added":true,"price":{"to":21700000},"delivery":{"to":"snemma 2027"}},
+  {"date":"2026-11-14","slug":"renault-r4-e-tech-base","label":"Renault R4 E-Tech","price":{"from":5390000,"to":5590000}},
 ]
 
 export default carChanges
