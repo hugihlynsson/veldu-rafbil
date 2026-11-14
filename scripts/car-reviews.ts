@@ -58,7 +58,7 @@ import {
   toRefresh,
   type DetailsFile,
 } from './carDetails'
-import { evDatabaseId, LIST_URL, readListSpecs } from './evDatabaseList'
+import { evDatabaseId, fetchList, LIST_URL } from './evDatabaseList'
 
 const file = path.join(__dirname, '../modules/data/carReviews.ts')
 
@@ -216,31 +216,18 @@ const readPages = async (
 }
 
 // Some 9 MB in one request, rather than a page for each car
-const readList = async (
-  wanted: ReadonlyArray<Car>,
-  file: DetailsFile,
-): Promise<number> => {
-  const response = await fetch(LIST_URL, {
-    signal: AbortSignal.timeout(60_000),
-  }).catch(() => null)
-  if (!response?.ok) {
-    await response?.body?.cancel()
-    console.error(
-      `Could not read ${LIST_URL} (${response?.status ?? 'no answer'})`,
-    )
-    return 0
+const readFromList = async (wanted: ReadonlyArray<Car>, file: DetailsFile) => {
+  const read = await fetchList()
+  if ('error' in read) {
+    console.error(`Could not read ${LIST_URL}: ${read.error}`)
+    return
   }
-  const list = readListSpecs(await response.text())
-  let found = 0
   for (const car of wanted) {
     const id = car.evDatabaseUrl && evDatabaseId(car.evDatabaseUrl)
-    const specs = id ? list.get(id) : undefined
-    if (!specs) continue
-    file[carSlug(car)] = entryFrom(specs, LIST_URL, today)
-    found++
+    const row = id ? read.list.get(id) : undefined
+    if (row) file[carSlug(car)] = entryFrom(row.specs, LIST_URL, today)
   }
   saveDetailsFile(file)
-  return found
 }
 
 // Given rather than looked up by the model, which skipped them often enough
@@ -254,7 +241,7 @@ const loadDetails = async (): Promise<DetailsOf> => {
     if (limited) console.log('ev-database answered 429; trying its front page')
   }
   if (lacking(cars, file).some((car) => car.evDatabaseUrl)) {
-    await readList(lacking(cars, file), file)
+    await readFromList(lacking(cars, file), file)
   }
   saveDetailsFile(file)
 

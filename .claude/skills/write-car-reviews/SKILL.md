@@ -66,9 +66,11 @@ A car on neither, usually one with no `evDatabaseUrl`, stops the run with
 
 Where to look, in order:
 
-1. **The car's ev-database page, if there is one.** Search for it even when
-   the car has no `evDatabaseUrl`: the site may have added it since. If you
-   find one, add it to the car in `newCars.ts` too, which the next run uses.
+1. **The car's ev-database page, if there is one.** Look for it even when the
+   car has no `evDatabaseUrl`, as the site may have added it since:
+   `npx tsx scripts/ev-database-list.ts "<make> <model>"` searches the front
+   page, which gives its URL. If you find one, add it to the car in
+   `newCars.ts`, and the next run reads its details itself.
    While the pages answer 429 to curl, WebFetch and the browser alike,
    `WebSearch` with `allowed_domains: ["ev-database.org"]` still returns their
    figures in its snippets.
