@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react'
 
+import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 import { latestNews } from '@/modules/news/feed'
 import LatestNews from '@/components/list/LatestNews'
 import FooterLogo from './FooterLogo'
@@ -7,6 +8,8 @@ import TextLink from './TextLink'
 
 // Rendered on the server only, by each page, so the change log it reads the
 // latest update from never reaches the browser
+const realRangeText = `${Math.round(realRangeLowFactor * 100)}–${Math.round(realRangeHighFactor * 100)}%`
+
 const Footer: FunctionComponent<{}> = () => (
   <footer className="bg-haze pt-8 pb-34 xs:pt-14">
     <div className="mx-auto max-w-column px-(--gutter) md:max-w-page md:px-10 lg:flex lg:items-center lg:justify-between lg:gap-10">
@@ -24,6 +27,12 @@ const Footer: FunctionComponent<{}> = () => (
         <p className="m-0">
           Ef þú ert með ábendingu eða fyrirspurn geturu sent póst á{' '}
           <TextLink href="mailto:hugi@hey.com">hugi@hey.com</TextLink>.
+        </p>
+        <p className="m-0 mt-4">
+          Drægni er samkvæmt{' '}
+          <TextLink href="http://wltpfacts.eu/">WLTP</TextLink> mælingum
+          framleiðenda. Raundrægni á Íslandi er oftast {realRangeText} af henni,
+          eftir veðri og aksturslagi.
         </p>
       </div>
 

@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 import cars from '@/modules/data/cars'
-import { listHeadline } from '@/modules/copy/listHeadline'
+import { listHeadline, listLead } from '@/modules/copy/listHeadline'
 import { LIST_SHARE_IMAGE_PATH, shareImageSize } from '@/modules/detail/paths'
 import { latestNews } from '@/modules/news/feed'
 import CarList from '@/components/list/CarList'
@@ -14,7 +14,7 @@ import Footer from '@/components/Footer'
 export const dynamic = 'force-static'
 
 const title = 'Veldu Rafbíl'
-const description = `Listi yfir alla ${cars.length} bílana sem eru seldir á Íslandi og eru 100% rafdrifnir, með hlekk á seljanda og helstu upplýsingum til samanburðar`
+const description = `${listLead(cars.length)}, með verði, drægni og hleðsluhraða til samanburðar og ráðgjöf um hvaða bíll hentar þér.`
 
 export const metadata: Metadata = {
   title,
