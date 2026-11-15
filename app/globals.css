@@ -63,7 +63,7 @@
      one that is off only has a faint edge. The edge is under 3:1 by design,
      unlike a field's, since the chip's label says what it is */
   --color-chip-on: #eee;
-  --color-line-soft: #eee;
+  --color-line-soft: #f2f2f2;
   /* The edge of a translucent panel: the chat bar and the pills over the
      page. What is behind it changes, so it is the page's ink at an alpha
      rather than a grey that would only suit one background */
@@ -345,7 +345,7 @@
     --color-line-chip: #4a4a4a;
     /* As the sorting chosen, `raised` */
     --color-chip-on: #383838;
-    --color-line-soft: #2a2a2a;
+    --color-line-soft: #222;
     --color-edge: rgb(255 255 255 / 0.06);
     --color-edge-strong: rgb(255 255 255 / 0.12);
 
