@@ -59,12 +59,11 @@
   /* A filter chip's edge, softer than a field's: its own text is what tells
      you it is there, so the line is only a shape around it */
   --color-line-chip: #ddd;
-  /* A chip above the list that is off. Light fills it, as the sorting's
-     track does, so the one that is on stands out white; dark draws only a
-     faint edge, as the one on is already a step lighter. The edge is under
-     3:1 by design, unlike a field's, since the chip's label says what it is */
-  --color-chip-off: #f2f2f2;
-  --color-line-soft: transparent;
+  /* A chip above the list: one that is on is filled a step off the page,
+     one that is off only has a faint edge. The edge is under 3:1 by design,
+     unlike a field's, since the chip's label says what it is */
+  --color-chip-on: #eee;
+  --color-line-soft: #eee;
   /* The edge of a translucent panel: the chat bar and the pills over the
      page. What is behind it changes, so it is the page's ink at an alpha
      rather than a grey that would only suit one background */
@@ -297,10 +296,6 @@
   --shadow-chip: 0 2px 8px rgb(0 0 0 / 0.04);
   --shadow-chip-hover: 0 4px 12px rgb(0 0 0 / 0.08);
   --shadow-chip-press: 0 2px 6px rgb(0 0 0 / 0.06);
-  /* A chip above the list that is on: `raised` spread wider, as it stands on
-     the page with no track under it to set it off */
-  --shadow-chip-on:
-    0 2px 8px 0 rgb(0 0 0 / 0.12), 0 1px 2px 0 rgb(0 0 0 / 0.08);
   --shadow-sheet: 0px 0px 40px 0px rgb(0 0 0 / 0.1);
   --shadow-sheet-footer: 0 0 32px 0 rgb(0 0 0 / 0.1);
   --shadow-modal: 0px 8px 60px rgb(0 0 0 / 0.15);
@@ -348,7 +343,8 @@
     --color-line: #3a3a3a;
     --color-line-strong: #757575;
     --color-line-chip: #4a4a4a;
-    --color-chip-off: transparent;
+    /* As the sorting chosen, `raised` */
+    --color-chip-on: #383838;
     --color-line-soft: #2a2a2a;
     --color-edge: rgb(255 255 255 / 0.06);
     --color-edge-strong: rgb(255 255 255 / 0.12);
@@ -377,7 +373,6 @@
     --shadow-chip: none;
     --shadow-chip-hover: none;
     --shadow-chip-press: none;
-    --shadow-chip-on: none;
     --shadow-sheet: none;
     --shadow-sheet-footer: 0 -1px 0px 0 rgb(255 255 255 / 0.07);
     --shadow-modal: none;

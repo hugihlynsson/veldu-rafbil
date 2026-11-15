@@ -4,12 +4,9 @@
 // not change its size and shift the row. The type's colour is left to each,
 // as a filter's label is quieter than a make.
 
-/**
- * A make chosen, a filter applied: lifted, as the sorting chosen above them
- * is, so the header has one look for what is on
- */
-export const chipOn = 'bg-raised shadow-(--shadow-chip-on)'
+/** A make chosen, a filter applied */
+export const chipOn = 'bg-chip-on'
 
 /** A make not chosen, or a button among the chips */
 export const chipOff =
-  'bg-chip-off ring-1 ring-inset ring-line-soft hover:bg-cloud'
+  'bg-transparent ring-1 ring-inset ring-line-soft hover:bg-haze'
