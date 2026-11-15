@@ -44,7 +44,7 @@ export default function Toggles<P>({
             icon ? 'px-2.5' : 'px-3 xs:px-4',
             value === currentValue
               ? 'bg-raised text-tint shadow-(--shadow-raised)'
-              : 'bg-transparent text-stone hover:text-tint hover:bg-raised/50 active:scale-[0.97]',
+              : 'bg-transparent text-stone hover:text-tint hover:bg-raised/50 active:scale-96 active:duration-75',
           )}
           onClick={() => onClick(value)}
         >

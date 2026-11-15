@@ -47,7 +47,7 @@ const scrollingWidth: Record<number, string> = {
 const eyebrow =
   'm-0 uppercase text-eyebrow font-semibold tracking-wider text-stone'
 const secondaryButton =
-  'inline-flex items-center justify-center gap-1.5 py-2 px-4 text-sm font-semibold rounded-full no-underline bg-cloud text-tint transition duration-100 hover:bg-smoke active:scale-[0.98]'
+  'inline-flex items-center justify-center gap-1.5 py-2 px-4 text-sm font-semibold rounded-full no-underline bg-cloud text-tint transition duration-100 hover:bg-smoke active:scale-96 active:duration-75'
 
 const deliveryText = (expectedDelivery: string) =>
   `Væntanlegur ${expectedDelivery.toLowerCase()}`

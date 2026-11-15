@@ -92,7 +92,7 @@ export default function MakeSheet({
               Öll merki
             </button>
             <button
-              className="appearance-none px-4 pt-2.75 pb-3 bg-sky border-0 rounded-full text-on-sky text-sm font-semibold cursor-pointer transition duration-200 hover:bg-sky-hover active:scale-[0.98]"
+              className="appearance-none px-4 pt-2.75 pb-3 bg-sky border-0 rounded-full text-on-sky text-sm font-semibold cursor-pointer transition duration-150 hover:bg-sky-hover active:scale-96 active:duration-75"
               onClick={() => {
                 onSubmit(chosen)
                 close()
