@@ -1345,9 +1345,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'kia-ev9-base': {
     paragraphs: [
       'Kia EV9 er stór og veglegur lúxusjeppi sem býður upp á allt að sjö sæti og höfðar sérstaklega til stórra fjölskyldna. Hann sker sig úr fyrir kassalaga og framúrstefnulegt útlit, háa setstöðu og mikið rými fyrir farþega og farangur.',
-      'Helsti styrkur bílsins felst í notagildi og burði. Skottið er mjög stórt, fjórhjóladrifið veitir nauðsynlegt grip í íslenskri vetrarfærð og bíllinn má draga 2.500 kg, sem er með því allra mesta sem býðst. Hann ræður því léttilega við þung hjólhýsi eða tjaldvagna. Hraðhleðslan er einnig lipur, svo ferðalög tefjast ekki að óþörfu.',
+      'Helsti styrkur bílsins felst í notagildi og burði. Skottið er mjög stórt, fjórhjóladrifið veitir nauðsynlegt grip í íslenskri vetrarfærð og bíllinn má draga 2.500 kg, sem er með því allra mesta sem býðst. Hann ræður því léttilega við þung hjólhýsi eða tjaldvagna.',
       'Helsti gallinn er að drægnin er meðal þeirra stystu í sínum verðflokki, sem krefst meiri aðgátar í vetrarferðum milli landshluta. Þar stendur Hyundai IONIQ 9 Long Range AWD til dæmis betur að vígi með 93 km meiri drægni og 80 l stærra skott á nánast sama verði.',
-      'Fyrir þá sem þurfa fullvaxinn sjö sæta ferðabíl með mikla dráttargetu og öflugu fjórhjóladrifi er EV9 engu að síður mjög fýsilegur kostur.',
+      'Hann hentar ef þú þarft fullvaxinn sjö sæta bíl og dregur oft þungt.',
     ],
     questions: [
       'Hvers vegna frekar en Hyundai IONIQ 9?',
@@ -4790,9 +4790,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'xpeng-g9l-rwd-long-range': {
     paragraphs: [
-      'XPENG G9L RWD Long Range er stór lúxusjeppi með sæti fyrir allt að sjö manns, sniðinn fyrir stórar fjölskyldur sem vilja mikið pláss og þægindi. Með rúmlega fimm metra lengd býður hann upp á einstaklega mikið rými fyrir bæði farþega og farangur.',
+      'XPENG G9L RWD Long Range er stór lúxusjeppi með sæti fyrir allt að sjö, gerður fyrir stórar fjölskyldur sem vilja mikið pláss og þægindi. Hann er rúmir fimm metrar á lengd og rýmið eftir því, bæði fyrir farþega og farangur.',
       'Helsti styrkur bílsins liggur í ferðaeiginleikunum, en hann hleður hraðast af keppinautum sínum og lágmarkar þannig hleðslustopp á langferðum um landið. Farangursrýmið er með þeim allra stærstu, sérstaklega þegar framskottið er talið með, og hann má draga tvö tonn, sem dugar vel fyrir hjólhýsi eða kerru.',
-      'Stærsti gallinn fyrir íslenskar aðstæður er afturhjóladrifið, sem getur verið snúið í snjó og hálku á jafn stórum bíl, auk þess sem hann er fremur seinn upp á hundraðið miðað við aðra í sínum verðflokki. Fyrir þá sem vilja fjórhjóladrif og sneggri viðbrögð er útfærslan XPENG G9L AWD Performance eða hinn rúmgóði Hyundai IONIQ 9 Long Range AWD mun vænlegri kostur.',
+      'Stærsti gallinn hér á landi er afturhjóladrifið, sem getur verið snúið í snjó og hálku á svona stórum bíl, og hann er með þeim hægustu upp í hundrað í sínum verðflokki. Ef þú vilt fjórhjóladrif færðu það í G9L AWD Performance, eða í Hyundai IONIQ 9 Long Range AWD, sem má líka draga 500 kg meira en hleður hægar.',
+      'Hann hentar ef pláss og stutt hleðslustopp skipta þig mestu.',
     ],
     questions: [
       'Borgar sig að taka AWD Performance?',
@@ -4811,9 +4812,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'xpeng-g9l-awd-performance': {
     paragraphs: [
-      'XPENG G9L AWD Performance er risavaxinn sjö sæta lúxusjeppi sem er sniðinn að stórum fjölskyldum sem þurfa mikið rými og öruggt grip í öllum veðrum. Með öflugu fjórhjóladrifi og miklu afli lætur hann vetrarfærðina lítið á sig fá, og farangursrýmið er með því allra stærsta sem fæst.',
+      'XPENG G9L AWD Performance er stór sjö sæta lúxusjeppi fyrir fjölskyldur sem vilja mikið pláss og nóg afl. Hann er meðal þeirra aflmestu í sínum verðflokki og farangursrýmið er með því allra stærsta sem fæst.',
       'Helsti styrkleiki bílsins á ferðalögum um landið er hleðslan, en hann er meðal þeirra sem hlaða allra hraðast og heldur því hleðslustoppunum í algjöru lágmarki. Innanrýmið er sérlega rúmgott, skottið tekur vandræðalaust við miklum farangri og hann má draga tvö tonn, sem dugar vel fyrir kerrur eða hjólhýsi.',
-      'Helsti ókosturinn er að hann drífur styttra en flestir í sínum verðflokki. Þeir sem vilja meiri drægni og stærri krók gætu frekar skoðað Hyundai IONIQ 9 Long Range AWD, sem kemst lengra og má draga 500 kg meira, þótt hleðslustoppin verði á móti um 85% lengri. G9L er frábær valkostur fyrir þá sem setja mikið pláss, mikið afl og snögg hleðslustopp í forgang.',
+      'Helsti ókosturinn er að hann drífur styttra en flestir í sínum verðflokki. Ef þú vilt meiri drægni og stærri krók er Hyundai IONIQ 9 Long Range AWD þess virði að skoða: hann kemst 52 km lengra og má draga 500 kg meira, en hleðslustoppin eru um 85% lengri.',
+      'Hann hentar ef þú vilt mikið pláss, mikið afl og stutt hleðslustopp.',
     ],
     questions: [
       'Hvernig er hann miðað við Hyundai IONIQ 9?',
@@ -4825,7 +4827,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hversu mikið pláss er með öll 7 sætin?',
       'Er drægnin vandamál í langferðum?',
       'Hvar nýtist hleðsluhraðinn hans best?',
-      'Dugar dráttargetan fyrir stór hjólhýsi?',
+      'Dugar krókurinn fyrir stór hjólhýsi?',
     ],
     facts: '47bbf27a26d2',
     model: 'gemini-3.8-flash, thinking medium',
@@ -4890,9 +4892,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'xpeng-x9-awd-performance': {
     paragraphs: [
       'XPENG X9 AWD Performance er stór sjö sæta lúxusfjölnotabíll sem leggur allt upp úr rými og þægindum fyrir stórar fjölskyldur eða fólksflutninga á fyrsta farrými. Hann sker sig rækilega úr með framúrstefnulegri hönnun og vandaðri innréttingu þar sem allir farþegar njóta meiri þæginda en gengur og gerist í hefðbundnum bílum.',
-      'Fjórhjóladrifið tryggir gott veggrip í vetrarfærð og aflið vantar sannarlega ekki við framúrakstur eða brattar brekkur. Bíllinn drífur fremur langt á rafhlöðunni og á langferðum um landið er hann meðal þeirra sem hlaða allra hraðast, sem þýðir að hleðslustoppin verða óvenju stutt.',
-      'Helsti gallinn er krókurinn, en miðað við aðra í sínum verðflokki dregur hann minna en flestir. Þeir sem þurfa reglulega að draga þung hjólhýsi eða kerrur ættu frekar að skoða Kia EV9, sem hefur 1.000 kg meiri dráttargetu, þótt hleðslustoppin þar séu um 105% lengri.',
-      'Fyrir þá sem setja pláss, lúxus og sneggri áningu á ferðalögum í forgang er X9 afar athyglisverður kostur.',
+      'Hann er aflmeiri en flestir á svipuðu verði og á langferðum um landið er hann meðal þeirra sem hlaða hraðast, svo hleðslustoppin verða stutt. Drægnin er fremur löng miðað við listann í heild en styttri en hjá flestum á svipuðu verði.',
+      'Helsti gallinn er krókurinn, en miðað við aðra í sínum verðflokki dregur hann minna en flestir. Ef þú dregur oft þung hjólhýsi eða kerrur er Kia EV9 betri kostur, sem má draga 1.000 kg meira, þótt hleðslustoppin þar séu um 105% lengri.',
+      'Hann hentar ef pláss, þægindi og stutt hleðslustopp skipta þig mestu.',
     ],
     questions: [
       'Er hann betri ferðabíll en Kia EV9?',
@@ -4901,7 +4903,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig eru sætin í annarri sætaröð?',
       'Hvernig er plássið í aftasta sætinu?',
       'Hvernig nýtist skottið með sjö í bílnum?',
-      'Dugar dráttargetan fyrir ferðavagn?',
+      'Dugar krókurinn fyrir ferðavagn?',
       'Er erfitt að leggja svona stórum bíl?',
       'Hvað tekur venjulegt hleðslustopp?',
       'Hvernig reynist hann í vetrarfærð?',
