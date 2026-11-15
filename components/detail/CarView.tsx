@@ -273,7 +273,7 @@ const CarView: FunctionComponent<Props> = ({
                   <Link
                     href={comparisonPathOf([car, other])}
                     aria-label={`Bera ${carName(car, [car])} saman við ${carName(other, [other])}`}
-                    className="relative z-1 shrink-0 self-center mr-3 inline-flex items-center justify-center w-8 h-8 text-sm font-semibold rounded-full border border-line-chip bg-lab text-tint no-underline transition duration-100 hover:bg-cloud active:scale-[0.95] md:self-start md:w-auto md:h-auto md:mx-1 md:py-1 md:px-3"
+                    className="relative z-1 shrink-0 self-center mr-3 inline-flex items-center justify-center w-8 h-8 text-sm font-semibold rounded-full border border-line-chip bg-lab text-tint no-underline transition duration-100 hover:bg-cloud active:scale-93 active:duration-75 md:self-start md:w-auto md:h-auto md:mx-1 md:py-1 md:px-3"
                   >
                     <span className="flex md:hidden">
                       <CompareIcon size={14} />

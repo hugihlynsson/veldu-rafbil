@@ -58,7 +58,7 @@ const CompareTray: FunctionComponent<Props> = ({ cars, onRemove }) => {
               }}
               className={clsx(
                 button,
-                'bg-sky text-on-sky transition duration-100 hover:bg-sky-hover active:scale-[0.98]',
+                'bg-sky text-on-sky transition duration-100 hover:bg-sky-hover active:scale-96 active:duration-75',
               )}
             >
               Bera saman <span aria-hidden>&nbsp;→</span>

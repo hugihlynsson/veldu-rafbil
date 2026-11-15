@@ -58,7 +58,7 @@ interface Props {
 
 // Frosted, so they read over the photo and over the text it scrolls into
 const glassButton =
-  'flex items-center justify-center p-0 rounded-full border border-edge bg-glass/70 backdrop-blur-md text-tint no-underline cursor-pointer shadow-(--shadow-chip) transition duration-100 hover:bg-glass/90 active:scale-[0.95]'
+  'flex items-center justify-center p-0 rounded-full border border-edge bg-glass/70 backdrop-blur-md text-tint no-underline cursor-pointer shadow-(--shadow-chip) transition duration-100 hover:bg-glass/90 active:scale-93 active:duration-75'
 
 const sheetButton = clsx(glassButton, 'w-9 h-9')
 

@@ -50,7 +50,7 @@ const CompareToggle: FunctionComponent<Props> = ({
       title={said}
       onClick={onToggle}
       className={clsx(
-        'inline-flex items-center justify-center shrink-0 w-7.5 h-7.5 rounded-full border cursor-pointer transition duration-100 active:enabled:scale-[0.95] disabled:cursor-not-allowed disabled:text-clay disabled:border-line',
+        'inline-flex items-center justify-center shrink-0 w-7.5 h-7.5 rounded-full border cursor-pointer transition duration-100 active:enabled:scale-93 active:duration-75 disabled:cursor-not-allowed disabled:text-clay disabled:border-line',
         selected
           ? 'bg-sky border-sky text-on-sky hover:bg-sky-hover hover:border-sky-hover'
           : 'bg-transparent border-line-chip text-tint hover:enabled:bg-cloud',
