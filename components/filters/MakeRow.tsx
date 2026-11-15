@@ -102,7 +102,9 @@ export default function MakeRow({ chosen, onChange, onShowAll }: Props) {
         </MakeChip>
       ))}
       {hiddenCount > 0 && (
-        <MakeChip label={`Sýna öll ${makes.length} merkin`} onClick={onShowAll}>
+        // Opening with the text on the chip, so a voice command naming it
+        // finds it
+        <MakeChip label={`+${hiddenCount} merki, sýna öll`} onClick={onShowAll}>
           +{hiddenCount} merki
         </MakeChip>
       )}

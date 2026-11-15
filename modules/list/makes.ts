@@ -8,8 +8,12 @@ export const makes = [...new Set(cars.map((car) => car.make))]
 // Icelandic browser, and this is rendered on both
 export const makesInOrder = [...makes].sort((a, b) => a.localeCompare(b, 'is'))
 
-export const carCountOf = (make: string): number =>
-  cars.filter((car) => car.make === make).length
+const carCounts = new Map<string, number>()
+for (const car of cars) {
+  carCounts.set(car.make, (carCounts.get(car.make) ?? 0) + 1)
+}
+
+export const carCountOf = (make: string): number => carCounts.get(make) ?? 0
 
 /**
  * The makes typed into the search most, October to November 2026, most first.

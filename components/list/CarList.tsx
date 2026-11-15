@@ -60,6 +60,7 @@ import useInputModality, { getInputModality } from '@/utils/inputModality'
 import CompareTray from '@/components/detail/CompareTray'
 import type { SheetChat } from '@/components/detail/CarSheet'
 import { track } from '@/utils/track'
+import type { TrackedEvent } from '@/modules/analytics/events'
 
 // Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
 // so arriving a moment later shifts nothing.
@@ -101,6 +102,11 @@ interface Props {
   latest?: LatestNewsLine
 }
 
+type FilterChangeSource = Extract<
+  TrackedEvent,
+  { name: 'filters_changed' }
+>['source']
+
 export default function CarList({ latest }: Props) {
   const { sorting, direction, toggleSorting } = useSorting()
   const { filters, setFilters } = useFilters()
@@ -118,16 +124,7 @@ export default function CarList({ latest }: Props) {
 
   // The filters as the URL will hold them, so a modal closed with nothing
   // changed is not counted as a change
-  const changeFilters = (
-    requested: Filters,
-    source:
-      | 'modal'
-      | 'chip'
-      | 'cleared'
-      | 'suggestion'
-      | 'make-row'
-      | 'make-sheet',
-  ) => {
+  const changeFilters = (requested: Filters, source: FilterChangeSource) => {
     const next = liftMakes(requested)
     const fields = fieldsFromFilters(normalizeFilters(next))
     if (JSON.stringify(fields) === JSON.stringify(fieldsFromFilters(filters))) {

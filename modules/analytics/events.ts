@@ -80,8 +80,9 @@ export const productEventSchema = z.discriminatedUnion('name', [
       'make-row',
       'make-sheet',
     ]),
+    // Room for every make chosen in the sheet, which joined runs past 200
     filters: z
-      .array(z.strictObject({ key: filterKey, value: z.string().max(200) }))
+      .array(z.strictObject({ key: filterKey, value: z.string().max(600) }))
       .max(filterKeys.length),
     count: z.int().min(0).max(10_000),
   }),
