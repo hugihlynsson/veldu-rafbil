@@ -57,7 +57,7 @@ export default function MakeSheet({
           <div className="grow shrink min-h-0 overflow-y-auto p-5 pb-8">
             <fieldset
               aria-labelledby="make-sheet-title"
-              className="m-0 min-w-0 border-0 p-0 flex flex-wrap gap-2"
+              className="m-0 min-w-0 border-0 p-0 flex flex-wrap gap-1.5"
             >
               <MakeChip
                 pressed={chosen.length === 0}

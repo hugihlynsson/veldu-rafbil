@@ -25,6 +25,7 @@ export const rowMakes = [
   'BMW',
   'Leapmotor',
   'Volvo',
+  'Polestar',
 ]
 
 const makeByKey = new Map(

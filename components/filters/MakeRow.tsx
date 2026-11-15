@@ -81,7 +81,7 @@ export default function MakeRow({ chosen, onChange, onShowAll }: Props) {
     // keeps to the intro's measure, the column the latest news stands beside
     <fieldset
       aria-label="Merki"
-      className="m-0 min-w-0 border-0 p-0 flex gap-2 mt-4 overflow-x-auto no-scrollbar max-md:-mx-(--gutter) max-md:px-(--gutter) max-md:scroll-px-(--gutter) md:flex-wrap md:overflow-visible lg:max-w-[33rem]"
+      className="m-0 min-w-0 border-0 p-0 flex gap-1.5 mt-4 overflow-x-auto no-scrollbar max-md:-mx-(--gutter) max-md:px-(--gutter) max-md:scroll-px-(--gutter) md:flex-wrap md:overflow-visible lg:max-w-[33rem]"
     >
       <MakeChip
         pressed={chosen.length === 0}
