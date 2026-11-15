@@ -183,12 +183,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
         }
 
         return (
-          <section
-            className={clsx(
-              sheetPanel,
-              'sheet-panel:max-w-[640px] sheet-panel:max-h-[calc(100dvh-4rem)]',
-            )}
-          >
+          <section className={sheetPanel}>
             <header className="relative bg-surface text-center px-4 py-3 border-b border-line sheet-panel:py-4.5">
               {/* As far in from the left as the header's height leaves above and below it */}
               <CloseButton onClick={close} className="sheet-panel:left-4" />

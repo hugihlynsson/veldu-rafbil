@@ -45,7 +45,7 @@ export default function MakeSheet({
       )}
     >
       {({ close }) => (
-        <section className={clsx(sheetPanel, 'sheet-panel:max-h-[500px]')}>
+        <section className={sheetPanel}>
           <header className="relative bg-surface text-center px-4 py-3 border-b border-line sheet-panel:py-4.5">
             <CloseButton onClick={close} className="sheet-panel:left-4" />
             <h2 id="make-sheet-title" className="m-0 text-lg font-semibold">
