@@ -195,7 +195,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
               'sheet-panel:rounded-sheet-panel sheet-panel:max-w-[640px] sheet-panel:max-h-[calc(100dvh-4rem)]',
             )}
           >
-            <header className="relative bg-surface text-center px-4 py-3 border-b border-line">
+            <header className="relative bg-surface text-center px-4 py-3 border-b border-line sheet-panel:py-5">
               <CloseButton onClick={close} />
               <h2 id="filter-modal-title" className="m-0 text-lg font-semibold">
                 Leita
