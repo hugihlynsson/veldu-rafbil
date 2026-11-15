@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react'
 import ChevronIcon from '@/components/ChevronIcon'
 
 const controlClasses =
-  'block w-full border border-line-strong rounded-xl bg-surface p-2.75 text-base font-normal text-tint transition-[border-color] duration-200 hover:border-clay'
+  'block w-full border border-line-field rounded-xl bg-surface p-2.75 text-base font-normal text-tint transition-[border-color] duration-200 hover:border-line-strong'
 
 const inputClasses = `${controlClasses} placeholder:text-clay`
 
@@ -14,6 +14,7 @@ interface LabelProps {
   label: string
   /** "Hámark" or "Lágmark", with the unit where there is one to give */
   hint?: string
+  className?: string
   children: ReactNode
 }
 
@@ -21,9 +22,10 @@ const Field: React.FunctionComponent<LabelProps> = ({
   id,
   label,
   hint,
+  className,
   children,
 }) => (
-  <div>
+  <div className={className}>
     <div className="flex gap-2 items-baseline mb-1 px-3">
       <label htmlFor={id} className="text-tint text-xs font-semibold">
         {label}
@@ -47,6 +49,7 @@ interface InputProps {
   onChange: (event: ControlEvent) => void
   onKeyDown: (event: ControlKeyEvent) => void
   inputRef?: React.Ref<HTMLInputElement>
+  className?: string
 }
 
 export const FilterInput: React.FunctionComponent<InputProps> = ({
@@ -59,8 +62,9 @@ export const FilterInput: React.FunctionComponent<InputProps> = ({
   onChange,
   onKeyDown,
   inputRef,
+  className,
 }) => (
-  <Field id={id} label={label} hint={hint}>
+  <Field id={id} label={label} hint={hint} className={className}>
     <input
       ref={inputRef}
       id={id}
