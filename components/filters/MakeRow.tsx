@@ -1,18 +1,26 @@
 import { type ReactNode, useState } from 'react'
 import clsx from 'clsx'
 
-import { makes, rowMakes } from '@/modules/list/makes'
+import { carCountOf, makes, rowMakes } from '@/modules/list/makes'
 import { chipOff, chipOn } from './chipTone'
 
 interface ChipProps {
   pressed?: boolean
   label?: string
+  /** The cars of the make, quieter beside its name */
+  count?: number
   onClick: () => void
   children: ReactNode
 }
 
 /** A make to switch on or off, in the row and in the sheet of every make */
-export function MakeChip({ pressed, label, onClick, children }: ChipProps) {
+export function MakeChip({
+  pressed,
+  label,
+  count,
+  onClick,
+  children,
+}: ChipProps) {
   return (
     <button
       type="button"
@@ -25,6 +33,14 @@ export function MakeChip({ pressed, label, onClick, children }: ChipProps) {
       onClick={onClick}
     >
       {children}
+      {/* The space is for a screen reader, which would read "Tesla8"; the
+          flex gap is what spaces it on the page */}
+      {count !== undefined && (
+        <>
+          {' '}
+          <span className="font-medium text-stone">{count}</span>
+        </>
+      )}
     </button>
   )
 }
@@ -78,6 +94,7 @@ export default function MakeRow({ chosen, onChange, onShowAll }: Props) {
         <MakeChip
           key={make}
           pressed={chosen.includes(make)}
+          count={carCountOf(make)}
           onClick={() => toggle(make)}
         >
           {make}

@@ -66,12 +66,10 @@ export default function MakeSheet({
               <MakeChip
                 key={make}
                 pressed={chosen.includes(make)}
+                count={carCountOf(make)}
                 onClick={() => toggle(make)}
               >
                 {make}
-                <span className="font-medium text-stone">
-                  {carCountOf(make)}
-                </span>
               </MakeChip>
             ))}
           </fieldset>
