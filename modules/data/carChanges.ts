@@ -2022,6 +2022,8 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-14","slug":"renault-r4-e-tech-base","label":"Renault R4 E-Tech","price":{"from":5390000,"to":5590000}},
   {"date":"2026-11-14","slug":"volvo-ec40-p8-awd","label":"Volvo EC40 P8 AWD","renamedFrom":"Volvo EC40 P8 Performance"},
   {"date":"2026-11-14","slug":"volvo-ex40-p8-awd","label":"Volvo EX40 P8 AWD","renamedFrom":"Volvo EX40 P8 Performance"},
+  {"date":"2026-11-15","slug":"xpeng-g9l-rwd-long-range","label":"XPENG G9L RWD Long Range","added":true,"price":{"to":11400000},"delivery":{"to":"2027"}},
+  {"date":"2026-11-15","slug":"xpeng-g9l-awd-performance","label":"XPENG G9L AWD Performance","added":true,"price":{"to":12100000},"delivery":{"to":"2027"}},
 ]
 
 export default carChanges
