@@ -44,7 +44,6 @@
   --color-veil: #dcdcdc; /* the chat bar, likewise */
   --color-cloud: #eee; /* a fill on the page: pills */
   --color-smoke: #ddd; /* the same fill, hovered */
-  --color-sunk: #e2e2e2; /* the same fill, pressed in: a make chosen */
   --color-shade: #eee; /* a card on the page, hovered */
   --color-raised: #fff; /* a control lifted off a tinted track */
   --color-track: rgb(0 0 0 / 0.04); /* that track: the sorting tabs */
@@ -292,13 +291,6 @@
   --shadow-chip: 0 2px 8px rgb(0 0 0 / 0.04);
   --shadow-chip-hover: 0 4px 12px rgb(0 0 0 / 0.08);
   --shadow-chip-press: 0 2px 6px rgb(0 0 0 / 0.06);
-  /* A pill that stands like a key, and the same pill pressed in: lit along
-     its top edge, then shaded inside from the top with a lip of light under */
-  --shadow-key:
-    inset 0 1px 0 rgb(255 255 255 / 0.7), 0 1px 2px rgb(0 0 0 / 0.08);
-  --shadow-key-pressed:
-    inset 0 1px 3px rgb(0 0 0 / 0.18), inset 0 0 0 1px rgb(0 0 0 / 0.04),
-    0 1px 0 rgb(255 255 255 / 0.9);
   --shadow-sheet: 0px 0px 40px 0px rgb(0 0 0 / 0.1);
   --shadow-sheet-footer: 0 0 32px 0 rgb(0 0 0 / 0.1);
   --shadow-modal: 0px 8px 60px rgb(0 0 0 / 0.15);
@@ -336,8 +328,6 @@
     --color-veil: #343434;
     --color-cloud: #262626;
     --color-smoke: #303030;
-    /* Under `cloud` rather than over it, as a key pressed in sits lower */
-    --color-sunk: #141414;
     --color-shade: #1a1a1a;
     --color-raised: #383838;
     --color-track: rgb(255 255 255 / 0.09);
@@ -367,18 +357,14 @@
 
     /* Dark draws depth with the surface ladder, not with shadows: everything
        that casts one in light already sits a step lighter than what is under
-       it here. The ones left are hairlines: edges where the fill is the same
-       on both sides, and the lit and shaded edges of a key */
+       it here. The two left are hairlines, edges where the fill is the same
+       on both sides */
     --shadow-hairline: 0 1px 0px 0 rgb(255 255 255 / 0.07);
     --shadow-raised: none;
     --shadow-pill: none;
     --shadow-chip: none;
     --shadow-chip-hover: none;
     --shadow-chip-press: none;
-    /* A key keeps its edges here, as hairlines: lit above, shaded within */
-    --shadow-key: inset 0 1px 0 rgb(255 255 255 / 0.07);
-    --shadow-key-pressed:
-      inset 0 1px 3px rgb(0 0 0 / 0.7), 0 1px 0 rgb(255 255 255 / 0.07);
     --shadow-sheet: none;
     --shadow-sheet-footer: 0 -1px 0px 0 rgb(255 255 255 / 0.07);
     --shadow-modal: none;

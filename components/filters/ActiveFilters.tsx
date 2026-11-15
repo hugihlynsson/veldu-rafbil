@@ -1,10 +1,18 @@
+import clsx from 'clsx'
+
 import type { Filters } from '@/modules/list/filters'
 import { activeChips } from '@/modules/list/filterChips'
 import { agree } from '@/modules/copy/plural'
 import SearchIcon from '@/components/SearchIcon'
+import { chipOff, chipOn } from './chipTone'
 
-const filterClasses =
-  "shrink-0 relative text-xs font-semibold py-1 pr-2 pl-2.5 border border-line-chip rounded-full cursor-pointer text-center flex justify-center items-center bg-lab transition-colors duration-200 text-clay after:content-['+'] after:rotate-45 after:ml-1.5 after:text-base after:leading-[10px] after:-mt-px after:text-clay after:transition-colors hover:bg-haze hover:after:text-tint active:text-tint"
+// Stone rather than clay for the label and the cross, which on the fill of a
+// chip that is on would fall short of 4.5:1
+const filterClasses = clsx(
+  "shrink-0 relative text-xs font-semibold py-1.25 pr-2 pl-2.5 border-0 rounded-full cursor-pointer text-center flex justify-center items-center transition-colors duration-200 after:content-['+'] after:rotate-45 after:ml-1.5 after:text-base after:leading-[10px] after:-mt-px after:text-stone after:transition-colors hover:after:text-tint",
+  chipOn,
+  'text-stone',
+)
 
 interface FilterButtonsProps {
   filters: Filters
@@ -45,7 +53,10 @@ const ActiveFilters = ({
           </button>
         ))}
         <button
-          className="flex justify-center items-center shrink-0 gap-1.5 py-2 pr-4 pl-3 border-0 rounded-full text-control font-semibold cursor-pointer text-center bg-cloud transition duration-200 text-tint hover:bg-smoke active:scale-[0.98]"
+          className={clsx(
+            'flex justify-center items-center shrink-0 gap-1.5 py-2 pr-4 pl-3 border-0 rounded-full text-control font-semibold cursor-pointer text-center text-tint transition duration-200 active:scale-[0.98]',
+            chipOff,
+          )}
           onClick={onOpenFilterModal}
         >
           <SearchIcon size={15} className="opacity-70" />

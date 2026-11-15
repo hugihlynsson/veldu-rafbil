@@ -69,7 +69,7 @@ export default function MakeSheet({
                 onClick={() => toggle(make)}
               >
                 {make}
-                <span className="font-medium text-clay">
+                <span className="font-medium text-stone">
                   {carCountOf(make)}
                 </span>
               </MakeChip>

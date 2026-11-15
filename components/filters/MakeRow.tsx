@@ -2,6 +2,7 @@ import { type ReactNode, useState } from 'react'
 import clsx from 'clsx'
 
 import { makes, rowMakes } from '@/modules/list/makes'
+import { chipOff, chipOn } from './chipTone'
 
 interface ChipProps {
   pressed?: boolean
@@ -18,12 +19,8 @@ export function MakeChip({ pressed, label, onClick, children }: ChipProps) {
       aria-pressed={pressed}
       aria-label={label}
       className={clsx(
-        'shrink-0 flex items-center gap-1.5 border-0 rounded-full py-2 px-3.5 text-control font-semibold whitespace-nowrap cursor-pointer transition duration-200 active:scale-[0.98]',
-        // Pressed in when on, like a key, rather than filled with the brand:
-        // a choice made, not the page's one button to press
-        pressed
-          ? 'bg-sunk text-tint shadow-(--shadow-key-pressed)'
-          : 'bg-cloud text-tint shadow-(--shadow-key) hover:bg-smoke',
+        'shrink-0 flex items-center gap-1.5 border-0 rounded-full py-2 px-3.5 text-control font-semibold whitespace-nowrap text-tint cursor-pointer transition duration-200 active:scale-[0.98]',
+        pressed ? chipOn : chipOff,
       )}
       onClick={onClick}
     >
