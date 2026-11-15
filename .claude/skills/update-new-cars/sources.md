@@ -286,6 +286,14 @@ Read that way the same day, every Model 3 and Model Y price was unchanged.
   (`smart_verdlisti_140723` is the #1 whatever its slug says), and
   `xpeng.com/is/<model>` links `xpeng_ver_listar`. All four uploaded on
   2026-11-02. "Verð" is the price; a "sérverð" row (#5 Pulse) is an offer.
+  The G9L was added on 2026-11-15 with estimated prices, ahead of any word
+  from the importer: it has no page under `xpeng.com/is`, and
+  `xpeng_ver_listar` was still the 2026-11-02 upload read above, which has
+  no G9L. Both entries point at `xpeng.com/is` itself. XPENG is sold by
+  Bílaumboðið Una, Askja's sister company, so the list stays on Askja's
+  issuu while news goes on `bilaumbodiduna.is/frettir`. Check all three
+  for the G9L each sweep, and replace the link, prices and delivery (a
+  guessed `2027`) once they appear. The estimate's working is in PR #1769.
 - **Volkswagen**: the ID.3 Neo has its own list, `vw/neo.pdf`, linked from
   the verdlistar page and uploaded on 2026-11-10. `vw/id3.pdf` is still the
   ID.3 Pro alone, uploaded on 2026-11-04, so both are on sale. The ID.

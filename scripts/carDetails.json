@@ -1759,6 +1759,30 @@
     "segment": "E - Executive",
     "cargoWithFrunk": 731
   },
+  "xpeng-g9l-rwd-long-range": {
+    "source": "https://ev-database.org/car/3839/XPENG-G9L-RWD-Long-Range",
+    "read": "2026-11-15",
+    "evDatabaseUrl": "https://ev-database.org/car/3839/XPENG-G9L-RWD-Long-Range",
+    "body": "SUV",
+    "segment": "F - Luxury",
+    "length": 5120,
+    "cargo": 935,
+    "frunk": 65,
+    "warrantyYears": 8,
+    "warrantyKm": 160000
+  },
+  "xpeng-g9l-awd-performance": {
+    "source": "https://ev-database.org/car/3840/XPENG-G9L-AWD-Performance",
+    "read": "2026-11-15",
+    "evDatabaseUrl": "https://ev-database.org/car/3840/XPENG-G9L-AWD-Performance",
+    "body": "SUV",
+    "segment": "F - Luxury",
+    "length": 5120,
+    "cargo": 935,
+    "frunk": 65,
+    "warrantyYears": 8,
+    "warrantyKm": 160000
+  },
   "xpeng-l03-rwd-standard-range": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",

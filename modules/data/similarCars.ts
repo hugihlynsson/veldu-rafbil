@@ -309,7 +309,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   'kia-ev9-base': [
     'hyundai-ioniq-9-long-range-awd',
     'xpeng-x9-awd-performance',
-    'byd-tang-flagship',
+    'xpeng-g9l-rwd-long-range',
   ],
   'kia-ev9-gt': [
     'hyundai-ioniq-9-long-range-performance-awd',
@@ -1146,6 +1146,16 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'mercedes-benz-glc-300-4matic',
     'tesla-model-y-performance',
   ],
+  'xpeng-g9l-rwd-long-range': [
+    'hyundai-ioniq-9-long-range-awd',
+    'byd-tang-flagship',
+    'xpeng-x9-awd-performance',
+  ],
+  'xpeng-g9l-awd-performance': [
+    'xpeng-x9-awd-performance',
+    'kia-ev9-base',
+    'hyundai-ioniq-9-long-range-awd',
+  ],
   'xpeng-l03-rwd-standard-range': [
     'smart-1-pro',
     'kia-ev3-standard-range',
@@ -1163,7 +1173,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'xpeng-x9-awd-performance': [
     'kia-ev9-base',
-    'hyundai-ioniq-9-long-range-awd',
+    'xpeng-g9l-awd-performance',
     'volkswagen-id-buzz-gtx',
   ],
 }
