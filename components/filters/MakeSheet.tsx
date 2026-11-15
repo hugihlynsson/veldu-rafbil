@@ -52,27 +52,31 @@ export default function MakeSheet({
               Merki
             </h2>
           </header>
-          <fieldset
-            aria-labelledby="make-sheet-title"
-            className="m-0 min-w-0 border-0 flex flex-wrap content-start gap-2 grow shrink overflow-y-auto p-5 pb-8"
-          >
-            <MakeChip
-              pressed={chosen.length === 0}
-              onClick={() => setChosen([])}
+          {/* The scroller is a div: a fieldset will not shrink in a flex
+              column, so the makes ran on under the footer */}
+          <div className="grow shrink min-h-0 overflow-y-auto p-5 pb-8">
+            <fieldset
+              aria-labelledby="make-sheet-title"
+              className="m-0 min-w-0 border-0 p-0 flex flex-wrap gap-2"
             >
-              Öll merki
-            </MakeChip>
-            {makesInOrder.map((make) => (
               <MakeChip
-                key={make}
-                pressed={chosen.includes(make)}
-                count={carCountOf(make)}
-                onClick={() => toggle(make)}
+                pressed={chosen.length === 0}
+                onClick={() => setChosen([])}
               >
-                {make}
+                Öll merki
               </MakeChip>
-            ))}
-          </fieldset>
+              {makesInOrder.map((make) => (
+                <MakeChip
+                  key={make}
+                  pressed={chosen.includes(make)}
+                  count={carCountOf(make)}
+                  onClick={() => toggle(make)}
+                >
+                  {make}
+                </MakeChip>
+              ))}
+            </fieldset>
+          </div>
           <footer className="p-4 flex justify-end shadow-(--shadow-sheet-footer) z-1">
             <button
               className="appearance-none px-4 pt-2.75 pb-3 bg-sky border-0 rounded-full text-on-sky text-sm font-semibold cursor-pointer transition duration-200 hover:bg-sky-hover active:scale-[0.98]"
