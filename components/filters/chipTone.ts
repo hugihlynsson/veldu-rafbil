@@ -8,7 +8,7 @@
  * A make chosen, a filter applied: lifted, as the sorting chosen above them
  * is, so the header has one look for what is on
  */
-export const chipOn = 'bg-raised shadow-(--shadow-raised)'
+export const chipOn = 'bg-raised shadow-(--shadow-chip-on)'
 
 /** A make not chosen, or a button among the chips */
 export const chipOff =
