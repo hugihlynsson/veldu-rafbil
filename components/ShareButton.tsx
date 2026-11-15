@@ -89,7 +89,7 @@ const ShareButton: FunctionComponent<Props> = ({
         aria-label={said}
         title={said}
         className={clsx(
-          'inline-flex items-center justify-center shrink-0 w-7.5 h-7.5 rounded-full border border-line-chip bg-transparent text-tint cursor-pointer transition duration-100 hover:bg-cloud active:scale-[0.95]',
+          'inline-flex items-center justify-center shrink-0 w-7.5 h-7.5 rounded-full border border-line-chip bg-transparent text-tint cursor-pointer transition duration-100 hover:bg-cloud active:scale-93 active:duration-75',
           className,
         )}
       >
@@ -103,7 +103,7 @@ const ShareButton: FunctionComponent<Props> = ({
       type="button"
       onClick={share}
       className={clsx(
-        'inline-flex items-center justify-center gap-1.5 text-sm font-semibold rounded-full border-0 cursor-pointer transition duration-100 active:scale-[0.98]',
+        'inline-flex items-center justify-center gap-1.5 text-sm font-semibold rounded-full border-0 cursor-pointer transition duration-100 active:scale-96 active:duration-75',
         variant === 'quiet'
           ? 'py-1.5 px-3.5 bg-cloud text-tint hover:bg-smoke'
           : 'py-3 px-5 bg-sky text-on-sky hover:bg-sky-hover',

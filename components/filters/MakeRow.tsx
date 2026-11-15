@@ -27,7 +27,7 @@ export function MakeChip({
       aria-pressed={pressed}
       aria-label={label}
       className={clsx(
-        'shrink-0 flex items-center gap-1.5 border-0 rounded-full py-2 px-3.5 text-control font-semibold whitespace-nowrap text-tint cursor-pointer transition duration-200 active:scale-[0.98]',
+        'shrink-0 flex items-center gap-1.5 border-0 rounded-full py-2 px-3.5 text-control font-semibold whitespace-nowrap text-tint cursor-pointer transition duration-150 active:scale-96 active:duration-75',
         pressed ? chipOn : chipOff,
       )}
       onClick={onClick}

@@ -53,7 +53,7 @@ const ActiveFilters = ({
         ))}
         <button
           className={clsx(
-            'flex justify-center items-center shrink-0 gap-1.5 py-2 pr-4 pl-3 border-0 rounded-full text-control font-semibold cursor-pointer text-center text-tint transition duration-200 active:scale-[0.98]',
+            'flex justify-center items-center shrink-0 gap-1.5 py-2 pr-4 pl-3 border-0 rounded-full text-control font-semibold cursor-pointer text-center text-tint transition duration-150 active:scale-96 active:duration-75',
             chipOff,
           )}
           onClick={onOpenFilterModal}
