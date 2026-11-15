@@ -262,7 +262,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
               tabIndex={-1}
               onClickCapture={openLinkedCar}
               className={clsx(
-                'relative w-[min(960px,calc(100vw-11.5rem))] max-h-[calc(100dvh-4rem)] overflow-x-hidden overflow-y-auto overscroll-contain outline-none rounded-sheet bg-surface shadow-(--shadow-modal)',
+                'relative w-[min(960px,calc(100vw-11.5rem))] max-h-[calc(100dvh-4rem)] overflow-x-hidden overflow-y-auto overscroll-contain outline-none rounded-modal bg-surface shadow-(--shadow-modal)',
                 panelMotion,
               )}
             >

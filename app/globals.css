@@ -117,9 +117,11 @@
   --radius-toggle: calc(10px * var(--corner));
   --radius-card: calc(14px * var(--corner));
   --radius-sheet: calc(20px * var(--corner));
-  /* Concentric with the pill in its footer: half the button's 43px plus the
-     16px around it */
-  --radius-sheet-panel: calc(37.5px * var(--corner));
+  /* A centred modal: the car sheet and the filter modal on a wide screen.
+     Near-concentric with what sits in its corners, the car sheet's 36px
+     buttons 16px in and the filter footer's 43px pill 16px in, and never
+     more than that, which pinches in towards them */
+  --radius-modal: calc(32px * var(--corner));
 
   /* Motion. Everything that arrives rises the same way; `--rise` shortens
      the distance for the cars under an answer, which are big enough that

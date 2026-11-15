@@ -192,7 +192,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             className={clsx(
               'z-1 flex flex-col rounded-t-sheet bg-surface w-screen max-w-[400px] max-h-[85dvh] overflow-hidden shadow-(--shadow-sheet)',
               panelMotion,
-              'sheet-panel:rounded-sheet-panel sheet-panel:max-w-[640px] sheet-panel:max-h-[calc(100dvh-4rem)]',
+              'sheet-panel:rounded-modal sheet-panel:max-w-[640px] sheet-panel:max-h-[calc(100dvh-4rem)]',
             )}
           >
             <header className="relative bg-surface text-center px-4 py-3 border-b border-line sheet-panel:py-4.5">
