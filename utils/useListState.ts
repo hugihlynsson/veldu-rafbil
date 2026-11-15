@@ -1,6 +1,7 @@
 import { useQueryStates } from 'nuqs'
 
 import type { Filters } from '@/modules/list/filters'
+import { liftMakes } from '@/modules/list/makes'
 import type { Sorting } from '@/modules/list/sorting'
 import type { View } from '@/modules/list/view'
 import { viewParsers, viewUrlKeys } from '@/modules/list/view'
@@ -27,7 +28,9 @@ export const useFilters = () => {
     urlKeys: filterUrlKeys,
   })
 
-  const filters = filtersFromValues(values as FilterValues)
+  // Read lifted, so an old link's make shows in the row; written as given, as
+  // CarList lifts what it sets to tell whether anything changed
+  const filters = liftMakes(filtersFromValues(values as FilterValues))
 
   const setFilters = (next: Filters) => void setValues(valuesFromFilters(next))
 

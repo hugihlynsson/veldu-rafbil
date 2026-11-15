@@ -7,6 +7,7 @@ import {
   type EventName,
   type TrackedEvent,
 } from './events'
+import { makes } from '@/modules/list/makes'
 import { MAX_BATCH } from './visit'
 
 const conversationId = '6f1c8a52-3e0b-4d5e-9a57-0f2b6c1d9e44'
@@ -114,6 +115,14 @@ describe('productEventSchema', () => {
   it('refuses a field the event does not have', () => {
     const extra = { ...onPage(tracked.seller_clicked), price: 5_990_000 }
     expect(productEventSchema.safeParse(extra).success).toBe(false)
+  })
+
+  it('reads every make chosen at once', () => {
+    const event = onPage({
+      ...tracked.filters_changed,
+      filters: [{ key: 'make', value: makes.join(', ') }],
+    })
+    expect(productEventSchema.safeParse(event).success).toBe(true)
   })
 
   it('refuses a filter the list does not have', () => {

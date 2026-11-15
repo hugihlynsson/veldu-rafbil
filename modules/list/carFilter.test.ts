@@ -4,6 +4,7 @@ import carFilter from './carFilter'
 import { deriveCar, Car } from '@/modules/data/cars'
 import { grantAmount, grantPriceCeiling } from '@/modules/data/globals'
 import type { NewCar } from '@/modules/data/newCarSchema'
+import type { Filters } from './filters'
 
 const car = (over: Partial<NewCar>): Car =>
   deriveCar({
@@ -81,6 +82,57 @@ describe('carFilter', () => {
 
   it('keeps a car matching any one of several names', () => {
     expect(keep({ name: ['kia', 'tesla'] }, car({}))).toBe(true)
+  })
+
+  it('matches a make whole, in any case', () => {
+    const mini = car({ make: 'Mini', model: 'Cooper' })
+    expect(keep({ make: ['Mini'] }, mini)).toBe(true)
+    expect(keep({ make: ['mini'] }, mini)).toBe(true)
+    expect(keep({ make: ['Min'] }, mini)).toBe(false)
+    expect(keep({ make: ['Kia', 'Mini'] }, mini)).toBe(true)
+  })
+
+  describe('a make and a name together', () => {
+    const enyaq = car({ make: 'Skoda', model: 'Enyaq', subModel: '85' })
+    const elroq = car({ make: 'Skoda', model: 'Elroq', subModel: '85' })
+    const ev3 = car({
+      make: 'Kia',
+      model: 'EV3',
+      subModel: 'Long Range',
+      price: 5_000_000,
+    })
+    const modelY = car({})
+    const list = [enyaq, elroq, ev3, modelY]
+    const kept = (filters: Filters) =>
+      list.filter(carFilter(filters, list)).map((c) => c.model)
+
+    it('narrows the make to the model named', () => {
+      expect(kept({ make: ['Skoda'], name: ['enyaq'] })).toEqual(['Enyaq'])
+    })
+
+    it('adds a model of a make not chosen', () => {
+      expect(kept({ make: ['Kia'], name: ['model y'] })).toEqual([
+        'EV3',
+        'Model Y',
+      ])
+    })
+
+    it('narrows only the make the name is of', () => {
+      expect(kept({ make: ['Skoda', 'Kia'], name: ['enyaq'] })).toEqual([
+        'Enyaq',
+        'EV3',
+      ])
+    })
+
+    it('keeps a word that finds a car of the make inside the make', () => {
+      expect(kept({ make: ['Kia'], name: ['long range'] })).toEqual(['EV3'])
+    })
+
+    it('still applies the other filters', () => {
+      expect(
+        kept({ make: ['Kia'], name: ['model y'], price: 6_000_000 }),
+      ).toEqual(['EV3'])
+    })
   })
 
   it('matches any of the selected drives', () => {

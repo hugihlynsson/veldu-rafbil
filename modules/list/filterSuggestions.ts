@@ -85,6 +85,19 @@ export const readAsksAdvisor = (json: unknown): boolean =>
   z.object({ asksAdvisor: z.boolean() }).safeParse(json).data?.asksAdvisor ??
   false
 
+// A make offered joins the ones chosen in the row, as a tap there would,
+// rather than quietly dropping them, and one already chosen is not offered
+const joinedMakes = (
+  suggestion: FilterSuggestion,
+  current: Filters,
+): FilterSuggestion =>
+  suggestion.key === 'make' && current.make
+    ? {
+        ...suggestion,
+        value: [...new Set([...current.make, ...suggestion.value])],
+      }
+    : suggestion
+
 export type RankedSuggestion = FilterSuggestion & {
   /** Cars the list would show with this added to the current filters */
   count: number
@@ -107,7 +120,7 @@ export const rankSuggestions = (
   list: ReadonlyArray<Car> = cars,
 ): { suggestions: RankedSuggestion[]; combined: Filters; count: number } => {
   const count = (filters: Filters) =>
-    list.filter(carFilter(normalizeFilters(filters))).length
+    list.filter(carFilter(normalizeFilters(filters), list)).length
   const currentCount = count(current)
 
   const ordered = [...suggestions].sort(
@@ -118,7 +131,8 @@ export const rankSuggestions = (
 
   let combined = current
   const kept: RankedSuggestion[] = []
-  for (const suggestion of ordered) {
+  for (const offered of ordered) {
+    const suggestion = joinedMakes(offered, current)
     if (kept.length === MAX_SUGGESTIONS) break
     if (sameValue(current[suggestion.key], suggestion.value)) continue
     if (kept.some(({ key }) => key === suggestion.key)) continue

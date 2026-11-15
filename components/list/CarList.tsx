@@ -23,6 +23,8 @@ import LatestNews from './LatestNews'
 import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/filters/FilterModal'
 import ActiveFilters from '@/components/filters/ActiveFilters'
+import MakeRow from '@/components/filters/MakeRow'
+import MakeSheet from '@/components/filters/MakeSheet'
 import cars, { type Car as CarData } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf } from '@/modules/detail/paths'
@@ -35,6 +37,7 @@ import {
   type FilterKey,
   type Filters,
 } from '@/modules/list/filters'
+import { liftMakes } from '@/modules/list/makes'
 import {
   sortCars,
   sortingDefinitions,
@@ -57,6 +60,7 @@ import useInputModality, { getInputModality } from '@/utils/inputModality'
 import CompareTray from '@/components/detail/CompareTray'
 import type { SheetChat } from '@/components/detail/CarSheet'
 import { track } from '@/utils/track'
+import type { TrackedEvent } from '@/modules/analytics/events'
 
 // Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
 // so arriving a moment later shifts nothing.
@@ -98,6 +102,11 @@ interface Props {
   latest?: LatestNewsLine
 }
 
+type FilterChangeSource = Extract<
+  TrackedEvent,
+  { name: 'filters_changed' }
+>['source']
+
 export default function CarList({ latest }: Props) {
   const { sorting, direction, toggleSorting } = useSorting()
   const { filters, setFilters } = useFilters()
@@ -115,10 +124,8 @@ export default function CarList({ latest }: Props) {
 
   // The filters as the URL will hold them, so a modal closed with nothing
   // changed is not counted as a change
-  const changeFilters = (
-    next: Filters,
-    source: 'modal' | 'chip' | 'cleared' | 'suggestion',
-  ) => {
+  const changeFilters = (requested: Filters, source: FilterChangeSource) => {
+    const next = liftMakes(requested)
     const fields = fieldsFromFilters(normalizeFilters(next))
     if (JSON.stringify(fields) === JSON.stringify(fieldsFromFilters(filters))) {
       return
@@ -142,6 +149,7 @@ export default function CarList({ latest }: Props) {
   }
 
   const [editingFilters, setEditingFilters] = useState<boolean>(false)
+  const [choosingMakes, setChoosingMakes] = useState(false)
   const controlsRef = useRef<HTMLDivElement>(null)
 
   // A suggested filter replaces the cars under the reader, so a place halfway
@@ -325,6 +333,12 @@ export default function CarList({ latest }: Props) {
           </div>
         </div>
 
+        <MakeRow
+          chosen={filters.make ?? []}
+          onChange={(make) => changeFilters({ ...filters, make }, 'make-row')}
+          onShowAll={() => setChoosingMakes(true)}
+        />
+
         <ActiveFilters
           filters={filters}
           onRemoveFilter={removeFilterChip}
@@ -398,6 +412,18 @@ export default function CarList({ latest }: Props) {
         />
       )}
 
+      {choosingMakes && (
+        <MakeSheet
+          initialMakes={filters.make ?? []}
+          onSubmit={(make) => changeFilters({ ...filters, make }, 'make-sheet')}
+          onDone={() => setChoosingMakes(false)}
+          getCountPreview={(make) =>
+            cars.filter(carFilter(normalizeFilters({ ...filters, make })))
+              .length
+          }
+        />
+      )}
+
       {isComparing && (
         <CompareTray cars={comparison.selected} onRemove={removeCompared} />
       )}
@@ -410,7 +436,7 @@ export default function CarList({ latest }: Props) {
           page but not over it in the sheet. There the chat is about the
           sheet's car, as it is on the car's page. */}
       <ChatContainer
-        hide={editingFilters || (isComparing && !sheetChat)}
+        hide={editingFilters || choosingMakes || (isComparing && !sheetChat)}
         container={sheetChat?.container}
         about={sheetChat && sheetCar ? [sheetCar] : undefined}
         starters={sheetChat?.starters}

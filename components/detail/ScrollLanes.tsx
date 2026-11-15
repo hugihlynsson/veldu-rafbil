@@ -30,7 +30,7 @@ export const Lane: FunctionComponent<{
       ref={scrolls ? lane : undefined}
       className={clsx(
         scrolls &&
-          'max-md:overflow-x-auto max-md:data-driving:snap-x max-md:data-driving:snap-mandatory max-md:scroll-pl-(--gutter) [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+          'max-md:overflow-x-auto max-md:data-driving:snap-x max-md:data-driving:snap-mandatory max-md:scroll-pl-(--gutter) no-scrollbar',
         className,
       )}
     >

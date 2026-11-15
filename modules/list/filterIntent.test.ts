@@ -80,7 +80,7 @@ describe('parseFilterIntent', () => {
     expect(
       read('mig langar í fjórhjóladrifin rafbíl sem er ekki tesla'),
     ).toEqual({ drive: ['AWD'] })
-    expect(read('Kia en ekki Tesla')).toEqual({ name: ['Kia'] })
+    expect(read('Kia en ekki Tesla')).toEqual({ make: ['Kia'] })
   })
 
   it('keeps every drive asked for', () => {
@@ -90,8 +90,8 @@ describe('parseFilterIntent', () => {
   })
 
   it('reads a make, inflected', () => {
-    expect(read('Kia')).toEqual({ name: ['Kia'] })
-    expect(read('Polestarinn')).toEqual({ name: ['Polestar'] })
+    expect(read('Kia')).toEqual({ make: ['Kia'] })
+    expect(read('Polestarinn')).toEqual({ make: ['Polestar'] })
   })
 
   it('reads a model that is a number after its make', () => {
@@ -99,8 +99,11 @@ describe('parseFilterIntent', () => {
     expect(read('smart #5 eða smart 1')).toEqual({
       name: ['Smart #5', 'Smart #1'],
     })
-    expect(read('Polestar 4 eða Kia')).toEqual({ name: ['Polestar 4', 'Kia'] })
-    expect(read('4 Polestar')).toEqual({ name: ['Polestar'] })
+    expect(read('Polestar 4 eða Kia')).toEqual({
+      make: ['Kia'],
+      name: ['Polestar 4'],
+    })
+    expect(read('4 Polestar')).toEqual({ make: ['Polestar'] })
   })
 
   // The name is applied as the list's filter, which reads it as part of a

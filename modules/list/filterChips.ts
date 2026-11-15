@@ -20,6 +20,11 @@ export type ChipText = {
 const chipText: {
   [Key in keyof Filters]-?: (value: FilterValue<Key>) => ChipText
 } = {
+  make: (makes) => ({
+    label: 'Merki:',
+    value: makes.join(', '),
+    removeLabel: `Fjarlægja merkjasíu: ${makes.join(', ')}`,
+  }),
   name: (names) => ({
     label: 'Nafn:',
     value: names.join(', '),
@@ -96,10 +101,14 @@ export const filterChipText = <Key extends FilterKey>(
   value: FilterValue<Key>,
 ): ChipText => (chipText[name] as (value: unknown) => ChipText)(value)
 
-/** The chips for the filters set, in their order whatever order they came in */
+/**
+ * The chips for the filters set, in their order whatever order they came in.
+ * Not the makes, which the row above shows chosen: a chip would be a second
+ * switch for them.
+ */
 export const activeChips = (filters: Filters) =>
   filterKeys.flatMap((name) => {
     const value = filters[name]
-    if (value === undefined) return []
+    if (value === undefined || name === 'make') return []
     return [{ name, ...filterChipText(name, value) }]
   })

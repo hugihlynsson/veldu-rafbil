@@ -1,5 +1,13 @@
 @import 'tailwindcss';
 
+/* A strip that scrolls sideways, swiped or dragged, with no bar under it */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* Every colour in the UI is one of these roles, and the block below is the
    only place a role takes a different value. A component asks for the role it
    means — `bg-lab`, `text-stone`, `border-line` — and never for a theme, so
@@ -51,6 +59,11 @@
   /* A filter chip's edge, softer than a field's: its own text is what tells
      you it is there, so the line is only a shape around it */
   --color-line-chip: #ddd;
+  /* A chip above the list: one that is on is filled a step off the page,
+     one that is off only has a faint edge. The edge is under 3:1 by design,
+     unlike a field's, since the chip's label says what it is */
+  --color-chip-on: #eee;
+  --color-line-soft: #f2f2f2;
   /* A filter field's edge, below 3:1: each one sits under its label in a
      column of them, which is what tells you it is there. A hover brings
      back `line-strong` */
@@ -339,6 +352,9 @@
     --color-line: #3a3a3a;
     --color-line-strong: #757575;
     --color-line-chip: #4a4a4a;
+    /* As the sorting chosen, `raised` */
+    --color-chip-on: #383838;
+    --color-line-soft: #222;
     --color-line-field: #5a5a5a;
     --color-edge: rgb(255 255 255 / 0.06);
     --color-edge-strong: rgb(255 255 255 / 0.12);

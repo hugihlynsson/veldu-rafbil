@@ -10,7 +10,7 @@ import type { Car, Availability } from '@/modules/data/cars'
 import type { Drive } from '@/modules/data/newCarSchema'
 // Relative: next.config.ts loads this file, and its loader cannot resolve @/
 import { drives } from '../data/drives'
-import { nameMatcher } from './carNames'
+import { makeKey, nameMatcher } from './carNames'
 
 interface FilterDefinition<Value> {
   // Icelandic, and part of every link to the list that has been shared
@@ -96,6 +96,16 @@ export const parseAsWord = <T extends string>(words: Record<string, T>) =>
  * nothing, and fails quietly.
  */
 export const filterDefinitions = {
+  // The make as the data spells it, matched whole, so "Mini" is not every car
+  // with a mini in its name. How it combines with a name is carFilter's.
+  make: filter({
+    urlKey: 'merki',
+    parser: parseAsList((entry): entry is string => entry !== ''),
+    test: (makes) => {
+      const keys = new Set(makes.map(makeKey))
+      return (car) => keys.has(makeKey(car.make))
+    },
+  }),
   name: filter({
     urlKey: 'nafn',
     parser: parseAsList((entry): entry is string => entry !== ''),

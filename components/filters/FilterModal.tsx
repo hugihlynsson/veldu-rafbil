@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 
-import cars from '@/modules/data/cars'
 import {
   fieldFromFilter,
   fieldsFromFilters,
@@ -9,9 +8,9 @@ import {
   type FilterKey,
   type Filters,
 } from '@/modules/list/filters'
-import { splitAtMakes } from '@/modules/list/carNames'
+import { liftMakes } from '@/modules/list/makes'
 import clsx from 'clsx'
-import Modal, { panelMotion } from '@/components/Modal'
+import Modal, { sheetPanel } from '@/components/Modal'
 import CloseButton from '@/components/CloseButton'
 import { getInputModality } from '@/utils/inputModality'
 import { FilterInput, FilterSelect } from './FilterField'
@@ -31,13 +30,14 @@ type Field =
     }
 
 // Mapped over `Filters`, so a new filter does not compile until it has a
-// field. In the order the modal shows them.
-const fields: { [Key in FilterKey]-?: Field } = {
+// field. In the order the modal shows them. The make is chosen in the row
+// above the list, and carried through here until the search is cleared.
+const fields: { [Key in Exclude<FilterKey, 'make'>]-?: Field } = {
   name: {
     kind: 'input',
     label: 'Nafn',
     type: 'text',
-    placeholder: 'Tesla, Kia',
+    placeholder: 'Model Y, Enyaq',
   },
   price: {
     kind: 'input',
@@ -131,8 +131,6 @@ interface Props {
   onDone: () => void
 }
 
-const makes = [...new Set(cars.map((car) => car.make))]
-
 const FiltersModal: React.FunctionComponent<Props> = ({
   initialFilters,
   onSubmit,
@@ -145,10 +143,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
     fieldsFromFilters(initialFilters),
   )
   const isEmpty = Object.values(values).every((value) => !value)
-  const read = filtersFromFields(values)
-  const filters: Filters = read.name
-    ? { ...read, name: splitAtMakes(read.name, makes) }
-    : read
+  const filters = liftMakes(filtersFromFields(values))
 
   const handleFilterChange =
     (name: FilterKey) =>
@@ -188,13 +183,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
         }
 
         return (
-          <section
-            className={clsx(
-              'z-1 flex flex-col rounded-t-sheet bg-surface w-screen max-w-[400px] max-h-[85dvh] overflow-hidden shadow-(--shadow-sheet)',
-              panelMotion,
-              'sheet-panel:rounded-modal sheet-panel:max-w-[640px] sheet-panel:max-h-[calc(100dvh-4rem)]',
-            )}
-          >
+          <section className={sheetPanel}>
             <header className="relative bg-surface text-center px-4 py-3 border-b border-line sheet-panel:py-4.5">
               {/* As far in from the left as the header's height leaves above and below it */}
               <CloseButton onClick={close} className="sheet-panel:left-4" />
@@ -203,42 +192,46 @@ const FiltersModal: React.FunctionComponent<Props> = ({
               </h2>
             </header>
             <div className="grid grid-cols-1 gap-6 grow shrink overflow-y-auto p-5 pb-8 sheet-panel:grid-cols-2 sheet-panel:gap-x-4 sheet-panel:p-6 sheet-panel:pb-8">
-              {(Object.keys(fields) as FilterKey[]).map((key) => {
-                const field = fields[key]
-                const id = `filter-${key}`
-                const value = values[key] ?? ''
-                return field.kind === 'input' ? (
-                  <FilterInput
-                    key={key}
-                    className={key === 'name' ? 'col-span-full' : undefined}
-                    id={id}
-                    inputRef={key === 'name' ? nameInputRef : undefined}
-                    label={field.label}
-                    hint={field.hint}
-                    type={field.type}
-                    placeholder={field.placeholder}
-                    onChange={handleFilterChange(key)}
-                    onKeyDown={handleKeyPress}
-                    value={value}
-                  />
-                ) : (
-                  <FilterSelect
-                    key={key}
-                    id={id}
-                    label={field.label}
-                    options={withCurrent(field.options, values[key])}
-                    onChange={handleFilterChange(key)}
-                    onKeyDown={handleKeyPress}
-                    value={value}
-                  />
-                )
-              })}
+              {(Object.keys(fields) as Array<keyof typeof fields>).map(
+                (key) => {
+                  const field = fields[key]
+                  const id = `filter-${key}`
+                  const value = values[key] ?? ''
+                  return field.kind === 'input' ? (
+                    <FilterInput
+                      key={key}
+                      className={key === 'name' ? 'col-span-full' : undefined}
+                      id={id}
+                      inputRef={key === 'name' ? nameInputRef : undefined}
+                      label={field.label}
+                      hint={field.hint}
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      onChange={handleFilterChange(key)}
+                      onKeyDown={handleKeyPress}
+                      value={value}
+                    />
+                  ) : (
+                    <FilterSelect
+                      key={key}
+                      id={id}
+                      label={field.label}
+                      options={withCurrent(field.options, values[key])}
+                      onChange={handleFilterChange(key)}
+                      onKeyDown={handleKeyPress}
+                      value={value}
+                    />
+                  )
+                },
+              )}
             </div>
             <footer className="p-4 flex justify-between shadow-(--shadow-sheet-footer) z-1">
               <button
                 className="appearance-none border-0 bg-transparent p-0 pl-1 sheet-panel:pl-2 text-stone text-sm font-semibold transition-[color,opacity] duration-200 cursor-pointer hover:enabled:text-tint disabled:opacity-40 disabled:cursor-default"
                 disabled={isEmpty}
                 onClick={() => {
+                  // The makes too, so what it leaves is every car, as the
+                  // count beside it then says
                   setValues({})
                   // Disabling the focused button drops focus out of the form
                   if (getInputModality() === 'keyboard') {

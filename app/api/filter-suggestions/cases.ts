@@ -41,7 +41,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'Tesla undir 7 m.kr.',
     kind: 'literal',
-    expect: { name: ['Tesla'], price: 7_000_000 },
+    expect: { make: ['Tesla'], price: 7_000_000 },
   },
   { text: '7 sæta bíll', kind: 'literal', expect: { seats: 7 } },
   {
@@ -69,7 +69,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'polestar eða volvo',
     kind: 'literal',
-    expect: { name: ['Polestar', 'Volvo'] },
+    expect: { make: ['Polestar', 'Volvo'] },
   },
   {
     text: 'hámark 6.500.000 kr',
@@ -110,7 +110,7 @@ export const intentCases: IntentCase[] = [
     expect: { drive: ['FWD'], price: 5_000_000 },
   },
   { text: 'VW ID.4', kind: 'literal', expect: { name: ['ID.4'] } },
-  { text: 'mig langar í Teslu', kind: 'literal', expect: { name: ['Tesla'] } },
+  { text: 'mig langar í Teslu', kind: 'literal', expect: { make: ['Tesla'] } },
   { text: '5 til 8 milljónir', kind: 'literal', expect: { price: 8_000_000 } },
   {
     text: 'fimm manna fjölskylda, 600 km',
@@ -122,7 +122,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'Mercedes undir 12 milljónum',
     kind: 'literal',
-    expect: { name: ['Mercedes-Benz'], price: 12_000_000 },
+    expect: { make: ['Mercedes-Benz'], price: 12_000_000 },
   },
   {
     text: 'aldrif, 8 sæti',
@@ -193,7 +193,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'Tesla sem kemst til Akureyrar án þess að hlaða',
     kind: 'mixed',
-    expect: { name: ['Tesla'], range: 'any' },
+    expect: { make: ['Tesla'], range: 'any' },
   },
   {
     text: 'sportlegur og hraður, undir 12 milljónum',
@@ -223,7 +223,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'Kia sem dugar alla leið til Akureyrar',
     kind: 'mixed',
-    expect: { name: ['Kia'], range: 'any' },
+    expect: { make: ['Kia'], range: 'any' },
   },
   {
     text: 'undir 7 milljónum og snöggur',

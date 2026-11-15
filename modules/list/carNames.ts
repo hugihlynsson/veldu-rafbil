@@ -15,6 +15,10 @@ export const foldText = (text: string): string =>
     .normalize('NFKD')
     .replace(/\p{Mark}/gu, '')
 
+/** A make as compared, so "Range Rover", "range-rover" and "rangerover" are one */
+export const makeKey = (text: string): string =>
+  foldText(text).replace(/[^\p{L}\p{N}]/gu, '')
+
 /** What people call a make other than its name, folded */
 export const makeAliases: Record<string, string[]> = {
   'Mercedes-Benz': ['mercedes', 'benz', 'merc'],
