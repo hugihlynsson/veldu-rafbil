@@ -12,4 +12,4 @@ export const chipOn = 'bg-raised shadow-(--shadow-raised)'
 
 /** A make not chosen, or a button among the chips */
 export const chipOff =
-  'bg-transparent ring-1 ring-inset ring-line-soft hover:bg-haze'
+  'bg-chip-off ring-1 ring-inset ring-line-soft hover:bg-cloud'
