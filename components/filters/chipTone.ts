@@ -9,4 +9,4 @@ export const chipOn = 'bg-cloud hover:bg-smoke'
 
 /** A make not chosen, or a button among the chips */
 export const chipOff =
-  'bg-transparent ring-1 ring-inset ring-line hover:bg-haze'
+  'bg-transparent ring-1 ring-inset ring-line-soft hover:bg-haze'

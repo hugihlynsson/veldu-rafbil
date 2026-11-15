@@ -59,6 +59,9 @@
   /* A filter chip's edge, softer than a field's: its own text is what tells
      you it is there, so the line is only a shape around it */
   --color-line-chip: #ddd;
+  /* The edge of a chip above the list that is off, kept faint as its label
+     says what it is; under 3:1 by design, unlike a field's */
+  --color-line-soft: #eee;
   /* The edge of a translucent panel: the chat bar and the pills over the
      page. What is behind it changes, so it is the page's ink at an alpha
      rather than a grey that would only suit one background */
@@ -338,6 +341,7 @@
     --color-line: #3a3a3a;
     --color-line-strong: #757575;
     --color-line-chip: #4a4a4a;
+    --color-line-soft: #2a2a2a;
     --color-edge: rgb(255 255 255 / 0.06);
     --color-edge-strong: rgb(255 255 255 / 0.12);
 
