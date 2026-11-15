@@ -9,6 +9,8 @@ interface ChipProps {
   label?: string
   /** The cars of the make, quieter beside its name */
   count?: number
+  /** Stretched to a grid cell, the count at its far edge so counts line up */
+  fill?: boolean
   onClick: () => void
   children: ReactNode
 }
@@ -18,6 +20,7 @@ export function MakeChip({
   pressed,
   label,
   count,
+  fill,
   onClick,
   children,
 }: ChipProps) {
@@ -28,11 +31,12 @@ export function MakeChip({
       aria-label={label}
       className={clsx(
         'shrink-0 flex items-center gap-1.5 border-0 rounded-full py-2 px-3.5 text-control font-semibold whitespace-nowrap text-tint cursor-pointer transition duration-200 active:scale-[0.98]',
+        fill && 'justify-between min-w-0',
         pressed ? chipOn : chipOff,
       )}
       onClick={onClick}
     >
-      {children}
+      {fill ? <span className="truncate">{children}</span> : children}
       {/* The space is for a screen reader, which would read "Tesla8"; the
           flex gap is what spaces it on the page */}
       {count !== undefined && (
