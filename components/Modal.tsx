@@ -29,11 +29,14 @@ type State = 'initializing' | 'visible' | 'leaving'
 export const panelMotion =
   'opacity-0 translate-y-6 transition-[opacity,translate] duration-300 ease-in-cubic group-data-[state=visible]/modal:opacity-100 group-data-[state=visible]/modal:translate-y-0 group-data-[state=visible]/modal:ease-out-cubic group-data-[state=leaving]/modal:duration-200'
 
-/** A panel that rises from the bottom on a phone and stands centred above */
+/**
+ * A panel that rises from the bottom on a phone and stands centred above.
+ * Its size once centred is each modal's own.
+ */
 export const sheetPanel = clsx(
   'z-1 flex flex-col rounded-t-sheet bg-surface w-screen max-w-[400px] max-h-[85dvh] overflow-hidden shadow-(--shadow-sheet)',
   panelMotion,
-  'sheet-panel:rounded-sheet sheet-panel:max-h-[500px]',
+  'sheet-panel:rounded-modal',
 )
 
 type ReturnFocus = 'always' | 'keyboard'

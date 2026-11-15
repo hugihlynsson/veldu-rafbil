@@ -64,6 +64,10 @@
      unlike a field's, since the chip's label says what it is */
   --color-chip-on: #eee;
   --color-line-soft: #f2f2f2;
+  /* A filter field's edge, below 3:1: each one sits under its label in a
+     column of them, which is what tells you it is there. A hover brings
+     back `line-strong` */
+  --color-line-field: #c4c4c4;
   /* The edge of a translucent panel: the chat bar and the pills over the
      page. What is behind it changes, so it is the page's ink at an alpha
      rather than a grey that would only suit one background */
@@ -112,9 +116,9 @@
      "this has the page's full width" */
   --container-wide: 944px;
 
-  /* Radii, written at their round-corner size. A squircle of the same radius
-     hugs the corner more tightly, so `--corner` grows them where one is drawn
-     (below) and they read as soft as before. Every radius goes through here,
+  /* Radii, written at their round-corner size. A continuous corner of the
+     same radius hugs the corner more tightly, so `--corner` grows them where
+     one is drawn (below) and they read as soft as before. Every radius goes through here,
      arbitrary ones included, or it misses the scaling */
   --radius: calc(0.25rem * var(--corner));
   --radius-sm: calc(0.25rem * var(--corner));
@@ -126,6 +130,11 @@
   --radius-toggle: calc(10px * var(--corner));
   --radius-card: calc(14px * var(--corner));
   --radius-sheet: calc(20px * var(--corner));
+  /* A centred modal: the car sheet and the filter modal on a wide screen.
+     Near-concentric with what sits in its corners, the car sheet's 36px
+     buttons 16px in and the filter footer's 43px pill 16px in, and never
+     more than that, which pinches in towards them */
+  --radius-modal: calc(32px * var(--corner));
 
   /* Motion. Everything that arrives rises the same way; `--rise` shortens
      the distance for the cars under an answer, which are big enough that
@@ -346,6 +355,7 @@
     /* As the sorting chosen, `raised` */
     --color-chip-on: #383838;
     --color-line-soft: #222;
+    --color-line-field: #5a5a5a;
     --color-edge: rgb(255 255 255 / 0.06);
     --color-edge-strong: rgb(255 255 255 / 0.12);
 
@@ -417,23 +427,27 @@
 }
 
 /* iOS-style continuous corners where the browser can draw them, and plain
-   round ones elsewhere. A pill keeps round ends: a squircle there reads as a
-   squashed rectangle, so anything meant to be a pill or a circle is
-   `rounded-full`, whatever its size */
+   round ones elsewhere. A pill keeps round ends: a continuous corner there
+   reads as a squashed rectangle, so anything meant to be a pill or a circle
+   is `rounded-full`, whatever its size. superellipse(1.32) at 1.2× the
+   radius is the closest fit to Figma's 60% corner smoothing, the usual
+   stand-in for Apple's curve, within 0.5% of the radius; `squircle` is
+   superellipse(2), far squarer and longer than iOS */
 :root {
   --corner: 1;
 }
-@supports (corner-shape: squircle) {
+@supports (corner-shape: superellipse(1.32)) {
   :root {
-    --corner: 1.6;
+    --corner: 1.2;
   }
   @layer base {
     /* The pseudo-elements too, which `*` misses: drawn round at a radius
-       grown for a squircle, a hover card bulges in over what it frames */
+       grown for a continuous corner, a hover card bulges in over what it
+       frames */
     *,
     ::before,
     ::after {
-      corner-shape: squircle;
+      corner-shape: superellipse(1.32);
     }
     .rounded-full {
       corner-shape: round;

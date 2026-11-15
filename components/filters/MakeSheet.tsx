@@ -45,16 +45,16 @@ export default function MakeSheet({
       )}
     >
       {({ close }) => (
-        <section className={sheetPanel}>
-          <header className="relative bg-surface text-center px-4 py-3 border-b border-line">
-            <CloseButton onClick={close} />
+        <section className={clsx(sheetPanel, 'sheet-panel:max-h-[500px]')}>
+          <header className="relative bg-surface text-center px-4 py-3 border-b border-line sheet-panel:py-4.5">
+            <CloseButton onClick={close} className="sheet-panel:left-4" />
             <h2 id="make-sheet-title" className="m-0 text-lg font-semibold">
               Merki
             </h2>
           </header>
           {/* The scroller is a div: a fieldset will not shrink in a flex
               column, so the makes ran on under the footer */}
-          <div className="grow shrink min-h-0 overflow-y-auto p-5 pb-8">
+          <div className="grow shrink min-h-0 overflow-y-auto p-5 pb-8 sheet-panel:p-6 sheet-panel:pb-8">
             <fieldset
               aria-labelledby="make-sheet-title"
               className="m-0 min-w-0 border-0 p-0 flex flex-wrap gap-1.5"

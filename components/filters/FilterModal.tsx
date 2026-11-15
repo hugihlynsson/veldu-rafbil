@@ -12,6 +12,7 @@ import { liftMakes } from '@/modules/list/makes'
 import clsx from 'clsx'
 import Modal, { sheetPanel } from '@/components/Modal'
 import CloseButton from '@/components/CloseButton'
+import { getInputModality } from '@/utils/inputModality'
 import { FilterInput, FilterSelect } from './FilterField'
 
 type Field =
@@ -141,6 +142,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
   const [values, setValues] = useState<FilterFields>(() =>
     fieldsFromFilters(initialFilters),
   )
+  const isEmpty = Object.values(values).every((value) => !value)
   const filters = liftMakes(filtersFromFields(values))
 
   const handleFilterChange =
@@ -181,14 +183,20 @@ const FiltersModal: React.FunctionComponent<Props> = ({
         }
 
         return (
-          <section className={sheetPanel}>
-            <header className="relative bg-surface text-center px-4 py-3 border-b border-line">
-              <CloseButton onClick={close} />
+          <section
+            className={clsx(
+              sheetPanel,
+              'sheet-panel:max-w-[640px] sheet-panel:max-h-[calc(100dvh-4rem)]',
+            )}
+          >
+            <header className="relative bg-surface text-center px-4 py-3 border-b border-line sheet-panel:py-4.5">
+              {/* As far in from the left as the header's height leaves above and below it */}
+              <CloseButton onClick={close} className="sheet-panel:left-4" />
               <h2 id="filter-modal-title" className="m-0 text-lg font-semibold">
                 Leita
               </h2>
             </header>
-            <div className="flex flex-col gap-6 grow shrink overflow-y-auto p-5 pb-8">
+            <div className="grid grid-cols-1 gap-6 grow shrink overflow-y-auto p-5 pb-8 sheet-panel:grid-cols-2 sheet-panel:gap-x-4 sheet-panel:p-6 sheet-panel:pb-8">
               {(Object.keys(fields) as Array<keyof typeof fields>).map(
                 (key) => {
                   const field = fields[key]
@@ -197,6 +205,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                   return field.kind === 'input' ? (
                     <FilterInput
                       key={key}
+                      className={key === 'name' ? 'col-span-full' : undefined}
                       id={id}
                       inputRef={key === 'name' ? nameInputRef : undefined}
                       label={field.label}
@@ -223,10 +232,17 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             </div>
             <footer className="p-4 flex justify-between shadow-(--shadow-sheet-footer) z-1">
               <button
-                className="appearance-none border-0 bg-transparent p-0 pl-1 text-stone text-sm font-semibold transition-colors duration-200 cursor-pointer hover:text-tint"
-                // The makes too, so what it leaves is every car, as the count
-                // beside it then says
-                onClick={() => setValues({})}
+                className="appearance-none border-0 bg-transparent p-0 pl-1 sheet-panel:pl-2 text-stone text-sm font-semibold transition-[color,opacity] duration-200 cursor-pointer hover:enabled:text-tint disabled:opacity-40 disabled:cursor-default"
+                disabled={isEmpty}
+                onClick={() => {
+                  // The makes too, so what it leaves is every car, as the
+                  // count beside it then says
+                  setValues({})
+                  // Disabling the focused button drops focus out of the form
+                  if (getInputModality() === 'keyboard') {
+                    nameInputRef.current?.focus()
+                  }
+                }}
               >
                 Hreinsa leit
               </button>
