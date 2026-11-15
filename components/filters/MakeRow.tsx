@@ -76,12 +76,13 @@ export default function MakeRow({ chosen, onChange, onShowAll }: Props) {
     )
 
   return (
-    // Scrolled sideways below md, out past the gutters; wrapped from md, where
-    // the row nearly fits and nothing should hide past the edge. From lg it
-    // keeps to the intro's measure, the column the latest news stands beside
+    // Scrolled sideways below md, out to the screen's edges rather than the
+    // column's, which stops short of them from 480px, with the first chip
+    // padded back in line with the text. Wrapped from md, kept to the intro's
+    // measure, the column the latest news stands beside from lg
     <fieldset
       aria-label="Merki"
-      className="m-0 min-w-0 border-0 p-0 flex gap-1.5 mt-4 overflow-x-auto no-scrollbar max-md:-mx-(--gutter) max-md:px-(--gutter) max-md:scroll-px-(--gutter) md:flex-wrap md:overflow-visible lg:max-w-[33rem]"
+      className="m-0 min-w-0 border-0 p-0 flex gap-1.5 mt-4 overflow-x-auto no-scrollbar max-md:mx-[calc(50%-50vw)] max-md:px-[calc(50vw-50%)] max-md:scroll-px-[calc(50vw-50%)] md:flex-wrap md:overflow-visible md:max-w-[33rem]"
     >
       <MakeChip
         pressed={chosen.length === 0}
