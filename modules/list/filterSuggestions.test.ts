@@ -98,6 +98,18 @@ describe('rankSuggestions', () => {
     ).toEqual([['seats', 1]])
   })
 
+  it('joins a make offered to the ones chosen, and skips one chosen', () => {
+    const makes = [car({ make: 'Kia' }), car({ make: 'Tesla' })]
+    const rank = (offered: string[], current: string[]) =>
+      rankSuggestions(
+        [text({ key: 'make', value: offered })],
+        { make: current },
+        makes,
+      ).suggestions.map(({ value, count }) => [value, count])
+    expect(rank(['Kia'], ['Tesla'])).toEqual([[['Tesla', 'Kia'], 2]])
+    expect(rank(['Kia'], ['Kia', 'Tesla'])).toEqual([])
+  })
+
   it('counts the suggestions together', () => {
     const { combined, count } = rankSuggestions(
       [

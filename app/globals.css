@@ -1,5 +1,13 @@
 @import 'tailwindcss';
 
+/* A strip that scrolls sideways, swiped or dragged, with no bar under it */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* Every colour in the UI is one of these roles, and the block below is the
    only place a role takes a different value. A component asks for the role it
    means — `bg-lab`, `text-stone`, `border-line` — and never for a theme, so

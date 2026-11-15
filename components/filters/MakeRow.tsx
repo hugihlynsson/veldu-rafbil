@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import clsx from 'clsx'
 
 import { rowMakes } from '@/modules/list/makes'
@@ -13,13 +14,16 @@ interface Props {
 /**
  * All makes, or the ones chosen of them. A make chosen that the row does not
  * hold, from a link or the search, stands after "Öll merki" so it is seen to
- * be on; the row's own makes keep their places, so none moves under a tap.
+ * be on, and stays there once switched off, so no chip moves under a tap.
  */
 export default function MakeRow({ chosen, onChange }: Props) {
-  const shown = [
-    ...chosen.filter((make) => !rowMakes.includes(make)),
-    ...rowMakes,
-  ]
+  const [extras, setExtras] = useState<string[]>([])
+  const added = chosen.filter(
+    (make) => !rowMakes.includes(make) && !extras.includes(make),
+  )
+  if (added.length > 0) setExtras([...extras, ...added])
+
+  const shown = [...extras, ...added, ...rowMakes]
 
   const toggle = (make: string) =>
     onChange(
@@ -46,11 +50,11 @@ export default function MakeRow({ chosen, onChange }: Props) {
   )
 
   return (
-    // Scrolled sideways on a phone, out to the screen's edges; wrapped from
-    // md, where the row nearly fits and nothing should hide past the edge
+    // Scrolled sideways below md, out past the gutters; wrapped from md, where
+    // the row nearly fits and nothing should hide past the edge
     <fieldset
       aria-label="Merki"
-      className="m-0 min-w-0 border-0 p-0 flex gap-2 mt-4 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden max-md:-mx-(--gutter) max-md:px-(--gutter) max-md:scroll-px-(--gutter) md:flex-wrap md:overflow-visible"
+      className="m-0 min-w-0 border-0 p-0 flex gap-2 mt-4 overflow-x-auto no-scrollbar max-md:-mx-(--gutter) max-md:px-(--gutter) max-md:scroll-px-(--gutter) md:flex-wrap md:overflow-visible"
     >
       {chip('Öll merki', chosen.length === 0, () => {
         if (chosen.length > 0) onChange([])

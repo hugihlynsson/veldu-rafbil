@@ -30,7 +30,7 @@ type Field =
 
 // Mapped over `Filters`, so a new filter does not compile until it has a
 // field. In the order the modal shows them. The make is chosen in the row
-// above the list, and carried through here untouched.
+// above the list, and carried through here until the search is cleared.
 const fields: { [Key in Exclude<FilterKey, 'make'>]-?: Field } = {
   name: {
     kind: 'input',
@@ -230,8 +230,9 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             <footer className="p-4 flex justify-between shadow-(--shadow-sheet-footer) z-1">
               <button
                 className="appearance-none border-0 bg-transparent p-0 pl-1 text-stone text-sm font-semibold transition-colors duration-200 cursor-pointer hover:text-tint"
-                // The makes are the row's, which the modal does not show
-                onClick={() => setValues(({ make }) => (make ? { make } : {}))}
+                // The makes too, so what it leaves is every car, as the count
+                // beside it then says
+                onClick={() => setValues({})}
               >
                 Hreinsa leit
               </button>

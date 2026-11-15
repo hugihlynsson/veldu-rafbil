@@ -23,10 +23,13 @@ const ActiveFilters = ({
 
   return (
     <div className="mt-5">
-      {chips.length > 0 && (
+      {/* With only makes chosen there is no chip for the count to lead into */}
+      {Object.values(filters).length > 0 && (
         <div className="mb-2 text-sm font-semibold">
           {filteredCarsCount}{' '}
-          {agree(filteredCarsCount, 'bíll passar við:', 'bílar passa við:')}
+          {chips.length > 0
+            ? agree(filteredCarsCount, 'bíll passar við:', 'bílar passa við:')
+            : agree(filteredCarsCount, 'bíll á listanum', 'bílar á listanum')}
         </div>
       )}
       <div className="flex flex-wrap gap-2 self-start max-w-full -ml-0.5">

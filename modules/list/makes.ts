@@ -1,5 +1,5 @@
 import cars from '@/modules/data/cars'
-import { foldText, makeAliases, splitAtMakes } from './carNames'
+import { makeAliases, makeKey, splitAtMakes } from './carNames'
 import type { Filters } from './filters'
 
 export const makes = [...new Set(cars.map((car) => car.make))]
@@ -20,9 +20,6 @@ export const rowMakes = [
   'Volvo',
 ]
 
-// "Range Rover", "range-rover" and "rangerover" are one make
-const makeKey = (text: string) => foldText(text).replace(/[^\p{L}\p{N}]/gu, '')
-
 const makeByKey = new Map(
   makes.flatMap((make) =>
     [make, ...(makeAliases[make] ?? [])].map(
@@ -35,7 +32,8 @@ const makeByKey = new Map(
  * A name that is a make and nothing else is moved to the make filter, so the
  * row shows it chosen: "tesla" typed into the search, or a link from before
  * there was a row. Makes are spelled as the data spells them, which is what
- * the row looks for.
+ * the row looks for, and one not on the list is dropped: a link to a make no
+ * longer sold shows every car rather than none, and puts no chip in the row.
  */
 export const liftMakes = (filters: Filters): Filters => {
   const { make = [], name = [], ...rest } = filters
@@ -44,8 +42,8 @@ export const liftMakes = (filters: Filters): Filters => {
   const kept = names.filter((entry) => !makeByKey.has(makeKey(entry)))
   const chosen = [
     ...new Set(
-      [...make, ...lifted].map(
-        (entry) => makeByKey.get(makeKey(entry)) ?? entry,
+      [...make, ...lifted].flatMap(
+        (entry) => makeByKey.get(makeKey(entry)) ?? [],
       ),
     ),
   ]

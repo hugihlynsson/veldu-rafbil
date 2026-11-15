@@ -43,8 +43,9 @@ describe('liftMakes', () => {
     })
   })
 
-  it('keeps a make it does not know, which matches no car', () => {
-    expect(liftMakes({ make: ['Honda'] })).toEqual({ make: ['Honda'] })
+  it('drops a make that is not on the list', () => {
+    expect(liftMakes({ make: ['Honda', 'Kia'] })).toEqual({ make: ['Kia'] })
+    expect(liftMakes({ make: ['Öll merki'] })).toEqual({})
   })
 
   it('leaves the other filters alone', () => {
