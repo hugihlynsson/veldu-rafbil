@@ -77,10 +77,12 @@ export default function MakeRow({ chosen, onChange, onShowAll }: Props) {
 
   return (
     // Scrolled sideways below md, out past the gutters; wrapped from md, where
-    // the row nearly fits and nothing should hide past the edge
+    // the row nearly fits and nothing should hide past the edge. Padded above
+    // and below, and the margins taken back, as a scroller clips the shadow
+    // of a chip that is on
     <fieldset
       aria-label="Merki"
-      className="m-0 min-w-0 border-0 p-0 flex gap-2 mt-4 overflow-x-auto no-scrollbar max-md:-mx-(--gutter) max-md:px-(--gutter) max-md:scroll-px-(--gutter) md:flex-wrap md:overflow-visible"
+      className="m-0 min-w-0 border-0 p-0 flex gap-2 mt-3 -mb-1 py-1 overflow-x-auto no-scrollbar max-md:-mx-(--gutter) max-md:px-(--gutter) max-md:scroll-px-(--gutter) md:flex-wrap md:overflow-visible"
     >
       <MakeChip
         pressed={chosen.length === 0}
