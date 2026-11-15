@@ -10,7 +10,7 @@ import {
 } from '@/modules/list/filters'
 import { liftMakes } from '@/modules/list/makes'
 import clsx from 'clsx'
-import Modal, { panelMotion } from '@/components/Modal'
+import Modal, { sheetPanel } from '@/components/Modal'
 import CloseButton from '@/components/CloseButton'
 import { FilterInput, FilterSelect } from './FilterField'
 
@@ -181,13 +181,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
         }
 
         return (
-          <section
-            className={clsx(
-              'z-1 flex flex-col rounded-t-sheet bg-surface w-screen max-w-[400px] max-h-[85dvh] overflow-hidden shadow-(--shadow-sheet)',
-              panelMotion,
-              'sheet-panel:rounded-sheet sheet-panel:max-h-[500px]',
-            )}
-          >
+          <section className={sheetPanel}>
             <header className="relative bg-surface text-center px-4 py-3 border-b border-line">
               <CloseButton onClick={close} />
               <h2 id="filter-modal-title" className="m-0 text-lg font-semibold">

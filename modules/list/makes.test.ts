@@ -1,10 +1,27 @@
 import { describe, expect, it } from 'vitest'
 
-import { liftMakes, makes, rowMakes } from './makes'
+import cars from '@/modules/data/cars'
+
+import { carCountOf, liftMakes, makes, makesInOrder, rowMakes } from './makes'
 
 describe('rowMakes', () => {
   it('holds only makes on the list, spelled as the data spells them', () => {
     for (const make of rowMakes) expect(makes).toContain(make)
+  })
+})
+
+describe('makesInOrder', () => {
+  it('holds every make once, in Icelandic order', () => {
+    expect([...makesInOrder].sort()).toEqual([...makes].sort())
+    expect(makesInOrder.indexOf('BMW')).toBeLessThan(
+      makesInOrder.indexOf('Volvo'),
+    )
+  })
+
+  it('counts every car under its one make', () => {
+    expect(makes.reduce((sum, make) => sum + carCountOf(make), 0)).toBe(
+      cars.length,
+    )
   })
 })
 

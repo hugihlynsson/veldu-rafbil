@@ -24,6 +24,7 @@ import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/filters/FilterModal'
 import ActiveFilters from '@/components/filters/ActiveFilters'
 import MakeRow from '@/components/filters/MakeRow'
+import MakeSheet from '@/components/filters/MakeSheet'
 import cars, { type Car as CarData } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf } from '@/modules/detail/paths'
@@ -119,7 +120,13 @@ export default function CarList({ latest }: Props) {
   // changed is not counted as a change
   const changeFilters = (
     requested: Filters,
-    source: 'modal' | 'chip' | 'cleared' | 'suggestion' | 'makes',
+    source:
+      | 'modal'
+      | 'chip'
+      | 'cleared'
+      | 'suggestion'
+      | 'make-row'
+      | 'make-sheet',
   ) => {
     const next = liftMakes(requested)
     const fields = fieldsFromFilters(normalizeFilters(next))
@@ -145,6 +152,7 @@ export default function CarList({ latest }: Props) {
   }
 
   const [editingFilters, setEditingFilters] = useState<boolean>(false)
+  const [choosingMakes, setChoosingMakes] = useState(false)
   const controlsRef = useRef<HTMLDivElement>(null)
 
   // A suggested filter replaces the cars under the reader, so a place halfway
@@ -330,7 +338,8 @@ export default function CarList({ latest }: Props) {
 
         <MakeRow
           chosen={filters.make ?? []}
-          onChange={(make) => changeFilters({ ...filters, make }, 'makes')}
+          onChange={(make) => changeFilters({ ...filters, make }, 'make-row')}
+          onShowAll={() => setChoosingMakes(true)}
         />
 
         <ActiveFilters
@@ -406,6 +415,18 @@ export default function CarList({ latest }: Props) {
         />
       )}
 
+      {choosingMakes && (
+        <MakeSheet
+          initialMakes={filters.make ?? []}
+          onSubmit={(make) => changeFilters({ ...filters, make }, 'make-sheet')}
+          onDone={() => setChoosingMakes(false)}
+          getCountPreview={(make) =>
+            cars.filter(carFilter(normalizeFilters({ ...filters, make })))
+              .length
+          }
+        />
+      )}
+
       {isComparing && (
         <CompareTray cars={comparison.selected} onRemove={removeCompared} />
       )}
@@ -418,7 +439,7 @@ export default function CarList({ latest }: Props) {
           page but not over it in the sheet. There the chat is about the
           sheet's car, as it is on the car's page. */}
       <ChatContainer
-        hide={editingFilters || (isComparing && !sheetChat)}
+        hide={editingFilters || choosingMakes || (isComparing && !sheetChat)}
         container={sheetChat?.container}
         about={sheetChat && sheetCar ? [sheetCar] : undefined}
         starters={sheetChat?.starters}

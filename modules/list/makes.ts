@@ -4,6 +4,13 @@ import type { Filters } from './filters'
 
 export const makes = [...new Set(cars.map((car) => car.make))]
 
+// The locale named, as the runtime's default differs between node and an
+// Icelandic browser, and this is rendered on both
+export const makesInOrder = [...makes].sort((a, b) => a.localeCompare(b, 'is'))
+
+export const carCountOf = (make: string): number =>
+  cars.filter((car) => car.make === make).length
+
 /**
  * The makes typed into the search most, October to November 2026, most first.
  * Fixed rather than counted, so the row never reorders under a thumb; the
