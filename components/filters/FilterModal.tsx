@@ -236,7 +236,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             </div>
             <footer className="p-4 flex justify-between shadow-(--shadow-sheet-footer) z-1">
               <button
-                className="appearance-none border-0 bg-transparent p-0 pl-1 text-stone text-sm font-semibold transition-[color,opacity] duration-200 cursor-pointer hover:enabled:text-tint disabled:opacity-40 disabled:cursor-default"
+                className="appearance-none border-0 bg-transparent p-0 pl-1 sheet-panel:pl-2 text-stone text-sm font-semibold transition-[color,opacity] duration-200 cursor-pointer hover:enabled:text-tint disabled:opacity-40 disabled:cursor-default"
                 disabled={isEmpty}
                 onClick={() => {
                   setValues({})
