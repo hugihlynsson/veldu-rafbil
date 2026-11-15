@@ -19,18 +19,18 @@ const ActiveFilters = ({
   onOpenFilterModal,
   filteredCarsCount,
 }: FilterButtonsProps) => {
-  const hasFilter = Object.values(filters).length > 0
+  const chips = activeChips(filters)
 
   return (
     <div className="mt-5">
-      {hasFilter && (
+      {chips.length > 0 && (
         <div className="mb-2 text-sm font-semibold">
           {filteredCarsCount}{' '}
           {agree(filteredCarsCount, 'bíll passar við:', 'bílar passa við:')}
         </div>
       )}
       <div className="flex flex-wrap gap-2 self-start max-w-full -ml-0.5">
-        {activeChips(filters).map(({ name, label, value, removeLabel }) => (
+        {chips.map(({ name, label, value, removeLabel }) => (
           <button
             key={name}
             aria-label={removeLabel}

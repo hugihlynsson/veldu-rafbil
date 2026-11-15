@@ -45,7 +45,8 @@ const responseHeader = async (
     .findLast((header) => header.key.toLowerCase() === key.toLowerCase())?.value
 
 const everyFilter: Required<Filters> = {
-  name: ['tesla'],
+  make: ['Tesla'],
+  name: ['model y'],
   drive: ['AWD'],
   price: 9_000_000,
   range: 300,

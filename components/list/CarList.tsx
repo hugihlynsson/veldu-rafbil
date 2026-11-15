@@ -23,6 +23,7 @@ import LatestNews from './LatestNews'
 import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/filters/FilterModal'
 import ActiveFilters from '@/components/filters/ActiveFilters'
+import MakeRow from '@/components/filters/MakeRow'
 import cars, { type Car as CarData } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf } from '@/modules/detail/paths'
@@ -35,6 +36,7 @@ import {
   type FilterKey,
   type Filters,
 } from '@/modules/list/filters'
+import { liftMakes } from '@/modules/list/makes'
 import {
   sortCars,
   sortingDefinitions,
@@ -116,9 +118,10 @@ export default function CarList({ latest }: Props) {
   // The filters as the URL will hold them, so a modal closed with nothing
   // changed is not counted as a change
   const changeFilters = (
-    next: Filters,
-    source: 'modal' | 'chip' | 'cleared' | 'suggestion',
+    requested: Filters,
+    source: 'modal' | 'chip' | 'cleared' | 'suggestion' | 'makes',
   ) => {
+    const next = liftMakes(requested)
     const fields = fieldsFromFilters(normalizeFilters(next))
     if (JSON.stringify(fields) === JSON.stringify(fieldsFromFilters(filters))) {
       return
@@ -324,6 +327,11 @@ export default function CarList({ latest }: Props) {
             />
           </div>
         </div>
+
+        <MakeRow
+          chosen={filters.make ?? []}
+          onChange={(make) => changeFilters({ ...filters, make }, 'makes')}
+        />
 
         <ActiveFilters
           filters={filters}

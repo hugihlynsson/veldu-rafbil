@@ -72,7 +72,7 @@ export const productEventSchema = z.discriminatedUnion('name', [
   // the cars they leave. A list rather than an object, as Axiom makes a
   // column of every key, and a query naming a filter not yet used fails.
   event('filters_changed', {
-    source: z.enum(['modal', 'chip', 'cleared', 'suggestion']),
+    source: z.enum(['modal', 'chip', 'cleared', 'suggestion', 'makes']),
     filters: z
       .array(z.strictObject({ key: filterKey, value: z.string().max(200) }))
       .max(filterKeys.length),

@@ -107,7 +107,7 @@ export const rankSuggestions = (
   list: ReadonlyArray<Car> = cars,
 ): { suggestions: RankedSuggestion[]; combined: Filters; count: number } => {
   const count = (filters: Filters) =>
-    list.filter(carFilter(normalizeFilters(filters))).length
+    list.filter(carFilter(normalizeFilters(filters), list)).length
   const currentCount = count(current)
 
   const ordered = [...suggestions].sort(

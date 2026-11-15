@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 
-import cars from '@/modules/data/cars'
 import {
   fieldFromFilter,
   fieldsFromFilters,
@@ -9,7 +8,7 @@ import {
   type FilterKey,
   type Filters,
 } from '@/modules/list/filters'
-import { splitAtMakes } from '@/modules/list/carNames'
+import { liftMakes } from '@/modules/list/makes'
 import clsx from 'clsx'
 import Modal, { panelMotion } from '@/components/Modal'
 import CloseButton from '@/components/CloseButton'
@@ -30,13 +29,14 @@ type Field =
     }
 
 // Mapped over `Filters`, so a new filter does not compile until it has a
-// field. In the order the modal shows them.
-const fields: { [Key in FilterKey]-?: Field } = {
+// field. In the order the modal shows them. The make is chosen in the row
+// above the list, and carried through here untouched.
+const fields: { [Key in Exclude<FilterKey, 'make'>]-?: Field } = {
   name: {
     kind: 'input',
     label: 'Nafn',
     type: 'text',
-    placeholder: 'Tesla, Kia',
+    placeholder: 'Model Y, Enyaq',
   },
   price: {
     kind: 'input',
@@ -130,8 +130,6 @@ interface Props {
   onDone: () => void
 }
 
-const makes = [...new Set(cars.map((car) => car.make))]
-
 const FiltersModal: React.FunctionComponent<Props> = ({
   initialFilters,
   onSubmit,
@@ -143,10 +141,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
   const [values, setValues] = useState<FilterFields>(() =>
     fieldsFromFilters(initialFilters),
   )
-  const read = filtersFromFields(values)
-  const filters: Filters = read.name
-    ? { ...read, name: splitAtMakes(read.name, makes) }
-    : read
+  const filters = liftMakes(filtersFromFields(values))
 
   const handleFilterChange =
     (name: FilterKey) =>
@@ -200,40 +195,43 @@ const FiltersModal: React.FunctionComponent<Props> = ({
               </h2>
             </header>
             <div className="flex flex-col gap-6 grow shrink overflow-y-auto p-5 pb-8">
-              {(Object.keys(fields) as FilterKey[]).map((key) => {
-                const field = fields[key]
-                const id = `filter-${key}`
-                const value = values[key] ?? ''
-                return field.kind === 'input' ? (
-                  <FilterInput
-                    key={key}
-                    id={id}
-                    inputRef={key === 'name' ? nameInputRef : undefined}
-                    label={field.label}
-                    hint={field.hint}
-                    type={field.type}
-                    placeholder={field.placeholder}
-                    onChange={handleFilterChange(key)}
-                    onKeyDown={handleKeyPress}
-                    value={value}
-                  />
-                ) : (
-                  <FilterSelect
-                    key={key}
-                    id={id}
-                    label={field.label}
-                    options={withCurrent(field.options, values[key])}
-                    onChange={handleFilterChange(key)}
-                    onKeyDown={handleKeyPress}
-                    value={value}
-                  />
-                )
-              })}
+              {(Object.keys(fields) as Array<keyof typeof fields>).map(
+                (key) => {
+                  const field = fields[key]
+                  const id = `filter-${key}`
+                  const value = values[key] ?? ''
+                  return field.kind === 'input' ? (
+                    <FilterInput
+                      key={key}
+                      id={id}
+                      inputRef={key === 'name' ? nameInputRef : undefined}
+                      label={field.label}
+                      hint={field.hint}
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      onChange={handleFilterChange(key)}
+                      onKeyDown={handleKeyPress}
+                      value={value}
+                    />
+                  ) : (
+                    <FilterSelect
+                      key={key}
+                      id={id}
+                      label={field.label}
+                      options={withCurrent(field.options, values[key])}
+                      onChange={handleFilterChange(key)}
+                      onKeyDown={handleKeyPress}
+                      value={value}
+                    />
+                  )
+                },
+              )}
             </div>
             <footer className="p-4 flex justify-between shadow-(--shadow-sheet-footer) z-1">
               <button
                 className="appearance-none border-0 bg-transparent p-0 pl-1 text-stone text-sm font-semibold transition-colors duration-200 cursor-pointer hover:text-tint"
-                onClick={() => setValues({})}
+                // The makes are the row's, which the modal does not show
+                onClick={() => setValues(({ make }) => (make ? { make } : {}))}
               >
                 Hreinsa leit
               </button>

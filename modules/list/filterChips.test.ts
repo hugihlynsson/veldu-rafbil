@@ -10,6 +10,12 @@ describe('activeChips', () => {
       ),
     ).toEqual(['name', 'seats', 'availability'])
   })
+
+  it('leaves the makes to the row', () => {
+    expect(
+      activeChips({ make: ['Kia'], seats: 7 }).map(({ name }) => name),
+    ).toEqual(['seats'])
+  })
 })
 
 describe('filterChipText', () => {

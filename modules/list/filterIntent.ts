@@ -499,15 +499,22 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
   const modelMakes = new Set(
     names.flatMap(({ entry }) => (entry.isModel ? [...entry.makes] : [])),
   )
-  const nameList = [
+  const read = names
+    .filter(({ entry }) => entry.isModel || !modelMakes.has(entry.name))
+    .sort((a, b) => a.index - b.index)
+  // A make alone goes where the row shows it, so a make already chosen there
+  // is not offered again as a name
+  const namesOf = (isModel: boolean) => [
     ...new Set(
-      names
-        .filter(({ entry }) => entry.isModel || !modelMakes.has(entry.name))
-        .sort((a, b) => a.index - b.index)
+      read
+        .filter(({ entry }) => entry.isModel === isModel)
         .map(({ entry }) => entry.name),
     ),
   ]
-  if (nameList.length) set('name', nameList)
+  const makeList = namesOf(false)
+  const modelList = namesOf(true)
+  if (makeList.length) set('make', makeList)
+  if (modelList.length) set('name', modelList)
 
   const unread = rest
     .split(/[^\p{L}]+/u)

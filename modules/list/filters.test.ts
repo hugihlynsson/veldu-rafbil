@@ -149,6 +149,8 @@ describe('getFiltersFromQuery', () => {
 // Two makes picked and reloaded used to match nothing
 describe('filters survive a round trip through the URL', () => {
   const cases: Array<[string, Filters]> = [
+    ['two makes', { make: ['Tesla', 'Kia'] }],
+    ['a make and a name', { make: ['Skoda'], name: ['enyaq'] }],
     ['two names', { name: ['tesla', 'kia'] }],
     ['one name', { name: ['tesla'] }],
     ['two drives', { drive: ['AWD', 'RWD'] }],
@@ -166,6 +168,7 @@ describe('filters survive a round trip through the URL', () => {
     [
       'every filter at once',
       {
+        make: ['Tesla'],
         name: ['tesla', 'kia'],
         drive: ['AWD', 'RWD'],
         price: 9_000_000,
@@ -207,6 +210,7 @@ describe('filters survive a round trip through the URL', () => {
   // it is listed, and one written under the wrong key would not read back
   it('writes every filter under its own key', () => {
     const everyFilter: Required<Filters> = {
+      make: ['Tesla'],
       name: ['tesla'],
       drive: ['AWD'],
       price: 9_000_000,
@@ -308,6 +312,7 @@ describe('the filter modal fields', () => {
 describe('filterKeys', () => {
   it('keeps the order the chips have always stood in', () => {
     expect(filterKeys).toEqual([
+      'make',
       'name',
       'price',
       'range',
