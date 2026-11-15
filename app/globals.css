@@ -51,6 +51,10 @@
   /* A filter chip's edge, softer than a field's: its own text is what tells
      you it is there, so the line is only a shape around it */
   --color-line-chip: #ddd;
+  /* A filter field's edge, below 3:1: each one sits under its label in a
+     column of them, which is what tells you it is there. A hover brings
+     back `line-strong` */
+  --color-line-field: #c4c4c4;
   /* The edge of a translucent panel: the chat bar and the pills over the
      page. What is behind it changes, so it is the page's ink at an alpha
      rather than a grey that would only suit one background */
@@ -113,6 +117,9 @@
   --radius-toggle: calc(10px * var(--corner));
   --radius-card: calc(14px * var(--corner));
   --radius-sheet: calc(20px * var(--corner));
+  /* Concentric with the pill in its footer: half the button's 43px plus the
+     16px around it */
+  --radius-sheet-panel: calc(37.5px * var(--corner));
 
   /* Motion. Everything that arrives rises the same way; `--rise` shortens
      the distance for the cars under an answer, which are big enough that
@@ -330,6 +337,7 @@
     --color-line: #3a3a3a;
     --color-line-strong: #757575;
     --color-line-chip: #4a4a4a;
+    --color-line-field: #5a5a5a;
     --color-edge: rgb(255 255 255 / 0.06);
     --color-edge-strong: rgb(255 255 255 / 0.12);
 
