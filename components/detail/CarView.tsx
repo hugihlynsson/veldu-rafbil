@@ -131,14 +131,26 @@ const CarView: FunctionComponent<Props> = ({
                 </div>
                 {/* Nothing to pass on about a car that cannot be bought */}
                 {!notice && (
-                  <ShareButton
-                    title={car.label}
-                    path={carPathOf(car)}
-                    label="Deila"
-                    event="Car shared"
-                    variant="quiet"
-                    className="shrink-0 mt-1"
-                  />
+                  <>
+                    {/* The column is at most 480px until lg, too narrow for
+                        a long name beside the labelled pill */}
+                    <ShareButton
+                      title={car.label}
+                      path={carPathOf(car)}
+                      label={`Deila ${car.label}`}
+                      event="Car shared"
+                      variant="icon"
+                      className="mt-1 lg:hidden"
+                    />
+                    <ShareButton
+                      title={car.label}
+                      path={carPathOf(car)}
+                      label="Deila"
+                      event="Car shared"
+                      variant="quiet"
+                      className="shrink-0 mt-1 max-lg:hidden"
+                    />
+                  </>
                 )}
               </div>
               {notice ? (
