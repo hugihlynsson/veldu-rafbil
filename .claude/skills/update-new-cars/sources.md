@@ -23,27 +23,27 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Make          | Last read  | List dated | Note                                           |
 | ------------- | ---------- | ---------- | ---------------------------------------------- |
 | Audi          | 2026-11-07 | 2026-11-04 | Q4 and Q6; A6 03-18                            |
-| BMW           | 2026-11-05 | 2026-11-04 |                                                |
+| BMW           | 2026-11-16 | 2026-11-16 |                                                |
 | BYD           | 2026-11-03 | 2026-10-30 |                                                |
 | Citroën       | —          | —          | No price published; see 2026-11-10 note        |
 | Fiat          | 2026-11-06 | 2026-01    | 500e unpriced ("Leitið til sölumanna")         |
 | Ford          | 2026-11-10 | 2026-06-22 | Capri; Explorer 06-12, Puma 04-08, Mach-E 2025 |
 | GWM           | 2026-11-06 | 2026-01-20 |                                                |
 | Hongqi        | 2026-11-10 | 2026-10-31 |                                                |
-| Hyundai       | 2026-11-06 | 2026-11    |                                                |
+| Hyundai       | 2026-11-16 | 2026-11-16 | STARIA also in `hyundai_fyrirt_kjalausnir`     |
 | JAC           | 2026-11-03 | 2026-10-30 |                                                |
 | Jeep          | 2026-11-06 | —          | Avenger list is the 4xe hybrid only            |
 | KGM           | 2026-11-10 | 2026-10-30 |                                                |
 | Kia           | 2026-11-14 | 2026-11-13 | PV5 11-14; EV9 11-12; EV5 and EV6 11-10        |
-| Leapmotor     | 2026-11-14 | —          | ÍSBAND page; no dated list                     |
-| Lexus         | 2026-11-14 | —          | TZ unpriced; estimated from NL prices          |
-| Mazda         | 2026-11-10 | 2026-11-02 |                                                |
-| Mercedes-Benz | 2026-11-05 | —          | CLA 11-10 (list 11-09), VLE 11-11 (list 11-11) |
-| MG            | 2026-11-10 | 2026-10-31 |                                                |
+| Leapmotor     | 2026-11-16 | —          | ÍSBAND page; no dated list                     |
+| Lexus         | 2026-11-16 | —          | TZ unpriced; estimated from NL prices          |
+| Mazda         | 2026-11-16 | 2026-11-16 | CX-6e; 6e 11-02                                |
+| Mercedes-Benz | 2026-11-16 | 2026-11-16 | GLA, GLB, GLC and CLA; VLE 11-11; rest older   |
+| MG            | 2026-11-16 | 2026-11-16 |                                                |
 | Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
 | Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
 | Opel          | —          | —          | No price published; see 2026-11-10 note        |
-| Peugeot       | 2026-11-14 | —          | Read from the model pages                      |
+| Peugeot       | 2026-11-16 | —          | Read from the model pages                      |
 | Polestar      | 2026-11-12 | 2026-11-05 | Polestar 5; 2, 3 and 4 from 2026-10-29         |
 | Porsche       | 2026-11-12 | 2026-10-30 |                                                |
 | Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
@@ -52,8 +52,8 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Smart         | 2026-11-10 | 2026-11-02 |                                                |
 | Subaru        | 2026-11-10 | 2026-10-31 |                                                |
 | Suzuki        | 2026-11-10 | 2026-10-30 |                                                |
-| Tesla         | 2026-11-14 | —          | Design pages; no dated list                    |
-| Toyota        | 2026-11-14 | —          |                                                |
+| Tesla         | 2026-11-16 | —          | Design pages; no dated list                    |
+| Toyota        | 2026-11-16 | —          |                                                |
 | Volkswagen    | 2026-11-12 | 2026-11-10 | ID.4 and ID.3 Neo; ID.3, ID.7, Polo 11-04      |
 | Volvo         | 2026-11-06 | 2026-10-28 | EX40/EC40 2027.5 P8 AWD unpriced on 11-12      |
 | XPENG         | 2026-11-10 | 2026-11-02 |                                                |
@@ -355,3 +355,13 @@ the Passenger one rear row (one rear legroom figure, a 60:40 bench) and no
 seat count, against the 7 in the car list. Peugeot's model pages moved again,
 to `/tegundir/<number>/e-<number>.html` (`/tegundir/3008/e-3008.html`); the
 prices render client-side, so `find` "verð frá" in the built-in browser.
+
+**Read on 2026-11-16**: issuu now answers 403 to curl, both the profile
+listings and the document pages, so `scripts/issuu-pages.sh` cannot find a
+document id. Open `issuu.com/<publisher>?ps=100` in the built-in browser and
+pull each `documentId` (`yymmddHHMMSS-<hash>`) and `uri` out of the page's
+HTML with `javascript_exec`; `image.isu.pub/<documentId>/jpg/page_<n>.jpg`
+still answers curl. BL reissued its BMW, MG and Hyundai lists and Askja its
+GLA, GLB, GLC and CLA lists that day, and Brimborg the Mazda CX-6e's; every
+price matched. The Peugeot pages now live on `peugeotisland.is`, as the car
+list's links already say; `peugeot.is` is refused by the built-in browser.
