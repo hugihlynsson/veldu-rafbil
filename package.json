@@ -30,7 +30,7 @@
     "format": "oxfmt",
     "lint": "oxlint",
     "dev": "next dev",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc",
     "test": "vitest run",
     "prepare": "husky"
   },
