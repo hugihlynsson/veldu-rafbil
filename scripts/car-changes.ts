@@ -51,8 +51,8 @@ const loadAt = async <T>(revision: string, file: string): Promise<T> => {
 const versionAt = async (revision: string, file = dataFile) =>
   readVersion(await loadAt<Record<string, unknown>[]>(revision, file))
 
-// The day in Iceland, which keeps UTC all year
-const dayOf = (date: Date) => date.toISOString().slice(0, 10)
+const iceland = 'Atlantic/Reykjavik'
+const today = () => Temporal.Now.plainDateISO(iceland).toString()
 
 const working = () =>
   readVersion(newCars as unknown as Record<string, unknown>[])
@@ -74,7 +74,14 @@ const rebuild = async (): Promise<CarChange[]> => {
     .map((block) => {
       const [head = '', file = ''] = block.trim().split('\n').filter(Boolean)
       const [hash = '', time = '0'] = head.split(' ')
-      return { hash, file, date: dayOf(new Date(Number(time) * 1000)) }
+      return {
+        hash,
+        file,
+        date: Temporal.Instant.fromEpochMilliseconds(Number(time) * 1000)
+          .toZonedDateTimeISO(iceland)
+          .toPlainDate()
+          .toString(),
+      }
     })
     .reverse()
 
@@ -97,7 +104,7 @@ const rebuild = async (): Promise<CarChange[]> => {
     }
     apply(after, date)
   }
-  apply(working(), dayOf(new Date()))
+  apply(working(), today())
   return withoutNeverListed(entries)
 }
 
@@ -148,7 +155,7 @@ const sinceMain = async (): Promise<CarChange[]> => {
   const { entries, renames } = diffVersions(
     await versionAt(base),
     working(),
-    dayOf(new Date()),
+    today(),
     movedSlugs,
   )
   return [...followRenames(logged, renames), ...entries]

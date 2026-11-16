@@ -74,9 +74,9 @@ describe('the details a run reads', () => {
     const at = (source: string, read: string) => ({
       [carSlug(withPage)]: { source, read },
     })
-    const old = new Date(Date.parse(today) - (MAX_AGE_DAYS + 1) * 86_400_000)
-      .toISOString()
-      .slice(0, 10)
+    const old = Temporal.PlainDate.from(today)
+      .subtract({ days: MAX_AGE_DAYS + 1 })
+      .toString()
     expect(toRefresh([withPage], at(LIST_URL, today), today)).toEqual([
       withPage,
     ])

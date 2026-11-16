@@ -24,5 +24,19 @@
   },
   "env": {
     "builtin": true
-  }
+  },
+  "overrides": [
+    {
+      "files": ["components/**", "utils/**", "modules/**"],
+      "rules": {
+        "eslint/no-restricted-globals": [
+          "error",
+          {
+            "name": "Temporal",
+            "message": "Browsers do not all ship Temporal yet: keep it to routes and scripts, and pass the browser a YYYY-MM-DD string"
+          }
+        ]
+      }
+    }
+  ]
 }
