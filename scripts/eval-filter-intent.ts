@@ -2,7 +2,7 @@
  * Scores the filter suggestions against app/api/filter-suggestions/cases.ts: the
  * parser alone, and, when TYPESAFE_API_KEY is set, the parser with Jev.
  *
- *   npx tsx --env-file=.env.local scripts/eval-filter-intent.ts [--verbose]
+ *   node --env-file=.env.local --import ./scripts/resolve.ts scripts/eval-filter-intent.ts [--verbose]
  *
  * Each case the parser cannot finish is a real, billed request, of about
  * 2,000 input tokens. Jev's answers vary a little from run to run, so a

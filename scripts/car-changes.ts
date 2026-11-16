@@ -2,8 +2,8 @@
  * Writes modules/data/carChanges.ts: what each change to newCars.ts did to
  * each car, which /uppfaerslur and each car's page tell.
  *
- *   npx tsx scripts/car-changes.ts             what this branch changed, dated today
- *   npx tsx scripts/car-changes.ts --rebuild   the whole log afresh, from the git history
+ *   node --import ./scripts/resolve.ts scripts/car-changes.ts             what this branch changed, dated today
+ *   node --import ./scripts/resolve.ts scripts/car-changes.ts --rebuild   the whole log afresh, from the git history
  *
  * A branch's entries are worked out afresh from where it left main on every
  * run, so it can be run again after each edit and dates them all the day of
@@ -28,7 +28,7 @@ import {
   type CarVersion,
 } from './carChangeDiff'
 
-const root = path.join(__dirname, '..')
+const root = path.join(import.meta.dirname, '..')
 const dataFile = 'modules/data/newCars.ts'
 const logFile = 'modules/data/carChanges.ts'
 
@@ -54,8 +54,7 @@ const versionAt = async (revision: string, file = dataFile) =>
 const iceland = 'Atlantic/Reykjavik'
 const today = () => Temporal.Now.plainDateISO(iceland).toString()
 
-const working = () =>
-  readVersion(newCars as unknown as Record<string, unknown>[])
+const working = () => readVersion(newCars)
 
 const rebuild = async (): Promise<CarChange[]> => {
   // --follow finds the data under the paths it had before; it walks newest first

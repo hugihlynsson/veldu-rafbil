@@ -254,7 +254,7 @@ make, then model. The fields that are easy to get wrong:
   as similar get another.
 - **Each car's page offers similar cars from `modules/data/similarCars.ts`,
   picked by hand.** After adding, renaming or dropping a car, run
-  `npx tsx scripts/similar-cars.ts`: it fills in an entry for each new car from
+  `node --import ./scripts/resolve.ts scripts/similar-cars.ts`: it fills in an entry for each new car from
   price and range alone, works out again any entry naming a car that is gone,
   and keeps the rest. Then look the new entry over, so it offers cars of the
   same kind and seats, and offer the new car in the entry of a car or two near
@@ -269,7 +269,7 @@ make, then model. The fields that are easy to get wrong:
   are written.
 - **What changed is news, logged in `modules/data/carChanges.ts`.** It is
   what `/uppfaerslur` and the history on each car's page are told from. Once the
-  edits to `newCars.ts` are done, run `npx tsx scripts/car-changes.ts`. It
+  edits to `newCars.ts` are done, run `node --import ./scripts/resolve.ts scripts/car-changes.ts`. It
   works out what the branch changed since it left main, so run it again after
   any later edit rather than editing the log; it dates every entry today. A
   test fails until it is run. Read the new lines at the end of the file: a
@@ -282,7 +282,7 @@ make, then model. The fields that are easy to get wrong:
 And, for a car that is genuinely new to the list:
 
 - **Specs come from ev-database.** Find the variant with
-  `npx tsx scripts/ev-database-list.ts "Kia EV2"`, which reads the site's front
+  `node --import ./scripts/resolve.ts scripts/ev-database-list.ts "Kia EV2"`, which reads the site's front
   page and prints every matching car with its page's URL, then read the page
   with `WebFetch`. Guessing the URL does not work: the path needs the exact slug
   (`/car/3490/Kia-EV2-422-kWh`), and a wrong slug is a 404 even for a real id.
@@ -342,7 +342,7 @@ estimate is worked out the same way every time:
 
 1. **Start from the German price on ev-database.** Every model has one, and it
    is the one base that is there for every make.
-   `npx tsx scripts/ev-database-list.ts "<make>"` prints the make's German
+   `node --import ./scripts/resolve.ts scripts/ev-database-list.ts "<make>"` prints the make's German
    prices in one request, while its pages are blocked or not; a price marked
    archive is the last one asked before it was discontinued there.
 2. **Work out the make's kr/€ ratio.** For each car of that make already in the
