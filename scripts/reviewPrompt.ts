@@ -14,6 +14,7 @@ import {
 const writingRules = [
   'Þegar þú skrifar:',
   shared.voice,
+  '- Ávarpaðu aldrei lesandann og talaðu aldrei í fyrstu persónu: ekki „þú“, „þig“, „færðu“ eða „ég“. Skrifaðu „hann er fyrir fólk sem vill…“ eða „hann hentar þeim sem þurfa…“, ekki „hann er fyrir þig sem vilt…“.',
   '- Ekki endursegja tölurnar: þær eru í töflu beint fyrir ofan textann þinn. Segðu frekar hvað þær þýða í daglegu lífi.',
   shared.noArithmetic,
   '- Verðið er það sem kaupandinn borgar. Nefndu aldrei rafbílastyrkinn, hvorki að bíll fái hann né að hann fái hann ekki.',
