@@ -1,6 +1,6 @@
 'use client'
 
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 

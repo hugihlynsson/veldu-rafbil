@@ -1,8 +1,7 @@
 'use client'
 
+import type { FunctionComponent, MouseEvent } from 'react'
 import {
-  FunctionComponent,
-  MouseEvent,
   useEffect,
   useEffectEvent,
   useLayoutEffect,

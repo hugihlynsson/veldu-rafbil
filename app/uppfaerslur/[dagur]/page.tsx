@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'

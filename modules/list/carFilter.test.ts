@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest'
 
 import carFilter from './carFilter'
-import { deriveCar, Car } from '@/modules/data/cars'
+import type { Car } from '@/modules/data/cars'
+import { deriveCar } from '@/modules/data/cars'
 import { grantAmount, grantPriceCeiling } from '@/modules/data/globals'
 import type { NewCar } from '@/modules/data/newCarSchema'
 import type { Filters } from './filters'

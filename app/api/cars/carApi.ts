@@ -1,6 +1,6 @@
-import type { Availability } from '@/modules/data/cars'
+import type { Availability, Car } from '@/modules/data/cars'
 import type { Drive } from '@/modules/data/newCarSchema'
-import cars, { Car } from '@/modules/data/cars'
+import cars from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { MAX_COMPARED } from '@/modules/detail/comparison'
 import { chargeWindowShare } from '@/modules/data/getKmPerMinutesCharged'

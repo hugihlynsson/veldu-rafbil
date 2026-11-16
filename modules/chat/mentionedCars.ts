@@ -1,4 +1,5 @@
-import cars, { Car } from '@/modules/data/cars'
+import type { Car } from '@/modules/data/cars'
+import cars from '@/modules/data/cars'
 
 interface Model {
   base?: Car

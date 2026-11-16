@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 
 /** A plus to add something with. Drawn, as + sits off the centre of its glyph */
 const PlusIcon: FunctionComponent<{ size: number }> = ({ size }) => (

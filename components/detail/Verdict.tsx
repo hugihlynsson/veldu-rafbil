@@ -1,12 +1,7 @@
 'use client'
 
-import {
-  FunctionComponent,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import type { FunctionComponent, ReactNode } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 
 import type { Car } from '@/modules/data/cars'

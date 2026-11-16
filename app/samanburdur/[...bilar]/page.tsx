@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { notFound, permanentRedirect } from 'next/navigation'
 
 import type { Car } from '@/modules/data/cars'

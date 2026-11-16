@@ -20,7 +20,13 @@
     "jsx-a11y/no-autofocus": "off",
     "eslint/eqeqeq": "error",
     "eslint/prefer-const": "error",
-    "eslint/no-var": "error"
+    "eslint/no-var": "error",
+    "typescript/consistent-type-imports": [
+      "error",
+      {
+        "disallowTypeAnnotations": false
+      }
+    ]
   },
   "env": {
     "builtin": true

@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 
 import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 import { latestNews } from '@/modules/news/feed'

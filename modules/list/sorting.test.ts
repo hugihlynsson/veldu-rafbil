@@ -9,7 +9,8 @@ import {
   sortingUrlKeys,
   toggledSorting,
 } from './sorting'
-import { deriveCar, Car } from '@/modules/data/cars'
+import type { Car } from '@/modules/data/cars'
+import { deriveCar } from '@/modules/data/cars'
 import { grantPriceCeiling } from '@/modules/data/globals'
 import type { NewCar } from '@/modules/data/newCarSchema'
 import {

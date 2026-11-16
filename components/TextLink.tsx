@@ -1,4 +1,4 @@
-import { ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 
 /** A link inside running text, set apart by its weight until it is hovered */
 const TextLink = ({ children, ...props }: ComponentProps<'a'>) => (
