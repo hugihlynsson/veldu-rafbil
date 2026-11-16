@@ -1,7 +1,7 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import React, {
-  ReactNode,
   useEffect,
   useEffectEvent,
   useLayoutEffect,

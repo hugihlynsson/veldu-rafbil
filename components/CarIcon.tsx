@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 
 /** A car from the side, where a car's photo would be and there is none */
 const CarIcon: FunctionComponent<{ size: number; className?: string }> = ({

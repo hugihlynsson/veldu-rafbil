@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 
 /**
  * A cross to close or take something out with. Drawn, as × sits off the

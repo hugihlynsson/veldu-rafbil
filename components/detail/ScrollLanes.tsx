@@ -1,6 +1,7 @@
 'use client'
 
-import { createContext, FunctionComponent, ReactNode, use } from 'react'
+import type { FunctionComponent, ReactNode } from 'react'
+import { createContext, use } from 'react'
 import clsx from 'clsx'
 
 import useSyncedScroll from '@/utils/useSyncedScroll'

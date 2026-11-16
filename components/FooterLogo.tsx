@@ -1,6 +1,6 @@
 'use client'
 
-import { FunctionComponent, MouseEvent } from 'react'
+import type { FunctionComponent, MouseEvent } from 'react'
 import Link from 'next/link'
 
 import Logo from './Logo'

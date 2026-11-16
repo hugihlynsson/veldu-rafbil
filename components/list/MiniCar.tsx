@@ -1,7 +1,7 @@
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 import Image from 'next/image'
 
-import { Car } from '@/modules/data/cars'
+import type { Car } from '@/modules/data/cars'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 
 interface Props {

@@ -14,9 +14,8 @@ import type { Filters } from '@/modules/list/filters'
 import { filterDefinitions } from '@/modules/list/filters'
 import { parseFilterIntent } from '@/modules/list/filterIntent'
 import { rankSuggestions } from '@/modules/list/filterSuggestions'
+import type { CaseScore, IntentCase } from '@/app/api/filter-suggestions/cases'
 import {
-  CaseScore,
-  IntentCase,
   intentCases,
   scoreCase,
   summarize,

@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 
 import cars from '@/modules/data/cars'
 import { listHeadline, listLead } from '@/modules/copy/listHeadline'

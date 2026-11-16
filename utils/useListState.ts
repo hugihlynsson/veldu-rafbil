@@ -1,12 +1,11 @@
 import { useQueryStates } from 'nuqs'
 
-import type { Filters } from '@/modules/list/filters'
+import type { Filters, FilterValues } from '@/modules/list/filters'
 import { liftMakes } from '@/modules/list/makes'
 import type { Sorting } from '@/modules/list/sorting'
 import type { View } from '@/modules/list/view'
 import { viewParsers, viewUrlKeys } from '@/modules/list/view'
 import {
-  FilterValues,
   filterParsers,
   filterUrlKeys,
   filtersFromValues,

@@ -1,6 +1,6 @@
 'use client'
 
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 import Link from 'next/link'
 
 import Logo from '@/components/Logo'

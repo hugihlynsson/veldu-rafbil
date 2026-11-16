@@ -1,6 +1,6 @@
 'use client'
 
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 import { trackEvent } from 'fathom-client'
 
 import type { Car } from '@/modules/data/cars'

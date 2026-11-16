@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 
 const paths = {
   left: 'M9 2 4 7l5 5',

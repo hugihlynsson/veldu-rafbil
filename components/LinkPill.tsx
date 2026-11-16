@@ -1,4 +1,5 @@
-import React, { ReactNode, FunctionComponent } from 'react'
+import type { ReactNode, FunctionComponent } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
 

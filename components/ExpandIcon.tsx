@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 
 /** Two arrows out to opposite corners, for opening something at full size */
 const ExpandIcon: FunctionComponent<{ size: number }> = ({ size }) => (

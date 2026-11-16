@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { notFound, permanentRedirect } from 'next/navigation'
 
 import { carPath, shareImagePath, shareImageSize } from '@/modules/detail/paths'

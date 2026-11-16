@@ -1,6 +1,6 @@
 'use client'
 
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 import clsx from 'clsx'
 import { trackEvent } from 'fathom-client'
 

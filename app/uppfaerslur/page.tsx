@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { LIST_SHARE_IMAGE_PATH, shareImageSize } from '@/modules/detail/paths'
 import { frontDays, olderPage, olderThanFront } from '@/modules/news/feed'
 import { NEWS_FEED_PATH, NEWS_PATH, newsPagePath } from '@/modules/news/paths'

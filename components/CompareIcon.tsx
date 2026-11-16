@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import type { FunctionComponent } from 'react'
 
 /**
  * Two columns of figures side by side, as on the comparison page. The rows are
