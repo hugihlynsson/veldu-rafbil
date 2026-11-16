@@ -15,7 +15,7 @@ this skill is everything around it.
 ## 1. Run the script, naming the cars
 
 ```bash
-npx tsx --env-file=.env.local scripts/car-reviews.ts <slug>…
+node --env-file=.env.local --import ./scripts/resolve.ts scripts/car-reviews.ts <slug>…
 ```
 
 Name the cars the change put out of date: each car added or whose figures
@@ -39,7 +39,7 @@ The front page has no length or warranty, and gives boot and frunk as one
 figure, kept as `cargoWithFrunk`; the prompt compares every car on the two
 together. A car whose `evDatabaseUrl` changes is looked up again, as is one
 that gains a link. To do that without writing any review, as when only a link
-changed, run `npx tsx scripts/car-reviews.ts --details`.
+changed, run `node --import ./scripts/resolve.ts scripts/car-reviews.ts --details`.
 
 A link that answers 404 stops the run, rather than taking the car off the list
 by its id and shipping the broken link: find the right page with
@@ -77,7 +77,7 @@ Where to look, in order:
 
 1. **The car's ev-database page, if there is one.** Look for it even when the
    car has no `evDatabaseUrl`, as the site may have added it since:
-   `npx tsx scripts/ev-database-list.ts "<make> <model>"` searches the front
+   `node --import ./scripts/resolve.ts scripts/ev-database-list.ts "<make> <model>"` searches the front
    page, which gives its URL. If you find one, add it to the car in
    `newCars.ts`, and the next run reads its details itself.
    While the pages answer 429 to curl, WebFetch and the browser alike,
@@ -124,7 +124,7 @@ pages (which add length, frunk and warranty), and to reread pages over a year
 old:
 
 ```bash
-npx tsx scripts/car-reviews.ts --refresh-details
+node --import ./scripts/resolve.ts scripts/car-reviews.ts --refresh-details
 ```
 
 It reads one page every 9 seconds and stops at the first 429, saving as it

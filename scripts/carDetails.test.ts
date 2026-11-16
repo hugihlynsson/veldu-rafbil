@@ -18,7 +18,7 @@ import {
 import { LIST_URL } from './evDatabaseList'
 
 const file = JSON.parse(
-  readFileSync(path.join(__dirname, 'carDetails.json'), 'utf8'),
+  readFileSync(path.join(import.meta.dirname, 'carDetails.json'), 'utf8'),
 ) as DetailsFile
 
 describe('the details reviews are written from', () => {
@@ -36,7 +36,7 @@ describe('the details reviews are written from', () => {
   })
 
   it('holds each car as read from the ev-database page it links to now', () => {
-    // A link changed or added since: `npx tsx scripts/car-reviews.ts --details`
+    // A link changed or added since: `node --import ./scripts/resolve.ts scripts/car-reviews.ts --details`
     expect(lacking(cars, file).map(carSlug)).toEqual([])
   })
 })

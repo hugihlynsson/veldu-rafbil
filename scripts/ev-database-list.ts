@@ -3,8 +3,8 @@
  * its car pages answered 429 for weeks: each car's exact page URL, its
  * figures and its German, Dutch and UK prices, all in one request.
  *
- *   npx tsx scripts/ev-database-list.ts "Kia EV2" "Hyundai"   every car whose name has every word of one
- *   npx tsx scripts/ev-database-list.ts 3491                  the car with that id
+ *   node --import ./scripts/resolve.ts scripts/ev-database-list.ts "Kia EV2" "Hyundai"   every car whose name has every word of one
+ *   node --import ./scripts/resolve.ts scripts/ev-database-list.ts 3491                  the car with that id
  *
  * The list has no WLTP range, power, nominal battery or 10-80% time; the
  * update-new-cars skill says where those come from instead.
@@ -48,7 +48,6 @@ const describe = (row: ListRow): string => {
     .join('\n')
 }
 
-// Not a top-level await, which tsx runs this module without
 const main = async () => {
   const read = await fetchList()
   if ('error' in read) throw new Error(`Could not read the list: ${read.error}`)

@@ -3,14 +3,14 @@
  * questions its chat offers to start on, written by the advisor's model from
  * the prompts in scripts/reviewPrompt.ts.
  *
- *   npx tsx --env-file=.env.local scripts/car-reviews.ts           the missing and out-of-date ones, if only a few
- *   npx tsx --env-file=.env.local scripts/car-reviews.ts --due     the missing and out-of-date ones, however many
- *   npx tsx --env-file=.env.local scripts/car-reviews.ts <slug>…   these, afresh
- *   npx tsx --env-file=.env.local scripts/car-reviews.ts --all     every one, afresh
- *   npx tsx --env-file=.env.local scripts/car-reviews.ts --questions [<slug>…]
+ *   node --env-file=.env.local --import ./scripts/resolve.ts scripts/car-reviews.ts           the missing and out-of-date ones, if only a few
+ *   node --env-file=.env.local --import ./scripts/resolve.ts scripts/car-reviews.ts --due     the missing and out-of-date ones, however many
+ *   node --env-file=.env.local --import ./scripts/resolve.ts scripts/car-reviews.ts <slug>…   these, afresh
+ *   node --env-file=.env.local --import ./scripts/resolve.ts scripts/car-reviews.ts --all     every one, afresh
+ *   node --env-file=.env.local --import ./scripts/resolve.ts scripts/car-reviews.ts --questions [<slug>…]
  *                                                                  only the questions, keeping the reviews
- *   npx tsx scripts/car-reviews.ts --details                         only the details of cars with none, or a changed link
- *   npx tsx scripts/car-reviews.ts --refresh-details                 only the details, from ev-database, slowly
+ *   node --import ./scripts/resolve.ts scripts/car-reviews.ts --details                         only the details of cars with none, or a changed link
+ *   node --import ./scripts/resolve.ts scripts/car-reviews.ts --refresh-details                 only the details, from ev-database, slowly
  *
  * The questions are written from the review, so a review written afresh gets
  * new ones, and a review kept without any gets them on the next run.
@@ -62,7 +62,7 @@ import {
 } from './carDetails'
 import { evDatabaseId, fetchList, LIST_URL } from './evDatabaseList'
 
-const file = path.join(__dirname, '../modules/data/carReviews.ts')
+const file = path.join(import.meta.dirname, '../modules/data/carReviews.ts')
 
 // Written once per car and kept, so it can think longer than the chat, whose
 // every answer waits on its thinking. Medium rather than high: the gaps and
@@ -89,7 +89,7 @@ const MAX_UNASKED = 8
 // be among too few of them to mean much
 const MIN_WITH_DETAILS = 0.9
 
-const detailsFile = path.join(__dirname, 'carDetails.json')
+const detailsFile = path.join(import.meta.dirname, 'carDetails.json')
 const today = Temporal.Now.plainDateISO('Atlantic/Reykjavik').toString()
 
 const readDetailsFile = (): DetailsFile =>
@@ -400,7 +400,6 @@ const worker = async (details: DetailsOf) => {
   }
 }
 
-// Not a top-level await, which tsx runs this module without
 const main = async () => {
   // As the reviews are saved below: a car no longer on the list drops out
   saveDetailsFile(readDetailsFile())

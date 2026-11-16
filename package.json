@@ -2,6 +2,7 @@
   "name": "evs",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "license": "MIT",
   "engines": {
     "node": "^26"
@@ -43,7 +44,6 @@
     "lint-staged": "^17.6.0",
     "oxfmt": "^0.78.0",
     "oxlint": "^1.93.0",
-    "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vitest": "^5.1.0"
   },

@@ -2,8 +2,8 @@
  * Writes modules/data/similarCars.ts: for each car, the cars closest to it in
  * price and range, which its page shows and its review is written against.
  *
- *   npx tsx scripts/similar-cars.ts         adds the cars that have no entry
- *   npx tsx scripts/similar-cars.ts --all   works every entry out afresh,
+ *   node --import ./scripts/resolve.ts scripts/similar-cars.ts         adds the cars that have no entry
+ *   node --import ./scripts/resolve.ts scripts/similar-cars.ts --all   works every entry out afresh,
  *                                           dropping every hand-picked one
  *
  * An entry already there is kept, so one set by hand survives a run that only
@@ -18,7 +18,7 @@ import { carSlug } from '@/modules/data/getCarId'
 import { closestCars } from '@/modules/detail/similar'
 import similarCars from '@/modules/data/similarCars'
 
-const file = path.join(__dirname, '../modules/data/similarCars.ts')
+const file = path.join(import.meta.dirname, '../modules/data/similarCars.ts')
 const all = process.argv.includes('--all')
 
 const current = new Set(cars.map(carSlug))
