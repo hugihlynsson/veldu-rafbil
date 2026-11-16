@@ -122,7 +122,7 @@ export const toRefresh = (
     const entry = file[carSlug(car)]
     if (!car.evDatabaseUrl || !entry) return Boolean(car.evDatabaseUrl)
     if (entry.source === LIST_URL) return true
-    const age = (Date.parse(today) - Date.parse(entry.read)) / 86_400_000
+    const age = Temporal.PlainDate.from(entry.read).until(today).days
     return entry.source === car.evDatabaseUrl && age > MAX_AGE_DAYS
   })
 

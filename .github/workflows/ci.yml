@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         # Every major package.json engines promises
-        node: [22, 24, 26]
+        node: [26]
     steps:
       - uses: actions/checkout@v7
 

@@ -11,9 +11,7 @@ export const CHANGE_DAYS = 60
 export const MAX_CHANGES = 120
 
 const daysBefore = (date: string, days: number) =>
-  new Date(Date.parse(`${date}T00:00:00Z`) - days * 86_400_000)
-    .toISOString()
-    .slice(0, 10)
+  Temporal.PlainDate.from(date).subtract({ days }).toString()
 
 /**
  * The changes the advisor is told of, newest first. The window is counted

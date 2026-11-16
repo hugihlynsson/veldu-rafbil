@@ -3,7 +3,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "react-jsx",
-    "lib": ["dom", "es2023"],
+    "lib": ["dom", "es2023", "esnext.temporal"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "noEmit": true,

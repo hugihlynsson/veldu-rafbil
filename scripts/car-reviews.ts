@@ -90,7 +90,7 @@ const MAX_UNASKED = 8
 const MIN_WITH_DETAILS = 0.9
 
 const detailsFile = path.join(__dirname, 'carDetails.json')
-const today = new Date().toISOString().slice(0, 10)
+const today = Temporal.Now.plainDateISO('Atlantic/Reykjavik').toString()
 
 const readDetailsFile = (): DetailsFile =>
   JSON.parse(readFileSync(detailsFile, 'utf8')) as DetailsFile
