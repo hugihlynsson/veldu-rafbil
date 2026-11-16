@@ -23,8 +23,7 @@ const car = (overrides: Partial<CarVersion> = {}): CarVersion => ({
   ...overrides,
 })
 
-const version = (...cars: CarVersion[]) =>
-  readVersion(cars as unknown as Record<string, unknown>[])
+const version = (...cars: CarVersion[]) => readVersion(cars)
 
 const diff = (before: CarVersion[], after: CarVersion[], moved = {}) =>
   diffVersions(version(...before), version(...after), '2026-11-05', moved)
