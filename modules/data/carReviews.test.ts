@@ -55,6 +55,16 @@ describe('the car reviews', () => {
     }
   })
 
+  // A review speaks of "fólk sem vill…", never to the reader or as a writer.
+  // The questions are the reader's own words, so they may say "ég"
+  it('never addresses the reader or speaks for itself', () => {
+    const person =
+      /(?<!\p{L})(þú|þig|þér|þín\p{L}*|þinn\p{L}*|þitt|ég|mig|mér|okkur|okkar|færðu|velurðu|kemstu|viltu|þurfirðu|geturðu|ertu)(?!\p{L})/iu
+    for (const [slug, { paragraphs }] of Object.entries(carReviews)) {
+      expect(paragraphs.join(' '), slug).not.toMatch(person)
+    }
+  })
+
   // The chat offers three at a time, drawn afresh each time it is focused
   it('has questions to start on with each, as pills can show them', () => {
     for (const { questions } of Object.values(carReviews)) {

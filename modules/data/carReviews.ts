@@ -63,7 +63,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Audi A2 e-tron er fimm sæta hlaðbakur í C-stærðarflokki sem höfðar sérstaklega til þeirra sem leita að vönduðum ferðabíl í fremur nettu formi. Hann hentar einkar vel fyrir þá sem aka reglulega langar vegalengdir milli landshluta og vilja hágæða tilfinningu án þess að kaupa stóran jeppling.',
       'Helsti styrkleiki bílsins er drægnin, en hann drífur mjög langt og er meðal þeirra allra langdrægustu í sínum verðflokki. Það skilar miklu öryggi í íslenskum vetrarkulda. Hann hleður jafnframt hraðar en flestir keppinautar svo hleðslustopp tefja lítið, auk þess sem 1.600 kg dráttargeta er rífleg fyrir bíl af þessari stærð.',
       'Stærstu gallarnir eru að bíllinn er aðeins afturhjóladrifinn og skottið er með þeim minnstu miðað við aðra á svipuðu verði. Hann er einnig fremur aflítill miðað við verðmiðann. Ef fjórhjóladrif og meira pláss vega þyngra er Polestar 2 Long Range Dual Motor talsvert ódýrari og mun sneggri, og Ford Capri býður sömuleiðis fjórhjóladrif og miklu stærra farangursrými fyrir lægra verð.',
-      'Bíllinn er afar sterkur kostur ef drægni og lúxus skipta öllu máli, svo lengi sem afturhjóladrifið og takmarkað skottpláss henta þínum þörfum.',
+      'Bíllinn er afar sterkur kostur ef drægni og lúxus skipta öllu máli, svo lengi sem afturhjóladrifið og takmarkað skottpláss duga.',
     ],
     questions: [
       'Borgar sig að taka 240 kW útfærsluna?',
@@ -214,7 +214,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Audi Q6 e-tron Sportback er stór og rennilegur jepplingur með aflíðandi þaklínu, ætlaður þeim sem leita að fáguðu útliti í bland við mikla getu. Fjórhjóladrifið kemur sér vel á íslenskum vegum og veitir öruggt grip í snjó og vetrarfærð.',
       'Bíllinn hentar prýðilega í langferðir enda drífur hann mjög langt og hleður hraðar en flestir í sínum verðflokki, sem þýðir stutt hleðslustopp á leiðinni milli landshluta. Dráttargetan er einnig í sérflokki, en hann má draga allt að 2.400 kg sem gerir hann að einum öflugasta dráttarbílnum í þessum verðflokki.',
-      'Að baki lúxusútlitsins er fórnað nokkru rými, því skottið er minna en í flestum keppinautum og bíllinn er hægari í spyrnunni en margir á svipuðu verði. Ef útlitið skiptir ekki öllu máli færðu hefðbundinn Audi Q6 e-tron með aðeins stærra skotti á 600.000 kr. lægra verði. Þá býður BMW iX3 50 xDrive upp á heilum 168 km meiri drægni fyrir 200.000 kr. meira.',
+      'Að baki lúxusútlitsins er fórnað nokkru rými, því skottið er minna en í flestum keppinautum og bíllinn er hægari í spyrnunni en margir á svipuðu verði. Ef útlitið skiptir ekki öllu máli fæst hefðbundinn Audi Q6 e-tron með aðeins stærra skotti á 600.000 kr. lægra verði. Þá býður BMW iX3 50 xDrive upp á heilum 168 km meiri drægni fyrir 200.000 kr. meira.',
       'Þetta er glæsilegur ferðabíll fyrir þá sem vilja mikla dráttargetu og snarpa hleðslu í sportlegum búningi.',
     ],
     questions: [
@@ -255,10 +255,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'bmw-i3-40-xdrive': {
     paragraphs: [
-      'BMW i3 40 xDrive er fjórhjóladrifinn fólksbíll í millistærð, með skottloki, og í raun nýi rafmagnsþristurinn frá BMW. Hann er fyrir þig sem vilt lágan og lipran bíl sem er gaman að keyra, en þarft samt að komast landshluta á milli án vesens.',
+      'BMW i3 40 xDrive er fjórhjóladrifinn fólksbíll í millistærð, með skottloki, og í raun nýi rafmagnsþristurinn frá BMW. Hann er fyrir fólk sem vill lágan og lipran bíl sem er gaman að keyra, en þarf samt að komast landshluta á milli án vesens.',
       'Og það gerir hann vel. Miðað við aðra í sínum verðflokki drífur hann með þeim lengstu og er meðal þeirra sem hlaða hraðast, svo stoppin á leiðinni norður verða fá og stutt, líka í frosti. Hann er líka meðal þeirra ódýrustu á hvern km drægni og dregur meira en flestir á svipuðu verði, svo kerran fer með í sumarbústaðinn.',
-      'Það sem þú gefur eftir er skottið, sem er minna en hjá flestum á svipuðu verði. Ef farangurinn skiptir meira máli er Volkswagen ID.7 GTX skutbíll sem kostar 200.000 kr. meira og tekur 154 l meira, en drífur á móti 126 km styttra og hleður hægar.',
-      'Dugi skottið þér færðu hér fólksbíl sem fer langt, hleður hratt og keyrir eins og BMW á að gera.',
+      'Það sem hann gefur eftir er skottið, sem er minna en hjá flestum á svipuðu verði. Ef farangurinn skiptir meira máli er Volkswagen ID.7 GTX skutbíll sem kostar 200.000 kr. meira og tekur 154 l meira, en drífur á móti 126 km styttra og hleður hægar.',
+      'Dugi skottið er þetta fólksbíll sem fer langt, hleður hratt og keyrir eins og BMW á að gera.',
     ],
     questions: [
       'Borgar sig að taka 50 xDrive frekar?',
@@ -276,10 +276,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'bmw-i3-50-xdrive': {
     paragraphs: [
-      'BMW i3 50 xDrive er fjórhjóladrifinn fólksbíll í millistærð, með skottloki, og öflugri gerðin af nýja rafmagnsþristinum frá BMW. Hann er fyrir þig sem keyrir mikið utanbæjar og vilt helst aldrei þurfa að hugsa um hvar næsta hleðslustöð er.',
-      'Drægnin er það sem stendur upp úr: hann drífur lengst allra rafbíla sem eru seldir hér, svo jafnvel í vetrarkulda kemstu landshluta á milli á einni hleðslu. Hann er líka ódýrastur á hvern km drægni af bílum á svipuðu verði, er meðal þeirra sem hlaða hraðast og er sneggri og aflmeiri en flestir keppinautar hans.',
-      'Gallinn er skottið, sem er með því minnsta í verðflokknum. Mercedes-Benz CLA Shooting Brake 350 4MATIC er skutbíll sem kostar aðeins 200.000 kr. meira og tekur 105 l meira, en drífur 169 km styttra. Og þurfirðu ekki alla þessa drægni sparar BMW i3 40 xDrive þér 1.000.000 kr. fyrir 202 km minni drægni.',
-      'Ef drægnin skiptir þig öllu og skottið litlu er erfitt að gera betur.',
+      'BMW i3 50 xDrive er fjórhjóladrifinn fólksbíll í millistærð, með skottloki, og öflugri gerðin af nýja rafmagnsþristinum frá BMW. Hann er fyrir fólk sem keyrir mikið utanbæjar og vill helst aldrei þurfa að hugsa um hvar næsta hleðslustöð er.',
+      'Drægnin er það sem stendur upp úr: hann drífur lengst allra rafbíla sem eru seldir hér, svo jafnvel í vetrarkulda kemst hann landshluta á milli á einni hleðslu. Hann er líka ódýrastur á hvern km drægni af bílum á svipuðu verði, er meðal þeirra sem hlaða hraðast og er sneggri og aflmeiri en flestir keppinautar hans.',
+      'Gallinn er skottið, sem er með því minnsta í verðflokknum. Mercedes-Benz CLA Shooting Brake 350 4MATIC er skutbíll sem kostar aðeins 200.000 kr. meira og tekur 105 l meira, en drífur 169 km styttra. Og sé ekki þörf á allri þessari drægni sparar BMW i3 40 xDrive 1.000.000 kr. fyrir 202 km minni drægni.',
+      'Ef drægnin skiptir öllu og skottið litlu er erfitt að gera betur.',
     ],
     questions: [
       'Dugar 40 xDrive mér ekki alveg eins vel?',
@@ -319,7 +319,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'bmw-i4-m60-xdrive': {
     paragraphs: [
-      'BMW i4 M60 xDrive er stór fólksbíll með afturhlera, sportlegur í útliti og með M-merkið aftan á. Hann hentar ef þú vilt kraftmikinn bíl sem er samt nógu praktískur fyrir hversdaginn.',
+      'BMW i4 M60 xDrive er stór fólksbíll með afturhlera, sportlegur í útliti og með M-merkið aftan á. Hann er fyrir fólk sem vill kraftmikinn bíl sem er samt nógu praktískur fyrir hversdaginn.',
       'Aflið og hröðunin eru aðalatriðið: hann er meðal þeirra sneggstu og aflmestu á svipuðu verði. Afturhlerinn gerir skottið aðgengilegra en í stallbak, og hann má draga léttan vagn.',
       'Á móti kemur að drægnin er bara í meðallagi og styttri en hjá flestum keppinautum hans, hann hleður hægar og skottið er með þeim minnstu. Volvo ES90 Twin Motor Performance er 1.200.000 kr. ódýrari, drífur 128 km lengra og hleðslustoppin eru um 35% styttri, þótt hann sé 0,3 s hægari í 0-100 km/klst. Og ef aflið má vera minna fæst BMW i4 40 xDrive fyrir 2.000.000 kr. minna með nánast sömu drægni.',
       'i4 M60 er bíllinn fyrir þá sem vilja kraftinn fyrst og praktíkina svo.',
@@ -429,8 +429,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'BMW iX1 eDrive 20 er meðalstór jepplingur sem opnar aðgang að vönduðum heimi BMW á fremur hagstæðu verði. Hann höfðar einkum til þeirra sem kunna að meta fágaða aksturseiginleika, þægindi og gott innanrými í daglegu lífi frekar en að hámarka plássið fyrir peninginn.',
       'Bíllinn er afar lipur í innanbæjarakstri og farangursrýmið dugar vel fyrir hefðbundinn fjölskyldupakkning.',
-      'Helstu gallarnir snúa að notagildi hans á langferðum og í vetrarfærð. Hann drífur styttra en flestir í sínum verðflokki, er aðeins framhjóladrifinn og er meðal þeirra bíla sem mega draga minnst, sem útilokar stærri kerrur og tjaldvagna. Ef meiri drægni, stærra skott og dráttargeta skipta sköpum færðu meira notagildi í Opel Grandland. Fyrir þá sem vilja fjórhjóladrif og meiri kraft er BMW iX1 xDrive 30 mun snarpari kostur, þótt hann kosti meira.',
-      'Þetta er ljómandi kostur fyrir þá sem vilja gæðatilfinningu þýska lúxusmerkisins í nettum pakka, en síðri ef þú þarft að draga þungt eða takast á við þungan vetrarsnjó.',
+      'Helstu gallarnir snúa að notagildi hans á langferðum og í vetrarfærð. Hann drífur styttra en flestir í sínum verðflokki, er aðeins framhjóladrifinn og er meðal þeirra bíla sem mega draga minnst, sem útilokar stærri kerrur og tjaldvagna. Ef meiri drægni, stærra skott og dráttargeta skipta sköpum fæst meira notagildi í Opel Grandland. Fyrir þá sem vilja fjórhjóladrif og meiri kraft er BMW iX1 xDrive 30 mun snarpari kostur, þótt hann kosti meira.',
+      'Þetta er ljómandi kostur fyrir þá sem vilja gæðatilfinningu þýska lúxusmerkisins í nettum pakka, en síðri fyrir þá sem þurfa að draga þungt eða takast á við þungan vetrarsnjó.',
     ],
     questions: [
       'Borgar xDrive 30 útfærslan sig frekar?',
@@ -474,7 +474,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'BMW iX3 40 er stór jepplingur sem hentar sérlega vel fyrir þá sem vilja vandaðan og þægilegan lúxusbíl til langferða.',
       'Í sínum verðflokki er bíllinn með þeim allra langdrægustu. Drægnin gefur mikið öryggi í vetrarakstri milli landshluta og hleðslustoppin á langferðum eru umtalsvert styttri en hjá flestum keppinautum. Að auki má hann draga allt að 2.000 kg, sem er meira en flestir sambærilegir bílar ráða við, auk þess sem hefðbundið farangursrými fær góðan stuðning frá rúmgóðu framskotti.',
       'Helsti gallinn fyrir íslenskar aðstæður er að bíllinn er aðeins afturhjóladrifinn, á meðan keppinautar á borð við Polestar 4 SUV Long Range Dual Motor bjóða fjórhjóladrif og mun snarpari hröðun. Ef fjórhjóladrifið er nauðsynlegt fyrir færðina á veturna leysir dýrari útfærslan, BMW iX3 50 xDrive, þann vanda ásamt því að bæta við mikilli drægni.',
-      'Ef afturhjóladrif dugar þér færðu hér einn öflugasta ferðabílinn hvað varðar drægni, hleðsluhraða og dráttargetu.',
+      'Ef afturhjóladrif dugar er þetta einn öflugasti ferðabíllinn hvað varðar drægni, hleðsluhraða og dráttargetu.',
     ],
     questions: [
       'Borgar 50 xDrive útfærslan sig?',
@@ -517,8 +517,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'BMW iX5 60 xDrive er stór fjórhjóladrifinn lúxusjeppi, rafmagnsútgáfan af X5, með loftpúðafjöðrun. Hann er fyrir fjölskylduna sem vill pláss, kraft og drægni í einum bíl og ætlar sér að draga eitthvað þungt.',
       'Miðað við aðra í sínum verðflokki drífur hann lengst og er ódýrastur á hvern km drægni, svo hringferð að vetri er lítið mál. Hann hleður líka hraðar en flestir, skottið er stærra en hjá flestum og hann er meðal þeirra sem draga mest, svo hjólhýsið er ekki vandamál.',
-      'Á móti kemur að hann er mjög dýr, og hann tekur fimm, svo ef þú þarft sjö sæti er hann ekki bíllinn. Porsche Cayenne er 540.000 kr. ódýrari, með 163 l stærra skott og dregur 300 kg meira, en drífur 203 km styttra, svo hann hentar betur ef plássið og kerran skipta þig meira máli en drægnin.',
-      'Ef þú vilt stóran jeppa sem kemst lengst á hleðslunni er fátt sem slær hann út á þessu verði.',
+      'Á móti kemur að hann er mjög dýr, og hann tekur fimm, svo hann er ekki bíllinn fyrir þá sem þurfa sjö sæti. Porsche Cayenne er 540.000 kr. ódýrari, með 163 l stærra skott og dregur 300 kg meira, en drífur 203 km styttra, svo hann hentar betur ef plássið og kerran skipta meira máli en drægnin.',
+      'Fyrir fólk sem vill stóran jeppa sem kemst lengst á hleðslunni er fátt sem slær hann út á þessu verði.',
     ],
     questions: [
       'Af hverju hann frekar en Porsche Cayenne?',
@@ -888,7 +888,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'hyundai-inster-long-range': {
     paragraphs: [
       'Hyundai INSTER er örjepplingur og einn allra minnsti rafbíllinn sem völ er á. Hann er sérsniðinn fyrir þá sem leita að nettum og liprum borgarbíl en vilja um leið njóta hækkaðrar setustöðu jepplingsins.',
-      'Fyrir daglegan akstur og snatt innanbæjar reynist hann einkar hentugur, sérstaklega í þröngum bílastæðum. Í þessari Long Range útgáfu færðu bæði meiri drægni og talsvert stærra skott en í ódýrari útfærslu bílsins, sem gerir hann mun hagnýtari í hversdagslegri notkun. Drægnin dugar ágætlega innanbæjar allan ársins hring, þótt gera verði ráð fyrir að hún dragist saman í íslenskum vetrarkulda.',
+      'Fyrir daglegan akstur og snatt innanbæjar reynist hann einkar hentugur, sérstaklega í þröngum bílastæðum. Þessi Long Range útgáfa hefur bæði meiri drægni og talsvert stærra skott en ódýrari útfærsla bílsins, sem gerir hann mun hagnýtari í hversdagslegri notkun. Drægnin dugar ágætlega innanbæjar allan ársins hring, þótt gera verði ráð fyrir að hún dragist saman í íslenskum vetrarkulda.',
       'Að baki býr þó að bíllinn er mjög aflítill og með þeim hægustu í sínum verðflokki. Hann hleður einnig hægar en flestir keppinautar hans, sem kemur niður á honum á langferðum milli landshluta. Ef pláss og kraftur skipta máli er Ford Puma 100.000 kr. ódýrari og býður upp á 172 lítrum stærra skott og um 25% styttri hleðslustopp.',
       'INSTER Long Range er lipur og skemmtilegur kostur í þéttbýli, en hentar síður sem alhliða fjölskyldubíll eða í mikil ferðalög.',
     ],
@@ -911,7 +911,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Hyundai IONIQ 3 Standard Range er lítill hlaðbakur sem hentar einkar vel í daglegan innanbæjarakstur og styttri ferðir. Þótt bíllinn sé lipur og þægilegur við að leggja í bænum býður hann upp á meira notagildi en stærðin gefur til kynna.',
       'Helsti kostur hans er farangursrýmið, en skottið er stærra en hjá flestum í sínum verðflokki. Hann má einnig draga 750 kg kerru, sem er mikill kostur hér á landi þar sem margir smærri rafbílar mega alls ekkert draga.',
-      'Veikleikinn liggur hins vegar í rafhlöðunni. Hann drífur stutt, sem finnst sérstaklega vel í íslenskum vetrarkulda, og á langferðum hleður hann hægar en flestir. Ef þú ferðast mikið milli landshluta kemst BYD Dolphin 83 km lengra, eða þá að Hyundai IONIQ 3 Long Range leysir málið með 152 km meiri drægni og um 30% styttri hleðslustoppum.',
+      'Veikleikinn liggur hins vegar í rafhlöðunni. Hann drífur stutt, sem finnst sérstaklega vel í íslenskum vetrarkulda, og á langferðum hleður hann hægar en flestir. Fyrir þá sem ferðast mikið milli landshluta kemst BYD Dolphin 83 km lengra, eða þá að Hyundai IONIQ 3 Long Range leysir málið með 152 km meiri drægni og um 30% styttri hleðslustoppum.',
       'Fyrir þá sem leita að liprum og hagkvæmum bíl til daglegra nota með gott skott og kerrutengi er þessi útfærsla engu að síður afar fýsilegur kostur.',
     ],
     questions: [
@@ -934,7 +934,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hyundai IONIQ 3 Long Range er lítill hlaðbakur sem hentar vel þeim sem leita að liprum bíl í bæinn en þurfa jafnframt að geta lagt hiklaust í langferðir.',
       'Helsti kostur hans er drægnin, en hann drífur lengra en flestir á svipuðu verði. Það veitir gott öryggi í vetrarkulda og á lengri ferðalögum milli landshluta þar sem hleðslustöðvar eru strjálli. Einnig má hann draga létta kerru, sem er alls ekki sjálfgefið fyrir svo nettan bíl.',
       'Aðalágallinn er hve aflítill hann er, en hröðunin gerir hann að einum hægasta bílnum sem völ er á. Ef snerpa og kraftur skipta meira máli er Volkswagen ID.3 Neo 58 kWh 460.000 kr. ódýrari og mun sneggri, en sá má alls ekki draga kerru og hefur 56 l minna skott.',
-      'Ef þú leitar að hagkvæmum hlaðbak með góða drægni og möguleika á kerrudrætti er þetta mjög skynsamlegur kostur, svo framarlega sem mikil hröðun er ekki efst á óskalistanum.',
+      'Fyrir þá sem leita að hagkvæmum hlaðbak með góða drægni og möguleika á kerrudrætti er þetta mjög skynsamlegur kostur, svo framarlega sem mikil hröðun er ekki efst á óskalistanum.',
     ],
     questions: [
       'Af hverju er Standard Range sneggri?',
@@ -1020,7 +1020,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'hyundai-kona-electric-65-kwh': {
     paragraphs: [
       'Hyundai Kona Electric er nettur jepplingur sem hentar sérlega vel þeim sem vilja viðráðanlegan bíl í bæinn sem ræður samt vel við ferðalög. Hann nýtir stærð sína vel og kemur á óvart með góðu innanrými og skotti sem rúmar meira en flestir búast við af bíl í þessum stærðarflokki.',
-      'Helsti styrkleikinn er hve mikla drægni þú færð fyrir peninginn, en hann drífur lengra en flestir í sínum verðflokki. Það gefur mikið öryggi á milli landshluta og kemur í veg fyrir drægnikvíða, jafnvel í íslenskum vetrarkulda. Farangursrýmið er einnig stærra en hjá flestum sambærilegum bílum.',
+      'Helsti styrkleikinn er hve mikil drægni fæst fyrir peninginn, en hann drífur lengra en flestir í sínum verðflokki. Það gefur mikið öryggi á milli landshluta og kemur í veg fyrir drægnikvíða, jafnvel í íslenskum vetrarkulda. Farangursrýmið er einnig stærra en hjá flestum sambærilegum bílum.',
       'Á móti kemur að bíllinn hleður mjög hægt, svo hleðslustopp á langferðum geta tekið talsvert langan tíma. Hann er jafnframt framhjóladrifinn og má draga fremur lítið. Hafi fólk þörf fyrir meira pláss og dráttargetu býður Tesla Model Y Standard Range upp á margfalt stærra skott og styttri hleðslustopp fyrir lítið eitt hærra verð.',
       'Kona er afar hagkvæmur og drægnigóður kostur fyrir þá sem þurfa ekki fjórhjóladrif og eru tilbúnir að taka sér góðan tíma á hraðhleðslustöðvum.',
     ],
@@ -1347,7 +1347,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Kia EV9 er stór og veglegur lúxusjeppi sem býður upp á allt að sjö sæti og höfðar sérstaklega til stórra fjölskyldna. Hann sker sig úr fyrir kassalaga og framúrstefnulegt útlit, háa setstöðu og mikið rými fyrir farþega og farangur.',
       'Helsti styrkur bílsins felst í notagildi og burði. Skottið er mjög stórt, fjórhjóladrifið veitir nauðsynlegt grip í íslenskri vetrarfærð og bíllinn má draga 2.500 kg, sem er með því allra mesta sem býðst. Hann ræður því léttilega við þung hjólhýsi eða tjaldvagna.',
       'Helsti gallinn er að drægnin er meðal þeirra stystu í sínum verðflokki, sem krefst meiri aðgátar í vetrarferðum milli landshluta. Þar stendur Hyundai IONIQ 9 Long Range AWD til dæmis betur að vígi með 93 km meiri drægni og 80 l stærra skott á nánast sama verði.',
-      'Hann hentar ef þú þarft fullvaxinn sjö sæta bíl og dregur oft þungt.',
+      'Hann hentar þeim sem þurfa fullvaxinn sjö sæta bíl og draga oft þungt.',
     ],
     questions: [
       'Hvers vegna frekar en Hyundai IONIQ 9?',
@@ -1540,7 +1540,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'lexus-es-350e': {
     paragraphs: [
-      'Lexus ES 350e er stór og fágaður lúxusfólksbíll með skottloki og framhjóladrifi, rúmlega fimm metrar á lengd, sem setur þægindi, mýkt og hljóðláta ferð ofar afli. Hann hentar ef þú kannt að meta rótgróinn áreiðanleika Lexus og vilt afslappaðan langferðabíl.',
+      'Lexus ES 350e er stór og fágaður lúxusfólksbíll með skottloki og framhjóladrifi, rúmlega fimm metrar á lengd, sem setur þægindi, mýkt og hljóðláta ferð ofar afli. Hann hentar fólki sem kann að meta rótgróinn áreiðanleika Lexus og vill afslappaðan langferðabíl.',
       'Lexus ábyrgist rafhlöðuna í allt að 10 ár eða 1.000.000 km með reglulegu eftirliti hjá umboðinu, mun lengur en flestir aðrir framleiðendur, og vönduð fjöðrun og lágvær gangur gera ferðirnar ljúfar. Hann drífur líka fremur langt.',
       'Á móti kemur að hann er meðal þeirra aflminnstu og hægustu á svipuðu verði, hleður hægar en flestir keppinautar hans og má ekki draga kerru. Volvo ES90 Twin Motor er 1.800.000 kr. ódýrari, fjórhjóladrifinn, drífur 99 km lengra og hleðslustoppin eru um 40% styttri.',
       'ES 350e er fyrir þá sem setja ró, þægindi og langa ábyrgð í öndvegi.',
@@ -1649,8 +1649,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'lexus-tz-450e-standard-range': {
     paragraphs: [
       'Lexus TZ er stór jeppi með þrjár sætaraðir og sæti fyrir sex, fyrsti rafjeppi Lexus í þessari stærð. Hann er hugsaður sem rólegur og vandaður ferðabíll fyrir stóra fjölskyldu, ekki sportjeppi, og Standard Range er ódýrasta leiðin inn í hann.',
-      'Það sem þú borgar fyrir er fyrst og fremst merkið. Lexus er þekkt fyrir vandaða smíði, hljóðláta innréttingu og bíla sem bila lítið, og ef þú ætlar að eiga bílinn lengi vegur það þungt. Í tölunum sjálfum hefur hann hins vegar fáa styrkleika.',
-      'Drægnin er stærsti gallinn: hann drífur fremur stutt og er meðal þeirra sem drífa styst í sínum verðflokki, auk þess sem hann hleður fremur hægt. Vetrarferð út á land kallar því á meiri skipulagningu en þú vilt. Volvo EX90 Twin Motor er 2.100.000 kr. ódýrari, drífur 164 km lengra, tekur sjö og dregur 700 kg meira. Viltu samt TZ bætir Long Range úr drægninni, með 80 km meiri drægni fyrir 1.800.000 kr. meira.',
+      'Það sem kaupandinn borgar fyrir er fyrst og fremst merkið. Lexus er þekkt fyrir vandaða smíði, hljóðláta innréttingu og bíla sem bila lítið, og fyrir þá sem ætla að eiga bílinn lengi vegur það þungt. Í tölunum sjálfum hefur hann hins vegar fáa styrkleika.',
+      'Drægnin er stærsti gallinn: hann drífur fremur stutt og er meðal þeirra sem drífa styst í sínum verðflokki, auk þess sem hann hleður fremur hægt. Vetrarferð út á land kallar því á meiri skipulagningu en flestir kæra sig um. Volvo EX90 Twin Motor er 2.100.000 kr. ódýrari, drífur 164 km lengra, tekur sjö og dregur 700 kg meira. Fyrir þá sem vilja samt TZ bætir Long Range úr drægninni, með 80 km meiri drægni fyrir 1.800.000 kr. meira.',
       'Vandaður fjölskyldujeppi, en sem rafbíll er erfitt að réttlæta verðið.',
     ],
     questions: [
@@ -1672,7 +1672,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Lexus TZ 450e Long Range er stór sex sæta jeppi með þrjár sætaraðir, og sú útfærsla TZ sem drífur lengst. Hann er gerður fyrir fjölskyldur sem vilja þægilegan og hljóðlátan ferðabíl og leggja meira upp úr þægindum en snerpu.',
       'Merkið er helsta aðdráttaraflið. Lexus hefur lengi verið með þeim áreiðanlegustu í lúxusflokki, og það skiptir máli í bíl sem á að endast fjölskyldunni í mörg ár. Drægnin er í meðallagi, sem dugar í flestar ferðir milli landshluta, en það er ekki þar sem hann sker sig úr.',
       'Hann drífur samt styttra en flestir á svipuðu verði, hleður fremur hægt og dregur minna en flestir keppinautar hans. Volvo EX90 Twin Motor Performance er augljós samanburður: 3.100.000 kr. ódýrari, 78 km meiri drægni, 2,4 s sneggri og 700 kg meiri dráttargeta, og hann tekur sjö en ekki sex. Það er erfitt að horfa fram hjá því.',
-      'Skiptir Lexus-merkið þig máli er þetta skynsamasta TZ-útfærslan, en annars færðu meira fyrir minna annars staðar.',
+      'Skipti Lexus-merkið máli er þetta skynsamasta TZ-útfærslan, en annars fæst meira fyrir minna annars staðar.',
     ],
     questions: [
       'Er hann betri kaup en Standard Range?',
@@ -1692,8 +1692,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Lexus TZ 550e er aflmesta útfærslan af stóra Lexus-jeppanum, með þrjár sætaraðir og sæti fyrir sex. Hann er fyrir þá sem vilja vandaðan lúxusjeppa fyrir fjölskylduna en vilja ekki gefa eftir í viðbragði.',
       'Hann er fremur snöggur og aflmikill, þótt flestir á svipuðu verði séu sneggri, svo hann tekur vel við sér þó hann sé fullur af fólki og farangri. Svo er það merkið: Lexus stendur fyrir vandaða smíði, hljóðláta innréttingu og góða endingu.',
-      'Gallinn er að hann drífur fremur stutt og er meðal þeirra sem drífa styst í sínum verðflokki, hleður fremur hægt og dregur minna en flestir keppinautar hans. TZ 450e Long Range drífur 50 km lengra og er 1.800.000 kr. ódýrari, og snerpan sem þú missir skiptir litlu í fjölskyldubíl. Volvo EX90 Twin Motor Performance er 4.900.000 kr. ódýrari, drífur 128 km lengra og er 1 s sneggri.',
-      'Dýrasta TZ-útfærslan gefur þér mest afl en minnst fyrir peninginn.',
+      'Gallinn er að hann drífur fremur stutt og er meðal þeirra sem drífa styst í sínum verðflokki, hleður fremur hægt og dregur minna en flestir keppinautar hans. TZ 450e Long Range drífur 50 km lengra og er 1.800.000 kr. ódýrari, og snerpan sem tapast skiptir litlu í fjölskyldubíl. Volvo EX90 Twin Motor Performance er 4.900.000 kr. ódýrari, drífur 128 km lengra og er 1 s sneggri.',
+      'Dýrasta TZ-útfærslan gefur mest afl en minnst fyrir peninginn.',
     ],
     questions: [
       'Munar mikið um aflið miðað við 450e?',
@@ -1844,7 +1844,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'mercedes-benz-cla-amg-45-4matic': {
     paragraphs: [
       'Mercedes-Benz CLA AMG 45 4MATIC+ er stór stallbakur sem leggur allt undir í afkastagetu. Bíllinn er sneggstur allra á svipuðu verði og hentar þeim sem leita að aksturseiginleikum ofurbíls ásamt fáguðum lúxus og nýjustu tækni þýska framleiðandans.',
-      'Drægnin er mjög mikil og dugar áreynslulaust á milli landshluta allan ársins hring, auk þess sem hann hleður hraðar en flestir keppinautar. Fjórhjóladrifið veitir mikið öryggi og grip í snjó og hálku, og þótt bíllinn sé fremur dýr færðu fleiri kílómetra drægni fyrir hverja krónu en gengur og gerist hjá öðrum jafn öflugum bílum.',
+      'Drægnin er mjög mikil og dugar áreynslulaust á milli landshluta allan ársins hring, auk þess sem hann hleður hraðar en flestir keppinautar. Fjórhjóladrifið veitir mikið öryggi og grip í snjó og hálku, og þótt bíllinn sé fremur dýr fást fleiri kílómetrar drægni fyrir hverja krónu en gengur og gerist hjá öðrum jafn öflugum bílum.',
       'Fórnarkostnaðurinn snýr að notagildinu. Bíllinn tekur aðeins fjóra í sæti, skottið er undir meðallagi og hann má alls ekki draga kerru. Ef hversdagsleg þægindi vega þyngra er CLA 350 4MATIC mun hagkvæmari kostur sem drífur enn lengra, býður fimm sæti og ríflega dráttargetu.',
       'Þessi útfærsla er því fyrst og fremst hugsuð fyrir áhugafólk um akstur sem setur hröðun og aflið fram yfir hefðbundnar fjölskylduþarfir.',
     ],
@@ -1865,10 +1865,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'mercedes-benz-amg-gt-53-4matic': {
     paragraphs: [
-      'Mercedes-AMG GT 53 4MATIC+ er lágur og langur fjögurra dyra hlaðbakur í lúxusflokki með fjórhjóladrifi, inngangurinn í rafmagnaða AMG GT-línuna. Hann er fyrir þig sem vilt sportlegan GT-bíl sem fer líka létt með langferðir.',
-      'Drægnin er með því mesta í hans verðflokki, svo Akureyri á einni hleðslu er raunhæf, líka um hávetur. Þegar þú stoppar hleður hann hraðast bíla á svipuðu verði, og miðað við þá færðu flesta km fyrir krónuna. Hann er líka hörkusnöggur, þó flestir keppinautar hans séu sneggri.',
+      'Mercedes-AMG GT 53 4MATIC+ er lágur og langur fjögurra dyra hlaðbakur í lúxusflokki með fjórhjóladrifi, inngangurinn í rafmagnaða AMG GT-línuna. Hann er fyrir fólk sem vill sportlegan GT-bíl sem fer líka létt með langferðir.',
+      'Drægnin er með því mesta í hans verðflokki, svo Akureyri á einni hleðslu er raunhæf, líka um hávetur. Þegar stoppa þarf hleður hann hraðast bíla á svipuðu verði, og miðað við þá fást flestir km fyrir krónuna. Hann er líka hörkusnöggur, þó flestir keppinautar hans séu sneggri.',
       'Á móti kemur að skottið er með þeim minnstu á þessu verði og hann má ekki draga kerru. Mercedes-Benz EQS 580 4MATIC er 3.500.000 kr. dýrari, en með 154 l stærra skott og má draga allt að 1.700 kg, þó hleðslustoppin séu um 65% lengri. Porsche Taycan 4S Plus er 3.500.000 kr. ódýrari og 0,2 s sneggri, en drífur 252 km styttra.',
-      'GT 53 er fyrir þig sem vilt AMG-akstur án þess að fórna drægninni.',
+      'GT 53 er fyrir fólk sem vill AMG-akstur án þess að fórna drægninni.',
     ],
     facts: '039bf6b85a00',
     questions: [
@@ -1886,9 +1886,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'mercedes-benz-amg-gt-55-4matic': {
     paragraphs: [
-      'Mercedes-AMG GT 55 4MATIC+ er lágur fjögurra dyra hlaðbakur í lúxusflokki með þremur rafmótorum og fjórhjóladrifi, miðjan í AMG GT-línunni. Hann er fyrir þig sem vilt ofursportbílasnerpu í bíl sem tekur fimm.',
+      'Mercedes-AMG GT 55 4MATIC+ er lágur fjögurra dyra hlaðbakur í lúxusflokki með þremur rafmótorum og fjórhjóladrifi, miðjan í AMG GT-línunni. Hann er fyrir fólk sem vill ofursportbílasnerpu í bíl sem tekur fimm.',
       'Miðað við aðra í sínum verðflokki drífur hann með þeim lengstu og hleður hraðast, svo ferð út á land kallar á fá og stutt stopp. Hann er líka sneggri og aflmeiri en flestir keppinautar hans.',
-      'Gallarnir eru að skottið er eitt það minnsta á þessu verði og hann má ekki draga kerru. Mercedes-Benz EQS 580 4MATIC er 3.500.000 kr. ódýrari, drífur 169 km lengra, með 154 l stærra skott og má draga allt að 1.700 kg, en er 1,3 s hægari. Og Mercedes-Benz AMG GT 53 4MATIC+ sparar þér 7.000.000 kr. og drífur 109 km lengra, en er 1,1 s hægari.',
+      'Gallarnir eru að skottið er eitt það minnsta á þessu verði og hann má ekki draga kerru. Mercedes-Benz EQS 580 4MATIC er 3.500.000 kr. ódýrari, drífur 169 km lengra, með 154 l stærra skott og má draga allt að 1.700 kg, en er 1,3 s hægari. Og Mercedes-Benz AMG GT 53 4MATIC+ sparar 7.000.000 kr. og drífur 109 km lengra, en er 1,1 s hægari.',
       'GT 55 er hraðskreiður ferðabíll sem fórnar fáu nema skotti og krók.',
     ],
     facts: 'bc9171fa67e3',
@@ -1907,10 +1907,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'mercedes-benz-amg-gt-63-4matic': {
     paragraphs: [
-      'Mercedes-AMG GT 63 4MATIC+ er flaggskip AMG GT-línunnar, lágur fjögurra dyra hlaðbakur í lúxusflokki með fjórhjóladrifi. Hann er aflmestur og sneggstur allra rafbíla á listanum, fyrir þig sem vilt það allra mesta.',
+      'Mercedes-AMG GT 63 4MATIC+ er flaggskip AMG GT-línunnar, lágur fjögurra dyra hlaðbakur í lúxusflokki með fjórhjóladrifi. Hann er aflmestur og sneggstur allra rafbíla á listanum, fyrir fólk sem vill það allra mesta.',
       'Hann hleður líka hraðast allra, svo stoppin á langferð verða stutt, og drægnin er mikil, nóg til að fara á milli landshluta um hávetur án þess að hugsa mikið um það.',
       'Á móti kemur að hann er mjög dýr, skottið er fremur lítið og hann má ekki draga kerru. Mercedes-Benz AMG GT 55 4MATIC+ er 6.000.000 kr. ódýrari og aðeins 0,4 s hægari, en hleðslustoppin eru um 45% lengri. Polestar 5 Performance er 16.000.000 kr. ódýrari og má draga allt að 1.800 kg, en er 0,8 s hægari og stoppin um 150% lengri.',
-      'GT 63 er fyrir þig sem vilt hraðskreiðasta rafbílinn hér og spyrð ekki um verðið.',
+      'GT 63 er fyrir fólk sem vill hraðskreiðasta rafbílinn hér og spyr ekki um verðið.',
     ],
     facts: 'ada71436d9f0',
     questions: [
@@ -1950,10 +1950,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'mercedes-benz-gla-350-4matic': {
     paragraphs: [
-      'Mercedes-Benz GLA 350 4MATIC er nettur fimm sæta jepplingur með fjórhjóladrifi og lúxusyfirbragði Mercedes, fyrir þig sem vilt komast langt á hleðslunni án þess að fara í stærri bíl.',
+      'Mercedes-Benz GLA 350 4MATIC er nettur fimm sæta jepplingur með fjórhjóladrifi og lúxusyfirbragði Mercedes, fyrir fólk sem vill komast langt á hleðslunni án þess að fara í stærri bíl.',
       'Drægnin er það sem hann gerir best: hann er meðal þeirra langdrægustu á sínu verði og hleður með þeim hraðasta, svo ferðir milli landshluta kalla á fá og stutt stopp, líka í vetrarkulda. Hann má líka draga 2.000 kg, sem dugar fyrir flest hjólhýsi.',
-      'Skottið er hins vegar minna en hjá flestum á svipuðu verði. Vanti þig pláss er Tesla Model Y Performance 60.000 kr. ódýrari með 454 l stærra skott, en drífur 63 km styttra og stoppin eru um 80% lengri. BMW iX3 40 kostar 500.000 kr. meira og er með 61 l stærra skott, en er aðeins afturhjóladrifinn.',
-      'GLA er lipur langferðabíll með krók sem munar um, ef þú kemst af með minna skott.',
+      'Skottið er hins vegar minna en hjá flestum á svipuðu verði. Vanti meira pláss er Tesla Model Y Performance 60.000 kr. ódýrari með 454 l stærra skott, en drífur 63 km styttra og stoppin eru um 80% lengri. BMW iX3 40 kostar 500.000 kr. meira og er með 61 l stærra skott, en er aðeins afturhjóladrifinn.',
+      'GLA er lipur langferðabíll með krók sem munar um, fyrir þá sem komast af með minna skott.',
     ],
     facts: 'f5b7b44a85ca',
     questions: [
@@ -1973,7 +1973,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Mercedes-Benz GLB 350 4MATIC EQ er meðalstór jepplingur sem býður upp á allt að sjö sæti og þægilegan lúxus. Hann sameinar lipra stærð í innanbæjarakstri og góða nýtingu fyrir fjölskyldur sem þurfa auka sæti af og til án þess að aka um á risajeppa.',
       'Bíllinn stendur sérstaklega vel að vígi í ferðalögum milli landshluta. Hann drífur lengra en flestir í sínum verðflokki og er meðal þeirra sem hlaða hraðast, sem styttir viðkomur á hleðslustöðvum í vetrarkulda til muna. Fjórhjóladrifið gefur öruggt grip í snjó og hálku, dráttargetan dugar vel fyrir stærri kerrur og hjólhýsi og óvenju rúmgott framskottið nýtist sérlega vel undir hleðslusnúrur og farangur.',
-      'Helsti veikleikinn liggur í skottplássinu. Þar sem bíllinn er tiltölulega nettur er hefðbundið farangursrými mun minna en hjá öðrum sjö sæta valkostum. Ef flutningsgetan skiptir öllu máli færðu miklu stærra skott í Skoda Peaq 90x á lægra verði, en þarft á móti að sætta þig við talsvert lengri hleðslustopp á ferðalögum.',
+      'Helsti veikleikinn liggur í skottplássinu. Þar sem bíllinn er tiltölulega nettur er hefðbundið farangursrými mun minna en hjá öðrum sjö sæta valkostum. Ef flutningsgetan skiptir öllu máli er miklu stærra skott í Skoda Peaq 90x á lægra verði, en á móti eru hleðslustoppin talsvert lengri á ferðalögum.',
       'Fyrir þá sem vilja vandaðan gæðabíl með framúrskarandi hleðslugetu og mikla drægni er GLB sérlega heildstæður kostur.',
     ],
     questions: [
@@ -1995,7 +1995,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Mercedes-Benz GLC 300 4MATIC er stór lúxusjepplingur sem sameinar ríkuleg þægindi, mikið afl og öruggt grip með fjórhjóladrifi. Hann hentar einkar vel fyrir kröfuharðar fjölskyldur sem vilja fágaðan ferðabíl sem drífur léttilega á milli landshluta og lætur íslenska vetrarfærð ekki á sig fá.',
       'Bíllinn sker sig sérstaklega úr í flutningsgetu miðað við aðra í sínum verðflokki. Farangursrýmið er með stærra móti, auk þess sem hann hefur mjög rúmgott framskott, og má draga mjög þungt eða allt að 2.400 kg sem dugar fyrir stærstu hjólhýsi. Þá er hann sneggri upp á hundraðið en flestir keppinautarnir.',
-      'Helsti gallinn er verðið, en sambærilegir bílar eins og Volvo EX60 P10 og Audi Q6 e-tron kosta um milljón krónum minna og þurfa styttri hleðslustopp á ferðalögum. Stærsta samkeppnin kemur þó frá hans eigin búðum: fyrir aðeins 400.000 kr. meira færðu Mercedes-Benz GLC 400 4MATIC, sem bætir við 102 km meiri drægni og tekur um 20% styttri hleðslustopp, sem gerir þá útfærslu að mun betri kaupum.',
+      'Helsti gallinn er verðið, en sambærilegir bílar eins og Volvo EX60 P10 og Audi Q6 e-tron kosta um milljón krónum minna og þurfa styttri hleðslustopp á ferðalögum. Stærsta samkeppnin kemur þó frá hans eigin búðum: fyrir aðeins 400.000 kr. meira fæst Mercedes-Benz GLC 400 4MATIC, sem bætir við 102 km meiri drægni og tekur um 20% styttri hleðslustopp, sem gerir þá útfærslu að mun betri kaupum.',
     ],
     questions: [
       'Borgar sig að velja GLC 400 frekar?',
@@ -2148,7 +2148,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Mercedes-Benz VLE 300 er stór, lúxusgerður fjölnotabíll með sæti fyrir allt að sjö manns. Hann er sérsniðinn fyrir stórar fjölskyldur eða fyrirtæki í fólksflutningum sem vilja fágaðan ferðabíl með óvenju miklu rými fyrir farþega.',
       'Helsti styrkleiki bílsins er drægnin, sem er með því allra mesta sem gerist á markaðnum og sérstaklega óvenjuleg fyrir svo stóran bíl. Hún dugar léttilega á milli landshluta án hleðslustopps, jafnvel í nístingskulda á veturna. Miðað við aðra bíla á svipuðu verði fær maður líka óvenju mikið af kílómetrum fyrir hverja krónu, þótt verðmiðinn sé vissulega hár.',
       'Aðalveikleikinn felst í því að bíllinn er aðeins framhjóladrifinn og meðal þeirra hægustu og aflminnstu í sínum verðflokki, sem getur verið hvimleitt á þungum bíl í vetrarfærð eða bröttum brekkum. Fyrir þá sem aka mikið í snjó og hálku kemur VLE 400 4MATIC sterklega til greina, en sú útfærsla bætir við fjórhjóladrifi og umtalsvert meira afli gegn aðeins hærra verði.',
-      'Þetta er fágaður og þægilegur langferðabíll fyrir marga, svo lengi sem framhjóladrif dugar þér.',
+      'Þetta er fágaður og þægilegur langferðabíll fyrir marga, svo lengi sem framhjóladrif dugar.',
     ],
     questions: [
       'Borgar sig að taka frekar 400 4MATIC?',
@@ -2169,7 +2169,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Mercedes-Benz VLE 400 4MATIC er stór lúxusfjölnotabíll með sæti fyrir allt að sjö manns, hannaður fyrir þá sem þurfa mikið farþegarými og hámarksþægindi í senn. Hann sameinar kosti stórs fjölskyldubíls og þann fágaða frágang sem einkennir merkið.',
       'Helsti styrkur hans felst í óvenju mikilli drægni, enda er hann meðal þeirra allra langdrægustu í sínum verðflokki. Fjórhjóladrifið kemur sér sérlega vel í íslenskri vetrarfærð, og með þessa drægni dugar hann áreynslulaust milli landshluta í frosti og vosbúð án þess að krefjast tíðra viðkomu á hleðslustöðvum.',
-      'Á móti kemur að bíllinn er mjög dýr og gefur töluvert eftir í snerpu og afli miðað við flesta keppinauta hans. Ef þú vilt frekar snarpan jeppa en rúmgóðan fjölnotabíl er sjö sæta Kia EV9 GT mun sneggri og ódýrari, en drífur talsvert styttra.',
+      'Á móti kemur að bíllinn er mjög dýr og gefur töluvert eftir í snerpu og afli miðað við flesta keppinauta hans. Fyrir þá sem vilja frekar snarpan jeppa en rúmgóðan fjölnotabíl er sjö sæta Kia EV9 GT mun sneggri og ódýrari, en drífur talsvert styttra.',
       'Fyrir þá sem þurfa fyrsta flokks rými fyrir stóra fjölskyldu eða hópferðir og vilja komast nánast hvert á land sem er á einni hleðslu er þessi bíll afar sannfærandi.',
     ],
     questions: [
@@ -2299,8 +2299,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'MG MGS5 Comfort er fimm sæta jepplingur sem höfðar fyrst og fremst til þeirra sem leita að nýjum bíl á sem lægstu verði. Hann hentar sérstaklega vel til daglegra erinda og styttri ferða innanbæjar.',
       'Verðið er hans stærsti styrkur, enda er hann með allra ódýrustu bílunum á markaðnum. Vélarafl og hröðun eru í ágætu meðallagi miðað við aðra í sínum verðflokki, sem dugar áreynslulaust í venjulegri umferð.',
-      'Á móti kemur að hann drífur mjög stutt og hleður hægar en flestir keppinautar, sem kemur niður á honum á langferðum og í vetrarkulda. Hér borgar sig að skoða MG MGS5 LUX, sem kostar 400.000 kr. meira en bætir við 125 km drægni og býður um 20% styttri hleðslustopp. Eins færðu með Leapmotor B10 Design heilum 94 km meiri drægni og um 30% styttri hleðslustopp fyrir aðeins 200.000 kr. viðbót.',
-      'Þessi útfærsla hentar prýðilega sem ódýr bæjarbíll, en fyrir reglulegan akstur á milli landshluta færðu mun meira fyrir peninginn með því að leggja aðeins meira undir.',
+      'Á móti kemur að hann drífur mjög stutt og hleður hægar en flestir keppinautar, sem kemur niður á honum á langferðum og í vetrarkulda. Hér borgar sig að skoða MG MGS5 LUX, sem kostar 400.000 kr. meira en bætir við 125 km drægni og býður um 20% styttri hleðslustopp. Eins býður Leapmotor B10 Design heilum 94 km meiri drægni og um 30% styttri hleðslustopp fyrir aðeins 200.000 kr. viðbót.',
+      'Þessi útfærsla hentar prýðilega sem ódýr bæjarbíll, en fyrir reglulegan akstur á milli landshluta fæst mun meira fyrir peninginn með því að leggja aðeins meira undir.',
     ],
     questions: [
       'Borgar LUX-útfærslan sig frekar?',
@@ -2365,7 +2365,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Mini Aceman E er lítill og nettur jepplingur með líflegri hönnun Mini, fyrir þá sem vilja persónulegan og lipran bæjarbíl með fimm sætum.',
       'Hann er auðveldur í þröngum stæðum og fremur ódýr, og vandaður frágangur og sérstæð innrétting gera hann eftirminnilegri en flesta smábíla. Hann má líka draga 750 kg, sem Fiat 600e má ekki.',
       'Á móti kemur að hann drífur mjög stutt, sérstaklega í vetrarkulda, er meðal þeirra sem hlaða hægast í sínum verðflokki og skottið er eitt það minnsta. Volvo EX30 Single Motor Extended Range kostar aðeins 100.000 kr. meira, drífur 165 km lengra og hleðslustoppin eru um 35% styttri.',
-      'Aceman E er heillandi bæjarbíll, en síður heppilegur ef þú ferð reglulega á milli landshluta.',
+      'Aceman E er heillandi bæjarbíll, en síður heppilegur fyrir þá sem fara reglulega á milli landshluta.',
     ],
     questions: [
       'Borgar sig að taka Aceman SE útfærsluna?',
@@ -2383,10 +2383,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'mini-cooper-se': {
     paragraphs: [
-      'Mini Cooper SE er lítill og lipur þriggja dyra hlaðbakur með framhjóladrifi og fjórum sætum, með sterkan svip og go-kart tilfinninguna sem Mini er þekktur fyrir. Hann er fyrir þig sem vilt skemmtilegan bæjarbíl og lætur stílinn ráða.',
+      'Mini Cooper SE er lítill og lipur þriggja dyra hlaðbakur með framhjóladrifi og fjórum sætum, með sterkan svip og go-kart tilfinninguna sem Mini er þekktur fyrir. Hann er fyrir fólk sem vill skemmtilegan bæjarbíl og lætur stílinn ráða.',
       'Hann er sneggri en flestir á svipuðu verði, og smæðin gerir hann auðveldan í þröngum stæðum og borgarumferð. Drægnin dugar vel í daglegt snatt.',
       'Á móti kemur að hann drífur styttra og hleður hægar en flestir í sínum verðflokki, skottið er með þeim minnstu og hann má ekki draga kerru. Renault R5 E-Tech 52 kWh er 1.000.000 kr. ódýrari kostur í sama anda, drífur álíka langt og er með 126 l stærra skott, en er 1,3 s hægari í hundraðið.',
-      'Cooper SE velurðu með hjartanu, frekar en sem eina bíl heimilisins.',
+      'Cooper SE er valinn með hjartanu, frekar en sem eini bíll heimilisins.',
     ],
     facts: '1507717658a8',
     questions: [
@@ -2402,10 +2402,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'mini-countryman-e': {
     paragraphs: [
-      'Mini Countryman E er stærsti Mini sem hefur verið smíðaður, framhjóladrifinn jepplingur af meðalstærð með hringlaga skjánum og glaðlegri hönnun merkisins að innan. Hann er fyrir þig sem fellur fyrir stílnum en þarft meira pláss en í litlu Mini-bílunum.',
-      'Í tölunum er fátt sem stendur upp úr, því hann er hvorki langdrægur né snöggur. Það sem þú færð umfram keppinautana er karakterinn, vönduð innréttingin og lipur akstur.',
+      'Mini Countryman E er stærsti Mini sem hefur verið smíðaður, framhjóladrifinn jepplingur af meðalstærð með hringlaga skjánum og glaðlegri hönnun merkisins að innan. Hann er fyrir fólk sem fellur fyrir stílnum en þarf meira pláss en í litlu Mini-bílunum.',
+      'Í tölunum er fátt sem stendur upp úr, því hann er hvorki langdrægur né snöggur. Það sem hann hefur umfram keppinautana er karakterinn, vönduð innréttingin og lipur akstur.',
       'Hann er meðal þeirra hægustu á svipuðu verði, hleður hægar en flestir og má draga fremur lítið. Kia EV5 er aðeins 780 kr. dýrari en drífur 68 km lengra, með 150 l stærra skott og um 15% styttri hleðslustopp. BMW iX1 eDrive 20 er byggður á sama grunni og er 1.100.000 kr. ódýrari.',
-      'Þú velur hann með hjartanu. Með höfðinu velurðu Kia EV5.',
+      'Hann er valinn með hjartanu. Með höfðinu yrði Kia EV5 fyrir valinu.',
     ],
     questions: [
       'Borgar sig að taka frekar SE 4x4?',
@@ -2423,7 +2423,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'mini-countryman-se-4x4': {
     paragraphs: [
-      'Mini Countryman SE 4x4 er meðalstór jepplingur með ríkan persónuleika, sem sameinar sérkenni Mini og þægindi hærri bíls. Hann hentar ef þú vilt skemmtilegan og áberandi bíl til daglegra nota.',
+      'Mini Countryman SE 4x4 er meðalstór jepplingur með ríkan persónuleika, sem sameinar sérkenni Mini og þægindi hærri bíls. Hann hentar þeim sem vilja skemmtilegan og áberandi bíl til daglegra nota.',
       'Fjórhjóladrifið og lipur hröðun gera hann öruggan í vetrarfærð og á hálum vegum, og innanrýmið er vel heppnað, með hringlaga skjánum sem setur svip á bílinn.',
       'Helsti gallinn kemur fram á langferðum: hann drífur fremur stutt og hleður hægar en flestir keppinautar í sínum verðflokki, sem lengir hleðslustoppin utan höfuðborgarsvæðisins. Skottið er líka minna og hann dregur minna en flestir. Ef krókurinn skiptir máli má Mercedes-Benz EQA SUV 300 4MATIC draga 600 kg meira á sama verði, þótt skottið í honum sé 120 l minna.',
       'Countryman SE er fyrst og fremst hönnunar- og lífsstílsbíll fyrir þá sem meta akstursgleði og útlit meira en drægni á hverja krónu.',
@@ -2929,7 +2929,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Porsche Taycan Plus er stór lúxusfólksbíll með skottloki, sniðinn fyrir þá sem leita að sportlegum aksturseiginleikum og mikilli fágun. Þetta er lágur og rennilegur bíll sem leggur meiri áherslu á akstursánægju en hefðbundið nytjagildi.',
       'Helsti styrkur hans er afbragðs samspil drægni og hleðsluhraða. Hann drífur lengra en flestir á svipuðu verði, sem þýðir að ferðalög milli landshluta eru auðveld jafnvel í vetrarkulda. Á lengri ferðum hleður hann jafnframt meðal þeirra allra hröðustu, sem gerir hleðslustopp óvenju stutt.',
       'Stærstu málamiðlanirnar snúa að íslenskum aðstæðum. Hann er eingöngu afturhjóladrifinn, sem gefur eftir í snjó og hálku, skottið er minna en hjá flestum keppinautum og hann má alls ekki draga kerru. Ef dráttargeta er mikilvæg má nefna BMW i4 M60 xDrive sem býður upp á fjórhjóladrif og 1.600 kg dráttargetu, þótt hann fórni mikilli drægni og hlaði mun hægar. Sé óskað eftir betra vetrargripi í sama yfirbragði leysir útfærslan Taycan 4 Plus það með fjórhjóladrifi.',
-      'Taycan Plus er glæsilegur ferðabíll fyrir þá sem vilja hámarksdrægni og sneggstu hleðsluna, svo lengi sem afturhjóladrifið og kerrubannið henta þínum þörfum.',
+      'Taycan Plus er glæsilegur ferðabíll fyrir þá sem vilja hámarksdrægni og sneggstu hleðsluna, svo lengi sem afturhjóladrifið og kerrubannið eru engin fyrirstaða.',
     ],
     questions: [
       'Borgar sig að taka Taycan 4 Plus?',
@@ -3038,7 +3038,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Porsche Cayenne er stór lúxusjeppi sem sameinar mikil afköst, fjórhjóladrif og rótgróna aksturseiginleika merkisins. Hann hentar þeim sem gera strangar kröfur um rými og getu við íslenskar aðstæður, jafnt í vetrarfærð sem á langferðum.',
       'Drægnin dugar léttilega á milli landshluta í vetrarkulda, og bíllinn er meðal þeirra allra fljótustu að hraðhlaða svo stopp á ferðalögum verða vart styttri. Hann skarar sérstaklega fram úr með risavöxnu farangursrými og getu til að draga allt að 3.000 kg, sem er fátítt meðal rafbíla og gerir hann fullkominn fyrir stór hjólhýsi eða kerrur.',
-      'Helsti veikleikinn er að miðað við aðra í sínum verðflokki eru aflið og hröðunin aðeins í meðallagi, þótt bíllinn sé vissulega snöggur. Viljir þú komast enn lengra á hleðslunni kemur BMW iX5 60 xDrive til greina: hann er 540.000 kr. dýrari en drífur 203 km lengra, þótt skottið sé 163 l minna og hann dragi 300 kg minna.',
+      'Helsti veikleikinn er að miðað við aðra í sínum verðflokki eru aflið og hröðunin aðeins í meðallagi, þótt bíllinn sé vissulega snöggur. Fyrir þá sem vilja komast enn lengra á hleðslunni kemur BMW iX5 60 xDrive til greina: hann er 540.000 kr. dýrari en drífur 203 km lengra, þótt skottið sé 163 l minna og hann dragi 300 kg minna.',
       'Cayenne er heilsteyptur og afar öflugur ferðajeppi þar sem ekkert er gefið eftir í notagildi.',
     ],
     questions: [
@@ -3165,7 +3165,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'range-rover-electric-ev450': {
     paragraphs: [
-      'Range Rover Electric EV450 er stór lúxusjeppi sem færir hefðbundna fágun merkisins yfir í rafmagnið. Hann hentar ef þú leitar að rólegri og þægilegri akstursupplifun og traustri nærveru á veginum frekar en ærandi afli.',
+      'Range Rover Electric EV450 er stór lúxusjeppi sem færir hefðbundna fágun merkisins yfir í rafmagnið. Hann hentar þeim sem leita að rólegri og þægilegri akstursupplifun og traustri nærveru á veginum frekar en ærandi afli.',
       'Stærsti styrkleiki hans í daglegu lífi er plássið, en skottið er stærra en hjá flestum keppinautum. Hann má draga 2.500 kg, og þótt drægnin sé styttri en hjá flestum á svipuðu verði drífur hann fremur langt og dugar vel í langferðir milli landshluta.',
       'Helsti galli bílsins er að hann er meðal þeirra hægustu og aflminnstu í sínum verðflokki. Range Rover Sport Electric EV550 er 3.700.000 kr. ódýrari og 1,1 s sneggri í 0-100 km/klst, þótt skottið sé 106 l minna, og Porsche Cayenne Turbo er 3,1 s sneggri og með 104 l stærra skott.',
       'Þetta er virðulegur lúxusferðabíll sem leggur áherslu á rólegheit, rými og þægindi fram yfir hraða.',
@@ -3207,7 +3207,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'range-rover-sport-electric-ev450': {
     paragraphs: [
-      'Range Rover Sport Electric EV450 er stór lúxusjeppi, lægri og sportlegri en stóri bróðirinn og fyrsti Sportinn sem gengur eingöngu fyrir rafmagni. Hann hentar ef þú vilt yfirvegaðan og virðulegan jeppa sem kemst líka út fyrir malbikið.',
+      'Range Rover Sport Electric EV450 er stór lúxusjeppi, lægri og sportlegri en stóri bróðirinn og fyrsti Sportinn sem gengur eingöngu fyrir rafmagni. Hann hentar þeim sem vilja yfirvegaðan og virðulegan jeppa sem kemst líka út fyrir malbikið.',
       'Plássið og krókurinn eru hans sterkustu hliðar: skottið er stærra og hann dregur meira en flestir á svipuðu verði, svo hjólhýsið eða hestakerran fylgir með án vandræða. Og Range Rover-nafnið stendur enn fyrir sitt þegar vegurinn breytist í slóða.',
       'Á móti kemur að hann er meðal þeirra hægustu og drífur styttra og hleður hægar en flestir keppinautar hans. Porsche Cayenne S kostar aðeins 60.000 kr. meira, drífur 53 km lengra, er 1,8 s sneggri í 0-100 km/klst, hleðslustoppin eru um 35% styttri og skottið 244 l stærra. Það er erfitt að horfa fram hjá því.',
       'Sport Electric EV450 er fyrir þann sem vill Range Rover og er tilbúinn að borga fyrir merkið.',
@@ -3226,7 +3226,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'range-rover-sport-electric-ev550': {
     paragraphs: [
-      'Range Rover Sport Electric EV550 er aflmeiri útgáfa rafmagnaða Sportsins, stór lúxusjeppi sem er lægri og sportlegri en stóri Range Roverinn. Hann hentar ef þú vilt virðulegan jeppa sem á líka nóg inni þegar þú stígur á gjöfina.',
+      'Range Rover Sport Electric EV550 er aflmeiri útgáfa rafmagnaða Sportsins, stór lúxusjeppi sem er lægri og sportlegri en stóri Range Roverinn. Hann hentar þeim sem vilja virðulegan jeppa sem á líka nóg inni þegar stigið er á gjöfina.',
       'Skottið er stærra og krókurinn ber meira en hjá flestum á svipuðu verði, svo kerran eða hjólhýsið fylgir með. Hann er fremur snöggur, þótt flestir keppinautar hans séu enn sneggri.',
       'Gallarnir eru að hann drífur styttra og hleður hægar en flestir þeirra. Porsche Cayenne Turbo kostar 3.100.000 kr. meira en er 2 s sneggri í 0-100 km/klst, með um 30% styttri hleðslustopp og 210 l stærra skott. Og ef snerpan skiptir ekki öllu sparar Range Rover Sport Electric EV450 3.000.000 kr. með sömu drægni og sama skotti.',
       'EV550 er fyrir þann sem vill Range Rover með aukakrafti, en EV450 gefur flestum það sem skiptir máli.',
@@ -3245,9 +3245,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'renault-r4-e-tech-base': {
     paragraphs: [
-      'Renault R4 E-Tech er lítill jepplingur í áberandi retróstíl sem sækir innblástur í sögu merkisins. Hann er hannaður sem lipur borgarbíll með örlítið hærri setustöðu en hefðbundinn smábíll, og hentar ef þú vilt persónulegan og handhægan bíl í daglega snattið.',
+      'Renault R4 E-Tech er lítill jepplingur í áberandi retróstíl sem sækir innblástur í sögu merkisins. Hann er hannaður sem lipur borgarbíll með örlítið hærri setustöðu en hefðbundinn smábíll, og hentar fólki sem vill persónulegan og handhægan bíl í daglega snattið.',
       'Stærsti kosturinn er kaupverðið, enda er hann með allra ódýrustu rafbílum á landinu. Uppgefin drægni dugar leikandi í allan daglegan snattakstur og hóflegar ferðir yfir sumarið, þótt reikna verði með að hún dragist saman í íslenskum vetrarkulda.',
-      'Helsti gallinn er að hann hleður fremur hægt á hraðhleðslustöðvum og aflið er með því minnsta miðað við aðra í sínum verðflokki. Ef þú vilt meiri kraft og styttri stopp er Smart #1 Pro+ þess virði að skoða: hann er 200.000 kr. ódýrari, drífur 33 km lengra og hleðslustoppin eru um 20% styttri.',
+      'Helsti gallinn er að hann hleður fremur hægt á hraðhleðslustöðvum og aflið er með því minnsta miðað við aðra í sínum verðflokki. Fyrir þá sem vilja meiri kraft og styttri stopp er Smart #1 Pro+ þess virði að skoða: hann er 200.000 kr. ódýrari, drífur 33 km lengra og hleðslustoppin eru um 20% styttri.',
       'Renault R4 er fyrst og fremst skemmtilegur og hagkvæmur kostur fyrir þá sem heillast af útliti hans og aka mest innanbæjar.',
     ],
     questions: [
@@ -3529,7 +3529,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'smart-1-brabus': {
     paragraphs: [
-      'Smart #1 Brabus er lítill jepplingur sem hagar sér nánast eins og sportbíll í dulargervi. Hann hentar ef þú vilt mikla snerpu í liprum bíl sem er auðvelt að athafna sig á í bænum.',
+      'Smart #1 Brabus er lítill jepplingur sem hagar sér nánast eins og sportbíll í dulargervi. Hann hentar þeim sem vilja mikla snerpu í liprum bíl sem er auðvelt að athafna sig á í bænum.',
       'Helsti styrkur hans liggur í hröðun og afli, en hann er meðal þeirra sneggstu í sínum verðflokki, og krókurinn ber meira en hjá flestum keppinautum hans.',
       'Hann gefur hins vegar mikið eftir í langkeyrslu: hann drífur mjög stutt og hleður hægar en flestir, svo vetrarferðir milli landshluta kalla á tíð stopp. Volvo EX30 Twin Motor Performance kostar 400.000 kr. meira, er 0,3 s sneggri og drífur 50 km lengra, og Smart #3 Brabus kostar 200.000 kr. meira, drífur 15 km lengra og er með 57 l stærra skott. Smart #1 Pulse er með sama afl og sparar 500.000 kr.',
       'Þetta er skemmtileg vasaraketta fyrir þá sem setja akstursgleði í forgang, en síður góður ferðabíll.',
@@ -3750,7 +3750,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Tesla Model 3 með afturhjóladrifi er stór fólksbíll með hefðbundnu skottloki sem sameinar lipra aksturseiginleika og mikla hagkvæmni. Hann hentar sérlega vel þeim sem vilja rúmgóðan fjölskyldubíl á góðu verði en þurfa ekki endilega á hárri jepplingabyggingu að halda.',
       'Stærsti styrkur bílsins er hve mikið fæst fyrir peninginn. Hann er meðal þeirra allra ódýrustu á hvern kílómetra drægni og kemst auðveldlega á milli landshluta á einni hleðslu, jafnvel í vetrarkulda. Á langferðum hleður hann hraðar en flestir keppinautar hans, auk þess sem aðgengi að eigin hleðsluneti framleiðandans veitir mikið öryggi. Farangursrýmið er sömuleiðis með einu af stærstu skottunum í sínum verðflokki, sérstaklega þegar framskottið er talið með.',
       'Helsti gallinn fyrir íslenskar aðstæður er afturhjóladrifið, sem veitir minna grip í fannfergi og vetrarhálku. Ef fjórhjóladrif er ófrávíkjanleg krafa bætir útgáfan Tesla Model 3 Long Range Fjórhjóladrif úr því, þótt hún sé 1.500.000 kr. dýrari. Þá má nefna að Mazda 6e Long Range getur dregið 500 kg meira, en hleðslustoppin í henni eru nær tvöfalt lengri.',
-      'Á heildina litið er erfitt að finna betri kaup á markaðnum í dag ef þú kemst af án fjórhjóladrifs.',
+      'Á heildina litið er erfitt að finna betri kaup á markaðnum í dag fyrir þá sem komast af án fjórhjóladrifs.',
     ],
     questions: [
       'Borgar Long Range Afturhjóladrif sig?',
@@ -3858,7 +3858,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Tesla Model Y Premium Long Range er stór jepplingur sem hentar einstaklega vel fyrir fjölskyldur og þá sem ferðast mikið. Bíllinn sker sig sérstaklega úr með einu allra stærsta farangursrými sem völ er á, sem tekur allan farangur fyrir löng ferðalög eða útivistarbúnað án nokkurrar fyrirhafnar.',
       'Helsti styrkur hans er hversu mikið maður fær fyrir peninginn þegar kemur að ferðalögum. Hann er meðal langdrægustu bíla í sínum verðflokki, sem þýðir að hann kemst á milli landshluta án hleðslustopps, jafnvel í frosti og vetrarfærð. Þegar stoppa þarf hleður hann hraðar en flestir keppinautar, auk þess sem aðgengi að hleðsluneti Tesla reynist mörgum mikill kostur. Hann má einnig draga umtalsvert þyngri kerru en gengur og gerist.',
-      'Stærsti gallinn við þessa útfærslu er að hún er aðeins með afturhjóladrifi, sem er ókostur í íslenskum snjó og hálku. Þar kemur Tesla Model Y Long Range Dual Motor sterklega til greina, en fyrir aðeins 400.000 kr. meira færðu fjórhjóladrif sem veitir miklu meira öryggi að vetrarlagi, án þess að fórna drægni.',
+      'Stærsti gallinn við þessa útfærslu er að hún er aðeins með afturhjóladrifi, sem er ókostur í íslenskum snjó og hálku. Þar kemur Tesla Model Y Long Range Dual Motor sterklega til greina, en fyrir aðeins 400.000 kr. meira fæst fjórhjóladrif sem veitir miklu meira öryggi að vetrarlagi, án þess að fórna drægni.',
       'Fyrir þá sem gera ekki kröfu um fjórhjóladrif er þetta einn hagkvæmasti og rúmgóðasti ferðabíll sem hægt er að velja í dag.',
     ],
     questions: [
@@ -4187,7 +4187,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Volkswagen ID. Polo er lítill hlaðbakur sem hentar sérstaklega vel sem lipur borgarbíll eða sparneytinn vagn í daglegan akstur. Hann ber nafn eins þekktasta smábíls sögunnar og færir þá hugmyndafræði inn í rafbílaheiminn á aðgengilegu verði.',
       'Þótt drægnin teljist fremur stutt af öllum rafbílum drífur hann lengra en flestir á svipuðu verði og gefur mjög mikið fyrir peninginn á hvern kílómetra. Hann er jafnframt aflmeiri og sneggri upp á hundraðið en flestir keppinautarnir. Hraðhleðslan kemur einnig sterk inn, en á langferðum eru hleðslustoppin til dæmis umtalsvert styttri en hjá bæði Renault R5 E-Tech og BYD Dolphin.',
       'Helstu takmarkanir liggja í stærðinni og aðstæðum sem krefjast meira grips. Hann er aðeins framhjóladrifinn, sem reynir meira á ökumanninn í íslenskri vetrarfærð, og drægnin rýrnar eins og alltaf í frosti. Plássið er líka takmarkað eins og við má búast í þessum stærðarflokki.',
-      'Ef þú leitar að hagkvæmum smábíl sem kemst drjúgt fyrir aurinn og tefur þig óvenju stutt við hleðslustöðvar er ID. Polo einkar álitlegur kostur.',
+      'Fyrir þá sem leita að hagkvæmum smábíl sem kemst drjúgt fyrir aurinn og tefur óvenju stutt við hleðslustöðvar er ID. Polo einkar álitlegur kostur.',
     ],
     questions: [
       'Hvernig er hann miðað við Skoda Epiq 55?',
@@ -4208,7 +4208,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Volkswagen ID. Polo GTI er lítill hlaðbakur með sportlegu ívafi. Hann er lipur og hannaður fyrir þá sem vilja kvikan smábíl í bæjaraksturinn sem jafnframt býður upp á klassíska GTI-stemningu og auðvelt er að leggja.',
       'Þótt skottið sé minna en hjá flestum á svipuðu verði er það furðu nýtistórt fyrir bíl af þessari stærð, og 1.200 kg dráttargeta kemur sér vel fyrir garðkerruna eða léttari farm. Hraðhleðslan er í meðallagi, svo ferðalög milli landshluta ganga ágætlega fyrir sig þótt huga þurfi að hleðslustöðvum.',
-      'Helsti gallinn er hvað hann kostar miðað við það sem hann býður upp á, enda drífur hann fremur stutt og enn styttra í vetrarkulda. Venjulegur Volkswagen ID. Polo er heilum 2.100.000 kr. ódýrari, drífur 30 km lengra og er aðeins 0,3 sekúndum hægari í hundraðið. Ef eftirsóknin er meiri kraftur og öruggara grip í snjó og hálku færðu Smart #1 Brabus með fjórhjóladrifi fyrir 820.000 kr. minna.',
+      'Helsti gallinn er hvað hann kostar miðað við það sem hann býður upp á, enda drífur hann fremur stutt og enn styttra í vetrarkulda. Venjulegur Volkswagen ID. Polo er heilum 2.100.000 kr. ódýrari, drífur 30 km lengra og er aðeins 0,3 sekúndum hægari í hundraðið. Ef eftirsóknin er meiri kraftur og öruggara grip í snjó og hálku fæst Smart #1 Brabus með fjórhjóladrifi fyrir 820.000 kr. minna.',
       'ID. Polo GTI er skemmtilegur og sprækur, en verðálagningin á GTI-merkinu gerir hann erfiðan í kaupum þegar venjulega gerðin veitir nánast sömu nytsemi fyrir mun lægri upphæð.',
     ],
     questions: [
@@ -4426,7 +4426,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Volvo EC40 Twin Motor er rennilegur jepplingur með sportlegu útliti. Hann er sniðinn fyrir þá sem vilja fáguð gæði Volvo, háa sætisstöðu og öruggt grip, en kjósa djarfara og straumlínulagaðra snið en hefðbundnir fjölskyldubílar bjóða upp á.',
       'Fjórhjóladrifið og ríflegt aflið koma sér sérlega vel í snjó og hálku. Bíllinn drífur lengra en flestir í sínum verðflokki, sem dugar léttilega á milli landshluta jafnvel þótt vetrarkuldinn éti hluta af drægninni. Á ferðalögum utan bæjarins hleður hann líka fremur hratt, þótt það sé aðeins í meðallagi á þessu verði.',
-      'Bíllinn gefur fátt eftir í akstri eða tækni og helsti ókosturinn er hár verðmiði. Ef þú ekur aðallega innanbæjar og þarft ekki jafn mikla drægni getur BMW iX1 xDrive 30 verið fýsilegur valkostur, enda er hann 700.000 kr. ódýrari, þótt það komi á kostnað drægninnar og þýði um 30% lengri hleðslustopp.',
+      'Bíllinn gefur fátt eftir í akstri eða tækni og helsti ókosturinn er hár verðmiði. Fyrir þá sem aka aðallega innanbæjar og þurfa ekki jafn mikla drægni getur BMW iX1 xDrive 30 verið fýsilegur valkostur, enda er hann 700.000 kr. ódýrari, þótt það komi á kostnað drægninnar og þýði um 30% lengri hleðslustopp.',
       'Uppfærður EC40, P8 AWD, er væntanlegur snemma 2027 með nýju andliti og stærri skjá en sama afli, og verðið hér á landi liggur ekki fyrir. Fyrir þá sem vilja kraftmikinn lúxusjeppling sem svíkur mann ekki á langferðum í vetrarveðri er EC40 afar heilsteypt val.',
     ],
     questions: [
@@ -4446,9 +4446,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'volvo-ec40-p8-awd': {
     paragraphs: [
-      'Volvo EC40 P8 AWD er uppfærður EC40: jepplingur með hallandi þaklínu, sami bíll og EX40 að framan en sportlegri að aftan. Hann fékk í haust nýtt andlit, Matrix LED-ljós og stærri skjá, 11,2 tommu í stað 9, og er væntanlegur snemma 2027. Hann hentar ef þú vilt nettan bíl með meiri stíl en kassalaga jepplingur býður.',
+      'Volvo EC40 P8 AWD er uppfærður EC40: jepplingur með hallandi þaklínu, sami bíll og EX40 að framan en sportlegri að aftan. Hann fékk í haust nýtt andlit, Matrix LED-ljós og stærri skjá, 11,2 tommu í stað 9, og er væntanlegur snemma 2027. Hann hentar þeim sem vilja nettan bíl með meiri stíl en kassalaga jepplingur býður.',
       'Hann er sneggri en flestir á svipuðu verði, svo hann á nóg inni við framúrakstur á þjóðveginum.',
-      'Verðið er enn áætlað, en miðað við það hleður hann hægar en flestir á svipuðu verði, og hallandi þakið tekur af skottinu og höfuðplássinu aftur í. Skoda Enyaq RS er 710.000 kr. ódýrari, drífur álíka langt og er með mun stærra skott. Og ef þú vilt bíl strax er EC40 Twin Motor, sem hann leysir af hólmi, 1.300.000 kr. ódýrari, jafn snöggur og aflmikill og drífur jafn langt.',
+      'Verðið er enn áætlað, en miðað við það hleður hann hægar en flestir á svipuðu verði, og hallandi þakið tekur af skottinu og höfuðplássinu aftur í. Skoda Enyaq RS er 710.000 kr. ódýrari, drífur álíka langt og er með mun stærra skott. Og fyrir þá sem vilja bíl strax er EC40 Twin Motor, sem hann leysir af hólmi, 1.300.000 kr. ódýrari, jafn snöggur og aflmikill og drífur jafn langt.',
       'Nýi EC40 er fyrir þann sem vill útlitið og nýjustu tæknina og getur beðið, en sá eldri gefur meira fyrir peninginn á meðan hann fæst.',
     ],
     questions: [
@@ -4467,7 +4467,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'volvo-es90-twin-motor': {
     paragraphs: [
-      'Volvo ES90 Twin Motor er stór og fágaður fólksbíll með afturhlera, fimm metrar á lengd, þar sem skandinavískur lúxus, hljóðlátur akstur og þægindi eru í fyrirrúmi. Hann hentar ef þú vilt vandaðan langferðabíl í fólksbílasniði frekar en jeppa.',
+      'Volvo ES90 Twin Motor er stór og fágaður fólksbíll með afturhlera, fimm metrar á lengd, þar sem skandinavískur lúxus, hljóðlátur akstur og þægindi eru í fyrirrúmi. Hann hentar þeim sem vilja vandaðan langferðabíl í fólksbílasniði frekar en jeppa.',
       'Stærsti kosturinn er hve vel hann hentar í langferðir: hann drífur lengra og hleður hraðar en flestir á svipuðu verði, sem kemur sér vel í vetrarakstri milli landshluta. Hann má líka draga 2.000 kg.',
       'Gallarnir eru að skottið er eitt það minnsta og hann er hægari en flestir keppinautar hans. Audi A6 e-tron Sportback quattro er 1.300.000 kr. ódýrari, drífur 33 km lengra, er 0,9 s sneggri og með 61 l stærra skott, og Mercedes-Benz C 400 4MATIC kostar 200.000 kr. meira en drífur 83 km lengra og er með 103 l stærra skott.',
       'ES90 er sterkur kostur fyrir þá sem meta drægni, hraða hleðslu og fágun ofar plássi.',
@@ -4509,9 +4509,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'volvo-ex40-recharge-twin': {
     paragraphs: [
-      'Volvo EX40 Recharge Twin er meðalstór jepplingur, sami bíll og hét áður XC40 Recharge: kassalaga, hár í sæti og með rólegu, skandinavísku innréttinguna sem Volvo er þekkt fyrir. Hann hentar ef þú vilt þéttan og öruggan fjölskyldubíl sem á samt nóg inni þegar þú stígur á gjöfina.',
+      'Volvo EX40 Recharge Twin er meðalstór jepplingur, sami bíll og hét áður XC40 Recharge: kassalaga, hár í sæti og með rólegu, skandinavísku innréttinguna sem Volvo er þekkt fyrir. Hann hentar þeim sem vilja þéttan og öruggan fjölskyldubíl sem á samt nóg inni þegar stigið er á gjöfina.',
       'Og það á hann. Hann er sneggri og aflmeiri en flestir á svipuðu verði, og krókurinn ber meira en hjá flestum keppinautum hans, svo hjólhýsið eða stóra kerran er ekkert mál.',
-      'Gallinn er plássið aftast: skottið er með þeim minnstu miðað við keppinautana, og þú borgar meira á hvern km drægni en hjá flestum þeirra. BMW iX1 xDrive 30 er 700.000 kr. ódýrari og með 49 l stærra skott, en hann drífur 99 km styttra og hleðslustoppin eru um 25% lengri.',
+      'Gallinn er plássið aftast: skottið er með þeim minnstu miðað við keppinautana, og hver km drægni kostar meira en hjá flestum þeirra. BMW iX1 xDrive 30 er 700.000 kr. ódýrari og með 49 l stærra skott, en hann drífur 99 km styttra og hleðslustoppin eru um 25% lengri.',
       'Uppfærður EX40, P8 AWD, er væntanlegur snemma 2027 með nýju andliti og stærri skjá en sama afli, og verðið hér á landi liggur ekki fyrir. EX40 er bíllinn fyrir þann sem vill kraft og krók í nettum pakka og getur lifað með minna skotti.',
     ],
     questions: [
@@ -4530,9 +4530,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'volvo-ex40-p8-awd': {
     paragraphs: [
-      'Volvo EX40 P8 AWD er uppfærður EX40: nettur, kassalaga jepplingur sem fékk í haust nýtt andlit, Matrix LED-ljós og stærri skjá, 11,2 tommu í stað 9. Hann er væntanlegur snemma 2027. Hann hentar ef þú vilt lítinn fjölskyldubíl sem situr hátt en á samt nóg inni þegar þú stígur á gjöfina.',
+      'Volvo EX40 P8 AWD er uppfærður EX40: nettur, kassalaga jepplingur sem fékk í haust nýtt andlit, Matrix LED-ljós og stærri skjá, 11,2 tommu í stað 9. Hann er væntanlegur snemma 2027. Hann hentar þeim sem vilja lítinn fjölskyldubíl sem situr hátt en á samt nóg inni þegar stigið er á gjöfina.',
       'Og það á hann: hann er sneggri en flestir á svipuðu verði, og krókurinn ber allt að 1.800 kg, svo kerran eða hjólhýsið er ekkert mál.',
-      'Verðið er enn áætlað, en miðað við það drífur hann styttra og hleður hægar en flestir á svipuðu verði, og skottið er lítið. Skoda Enyaq RS er 710.000 kr. ódýrari, drífur álíka langt og er með mun stærra skott. Og ef þú vilt bíl strax er EX40 Recharge Twin, sem hann leysir af hólmi, 1.300.000 kr. ódýrari, jafn snöggur og aflmikill og nánast jafn langdrægur.',
+      'Verðið er enn áætlað, en miðað við það drífur hann styttra og hleður hægar en flestir á svipuðu verði, og skottið er lítið. Skoda Enyaq RS er 710.000 kr. ódýrari, drífur álíka langt og er með mun stærra skott. Og fyrir þá sem vilja bíl strax er EX40 Recharge Twin, sem hann leysir af hólmi, 1.300.000 kr. ódýrari, jafn snöggur og aflmikill og nánast jafn langdrægur.',
       'Nýi EX40 er fyrir þann sem vill nýjasta útlitið og tæknina og getur beðið, en sá eldri gefur meira fyrir peninginn á meðan hann fæst.',
     ],
     questions: [
@@ -4639,9 +4639,9 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'volvo-ex60-p12': {
     paragraphs: [
       'Volvo EX60 P12 er lúxusjepplingur í millistærð með fjórhjóladrifi, og drífur lengst allra á sínu verði. Hann er fyrir þá sem keyra mikið út á land og vilja hugsa sem minnst um hleðslu, sumar sem vetur.',
-      'Hann hleður líka með þeim hröðustu, svo þegar þú þarft að stoppa er það stutt. Aflið er mikið, hann er með þeim sneggstu á sínu verði og má draga 2.400 kg, sem dugar fyrir flest hjólhýsi. Miðað við drægnina færðu líka mikið fyrir peninginn.',
-      'Veikleikarnir eru fáir og sá stærsti er verðið. BMW iX3 50 xDrive er nánast jafnoki hans: 100.000 kr. ódýrari og drífur álíka langt, en er sekúndu lengur í hundraðið og má draga 400 kg minna. Ef þú þarft ekki alla þessa drægni sparar Volvo EX60 P10 þér 1.000.000 kr. og drífur samt langt.',
-      'Ef drægni og krókur skipta þig mestu er erfitt að gera betur á þessu verði.',
+      'Hann hleður líka með þeim hröðustu, svo hleðslustoppin eru stutt. Aflið er mikið, hann er með þeim sneggstu á sínu verði og má draga 2.400 kg, sem dugar fyrir flest hjólhýsi. Miðað við drægnina fæst líka mikið fyrir peninginn.',
+      'Veikleikarnir eru fáir og sá stærsti er verðið. BMW iX3 50 xDrive er nánast jafnoki hans: 100.000 kr. ódýrari og drífur álíka langt, en er sekúndu lengur í hundraðið og má draga 400 kg minna. Sé ekki þörf á allri þessari drægni sparar Volvo EX60 P10 1.000.000 kr. og drífur samt langt.',
+      'Ef drægni og krókur skipta mestu er erfitt að gera betur á þessu verði.',
     ],
     questions: [
       'Borgar sig að spara og velja P10?',
@@ -4661,7 +4661,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Volvo EX90 er stór lúxusjeppi sem rúmar allt að sjö manns og hentar einkar vel stórum fjölskyldum sem leita að fágun, vönduðu vinnubragði og miklu öryggi. Fjórhjóladrifið sér til þess að bíllinn ráði fumlaust við snjó, hálku og krefjandi íslenskar vetraraðstæður.',
       'Helsti kostur hans er drægnin, en hann drífur lengra en flestir í sínum verðflokki. Það munar miklu þegar ekið er milli landshluta í vetrarkulda og veitir gott öryggi þegar hleðslustöðvar eru strjálar.',
-      'Á móti kemur að bíllinn hleður hægar en flestir aðrir á svipuðu verði, sem þýðir nokkuð lengri biðtíma við hraðhleðslustöðvar á langferðum. Ef þú vilt svipað rými og fjórhjóladrif en leggur áherslu á hraðari ferðalög gæti Hyundai IONIQ 9 Long Range Performance AWD verið heppilegri, enda er hann 2.500.000 kr. ódýrari og býður upp á um 25% styttri hleðslustopp.',
+      'Á móti kemur að bíllinn hleður hægar en flestir aðrir á svipuðu verði, sem þýðir nokkuð lengri biðtíma við hraðhleðslustöðvar á langferðum. Fyrir þá sem vilja svipað rými og fjórhjóladrif en leggja áherslu á hraðari ferðalög gæti Hyundai IONIQ 9 Long Range Performance AWD verið heppilegri, enda er hann 2.500.000 kr. ódýrari og býður upp á um 25% styttri hleðslustopp.',
       'Volvo EX90 er fyrsta flokks ferðabíll sem sameinar rúmgæði og mikla drægni, en kaupendur greiða líka ríkulega fyrir nafnið og lúxusinn.',
     ],
     questions: [
@@ -4749,7 +4749,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'XPENG G6 AWD Performance er stór jepplingur sem sameinar mikið rými, gríðarlegt afl og háþróaða tækni. Hann hentar sérstaklega vel fjölskyldum sem vilja öruggan gripbíl í snjó og hálku með öflugu fjórhjóladrifi án þess að fórna sportlegum akstri.',
       'Í sínum verðflokki skarar hann fram úr í hraðhleðslu, þar sem hleðslustopp á langferðum eru umtalsvert styttri en hjá flestum keppinautum. Hann drífur einnig lengra en flestir þeirra, sem veitir gott öryggi í lengri ferðum milli landshluta yfir vetrartímann. Að auki er skottið rúmgott og dráttargetan meiri en gerist og gengur hjá svipuðum bílum.',
       'Fátt er hægt að setja út á tölurnar, en ef hámarks pláss skiptir öllu máli býður Tesla Model Y Long Range Dual Motor upp á mun stærra skott og meiri drægni, þótt greiða þurfi talsvert meira fyrir hann.',
-      'Á heildina litið færðu hér feykilega mikið afl, hraða hleðslu og ríflegan búnað fyrir peninginn.',
+      'Á heildina litið býður hann feykilega mikið afl, hraða hleðslu og ríflegan búnað fyrir peninginn.',
     ],
     questions: [
       'Er skottið minna en í Tesla Model Y?',
@@ -4792,8 +4792,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'XPENG G9L RWD Long Range er stór lúxusjeppi með sæti fyrir allt að sjö, gerður fyrir stórar fjölskyldur sem vilja mikið pláss og þægindi. Hann er rúmir fimm metrar á lengd og rýmið eftir því, bæði fyrir farþega og farangur.',
       'Helsti styrkur bílsins liggur í ferðaeiginleikunum, en hann hleður hraðast af keppinautum sínum og lágmarkar þannig hleðslustopp á langferðum um landið. Farangursrýmið er með þeim allra stærstu, sérstaklega þegar framskottið er talið með, og hann má draga tvö tonn, sem dugar vel fyrir hjólhýsi eða kerru.',
-      'Stærsti gallinn hér á landi er afturhjóladrifið, sem getur verið snúið í snjó og hálku á svona stórum bíl, og hann er með þeim hægustu upp í hundrað í sínum verðflokki. Ef þú vilt fjórhjóladrif færðu það í G9L AWD Performance, eða í Hyundai IONIQ 9 Long Range AWD, sem má líka draga 500 kg meira en hleður hægar.',
-      'Hann hentar ef pláss og stutt hleðslustopp skipta þig mestu.',
+      'Stærsti gallinn hér á landi er afturhjóladrifið, sem getur verið snúið í snjó og hálku á svona stórum bíl, og hann er með þeim hægustu upp í hundrað í sínum verðflokki. Fjórhjóladrif fæst í G9L AWD Performance, eða í Hyundai IONIQ 9 Long Range AWD, sem má líka draga 500 kg meira en hleður hægar.',
+      'Hann hentar ef pláss og stutt hleðslustopp skipta mestu.',
     ],
     questions: [
       'Borgar sig að taka AWD Performance?',
@@ -4814,8 +4814,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'XPENG G9L AWD Performance er stór sjö sæta lúxusjeppi fyrir fjölskyldur sem vilja mikið pláss og nóg afl. Hann er meðal þeirra aflmestu í sínum verðflokki og farangursrýmið er með því allra stærsta sem fæst.',
       'Helsti styrkleiki bílsins á ferðalögum um landið er hleðslan, en hann er meðal þeirra sem hlaða allra hraðast og heldur því hleðslustoppunum í algjöru lágmarki. Innanrýmið er sérlega rúmgott, skottið tekur vandræðalaust við miklum farangri og hann má draga tvö tonn, sem dugar vel fyrir kerrur eða hjólhýsi.',
-      'Helsti ókosturinn er að hann drífur styttra en flestir í sínum verðflokki. Ef þú vilt meiri drægni og stærri krók er Hyundai IONIQ 9 Long Range AWD þess virði að skoða: hann kemst 52 km lengra og má draga 500 kg meira, en hleðslustoppin eru um 85% lengri.',
-      'Hann hentar ef þú vilt mikið pláss, mikið afl og stutt hleðslustopp.',
+      'Helsti ókosturinn er að hann drífur styttra en flestir í sínum verðflokki. Fyrir þá sem vilja meiri drægni og stærri krók er Hyundai IONIQ 9 Long Range AWD þess virði að skoða: hann kemst 52 km lengra og má draga 500 kg meira, en hleðslustoppin eru um 85% lengri.',
+      'Hann hentar þeim sem vilja mikið pláss, mikið afl og stutt hleðslustopp.',
     ],
     questions: [
       'Hvernig er hann miðað við Hyundai IONIQ 9?',
@@ -4834,10 +4834,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'xpeng-l03-rwd-standard-range': {
     paragraphs: [
-      'XPENG L03 RWD Standard Range er rennilegur jepplingur með afturhjóladrifi og ódýrasta útfærsla L03, fyrir þig sem vilt mikið fyrir peninginn frá nýju merki á Íslandi.',
+      'XPENG L03 RWD Standard Range er rennilegur jepplingur með afturhjóladrifi og ódýrasta útfærsla L03, fyrir fólk sem vill mikið fyrir peninginn frá nýju merki á Íslandi.',
       'Hann er mjög ódýr, drífur lengra en flestir á svipuðu verði og er meðal þeirra sem hlaða hraðast, svo stoppin á leiðinni verða stutt. Hann er líka sneggri en flestir í sínum verðflokki og má draga 1.500 kg, með því mesta á þessu verði.',
       'Á móti kemur að drægnin er samt fremur stutt, sérstaklega í vetrarkulda, og skottið er fremur lítið. XPENG L03 RWD Long Range kostar 500.000 kr. meira og drífur 75 km lengra, með um 20% styttri hleðslustopp. Kia EV3 Standard Range kostar 300.000 kr. meira frá rótgrónara merki, en drífur 15 km styttra og stoppin eru um 40% lengri.',
-      'L03 Standard Range gefur þér mikið fyrir lítið, svo lengi sem drægnin dugar.',
+      'L03 Standard Range gefur mikið fyrir lítið, svo lengi sem drægnin dugar.',
     ],
     facts: '763efac8ac1a',
     questions: [
@@ -4853,7 +4853,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'xpeng-l03-rwd-long-range': {
     paragraphs: [
-      'XPENG L03 RWD Long Range er rennilegur jepplingur með afturhjóladrifi og stærri rafhlöðu, fyrir þig sem vilt komast langt án þess að borga mikið.',
+      'XPENG L03 RWD Long Range er rennilegur jepplingur með afturhjóladrifi og stærri rafhlöðu, fyrir fólk sem vill komast langt án þess að borga mikið.',
       'Hann er meðal þeirra ódýrustu á hvern km drægni í sínum verðflokki, drífur lengra en flestir á svipuðu verði og er meðal þeirra sem hlaða hraðast. Hann er líka sneggri en flestir þeirra og má draga 1.500 kg, og framskottið nýtist vel undir kapla og smádót.',
       'Skottið er hins vegar fremur lítið, og afturhjóladrifið kallar á aðgát í snjó og hálku. Kia EV3 Long Range kostar 400.000 kr. meira og drífur 85 km lengra, en stoppin eru um 35% lengri og hann má draga 500 kg minna. XPENG L03 AWD Performance fæst með fjórhjóladrifi fyrir 500.000 kr. meira, en drífur 80 km styttra.',
       'Long Range er skynsamlegasta útfærsla L03 fyrir flesta.',
@@ -4872,10 +4872,10 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   },
   'xpeng-l03-awd-performance': {
     paragraphs: [
-      'XPENG L03 AWD Performance er rennilegur jepplingur með fjórhjóladrifi og miklu afli, fyrir þig sem vilt sprækan bíl án þess að borga sportbílaverð.',
+      'XPENG L03 AWD Performance er rennilegur jepplingur með fjórhjóladrifi og miklu afli, fyrir fólk sem vill sprækan bíl án þess að borga sportbílaverð.',
       'Hann er meðal þeirra sneggstu á svipuðu verði og hleður með þeim hraðasta, svo stoppin á ferðalögum verða stutt. Fjórhjóladrifið kemur sér vel í snjó og hálku og hann má draga 1.500 kg, meira en flestir í sínum verðflokki.',
-      'Aflið kostar þó drægni: hann drífur styttra en flestir á svipuðu verði og skottið er minna en hjá flestum. XPENG L03 RWD Long Range er 500.000 kr. ódýrari og drífur 80 km lengra, ef þú getur verið án fjórhjóladrifsins. Leapmotor C10 Design AWD kostar 100.000 kr. meira, er sneggri og með stærra skott, en stoppin eru um 50% lengri.',
-      'Performance er fyrir þig sem metur afl og grip meira en drægni.',
+      'Aflið kostar þó drægni: hann drífur styttra en flestir á svipuðu verði og skottið er minna en hjá flestum. XPENG L03 RWD Long Range er 500.000 kr. ódýrari og drífur 80 km lengra, fyrir þá sem geta verið án fjórhjóladrifsins. Leapmotor C10 Design AWD kostar 100.000 kr. meira, er sneggri og með stærra skott, en stoppin eru um 50% lengri.',
+      'Performance er fyrir fólk sem metur afl og grip meira en drægni.',
     ],
     facts: '46120d7bb6dc',
     questions: [
@@ -4893,8 +4893,8 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'XPENG X9 AWD Performance er stór sjö sæta lúxusfjölnotabíll sem leggur allt upp úr rými og þægindum fyrir stórar fjölskyldur eða fólksflutninga á fyrsta farrými. Hann sker sig rækilega úr með framúrstefnulegri hönnun og vandaðri innréttingu þar sem allir farþegar njóta meiri þæginda en gengur og gerist í hefðbundnum bílum.',
       'Hann er aflmeiri en flestir á svipuðu verði og á langferðum um landið er hann meðal þeirra sem hlaða hraðast, svo hleðslustoppin verða stutt. Drægnin er fremur löng miðað við listann í heild en styttri en hjá flestum á svipuðu verði.',
-      'Helsti gallinn er krókurinn, en miðað við aðra í sínum verðflokki dregur hann minna en flestir. Ef þú dregur oft þung hjólhýsi eða kerrur er Kia EV9 betri kostur, sem má draga 1.000 kg meira, þótt hleðslustoppin þar séu um 105% lengri.',
-      'Hann hentar ef pláss, þægindi og stutt hleðslustopp skipta þig mestu.',
+      'Helsti gallinn er krókurinn, en miðað við aðra í sínum verðflokki dregur hann minna en flestir. Fyrir þá sem draga oft þung hjólhýsi eða kerrur er Kia EV9 betri kostur, sem má draga 1.000 kg meira, þótt hleðslustoppin þar séu um 105% lengri.',
+      'Hann hentar ef pláss, þægindi og stutt hleðslustopp skipta mestu.',
     ],
     questions: [
       'Er hann betri ferðabíll en Kia EV9?',

@@ -101,9 +101,10 @@ Read each new review in the diff before committing, as you would the figures:
   body wrong before ("fólksbíll eða hlaðbakur" for an SUV).
 - **No grant.** A review never mentions the rafbílastyrkur, not even that a
   car does not get it: the price is what the buyer pays.
-- **Tone.** Like a knowledgeable friend, not a salesman: "þú", everyday words
-  ("krókur", not "dráttargeta"), short closing lines. "Hann hentar ef þú vilt…",
-  not "Hann hentar þér ef þú vilt…".
+- **Tone.** Like a knowledgeable friend, not a salesman: everyday words
+  ("krókur", not "dráttargeta"), short closing lines. Never "þú" or "ég": a
+  review speaks of "fólk sem vill…" or "þá sem þurfa…", never "fyrir þig sem
+  vilt…" or "færðu". `carReviews.test.ts` fails on either.
 - **Typos and grammar.** Fix them by hand in `carReviews.ts`. An edited review
   is kept by later runs until its car's figures change.
 
