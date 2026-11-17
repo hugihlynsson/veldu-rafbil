@@ -306,8 +306,12 @@ make, then model. The fields that are easy to get wrong:
     specification sheets do, under `hyundai.com/content/dam/hyundai/au/`
     (INSTER, IONIQ 5, Kona Electric). No sheet was found for the STARIA
     Electric.
-  - Lexus' brochure on `kynningarefni.toyota.is` and the landrover.is pages
-    and price lists give none.
+  - Lexus: the technical specifications PDFs on `media.lexus.co.uk`
+    ("Min. ground clearance"), found by searching the site's PDFs by name,
+    such as `251017-RZ-tech-specs.pdf`. Its brochure on
+    `kynningarefni.toyota.is` gives none, and no sheet had been published
+    for the new ES or the TZ by November 2026.
+  - The landrover.is pages and price lists give none.
   - XPENG's model and spec pages give none in any market checked (is, se,
     ae and Australia's shop). Its pressroom on `xpeng.com/pressroom/news/`
     does in places: the Danish G9L release gives „Maksimal frihøjde: 216
