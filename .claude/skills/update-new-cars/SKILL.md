@@ -313,6 +313,11 @@ make, then model. The fields that are easy to get wrong:
     does in places: the Danish G9L release gives „Maksimal frihøjde: 216
     mm“ on its standard air suspension. The G6, G9, L03 and X9 releases
     give none.
+  - smart: the specifications pages on `uk.smart.com/en/models/hashtag-<one|three|five>/specifications/`
+    give "Ground Clearance curb 0/5" per trim; take the first, the unladen
+    one. The UK sells no Pulse #1 or #3, but every other trim there shares
+    one figure, so the Pulse takes it. smart.askja.is links only an issuu
+    price list.
   - Hongqi and MG publish no clearance on their own sites.
 - **`expectedDelivery`** is a lowercase-able Icelandic phrase (`sumar 2026`),
   and having one at all is what makes a car count as expected rather than
