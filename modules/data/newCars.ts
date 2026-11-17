@@ -889,6 +889,7 @@ const newCars: Array<NewCar> = [
     drive: 'FWD',
     seats: 5,
     towing: 0,
+    groundClearance: { mm: 201 },
     power: 115,
     timeToCharge10To80: 44,
   },

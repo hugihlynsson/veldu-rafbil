@@ -328,6 +328,8 @@ make, then model. The fields that are easy to get wrong:
     Fiat Norway's do for the 600e, not the 500e. Its links under
     `fiat.no/modeller/<model>/…prisliste…` serve the PDF as a download, so
     fetch them from a page there rather than opening them.
+    Jeep Norway's Avenger price list, linked from
+    `jeep.com/no/modeller/jeep-avenger/elektrisk.html`, gives it in mm.
   - Ford: the price list PDF linked from each car's page on ford.is gives
     „Veghæð mm“ under „Helstu mál“. The PDFs are on `assets.mango.is` and
     `skjol.ford.is`.
