@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { deriveCar } from '@/modules/data/cars'
 import type { NewCar } from '@/modules/data/newCarSchema'
-import { specRows } from './specs'
+import { carFigures, specRows } from './specs'
 
 const base: NewCar = {
   make: 'Kia',
@@ -103,5 +103,34 @@ describe('specRows', () => {
     expect(
       row('price', car({ price: 6_390_000 }), car({}))?.cells[0],
     ).toMatchObject({ text: '5.990.000 kr.', detail: 'með styrk' })
+  })
+})
+
+describe('carFigures', () => {
+  const clearance = (overrides: Partial<NewCar>) =>
+    carFigures(car(overrides)).find(({ key }) => key === 'groundClearance')
+
+  it('gives the ground clearance in mm, and says when it is a raised level', () => {
+    expect(clearance({ groundClearance: { mm: 180 } })?.cells[0]).toEqual({
+      text: '180 mm',
+      detail: undefined,
+      best: false,
+    })
+    expect(
+      clearance({ groundClearance: { mm: 240, adjustable: true } })?.cells[0]
+        ?.detail,
+    ).toBe('Hæsta stilling')
+  })
+
+  it('leaves the figure out for a car without one', () => {
+    expect(clearance({})).toBeUndefined()
+  })
+
+  // Too few cars have one for a row of mostly gaps
+  it('keeps the ground clearance out of a comparison', () => {
+    const withIt = car({ groundClearance: { mm: 200 } })
+    expect(specRows([withIt, withIt]).map(({ key }) => key)).not.toContain(
+      'groundClearance',
+    )
   })
 })

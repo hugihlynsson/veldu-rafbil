@@ -231,6 +231,13 @@ make, then model. The fields that are easy to get wrong:
   "no towbar", so confirm a `0` on the car's page or the maker's spec sheet
   (the UK, German or French sites usually give towing; Icelandic importers
   rarely do), and when ev-database and the maker disagree, take the maker's.
+- **`groundClearance` is optional, in mm, from the maker.** Leave it out
+  rather than guess: the car's page shows it only where it is set, and nothing
+  else reads it yet. Take the highest the car can be raised, options included,
+  and add `adjustable: true` when that is an air-suspension level rather than
+  its fixed height. ev-database has no figure. Prefer the unladen one where a
+  sheet gives both, and a variant on different springs or wheels may differ
+  from its siblings.
 - **`expectedDelivery`** is a lowercase-able Icelandic phrase (`sumar 2026`),
   and having one at all is what makes a car count as expected rather than
   available — it drives both the availability filter and the badge on the card.

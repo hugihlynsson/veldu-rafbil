@@ -7,7 +7,7 @@ import type { Car } from '@/modules/data/cars'
 import type { CarReview } from '@/modules/data/carReviews'
 import { carName } from '@/modules/data/getCarId'
 import { carPathOf, comparisonPathOf } from '@/modules/detail/paths'
-import { specRows, type SpecKey } from '@/modules/detail/specs'
+import { carFigures, type FigureKey } from '@/modules/detail/specs'
 import { carSubtitle, deprecatedNotice } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { dayText } from '@/modules/copy/dayText'
@@ -40,8 +40,9 @@ interface Props {
 /** The name that labels the sheet the car is shown in */
 export const SHEET_TITLE_ID = 'car-sheet-title'
 
-// Eight, which fill the rows two to a row on a phone and four from lg
-const figureOrder: SpecKey[] = [
+// Eight, which fill the rows two to a row on a phone and four from lg, and
+// the ground clearance beside the drive for a car that has one
+const figureOrder: FigureKey[] = [
   'range',
   'acceleration',
   'capacity',
@@ -49,6 +50,7 @@ const figureOrder: SpecKey[] = [
   'charging',
   'power',
   'drive',
+  'groundClearance',
   'towing',
 ]
 
@@ -69,7 +71,7 @@ const CarView: FunctionComponent<Props> = ({
   const subTitle = carSubtitle(car)
   const notice = deprecatedNotice(car)
   // The price is the pill under the name
-  const figures = specRows([car])
+  const figures = carFigures(car)
     .filter(({ key }) => figureOrder.includes(key))
     .toSorted((a, b) => figureOrder.indexOf(a.key) - figureOrder.indexOf(b.key))
 

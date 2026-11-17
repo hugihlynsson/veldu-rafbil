@@ -100,8 +100,8 @@ export interface SpecCell {
 
 export type SpecKey = keyof typeof specs
 
-export interface SpecRow {
-  key: SpecKey
+export interface SpecRow<Key extends string = SpecKey> {
+  key: Key
   label: string
   cells: SpecCell[]
 }
@@ -126,3 +126,28 @@ export const specRows = (compared: ReadonlyArray<Car>): SpecRow[] =>
       })),
     }
   })
+
+export type FigureKey = SpecKey | 'groundClearance'
+
+// Only some cars have a ground clearance yet, so it is a figure on a car's own
+// page, where a missing one leaves no gap, and kept out of comparisons
+export const carFigures = (car: Car): SpecRow<FigureKey>[] => [
+  ...specRows([car]),
+  ...(car.groundClearance
+    ? [
+        {
+          key: 'groundClearance' as const,
+          label: 'Veghæð',
+          cells: [
+            {
+              text: `${car.groundClearance.mm} mm`,
+              detail: car.groundClearance.adjustable
+                ? 'Hæsta stilling'
+                : undefined,
+              best: false,
+            },
+          ],
+        },
+      ]
+    : []),
+]
