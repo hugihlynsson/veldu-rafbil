@@ -330,6 +330,28 @@ make, then model. The fields that are easy to get wrong:
     fetch them from a page there rather than opening them.
     Jeep Norway's Avenger price list, linked from
     `jeep.com/no/modeller/jeep-avenger/elektrisk.html`, gives it in mm.
+  - Other Norwegian importers' price lists give „Bakkeklaring“ too:
+    - Volkswagen: the „tekniske data“ PDFs linked from
+      `volkswagen.no/no/kjope-bil/prisliste.html`. The ID.3 Neo's row reads
+      „15“, a typo; the ID.3 GTI is not sold there.
+    - Kia: `kia.no/prislister`, PDFs on `media.crystallize.com`. Some rows
+      give more than one figure, such as the PV5's lowest point and the
+      battery's; take the first.
+    - Nissan: `nissan.no/biler/brosjyrer.html`, PDFs on
+      `www-europe.nissan-cdn.net`, per version.
+    - Toyota and Lexus: `forhandler.toyota.no/pdf/<model>` and
+      `forhandler.lexus.no/pdf/<model>`, named as on `toyota.no/brosjyrer`.
+      None for the Proace or the Lexus ES and TZ.
+    - None from Skoda, Hyundai (only the STARIA's manual), Mercedes or
+      Renault Norway.
+  - Mazda Europe's press kits on mynewsdesk (Word files) give it under
+    technical specifications. Suzuki UK's model page has it in its spec data.
+  - jac.is gives „Veghæð (mm)“. byd.is lists „Minimum ground clearance at
+    full load“ among the Atto 3 Evo's equipment, the only figure for it.
+    GWM Germany's ORA 03 price list gives it unladen for both batteries.
+  - Land Rover's spec sheet for the Range Rover Electric gives only the
+    standard height, 201 mm, not the raised one, so it is left out.
+    Hongqi publishes none.
   - Ford: the price list PDF linked from each car's page on ford.is gives
     „Veghæð mm“ under „Helstu mál“. The PDFs are on `assets.mango.is` and
     `skjol.ford.is`.
