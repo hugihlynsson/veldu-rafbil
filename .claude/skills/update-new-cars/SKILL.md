@@ -262,8 +262,14 @@ make, then model. The fields that are easy to get wrong:
     on `cdn.sanity.io` and `vatt.is` give no clearance for the cars without
     a table, the Dolphin, Atto 3 Evo and Sealion 7.
   - The importers' pages for Mercedes-Benz, Lexus, Hyundai, Nissan, Opel,
-    Citroën, Mini, Land Rover, Fiat, GWM and Suzuki gave no figure, and the
-    Volkswagen newsroom has none in its pages or press releases.
+    Citroën, Mini, Land Rover, Fiat, GWM and Suzuki gave no figure.
+  - Volkswagen: Hekla's price lists, `hekla.is/static/files/efni/verdlistar/vw/<model>.pdf`,
+    give „Veghæð (mm)“ for the ID.3 only. Of the press kits on
+    `volkswagen-newsroom.com` (the „Publikationen“, under `/download`),
+    only the ID. Cross's technical data has „Bodenfreiheit“. Search there
+    in German; the English search finds nothing.
+  - Mercedes-Benz gives none: not in the "All technical data" panel on
+    mercedes-benz.co.uk, nor in its press releases.
   - Kia's specifications are on `digital-brochures.kia.com`, but its table
     of dimensions is an image, with no text to read, and its press site
     offers only zip packages. Nissan, Toyota and BYD give no clearance in the
