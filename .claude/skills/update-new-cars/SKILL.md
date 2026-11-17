@@ -285,6 +285,11 @@ make, then model. The fields that are easy to get wrong:
     open a page there first and fetch the PDF from it. The UK sells only
     the 2WD Ariya, and no other market's brochure turned up for the
     e-4ORCE. nissan.is links only an old issuu price list.
+  - MG publishes no clearance in Europe: not in the UK or Dutch brochures
+    and price lists on `media.mgmotor.eu` (behind Cloudflare, which blocks
+    the browser but lets curl through). MG Australia's brochures give
+    "Running Clearance (mm)", linked from `mgmotor.com.au/vehicles/<model>`
+    as `/brochures/<MODEL>_<year>.pdf`. Match the version by battery.
   - Tesla, Volvo, BMW, Porsche and Audi refuse automated requests, so they
     need a person or a real browser. Do not work around that. In a browser:
     - Tesla: the spec table on `tesla.com/is_is/modely` and `/model3`
