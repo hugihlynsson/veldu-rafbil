@@ -237,7 +237,25 @@ make, then model. The fields that are easy to get wrong:
   and add `adjustable: true` when that is an air-suspension level rather than
   its fixed height. ev-database has no figure. Prefer the unladen one where a
   sheet gives both, and a variant on different springs or wheels may differ
-  from its siblings.
+  from its siblings. Where it has been found:
+  - Most makers' spec tables are drawn by script and are not in the page's
+    HTML. Look for the PDF instead: a brochure or a technical data sheet.
+  - Skoda: the "Technical data" page of each model's press kit on
+    `www.skoda-storyboard.com` links a PDF on its CDN. The same path under
+    `www.skoda-storyboard.com/direct-download/` serves it too. Its
+    "Clearance (at kerb weight)" row spans the columns it is shared by, so
+    read a figure against the version headings by position. A figure in
+    `{braces}` is the other body, such as the 7-seat Peaq. The sheet can be
+    older than the newest versions: the 85x was missing from the Elroq's.
+  - Leapmotor: the brochure PDF linked from each model's page on
+    `www.leapmotor.net`, under "Ground Clearance (mm)". It names its own
+    trims, which are not always the ones sold here.
+  - Icelandic importers sometimes say it in prose, as subaru.is does
+    ("21 cm háa veghæð"). Take that as the maker's figure.
+  - Kia's specifications are on `digital-brochures.kia.com`. Tesla, Volvo,
+    BMW, Porsche and Audi refuse automated requests, so they need a person or
+    a real browser. Do not work around that.
+  - XPENG, Hongqi and MG publish no clearance on their own sites.
 - **`expectedDelivery`** is a lowercase-able Icelandic phrase (`sumar 2026`),
   and having one at all is what makes a car count as expected rather than
   available — it drives both the availability filter and the badge on the card.
