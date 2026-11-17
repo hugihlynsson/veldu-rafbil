@@ -279,6 +279,12 @@ make, then model. The fields that are easy to get wrong:
     mm long) and its PV5 the Cargo, and it sells no EV2, so those have none.
     Nissan, Toyota and BYD give no clearance in the HTML of their UK or EU
     spec pages either.
+  - Nissan: the UK brochures linked from `nissan.co.uk/vehicles/brochures.html`
+    do, under technical specifications. They are on
+    `www-europe.nissan-cdn.net`, which refuses reads from other sites, so
+    open a page there first and fetch the PDF from it. The UK sells only
+    the 2WD Ariya, and no other market's brochure turned up for the
+    e-4ORCE. nissan.is links only an old issuu price list.
   - Tesla, Volvo, BMW, Porsche and Audi refuse automated requests, so they
     need a person or a real browser. Do not work around that. In a browser:
     - Tesla: the spec table on `tesla.com/is_is/modely` and `/model3`
