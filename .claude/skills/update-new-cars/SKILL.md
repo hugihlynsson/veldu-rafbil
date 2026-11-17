@@ -249,7 +249,9 @@ make, then model. The fields that are easy to get wrong:
     older than the newest versions: the 85x was missing from the Elroq's.
   - Leapmotor: the brochure PDF linked from each model's page on
     `www.leapmotor.net`, under "Ground Clearance (mm)". It names its own
-    trims, which are not always the ones sold here.
+    trims, not the ones sold here, but each sheet so far has one figure for
+    every trim, AWD and range extender included, so that figure is the
+    body's and goes on every version.
   - Icelandic importers sometimes say it in prose, as subaru.is does
     ("21 cm háa veghæð"). Take that as the maker's figure.
   - Kia's specifications are on `digital-brochures.kia.com`. Tesla, Volvo,
