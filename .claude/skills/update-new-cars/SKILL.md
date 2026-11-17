@@ -252,8 +252,17 @@ make, then model. The fields that are easy to get wrong:
     trims, not the ones sold here, but each sheet so far has one figure for
     every trim, AWD and range extender included, so that figure is the
     body's and goes on every version.
-  - Icelandic importers sometimes say it in prose, as subaru.is does
-    ("21 cm háa veghæð"). Take that as the maker's figure.
+  - Start with the Icelandic importer's page for the car, its `sellerUrl`,
+    and the PDFs it links. Search the text for "veghæð", "hæð frá jörðu" and
+    "hæð undir lægsta punkt" as well as "ground clearance". Some put it in a
+    spec table (byd.is, "Veghæð (mm)"), some in prose ("21 cm" on
+    subaru.is, "18,1 cm" on renault.is, "16 cm" on peugeotisland.is), and
+    toyota.is in its brochure PDF ("Lágmarkshæð frá jörðu"). Take any of
+    these as the maker's figure. byd.is links its other brochures on
+    `cdn.sanity.io` and `vatt.is`.
+  - The importers' pages for Mercedes-Benz, Lexus, Hyundai, Nissan, Opel,
+    Citroën, Mini, Land Rover, Fiat, GWM and Suzuki gave no figure, and the
+    Volkswagen newsroom has none in its pages or press releases.
   - Kia's specifications are on `digital-brochures.kia.com`, but its table
     of dimensions is an image, with no text to read. Nissan, Toyota and BYD
     give no clearance in the HTML of their UK or EU spec pages either. Tesla, Volvo,
