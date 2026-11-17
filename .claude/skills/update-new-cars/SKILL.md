@@ -288,7 +288,9 @@ make, then model. The fields that are easy to get wrong:
       `volvocars.com/uk/support/car/<model>/article/0ed816eed33d98cac0a8cc377bc12bc7-e6a7973b2bf222b2c0a8b09757c97ec8-8664b2fa77a7e089c0a8296870d1a409/`.
     - BMW: the specifications PDF attached to each model's article on
       `newsroom.bmwgroup.com`, "Ground clearance, empty". Its search is poor,
-      and no sheet was found for the i3, i4, iX1 eDrive20 or iX3 40.
+      and no sheet was found for the i3, i4, iX1 eDrive20 or iX3 40. MINI
+      has its sheets there too: search for "Technical specifications of the
+      MINI" and read "Ground clearance (curb weight)".
     - Porsche: each model page on `porsche.com/international/models/` gives
       every suspension level; the highest is the one to use.
     - Audi's technical data sheets on `uploads.audi.com` have no clearance.
