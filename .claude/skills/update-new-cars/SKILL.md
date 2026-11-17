@@ -308,7 +308,12 @@ make, then model. The fields that are easy to get wrong:
     Electric.
   - Lexus' brochure on `kynningarefni.toyota.is` and the landrover.is pages
     and price lists give none.
-  - XPENG, Hongqi and MG publish no clearance on their own sites.
+  - XPENG's model and spec pages give none in any market checked (is, se,
+    ae and Australia's shop). Its pressroom on `xpeng.com/pressroom/news/`
+    does in places: the Danish G9L release gives „Maksimal frihøjde: 216
+    mm“ on its standard air suspension. The G6, G9, L03 and X9 releases
+    give none.
+  - Hongqi and MG publish no clearance on their own sites.
 - **`expectedDelivery`** is a lowercase-able Icelandic phrase (`sumar 2026`),
   and having one at all is what makes a car count as expected rather than
   available — it drives both the availability filter and the badge on the card.
