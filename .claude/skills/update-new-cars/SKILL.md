@@ -254,7 +254,9 @@ make, then model. The fields that are easy to get wrong:
     body's and goes on every version.
   - Icelandic importers sometimes say it in prose, as subaru.is does
     ("21 cm háa veghæð"). Take that as the maker's figure.
-  - Kia's specifications are on `digital-brochures.kia.com`. Tesla, Volvo,
+  - Kia's specifications are on `digital-brochures.kia.com`, but its table
+    of dimensions is an image, with no text to read. Nissan, Toyota and BYD
+    give no clearance in the HTML of their UK or EU spec pages either. Tesla, Volvo,
     BMW, Porsche and Audi refuse automated requests, so they need a person or
     a real browser. Do not work around that.
   - XPENG, Hongqi and MG publish no clearance on their own sites.
