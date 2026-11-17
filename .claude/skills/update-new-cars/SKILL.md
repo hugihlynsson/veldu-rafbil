@@ -265,10 +265,32 @@ make, then model. The fields that are easy to get wrong:
     Citroën, Mini, Land Rover, Fiat, GWM and Suzuki gave no figure, and the
     Volkswagen newsroom has none in its pages or press releases.
   - Kia's specifications are on `digital-brochures.kia.com`, but its table
-    of dimensions is an image, with no text to read. Nissan, Toyota and BYD
-    give no clearance in the HTML of their UK or EU spec pages either. Tesla, Volvo,
-    BMW, Porsche and Audi refuse automated requests, so they need a person or
-    a real browser. Do not work around that.
+    of dimensions is an image, with no text to read, and its press site
+    offers only zip packages. Nissan, Toyota and BYD give no clearance in the
+    HTML of their UK or EU spec pages either.
+  - Tesla, Volvo, BMW, Porsche and Audi refuse automated requests, so they
+    need a person or a real browser. Do not work around that. In a browser:
+    - Tesla: the spec table on `tesla.com/is_is/modely` and `/model3`
+      („Veghæð“), one tab per trim, also in the page's JSON.
+    - Volvo: the spec pages give none, but each model's "Car dimensions"
+      support article does, at kerb weight plus one person:
+      `volvocars.com/uk/support/car/<model>/article/0ed816eed33d98cac0a8cc377bc12bc7-e6a7973b2bf222b2c0a8b09757c97ec8-8664b2fa77a7e089c0a8296870d1a409/`.
+    - BMW: the specifications PDF attached to each model's article on
+      `newsroom.bmwgroup.com`, "Ground clearance, empty". Its search is poor,
+      and no sheet was found for the i3, i4, iX1 eDrive20 or iX3 40.
+    - Porsche: each model page on `porsche.com/international/models/` gives
+      every suspension level; the highest is the one to use.
+    - Audi's technical data sheets on `uploads.audi.com` have no clearance.
+  - Polestar: `polestar.com/is-is/<model>/specifications/` gives front and
+    rear; take the lower.
+  - renault.co.uk's specifications pages have a "Ground clearance" row, but
+    its Scenic page gives the wrong length, so check a row against renault.is.
+  - Peugeot's price list PDF on peugeotisland.is gives „Veghæð“; the
+    citroen.is and opelisland.is pages link none.
+  - Hyundai: only the IONIQ 9's page on `hyundai.com/eu/en/models/` gives
+    one ("Minimum ground clearance").
+  - Lexus' brochure on `kynningarefni.toyota.is` and the landrover.is pages
+    and price lists give none.
   - XPENG, Hongqi and MG publish no clearance on their own sites.
 - **`expectedDelivery`** is a lowercase-able Icelandic phrase (`sumar 2026`),
   and having one at all is what makes a car count as expected rather than
