@@ -323,6 +323,8 @@ make, then model. The fields that are easy to get wrong:
     For the e-Traveller, Peugeot Norway's price list does („Bakkeklaring“),
     linked from `peugeot.no/nyttige-lenker/last-ned-prislister.html`.
     peugeot.no refuses curl, so fetch it from a page there in a browser.
+    Citroën Norway's price lists, on the same path at citroen.no, give
+    „Bakkeklaring“ in cm, with the values printed apart from their labels.
   - Ford: the price list PDF linked from each car's page on ford.is gives
     „Veghæð mm“ under „Helstu mál“. The PDFs are on `assets.mango.is` and
     `skjol.ford.is`.
