@@ -107,30 +107,42 @@ describe('specRows', () => {
 })
 
 describe('carFigures', () => {
-  const clearance = (overrides: Partial<NewCar>) =>
-    carFigures(car(overrides)).find(({ key }) => key === 'groundClearance')
+  const drive = (overrides: Partial<NewCar>) =>
+    carFigures(car(overrides)).find(({ key }) => key === 'drive')?.cells[0]
 
-  it('gives the ground clearance in mm, and says when it is a raised level', () => {
-    expect(clearance({ groundClearance: { mm: 180 } })?.cells[0]).toEqual({
-      text: '180 mm',
-      detail: undefined,
+  it('gives the ground clearance under the drive', () => {
+    expect(drive({ drive: 'AWD', groundClearance: { mm: 180 } })).toEqual({
+      text: 'AWD',
+      detail: 'Fjórhjóladrif · veghæð\u00a0180\u00a0mm',
       best: false,
     })
-    expect(
-      clearance({ groundClearance: { mm: 240, adjustable: true } })?.cells[0]
-        ?.detail,
-    ).toBe('Hæsta stilling')
   })
 
-  it('leaves the figure out for a car without one', () => {
-    expect(clearance({})).toBeUndefined()
+  it('says "up to" for a raised air-suspension level', () => {
+    expect(
+      drive({ drive: 'AWD', groundClearance: { mm: 240, adjustable: true } })
+        ?.detail,
+    ).toBe('Fjórhjóladrif · veghæð\u00a0allt\u00a0að\u00a0240\u00a0mm')
+  })
+
+  it('leaves the drive as it is for a car without one', () => {
+    expect(drive({ drive: 'AWD' })?.detail).toBe('Fjórhjóladrif')
+  })
+
+  it('adds no figure of its own, so the page keeps its eight', () => {
+    const withIt = car({ groundClearance: { mm: 200 } })
+    expect(carFigures(withIt).map(({ key }) => key)).toEqual(
+      specRows([withIt]).map(({ key }) => key),
+    )
   })
 
   // Too few cars have one for a row of mostly gaps
   it('keeps the ground clearance out of a comparison', () => {
     const withIt = car({ groundClearance: { mm: 200 } })
-    expect(specRows([withIt, withIt]).map(({ key }) => key)).not.toContain(
-      'groundClearance',
-    )
+    expect(
+      specRows([withIt, withIt]).flatMap(({ cells }) =>
+        cells.map((cell) => cell.detail),
+      ),
+    ).not.toContain('Fjórhjóladrif · veghæð\u00a0200\u00a0mm')
   })
 })

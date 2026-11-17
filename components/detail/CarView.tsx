@@ -7,7 +7,7 @@ import type { Car } from '@/modules/data/cars'
 import type { CarReview } from '@/modules/data/carReviews'
 import { carName } from '@/modules/data/getCarId'
 import { carPathOf, comparisonPathOf } from '@/modules/detail/paths'
-import { carFigures, type FigureKey } from '@/modules/detail/specs'
+import { carFigures, type SpecKey } from '@/modules/detail/specs'
 import { carSubtitle, deprecatedNotice } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { dayText } from '@/modules/copy/dayText'
@@ -40,9 +40,9 @@ interface Props {
 /** The name that labels the sheet the car is shown in */
 export const SHEET_TITLE_ID = 'car-sheet-title'
 
-// Eight, which fill the rows two to a row on a phone and four from lg, and
-// the ground clearance beside the drive for a car that has one
-const figureOrder: FigureKey[] = [
+// Eight, which fill the rows two to a row on a phone and four from lg. A
+// ground clearance goes under the drive rather than making a ninth
+const figureOrder: SpecKey[] = [
   'range',
   'acceleration',
   'capacity',
@@ -50,7 +50,6 @@ const figureOrder: FigureKey[] = [
   'charging',
   'power',
   'drive',
-  'groundClearance',
   'towing',
 ]
 
