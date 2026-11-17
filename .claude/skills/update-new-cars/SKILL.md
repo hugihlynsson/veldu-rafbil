@@ -270,10 +270,15 @@ make, then model. The fields that are easy to get wrong:
     in German; the English search finds nothing.
   - Mercedes-Benz gives none: not in the "All technical data" panel on
     mercedes-benz.co.uk, nor in its press releases.
-  - Kia's specifications are on `digital-brochures.kia.com`, but its table
-    of dimensions is an image, with no text to read, and its press site
-    offers only zip packages. Nissan, Toyota and BYD give no clearance in the
-    HTML of their UK or EU spec pages either.
+  - Kia publishes no clearance in Europe: not in the UK digital brochures,
+    the Belgian brochure PDFs or the kia.com/sk spec pages, and its press
+    site offers only zip packages. Kia Australia's brochures do, as "Minimum
+    Ground Clearance (mm)", per version:
+    `kia.com/content/dam/kwcms/au/en/images/pdf/<model>/kia-<model>-brochure.pdf`.
+    Match the version by battery and drive. Its EV4 is the Fastback (4,730
+    mm long) and its PV5 the Cargo, and it sells no EV2, so those have none.
+    Nissan, Toyota and BYD give no clearance in the HTML of their UK or EU
+    spec pages either.
   - Tesla, Volvo, BMW, Porsche and Audi refuse automated requests, so they
     need a person or a real browser. Do not work around that. In a browser:
     - Tesla: the spec table on `tesla.com/is_is/modely` and `/model3`
