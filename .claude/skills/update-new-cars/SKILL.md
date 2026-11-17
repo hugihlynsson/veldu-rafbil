@@ -258,8 +258,9 @@ make, then model. The fields that are easy to get wrong:
     spec table (byd.is, "Veghæð (mm)"), some in prose ("21 cm" on
     subaru.is, "18,1 cm" on renault.is, "16 cm" on peugeotisland.is), and
     toyota.is in its brochure PDF ("Lágmarkshæð frá jörðu"). Take any of
-    these as the maker's figure. byd.is links its other brochures on
-    `cdn.sanity.io` and `vatt.is`.
+    these as the maker's figure. The price sheets and brochures byd.is links
+    on `cdn.sanity.io` and `vatt.is` give no clearance for the cars without
+    a table, the Dolphin, Atto 3 Evo and Sealion 7.
   - The importers' pages for Mercedes-Benz, Lexus, Hyundai, Nissan, Opel,
     Citroën, Mini, Land Rover, Fiat, GWM and Suzuki gave no figure, and the
     Volkswagen newsroom has none in its pages or press releases.
