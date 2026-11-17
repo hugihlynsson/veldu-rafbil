@@ -110,10 +110,11 @@ describe('carFigures', () => {
   const drive = (overrides: Partial<NewCar>) =>
     carFigures(car(overrides)).find(({ key }) => key === 'drive')?.cells[0]
 
-  it('gives the ground clearance under the drive', () => {
+  it('gives the ground clearance under the drive, and its name as the title', () => {
     expect(drive({ drive: 'AWD', groundClearance: { mm: 180 } })).toEqual({
       text: 'AWD',
-      detail: 'Fjórhjóladrif · veghæð\u00a0180\u00a0mm',
+      detail: 'Veghæð 180 mm',
+      title: 'Fjórhjóladrif',
       best: false,
     })
   })
@@ -122,11 +123,15 @@ describe('carFigures', () => {
     expect(
       drive({ drive: 'AWD', groundClearance: { mm: 240, adjustable: true } })
         ?.detail,
-    ).toBe('Fjórhjóladrif · veghæð\u00a0allt\u00a0að\u00a0240\u00a0mm')
+    ).toBe('Veghæð allt að 240 mm')
   })
 
   it('leaves the drive as it is for a car without one', () => {
-    expect(drive({ drive: 'AWD' })?.detail).toBe('Fjórhjóladrif')
+    expect(drive({ drive: 'AWD' })).toEqual({
+      text: 'AWD',
+      detail: 'Fjórhjóladrif',
+      best: false,
+    })
   })
 
   it('adds no figure of its own, so the page keeps its eight', () => {
@@ -143,6 +148,6 @@ describe('carFigures', () => {
       specRows([withIt, withIt]).flatMap(({ cells }) =>
         cells.map((cell) => cell.detail),
       ),
-    ).not.toContain('Fjórhjóladrif · veghæð\u00a0200\u00a0mm')
+    ).not.toContain('Veghæð 200 mm')
   })
 })

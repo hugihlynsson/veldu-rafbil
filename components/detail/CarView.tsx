@@ -175,7 +175,10 @@ const CarView: FunctionComponent<Props> = ({
                 <div key={row.key}>
                   <dt className={eyebrow}>{row.label}</dt>
                   <dd className="m-0 mt-1">
-                    <div className="text-2xl font-normal">
+                    <div
+                      className="text-2xl font-normal"
+                      title={row.cells[0]?.title}
+                    >
                       {row.cells[0]?.text}
                     </div>
                     {row.cells[0]?.detail && (

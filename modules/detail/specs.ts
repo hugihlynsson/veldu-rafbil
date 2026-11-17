@@ -94,6 +94,8 @@ const specs = {
 export interface SpecCell {
   text: string
   detail?: string
+  /** The figure in full, as its title, where the detail no longer gives it */
+  title?: string
   /** Ahead of at least one other car, and behind none */
   best: boolean
 }
@@ -127,23 +129,17 @@ export const specRows = (compared: ReadonlyArray<Car>): SpecRow[] =>
     }
   })
 
-/**
- * The ground clearance as it reads under the drive. Its spaces do not break,
- * so a narrow column wraps it whole onto a line of its own after the drive
- */
+/** The ground clearance as it reads under the drive */
 export const groundClearanceText = ({
   mm,
   adjustable,
 }: NonNullable<Car['groundClearance']>): string =>
-  (adjustable ? `veghæð allt að ${mm} mm` : `veghæð ${mm} mm`).replaceAll(
-    ' ',
-    '\u00a0',
-  )
+  adjustable ? `Veghæð allt að ${mm} mm` : `Veghæð ${mm} mm`
 
 // Only some cars have a ground clearance yet, so it is on a car's own page
-// alone, kept out of comparisons. It rides on the drive's detail rather than
+// alone, kept out of comparisons. It takes the drive's detail rather than
 // being a figure of its own, so the page keeps eight figures, which fill the
-// rows evenly at every width
+// rows evenly at every width. The drive's name moves to the figure's title
 export const carFigures = (car: Car): SpecRow[] => {
   const clearance =
     car.groundClearance && groundClearanceText(car.groundClearance)
@@ -153,7 +149,8 @@ export const carFigures = (car: Car): SpecRow[] => {
           ...row,
           cells: row.cells.map((cell) => ({
             ...cell,
-            detail: [cell.detail, clearance].filter(Boolean).join(' · '),
+            detail: clearance,
+            title: cell.detail,
           })),
         }
       : row,
