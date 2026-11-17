@@ -295,6 +295,10 @@ make, then model. The fields that are easy to get wrong:
     as `/brochures/<MODEL>_<year>.pdf`. Match the version by battery.
   - XPENG gives none for the G6, G9, L03 or X9: the Australian model pages
     have no spec table, and XPENG Malaysia's spec PDFs leave it out.
+  - Opel: the Swedish price lists, `dokument.opel.se/prislistor/personbilar/<model>.pdf`,
+    give „Markfrigångshöjd tjänstevikt/max. last“ for the Grandland. The
+    Frontera's row is there but empty. Vauxhall's and opel.de's PDFs refuse
+    automated requests.
   - Tesla, Volvo, BMW, Porsche and Audi refuse automated requests, so they
     need a person or a real browser. Do not work around that. In a browser:
     - Tesla: the spec table on `tesla.com/is_is/modely` and `/model3`
