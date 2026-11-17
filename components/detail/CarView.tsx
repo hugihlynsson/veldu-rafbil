@@ -7,7 +7,7 @@ import type { Car } from '@/modules/data/cars'
 import type { CarReview } from '@/modules/data/carReviews'
 import { carName } from '@/modules/data/getCarId'
 import { carPathOf, comparisonPathOf } from '@/modules/detail/paths'
-import { specRows, type SpecKey } from '@/modules/detail/specs'
+import { carFigures, type SpecKey } from '@/modules/detail/specs'
 import { carSubtitle, deprecatedNotice } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import { dayText } from '@/modules/copy/dayText'
@@ -40,7 +40,8 @@ interface Props {
 /** The name that labels the sheet the car is shown in */
 export const SHEET_TITLE_ID = 'car-sheet-title'
 
-// Eight, which fill the rows two to a row on a phone and four from lg
+// Eight, which fill the rows two to a row on a phone and four from lg. A
+// ground clearance goes under the drive rather than making a ninth
 const figureOrder: SpecKey[] = [
   'range',
   'acceleration',
@@ -69,7 +70,7 @@ const CarView: FunctionComponent<Props> = ({
   const subTitle = carSubtitle(car)
   const notice = deprecatedNotice(car)
   // The price is the pill under the name
-  const figures = specRows([car])
+  const figures = carFigures(car)
     .filter(({ key }) => figureOrder.includes(key))
     .toSorted((a, b) => figureOrder.indexOf(a.key) - figureOrder.indexOf(b.key))
 
@@ -174,7 +175,10 @@ const CarView: FunctionComponent<Props> = ({
                 <div key={row.key}>
                   <dt className={eyebrow}>{row.label}</dt>
                   <dd className="m-0 mt-1">
-                    <div className="text-2xl font-normal">
+                    <div
+                      className="text-2xl font-normal"
+                      title={row.cells[0]?.title}
+                    >
                       {row.cells[0]?.text}
                     </div>
                     {row.cells[0]?.detail && (

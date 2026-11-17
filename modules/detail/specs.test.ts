@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { deriveCar } from '@/modules/data/cars'
 import type { NewCar } from '@/modules/data/newCarSchema'
-import { specRows } from './specs'
+import { carFigures, specRows } from './specs'
 
 const base: NewCar = {
   make: 'Kia',
@@ -103,5 +103,51 @@ describe('specRows', () => {
     expect(
       row('price', car({ price: 6_390_000 }), car({}))?.cells[0],
     ).toMatchObject({ text: '5.990.000 kr.', detail: 'með styrk' })
+  })
+})
+
+describe('carFigures', () => {
+  const drive = (overrides: Partial<NewCar>) =>
+    carFigures(car(overrides)).find(({ key }) => key === 'drive')?.cells[0]
+
+  it('gives the ground clearance under the drive, and its name as the title', () => {
+    expect(drive({ drive: 'AWD', groundClearance: { mm: 180 } })).toEqual({
+      text: 'AWD',
+      detail: 'Veghæð 180 mm',
+      title: 'Fjórhjóladrif',
+      best: false,
+    })
+  })
+
+  it('says "up to" for a raised air-suspension level', () => {
+    expect(
+      drive({ drive: 'AWD', groundClearance: { mm: 240, adjustable: true } })
+        ?.detail,
+    ).toBe('Veghæð allt að 240 mm')
+  })
+
+  it('leaves the drive as it is for a car without one', () => {
+    expect(drive({ drive: 'AWD' })).toEqual({
+      text: 'AWD',
+      detail: 'Fjórhjóladrif',
+      best: false,
+    })
+  })
+
+  it('adds no figure of its own, so the page keeps its eight', () => {
+    const withIt = car({ groundClearance: { mm: 200 } })
+    expect(carFigures(withIt).map(({ key }) => key)).toEqual(
+      specRows([withIt]).map(({ key }) => key),
+    )
+  })
+
+  // Too few cars have one for a row of mostly gaps
+  it('keeps the ground clearance out of a comparison', () => {
+    const withIt = car({ groundClearance: { mm: 200 } })
+    expect(
+      specRows([withIt, withIt]).flatMap(({ cells }) =>
+        cells.map((cell) => cell.detail),
+      ),
+    ).not.toContain('Veghæð 200 mm')
   })
 })

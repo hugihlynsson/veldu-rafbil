@@ -231,6 +231,155 @@ make, then model. The fields that are easy to get wrong:
   "no towbar", so confirm a `0` on the car's page or the maker's spec sheet
   (the UK, German or French sites usually give towing; Icelandic importers
   rarely do), and when ev-database and the maker disagree, take the maker's.
+- **`groundClearance` is optional, in mm, from the maker.** Leave it out
+  rather than guess: the car's page shows it only where it is set, and nothing
+  else reads it yet. Take the highest the car can be raised, options included,
+  and add `adjustable: true` when that is an air-suspension level rather than
+  its fixed height. ev-database has no figure. Prefer the unladen one where a
+  sheet gives both, and a variant on different springs or wheels may differ
+  from its siblings. Where it has been found:
+  - Most makers' spec tables are drawn by script and are not in the page's
+    HTML. Look for the PDF instead: a brochure or a technical data sheet.
+  - Skoda: the "Technical data" page of each model's press kit on
+    `www.skoda-storyboard.com` links a PDF on its CDN. The same path under
+    `www.skoda-storyboard.com/direct-download/` serves it too. Its
+    "Clearance (at kerb weight)" row spans the columns it is shared by, so
+    read a figure against the version headings by position. A figure in
+    `{braces}` is the other body, such as the 7-seat Peaq. The sheet can be
+    older than the newest versions: the 85x was missing from the Elroq's.
+  - Leapmotor: the brochure PDF linked from each model's page on
+    `www.leapmotor.net`, under "Ground Clearance (mm)". It names its own
+    trims, not the ones sold here, but each sheet so far has one figure for
+    every trim, AWD and range extender included, so that figure is the
+    body's and goes on every version.
+  - Start with the Icelandic importer's page for the car, its `sellerUrl`,
+    and the PDFs it links. Search the text for "veghæð", "hæð frá jörðu" and
+    "hæð undir lægsta punkt" as well as "ground clearance". Some put it in a
+    spec table (byd.is, "Veghæð (mm)"), some in prose ("21 cm" on
+    subaru.is, "18,1 cm" on renault.is, "16 cm" on peugeotisland.is), and
+    toyota.is in its brochure PDF ("Lágmarkshæð frá jörðu"). Take any of
+    these as the maker's figure. The price sheets and brochures byd.is links
+    on `cdn.sanity.io` and `vatt.is` give no clearance for the cars without
+    a table, the Dolphin, Atto 3 Evo and Sealion 7. BYD's Thai distributor
+    does, as "Ground Clearance Unladen (mm)", on
+    `reverautomotive.com/en/model/<model>/tech-spec`. Its Atto 3 is the
+    older front-wheel-drive car, not the Evo.
+  - The importers' pages for Mercedes-Benz, Lexus, Hyundai, Nissan, Opel,
+    Citroën, Mini, Land Rover, Fiat, GWM and Suzuki gave no figure.
+  - Volkswagen: Hekla's price lists, `hekla.is/static/files/efni/verdlistar/vw/<model>.pdf`,
+    give „Veghæð (mm)“ for the ID.3 only. Of the press kits on
+    `volkswagen-newsroom.com` (the „Publikationen“, under `/download`),
+    only the ID. Cross's technical data has „Bodenfreiheit“. Search there
+    in German; the English search finds nothing.
+  - Mercedes-Benz gives none: not in the "All technical data" panel on
+    mercedes-benz.co.uk, nor in its press releases.
+  - Kia publishes no clearance in Europe: not in the UK digital brochures,
+    the Belgian brochure PDFs or the kia.com/sk spec pages, and its press
+    site offers only zip packages. Kia Australia's brochures do, as "Minimum
+    Ground Clearance (mm)", per version:
+    `kia.com/content/dam/kwcms/au/en/images/pdf/<model>/kia-<model>-brochure.pdf`.
+    Match the version by battery and drive. Its EV4 is the Fastback (4,730
+    mm long) and its PV5 the Cargo, and it sells no EV2, so those have none.
+    Nissan, Toyota and BYD give no clearance in the HTML of their UK or EU
+    spec pages either.
+  - Nissan: the UK brochures linked from `nissan.co.uk/vehicles/brochures.html`
+    do, under technical specifications. They are on
+    `www-europe.nissan-cdn.net`, which refuses reads from other sites, so
+    open a page there first and fetch the PDF from it. The UK sells only
+    the 2WD Ariya, and no other market's brochure turned up for the
+    e-4ORCE. nissan.is links only an old issuu price list.
+  - MG publishes no clearance in Europe: not in the UK or Dutch brochures
+    and price lists on `media.mgmotor.eu` (behind Cloudflare, which blocks
+    the browser but lets curl through). MG Australia's brochures give
+    "Running Clearance (mm)", linked from `mgmotor.com.au/vehicles/<model>`
+    as `/brochures/<MODEL>_<year>.pdf`. Match the version by battery.
+  - XPENG gives none for the G6, G9, L03 or X9: the Australian model pages
+    have no spec table, and XPENG Malaysia's spec PDFs leave it out.
+  - Opel: the Swedish price lists, `dokument.opel.se/prislistor/personbilar/<model>.pdf`,
+    give „Markfrigångshöjd tjänstevikt/max. last“ for the Grandland. The
+    Frontera's row is there but empty. Vauxhall's and opel.de's PDFs refuse
+    automated requests.
+  - Tesla, Volvo, BMW, Porsche and Audi refuse automated requests, so they
+    need a person or a real browser. Do not work around that. In a browser:
+    - Tesla: the spec table on `tesla.com/is_is/modely` and `/model3`
+      („Veghæð“), one tab per trim, also in the page's JSON.
+    - Volvo: the spec pages give none, but each model's "Car dimensions"
+      support article does, at kerb weight plus one person:
+      `volvocars.com/uk/support/car/<model>/article/0ed816eed33d98cac0a8cc377bc12bc7-e6a7973b2bf222b2c0a8b09757c97ec8-8664b2fa77a7e089c0a8296870d1a409/`.
+    - BMW: the specifications PDF attached to each model's article on
+      `newsroom.bmwgroup.com`, "Ground clearance, empty". Its search is poor,
+      and no sheet was found for the i3, i4, iX1 eDrive20 or iX3 40. MINI
+      has its sheets there too: search for "Technical specifications of the
+      MINI" and read "Ground clearance (curb weight)".
+    - Porsche: each model page on `porsche.com/international/models/` gives
+      every suspension level; the highest is the one to use.
+    - Audi's technical data sheets on `uploads.audi.com` have no clearance.
+  - Polestar: `polestar.com/is-is/<model>/specifications/` gives front and
+    rear; take the lower.
+  - renault.co.uk's specifications pages have a "Ground clearance" row, but
+    its Scenic page gives the wrong length, so check a row against renault.is.
+  - Peugeot's price list PDF on peugeotisland.is gives „Veghæð“; the
+    citroen.is and opelisland.is pages link none.
+    For the e-Traveller, Peugeot Norway's price list does („Bakkeklaring“),
+    linked from `peugeot.no/nyttige-lenker/last-ned-prislister.html`.
+    peugeot.no refuses curl, so fetch it from a page there in a browser.
+    Citroën Norway's price lists, on the same path at citroen.no, give
+    „Bakkeklaring“ in cm, with the values printed apart from their labels.
+    Fiat Norway's do for the 600e, not the 500e. Its links under
+    `fiat.no/modeller/<model>/…prisliste…` serve the PDF as a download, so
+    fetch them from a page there rather than opening them.
+    Jeep Norway's Avenger price list, linked from
+    `jeep.com/no/modeller/jeep-avenger/elektrisk.html`, gives it in mm.
+  - Other Norwegian importers' price lists give „Bakkeklaring“ too:
+    - Volkswagen: the „tekniske data“ PDFs linked from
+      `volkswagen.no/no/kjope-bil/prisliste.html`. The ID.3 Neo's row reads
+      „15“, a typo; the ID.3 GTI is not sold there.
+    - Kia: `kia.no/prislister`, PDFs on `media.crystallize.com`. Some rows
+      give more than one figure, such as the PV5's lowest point and the
+      battery's; take the first.
+    - Nissan: `nissan.no/biler/brosjyrer.html`, PDFs on
+      `www-europe.nissan-cdn.net`, per version.
+    - Toyota and Lexus: `forhandler.toyota.no/pdf/<model>` and
+      `forhandler.lexus.no/pdf/<model>`, named as on `toyota.no/brosjyrer`.
+      None for the Proace or the Lexus ES and TZ.
+    - None from Skoda, Hyundai (only the STARIA's manual), Mercedes or
+      Renault Norway.
+  - Mazda Europe's press kits on mynewsdesk (Word files) give it under
+    technical specifications. Suzuki UK's model page has it in its spec data.
+  - jac.is gives „Veghæð (mm)“. byd.is lists „Minimum ground clearance at
+    full load“ among the Atto 3 Evo's equipment, the only figure for it.
+    GWM Germany's ORA 03 price list gives it unladen for both batteries.
+  - Land Rover's spec sheet for the Range Rover Electric gives only the
+    standard height, 201 mm, not the raised one, so it is left out.
+    Hongqi publishes none.
+  - Ford: the price list PDF linked from each car's page on ford.is gives
+    „Veghæð mm“ under „Helstu mál“. The PDFs are on `assets.mango.is` and
+    `skjol.ford.is`.
+  - Hyundai: the IONIQ 9's page on `hyundai.com/eu/en/models/` gives one
+    ("Minimum ground clearance"), and so does the IONIQ 3's EU brochure,
+    linked from its technical data page on `dmassets.hyundai.com`. Open
+    those brochures with `fetch`, not by navigating: the server sends them
+    as downloads. The other EU brochures have none, but Hyundai Australia's
+    specification sheets do, under `hyundai.com/content/dam/hyundai/au/`
+    (INSTER, IONIQ 5, Kona Electric). No sheet was found for the STARIA
+    Electric.
+  - Lexus: the technical specifications PDFs on `media.lexus.co.uk`
+    ("Min. ground clearance"), found by searching the site's PDFs by name,
+    such as `251017-RZ-tech-specs.pdf`. Its brochure on
+    `kynningarefni.toyota.is` gives none, and no sheet had been published
+    for the new ES or the TZ by November 2026.
+  - The landrover.is pages and price lists give none.
+  - XPENG's model and spec pages give none in any market checked (is, se,
+    ae and Australia's shop). Its pressroom on `xpeng.com/pressroom/news/`
+    does in places: the Danish G9L release gives „Maksimal frihøjde: 216
+    mm“ on its standard air suspension. The G6, G9, L03 and X9 releases
+    give none.
+  - smart: the specifications pages on `uk.smart.com/en/models/hashtag-<one|three|five>/specifications/`
+    give "Ground Clearance curb 0/5" per trim; take the first, the unladen
+    one. The UK sells no Pulse #1 or #3, but every other trim there shares
+    one figure, so the Pulse takes it. smart.askja.is links only an issuu
+    price list.
+  - Hongqi and MG publish no clearance on their own sites.
 - **`expectedDelivery`** is a lowercase-able Icelandic phrase (`sumar 2026`),
   and having one at all is what makes a car count as expected rather than
   available — it drives both the availability filter and the badge on the card.
