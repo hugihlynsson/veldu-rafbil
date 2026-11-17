@@ -298,8 +298,14 @@ make, then model. The fields that are easy to get wrong:
     its Scenic page gives the wrong length, so check a row against renault.is.
   - Peugeot's price list PDF on peugeotisland.is gives „Veghæð“; the
     citroen.is and opelisland.is pages link none.
-  - Hyundai: only the IONIQ 9's page on `hyundai.com/eu/en/models/` gives
-    one ("Minimum ground clearance").
+  - Hyundai: the IONIQ 9's page on `hyundai.com/eu/en/models/` gives one
+    ("Minimum ground clearance"), and so does the IONIQ 3's EU brochure,
+    linked from its technical data page on `dmassets.hyundai.com`. Open
+    those brochures with `fetch`, not by navigating: the server sends them
+    as downloads. The other EU brochures have none, but Hyundai Australia's
+    specification sheets do, under `hyundai.com/content/dam/hyundai/au/`
+    (INSTER, IONIQ 5, Kona Electric). No sheet was found for the STARIA
+    Electric.
   - Lexus' brochure on `kynningarefni.toyota.is` and the landrover.is pages
     and price lists give none.
   - XPENG, Hongqi and MG publish no clearance on their own sites.
