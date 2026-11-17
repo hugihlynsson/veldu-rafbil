@@ -325,6 +325,9 @@ make, then model. The fields that are easy to get wrong:
     peugeot.no refuses curl, so fetch it from a page there in a browser.
     Citroën Norway's price lists, on the same path at citroen.no, give
     „Bakkeklaring“ in cm, with the values printed apart from their labels.
+    Fiat Norway's do for the 600e, not the 500e. Its links under
+    `fiat.no/modeller/<model>/…prisliste…` serve the PDF as a download, so
+    fetch them from a page there rather than opening them.
   - Ford: the price list PDF linked from each car's page on ford.is gives
     „Veghæð mm“ under „Helstu mál“. The PDFs are on `assets.mango.is` and
     `skjol.ford.is`.
