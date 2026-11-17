@@ -320,6 +320,9 @@ make, then model. The fields that are easy to get wrong:
     its Scenic page gives the wrong length, so check a row against renault.is.
   - Peugeot's price list PDF on peugeotisland.is gives „Veghæð“; the
     citroen.is and opelisland.is pages link none.
+    For the e-Traveller, Peugeot Norway's price list does („Bakkeklaring“),
+    linked from `peugeot.no/nyttige-lenker/last-ned-prislister.html`.
+    peugeot.no refuses curl, so fetch it from a page there in a browser.
   - Ford: the price list PDF linked from each car's page on ford.is gives
     „Veghæð mm“ under „Helstu mál“. The PDFs are on `assets.mango.is` and
     `skjol.ford.is`.
