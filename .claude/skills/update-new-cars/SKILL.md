@@ -260,7 +260,10 @@ make, then model. The fields that are easy to get wrong:
     toyota.is in its brochure PDF ("Lágmarkshæð frá jörðu"). Take any of
     these as the maker's figure. The price sheets and brochures byd.is links
     on `cdn.sanity.io` and `vatt.is` give no clearance for the cars without
-    a table, the Dolphin, Atto 3 Evo and Sealion 7.
+    a table, the Dolphin, Atto 3 Evo and Sealion 7. BYD's Thai distributor
+    does, as "Ground Clearance Unladen (mm)", on
+    `reverautomotive.com/en/model/<model>/tech-spec`. Its Atto 3 is the
+    older front-wheel-drive car, not the Evo.
   - The importers' pages for Mercedes-Benz, Lexus, Hyundai, Nissan, Opel,
     Citroën, Mini, Land Rover, Fiat, GWM and Suzuki gave no figure.
   - Volkswagen: Hekla's price lists, `hekla.is/static/files/efni/verdlistar/vw/<model>.pdf`,
@@ -290,6 +293,8 @@ make, then model. The fields that are easy to get wrong:
     the browser but lets curl through). MG Australia's brochures give
     "Running Clearance (mm)", linked from `mgmotor.com.au/vehicles/<model>`
     as `/brochures/<MODEL>_<year>.pdf`. Match the version by battery.
+  - XPENG gives none for the G6, G9, L03 or X9: the Australian model pages
+    have no spec table, and XPENG Malaysia's spec PDFs leave it out.
   - Tesla, Volvo, BMW, Porsche and Audi refuse automated requests, so they
     need a person or a real browser. Do not work around that. In a browser:
     - Tesla: the spec table on `tesla.com/is_is/modely` and `/model3`
