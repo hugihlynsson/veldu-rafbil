@@ -298,6 +298,9 @@ make, then model. The fields that are easy to get wrong:
     its Scenic page gives the wrong length, so check a row against renault.is.
   - Peugeot's price list PDF on peugeotisland.is gives „Veghæð“; the
     citroen.is and opelisland.is pages link none.
+  - Ford: the price list PDF linked from each car's page on ford.is gives
+    „Veghæð mm“ under „Helstu mál“. The PDFs are on `assets.mango.is` and
+    `skjol.ford.is`.
   - Hyundai: the IONIQ 9's page on `hyundai.com/eu/en/models/` gives one
     ("Minimum ground clearance"), and so does the IONIQ 3's EU brochure,
     linked from its technical data page on `dmassets.hyundai.com`. Open
