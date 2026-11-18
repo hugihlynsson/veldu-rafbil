@@ -44,6 +44,7 @@ describe('intentRequest', () => {
       ADVISOR_KEY,
       'drive',
       'fastcharge',
+      'groundClearance',
       'range',
       'towing',
       'value',
@@ -82,6 +83,7 @@ describe('withNumbers', () => {
       range: [600],
       seats: [8],
       towing: [600],
+      groundClearance: [],
       drive: [],
       acceleration: [8],
       fastcharge: [],
@@ -103,6 +105,13 @@ describe('withNumbers', () => {
     expect(stated(['1,5']).towing).toEqual([1500])
     expect(stated(['3']).towing).toEqual([])
     expect(stated(['1300']).towing).toEqual([1300])
+  })
+
+  // "20" is read beside "veghæð" by the parser, and is too often something else
+  it('offers ground clearance only for a number as large as one in mm', () => {
+    expect(stated(['190']).groundClearance).toEqual([190])
+    expect(stated(['20']).groundClearance).toEqual([])
+    expect(stated(['400']).groundClearance).toEqual([])
   })
 
   it('offers seats only for more people than nearly every car seats', () => {

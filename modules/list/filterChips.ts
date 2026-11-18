@@ -56,6 +56,14 @@ const chipText: {
       removeLabel: `Fjarlægja dráttargetusíu: lágmark ${kg} kg`,
     }
   },
+  groundClearance: (min) => {
+    const mm = addDecimalSeparators(min)
+    return {
+      label: 'Veghæð:',
+      value: `↑${mm} mm`,
+      removeLabel: `Fjarlægja veghæðarsíu: lágmark ${mm} mm`,
+    }
+  },
   drive: (drives) => ({
     label: 'Drif:',
     value: drives.join(', '),

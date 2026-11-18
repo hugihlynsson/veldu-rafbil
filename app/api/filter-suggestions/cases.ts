@@ -100,6 +100,19 @@ export const intentCases: IntentCase[] = [
   },
   // No filter holds the most a car tows
   { text: 'dráttargeta undir 1000 kg', kind: 'literal', expect: {} },
+  {
+    text: 'veghæð minnst 200 mm',
+    kind: 'literal',
+    expect: { groundClearance: 200 },
+  },
+  { text: 'veghæð 18 cm', kind: 'literal', expect: { groundClearance: 180 } },
+  {
+    text: '20 cm veghæð og fjórhjóladrif',
+    kind: 'literal',
+    expect: { groundClearance: 200, drive: ['AWD'] },
+  },
+  // No filter holds the lowest a car may sit
+  { text: 'veghæð undir 150 mm', kind: 'literal', expect: {} },
   // When the car can be had is never suggested
   { text: 'fáanlegur strax, 5 sæti', kind: 'literal', expect: { seats: 5 } },
   { text: 'væntanlegir bílar', kind: 'literal', expect: {} },
@@ -319,7 +332,7 @@ export const intentCases: IntentCase[] = [
     text: 'lúxus jeppi',
     kind: 'vague',
     expect: {},
-    allow: ['drive', 'seats', 'acceleration'],
+    allow: ['drive', 'seats', 'acceleration', 'groundClearance'],
   },
   { text: 'bara eitthvað rafmagns', kind: 'vague', expect: {} },
   { text: 'rafbíll', kind: 'vague', expect: {} },
@@ -338,7 +351,25 @@ export const intentCases: IntentCase[] = [
     text: 'þarf að komast upp á hálendið',
     kind: 'vague',
     expect: { drive: ['AWD'] },
-    allow: ['range'],
+    allow: ['range', 'groundClearance'],
+  },
+  {
+    text: 'þarf að komast yfir óbrúaðar ár',
+    kind: 'vague',
+    expect: { groundClearance: { oneOf: ['highest'] } },
+    allow: ['drive'],
+  },
+  {
+    text: 'hátt undir hann',
+    kind: 'vague',
+    expect: { groundClearance: 'any' },
+  },
+  { text: 'mikil veghæð', kind: 'vague', expect: { groundClearance: 'any' } },
+  {
+    text: 'keyri F-vegi á sumrin',
+    kind: 'vague',
+    expect: { groundClearance: { oneOf: ['high', 'highest'] } },
+    allow: ['drive'],
   },
 
   // A word like "hratt" fits several questions, and should answer only one
@@ -415,7 +446,12 @@ export const intentCases: IntentCase[] = [
     kind: 'vague',
     expect: { price: { oneOf: ['cheap'] } },
   },
-  { text: 'jeppi fyrir fjallvegi', kind: 'vague', expect: { drive: ['AWD'] } },
+  {
+    text: 'jeppi fyrir fjallvegi',
+    kind: 'vague',
+    expect: { drive: ['AWD'] },
+    allow: ['groundClearance'],
+  },
   { text: 'hálka og brekkur', kind: 'vague', expect: { drive: ['AWD'] } },
   {
     text: 'nýr bíll sem er ekki kominn til landsins',
@@ -442,6 +478,11 @@ export const intentCases: IntentCase[] = [
   },
 
   { text: 'kemst 600 á hleðslunni', kind: 'number', expect: { range: 600 } },
+  {
+    text: 'þarf hátt undir hann, helst 190',
+    kind: 'number',
+    expect: { groundClearance: 190 },
+  },
   { text: 'við erum 8', kind: 'number', expect: { seats: 8 } },
   {
     text: 'hjólhýsið er 1300 á þyngd',

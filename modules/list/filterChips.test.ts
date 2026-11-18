@@ -35,6 +35,16 @@ describe('filterChipText', () => {
     })
   })
 
+  it('writes ground clearance in mm', () => {
+    expect(filterChipText('groundClearance', 180)).toEqual({
+      label: 'Veghæð:',
+      value: '↑180 mm',
+      removeLabel: 'Fjarlægja veghæðarsíu: lágmark 180 mm',
+    })
+    // The URL is not bounded, and a number in the list takes a thousands dot
+    expect(filterChipText('groundClearance', 1500).value).toBe('↑1.500 mm')
+  })
+
   it('writes an acceleration to one decimal', () => {
     expect(filterChipText('acceleration', 7).value).toBe('↓7.0s')
   })

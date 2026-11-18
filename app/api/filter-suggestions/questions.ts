@@ -6,7 +6,12 @@ import type {
 
 import type { FilterKey, FilterValue } from '@/modules/list/filters'
 import cars, { type Car } from '@/modules/data/cars'
-import { readNumber, readTowing, within } from '@/modules/list/filterIntent'
+import {
+  readGroundClearance,
+  readNumber,
+  readTowing,
+  within,
+} from '@/modules/list/filterIntent'
 
 export interface Option<Key extends FilterKey> {
   label: string
@@ -282,6 +287,48 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
         }
       },
     },
+    // Fixed heights rather than brackets cut from the list, like towing: a
+    // ford is as deep as it is. Snow and gravel are left to all-wheel drive,
+    // which most cars that sit low still have, so a winter car is not also
+    // asked to be a high one.
+    groundClearance: {
+      key: 'groundClearance',
+      ordered: true,
+      instructions:
+        'Does the person in `request` need a car that sits high off the road? In Icelandic, veghæð, hátt undir hann, hátt undir bílinn, hálendið, F-vegir, fjallvegir, slóðar, óbrúaðar ár and vöð ask for ground clearance.',
+      none: 'Ground clearance is not mentioned: nothing about sitting high, the highlands, mountain tracks or fording rivers. Winter, snow, ice and gravel roads alone call for all-wheel drive, not a high car, and a jeppi named for its size, comfort or luxury is not one asked to sit high',
+      options: [
+        {
+          label: 'raised',
+          value: 160,
+          description:
+            'Higher than a regular car, for rough gravel roads, or a high car with nothing more said: at least 160 mm',
+        },
+        {
+          label: 'high',
+          value: 180,
+          description:
+            'Mountain roads and F-roads (fjallvegir) in summer: at least 180 mm',
+        },
+        {
+          label: 'highest',
+          value: 200,
+          description:
+            'The rougher highland tracks and fording rivers (óbrúaðar ár, vöð): at least 200 mm',
+        },
+      ],
+      // Only a number as large as a clearance in mm: a bare "20" is far more
+      // often something else, and the parser reads it beside "veghæð" itself
+      fromNumber: (text) => {
+        const min = readGroundClearance(text, 'mm')
+        if (min === undefined) return undefined
+        return {
+          label: `at_least_${min}_mm`,
+          value: min,
+          description: `${theNumber(text)} as the ground clearance the car needs: at least ${min} mm`,
+        }
+      },
+    },
     acceleration: {
       key: 'acceleration',
       ordered: true,
@@ -416,7 +463,7 @@ const advisorQuestion: NoulQuestion = {
 // Every question is answered on its own, so each is told what the words
 // around a number mean, or a "7" that is a price is read as seats too
 const statedInstructions =
-  'Options that name a number are read off `request`. Take one only when the words around that number say it is about this: kosta, verð, dýr and milljónir are price; km, kemst, drægni and keyra are distance; sæti, manna, erum and börn are people; draga, kerra, hjólhýsi, kg and tonn are towing; sek and í hundraðið are acceleration.'
+  'Options that name a number are read off `request`. Take one only when the words around that number say it is about this: kosta, verð, dýr and milljónir are price; km, kemst, drægni and keyra are distance; sæti, manna, erum and börn are people; draga, kerra, hjólhýsi, kg and tonn are towing; veghæð, mm and cm are ground clearance; sek and í hundraðið are acceleration.'
 
 const toChoice = (question: IntentQuestion<FilterKey>): ChoiceQuestion => {
   const stated = question.stated ?? []
