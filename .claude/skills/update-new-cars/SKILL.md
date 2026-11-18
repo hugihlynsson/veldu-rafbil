@@ -452,7 +452,13 @@ make, then model. The fields that are easy to get wrong:
       (`yanase.co.jp/mercedes-benz/<model>/`) mirrors older ones.
       Japan rarely sells our exact versions. Where every listed version of
       a model shares one figure, we used it for ours too (EQS 580, EQS SUV
-      580, GLC 400, CLA 350, EQA 300). The same goes for BMW's iX1 eDrive20,
+      580, GLC 400, CLA 350, EQA 300). Japan's figure is the AIRMATIC
+      normal level, so where air suspension is standard add the raise from
+      the press kit and mark it adjustable: up to 25 mm on the EQS and EQS
+      SUV (German press kits), giving 165 and 200. The EQE SUV's optional
+      AIRMATIC raises up to 30 mm, but the DI does not say whether its 160
+      is on air or steel springs, and the electric GLC's press kit gives no
+      raise, so both keep the DI figure. The same goes for BMW's iX1 eDrive20,
       which takes the xDrive30's 170. In November 2026 Japan sold no
       electric C, GLA, GLB, AMG GT 4-door, VLE, EQV, EQT or eVito, so
       those have none.
