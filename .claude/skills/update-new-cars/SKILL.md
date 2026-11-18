@@ -231,13 +231,14 @@ make, then model. The fields that are easy to get wrong:
   "no towbar", so confirm a `0` on the car's page or the maker's spec sheet
   (the UK, German or French sites usually give towing; Icelandic importers
   rarely do), and when ev-database and the maker disagree, take the maker's.
-- **`groundClearance` is optional, in mm, from the maker.** Leave it out
-  rather than guess: the car's page shows it only where it is set, and nothing
-  else reads it yet. Take the highest the car can be raised, options included,
-  and add `adjustable: true` when that is an air-suspension level rather than
-  its fixed height. ev-database has no figure. Prefer the unladen one where a
-  sheet gives both, and a variant on different springs or wheels may differ
-  from its siblings. Where it has been found:
+- **`groundClearance` is in mm, from the maker, and `null` where you could
+  not find it**, which the car's page shows as „Veghæð óþekkt“ rather than
+  guess. Nothing but the car's page reads it yet. Take the highest the car
+  can be raised, options included, and add `adjustable: true` when that is
+  an air-suspension level rather than its fixed height. ev-database has no
+  figure. Prefer the unladen one where a sheet gives both, and a variant on
+  different springs or wheels may differ from its siblings. Where it has been
+  found:
   - Most makers' spec tables are drawn by script and are not in the page's
     HTML. Look for the PDF instead: a brochure or a technical data sheet.
   - Skoda: the "Technical data" page of each model's press kit on
@@ -271,8 +272,10 @@ make, then model. The fields that are easy to get wrong:
     `volkswagen-newsroom.com` (the „Publikationen“, under `/download`),
     only the ID. Cross's technical data has „Bodenfreiheit“. Search there
     in German; the English search finds nothing.
-  - Mercedes-Benz gives none: not in the "All technical data" panel on
-    mercedes-benz.co.uk, nor in its press releases.
+  - Mercedes-Benz gives none in Europe or the US: not in the "All technical data" panel on
+    mercedes-benz.co.uk, nor in its press releases, nor on mbusa.com, which
+    says only that the air suspension raises the car "up to an inch". Mercedes Japan's spec
+    PDFs do give it; see the Japanese bullet below.
   - Kia publishes no clearance in Europe: not in the UK digital brochures,
     the Belgian brochure PDFs or the kia.com/sk spec pages, and its press
     site offers only zip packages. Kia Australia's brochures do, as "Minimum
@@ -307,10 +310,17 @@ make, then model. The fields that are easy to get wrong:
       support article does, at kerb weight plus one person:
       `volvocars.com/uk/support/car/<model>/article/0ed816eed33d98cac0a8cc377bc12bc7-e6a7973b2bf222b2c0a8b09757c97ec8-8664b2fa77a7e089c0a8296870d1a409/`.
     - BMW: the specifications PDF attached to each model's article on
-      `newsroom.bmwgroup.com`, "Ground clearance, empty". Its search is poor,
-      and no sheet was found for the i3, i4, iX1 eDrive20 or iX3 40. MINI
-      has its sheets there too: search for "Technical specifications of the
-      MINI" and read "Ground clearance (curb weight)".
+      `newsroom.bmwgroup.com`, "Ground clearance, empty" or "(unladen)".
+      Its search is poor; list a model's articles by tag instead,
+      `newsroom.bmwgroup.com/global/?h=1&t=<model>` (`t=iX3`, `t=i4`), and
+      `/emea/?h=1&t=<model>` for BMW UK's. It rate-limits quick requests.
+      The PDFs under `/download/` are plain files that curl fetches; some,
+      like the i4's, are text drawn as images and need rendering to read.
+      The i4's sheet, "valid as of July 2024", gives 125 mm for the xDrive40
+      and the M50, the M60's predecessor. No sheet was found for the new i3,
+      the iX1 eDrive20 or the iX3 40, globally or on BMW UK's. MINI has its
+      sheets there too: search for "Technical specifications of the MINI"
+      and read "Ground clearance (curb weight)".
     - Porsche: each model page on `porsche.com/international/models/` gives
       every suspension level; the highest is the one to use.
     - Audi's technical data sheets on `uploads.audi.com` have no clearance.
@@ -333,7 +343,8 @@ make, then model. The fields that are easy to get wrong:
   - Other Norwegian importers' price lists give „Bakkeklaring“ too:
     - Volkswagen: the „tekniske data“ PDFs linked from
       `volkswagen.no/no/kjope-bil/prisliste.html`. The ID.3 Neo's row reads
-      „15“, a typo; the ID.3 GTI is not sold there.
+      „Bakkeklaring, mm 15“, most likely centimetres under a mm label (the
+      ID.4's sheet gives „cm 15,6“); the ID.3 GTI is not sold there.
     - Kia: `kia.no/prislister`, PDFs on `media.crystallize.com`. Some rows
       give more than one figure, such as the PV5's lowest point and the
       battery's; take the first.
@@ -367,8 +378,62 @@ make, then model. The fields that are easy to get wrong:
     ("Min. ground clearance"), found by searching the site's PDFs by name,
     such as `251017-RZ-tech-specs.pdf`. Its brochure on
     `kynningarefni.toyota.is` gives none, and no sheet had been published
-    for the new ES or the TZ by November 2026.
-  - The landrover.is pages and price lists give none.
+    for the new ES or the TZ by November 2026. Nor do the ES and TZ
+    releases on `newsroom.lexus.eu`, or the 2027 ES 350e/500e
+    specifications PDF on `pressroom.lexus.com` (inches, no clearance row).
+    That site's TZ PDF link returned 403. Its PDFs on
+    `lexus-cms-media.s3…amazonaws.com` refuse curl and come only as
+    browser downloads, so a person has to save them.
+  - The landrover.is pages and price lists give none. Land Rover UK's
+    2026 technical specification PDFs on `landrover.co.uk/content/dam/lrdx/`
+    cover the petrol, diesel and plug-in Range Rovers, not the Electric.
+  - Hyundai Germany's price lists give „Bodenfreiheit (mm)“:
+    `hyundai.com/de/de/preislisten/<model>.html` serves the PDF itself, which
+    curl fetches (the STARIA Elektro's gives 186).
+  - renault.fr's `comparateur-specifications.html` page for each model gives
+    „garde au sol en charge“ in its page JSON, and it matches the figures
+    used for the R4 and R5. Its Scenic gives 121 with the right length,
+    4,470 mm, unlike renault.co.uk's.
+  - Danish Stellantis price lists give „Bakkeklaring mm“ (the Fiat 600e's
+    „Kundeprisliste“), but none was found for the 500e, Frontera or
+    e-Rifter. Fiat's UK price and specification guide gives none.
+  - Toyota UK's media site has Word spec sheets on `cdn.uc.assets.prezly.com`
+    ("Specification Sheet_Proace_TP_DPL"). The Proace and Verso's gives
+    "150 / 175" without and with the rough road option for every powertrain,
+    electric included; the Proace Verso takes the standard 150, by
+    choice, not the option's 175. The Proace City's lists five powertrains but four
+    clearance figures, so the electric's cannot be told apart.
+  - XPENG France's G9 price sheet on `s-cdn.xpeng.com` gives „Garde au sol
+    en pleine charge 145 (±50 mm avec suspension pneumatique)“.
+  - Audi's media centre gives the Q4 e-tron "approximately 18 centimeters",
+    but Audi Japan measures it at 165 mm (150 with S line); we use 165.
+  - Japanese spec tables always have „最低地上高“ (minimum ground clearance),
+    unladen, often as „社内測定値“ (the maker's own measurement). Where Japan
+    sells the car, look there first. Most of these PDFs are images or have
+    undecodable fonts, so OCR them (macOS Vision does Japanese) and read the
+    row against the column headings:
+    - Mercedes-Benz: the „DI“ (Data Information) PDF per model, listed on
+      `mercedes-benz.co.jp/passengercars/cars-guide/catalogues.html` under
+      `/content/dam/japan/passengercars/Model/catalog/`. Gives the EQE SUV,
+      EQS SUV, EQS, electric GLC, CLA and CLA Shooting Brake, and G 580. A
+      figure in brackets is with the option its footnote names (the CLA's
+      135 is with the AMG Line package). The dealer Yanase
+      (`yanase.co.jp/mercedes-benz/<model>/`) mirrors older ones.
+      Japan rarely sells our exact versions. Where every listed version of
+      a model shares one figure, we used it for ours too (EQS 580, EQS SUV
+      580, GLC 400, CLA 350, EQA 300). The same goes for BMW's iX1 eDrive20,
+      which takes the xDrive30's 170.
+    - BMW: the „主要諸元“ price lists on
+      `bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/`, e.g.
+      `iX3_EPL_202603V2`. Their iX3 50 figure matches the newsroom's.
+    - Audi: the „Product Information“ PDF linked from each model's
+      `productinfo.audi.co.jp/models/<model>/specifications/` page. Only the
+      Q4's has the row („社内参考値“), and only for the rear-drive 45.
+    - Lexus: `lexus.jp/models/<model>/pdf/specificationslist.pdf`. The ES
+      500e and 350e share 145; the TZ had no sheet in November 2026.
+    - Fiat Japan's 500e catalogue has no row.
+  - Web search finds aggregators such as evkx.net first. Their figures are
+    estimates or unsourced; use them only to know what to look for.
   - XPENG's model and spec pages give none in any market checked (is, se,
     ae and Australia's shop). Its pressroom on `xpeng.com/pressroom/news/`
     does in places: the Danish G9L release gives „Maksimal frihøjde: 216

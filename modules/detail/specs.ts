@@ -129,22 +129,24 @@ export const specRows = (compared: ReadonlyArray<Car>): SpecRow[] =>
     }
   })
 
-/** The ground clearance as it reads under the drive */
-export const groundClearanceText = ({
-  mm,
-  adjustable,
-}: NonNullable<Car['groundClearance']>): string =>
-  adjustable ? `Veghæð allt að ${mm} mm` : `Veghæð ${mm} mm`
+/** The ground clearance as it reads under the drive, „óþekkt“ where none was found */
+export const groundClearanceText = (
+  clearance: Car['groundClearance'],
+): string =>
+  !clearance
+    ? 'Veghæð óþekkt'
+    : clearance.adjustable
+      ? `Veghæð allt að ${clearance.mm} mm`
+      : `Veghæð ${clearance.mm} mm`
 
-// Only some cars have a ground clearance yet, so it is on a car's own page
-// alone, kept out of comparisons. It takes the drive's detail rather than
-// being a figure of its own, so the page keeps eight figures, which fill the
-// rows evenly at every width. The drive's name moves to the figure's title
+// Ground clearance is on a car's own page alone for now, kept out of
+// comparisons. It takes the drive's detail rather than being a figure of its
+// own, so the page keeps eight figures, which fill the rows evenly at every
+// width. The drive's name moves to the figure's title
 export const carFigures = (car: Car): SpecRow[] => {
-  const clearance =
-    car.groundClearance && groundClearanceText(car.groundClearance)
+  const clearance = groundClearanceText(car.groundClearance)
   return specRows([car]).map((row) =>
-    row.key === 'drive' && clearance
+    row.key === 'drive'
       ? {
           ...row,
           cells: row.cells.map((cell) => ({
