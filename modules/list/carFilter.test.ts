@@ -21,6 +21,7 @@ const car = (over: Partial<NewCar>): Car =>
     drive: 'AWD',
     seats: 5,
     towing: 1500,
+    groundClearance: null,
     timeToCharge10To80: 25,
     power: 250,
     ...over,

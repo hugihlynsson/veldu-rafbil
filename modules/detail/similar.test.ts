@@ -16,6 +16,7 @@ const base: NewCar = {
   drive: 'FWD',
   seats: 5,
   towing: 1500,
+  groundClearance: null,
   timeToCharge10To80: 31,
   power: 150,
 }

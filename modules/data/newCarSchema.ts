@@ -36,13 +36,14 @@ export const newCarSchema = z.strictObject({
   towing: z.int().min(0).max(3500).nullable(),
   // mm, the maker's figure at the highest the car can be raised, as that is
   // what someone asking about snow wants. `adjustable` marks a raised air
-  // suspension level, often for low speeds only. Left out where not found.
+  // suspension level, often for low speeds only. null where none has been
+  // found, which the site says rather than guess.
   groundClearance: z
     .strictObject({
       mm: z.int().min(100).max(350),
       adjustable: z.literal(true).optional(),
     })
-    .optional(),
+    .nullable(),
   // Minutes on a fast charger
   timeToCharge10To80: z.number().positive().lt(180),
   // kW

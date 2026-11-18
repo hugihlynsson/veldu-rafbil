@@ -16,6 +16,7 @@ const base: NewCar = {
   drive: 'FWD',
   seats: 5,
   towing: 1500,
+  groundClearance: null,
   timeToCharge10To80: 31,
   power: 150,
 }
@@ -126,10 +127,11 @@ describe('carFigures', () => {
     ).toBe('Veghæð allt að 240 mm')
   })
 
-  it('leaves the drive as it is for a car without one', () => {
-    expect(drive({ drive: 'AWD' })).toEqual({
+  it('says it is unknown for a car without one', () => {
+    expect(drive({ drive: 'AWD', groundClearance: null })).toEqual({
       text: 'AWD',
-      detail: 'Fjórhjóladrif',
+      detail: 'Veghæð óþekkt',
+      title: 'Fjórhjóladrif',
       best: false,
     })
   })

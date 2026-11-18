@@ -231,13 +231,14 @@ make, then model. The fields that are easy to get wrong:
   "no towbar", so confirm a `0` on the car's page or the maker's spec sheet
   (the UK, German or French sites usually give towing; Icelandic importers
   rarely do), and when ev-database and the maker disagree, take the maker's.
-- **`groundClearance` is optional, in mm, from the maker.** Leave it out
-  rather than guess: the car's page shows it only where it is set, and nothing
-  else reads it yet. Take the highest the car can be raised, options included,
-  and add `adjustable: true` when that is an air-suspension level rather than
-  its fixed height. ev-database has no figure. Prefer the unladen one where a
-  sheet gives both, and a variant on different springs or wheels may differ
-  from its siblings. Where it has been found:
+- **`groundClearance` is in mm, from the maker, and `null` where you could
+  not find it**, which the car's page shows as „Veghæð óþekkt“ rather than
+  guess. Nothing but the car's page reads it yet. Take the highest the car
+  can be raised, options included, and add `adjustable: true` when that is
+  an air-suspension level rather than its fixed height. ev-database has no
+  figure. Prefer the unladen one where a sheet gives both, and a variant on
+  different springs or wheels may differ from its siblings. Where it has been
+  found:
   - Most makers' spec tables are drawn by script and are not in the page's
     HTML. Look for the PDF instead: a brochure or a technical data sheet.
   - Skoda: the "Technical data" page of each model's press kit on
