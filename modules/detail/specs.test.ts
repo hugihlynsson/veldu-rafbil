@@ -100,6 +100,20 @@ describe('specRows', () => {
     expect(cells?.every((cell) => !cell.best)).toBe(true)
   })
 
+  it('gives the ground clearance a row in a comparison, unranked', () => {
+    const cells = row(
+      'groundClearance',
+      car({ groundClearance: { mm: 240, adjustable: true } }),
+      car({ groundClearance: { mm: 160 } }),
+      car({ groundClearance: null }),
+    )?.cells
+    expect(cells).toEqual([
+      { text: '240 mm', detail: 'Hæsta stilling', best: false },
+      { text: '160 mm', detail: undefined, best: false },
+      { text: 'Óþekkt', detail: undefined, best: false },
+    ])
+  })
+
   it('writes prices with the list grouping', () => {
     expect(
       row('price', car({ price: 6_390_000 }), car({}))?.cells[0],
@@ -134,22 +148,5 @@ describe('carFigures', () => {
       title: 'Fjórhjóladrif',
       best: false,
     })
-  })
-
-  it('adds no figure of its own, so the page keeps its eight', () => {
-    const withIt = car({ groundClearance: { mm: 200 } })
-    expect(carFigures(withIt).map(({ key }) => key)).toEqual(
-      specRows([withIt]).map(({ key }) => key),
-    )
-  })
-
-  // Too few cars have one for a row of mostly gaps
-  it('keeps the ground clearance out of a comparison', () => {
-    const withIt = car({ groundClearance: { mm: 200 } })
-    expect(
-      specRows([withIt, withIt]).flatMap(({ cells }) =>
-        cells.map((cell) => cell.detail),
-      ),
-    ).not.toContain('Veghæð 200 mm')
   })
 })

@@ -107,6 +107,20 @@ describe('the published car payload', () => {
     expect(payload.notes.towing).toContain('null')
   })
 
+  it('publishes the ground clearance under its unit, with null where none is known', () => {
+    for (const car of cars) {
+      const api = toApiCar(car)
+      expect(api.groundClearanceMm, label(car)).toBe(
+        car.groundClearance?.mm ?? null,
+      )
+      expect(api.groundClearanceAdjustable, label(car)).toBe(
+        car.groundClearance?.adjustable === true,
+      )
+    }
+    expect(payload.cars[0]).not.toHaveProperty('groundClearance')
+    expect(payload.notes.groundClearance).toContain('null')
+  })
+
   it('turns the fixed-precision charge rate back into a number', () => {
     for (const car of payload.cars) {
       expect(Number.isFinite(car.fastCharge.kmPerMinute), car.slug).toBe(true)
