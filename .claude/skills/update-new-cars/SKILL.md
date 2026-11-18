@@ -248,6 +248,10 @@ make, then model. The fields that are easy to get wrong:
     read a figure against the version headings by position. A figure in
     `{braces}` is the other body, such as the 7-seat Peaq. The sheet can be
     older than the newest versions: the 85x was missing from the Elroq's.
+    Škoda Germany's press site has a sheet per version, with „Bodenfreiheit
+    (bei Leergewicht)“, at `www.skoda-media.de/model_motor/genpdf/<id>/full`.
+    The ids run in sequence within a model year, so step through the
+    neighbours of one you know (the 2027 Elroq is 27714–27723, the 85x 27719).
   - Leapmotor: the brochure PDF linked from each model's page on
     `www.leapmotor.net`, under "Ground Clearance (mm)". It names its own
     trims, not the ones sold here, but each sheet so far has one figure for
@@ -361,7 +365,7 @@ make, then model. The fields that are easy to get wrong:
     full load“ among the Atto 3 Evo's equipment, the only figure for it.
     GWM Germany's ORA 03 price list gives it unladen for both batteries.
   - Land Rover's spec sheet for the Range Rover Electric gives only the
-    standard height, 201 mm, not the raised one, so it is left out.
+    standard height, 201 mm, not the raised one; see the reviews bullet below.
     Hongqi publishes none.
   - Ford: the price list PDF linked from each car's page on ford.is gives
     „Veghæð mm“ under „Helstu mál“. The PDFs are on `assets.mango.is` and
@@ -407,6 +411,18 @@ make, then model. The fields that are easy to get wrong:
     en pleine charge 145 (±50 mm avec suspension pneumatique)“.
   - Audi's media centre gives the Q4 e-tron "approximately 18 centimeters",
     but Audi Japan measures it at 165 mm (150 with S line); we use 165.
+  - Audi Norway's price lists describe the suspensions in „Understell og
+    bremser“, under „bakkeklaring“. audi.no refuses curl, but the same files
+    are on `media.audi.com/is/content/audi/country/no/assets/prislister/Prisliste-Audi-<model>.pdf`
+    (`Q6-etron`, `A6-etron`, `e-tron-GT`, `A2-etron`). The Q6's gives 184 mm
+    on the standard comfort suspension, and the air suspension's normal
+    level 28 mm lower with a raised mode of +45, so 201 adjustable for the
+    Q6, the Sportback and the SQ6. The A6 and e-tron GT lists give only the
+    offsets (+20 raised) without a base, and the A2's nothing.
+  - Reviews give the Range Rover Electric 262 mm at off-road height (evo;
+    Autocar rounds it to 260). Nothing from Land Rover was found to back it,
+    but it is used, as an exception, since Land Rover's sheet gives only the
+    standard 201. No figure for the Sport Electric was found even there.
   - Japanese spec tables always have „最低地上高“ (minimum ground clearance),
     unladen, often as „社内測定値“ (the maker's own measurement). Where Japan
     sells the car, look there first. Most of these PDFs are images or have
