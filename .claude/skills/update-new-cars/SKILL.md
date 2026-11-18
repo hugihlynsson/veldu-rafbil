@@ -433,6 +433,11 @@ make, then model. The fields that are easy to get wrong:
   - The Lexus TZ takes evkx.net's 203 mm, for every version, as an
     exception: no Lexus sheet had it by November 2026 (cars-data.com says
     200). Replace it once `lexus.jp` or `media.lexus.co.uk` publishes one.
+  - Estimates stand in, as exceptions, where no maker figure was found by
+    November 2026: evkx.net's 114 for the Fiat 500e, 155 for the Hongqi
+    EHS5, 163 for the Opel Frontera and 255 adjustable for the EHS7 Premium
+    (its air suspension's highest; 168 on coil springs), and Automobile
+    Propre's 174 for the e-Rifter. Replace each with the maker's once found.
   - Japanese spec tables always have „最低地上高“ (minimum ground clearance),
     unladen, often as „社内測定値“ (the maker's own measurement). Where Japan
     sells the car, look there first. Most of these PDFs are images or have
