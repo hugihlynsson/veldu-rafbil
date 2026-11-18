@@ -114,7 +114,7 @@ describe('the published car payload', () => {
         car.groundClearance?.mm ?? null,
       )
       expect(api.groundClearanceAdjustable, label(car)).toBe(
-        car.groundClearance?.adjustable === true,
+        car.groundClearance ? car.groundClearance.adjustable === true : null,
       )
     }
     expect(payload.cars[0]).not.toHaveProperty('groundClearance')

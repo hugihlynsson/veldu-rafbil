@@ -145,7 +145,8 @@ const describeCar = (car: Car): string =>
     driveLabels[car.drive].toLowerCase(),
     `allt að ${car.seats} sæti`,
     towingText(car.towing),
-    groundClearanceText(car.groundClearance),
+    // Left out where unknown, as the model is told never to mention it then
+    ...(car.groundClearance ? [groundClearanceText(car.groundClearance)] : []),
   ].join(', ')
 
 // The model is given every gap worked out, so a figure in its text is one it

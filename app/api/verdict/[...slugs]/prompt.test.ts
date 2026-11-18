@@ -21,6 +21,13 @@ describe('verdictFacts', () => {
     expect(facts).not.toMatch(/^- Veghæð/m)
   })
 
+  it('leaves out a ground clearance that is not known', () => {
+    const unknown = cars.find((car) => car.groundClearance === null)!
+    expect(verdictFacts([kia, unknown])).not.toContain(
+      groundClearanceText(null),
+    )
+  })
+
   // The model copies a gap; left to subtract, it gets one wrong now and then
   it('works out every gap between them', () => {
     expect(facts).toContain(

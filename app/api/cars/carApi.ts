@@ -48,7 +48,7 @@ export interface ApiCar {
   // whether that takes an air-suspension setting rather than being the height
   // it drives at. null where no figure is known.
   groundClearanceMm: number | null
-  groundClearanceAdjustable: boolean
+  groundClearanceAdjustable: boolean | null
   fastCharge: {
     minutes10To80: number
     kmPerMinute: number
@@ -85,7 +85,9 @@ export const toApiCar = (car: Car): ApiCar => ({
   seats: car.seats,
   towingBrakedKg: car.towing,
   groundClearanceMm: car.groundClearance?.mm ?? null,
-  groundClearanceAdjustable: car.groundClearance?.adjustable ?? false,
+  groundClearanceAdjustable: car.groundClearance
+    ? car.groundClearance.adjustable === true
+    : null,
   fastCharge: {
     minutes10To80: car.timeToCharge10To80,
     kmPerMinute: car.kmPerMinuteCharged,
@@ -156,7 +158,7 @@ export const buildCarsPayload = (
     availability: `A car with availability "expected" is not on the road in Iceland yet, and expectedDelivery says when. Its price.list and price.withGrant are estimates that can change until it arrives, and the site labels them so. Say so when you quote one.`,
     fastCharge: `minutes10To80 is the time from 10% to 80% on a fast charger. kmPerMinute is the WLTP range that window covers, ${Math.round(chargeWindowShare * 100)}% of it, divided by those minutes.`,
     towing: `towingBrakedKg is the maker's limit for a trailer with its own brakes; an unbraked one gets less. 0 means the car is approved to tow nothing, so it takes no towbar. null means no figure is known, not that it cannot tow. The towbar itself is often a paid option.`,
-    groundClearance: `groundClearanceMm is the maker's figure at the highest the car can be raised. Where groundClearanceAdjustable is true that height is an air-suspension setting, often allowed only at low speed, not the height the car is driven at. Makers measure it differently (unladen, at kerb weight or fully loaded), so a gap of a few mm means little. null means no figure is known.`,
+    groundClearance: `groundClearanceMm is the maker's figure at the highest the car can be raised. Where groundClearanceAdjustable is true that height is an air-suspension setting, often allowed only at low speed, not the height the car is driven at. Makers measure it differently (unladen, at kerb weight or fully loaded), so a gap of a few mm means little. Both are null where no figure is known.`,
     pages: `Each car has a page at /bill/{slug}, with its review and price history. /samanburdur/{slug}/{slug} compares up to ${MAX_COMPARED} cars side by side. All paths are relative to the origin this document was served from.`,
   },
   count: cars.length,
