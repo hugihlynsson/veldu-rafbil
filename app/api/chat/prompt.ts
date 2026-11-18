@@ -8,6 +8,7 @@ import {
   grantStartText,
   previousGrantAmountText,
 } from '@/modules/copy/grantCopy'
+import { groundClearanceText } from '@/modules/copy/groundClearanceCopy'
 import { towingText } from '@/modules/copy/towingCopy'
 import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 import { allNews } from '@/modules/news/history'
@@ -28,7 +29,7 @@ const carsSummary = cars
   .toSorted((a, b) => a.priceWithGrant - b.priceWithGrant)
   .map(
     (car) =>
-      `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr${car.availability === 'expected' ? ' (áætlað verð)' : ''}, ${car.range} km drægni, ${car.capacity} kWh rafhlaða, hraðhleðsla 10-80% á ${car.timeToCharge10To80} mín (${car.kmPerMinuteCharged} km/mín), ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti, ${towingText(car.towing)}${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''} (auðkenni: ${carRef(car)})`,
+      `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr${car.availability === 'expected' ? ' (áætlað verð)' : ''}, ${car.range} km drægni, ${car.capacity} kWh rafhlaða, hraðhleðsla 10-80% á ${car.timeToCharge10To80} mín (${car.kmPerMinuteCharged} km/mín), ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti, ${towingText(car.towing)}, ${groundClearanceText(car.groundClearance)}${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''} (auðkenni: ${carRef(car)})`,
   )
   .join('\n')
 
@@ -61,6 +62,7 @@ Gott að hafa í huga:
 - Þú veist EINUNGIS um rafbíla á Íslandi
 - Sætafjöldinn að ofan er mesti fjöldi sæta sem bíllinn fæst með á Íslandi, þar með talið gegn aukagjaldi. Verðið er hins vegar fyrir ódýrustu útfærsluna, svo taktu fram að sætin geti kostað aukalega þegar það á við. Ekki giska út frá því sem bíllinn býður í öðrum löndum
 - Dráttargetan að ofan er fyrir eftirvagn með hemlum, eins og framleiðandinn gefur hana upp. Bíll með „enginn dráttarkrókur“ má ekki draga eftirvagn. Ef dráttargetan er óþekkt, segðu það frekar en að giska. Dráttarkrókurinn getur kostað aukalega
+- Veghæðin að ofan er eins og framleiðandinn gefur hana upp, og framleiðendur mæla hana ekki allir eins (tómur bíll, í eiginþyngd eða fullhlaðinn), svo fáeinir mm á milli bíla skipta litlu. Veghæð „í hæstu stillingu loftpúðafjöðrunar“ fæst aðeins með því að hækka bílinn, oft aðeins á lítilli ferð, og er ekki veghæðin í venjulegum akstri: segðu það þegar þú nefnir hana. Ef veghæðin er óþekkt, segðu það frekar en að giska
 - Veldu Rafbíl er búin til af Huga Hlynssyni og er rekin sem óhagnaðardrifin samfélagsþjónusta. Upplýsingar svo sem verð og framboð geta verið úreltar
 - Þú getur aðstoðað við ýmislegt tengt rafbílum og rafbílaumhverfi á Íslandi
 - Ef spurt er um eitthvað sem tengist ekki rafbílum þá VERÐUR þú að svara vinalega að þú sért ekki viss og biddu þá að spyrja um rafbíla í staðinn
