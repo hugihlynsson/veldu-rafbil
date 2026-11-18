@@ -248,6 +248,10 @@ make, then model. The fields that are easy to get wrong:
     read a figure against the version headings by position. A figure in
     `{braces}` is the other body, such as the 7-seat Peaq. The sheet can be
     older than the newest versions: the 85x was missing from the Elroq's.
+    Škoda Germany's press site has a sheet per version, with „Bodenfreiheit
+    (bei Leergewicht)“, at `www.skoda-media.de/model_motor/genpdf/<id>/full`.
+    The ids run in sequence within a model year, so step through the
+    neighbours of one you know (the 2027 Elroq is 27714–27723, the 85x 27719).
   - Leapmotor: the brochure PDF linked from each model's page on
     `www.leapmotor.net`, under "Ground Clearance (mm)". It names its own
     trims, not the ones sold here, but each sheet so far has one figure for
@@ -296,8 +300,11 @@ make, then model. The fields that are easy to get wrong:
     the browser but lets curl through). MG Australia's brochures give
     "Running Clearance (mm)", linked from `mgmotor.com.au/vehicles/<model>`
     as `/brochures/<MODEL>_<year>.pdf`. Match the version by battery.
-  - XPENG gives none for the G6, G9, L03 or X9: the Australian model pages
-    have no spec table, and XPENG Malaysia's spec PDFs leave it out.
+  - XPENG gives none for the G6 anywhere found: not the Australian model
+    pages, XPENG Malaysia's spec PDFs, the configuration tables on
+    `xiaopeng.com/<model>/configuration.html` in China, or the dimension
+    tables of the European and Hong Kong owner's manuals. See below for
+    where the L03, X9 and G9L have one.
   - Opel: the Swedish price lists, `dokument.opel.se/prislistor/personbilar/<model>.pdf`,
     give „Markfrigångshöjd tjänstevikt/max. last“ for the Grandland. The
     Frontera's row is there but empty. Vauxhall's and opel.de's PDFs refuse
@@ -361,7 +368,7 @@ make, then model. The fields that are easy to get wrong:
     full load“ among the Atto 3 Evo's equipment, the only figure for it.
     GWM Germany's ORA 03 price list gives it unladen for both batteries.
   - Land Rover's spec sheet for the Range Rover Electric gives only the
-    standard height, 201 mm, not the raised one, so it is left out.
+    standard height, 201 mm, not the raised one; see the reviews bullet below.
     Hongqi publishes none.
   - Ford: the price list PDF linked from each car's page on ford.is gives
     „Veghæð mm“ under „Helstu mál“. The PDFs are on `assets.mango.is` and
@@ -407,6 +414,21 @@ make, then model. The fields that are easy to get wrong:
     en pleine charge 145 (±50 mm avec suspension pneumatique)“.
   - Audi's media centre gives the Q4 e-tron "approximately 18 centimeters",
     but Audi Japan measures it at 165 mm (150 with S line); we use 165.
+  - Audi Norway's price lists describe the suspensions in „Understell og
+    bremser“, under „bakkeklaring“. audi.no refuses curl, but the same files
+    are on `media.audi.com/is/content/audi/country/no/assets/prislister/Prisliste-Audi-<model>.pdf`
+    (`Q6-etron`, `A6-etron`, `e-tron-GT`, `A2-etron`). The Q6's gives 184 mm
+    on the standard comfort suspension, and the air suspension's normal
+    level 28 mm lower with a raised mode of +45, so 201 adjustable for the
+    Q6, the Sportback and the SQ6. The A6 and e-tron GT lists give only the
+    offsets (+20 raised) without a base, and the A2's nothing.
+  - Reviews give the Range Rover Electric 262 mm at off-road height (evo;
+    Autocar rounds it to 260). Nothing from Land Rover was found to back it,
+    but it is used, as an exception, since Land Rover's sheet gives only the
+    standard 201. No figure for the Sport Electric was found even there.
+  - The Lexus TZ takes evkx.net's 203 mm, for every version, as another
+    exception: no Lexus sheet had it by November 2026 (cars-data.com says
+    200). Replace it once `lexus.jp` or `media.lexus.co.uk` publishes one.
   - Japanese spec tables always have „最低地上高“ (minimum ground clearance),
     unladen, often as „社内測定値“ (the maker's own measurement). Where Japan
     sells the car, look there first. Most of these PDFs are images or have
@@ -437,8 +459,13 @@ make, then model. The fields that are easy to get wrong:
   - XPENG's model and spec pages give none in any market checked (is, se,
     ae and Australia's shop). Its pressroom on `xpeng.com/pressroom/news/`
     does in places: the Danish G9L release gives „Maksimal frihøjde: 216
-    mm“ on its standard air suspension. The G6, G9, L03 and X9 releases
-    give none.
+    mm“ on its standard air suspension, and the Norwegian X9 launch release
+    (June 2025) „Bakkeklaringen kan justeres helt opp til 22 cm“. The G6,
+    G9 and L03 releases give none.
+  - XPENG's Dutch configurator, `store.xpeng.com/nl/configurator/<model>`,
+    gives „Bodemvrijheid, beladen (mm)“ in the spec text in its page HTML:
+    143 for every L03, and 176 for the G9L, whose raised 216 is used. Its
+    G6 and X9 pages, and the other markets' configurators, have none.
   - smart: the specifications pages on `uk.smart.com/en/models/hashtag-<one|three|five>/specifications/`
     give "Ground Clearance curb 0/5" per trim; take the first, the unladen
     one. The UK sells no Pulse #1 or #3, but every other trim there shares
