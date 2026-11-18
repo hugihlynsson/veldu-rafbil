@@ -274,8 +274,9 @@ make, then model. The fields that are easy to get wrong:
   - Volkswagen: Hekla's price lists, `hekla.is/static/files/efni/verdlistar/vw/<model>.pdf`,
     give „Veghæð (mm)“ for the ID.3 only. Of the press kits on
     `volkswagen-newsroom.com` (the „Publikationen“, under `/download`),
-    only the ID. Cross's technical data has „Bodenfreiheit“. Search there
-    in German; the English search finds nothing.
+    only the ID. Cross's technical data has „Bodenfreiheit“ (the ID.3 GTI
+    media workshop's has none). Search there in German; the English search
+    finds nothing.
   - Mercedes-Benz gives none in Europe or the US: not in the "All technical data" panel on
     mercedes-benz.co.uk, nor in its press releases, nor on mbusa.com, which
     says only that the air suspension raises the car "up to an inch". Mercedes Japan's spec
@@ -367,9 +368,7 @@ make, then model. The fields that are easy to get wrong:
   - jac.is gives „Veghæð (mm)“. byd.is lists „Minimum ground clearance at
     full load“ among the Atto 3 Evo's equipment, the only figure for it.
     GWM Germany's ORA 03 price list gives it unladen for both batteries.
-  - Land Rover's spec sheet for the Range Rover Electric gives only the
-    standard height, 201 mm, not the raised one; see the reviews bullet below.
-    Hongqi publishes none.
+  - Hongqi publishes none.
   - Ford: the price list PDF linked from each car's page on ford.is gives
     „Veghæð mm“ under „Helstu mál“. The PDFs are on `assets.mango.is` and
     `skjol.ford.is`.
@@ -391,9 +390,18 @@ make, then model. The fields that are easy to get wrong:
     That site's TZ PDF link returned 403. Its PDFs on
     `lexus-cms-media.s3…amazonaws.com` refuse curl and come only as
     browser downloads, so a person has to save them.
-  - The landrover.is pages and price lists give none. Land Rover UK's
-    2026 technical specification PDFs on `landrover.co.uk/content/dam/lrdx/`
-    cover the petrol, diesel and plug-in Range Rovers, not the Electric.
+  - Range Rover: the PDF the UK configurator makes of a build gives „Ground
+    clearance – standard“ and „– off road“ ride heights. curl fetches it from
+    `pdfgen.config.rangerover.com/lr/en_gb/<model>_<year>/4d785/<build>/landrover.pdf`,
+    with the model, year and build codes from the configurator's URL once a
+    version is picked on `rangerover.com/en-gb/build-your-own/`: `l460_k27`
+    is the Range Rover and `l461_k27` the Sport, and builds such as
+    `a-ab_a-ev-550_a-swb_e` or `a-se_a-ev-450_a-swb_e`. The Range Rover
+    Electric gives 201 and 262 for the EV450 and EV550, the Sport Electric
+    202 and 263; the UK sells the Sport only as the 550, which the 450 takes
+    too. The landrover.is pages and price lists, and Land Rover UK's
+    technical specification PDFs on `landrover.co.uk/content/dam/lrdx/`,
+    give no raised height.
   - Hyundai Germany's price lists give „Bodenfreiheit (mm)“:
     `hyundai.com/de/de/preislisten/<model>.html` serves the PDF itself, which
     curl fetches (the STARIA Elektro's gives 186).
@@ -422,13 +430,14 @@ make, then model. The fields that are easy to get wrong:
     level 28 mm lower with a raised mode of +45, so 201 adjustable for the
     Q6, the Sportback and the SQ6. The A6 and e-tron GT lists give only the
     offsets (+20 raised) without a base, and the A2's nothing.
-  - Reviews give the Range Rover Electric 262 mm at off-road height (evo;
-    Autocar rounds it to 260). Nothing from Land Rover was found to back it,
-    but it is used, as an exception, since Land Rover's sheet gives only the
-    standard 201. No figure for the Sport Electric was found even there.
-  - The Lexus TZ takes evkx.net's 203 mm, for every version, as another
+  - The Lexus TZ takes evkx.net's 203 mm, for every version, as an
     exception: no Lexus sheet had it by November 2026 (cars-data.com says
     200). Replace it once `lexus.jp` or `media.lexus.co.uk` publishes one.
+  - Estimates stand in, as exceptions, where no maker figure was found by
+    November 2026: evkx.net's 114 for the Fiat 500e, 155 for the Hongqi
+    EHS5, 163 for the Opel Frontera and 255 adjustable for the EHS7 Premium
+    (its air suspension's highest; 168 on coil springs), and Automobile
+    Propre's 174 for the e-Rifter. Replace each with the maker's once found.
   - Japanese spec tables always have „最低地上高“ (minimum ground clearance),
     unladen, often as „社内測定値“ (the maker's own measurement). Where Japan
     sells the car, look there first. Most of these PDFs are images or have
@@ -444,7 +453,9 @@ make, then model. The fields that are easy to get wrong:
       Japan rarely sells our exact versions. Where every listed version of
       a model shares one figure, we used it for ours too (EQS 580, EQS SUV
       580, GLC 400, CLA 350, EQA 300). The same goes for BMW's iX1 eDrive20,
-      which takes the xDrive30's 170.
+      which takes the xDrive30's 170. In November 2026 Japan sold no
+      electric C, GLA, GLB, AMG GT 4-door, VLE, EQV, EQT or eVito, so
+      those have none.
     - BMW: the „主要諸元“ price lists on
       `bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/`, e.g.
       `iX3_EPL_202603V2`. Their iX3 50 figure matches the newsroom's.
