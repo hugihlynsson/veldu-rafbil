@@ -93,10 +93,49 @@ const towingWords = new RegExp(
   'u',
 )
 
-// What may stand between a towing word and its number: bounds and little
-// else, so "dráttarkrókur og 500 lítra skott" is not read as towing
-const TOWING_GAP =
-  'minnst|lagmark|yfir|amk|ad|minnsta|kosti|um|ca|sirka|allt|upp|i|er|undir|hamark|max|mesta|lagi|meira|meiri|minna|minni|en|ekki'
+// The schema's bounds, shared with the filter suggestions like the towing ones
+export const MIN_GROUND_CLEARANCE = 100
+export const MAX_GROUND_CLEARANCE = 350
+
+const CENTIMETRES = String.raw`(?:cm|sm|sentimetr\w*|centimetr\w*)`
+const CLEARANCE_UNIT = String.raw`(?:mm|millimetr\w*|${CENTIMETRES})`
+const centimetreUnit = new RegExp(`^${CENTIMETRES}$`, 'u')
+
+// A number without its unit that is too small to be mm is cm, as "veghæð 20"
+// can only mean 20 cm
+const inCentimetres = (value: number, unit?: string) =>
+  unit ? centimetreUnit.test(unit) : value <= MAX_GROUND_CLEARANCE / 10
+
+/** A ground clearance in mm, written in mm or cm */
+export const readGroundClearance = (
+  raw: string,
+  unit?: string,
+): number | undefined => {
+  const value = parseNumber(raw, true)
+  const mm = Math.round(inCentimetres(value, unit) ? value * 10 : value)
+  return within(mm, MIN_GROUND_CLEARANCE, MAX_GROUND_CLEARANCE) ? mm : undefined
+}
+
+// Not "hátt undir hann" as the word a number follows: that is left for a
+// model. It still makes a length in cm or mm a clearance.
+const CLEARANCE_WORD = String.raw`veghaed\w*`
+const HIGH_UNDER = String.raw`${START}hatt undir${END}`
+const clearanceWords = new RegExp(
+  String.raw`${START}${CLEARANCE_WORD}${END}|${HIGH_UNDER}`,
+  'u',
+)
+
+// The "undir" of "hátt undir" asks for more height, not a ceiling on it, so
+// it is hidden from the bound a clearance number takes
+const clearanceBefore = (before: string) =>
+  before.replace(new RegExp(HIGH_UNDER, 'gu'), (phrase) =>
+    ' '.repeat(phrase.length),
+  )
+
+// What may stand between a towing or clearance word and its number: bounds
+// and little else, so "dráttarkrókur og 500 lítra skott" is not read as towing
+const BOUND_GAP =
+  'minnst|lagmark|yfir|amk|ad|minnsta|kosti|um|ca|sirka|allt|upp|i|er|undir|hamark|max|mesta|lagi|meira|meiri|haerri|minna|minni|laegri|en|ekki'
 
 // A number followed by one of these is some other figure's
 const OTHER_UNIT = String.raw`(?:km|kilometr\w*|kr|kronur\w*|isk|kwh|kw|ho|hestofl\w*|hp|ps|litr\w*|l|sek\w*|s|saet\w*|manna|manns|milljon\w*|miljon\w*|millj\w*|m|mkr|thus\w*)`
@@ -122,9 +161,9 @@ const lastWords = (before: string, count: number): string[] =>
     .slice(-count)
 
 const lowerBoundWords = new Set(['yfir', 'fra', 'minnst', 'lagmark', 'amk'])
-const lowerBoundPhrases = ['minnsta kosti', 'meira en', 'meiri en']
+const lowerBoundPhrases = ['minnsta kosti', 'meira en', 'meiri en', 'haerri en']
 const upperBoundWords = new Set(['undir', 'hamark', 'max', 'innan'])
-const upperBoundPhrases = ['minna en', 'minni en', 'mesta lagi']
+const upperBoundPhrases = ['minna en', 'minni en', 'laegri en', 'mesta lagi']
 
 type Bound = 'lower' | 'upper'
 const boundVerbs = new Set(['kosta', 'kostar', 'fara', 'vera'])
@@ -270,7 +309,7 @@ const fillerWords = new Set(
   mesta lagi upp ekki innan verd verdi kostar kosta budget draegni saeti
   saeta saetum drif drifi hrodun sek hledsla hradhledsla hradhledslu km
   kilometra manna tharf bara rafmagns bilarnir bilana kg kilo kiloa tonn
-  tonnum
+  tonnum haerri laegri
   `
     .trim()
     .split(/\s+/),
@@ -294,6 +333,7 @@ export interface ParsedIntent {
 export const parseFilterIntent = (text: string): ParsedIntent => {
   let rest = foldText(text.slice(0, MAX_INTENT_LENGTH))
   const aboutTowing = towingWords.test(rest)
+  const aboutClearance = clearanceWords.test(rest)
   const filters: Filters = {}
   const drives: Drive[] = []
   const names: Array<{ index: number; entry: NameEntry }> = []
@@ -353,7 +393,7 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
   // There is no filter for the most a car tows, so "undir 1000" is read and
   // dropped.
   take(
-    String.raw`${START}${TOWING_VERB}(?:[\s:]+(?:${TOWING_GAP})){0,3}[\s:]+${NUM}${END}(?!\s*${OTHER_UNIT}${END})(?:\s*(${WEIGHT})${END})?`,
+    String.raw`${START}${TOWING_VERB}(?:[\s:]+(?:${BOUND_GAP})){0,3}[\s:]+${NUM}${END}(?!\s*${OTHER_UNIT}${END})(?:\s*(${WEIGHT})${END})?`,
     (match, before) => {
       const [text, raw, unit] = match
       const after = match.input.slice(match.index + text.length)
@@ -384,6 +424,47 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
       const bound = boundBefore(before)
       if (!bound && negatedBefore(before)) return false
       if (bound !== 'upper') set('towing', min)
+    },
+  )
+
+  // "veghæð 20 cm" or "veghæð minnst 180", read like a towing weight. No
+  // filter holds the lowest a car may sit, so "undir 150" is read and dropped.
+  take(
+    String.raw`${START}${CLEARANCE_WORD}(?:[\s:]+(?:${BOUND_GAP})){0,3}[\s:]+${NUM}(?:${END}|(?=${CLEARANCE_UNIT}${END}))(?!\s*${OTHER_UNIT}${END})(?:\s*(${CLEARANCE_UNIT})${END})?`,
+    (match, before) => {
+      const [text, raw, unit] = match
+      // "veghæð 20 tommu felgur" is a wheel, so a bare cm is read only where
+      // no word but a joining one follows it
+      const after = match.input.slice(match.index + text.length)
+      if (
+        !unit &&
+        inCentimetres(parseNumber(raw, true)) &&
+        countFollows.test(after)
+      )
+        return false
+      const min = readGroundClearance(raw, unit)
+      if (min === undefined) return false
+      const lead = clearanceBefore(
+        before + text.slice(0, text.lastIndexOf(raw)),
+      )
+      const bound = boundBefore(lead)
+      if (!bound && negatedBefore(lead)) return false
+      if (bound !== 'upper') set('groundClearance', min)
+    },
+  )
+
+  // "200 mm veghæð": a length is only a clearance where the request is about
+  // one, as "20 cm" alone could be anything
+  take(
+    String.raw`${START}${NUM}\s*(${CLEARANCE_UNIT})${END}(?:\s+veghaed\w*)?`,
+    (match, before) => {
+      if (!aboutClearance) return false
+      const min = readGroundClearance(match[1], match[2])
+      if (min === undefined) return false
+      const lead = clearanceBefore(before)
+      const bound = boundBefore(lead)
+      if (!bound && negatedBefore(lead)) return false
+      if (bound !== 'upper') set('groundClearance', min)
     },
   )
 

@@ -52,6 +52,7 @@ const everyFilter: Required<Filters> = {
   range: 300,
   seats: 5,
   towing: 1500,
+  groundClearance: 180,
   acceleration: 9,
   value: 30_000,
   fastcharge: 2,

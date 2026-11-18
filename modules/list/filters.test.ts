@@ -133,6 +133,11 @@ describe('getFiltersFromQuery', () => {
     expect(getFiltersFromQuery({ drattargeta: '0' })).toEqual({})
   })
 
+  it('reads ground clearance in whole mm, rounding a fraction up', () => {
+    expect(getFiltersFromQuery({ veghaed: '179.5' }).groundClearance).toBe(180)
+    expect(getFiltersFromQuery({ veghaed: 'hatt' })).toEqual({})
+  })
+
   // Seconds and km per minute are measurements, not prices
   it('leaves the filters that are not prices fractional', () => {
     expect(getFiltersFromQuery({ hrodun: '7.25' }).acceleration).toBe(7.25)
@@ -159,6 +164,7 @@ describe('filters survive a round trip through the URL', () => {
     ['a range', { range: 400 }],
     ['a seat count', { seats: 7 }],
     ['a towing weight', { towing: 1500 }],
+    ['a ground clearance', { groundClearance: 180 }],
     ['an acceleration', { acceleration: 7 }],
     ['a value', { value: 20_000 }],
     ['a fastcharge', { fastcharge: 3 }],
@@ -175,6 +181,7 @@ describe('filters survive a round trip through the URL', () => {
         range: 300,
         seats: 5,
         towing: 1500,
+        groundClearance: 130,
         acceleration: 9,
         value: 30_000,
         fastcharge: 2,
@@ -217,6 +224,7 @@ describe('filters survive a round trip through the URL', () => {
       range: 300,
       seats: 5,
       towing: 1500,
+      groundClearance: 180,
       acceleration: 9,
       value: 30_000,
       fastcharge: 2,
@@ -318,6 +326,7 @@ describe('filterKeys', () => {
       'range',
       'seats',
       'towing',
+      'groundClearance',
       'drive',
       'acceleration',
       'value',

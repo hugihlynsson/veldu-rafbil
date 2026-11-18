@@ -1,13 +1,17 @@
 import { describe, expect, it } from 'vitest'
 
 import cars from '@/modules/data/cars'
+import { newCarSchema } from '@/modules/data/newCarSchema'
 import carFilter from './carFilter'
 import {
+  MAX_GROUND_CLEARANCE,
   MAX_INTENT_LENGTH,
   MAX_TOWING,
+  MIN_GROUND_CLEARANCE,
   MIN_TOWING,
   needsModel,
   parseFilterIntent,
+  readGroundClearance,
   readsAsQuestion,
   readTowing,
 } from './filterIntent'
@@ -212,6 +216,100 @@ describe('parseFilterIntent', () => {
     expect(parseFilterIntent('dráttargeta').unread).toEqual(['drattargeta'])
   })
 
+  it('reads a ground clearance in mm or cm', () => {
+    expect(read('veghæð 200 mm')).toEqual({ groundClearance: 200 })
+    expect(read('veghæð minnst 18 cm')).toEqual({ groundClearance: 180 })
+    expect(read('veghaed 17,5 sm')).toEqual({ groundClearance: 175 })
+    expect(read('veghæð að minnsta kosti 190')).toEqual({
+      groundClearance: 190,
+    })
+    expect(read('20 cm veghæð og fjórhjóladrif')).toEqual({
+      groundClearance: 200,
+      drive: ['AWD'],
+    })
+  })
+
+  // Nobody means 20 mm, which no car sits at
+  it('reads a clearance number too small for mm as cm', () => {
+    expect(read('veghæð 20')).toEqual({ groundClearance: 200 })
+    expect(read('veghæð 20 og undir 9 milljónum')).toEqual({
+      price: 9_000_000,
+      groundClearance: 200,
+    })
+  })
+
+  // A unit or a clearance word left over is a word for a model
+  it('reads the whole of a clearance, leaving nothing for a model', () => {
+    for (const text of ['veghæð 18 cm', '200 mm veghæð', 'veghæðin 190 mm']) {
+      expect(parseFilterIntent(text), text).toEqual({
+        filters: {
+          groundClearance: readGroundClearance(
+            text.match(/\d+/)![0],
+            text.includes('cm') ? 'cm' : 'mm',
+          ),
+        },
+        unread: [],
+        numbers: [],
+      })
+    }
+  })
+
+  it('reads a clearance with its unit written onto the number', () => {
+    expect(parseFilterIntent('veghæð yfir 200mm')).toEqual({
+      filters: { groundClearance: 200 },
+      unread: [],
+      numbers: [],
+    })
+  })
+
+  it('reads "hærri en" as a floor', () => {
+    expect(read('veghæð hærri en 180')).toEqual({ groundClearance: 180 })
+  })
+
+  it('reads a length beside "hátt undir" as a clearance', () => {
+    expect(read('hátt undir bílinn, minnst 20 cm')).toEqual({
+      groundClearance: 200,
+    })
+  })
+
+  it('reads no clearance from a length that is about something else', () => {
+    expect(read('veghæð 20 tommu felgur').groundClearance).toBeUndefined()
+    expect(read('20 cm').groundClearance).toBeUndefined()
+    expect(read('veghæð og 500 km drægni')).toEqual({ range: 500 })
+    expect(read('veghæð 400 km').groundClearance).toBeUndefined()
+  })
+
+  it('reads a clearance ceiling as no filter, and a negated floor as one', () => {
+    expect(read('veghæð undir 150 mm')).toEqual({})
+    expect(read('veghæð ekki minni en 180')).toEqual({ groundClearance: 180 })
+  })
+
+  // Its "undir" asks for more height, so it is no ceiling
+  it('reads a length after "hátt undir" as a floor', () => {
+    expect(read('hátt undir 200 mm')).toEqual({ groundClearance: 200 })
+    expect(read('þarf hátt undir, 20 cm')).toEqual({ groundClearance: 200 })
+    expect(read('hátt undir hann, veghæð 190')).toEqual({
+      groundClearance: 190,
+    })
+  })
+
+  // A word left over is a billed request, though the number was read
+  it('reads "hærri en" and "lægri en" whole', () => {
+    expect(parseFilterIntent('drægni hærri en 400 km')).toEqual({
+      filters: { range: 400 },
+      unread: [],
+      numbers: [],
+    })
+    expect(parseFilterIntent('veghæð hærri en 180').unread).toEqual([])
+  })
+
+  it('leaves "veghæð" alone for a model', () => {
+    expect(parseFilterIntent('mikil veghæð').unread).toEqual([
+      'mikil',
+      'veghaed',
+    ])
+  })
+
   it('reads 0-100 as the sprint, not as two numbers', () => {
     expect(parseFilterIntent('0-100 á 5 sek')).toEqual({
       filters: { acceleration: 5 },
@@ -287,5 +385,36 @@ describe('readTowing', () => {
   it('reads a weight with its unit by the same bounds', () => {
     expect(read(`${MIN_TOWING - 1} kg kerra`)).toEqual({})
     expect(read(`${MIN_TOWING} kg kerra`)).toEqual({ towing: MIN_TOWING })
+  })
+})
+
+// The parser and the suggestions read a clearance through this, so the bounds
+// cannot drift apart
+describe('readGroundClearance', () => {
+  it('keeps to the bounds the car data is held to', () => {
+    const at = (mm: number) =>
+      newCarSchema.shape.groundClearance.safeParse({ mm }).success
+    expect(at(MIN_GROUND_CLEARANCE)).toBe(true)
+    expect(at(MIN_GROUND_CLEARANCE - 1)).toBe(false)
+    expect(at(MAX_GROUND_CLEARANCE)).toBe(true)
+    expect(at(MAX_GROUND_CLEARANCE + 1)).toBe(false)
+  })
+
+  it('takes a height between the bounds, in mm or cm', () => {
+    expect(readGroundClearance(String(MIN_GROUND_CLEARANCE))).toBe(
+      MIN_GROUND_CLEARANCE,
+    )
+    expect(readGroundClearance(String(MAX_GROUND_CLEARANCE))).toBe(
+      MAX_GROUND_CLEARANCE,
+    )
+    expect(
+      readGroundClearance(String(MIN_GROUND_CLEARANCE - 1)),
+    ).toBeUndefined()
+    expect(
+      readGroundClearance(String(MAX_GROUND_CLEARANCE + 1)),
+    ).toBeUndefined()
+    expect(readGroundClearance('18', 'cm')).toBe(180)
+    expect(readGroundClearance('18', 'mm')).toBeUndefined()
+    expect(readGroundClearance('18,5', 'sentimetrar')).toBe(185)
   })
 })
