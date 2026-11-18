@@ -300,8 +300,11 @@ make, then model. The fields that are easy to get wrong:
     the browser but lets curl through). MG Australia's brochures give
     "Running Clearance (mm)", linked from `mgmotor.com.au/vehicles/<model>`
     as `/brochures/<MODEL>_<year>.pdf`. Match the version by battery.
-  - XPENG gives none for the G6, G9, L03 or X9: the Australian model pages
-    have no spec table, and XPENG Malaysia's spec PDFs leave it out.
+  - XPENG gives none for the G6 anywhere found: not the Australian model
+    pages, XPENG Malaysia's spec PDFs, the configuration tables on
+    `xiaopeng.com/<model>/configuration.html` in China, or the dimension
+    tables of the European and Hong Kong owner's manuals. See below for
+    where the L03, X9 and G9L have one.
   - Opel: the Swedish price lists, `dokument.opel.se/prislistor/personbilar/<model>.pdf`,
     give „Markfrigångshöjd tjänstevikt/max. last“ for the Grandland. The
     Frontera's row is there but empty. Vauxhall's and opel.de's PDFs refuse
@@ -456,8 +459,13 @@ make, then model. The fields that are easy to get wrong:
   - XPENG's model and spec pages give none in any market checked (is, se,
     ae and Australia's shop). Its pressroom on `xpeng.com/pressroom/news/`
     does in places: the Danish G9L release gives „Maksimal frihøjde: 216
-    mm“ on its standard air suspension. The G6, G9, L03 and X9 releases
-    give none.
+    mm“ on its standard air suspension, and the Norwegian X9 launch release
+    (June 2025) „Bakkeklaringen kan justeres helt opp til 22 cm“. The G6,
+    G9 and L03 releases give none.
+  - XPENG's Dutch configurator, `store.xpeng.com/nl/configurator/<model>`,
+    gives „Bodemvrijheid, beladen (mm)“ in the spec text in its page HTML:
+    143 for every L03, and 176 for the G9L, whose raised 216 is used. Its
+    G6 and X9 pages, and the other markets' configurators, have none.
   - smart: the specifications pages on `uk.smart.com/en/models/hashtag-<one|three|five>/specifications/`
     give "Ground Clearance curb 0/5" per trim; take the first, the unladen
     one. The UK sells no Pulse #1 or #3, but every other trim there shares
