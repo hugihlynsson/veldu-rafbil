@@ -35,15 +35,15 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Jeep          | 2026-11-06 | —          | Avenger list is the 4xe hybrid only            |
 | KGM           | 2026-11-10 | 2026-10-30 |                                                |
 | Kia           | 2026-11-14 | 2026-11-13 | PV5 11-14; EV9 11-12; EV5 and EV6 11-10        |
-| Leapmotor     | 2026-11-16 | —          | ÍSBAND page; no dated list                     |
-| Lexus         | 2026-11-16 | —          | TZ unpriced; estimated from NL prices          |
-| Mazda         | 2026-11-16 | 2026-11-16 | CX-6e; 6e 11-02                                |
+| Leapmotor     | 2026-11-18 | —          | ÍSBAND page; no dated list                     |
+| Lexus         | 2026-11-18 | —          | TZ unpriced; estimated from NL prices          |
+| Mazda         | 2026-11-18 | 2026-11-16 | CX-6e and 6e                                   |
 | Mercedes-Benz | 2026-11-16 | 2026-11-16 | GLA, GLB, GLC and CLA; VLE 11-11; rest older   |
 | MG            | 2026-11-16 | 2026-11-16 |                                                |
 | Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
 | Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
 | Opel          | —          | —          | No price published; see 2026-11-10 note        |
-| Peugeot       | 2026-11-16 | —          | Read from the model pages                      |
+| Peugeot       | 2026-11-18 | —          | Read from the model pages                      |
 | Polestar      | 2026-11-12 | 2026-11-05 | Polestar 5; 2, 3 and 4 from 2026-10-29         |
 | Porsche       | 2026-11-12 | 2026-10-30 |                                                |
 | Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
@@ -52,8 +52,8 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Smart         | 2026-11-10 | 2026-11-02 |                                                |
 | Subaru        | 2026-11-10 | 2026-10-31 |                                                |
 | Suzuki        | 2026-11-10 | 2026-10-30 |                                                |
-| Tesla         | 2026-11-16 | —          | Design pages; no dated list                    |
-| Toyota        | 2026-11-16 | —          |                                                |
+| Tesla         | 2026-11-18 | —          | Design pages; no dated list                    |
+| Toyota        | 2026-11-18 | —          |                                                |
 | Volkswagen    | 2026-11-12 | 2026-11-10 | ID.4 and ID.3 Neo; ID.3, ID.7, Polo 11-04      |
 | Volvo         | 2026-11-06 | 2026-10-28 | EX40/EC40 2027.5 P8 AWD unpriced on 11-12      |
 | XPENG         | 2026-11-10 | 2026-11-02 |                                                |
@@ -365,3 +365,20 @@ still answers curl. BL reissued its BMW, MG and Hyundai lists and Askja its
 GLA, GLB, GLC and CLA lists that day, and Brimborg the Mazda CX-6e's; every
 price matched. The Peugeot pages now live on `peugeotisland.is`, as the car
 list's links already say; `peugeot.is` is refused by the built-in browser.
+
+**Checked on 2026-11-18**: no newer list than the one last read for Audi,
+BMW, BYD, Fiat, Ford, GWM, Hongqi, Hyundai, JAC, Jeep, KGM, Kia, MG, Mini,
+Mercedes-Benz, Nissan, Polestar, Porsche, Range Rover, Renault, Škoda, Smart,
+Subaru, Suzuki, Volkswagen, Volvo and XPENG, by `Last-Modified`, the dated
+filename or the issuu `documentId`. The lists without a date (Leapmotor,
+Lexus, Peugeot, Tesla, Toyota) and Mazda's 6e, re-uploaded on 2026-11-16, were
+read, and every price matched. Documents missing from an issuu listing (Smart,
+XPENG, most Kia and Mercedes lists) can be dated from inside the built-in
+browser on issuu.com: `fetch('/askja/docs/<slug>')` returns the page, and the
+first `yymmddHHMMSS-<hash>` in it is the document's upload. xpeng.com/is now
+has a "Hannaðu þinn G9L" button, but it opens the L03 configurator, and
+`/is/model/g9l` is a 404, so the G9L is still unpriced. `vw/id-tiguan.pdf`
+is still a 404. Toyota's list prints 330 km for the Proace City Verso, the
+long body (the only one it sells), where the car list has 345 km and links
+ev-database's short L1; the Proace Verso prints a span, 338–432 km. Both were
+left for the owner.
