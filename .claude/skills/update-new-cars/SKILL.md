@@ -423,6 +423,9 @@ make, then model. The fields that are easy to get wrong:
     Autocar rounds it to 260). Nothing from Land Rover was found to back it,
     but it is used, as an exception, since Land Rover's sheet gives only the
     standard 201. No figure for the Sport Electric was found even there.
+  - The Lexus TZ takes evkx.net's 203 mm, for every version, as another
+    exception: no Lexus sheet had it by November 2026 (cars-data.com says
+    200). Replace it once `lexus.jp` or `media.lexus.co.uk` publishes one.
   - Japanese spec tables always have „最低地上高“ (minimum ground clearance),
     unladen, often as „社内測定値“ (the maker's own measurement). Where Japan
     sells the car, look there first. Most of these PDFs are images or have
