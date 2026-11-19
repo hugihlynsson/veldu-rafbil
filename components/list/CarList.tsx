@@ -221,10 +221,13 @@ export default function CarList({ latest }: Props) {
   const isComparing = comparison.selected.length > 0
 
   // A full tray takes no more, and the toggle says so
-  const toggleCompared = (car: CarData) => {
+  const toggleCompared = (
+    car: CarData,
+    source: 'card' | 'suggestion' = 'card',
+  ) => {
     const toggled = toggleComparedCar(car)
     if (toggled)
-      track({ name: 'compare_toggled', car: carSlug(car), ...toggled })
+      track({ name: 'compare_toggled', car: carSlug(car), ...toggled, source })
   }
 
   const removeCompared = (car: CarData) => {
@@ -234,6 +237,7 @@ export default function CarList({ latest }: Props) {
       car: carSlug(car),
       added: false,
       count: comparison.selected.length - 1,
+      source: 'tray',
     })
   }
 
@@ -426,7 +430,11 @@ export default function CarList({ latest }: Props) {
       )}
 
       {isComparing && (
-        <CompareTray cars={comparison.selected} onRemove={removeCompared} />
+        <CompareTray
+          cars={comparison.selected}
+          onRemove={removeCompared}
+          onAdd={(car) => toggleCompared(car, 'suggestion')}
+        />
       )}
 
       {sheetCar && (

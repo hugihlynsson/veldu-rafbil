@@ -56,6 +56,7 @@ const tracked = {
     car: 'kia-ev3',
     added: true,
     count: 2,
+    source: 'suggestion',
   },
   comparison_opened: {
     name: 'comparison_opened',

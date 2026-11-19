@@ -96,10 +96,13 @@ export const productEventSchema = z.discriminatedUnion('name', [
     direction: z.enum(['previous', 'next']),
     method: z.enum(['key', 'button']),
   }),
+  // `source` is absent from pages older than it: a card's button, the tray's
+  // cross, or a car the tray suggested beside the one in it
   event('compare_toggled', {
     car: slug,
     added: z.boolean(),
     count: z.int().min(0).max(MAX_COMPARED),
+    source: z.enum(['card', 'tray', 'suggestion']).optional(),
   }),
   event('comparison_opened', {
     cars: z.array(slug).min(1).max(MAX_COMPARED),
