@@ -94,7 +94,13 @@ const Writing: FunctionComponent<{
             </p>
           ))
         ) : (
-          <TypingDots label="Gervigreindin ber bílana saman" className="mt-2" />
+          // Held back past the first word's usual arrival, some 1.5 to 2.5s
+          // after the page asks, so most see the words come and never dots
+          // that flash past; in CSS so it counts from the server's paint
+          <TypingDots
+            label="Gervigreindin ber bílana saman"
+            className="mt-2 animate-late-in"
+          />
         )}
       </div>
     </div>

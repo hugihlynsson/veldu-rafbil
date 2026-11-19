@@ -150,6 +150,7 @@
   --animate-pill-in: pill-in 0.3s ease-out backwards;
   --animate-pill-out: pill-out 0.2s ease-in forwards;
   --animate-typing: typing 1.4s infinite;
+  --animate-late-in: hero-in 0.3s ease-out 2s backwards;
   --animate-step-next: step-next 0.3s var(--ease-out-cubic) backwards;
   --animate-step-previous: step-previous 0.3s var(--ease-out-cubic) backwards;
   --animate-hero-in: hero-in 0.2s ease-out;
