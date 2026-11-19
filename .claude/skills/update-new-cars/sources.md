@@ -30,32 +30,32 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Ford          | 2026-11-10 | 2026-06-22 | Capri; Explorer 06-12, Puma 04-08, Mach-E 2025 |
 | GWM           | 2026-11-06 | 2026-01-20 |                                                |
 | Hongqi        | 2026-11-10 | 2026-10-31 |                                                |
-| Hyundai       | 2026-11-16 | 2026-11-16 | STARIA also in `hyundai_fyrirt_kjalausnir`     |
+| Hyundai       | 2026-11-19 | 2026-11-18 | STARIA in the main list again                  |
 | JAC           | 2026-11-03 | 2026-10-30 |                                                |
 | Jeep          | 2026-11-06 | —          | Avenger list is the 4xe hybrid only            |
 | KGM           | 2026-11-10 | 2026-10-30 |                                                |
 | Kia           | 2026-11-14 | 2026-11-13 | PV5 11-14; EV9 11-12; EV5 and EV6 11-10        |
-| Leapmotor     | 2026-11-18 | —          | ÍSBAND page; no dated list                     |
-| Lexus         | 2026-11-18 | —          | TZ unpriced; estimated from NL prices          |
+| Leapmotor     | 2026-11-19 | —          | ÍSBAND page; no dated list                     |
+| Lexus         | 2026-11-19 | —          | TZ unpriced; estimated from NL prices          |
 | Mazda         | 2026-11-18 | 2026-11-16 | CX-6e and 6e                                   |
-| Mercedes-Benz | 2026-11-16 | 2026-11-16 | GLA, GLB, GLC and CLA; VLE 11-11; rest older   |
+| Mercedes-Benz | 2026-11-19 | 2026-11-16 | C, GLA, GLB, GLC, CLA; VLE 11-11; rest older   |
 | MG            | 2026-11-16 | 2026-11-16 |                                                |
 | Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
 | Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
 | Opel          | —          | —          | No price published; see 2026-11-10 note        |
-| Peugeot       | 2026-11-18 | —          | Read from the model pages                      |
+| Peugeot       | 2026-11-19 | —          | Read from the model pages                      |
 | Polestar      | 2026-11-12 | 2026-11-05 | Polestar 5; 2, 3 and 4 from 2026-10-29         |
 | Porsche       | 2026-11-12 | 2026-10-30 |                                                |
 | Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
-| Renault       | 2026-11-14 | 2026-11-13 |                                                |
+| Renault       | 2026-11-19 | 2026-11-18 |                                                |
 | Škoda         | 2026-11-12 | 2026-11-10 | Enyaq; Peaq, Epiq and Elroq 11-09              |
 | Smart         | 2026-11-10 | 2026-11-02 |                                                |
 | Subaru        | 2026-11-10 | 2026-10-31 |                                                |
 | Suzuki        | 2026-11-10 | 2026-10-30 |                                                |
-| Tesla         | 2026-11-18 | —          | Design pages; no dated list                    |
-| Toyota        | 2026-11-18 | —          |                                                |
+| Tesla         | 2026-11-19 | —          | Design pages; no dated list                    |
+| Toyota        | 2026-11-19 | —          |                                                |
 | Volkswagen    | 2026-11-12 | 2026-11-10 | ID.4 and ID.3 Neo; ID.3, ID.7, Polo 11-04      |
-| Volvo         | 2026-11-06 | 2026-10-28 | EX40/EC40 2027.5 P8 AWD unpriced on 11-12      |
+| Volvo         | 2026-11-19 | 2026-11-04 | EX40 MY27.5 11-04, EX90 11-03; EC40 unpriced   |
 | XPENG         | 2026-11-10 | 2026-11-02 |                                                |
 
 ## Importers with one page for several makes
@@ -382,3 +382,19 @@ is still a 404. Toyota's list prints 330 km for the Proace City Verso, the
 long body (the only one it sells), where the car list has 345 km and links
 ev-database's short L1; the Proace Verso prints a span, 338–432 km. Both were
 left for the owner.
+
+**Read on 2026-11-19**: BL reissued its Hyundai and Renault lists on
+2026-11-18 and Askja its C-Class list on 2026-11-16; every price matched. The
+Hyundai list prints the STARIA Electric (450 km, against 399 in the car list)
+on its own page again. Volvo's electric-cars page links an EX40 list for the
+2027.5 model year (`VOLVO_EX40_MY27_5_Verdlisti_20261104.pdf`), the P8 AWD
+in Plus and Ultra trims, though it prints 442 hö and 4,6 sek where the
+configurator gives 300 kW; its Plus at 9.190.000 replaced the estimate. No EC40
+list yet. The EX90 list (2026-11-03) prints 606 km for both versions.
+landrover.is now answers 403 to curl; in the built-in browser,
+`fetch('/range-rover/range-rover-sport/electric')` returns a page whose HTML
+holds every model's list under `/uploads/`, still the 14.10.2026 ones. No newer
+list than the one last read for Audi, BMW, BYD, Fiat, Ford, GWM, Hongqi, JAC,
+Jeep, KGM, Kia, Mazda, MG, Mini, Nissan, Polestar, Porsche, Range Rover,
+Škoda, Smart, Subaru, Suzuki, Volkswagen and XPENG. The G9L's pages on
+xpeng.com/is still redirect to a 404.
