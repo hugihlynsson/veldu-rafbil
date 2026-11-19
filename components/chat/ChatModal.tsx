@@ -102,6 +102,15 @@ const ChatModal: React.FunctionComponent<Props> = ({
   // Nor is a link to the comparison the page already is any use
   const answerComparison =
     about && sameCarSet(answerCars.map(carSlug), about) ? [] : answerCars
+  // A comparison the answer named is the one its last line leads into, so it
+  // goes straight under the text rather than after the cars
+  const comparisonLedInto =
+    lastMessage?.role === 'assistant' &&
+    (lastMessage.metadata?.comparison?.length ?? 0) > 0
+  const comparisonLink = status !== 'streaming' &&
+    answerComparison.length > 0 && (
+      <CompareAnswerCars cars={answerComparison} animate={animateExtras} />
+    )
   const [pageStarters] = useState(() =>
     about ? getRandomSuggestions(starters, 3) : [],
   )
@@ -202,6 +211,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
                       <>
                         {showLoading && <TypingIndicator />}
                         {unansweredAlert}
+                        {comparisonLedInto && comparisonLink}
                         {status !== 'streaming' && lastMessage && (
                           <MentionedCars
                             lastMessage={lastMessage}
@@ -217,13 +227,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
                             }}
                           />
                         )}
-                        {status !== 'streaming' &&
-                          answerComparison.length > 0 && (
-                            <CompareAnswerCars
-                              cars={answerComparison}
-                              animate={animateExtras}
-                            />
-                          )}
+                        {!comparisonLedInto && comparisonLink}
                         {status !== 'streaming' && followUps.length > 0 && (
                           <FollowUpSuggestions
                             suggestions={followUps}

@@ -152,6 +152,6 @@ describe('the assistant system prompt', () => {
     const [, example] = systemPrompt.match(/\[compare:([^\]<]+)\]/) ?? []
     expect(resolveComparison([example ?? ''])).toHaveLength(2)
     expect(systemPrompt).toContain(`${MIN_COMPARED} til ${MAX_COMPARED} bílar`)
-    expect(systemPrompt).toContain('tvær til fjórar setningar, ENGIN tafla')
+    expect(systemPrompt).toContain('svo svarið er inngangur að honum')
   })
 })
