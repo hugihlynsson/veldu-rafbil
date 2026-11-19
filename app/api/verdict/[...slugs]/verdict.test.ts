@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
+import { advisorModel } from '@/modules/chat/model'
 import cars, { type Car } from '@/modules/data/cars'
 
 const [a, b] = cars.filter((car) => !car.evDatabaseUrl) as [Car, Car]
@@ -19,7 +20,8 @@ const answering = (finishes: string[]) => {
     logAfterResponse: async (event: () => Promise<object>) =>
       logged.push(await event()),
   }))
-  vi.doMock('@ai-sdk/google', () => ({ google: () => 'model' }))
+  vi.doMock('@ai-sdk/anthropic', () => ({ anthropic: () => 'claude' }))
+  vi.doMock('@ai-sdk/google', () => ({ google: () => 'gemini' }))
   vi.doMock('ai', () => ({
     streamText: (call: unknown) => {
       const finish = finishes[calls.length] ?? 'stop'
@@ -52,6 +54,7 @@ afterEach(() => {
     'next/cache',
     'next/server',
     '@/app/api/publicEndpoint',
+    '@ai-sdk/anthropic',
     '@ai-sdk/google',
     'ai',
   ])
@@ -93,10 +96,26 @@ describe('writeVerdict', () => {
     expect(calls).toHaveLength(1)
   })
 
-  it('asks again once when the first answer is filtered', async () => {
-    const { calls } = answering(['content-filter', 'stop'])
+  it('asks Claude, with its fallbacks, when the first answer is kept', async () => {
+    const { calls, logged } = answering(['stop'])
+    expect(await finished()).toBe('verdict')
+    expect(calls[0]).toMatchObject({
+      model: 'claude',
+      providerOptions: { anthropic: { fallbacks: 'default' } },
+    })
+    await vi.waitFor(() => expect(logged).toHaveLength(1))
+    expect(logged[0]).toMatchObject({ model: 'claude-fable-5-2' })
+  })
+
+  // Claude's own fallbacks have declined by then, and asking it again would
+  // pay for the same refusal
+  it('asks Gemini once when the first answer is filtered', async () => {
+    const { calls, logged } = answering(['content-filter', 'stop'])
     expect(await finished()).toBe('verdict')
     expect(calls).toHaveLength(2)
+    expect(calls[1]).toMatchObject({ model: 'gemini' })
+    await vi.waitFor(() => expect(logged).toHaveLength(1))
+    expect(logged[0]).toMatchObject({ model: advisorModel })
   })
 
   // Every call is paid for, and a set that is filtered twice will be again

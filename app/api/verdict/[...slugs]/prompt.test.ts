@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
+import { groundClearanceText } from '@/modules/copy/groundClearanceCopy'
 import cars from '@/modules/data/cars'
 import { writingRules } from '@/modules/detail/writingRules'
 import { readVerdict, verdictFacts, verdictPrompt } from './prompt'
@@ -13,6 +14,18 @@ describe('verdictFacts', () => {
   it('names each car compared in full', () => {
     expect(facts).toContain(`- ${kia.label}, `)
     expect(facts).toContain(`- ${tesla.label}, `)
+  })
+
+  it('gives each car its ground clearance, unranked', () => {
+    expect(facts).toContain(groundClearanceText(kia.groundClearance))
+    expect(facts).not.toMatch(/^- Veghæð/m)
+  })
+
+  it('leaves out a ground clearance that is not known', () => {
+    const unknown = cars.find((car) => car.groundClearance === null)!
+    expect(verdictFacts([kia, unknown])).not.toContain(
+      groundClearanceText(null),
+    )
   })
 
   // The model copies a gap; left to subtract, it gets one wrong now and then

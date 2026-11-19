@@ -10,6 +10,7 @@ import {
   grantStartText,
   previousGrantAmountText,
 } from '@/modules/copy/grantCopy'
+import { groundClearanceText } from '@/modules/copy/groundClearanceCopy'
 import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 import { allNews } from '@/modules/news/history'
 import { recentChangesSection } from './recentChanges'
@@ -48,6 +49,16 @@ describe('the assistant system prompt', () => {
       expect(line, car.id).toContain(`${car.timeToCharge10To80} mín`)
       expect(line, car.id).toContain(`${car.kmPerMinuteCharged} km/mín`)
     }
+  })
+
+  // „Hver er með mestu veghæðina?“ is a suggestion, and had nothing behind it
+  it('gives every car its ground clearance, or says it is not known', () => {
+    for (const car of cars) {
+      expect(lineOf(car), car.id).toContain(
+        groundClearanceText(car.groundClearance),
+      )
+    }
+    expect(systemPrompt).toContain('Ef veghæðin er óþekkt')
   })
 
   // The prompt says so, and asked for a cheap car that is also good at

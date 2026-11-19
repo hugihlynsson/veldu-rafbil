@@ -1,6 +1,7 @@
 import type { Car } from '@/modules/data/cars'
 import { grantAmountText } from '@/modules/copy/grantCopy'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
+import { groundClearanceText } from '@/modules/copy/groundClearanceCopy'
 import { towingText } from '@/modules/copy/towingCopy'
 import { driveLabels } from '@/modules/data/drives'
 import { advisorIntro, writingRules } from '@/modules/detail/writingRules'
@@ -28,7 +29,7 @@ ${writingRules.plainText}
 
 Svaraðu með hnitmiðuðum samanburði á bílunum, um 120 orðum í tveimur eða þremur stuttum efnisgreinum og engu öðru. Byrjaðu á því sem helst skilur þá að, segðu svo hverjum hver þeirra hentar og hvers vegna, gjarnan með því sem ev-database segir um stærð þeirra og pláss. Nefndu bílana með tegund og gerð, til dæmis Kia EV3, en séu tvær útfærslur sömu gerðar bornar saman, nefndu útfærsluna líka, eins og bíllinn heitir í gögnunum.
 
-Vertu heiðarleg(ur). Það sem bíll gerir í meðallagi gerirðu ekki að kosti: segðu það eða slepptu því. Notaðu ekki orð eins og „einstakur“, „framúrskarandi“ eða „frábær“ nema munurinn sýni að hann skari greinilega fram úr. Framhjóla- eða afturhjóladrif er aldrei kostur í snjó og hálku: þar hefur aðeins fjórhjóladrif forskot, og það nefnirðu aðeins þar sem það greinir bílana að. Stærð rafhlöðunnar skiptir kaupanda aðeins máli gegnum drægnina, svo nefndu hana ekki sem kost eða galla ein og sér. Bíl sem má ekki draga kerru nefnirðu alltaf sem galla, enda draga margir Íslendingar kerru eða hjólhýsi. Smávægilegur munur, fáeinir km eða lítill verðmunur, skiptir kaupanda ekki máli: nefndu hann ekki sem kost.
+Vertu heiðarleg(ur). Það sem bíll gerir í meðallagi gerirðu ekki að kosti: segðu það eða slepptu því. Notaðu ekki orð eins og „einstakur“, „framúrskarandi“ eða „frábær“ nema munurinn sýni að hann skari greinilega fram úr. Framhjóla- eða afturhjóladrif er aldrei kostur í snjó og hálku: þar hefur aðeins fjórhjóladrif forskot, og það nefnirðu aðeins þar sem það greinir bílana að. Stærð rafhlöðunnar skiptir kaupanda aðeins máli gegnum drægnina, svo nefndu hana ekki sem kost eða galla ein og sér. Bíl sem má ekki draga kerru nefnirðu alltaf sem galla, enda draga margir Íslendingar kerru eða hjólhýsi. Smávægilegur munur, fáeinir km eða lítill verðmunur, skiptir kaupanda ekki máli: nefndu hann ekki sem kost. Framleiðendur mæla veghæð ekki allir eins, svo nefndu hana aðeins þar sem munurinn er mikill, og veghæð í hæstu stillingu loftpúðafjöðrunar aðeins sem það sem hún er, því hún er oft aðeins leyfð á lítilli ferð. Óþekkta veghæð nefnirðu ekki.
 
 Veldu það sem skiptir þá máli sem kaupa svona bíla: í stórum fjölskyldubíl eða jeppa vega skott, sæti og dráttargeta þyngra en hröðun og afl, en í sportbíl er því öfugt farið.`
 
@@ -144,6 +145,8 @@ const describeCar = (car: Car): string =>
     driveLabels[car.drive].toLowerCase(),
     `allt að ${car.seats} sæti`,
     towingText(car.towing),
+    // Left out where unknown, as the model is told never to mention it then
+    ...(car.groundClearance ? [groundClearanceText(car.groundClearance)] : []),
   ].join(', ')
 
 // The model is given every gap worked out, so a figure in its text is one it

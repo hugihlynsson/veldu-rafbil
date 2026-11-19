@@ -21,6 +21,7 @@ const car = (over: Partial<NewCar>): Car =>
     drive: 'AWD',
     seats: 5,
     towing: 1500,
+    groundClearance: null,
     timeToCharge10To80: 25,
     power: 250,
     ...over,
@@ -53,6 +54,21 @@ describe('carFilter', () => {
     expect(keep({ towing: 1600 }, car({ towing: 1500 }))).toBe(false)
     expect(keep({ towing: 750 }, car({ towing: 0 }))).toBe(false)
     expect(keep({ towing: 750 }, car({ towing: null }))).toBe(false)
+  })
+
+  it('treats ground clearance as a minimum, and an unknown figure as none', () => {
+    const at = (mm: number) => car({ groundClearance: { mm } })
+    expect(keep({ groundClearance: 180 }, at(180))).toBe(true)
+    expect(keep({ groundClearance: 181 }, at(180))).toBe(false)
+    expect(keep({ groundClearance: 100 }, car({ groundClearance: null }))).toBe(
+      false,
+    )
+  })
+
+  it('compares an air-suspension car at its raised level', () => {
+    const raised = car({ groundClearance: { mm: 219, adjustable: true } })
+    expect(keep({ groundClearance: 219 }, raised)).toBe(true)
+    expect(keep({ groundClearance: 220 }, raised)).toBe(false)
   })
 
   it('compares price after the grant', () => {

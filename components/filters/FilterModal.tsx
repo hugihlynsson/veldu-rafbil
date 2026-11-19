@@ -82,6 +82,13 @@ const fields: { [Key in Exclude<FilterKey, 'make'>]-?: Field } = {
     type: 'number',
     placeholder: '1500',
   },
+  groundClearance: {
+    kind: 'input',
+    label: 'Veghæð',
+    hint: 'Lágmark, mm',
+    type: 'number',
+    placeholder: '180',
+  },
   availability: {
     kind: 'select',
     label: 'Framboð',

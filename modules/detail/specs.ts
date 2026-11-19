@@ -1,5 +1,10 @@
 import type { Car } from '@/modules/data/cars'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
+import {
+  groundClearanceDetail,
+  groundClearanceFigure,
+  groundClearanceLine,
+} from '@/modules/copy/groundClearanceCopy'
 import { towingFigure } from '@/modules/copy/towingCopy'
 import { driveLabels } from '@/modules/data/drives'
 import { formatKmPerMinute } from '@/modules/data/getKmPerMinutesCharged'
@@ -89,6 +94,14 @@ const specs = {
     text: (car) => towingFigure(car.towing),
     detail: (car) => (car.towing ? 'Hemluð' : undefined),
   },
+  // Not ranked: makers measure it unladen, at kerb weight or fully loaded, and
+  // a raised air-suspension level is often for low speeds only, so a few mm
+  // between two cars says little
+  groundClearance: {
+    label: 'Veghæð',
+    text: (car) => groundClearanceFigure(car.groundClearance),
+    detail: (car) => groundClearanceDetail(car.groundClearance),
+  },
 } satisfies Record<string, Spec>
 
 export interface SpecCell {
@@ -129,22 +142,13 @@ export const specRows = (compared: ReadonlyArray<Car>): SpecRow[] =>
     }
   })
 
-/** The ground clearance as it reads under the drive */
-export const groundClearanceText = ({
-  mm,
-  adjustable,
-}: NonNullable<Car['groundClearance']>): string =>
-  adjustable ? `Veghæð allt að ${mm} mm` : `Veghæð ${mm} mm`
-
-// Only some cars have a ground clearance yet, so it is on a car's own page
-// alone, kept out of comparisons. It takes the drive's detail rather than
-// being a figure of its own, so the page keeps eight figures, which fill the
-// rows evenly at every width. The drive's name moves to the figure's title
+// On a car's own page the ground clearance takes the drive's detail rather
+// than being a figure of its own, so the page keeps eight figures, which fill
+// the rows evenly at every width. The drive's name moves to the figure's title
 export const carFigures = (car: Car): SpecRow[] => {
-  const clearance =
-    car.groundClearance && groundClearanceText(car.groundClearance)
+  const clearance = groundClearanceLine(car.groundClearance)
   return specRows([car]).map((row) =>
-    row.key === 'drive' && clearance
+    row.key === 'drive'
       ? {
           ...row,
           cells: row.cells.map((cell) => ({

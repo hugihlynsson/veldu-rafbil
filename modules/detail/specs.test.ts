@@ -16,6 +16,7 @@ const base: NewCar = {
   drive: 'FWD',
   seats: 5,
   towing: 1500,
+  groundClearance: null,
   timeToCharge10To80: 31,
   power: 150,
 }
@@ -99,6 +100,20 @@ describe('specRows', () => {
     expect(cells?.every((cell) => !cell.best)).toBe(true)
   })
 
+  it('gives the ground clearance a row in a comparison, unranked', () => {
+    const cells = row(
+      'groundClearance',
+      car({ groundClearance: { mm: 240, adjustable: true } }),
+      car({ groundClearance: { mm: 160 } }),
+      car({ groundClearance: null }),
+    )?.cells
+    expect(cells).toEqual([
+      { text: '240 mm', detail: 'Hæsta stilling', best: false },
+      { text: '160 mm', detail: undefined, best: false },
+      { text: 'Óþekkt', detail: undefined, best: false },
+    ])
+  })
+
   it('writes prices with the list grouping', () => {
     expect(
       row('price', car({ price: 6_390_000 }), car({}))?.cells[0],
@@ -126,28 +141,12 @@ describe('carFigures', () => {
     ).toBe('Veghæð allt að 240 mm')
   })
 
-  it('leaves the drive as it is for a car without one', () => {
-    expect(drive({ drive: 'AWD' })).toEqual({
+  it('says it is unknown for a car without one', () => {
+    expect(drive({ drive: 'AWD', groundClearance: null })).toEqual({
       text: 'AWD',
-      detail: 'Fjórhjóladrif',
+      detail: 'Veghæð óþekkt',
+      title: 'Fjórhjóladrif',
       best: false,
     })
-  })
-
-  it('adds no figure of its own, so the page keeps its eight', () => {
-    const withIt = car({ groundClearance: { mm: 200 } })
-    expect(carFigures(withIt).map(({ key }) => key)).toEqual(
-      specRows([withIt]).map(({ key }) => key),
-    )
-  })
-
-  // Too few cars have one for a row of mostly gaps
-  it('keeps the ground clearance out of a comparison', () => {
-    const withIt = car({ groundClearance: { mm: 200 } })
-    expect(
-      specRows([withIt, withIt]).flatMap(({ cells }) =>
-        cells.map((cell) => cell.detail),
-      ),
-    ).not.toContain('Veghæð 200 mm')
   })
 })

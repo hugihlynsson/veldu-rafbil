@@ -44,9 +44,9 @@ const parseAsKronur = createParser({
   serialize: String,
 })
 
-// A seat count is a whole number of people, and a towing weight is in whole
-// kg. The UI offers a short list, but the URL can carry anything, and half a
-// seat would render in the chip. Up, as both are minimums.
+// A seat count is a whole number of people, a towing weight is in whole kg
+// and a ground clearance in whole mm. The URL can carry anything, and half a
+// seat would render in the chip. Up, as all are minimums.
 const parseAsWholeMinimum = createParser({
   parse: (value) => {
     const parsed = positive(value)
@@ -135,6 +135,14 @@ export const filterDefinitions = {
     // A car whose figure is not known is left out: offered for a trailer, it
     // may turn out to take none
     test: (min) => (car) => (car.towing ?? 0) >= min,
+  }),
+  groundClearance: filter({
+    urlKey: 'veghaed',
+    parser: parseAsWholeMinimum,
+    // The most a car can sit off the road, so an adjustable figure counts at
+    // its raised level, and the list card says that is what it is. A car
+    // whose figure is not known is left out.
+    test: (min) => (car) => (car.groundClearance?.mm ?? 0) >= min,
   }),
   drive: filter({
     urlKey: 'drif',

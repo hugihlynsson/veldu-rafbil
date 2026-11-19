@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
+import { groundClearanceLine } from '@/modules/copy/groundClearanceCopy'
 import { driveLabels } from '@/modules/data/drives'
 import { toHorsepower } from '@/modules/data/horsepower'
 import type { Car } from '@/modules/data/cars'
@@ -25,6 +26,7 @@ interface Props {
   showValue?: boolean
   showSeats?: boolean
   showTowing?: boolean
+  showGroundClearance?: boolean
   preload?: boolean
   /** Its place in the list as sorted and filtered, from 0 */
   position: number
@@ -71,6 +73,7 @@ const NewCar: FunctionComponent<Props> = ({
   showValue,
   showSeats,
   showTowing,
+  showGroundClearance,
   preload,
   position,
   view = 'list',
@@ -83,11 +86,15 @@ const NewCar: FunctionComponent<Props> = ({
 
   // Not agree(): sæti is neuter and reads the same at every count. A car
   // without a subModel gets the seat count on its own rather than a lone dot.
-  // The towing filter lets through only cars with a figure.
+  // The towing and ground clearance filters let through only cars with a
+  // figure.
   const subTitle = [
     car.subModel,
     showSeats && `${car.seats} sæti`,
     showTowing && car.towing && `Dregur ${addDecimalSeparators(car.towing)} kg`,
+    showGroundClearance &&
+      car.groundClearance &&
+      groundClearanceLine(car.groundClearance),
   ]
     .filter(Boolean)
     .join(' · ')
