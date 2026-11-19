@@ -3927,7 +3927,7 @@ const newCars: Array<NewCar> = [
     model: 'EC40',
     subModel: 'P8 AWD',
     heroImageName: 'volvo-ec40',
-    price: 10_500_000,
+    price: 9_190_000,
     sellerUrl: 'https://www.volvocars.com/is/cars/ec40-electric/',
     acceleration: 4.7,
     capacity: 82,
