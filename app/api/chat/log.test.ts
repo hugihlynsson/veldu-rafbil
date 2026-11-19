@@ -26,6 +26,7 @@ const finish: ChatFinish = {
   text: 'Leapmotor T03.',
   followUps: ['Hvað fer hann langt?'],
   cars: ['car-leapmotor-t03'],
+  comparison: ['car-leapmotor-t03', 'car-kia-ev3-long-range'],
   usage: {
     inputTokens: 10,
     outputTokens: 20,
@@ -45,6 +46,7 @@ describe('chatLogEvent', () => {
       assistantResponse: finish.text,
       followUps: finish.followUps,
       cars: ['leapmotor-t03'],
+      comparison: ['leapmotor-t03', 'kia-ev3-long-range'],
       tokenUsage: finish.usage,
       toolCalls: [],
     })

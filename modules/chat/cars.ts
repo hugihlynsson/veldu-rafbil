@@ -23,6 +23,18 @@ export const resolveCarRefs = (refs: string[]): string[] => {
 }
 
 /**
+ * The ids of the cars an answer's [compare:] marker names, in its order: the
+ * first marker only, as an answer makes one comparison. None unless at least
+ * MIN_COMPARED of them are real, and no more than the comparison shows.
+ */
+export const resolveComparison = (markers: string[]): string[] => {
+  const [marker] = markers
+  if (!marker) return []
+  const ids = resolveCarRefs(marker.split(/[,|]/).map((ref) => ref.trim()))
+  return ids.length >= MIN_COMPARED ? ids.slice(0, MAX_COMPARED) : []
+}
+
+/**
  * The cars to show under an answer: the ones the model tagged, best first.
  * An answer from before it tagged any, or one it tagged none in, falls back
  * to the cars its text names.
@@ -41,9 +53,10 @@ export const getAnswerCars = (message: ChatMessage): Car[] => {
 export const COMPARED_FROM_ANSWER = 3
 
 /**
- * The cars the last answer's comparison link compares. Read off how many it
- * tags, not the question's wording, so a car added in any phrasing is not
- * dropped. None when the last message is not an answer, or is about one car
+ * The cars the last answer's comparison link compares: the ones its
+ * [compare:] marker names. An answer without one, or stored before there was
+ * one, falls back to the cars it tags, read off how many, not the question's
+ * wording. None when the last message is not an answer, or is about one car
  * or none.
  */
 export const getAnswerComparison = (
@@ -51,6 +64,10 @@ export const getAnswerComparison = (
 ): Car[] => {
   const answer = messages.at(-1)
   if (answer?.role !== 'assistant') return []
+  const compared = (answer.metadata?.comparison ?? []).flatMap(
+    (id) => carsById.get(id) ?? [],
+  )
+  if (compared.length >= MIN_COMPARED) return compared
   const cars = getAnswerCars(answer)
   const answerCars =
     cars.length > MAX_COMPARED ? cars.slice(0, COMPARED_FROM_ANSWER) : cars

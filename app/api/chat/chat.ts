@@ -16,9 +16,10 @@ import {
 } from '@/modules/chat/request'
 import {
   markerTransform,
+  emptyMarkers,
   type AnswerMarkers,
 } from '@/modules/chat/answerMarkers'
-import { resolveCarRefs } from '@/modules/chat/cars'
+import { resolveCarRefs, resolveComparison } from '@/modules/chat/cars'
 import {
   createFetchCarDetailsTool,
   upgradeCarDetailsCalls,
@@ -75,6 +76,8 @@ export interface ChatFinish {
   text: string
   followUps: string[]
   cars: string[]
+  /** Car ids, as `cars` */
+  comparison: string[]
   usage: LanguageModelUsage
   toolCalls: Array<{ toolName: string; input: unknown }>
 }
@@ -92,17 +95,22 @@ interface StreamChatOptions {
 const metadataOf = ({
   followUps,
   cars,
+  comparison,
 }: AnswerMarkers): ChatMessage['metadata'] => {
   const ids = resolveCarRefs(cars)
-  if (followUps.length === 0 && ids.length === 0) return undefined
+  const compared = resolveComparison(comparison)
+  if (followUps.length === 0 && ids.length === 0 && compared.length === 0) {
+    return undefined
+  }
   return {
     ...(followUps.length > 0 && { followUps }),
     ...(ids.length > 0 && { cars: ids }),
+    ...(compared.length > 0 && { comparison: compared }),
   }
 }
 
 /**
- * The answer as a UI message stream. The follow-up and car markers the prompt
+ * The answer as a UI message stream. The follow-up, car and comparison markers the prompt
  * asks for are taken out of the text on the way and sent as the message's
  * metadata when it finishes, so the client never has to parse them.
  */
@@ -114,7 +122,7 @@ export const streamChat = async ({
   onError,
   onFirstText,
 }: StreamChatOptions): Promise<Response> => {
-  const markers: AnswerMarkers = { followUps: [], cars: [] }
+  const markers = emptyMarkers()
   const answerTools = createTools()
   let hasText = false
 
@@ -144,6 +152,7 @@ export const streamChat = async ({
         text,
         followUps: markers.followUps,
         cars: resolveCarRefs(markers.cars),
+        comparison: resolveComparison(markers.comparison),
         usage: totalUsage,
         toolCalls: steps.flatMap((step) =>
           step.toolCalls.map(({ toolName, input }) => ({ toolName, input })),

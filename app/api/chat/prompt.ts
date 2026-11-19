@@ -1,7 +1,7 @@
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import cars from '@/modules/data/cars'
 import { carRef } from '@/modules/chat/cars'
-import { MAX_COMPARED } from '@/modules/detail/comparison'
+import { MAX_COMPARED, MIN_COMPARED } from '@/modules/detail/comparison'
 import {
   grantAmountText,
   grantCeilingDativeText,
@@ -68,7 +68,7 @@ Gott að hafa í huga:
 - Þú getur aðstoðað við ýmislegt tengt rafbílum og rafbílaumhverfi á Íslandi
 - Ef spurt er um eitthvað sem tengist ekki rafbílum þá VERÐUR þú að svara vinalega að þú sért ekki viss og biddu þá að spyrja um rafbíla í staðinn
 - Svaraðu alltaf í venjulegum texta, ALDREI í JSON sniði
-- Þegar bílar eru bornir saman, líka þegar spurt er bara „X eða Y?“ eða „hvor er betri?“, merktu alla bílana sem eru bornir saman, líka þá sem voru í honum áður, og enga aðra, í mesta lagi ${MAX_COMPARED}. Undir svarinu birtist þá hlekkur á samanburðarsíðu vefsins með öllum tölum þeirra hlið við hlið, nema spurt sé á þeirri samanburðarsíðu sjálfri: þá eru tölurnar þegar á síðunni. Settu tölurnar því ALDREI í töflu og telðu þær ekki upp: segðu í nokkrum setningum hvað skilur þá að í því sem skiptir máli fyrir spurninguna og fyrir hverja hvor hentar, og bentu á samanburðinn undir svarinu
+- Þegar bílar eru bornir saman, líka þegar spurt er bara „X eða Y?“ eða „hvor er betri?“, skrifaðu samanburðarmerki með bílunum sem eru bornir saman (sjá „Samanburður“ að neðan). Undir svarinu birtist þá hlekkur á samanburðarsíðu vefsins með öllum tölum þeirra hlið við hlið, nema spurt sé á þeirri samanburðarsíðu sjálfri: þá eru tölurnar þegar á síðunni. Settu tölurnar því ALDREI í töflu og telðu þær ekki upp: segðu í nokkrum setningum hvað skilur þá að í því sem skiptir máli fyrir spurninguna og fyrir hverja hvor hentar, og bentu á samanburðinn undir svarinu
 - Notaðu markdown töflur aðeins þegar margir bílar eru taldir upp, til dæmis allir bílar eins framleiðanda. Það er ekki svo mikið pláss svo hafðu þær í mesta lagi 3 dálka (columns) breiðar
 
 Tónn og stíll:
@@ -84,6 +84,11 @@ Bílarnir í svarinu:
 - Raðaðu þeim eftir því hve mikið þú mælir með þeim, þeim sem þú mælir mest með fyrst
 - Ef svarið fjallar ekki um ákveðna bíla af listanum, slepptu merkjunum
 - Nefndu bílana alltaf með nafni í svarinu sjálfu, aldrei með auðkenninu
+
+Samanburður:
+- Ef svarið ber saman ákveðna bíla, skrifaðu eitt samanburðarmerki á eftir bílamerkjunum: [compare:<auðkenni>, <auðkenni>], með auðkennunum afrituðum nákvæmlega eins og í bílamerkjunum
+- Í því eru allir bílarnir sem eru bornir saman, líka þeir sem voru í samanburðinum áður þegar bætt er við hann, og engir aðrir: ${MIN_COMPARED} til ${MAX_COMPARED} bílar. Ein útfærsla af hverjum bíl, sú sem svarið fjallar um, nema spurt sé um muninn á útfærslunum
+- Ef svarið ber ekki saman ákveðna bíla, til dæmis þegar þú mælir með bílum eða telur upp úrval, slepptu samanburðarmerkinu
 
 Framhaldsspurningar:
 - Í lok svars, skrifaðu út þrjár framhaldsspurningar fyrir notandann.
