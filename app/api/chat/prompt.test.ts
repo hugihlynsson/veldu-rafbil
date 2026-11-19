@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import systemPrompt from './prompt'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import cars from '@/modules/data/cars'
-import { carRef, resolveCarRefs } from '@/modules/chat/cars'
+import { carRef, resolveCarRefs, resolveComparison } from '@/modules/chat/cars'
 import { MAX_COMPARED, MIN_COMPARED } from '@/modules/detail/comparison'
 import {
   grantAmountText,
@@ -149,7 +149,9 @@ describe('the assistant system prompt', () => {
   // the link under the answer compares what its [compare:] marker names
   it('has a comparison name its cars in a marker, up to what the comparison shows', () => {
     expect(systemPrompt).toContain('[compare:<auðkenni>, <auðkenni>]')
+    const [, example] = systemPrompt.match(/\[compare:([^\]<]+)\]/) ?? []
+    expect(resolveComparison([example ?? ''])).toHaveLength(2)
     expect(systemPrompt).toContain(`${MIN_COMPARED} til ${MAX_COMPARED} bílar`)
-    expect(systemPrompt).toContain('Settu tölurnar því ALDREI í töflu')
+    expect(systemPrompt).toContain('tvær til fjórar setningar, ENGIN tafla')
   })
 })
