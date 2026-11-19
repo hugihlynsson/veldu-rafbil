@@ -151,6 +151,6 @@ describe('the assistant system prompt', () => {
     expect(systemPrompt).toContain(
       `merktu alla bílana sem eru bornir saman, líka þá sem voru í honum áður, og enga aðra, í mesta lagi ${MAX_COMPARED}`,
     )
-    expect(systemPrompt).toContain('Endurtaktu því ekki heila töflu')
+    expect(systemPrompt).toContain('Settu tölurnar því ALDREI í töflu')
   })
 })
