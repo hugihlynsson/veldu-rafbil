@@ -2,6 +2,7 @@
 
 import type { FunctionComponent, ReactNode } from 'react'
 import { useEffect, useState } from 'react'
+import clsx from 'clsx'
 
 import TypingDots from '@/components/TypingDots'
 import { readVerdict } from '@/modules/detail/readVerdict'
@@ -28,14 +29,17 @@ const ReviewSection: FunctionComponent<{
   </section>
 )
 
+// Not text-pretty: Safari's weighs a whole paragraph, so each word added to
+// one being written moves the line breaks above it
 const paragraphStyle =
-  'mt-2 mb-0 text-base leading-normal text-pretty md:text-lg [&+&]:mt-3'
+  'mt-2 mb-0 text-base leading-normal md:text-lg [&+&]:mt-3'
 
-const Paragraphs: FunctionComponent<{ paragraphs: ReadonlyArray<string> }> = ({
-  paragraphs,
-}) =>
+const Paragraphs: FunctionComponent<{
+  paragraphs: ReadonlyArray<string>
+  pretty?: boolean
+}> = ({ paragraphs, pretty }) =>
   paragraphs.map((paragraph, index) => (
-    <p key={index} className={paragraphStyle}>
+    <p key={index} className={clsx(paragraphStyle, pretty && 'text-pretty')}>
       {paragraph}
     </p>
   ))
@@ -187,7 +191,7 @@ const Verdict: FunctionComponent<Props> = ({ written, endpoint }) => {
   if (written && verdict === written)
     return (
       <ReviewSection>
-        <Paragraphs paragraphs={written.paragraphs} />
+        <Paragraphs paragraphs={written.paragraphs} pretty />
       </ReviewSection>
     )
 
