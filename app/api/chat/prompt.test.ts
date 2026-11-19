@@ -4,6 +4,7 @@ import systemPrompt from './prompt'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import cars from '@/modules/data/cars'
 import { carRef, resolveCarRefs } from '@/modules/chat/cars'
+import { MAX_COMPARED } from '@/modules/detail/comparison'
 import {
   grantAmountText,
   grantLostRangeText,
@@ -142,5 +143,14 @@ describe('the assistant system prompt', () => {
   it('shows the car markers after the answer, before the follow-ups', () => {
     const example = systemPrompt.slice(systemPrompt.indexOf('TIL DÆMIS'))
     expect(example.indexOf('[car:')).toBeLessThan(example.indexOf('[q:'))
+  })
+
+  // Tables rebuilt message by message ran conversations to 90k tokens a turn;
+  // the link under the answer compares what its markers tag
+  it('has a comparison tag every compared car, up to what the comparison shows', () => {
+    expect(systemPrompt).toContain(
+      `merktu alla bílana sem eru bornir saman, líka þá sem voru í honum áður, og enga aðra, í mesta lagi ${MAX_COMPARED}`,
+    )
+    expect(systemPrompt).toContain('Endurtaktu því ekki heila töflu')
   })
 })

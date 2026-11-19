@@ -98,10 +98,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
   // may not be: its follow-ups and its comparison wait for a question here
   const elsewhere = askedElsewhere(messages, about)
   const followUps = elsewhere ? [] : lastMessageFollowUps
-  const answerCars =
-    lastMessage?.role === 'assistant' && !elsewhere
-      ? getAnswerComparison(lastMessage)
-      : []
+  const answerCars = elsewhere ? [] : getAnswerComparison(messages)
   // Nor is a link to the comparison the page already is any use
   const answerComparison =
     about && sameCarSet(answerCars.map(carSlug), about) ? [] : answerCars
