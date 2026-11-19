@@ -1,4 +1,8 @@
-import { google } from '@ai-sdk/google'
+import {
+  anthropic,
+  type AnthropicLanguageModelOptions,
+} from '@ai-sdk/anthropic'
+import { google, type GoogleLanguageModelOptions } from '@ai-sdk/google'
 import { streamText, type LanguageModelUsage } from 'ai'
 import { createHash } from 'node:crypto'
 import { unstable_cache } from 'next/cache'
@@ -20,8 +24,18 @@ class NotWritten extends Error {}
 const ordered = (cars: ReadonlyArray<Car>) =>
   cars.toSorted((a, b) => carSlug(a).localeCompare(carSlug(b)))
 
-// Medium, as the reviews are written: whoever first opens a set of cars waits
-// on every token of its thinking. On three sets, high took 16-29 s against
+// Picked on Icelandic and on the wait, as whoever first opens a set of cars
+// waits for every token. Nov 2026, five of the most-opened sets from the same
+// prompt and pages: Fable 5.2 at low effort was done in ~5 s and read best;
+// Opus 5.5 at low took ~8 s, and 3.8 Flash and 4 Hydrogen at medium thinking
+// ~20 s. Miðeind's leaderboard has Fable 5.2 at 77.5 at low, the Geminis at
+// 63.5 and 67.1 at high. ~$0.04 a verdict, against 3.8 Flash's ~$0.01. Re-run
+// the comparison before changing it, and say here what it found.
+// https://huggingface.co/spaces/mideind/icelandic-llm-leaderboard
+const verdictModel = 'claude-fable-5-2'
+const verdictEffort = 'low'
+
+// For the fallback only. Medium, as on three sets high took 16-29 s against
 // medium's 13-17 s, for verdicts no better to read
 const thinkingLevel = 'medium'
 
@@ -33,8 +47,35 @@ const thinkingLevel = 'medium'
 const keyOf = (cars: ReadonlyArray<Car>): string => {
   const { system, prompt } = verdictPrompt(ordered(cars))
   return createHash('sha256')
-    .update(`${advisorModel} ${thinkingLevel}\n${system}\n${prompt}`)
+    .update(`${verdictModel} ${verdictEffort}\n${system}\n${prompt}`)
     .digest('hex')
+}
+
+type Writer = Pick<
+  Parameters<typeof streamText>[0],
+  'model' | 'providerOptions'
+> & { name: string }
+
+const writer: Writer = {
+  name: verdictModel,
+  model: anthropic(verdictModel),
+  providerOptions: {
+    anthropic: {
+      effort: verdictEffort,
+      // A refusal is answered by another Claude model within the same call
+      fallbacks: 'default',
+    } satisfies AnthropicLanguageModelOptions,
+  },
+}
+
+const fallbackWriter: Writer = {
+  name: advisorModel,
+  model: google(advisorModel),
+  providerOptions: {
+    google: {
+      thinkingConfig: { thinkingLevel },
+    } satisfies GoogleLanguageModelOptions,
+  },
 }
 
 /**
@@ -89,6 +130,8 @@ interface Usage {
   readEveryPage?: boolean
   /** A first answer the provider stopped, and what it had cost */
   blocked?: { reason: string | undefined; usage: LanguageModelUsage }
+  /** The model asked for the answer kept, the fallback's after a refusal */
+  model?: string
 }
 
 const write = async (
@@ -117,14 +160,13 @@ const write = async (
   usage.lookups = pages.filter((page) => page.car.evDatabaseUrl).length
   usage.readEveryPage = readEveryPage(compared, read)
 
-  const answer = async () => {
+  const answer = async ({ name, model, providerOptions }: Writer) => {
+    usage.model = name
     const result = streamText({
-      model: google(advisorModel),
+      model,
       system,
       prompt: `${prompt}\n\n${verdictDetails(pages)}`,
-      providerOptions: {
-        google: { thinkingConfig: { thinkingLevel } },
-      },
+      providerOptions,
       maxOutputTokens: 16_384,
       abortSignal,
     })
@@ -141,15 +183,15 @@ const write = async (
     return result
   }
 
-  let result = await answer()
-  // Gemini stops an answer as a content filter now and then, for a set of
-  // cars the same request writes a verdict for on the next try
+  let result = await answer(writer)
+  // Filtered only once every Claude model the fallbacks tried declined, so
+  // another provider's model, with its own classifier, writes it instead
   if ((await result.finishReason) === 'content-filter') {
     usage.blocked = {
       reason: await result.rawFinishReason,
       usage: await result.totalUsage,
     }
-    result = await answer()
+    result = await answer(fallbackWriter)
   }
 
   usage.total = await result.totalUsage
@@ -222,7 +264,7 @@ export const writeVerdict = (compared: ReadonlyArray<Car>): Job => {
       lookups: usage.lookups,
       readEveryPage: usage.readEveryPage,
       millis: Math.round(performance.now() - startedAt),
-      model: advisorModel,
+      model: usage.model ?? verdictModel,
       ...deployment(),
     }
   })

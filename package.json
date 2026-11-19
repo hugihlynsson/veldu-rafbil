@@ -8,6 +8,7 @@
     "node": "^26"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^4.0.106",
     "@ai-sdk/google": "^4.0.117",
     "@ai-sdk/react": "^4.0.173",
     "@axiomhq/js": "^2.0.0",
