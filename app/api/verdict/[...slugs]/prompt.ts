@@ -5,7 +5,6 @@ import { groundClearanceText } from '@/modules/copy/groundClearanceCopy'
 import { towingText } from '@/modules/copy/towingCopy'
 import { driveLabels } from '@/modules/data/drives'
 import { advisorIntro, writingRules } from '@/modules/detail/writingRules'
-import type { Verdict } from '@/modules/detail/verdictEvents'
 
 // The rules shared with the car reviews come from writingRules, so a
 // correction there reaches both; the rest are only a comparison's
@@ -207,22 +206,3 @@ export const verdictDetails = (
       specifications ? ['', `${car.label}:`, specifications] : [],
     ),
   ].join('\n')
-
-// Far past the some 120 words asked for, as a car's review is cut
-const MAX_LENGTH = 3000
-
-/** The answer as the page shows it, in paragraphs and without markdown */
-export const readVerdict = (text: string): Verdict | null => {
-  const paragraphs = text
-    .slice(0, MAX_LENGTH)
-    .split(/\n\s*\n/)
-    .map((paragraph) =>
-      paragraph
-        .replace(/\*\*|__|^#+\s*|^[-*•]\s+/gm, '')
-        .replace(/\s+/g, ' ')
-        .trim(),
-    )
-    .filter(Boolean)
-
-  return paragraphs.length > 0 ? { paragraphs } : null
-}

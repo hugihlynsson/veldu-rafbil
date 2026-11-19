@@ -1,13 +1,27 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { advisorModel } from '@/modules/chat/model'
 import cars, { type Car } from '@/modules/data/cars'
+import type { VerdictEvent } from '@/modules/detail/verdictEvents'
 
 const [a, b] = cars.filter((car) => !car.evDatabaseUrl) as [Car, Car]
-const words = Array.from({ length: 60 }, () => 'orð').join(' ')
+const words = Array.from({ length: 60 }, () => 'orð')
 
-// Each answer the model gives, in turn, as the finish it ends with
-const answering = (finishes: string[]) => {
+const writing = (text: ReadonlyArray<string>) =>
+  text.map((word) => ({ type: 'text-delta', text: `${word} ` }))
+
+interface Answer {
+  finish?: string
+  parts?: ReadonlyArray<object>
+  /** The model the provider says answered */
+  modelId?: string
+}
+
+// The model's answer, streamed as `parts` and ending with `finish`
+const answering = ({
+  finish = 'stop',
+  parts = writing(words),
+  modelId = 'claude-fable-5-2',
+}: Answer = {}) => {
   const calls: unknown[] = []
   const logged: object[] = []
   vi.resetModules()
@@ -21,33 +35,33 @@ const answering = (finishes: string[]) => {
       logged.push(await event()),
   }))
   vi.doMock('@ai-sdk/anthropic', () => ({ anthropic: () => 'claude' }))
-  vi.doMock('@ai-sdk/google', () => ({ google: () => 'gemini' }))
   vi.doMock('ai', () => ({
     streamText: (call: unknown) => {
-      const finish = finishes[calls.length] ?? 'stop'
       calls.push(call)
       return {
         stream: (async function* () {
-          yield { type: 'text-start' }
+          yield* parts
         })(),
         finishReason: Promise.resolve(finish),
         rawFinishReason: Promise.resolve(finish.toUpperCase()),
         totalUsage: Promise.resolve({ outputTokens: 10 }),
-        text: Promise.resolve(words),
+        response: Promise.resolve({ modelId }),
       }
     },
   }))
   return { calls, logged }
 }
 
-const finished = async () => {
+const finished = async (): Promise<VerdictEvent[]> => {
   const { writeVerdict } = await import('./verdict')
   const job = writeVerdict([a, b])
   await vi.waitFor(() =>
     expect(['verdict', 'error']).toContain(job.events.at(-1)?.type),
   )
-  return job.events.at(-1)?.type
+  return job.events
 }
+
+const last = (events: VerdictEvent[]) => events.at(-1)?.type
 
 afterEach(() => {
   for (const mocked of [
@@ -55,7 +69,6 @@ afterEach(() => {
     'next/server',
     '@/app/api/publicEndpoint',
     '@ai-sdk/anthropic',
-    '@ai-sdk/google',
     'ai',
   ])
     vi.doUnmock(mocked)
@@ -78,9 +91,9 @@ describe('peekVerdict', () => {
   }
 
   it('reads the verdict the route kept, under a key no compiler changes', async () => {
-    answering(['stop'])
+    answering()
     const kept = keyedOnSource()
-    expect(await finished()).toBe('verdict')
+    expect(last(await finished())).toBe('verdict')
     const { peekVerdict } = await import('./verdict')
     expect(await peekVerdict([b, a])).toMatchObject({
       paragraphs: expect.any(Array),
@@ -90,15 +103,10 @@ describe('peekVerdict', () => {
 })
 
 describe('writeVerdict', () => {
-  it('asks once when the first answer is kept', async () => {
-    const { calls } = answering(['stop'])
-    expect(await finished()).toBe('verdict')
+  it('asks Claude once, with its fallbacks', async () => {
+    const { calls, logged } = answering()
+    expect(last(await finished())).toBe('verdict')
     expect(calls).toHaveLength(1)
-  })
-
-  it('asks Claude, with its fallbacks, when the first answer is kept', async () => {
-    const { calls, logged } = answering(['stop'])
-    expect(await finished()).toBe('verdict')
     expect(calls[0]).toMatchObject({
       model: 'claude',
       providerOptions: { anthropic: { fallbacks: 'default' } },
@@ -107,32 +115,59 @@ describe('writeVerdict', () => {
     expect(logged[0]).toMatchObject({ model: 'claude-fable-5-2' })
   })
 
-  // Claude's own fallbacks have declined by then, and asking it again would
-  // pay for the same refusal
-  it('asks Gemini once when the first answer is filtered', async () => {
-    const { calls, logged } = answering(['content-filter', 'stop'])
-    expect(await finished()).toBe('verdict')
-    expect(calls).toHaveLength(2)
-    expect(calls[1]).toMatchObject({ model: 'gemini' })
-    await vi.waitFor(() => expect(logged).toHaveLength(1))
-    expect(logged[0]).toMatchObject({ model: advisorModel })
+  // The page shows the words as they come and then swaps in the verdict, so
+  // the two have to read the same
+  it('sends the words as they are written, then the verdict they make', async () => {
+    answering()
+    const events = await finished()
+    const sent = events.flatMap((event) =>
+      event.type === 'text' ? [event.text] : [],
+    )
+    expect(sent).toHaveLength(words.length)
+    expect(events.at(-1)).toEqual({
+      type: 'verdict',
+      verdict: { paragraphs: [sent.join('').trim()] },
+    })
   })
 
-  // Every call is paid for, and a set that is filtered twice will be again
-  it('gives up after a second filtered answer', async () => {
-    const { calls, logged } = answering(['content-filter', 'content-filter'])
-    expect(await finished()).toBe('error')
-    expect(calls).toHaveLength(2)
+  it('keeps only what the model that took over wrote', async () => {
+    const { logged } = answering({
+      parts: [
+        ...writing(['Hálfskrifað']),
+        { type: 'custom', kind: 'anthropic.fallback' },
+        ...writing(words),
+      ],
+      modelId: 'claude-opus-5-5',
+    })
+    const events = await finished()
+    const restart = events.findIndex((event) => event.type === 'restart')
+    expect(restart).toBe(1)
+    expect(events.at(-1)).toMatchObject({
+      verdict: { paragraphs: [words.join(' ')] },
+    })
+    await vi.waitFor(() => expect(logged).toHaveLength(1))
+    expect(logged[0]).toMatchObject({ model: 'claude-opus-5-5' })
+  })
+
+  // Every model the fallbacks name has refused by then, and each call is paid
+  it('gives up on an answer every model refused', async () => {
+    const { calls, logged } = answering({ finish: 'content-filter' })
+    expect(last(await finished())).toBe('error')
+    expect(calls).toHaveLength(1)
     await vi.waitFor(() => expect(logged).toHaveLength(1))
     expect(logged[0]).toMatchObject({
       error: expect.stringContaining('CONTENT-FILTER'),
-      blocked: { reason: 'CONTENT-FILTER' },
     })
   })
 
   it('does not ask again for an answer cut off for another reason', async () => {
-    const { calls } = answering(['length'])
-    expect(await finished()).toBe('error')
+    const { calls } = answering({ finish: 'length' })
+    expect(last(await finished())).toBe('error')
     expect(calls).toHaveLength(1)
+  })
+
+  it('keeps no verdict far shorter than the one asked for', async () => {
+    answering({ parts: writing(words.slice(0, 10)) })
+    expect(last(await finished())).toBe('error')
   })
 })

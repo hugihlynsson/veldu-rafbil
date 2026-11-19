@@ -2,7 +2,6 @@ import {
   anthropic,
   type AnthropicLanguageModelOptions,
 } from '@ai-sdk/anthropic'
-import { google, type GoogleLanguageModelOptions } from '@ai-sdk/google'
 import { streamText, type LanguageModelUsage } from 'ai'
 import { createHash } from 'node:crypto'
 import { unstable_cache } from 'next/cache'
@@ -10,12 +9,12 @@ import { after } from 'next/server'
 
 import type { Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
+import { readVerdict } from '@/modules/detail/readVerdict'
 import type { Verdict, VerdictEvent } from '@/modules/detail/verdictEvents'
-import { advisorModel } from '@/modules/chat/model'
 import { readCarPage } from '@/app/api/chat/tools/fetchCarDetails'
 import { deployment, logAfterResponse } from '@/app/api/publicEndpoint'
 import { readEveryPage, verdictKeys } from './keep'
-import { readVerdict, verdictDetails, verdictPrompt } from './prompt'
+import { verdictDetails, verdictPrompt } from './prompt'
 
 class NotWritten extends Error {}
 
@@ -35,10 +34,6 @@ const ordered = (cars: ReadonlyArray<Car>) =>
 const verdictModel = 'claude-fable-5-2'
 const verdictEffort = 'low'
 
-// For the fallback only. Medium, as on three sets high took 16-29 s against
-// medium's 13-17 s, for verdicts no better to read
-const thinkingLevel = 'medium'
-
 /**
  * Everything the model is given, hashed: a verdict lasts as long as the
  * figures, prompt and model it was written from, through any number
@@ -49,33 +44,6 @@ const keyOf = (cars: ReadonlyArray<Car>): string => {
   return createHash('sha256')
     .update(`${verdictModel} ${verdictEffort}\n${system}\n${prompt}`)
     .digest('hex')
-}
-
-type Writer = Pick<
-  Parameters<typeof streamText>[0],
-  'model' | 'providerOptions'
-> & { name: string }
-
-const writer: Writer = {
-  name: verdictModel,
-  model: anthropic(verdictModel),
-  providerOptions: {
-    anthropic: {
-      effort: verdictEffort,
-      // A refusal is answered by another Claude model within the same call
-      fallbacks: 'default',
-    } satisfies AnthropicLanguageModelOptions,
-  },
-}
-
-const fallbackWriter: Writer = {
-  name: advisorModel,
-  model: google(advisorModel),
-  providerOptions: {
-    google: {
-      thinkingConfig: { thinkingLevel },
-    } satisfies GoogleLanguageModelOptions,
-  },
 }
 
 /**
@@ -119,8 +87,7 @@ const MIN_WORDS = 45
 const wordCount = ({ paragraphs }: Verdict) =>
   paragraphs.join(' ').split(/\s+/).length
 
-// Long enough to read four pages and think, which the page shows it doing;
-// short of the function's own limit
+// Long enough to read four pages and think; short of the function's own limit
 const TIMEOUT_MS = 100_000
 
 interface Usage {
@@ -128,9 +95,7 @@ interface Usage {
   lookups: number
   /** Whether every page was read, which decides how long it is kept */
   readEveryPage?: boolean
-  /** A first answer the provider stopped, and what it had cost */
-  blocked?: { reason: string | undefined; usage: LanguageModelUsage }
-  /** The model asked for the answer kept, the fallback's after a refusal */
+  /** The model that answered, another Claude model after a refusal */
   model?: string
 }
 
@@ -160,49 +125,47 @@ const write = async (
   usage.lookups = pages.filter((page) => page.car.evDatabaseUrl).length
   usage.readEveryPage = readEveryPage(compared, read)
 
-  const answer = async ({ name, model, providerOptions }: Writer) => {
-    usage.model = name
-    const result = streamText({
-      model,
-      system,
-      prompt: `${prompt}\n\n${verdictDetails(pages)}`,
-      providerOptions,
-      maxOutputTokens: 16_384,
-      abortSignal,
-    })
+  const result = streamText({
+    model: anthropic(verdictModel),
+    system,
+    prompt: `${prompt}\n\n${verdictDetails(pages)}`,
+    providerOptions: {
+      anthropic: {
+        effort: verdictEffort,
+        // A refusal is answered by another Claude model within the same call
+        fallbacks: 'default',
+      } satisfies AnthropicLanguageModelOptions,
+    },
+    maxOutputTokens: 16_384,
+    abortSignal,
+  })
 
-    let writing = false
-    for await (const part of result.stream) {
-      if (part.type === 'text-start' && !writing) {
-        writing = true
-        emit({ type: 'writing' })
-      } else if (part.type === 'error') {
-        throw part.error
-      }
+  // A model that takes over from one that declined writes the verdict afresh,
+  // so it is read from the words since the last one took over
+  let text = ''
+  for await (const part of result.stream) {
+    if (part.type === 'text-delta') {
+      text += part.text
+      emit({ type: 'text', text: part.text })
+    } else if (part.type === 'custom' && part.kind === 'anthropic.fallback') {
+      text = ''
+      emit({ type: 'restart' })
+    } else if (part.type === 'error') {
+      throw part.error
     }
-    return result
-  }
-
-  let result = await answer(writer)
-  // Filtered only once every Claude model the fallbacks tried declined, so
-  // another provider's model, with its own classifier, writes it instead
-  if ((await result.finishReason) === 'content-filter') {
-    usage.blocked = {
-      reason: await result.rawFinishReason,
-      usage: await result.totalUsage,
-    }
-    result = await answer(fallbackWriter)
   }
 
   usage.total = await result.totalUsage
+  usage.model = (await result.response).modelId
   // Thrown rather than returned, as whatever is returned is kept: an answer
-  // cut off by its token limit or an interruption would be kept half written
+  // cut off by its token limit, an interruption or a refusal every model in
+  // the fallbacks gave would be kept half written
   const finishReason = await result.finishReason
   if (finishReason !== 'stop') {
     const raw = await result.rawFinishReason
     throw new Error(`The verdict ended with ${finishReason} (${raw})`)
   }
-  const verdict = readVerdict(await result.text)
+  const verdict = readVerdict(text)
   if (!verdict || wordCount(verdict) < MIN_WORDS) {
     throw new Error('The model gave too short a verdict')
   }
@@ -260,7 +223,6 @@ export const writeVerdict = (compared: ReadonlyArray<Car>): Job => {
       cars: ordered(compared).map(carSlug),
       error: failure,
       usage: usage.total,
-      blocked: usage.blocked,
       lookups: usage.lookups,
       readEveryPage: usage.readEveryPage,
       millis: Math.round(performance.now() - startedAt),
