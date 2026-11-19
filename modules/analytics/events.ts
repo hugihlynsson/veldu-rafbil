@@ -121,11 +121,16 @@ export const productEventSchema = z.discriminatedUnion('name', [
   }),
   event('seller_clicked', { car: slug }),
   event('ev_database_clicked', { car: slug }),
-  // Its id is in the link, and on each page_viewed the link opens
+  // Its id is in the link, and on each page_viewed the link opens. Sent once
+  // the sheet closes, as opening it is not sharing: `cancelled` is a sheet
+  // dismissed, `prompted` the link shown to copy by hand. `cars` are the ones
+  // the link is about, which the page it was shared from may not be.
   event('shared', {
     shareId,
     target: pageKind,
+    cars: z.array(slug).max(MAX_COMPARED),
     method: z.enum(['sheet', 'copy']),
+    outcome: z.enum(['sent', 'cancelled', 'failed', 'copied', 'prompted']),
   }),
   event('chat_bar_focused', {}),
   event('chat_opened', {}),

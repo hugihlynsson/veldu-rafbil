@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import { trackEvent } from 'fathom-client'
 
 import { pageOf, shareUrl } from '@/modules/analytics/visit'
-import { shortId, track } from '@/utils/track'
+import { flushTracked, shortId, track } from '@/utils/track'
 
 interface Props {
   title: string
@@ -56,26 +56,42 @@ const ShareButton: FunctionComponent<Props> = ({
       path ? new URL(path, window.location.origin).href : window.location.href,
       shareId,
     )
+    const target = pageOf(new URL(url).pathname)
+    const report = (
+      method: 'sheet' | 'copy',
+      outcome: 'sent' | 'cancelled' | 'failed' | 'copied' | 'prompted',
+    ) => {
+      track({
+        name: 'shared',
+        shareId,
+        target: target.kind,
+        cars: target.slugs,
+        method,
+        outcome,
+      })
+      // Sharing to another app hides the page, where a timer may never fire
+      flushTracked()
+    }
+
     trackEvent(event)
-    track({
-      name: 'shared',
-      shareId,
-      target: pageOf(new URL(url).pathname).kind,
-      method: typeof navigator.share === 'function' ? 'sheet' : 'copy',
-    })
-    if (navigator.share) {
+    if (typeof navigator.share === 'function') {
       try {
         await navigator.share({ title, url })
-      } catch {
-        // Closing the sheet rejects too, and is no failure
+        report('sheet', 'sent')
+      } catch (error) {
+        const closed =
+          error instanceof DOMException && error.name === 'AbortError'
+        report('sheet', closed ? 'cancelled' : 'failed')
       }
       return
     }
     try {
       await navigator.clipboard.writeText(url)
+      report('copy', 'copied')
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
+      report('copy', 'prompted')
       window.prompt('Afritaðu hlekkinn', url)
     }
   }
