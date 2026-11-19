@@ -112,3 +112,25 @@ describe('the reviews', () => {
     expect(files).not.toContain(reviews)
   })
 })
+
+// Every car's similar cars, kept by hand: the tray suggests from them once a
+// car is in it, which few visits get to
+describe('the similar cars', () => {
+  const similarCars = path.join(root, 'modules/data/similarCars.ts')
+  const suggestions = path.join(
+    root,
+    'components/detail/CompareSuggestions.tsx',
+  )
+
+  it('stay out of the list', () => {
+    const { files } = importGraph(carList)
+    expect(files).toContain(
+      path.join(root, 'components/detail/CompareTray.tsx'),
+    )
+    expect(files).not.toContain(similarCars)
+  })
+
+  it('are what the tray loads behind next/dynamic', () => {
+    expect(importGraph(suggestions).files).toContain(similarCars)
+  })
+})

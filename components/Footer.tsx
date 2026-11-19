@@ -11,7 +11,9 @@ import TextLink from './TextLink'
 const realRangeText = `${Math.round(realRangeLowFactor * 100)}–${Math.round(realRangeHighFactor * 100)}%`
 
 const Footer: FunctionComponent<{}> = () => (
-  <footer className="bg-haze pt-8 pb-34 xs:pt-14">
+  // Clear of the bar at the foot of the page, and of the pills the compare
+  // tray raises over it
+  <footer className="bg-haze pt-8 pb-34 xs:pt-14 in-[body:has([data-compare-suggestions])]:pb-62">
     <div className="mx-auto max-w-column px-(--gutter) md:max-w-page md:px-10 lg:flex lg:items-center lg:justify-between lg:gap-10">
       <div className="text-sm leading-5.5 text-pretty text-stone">
         <FooterLogo />
