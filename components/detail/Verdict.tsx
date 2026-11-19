@@ -75,7 +75,9 @@ const wordSpans = (paragraph: string, part: number) =>
 const Writing: FunctionComponent<{
   paragraphs: ReadonlyArray<string> | undefined
   done: boolean
-}> = ({ paragraphs, done }) => {
+  /** Once a model has taken over, the reader has waited already */
+  restarted?: boolean
+}> = ({ paragraphs, done, restarted }) => {
   const { ref, enabled } = useWordReveal<HTMLDivElement>(true)
 
   return (
@@ -96,10 +98,10 @@ const Writing: FunctionComponent<{
         ) : (
           // Held back past the first word's usual arrival, some 1.5 to 2.5s
           // after the page asks, so most see the words come and never dots
-          // that flash past; in CSS so it counts from the server's paint
+          // that flash past; in CSS so it counts from their paint, not hydration
           <TypingDots
             label="Gervigreindin ber bílana saman"
-            className="mt-2 animate-late-in"
+            className={clsx('mt-2', !restarted && 'animate-late-in')}
           />
         )}
       </div>
@@ -207,6 +209,7 @@ const Verdict: FunctionComponent<Props> = ({ written, endpoint }) => {
         key={attempt}
         paragraphs={(verdict ?? readVerdict(text))?.paragraphs}
         done={Boolean(verdict)}
+        restarted={attempt > 0}
       />
     </ReviewSection>
   )
