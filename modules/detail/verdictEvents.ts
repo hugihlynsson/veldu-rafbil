@@ -8,8 +8,7 @@ export interface Verdict {
  * works: that it has started, its words as it writes them, and then the
  * verdict or the news that there will be none. The verdict is the words as
  * they are kept, and replaces them. One already written is sent alone, with
- * no `working` before it, so the page shows the model at work only when there
- * is a wait. A reader skips a type it does not know, so one can be added
+ * no `working` before it. A reader skips a type it does not know, so one can be added
  * without breaking a page still open.
  */
 export type VerdictEvent =
