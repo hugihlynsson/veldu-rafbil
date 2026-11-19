@@ -58,7 +58,6 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
 // Its own boundary, so the figures never wait on the cache
 const WrittenVerdict = async ({ cars }: { cars: ReadonlyArray<Car> }) => (
   <Verdict
-    cars={cars}
     written={await peekVerdict(cars)}
     endpoint={`/api/verdict/${cars.map(carSlug).join('/')}`}
   />

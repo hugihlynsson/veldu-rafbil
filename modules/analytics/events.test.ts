@@ -64,7 +64,12 @@ const tracked = {
     conversationId,
   },
   compare_more: { name: 'compare_more', cars: ['kia-ev3', 'skoda-elroq'] },
-  verdict_shown: { name: 'verdict_shown', written: false, waitMs: 18_400 },
+  verdict_shown: {
+    name: 'verdict_shown',
+    written: false,
+    waitMs: 5_400,
+    firstTextMs: 1_100,
+  },
   verdict_failed: { name: 'verdict_failed', waitMs: 61_000 },
   seller_clicked: { name: 'seller_clicked', car: 'kia-ev3' },
   ev_database_clicked: { name: 'ev_database_clicked', car: 'kia-ev3' },

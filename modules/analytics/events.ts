@@ -107,9 +107,18 @@ export const productEventSchema = z.discriminatedUnion('name', [
     conversationId,
   }),
   event('compare_more', { cars: z.array(slug).min(1).max(MAX_COMPARED) }),
-  // `written` when one was already there, which shows at once
-  event('verdict_shown', { written: z.boolean(), waitMs: milliseconds }),
-  event('verdict_failed', { waitMs: milliseconds }),
+  // `written` when one was already there, which shows at once. `waitMs` is
+  // until the verdict was kept, `firstTextMs` until its first words showed.
+  event('verdict_shown', {
+    written: z.boolean(),
+    waitMs: milliseconds,
+    firstTextMs: milliseconds.optional(),
+  }),
+  // With `firstTextMs` when it failed after its words had begun to show
+  event('verdict_failed', {
+    waitMs: milliseconds,
+    firstTextMs: milliseconds.optional(),
+  }),
   event('seller_clicked', { car: slug }),
   event('ev_database_clicked', { car: slug }),
   // Its id is in the link, and on each page_viewed the link opens

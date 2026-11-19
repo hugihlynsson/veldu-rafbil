@@ -5,15 +5,17 @@ export interface Verdict {
 
 /**
  * What the verdict's endpoint sends, one JSON object a line, while the model
- * works: that it has started, that it has finished thinking and begun to
- * write, and then the verdict or the news that there will be none. One
- * already written is sent alone, with no `working` before it, so the page
- * shows the model at work only when there is a wait. A reader skips a type it does
- * not know, so one can be added without breaking a page still open.
+ * works: that it has started, its words as it writes them, and then the
+ * verdict or the news that there will be none. The verdict is the words as
+ * they are kept, and replaces them. One already written is sent alone, with
+ * no `working` before it. A reader skips a type it does not know, so one can be added
+ * without breaking a page still open.
  */
 export type VerdictEvent =
   | { type: 'working' }
-  | { type: 'writing' }
+  | { type: 'text'; text: string }
+  // Another model took over from one that declined, and writes it afresh
+  | { type: 'restart' }
   | { type: 'verdict'; verdict: Verdict }
   | { type: 'error' }
 
