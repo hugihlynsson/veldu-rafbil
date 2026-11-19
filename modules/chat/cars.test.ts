@@ -3,7 +3,6 @@ import { describe, expect, it } from 'vitest'
 import cars, { type Car } from '@/modules/data/cars'
 import { MAX_COMPARED } from '@/modules/detail/comparison'
 import {
-  asksToCompare,
   carRef,
   COMPARED_FROM_ANSWER,
   getAnswerCars,
@@ -102,62 +101,22 @@ describe('getAnswerCars', () => {
   })
 })
 
-const question = (text: string): ChatMessage => ({
-  id: 'q',
-  role: 'user',
-  parts: [{ type: 'text', text }],
-})
-
-describe('asksToCompare', () => {
-  it.each([
-    'Bæta G6 í samanburð',
-    'Geturðu bætt VW ID.4 í samanburðinn?',
-    'Berðu saman Kia EV3 og Skoda Elroq',
-    'Geturðu uppfært töfluna með veghæð?',
-    'Settu þá í töflu',
-    'EV3 vs Elroq',
-  ])('reads "%s" as asking for a comparison', (text) => {
-    expect(asksToCompare(text)).toBe(true)
-  })
-
-  it.each(['Hvaða bíll er bestur fyrir fjölskyldu?', 'Hvað kostar Tesla?'])(
-    'does not read "%s" as asking for one',
-    (text) => {
-      expect(asksToCompare(text)).toBe(false)
-    },
-  )
-})
-
 describe('getAnswerComparison', () => {
-  const tagged = [third.id, first.id, fourth.id, second.id, fifth.id]
-
-  it(`compares the first ${COMPARED_FROM_ANSWER} an answer recommends, in its order`, () => {
+  it(`compares the first ${COMPARED_FROM_ANSWER} of an answer that recommends more than ${MAX_COMPARED}, in its order`, () => {
     expect(
       getAnswerComparison([
-        question('Hvaða bíl mælirðu með?'),
-        answer('…', tagged),
+        answer('…', [third.id, first.id, fourth.id, second.id, fifth.id]),
       ]),
     ).toEqual([third, first, fourth])
   })
 
-  it(`compares up to ${MAX_COMPARED} when the question asks for a comparison`, () => {
+  // "Bættu líka ID.4 við" names no comparison, but its answer tags all four
+  it(`compares every car an answer tags, up to ${MAX_COMPARED}`, () => {
     expect(
       getAnswerComparison([
-        question('Bættu Elroq í samanburðinn'),
-        answer('…', tagged),
+        answer('…', [third.id, first.id, fourth.id, second.id]),
       ]),
     ).toEqual([third, first, fourth, second])
-  })
-
-  it('reads the question the answer is to, not an earlier one', () => {
-    expect(
-      getAnswerComparison([
-        question('Berðu þá saman'),
-        answer('…', [first.id, second.id]),
-        question('Hvaða bíl mælirðu með?'),
-        answer('…', tagged),
-      ]),
-    ).toEqual([third, first, fourth])
   })
 
   it('compares two when an answer tags two', () => {
@@ -168,13 +127,10 @@ describe('getAnswerComparison', () => {
   })
 
   it('has nothing to compare in an answer about one car', () => {
-    expect(
-      getAnswerComparison([question('Berðu saman'), answer('…', [first.id])]),
-    ).toEqual([])
+    expect(getAnswerComparison([answer('…', [first.id])])).toEqual([])
   })
 
   it('has nothing to compare before the answer comes', () => {
     expect(getAnswerComparison([])).toEqual([])
-    expect(getAnswerComparison([question('Berðu þá saman')])).toEqual([])
   })
 })

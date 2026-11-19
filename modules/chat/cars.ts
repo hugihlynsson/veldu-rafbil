@@ -35,33 +35,24 @@ export const getAnswerCars = (message: ChatMessage): Car[] => {
   return tagged.length > 0 ? tagged : findMentionedCars(getMessageText(message))
 }
 
-// Three is enough to choose between, and the most a comparison shows in
-// columns without crowding a phone
+// An answer that compares tags at most MAX_COMPARED cars, as the prompt asks,
+// so all of them fit; one that tags more is recommending, best first, and
+// three are enough to choose between
 export const COMPARED_FROM_ANSWER = 3
 
-// "Berðu saman", "samanburðinn", "vs", or a table the chat has been keeping:
-// a question asking for the cars side by side, which can name a fourth
-const comparisonAsked = /(?<!\p{L})(saman|tafl|töfl|vs(?!\p{L}))/iu
-
-/** Whether a question asks for its cars side by side */
-export const asksToCompare = (question: string): boolean =>
-  comparisonAsked.test(question)
-
 /**
- * The cars the last answer's comparison link compares: the first it tags, as
- * it lists them best first — every car it compared, when the question asked
- * for a comparison. None when the last message is not an answer, or is about
- * one car or none.
+ * The cars the last answer's comparison link compares. Read off how many it
+ * tags, not the question's wording, so a car added in any phrasing is not
+ * dropped. None when the last message is not an answer, or is about one car
+ * or none.
  */
 export const getAnswerComparison = (
   messages: ReadonlyArray<ChatMessage>,
 ): Car[] => {
   const answer = messages.at(-1)
   if (answer?.role !== 'assistant') return []
-  const question = messages.findLast((message) => message.role === 'user')
-  const most = asksToCompare(getMessageText(question))
-    ? MAX_COMPARED
-    : COMPARED_FROM_ANSWER
-  const answerCars = getAnswerCars(answer).slice(0, most)
+  const cars = getAnswerCars(answer)
+  const answerCars =
+    cars.length > MAX_COMPARED ? cars.slice(0, COMPARED_FROM_ANSWER) : cars
   return answerCars.length >= MIN_COMPARED ? answerCars : []
 }
