@@ -55,7 +55,10 @@ import {
   useListShown,
 } from '@/utils/carSheet'
 import { prefetchCarReview } from '@/utils/carFiles'
-import useComparison, { toggleComparedCar } from '@/utils/useComparison'
+import useComparison, {
+  addComparedCar,
+  toggleComparedCar,
+} from '@/utils/useComparison'
 import useInputModality, { getInputModality } from '@/utils/inputModality'
 import CompareTray from '@/components/detail/CompareTray'
 import type { SheetChat } from '@/components/detail/CarSheet'
@@ -221,13 +224,26 @@ export default function CarList({ latest }: Props) {
   const isComparing = comparison.selected.length > 0
 
   // A full tray takes no more, and the toggle says so
-  const toggleCompared = (
-    car: CarData,
-    source: 'card' | 'suggestion' = 'card',
-  ) => {
+  const toggleCompared = (car: CarData) => {
     const toggled = toggleComparedCar(car)
     if (toggled)
-      track({ name: 'compare_toggled', car: carSlug(car), ...toggled, source })
+      track({
+        name: 'compare_toggled',
+        car: carSlug(car),
+        ...toggled,
+        source: 'card',
+      })
+  }
+
+  const addSuggested = (car: CarData) => {
+    const added = addComparedCar(car)
+    if (added)
+      track({
+        name: 'compare_toggled',
+        car: carSlug(car),
+        ...added,
+        source: 'suggestion',
+      })
   }
 
   const removeCompared = (car: CarData) => {
@@ -433,7 +449,7 @@ export default function CarList({ latest }: Props) {
         <CompareTray
           cars={comparison.selected}
           onRemove={removeCompared}
-          onAdd={(car) => toggleCompared(car, 'suggestion')}
+          onAdd={addSuggested}
         />
       )}
 

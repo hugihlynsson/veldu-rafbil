@@ -17,8 +17,7 @@ const SUGGESTED_COUNT = 2
 
 /**
  * The cars the one in the tray is most often weighed against, above it, so the
- * second car is a tap away. Loaded on its own, as the similar-cars list is
- * kept out of the list's first load.
+ * second car is a tap away
  */
 const CompareSuggestions: FunctionComponent<Props> = ({ car, onAdd }) => {
   const suggested = car ? similarTo(car).slice(0, SUGGESTED_COUNT) : []

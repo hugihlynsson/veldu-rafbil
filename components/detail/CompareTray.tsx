@@ -1,4 +1,4 @@
-import type { FunctionComponent } from 'react'
+import { useRef, type FunctionComponent } from 'react'
 import clsx from 'clsx'
 import { trackEvent } from 'fathom-client'
 import dynamic from 'next/dynamic'
@@ -9,6 +9,7 @@ import type { Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { comparisonPathOf } from '@/modules/detail/paths'
 import { MAX_COMPARED, MIN_COMPARED } from '@/modules/detail/comparison'
+import { getInputModality } from '@/utils/inputModality'
 import { rememberListSearch } from '@/utils/listReturn'
 import CrossIcon from '@/components/CrossIcon'
 import PlusIcon from '@/components/PlusIcon'
@@ -37,9 +38,22 @@ const button =
  */
 const CompareTray: FunctionComponent<Props> = ({ cars, onRemove, onAdd }) => {
   const ready = cars.length >= MIN_COMPARED
+  const suggesting = cars.length === 1
+
+  // A pill picked by key goes as the car it named arrives, and would take the
+  // focus with it to the page's start: it goes on to the comparison instead
+  const focusCompare = useRef(false)
+  const add = (car: Car) => {
+    focusCompare.current = getInputModality() === 'keyboard'
+    onAdd(car)
+  }
 
   return (
-    <div className="fixed bottom-[calc(1rem+var(--keyboard-inset))] left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col-reverse items-center gap-3 sm:bottom-[calc(1.5rem+var(--keyboard-inset))]">
+    <div
+      className="fixed bottom-[calc(1rem+var(--keyboard-inset))] left-1/2 -translate-x-1/2 z-1000 pointer-events-none flex flex-col-reverse items-center gap-3 sm:bottom-[calc(1.5rem+var(--keyboard-inset))]"
+      // Read by the footer, which makes room for the pills
+      data-compare-suggestions={suggesting || undefined}
+    >
       <section
         aria-label="Samanburður"
         className="pointer-events-auto w-[min(25rem,calc(100vw-1.5rem))] animate-bar-in"
@@ -56,6 +70,11 @@ const CompareTray: FunctionComponent<Props> = ({ cars, onRemove, onAdd }) => {
             {ready ? (
               <Link
                 href={comparisonPathOf(cars)}
+                ref={(link) => {
+                  if (!link || !focusCompare.current) return
+                  focusCompare.current = false
+                  link.focus()
+                }}
                 onClick={() => {
                   rememberListSearch(window.location.search)
                   trackEvent('Comparison opened')
@@ -131,10 +150,7 @@ const CompareTray: FunctionComponent<Props> = ({ cars, onRemove, onAdd }) => {
       </section>
 
       {/* Beside a lone car only: with two the tray can already compare */}
-      <CompareSuggestions
-        car={cars.length === 1 ? cars[0] : undefined}
-        onAdd={onAdd}
-      />
+      <CompareSuggestions car={suggesting ? cars[0] : undefined} onAdd={add} />
     </div>
   )
 }

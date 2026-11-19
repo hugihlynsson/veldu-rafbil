@@ -82,6 +82,10 @@ export const toggleComparedCar = (
   return { added, count: next.length }
 }
 
+/** Puts a car in the tray, and leaves one already there in it */
+export const addComparedCar = (car: Car) =>
+  read().includes(car) ? undefined : toggleComparedCar(car)
+
 /** Puts these cars in the tray on the list, in place of what was there */
 export const setComparedCars = (selected: ReadonlyArray<Car>) =>
   write(selected.slice(0, MAX_COMPARED))
