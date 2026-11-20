@@ -109,7 +109,11 @@ const ChatModal: React.FunctionComponent<Props> = ({
     (lastMessage.metadata?.comparison?.length ?? 0) > 0
   const comparisonLink = status !== 'streaming' &&
     answerComparison.length > 0 && (
-      <CompareAnswerCars cars={answerComparison} animate={animateExtras} />
+      <CompareAnswerCars
+        cars={answerComparison}
+        animate={animateExtras}
+        featured={comparisonLedInto}
+      />
     )
   const [pageStarters] = useState(() =>
     about ? getRandomSuggestions(starters, 3) : [],
