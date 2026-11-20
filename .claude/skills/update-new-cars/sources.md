@@ -35,7 +35,7 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Jeep          | 2026-11-06 | —          | Avenger list is the 4xe hybrid only            |
 | KGM           | 2026-11-10 | 2026-10-30 |                                                |
 | Kia           | 2026-11-14 | 2026-11-13 | PV5 11-14; EV9 11-12; EV5 and EV6 11-10        |
-| Leapmotor     | 2026-11-20 | —          | ÍSBAND page; no dated list                     |
+| Leapmotor     | 2026-11-20 | 2026-11-19 | ÍSBAND PDF list; prices are images             |
 | Lexus         | 2026-11-20 | —          | TZ unpriced; estimated from NL prices          |
 | Mazda         | 2026-11-18 | 2026-11-16 | CX-6e and 6e                                   |
 | Mercedes-Benz | 2026-11-19 | 2026-11-16 | C, GLA, GLB, GLC, CLA; VLE 11-11; rest older   |
@@ -211,7 +211,10 @@ Premium AWD, but no seat option could be selected.
 `isband.is/nyir-bilar/leapmotor/`, readable with curl, lists each car it sells
 under the name it advertises, with "Listaverð" before the grant. Read on
 2026-11-02. Its "með rafbílastyrk" figures deduct 500.000 kr., not
-`grantAmount`, so take the Listaverð.
+`grantAmount`, so take the Listaverð. The page's "Skoða verðlista" link,
+`isband.is/nyir-bilar/verdlistar-baeklingar/verdlisti-leapmotor`, answers
+with a PDF dated by `Last-Modified`. Its prices and specs are images, so
+render the pages with `pdf pages` rather than `pdf text`.
 
 **Placeholders**: Askja keeps a document's slug while a list is being reissued,
 with one page that says so. On 2026-10-31 `kia_ev9_gt_verdlisti`, `eqt_verdlisti`,
@@ -401,10 +404,10 @@ xpeng.com/is still redirect to a 404.
 
 **Read on 2026-11-20**: BL re-uploaded its BMW and Hyundai lists on
 2026-11-19, after that day's sweep had read them; every price matched. The
-lists without a date (Leapmotor, Lexus, Peugeot, Tesla, Toyota) were read too,
-and every price matched. No newer list than the one last read for Audi, BYD,
+lists without a date (Lexus, Peugeot, Tesla, Toyota) were read too, and every
+price matched. ÍSBAND's Leapmotor list is a PDF, last modified 2026-11-19, and
+every price matched it. No newer list than the one last read for Audi, BYD,
 Fiat, Ford, GWM, Hongqi, JAC, Jeep, Kia, Mazda, Mercedes-Benz, MG, Mini,
 Nissan, Polestar, Porsche, Range Rover, Renault, Škoda, Smart, Subaru, Suzuki,
 Volkswagen, Volvo and XPENG. `kgm.benni.is` did not answer curl within two
-minutes, so KGM was not checked. ÍSBAND's Leapmotor page lists only six
-versions; the B05 Pro, B10 base and C10 Pro and ProMax are not on it.
+minutes, so KGM was not checked.
