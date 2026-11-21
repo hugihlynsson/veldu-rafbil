@@ -23,27 +23,27 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Make          | Last read  | List dated | Note                                           |
 | ------------- | ---------- | ---------- | ---------------------------------------------- |
 | Audi          | 2026-11-07 | 2026-11-04 | Q4 and Q6; A6 03-18                            |
-| BMW           | 2026-11-16 | 2026-11-16 |                                                |
+| BMW           | 2026-11-21 | 2026-11-20 |                                                |
 | BYD           | 2026-11-03 | 2026-10-30 |                                                |
 | Citroën       | —          | —          | No price published; see 2026-11-10 note        |
 | Fiat          | 2026-11-06 | 2026-01    | 500e unpriced ("Leitið til sölumanna")         |
 | Ford          | 2026-11-10 | 2026-06-22 | Capri; Explorer 06-12, Puma 04-08, Mach-E 2025 |
 | GWM           | 2026-11-06 | 2026-01-20 |                                                |
 | Hongqi        | 2026-11-10 | 2026-10-31 |                                                |
-| Hyundai       | 2026-11-19 | 2026-11-18 | STARIA in the main list again                  |
+| Hyundai       | 2026-11-20 | 2026-11-19 | STARIA in the main list again                  |
 | JAC           | 2026-11-03 | 2026-10-30 |                                                |
 | Jeep          | 2026-11-06 | —          | Avenger list is the 4xe hybrid only            |
 | KGM           | 2026-11-10 | 2026-10-30 |                                                |
 | Kia           | 2026-11-14 | 2026-11-13 | PV5 11-14; EV9 11-12; EV5 and EV6 11-10        |
-| Leapmotor     | 2026-11-19 | —          | ÍSBAND page; no dated list                     |
-| Lexus         | 2026-11-19 | —          | TZ unpriced; estimated from NL prices          |
+| Leapmotor     | 2026-11-20 | 2026-11-19 | ÍSBAND PDF list; prices are images             |
+| Lexus         | 2026-11-21 | —          | TZ unpriced; estimated from NL prices          |
 | Mazda         | 2026-11-18 | 2026-11-16 | CX-6e and 6e                                   |
 | Mercedes-Benz | 2026-11-19 | 2026-11-16 | C, GLA, GLB, GLC, CLA; VLE 11-11; rest older   |
 | MG            | 2026-11-16 | 2026-11-16 |                                                |
 | Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
 | Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
 | Opel          | —          | —          | No price published; see 2026-11-10 note        |
-| Peugeot       | 2026-11-19 | —          | Read from the model pages                      |
+| Peugeot       | 2026-11-21 | —          | Read from the model pages                      |
 | Polestar      | 2026-11-12 | 2026-11-05 | Polestar 5; 2, 3 and 4 from 2026-10-29         |
 | Porsche       | 2026-11-12 | 2026-10-30 |                                                |
 | Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
@@ -52,10 +52,10 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Smart         | 2026-11-10 | 2026-11-02 |                                                |
 | Subaru        | 2026-11-10 | 2026-10-31 |                                                |
 | Suzuki        | 2026-11-10 | 2026-10-30 |                                                |
-| Tesla         | 2026-11-19 | —          | Design pages; no dated list                    |
-| Toyota        | 2026-11-19 | —          |                                                |
+| Tesla         | 2026-11-21 | —          | Design pages; no dated list                    |
+| Toyota        | 2026-11-21 | —          |                                                |
 | Volkswagen    | 2026-11-12 | 2026-11-10 | ID.4 and ID.3 Neo; ID.3, ID.7, Polo 11-04      |
-| Volvo         | 2026-11-19 | 2026-11-04 | EX40 MY27.5 11-04, EX90 11-03; EC40 unpriced   |
+| Volvo         | 2026-11-21 | 2026-11-18 | EX40 and EC40 MY27.5 11-18; EX90 11-03         |
 | XPENG         | 2026-11-10 | 2026-11-02 |                                                |
 
 ## Importers with one page for several makes
@@ -211,7 +211,10 @@ Premium AWD, but no seat option could be selected.
 `isband.is/nyir-bilar/leapmotor/`, readable with curl, lists each car it sells
 under the name it advertises, with "Listaverð" before the grant. Read on
 2026-11-02. Its "með rafbílastyrk" figures deduct 500.000 kr., not
-`grantAmount`, so take the Listaverð.
+`grantAmount`, so take the Listaverð. The page's "Skoða verðlista" link,
+`isband.is/nyir-bilar/verdlistar-baeklingar/verdlisti-leapmotor`, answers
+with a PDF dated by `Last-Modified`. Its prices and specs are images, so
+render the pages with `pdf pages` rather than `pdf text`.
 
 **Placeholders**: Askja keeps a document's slug while a list is being reissued,
 with one page that says so. On 2026-10-31 `kia_ev9_gt_verdlisti`, `eqt_verdlisti`,
@@ -398,3 +401,27 @@ list than the one last read for Audi, BMW, BYD, Fiat, Ford, GWM, Hongqi, JAC,
 Jeep, KGM, Kia, Mazda, MG, Mini, Nissan, Polestar, Porsche, Range Rover,
 Škoda, Smart, Subaru, Suzuki, Volkswagen and XPENG. The G9L's pages on
 xpeng.com/is still redirect to a 404.
+
+**Read on 2026-11-20**: BL re-uploaded its BMW and Hyundai lists on
+2026-11-19, after that day's sweep had read them; every price matched. The
+lists without a date (Lexus, Peugeot, Tesla, Toyota) were read too, and every
+price matched. ÍSBAND's Leapmotor list is a PDF, last modified 2026-11-19, and
+every price matched it. No newer list than the one last read for Audi, BYD,
+Fiat, Ford, GWM, Hongqi, JAC, Jeep, Kia, Mazda, Mercedes-Benz, MG, Mini,
+Nissan, Polestar, Porsche, Range Rover, Renault, Škoda, Smart, Subaru, Suzuki,
+Volkswagen, Volvo and XPENG. `kgm.benni.is` did not answer curl within two
+minutes, so KGM was not checked.
+
+**Read on 2026-11-21**: BL re-uploaded its BMW list once more on 2026-11-20
+at 14:53, after that day's sweep; every price matched. Volvo's electric-cars
+page now links an EC40 list for the 2027.5 model year
+(`VOLVO_EC40_MY27.5_Verdlisti_20261118.pdf`), its first, and a reissued EX40
+list of the same date. Both sell only the P8 AWD, in Plus and Ultra trims;
+the EC40 Plus lists at 9.190.000, the figure it had been given from the
+EX40's, and the EX40 Plus is unchanged. Neither list has the older Twin
+Motor versions the car list still carries. The undated lists (Lexus,
+Peugeot, Tesla, Toyota) were read and every price matched. No newer list
+than the one last read for Audi, BYD, Fiat, Ford, GWM, Hongqi, Hyundai, JAC,
+Jeep, Kia, Leapmotor, Mazda, Mercedes-Benz, MG, Mini, Nissan, Polestar,
+Porsche, Range Rover, Renault, Škoda, Smart, Subaru, Suzuki, Volkswagen and
+XPENG. `kgm.benni.is` again did not answer curl within 45 seconds.
