@@ -32,7 +32,6 @@ import {
 } from '@/utils/carSheet'
 import { getInputModality } from '@/utils/inputModality'
 import { leavePageBeforeLoad } from '@/utils/pageBeforeLoad'
-import markScrollbarKind from '@/utils/scrollbarKind'
 import { track } from '@/utils/track'
 import {
   prefetchCarReview,
@@ -190,9 +189,6 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [])
 
-  // Before a paint, so the panel's bar is never drawn the wrong way first
-  useLayoutEffect(markScrollbarKind, [])
-
   // The review's questions come from here, as the list does not have them.
   // Layout, so the bar is in before a paint.
   useLayoutEffect(() => {
@@ -265,7 +261,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
               tabIndex={-1}
               onClickCapture={openLinkedCar}
               className={clsx(
-                'relative w-[min(960px,calc(100vw-11.5rem))] max-h-[calc(100dvh-4rem)] overflow-x-hidden overflow-y-auto rounded-scrollbar overscroll-contain outline-none rounded-modal bg-surface shadow-(--shadow-modal)',
+                'relative w-[min(960px,calc(100vw-11.5rem))] max-h-[calc(100dvh-4rem)] overflow-x-hidden overflow-y-auto overscroll-contain outline-none rounded-modal bg-surface shadow-(--shadow-modal)',
                 panelMotion,
               )}
             >

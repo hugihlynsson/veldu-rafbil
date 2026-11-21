@@ -8,37 +8,6 @@
   }
 }
 
-/* A rounded panel that scrolls itself: a native bar runs into the corners,
-   so the track is drawn by hand and stops short of them. Only where bars are
-   always shown (utils/scrollbarKind): a drawn bar never fades and takes a
-   strip of its own, so an overlay bar is left as it is. Chrome ignores all
-   of this once scrollbar-width or scrollbar-color is set on the element. */
-@utility rounded-scrollbar {
-  :root[data-scrollbars='classic'] &::-webkit-scrollbar {
-    width: 10px;
-  }
-  :root[data-scrollbars='classic'] &::-webkit-scrollbar-button {
-    display: none;
-  }
-  :root[data-scrollbars='classic'] &::-webkit-scrollbar-track {
-    margin-block: var(--radius-modal);
-  }
-  /* A share of the text colour, so it sits as quietly on either theme */
-  :root[data-scrollbars='classic'] &::-webkit-scrollbar-thumb {
-    border: 3px solid transparent;
-    border-radius: 999px;
-    background: color-mix(in oklab, var(--color-tint) 25%, transparent)
-      padding-box;
-  }
-  :root[data-scrollbars='classic'] &::-webkit-scrollbar-thumb:hover {
-    background-color: color-mix(in oklab, var(--color-tint) 45%, transparent);
-  }
-  /* Firefox has no track margin, so it keeps a thin native bar instead */
-  @supports not selector(::-webkit-scrollbar) {
-    scrollbar-width: thin;
-  }
-}
-
 /* Every colour in the UI is one of these roles, and the block below is the
    only place a role takes a different value. A component asks for the role it
    means — `bg-lab`, `text-stone`, `border-line` — and never for a theme, so
