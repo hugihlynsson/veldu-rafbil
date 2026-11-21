@@ -9,16 +9,18 @@
 }
 
 /* A rounded panel that scrolls itself: a native bar runs into the corners,
-   so the track is drawn by hand and stops short of them. Chrome ignores all
+   so the track is drawn by hand and stops short of them. Only where bars are
+   always shown (utils/scrollbarKind): a drawn bar never fades and takes a
+   strip of its own, so an overlay bar is left as it is. Chrome ignores all
    of this once scrollbar-width or scrollbar-color is set on the element. */
 @utility rounded-scrollbar {
-  &::-webkit-scrollbar {
+  :root[data-scrollbars='classic'] &::-webkit-scrollbar {
     width: 12px;
   }
-  &::-webkit-scrollbar-track {
+  :root[data-scrollbars='classic'] &::-webkit-scrollbar-track {
     margin-block: var(--radius-modal);
   }
-  &::-webkit-scrollbar-thumb {
+  :root[data-scrollbars='classic'] &::-webkit-scrollbar-thumb {
     border: 3px solid transparent;
     border-radius: 6px;
     background: var(--color-line-strong) padding-box;
