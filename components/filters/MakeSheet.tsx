@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import clsx from 'clsx'
 
 import { carCountOf, makesInOrder } from '@/modules/list/makes'
 import Modal, { sheetPanel } from '@/components/Modal'
@@ -39,10 +38,8 @@ export default function MakeSheet({
       labelledBy="make-sheet-title"
       onDone={onDone}
       returnFocus="keyboard"
-      className={clsx(
-        'items-end data-[state=visible]:backdrop:bg-backdrop-strong',
-        'sheet-panel:items-center',
-      )}
+      backdrop="strong"
+      className="items-end sheet-panel:items-center"
     >
       {({ close }) => (
         <section className={sheetPanel}>

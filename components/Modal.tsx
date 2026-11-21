@@ -67,7 +67,9 @@ interface Props {
    * a click, where it would only ring whatever was tapped to open the dialog
    */
   returnFocus?: ReturnFocus
-  /** Layout and backdrop for this particular dialog */
+  /** How far the backdrop darkens the page, which the scrollbar gutter matches */
+  backdrop: 'soft' | 'strong'
+  /** Layout for this particular dialog */
   className?: string
   children: (modal: Modal) => ReactNode
 }
@@ -81,6 +83,7 @@ const Modal: React.FunctionComponent<Props> = ({
   onDone,
   initialFocusRef,
   returnFocus = 'always',
+  backdrop,
   className,
   children,
 }) => {
@@ -135,10 +138,14 @@ const Modal: React.FunctionComponent<Props> = ({
     <dialog
       ref={dialogRef}
       data-state={state}
+      data-backdrop={backdrop}
       aria-labelledby={labelledBy}
       className={clsx(
         'group/modal hidden open:flex fixed inset-0 m-0 h-full w-full max-h-none max-w-none border-0 bg-transparent p-0 justify-center',
         'backdrop:bg-transparent backdrop:transition-[background-color] backdrop:duration-300 data-[state=leaving]:backdrop:duration-200 data-[state=leaving]:backdrop:delay-50',
+        backdrop === 'strong'
+          ? 'data-[state=visible]:backdrop:bg-backdrop-strong'
+          : 'data-[state=visible]:backdrop:bg-backdrop',
         className,
       )}
       onCancel={(event) => {

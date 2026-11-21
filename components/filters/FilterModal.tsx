@@ -9,7 +9,6 @@ import {
   type Filters,
 } from '@/modules/list/filters'
 import { liftMakes } from '@/modules/list/makes'
-import clsx from 'clsx'
 import Modal, { sheetPanel } from '@/components/Modal'
 import CloseButton from '@/components/CloseButton'
 import { getInputModality } from '@/utils/inputModality'
@@ -164,10 +163,8 @@ const FiltersModal: React.FunctionComponent<Props> = ({
       labelledBy="filter-modal-title"
       onDone={onDone}
       initialFocusRef={nameInputRef}
-      className={clsx(
-        'items-end data-[state=visible]:backdrop:bg-backdrop-strong',
-        'sheet-panel:items-center',
-      )}
+      backdrop="strong"
+      className="items-end sheet-panel:items-center"
     >
       {({ close }) => {
         const handleDone = () => {

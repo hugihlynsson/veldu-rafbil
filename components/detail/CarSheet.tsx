@@ -243,7 +243,8 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
       onDone={closeCarSheet}
       initialFocusRef={initialFocusRef}
       returnFocus="keyboard"
-      className="items-center data-[state=visible]:backdrop:bg-backdrop-strong"
+      backdrop="strong"
+      className="items-center"
     >
       {({ close }) => (
         <>

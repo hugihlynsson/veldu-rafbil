@@ -147,7 +147,8 @@ const ChatModal: React.FunctionComponent<Props> = ({
       labelledBy="chat-modal-title"
       onDone={() => onDone(pickedCar.current)}
       initialFocusRef={composerRef}
-      className="items-start data-[state=visible]:backdrop:bg-backdrop"
+      backdrop="soft"
+      className="items-start"
     >
       {({ close }) => (
         <>
