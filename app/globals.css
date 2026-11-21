@@ -388,8 +388,10 @@
       'calt' 1; /* fix for Chrome */
   }
 
+  /* The gutter stays while a modal fixes the body, so the page doesn't shift */
   html {
     min-height: 100vh;
+    scrollbar-gutter: stable;
   }
 
   body {
