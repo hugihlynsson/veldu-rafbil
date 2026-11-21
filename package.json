@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.106",
-    "@ai-sdk/google": "^4.0.117",
-    "@ai-sdk/react": "^4.0.173",
+    "@ai-sdk/google": "^4.0.122",
+    "@ai-sdk/react": "^4.0.180",
     "@axiomhq/js": "^2.0.0",
     "@chenglou/pretext": "^1.0.0",
     "@tailwindcss/postcss": "^4.3.5",
