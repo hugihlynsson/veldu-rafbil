@@ -287,6 +287,8 @@
   --shadow-chip: 0 2px 8px rgb(0 0 0 / 0.04);
   --shadow-chip-hover: 0 4px 12px rgb(0 0 0 / 0.08);
   --shadow-chip-press: 0 2px 6px rgb(0 0 0 / 0.06);
+  /* The search bar over the list, lifted the way Airbnb's is */
+  --shadow-search: 0 2px 12px rgb(0 0 0 / 0.08), 0 0 0 1px rgb(0 0 0 / 0.04);
   --shadow-sheet: 0px 0px 40px 0px rgb(0 0 0 / 0.1);
   --shadow-sheet-footer: 0 0 32px 0 rgb(0 0 0 / 0.1);
   --shadow-modal: 0px 8px 60px rgb(0 0 0 / 0.15);
@@ -365,6 +367,7 @@
     --shadow-chip: none;
     --shadow-chip-hover: none;
     --shadow-chip-press: none;
+    --shadow-search: none;
     --shadow-sheet: none;
     --shadow-sheet-footer: 0 -1px 0px 0 rgb(255 255 255 / 0.07);
     --shadow-modal: none;

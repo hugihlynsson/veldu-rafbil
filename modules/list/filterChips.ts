@@ -1,4 +1,5 @@
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
+import { bodyTypeLabels } from './bodyTypes'
 import {
   filterKeys,
   type FilterKey,
@@ -30,6 +31,14 @@ const chipText: {
     value: names.join(', '),
     removeLabel: `Fjarlægja nafnasíu: ${names.join(', ')}`,
   }),
+  body: (types) => {
+    const value = types.map((type) => bodyTypeLabels[type]).join(', ')
+    return {
+      label: 'Gerð:',
+      value,
+      removeLabel: `Fjarlægja gerðarsíu: ${value}`,
+    }
+  },
   price: (max) => {
     const price = addDecimalSeparators(max)
     return {

@@ -79,6 +79,8 @@ export const productEventSchema = z.discriminatedUnion('name', [
       'suggestion',
       'make-row',
       'make-sheet',
+      'search',
+      'preset',
     ]),
     // Room for every make chosen in the sheet, which joined runs past 200
     filters: z

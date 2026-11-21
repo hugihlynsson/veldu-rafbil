@@ -57,6 +57,7 @@ const everyFilter: Required<Filters> = {
   value: 30_000,
   fastcharge: 2,
   availability: 'available',
+  body: ['suv'],
 }
 
 const listQueries: [string, string][] = [
