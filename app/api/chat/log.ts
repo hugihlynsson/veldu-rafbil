@@ -120,6 +120,7 @@ export const chatLogEvent = (
     // By slug, as the pages' own events name a car, so an answer can be
     // followed to the cars opened from it
     cars: finish.cars.map((id) => carSlug({ id })),
+    comparison: finish.comparison.map((id) => carSlug({ id })),
     tokenUsage: finish.usage,
     toolCalls: finish.toolCalls,
   }

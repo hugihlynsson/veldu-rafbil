@@ -1,13 +1,14 @@
 import type { TextStreamPart, ToolSet } from 'ai'
 
 // The model is asked to end each answer with a [car:<ref>] marker for each car
-// it recommends and a [q:<question>] marker for each follow-up. A question is
-// 8-12 words and a ref under 60 characters: an opening with no `]` further
-// than this after it is the model writing one in prose, and swallowing it
-// would eat the answer.
+// it recommends, a [compare:<ref>, <ref>] marker for the cars it compares, and
+// a [q:<question>] marker for each follow-up. A question is 8-12 words and a
+// ref under 60 characters: an opening with no `]` further than this after it
+// is the model writing one in prose, and swallowing it would eat the answer.
 const kinds = {
   followUps: { open: '[q:', longest: 300 },
   cars: { open: '[car:', longest: 100 },
+  comparison: { open: '[compare:', longest: 300 },
 }
 const close = ']'
 
@@ -19,6 +20,12 @@ const longestOpen = Math.max(
 
 /** What the markers held, in the order written. Car refs are not checked. */
 export type AnswerMarkers = Record<Kind, string[]>
+
+export const emptyMarkers = (): AnswerMarkers => ({
+  followUps: [],
+  cars: [],
+  comparison: [],
+})
 
 const nextOpening = (text: string, from: number) => {
   let next: { kind: Kind; start: number } | undefined
@@ -52,7 +59,7 @@ const heldOpening = (text: string): number => {
  * and would otherwise leave blank lines at the bottom of every answer.
  */
 export const createMarkerSplitter = () => {
-  const found: AnswerMarkers = { followUps: [], cars: [] }
+  const found = emptyMarkers()
   let pending = ''
 
   // Only completed markers are cut here. What is held back — an unfinished
@@ -108,6 +115,7 @@ export const createMarkerSplitter = () => {
     found: (): AnswerMarkers => ({
       followUps: [...found.followUps],
       cars: [...found.cars],
+      comparison: [...found.comparison],
     }),
   }
 }
@@ -153,8 +161,7 @@ export const markerTransform =
         const text = splitter.end()
         if (text) controller.enqueue({ type: 'text-delta', id: part.id, text })
         const markers = splitter.found()
-        found.followUps.push(...markers.followUps)
-        found.cars.push(...markers.cars)
+        for (const kind of kindNames) found[kind].push(...markers[kind])
         splitters.delete(part.id)
         controller.enqueue(part)
       },

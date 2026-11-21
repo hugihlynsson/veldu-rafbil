@@ -2,7 +2,7 @@ import { safeValidateUIMessages, type UIMessage } from 'ai'
 import { z } from 'zod'
 
 import { splitMarkers } from './answerMarkers'
-import { MAX_COMPARED } from '@/modules/detail/comparison'
+import { MAX_COMPARED, MIN_COMPARED } from '@/modules/detail/comparison'
 
 // The most cars an answer tags. The route sends no more than this, as a
 // stored answer over any bound here would have the next request refused.
@@ -23,6 +23,12 @@ const chatMetadataSchema = z
       .array(z.string().min(1).max(100))
       .min(1)
       .max(MAX_TAGGED_CARS)
+      .optional(),
+    // Car ids the answer compares, which the browser looks up as it does cars
+    comparison: z
+      .array(z.string().min(1).max(100))
+      .min(MIN_COMPARED)
+      .max(MAX_COMPARED)
       .optional(),
     // On a question asked on a car's page or a comparison: the slugs of the
     // cars it is about, which the route looks up rather than trusts

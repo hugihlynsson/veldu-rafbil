@@ -1,11 +1,13 @@
 import { describe, expect, it } from 'vitest'
 
 import cars, { type Car } from '@/modules/data/cars'
+import { MAX_COMPARED } from '@/modules/detail/comparison'
 import {
   carRef,
   COMPARED_FROM_ANSWER,
   getAnswerCars,
   getAnswerComparison,
+  resolveComparison,
   resolveCarRefs,
 } from './cars'
 import {
@@ -14,7 +16,8 @@ import {
   type ChatMessage,
 } from './message'
 
-const [first, second, third, fourth] = cars as readonly [
+const [first, second, third, fourth, fifth] = cars as readonly [
+  Car,
   Car,
   Car,
   Car,
@@ -99,23 +102,86 @@ describe('getAnswerCars', () => {
   })
 })
 
+describe('resolveComparison', () => {
+  it('reads the first marker, each car real and once, up to MAX_COMPARED', () => {
+    const refs = [second, 'tesla-model-z', first, second, third, fourth, fifth]
+      .map((car) => (typeof car === 'string' ? car : carRef(car)))
+      .join(', ')
+    expect(resolveComparison([refs, carRef(fifth)])).toEqual(
+      [second, first, third, fourth].map((car) => car.id),
+    )
+  })
+
+  it('takes a | between refs as well as a comma', () => {
+    expect(resolveComparison([`${carRef(first)} | ${carRef(second)}`])).toEqual(
+      [first.id, second.id],
+    )
+  })
+
+  it('has no comparison of fewer than two real cars', () => {
+    expect(resolveComparison([`${carRef(first)}, tesla-model-z`])).toEqual([])
+    expect(resolveComparison([])).toEqual([])
+  })
+})
+
 describe('getAnswerComparison', () => {
-  it(`compares the first ${COMPARED_FROM_ANSWER} an answer recommends, in its order`, () => {
+  it(`compares the first ${COMPARED_FROM_ANSWER} of an answer that recommends more than ${MAX_COMPARED}, in its order`, () => {
     expect(
-      getAnswerComparison(
-        answer('…', [third.id, first.id, fourth.id, second.id]),
-      ),
+      getAnswerComparison([
+        answer('…', [third.id, first.id, fourth.id, second.id, fifth.id]),
+      ]),
     ).toEqual([third, first, fourth])
   })
 
+  // "Bættu líka ID.4 við" names no comparison, but its answer tags all four
+  it(`compares every car an answer tags, up to ${MAX_COMPARED}`, () => {
+    expect(
+      getAnswerComparison([
+        answer('…', [third.id, first.id, fourth.id, second.id]),
+      ]),
+    ).toEqual([third, first, fourth, second])
+  })
+
   it('compares two when an answer tags two', () => {
-    expect(getAnswerComparison(answer('…', [second.id, first.id]))).toEqual([
+    expect(getAnswerComparison([answer('…', [second.id, first.id])])).toEqual([
       second,
       first,
     ])
   })
 
   it('has nothing to compare in an answer about one car', () => {
-    expect(getAnswerComparison(answer('…', [first.id]))).toEqual([])
+    expect(getAnswerComparison([answer('…', [first.id])])).toEqual([])
+  })
+
+  it('compares the cars the answer says it compares, rather than the ones it tags', () => {
+    expect(
+      getAnswerComparison([
+        {
+          ...answer('…', [third.id, first.id, fourth.id]),
+          metadata: {
+            cars: [third.id, first.id, fourth.id],
+            comparison: [second.id, first.id],
+          },
+        },
+      ]),
+    ).toEqual([second, first])
+  })
+
+  it('falls back to the cars it tags when a compared car has left the list', () => {
+    expect(
+      getAnswerComparison([
+        {
+          ...answer('…', [third.id, first.id]),
+          metadata: {
+            cars: [third.id, first.id],
+            comparison: [second.id, 'car-farinn'],
+          },
+        },
+      ]),
+    ).toEqual([third, first])
+  })
+
+  it('has nothing to compare before the answer comes', () => {
+    expect(getAnswerComparison([])).toEqual([])
   })
 })
