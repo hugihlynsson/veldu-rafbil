@@ -296,7 +296,9 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
                                 car={car}
                                 compact={crowded}
                                 bare
-                                className="max-w-full -ml-0.5"
+                                // A margin would leave the wrapper sized
+                                // to it narrower than the pill
+                                className="max-w-full -translate-x-0.5"
                               />
                             </div>
                             {cell.detail && (
