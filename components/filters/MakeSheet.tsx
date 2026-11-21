@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import clsx from 'clsx'
 
 import { carCountOf, makesInOrder } from '@/modules/list/makes'
 import Modal, { sheetPanel } from '@/components/Modal'
 import CloseButton from '@/components/CloseButton'
+import { getInputModality } from '@/utils/inputModality'
 import { MakeChip } from './MakeRow'
 
 interface Props {
@@ -26,6 +27,7 @@ export default function MakeSheet({
   onDone,
 }: Props) {
   const [chosen, setChosen] = useState<string[]>(() => [...initialMakes])
+  const makesRef = useRef<HTMLFieldSetElement>(null)
 
   const toggle = (make: string) =>
     setChosen((current) =>
@@ -45,7 +47,9 @@ export default function MakeSheet({
       )}
     >
       {({ close }) => (
-        <section className={sheetPanel}>
+        // Wider than the filter modal from lg, so four columns fit the
+        // longest make with its count
+        <section className={clsx(sheetPanel, 'lg:sheet-panel:max-w-176')}>
           <header className="relative bg-surface text-center px-4 py-3 border-b border-line sheet-panel:py-4.5">
             <CloseButton onClick={close} className="sheet-panel:left-4" />
             <h2 id="make-sheet-title" className="m-0 text-lg font-semibold">
@@ -56,20 +60,16 @@ export default function MakeSheet({
               column, so the makes ran on under the footer */}
           <div className="grow shrink min-h-0 overflow-y-auto p-5 pb-8 sheet-panel:p-6 sheet-panel:pb-8">
             <fieldset
+              ref={makesRef}
               aria-labelledby="make-sheet-title"
-              className="m-0 min-w-0 border-0 p-0 flex flex-wrap gap-1.5"
+              className="m-0 min-w-0 border-0 p-0 grid grid-cols-2 gap-1.5 sheet-panel:grid-cols-3 lg:sheet-panel:grid-cols-4"
             >
-              <MakeChip
-                pressed={chosen.length === 0}
-                onClick={() => setChosen([])}
-              >
-                Öll merki
-              </MakeChip>
               {makesInOrder.map((make) => (
                 <MakeChip
                   key={make}
                   pressed={chosen.includes(make)}
                   count={carCountOf(make)}
+                  fill
                   onClick={() => toggle(make)}
                 >
                   {make}
@@ -77,7 +77,20 @@ export default function MakeSheet({
               ))}
             </fieldset>
           </div>
-          <footer className="p-4 flex justify-end shadow-(--shadow-sheet-footer) z-1">
+          <footer className="p-4 flex justify-between shadow-(--shadow-sheet-footer) z-1">
+            <button
+              className="appearance-none border-0 bg-transparent p-0 pl-1 sheet-panel:pl-2 text-stone text-sm font-semibold transition-[color,opacity] duration-200 cursor-pointer hover:enabled:text-tint disabled:opacity-40 disabled:cursor-default"
+              disabled={chosen.length === 0}
+              onClick={() => {
+                setChosen([])
+                // Disabling the focused button drops focus out of the sheet
+                if (getInputModality() === 'keyboard') {
+                  makesRef.current?.querySelector('button')?.focus()
+                }
+              }}
+            >
+              Öll merki
+            </button>
             <button
               className="appearance-none px-4 pt-2.75 pb-3 bg-sky border-0 rounded-full text-on-sky text-sm font-semibold cursor-pointer transition duration-150 hover:bg-sky-hover active:scale-96 active:duration-75"
               onClick={() => {
