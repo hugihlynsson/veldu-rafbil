@@ -251,6 +251,23 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
                   {row.cells.map((cell, index) => {
                     const car = cars[index]
                     const notice = car && deprecatedNotice(car)
+                    // In the gap before the figure rather than beside it, so
+                    // the columns stay aligned. Clear of the price's pill,
+                    // which starts before them. The first column's is pulled
+                    // in where the gutter is too narrow for it, as dark's is
+                    const bestDot = cell.best && (
+                      <span
+                        aria-hidden
+                        className={clsx(
+                          'absolute top-1/2 -translate-y-1/2 size-1.25 rounded-full bg-sky md:-left-3.75 md:size-1.75',
+                          row.key === 'price' ? '-left-3.25' : '-left-2.5',
+                          index === 0 &&
+                            (row.key === 'price'
+                              ? 'max-md:left-[max(-0.8125rem,calc(2px_-_var(--gutter)))]'
+                              : 'max-md:left-[max(-0.625rem,calc(2px_-_var(--gutter)))]'),
+                        )}
+                      />
+                    )
                     // Relative, so the sr-only label is held by the strip
                     // that scrolls it rather than widening the page
                     return (
@@ -269,44 +286,35 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
                               {car.hasGrant && ' með styrk'}
                             </div>
                           </div>
-                        ) : (
-                          <div className="relative">
-                            {cell.best && (
-                              // In the gap before the figure rather than
-                              // beside it, so the columns stay aligned. Clear of
-                              // the price's pill, which starts before them.
-                              // The first column's is pulled in where the
-                              // gutter is too narrow for it, as dark's is
-                              <span
-                                aria-hidden
-                                className={clsx(
-                                  'absolute top-1/2 -translate-y-1/2 size-1.25 rounded-full bg-sky md:-left-3.75 md:size-1.75',
-                                  row.key === 'price'
-                                    ? '-left-3.25'
-                                    : '-left-2.5',
-                                  index === 0 &&
-                                    (row.key === 'price'
-                                      ? 'max-md:left-[max(-0.8125rem,calc(2px_-_var(--gutter)))]'
-                                      : 'max-md:left-[max(-0.625rem,calc(2px_-_var(--gutter)))]'),
-                                )}
-                              />
-                            )}
-                            {row.key === 'price' && car ? (
+                        ) : row.key === 'price' && car ? (
+                          // The note beside the pill where the column
+                          // has room for both, and under it where not
+                          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                            <div className="relative max-w-full">
+                              {bestDot}
                               <PricePill
                                 car={car}
                                 compact={crowded}
                                 bare
                                 className="max-w-full -ml-0.5"
                               />
-                            ) : (
-                              <div className="text-2xl">{cell.text}</div>
+                            </div>
+                            {cell.detail && (
+                              <div className="text-xs font-medium text-stone">
+                                {cell.detail}
+                              </div>
                             )}
+                          </div>
+                        ) : (
+                          <div className="relative">
+                            {bestDot}
+                            <div className="text-2xl">{cell.text}</div>
                           </div>
                         )}
                         {cell.best && (
                           <span className="sr-only">, fremstur</span>
                         )}
-                        {cell.detail && !(notice && row.key === 'price') && (
+                        {cell.detail && row.key !== 'price' && (
                           <div className="mt-0.5 text-xs font-medium text-stone">
                             {cell.detail}
                           </div>
