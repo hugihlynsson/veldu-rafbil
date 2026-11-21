@@ -8,6 +8,27 @@
   }
 }
 
+/* A rounded panel that scrolls itself: a native bar runs into the corners,
+   so the track is drawn by hand and stops short of them. Chrome ignores all
+   of this once scrollbar-width or scrollbar-color is set on the element. */
+@utility rounded-scrollbar {
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+  &::-webkit-scrollbar-track {
+    margin-block: var(--radius-modal);
+  }
+  &::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 6px;
+    background: var(--color-line-strong) padding-box;
+  }
+  /* Firefox has no track margin, so it keeps a thin native bar instead */
+  @supports not selector(::-webkit-scrollbar) {
+    scrollbar-width: thin;
+  }
+}
+
 /* Every colour in the UI is one of these roles, and the block below is the
    only place a role takes a different value. A component asks for the role it
    means — `bg-lab`, `text-stone`, `border-line` — and never for a theme, so
@@ -388,8 +409,10 @@
       'calt' 1; /* fix for Chrome */
   }
 
+  /* The gutter stays while a modal fixes the body, so the page doesn't shift */
   html {
     min-height: 100vh;
+    scrollbar-gutter: stable;
   }
 
   body {
