@@ -14,6 +14,11 @@ import Modal, { sheetPanel } from '@/components/Modal'
 import CloseButton from '@/components/CloseButton'
 import { getInputModality } from '@/utils/inputModality'
 import { FilterInput, FilterSelect } from './FilterField'
+import {
+  bodyTypeLabels,
+  bodyTypes,
+  bodyTypeWord,
+} from '@/modules/list/bodyTypes'
 
 type Field =
   | {
@@ -38,6 +43,17 @@ const fields: { [Key in Exclude<FilterKey, 'make'>]-?: Field } = {
     label: 'Nafn',
     type: 'text',
     placeholder: 'Model Y, Enyaq',
+  },
+  body: {
+    kind: 'select',
+    label: 'Gerð',
+    options: [
+      ['', 'Allar'],
+      ...bodyTypes.map((type): [string, string] => [
+        bodyTypeWord(type),
+        bodyTypeLabels[type],
+      ]),
+    ],
   },
   price: {
     kind: 'input',

@@ -258,7 +258,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'ódýr borgarbíll',
     kind: 'vague',
-    expect: { price: { oneOf: ['cheap', 'mid_priced'] } },
+    expect: { price: { oneOf: ['cheap', 'mid_priced'] }, body: ['small'] },
   },
   { text: 'bíll fyrir veturinn', kind: 'vague', expect: { drive: ['AWD'] } },
   {
@@ -331,7 +331,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'lúxus jeppi',
     kind: 'vague',
-    expect: {},
+    expect: { body: ['suv'] },
     allow: ['drive', 'seats', 'acceleration', 'groundClearance'],
   },
   { text: 'bara eitthvað rafmagns', kind: 'vague', expect: {} },
@@ -449,7 +449,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'jeppi fyrir fjallvegi',
     kind: 'vague',
-    expect: { drive: ['AWD'] },
+    expect: { drive: ['AWD'], body: ['suv'] },
     allow: ['groundClearance'],
   },
   { text: 'hálka og brekkur', kind: 'vague', expect: { drive: ['AWD'] } },
@@ -473,7 +473,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'langdrægur jeppi á góðu verði',
     kind: 'vague',
-    expect: { range: 'any', price: 'any' },
+    expect: { range: 'any', price: 'any', body: ['suv'] },
     allow: ['drive', 'value'],
   },
 
@@ -648,7 +648,7 @@ export const intentCases: IntentCase[] = [
     text: 'eru jeppar betri á veturna?',
     kind: 'question',
     expect: {},
-    allow: ['drive'],
+    allow: ['drive', 'body'],
   },
   {
     text: 'hvaða bíll hleður hraðast?',

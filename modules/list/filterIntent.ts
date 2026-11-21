@@ -1,4 +1,5 @@
 import type { Drive } from '@/modules/data/newCarSchema'
+import type { BodyType } from './bodyTypes'
 import cars, { type Car } from '@/modules/data/cars'
 import {
   normalizeFilters,
@@ -547,6 +548,25 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
       set('price', max)
     },
   )
+
+  // Folded, so no accents. The jepplingur before the jeppi it begins with, and
+  // an SUV is either of them.
+  const bodyPatterns: Array<[BodyType[], string]> = [
+    [['compactSuv'], String.raw`jeppling\w*|crossover\w*`],
+    [['suv'], String.raw`jepp\w*|torfaer\w*`],
+    [['compactSuv', 'suv'], String.raw`suv|sportjepp\w*`],
+    [['small'], String.raw`smabil\w*|baejarbil\w*|borgarbil\w*`],
+    [['saloon'], String.raw`folksbil\w*|sedan\w*|hlad?bak\w*|hatchback\w*`],
+    [['estate'], String.raw`skutbil\w*|station\w*|langbak\w*`],
+    [['van'], String.raw`fjolnota\w*|sendibil\w*|minivan\w*|van`],
+  ]
+  const bodies = new Set<BodyType>()
+  for (const [types, source] of bodyPatterns) {
+    take(`${START}(?:${source})${END}`, (_match, before) => {
+      if (!negatedBefore(before)) types.forEach((type) => bodies.add(type))
+    })
+  }
+  if (bodies.size) set('body', [...bodies])
 
   const drivePatterns: Array<[Drive, string]> = [
     [
