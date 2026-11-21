@@ -1,13 +1,5 @@
 @import 'tailwindcss';
 
-/* Registered so it can transition, as html's background shades the scrollbar
-   gutter with it while a modal is up */
-@property --page-shade {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: transparent;
-}
-
 /* A strip that scrolls sideways, swiped or dragged, with no bar under it */
 @utility no-scrollbar {
   scrollbar-width: none;
@@ -396,23 +388,10 @@
       'calt' 1; /* fix for Chrome */
   }
 
-  /* The gutter stays while a modal fixes the body, so the page doesn't shift.
-     A modal's backdrop doesn't reach it, so the page's own background, which
-     is all that shows there, takes the backdrop's shade and timing. */
+  /* The gutter stays while a modal fixes the body, so the page doesn't shift */
   html {
     min-height: 100vh;
     scrollbar-gutter: stable;
-    background: linear-gradient(var(--page-shade), var(--page-shade))
-      var(--color-lab);
-    transition: --page-shade 200ms 50ms;
-  }
-  html:has(dialog[data-state='visible']) {
-    --page-shade: var(--color-backdrop-strong);
-    transition-duration: 300ms;
-    transition-delay: 0s;
-  }
-  html:has(dialog[data-state='visible'][data-backdrop='soft']) {
-    --page-shade: var(--color-backdrop);
   }
 
   body {
