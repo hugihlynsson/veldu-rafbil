@@ -289,7 +289,7 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
                         ) : row.key === 'price' && car ? (
                           // The note beside the pill where the column
                           // has room for both, and under it where not
-                          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                          <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
                             <div className="relative max-w-full">
                               {bestDot}
                               <PricePill
