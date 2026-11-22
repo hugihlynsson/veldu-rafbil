@@ -15,14 +15,20 @@ import { trackEvent } from 'fathom-client'
 
 import Car from './NewCar'
 import { GridIcon, ListIcon } from './ViewIcons'
-import Title from '@/components/Title'
 import { pageColumn } from '@/components/pageColumn'
 import type { LatestNews as LatestNewsLine } from '@/modules/news/news'
-import Intro from './Intro'
 import LatestNews from './LatestNews'
 import Toggles from '@/components/Toggles'
 import FilterModal from '@/components/filters/FilterModal'
-import ActiveFilters from '@/components/filters/ActiveFilters'
+import SearchHeader, {
+  type SearchSection,
+} from '@/components/search/SearchHeader'
+import StickySearch from '@/components/search/StickySearch'
+import SortSelect from '@/components/search/SortSelect'
+import { chipOn } from '@/components/filters/chipTone'
+import { activeChips } from '@/modules/list/filterChips'
+import type { Preset } from '@/modules/list/search'
+import useScrolledPast from '@/utils/useScrolledPast'
 import MakeRow from '@/components/filters/MakeRow'
 import MakeSheet from '@/components/filters/MakeSheet'
 import cars, { type Car as CarData } from '@/modules/data/cars'
@@ -41,7 +47,7 @@ import { liftMakes } from '@/modules/list/makes'
 import {
   sortCars,
   sortingDefinitions,
-  type Sorting,
+  type SortingState,
 } from '@/modules/list/sorting'
 import type { View } from '@/modules/list/view'
 import { agree } from '@/modules/copy/plural'
@@ -76,18 +82,15 @@ const ChatContainer = dynamic(() => import('@/components/chat/ChatContainer'), {
 const loadCarSheet = () => import('@/components/detail/CarSheet')
 const CarSheet = dynamic(loadCarSheet, { ssr: false })
 
+// Fetched on the first tap on the search, with the suggestions' zod behind it
+const SearchSheet = dynamic(() => import('@/components/search/SearchSheet'), {
+  ssr: false,
+})
+
 // The header and the line under the list share the text column of a card
 const column = `${pageColumn} py-4 xs:py-6`
 
 const carWord = (count: number) => agree(count, 'bíll', 'bílar')
-
-const toggleSortings: Sorting[] = [
-  'price',
-  'range',
-  'value',
-  'acceleration',
-  'name',
-]
 
 // From lg the grid outgrows the page, centred on it and kept clear of the
 // window's edges, while the header above stays where the list has it. NewCar's
@@ -111,12 +114,15 @@ type FilterChangeSource = Extract<
 >['source']
 
 export default function CarList({ latest }: Props) {
-  const { sorting, direction, toggleSorting } = useSorting()
+  const { sorting, direction, setSorting } = useSorting()
   const { filters, setFilters } = useFilters()
   const { view, setView } = useView()
 
-  const changeSorting = (tapped: Sorting) =>
-    track({ name: 'sorting_changed', ...toggleSorting(tapped) })
+  const changeSorting = (next: SortingState) => {
+    if (next.sorting === sorting && next.direction === direction) return
+    setSorting(next)
+    track({ name: 'sorting_changed', ...next })
+  }
 
   const changeView = (next: View) => {
     if (next === view) return
@@ -152,8 +158,36 @@ export default function CarList({ latest }: Props) {
   }
 
   const [editingFilters, setEditingFilters] = useState<boolean>(false)
+  // The filters the full modal opens with: the list's, or the search's draft
+  const [modalFilters, setModalFilters] = useState<Filters | null>(null)
   const [choosingMakes, setChoosingMakes] = useState(false)
+  const [searchSection, setSearchSection] = useState<SearchSection | null>(null)
   const controlsRef = useRef<HTMLDivElement>(null)
+  const { ref: searchBarRef, past: pastSearchBar } =
+    useScrolledPast<HTMLDivElement>()
+
+  const openAllFilters = (from: Filters = filters) => {
+    setModalFilters(from)
+    setEditingFilters(true)
+  }
+
+  // To the top of the cars, under the bar stuck to the window
+  const showResults = () =>
+    controlsRef.current?.scrollIntoView({
+      behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+      block: 'start',
+    })
+
+  const applyPreset = (preset: Preset) => {
+    changeFilters(preset.filters, 'preset')
+    changeSorting(preset.sorting)
+  }
+
+  const submitSearch = (next: Filters) => {
+    changeFilters(next, 'search')
+    const controls = controlsRef.current
+    if (controls && controls.getBoundingClientRect().top < 0) showResults()
+  }
 
   // A suggested filter replaces the cars under the reader, so a place halfway
   // down the old list means nothing: bring back the sorting and the filters,
@@ -289,82 +323,81 @@ export default function CarList({ latest }: Props) {
 
   return (
     <div className="max-w-page mx-auto">
-      <header
-        className={clsx('flex flex-col items-stretch md:pb-10 lg:pr-6', column)}
-      >
-        <Title />
+      <StickySearch
+        shown={pastSearchBar && !searchSection}
+        filters={filters}
+        count={filteredCars.length}
+        onOpen={setSearchSection}
+        onTop={() =>
+          window.scrollTo({
+            top: 0,
+            behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+          })
+        }
+      />
 
-        {/* The newest update beside the intro from lg, where the intro alone
-            leaves half the header empty, and under it on narrower screens.
-            The header gives up some of its right padding there for it */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-10">
-          <Intro />
-
-          {latest && (
-            <LatestNews
-              latest={latest}
-              preload
-              className="self-start -mx-1 mt-1 mb-10 lg:self-center lg:mx-0 lg:mt-6 lg:mb-8"
-            />
-          )}
-        </div>
+      <header className={clsx('flex flex-col items-stretch', column)}>
+        <SearchHeader
+          filters={filters}
+          count={filteredCars.length}
+          sorting={{ sorting, direction }}
+          barRef={searchBarRef}
+          onOpen={setSearchSection}
+          onShowResults={showResults}
+          onPreset={applyPreset}
+          aside={latest && <LatestNews latest={latest} preload />}
+        >
+          <MakeRow
+            chosen={filters.make ?? []}
+            onChange={(make) => changeFilters({ ...filters, make }, 'make-row')}
+            onShowAll={() => setChoosingMakes(true)}
+          />
+        </SearchHeader>
 
         <div
           ref={controlsRef}
-          id="sorting-label"
-          className="mb-2 text-sm font-semibold scroll-mt-4"
+          className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 mt-10 mb-4 scroll-mt-20 md:mt-14 md:mb-8"
         >
-          Raða eftir:
-        </div>
-
-        <div className="flex items-start gap-3">
-          <Toggles<Sorting>
-            currentValue={sorting}
-            items={toggleSortings.map((value): [string, Sorting] => [
-              sortingDefinitions[value].label,
-              value,
-            ])}
-            onClick={changeSorting}
-            labelledBy="sorting-label"
-            indicatorLabel={
-              direction === 'desc' ? 'lækkandi röð' : 'hækkandi röð'
-            }
-            indicator={
-              <span
-                aria-hidden
-                className={clsx(
-                  'leading-none ease-in-out transition-transform duration-150 -mr-1',
-                  direction === 'desc' && 'rotate-180',
-                )}
-              >
-                ↑
-              </span>
-            }
-          />
-
-          {/* Below md the grid would be one column, the list again */}
-          <div className="hidden md:block">
-            <Toggles<View>
-              currentValue={view}
-              items={viewItems}
-              onClick={changeView}
-              label="Útlit"
+          <span className="text-lg font-semibold text-tint">
+            {filteredCars.length} {carWord(filteredCars.length)}
+          </span>
+          <div className="flex items-center gap-2">
+            <SortSelect
+              sorting={sorting}
+              direction={direction}
+              onChange={changeSorting}
             />
+            {/* Below md the grid would be one column, the list again */}
+            <div className="hidden md:block">
+              <Toggles<View>
+                currentValue={view}
+                items={viewItems}
+                onClick={changeView}
+                label="Útlit"
+              />
+            </div>
           </div>
+          {activeChips(filters).length > 0 && (
+            <div className="basis-full flex flex-wrap gap-2 -ml-0.5">
+              {activeChips(filters).map(
+                ({ name, label, value, removeLabel }) => (
+                  <button
+                    key={name}
+                    type="button"
+                    aria-label={removeLabel}
+                    onClick={() => removeFilterChip(name)}
+                    className={clsx(
+                      "shrink-0 border-0 rounded-full py-1.25 pr-2 pl-2.5 text-xs font-semibold text-stone cursor-pointer flex items-center transition-colors duration-200 after:content-['+'] after:rotate-45 after:ml-1.5 after:text-base after:leading-[10px] after:-mt-px after:text-stone hover:after:text-tint",
+                      chipOn,
+                    )}
+                  >
+                    {label} <span className="text-tint ml-0.75">{value}</span>
+                  </button>
+                ),
+              )}
+            </div>
+          )}
         </div>
-
-        <MakeRow
-          chosen={filters.make ?? []}
-          onChange={(make) => changeFilters({ ...filters, make }, 'make-row')}
-          onShowAll={() => setChoosingMakes(true)}
-        />
-
-        <ActiveFilters
-          filters={filters}
-          onRemoveFilter={removeFilterChip}
-          onOpenFilterModal={() => setEditingFilters(true)}
-          filteredCarsCount={filteredCars.length}
-        />
 
         {/* The only feedback a screen reader gets for a sort or a filter, so
             it has to stay mounted to be announced at all */}
@@ -422,9 +455,19 @@ export default function CarList({ latest }: Props) {
         </div>
       )}
 
+      {searchSection && (
+        <SearchSheet
+          initialFilters={filters}
+          section={searchSection}
+          onSubmit={submitSearch}
+          onAllFilters={(draft) => openAllFilters(draft)}
+          onDone={() => setSearchSection(null)}
+        />
+      )}
+
       {editingFilters && (
         <FilterModal
-          initialFilters={filters}
+          initialFilters={modalFilters ?? filters}
           onSubmit={(next) => changeFilters(next, 'modal')}
           onDone={() => setEditingFilters(() => false)}
           getCountPreview={(filters: Filters) =>
@@ -461,7 +504,12 @@ export default function CarList({ latest }: Props) {
           page but not over it in the sheet. There the chat is about the
           sheet's car, as it is on the car's page. */}
       <ChatContainer
-        hide={editingFilters || choosingMakes || (isComparing && !sheetChat)}
+        hide={
+          editingFilters ||
+          choosingMakes ||
+          searchSection !== null ||
+          (isComparing && !sheetChat)
+        }
         container={sheetChat?.container}
         about={sheetChat && sheetCar ? [sheetCar] : undefined}
         starters={sheetChat?.starters}

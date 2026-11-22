@@ -55,7 +55,13 @@ export const useSorting = () => {
     return next
   }
 
-  return { sorting, direction, toggleSorting }
+  const setSorting = (next: SortingState) =>
+    void setValues({
+      sorting: next.sorting,
+      flipped: !isDefaultDirection(next.sorting, next.direction),
+    })
+
+  return { sorting, direction, toggleSorting, setSorting }
 }
 
 export const useView = () => {

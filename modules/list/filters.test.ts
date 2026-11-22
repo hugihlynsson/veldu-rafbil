@@ -229,6 +229,7 @@ describe('filters survive a round trip through the URL', () => {
       value: 30_000,
       fastcharge: 2,
       availability: 'available',
+      body: ['suv'],
     }
 
     expect(Object.keys(getQueryFromFilters(everyFilter)).sort()).toEqual(
@@ -332,6 +333,7 @@ describe('filterKeys', () => {
       'value',
       'fastcharge',
       'availability',
+      'body',
     ])
   })
 })

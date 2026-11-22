@@ -11,6 +11,7 @@ import type { Drive } from '@/modules/data/newCarSchema'
 // Relative: next.config.ts loads this file, and its loader cannot resolve @/
 import { drives } from '../data/drives'
 import { makeKey, nameMatcher } from './carNames'
+import { bodyTypeOf, bodyTypes, bodyTypeWord, type BodyType } from './bodyTypes'
 
 interface FilterDefinition<Value> {
   // Icelandic, and part of every link to the list that has been shared
@@ -69,6 +70,17 @@ const parseAsList = <T extends string>(accept: (entry: string) => entry is T) =>
     eq: (a, b) =>
       a.length === b.length && a.every((entry, i) => entry === b[i]),
   })
+
+// Icelandic words in the URL, in the order of `bodyTypes` however they came
+const parseAsBodyTypes = createMultiParser<BodyType[]>({
+  parse: (values) => {
+    const words = new Set(values.flatMap((value) => value.split(',')))
+    const types = bodyTypes.filter((type) => words.has(bodyTypeWord(type)))
+    return types.length ? types : null
+  },
+  serialize: (types) => [types.map(bodyTypeWord).join(',')],
+  eq: (a, b) => a.length === b.length && a.every((type, i) => type === b[i]),
+})
 
 /**
  * A lookup rather than parseAsStringLiteral, as the URL words are Icelandic.
@@ -174,6 +186,15 @@ export const filterDefinitions = {
     }),
     test: (availability) => (car) => car.availability === availability,
   }),
+  body: filter({
+    urlKey: 'gerd',
+    parser: parseAsBodyTypes,
+    // A car with no body type known is left out, as no type can claim it
+    test: (types) => (car) => {
+      const type = bodyTypeOf(car)
+      return type !== undefined && types.includes(type)
+    },
+  }),
 }
 
 export type FilterKey = keyof typeof filterDefinitions
@@ -260,9 +281,11 @@ export const fieldFromFilter = <Key extends FilterKey>(
   key: Key,
   value: FilterValue<Key>,
 ): string => {
+  const { parser } = filterDefinitions[key] as SomeFilterDefinition
+  // The body types are a select, whose options are the URL's words
+  if (key === 'body') return String(parser.serialize(value as never))
   // As people type a list, where the URL leaves out the space
   if (Array.isArray(value)) return value.join(', ')
-  const { parser } = filterDefinitions[key] as SomeFilterDefinition
   return parser.serialize(value as never) as string
 }
 

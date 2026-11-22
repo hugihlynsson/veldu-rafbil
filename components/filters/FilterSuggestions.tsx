@@ -81,8 +81,11 @@ interface Props {
    * onShownChange, so the pills it reports are those this action reads.
    */
   onAction: (action: BarAction) => void
-  /** Sends the text to the advisor, when sending it would filter instead */
-  onAsk: () => void
+  /**
+   * Sends the text to the advisor, when sending it would filter instead.
+   * Without it, as in the search, a wish gets the pill that adds them all.
+   */
+  onAsk?: () => void
 }
 
 const unread = { text: '', suggestions: [], asksAdvisor: false, at: 0 }
@@ -231,7 +234,7 @@ export default function FilterSuggestions({
     }
   })
 
-  if (filter) {
+  if (filter && onAsk) {
     pills.unshift({
       key: 'ask',
       content: (
