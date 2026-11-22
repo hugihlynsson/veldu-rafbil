@@ -48,6 +48,7 @@ import { agree } from '@/modules/copy/plural'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import { useFilters, useSorting, useView } from '@/utils/useListState'
 import { rememberListSearch } from '@/utils/listReturn'
+import useCardLimit from '@/utils/useCardLimit'
 import {
   opensInSheet,
   scrollSheetToTop,
@@ -277,6 +278,7 @@ export default function CarList({ latest }: Props) {
 
   const filteredCars = cars.filter(carFilter(listFilters))
   const shownCars = sortCars(filteredCars, listSorting, listDirection)
+  const cardLimit = useCardLimit()
 
   const hasFilter = Object.values(listFilters).length > 0
 
@@ -391,7 +393,7 @@ export default function CarList({ latest }: Props) {
         onPointerMove={prefetchLinkedReview}
         onFocus={prefetchLinkedReview}
       >
-        {shownCars.map((car, index) => (
+        {shownCars.slice(0, cardLimit).map((car, index) => (
           <Car
             preload={index <= 1}
             position={index}
