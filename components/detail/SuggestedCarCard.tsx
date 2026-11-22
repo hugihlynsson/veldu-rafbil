@@ -16,6 +16,9 @@ export const suggestedCarList =
 
 interface Props {
   car: Car
+  /** The photo's sizes where the cards are not the car page's three */
+  sizes?: string
+  className?: string
   /** Why it is offered, in place of its price and range */
   reason?: string
   action: {
@@ -35,11 +38,13 @@ const actionClassName =
   'relative z-1 shrink-0 self-center mr-3 inline-flex items-center justify-center w-8 h-8 text-sm font-semibold rounded-full border border-line-chip bg-lab text-tint no-underline transition duration-100 hover:bg-cloud active:scale-93 active:duration-75 md:self-start md:w-auto md:h-auto md:mx-1 md:py-1'
 
 /**
- * A car offered beside the ones on the page, sized for the review's measure.
+ * A car offered beside the ones on the page.
  * The whole card opens the car's page; the button over it does the action.
  */
 const SuggestedCarCard: FunctionComponent<Props> = ({
   car,
+  sizes = '(max-width: 767px) 128px, 210px',
+  className,
   reason,
   action,
 }) => {
@@ -58,14 +63,19 @@ const SuggestedCarCard: FunctionComponent<Props> = ({
   )
 
   return (
-    <li className="group relative flex items-center gap-3 rounded-card overflow-hidden transition-colors duration-200 hover:bg-shade md:flex-col md:items-stretch md:overflow-visible md:hover:bg-transparent">
+    <li
+      className={clsx(
+        'group relative flex items-center gap-3 rounded-card overflow-hidden transition-colors duration-200 hover:bg-shade md:flex-col md:items-stretch md:overflow-visible md:hover:bg-transparent',
+        className,
+      )}
+    >
       {/* Beside the name, flush to the card with its border drawn over it.
           Above the name it needs no border, and the card's larger corner
           would clip the photo's own */}
       <div className="w-32 aspect-[3/2] shrink-0 self-stretch overflow-hidden md:w-full md:rounded-lg">
         <Image
           alt=""
-          sizes="(max-width: 767px) 128px, 210px"
+          sizes={sizes}
           src={`/images/${car.heroImageName}.jpg`}
           width={128}
           height={85}

@@ -24,7 +24,6 @@ import PageTop from './PageTop'
 import { Lane, ScrollLanes } from './ScrollLanes'
 import ShareButton from '@/components/ShareButton'
 import CrossIcon from '@/components/CrossIcon'
-import PlusIcon from '@/components/PlusIcon'
 import { pageColumn } from '@/components/pageColumn'
 import { photoZoom } from '@/components/photoZoom'
 
@@ -54,9 +53,6 @@ const eyebrow =
   'm-0 uppercase text-eyebrow font-semibold tracking-wider text-stone'
 const secondaryButton =
   'inline-flex items-center justify-center gap-1.5 py-2 px-4 text-sm font-semibold rounded-full no-underline bg-cloud text-tint transition duration-100 hover:bg-smoke active:scale-96 active:duration-75'
-
-// One row each on a phone, and a row of them from md
-const SUGGESTED_COUNT = 3
 
 const deliveryText = (expectedDelivery: string) =>
   `Væntanlegur ${expectedDelivery.toLowerCase()}`
@@ -92,8 +88,9 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
   )
   // The width the columns share: the page less its edges, or the grid's
   const pageWidth = wide ? 1200 : 944
+  // One a column, so from md they stand in the table's own columns
   const suggested =
-    cars.length < MAX_COMPARED ? closestToSelection(cars, SUGGESTED_COUNT) : []
+    cars.length < MAX_COMPARED ? closestToSelection(cars, cars.length) : []
 
   return (
     <main className="max-w-page mx-auto pb-14 md:pb-24">
@@ -356,20 +353,11 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
         )}
       </ScrollLanes>
 
-      {suggested.length > 0 && (
-        <ComparisonSuggestions
-          cars={cars}
-          slugs={slugs}
-          suggested={suggested}
-          className={clsx(body, 'mt-13 md:mt-16')}
-        />
-      )}
-
+      {/* Under the figures, where the comparison has been read through */}
       <div
         className={clsx(
           body,
-          'flex flex-wrap items-center gap-2 sm:gap-3',
-          suggested.length > 0 ? 'mt-6 md:mt-8' : 'mt-14 md:mt-16',
+          'mt-10 md:mt-12 flex flex-wrap items-center gap-2 sm:gap-3',
         )}
       >
         <ShareButton
@@ -378,16 +366,30 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
           event="Comparison shared"
           className="-ml-0.5 max-sm:grow max-sm:px-2.5"
         />
-        <CompareMoreLink
-          cars={cars}
-          className={clsx(
-            secondaryButton,
-            'py-3 px-5 max-sm:grow max-sm:px-2.5',
-          )}
-        >
-          <PlusIcon size={16} /> Bera saman fleiri
-        </CompareMoreLink>
+        {/* With no room to add a car, the list is where one is swapped */}
+        {suggested.length === 0 && (
+          <CompareMoreLink
+            cars={cars}
+            className={clsx(
+              secondaryButton,
+              'py-3 px-5 max-sm:grow max-sm:px-2.5',
+            )}
+          >
+            Breyta á listanum
+          </CompareMoreLink>
+        )}
       </div>
+
+      {suggested.length > 0 && (
+        <ComparisonSuggestions
+          cars={cars}
+          slugs={slugs}
+          suggested={suggested}
+          className={clsx(lane, 'mt-14 md:mt-16')}
+          contentClassName={clsx(gutter, wide && 'lg:px-0')}
+          imageSizes={`(max-width: 767px) 128px, (max-width: ${pageWidth - 1}px) ${Math.ceil(100 / cars.length)}vw, ${Math.ceil(pageWidth / cars.length)}px`}
+        />
+      )}
     </main>
   )
 }
