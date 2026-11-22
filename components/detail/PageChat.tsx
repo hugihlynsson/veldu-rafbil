@@ -1,17 +1,12 @@
 'use client'
 
 import type { FunctionComponent } from 'react'
-import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 
 import type { Car } from '@/modules/data/cars'
 import { carPathOf } from '@/modules/detail/paths'
+import useChatSettings from '@/utils/chatSlot'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
-
-// The bar arrives after the figures, as on the list, and the AI SDK after it
-const ChatContainer = dynamic(() => import('@/components/chat/ChatContainer'), {
-  ssr: false,
-})
 
 interface Props {
   /**
@@ -26,8 +21,10 @@ interface Props {
 
 /**
  * The advisor's bar on a page other than the list, carrying the cars the page
- * is about, if any, with each question. A car picked from an answer opens its own page,
- * unless it is the car whose page this is, which is scrolled up to.
+ * is about, if any, with each question. It draws nothing: the bar is the root
+ * layout's, so it stays in place from one page to the next. A car picked from
+ * an answer opens its own page, unless it is the car whose page this is,
+ * which is scrolled up to.
  */
 const PageChat: FunctionComponent<Props> = ({ cars, starters }) => {
   const router = useRouter()
@@ -45,14 +42,9 @@ const PageChat: FunctionComponent<Props> = ({ cars, starters }) => {
     }
   }
 
-  return (
-    <ChatContainer
-      hide={false}
-      onShowCar={showCar}
-      about={cars}
-      starters={starters}
-    />
-  )
+  useChatSettings({ hide: false, onShowCar: showCar, about: cars, starters })
+
+  return null
 }
 
 export default PageChat

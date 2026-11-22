@@ -64,12 +64,7 @@ import CompareTray from '@/components/detail/CompareTray'
 import type { SheetChat } from '@/components/detail/CarSheet'
 import { track } from '@/utils/track'
 import type { TrackedEvent } from '@/modules/analytics/events'
-
-// Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
-// so arriving a moment later shifts nothing.
-const ChatContainer = dynamic(() => import('@/components/chat/ChatContainer'), {
-  ssr: false,
-})
+import useChatSettings from '@/utils/chatSlot'
 
 // Fetched as a pointer first reaches the cars, where it would open: a mouse
 // passing over, or a tablet's first touch, which is mostly a scroll
@@ -287,6 +282,19 @@ export default function CarList({ latest }: Props) {
 
   const filteredCarCount = cars.length - filteredCars.length
 
+  // The tray takes the bar's place while there is a car in it, on the page
+  // but not over it in the sheet. There the chat is about the sheet's car, as
+  // it is on the car's page.
+  useChatSettings({
+    hide: editingFilters || choosingMakes || (isComparing && !sheetChat),
+    container: sheetChat?.container,
+    placeTaken: isComparing,
+    about: sheetChat && sheetCar ? [sheetCar] : undefined,
+    starters: sheetChat?.starters,
+    onShowCar: showCar,
+    filters,
+    onApplyFilters: applySuggestedFilters,
+  })
   return (
     <div className="max-w-page mx-auto">
       <header
@@ -456,19 +464,6 @@ export default function CarList({ latest }: Props) {
       {sheetCar && (
         <CarSheet car={sheetCar} shown={shownCars} onChat={setSheetChat} />
       )}
-
-      {/* The tray takes the bar's place while there is a car in it, on the
-          page but not over it in the sheet. There the chat is about the
-          sheet's car, as it is on the car's page. */}
-      <ChatContainer
-        hide={editingFilters || choosingMakes || (isComparing && !sheetChat)}
-        container={sheetChat?.container}
-        about={sheetChat && sheetCar ? [sheetCar] : undefined}
-        starters={sheetChat?.starters}
-        onShowCar={showCar}
-        filters={filters}
-        onApplyFilters={applySuggestedFilters}
-      />
     </div>
   )
 }

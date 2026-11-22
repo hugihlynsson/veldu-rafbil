@@ -56,6 +56,9 @@ interface Props {
   animateIn?: boolean
   /** In a sheet's dialog, raised clear of the panel's bottom edge */
   lifted?: boolean
+  /** Its place on the page is taken, as by the comparison tray, so a lifted
+   * bar fades in and out rather than rising from that place and back */
+  placeTaken?: boolean
   /** The questions offered to start on; the general ones when left out */
   starters?: ReadonlyArray<string>
   /** Left out where the list is not what is in view, as inside the chat */
@@ -79,11 +82,19 @@ const ChatInput: React.FunctionComponent<Props> = ({
   onIntent,
   animateIn = false,
   lifted = false,
+  placeTaken = false,
   starters = CHAT_SUGGESTIONS,
   filterSuggestions,
 }) => {
   const [isFocused, setIsFocused] = useState(false)
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([])
+  // Focus can outlive the page, as on a mouse's back button, and the last
+  // page's questions would stay up on the next
+  const [suggestedFrom, setSuggestedFrom] = useState(starters)
+  if (starters !== suggestedFrom) {
+    setSuggestedFrom(starters)
+    setSelectedSuggestions(getRandomSuggestions(starters, 3))
+  }
   // The filter pills are fetched on the first keystroke, then kept mounted so
   // they can play their exit when the text is cleared or the input left
   const [hasTyped, setHasTyped] = useState(value !== '')
@@ -205,6 +216,9 @@ const ChatInput: React.FunctionComponent<Props> = ({
         lifted
           ? 'bottom-12 starting:bottom-6 group-data-[state=leaving]/modal:bottom-6 transition-[bottom,opacity,visibility] ease-out-cubic'
           : 'bottom-[calc(1rem+var(--keyboard-inset))] sm:bottom-[calc(1.5rem+var(--keyboard-inset))] transition-[opacity,visibility]',
+        lifted &&
+          placeTaken &&
+          'starting:opacity-0 group-data-[state=leaving]/modal:opacity-0 group-data-[state=leaving]/modal:duration-200',
         hide && 'opacity-0 invisible',
       )}
       onBlur={(event) => {
