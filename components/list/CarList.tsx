@@ -21,10 +21,8 @@ import type { LatestNews as LatestNewsLine } from '@/modules/news/news'
 import Intro from './Intro'
 import LatestNews from './LatestNews'
 import Toggles from '@/components/Toggles'
-import FilterModal from '@/components/filters/FilterModal'
 import ActiveFilters from '@/components/filters/ActiveFilters'
 import MakeRow from '@/components/filters/MakeRow'
-import MakeSheet from '@/components/filters/MakeSheet'
 import cars, { type Car as CarData } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf } from '@/modules/detail/paths'
@@ -60,9 +58,9 @@ import useComparison, {
   toggleComparedCar,
 } from '@/utils/useComparison'
 import useInputModality, { getInputModality } from '@/utils/inputModality'
-import CompareTray from '@/components/detail/CompareTray'
 import type { SheetChat } from '@/components/detail/CarSheet'
 import { track } from '@/utils/track'
+import afterLoad from '@/utils/afterLoad'
 import type { TrackedEvent } from '@/modules/analytics/events'
 import useChatSettings from '@/utils/chatSlot'
 
@@ -70,6 +68,16 @@ import useChatSettings from '@/utils/chatSlot'
 // passing over, or a tablet's first touch, which is mostly a scroll
 const loadCarSheet = () => import('@/components/detail/CarSheet')
 const CarSheet = dynamic(loadCarSheet, { ssr: false })
+
+// Shown only once they are opened, or once a car is in the tray, so they are
+// fetched after the page has loaded, off the bandwidth the first photo needs,
+// and are in by the time anyone taps
+const loadFilterModal = () => import('@/components/filters/FilterModal')
+const FilterModal = dynamic(loadFilterModal, { ssr: false })
+const loadMakeSheet = () => import('@/components/filters/MakeSheet')
+const MakeSheet = dynamic(loadMakeSheet, { ssr: false })
+const loadCompareTray = () => import('@/components/detail/CompareTray')
+const CompareTray = dynamic(loadCompareTray, { ssr: false })
 
 // The header and the line under the list share the text column of a card
 const column = `${pageColumn} py-4 xs:py-6`
@@ -183,6 +191,16 @@ export default function CarList({ latest }: Props) {
   useListShown()
   // From the start, so the sheet knows whether a key or a tap opened it
   useInputModality()
+
+  useEffect(
+    () =>
+      afterLoad(() => {
+        void loadFilterModal()
+        void loadMakeSheet()
+        void loadCompareTray()
+      }),
+    [],
+  )
 
   // Closing hands a key's focus back to the card that opened the sheet, which
   // a step through it has since left behind: the list goes to the car last

@@ -142,13 +142,34 @@ describe('the similar cars', () => {
 
   it('stay out of the list', () => {
     const { files } = importGraph(carList)
-    expect(files).toContain(
-      path.join(root, 'components/detail/CompareTray.tsx'),
-    )
+    expect(files).toContain(carList)
     expect(files).not.toContain(similarCars)
   })
 
   it('are what the tray loads behind next/dynamic', () => {
     expect(importGraph(suggestions).files).toContain(similarCars)
+  })
+})
+
+// Shown only once opened, or once a car is in the tray, so the list fetches
+// them after the page has loaded rather than with its first load
+describe('the modals and the tray', () => {
+  const source = readFileSync(carList, 'utf8')
+  const lazilyImported = [
+    ...source.matchAll(/import\(\s*['"]([^'"]+)['"]\s*\)/g),
+  ].map(([, specifier = '']) => resolveLocal(specifier, carList))
+  const { files } = importGraph(carList)
+
+  it.each([
+    'components/filters/FilterModal.tsx',
+    'components/filters/MakeSheet.tsx',
+    'components/detail/CompareTray.tsx',
+  ])('load %s behind next/dynamic', (file) => {
+    expect(files).not.toContain(path.join(root, file))
+    expect(lazilyImported).toContain(path.join(root, file))
+  })
+
+  it('leave the modal itself out of the list', () => {
+    expect(files).not.toContain(path.join(root, 'components/Modal.tsx'))
   })
 })
