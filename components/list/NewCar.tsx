@@ -136,8 +136,8 @@ const NewCar: FunctionComponent<Props> = ({
     >
       {/* The biggest thing to tap, so it opens the car too; one stop for the
           keyboard and screen readers is the name. None of the three
-          prefetches on sight, which a scroll down the list did for every car
-          it passed: CarList prefetches the one a pointer or a key reaches. */}
+          prefetches on sight, which would fetch every car a scroll passes:
+          CarList prefetches the one a pointer or a key reaches. */}
       <Link
         href={carPathOf(car)}
         onClick={openCar}

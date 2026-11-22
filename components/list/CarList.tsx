@@ -257,17 +257,21 @@ export default function CarList({ latest }: Props) {
   // in rather than shifting what is under it once it arrives, and otherwise
   // the car's page, which a tap's press gives a head start on its click. On a
   // move rather than an over, which the list scrolling under a still pointer
-  // fires for every card it passes, and a mouse's only, as a finger's moves
-  // are a scroll.
-  const prefetchedLink = useRef<Element | null>(null)
+  // fires for every card it passes, and only a hovering one's, as a finger's
+  // moves are a scroll. Kept with the sheet's state, which a resize can flip
+  // between the move and the click.
+  const prefetched = useRef<{ link: Element; sheet: boolean } | null>(null)
   const prefetchLinked = (event: SyntheticEvent) => {
     if (!(event.target instanceof Element)) return
     const link = event.target.closest('a')
-    if (!link || link === prefetchedLink.current) return
-    prefetchedLink.current = link
+    if (!link) return
+    const sheet = opensInSheet()
+    const last = prefetched.current
+    if (last?.link === link && last.sheet === sheet) return
+    prefetched.current = { link, sheet }
     const linked = carAtPath(link.pathname)
     if (!linked) return
-    if (opensInSheet()) prefetchCarReview(carSlug(linked))
+    if (sheet) prefetchCarReview(carSlug(linked))
     else router.prefetch(link.pathname)
   }
 
@@ -394,7 +398,10 @@ export default function CarList({ latest }: Props) {
           if (opensInSheet()) void loadCarSheet()
         }}
         onPointerMove={(event) => {
-          if (event.pointerType === 'mouse') prefetchLinked(event)
+          const hovering =
+            event.pointerType === 'mouse' ||
+            (event.pointerType === 'pen' && event.buttons === 0)
+          if (hovering) prefetchLinked(event)
         }}
         onPointerDown={prefetchLinked}
         onFocus={prefetchLinked}
