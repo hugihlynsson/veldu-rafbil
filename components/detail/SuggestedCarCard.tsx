@@ -16,7 +16,7 @@ export const suggestedCarList =
 
 interface Props {
   car: Car
-  /** Why it is offered, under its price and range */
+  /** Why it is offered, in place of its price and range */
   reason?: string
   action: {
     href: string
@@ -30,7 +30,7 @@ interface Props {
 }
 
 const actionClassName =
-  'relative z-1 shrink-0 self-center mr-3 inline-flex items-center justify-center w-8 h-8 text-sm font-semibold rounded-full border border-line-chip bg-lab text-tint no-underline transition duration-100 hover:bg-cloud active:scale-93 active:duration-75 md:order-2 md:self-start md:w-auto md:h-auto md:mx-1 md:py-1 md:px-3'
+  'relative z-1 shrink-0 self-center mr-3 inline-flex items-center justify-center w-8 h-8 text-sm font-semibold rounded-full border border-line-chip bg-lab text-tint no-underline transition duration-100 hover:bg-cloud active:scale-93 active:duration-75 md:self-start md:w-auto md:h-auto md:mx-1 md:py-1 md:px-3'
 
 /**
  * A car offered beside the ones on the page, sized for the review's measure.
@@ -49,7 +49,7 @@ const SuggestedCarCard: FunctionComponent<Props> = ({
   )
 
   return (
-    <li className="group relative flex flex-wrap items-center gap-x-3 md:gap-3 rounded-card overflow-hidden transition-colors duration-200 hover:bg-shade md:flex-col md:items-stretch md:overflow-visible md:hover:bg-transparent">
+    <li className="group relative flex items-center gap-3 rounded-card overflow-hidden transition-colors duration-200 hover:bg-shade md:flex-col md:items-stretch md:overflow-visible md:hover:bg-transparent">
       {/* Beside the name, flush to the card with its border drawn over it.
           Above the name it needs no border, and the card's larger corner
           would clip the photo's own */}
@@ -75,13 +75,19 @@ const SuggestedCarCard: FunctionComponent<Props> = ({
         >
           {car.make} <span className="font-normal">{car.model}</span>
         </Link>
-        <div className="mt-1 text-sm font-medium text-stone">
-          {/* On the narrowest phones it breaks between the two */}
-          <span className="whitespace-nowrap">
-            {addDecimalSeparators(car.priceWithGrant)} kr. ·
-          </span>{' '}
-          <span className="whitespace-nowrap">{car.range} km</span>
-        </div>
+        {reason ? (
+          <div className="mt-1 text-sm font-medium text-stone text-pretty">
+            {reason}
+          </div>
+        ) : (
+          <div className="mt-1 text-sm font-medium text-stone">
+            {/* On the narrowest phones it breaks between the two */}
+            <span className="whitespace-nowrap">
+              {addDecimalSeparators(car.priceWithGrant)} kr. ·
+            </span>{' '}
+            <span className="whitespace-nowrap">{car.range} km</span>
+          </div>
+        )}
       </div>
       {action.tracked ? (
         <TrackedLink
@@ -100,13 +106,6 @@ const SuggestedCarCard: FunctionComponent<Props> = ({
         >
           {actionContent}
         </Link>
-      )}
-      {/* A line of its own under the photo on a phone, where beside it the
-          name's column is too narrow for it; under the price from md */}
-      {reason && (
-        <div className="basis-full px-3 py-2 border-t border-line text-sm text-stone md:order-1 md:basis-auto md:-mt-2 md:p-0 md:px-1 md:border-0">
-          {reason}
-        </div>
       )}
     </li>
   )
