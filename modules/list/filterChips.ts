@@ -78,19 +78,6 @@ const chipText: {
       removeLabel: `Fjarlægja hröðunarsíu: hámark ${seconds} sekúndur`,
     }
   },
-  value: (max) => {
-    const value = addDecimalSeparators(max)
-    return {
-      label: 'Verði á km:',
-      value: `↓${value} kr.`,
-      removeLabel: `Fjarlægja síu á verði á km: hámark ${value} kr.`,
-    }
-  },
-  fastcharge: (min) => ({
-    label: 'Hraðhleðsla:',
-    value: `↑${min} km/min`,
-    removeLabel: `Fjarlægja hraðhleðslusíu: lágmark ${min} km á mínútu`,
-  }),
   availability: (availability) => {
     const isAvailable = availability === 'available'
     return {

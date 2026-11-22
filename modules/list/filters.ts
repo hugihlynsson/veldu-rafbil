@@ -156,16 +156,6 @@ export const filterDefinitions = {
     parser: parseAsPositive,
     test: (max) => (car) => car.acceleration <= max,
   }),
-  value: filter({
-    urlKey: 'virdi',
-    parser: parseAsKronur,
-    test: (max) => (car) => car.pricePerKm <= max,
-  }),
-  fastcharge: filter({
-    urlKey: 'hradhledsla',
-    parser: parseAsPositive,
-    test: (min) => (car) => car.kmPerMinuteCharged >= min,
-  }),
   availability: filter({
     urlKey: 'frambod',
     parser: parseAsWord<Availability>({

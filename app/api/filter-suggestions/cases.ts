@@ -85,7 +85,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'hraðhleðsla yfir 15 km/min',
     kind: 'literal',
-    expect: { fastcharge: 15 },
+    expect: {},
   },
   { text: '1500 kg dráttargeta', kind: 'literal', expect: { towing: 1500 } },
   {
@@ -130,7 +130,7 @@ export const intentCases: IntentCase[] = [
     kind: 'literal',
     expect: { seats: 5, range: 600 },
   },
-  { text: 'undir 15.000 kr/km', kind: 'literal', expect: { value: 15_000 } },
+  { text: 'undir 15.000 kr/km', kind: 'literal', expect: {} },
   { text: 'BYD Seal U', kind: 'literal', expect: { name: ['Seal U'] } },
   {
     text: 'Mercedes undir 12 milljónum',
@@ -231,7 +231,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'fjórhjóladrifinn og hleður hratt',
     kind: 'mixed',
-    expect: { drive: ['AWD'], fastcharge: 'any' },
+    expect: { drive: ['AWD'] },
   },
   {
     text: 'Kia sem dugar alla leið til Akureyrar',
@@ -251,7 +251,7 @@ export const intentCases: IntentCase[] = [
   {
     text: '5 sæti og mikið fyrir peninginn',
     kind: 'mixed',
-    expect: { seats: 5, value: 'any' },
+    expect: { seats: 5 },
     allow: ['price'],
   },
 
@@ -300,7 +300,7 @@ export const intentCases: IntentCase[] = [
   },
   { text: 'stór fjölskyldubíll', kind: 'vague', expect: { seats: 7 } },
   { text: 'langdrægur', kind: 'vague', expect: { range: 'any' } },
-  { text: 'sem hleður hratt', kind: 'vague', expect: { fastcharge: 'any' } },
+  { text: 'sem hleður hratt', kind: 'vague', expect: {} },
   {
     text: 'ég er með fjögur börn',
     kind: 'vague',
@@ -310,7 +310,6 @@ export const intentCases: IntentCase[] = [
     text: 'hagkvæmur og ódýr',
     kind: 'vague',
     expect: { price: { oneOf: ['cheap', 'mid_priced'] } },
-    allow: ['value'],
   },
   {
     text: 'mjög snöggur',
@@ -373,11 +372,11 @@ export const intentCases: IntentCase[] = [
   },
 
   // A word like "hratt" fits several questions, and should answer only one
-  { text: 'fljótur að hlaða', kind: 'vague', expect: { fastcharge: 'any' } },
+  { text: 'fljótur að hlaða', kind: 'vague', expect: {} },
   {
     text: 'hleður hratt á ferðalögum',
     kind: 'vague',
-    expect: { fastcharge: 'any' },
+    expect: {},
     allow: ['range'],
   },
   { text: 'kraftmikill', kind: 'vague', expect: { acceleration: 'any' } },
@@ -461,20 +460,19 @@ export const intentCases: IntentCase[] = [
   {
     text: 'mest fyrir peninginn',
     kind: 'vague',
-    expect: { value: 'any' },
+    expect: {},
     allow: ['price'],
   },
   {
     text: 'ódýr en langdrægur',
     kind: 'vague',
     expect: { price: { oneOf: ['cheap', 'mid_priced'] }, range: 'any' },
-    allow: ['value'],
   },
   {
     text: 'langdrægur jeppi á góðu verði',
     kind: 'vague',
     expect: { range: 'any', price: 'any' },
-    allow: ['drive', 'value'],
+    allow: ['drive'],
   },
 
   { text: 'kemst 600 á hleðslunni', kind: 'number', expect: { range: 600 } },
@@ -555,7 +553,6 @@ export const intentCases: IntentCase[] = [
     text: 'hvað tekur langan tíma að hlaða?',
     kind: 'question',
     expect: {},
-    allow: ['fastcharge'],
   },
   {
     text: 'er hægt að draga kerru?',
@@ -606,7 +603,6 @@ export const intentCases: IntentCase[] = [
     text: 'ódýrt og kemst langt',
     kind: 'vague',
     expect: { price: { oneOf: ['cheap', 'mid_priced'] }, range: 'any' },
-    allow: ['value'],
   },
   { text: 'sprækur bíll', kind: 'vague', expect: { acceleration: 'any' } },
   {
@@ -617,7 +613,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'stutt hleðslustopp á ferðinni',
     kind: 'vague',
-    expect: { fastcharge: 'any' },
+    expect: {},
     allow: ['range'],
   },
   { text: 'kemst langt á hleðslunni', kind: 'vague', expect: { range: 'any' } },
@@ -634,7 +630,7 @@ export const intentCases: IntentCase[] = [
   {
     text: 'besta drægni miðað við verð',
     kind: 'vague',
-    expect: { value: 'any' },
+    expect: {},
     allow: ['price', 'range'],
   },
   { text: 'lúxusbíll', kind: 'vague', expect: {}, allow: ['acceleration'] },
@@ -654,7 +650,6 @@ export const intentCases: IntentCase[] = [
     text: 'hvaða bíll hleður hraðast?',
     kind: 'question',
     expect: {},
-    allow: ['fastcharge'],
   },
   {
     text: 'get ég hlaðið í fjölbýli?',
@@ -734,7 +729,6 @@ export const intentCases: IntentCase[] = [
     text: 'hvað tekur langan tíma að hlaða á hraðhleðslustöð?',
     kind: 'question',
     expect: {},
-    allow: ['fastcharge'],
   },
   {
     text: 'get ég dregið hjólhýsi á rafbíl?',
@@ -755,41 +749,40 @@ export const intentCases: IntentCase[] = [
   {
     text: 'Ég vil geta farið frá Reykjavík til Egilsstaða án þess að stoppa lengi',
     kind: 'vague',
-    expect: { range: 'any', fastcharge: 'any' },
+    expect: { range: 'any' },
   },
   {
     text: 'Ég vil geta hlaðið hratt á hraðhleðslustöð',
     kind: 'vague',
-    expect: { fastcharge: 'any' },
+    expect: {},
   },
   {
     text: 'Ég vil 200kw hleðslu',
     kind: 'vague',
-    expect: { fastcharge: 'any' },
+    expect: {},
   },
-  { text: '250 kW hraðhleðsla', kind: 'vague', expect: { fastcharge: 'any' } },
+  { text: '250 kW hraðhleðsla', kind: 'vague', expect: {} },
   {
     text: 'vil ekki bíða lengi á hleðslustöðinni',
     kind: 'vague',
-    expect: { fastcharge: 'any' },
+    expect: {},
   },
   {
     text: 'stutt stopp á leiðinni norður',
     kind: 'vague',
-    expect: { fastcharge: 'any' },
+    expect: {},
     allow: ['range'],
   },
-  { text: 'öflug hleðsla', kind: 'vague', expect: { fastcharge: 'any' } },
+  { text: 'öflug hleðsla', kind: 'vague', expect: {} },
   {
     text: 'langferðabíll sem hleður hratt',
     kind: 'vague',
-    expect: { range: 'any', fastcharge: 'any' },
+    expect: { range: 'any' },
   },
   {
     text: 'kraftmikill, 300 kW',
     kind: 'vague',
     expect: { acceleration: 'any' },
-    allow: ['fastcharge'],
   },
   {
     text: 'stór rafhlaða, 80 kWh',
@@ -801,7 +794,6 @@ export const intentCases: IntentCase[] = [
     text: 'hvað tekur langan tíma að hlaða á 150 kW stöð?',
     kind: 'question',
     expect: {},
-    allow: ['fastcharge'],
   },
 ]
 

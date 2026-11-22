@@ -9,7 +9,7 @@ describe('getKmPerMinutesCharged', () => {
     expect(getKmPerMinutesCharged(20, 500)).toBe(17.5)
   })
 
-  // Sorting and the fastcharge filter compare it, so it cannot be text
+  // Sorting compares it, so it cannot be text
   it('returns a number', () => {
     expect(typeof getKmPerMinutesCharged(21, 712)).toBe('number')
   })

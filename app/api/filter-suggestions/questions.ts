@@ -39,12 +39,12 @@ export interface IntentQuestion<Key extends FilterKey> {
   threshold?: number
 }
 
-// Read into talk of running costs or a modest price, a price per km quietly
-// narrows the list well past what was asked. Sampled in October 2026, "besta
-// drægni miðað við verð" came to 0.98 and "mikið fyrir peninginn" to 0.92,
-// while "ódýr í rekstri" came to 0.63–0.70 and "mest fyrir peninginn" to 0.75.
-// Rare and right over common and doubtful.
-export const VALUE_THRESHOLD = 0.8
+// "Fast" alongside other wishes is as often a hope as a limit, and a time
+// ceiling quietly narrows the list well past what was asked. In November 2026
+// "mjög hraður" came to 0.85–0.97, while "big car, 6 people, fast" came to
+// 0.60–0.62 and a half-typed "hr" to 0.63–0.69. With no question about
+// charging left to take it, "hleður hratt á ferðalögum" leans here at 0.69.
+export const ACCELERATION_THRESHOLD = 0.8
 
 // Nearest rank, so every bracket is a value a car in the list really has
 const quantile = (values: number[], share: number): number => {
@@ -62,7 +62,6 @@ const ceilTo = (value: number, step: number) =>
 const floorTo = (value: number, step: number) =>
   Math.floor(Math.round((value / step) * 1000) / 1000) * step
 const ceilTenth = (value: number) => ceilTo(value * 10, 1) / 10
-const floorTenth = (value: number) => floorTo(value * 10, 1) / 10
 
 // A label is a key the model answers with, so it holds no dot
 const slug = (value: number) => String(value).replace('.', '_')
@@ -75,7 +74,7 @@ const theNumber = (text: string) =>
 // The parser's bounds for each unit, so a number is offered to a filter only
 // where it would have read it with the unit written out
 const statedNumber =
-  <Key extends 'range' | 'acceleration' | 'value'>(
+  <Key extends 'range' | 'acceleration'>(
     [min, max]: [number, number],
     label: (value: number) => string,
     description: (value: number) => string,
@@ -108,11 +107,6 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
     (value) => floorTo(value, 10),
   )
   const acceleration = bracket((car) => car.acceleration, ceilTenth)
-  const fastcharge = bracket((car) => car.kmPerMinuteCharged, floorTenth)
-  const value = bracket(
-    (car) => car.pricePerKm,
-    (value) => ceilTo(value, 100),
-  )
 
   const questions: { [Key in FilterKey]?: IntentQuestion<Key> } = {
     price: {
@@ -332,6 +326,7 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
     acceleration: {
       key: 'acceleration',
       ordered: true,
+      threshold: ACCELERATION_THRESHOLD,
       instructions:
         'Does the person in `request` want a car that accelerates quickly? Charging fast is charging speed, not acceleration. In Icelandic, snöggur, sprækur, kraftmikill, hraðskreiður, hraður and sportlegur describe a quick car.',
       none: 'Acceleration is not mentioned: nothing about a quick, powerful or sporty car. Fast charging or range is not acceleration',
@@ -356,53 +351,6 @@ export const buildIntentQuestions = (list: ReadonlyArray<Car> = cars) => {
         [1.5, 20],
         (max) => `under_${slug(max)}_seconds`,
         (max) => `as acceleration: 0-100 km/h in at most ${max} s`,
-      ),
-    },
-    fastcharge: {
-      key: 'fastcharge',
-      ordered: true,
-      instructions:
-        'Does the person in `request` want short charging stops, or a car that charges quickly on a fast charger? A quick or fast car is acceleration, not charging speed. In Icelandic, hleður hratt, hlaða hratt, fljótur að hlaða, hraðhleðsla, öflug hleðsla, stutt stopp, bíða ekki lengi and án þess að stoppa lengi ask for fast charging, and so does a charging power in kW.',
-      none: 'Charging is not mentioned: nothing about charging quickly, the stops on a trip or charging power. A quick or powerful car is not charging speed, and how far the car goes on a charge (á hleðslunni, á einni hleðslu) or a long trip with nothing said about its stops is range',
-      options: [
-        {
-          label: 'fast',
-          value: fastcharge(0.5),
-          description: `Shorter stops: charges faster than average, at least ${fastcharge(0.5)} km of range a minute on a fast charger`,
-        },
-        {
-          label: 'fastest',
-          value: fastcharge(0.75),
-          description: `The shortest stops: among the fastest to charge, at least ${fastcharge(0.75)} km a minute`,
-        },
-      ],
-      // No number is offered: nobody asks for charging in km a minute, and a
-      // stray "7" offered as one only competes with the filter it is about
-    },
-    value: {
-      key: 'value',
-      ordered: true,
-      threshold: VALUE_THRESHOLD,
-      instructions:
-        'Does the person in `request` want the most range for the money?',
-      none: 'Value for money is not mentioned: nothing about range for the price. A low price alone is not value for money',
-      options: [
-        {
-          label: 'good_value',
-          value: value(0.5),
-          description: 'Good value: a below-average price per km of range',
-        },
-        {
-          label: 'best_value',
-          value: value(0.25),
-          description:
-            'The best value: among the lowest prices per km of range',
-        },
-      ],
-      fromNumber: statedNumber(
-        [1000, 200_000],
-        (max) => `${max}_isk_a_km`,
-        (max) => `as the price per km of range: at most ${max} ISK a km`,
       ),
     },
   }

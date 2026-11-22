@@ -397,7 +397,7 @@ export default function CarList({ latest }: Props) {
             car={car}
             key={car.id}
             view={listView}
-            showValue={listSorting === 'value' || Boolean(listFilters.value)}
+            showValue={listSorting === 'value'}
             showSeats={Boolean(listFilters.seats)}
             showTowing={Boolean(listFilters.towing)}
             showGroundClearance={Boolean(listFilters.groundClearance)}

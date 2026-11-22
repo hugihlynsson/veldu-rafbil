@@ -370,17 +370,12 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
     () => {},
   )
 
-  take(String.raw`${START}${NUM}\s*km\s*(?:\/|a|per)\s*min\w*`, ([, raw]) => {
-    const min = parseNumber(raw)
-    if (within(min, 1, 60)) set('fastcharge', min)
-  })
-
+  // A charging rate or a price per km, which no filter holds any more. Taken
+  // all the same, so the number is not offered as an acceleration or a price.
+  take(String.raw`${START}${NUM}\s*km\s*(?:\/|a|per)\s*min\w*`, () => {})
   take(
     String.raw`${START}${NUM}\s*(thus\w*\s*)?${KRONUR}?\s*(?:\/|a|per)\s*(?:km|kilometr\w*)${END}`,
-    ([, raw, thousand]) => {
-      const max = parseNumber(raw) * (thousand ? 1000 : 1)
-      if (within(max, 1000, 200_000)) set('value', max)
-    },
+    () => {},
   )
 
   // Three rows of seats is a seven seater, whatever the number says
