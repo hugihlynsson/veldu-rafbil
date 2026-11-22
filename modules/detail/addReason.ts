@@ -4,7 +4,8 @@ import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 // Below these a car is not told apart from the others by it
 const MIN_PRICE_GAP = 100_000
 const MIN_RANGE_GAP = 20
-const MIN_CHARGE_GAP = 3
+// A share faster, as the minutes mean little without the 10–80% beside them
+const MIN_CHARGE_GAIN = 0.1
 const MIN_TOWING_GAP = 300
 // Within this share of the compared cars' price and range, a car is like them
 const LIKE_SHARE = 0.05
@@ -42,11 +43,13 @@ export const addReason = (
     return `${addDecimalSeparators(further)} km meiri drægni${than}`
   }
 
-  const quicker =
-    Math.min(...compared.map((other) => other.timeToCharge10To80)) -
-    car.timeToCharge10To80
-  if (quicker >= MIN_CHARGE_GAP) {
-    return `Hleðst ${Math.round(quicker)} mín. hraðar${than}`
+  // The range a minute adds, as the comparison's charging row ranks by
+  const gain =
+    car.kmPerMinuteCharged /
+      Math.max(...compared.map((other) => other.kmPerMinuteCharged)) -
+    1
+  if (gain >= MIN_CHARGE_GAIN) {
+    return `Hleðst ${Math.round(gain * 100)}% hraðar${than}`
   }
 
   // Only against figures that are known: a missing one may be the larger

@@ -49,10 +49,23 @@ describe('addReason', () => {
     )
   })
 
-  it('names quicker charging when it beats them on neither price nor range', () => {
+  it('names faster charging, as a share of the range a minute adds', () => {
+    // 17,9 km a minute to the faster pair car's 12,8
     expect(
-      addReason(car({ price: 8_000_000, timeToCharge10To80: 21.5 }), pair),
-    ).toBe('Hleðst 9 mín. hraðar en báðir')
+      addReason(
+        car({ price: 8_000_000, range: 550, timeToCharge10To80: 21.5 }),
+        pair,
+      ),
+    ).toBe('Hleðst 40% hraðar en báðir')
+  })
+
+  it('leaves charging out under a tenth faster', () => {
+    expect(
+      addReason(
+        car({ price: 8_000_000, range: 550, timeToCharge10To80: 28 }),
+        pair,
+      ),
+    ).toBeUndefined()
   })
 
   it('names towing only against figures that are known', () => {

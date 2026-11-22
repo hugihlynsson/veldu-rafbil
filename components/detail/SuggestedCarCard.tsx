@@ -25,12 +25,14 @@ interface Props {
     text: string
     /** In the words' place on a phone, where they would squeeze the name */
     icon: ReactNode
+    /** Before the words too from md, as the comparison's pluses are */
+    iconWithText?: boolean
     tracked?: { event: TrackedEvent; fathomEvent: string }
   }
 }
 
 const actionClassName =
-  'relative z-1 shrink-0 self-center mr-3 inline-flex items-center justify-center w-8 h-8 text-sm font-semibold rounded-full border border-line-chip bg-lab text-tint no-underline transition duration-100 hover:bg-cloud active:scale-93 active:duration-75 md:self-start md:w-auto md:h-auto md:mx-1 md:py-1 md:px-3'
+  'relative z-1 shrink-0 self-center mr-3 inline-flex items-center justify-center w-8 h-8 text-sm font-semibold rounded-full border border-line-chip bg-lab text-tint no-underline transition duration-100 hover:bg-cloud active:scale-93 active:duration-75 md:self-start md:w-auto md:h-auto md:mx-1 md:py-1'
 
 /**
  * A car offered beside the ones on the page, sized for the review's measure.
@@ -41,9 +43,16 @@ const SuggestedCarCard: FunctionComponent<Props> = ({
   reason,
   action,
 }) => {
+  const actionClasses = clsx(
+    actionClassName,
+    // The icon's side a touch tighter, as its box is emptier than a letter's
+    action.iconWithText ? 'md:gap-1.5 md:pl-2.5 md:pr-3' : 'md:px-3',
+  )
   const actionContent = (
     <>
-      <span className="flex md:hidden">{action.icon}</span>
+      <span className={clsx('flex', !action.iconWithText && 'md:hidden')}>
+        {action.icon}
+      </span>
       <span className="hidden md:inline">{action.text}</span>
     </>
   )
@@ -93,7 +102,7 @@ const SuggestedCarCard: FunctionComponent<Props> = ({
         <TrackedLink
           href={action.href}
           aria-label={action.label}
-          className={actionClassName}
+          className={actionClasses}
           {...action.tracked}
         >
           {actionContent}
@@ -102,7 +111,7 @@ const SuggestedCarCard: FunctionComponent<Props> = ({
         <Link
           href={action.href}
           aria-label={action.label}
-          className={actionClassName}
+          className={actionClasses}
         >
           {actionContent}
         </Link>

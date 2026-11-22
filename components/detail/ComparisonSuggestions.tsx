@@ -41,6 +41,7 @@ const ComparisonSuggestions: FunctionComponent<Props> = ({
               label: `Bæta ${car.label} við samanburðinn`,
               text: 'Bæta við',
               icon: <PlusIcon size={12} />,
+              iconWithText: true,
               tracked: {
                 event: {
                   name: 'comparison_extended',
