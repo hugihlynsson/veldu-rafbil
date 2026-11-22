@@ -135,10 +135,9 @@ const NewCar: FunctionComponent<Props> = ({
       )}
     >
       {/* The biggest thing to tap, so it opens the car too; one stop for the
-          keyboard and screen readers is the name. Only the name prefetches,
-          all three going to one page: the browser works out again on every
-          frame whether each prefetching Link is in view, and three a card
-          made that some 700 of them. */}
+          keyboard and screen readers is the name. None of the three
+          prefetches on sight, which would fetch every car a scroll passes:
+          CarList prefetches the one a pointer or a key reaches. */}
       <Link
         href={carPathOf(car)}
         onClick={openCar}
@@ -186,6 +185,7 @@ const NewCar: FunctionComponent<Props> = ({
             <Link
               href={carPathOf(car)}
               onClick={openCar}
+              prefetch={false}
               className="text-inherit no-underline decoration-2 underline-offset-4 hover:underline"
             >
               <span>{car.make}</span>{' '}
