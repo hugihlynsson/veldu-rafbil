@@ -27,6 +27,9 @@ interface Props {
   /** A sheet's place for the bar while one is over the page, which
    * showModal() makes inert and covers */
   container?: HTMLElement | null
+  /** The bar's place on the page is taken, as by the comparison tray, while
+   * a sheet holds it */
+  placeTaken?: boolean
   /** Called once the chat has closed, so the car's card can take the focus */
   onShowCar: (car: Car) => void
   /** The list's filters, which the bar suggests changes to as it is typed in */
@@ -41,6 +44,7 @@ interface Props {
 export default function ChatContainer({
   hide,
   container,
+  placeTaken,
   onShowCar,
   filters,
   onApplyFilters,
@@ -90,6 +94,7 @@ export default function ChatContainer({
       }}
       animateIn={!hasMoved}
       lifted={Boolean(container) && !isChatOpen}
+      placeTaken={placeTaken}
       hide={hide}
       disabled={conversation.isBusy}
       hasMessages={conversation.hasMessages}

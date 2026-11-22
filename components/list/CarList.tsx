@@ -288,6 +288,7 @@ export default function CarList({ latest }: Props) {
   useChatSettings({
     hide: editingFilters || choosingMakes || (isComparing && !sheetChat),
     container: sheetChat?.container,
+    placeTaken: isComparing,
     about: sheetChat && sheetCar ? [sheetCar] : undefined,
     starters: sheetChat?.starters,
     onShowCar: showCar,

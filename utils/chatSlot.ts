@@ -16,6 +16,7 @@ export const ChatSlotContext = createContext<SetChatSettings>(() => {})
 const useChatSettings = ({
   hide,
   container,
+  placeTaken,
   onShowCar,
   filters,
   onApplyFilters,
@@ -30,6 +31,7 @@ const useChatSettings = ({
     setSettings({
       hide,
       container,
+      placeTaken,
       onShowCar,
       filters,
       onApplyFilters,
@@ -41,6 +43,7 @@ const useChatSettings = ({
     setSettings,
     hide,
     container,
+    placeTaken,
     onShowCar,
     filters,
     onApplyFilters,
