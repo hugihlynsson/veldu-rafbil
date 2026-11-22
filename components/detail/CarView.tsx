@@ -111,9 +111,10 @@ const CarView: FunctionComponent<Props> = ({
         {/* The review's measure, which the rest of the page keeps, centred
             under the photo as it is on a phone */}
         <div className="md:max-w-prose md:mx-auto">
-          {/* The name and the figures read as one block, narrower than the
-              text under them until four figures to a row need its width */}
-          <div className="md:max-w-column lg:max-w-none">
+          <div>
+            {/* As wide as the text under it, so the share button keeps the
+                same inset from the photo's right edge as the name from its
+                left */}
             <div className="pt-8 md:pt-14">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
@@ -133,8 +134,8 @@ const CarView: FunctionComponent<Props> = ({
                 {/* Nothing to pass on about a car that cannot be bought */}
                 {!notice && (
                   <>
-                    {/* The column is at most 480px until lg, too narrow for
-                        a long name beside the labelled pill */}
+                    {/* Until lg, too narrow for a long name beside the
+                        labelled pill */}
                     <ShareButton
                       title={car.label}
                       path={carPathOf(car)}
@@ -170,7 +171,8 @@ const CarView: FunctionComponent<Props> = ({
               )}
             </div>
 
-            <dl className="m-0 mt-10 md:mt-14 grid grid-cols-2 gap-x-6 gap-y-5 md:grid-cols-3 lg:grid-cols-4">
+            {/* Narrower than the text until four to a row need its width */}
+            <dl className="m-0 mt-10 md:mt-14 grid grid-cols-2 gap-x-6 gap-y-5 md:max-w-column md:grid-cols-3 lg:max-w-none lg:grid-cols-4">
               {figures.map((row) => (
                 <div key={row.key}>
                   <dt className={eyebrow}>{row.label}</dt>
