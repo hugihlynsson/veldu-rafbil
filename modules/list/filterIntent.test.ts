@@ -63,7 +63,7 @@ describe('parseFilterIntent', () => {
     })
   })
 
-  // No filter holds either any more, and a bare 8.2 would be offered as an
+  // No filter holds either, and a bare 8.2 would be offered as an
   // acceleration: "Hvað þýðir 8,2 km/min" once became a filter
   it('takes a charging rate or a price per km as no number at all', () => {
     expect(parseFilterIntent('8,2 km/min')).toMatchObject({

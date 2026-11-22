@@ -42,8 +42,9 @@ export interface IntentQuestion<Key extends FilterKey> {
 // "Fast" alongside other wishes is as often a hope as a limit, and a time
 // ceiling quietly narrows the list well past what was asked. In November 2026
 // "mjög hraður" came to 0.85–0.97, while "big car, 6 people, fast" came to
-// 0.60–0.62 and a half-typed "hr" to 0.63–0.69. With no question about
-// charging left to take it, "hleður hratt á ferðalögum" leans here at 0.69.
+// 0.60–0.62 and a half-typed "hr" to 0.63–0.69. No question asks about
+// charging, so "hleður hratt á ferðalögum" leans here, at 0.69. A bare number
+// is held to it too, as "undir 6" is far more often a price than a time.
 export const ACCELERATION_THRESHOLD = 0.8
 
 // Nearest rank, so every bracket is a value a car in the list really has
