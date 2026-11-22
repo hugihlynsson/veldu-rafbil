@@ -2,12 +2,13 @@ import type { FunctionComponent } from 'react'
 import { trackEvent } from 'fathom-client'
 
 import type { Car } from '@/modules/data/cars'
-import { similarTo } from '@/modules/detail/similar'
+import { MAX_COMPARED } from '@/modules/detail/comparison'
+import { closestToSelection, similarTo } from '@/modules/detail/similar'
 import PlusIcon from '@/components/PlusIcon'
 import SuggestionPills from '@/components/SuggestionPills'
 
 interface Props {
-  car: Car | undefined
+  cars: ReadonlyArray<Car>
   onAdd: (car: Car) => void
 }
 
@@ -15,12 +16,20 @@ interface Props {
 // list someone may be picking their own second car from
 const SUGGESTED_COUNT = 2
 
+const suggestionsFor = (cars: ReadonlyArray<Car>): Car[] => {
+  if (cars.length === 0 || cars.length >= MAX_COMPARED) return []
+  const [only] = cars
+  return cars.length === 1 && only
+    ? similarTo(only).slice(0, SUGGESTED_COUNT)
+    : closestToSelection(cars, SUGGESTED_COUNT)
+}
+
 /**
- * The cars the one in the tray is most often weighed against, above it, so the
- * second car is a tap away
+ * The cars closest to those in the tray, above it, so the next one is a tap
+ * away while there is room for it
  */
-const CompareSuggestions: FunctionComponent<Props> = ({ car, onAdd }) => {
-  const suggested = car ? similarTo(car).slice(0, SUGGESTED_COUNT) : []
+const CompareSuggestions: FunctionComponent<Props> = ({ cars, onAdd }) => {
+  const suggested = suggestionsFor(cars)
 
   return (
     <SuggestionPills

@@ -38,7 +38,7 @@ const button =
  */
 const CompareTray: FunctionComponent<Props> = ({ cars, onRemove, onAdd }) => {
   const ready = cars.length >= MIN_COMPARED
-  const suggesting = cars.length === 1
+  const suggesting = cars.length < MAX_COMPARED
 
   // A pill picked by key goes as the car it named arrives, and would take the
   // focus with it to the page's start: it goes on to the comparison instead
@@ -149,8 +149,7 @@ const CompareTray: FunctionComponent<Props> = ({ cars, onRemove, onAdd }) => {
         </div>
       </section>
 
-      {/* Beside a lone car only: with two the tray can already compare */}
-      <CompareSuggestions car={suggesting ? cars[0] : undefined} onAdd={add} />
+      <CompareSuggestions cars={cars} onAdd={add} />
     </div>
   )
 }
