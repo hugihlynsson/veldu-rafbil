@@ -393,7 +393,6 @@ export default function CarList({ latest }: Props) {
       >
         {shownCars.map((car, index) => (
           <Car
-            preload={index <= 1}
             position={index}
             car={car}
             key={car.id}
