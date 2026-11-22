@@ -385,7 +385,7 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
           cars={cars}
           slugs={slugs}
           suggested={suggested}
-          className={clsx(lane, 'mt-14 md:mt-16')}
+          className={clsx(lane, 'mt-10 md:mt-12')}
           contentClassName={clsx(gutter, wide && 'lg:px-0')}
           imageSizes={`(max-width: 767px) 128px, (max-width: ${pageWidth - 1}px) ${Math.ceil(100 / cars.length)}vw, ${Math.ceil(pageWidth / cars.length)}px`}
         />
