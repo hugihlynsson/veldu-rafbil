@@ -141,6 +141,13 @@ sets is what it has to stop, which is what its hourly budget is for.
   something else, like a caravan's weight, are fixed. A suggestion is tapped,
   or sent from the bar's button once that shows how many cars it leaves, never
   applied for you, since a wrong filter quietly empties the list.
+- **Ask before you spend money on a model, unless it is Jev.** An eval, a
+  review run or a one-off call to Gemini, Claude or any other provider is a
+  real bill, and even a dollar is a lot for something run once — ask first and
+  say roughly what it will cost. Jev, behind the filter pills, costs a small
+  fraction of any of them (its price is beside its model constant), so calls
+  and evals against it need no asking — `scripts/eval-filter-intent.ts` costs
+  cents. Ask only if a run would be unusually large.
 
 ## Published data
 

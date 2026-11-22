@@ -23,6 +23,8 @@ import { suggestionsLogEvent } from './log'
 // with the Icelandic words for each filter glossed in them (the Icelandic set
 // is in 48af344, should a later model do better with it). Re-run
 // scripts/eval-filter-intent.ts before following "latest" to a new model.
+// Nov 2026 list price: $0.042 a million input tokens, output free — about
+// $0.0001 a request, and under 2 cents for a whole eval run.
 const modelName = 'jev-latest'
 
 // Someone who has typed on has no use for the answer, so it is not waited for
