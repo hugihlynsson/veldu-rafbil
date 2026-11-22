@@ -95,11 +95,11 @@ const SuggestedCarCard: FunctionComponent<Props> = ({
           {car.make} <span className="font-normal">{car.model}</span>
         </Link>
         {reason ? (
-          <div className="mt-1 text-sm font-medium text-stone text-pretty">
+          <div className="mt-1 text-sm leading-snug font-medium text-stone text-pretty">
             {reason}
           </div>
         ) : (
-          <div className="mt-1 text-sm font-medium text-stone">
+          <div className="mt-1 text-sm leading-snug font-medium text-stone">
             {/* On the narrowest phones it breaks between the two */}
             <span className="whitespace-nowrap">
               {addDecimalSeparators(car.priceWithGrant)} kr. ·
