@@ -28,7 +28,14 @@ export default function ChatSlot({ children }: { children: ReactNode }) {
     setSlot((previous) =>
       settings
         ? { settings, isClaimed: true }
-        : { settings: previous.settings, isClaimed: false },
+        : // Not the sheet's place, which leaves with the page it was on
+          {
+            settings: previous.settings && {
+              ...previous.settings,
+              container: undefined,
+            },
+            isClaimed: false,
+          },
     )
 
   const { settings, isClaimed } = slot

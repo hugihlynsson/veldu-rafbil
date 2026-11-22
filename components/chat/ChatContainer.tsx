@@ -3,6 +3,7 @@
 import { Suspense, useState } from 'react'
 import { createPortal } from 'react-dom'
 import dynamic from 'next/dynamic'
+import { usePathname } from 'next/navigation'
 import ChatInput from './ChatInput'
 import type { Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
@@ -50,6 +51,14 @@ export default function ChatContainer({
   const composer = useComposer()
   const chatModal = useChunk(importChatModal)
   const [wantsChatOpen, setWantsChatOpen] = useState<boolean>(false)
+  // The bar outlives the page, so a link in an answer, or back, would leave
+  // the chat open over the next one
+  const pathname = usePathname()
+  const [openedOn, setOpenedOn] = useState<string>(pathname)
+  if (pathname !== openedOn) {
+    setOpenedOn(pathname)
+    setWantsChatOpen(false)
+  }
   // The input remounts each time it moves between the page and a dialog, and
   // only its first arrival on the page is an entrance
   const [hasMoved, setHasMoved] = useState<boolean>(false)

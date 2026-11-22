@@ -22,8 +22,9 @@ interface Props {
 /**
  * The advisor's bar on a page other than the list, carrying the cars the page
  * is about, if any, with each question. It draws nothing: the bar is the root
- * layout's, so it stays in place from one page to the next. A car picked from an answer opens its own page,
- * unless it is the car whose page this is, which is scrolled up to.
+ * layout's, so it stays in place from one page to the next. A car picked from
+ * an answer opens its own page, unless it is the car whose page this is,
+ * which is scrolled up to.
  */
 const PageChat: FunctionComponent<Props> = ({ cars, starters }) => {
   const router = useRouter()

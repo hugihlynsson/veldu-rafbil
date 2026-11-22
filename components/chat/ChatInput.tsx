@@ -84,6 +84,13 @@ const ChatInput: React.FunctionComponent<Props> = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false)
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([])
+  // Focus can outlive the page, as on a mouse's back button, and the last
+  // page's questions would stay up on the next
+  const [suggestedFrom, setSuggestedFrom] = useState(starters)
+  if (starters !== suggestedFrom) {
+    setSuggestedFrom(starters)
+    setSelectedSuggestions(getRandomSuggestions(starters, 3))
+  }
   // The filter pills are fetched on the first keystroke, then kept mounted so
   // they can play their exit when the text is cleared or the input left
   const [hasTyped, setHasTyped] = useState(value !== '')
