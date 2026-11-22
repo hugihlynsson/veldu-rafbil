@@ -19,10 +19,10 @@ import EvDatabaseLink from '@/components/EvDatabaseLink'
 import CompareIcon from '@/components/CompareIcon'
 import ShareButton from '@/components/ShareButton'
 import { pageColumn } from '@/components/pageColumn'
-import { photoZoomFromMd } from '@/components/photoZoom'
 import PageTop from './PageTop'
 import { heroImageProps } from './heroImage'
 import SheetHero from './SheetHero'
+import SuggestedCarCard, { suggestedCarList } from './SuggestedCarCard'
 
 interface Props {
   car: Car
@@ -243,62 +243,18 @@ const CarView: FunctionComponent<Props> = ({
                 Bera alla saman <span aria-hidden>→</span>
               </Link>
             </div>
-            <ul className="mt-3 -mx-0.5 mb-0 p-0 list-none grid gap-3 md:mx-0 md:grid-cols-3">
+            <ul className={suggestedCarList}>
               {similar.map((other) => (
-                // The whole card opens the car's page; the button over it compares
-                <li
+                <SuggestedCarCard
                   key={other.id}
-                  className="group relative flex items-center gap-3 rounded-card overflow-hidden transition-colors duration-200 hover:bg-shade md:flex-col md:items-stretch md:overflow-visible md:hover:bg-transparent"
-                >
-                  {/* Beside the name, flush to the card with its border drawn
-                      over it. Above the name it needs no border, and the
-                      card's larger corner would clip the photo's own */}
-                  <div className="w-32 aspect-[3/2] shrink-0 self-stretch overflow-hidden md:w-full md:rounded-lg">
-                    <Image
-                      alt=""
-                      sizes="(max-width: 767px) 128px, 210px"
-                      src={`/images/${other.heroImageName}.jpg`}
-                      width={128}
-                      height={85}
-                      // Still while the compare link, the li's only direct
-                      // link, is hovered, as that does not open the car
-                      className={clsx(
-                        'w-full h-full object-cover md:group-has-[>a:hover]:scale-100',
-                        photoZoomFromMd,
-                      )}
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0 py-2 text-balance md:p-0 md:px-1">
-                    <Link
-                      href={carPathOf(other)}
-                      className="text-base font-semibold leading-tight text-tint no-underline after:absolute after:inset-0 after:rounded-card after:border after:border-line md:after:border-0"
-                    >
-                      {other.make}{' '}
-                      <span className="font-normal">{other.model}</span>
-                    </Link>
-                    <div className="mt-1 text-sm font-medium text-stone">
-                      {/* On the narrowest phones it breaks between the two */}
-                      <span className="whitespace-nowrap">
-                        {addDecimalSeparators(other.priceWithGrant)} kr. ·
-                      </span>{' '}
-                      <span className="whitespace-nowrap">
-                        {other.range} km
-                      </span>
-                    </div>
-                  </div>
-                  {/* An icon beside the name on phones, where the words would
-                      squeeze it, and the words under it from md up */}
-                  <Link
-                    href={comparisonPathOf([car, other])}
-                    aria-label={`Bera ${carName(car, [car])} saman við ${carName(other, [other])}`}
-                    className="relative z-1 shrink-0 self-center mr-3 inline-flex items-center justify-center w-8 h-8 text-sm font-semibold rounded-full border border-line-chip bg-lab text-tint no-underline transition duration-100 hover:bg-cloud active:scale-93 active:duration-75 md:self-start md:w-auto md:h-auto md:mx-1 md:py-1 md:px-3"
-                  >
-                    <span className="flex md:hidden">
-                      <CompareIcon size={14} />
-                    </span>
-                    <span className="hidden md:inline">Bera saman</span>
-                  </Link>
-                </li>
+                  car={other}
+                  action={{
+                    href: comparisonPathOf([car, other]),
+                    label: `Bera ${carName(car, [car])} saman við ${carName(other, [other])}`,
+                    text: 'Bera saman',
+                    icon: <CompareIcon size={14} />,
+                  }}
+                />
               ))}
             </ul>
           </section>

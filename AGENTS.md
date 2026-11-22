@@ -173,6 +173,13 @@ value in both blocks instead of a literal and a variant beside it. The dark
 values were each picked against the surface they land on rather than by eye,
 so take a pair off the ladder in that file rather than inventing one.
 
+Text that can wrap is told how. A heading or a name takes `text-balance`, so
+its lines come out even; a short run of copy — a card's detail, a note, an
+intro — takes `text-pretty`, so it never ends on a lone word, which on a phone
+column of a hundred-odd pixels it otherwise often does. Not text that streams
+in: Safari weighs the whole paragraph, so each word that arrives moves the
+breaks above it.
+
 Shadows are the exception that has to live outside `@theme`, read as
 `shadow-(--shadow-chip)`: Tailwind inlines a theme shadow into the utility
 itself, where a dark override would never reach it.
