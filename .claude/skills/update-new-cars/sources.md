@@ -36,14 +36,14 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | KGM           | 2026-11-10 | 2026-10-30 |                                                |
 | Kia           | 2026-11-14 | 2026-11-13 | PV5 11-14; EV9 11-12; EV5 and EV6 11-10        |
 | Leapmotor     | 2026-11-20 | 2026-11-19 | ÍSBAND PDF list; prices are images             |
-| Lexus         | 2026-11-21 | —          | TZ unpriced; estimated from NL prices          |
+| Lexus         | 2026-11-22 | —          | TZ unpriced; estimated from NL prices          |
 | Mazda         | 2026-11-18 | 2026-11-16 | CX-6e and 6e                                   |
 | Mercedes-Benz | 2026-11-19 | 2026-11-16 | C, GLA, GLB, GLC, CLA; VLE 11-11; rest older   |
 | MG            | 2026-11-16 | 2026-11-16 |                                                |
 | Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
 | Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
 | Opel          | —          | —          | No price published; see 2026-11-10 note        |
-| Peugeot       | 2026-11-21 | —          | Read from the model pages                      |
+| Peugeot       | 2026-11-22 | —          | Read from the model pages                      |
 | Polestar      | 2026-11-12 | 2026-11-05 | Polestar 5; 2, 3 and 4 from 2026-10-29         |
 | Porsche       | 2026-11-12 | 2026-10-30 |                                                |
 | Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
@@ -52,8 +52,8 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Smart         | 2026-11-10 | 2026-11-02 |                                                |
 | Subaru        | 2026-11-10 | 2026-10-31 |                                                |
 | Suzuki        | 2026-11-10 | 2026-10-30 |                                                |
-| Tesla         | 2026-11-21 | —          | Design pages; no dated list                    |
-| Toyota        | 2026-11-21 | —          |                                                |
+| Tesla         | 2026-11-22 | —          | Design pages; no dated list                    |
+| Toyota        | 2026-11-22 | —          |                                                |
 | Volkswagen    | 2026-11-12 | 2026-11-10 | ID.4 and ID.3 Neo; ID.3, ID.7, Polo 11-04      |
 | Volvo         | 2026-11-21 | 2026-11-18 | EX40 and EC40 MY27.5 11-18; EX90 11-03         |
 | XPENG         | 2026-11-10 | 2026-11-02 |                                                |
@@ -425,3 +425,16 @@ than the one last read for Audi, BYD, Fiat, Ford, GWM, Hongqi, Hyundai, JAC,
 Jeep, Kia, Leapmotor, Mazda, Mercedes-Benz, MG, Mini, Nissan, Polestar,
 Porsche, Range Rover, Renault, Škoda, Smart, Subaru, Suzuki, Volkswagen and
 XPENG. `kgm.benni.is` again did not answer curl within 45 seconds.
+
+**Read on 2026-11-22**: the undated lists (Lexus, Peugeot, Tesla, Toyota)
+were read and every price matched. With the browser pane hidden, Tesla's
+design pages animate their figures, but each page's inline scripts hold the
+trims as option codes (`"$MT367":{…,"price":…}`, `"$MTY85"`), priced on
+top of the model's base (`"long_name":"Model 3","price":4000000`) before
+VAT. (base + trim) × 1.24 + 164.592 kr. gives every "Staðgreiðsla" in the
+car list to the króna, so that sum reads them without a screenshot. No newer
+list than the one last read for Audi, BMW, BYD, Fiat, Ford, GWM, Hongqi,
+Hyundai, JAC, Jeep, Kia, Leapmotor, Mazda, Mercedes-Benz, MG, Mini, Nissan,
+Polestar, Porsche, Range Rover, Renault, Škoda, Smart, Subaru, Suzuki,
+Volkswagen, Volvo and XPENG. `kgm.benni.is` refused curl and the built-in
+browser alike.
