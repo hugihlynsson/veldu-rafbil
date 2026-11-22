@@ -21,29 +21,35 @@ const sameModel = (a: Car, b: Car) =>
     a.model.startsWith(`${b.model} `) ||
     b.model.startsWith(`${a.model} `))
 
-/**
- * The cars closest to this one, closest first: what scripts/similar-cars.ts
- * writes into the similar-cars list. Never another variant of the same model,
- * which is a choice within the car rather than against it, and one variant
- * of each other.
- */
-export const closestCars = (
-  car: Car,
-  among: ReadonlyArray<Car> = cars,
-  count: number = SIMILAR_COUNT,
+// Never another variant of a model already there, which is a choice within
+// the car rather than against it, and one variant of each other
+const rankModels = (
+  among: ReadonlyArray<Car>,
+  taken: ReadonlyArray<Car>,
+  score: (other: Car) => number,
 ): Car[] =>
   among
-    .filter((other) => !sameModel(car, other))
-    .map((other) => ({ other, distance: distance(car, other) }))
+    .filter((other) => !taken.some((car) => sameModel(car, other)))
+    .map((other) => ({ other, score: score(other) }))
     .toSorted(
-      (a, b) => a.distance - b.distance || a.other.id.localeCompare(b.other.id),
+      (a, b) => a.score - b.score || a.other.id.localeCompare(b.other.id),
     )
     .map(({ other }) => other)
     .filter(
       (other, index, ranked) =>
         ranked.findIndex((closer) => sameModel(closer, other)) === index,
     )
-    .slice(0, count)
+
+/**
+ * The cars closest to this one, closest first: what scripts/similar-cars.ts
+ * writes into the similar-cars list
+ */
+export const closestCars = (
+  car: Car,
+  among: ReadonlyArray<Car> = cars,
+  count: number = SIMILAR_COUNT,
+): Car[] =>
+  rankModels(among, [car], (other) => distance(car, other)).slice(0, count)
 
 /**
  * The cars someone looking at this one would weigh it against, as the
@@ -54,3 +60,38 @@ export const similarTo = (car: Car): Car[] =>
   (similarCars[carSlug(car)] ?? []).flatMap(
     (slug) => currentCarWithSlug(slug) ?? [],
   )
+
+// Tuned by holding one car out of each of the 3–4 car comparisons people
+// opened in October–November 2026 and ranking it from the rest (378 cases).
+// Averaging the distance over the selection put the held-out car among the
+// first four 28% of the time, to 21% from the first car alone; leaning on the
+// nearest selected car and on the hand-picked lists took it to 37%. Requiring
+// a car to sit between the selected ones on every figure, or near the worst
+// matched of them, did worse: people compare more widely than that. Ground
+// clearance, power, drive and make each moved it within noise.
+const NEAREST_SHARE = 0.3
+const LISTED_BONUS = 0.15
+
+/**
+ * The cars to offer beside these ones, best first: near all of them in price,
+ * range and seats, and nearer still where one of them lists it as similar
+ */
+export const closestToSelection = (
+  selected: ReadonlyArray<Car>,
+  count: number,
+  among: ReadonlyArray<Car> = cars,
+  listedFor: (car: Car) => ReadonlyArray<Car> = similarTo,
+): Car[] => {
+  if (selected.length === 0) return []
+  const listed = new Set(selected.flatMap(listedFor).map((car) => car.id))
+
+  return rankModels(among, selected, (other) => {
+    const distances = selected.map((car) => distance(car, other))
+    const mean = distances.reduce((sum, d) => sum + d, 0) / distances.length
+    return (
+      (1 - NEAREST_SHARE) * mean +
+      NEAREST_SHARE * Math.min(...distances) -
+      (listed.has(other.id) ? LISTED_BONUS : 0)
+    )
+  }).slice(0, count)
+}
