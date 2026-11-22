@@ -1,4 +1,4 @@
-import { useRef, type FunctionComponent } from 'react'
+import { useEffect, useRef, type FunctionComponent } from 'react'
 import clsx from 'clsx'
 import { trackEvent } from 'fathom-client'
 import dynamic from 'next/dynamic'
@@ -41,12 +41,20 @@ const CompareTray: FunctionComponent<Props> = ({ cars, onRemove, onAdd }) => {
   const suggesting = cars.length < MAX_COMPARED
 
   // A pill picked by key goes as the car it named arrives, and would take the
-  // focus with it to the page's start: it goes on to the comparison instead
+  // focus with it to the page's start: it goes on to the comparison instead.
+  // On each arrival, not on the link's mount, as from two cars it is there.
   const focusCompare = useRef(false)
+  const compareLink = useRef<HTMLAnchorElement>(null)
   const add = (car: Car) => {
     focusCompare.current = getInputModality() === 'keyboard'
     onAdd(car)
   }
+  const count = cars.length
+  useEffect(() => {
+    if (!focusCompare.current) return
+    focusCompare.current = false
+    compareLink.current?.focus()
+  }, [count])
 
   return (
     <div
@@ -70,11 +78,7 @@ const CompareTray: FunctionComponent<Props> = ({ cars, onRemove, onAdd }) => {
             {ready ? (
               <Link
                 href={comparisonPathOf(cars)}
-                ref={(link) => {
-                  if (!link || !focusCompare.current) return
-                  focusCompare.current = false
-                  link.focus()
-                }}
+                ref={compareLink}
                 onClick={() => {
                   rememberListSearch(window.location.search)
                   trackEvent('Comparison opened')

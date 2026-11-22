@@ -13,7 +13,7 @@ interface Props {
 }
 
 // Fewer than the car's page offers: on a phone each pill hides a row of the
-// list someone may be picking their own second car from
+// list someone may be picking their own next car from
 const SUGGESTED_COUNT = 2
 
 const suggestionsFor = (cars: ReadonlyArray<Car>): Car[] => {
