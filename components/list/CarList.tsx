@@ -252,18 +252,23 @@ export default function CarList({ latest }: Props) {
     })
   }
 
-  // The review of the car a card's link opens, fetched as the pointer or the
-  // focus reaches it, so the sheet opens with it in rather than shifting what
-  // is under it once it arrives. On a move rather than an over, which the list
-  // scrolling under a still pointer fires for every card it passes.
+  // What a card's link opens, fetched as a mouse, a finger or the focus
+  // reaches it: the review where it opens a sheet, so the sheet opens with it
+  // in rather than shifting what is under it once it arrives, and otherwise
+  // the car's page, which a tap's press gives a head start on its click. On a
+  // move rather than an over, which the list scrolling under a still pointer
+  // fires for every card it passes, and a mouse's only, as a finger's moves
+  // are a scroll.
   const prefetchedLink = useRef<Element | null>(null)
-  const prefetchLinkedReview = (event: SyntheticEvent) => {
+  const prefetchLinked = (event: SyntheticEvent) => {
     if (!(event.target instanceof Element)) return
     const link = event.target.closest('a')
     if (!link || link === prefetchedLink.current) return
     prefetchedLink.current = link
-    const linked = opensInSheet() && carAtPath(link.pathname)
-    if (linked) prefetchCarReview(carSlug(linked))
+    const linked = carAtPath(link.pathname)
+    if (!linked) return
+    if (opensInSheet()) prefetchCarReview(carSlug(linked))
+    else router.prefetch(link.pathname)
   }
 
   // The cards follow a tap a frame behind the controls, in a render that
@@ -388,8 +393,11 @@ export default function CarList({ latest }: Props) {
         onPointerEnter={() => {
           if (opensInSheet()) void loadCarSheet()
         }}
-        onPointerMove={prefetchLinkedReview}
-        onFocus={prefetchLinkedReview}
+        onPointerMove={(event) => {
+          if (event.pointerType === 'mouse') prefetchLinked(event)
+        }}
+        onPointerDown={prefetchLinked}
+        onFocus={prefetchLinked}
       >
         {shownCars.map((car, index) => (
           <Car
