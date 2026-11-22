@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
+import ChatSlot from '@/components/chat/ChatSlot'
 import Fathom from '@/components/Fathom'
 import PageTracking from '@/components/PageTracking'
 import { SITE_URL } from '@/modules/siteUrl'
@@ -69,7 +70,9 @@ export default function RootLayout({ children }: Props) {
       <body>
         <Fathom />
         <PageTracking />
-        <NuqsAdapter>{children}</NuqsAdapter>
+        <NuqsAdapter>
+          <ChatSlot>{children}</ChatSlot>
+        </NuqsAdapter>
       </body>
     </html>
   )
