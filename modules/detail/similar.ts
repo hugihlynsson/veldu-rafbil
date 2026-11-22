@@ -61,14 +61,15 @@ export const similarTo = (car: Car): Car[] =>
     (slug) => currentCarWithSlug(slug) ?? [],
   )
 
-// Tuned by holding one car out of each of the 3–4 car comparisons people
-// opened in October–November 2026 and ranking it from the rest (378 cases).
-// Averaging the distance over the selection put the held-out car among the
-// first four 28% of the time, to 21% from the first car alone; leaning on the
-// nearest selected car and on the hand-picked lists took it to 37%. Requiring
-// a car to sit between the selected ones on every figure, or near the worst
-// matched of them, did worse: people compare more widely than that. Ground
-// clearance, power, drive and make each moved it within noise.
+// Tuned on the comparisons people opened, holding one car out of each and
+// ranking it from the rest: scripts/eval-similar.ts, which re-runs it, has
+// the held-out car among the first four 36% of the time, to 21% from the
+// first car alone. Averaging over the selection, leaning on its nearest car
+// and on the hand-picked lists each added to that. Requiring a car to sit
+// between the selected ones on every figure, or near the worst matched of
+// them, did worse: people compare more widely than that. Ground clearance,
+// power, drive and make each moved it within noise. Re-run it before
+// changing these.
 const NEAREST_SHARE = 0.3
 const LISTED_BONUS = 0.15
 
