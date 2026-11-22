@@ -361,7 +361,7 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
           cars={cars}
           slugs={slugs}
           suggested={suggested}
-          className={clsx(body, 'mt-14 md:mt-16')}
+          className={clsx(body, 'mt-13 md:mt-16')}
         />
       )}
 
