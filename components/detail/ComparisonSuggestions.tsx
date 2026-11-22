@@ -48,7 +48,7 @@ const ComparisonSuggestions: FunctionComponent<Props> = ({
           cars={cars}
           className="text-sm font-semibold text-tint no-underline hover:underline"
         >
-          Velja af listanum <span aria-hidden>→</span>
+          Finna fleiri á listanum <span aria-hidden>→</span>
         </CompareMoreLink>
       </div>
       {/* The photos' gaps, as their row above has them */}
