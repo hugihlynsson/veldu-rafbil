@@ -6,7 +6,12 @@ import Link from 'next/link'
 import type { Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { carPathOf, comparisonPath } from '@/modules/detail/paths'
-import { comparisonTitle, MIN_COMPARED } from '@/modules/detail/comparison'
+import {
+  comparisonTitle,
+  MAX_COMPARED,
+  MIN_COMPARED,
+} from '@/modules/detail/comparison'
+import { closestToSelection } from '@/modules/detail/similar'
 import { specRows } from '@/modules/detail/specs'
 import { deprecatedNotice } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
@@ -14,6 +19,7 @@ import { agree } from '@/modules/copy/plural'
 import PricePill from '@/components/PricePill'
 import EvDatabaseLink from '@/components/EvDatabaseLink'
 import CompareMoreLink from './CompareMoreLink'
+import ComparisonSuggestions from './ComparisonSuggestions'
 import PageTop from './PageTop'
 import { Lane, ScrollLanes } from './ScrollLanes'
 import ShareButton from '@/components/ShareButton'
@@ -49,6 +55,9 @@ const eyebrow =
 const secondaryButton =
   'inline-flex items-center justify-center gap-1.5 py-2 px-4 text-sm font-semibold rounded-full no-underline bg-cloud text-tint transition duration-100 hover:bg-smoke active:scale-96 active:duration-75'
 
+// One row each on a phone, and a row of them from md
+const SUGGESTED_COUNT = 3
+
 const deliveryText = (expectedDelivery: string) =>
   `Væntanlegur ${expectedDelivery.toLowerCase()}`
 
@@ -83,6 +92,8 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
   )
   // The width the columns share: the page less its edges, or the grid's
   const pageWidth = wide ? 1200 : 944
+  const suggested =
+    cars.length < MAX_COMPARED ? closestToSelection(cars, SUGGESTED_COUNT) : []
 
   return (
     <main className="max-w-page mx-auto pb-14 md:pb-24">
@@ -345,10 +356,20 @@ const ComparisonView: FunctionComponent<Props> = ({ cars, slugs, verdict }) => {
         )}
       </ScrollLanes>
 
+      {suggested.length > 0 && (
+        <ComparisonSuggestions
+          cars={cars}
+          slugs={slugs}
+          suggested={suggested}
+          className={clsx(body, 'mt-14 md:mt-16')}
+        />
+      )}
+
       <div
         className={clsx(
           body,
-          'mt-14 md:mt-16 flex flex-wrap items-center gap-2 sm:gap-3',
+          'flex flex-wrap items-center gap-2 sm:gap-3',
+          suggested.length > 0 ? 'mt-6 md:mt-8' : 'mt-14 md:mt-16',
         )}
       >
         <ShareButton
