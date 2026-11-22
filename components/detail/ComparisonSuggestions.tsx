@@ -42,7 +42,7 @@ const ComparisonSuggestions: FunctionComponent<Props> = ({
     <div className={contentClassName}>
       <div className="flex items-baseline justify-between gap-4">
         <h2 id="add-to-comparison" className="m-0 text-sm font-semibold">
-          Bæta við samanburðinn:
+          Þú gætir líka haft áhuga á:
         </h2>
         <CompareMoreLink
           cars={cars}
