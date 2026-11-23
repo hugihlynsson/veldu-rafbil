@@ -23,7 +23,7 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Make          | Last read  | List dated | Note                                           |
 | ------------- | ---------- | ---------- | ---------------------------------------------- |
 | Audi          | 2026-11-07 | 2026-11-04 | Q4 and Q6; A6 03-18                            |
-| BMW           | 2026-11-21 | 2026-11-20 |                                                |
+| BMW           | 2026-11-23 | 2026-11-23 |                                                |
 | BYD           | 2026-11-03 | 2026-10-30 |                                                |
 | Citroën       | —          | —          | No price published; see 2026-11-10 note        |
 | Fiat          | 2026-11-06 | 2026-01    | 500e unpriced ("Leitið til sölumanna")         |
@@ -36,24 +36,24 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | KGM           | 2026-11-10 | 2026-10-30 |                                                |
 | Kia           | 2026-11-14 | 2026-11-13 | PV5 11-14; EV9 11-12; EV5 and EV6 11-10        |
 | Leapmotor     | 2026-11-20 | 2026-11-19 | ÍSBAND PDF list; prices are images             |
-| Lexus         | 2026-11-22 | —          | TZ unpriced; estimated from NL prices          |
+| Lexus         | 2026-11-23 | —          | TZ unpriced; estimated from NL prices          |
 | Mazda         | 2026-11-18 | 2026-11-16 | CX-6e and 6e                                   |
 | Mercedes-Benz | 2026-11-19 | 2026-11-16 | C, GLA, GLB, GLC, CLA; VLE 11-11; rest older   |
 | MG            | 2026-11-16 | 2026-11-16 |                                                |
 | Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
 | Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
 | Opel          | —          | —          | No price published; see 2026-11-10 note        |
-| Peugeot       | 2026-11-22 | —          | Read from the model pages                      |
+| Peugeot       | 2026-11-23 | —          | Read from the model pages                      |
 | Polestar      | 2026-11-12 | 2026-11-05 | Polestar 5; 2, 3 and 4 from 2026-10-29         |
 | Porsche       | 2026-11-12 | 2026-10-30 |                                                |
 | Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
 | Renault       | 2026-11-19 | 2026-11-18 |                                                |
 | Škoda         | 2026-11-12 | 2026-11-10 | Enyaq; Peaq, Epiq and Elroq 11-09              |
 | Smart         | 2026-11-10 | 2026-11-02 |                                                |
-| Subaru        | 2026-11-10 | 2026-10-31 |                                                |
+| Subaru        | 2026-11-23 | 2026-11-23 |                                                |
 | Suzuki        | 2026-11-10 | 2026-10-30 |                                                |
-| Tesla         | 2026-11-22 | —          | Design pages; no dated list                    |
-| Toyota        | 2026-11-22 | —          |                                                |
+| Tesla         | 2026-11-23 | —          | Design pages; no dated list                    |
+| Toyota        | 2026-11-23 | —          |                                                |
 | Volkswagen    | 2026-11-12 | 2026-11-10 | ID.4 and ID.3 Neo; ID.3, ID.7, Polo 11-04      |
 | Volvo         | 2026-11-21 | 2026-11-18 | EX40 and EC40 MY27.5 11-18; EX90 11-03         |
 | XPENG         | 2026-11-10 | 2026-11-02 |                                                |
@@ -103,15 +103,14 @@ BL documents read so far, under `issuu.com/hallih/docs/`:
 `nm70462_hyundai_ver__b__klingur___g` (every Hyundai EV, the IONIQ 3 and
 STARIA Electric included since October 2026; the IONIQ 9 rows carry no grant
 column, being over the ceiling), `bmw_ver_listi_xdrive_26.02.2019_lr` (iX5,
-i3, iX3, iX, iX1 and i4 since November 2026; no i5; 30 pages, every model's
-price table on an even page) and `hongqi_-_verdlisti` (EHS5 and EHS7).
+i3, iX3, iX, iX1 and i4 since November 2026; no i5; 28 pages since
+2026-11-23, every model's price table on an even page) and `hongqi_-_verdlisti` (EHS5 and EHS7).
 `dacia_ver__listi_16.01_2018_lr` has no EVs. Since October 2026 the MG list
 holds the MGS5, MGS6 and Cyberster as well as the MG4 Urban, and the Nissan list
 holds one Ariya row (Evolve 4WD) beside the Leaf; the Ariya's other trims are
 on its model page on nissan.is, readable with curl, unlabelled and before the
-grant. The BMW list carries the iX1 twice: the table on page 10 is the list
-price, and page 14's, headed "Sérverð", is a stale offer whose grant figures
-match neither the current grant nor the ceiling.
+grant. The BMW list's iX1 table is on page 10; the stale "Sérverð" page that
+followed it was dropped in the upload of 2026-11-23.
 
 BMW's press photos moved from PressClub to newsroom.bmwgroup.com, whose model
 pages embed every photo as a `content.presspage.com` URL. Each one has `500_`
@@ -438,3 +437,14 @@ Hyundai, JAC, Jeep, Kia, Leapmotor, Mazda, Mercedes-Benz, MG, Mini, Nissan,
 Polestar, Porsche, Range Rover, Renault, Škoda, Smart, Subaru, Suzuki,
 Volkswagen, Volvo and XPENG. `kgm.benni.is` refused curl and the built-in
 browser alike.
+
+**Read on 2026-11-23**: BL re-uploaded its BMW and Subaru lists that morning;
+every price matched. The Subaru list is now eight pages, the three EVs on
+pages 2, 4 and 6 (Uncharted, Solterra, e-Outback). The undated lists (Lexus,
+Peugeot, Tesla, Toyota) were read and every price matched; the Lexus TZ is
+still unpriced, and the XPENG G9L still has no page on xpeng.com/is nor any
+word on `bilaumbodiduna.is/frettir`. No newer list than the one last read for
+Audi, BYD, Fiat, Ford, GWM, Hongqi, Hyundai, JAC, Jeep, Kia, Leapmotor, Mazda,
+Mercedes-Benz, MG, Mini, Nissan, Polestar, Porsche, Range Rover, Renault,
+Škoda, Smart, Suzuki, Volkswagen, Volvo and XPENG. `kgm.benni.is` did not
+answer curl within 30 seconds, so KGM was not checked.
