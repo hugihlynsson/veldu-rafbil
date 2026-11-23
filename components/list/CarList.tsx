@@ -64,12 +64,7 @@ import CompareTray from '@/components/detail/CompareTray'
 import type { SheetChat } from '@/components/detail/CarSheet'
 import { track } from '@/utils/track'
 import type { TrackedEvent } from '@/modules/analytics/events'
-
-// Keeps the AI SDK off the list's hydration path. The bar is fixed-position,
-// so arriving a moment later shifts nothing.
-const ChatContainer = dynamic(() => import('@/components/chat/ChatContainer'), {
-  ssr: false,
-})
+import useChatSettings from '@/utils/chatSlot'
 
 // Fetched as a pointer first reaches the cars, where it would open: a mouse
 // passing over, or a tablet's first touch, which is mostly a scroll
@@ -257,18 +252,27 @@ export default function CarList({ latest }: Props) {
     })
   }
 
-  // The review of the car a card's link opens, fetched as the pointer or the
-  // focus reaches it, so the sheet opens with it in rather than shifting what
-  // is under it once it arrives. On a move rather than an over, which the list
-  // scrolling under a still pointer fires for every card it passes.
-  const prefetchedLink = useRef<Element | null>(null)
-  const prefetchLinkedReview = (event: SyntheticEvent) => {
+  // What a card's link opens, fetched as a mouse, a finger or the focus
+  // reaches it: the review where it opens a sheet, so the sheet opens with it
+  // in rather than shifting what is under it once it arrives, and otherwise
+  // the car's page, which a tap's press gives a head start on its click. On a
+  // move rather than an over, which the list scrolling under a still pointer
+  // fires for every card it passes, and only a hovering one's, as a finger's
+  // moves are a scroll. Kept with the sheet's state, which a resize can flip
+  // between the move and the click.
+  const prefetched = useRef<{ link: Element; sheet: boolean } | null>(null)
+  const prefetchLinked = (event: SyntheticEvent) => {
     if (!(event.target instanceof Element)) return
     const link = event.target.closest('a')
-    if (!link || link === prefetchedLink.current) return
-    prefetchedLink.current = link
-    const linked = opensInSheet() && carAtPath(link.pathname)
-    if (linked) prefetchCarReview(carSlug(linked))
+    if (!link) return
+    const sheet = opensInSheet()
+    const last = prefetched.current
+    if (last?.link === link && last.sheet === sheet) return
+    prefetched.current = { link, sheet }
+    const linked = carAtPath(link.pathname)
+    if (!linked) return
+    if (sheet) prefetchCarReview(carSlug(linked))
+    else router.prefetch(link.pathname)
   }
 
   // The cards follow a tap a frame behind the controls, in a render that
@@ -287,6 +291,19 @@ export default function CarList({ latest }: Props) {
 
   const filteredCarCount = cars.length - filteredCars.length
 
+  // The tray takes the bar's place while there is a car in it, on the page
+  // but not over it in the sheet. There the chat is about the sheet's car, as
+  // it is on the car's page.
+  useChatSettings({
+    hide: editingFilters || choosingMakes || (isComparing && !sheetChat),
+    container: sheetChat?.container,
+    placeTaken: isComparing,
+    about: sheetChat && sheetCar ? [sheetCar] : undefined,
+    starters: sheetChat?.starters,
+    onShowCar: showCar,
+    filters,
+    onApplyFilters: applySuggestedFilters,
+  })
   return (
     <div className="max-w-page mx-auto">
       <header
@@ -380,12 +397,17 @@ export default function CarList({ latest }: Props) {
         onPointerEnter={() => {
           if (opensInSheet()) void loadCarSheet()
         }}
-        onPointerMove={prefetchLinkedReview}
-        onFocus={prefetchLinkedReview}
+        onPointerMove={(event) => {
+          const hovering =
+            event.pointerType === 'mouse' ||
+            (event.pointerType === 'pen' && event.buttons === 0)
+          if (hovering) prefetchLinked(event)
+        }}
+        onPointerDown={prefetchLinked}
+        onFocus={prefetchLinked}
       >
         {shownCars.map((car, index) => (
           <Car
-            preload={index <= 1}
             position={index}
             car={car}
             key={car.id}
@@ -456,19 +478,6 @@ export default function CarList({ latest }: Props) {
       {sheetCar && (
         <CarSheet car={sheetCar} shown={shownCars} onChat={setSheetChat} />
       )}
-
-      {/* The tray takes the bar's place while there is a car in it, on the
-          page but not over it in the sheet. There the chat is about the
-          sheet's car, as it is on the car's page. */}
-      <ChatContainer
-        hide={editingFilters || choosingMakes || (isComparing && !sheetChat)}
-        container={sheetChat?.container}
-        about={sheetChat && sheetCar ? [sheetCar] : undefined}
-        starters={sheetChat?.starters}
-        onShowCar={showCar}
-        filters={filters}
-        onApplyFilters={applySuggestedFilters}
-      />
     </div>
   )
 }

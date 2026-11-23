@@ -78,17 +78,35 @@ describe("the list's first load", () => {
   })
 })
 
-// The bar arrives just after the list on every visit, though most visitors
+const chatSlot = path.join(root, 'components/chat/ChatSlot.tsx')
+
+// The root layout holds the bar for every page, so whatever it imports is in
+// every page's first load
+describe("the chat bar's slot", () => {
+  const packages = packagesImportedBy(chatSlot)
+
+  it('is in the root layout', () => {
+    expect(importGraph(path.join(root, 'app/layout.tsx')).files).toContain(
+      chatSlot,
+    )
+  })
+
+  it.each(heavyPackages)('leaves out %s', (name) => {
+    expect(importsOf(packages, name)).toEqual([])
+  })
+})
+
+// The bar arrives just after the page on every visit, though most visitors
 // never chat; what answers them is loaded once they start to
 describe('the chat bar', () => {
-  const bar = readFileSync(carList, 'utf8').match(
+  const bar = readFileSync(chatSlot, 'utf8').match(
     /dynamic\(\s*\(\)\s*=>\s*import\(\s*['"]([^'"]+)['"]/,
   )?.[1]
-  const entry = bar && resolveLocal(bar, carList)
+  const entry = bar && resolveLocal(bar, chatSlot)
   const packages = entry ? packagesImportedBy(entry) : new Set<string>()
 
-  it('is what the list loads behind next/dynamic', () => {
-    expect(entry).toMatch(/components\/chat\/\w+\.tsx$/)
+  it('is what the slot loads behind next/dynamic', () => {
+    expect(entry).toMatch(/components\/chat\/ChatContainer\.tsx$/)
     expect(packages).toContain('next/dynamic')
   })
 

@@ -141,6 +141,13 @@ sets is what it has to stop, which is what its hourly budget is for.
   something else, like a caravan's weight, are fixed. A suggestion is tapped,
   or sent from the bar's button once that shows how many cars it leaves, never
   applied for you, since a wrong filter quietly empties the list.
+- **Ask before you spend money on a model, unless it is Jev.** An eval, a
+  review run or a one-off call to Gemini, Claude or any other provider is a
+  real bill, and even a dollar is a lot for something run once — ask first and
+  say roughly what it will cost. Jev, behind the filter pills, costs a small
+  fraction of any of them (its price is beside its model constant), so calls
+  and evals against it need no asking — `scripts/eval-filter-intent.ts` costs
+  cents. Ask only if a run would be unusually large.
 
 ## Published data
 
@@ -165,6 +172,13 @@ variant in the codebase, and a new colour should not add one: give the role a
 value in both blocks instead of a literal and a variant beside it. The dark
 values were each picked against the surface they land on rather than by eye,
 so take a pair off the ladder in that file rather than inventing one.
+
+Text that can wrap is told how. A heading or a name takes `text-balance`, so
+its lines come out even; a short run of copy — a card's detail, a note, an
+intro — takes `text-pretty`, so it never ends on a lone word, which on a phone
+column of a hundred-odd pixels it otherwise often does. Not text that streams
+in: Safari weighs the whole paragraph, so each word that arrives moves the
+breaks above it.
 
 Shadows are the exception that has to live outside `@theme`, read as
 `shadow-(--shadow-chip)`: Tailwind inlines a theme shadow into the utility

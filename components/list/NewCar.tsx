@@ -27,7 +27,6 @@ interface Props {
   showSeats?: boolean
   showTowing?: boolean
   showGroundClearance?: boolean
-  preload?: boolean
   /** Its place in the list as sorted and filtered, from 0 */
   position: number
   view?: View
@@ -68,13 +67,24 @@ const sizes = {
   grid: '(max-width: 767px) 100vw, (max-width: 1023px) calc(50vw - 40px), (max-width: 1279px) calc(33.3vw - 34px), 392px',
 }
 
+// The first photo is the largest paint on every screen, so it alone is
+// preloaded, and ahead of the font and the scripts. The second is in view on a
+// desktop, but on a phone it starts below the fold, where a preload split the
+// first one's bandwidth. So it is fetched as the HTML is read, at low priority,
+// which the browser raises once layout finds it on screen. Low is also what
+// keeps React from preloading it: it does so for any image that is not lazy.
+const photoLoading = (position: number) => {
+  if (position === 0) return { preload: true, fetchPriority: 'high' } as const
+  if (position === 1) return { loading: 'eager', fetchPriority: 'low' } as const
+  return { loading: 'lazy' } as const
+}
+
 const NewCar: FunctionComponent<Props> = ({
   car,
   showValue,
   showSeats,
   showTowing,
   showGroundClearance,
-  preload,
   position,
   view = 'list',
   compared,
@@ -125,10 +135,9 @@ const NewCar: FunctionComponent<Props> = ({
       )}
     >
       {/* The biggest thing to tap, so it opens the car too; one stop for the
-          keyboard and screen readers is the name. Only the name prefetches,
-          all three going to one page: the browser works out again on every
-          frame whether each prefetching Link is in view, and three a card
-          made that some 700 of them. */}
+          keyboard and screen readers is the name. None of the three
+          prefetches on sight, which would fetch every car a scroll passes:
+          CarList prefetches the one a pointer or a key reaches. */}
       <Link
         href={carPathOf(car)}
         onClick={openCar}
@@ -143,7 +152,7 @@ const NewCar: FunctionComponent<Props> = ({
         )}
       >
         <Image
-          preload={preload}
+          {...photoLoading(position)}
           alt=""
           sizes={sizes[view]}
           src={`/images/${car.heroImageName}.jpg`}
@@ -176,6 +185,7 @@ const NewCar: FunctionComponent<Props> = ({
             <Link
               href={carPathOf(car)}
               onClick={openCar}
+              prefetch={false}
               className="text-inherit no-underline decoration-2 underline-offset-4 hover:underline"
             >
               <span>{car.make}</span>{' '}

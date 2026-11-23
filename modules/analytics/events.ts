@@ -110,6 +110,16 @@ export const productEventSchema = z.discriminatedUnion('name', [
     conversationId,
   }),
   event('compare_more', { cars: z.array(slug).min(1).max(MAX_COMPARED) }),
+  // A car the comparison page suggested, added to it: `cars` before it was,
+  // `position` its place among those suggested
+  event('comparison_extended', {
+    cars: z
+      .array(slug)
+      .min(1)
+      .max(MAX_COMPARED - 1),
+    car: slug,
+    position: z.int().min(0).max(10),
+  }),
   // `written` when one was already there, which shows at once. `waitMs` is
   // until the verdict was kept, `firstTextMs` until its first words showed.
   event('verdict_shown', {

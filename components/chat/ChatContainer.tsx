@@ -3,6 +3,7 @@
 import { Suspense, useState } from 'react'
 import { createPortal } from 'react-dom'
 import dynamic from 'next/dynamic'
+import { usePathname } from 'next/navigation'
 import ChatInput from './ChatInput'
 import type { Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
@@ -26,6 +27,9 @@ interface Props {
   /** A sheet's place for the bar while one is over the page, which
    * showModal() makes inert and covers */
   container?: HTMLElement | null
+  /** The bar's place on the page is taken, as by the comparison tray, while
+   * a sheet holds it */
+  placeTaken?: boolean
   /** Called once the chat has closed, so the car's card can take the focus */
   onShowCar: (car: Car) => void
   /** The list's filters, which the bar suggests changes to as it is typed in */
@@ -40,6 +44,7 @@ interface Props {
 export default function ChatContainer({
   hide,
   container,
+  placeTaken,
   onShowCar,
   filters,
   onApplyFilters,
@@ -50,6 +55,14 @@ export default function ChatContainer({
   const composer = useComposer()
   const chatModal = useChunk(importChatModal)
   const [wantsChatOpen, setWantsChatOpen] = useState<boolean>(false)
+  // The bar outlives the page, so a link in an answer, or back, would leave
+  // the chat open over the next one
+  const pathname = usePathname()
+  const [openedOn, setOpenedOn] = useState<string>(pathname)
+  if (pathname !== openedOn) {
+    setOpenedOn(pathname)
+    setWantsChatOpen(false)
+  }
   // The input remounts each time it moves between the page and a dialog, and
   // only its first arrival on the page is an entrance
   const [hasMoved, setHasMoved] = useState<boolean>(false)
@@ -81,6 +94,7 @@ export default function ChatContainer({
       }}
       animateIn={!hasMoved}
       lifted={Boolean(container) && !isChatOpen}
+      placeTaken={placeTaken}
       hide={hide}
       disabled={conversation.isBusy}
       hasMessages={conversation.hasMessages}

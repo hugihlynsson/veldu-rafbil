@@ -65,6 +65,12 @@ const tracked = {
     conversationId,
   },
   compare_more: { name: 'compare_more', cars: ['kia-ev3', 'skoda-elroq'] },
+  comparison_extended: {
+    name: 'comparison_extended',
+    cars: ['kia-ev3', 'skoda-elroq'],
+    car: 'hyundai-kona',
+    position: 1,
+  },
   verdict_shown: {
     name: 'verdict_shown',
     written: false,
