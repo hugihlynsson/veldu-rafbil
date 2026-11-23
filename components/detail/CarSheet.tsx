@@ -32,6 +32,7 @@ import {
 } from '@/utils/carSheet'
 import { getInputModality } from '@/utils/inputModality'
 import { leavePageBeforeLoad } from '@/utils/pageBeforeLoad'
+import { stretchOverscroll } from '@/utils/stretchOverscroll'
 import { track } from '@/utils/track'
 import {
   prefetchCarReview,
@@ -70,6 +71,21 @@ const stepButton = clsx(
 // After the panel has started to rise, out from beside it rather than up with it
 const stepMotion =
   'shrink-0 opacity-0 transition-[opacity,translate] duration-300 ease-in-cubic group-data-[state=visible]/modal:opacity-100 group-data-[state=visible]/modal:translate-x-0 group-data-[state=visible]/modal:ease-out-cubic group-data-[state=visible]/modal:delay-150 group-data-[state=leaving]/modal:duration-150'
+
+/**
+ * What a bounce at the top shows where SheetHero's reflection has faded: the
+ * photo's top edge, stretched so tall that the gap is a smear of its first
+ * rows. Only the top half: a bounce at the bottom shows the surface.
+ */
+const overscrollFill = (car: Car) => {
+  const { src } = getImageProps({
+    alt: '',
+    src: `/images/${car.heroImageName}.jpg`,
+    width: 64,
+    height: 43,
+  }).props
+  return `linear-gradient(var(--color-surface) 0 0) bottom / 100% 50% no-repeat, url("${src}") top / 100% 6000% no-repeat var(--color-surface)`
+}
 
 const arrivals = {
   previous: 'animate-step-previous',
@@ -204,6 +220,11 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
     return panel ? holdSheetPanel(panel) : undefined
   }, [])
 
+  useEffect(() => {
+    const panel = panelRef.current
+    return panel ? stretchOverscroll(panel) : undefined
+  }, [])
+
   // Every link to another car's page, wherever the page has one, so none
   // leaves the sheet for a page with the list gone from under it. Captured,
   // as a Link navigates in its own click unless that is prevented first. In
@@ -260,13 +281,14 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
               ref={panelRef}
               tabIndex={-1}
               onClickCapture={openLinkedCar}
+              style={{ background: overscrollFill(car) }}
               className={clsx(
-                'relative w-[min(960px,calc(100vw-11.5rem))] max-h-[calc(100dvh-4rem)] overflow-x-hidden overflow-y-auto overscroll-contain outline-none rounded-modal bg-surface shadow-(--shadow-modal)',
+                'relative w-[min(960px,calc(100vw-11.5rem))] max-h-[calc(100dvh-4rem)] overflow-x-hidden overflow-y-auto overscroll-contain outline-none rounded-modal shadow-(--shadow-modal)',
                 panelMotion,
               )}
             >
               {/* No height of its own, so the photo starts at the sheet's top */}
-              <div className="sticky top-0 z-2 h-0">
+              <div data-overscroll-pin className="sticky top-0 z-2 h-0">
                 <div className="absolute top-4 right-4 flex gap-2">
                   <a
                     href={path}
@@ -300,14 +322,17 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
                 </div>
               </div>
 
-              <CarView
-                car={car}
-                similar={similarTo(car)}
-                review={review ?? undefined}
-                history={history}
-                sheet
-                contentClassName={clsx(arrival && arrivals[arrival])}
-              />
+              {/* Solid, as the panel's own background is the photo's edge */}
+              <div className="bg-surface">
+                <CarView
+                  car={car}
+                  similar={similarTo(car)}
+                  review={review ?? undefined}
+                  history={history}
+                  sheet
+                  contentClassName={clsx(arrival && arrivals[arrival])}
+                />
+              </div>
             </div>
             {canStep && stepButtonTo('next')}
           </div>
