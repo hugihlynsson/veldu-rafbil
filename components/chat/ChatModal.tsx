@@ -164,6 +164,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
               hasMessages={messages.length > 0}
               onClose={close}
               onClearChat={() => {
+                if (!window.confirm('Hreinsa spjallið?')) return
                 close()
                 setTimeout(session.clear, 300)
               }}
