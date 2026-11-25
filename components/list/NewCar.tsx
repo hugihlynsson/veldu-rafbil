@@ -178,7 +178,7 @@ const NewCar: FunctionComponent<Props> = ({
         >
           <h2
             className={clsx(
-              'm-0 min-w-0 font-semibold text-display',
+              'm-0 min-w-0 font-semibold text-display leading-tight',
               grid && 'md:text-2xl',
             )}
           >
@@ -193,7 +193,7 @@ const NewCar: FunctionComponent<Props> = ({
             </Link>
             <span
               className={clsx(
-                'block font-medium text-base text-stone -mt-px mb-2',
+                'block font-medium text-base leading-snug text-stone mt-0.5 mb-2',
                 grid && 'md:mt-0 md:text-sm',
               )}
             >
