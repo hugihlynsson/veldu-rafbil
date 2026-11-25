@@ -63,7 +63,7 @@ export default function MakeSheet({
               column, so the makes ran on under the footer */}
           <div
             ref={edges.ref}
-            className="grow shrink min-h-0 overflow-y-auto p-5 pb-8 sheet-panel:p-6 sheet-panel:pb-8"
+            className="grow shrink min-h-0 overflow-y-auto px-5 py-2 sheet-panel:px-6 sheet-panel:pt-1.5"
           >
             <fieldset
               aria-labelledby="make-sheet-title"

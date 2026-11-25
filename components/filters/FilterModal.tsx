@@ -207,7 +207,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
             </header>
             <div
               ref={edges.ref}
-              className="grid grid-cols-1 gap-6 grow shrink overflow-y-auto p-5 pb-8 sheet-panel:grid-cols-2 sheet-panel:gap-x-4 sheet-panel:p-6 sheet-panel:pb-8"
+              className="grid grid-cols-1 gap-6 grow shrink overflow-y-auto px-5 py-2 sheet-panel:grid-cols-2 sheet-panel:gap-x-4 sheet-panel:px-6 sheet-panel:pt-1.5"
             >
               {(Object.keys(fields) as Array<keyof typeof fields>).map(
                 (key) => {

@@ -174,7 +174,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
 
             <div
               ref={scrollEdges.ref}
-              className="flex-1 overflow-y-auto pt-5 pb-21 flex flex-col"
+              className="flex-1 overflow-y-auto pt-2 pb-21 flex flex-col"
             >
               {turns.map((turn, index) => {
                 const isLastTurn = index === turns.length - 1
