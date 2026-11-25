@@ -8,7 +8,7 @@ export const CHANGE_DAYS = 60
 // A bound on the prompt, which every question pays for, kept by whole days: a
 // day like the grant change, when every price moved, would otherwise be as
 // long as the car list
-export const MAX_CHANGES = 120
+export const MAX_CHANGES = 40
 
 const daysBefore = (date: string, days: number) =>
   Temporal.PlainDate.from(date).subtract({ days }).toString()
