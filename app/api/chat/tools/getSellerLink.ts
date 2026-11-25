@@ -19,7 +19,7 @@ const sellerPages = new Map(
 /** The seller-link tool. Nothing is fetched, so it needs no call limit. */
 export const getSellerLinkTool = tool({
   description:
-    "Get the link to the seller's page for a car, where a buyer can see it, book a test drive or order it. Use it whenever a link to the seller, the dealer or the maker is asked for, and give the link exactly as it comes back. It says nothing else about the seller.",
+    "Get the link to the seller's page for a car, where a buyer can see it, book a test drive or order it. Use it whenever the answer sends the buyer to the seller, the dealer or the maker, whether or not a link was asked for, and give the link exactly as it comes back. It says nothing else about the seller.",
   inputSchema: z.object({
     car: z
       .string()
