@@ -164,6 +164,12 @@ const ChatModal: React.FunctionComponent<Props> = ({
               hasMessages={messages.length > 0}
               onClose={close}
               onClearChat={() => {
+                if (
+                  !window.confirm(
+                    'Hreinsa spjallið?\n\nAllar spurningar og svör hverfa og það er ekki hægt að afturkalla.',
+                  )
+                )
+                  return
                 close()
                 setTimeout(session.clear, 300)
               }}
