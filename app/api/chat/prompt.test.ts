@@ -182,6 +182,7 @@ describe('the assistant system prompt', () => {
   // Sent to the seller's site for service prices, a buyer got no link,
   // since none had been asked for
   it('gives the seller link whenever it points to the seller', () => {
-    expect(systemPrompt).toContain('Hvenær sem þú bendir á seljandann')
+    expect(systemPrompt).toContain('Hvenær sem þú bendir á seljanda bíls')
+    expect(systemPrompt).toContain('sæktu tengil hvers bíls')
   })
 })
