@@ -193,7 +193,7 @@ const NewCar: FunctionComponent<Props> = ({
             </Link>
             <span
               className={clsx(
-                'block font-medium text-base leading-snug text-stone mt-0.5 mb-2.5',
+                'block font-medium text-base leading-snug text-stone mt-0.5 mb-3',
                 grid && 'md:mt-0 md:text-sm',
               )}
             >
