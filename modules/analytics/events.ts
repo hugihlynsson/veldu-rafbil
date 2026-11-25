@@ -132,7 +132,8 @@ export const productEventSchema = z.discriminatedUnion('name', [
     waitMs: milliseconds,
     firstTextMs: milliseconds.optional(),
   }),
-  event('seller_clicked', { car: slug }),
+  // `source` only on a link the advisor gave, not on the car's own price
+  event('seller_clicked', { car: slug, source: z.enum(['chat']).optional() }),
   event('ev_database_clicked', { car: slug }),
   // Its id is in the link, and on each page_viewed the link opens. Sent once
   // the sheet closes, as opening it is not sharing: `cancelled` is a sheet

@@ -14,6 +14,9 @@ import { groundClearanceCell } from '@/modules/copy/groundClearanceCopy'
 import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 import { allNews } from '@/modules/news/history'
 import { recentChangesSection } from './recentChanges'
+import { carSlug } from '@/modules/data/getCarId'
+import { carPath } from '@/modules/detail/paths'
+import { SITE_URL } from '@/modules/siteUrl'
 
 describe('the assistant system prompt', () => {
   const lines = systemPrompt.split('\n')
@@ -155,5 +158,24 @@ describe('the assistant system prompt', () => {
   it('shows the car markers after the answer, before the follow-ups', () => {
     const example = systemPrompt.slice(systemPrompt.indexOf('TIL DÆMIS'))
     expect(example.indexOf('[car:')).toBeLessThan(example.indexOf('[q:'))
+  })
+
+  // The model made up /bilar/… and /id/… pages, which do not exist. The
+  // pattern is the sitemap's, filled with the ref each car's row gives.
+  it("gives the pattern of a car's page, which the ref fills in", () => {
+    const pattern = `${SITE_URL}${carPath('<auðkenni>')}`
+    expect(systemPrompt).toContain(pattern)
+    for (const car of cars) {
+      expect(pattern.replace('<auðkenni>', cellOf(car, 'auðkenni')!)).toBe(
+        `${SITE_URL}${carPath(carSlug(car))}`,
+      )
+    }
+  })
+
+  // It once wrote links and named dealers out of thin air
+  it('allows no link that is not in the prompt or from a tool', () => {
+    expect(systemPrompt).toContain('Skrifaðu aldrei vefslóð')
+    expect(systemPrompt).toContain('getSellerLink')
+    expect(systemPrompt).toContain('Þú veist ekki hvaða umboð')
   })
 })

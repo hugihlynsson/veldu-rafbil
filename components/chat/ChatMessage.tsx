@@ -4,7 +4,16 @@ import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 import type { ChatMessage as Message } from '@/modules/chat/message'
+import {
+  leavesSite,
+  sellerLinkCars,
+  sitePath,
+} from '@/modules/chat/answerLinks'
+import { trackEvent } from 'fathom-client'
+import { track } from '@/utils/track'
+import { rememberListSearch } from '@/utils/listReturn'
 import rehypeWords from '@/modules/chat/rehypeWords'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import useShrinkwrap from '@/utils/useShrinkwrap'
@@ -41,6 +50,7 @@ const ChatMessage: React.FunctionComponent<Props> = ({
   }, [scrollsOnArrival])
 
   const isUser = message.role === 'user'
+  const sellerCars = sellerLinkCars(message.parts ?? [])
 
   return (
     <div
@@ -71,6 +81,46 @@ const ChatMessage: React.FunctionComponent<Props> = ({
                   revealsWords ? [[rehypeWords, { part: index }]] : []
                 }
                 components={{
+                  a: ({ href, title, children }) => {
+                    const path = sitePath(href)
+                    // A plain link would reload the page, and the chat
+                    // with it, cutting off an answer still streaming
+                    if (path) {
+                      return (
+                        <Link
+                          href={path}
+                          title={title}
+                          onClick={() => {
+                            if (window.location.pathname === '/') {
+                              rememberListSearch(window.location.search)
+                            }
+                          }}
+                        >
+                          {children}
+                        </Link>
+                      )
+                    }
+                    return leavesSite(href) ? (
+                      <a
+                        href={href}
+                        title={title}
+                        target="_blank"
+                        rel="noopener"
+                        onClick={() => {
+                          const car = href && sellerCars.get(href)
+                          if (!car) return
+                          trackEvent('Seller clicked')
+                          track({ name: 'seller_clicked', car, source: 'chat' })
+                        }}
+                      >
+                        {children}
+                      </a>
+                    ) : (
+                      <a href={href} title={title}>
+                        {children}
+                      </a>
+                    )
+                  },
                   table: ({ children }) => (
                     <div className="table-wrapper">
                       <table>{children}</table>
