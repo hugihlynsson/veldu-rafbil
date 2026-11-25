@@ -154,9 +154,10 @@ under "Estimating a price". So read the price of every car with
 the report which estimates were replaced.
 
 **Removing a car.** A car missing from a price list is not proof it is gone —
-lists get split, renamed and sometimes just not uploaded. Remove one only when
-the importer's own site or list says it is discontinued; otherwise leave it and
-flag it in the report. Removing a car also means deleting its photo in
+lists get split, renamed and sometimes just not uploaded. A car already marked
+`deprecated` is gone on purpose, so its absence is not a finding. Remove one
+only when the importer's own site or list says it is discontinued; otherwise
+leave it and flag it in the report. Removing a car also means deleting its photo in
 `public/images/`: a test fails on photos no car uses.
 
 **Specs on existing cars.** The brochures round differently from ev-database,
