@@ -10,6 +10,7 @@ import {
 } from '@/modules/list/filters'
 import { liftMakes } from '@/modules/list/makes'
 import clsx from 'clsx'
+import useScrollEdges from '@/utils/useScrollEdges'
 import Modal, { sheetPanel } from '@/components/Modal'
 import CloseButton from '@/components/CloseButton'
 import { getInputModality } from '@/utils/inputModality'
@@ -149,6 +150,7 @@ const FiltersModal: React.FunctionComponent<Props> = ({
   const [values, setValues] = useState<FilterFields>(() =>
     fieldsFromFilters(initialFilters),
   )
+  const edges = useScrollEdges()
   const isEmpty = Object.values(values).every((value) => !value)
   const filters = liftMakes(filtersFromFields(values))
 
@@ -191,14 +193,22 @@ const FiltersModal: React.FunctionComponent<Props> = ({
 
         return (
           <section className={sheetPanel}>
-            <header className="relative bg-surface text-center px-4 py-3 border-b border-line sheet-panel:py-4.5">
+            <header
+              className={clsx(
+                'relative bg-surface text-center px-4 py-3 border-b transition-colors duration-200 sheet-panel:py-4.5',
+                edges.scrolled ? 'border-line' : 'border-transparent',
+              )}
+            >
               {/* As far in from the left as the header's height leaves above and below it */}
               <CloseButton onClick={close} className="sheet-panel:left-4" />
               <h2 id="filter-modal-title" className="m-0 text-lg font-semibold">
                 Leita
               </h2>
             </header>
-            <div className="grid grid-cols-1 gap-6 grow shrink overflow-y-auto p-5 pb-8 sheet-panel:grid-cols-2 sheet-panel:gap-x-4 sheet-panel:p-6 sheet-panel:pb-8">
+            <div
+              ref={edges.ref}
+              className="grid grid-cols-1 gap-6 grow shrink overflow-y-auto p-5 pb-8 sheet-panel:grid-cols-2 sheet-panel:gap-x-4 sheet-panel:p-6 sheet-panel:pb-8"
+            >
               {(Object.keys(fields) as Array<keyof typeof fields>).map(
                 (key) => {
                   const field = fields[key]
@@ -232,7 +242,12 @@ const FiltersModal: React.FunctionComponent<Props> = ({
                 },
               )}
             </div>
-            <footer className="p-4 flex justify-between shadow-(--shadow-sheet-footer) z-1">
+            <footer
+              className={clsx(
+                'p-4 flex justify-between z-1 transition-shadow duration-200',
+                !edges.atEnd && 'shadow-(--shadow-sheet-footer)',
+              )}
+            >
               <button
                 className="appearance-none border-0 bg-transparent p-0 pl-1 sheet-panel:pl-2 text-stone text-sm font-semibold transition-[color,opacity] duration-200 cursor-pointer hover:enabled:text-tint disabled:opacity-40 disabled:cursor-default"
                 disabled={isEmpty}

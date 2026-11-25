@@ -2,6 +2,7 @@ import { useState } from 'react'
 import clsx from 'clsx'
 
 import { carCountOf, makesInOrder } from '@/modules/list/makes'
+import useScrollEdges from '@/utils/useScrollEdges'
 import Modal, { sheetPanel } from '@/components/Modal'
 import CloseButton from '@/components/CloseButton'
 import { MakeChip } from './MakeRow'
@@ -25,6 +26,7 @@ export default function MakeSheet({
   getCountPreview,
   onDone,
 }: Props) {
+  const edges = useScrollEdges()
   const [chosen, setChosen] = useState<string[]>(() => [...initialMakes])
 
   const toggle = (make: string) =>
@@ -46,7 +48,12 @@ export default function MakeSheet({
     >
       {({ close }) => (
         <section className={sheetPanel}>
-          <header className="relative bg-surface text-center px-4 py-3 border-b border-line sheet-panel:py-4.5">
+          <header
+            className={clsx(
+              'relative bg-surface text-center px-4 py-3 border-b transition-colors duration-200 sheet-panel:py-4.5',
+              edges.scrolled ? 'border-line' : 'border-transparent',
+            )}
+          >
             <CloseButton onClick={close} className="sheet-panel:left-4" />
             <h2 id="make-sheet-title" className="m-0 text-lg font-semibold">
               Merki
@@ -54,7 +61,10 @@ export default function MakeSheet({
           </header>
           {/* The scroller is a div: a fieldset will not shrink in a flex
               column, so the makes ran on under the footer */}
-          <div className="grow shrink min-h-0 overflow-y-auto p-5 pb-8 sheet-panel:p-6 sheet-panel:pb-8">
+          <div
+            ref={edges.ref}
+            className="grow shrink min-h-0 overflow-y-auto p-5 pb-8 sheet-panel:p-6 sheet-panel:pb-8"
+          >
             <fieldset
               aria-labelledby="make-sheet-title"
               className="m-0 min-w-0 border-0 p-0 flex flex-wrap gap-1.5"
@@ -77,7 +87,12 @@ export default function MakeSheet({
               ))}
             </fieldset>
           </div>
-          <footer className="p-4 flex justify-end shadow-(--shadow-sheet-footer) z-1">
+          <footer
+            className={clsx(
+              'p-4 flex justify-end z-1 transition-shadow duration-200',
+              !edges.atEnd && 'shadow-(--shadow-sheet-footer)',
+            )}
+          >
             <button
               className="appearance-none px-4 pt-2.75 pb-3 bg-sky border-0 rounded-full text-on-sky text-sm font-semibold cursor-pointer transition duration-150 hover:bg-sky-hover active:scale-96 active:duration-75"
               onClick={() => {

@@ -1,23 +1,32 @@
 'use client'
 
 import React from 'react'
+import clsx from 'clsx'
 import CloseButton from '@/components/CloseButton'
 
 interface Props {
   hasMessages: boolean
+  /** The hairline under it shows only once the chat has scrolled under it */
+  scrolled: boolean
   onClose: () => void
   onClearChat: () => void
 }
 
 const ChatHeader: React.FunctionComponent<Props> = ({
   hasMessages,
+  scrolled,
   onClose,
   onClearChat,
 }) => {
   return (
     // Solid on a phone, where it meets the browser's bar, which is painted
     // the page's colour from theme-color; the frosted panel is a shade off it
-    <header className="relative text-center px-4 py-3.5 shadow-(--shadow-hairline) bg-lab chat-panel:bg-transparent">
+    <header
+      className={clsx(
+        'relative text-center px-4 py-3.5 bg-lab chat-panel:bg-transparent transition-shadow duration-200',
+        scrolled && 'shadow-(--shadow-hairline)',
+      )}
+    >
       <CloseButton onClick={onClose} />
       <h2 id="chat-modal-title" className="m-0 text-lg font-semibold">
         Spjall
