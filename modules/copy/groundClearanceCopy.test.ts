@@ -5,6 +5,7 @@ import {
   groundClearanceFigure,
   groundClearanceLine,
   groundClearanceText,
+  groundClearanceCell,
 } from './groundClearanceCopy'
 
 describe('groundClearanceFigure', () => {
@@ -49,5 +50,22 @@ describe('groundClearanceText', () => {
 
   it('says when there is no figure, rather than a number', () => {
     expect(groundClearanceText(null)).toBe('veghæð óþekkt')
+  })
+})
+
+describe('groundClearanceCell', () => {
+  it('gives the figure alone, as its heading names the unit', () => {
+    expect(groundClearanceCell({ mm: 186 })).toBe('186')
+  })
+
+  // The prompt's rule on raised levels quotes these words
+  it('says when the figure is a raised air-suspension level', () => {
+    expect(groundClearanceCell({ mm: 240, adjustable: true })).toBe(
+      '240 í hæstu stillingu loftpúðafjöðrunar',
+    )
+  })
+
+  it('says when the figure is not known', () => {
+    expect(groundClearanceCell(null)).toBe('óþekkt')
   })
 })

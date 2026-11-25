@@ -27,3 +27,10 @@ export const towingText = (towing: NewCar['towing']): string => {
   if (towing === 0) return 'enginn dráttarkrókur'
   return `dráttargeta ${addDecimalSeparators(towing)} kg`
 }
+
+/** A car's towing in a column whose heading gives the unit, for a model */
+export const towingCell = (towing: NewCar['towing']): string => {
+  if (towing === null) return 'óþekkt'
+  if (towing === 0) return 'enginn dráttarkrókur'
+  return addDecimalSeparators(towing)
+}

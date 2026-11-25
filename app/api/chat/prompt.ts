@@ -1,5 +1,5 @@
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
-import cars from '@/modules/data/cars'
+import cars, { type Car } from '@/modules/data/cars'
 import { carRef } from '@/modules/chat/cars'
 import {
   grantAmountText,
@@ -8,12 +8,12 @@ import {
   grantStartText,
   previousGrantAmountText,
 } from '@/modules/copy/grantCopy'
-import { groundClearanceText } from '@/modules/copy/groundClearanceCopy'
-import { towingText } from '@/modules/copy/towingCopy'
 import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 import { allNews } from '@/modules/news/history'
 import { NEWS_PATH } from '@/modules/news/paths'
 import { SITE_URL } from '@/modules/siteUrl'
+import { groundClearanceCell } from '@/modules/copy/groundClearanceCopy'
+import { towingCell } from '@/modules/copy/towingCopy'
 import { recentChangesSection } from './recentChanges'
 
 // The updates page goes back as far as the log does
@@ -21,17 +21,53 @@ const firstNewsYear = allNews[0]?.date.slice(0, 4)
 
 const percent = (factor: number) => `${Math.round(factor * 100)}%`
 
+const SEPARATOR = '|'
+
 // The figures each card shows, so an answer about charging or battery size
-// comes from the list rather than from whatever the model remembers. Cheapest
-// first: asked for a cheap car that is also good at something, the model
-// otherwise reaches for the ones it has heard of rather than reading the list.
-const carsSummary = cars
-  .toSorted((a, b) => a.priceWithGrant - b.priceWithGrant)
-  .map(
-    (car) =>
-      `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr${car.availability === 'expected' ? ' (áætlað verð)' : ''}, ${car.range} km drægni, ${car.capacity} kWh rafhlaða, hraðhleðsla 10-80% á ${car.timeToCharge10To80} mín (${car.kmPerMinuteCharged} km/mín), ${car.acceleration}s hröðun, ${car.drive} drif, ${car.seats} sæti, ${towingText(car.towing)}, ${groundClearanceText(car.groundClearance)}${car.expectedDelivery ? ` (væntanlegur ${car.expectedDelivery})` : ''} (auðkenni: ${carRef(car)})`,
-  )
-  .join('\n')
+// comes from the list rather than from whatever the model remembers. A table,
+// so a unit is named once in its heading rather than on each of the cars: the
+// heading and the cells come from this one list, so they cannot drift apart.
+// Nov 2026, scripts/eval-advisor-prompt.ts: 42% fewer input tokens than a line
+// of prose per car, with every lookup and ref as right as before.
+export const carColumns: Array<{
+  heading: string
+  cell: (car: Car) => string
+}> = [
+  { heading: 'Bíll', cell: (car) => car.label },
+  {
+    heading: 'Verð kr',
+    cell: (car) =>
+      `${addDecimalSeparators(car.priceWithGrant)}${car.availability === 'expected' ? ' (áætlað verð)' : ''}`,
+  },
+  { heading: 'Drægni km', cell: (car) => String(car.range) },
+  { heading: 'Rafhlaða kWh', cell: (car) => String(car.capacity) },
+  {
+    heading: 'Hraðhleðsla 10-80% mín',
+    cell: (car) => String(car.timeToCharge10To80),
+  },
+  { heading: 'km/mín', cell: (car) => String(car.kmPerMinuteCharged) },
+  { heading: 'Hröðun 0-100 s', cell: (car) => String(car.acceleration) },
+  { heading: 'Drif', cell: (car) => car.drive },
+  { heading: 'Sæti', cell: (car) => String(car.seats) },
+  { heading: 'Dráttargeta kg', cell: (car) => towingCell(car.towing) },
+  {
+    heading: 'Veghæð mm',
+    cell: (car) => groundClearanceCell(car.groundClearance),
+  },
+  { heading: 'Væntanlegur', cell: (car) => car.expectedDelivery ?? '' },
+  { heading: 'auðkenni', cell: (car) => carRef(car) },
+]
+
+export const carRow = (car: Car): string =>
+  carColumns.map(({ cell }) => cell(car)).join(SEPARATOR)
+
+// Cheapest first: asked for a cheap car that is also good at something, the
+// model otherwise reaches for the ones it has heard of rather than reading the
+// list.
+const carsTable = [
+  carColumns.map(({ heading }) => heading).join(SEPARATOR),
+  ...cars.toSorted((a, b) => a.priceWithGrant - b.priceWithGrant).map(carRow),
+].join('\n')
 
 // Built once per instance and identical for every request: the provider's
 // implicit prompt caching only hits on an identical prefix
@@ -39,9 +75,9 @@ const systemPrompt = `Þú ert hjálpsamur ráðgjafi fyrir Veldu Rafbíl, ísle
 
 - Þú ert reiprennandi á íslensku og svarar alltaf á íslensku.
 
-Þú hefur aðgang að upplýsingum um ${cars.length} rafbíla sem eru fáanlegir á Íslandi, í verðröð, sá ódýrasti fyrst:
+Þú hefur aðgang að upplýsingum um ${cars.length} rafbíla sem eru fáanlegir á Íslandi. Þeir eru í töflunni hér fyrir neðan, einn bíll í hverri línu, í verðröð, sá ódýrasti fyrst. Dálkarnir eru aðskildir með ${SEPARATOR} og fyrsta línan segir hvað hver dálkur er:
 
-${carsSummary}
+${carsTable}
 
 ${recentChangesSection(allNews)}
 
@@ -78,7 +114,7 @@ Tónn og stíll:
 
 Bílarnir í svarinu:
 - Á eftir svarinu, á undan framhaldsspurningunum, merktu bílana af listanum sem þú mælir með eða svarið fjallar um, hvern í sinni línu
-- Fyrir hvern bíl, notaðu þetta nákvæma snið: [car:<auðkenni>], með auðkenninu afrituðu nákvæmlega úr línu bílsins hér að ofan
+- Fyrir hvern bíl, notaðu þetta nákvæma snið: [car:<auðkenni>], með auðkenninu afrituðu nákvæmlega úr síðasta dálkinum í línu bílsins hér að ofan
 - Raðaðu þeim eftir því hve mikið þú mælir með þeim, þeim sem þú mælir mest með fyrst
 - Ef svarið fjallar ekki um ákveðna bíla af listanum, slepptu merkjunum
 - Nefndu bílana alltaf með nafni í svarinu sjálfu, aldrei með auðkenninu
