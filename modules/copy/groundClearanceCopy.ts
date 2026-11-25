@@ -33,3 +33,14 @@ export const groundClearanceText = (
   }
   return `veghæð ${clearance.mm} mm`
 }
+
+/** A car's ground clearance in a column headed in mm, for a model */
+export const groundClearanceCell = (
+  clearance: NewCar['groundClearance'],
+): string => {
+  if (!clearance) return 'óþekkt'
+  if (clearance.adjustable) {
+    return `${clearance.mm} í hæstu stillingu loftpúðafjöðrunar`
+  }
+  return String(clearance.mm)
+}

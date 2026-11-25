@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import systemPrompt from './prompt'
+import systemPrompt, { carColumns, carRow } from './prompt'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import cars from '@/modules/data/cars'
 import { carRef, resolveCarRefs } from '@/modules/chat/cars'
@@ -10,7 +10,7 @@ import {
   grantStartText,
   previousGrantAmountText,
 } from '@/modules/copy/grantCopy'
-import { groundClearanceText } from '@/modules/copy/groundClearanceCopy'
+import { groundClearanceCell } from '@/modules/copy/groundClearanceCopy'
 import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 import { allNews } from '@/modules/news/history'
 import { recentChangesSection } from './recentChanges'
@@ -18,12 +18,26 @@ import { recentChangesSection } from './recentChanges'
 describe('the assistant system prompt', () => {
   const lines = systemPrompt.split('\n')
   const lineOf = (car: (typeof cars)[number]) =>
-    lines.find((line) => line.startsWith(`${car.label}: `))
+    lines.find((line) => line === carRow(car))
+  const headings = carColumns.map(({ heading }) => heading)
+  const cellOf = (car: (typeof cars)[number], heading: string) =>
+    lineOf(car)?.split('|')[headings.indexOf(heading)]
 
-  it('lists every car by its label and the price a buyer pays', () => {
+  // A stray separator would shift every column after it, and the model would
+  // read the next figure as this one's
+  it('lists every car as a row of its own under the headings', () => {
+    expect(systemPrompt).toContain(`\n${headings.join('|')}\n`)
     for (const car of cars) {
-      expect(systemPrompt, car.id).toContain(
-        `${car.label}: ${addDecimalSeparators(car.priceWithGrant)} kr`,
+      expect(lineOf(car), car.id).toBeDefined()
+      expect(lineOf(car)?.split('|'), car.id).toHaveLength(headings.length)
+    }
+  })
+
+  it('gives every car its label and the price a buyer pays', () => {
+    for (const car of cars) {
+      expect(cellOf(car, 'Bíll'), car.id).toBe(car.label)
+      expect(cellOf(car, 'Verð kr'), car.id).toMatch(
+        new RegExp(`^${addDecimalSeparators(car.priceWithGrant)}\\b`),
       )
     }
   })
@@ -32,9 +46,7 @@ describe('the assistant system prompt', () => {
   // the seller has not set
   it('marks the price of an expected car, and only that, as an estimate', () => {
     for (const car of cars) {
-      const marked = lineOf(car)?.includes(
-        `${addDecimalSeparators(car.priceWithGrant)} kr (áætlað verð)`,
-      )
+      const marked = cellOf(car, 'Verð kr')?.endsWith(' (áætlað verð)')
       expect(marked, car.id).toBe(car.availability === 'expected')
     }
     expect(systemPrompt).toContain('Segðu alltaf að verðið sé áætlað')
@@ -44,18 +56,19 @@ describe('the assistant system prompt', () => {
   // memory, and could disagree with the card beside the chat
   it('gives every car the battery and fast-charge figures its card shows', () => {
     for (const car of cars) {
-      const line = lineOf(car)
-      expect(line, car.id).toContain(`${car.capacity} kWh`)
-      expect(line, car.id).toContain(`${car.timeToCharge10To80} mín`)
-      expect(line, car.id).toContain(`${car.kmPerMinuteCharged} km/mín`)
+      expect(cellOf(car, 'Rafhlaða kWh'), car.id).toBe(String(car.capacity))
+      expect(cellOf(car, 'Hraðhleðsla 10-80% mín'), car.id).toBe(
+        String(car.timeToCharge10To80),
+      )
+      expect(cellOf(car, 'km/mín'), car.id).toBe(String(car.kmPerMinuteCharged))
     }
   })
 
   // „Hver er með mestu veghæðina?“ is a suggestion, and had nothing behind it
   it('gives every car its ground clearance, or says it is not known', () => {
     for (const car of cars) {
-      expect(lineOf(car), car.id).toContain(
-        groundClearanceText(car.groundClearance),
+      expect(cellOf(car, 'Veghæð mm'), car.id).toBe(
+        groundClearanceCell(car.groundClearance),
       )
     }
     expect(systemPrompt).toContain('Ef veghæðin er óþekkt')
@@ -108,7 +121,7 @@ describe('the assistant system prompt', () => {
   it('sets the changes between the car list and the rules', () => {
     const changes = systemPrompt.indexOf('Breytingar á listanum frá')
     const lastCar = Math.max(
-      ...cars.map((car) => systemPrompt.indexOf(`${car.label}: `)),
+      ...cars.map((car) => systemPrompt.indexOf(carRow(car))),
     )
     expect(changes).toBeGreaterThan(lastCar)
     expect(changes).toBeLessThan(systemPrompt.indexOf('Gott að hafa í huga'))
@@ -123,7 +136,7 @@ describe('the assistant system prompt', () => {
   // back as the car it sits beside
   it('gives every car the ref its marker resolves to', () => {
     for (const car of cars) {
-      expect(lineOf(car), car.id).toContain(`(auðkenni: ${carRef(car)})`)
+      expect(cellOf(car, 'auðkenni'), car.id).toBe(carRef(car))
       expect(resolveCarRefs([carRef(car)])).toEqual([car.id])
     }
   })

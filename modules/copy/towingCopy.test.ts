@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
-import { towingClause, towingFigure, towingText } from './towingCopy'
+import {
+  towingCell,
+  towingClause,
+  towingFigure,
+  towingText,
+} from './towingCopy'
 
 describe('towingFigure', () => {
   it('tells a figure from no towbar and from no figure at all', () => {
@@ -31,5 +36,16 @@ describe('towingText', () => {
 
   it('says when there is no figure, rather than a number', () => {
     expect(towingText(null)).toBe('dráttargeta óþekkt')
+  })
+})
+
+describe('towingCell', () => {
+  it('gives the figure alone, as its heading names the unit', () => {
+    expect(towingCell(1500)).toBe('1.500')
+  })
+
+  it('tells no towbar from a figure not known', () => {
+    expect(towingCell(0)).toBe('enginn dráttarkrókur')
+    expect(towingCell(null)).toBe('óþekkt')
   })
 })
