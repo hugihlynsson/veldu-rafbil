@@ -27,6 +27,7 @@ import CompareAnswerCars from './CompareAnswerCars'
 import TypingIndicator from './TypingIndicator'
 import { getConversationId } from '@/utils/chatStorage'
 import { track } from '@/utils/track'
+import useScrollEdges from '@/utils/useScrollEdges'
 
 /**
  * The page in view, at the foot of a conversation not yet on it,
@@ -80,6 +81,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
   // Held until the dialog has closed: the page behind it is inert until then,
   // and the car's card could not take the focus
   const pickedCar = useRef<Car | undefined>(undefined)
+  const scrollEdges = useScrollEdges()
   const { messages, status, error } = session
   const lastMessage = messages.at(-1)
   // Reopening shows what was already said as it was left; only what arrives
@@ -162,6 +164,7 @@ const ChatModal: React.FunctionComponent<Props> = ({
           >
             <ChatHeader
               hasMessages={messages.length > 0}
+              scrolled={scrollEdges.scrolled}
               onClose={close}
               onClearChat={() => {
                 if (
@@ -175,7 +178,10 @@ const ChatModal: React.FunctionComponent<Props> = ({
               }}
             />
 
-            <div className="flex-1 overflow-y-auto pt-5 pb-21 flex flex-col">
+            <div
+              ref={scrollEdges.ref}
+              className="flex-1 overflow-y-auto pt-2 pb-21 flex flex-col"
+            >
               {turns.map((turn, index) => {
                 const isLastTurn = index === turns.length - 1
                 return (
