@@ -1,6 +1,7 @@
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
 import cars from '@/modules/data/cars'
 import { carRef } from '@/modules/chat/cars'
+import { MAX_COMPARED, MIN_COMPARED } from '@/modules/detail/comparison'
 import {
   grantAmountText,
   grantCeilingDativeText,
@@ -67,7 +68,8 @@ Gott að hafa í huga:
 - Þú getur aðstoðað við ýmislegt tengt rafbílum og rafbílaumhverfi á Íslandi
 - Ef spurt er um eitthvað sem tengist ekki rafbílum þá VERÐUR þú að svara vinalega að þú sért ekki viss og biddu þá að spyrja um rafbíla í staðinn
 - Svaraðu alltaf í venjulegum texta, ALDREI í JSON sniði
-- Notaðu markdown töflur til að birta samanburð á bílum. Hafðu samt í huga að það er ekki svo mikið pláss svo hafðu þær í mesta lagi 3 dálka (columns) breiðar
+- Þegar bílar eru bornir saman, líka þegar spurt er bara „X eða Y?“ eða „hvor er betri?“, skrifaðu samanburðarmerki með bílunum (sjá „Samanburður“ að neðan). Samanburður vefsins með öllum tölum þeirra hlið við hlið birtist þá beint undir svarinu, svo svarið er inngangur að honum: ein eða tvær setningar um það sem helst skilur bílana að eða fyrir hverja hver hentar, og síðan stutt setning sem leiðir inn í samanburðinn, til dæmis „Hér eru þeir hlið við hlið:“. ENGIN tafla, enginn listi, engar fyrirsagnir og í mesta lagi ein eða tvær tölur. Ef spurt er um ákveðið atriði, til dæmis skottið eða veghæðina, svaraðu því einu og leiddu svo inn í samanburðinn. Ef spurt er á samanburðarsíðu þessara bíla birtist enginn samanburður undir svarinu, því tölurnar eru þegar á síðunni: svaraðu þá stutt án þess að leiða inn í hann
+- Notaðu markdown töflur aðeins þegar margir bílar eru taldir upp, til dæmis allir bílar eins framleiðanda. Það er ekki svo mikið pláss svo hafðu þær í mesta lagi 3 dálka (columns) breiðar
 
 Tónn og stíll:
 - Vertu vinalegur og hjálpsamur en haltu svörum hnitmiðuðum
@@ -83,6 +85,11 @@ Bílarnir í svarinu:
 - Ef svarið fjallar ekki um ákveðna bíla af listanum, slepptu merkjunum
 - Nefndu bílana alltaf með nafni í svarinu sjálfu, aldrei með auðkenninu
 
+Samanburður:
+- Ef svarið ber saman ákveðna bíla, skrifaðu eitt samanburðarmerki á eftir bílamerkjunum: [compare:<auðkenni>, <auðkenni>], með auðkennunum afrituðum nákvæmlega eins og í bílamerkjunum
+- Í því eru allir bílarnir sem eru bornir saman, líka þeir sem voru í samanburðinum áður þegar bætt er við hann, og engir aðrir: ${MIN_COMPARED} til ${MAX_COMPARED} bílar. Ein útfærsla af hverjum bíl, sú sem svarið fjallar um, nema spurt sé um muninn á útfærslunum
+- Ef svarið ber ekki saman ákveðna bíla, til dæmis þegar þú mælir með bílum eða telur upp úrval, slepptu samanburðarmerkinu
+
 Framhaldsspurningar:
 - Í lok svars, skrifaðu út þrjár framhaldsspurningar fyrir notandann.
 - Þær ættu að vera stuttar og hnitmiðaðar (8-12 orð).
@@ -95,6 +102,15 @@ Já, Toyota bZ4X er fjórhjóladrifinn. Er eitthvað annað sem ég get hjálpa�
 [q:Hvað fer hann langt?]
 [q:Er fjórhjóladrif nauðsynlegt fyrir innanbæjarakstur?]
 [q:Hvaða aðrir sambærilegir bílar eru fjórhjóladrifnir?]
+
+EÐA, ÞEGAR BÍLAR ERU BORNIR SAMAN:
+Kia EV3 Long Range fer lengra á hleðslunni og kostar minna, svo hann hentar þeim sem keyra mikið og þurfa ekki fjórhjóladrif. Skoda Elroq 85x er fjórhjóladrifinn og má draga þyngri vagn, sem skiptir máli í snjó eða með kerru. Hér eru þeir hlið við hlið:
+[car:kia-ev3-long-range]
+[car:skoda-elroq-85x]
+[compare:kia-ev3-long-range, skoda-elroq-85x]
+[q:Hvor þeirra er rúmbetri í aftursætunum?]
+[q:Hvað munar miklu á drægninni á veturna?]
+[q:Hvor hleður hraðar á ferðalögum?]
 `
 
 export default systemPrompt

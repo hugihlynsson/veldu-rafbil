@@ -7,6 +7,7 @@ import {
 
 import {
   createMarkerSplitter,
+  emptyMarkers,
   markerTransform,
   splitMarkers,
   type AnswerMarkers,
@@ -20,6 +21,7 @@ const answer = `Já, Toyota bZ4X er fjórhjóladrifinn.
 
 [car:toyota-bz4x-awd]
 [car:toyota-bz4x-touring-awd]
+[compare:toyota-bz4x-awd, toyota-bz4x-touring-awd]
 [q:Hvað fer hann langt?]
 [q:Er fjórhjóladrif nauðsynlegt fyrir innanbæjarakstur?]
 [q:Hvaða aðrir sambærilegir bílar eru fjórhjóladrifnir?]
@@ -38,6 +40,7 @@ const markers: AnswerMarkers = {
     'Hvaða aðrir sambærilegir bílar eru fjórhjóladrifnir?',
   ],
   cars: ['toyota-bz4x-awd', 'toyota-bz4x-touring-awd'],
+  comparison: ['toyota-bz4x-awd, toyota-bz4x-touring-awd'],
 }
 
 const streamed = (chunks: string[]) => {
@@ -79,6 +82,7 @@ describe('splitting markers out of an answer', () => {
       text: 'Hann fer 500 km.',
       followUps: [],
       cars: [],
+      comparison: [],
     })
   })
 
@@ -93,6 +97,7 @@ describe('splitting markers out of an answer', () => {
       text: 'Fyrst  svo meira',
       followUps: ['Spurning?'],
       cars: [],
+      comparison: [],
     })
   })
 
@@ -105,6 +110,7 @@ describe('splitting markers out of an answer', () => {
       text: 'Kia EV3  eða .',
       followUps: [],
       cars: ['kia-ev3-long-range', 'byd-seal-base'],
+      comparison: [],
     })
   })
 
@@ -122,6 +128,7 @@ describe('splitting markers out of an answer', () => {
       text: 'Svarið.',
       followUps: [],
       cars: [],
+      comparison: [],
     })
     expect(splitMarkers('Svarið.\n[car:kia-ev').text).toBe('Svarið.')
   })
@@ -131,6 +138,22 @@ describe('splitting markers out of an answer', () => {
     expect(splitMarkers(long).text).toBe(long)
     const car = `Texti [car: ${'orð '.repeat(30)}endir.`
     expect(splitMarkers(car).text).toBe(car)
+  })
+
+  // [compare: and [car: share their first two characters
+  it('tells a comparison marker from a car marker, however the stream is cut', () => {
+    const text =
+      'Svar.\n[car:kia-ev3-long-range]\n[compare:kia-ev3-long-range, byd-seal-base]'
+    const whole = splitMarkers(text)
+    expect(whole).toEqual({
+      text: 'Svar.',
+      followUps: [],
+      cars: ['kia-ev3-long-range'],
+      comparison: ['kia-ev3-long-range, byd-seal-base'],
+    })
+    for (let at = 1; at < text.length; at++) {
+      expect(streamed([text.slice(0, at), text.slice(at)])).toMatchObject(whole)
+    }
   })
 
   it('ignores an empty marker', () => {
@@ -143,7 +166,7 @@ describe('splitting markers out of an answer', () => {
 
 describe('markerTransform', () => {
   const run = async (parts: TextStreamPart<ToolSet>[]) => {
-    const found: AnswerMarkers = { followUps: [], cars: [] }
+    const found = emptyMarkers()
     const out = await convertReadableStreamToArray(
       convertArrayToReadableStream(parts).pipeThrough(markerTransform(found)()),
     )
@@ -189,6 +212,6 @@ describe('markerTransform', () => {
     const { out, found } = await run([reasoning])
 
     expect(out).toEqual([reasoning])
-    expect(found).toEqual({ followUps: [], cars: [] })
+    expect(found).toEqual(emptyMarkers())
   })
 })

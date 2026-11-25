@@ -128,6 +128,34 @@ describe('streamChat', () => {
     })
   })
 
+  it('sends the cars an answer compares, each real and once', async () => {
+    const { message } = await read(
+      await streamChat({
+        model: modelSaying([
+          'Svar.\n',
+          `[compare:${carRef(second)}, tesla-model-z, ${carRef(first)}, ${carRef(second)}]`,
+        ]),
+        messages: [question],
+      }),
+    )
+
+    expect(message.metadata).toEqual({ comparison: [second.id, first.id] })
+  })
+
+  it('sends no comparison of fewer than two cars', async () => {
+    const { message } = await read(
+      await streamChat({
+        model: modelSaying([
+          'Svar.\n',
+          `[compare:${carRef(first)}, tesla-model-z]`,
+        ]),
+        messages: [question],
+      }),
+    )
+
+    expect(message.metadata).toBeUndefined()
+  })
+
   it('reports the clean answer and its markers when it finishes', async () => {
     let finish: ChatFinish | undefined
     await read(
