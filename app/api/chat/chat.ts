@@ -23,9 +23,13 @@ import {
   createFetchCarDetailsTool,
   upgradeCarDetailsCalls,
 } from './tools/fetchCarDetails'
+import { getSellerLinkTool } from './tools/getSellerLink'
 import { withPageContext } from './pageContext'
 
-const createTools = () => ({ fetchCarDetails: createFetchCarDetailsTool() })
+const createTools = () => ({
+  fetchCarDetails: createFetchCarDetailsTool(),
+  getSellerLink: getSellerLinkTool,
+})
 
 // Reading a conversation asks only for the tools' schemas; an answer is given
 // tools of its own, as the car-details tool counts its calls

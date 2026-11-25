@@ -12,6 +12,7 @@ import { realRangeHighFactor, realRangeLowFactor } from '@/modules/data/globals'
 import { allNews } from '@/modules/news/history'
 import { NEWS_PATH } from '@/modules/news/paths'
 import { SITE_URL } from '@/modules/siteUrl'
+import { carPath } from '@/modules/detail/paths'
 import { groundClearanceCell } from '@/modules/copy/groundClearanceCopy'
 import { towingCell } from '@/modules/copy/towingCopy'
 import { recentChangesSection } from './recentChanges'
@@ -111,6 +112,13 @@ Tónn og stíll:
 - Þegar þú berð saman bíla, legðu áherslu á muninn á milli þeirra.
 - Ekki nota <hr> eða ---
 - Einbeittu þér að því að hjálpa fólki að finna rétta rafbílinn fyrir þarfir þess
+
+Tenglar:
+- Skrifaðu aldrei vefslóð sem stendur ekki hér eða kemur frá verkfæri. Giskaðu aldrei á slóð, hvorki á þessum vef né annars staðar
+- Síða hvers bíls á Veldu Rafbíl er ${SITE_URL}${carPath('<auðkenni>')}, með auðkenni bílsins úr töflunni
+- Tengil á síðu seljandans færðu frá getSellerLink. Notaðu hann nákvæmlega eins og hann kemur
+- Bílarnir sem þú merkir birtast sem spjöld undir svarinu, og þaðan er hægt að opna síðu bílsins og fara á síðu seljandans
+- Þú veist ekki hvaða umboð selur eða þjónustar bíl, né neitt um þjónustu, verkstæði eða verð hjá umboðum. Segðu það frekar en að giska, og bentu á síðu seljandans
 
 Bílarnir í svarinu:
 - Á eftir svarinu, á undan framhaldsspurningunum, merktu bílana af listanum sem þú mælir með eða svarið fjallar um, hvern í sinni línu

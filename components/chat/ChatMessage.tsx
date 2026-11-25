@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { useEffect, useRef, useState } from 'react'
 import type { ChatMessage as Message } from '@/modules/chat/message'
+import { leavesSite } from '@/modules/chat/answerLinks'
 import rehypeWords from '@/modules/chat/rehypeWords'
 import prefersReducedMotion from '@/utils/prefersReducedMotion'
 import useShrinkwrap from '@/utils/useShrinkwrap'
@@ -71,6 +72,14 @@ const ChatMessage: React.FunctionComponent<Props> = ({
                   revealsWords ? [[rehypeWords, { part: index }]] : []
                 }
                 components={{
+                  a: ({ href, children }) =>
+                    leavesSite(href) ? (
+                      <a href={href} target="_blank" rel="noopener">
+                        {children}
+                      </a>
+                    ) : (
+                      <a href={href}>{children}</a>
+                    ),
                   table: ({ children }) => (
                     <div className="table-wrapper">
                       <table>{children}</table>
