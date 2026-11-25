@@ -24,11 +24,12 @@ import {
   upgradeCarDetailsCalls,
 } from './tools/fetchCarDetails'
 import { getSellerLinkTool } from './tools/getSellerLink'
+import { SELLER_LINK_TOOL } from '@/modules/chat/answerLinks'
 import { withPageContext } from './pageContext'
 
 const createTools = () => ({
   fetchCarDetails: createFetchCarDetailsTool(),
-  getSellerLink: getSellerLinkTool,
+  [SELLER_LINK_TOOL]: getSellerLinkTool,
 })
 
 // Reading a conversation asks only for the tools' schemas; an answer is given
