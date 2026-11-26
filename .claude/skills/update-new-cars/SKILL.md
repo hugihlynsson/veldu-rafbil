@@ -139,6 +139,7 @@ For each electric variant in the list, sort it into one of:
 | ----------------------------- | ------------------------------------------------------------ |
 | Price changed                 | Edit `price`                                                 |
 | Variant in the list, not here | Add it (see below)                                           |
+| Announced here, but no price  | Add it as expected, at an estimate (see below)               |
 | Variant here, not in the list | Investigate before removing                                  |
 | Now shipping                  | Delete `expectedDelivery`                                    |
 | Delivery date changed         | Edit `expectedDelivery`                                      |
@@ -601,9 +602,20 @@ And, for a car that is genuinely new to the list:
 #### Estimating a price
 
 An importer often announces a model before it prices it ("Væntanlegt" in the
-price column). It can still go in, with an estimated `price`, when the owner
-asks for it; otherwise it goes under **Not finished** in the report. The
-estimate is worked out the same way every time:
+price column, or a model page with no price on it). Add it anyway, with an
+`expectedDelivery` and an estimated `price`, rather than leaving it out until
+the price is published: otherwise a car the importer is already selling is
+missing from the list, and the sweep that finds the price replaces the
+estimate. The owner settled this on 2026-11-26. Give the delivery the importer
+names, or the year it says the car arrives (`2027`) when it names nothing
+narrower.
+
+First make sure there really is no price. A model page that prints none can
+still link a price list that does: the Peugeot e-308 and e-308 SW pages showed
+no price for three weeks while the `E-308.pdf` they linked had it. Read every
+price list or brochure the page links before estimating.
+
+The estimate is worked out the same way every time:
 
 1. **Start from the German price on ev-database.** Every model has one, and it
    is the one base that is there for every make.
