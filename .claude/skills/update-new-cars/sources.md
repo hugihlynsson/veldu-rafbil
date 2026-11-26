@@ -43,7 +43,7 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
 | Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
 | Opel          | —          | —          | No price published; see 2026-11-10 note        |
-| Peugeot       | 2026-11-25 | —          | Read from the model pages                      |
+| Peugeot       | 2026-11-26 | 2026-11-05 | e-308 and SW from their PDF; rest 11-25 pages  |
 | Polestar      | 2026-11-12 | 2026-11-05 | Polestar 5; 2, 3 and 4 from 2026-10-29         |
 | Porsche       | 2026-11-12 | 2026-10-30 |                                                |
 | Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
@@ -183,8 +183,10 @@ page prints "Fullt verð frá" per trim, before the grant, and links a PDF under
 `/content/dam/peugeot/iceland/verdlistar/`. Read on 2026-10-31 from the pages.
 By 2026-11-03 the pages had moved to `/tegundir/<model>/e-<model>.html`; the
 old URLs redirect there, except `E-Traveller.html`, which is a 404, and the
-menu no longer lists the e-Traveller. The menu lists an e-308 and e-308 SW that
-the car list does not have, with no price on their pages. On 2026-11-12 neither
+menu no longer lists the e-Traveller. The e-308 and e-308 SW
+share one PDF, `E-308.pdf`, which has a text layer but downloads rather than
+opens in the browser; fetch it from a page on the site and inflate its
+streams in the page to read it. On 2026-11-12 neither
 the e-Rifter nor the e-Traveller had a page, a PDF, a sitemap entry or a car in
 Brimborg's stock, and both are deprecated. `/sitemap.xml`, fetched from inside
 the site in the built-in browser, lists every model page Peugeot still has.

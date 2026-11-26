@@ -669,12 +669,12 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Citroën ë-C4 er millistór hlaðbakur sem höfðar einkum til þeirra sem leita að þægilegum og afslöppuðum fólksbíl til daglegra nota. Hann skarar ekki fram úr í tölulegum samanburði en býður upp á hefðbundin þægindi merkisins, með mjúkri fjöðrun og lágstemmdum karakter sem fer vel með mann í rólegum akstri.',
       'Bíllinn er fremur ódýr og drægnin dugar prýðilega innanbæjar og í styttri ferðir, þótt gera verði ráð fyrir að hún dragist saman í íslenskum vetrarkulda. Á langferðum þarf hins vegar að sýna þolinmæði, þar sem hann hleður hægar en flestir í sínum verðflokki.',
-      'Stærsti gallinn er að bíllinn má alls ekki draga kerru, farangursrýmið er takmarkað og hröðunin með því lémagna sem gerist. Volkswagen ID. Cross er til dæmis 100.000 kr. ódýrari, mun sneggri, með um 20% styttri hleðslustopp, 95 lítrum stærra skott og leyfilega dráttargetu upp á 1.200 kg.',
+      'Stærsti gallinn er að bíllinn má alls ekki draga kerru, farangursrýmið er takmarkað og hröðunin með því slakasta sem gerist. Peugeot e-308 er náskyldur honum, 100.000 kr. ódýrari og drífur 34 km lengra, en Renault Scenic E-Tech EV60 kostar 200.000 kr. meira og bætir úr helstu göllunum, með 165 l stærra skott og leyfi til að draga 1.100 kg.',
       'Þetta er prýðilegur kostur fyrir þá sem meta mýkt og einfaldleika mest, en þeir sem þurfa meira hagnýtt gildi fá talsvert meira fyrir peninginn hjá helstu keppinautum.',
     ],
     questions: [
       'Er fjöðrunin virkilega svona mjúk?',
-      'Af hverju frekar en Volkswagen ID. Cross?',
+      'Hvernig er hann miðað við Peugeot e-308?',
       'Hvernig er hann miðað við Fiat 600e?',
       'Er Renault Scenic E-Tech EV60 betri?',
       'Dugar aflið vel í framúrakstur?',
@@ -684,7 +684,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvað kemst mikið í skottið?',
       'Hvernig er plássið í aftursætinu?',
     ],
-    facts: 'e4b2a924b401',
+    facts: 'e85716546390',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'fiat-500e-base': {
@@ -2640,6 +2640,48 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     facts: 'a002520e1a83',
     model: 'gemini-3.8-flash, thinking medium',
   },
+  'peugeot-e-308-base': {
+    paragraphs: [
+      'Peugeot e-308 er meðalstór hlaðbakur, lægri og sportlegri en jepplingarnir sem ráða ríkjum í þessum verðflokki. Hönnunin er áberandi, með upplýstu grilli, og innanrýmið byggir á i-Cockpit Peugeot, þar sem lítið stýri situr lágt og mælaborðið ofan við það. Hann hentar þeim sem vilja laglegan og vel búinn bíl til daglegra nota.',
+      'Í tölunum hefur hann fáa styrkleika. Hann er fremur ódýr og drægnin er í meðallagi miðað við aðra á svipuðu verði, sem dugar vel innanbæjar en kallar á stopp á lengri leiðum í vetrarkulda. Það sem hann færir helst er vönduð innrétting og ríkulegur búnaður, enda er hann aðeins seldur hér í GT-útfærslu.',
+      'Á móti kemur að hann hleður hægar en flestir keppinautar hans, er með þeim hægustu í upptaki, skottið er lítið og hann má ekki draga kerru. Volkswagen ID.3 Neo 58 kWh kostar það sama en drífur 42 km lengra, hleður með um 30% styttri stoppum og er sneggri. Kia EV4 Fastback kostar 600.000 kr. meira en drífur 162 km lengra og má draga 1.000 kg.',
+      'e-308 er fyrir þá sem velja bíl eftir útliti og tilfinningu frekar en tölunum.',
+    ],
+    questions: [
+      'Hvernig er hann miðað við Volkswagen ID.3?',
+      'Hvað fær maður umfram Citroën ë-C4?',
+      'Borgar sig að borga meira fyrir Kia EV4?',
+      'Hentar i-Cockpit hávöxnum ökumönnum?',
+      'Hvað munar á honum og e-308 SW?',
+      'Hvað er innifalið í GT-útfærslunni?',
+      'Má setja hjólafestingu á hann?',
+      'Hvernig dugar hann í langferð að vetri?',
+      'Kemst barnavagn í lítið skottið?',
+      'Hvernig hafa rafbílar Peugeot reynst?',
+    ],
+    facts: '6bd9d199aac4',
+  },
+  'peugeot-e-308-sw-base': {
+    paragraphs: [
+      'Peugeot e-308 SW er skutbíll í millistærð, einn fárra rafknúinna skutbíla á þessu verðbili, þar sem jepplingar eru nær allsráðandi. Hann er lengri en hlaðbakurinn og nýtir lengdina í skottið, en heldur lágum og rennilegum línum og i-Cockpit-innréttingu Peugeot. Hann hentar þeim sem þurfa flutningspláss en kæra sig ekki um jeppling.',
+      'Skottið er stærra en hjá flestum á svipuðu verði og stækkar mikið þegar aftursætin eru felld, sem nýtist í skíðaferðir og stærri innkaup. Verðið er fremur lágt og drægnin í meðallagi í sínum flokki, nóg fyrir daglegan akstur en með stoppum á lengri leiðum í vetrarkulda.',
+      'Hann hleður þó hægar en flestir keppinautar hans, er með þeim hægustu í upptaki og má ekki draga kerru, sem margir kaupendur skutbíla sakna. Mazda 6e Long Range er stærri bíll, ódýrari og drífur 108 km lengra og má draga 1.500 kg, en skottið er 98 l minna.',
+      'e-308 SW er skynsamlegur fjölskyldubíll fyrir þá sem setja farangursrými og hefðbundið bílsnið ofar drægni og kerrudrætti.',
+    ],
+    questions: [
+      'Hvernig er hann miðað við Mazda 6e?',
+      'Er Kia EV3 betri kaup fyrir fjölskyldu?',
+      'Af hverju má hann ekki draga kerru?',
+      'Hvað munar á honum og e-308 hlaðbaknum?',
+      'Er Renault Scenic rúmbetri í aftursætum?',
+      'Má setja hjólafestingu á hann?',
+      'Henta langbogarnir fyrir skíðabox?',
+      'Hvað er innifalið í GT-útfærslunni?',
+      'Hvernig dugar hann í langferð að vetri?',
+      'Hvernig hafa rafbílar Peugeot reynst?',
+    ],
+    facts: '2fbc0a66f35b',
+  },
   'peugeot-e-3008-base': {
     paragraphs: [
       'Peugeot e-3008 er jepplingur sem sker sig úr fyrir djarfa hönnun og vandað innanrými. Hann hentar vel fólki sem leitar að stílhreinum fjölskyldubíl til daglegra nota og ferðalaga.',
@@ -3318,7 +3360,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     ],
     questions: [
       'Borgar sig að taka frekar EV87?',
-      'Af hverju ekki frekar Skoda Elroq 85x?',
+      'Af hverju ekki frekar Peugeot e-308 SW?',
       'Kemst hann á Akureyri án þess að hlaða?',
       'Hvernig reynist framhjóladrifið í snjó?',
       'Rúmast þrír barnabílstólar í aftursætinu?',
@@ -3328,7 +3370,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig virkar innbyggða Google-kerfið?',
       'Ræður hann við að draga hjólhýsi?',
     ],
-    facts: '6b50a7d294a9',
+    facts: '67c5718f22e5',
   },
   'renault-scenic-e-tech-ev87': {
     paragraphs: [
@@ -4274,13 +4316,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Volkswagen ID.3 Neo er meðalstór hlaðbakur sem hentar sérlega vel í daglegan innanbæjarakstur og snatt fyrir minni fjölskyldur. Afturhjóladrifið gefur honum afar þröngan beygjuradíus sem gerir hann lipran í þröngum götum og bílastæðahúsum.',
       'Þótt hann drífi fremur stutt yfir heildina drífur hann lengra en flestir í sínum verðflokki, og verðið á hvern kílómetra drægni er sérlega hagstætt. Hann hleður jafnframt hraðar á ferðalögum en flestir keppinautar hans, sem kemur sér vel þegar farið er milli landshluta.',
-      'Helsti gallinn við bílinn er að hann má alls ekki draga kerru, sem útilokar hann fyrir þá sem þurfa að flytja garðúrgang eða tjaldvagna. Farangursrýmið er sömuleiðis minna en gerist hjá flestum öðrum bílum á svipuðu verði. Fyrir aðeins 200.000 kr. meira býður Nissan Leaf Extended Range til að mynda upp á 130 km meiri drægni, stærra skott og leyfi fyrir kerrudrætti.',
+      'Helsti gallinn við bílinn er að hann má alls ekki draga kerru, sem útilokar hann fyrir þá sem þurfa að flytja garðúrgang eða tjaldvagna. Farangursrýmið er sömuleiðis minna en gerist hjá flestum öðrum bílum á svipuðu verði. Fyrir aðeins 100.000 kr. meira býður Kia EV3 Long Range til að mynda upp á 113 km meiri drægni, 100 l stærra skott og leyfi til að draga 1.000 kg.',
       'Volkswagen ID.3 Neo er því lipur og þægilegur fólksbíll á góðu verði, en hentar síður ef kerrudráttur og mikið farangurspláss eru nauðsynleg.',
     ],
     questions: [
       'Er 79 kWh útfærslan þess virði?',
       'Af hverju frekar en Kia EV3 Long Range?',
-      'Er Nissan Leaf Extended Range betri kaup?',
+      'Hvað hefur hann fram yfir Peugeot e-308?',
       'Hleður hann hraðar en Hyundai IONIQ 3?',
       'Má setja hjólagrind á hann?',
       'Kemst barnavagn fyrir í skottinu?',
@@ -4289,7 +4331,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig dugar hann í hringferð um landið?',
       'Er hann of aflítill á þjóðveginum?',
     ],
-    facts: '0dcd1e6d0516',
+    facts: '40fb8ba85fd6',
     model: 'gemini-3.8-flash, thinking medium',
   },
   'volkswagen-id-3-neo-79-kwh': {

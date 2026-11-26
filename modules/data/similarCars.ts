@@ -157,7 +157,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
   ],
   'citroen-e-c4-base': [
     'fiat-600e-base',
-    'volkswagen-id-cross-base',
+    'peugeot-e-308-base',
     'renault-scenic-e-tech-ev60',
   ],
   'fiat-500e-base': [
@@ -631,6 +631,16 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'ford-puma-base',
     'fiat-600e-base',
   ],
+  'peugeot-e-308-base': [
+    'volkswagen-id-3-neo-58-kwh',
+    'citroen-e-c4-base',
+    'kia-ev4-fastback',
+  ],
+  'peugeot-e-308-sw-base': [
+    'renault-scenic-e-tech-ev60',
+    'mazda-6e-long-range',
+    'kia-ev3-long-range',
+  ],
   'peugeot-e-3008-base': [
     'skoda-elroq-85x',
     'renault-scenic-e-tech-ev87',
@@ -797,7 +807,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'hyundai-ioniq-3-standard-range',
   ],
   'renault-scenic-e-tech-ev60': [
-    'skoda-elroq-85x',
+    'peugeot-e-308-sw-base',
     'xpeng-g6-rwd-standard-range',
     'kgm-torres-evx',
   ],
@@ -1022,8 +1032,8 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'hyundai-ioniq-3-long-range',
   ],
   'volkswagen-id-3-neo-58-kwh': [
+    'peugeot-e-308-base',
     'hyundai-ioniq-3-long-range',
-    'nissan-leaf-extended-range',
     'kia-ev3-long-range',
   ],
   'volkswagen-id-3-neo-79-kwh': [
