@@ -12,6 +12,17 @@ export const comparisonPathOf = (compared: ReadonlyArray<Car>): string =>
 
 export const carPath = (slug: string): string => `${CAR_PATH}/${slug}`
 
+// Each car a comparison can add multiplies its addresses, and crawlers that
+// followed every one fetched hundreds of thousands of pages a month. Pairs are
+// crawled; robots.txt keeps crawlers off larger ones, and a link to one tells
+// them not to follow it.
+export const MAX_CRAWLED_COMPARED = 2
+
+export const comparisonLinkRel = (
+  compared: ReadonlyArray<unknown>,
+): 'nofollow' | undefined =>
+  compared.length > MAX_CRAWLED_COMPARED ? 'nofollow' : undefined
+
 /** One car's review, which the sheet over the list fetches as it opens */
 export const carReviewPath = (slug: string): string =>
   `${carPath(slug)}/umsogn.json`

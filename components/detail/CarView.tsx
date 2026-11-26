@@ -6,7 +6,11 @@ import Link from 'next/link'
 import type { Car } from '@/modules/data/cars'
 import type { CarReview } from '@/modules/data/carReviews'
 import { carName } from '@/modules/data/getCarId'
-import { carPathOf, comparisonPathOf } from '@/modules/detail/paths'
+import {
+  carPathOf,
+  comparisonLinkRel,
+  comparisonPathOf,
+} from '@/modules/detail/paths'
 import { carFigures, type SpecKey } from '@/modules/detail/specs'
 import { carSubtitle, deprecatedNotice } from '@/modules/detail/subtitle'
 import addDecimalSeparators from '@/modules/copy/addDecimalSeparators'
@@ -238,6 +242,7 @@ const CarView: FunctionComponent<Props> = ({
               </h2>
               <Link
                 href={comparisonPathOf([car, ...similar])}
+                rel={comparisonLinkRel([car, ...similar])}
                 className="text-sm font-semibold text-tint no-underline hover:underline"
               >
                 Bera alla saman <span aria-hidden>→</span>

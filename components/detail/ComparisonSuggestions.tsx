@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import type { Car } from '@/modules/data/cars'
 import { carSlug } from '@/modules/data/getCarId'
 import { addReason } from '@/modules/detail/addReason'
-import { comparisonPath } from '@/modules/detail/paths'
+import { comparisonLinkRel, comparisonPath } from '@/modules/detail/paths'
 import PlusIcon from '@/components/PlusIcon'
 import CompareMoreLink from './CompareMoreLink'
 import SuggestedCarCard from './SuggestedCarCard'
@@ -71,6 +71,7 @@ const ComparisonSuggestions: FunctionComponent<Props> = ({
             reason={addReason(car, cars)}
             action={{
               href: comparisonPath([...slugs, carSlug(car)]),
+              rel: comparisonLinkRel([...slugs, car]),
               label: `Bæta ${car.label} við samanburðinn`,
               text: 'Bæta við',
               icon: <PlusIcon size={12} />,
