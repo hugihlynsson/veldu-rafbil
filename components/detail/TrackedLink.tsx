@@ -13,6 +13,7 @@ interface Props {
   /** Fathom's name for it, which only counts */
   fathomEvent: string
   className?: string
+  rel?: string
   'aria-label'?: string
   children: ReactNode
 }
