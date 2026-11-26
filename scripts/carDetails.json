@@ -966,6 +966,31 @@
     "segment": "B - Compact",
     "cargoWithFrunk": 434
   },
+  "peugeot-e-308-base": {
+    "source": "https://ev-database.org/car/3321/Peugeot-e-308-58-kWh",
+    "read": "2026-11-26",
+    "evDatabaseUrl": "https://ev-database.org/car/3321/Peugeot-e-308-58-kWh",
+    "body": "Hatchback",
+    "segment": "C - Medium",
+    "length": 4367,
+    "cargo": 361,
+    "frunk": 0,
+    "warrantyYears": 8,
+    "warrantyKm": 160000
+  },
+  "peugeot-e-308-sw-base": {
+    "source": "https://ev-database.org/car/3322/Peugeot-e-308-SW-58-kWh",
+    "read": "2026-11-26",
+    "evDatabaseUrl": "https://ev-database.org/car/3322/Peugeot-e-308-SW-58-kWh",
+    "body": "Station/Estate",
+    "segment": "C - Medium",
+    "length": 4636,
+    "cargo": 505,
+    "cargoMax": 1402,
+    "frunk": 0,
+    "warrantyYears": 8,
+    "warrantyKm": 160000
+  },
   "peugeot-e-3008-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",
