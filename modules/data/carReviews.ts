@@ -669,7 +669,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Citroën ë-C4 er millistór hlaðbakur sem höfðar einkum til þeirra sem leita að þægilegum og afslöppuðum fólksbíl til daglegra nota. Hann skarar ekki fram úr í tölulegum samanburði en býður upp á hefðbundin þægindi merkisins, með mjúkri fjöðrun og lágstemmdum karakter sem fer vel með mann í rólegum akstri.',
       'Bíllinn er fremur ódýr og drægnin dugar prýðilega innanbæjar og í styttri ferðir, þótt gera verði ráð fyrir að hún dragist saman í íslenskum vetrarkulda. Á langferðum þarf hins vegar að sýna þolinmæði, þar sem hann hleður hægar en flestir í sínum verðflokki.',
-      'Stærsti gallinn er að bíllinn má alls ekki draga kerru, farangursrýmið er takmarkað og hröðunin með því slakasta sem gerist. Peugeot e-308 er náskyldur honum, 100.000 kr. ódýrari og drífur 34 km lengra, en Renault Scenic E-Tech EV60 kostar 200.000 kr. meira og bætir úr helstu göllunum, með 165 l stærra skott og leyfi til að draga 1.100 kg.',
+      'Stærsti gallinn er að bíllinn má alls ekki draga kerru, farangursrýmið er takmarkað og hröðunin með því slakasta sem gerist. Peugeot e-308 er 100.000 kr. ódýrari og drífur 34 km lengra, en Renault Scenic E-Tech EV60 kostar 200.000 kr. meira og bætir úr helstu göllunum, með 165 l stærra skott og leyfi til að draga 1.100 kg.',
       'Þetta er prýðilegur kostur fyrir þá sem meta mýkt og einfaldleika mest, en þeir sem þurfa meira hagnýtt gildi fá talsvert meira fyrir peninginn hjá helstu keppinautum.',
     ],
     questions: [
@@ -2665,7 +2665,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Peugeot e-308 SW er skutbíll í millistærð, einn fárra rafknúinna skutbíla á þessu verðbili, þar sem jepplingar eru nær allsráðandi. Hann er lengri en hlaðbakurinn og nýtir lengdina í skottið, en heldur lágum og rennilegum línum og i-Cockpit-innréttingu Peugeot. Hann hentar þeim sem þurfa flutningspláss en kæra sig ekki um jeppling.',
       'Skottið er stærra en hjá flestum á svipuðu verði og stækkar mikið þegar aftursætin eru felld, sem nýtist í skíðaferðir og stærri innkaup. Verðið er fremur lágt og drægnin í meðallagi í sínum flokki, nóg fyrir daglegan akstur en með stoppum á lengri leiðum í vetrarkulda.',
-      'Hann hleður þó hægar en flestir keppinautar hans, er með þeim hægustu í upptaki og má ekki draga kerru, sem margir kaupendur skutbíla sakna. Mazda 6e Long Range er stærri bíll, ódýrari og drífur 108 km lengra og má draga 1.500 kg, en skottið er 98 l minna.',
+      'Hann hleður þó hægar en flestir keppinautar hans, er með þeim hægustu í upptaki og má ekki draga kerru, sem margir kaupendur skutbíla sakna. Mazda 6e Long Range er stærri bíll og ódýrari, drífur 108 km lengra og má draga 1.500 kg, en skottið er 98 l minna.',
       'e-308 SW er skynsamlegur fjölskyldubíll fyrir þá sem setja farangursrými og hefðbundið bílsnið ofar drægni og kerrudrætti.',
     ],
     questions: [
