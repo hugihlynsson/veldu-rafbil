@@ -22,7 +22,7 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 
 | Make          | Last read  | List dated | Note                                           |
 | ------------- | ---------- | ---------- | ---------------------------------------------- |
-| Audi          | 2026-11-07 | 2026-11-04 | Q4 and Q6; A6 03-18                            |
+| Audi          | 2026-11-26 | 2026-11-19 | Q4; Q6 11-04; A6 03-18                         |
 | BMW           | 2026-11-23 | 2026-11-23 |                                                |
 | BYD           | 2026-11-03 | 2026-10-30 |                                                |
 | Citroën       | —          | —          | No price published; see 2026-11-10 note        |
@@ -36,24 +36,24 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | KGM           | 2026-11-10 | 2026-10-30 |                                                |
 | Kia           | 2026-11-14 | 2026-11-13 | PV5 11-14; EV9 11-12; EV5 and EV6 11-10        |
 | Leapmotor     | 2026-11-20 | 2026-11-19 | ÍSBAND PDF list; prices are images             |
-| Lexus         | 2026-11-25 | —          | TZ unpriced; estimated from NL prices          |
+| Lexus         | 2026-11-26 | —          | TZ unpriced; estimated from NL prices          |
 | Mazda         | 2026-11-25 | 2026-11-25 | 6e; CX-6e 11-16                                |
 | Mercedes-Benz | 2026-11-24 | 2026-11-23 | AMG GT, unpriced; C, GLA, GLB, GLC, CLA 11-16  |
 | MG            | 2026-11-16 | 2026-11-16 |                                                |
 | Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
 | Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
 | Opel          | —          | —          | No price published; see 2026-11-10 note        |
-| Peugeot       | 2026-11-25 | —          | Read from the model pages                      |
+| Peugeot       | 2026-11-26 | —          | Read from the model pages                      |
 | Polestar      | 2026-11-12 | 2026-11-05 | Polestar 5; 2, 3 and 4 from 2026-10-29         |
 | Porsche       | 2026-11-12 | 2026-10-30 |                                                |
 | Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
 | Renault       | 2026-11-19 | 2026-11-18 |                                                |
-| Škoda         | 2026-11-24 | 2026-11-24 | Peaq; Enyaq 11-10; Epiq and Elroq 11-09        |
+| Škoda         | 2026-11-26 | 2026-11-24 | Peaq and Elroq; Enyaq 11-10; Epiq 11-09        |
 | Smart         | 2026-11-10 | 2026-11-02 |                                                |
 | Subaru        | 2026-11-23 | 2026-11-23 |                                                |
 | Suzuki        | 2026-11-10 | 2026-10-30 |                                                |
-| Tesla         | 2026-11-25 | —          | Design pages; no dated list                    |
-| Toyota        | 2026-11-25 | —          |                                                |
+| Tesla         | 2026-11-26 | —          | Design pages; no dated list                    |
+| Toyota        | 2026-11-26 | —          |                                                |
 | Volkswagen    | 2026-11-12 | 2026-11-10 | ID.4 and ID.3 Neo; ID.3, ID.7, Polo 11-04      |
 | Volvo         | 2026-11-21 | 2026-11-18 | EX40 and EC40 MY27.5 11-18; EX90 11-03         |
 | XPENG         | 2026-11-10 | 2026-11-02 |                                                |
@@ -480,3 +480,21 @@ seconds, so KGM was not checked. `scripts/pdf.swift`, `scripts/issuu-pages.sh`
 and `scripts/ipaper-text.py`, which SKILL.md names, are not in the repo: a
 PDFKit reader was written in the scratchpad for `pdf text`, and the iPaper
 page text is the run of long JSON strings in the flipbook's HTML.
+
+**Read on 2026-11-26**: Hekla's Audi Q4 e-tron list carries a
+`Last-Modified` of 2026-11-19 and its Škoda Elroq list one of 2026-11-24,
+both newer than the sweeps since had recorded; every price in them matched
+(Q4 45 quattro 9.490.000, Elroq 85x 7.190.000, RS 8.490.000), and both print
+higher WLTP figures than the car list, which keeps the lower. Check each Hekla
+PDF's header, not only the make's row. The undated lists (Lexus, Peugeot,
+Tesla, Toyota) were read and every price matched; the Lexus TZ is still
+unpriced, the XPENG G9L's page on xpeng.com/is is still a 404, and
+`vw/id-tiguan.pdf` is still a 404. Peugeot's e-308 page still prints no price,
+but it now links `/content/dam/peugeot/iceland/verdlistar/E-308.pdf`, last
+modified 2026-11-09, which answers only from inside the site. No newer list
+than the one last read for BMW, BYD, Fiat, Ford, GWM, Hongqi, Hyundai, JAC,
+Jeep, Kia, Leapmotor, Mazda, Mercedes-Benz, MG, Mini, Nissan, Polestar,
+Porsche, Range Rover, Renault, Smart, Subaru, Suzuki, Volkswagen, Volvo and
+XPENG. `kgm.benni.is` did not answer curl within 30 seconds, so KGM was not
+checked. The helper scripts are now in this skill's `scripts/` folder, and
+`pdf.swift` compiles as SKILL.md says.
