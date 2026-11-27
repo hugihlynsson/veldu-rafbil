@@ -687,6 +687,48 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     facts: 'e85716546390',
     model: 'gemini-3.8-flash, thinking medium',
   },
+  'citroen-e-c5-aircross-comfort-range': {
+    paragraphs: [
+      'Citroën ë-C5 Aircross er fimm sæta jepplingur í millistærð, 4,65 m á lengd, þar sem þægindi og rými ganga fyrir. Hann hentar fjölskyldum sem vilja afslappaðan og rúmgóðan bíl til daglegra nota og ferðalaga frekar en sportlegan akstur.',
+      'Í sínum verðflokki drífur hann lengra en flestir og er ódýrari á hvern kílómetra drægni. Skottið er líka stærra en hjá flestum, 565 l og 1.668 l með aftursætin niðri, og hann má draga 1.250 kg.',
+      'Á móti kemur að hann er hægari en flestir á svipuðu verði og hleður hægar. Systurbíllinn Peugeot e-3008 kostar 290.000 kr. meira, drífur álíka langt og er 1,9 s sneggri í hundraðið. Tesla Model Y Standard Range er 170.000 kr. ódýrari, drífur álíka langt, hleður með um 20% styttri stoppum og hefur mun meira farangursrými. Long Range útgáfan drífur 160 km lengra fyrir 1.100.000 kr. meira.',
+      'ë-C5 Aircross Comfort Range er góður kostur fyrir fólk sem vill rúmgóðan og þægilegan fjölskyldubíl á hagstæðu verði og setur snerpu og hraða hleðslu ekki í forgang.',
+    ],
+    questions: [
+      'Borgar sig að taka Long Range?',
+      'Af hverju hann frekar en Peugeot e-3008?',
+      'Hvernig er hann miðað við Tesla Model Y?',
+      'Er hann betri kostur en Opel Grandland?',
+      'Hversu mikill galli er hæga hleðslan?',
+      'Er hann of latur við framúrakstur?',
+      'Dugar framhjóladrifið í vetrarfærð?',
+      'Hver er raundrægnin í vetrarkulda?',
+      'Kemst barnavagn í skottið?',
+      'Hvenær kemur hann til landsins?',
+    ],
+    facts: '26739874f482',
+  },
+  'citroen-e-c5-aircross-long-range': {
+    paragraphs: [
+      'Citroën ë-C5 Aircross Long Range er langdræga útgáfan af þægindajepplingi Citroën, fimm sæta og 4,65 m á lengd, með 97 kWh rafhlöðu. Hann er hugsaður fyrir fjölskyldur sem aka mikið milli landshluta og vilja stoppa sem sjaldnast.',
+      'Drægnin er helsti kosturinn: 680 km samkvæmt WLTP, meðal þess mesta á svipuðu verði, og hann er meðal þeirra ódýrustu á hvern kílómetra drægni. Hann hleður líka hraðar en flestir í sínum verðflokki og skottið er stærra en hjá flestum, 565 l.',
+      'Gallinn er að hann er meðal þeirra hægustu á svipuðu verði og má draga minna en flestir, 1.200 kg. Renault Scenic E-Tech EV87 er 410.000 kr. ódýrari og 0,9 s sneggri í hundraðið, en drífur 57 km styttra og hleður með um 35% lengri stoppum. Peugeot e-3008 er 810.000 kr. ódýrari og mun sneggri, en drífur 155 km styttra. Comfort Range útgáfan sparar 1.100.000 kr. fyrir 160 km minni drægni.',
+      'ë-C5 Aircross Long Range hentar fólki sem metur drægni og þægindi á langferðum ofar snerpu, og fær óvenju mikla drægni fyrir peninginn.',
+    ],
+    questions: [
+      'Dugar Comfort Range útgáfan?',
+      'Hvernig er hann miðað við Renault Scenic?',
+      'Af hverju hann frekar en Kia EV5?',
+      'Er Peugeot e-3008 ekki betri kaup?',
+      'Kemst hann til Akureyrar að vetri?',
+      'Hvað tekur venjulegt hraðhleðslustopp?',
+      'Er hann of latur við framúrakstur?',
+      'Dugar framhjóladrifið í vetrarfærð?',
+      'Hvernig ræður hann við að draga kerru?',
+      'Hvernig er plássið fyrir fjölskyldu?',
+    ],
+    facts: '6cc0a6623773',
+  },
   'fiat-500e-base': {
     paragraphs: [
       'Fiat 500e er örsmár hlaðbakur sem er sérsniðinn fyrir þéttbýli og þröngar götur. Með sinni sígildu hönnun og mikla persónuleika heillar hann fyrst og fremst þá sem vilja stílhreinan og lipran borgarbíl. Hann er með þeim allra stystu á götunni og því sérlega þægilegur þegar kemur að því að leggja í þröng stæði.',
@@ -2555,14 +2597,14 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'opel-grandland-base': {
     paragraphs: [
       'Opel Grandland er fimm sæta jepplingur sem hentar vel þeim sem vilja látlausan og hagnýtan fjölskyldubíl. Hann leggur áherslu á hefðbundið notagildi og þægindi frekar en óþarfa prjál.',
-      'Helsti styrkleikinn er hve mikla drægni maður fær fyrir verðið, en bíllinn er ódýrari á hvern kílómetra en flestir keppinautar hans. Uppgefin drægni dugar prýðilega milli landshluta yfir sumartímann, þótt reikna megi með að hún dragist saman í vetrarkulda eins og ávallt á Íslandi.',
-      'Helsti gallinn er hversu aflítill og seinn bíllinn er miðað við aðra í sínum verðflokki, auk þess sem hann er aðeins framhjóladrifinn. Ef hugurinn stendur til öruggara grips í snjó og miklu meiri snerpu er Opel Grandland AWD aðeins 400.000 kr. dýrari. Einnig fæst Peugeot e-3008 á 600.000 kr. lægra verði með svipaða drægni en mun sneggri í sprettinum.',
-      'Fyrir þá sem horfa fyrst og fremst í hagkvæma drægni er þetta fyllilega gildur kostur, en fjórhjóladrifna útfærslan heillar líklega mun meira fyrir íslenskar aðstæður.',
+      'Skottið er stærra en hjá flestum í sínum verðflokki og drægnin, 521 km samkvæmt WLTP, er í meðallagi. Hún dugar prýðilega milli landshluta yfir sumartímann, þótt reikna megi með að hún dragist saman í vetrarkulda eins og ávallt á Íslandi.',
+      'Helsti gallinn er hversu aflítill og seinn bíllinn er, meðal þeirra hægustu á svipuðu verði, auk þess sem hann er aðeins framhjóladrifinn. Opel Grandland AWD bætir úr hvoru tveggja fyrir 400.000 kr. til viðbótar. Systurbíllinn Peugeot e-3008 er 600.000 kr. ódýrari með svipaða drægni og 2 s sneggri í hundraðið, og væntanlegur Citroën ë-C5 Aircross Long Range kostar aðeins 210.000 kr. meira en drífur 159 km lengra.',
+      'Grandland er fyllilega gildur fjölskyldubíll, en systurbílarnir frá Peugeot og Citroën gefa báðir meira fyrir peninginn.',
     ],
     questions: [
       'Borgar AWD-útfærslan sig?',
       'Af hverju hann frekar en Peugeot e-3008?',
-      'Hvernig er hann miðað við BYD Seal U?',
+      'Er Citroën ë-C5 Long Range betri kaup?',
       'Er hann betri kostur en BMW iX1?',
       'Er hann of latur við framúrakstur?',
       'Mun ég sakna fjórhjóladrifsins?',
@@ -2571,8 +2613,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Dugar drægnin í hringferð á sumrin?',
       'Hvernig er plássið fyrir fjölskyldu?',
     ],
-    facts: 'b59d5717bd13',
-    model: 'gemini-3.8-flash, thinking medium',
+    facts: 'c5112d36a156',
   },
   'opel-grandland-awd': {
     paragraphs: [
@@ -2685,13 +2726,13 @@ const carReviews: Readonly<Record<string, CarReview>> = {
   'peugeot-e-3008-base': {
     paragraphs: [
       'Peugeot e-3008 er jepplingur sem sker sig úr fyrir djarfa hönnun og vandað innanrými. Hann hentar vel fólki sem leitar að stílhreinum fjölskyldubíl til daglegra nota og ferðalaga.',
-      'Helsti styrkleiki bílsins er að hann drífur lengra en flestir í sínum verðflokki og er ódýrari á hvern kílómetra drægni en keppinautarnir. Þessi mikla drægni gefur gott öryggi þegar ekið er á milli landshluta, jafnvel þótt dregið geti úr henni í vetrarkulda.',
-      'Á móti kemur að bíllinn hleður hægar en flestir og er aðeins framhjóladrifinn. Ef fjórhjóladrif í snjó og hálku skiptir máli leysir Peugeot e-3008 Dual Motor það fyrir 500.000 kr. viðbót. Þá má einnig líta til Hongqi EHS5, sem er 500.000 kr. ódýrari, með fjórhjóladrifi og um 45% styttri hleðslustoppum.',
+      'Helsti styrkleiki bílsins er að hann drífur lengra en flestir í sínum verðflokki og er ódýrari á hvern kílómetra drægni en keppinautarnir. Skottið er eitt það stærsta á svipuðu verði, og drægnin gefur gott öryggi þegar ekið er á milli landshluta, jafnvel þótt dregið geti úr henni í vetrarkulda.',
+      'Á móti kemur að bíllinn hleður hægar en flestir og er aðeins framhjóladrifinn. Ef fjórhjóladrif í snjó og hálku skiptir máli leysir Peugeot e-3008 Dual Motor það fyrir 500.000 kr. viðbót. Systurbíllinn Citroën ë-C5 Aircross Comfort Range er væntanlegur á um 290.000 kr. lægra verði með álíka drægni, en hann er 1,9 s hægari í hundraðið. Renault Scenic E-Tech EV87 drífur 98 km lengra fyrir 400.000 kr. meira.',
       'Peugeot e-3008 er því áhugaverður kostur fyrir þá sem vilja mikla drægni og fágað yfirbragð, svo lengi sem lengri hleðslustopp á þjóðveginum eru ekki að þvælast fyrir.',
     ],
     questions: [
       'Borgar sig að taka Dual Motor útgáfuna?',
-      'Hvernig er hann miðað við Hongqi EHS5?',
+      'Af hverju hann frekar en Citroën ë-C5?',
       'Er hann betri en Renault Scenic E-Tech?',
       'Hvernig er hann miðað við Skoda Elroq 85x?',
       'Hversu mikill galli er hæga hleðslan?',
@@ -2701,7 +2742,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Hvernig er fótaplássið í aftursætunum?',
       'Er skottið nógu stórt fyrir barnavagn?',
     ],
-    facts: 'c733a7c57c31',
+    facts: 'e99d2686265a',
   },
   'peugeot-e-3008-dual-motor': {
     paragraphs: [
