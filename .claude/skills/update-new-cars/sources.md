@@ -36,14 +36,14 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | KGM           | 2026-11-10 | 2026-10-30 |                                                |
 | Kia           | 2026-11-14 | 2026-11-13 | PV5 11-14; EV9 11-12; EV5 and EV6 11-10        |
 | Leapmotor     | 2026-11-20 | 2026-11-19 | ÍSBAND PDF list; prices are images             |
-| Lexus         | 2026-11-26 | —          | TZ unpriced; estimated from NL prices          |
+| Lexus         | 2026-11-27 | —          | TZ unpriced; estimated from NL prices          |
 | Mazda         | 2026-11-25 | 2026-11-25 | 6e; CX-6e 11-16                                |
 | Mercedes-Benz | 2026-11-24 | 2026-11-23 | AMG GT, unpriced; C, GLA, GLB, GLC, CLA 11-16  |
 | MG            | 2026-11-16 | 2026-11-16 |                                                |
 | Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
 | Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
 | Opel          | —          | —          | No price published; see 2026-11-10 note        |
-| Peugeot       | 2026-11-26 | 2026-11-05 | e-308 and SW from their PDF; rest 11-25 pages  |
+| Peugeot       | 2026-11-27 | 2026-11-05 | e-308 and SW from their PDF; rest 11-27 pages  |
 | Polestar      | 2026-11-12 | 2026-11-05 | Polestar 5; 2, 3 and 4 from 2026-10-29         |
 | Porsche       | 2026-11-12 | 2026-10-30 |                                                |
 | Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
@@ -52,8 +52,8 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Smart         | 2026-11-10 | 2026-11-02 |                                                |
 | Subaru        | 2026-11-23 | 2026-11-23 |                                                |
 | Suzuki        | 2026-11-10 | 2026-10-30 |                                                |
-| Tesla         | 2026-11-26 | —          | Design pages; no dated list                    |
-| Toyota        | 2026-11-26 | —          |                                                |
+| Tesla         | 2026-11-27 | —          | Design pages; no dated list                    |
+| Toyota        | 2026-11-27 | —          |                                                |
 | Volkswagen    | 2026-11-12 | 2026-11-10 | ID.4 and ID.3 Neo; ID.3, ID.7, Polo 11-04      |
 | Volvo         | 2026-11-21 | 2026-11-18 | EX40 and EC40 MY27.5 11-18; EX90 11-03         |
 | XPENG         | 2026-11-10 | 2026-11-02 |                                                |
@@ -500,3 +500,16 @@ Porsche, Range Rover, Renault, Smart, Subaru, Suzuki, Volkswagen, Volvo and
 XPENG. `kgm.benni.is` did not answer curl within 30 seconds, so KGM was not
 checked. The helper scripts are now in this skill's `scripts/` folder, and
 `pdf.swift` compiles as SKILL.md says.
+
+**Read on 2026-11-27**: the undated lists (Lexus, Peugeot, Tesla, Toyota)
+were read and every price matched; the Lexus TZ is still unpriced, the XPENG
+G9L's page on xpeng.com/is is still a 404 with no word on
+`bilaumbodiduna.is/frettir`, and `vw/id-tiguan.pdf` is still a 404. Each
+Peugeot model page now links its own PDF under
+`/content/dam/peugeot/iceland/verdlistar/` (`E-2008`, `E-3008`, `E-5008`,
+last modified 2026-10-30; `E-308` 2026-11-09), so a `HEAD` from inside the
+site dates them. `kgm.benni.is` answered curl again: its Torres EVX list is
+still the 2026-10-30 upload. No newer list than the one last read for Audi,
+BMW, BYD, Fiat, Ford, GWM, Hongqi, Hyundai, JAC, Jeep, KGM, Kia, Leapmotor,
+Mazda, Mercedes-Benz, MG, Mini, Nissan, Polestar, Porsche, Range Rover,
+Renault, Škoda, Smart, Subaru, Suzuki, Volkswagen, Volvo and XPENG.
