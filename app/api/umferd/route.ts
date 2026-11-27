@@ -7,6 +7,7 @@ import {
   PRODUCT_EVENTS_DATASET,
   readGuardedBody,
 } from '../publicEndpoint'
+import { isCrawler } from './crawler'
 
 // Vercel's, from the address; anything else in the header is not a country
 const countryOf = (request: Request): string | undefined => {
@@ -19,6 +20,12 @@ const countryOf = (request: Request): string | undefined => {
  * so there is nothing to send back but whether the batch was taken.
  */
 export async function POST(req: Request) {
+  // Taken as any batch is, so a crawler learns nothing, and kept out of the
+  // counts: one that renders pages is a quarter of the sessions some weeks
+  if (isCrawler(req.headers.get('user-agent'))) {
+    return new Response(null, { status: 204 })
+  }
+
   const read = await readGuardedBody(req, productEventRateLimit)
   if (read instanceof Response) return read
 
