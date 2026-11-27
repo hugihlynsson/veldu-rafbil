@@ -98,6 +98,36 @@ describe('parseFilterIntent', () => {
     expect(read('Polestarinn')).toEqual({ make: ['Polestar'] })
   })
 
+  it('reads a make misspelled by one letter', () => {
+    expect(read('Hongqui')).toEqual({ make: ['Hongqi'] })
+    expect(read('Polstar')).toEqual({ make: ['Polestar'] })
+    expect(read('Lepmotor eða Hyundia')).toEqual({
+      make: ['Leapmotor', 'Hyundai'],
+    })
+    expect(read('Polstarinn')).toEqual({ make: ['Polestar'] })
+    expect(read('Polstar 4')).toEqual({ name: ['Polestar 4'] })
+    expect(read('ekki Polstar')).toEqual({})
+  })
+
+  it('reads a short make only when two of its letters are swapped', () => {
+    expect(read('Telsa')).toEqual({ make: ['Tesla'] })
+    expect(read('Telsu')).toEqual({ make: ['Tesla'] })
+    expect(read('Tesle')).toEqual({})
+    expect(read('kemur hann snart')).toEqual({})
+  })
+
+  it('leaves a word more than one letter from any make', () => {
+    expect(read('Polstr')).toEqual({})
+    expect(read('Chervolet')).toEqual({})
+  })
+
+  it('never reads a car on the list as a typo of another make', () => {
+    for (const car of cars) {
+      const { make = [] } = read(`${car.make} ${car.model}`)
+      expect(make.filter((other) => other !== car.make)).toEqual([])
+    }
+  })
+
   it('reads a model that is a number after its make', () => {
     expect(read('Polestar 4')).toEqual({ name: ['Polestar 4'] })
     expect(read('smart #5 eða smart 1')).toEqual({
