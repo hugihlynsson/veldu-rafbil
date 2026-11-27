@@ -151,8 +151,12 @@
   --animate-pill-out: pill-out 0.2s ease-in forwards;
   --animate-typing: typing 1.4s infinite;
   --animate-late-in: hero-in 0.3s ease-out 2s backwards;
-  --animate-step-next: step-next 0.3s var(--ease-out-cubic) backwards;
-  --animate-step-previous: step-previous 0.3s var(--ease-out-cubic) backwards;
+  --animate-step-next: step-next 0.3s var(--ease-out-cubic) 0.1s backwards;
+  --animate-step-previous: step-previous 0.3s var(--ease-out-cubic) 0.1s
+    backwards;
+  --animate-step-next-out: step-next-out 0.15s var(--ease-in-cubic) forwards;
+  --animate-step-previous-out: step-previous-out 0.15s var(--ease-in-cubic)
+    forwards;
   --animate-hero-in: hero-in 0.2s ease-out;
   --animate-count-up-in: count-up-in 0.3s var(--ease-out-cubic) 0.1s backwards;
   --animate-count-up-out: count-up-out 0.15s var(--ease-in-cubic) forwards;
@@ -191,7 +195,9 @@
     }
   }
 
-  /* The car stepped to comes in from the side of the arrow pressed */
+  /* The car stepped to comes in from the side of the arrow pressed, as the
+     last goes out the other, waiting until it is mostly out of the way so
+     the two never read as one jumble of text */
   @keyframes step-next {
     from {
       opacity: 0;
@@ -203,6 +209,20 @@
     from {
       opacity: 0;
       transform: translateX(-2rem);
+    }
+  }
+
+  @keyframes step-next-out {
+    to {
+      opacity: 0;
+      transform: translateX(-2rem);
+    }
+  }
+
+  @keyframes step-previous-out {
+    to {
+      opacity: 0;
+      transform: translateX(2rem);
     }
   }
 
