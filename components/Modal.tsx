@@ -60,7 +60,11 @@ interface Props {
   labelledBy: string
   /** Called once the leave animation has finished and the dialog is closed */
   onDone: () => void
-  /** Focused after open: showModal() lands on the close button otherwise */
+  /**
+   * Focused after open. Without one, showModal() lands on the close button,
+   * which a keyboard wants to start from and a tap would only see ringed, so
+   * after a tap or a click the dialog itself takes focus instead
+   */
   initialFocusRef?: React.RefObject<HTMLElement | null>
   /**
    * Who gets focus handed back on close. `keyboard` lets it go after a tap or
@@ -96,7 +100,10 @@ const Modal: React.FunctionComponent<Props> = ({
     unlockBodyScroll.current = unlock
     dialog?.showModal()
     // preventScroll: the dialog is fixed, and scrolling to it moves the list
-    initialFocusRef?.current?.focus({ preventScroll: true })
+    const initialFocus =
+      initialFocusRef?.current ??
+      (getInputModality() === 'keyboard' ? null : dialog)
+    initialFocus?.focus({ preventScroll: true })
     // A frame with the enter styles gives the transition something to move from
     const timer = setTimeout(() => setState('visible'), 1)
     return () => {
@@ -136,8 +143,9 @@ const Modal: React.FunctionComponent<Props> = ({
       ref={dialogRef}
       data-state={state}
       aria-labelledby={labelledBy}
+      tabIndex={-1}
       className={clsx(
-        'group/modal hidden open:flex fixed inset-0 m-0 h-full w-full max-h-none max-w-none border-0 bg-transparent p-0 justify-center',
+        'group/modal hidden open:flex outline-none fixed inset-0 m-0 h-full w-full max-h-none max-w-none border-0 bg-transparent p-0 justify-center',
         'backdrop:bg-transparent backdrop:transition-[background-color] backdrop:duration-300 data-[state=leaving]:backdrop:duration-200 data-[state=leaving]:backdrop:delay-50',
         className,
       )}
