@@ -23,6 +23,7 @@ interface Props {
   reason?: string
   action: {
     href: string
+    rel?: string
     label: string
     /** Its words from md up, where they fit beside nothing */
     text: string
@@ -111,6 +112,7 @@ const SuggestedCarCard: FunctionComponent<Props> = ({
       {action.tracked ? (
         <TrackedLink
           href={action.href}
+          rel={action.rel}
           aria-label={action.label}
           className={actionClasses}
           {...action.tracked}
@@ -120,6 +122,7 @@ const SuggestedCarCard: FunctionComponent<Props> = ({
       ) : (
         <Link
           href={action.href}
+          rel={action.rel}
           aria-label={action.label}
           className={actionClasses}
         >
