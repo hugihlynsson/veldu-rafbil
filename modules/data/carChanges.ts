@@ -2029,6 +2029,8 @@ const carChanges: ReadonlyArray<CarChange> = [
   {"date":"2026-11-25","slug":"mazda-6e-long-range","label":"Mazda 6e Long Range","price":{"from":6390000,"to":6090000}},
   {"date":"2026-11-26","slug":"peugeot-e-308-base","label":"Peugeot e-308","added":true,"price":{"to":6190000}},
   {"date":"2026-11-26","slug":"peugeot-e-308-sw-base","label":"Peugeot e-308 SW","added":true,"price":{"to":6290000}},
+  {"date":"2026-11-27","slug":"citroen-e-c5-aircross-comfort-range","label":"Citroën ë-C5 Aircross Comfort Range","added":true,"price":{"to":6700000},"delivery":{"to":"2027"}},
+  {"date":"2026-11-27","slug":"citroen-e-c5-aircross-long-range","label":"Citroën ë-C5 Aircross Long Range","added":true,"price":{"to":7800000},"delivery":{"to":"2027"}},
 ]
 
 export default carChanges

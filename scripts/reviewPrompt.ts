@@ -152,7 +152,9 @@ export const readDetails = (
       : read
   return {
     body: specs.carBody,
-    segment: specs.segment,
+    // Newer pages prefix an SUV's segment with J ("JC - Medium"); the body
+    // already says SUV, and the rest of the list has the plain letter
+    segment: specs.segment?.replace(/^J(?=[A-F] - )/, ''),
     length: numberIn(specs.length),
     cargo,
     cargoMax: cargo === undefined ? undefined : cargoMax,

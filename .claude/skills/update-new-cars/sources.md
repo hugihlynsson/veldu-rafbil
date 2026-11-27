@@ -25,7 +25,7 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Audi          | 2026-11-07 | 2026-11-04 | Q4 and Q6; A6 03-18                            |
 | BMW           | 2026-11-23 | 2026-11-23 |                                                |
 | BYD           | 2026-11-03 | 2026-10-30 |                                                |
-| Citroën       | —          | —          | No price published; see 2026-11-10 note        |
+| Citroën       | 2026-11-27 | —          | ë-C5 Aircross page, no price; estimated        |
 | Fiat          | 2026-11-06 | 2026-01    | 500e unpriced ("Leitið til sölumanna")         |
 | Ford          | 2026-11-10 | 2026-06-22 | Capri; Explorer 06-12, Puma 04-08, Mach-E 2025 |
 | GWM           | 2026-11-06 | 2026-01-20 |                                                |
