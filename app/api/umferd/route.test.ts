@@ -24,7 +24,7 @@ const loadPost = async () => {
         body: typeof body === 'string' ? body : JSON.stringify(body),
       }),
     )
-  return Object.assign(post, { ingested })
+  return Object.assign(post, { ingested, POST })
 }
 
 const batch = {
@@ -62,8 +62,8 @@ describe('POST /api/umferd', () => {
   })
 
   it('reads a beacon, which is sent as text', async () => {
-    const { POST } = await import('./route')
-    const response = await POST(
+    const post = await loadPost()
+    const response = await post.POST(
       new Request('http://localhost/api/umferd', {
         method: 'POST',
         headers: {
@@ -75,6 +75,7 @@ describe('POST /api/umferd', () => {
       }),
     )
     expect(response.status).toBe(204)
+    expect(post.ingested).toHaveBeenCalledOnce()
   })
 
   it('refuses a body that is not a batch', async () => {
