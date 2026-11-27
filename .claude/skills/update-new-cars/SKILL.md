@@ -328,12 +328,16 @@ make, then model. The fields that are easy to get wrong:
       like the i4's, are text drawn as images and need rendering to read.
       The i4's sheet, "valid as of July 2024", gives 125 mm for the xDrive40
       and the M50, the M60's predecessor. No sheet was found for the new i3,
-      the iX1 eDrive20 or the iX3 40, globally or on BMW UK's. MINI has its
+      the iX1 eDrive20 or the iX3 40, globally or on BMW UK's; the 3 Series
+      technical data of October 2026, which covers both i3s, has no
+      clearance row. MINI has its
       sheets there too: search for "Technical specifications of the MINI"
       and read "Ground clearance (curb weight)".
     - Porsche: each model page on `porsche.com/international/models/` gives
       every suspension level; the highest is the one to use.
     - Audi's technical data sheets on `uploads.audi.com` have no clearance.
+      Nor does Audi Australia's e-tron GT specification guide, which covers
+      only the S and RS; it sells no A6 e-tron.
   - Polestar: `polestar.com/is-is/<model>/specifications/` gives front and
     rear; take the lower.
   - renault.co.uk's specifications pages have a "Ground clearance" row, but
@@ -420,6 +424,10 @@ make, then model. The fields that are easy to get wrong:
     electric included; the Proace Verso takes the standard 150, by
     choice, not the option's 175. The Proace City's lists five powertrains but four
     clearance figures, so the electric's cannot be told apart.
+  - The Proace City Verso and the e-Rifter take the 155 mm of their
+    Stellantis twin, from Citroën Norway's ë-Berlingo price list
+    („Bakkeklaring 15,5 cm“, one figure for both lengths). citroen.no's
+    PDFs, unlike its pages, answer curl. Peugeot Norway sells no Rifter.
   - XPENG France's G9 price sheet on `s-cdn.xpeng.com` gives „Garde au sol
     en pleine charge 145 (±50 mm avec suspension pneumatique)“.
   - Audi's media centre gives the Q4 e-tron "approximately 18 centimeters",
@@ -438,8 +446,8 @@ make, then model. The fields that are easy to get wrong:
   - Estimates stand in, as exceptions, where no maker figure was found by
     November 2026: evkx.net's 114 for the Fiat 500e, 155 for the Hongqi
     EHS5, 163 for the Opel Frontera and 255 adjustable for the EHS7 Premium
-    (its air suspension's highest; 168 on coil springs), and Automobile
-    Propre's 174 for the e-Rifter. Replace each with the maker's once found.
+    (its air suspension's highest; 168 on coil springs). Replace each with
+    the maker's once found.
   - Japanese spec tables always have „最低地上高“ (minimum ground clearance),
     unladen, often as „社内測定値“ (the maker's own measurement). Where Japan
     sells the car, look there first. Most of these PDFs are images or have
@@ -467,12 +475,16 @@ make, then model. The fields that are easy to get wrong:
       and raises up to 30 mm, but the DI does not say whether its 160 is on
       air or steel springs, so it keeps 160; if it is on air, it is 190 and
       adjustable. The electric GLC's press kit gives no raise, so it keeps
-      the DI figure. BMW's iX1 eDrive20 likewise takes the xDrive30's 170.
-      In November 2026 Japan sold no electric C, GLA, GLB, AMG GT 4-door,
-      VLE, EQV, EQT or eVito, so those have none.
+      the DI figure. BMW's iX1 eDrive20 likewise takes the xDrive30's 170,
+      and the iX3 40 the 50 xDrive's 176. In November 2026 Japan sold no
+      electric C, GLA, GLB, AMG GT 4-door, VLE, EQV, EQT or eVito, and of
+      the electric CLA only the 200 and 250+, not the AMG 45, so those have
+      none. The site answers curl with 403; read its pages in a browser.
     - BMW: the „主要諸元“ price lists on
       `bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/`, e.g.
-      `iX3_EPL_202603V2`. Their iX3 50 figure matches the newsroom's.
+      `iX3_EPL_202603V2`, listed on `bmw.co.jp/ja/footer/contact/brochure.html`.
+      Their iX3 50 figure matches the newsroom's. The November 2026 list
+      still sells only the 50, and no new i3 yet.
     - Audi: the „Product Information“ PDF linked from each model's
       `productinfo.audi.co.jp/models/<model>/specifications/` page. Only the
       Q4's has the row („社内参考値“), and only for the rear-drive 45.
