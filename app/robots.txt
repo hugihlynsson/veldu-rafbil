@@ -15,6 +15,10 @@ Disallow: /api/chat
 # the endpoint that writes the verdict is only for the page to call.
 Disallow: /api/verdict
 
+# Where the pages report how they are used. A crawler that renders a page
+# would be counted as a visitor, so one that reads this sends nothing.
+Disallow: /api/umferd
+
 # Comparisons of more than two cars. Every car added multiplies the
 # addresses, until crawling them never ends; any pair is still open, and
 # the larger ones people share still unfurl.

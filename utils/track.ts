@@ -8,7 +8,7 @@ import {
 
 // Icelandic for traffic, and nothing a blocklist matches: lists catch paths
 // like /events, /track and /collect, and a blocked beacon is a silent gap
-const ENDPOINT = '/api/umferd'
+export const TRACKING_ENDPOINT = '/api/umferd'
 const SESSION_KEY = 'veldu-rafbil-session'
 
 // Long enough that a run of taps goes as one request
@@ -48,9 +48,11 @@ const send = (body: string) => {
   // as a string, so as text/plain: Chromium throws on a JSON Blob, as a type
   // a form could not send. The route reads the body as JSON whatever its type.
   try {
-    if (navigator.sendBeacon?.(ENDPOINT, body)) return
+    if (navigator.sendBeacon?.(TRACKING_ENDPOINT, body)) return
   } catch {}
-  fetch(ENDPOINT, { method: 'POST', body, keepalive: true }).catch(() => {})
+  fetch(TRACKING_ENDPOINT, { method: 'POST', body, keepalive: true }).catch(
+    () => {},
+  )
 }
 
 /** Sends whatever is waiting, now */
@@ -89,7 +91,8 @@ const listen = () => {
  * Sent with the others from the next few seconds, to /api/umferd.
  */
 export const track = (event: TrackedEvent, page?: Page): void => {
-  if (typeof window === 'undefined') return
+  // A browser driven by a script is no visitor, whatever it calls itself
+  if (typeof window === 'undefined' || navigator.webdriver) return
   listen()
   queue.push({
     ...event,
