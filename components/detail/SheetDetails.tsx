@@ -40,10 +40,15 @@ interface Departing {
 const SheetDetails: FunctionComponent<Props> = ({ step, ...current }) => {
   const { car } = current
   const [shown, setShown] = useState(car)
+  // Taken as the car changes rather than read from the step, which the sheet
+  // sets a render or more before the address moves, and on the last car would
+  // hide it through the arrival's delay
+  const [arrival, setArrival] = useState<SheetStep | null>(null)
   const [departing, setDeparting] = useState<ReadonlyArray<Departing>>([])
 
   if (shown.id !== car.id) {
     setShown(car)
+    setArrival(step ?? null)
     // Back to one still on its way out, which comes in again as itself
     const others = departing.filter((layer) => layer.car.id !== car.id)
     setDeparting(step ? [...others, { car: shown, step }] : others)
@@ -57,7 +62,7 @@ const SheetDetails: FunctionComponent<Props> = ({ step, ...current }) => {
         key={car.id}
         {...current}
         titleId={SHEET_TITLE_ID}
-        className={step ? arrivals[step] : undefined}
+        className={arrival ? arrivals[arrival] : undefined}
       />
       {/* After the car shown, so its section ids, which they share for the
           moment one leaves, label the car shown's. Clipped, so a longer page
