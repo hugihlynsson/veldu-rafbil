@@ -154,9 +154,8 @@
   --animate-step-next: step-next 0.3s var(--ease-out-cubic) 0.1s backwards;
   --animate-step-previous: step-previous 0.3s var(--ease-out-cubic) 0.1s
     backwards;
-  --animate-step-next-out: step-next-out 0.2s var(--ease-out-cubic) forwards;
-  --animate-step-previous-out: step-previous-out 0.2s var(--ease-out-cubic)
-    forwards;
+  --animate-step-next-out: step-next-out 0.15s ease-in forwards;
+  --animate-step-previous-out: step-previous-out 0.15s ease-in forwards;
   --animate-hero-in: hero-in 0.2s ease-out;
   --animate-count-up-in: count-up-in 0.3s var(--ease-out-cubic) 0.1s backwards;
   --animate-count-up-out: count-up-out 0.15s var(--ease-in-cubic) forwards;
@@ -197,12 +196,14 @@
 
   /* The car stepped to comes in from the side of the arrow pressed, as the
      last goes out the other, waiting until it is mostly out of the way so
-     the two never read as one jumble of text. Out easing out, so it fades
-     from the start rather than holding and then dropping at the end */
+     the two never read as one jumble of text. Out on a gentler ease-in than
+     the cubic, which held it near whole and then dropped it at the end. A
+     touch of blur either way, which softens the text as it crosses */
   @keyframes step-next {
     from {
       opacity: 0;
       transform: translateX(2rem);
+      filter: blur(1px);
     }
   }
 
@@ -210,6 +211,7 @@
     from {
       opacity: 0;
       transform: translateX(-2rem);
+      filter: blur(1px);
     }
   }
 
@@ -217,6 +219,7 @@
     to {
       opacity: 0;
       transform: translateX(-2rem);
+      filter: blur(1px);
     }
   }
 
@@ -224,6 +227,7 @@
     to {
       opacity: 0;
       transform: translateX(2rem);
+      filter: blur(1px);
     }
   }
 
