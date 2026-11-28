@@ -8,8 +8,8 @@ import {
 } from './model'
 import {
   ADVISOR_KEY,
+  ACCELERATION_THRESHOLD,
   buildIntentQuestions,
-  VALUE_THRESHOLD,
   withNumbers,
 } from './questions'
 
@@ -69,19 +69,19 @@ describe('suggestionsFromAnswers', () => {
     expect(suggestion?.value).toBe(notThePriciest.value)
   })
 
-  it('asks more of a price per km than of the other filters', () => {
-    const doubtful = 1 - VALUE_THRESHOLD + 0.05
+  it('asks more of acceleration than of the other filters', () => {
+    const doubtful = 1 - ACCELERATION_THRESHOLD + 0.05
     expect(
       suggestionsFromAnswers({
-        value: choice({ none: doubtful, good_value: 1 - doubtful }),
+        acceleration: choice({ none: doubtful, brisk: 1 - doubtful }),
         range: choice({ none: doubtful, long_trips: 1 - doubtful }),
       }).map(({ key }) => key),
     ).toEqual(['range'])
     expect(
       suggestionsFromAnswers({
-        value: choice({ none: 0.1, good_value: 0.9 }),
+        acceleration: choice({ none: 0.1, fast: 0.9 }),
       }).map(({ key }) => key),
-    ).toEqual(['value'])
+    ).toEqual(['acceleration'])
   })
 
   it('suggests nothing below the threshold', () => {

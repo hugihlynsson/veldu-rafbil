@@ -54,8 +54,6 @@ const everyFilter: Required<Filters> = {
   towing: 1500,
   groundClearance: 180,
   acceleration: 9,
-  value: 30_000,
-  fastcharge: 2,
   availability: 'available',
 }
 

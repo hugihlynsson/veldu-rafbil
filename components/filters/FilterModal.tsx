@@ -32,8 +32,12 @@ type Field =
 
 // Mapped over `Filters`, so a new filter does not compile until it has a
 // field. In the order the modal shows them. The make is chosen in the row
-// above the list, and carried through here until the search is cleared.
-const fields: { [Key in Exclude<FilterKey, 'make'>]-?: Field } = {
+// above the list, and acceleration only from a suggestion, as people say
+// "sprækur" but never type a 0–100 time; both are carried through here until
+// the search is cleared.
+const fields: {
+  [Key in Exclude<FilterKey, 'make' | 'acceleration'>]-?: Field
+} = {
   name: {
     kind: 'input',
     label: 'Nafn',
@@ -98,27 +102,6 @@ const fields: { [Key in Exclude<FilterKey, 'make'>]-?: Field } = {
       [fieldFromFilter('availability', 'available'), 'Fáanlegir'],
       [fieldFromFilter('availability', 'expected'), 'Væntanlegir'],
     ],
-  },
-  acceleration: {
-    kind: 'input',
-    label: 'Hröðun',
-    hint: 'Hámark, sec',
-    type: 'number',
-    placeholder: '8.0',
-  },
-  value: {
-    kind: 'input',
-    label: 'Verði á km',
-    hint: 'Hámark',
-    type: 'number',
-    placeholder: '44000',
-  },
-  fastcharge: {
-    kind: 'input',
-    label: 'Hraðhleðsla',
-    hint: 'Lágmark, km/min',
-    type: 'number',
-    placeholder: '3.1',
   },
 }
 

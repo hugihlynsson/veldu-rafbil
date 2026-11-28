@@ -43,11 +43,9 @@ describe('intentRequest', () => {
       'acceleration',
       ADVISOR_KEY,
       'drive',
-      'fastcharge',
       'groundClearance',
       'range',
       'towing',
-      'value',
     ])
   })
 
@@ -86,8 +84,6 @@ describe('withNumbers', () => {
       groundClearance: [],
       drive: [],
       acceleration: [8],
-      fastcharge: [],
-      value: [],
     })
   })
 

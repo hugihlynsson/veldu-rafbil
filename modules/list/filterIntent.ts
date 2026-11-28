@@ -441,25 +441,19 @@ export const parseFilterIntent = (text: string): ParsedIntent => {
     () => {},
   )
 
-  // Charging power or battery size, which no filter holds. The number is no
-  // value of any filter, but the word is left for a model, as "200 kW
-  // hleðsla" still asks for fast charging.
+  // Charging power or battery size, which no filter holds. Only the number is
+  // taken, and the unit left for a model, as "300 kW" can still mean powerful.
   take(
     String.raw`${START}${NUM}(?=\s*(?:kwh|kw|kilowott\w*|kilovott\w*)${END})`,
     () => {},
   )
 
-  take(String.raw`${START}${NUM}\s*km\s*(?:\/|a|per)\s*min\w*`, ([, raw]) => {
-    const min = parseNumber(raw)
-    if (within(min, 1, 60)) set('fastcharge', min)
-  })
-
+  // A charging rate or a price per km, which no filter holds. Taken all the
+  // same, so the number is not offered as an acceleration or a price.
+  take(String.raw`${START}${NUM}\s*km\s*(?:\/|a|per)\s*min\w*`, () => {})
   take(
-    String.raw`${START}${NUM}\s*(thus\w*\s*)?${KRONUR}?\s*(?:\/|a|per)\s*(?:km|kilometr\w*)${END}`,
-    ([, raw, thousand]) => {
-      const max = parseNumber(raw) * (thousand ? 1000 : 1)
-      if (within(max, 1000, 200_000)) set('value', max)
-    },
+    String.raw`${START}${NUM}\s*(?:thus\w*\s*)?${KRONUR}?\s*(?:\/|a|per)\s*(?:km|kilometr\w*)${END}`,
+    () => {},
   )
 
   // Three rows of seats is a seven seater, whatever the number says

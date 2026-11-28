@@ -24,22 +24,27 @@ describe('getFiltersFromQuery', () => {
     expect(
       getFiltersFromQuery({
         hrodun: '7',
-        hradhledsla: '5',
         verd: '6000000',
         draegni: '400',
         saeti: '7',
-        virdi: '12000',
         frambod: 'faanlegir',
       }),
     ).toEqual({
       acceleration: 7,
-      fastcharge: 5,
       price: 6000000,
       range: 400,
       seats: 7,
-      value: 12000,
       availability: 'available',
     })
+  })
+
+  // Fast charge and price per km were filters until November 2026, and a
+  // link shared then shows every car rather than none
+  it('ignores the filters that were removed', () => {
+    const filters = getFiltersFromQuery({ hradhledsla: '5', virdi: '12000' })
+
+    expect(filters).toEqual({})
+    expect(matches(filters)).toBe(cars.length)
   })
 
   it('reads vaentanlegir as expected rather than available', () => {
@@ -92,8 +97,7 @@ describe('getFiltersFromQuery', () => {
     ['verd', ''],
     ['draegni', 'four hundred'],
     ['hrodun', '-3'],
-    ['virdi', '0'],
-    ['hradhledsla', 'Infinity'],
+    ['hrodun', 'Infinity'],
     ['saeti', '0'],
     ['saeti', 'nine'],
   ])('ignores %s=%s rather than matching nothing', (key, value) => {
@@ -109,7 +113,6 @@ describe('getFiltersFromQuery', () => {
     ['verd', '9500000.5', 9_500_001],
     ['verd', '6000000.4', 6_000_000],
     ['verd', '9499999.5', 9_500_000],
-    ['virdi', '20000.6', 20_001],
   ])('reads %s=%s as %d whole krónur', (key, value, expected) => {
     const filters = getFiltersFromQuery({ [key]: value })
 
@@ -119,7 +122,6 @@ describe('getFiltersFromQuery', () => {
 
   it('treats a price that rounds to nothing as no filter', () => {
     expect(getFiltersFromQuery({ verd: '0.4' })).toEqual({})
-    expect(getFiltersFromQuery({ virdi: '0.2' })).toEqual({})
   })
 
   // Half a seat would render in the chip that offers to remove the filter
@@ -138,10 +140,9 @@ describe('getFiltersFromQuery', () => {
     expect(getFiltersFromQuery({ veghaed: 'hatt' })).toEqual({})
   })
 
-  // Seconds and km per minute are measurements, not prices
-  it('leaves the filters that are not prices fractional', () => {
+  // Seconds are a measurement, not a price
+  it('leaves an acceleration fractional', () => {
     expect(getFiltersFromQuery({ hrodun: '7.25' }).acceleration).toBe(7.25)
-    expect(getFiltersFromQuery({ hradhledsla: '3.1' }).fastcharge).toBe(3.1)
   })
 
   it('still reads a good number next to a bad one', () => {
@@ -166,8 +167,6 @@ describe('filters survive a round trip through the URL', () => {
     ['a towing weight', { towing: 1500 }],
     ['a ground clearance', { groundClearance: 180 }],
     ['an acceleration', { acceleration: 7 }],
-    ['a value', { value: 20_000 }],
-    ['a fastcharge', { fastcharge: 3 }],
     ['available', { availability: 'available' }],
     ['expected', { availability: 'expected' }],
     ['no filter at all', {}],
@@ -183,8 +182,6 @@ describe('filters survive a round trip through the URL', () => {
         towing: 1500,
         groundClearance: 130,
         acceleration: 9,
-        value: 30_000,
-        fastcharge: 2,
         availability: 'available',
       },
     ],
@@ -226,8 +223,6 @@ describe('filters survive a round trip through the URL', () => {
       towing: 1500,
       groundClearance: 180,
       acceleration: 9,
-      value: 30_000,
-      fastcharge: 2,
       availability: 'available',
     }
 
@@ -265,8 +260,6 @@ describe('the filter modal fields', () => {
     range: 300,
     seats: 5,
     acceleration: 9.5,
-    value: 30_000,
-    fastcharge: 2.5,
     availability: 'expected',
   }
 
@@ -329,8 +322,6 @@ describe('filterKeys', () => {
       'groundClearance',
       'drive',
       'acceleration',
-      'value',
-      'fastcharge',
       'availability',
     ])
   })

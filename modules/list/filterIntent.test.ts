@@ -59,9 +59,20 @@ describe('parseFilterIntent', () => {
   it('keeps a number with a unit for the filter the unit belongs to', () => {
     expect(read('undir 5 sek, 15 km/min, 500 km, 12.000 kr/km')).toEqual({
       acceleration: 5,
-      fastcharge: 15,
       range: 500,
-      value: 12_000,
+    })
+  })
+
+  // No filter holds either, and a bare 8.2 would be offered as an
+  // acceleration: "Hvað þýðir 8,2 km/min" once became a filter
+  it('takes a charging rate or a price per km as no number at all', () => {
+    expect(parseFilterIntent('8,2 km/min')).toMatchObject({
+      filters: {},
+      numbers: [],
+    })
+    expect(parseFilterIntent('12.000 kr/km')).toMatchObject({
+      filters: {},
+      numbers: [],
     })
   })
 
