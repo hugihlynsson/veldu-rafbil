@@ -16,20 +16,23 @@ for (const car of cars) {
 export const carCountOf = (make: string): number => carCounts.get(make) ?? 0
 
 /**
- * The makes typed into the search most, October to November 2026, most first.
- * Fixed rather than counted, so the row never reorders under a thumb; the
- * filters_changed events say whether it still holds.
+ * The makes chosen most without the row's help, typed or picked from the sheet
+ * of every make, with comparisons breaking a close call; late November 2026,
+ * most first. Not taps on the row, which follow a chip's place in it, nor car
+ * views, which follow price, as the list opens cheapest first. Fixed
+ * rather than counted, so the row never reorders under a thumb, and re-picked
+ * from the filters_changed events now and then.
  */
 export const rowMakes = [
-  'XPENG',
   'Tesla',
-  'BYD',
-  'Kia',
+  'XPENG',
   'Skoda',
+  'Kia',
+  'BYD',
+  'Hyundai',
   'BMW',
   'Leapmotor',
   'Volvo',
-  'Polestar',
 ]
 
 const makeByKey = new Map(
