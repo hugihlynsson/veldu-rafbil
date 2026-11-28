@@ -70,7 +70,7 @@ const ChatMessage: React.FunctionComponent<Props> = ({
       ) : (
         <div
           ref={answerRef}
-          className="message-content w-full text-sm leading-6 wrap-break-word text-tint"
+          className="message-content w-full text-sm leading-normal wrap-break-word text-tint"
         >
           {message.parts?.map((part, index) =>
             part.type === 'text' ? (
@@ -146,7 +146,7 @@ const Question: React.FunctionComponent<{ text: string }> = ({ text }) => {
   return (
     <div
       ref={ref}
-      className="max-w-[90%] px-3.5 py-2.5 rounded-2xl text-sm leading-6 whitespace-pre-line wrap-break-word bg-sky text-on-sky"
+      className="max-w-[90%] px-3.5 py-2.5 rounded-2xl text-sm leading-normal whitespace-pre-line wrap-break-word bg-sky text-on-sky"
     >
       {text}
     </div>

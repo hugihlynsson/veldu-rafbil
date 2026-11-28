@@ -211,11 +211,46 @@ const namePattern = (name: string) =>
     .join(String.raw`[\s-]*`)
 
 // Teslu, Polestarinn: a make is a noun, and it inflects
+const feminineEndings = ['a', 'u', 'an', 'una', 'unni', 'unnar']
+const otherEndings = ['', 'inn', 'inum', 'ins', 'num', 'nn', 'n', 's', 'i']
+
 const makePattern = (name: string) => {
   const folded = namePattern(name)
   return folded.endsWith('a')
-    ? `${folded.slice(0, -1)}(?:a|u|an|una|unni|unnar)`
-    : `${folded}(?:inn|inum|ins|num|nn|n|s|i)?`
+    ? `${folded.slice(0, -1)}(?:${feminineEndings.join('|')})`
+    : `${folded}(?:${otherEndings.filter(Boolean).join('|')})?`
+}
+
+const inflectionsOf = (make: string) =>
+  make.endsWith('a')
+    ? feminineEndings.map((ending) => make.slice(0, -1) + ending)
+    : otherEndings.map((ending) => make + ending)
+
+/** Whether two words are one swap of neighbouring letters apart */
+const oneSwapApart = (a: string, b: string) => {
+  if (a.length !== b.length) return false
+  const [first, second, ...more] = [...a].flatMap((letter, i) =>
+    letter === b[i] ? [] : [i],
+  )
+  return (
+    first !== undefined &&
+    second === first + 1 &&
+    more.length === 0 &&
+    a[first] === b[second] &&
+    a[second] === b[first]
+  )
+}
+
+/** Whether two words are one letter changed, added, dropped or swapped apart */
+const oneTypoApart = (a: string, b: string) => {
+  if (a === b || Math.abs(a.length - b.length) > 1) return false
+  if (a.length === b.length) {
+    const differ = [...a].filter((letter, i) => letter !== b[i]).length
+    return differ === 1 || oneSwapApart(a, b)
+  }
+  const [short, long] = a.length < b.length ? [a, b] : [b, a]
+  const at = [...short].findIndex((letter, i) => letter !== long[i])
+  return at === -1 || short.slice(at) === long.slice(at + 1)
 }
 
 // A model called "C" or "3" would match every sentence with a letter or a
@@ -294,6 +329,50 @@ const buildNameEntries = (list: ReadonlyArray<Car>): NameEntry[] => {
 
 const nameEntries = buildNameEntries(cars)
 
+// Each one-word spelling of a make, inflected, with how far a typo may stray
+// from it. A short make takes only a swap, as one changed letter turns Smart
+// into "snart" and Mazda into words no one meant as a car.
+const makeForms = (() => {
+  const spellings = [...new Set(cars.map((car) => car.make))].flatMap((make) =>
+    [make, ...(makeAliases[make] ?? [])].map((spelling) => ({
+      make,
+      folded: foldText(spelling),
+    })),
+  )
+  return spellings
+    .filter(({ folded }) => /^\p{L}+$/u.test(folded) && folded.length >= 5)
+    .flatMap(({ make, folded }) =>
+      inflectionsOf(folded).map((form) => ({
+        make,
+        form,
+        isNear: folded.length >= 6 ? oneTypoApart : oneSwapApart,
+      })),
+    )
+})()
+
+// A word that is already a make's or a model's own name is never a typo
+const knownWords = new Set([
+  ...makeForms.map(({ form }) => form),
+  ...cars.flatMap((car) => foldText(`${car.make} ${car.model}`).split(/\W+/)),
+])
+
+/**
+ * "Polstar" and "Hongqui" spelled as the make, so the rules after read them as
+ * they read the make. Only where one make is that near, as a word near two is
+ * no make in particular.
+ */
+const correctMakes = (text: string) =>
+  text.replace(/\p{L}+/gu, (word) => {
+    if (word.length < 5 || knownWords.has(word) || fillerWords.has(word))
+      return word
+    const [nearest, ...others] = makeForms.filter(({ form, isNear }) =>
+      isNear(word, form),
+    )
+    if (!nearest || others.some(({ make }) => make !== nearest.make))
+      return word
+    return nearest.form
+  })
+
 /**
  * Words that say nothing a filter could use, so a request made of nothing
  * else needs no model. The topic words are here too: "drægni" alone asks for
@@ -331,7 +410,7 @@ export interface ParsedIntent {
  * left in `unread`, and a number it cannot place in `numbers`, for one that can.
  */
 export const parseFilterIntent = (text: string): ParsedIntent => {
-  let rest = foldText(text.slice(0, MAX_INTENT_LENGTH))
+  let rest = correctMakes(foldText(text.slice(0, MAX_INTENT_LENGTH)))
   const aboutTowing = towingWords.test(rest)
   const aboutClearance = clearanceWords.test(rest)
   const filters: Filters = {}

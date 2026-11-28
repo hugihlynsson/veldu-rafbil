@@ -247,6 +247,32 @@
     "segment": "C - Medium",
     "cargoWithFrunk": 380
   },
+  "citroen-e-c5-aircross-comfort-range": {
+    "source": "https://ev-database.org/car/3230/Citroen-C5-Aircross-Comfort-Range",
+    "read": "2026-11-27",
+    "evDatabaseUrl": "https://ev-database.org/car/3230/Citroen-C5-Aircross-Comfort-Range",
+    "body": "SUV",
+    "segment": "C - Medium",
+    "length": 4652,
+    "cargo": 565,
+    "cargoMax": 1668,
+    "frunk": 0,
+    "warrantyYears": 8,
+    "warrantyKm": 160000
+  },
+  "citroen-e-c5-aircross-long-range": {
+    "source": "https://ev-database.org/car/3231/Citroen-C5-Aircross-Long-Range",
+    "read": "2026-11-27",
+    "evDatabaseUrl": "https://ev-database.org/car/3231/Citroen-C5-Aircross-Long-Range",
+    "body": "SUV",
+    "segment": "C - Medium",
+    "length": 4652,
+    "cargo": 565,
+    "cargoMax": 1668,
+    "frunk": 0,
+    "warrantyYears": 8,
+    "warrantyKm": 160000
+  },
   "fiat-500e-base": {
     "source": "https://ev-database.org/",
     "read": "2026-11-14",

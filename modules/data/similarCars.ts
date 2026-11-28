@@ -160,6 +160,16 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'peugeot-e-308-base',
     'renault-scenic-e-tech-ev60',
   ],
+  'citroen-e-c5-aircross-comfort-range': [
+    'peugeot-e-3008-base',
+    'opel-grandland-base',
+    'tesla-model-y-standard-range',
+  ],
+  'citroen-e-c5-aircross-long-range': [
+    'renault-scenic-e-tech-ev87',
+    'kia-ev5-base',
+    'peugeot-e-3008-base',
+  ],
   'fiat-500e-base': [
     'mini-aceman-e',
     'mini-cooper-se',
@@ -612,7 +622,7 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'peugeot-e-5008-base',
   ],
   'opel-grandland-base': [
-    'byd-seal-u-base',
+    'citroen-e-c5-aircross-long-range',
     'peugeot-e-3008-base',
     'bmw-ix1-edrive-20',
   ],
@@ -642,9 +652,9 @@ const similarCars: Readonly<Record<string, ReadonlyArray<string>>> = {
     'kia-ev3-long-range',
   ],
   'peugeot-e-3008-base': [
+    'citroen-e-c5-aircross-comfort-range',
     'skoda-elroq-85x',
     'renault-scenic-e-tech-ev87',
-    'hongqi-ehs5-base',
   ],
   'peugeot-e-3008-dual-motor': [
     'opel-grandland-awd',

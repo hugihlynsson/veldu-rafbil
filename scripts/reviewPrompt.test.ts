@@ -347,6 +347,12 @@ describe('readDetails', () => {
     expect(readDetails({ cargoVolume: '633 L' }).cargo).toBe(633)
   })
 
+  // The Citroën C5 Aircross's page gives "JC - Medium"
+  it('gives an SUV the same segment letter as every other car', () => {
+    expect(readDetails({ segment: 'JC - Medium' }).segment).toBe('C - Medium')
+    expect(readDetails({ segment: 'C - Medium' }).segment).toBe('C - Medium')
+  })
+
   it('reads no boot out of a pickup, whose figure is its bed', () => {
     expect(
       readDetails({ carBody: 'Pickup Truck', cargoVolume: '907 L' }).cargo,

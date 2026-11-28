@@ -39,7 +39,8 @@ import {
   useCarHistory,
   useCarReview,
 } from '@/utils/carFiles'
-import CarView, { SHEET_TITLE_ID } from './CarView'
+import CarView from './CarView'
+import { SHEET_TITLE_ID } from './SheetDetails'
 import { heroImageProps } from './heroImage'
 
 /** The chat bar's place in the sheet, and what it offers to ask there */
@@ -86,11 +87,6 @@ const overscrollFill = (car: Car) => {
   }).props
   return `linear-gradient(var(--color-surface) 0 0) bottom / 100% 50% no-repeat, url("${src}") top / 100% 6000% no-repeat var(--color-surface)`
 }
-
-const arrivals = {
-  previous: 'animate-step-previous',
-  next: 'animate-step-next',
-} as const
 
 const steps = {
   previous: {
@@ -330,7 +326,7 @@ const CarSheet: FunctionComponent<Props> = ({ car, shown, onChat }) => {
                   review={review ?? undefined}
                   history={history}
                   sheet
-                  contentClassName={clsx(arrival && arrivals[arrival])}
+                  step={arrival}
                 />
               </div>
             </div>

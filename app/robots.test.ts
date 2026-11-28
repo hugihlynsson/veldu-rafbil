@@ -8,6 +8,7 @@ import {
   comparisonPath,
   shareImagePath,
 } from '@/modules/detail/paths'
+import { TRACKING_ENDPOINT } from '@/utils/track'
 
 const robots = readFileSync(path.join(__dirname, 'robots.txt'), 'utf8')
 
@@ -43,6 +44,11 @@ describe('robots.txt', () => {
 
   it('leaves pairs open', () => {
     expect(isDisallowed(comparisonPath(slugsOf(2)))).toBe(false)
+  })
+
+  // A crawler that renders pages runs their tracking too, and would be counted
+  it('keeps crawlers from reporting how the pages are used', () => {
+    expect(isDisallowed(TRACKING_ENDPOINT)).toBe(true)
   })
 
   // A link people share has to unfurl, whatever its size
