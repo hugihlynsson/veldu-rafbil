@@ -25,7 +25,7 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Audi          | 2026-11-26 | 2026-11-19 | Q4; Q6 11-04; A6 03-18                         |
 | BMW           | 2026-11-23 | 2026-11-23 |                                                |
 | BYD           | 2026-11-03 | 2026-10-30 |                                                |
-| Citroën       | 2026-11-27 | —          | ë-C5 Aircross page, no price; estimated        |
+| Citroën       | 2026-11-28 | —          | ë-C5 Aircross page, no price; estimated        |
 | Fiat          | 2026-11-06 | 2026-01    | 500e unpriced ("Leitið til sölumanna")         |
 | Ford          | 2026-11-10 | 2026-06-22 | Capri; Explorer 06-12, Puma 04-08, Mach-E 2025 |
 | GWM           | 2026-11-06 | 2026-01-20 |                                                |
@@ -36,14 +36,14 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | KGM           | 2026-11-10 | 2026-10-30 |                                                |
 | Kia           | 2026-11-14 | 2026-11-13 | PV5 11-14; EV9 11-12; EV5 and EV6 11-10        |
 | Leapmotor     | 2026-11-20 | 2026-11-19 | ÍSBAND PDF list; prices are images             |
-| Lexus         | 2026-11-27 | —          | TZ unpriced; estimated from NL prices          |
+| Lexus         | 2026-11-28 | —          | TZ unpriced; estimated from NL prices          |
 | Mazda         | 2026-11-25 | 2026-11-25 | 6e; CX-6e 11-16                                |
 | Mercedes-Benz | 2026-11-24 | 2026-11-23 | AMG GT, unpriced; C, GLA, GLB, GLC, CLA 11-16  |
 | MG            | 2026-11-16 | 2026-11-16 |                                                |
 | Mini          | 2026-11-06 | —          | List lacks the Aceman                          |
 | Nissan        | 2026-11-10 | 2026-10-31 | nissan.is says 8.990.000 for the Evolve 4WD    |
 | Opel          | —          | —          | No price published; see 2026-11-10 note        |
-| Peugeot       | 2026-11-27 | 2026-11-05 | e-308 and SW from their PDF; rest 11-27 pages  |
+| Peugeot       | 2026-11-28 | 2026-11-05 | e-308 and SW from their PDF; rest 11-28 pages  |
 | Polestar      | 2026-11-12 | 2026-11-05 | Polestar 5; 2, 3 and 4 from 2026-10-29         |
 | Porsche       | 2026-11-12 | 2026-10-30 |                                                |
 | Range Rover   | 2026-11-06 | 2026-10-14 |                                                |
@@ -52,8 +52,8 @@ commits and the notes below, so a "—" means nothing recorded, not never.
 | Smart         | 2026-11-10 | 2026-11-02 |                                                |
 | Subaru        | 2026-11-23 | 2026-11-23 |                                                |
 | Suzuki        | 2026-11-10 | 2026-10-30 |                                                |
-| Tesla         | 2026-11-27 | —          | Design pages; no dated list                    |
-| Toyota        | 2026-11-27 | —          |                                                |
+| Tesla         | 2026-11-28 | —          | Design pages; no dated list                    |
+| Toyota        | 2026-11-28 | —          |                                                |
 | Volkswagen    | 2026-11-12 | 2026-11-10 | ID.4 and ID.3 Neo; ID.3, ID.7, Polo 11-04      |
 | Volvo         | 2026-11-21 | 2026-11-18 | EX40 and EC40 MY27.5 11-18; EX90 11-03         |
 | XPENG         | 2026-11-10 | 2026-11-02 |                                                |
@@ -513,3 +513,20 @@ still the 2026-10-30 upload. No newer list than the one last read for Audi,
 BMW, BYD, Fiat, Ford, GWM, Hongqi, Hyundai, JAC, Jeep, KGM, Kia, Leapmotor,
 Mazda, Mercedes-Benz, MG, Mini, Nissan, Polestar, Porsche, Range Rover,
 Renault, Škoda, Smart, Subaru, Suzuki, Volkswagen, Volvo and XPENG.
+
+**Read on 2026-11-28**: the undated lists (Lexus, Peugeot, Tesla, Toyota)
+were read and every price matched; the Lexus TZ is still unpriced, the
+ë-C5 Aircross page still prints no price and links no list, the XPENG G9L's
+page on xpeng.com/is is still a 404 with no word on
+`bilaumbodiduna.is/frettir`, and `vw/id-tiguan.pdf` is still a 404. The
+e-2008's page moved to `/tegundir/new-peugeot-2008--1-7e/e-2008.html`; the old
+`/tegundir/Nyr-e-2008.html` now redirects to a 404, so its `sellerUrl` was
+fixed. `/sitemap.xml` names the current page of every Peugeot model. Every
+Askja and BL document's page holds one `documentId`, its own, so
+`fetch('/<publisher>/docs/<slug>')` dates any of them, listed or not; the
+newest were BL's Subaru and BMW (2026-11-23) and Askja's AMG GT (2026-11-23).
+`kgm.benni.is` answered curl with 403, so KGM was not checked. No newer list
+than the one last read for Audi, BMW, BYD, Fiat, Ford, GWM, Hongqi, Hyundai,
+JAC, Jeep, Kia, Leapmotor, Mazda, Mercedes-Benz, MG, Mini, Nissan, Polestar,
+Porsche, Range Rover, Renault, Škoda, Smart, Subaru, Suzuki, Volkswagen, Volvo
+and XPENG.

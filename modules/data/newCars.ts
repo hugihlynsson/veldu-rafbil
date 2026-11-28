@@ -2352,7 +2352,8 @@ const newCars: Array<NewCar> = [
     subModel: '54 kWh',
     heroImageName: 'peugeot-2008',
     price: 5_290_000,
-    sellerUrl: 'https://www.peugeotisland.is/tegundir/Nyr-e-2008.html',
+    sellerUrl:
+      'https://www.peugeotisland.is/tegundir/new-peugeot-2008--1-7e/e-2008.html',
     acceleration: 9.1,
     capacity: 54,
     range: 406,
