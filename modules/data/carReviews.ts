@@ -865,7 +865,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
     paragraphs: [
       'Hongqi EHS5 er fimm sæta jepplingur sem býður upp á fádæma afköst miðað við verðmiðann. Hann hentar sérstaklega þeim sem leita að snörpum fjölskyldubíl með fjórhjóladrifi sem veitir mikið öryggi í snjó og hálku á íslenskum vetrarvegum.',
       'Hann er aflmesti bíllinn í sínum verðflokki og hröðunin er á pari við sportbíla. Jafnframt drífur hann lengra en flestir keppinautar hans og hleðslustoppin á langferðum eru umtalsvert styttri, sem gerir hann afar hagkvæman á hvern kílómetra drægni.',
-      'Helsti ókosturinn er að nánari upplýsingar liggja ekki fyrir um bílinn, svo sem um nákvæma stærð farangursrýmis eða leyfilega dráttargetu. Fyrir þá sem vilja tryggja sér gott pláss og getu til að draga hjólhýsi eða kerru gæti Skoda Elroq 85x verið heppilegri kostur, enda má hann draga 1.800 kg og kemst 48 km lengra, þótt hann kosti 700.000 kr. meira og sé talsvert aflminni.',
+      'Skottið tekur 462 lítra og að auki er 48 lítra framskott, sem er meira en flestir á svipuðu verði bjóða, og á krókinn má hengja 1.500 kg. Veghæðin er þó aðeins 155 mm, sem er lítið fyrir jeppling og getur munað um í djúpum snjó og á grófum malarvegum. Þeim sem draga þungt hjólhýsi gæti Skoda Elroq 85x hentað betur, enda má hann draga 1.800 kg, situr hærra og kemst 48 km lengra, þótt hann kosti 700.000 kr. meira og sé talsvert aflminni.',
       'Fyrir þá sem horfa fyrst og fremst í mikið afl, fjórhjóladrif og góða drægni á hagstæðu verði er Hongqi EHS5 engu að síður mjög álitlegur kostur.',
     ],
     questions: [
@@ -874,7 +874,7 @@ const carReviews: Readonly<Record<string, CarReview>> = {
       'Af hverju að skoða Mazda CX-6e frekar?',
       'Hvernig nýtast 455 kW í daglegum akstri?',
       'Hvað er skottið á honum stórt?',
-      'Er komin tala á dráttargetuna?',
+      'Dugar krókurinn fyrir hjólhýsi?',
       'Hversu hratt hleður hann á ferðalögum?',
       'Hvernig dugar fjórhjóladrifið í snjó?',
       'Eyðir hann miklu með svona mikið afl?',
